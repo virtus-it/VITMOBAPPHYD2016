@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import{RouterModule} from '@angular/router';
-
+import { AgmCoreModule } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -25,7 +25,10 @@ import { OrderComponent } from './order/order.component';
       {path:'order',component:OrderComponent},
       {path:'',redirectTo:'login',pathMatch:'full'},
       {path:'**',redirectTo:'login',pathMatch:'full'}
-    ])
+    ]),
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
+    })
   ],
   providers: [
     AuthenticationService,

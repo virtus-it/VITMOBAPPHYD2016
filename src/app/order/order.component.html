@@ -1,3 +1,9 @@
 <p>
   order works!
 </p>
+<agm-map [latitude]="lat" [longitude]="lng">
+  <agm-marker  *ngFor="let m of markers; let i = index"
+          (markerClick)="clickedMarker(m.label, i)"
+          [latitude]="m.lat"
+          [longitude]="m.lng"></agm-marker>
+</agm-map>
