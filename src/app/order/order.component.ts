@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule, LatLngLiteral} from '@agm/core';
 interface marker {
@@ -7,14 +6,6 @@ interface marker {
   label?: string;
   icon:string;
 	
-=======
-﻿import { Component, OnInit } from '@angular/core';
-interface marker {
-	lat: number;
-	lng: number;
-	label?: string;
-    icon: string;
->>>>>>> 8f3bcb4b3df969657fc948b048ded4964d2cc866
 }
 @Component({
   selector: 'app-order',
@@ -24,11 +15,8 @@ interface marker {
 export class OrderComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
-<<<<<<< HEAD
-  paths : Array<LatLngLiteral>;
-=======
   zoom: number = 12;
->>>>>>> 8f3bcb4b3df969657fc948b048ded4964d2cc866
+  paths : Array<LatLngLiteral>;
   constructor() { }
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
@@ -42,14 +30,14 @@ export class OrderComponent implements OnInit {
   }
   markers: marker[] = [
 	  {
-		  lat: 17.361616,
-		  lng: 78.474655,
+		  lat: 17.359066,
+		  lng: 78.399639,
       label: 'A',
       icon:'../assets/images/green.png'
 	  },
 	  {
-		  lat: 17.392042,
-		  lng: 78.445044,
+		  lat: 17.399695,
+		  lng: 78.522549,
       label: 'B',
         icon:'../assets/images/red.png'
 	  },
