@@ -5,5 +5,11 @@
   <agm-marker  *ngFor="let m of markers; let i = index"
           (markerClick)="clickedMarker(m.label, i)"
           [latitude]="m.lat"
-          [longitude]="m.lng"></agm-marker>
+          [longitude]="m.lng"
+          [iconUrl]="m.icon"></agm-marker>
+           <agm-polygon  *ngFor="let p of distibutors; let i = index"  [paths]="p.path"
+        [editable]="true" 
+        [draggable]="true" 
+        (polyClick)="click(event)" 
+        (polyDblClick)="delete(event)"></agm-polygon>
 </agm-map>
