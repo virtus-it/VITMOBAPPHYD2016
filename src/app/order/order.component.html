@@ -5,12 +5,11 @@
           [latitude]="m.lat"
           [longitude]="m.lng"
           [iconUrl]="m.icon"></agm-marker>
-<<<<<<< HEAD
+
            <agm-polygon  *ngFor="let p of distibutors; let i = index"  [paths]="p.path"
         [editable]="true" 
         [draggable]="true" 
         (polyClick)="click(event)" 
         (polyDblClick)="delete(event)"></agm-polygon>
-=======
->>>>>>> 8f3bcb4b3df969657fc948b048ded4964d2cc866
+
 </agm-map>
