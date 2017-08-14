@@ -4,7 +4,13 @@ interface marker {
 	lat: number;
 	lng: number;
   label?: string;
-  icon:string;
+  icon?:string;
+	
+}
+
+interface polygonArray {
+  name:string,
+	path:any[]
 	
 }
 @Component({
@@ -16,7 +22,11 @@ export class OrderComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
   zoom: number = 12;
-  paths : Array<LatLngLiteral>;
+  ploymarkers: marker[] = [];
+  polygonArray:any ={
+    name:"",
+	path:[]
+  }
   constructor() { }
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
@@ -27,6 +37,25 @@ export class OrderComponent implements OnInit {
   
   delete($event: any){
     console.log(`delete is called {$event}`);
+  }
+   savePloygon(){
+    console.log(this.polygonArray);
+    let polygon = Object.assign([], this.polygonArray);;
+    this.distibutors.push(polygon);
+  this.polygonArray.name="";
+  this.polygonArray.path =[];
+    this.ploymarkers = [];
+  }
+  mapClicked($event: any) {
+    this.ploymarkers.push({
+      lat: $event.coords.lat,
+      lng: $event.coords.lng
+     });
+    this.polygonArray.path.push({
+      lat: $event.coords.lat,
+      lng: $event.coords.lng
+     });
+   
   }
   markers: marker[] = [
 	  {

@@ -1,11 +1,15 @@
-﻿
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+﻿<div>
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
   <agm-marker  *ngFor="let m of markers; let i = index"
           (markerClick)="clickedMarker(m.label, i)"
           [latitude]="m.lat"
           [longitude]="m.lng"
           [iconUrl]="m.icon"></agm-marker>
-
+<agm-marker  *ngFor="let m of ploymarkers; let i = index"
+          
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          ></agm-marker>
            <agm-polygon  *ngFor="let p of distibutors; let i = index"  [paths]="p.path"
         [editable]="true" 
         [draggable]="true" 
@@ -13,3 +17,14 @@
         (polyDblClick)="delete(event)"></agm-polygon>
 
 </agm-map>
+</div>
+<div>
+<div class="col-lg-6">
+    <div class="input-group">
+      <input type="text" class="form-control"  [(ngModel)]="polygonArray.name" placeholder="Distributors Name">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)='savePloygon()'>save polygon!</button>
+      </span>
+    </div>
+  </div>
+</div>
