@@ -1,9 +1,9 @@
-import { BrowserModule } from '@angular/platform-browser';
+﻿import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import{RouterModule} from '@angular/router';
-import { AgmCoreModule } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -31,7 +31,8 @@ import { OrderComponent } from './order/order.component';
     })
   ],
   providers: [
-    AuthenticationService,
+      AuthenticationService,
+      GoogleMapsAPIWrapper,
     { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }
   ],
   

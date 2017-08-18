@@ -1,5 +1,5 @@
 ﻿<div>
-<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" >
   <agm-marker  *ngFor="let m of markers; let i = index"
           (markerClick)="clickedMarker(m.label, i)"
           [latitude]="m.lat"
@@ -10,9 +10,9 @@
           [latitude]="m.lat"
           [longitude]="m.lng"
           ></agm-marker>
-           <agm-polygon  *ngFor="let p of distibutors; let i = index"  [paths]="p.path"
+           <agm-polygon  *ngFor="let p of distPolygon; let i = index"  [paths]="p.path"
         [editable]="true" 
-        [draggable]="true" 
+        [draggable]="true"
         (polyClick)="click(event)" 
         (polyDblClick)="delete(event)"></agm-polygon>
 
@@ -20,10 +20,42 @@
 </div>
 <div>
 <div class="col-lg-6">
+  <div class="input-group">
+    <select [(ngModel)]="selectedDist">
+      <option [value]="0">Please Select</option>
+      <option *ngFor="let dist of distubutors" [ngValue]="dist">
+        {{dist.distibutorname}}
+      </option>
+    </select>
+    </div>
     <div class="input-group">
-      <input type="text" class="form-control"  [(ngModel)]="polygonArray.name" placeholder="Distributors Name">
+      <input type="text" class="form-control" [(ngModel)]="polygonArray.name" placeholder="Polygon Name">
       <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" (click)='savePloygon()'>save polygon!</button>
+        <button class="btn btn-secondary" type="button" (click)='savePloygon(selectedDist)'>save polygon!</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <span>Create Distributor</span>
+    <div class="input-group">
+      <input type="text" class="form-control" [(ngModel)]="DistributorArray.distibutorname" placeholder="Distributors Name">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)='saveDistibutor()'>save Distributor!</button>
+      </span>
+    </div>
+  </div>
+  <div class="col-lg-6">
+    <div class="input-group">
+      <select [(ngModel)]="selectedDistView">
+        <option [value]="0">Please Select</option>
+        <option *ngFor="let dist of distubutors" [ngValue]="dist">
+          {{dist.distibutorname}}
+        </option>
+      </select>
+    </div>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="button" (click)='viewDistPolygon(selectedDistView)'>view Distributor polygon!</button>
       </span>
     </div>
   </div>
