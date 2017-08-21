@@ -27,6 +27,7 @@ import { OrderComponent } from './order/order.component';
       {path:'**',redirectTo:'login',pathMatch:'full'}
     ]),
     AgmCoreModule.forRoot({
+       // libraries: ["geometry"],
       apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
     })
   ],

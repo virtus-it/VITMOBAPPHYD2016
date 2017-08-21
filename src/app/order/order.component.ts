@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule, GoogleMapsAPIWrapper,LatLngLiteral } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader  } from '@agm/core';
+declare var google:any; 
 interface marker {
 	lat: number;
 	lng: number;
@@ -28,7 +29,7 @@ export class OrderComponent implements OnInit {
         name: "",
         path: []
     }
-    constructor(public gMaps: GoogleMapsAPIWrapper) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader) { }
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }
@@ -42,7 +43,8 @@ export class OrderComponent implements OnInit {
     savePloygon(dist) {
         console.log(this.polygonArray);
         console.log(dist);
-        let polygon = Object.assign([], this.polygonArray);;
+        let polygon = Object.assign([], this.polygonArray);
+        polygon.distibutorname = dist.distibutorname;
         this.allDistibutors.push(polygon);
         dist.area.push(polygon);
         console.log("all distbtors" +this.distubutors);
@@ -59,16 +61,28 @@ export class OrderComponent implements OnInit {
        
 
     }
+    customerMapClicked($event: any) {
+        for (let dist of this.allDistibutors) {
+            var latlong = new google.maps.LatLng($event.coords.lat, $event.coords.lng);
+            var polygonPath = new google.maps.Polygon({
+                paths: dist.path
+            });
+            // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
+            if (this.gMaps.containsLocation(latlong, polygonPath)) {
+                console.log(true);
+                alert("location exist to : " + dist.distibutorname);
+                return false;
+            }
+            
+        };
+    }
     mapClicked($event: any) {
+       //var bermudaTriangle = new google.maps.Polygon({
+        //    paths: this.distubutors[0].area[0].path
+        //});
         
         
        
-        this.gMaps.containsLocation(<LatLngLiteral>{
-            lat: $event.coords.lat,
-            lng: $event.coords.lng
-        }, this.distubutors[0].area[0].path).then((map) => {
-            console.log(map);
-        });
         this.ploymarkers.push({
             lat: $event.coords.lat,
             lng: $event.coords.lng
@@ -105,6 +119,7 @@ export class OrderComponent implements OnInit {
     allDistibutors: any[] = [
         {
             name: "test",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.383406, lng: 78.400841 },
                 { lat: 17.353495, lng: 78.380756 },
@@ -112,7 +127,17 @@ export class OrderComponent implements OnInit {
             ],
         },
         {
+            name: "marmuda",
+            distibutorname: "Kinley",
+            path: [
+                { lat: 25.774, lng: -80.190 },
+                { lat: 18.466, lng: -66.118 },
+                { lat: 32.3212, lng: -64.757 }
+            ],
+        },
+        {
             name: "test2",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.409195, lng: 78.506413 },
                 { lat: 17.384624, lng: 78.516026 },
@@ -125,6 +150,7 @@ export class OrderComponent implements OnInit {
         distibutorname: "Kinley",
         area: [{
             name: "test2",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.409195, lng: 78.506413 },
                 { lat: 17.384624, lng: 78.516026 },
@@ -132,7 +158,17 @@ export class OrderComponent implements OnInit {
             ],
         },
             {
+                name: "marmuda",
+                distibutorname: "Kinley",
+                path: [
+                    { lat: 25.774, lng: -80.190 },
+                    { lat: 18.466, lng: -66.118 },
+                    { lat: 32.3212, lng: -64.757 }
+                ],
+            },
+            {
                 name: "test",
+                distibutorname: "Kinley",
                 path: [
                     { lat: 17.383406, lng: 78.400841 },
                     { lat: 17.353495, lng: 78.380756 },
@@ -142,13 +178,15 @@ export class OrderComponent implements OnInit {
       }
     ];
     distPolygon = this.allDistibutors;
-    //path: Array<LatLngLiteral> = [
+    //paths: Array<LatLngLiteral> = [
     //   { lat: 17.383406,  lng: 78.400841 },
     //   { lat: 17.353495,  lng: 78.380756 },
     //   { lat: 17.359722,  lng: 78.417835 }
     //];
+
+
     
-    ngOnInit() {
+    ngOnInit() :void{
         
   }
 
