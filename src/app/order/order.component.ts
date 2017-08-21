@@ -1,7 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { LatLngLiteral } from '@agm/core/services/google-maps-types';
-
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader  } from '@agm/core';
+declare var google:any; 
 interface marker {
 	lat: number;
 	lng: number;
@@ -9,7 +8,7 @@ interface marker {
   icon?:string;
 	
 }
-declare const google: any;
+
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
@@ -32,64 +31,14 @@ export class OrderComponent implements OnInit {
         name: "",
         path: []
     }
-    constructor(public gMaps: GoogleMapsAPIWrapper) { 
-
-        
-    }
-    
-      
+    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader) { }
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }
     viewAllDistPolygon(){
         this.distPolygon = this.allDistibutors;
     }
-    customerMapClicked(event: any){
-var latlng = new google.maps.LatLng(event.coords.lat, event.coords.lat);
-var triangleCoords = [
-    {lat: 25.774, lng: -80.19},
-    {lat: 18.466, lng: -66.118},
-    {lat: 32.321, lng: -64.757}
-  ];
-
-  var bermudaTriangle = new google.maps.Polygon({paths: triangleCoords});
-       console.log(latlng);
-      
-  google.maps.geometry.poly.containsLocation(latlng, bermudaTriangle).then((map) => {
-      
-      console.log(map);
-    });
-//        for (let dist of this.distubutors) {
-//    for(let area of dist.area){
-// let Polygon = new google.maps.Polygon({paths: area.path});
-
-//  if(google.maps.geometry.poly.containsLocation(latlng, Polygon)){
-//      alert(true);
-//  }
-//     else{
-
-//         alert(false);
-//     }
-//    }
-// }
-       
-//  var resultColor =google.maps.geometry.poly.containsLocation(latlng, bermudaTriangle)?
-//               console.log("true"):
-//               console.log("false");
-          
-//  if(resultColor){
-//             console.log(resultColor);
-//         }
-    //    var bermudaTriangle = new google.maps.Polygon({paths: this.distubutors[0].area[0].path});
-    //     this.gMaps.containsLocation(latlng, bermudaTriangle).then((mapss) => {
-    //         console.log(mapss);
-    //     });
-    //    var test =   this.gMaps.containsLocation(latlng, bermudaTriangle);
-    //    if(test){
-    //        console.log(test);
-    //    }
-
-    }
+  
     click($event: any) {
         console.log(`click event is called {$event}`);
     }
@@ -100,7 +49,8 @@ var triangleCoords = [
     savePloygon(dist) {
         console.log(this.polygonArray);
         console.log(dist);
-        let polygon = Object.assign([], this.polygonArray);;
+        let polygon = Object.assign([], this.polygonArray);
+        polygon.distibutorname = dist.distibutorname;
         this.allDistibutors.push(polygon);
         dist.area.push(polygon);
         console.log("all distbtors" +this.distubutors);
@@ -117,10 +67,29 @@ var triangleCoords = [
        
 
     }
+    customerMapClicked($event: any) {
+        for (let dist of this.allDistibutors) {
+            var latlong = new google.maps.LatLng($event.coords.lat, $event.coords.lng);
+            var polygonPath = new google.maps.Polygon({
+                paths: dist.path
+            });
+            // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
+            if (this.gMaps.containsLocation(latlong, polygonPath)) {
+                console.log(true);
+                alert("Distibutor location : " + dist.distibutorname);
+                return false;
+            }
+            
+        };
+    }
     mapClicked($event: any) {
+       //var bermudaTriangle = new google.maps.Polygon({
+        //    paths: this.distubutors[0].area[0].path
+        //});
         
-        // var latlng = <LatLngLiteral>{lat : $event.coords.lat, lng:$event.coords.lng};
-       this.ploymarkers.push({
+        
+       
+        this.ploymarkers.push({
             lat: $event.coords.lat,
             lng: $event.coords.lng
         });
@@ -157,6 +126,7 @@ var triangleCoords = [
     allDistibutors: any[] = [
         {
             name: "test",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.383406, lng: 78.400841 },
                 { lat: 17.353495, lng: 78.380756 },
@@ -164,7 +134,17 @@ var triangleCoords = [
             ],
         },
         {
+            name: "marmuda",
+            distibutorname: "Kinley",
+            path: [
+                { lat: 25.774, lng: -80.190 },
+                { lat: 18.466, lng: -66.118 },
+                { lat: 32.3212, lng: -64.757 }
+            ],
+        },
+        {
             name: "test2",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.409195, lng: 78.506413 },
                 { lat: 17.384624, lng: 78.516026 },
@@ -177,6 +157,7 @@ var triangleCoords = [
         distibutorname: "Kinley",
         area: [{
             name: "test2",
+            distibutorname: "Kinley",
             path: [
                 { lat: 17.409195, lng: 78.506413 },
                 { lat: 17.384624, lng: 78.516026 },
@@ -184,7 +165,17 @@ var triangleCoords = [
             ],
         },
             {
+                name: "marmuda",
+                distibutorname: "Kinley",
+                path: [
+                    { lat: 25.774, lng: -80.190 },
+                    { lat: 18.466, lng: -66.118 },
+                    { lat: 32.3212, lng: -64.757 }
+                ],
+            },
+            {
                 name: "test",
+                distibutorname: "Kinley",
                 path: [
                     { lat: 17.383406, lng: 78.400841 },
                     { lat: 17.353495, lng: 78.380756 },
@@ -194,13 +185,15 @@ var triangleCoords = [
       }
     ];
     distPolygon = this.allDistibutors;
-    //path: Array<LatLngLiteral> = [
+    //paths: Array<LatLngLiteral> = [
     //   { lat: 17.383406,  lng: 78.400841 },
     //   { lat: 17.353495,  lng: 78.380756 },
     //   { lat: 17.359722,  lng: 78.417835 }
     //];
-   
-    ngOnInit() {
+
+
+    
+    ngOnInit() :void{
         
   }
 
