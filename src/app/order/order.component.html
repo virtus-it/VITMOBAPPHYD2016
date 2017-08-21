@@ -20,31 +20,49 @@
 </div>
 <div>
 <div class="col-lg-6">
-  <div class="input-group">
-    <select [(ngModel)]="selectedDist">
+   <nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0">Create Polygon with Distributor</h1>
+</nav>
+    <div class="input-group">
+      <select [(ngModel)]="selectedDist">
       <option [value]="0">Please Select</option>
       <option *ngFor="let dist of distubutors" [ngValue]="dist">
         {{dist.distibutorname}}
       </option>
     </select>
-    </div>
-    <div class="input-group">
       <input type="text" class="form-control" [(ngModel)]="polygonArray.name" placeholder="Polygon Name">
       <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" (click)='savePloygon(selectedDist)'>save polygon!</button>
+        <button class="btn btn-primary" type="button"  (click)='savePloygon(selectedDist)'>save polygon!</button>
       </span>
     </div>
   </div>
   <div class="col-lg-6">
-    <span>Create Distributor</span>
+   <nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0">View All Distributor Polygon</h1>
+</nav>
+    <div class="input-group">
+      <span class="input-group-btn">
+        <button class="btn btn-primary" type="button" (click)='viewAllDistPolygon()'>View All Distributor polygon!</button>
+      </span>
+    </div>
+    </div>
+  <div class="col-lg-6">
+    <nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0">Create Distributor</h1>
+</nav>
+   
     <div class="input-group">
       <input type="text" class="form-control" [(ngModel)]="DistributorArray.distibutorname" placeholder="Distributors Name">
       <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" (click)='saveDistibutor()'>save Distributor!</button>
+        <button class="btn btn-primary" type="button" (click)='saveDistibutor()'>save Distributor!</button>
       </span>
     </div>
   </div>
   <div class="col-lg-6">
+     <nav class="navbar navbar-light bg-faded">
+  <h1 class="navbar-brand mb-0">View Polygon with Distributor</h1>
+</nav>
+   
     <div class="input-group">
       <select [(ngModel)]="selectedDistView">
         <option [value]="0">Please Select</option>
@@ -52,11 +70,12 @@
           {{dist.distibutorname}}
         </option>
       </select>
-    </div>
-    <div class="input-group">
       <span class="input-group-btn">
-        <button class="btn btn-secondary" type="button" (click)='viewDistPolygon(selectedDistView)'>view Distributor polygon!</button>
+        <button class="btn btn-primary" type="button" (click)='viewDistPolygon(selectedDistView)'>view Distributor polygon!</button>
       </span>
     </div>
   </div>
 </div>
+
+<!-- <agm-map [latitude]="lat1" [longitude]="lng1" [zoom]="zoom" (mapClick)="customerMapClicked($event)" >
+ </agm-map> -->

@@ -27,7 +27,8 @@ import { OrderComponent } from './order/order.component';
       {path:'**',redirectTo:'login',pathMatch:'full'}
     ]),
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
+    //apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
+   apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
     })
   ],
   providers: [
