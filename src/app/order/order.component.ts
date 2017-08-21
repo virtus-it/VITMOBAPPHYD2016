@@ -70,7 +70,7 @@ export class OrderComponent implements OnInit {
             // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
             if (this.gMaps.containsLocation(latlong, polygonPath)) {
                 console.log(true);
-                alert("location exist to : " + dist.distibutorname);
+                alert("Distibutor location : " + dist.distibutorname);
                 return false;
             }
             
