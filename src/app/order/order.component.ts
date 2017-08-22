@@ -55,7 +55,7 @@ export class OrderComponent implements OnInit {
     saveDistibutor() {
         console.log(this.polygonArray);
         
-        let distibutors = Object.assign([], this.DistributorArray);;
+        let distibutors = Object.assign([], this.DistributorArray);
         this.distubutors.push(distibutors);
         this.DistributorArray.distibutorname = "";
        
