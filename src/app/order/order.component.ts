@@ -17,6 +17,8 @@ interface marker {
 export class OrderComponent implements OnInit {
     lat: number = 17.3850;
     lng: number = 78.4867;
+    lat1: number = 24.886;
+    lng1: number = -70.269; 
     zoom: number = 12;
     selectedDist: any = "0";
     selectedDistView: any = "0";
@@ -33,6 +35,10 @@ export class OrderComponent implements OnInit {
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }
+    viewAllDistPolygon(){
+        this.distPolygon = this.allDistibutors;
+    }
+  
     click($event: any) {
         console.log(`click event is called {$event}`);
     }
@@ -96,6 +102,7 @@ export class OrderComponent implements OnInit {
     viewDistPolygon(dist) {
         this.distPolygon = dist.area;
     }
+    
     markers: marker[] = [
         {
             lat: 17.359066,
