@@ -1,6 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader  } from '@agm/core';
-declare var google:any; 
+declare var google: any;
 interface marker {
 	lat: number;
 	lng: number;
@@ -8,13 +8,17 @@ interface marker {
   icon?:string;
 	
 }
-
+ 
 @Component({
     selector: 'app-order',
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+    map: any;
+    drawingManager: any;
+   
+
     lat: number = 17.3850;
     lng: number = 78.4867;
     lat1: number = 24.886;
@@ -184,17 +188,75 @@ export class OrderComponent implements OnInit {
             }]
       }
     ];
+    intialMap() {
+       
+        var gPolygons = [];
+        var polygon1 = {
+            draggable: true,
+            editable: true,
+            fillColor: "#f00"
+        };
+
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 17.4471, lng: 78.454 },
+            zoom: 10
+        });
+        this.drawingManager = new google.maps.drawing.DrawingManager({
+            drawingMode: google.maps.drawing.OverlayType.POLYGON,
+            drawingControl: true,
+            editable: true,
+            polygonOptions: polygon1,
+            drawingControlOptions: {
+                position: google.maps.ControlPosition.TOP_CENTER,
+                drawingModes: ['polygon']
+
+            }
+             
+        });
+        this.drawingManager.setMap(this.map);
+        google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
+            var poly = event.overlay;
+            
+           
+           
+                google.maps.event.addListener(poly.getPath(), 'set_at', function () {
+                    console.log(poly);
+                    pushPolygon(poly);
+                    
+                });
+
+                google.maps.event.addListener(poly.getPath(), 'insert_at', function () {
+                    console.log("test");
+                    console.log(this.drawingManager.map.data);
+                });
+              
+         
+               pushPolygon(poly);
+               console.log(JSON.stringify(this.drawingManager.map.getPath()));
+        });
+        function pushPolygon(poly) {
+            gPolygons.push(poly);
+           
+        }
+       
+    }
+   
     distPolygon = this.allDistibutors;
     //paths: Array<LatLngLiteral> = [
     //   { lat: 17.383406,  lng: 78.400841 },
     //   { lat: 17.353495,  lng: 78.380756 },
     //   { lat: 17.359722,  lng: 78.417835 }
     //];
-
-
     
-    ngOnInit() :void{
+  
+    
+    ngOnInit() {
+        this._loader.load().then(() => {
+            this.intialMap();
+        });
         
+        
+    
   }
-
+   
 }

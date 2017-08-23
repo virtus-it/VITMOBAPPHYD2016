@@ -32,6 +32,7 @@ import { OrderComponent } from './order/order.component';
    //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
        // libraries: ["geometry"],
+        libraries: ["drawing"],
       apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
 
     })
