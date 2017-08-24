@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader  } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
+import * as _ from 'underscore';
 declare var google: any;
 interface marker {
 	lat: number;
@@ -53,7 +54,7 @@ export class OrderComponent implements OnInit {
     savePloygon(dist) {
         console.log(this.polygonArray);
         console.log(dist);
-        let polygon = Object.assign([], this.polygonArray);
+        let polygon = Object.assign({}, this.polygonArray);
         polygon.distibutorname = dist.distibutorname;
         this.allDistibutors.push(polygon);
         dist.area.push(polygon);
@@ -71,6 +72,7 @@ export class OrderComponent implements OnInit {
        
 
     }
+   
     customerMapClicked($event: any) {
         for (let dist of this.allDistibutors) {
             var latlong = new google.maps.LatLng($event.coords.lat, $event.coords.lng);
@@ -188,6 +190,7 @@ export class OrderComponent implements OnInit {
             }]
       }
     ];
+
     intialMap() {
        
         var gPolygons = [];
@@ -201,6 +204,7 @@ export class OrderComponent implements OnInit {
             center: { lat: 17.4471, lng: 78.454 },
             zoom: 10
         });
+       
         this.drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.POLYGON,
             drawingControl: true,
@@ -216,31 +220,84 @@ export class OrderComponent implements OnInit {
         this.drawingManager.setMap(this.map);
         google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
             var poly = event.overlay;
-            
+            //this.map.data.add(new google.maps.Data.Feature({
+            //    geometry: new google.maps.Data.Polygon([poly.getPath().getArray()])
+            //}));
            
            
                 google.maps.event.addListener(poly.getPath(), 'set_at', function () {
-                    console.log(poly);
-                    pushPolygon(poly);
+                   
                     
                 });
 
                 google.maps.event.addListener(poly.getPath(), 'insert_at', function () {
-                    console.log("test");
-                    console.log(this.drawingManager.map.data);
+                    
+                  
                 });
               
          
-               pushPolygon(poly);
-               console.log(JSON.stringify(this.drawingManager.map.getPath()));
+              // pushPolygon(poly);
+              
         });
-        function pushPolygon(poly) {
-            gPolygons.push(poly);
-           
-        }
+        
        
     }
-   
+    initMap() {
+        console.log('now: ', _.now());
+        this.map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 17.4471, lng: 78.454 },
+            zoom: 10,
+            // only show roadmap type of map, and disable ability to switch to other type
+           // mapTypeId: google.maps.MapTypeId.ROADMAP,
+            mapTypeControl: false
+        });
+
+        this.map.data.setControls(['Polygon']);
+        this.map.data.setStyle({
+            editable: true,
+            draggable: true
+        });
+        this.bindDataLayerListeners(this.map.data);
+
+        //load saved data
+        //loadPolygons(map);
+    }
+    bindDataLayerListeners(dataLayer) {
+        dataLayer.addListener('addfeature', this.savePolygon);
+        dataLayer.addListener('removefeature', this.savePolygon);
+        dataLayer.addListener('setgeometry', this.savePolygon);
+    }
+    savePolygon() {
+        this.map.data.toGeoJson(function (json) {
+            console.log(json.features);
+            localStorage.setItem('geoData', JSON.stringify(json));
+            
+        });
+    }
+    saveP(dist) {
+        var data = JSON.parse(localStorage.getItem('geoData'));
+
+        for (let feature of data.features) {
+           
+            var coordinates = feature.geometry.coordinates;
+            for (let coord of coordinates) {
+                coord.forEach((item, index) => {
+                    if (coord.length - 1 != index) { 
+                    var path = { lat: item[1], lng: item[0] };
+                    this.polygonArray.path.push(path);
+                }
+                });
+                
+            }
+            let polygon = Object.assign({}, this.polygonArray);
+            polygon.distibutorname = dist.distibutorname;
+            this.allDistibutors.push(polygon);
+            dist.area.push(polygon);
+            this.polygonArray.name = "";
+            this.polygonArray.path = [];
+            localStorage.setItem('geoData', '');
+        }
+    }
     distPolygon = this.allDistibutors;
     //paths: Array<LatLngLiteral> = [
     //   { lat: 17.383406,  lng: 78.400841 },
@@ -252,7 +309,7 @@ export class OrderComponent implements OnInit {
     
     ngOnInit() {
         this._loader.load().then(() => {
-            this.intialMap();
+            this.initMap();
         });
         
         

@@ -88,3 +88,15 @@
 <div>
   <div id="map"></div>
 </div>
+
+<div class="input-group">
+  <select [(ngModel)]="selectedDist">
+    <option [value]="0">Please Select</option>
+    <option *ngFor="let dist of distubutors" [ngValue]="dist">
+      {{dist.distibutorname}}
+    </option>
+  </select>
+ <span class="input-group-btn">
+    <button class="btn btn-primary" type="button" (click)='saveP(selectedDist)'>save polygon!</button>
+  </span>
+</div>
