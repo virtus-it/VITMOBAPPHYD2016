@@ -11,7 +11,7 @@ interface marker {
 }
  
 @Component({
-    selector: 'app-order',
+    
     templateUrl: './order.component.html',
     styleUrls: ['./order.component.css']
 })
@@ -204,12 +204,18 @@ export class OrderComponent implements OnInit {
             center: { lat: 17.4471, lng: 78.454 },
             zoom: 10
         });
-       
+        var triangleCoords = [
+          {lat: 25.774, lng: -80.190},
+          {lat: 18.466, lng: -66.118},
+          {lat: 32.321, lng: -64.757},
+          {lat: 25.774, lng: -80.190}
+        ];
         this.drawingManager = new google.maps.drawing.DrawingManager({
             drawingMode: google.maps.drawing.OverlayType.POLYGON,
             drawingControl: true,
             editable: true,
             polygonOptions: polygon1,
+            paths: triangleCoords,
             drawingControlOptions: {
                 position: google.maps.ControlPosition.TOP_CENTER,
                 drawingModes: ['polygon']
@@ -217,6 +223,9 @@ export class OrderComponent implements OnInit {
             }
              
         });
+         
+
+       
         this.drawingManager.setMap(this.map);
         google.maps.event.addListener(this.drawingManager, 'overlaycomplete', (event) => {
             var poly = event.overlay;
@@ -244,12 +253,19 @@ export class OrderComponent implements OnInit {
     }
     initMap() {
         console.log('now: ', _.now());
+         var triangleCoords = [
+          {lat: 25.774, lng: -80.190},
+          {lat: 18.466, lng: -66.118},
+          {lat: 32.321, lng: -64.757},
+          {lat: 25.774, lng: -80.190}
+        ];
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 17.4471, lng: 78.454 },
             zoom: 10,
             // only show roadmap type of map, and disable ability to switch to other type
            // mapTypeId: google.maps.MapTypeId.ROADMAP,
-            mapTypeControl: false
+            mapTypeControl: false,
+          
         });
 
         this.map.data.setControls(['Polygon']);
@@ -257,6 +273,7 @@ export class OrderComponent implements OnInit {
             editable: true,
             draggable: true
         });
+        this.map.data.add({geometry: new google.maps.Data.Polygon([triangleCoords])})
         this.bindDataLayerListeners(this.map.data);
 
         //load saved data
