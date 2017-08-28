@@ -1,5 +1,6 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
+import { AuthenticationService } from '../login/authentication.service';
 import * as _ from 'underscore';
 declare var google: any;
 interface marker {
@@ -36,7 +37,7 @@ export class OrderComponent implements OnInit {
         name: "",
         path: []
     }
-    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader, private authenticationService: AuthenticationService) { }
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }
@@ -72,7 +73,9 @@ export class OrderComponent implements OnInit {
        
 
     }
-   
+    logOut() {
+        this.authenticationService.logout();
+    }
     customerMapClicked($event: any) {
         for (let dist of this.allDistibutors) {
             var latlong = new google.maps.LatLng($event.coords.lat, $event.coords.lng);

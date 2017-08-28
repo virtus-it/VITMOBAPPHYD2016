@@ -9,7 +9,8 @@ import {MaterialModule,MdSidenavModule} from '@angular/material';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './login/authentication.service';
-import {DistributorServiceService} from './distributor/distributor-service.service';
+import { DistributorServiceService } from './distributor/distributor-service.service';
+import { LoggedInGuard } from './login/logged-in.guard';
 import { OrderComponent } from './order/order.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { DistributorComponent } from './distributor/distributor.component';
@@ -31,10 +32,10 @@ import { DistributorComponent } from './distributor/distributor.component';
     MdSidenavModule,
     RouterModule.forRoot([
       {path:'login',component:LoginComponent},
-      {path:'order',component:OrderComponent},
-      {path:'distributor',component:DistributorComponent},
+      { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard]},
+      { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
       {path:'',redirectTo:'login',pathMatch:'full'},
-      {path:'**',redirectTo:'login',pathMatch:'full'}
+      {path:'**',redirectTo:'login'}
     ]),
     AgmCoreModule.forRoot({
 
@@ -51,6 +52,7 @@ import { DistributorComponent } from './distributor/distributor.component';
       AuthenticationService,
       GoogleMapsAPIWrapper,
       DistributorServiceService,
+      LoggedInGuard,
     { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }
   ],
   
