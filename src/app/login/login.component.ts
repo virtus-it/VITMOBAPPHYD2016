@@ -25,7 +25,9 @@ export class LoginComponent implements OnInit {
         if (data.data.user) {
             console.log("Logged in and should navigate to diifrent page");
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
-            this.router.navigate(['/order']);
+            this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
+            this.router.navigate(['/distributor']);
+            
         }
     }
 }

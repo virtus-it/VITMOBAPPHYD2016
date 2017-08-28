@@ -31,10 +31,10 @@ import { DistributorComponent } from './distributor/distributor.component';
     MaterialModule,
     MdSidenavModule,
     RouterModule.forRoot([
-      {path:'login',component:LoginComponent},
-      { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard]},
-      { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
-      {path:'',redirectTo:'login',pathMatch:'full'},
+        { path: 'login', component: LoginComponent},
+        { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard]},
+        { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard]},
+        { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard]},
       {path:'**',redirectTo:'login'}
     ]),
     AgmCoreModule.forRoot({

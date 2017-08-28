@@ -12,12 +12,14 @@ export class LoggedInGuard implements CanActivate {
     }
     checkLogin(url: string): boolean {
         if (this.Auth.loggedIn) {
+            //this.router.navigate(['/order']);
             return true;
         }
-        else {
+        
+        
             // Navigate to the login page with extras
-            this.router.navigate(['/login']);
+        this.router.navigate(['/login']);
             return false;
-        }
+       
     }
 }
