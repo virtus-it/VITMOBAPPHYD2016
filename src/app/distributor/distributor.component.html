@@ -7,12 +7,8 @@
       <tr>
         <th>User</th>
         <th> Mobile no</th>
-        <th width="20%">Address</th>
-        <th width="25%">Areas</th>
-        <th>Product List</th>
-        <th>View Orders</th>
-        <th>Edit</th>
-        <th>Service Area</th>
+        <th >Address</th>
+         <th>Service Area</th>
       </tr>
 
     </thead>
@@ -21,22 +17,13 @@
 
       <tr id="Preordrlist" *ngFor="let dist of distributors"> 
         <td>
-          <div class="profilename"></div>
           {{dist.firstname}}
         </td>
 
         <td>{{dist.mobileno}}</td>
 
         <td>{{dist.address}}</td>
-        <td>
-          <span>
-            area
-          </span>
-        </td>
-        <td><a href="#" type="button" class="">Products</a></td>
-        <td><a href="#distributorbyorders" type="button" data-toggle="modal" class="customer_orders">orders</a> </td>
-        <td><a href="#editsupplier" type="button" data-toggle="modal" class="edit_supplier"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></a> </td>
-        <td><a href="#" type="button">Add service area</a> </td>
+        <td> <button md-button (click)="openMapDialog(dist)">Add service area</button></td>
       </tr>
 
     </tbody>
@@ -46,3 +33,4 @@
 
 
 </div>
+

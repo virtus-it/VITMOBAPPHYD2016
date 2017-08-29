@@ -1,12 +1,17 @@
-<md-sidenav-container class="example-container">
-  <md-sidenav #sidenav class="example-sidenav">
-    Jolly good!
+﻿<<md-sidenav-container>
+  <md-sidenav #sidenav mode="side" class="app-sidenav">
+    <md-nav-list>
+      <a md-list-item href="page1.html">Page 1</a>
+      <a md-list-item href="page2.html">Page 2</a>
+      <a md-list-item href="page3.html">Page 3</a>
+    </md-nav-list>
   </md-sidenav>
-
-  <div class="example-sidenav-content">
-    <button type="button" md-button (click)="sidenav.open()">
-      Open sidenav
+  <md-toolbar color="primary">
+    <button md-icon-button (click)="sidenav.toggle()">
+      <md-icon class="md-24">menu</md-icon>
     </button>
+  </md-toolbar>
+  <div class="app-content">
+   
   </div>
-
 </md-sidenav-container>
