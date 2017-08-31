@@ -73,9 +73,7 @@ export class OrderComponent implements OnInit {
        
 
     }
-    logOut() {
-        this.authenticationService.logout();
-    }
+   
     customerMapClicked($event: any) {
         for (let dist of this.allDistibutors) {
             var latlong = new google.maps.LatLng($event.coords.lat, $event.coords.lng);

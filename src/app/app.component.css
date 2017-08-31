@@ -1,0 +1,12 @@
+﻿.navbar {
+  background-color: #fff !important;
+  border-bottom: solid 1px #c5d6de;
+}
+
+.navbar-nav {
+  margin: 10px !important;
+}
+
+.btn-customMenu {
+  right: 465px
+}

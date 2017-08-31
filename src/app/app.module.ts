@@ -58,9 +58,12 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
         GoogleMapsAPIWrapper,
         DistributorServiceService,
         LoggedInGuard,
-        { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }
+        { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }  // 
     ],
     entryComponents: [MapDialogComponent],
+    exports: [
+        MaterialModule
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
