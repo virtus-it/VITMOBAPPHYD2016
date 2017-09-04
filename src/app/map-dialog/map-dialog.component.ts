@@ -63,9 +63,16 @@ export class MapDialogComponent implements OnInit {
     }
     getPolygonDataResult(output, dataLayer) {
         console.log(output);
+        //9863636315
+        //paani
         if (output.data && output.data.length > 0) {
             for (let data of output.data) {
-                dataLayer.add({ geometry: new google.maps.Data.Polygon([data.polygonjson.path]) })
+                console.log(data.polygonvalue[0].path);
+                if(data.polygonvalue && data.polygonvalue.length>0){
+                 for (let polygon of data.polygonvalue) {
+                dataLayer.add({ geometry: new google.maps.Data.Polygon([polygon.path]) })
+                 }
+            }
 
             }
         }
