@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
-import { DistributorServiceService } from '../distributor/distributor-service.service'
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 declare var google: any;
 @Component({
@@ -15,20 +16,9 @@ export class MapDialogComponent implements OnInit {
     polygonArray: any = {
         path: []
     }
-    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService) { }
+    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
     initMap() {
-
-        //var triangleCoords = [
-        //    { lat: 25.774, lng: -80.190 },
-        //    { lat: 18.466, lng: -66.118 },
-        //    { lat: 32.321, lng: -64.757 }
-
-        //];
-        //var triangleCoords2 = [
-        //    { lat: 45.774, lng: -80.190 },
-        //    { lat: 12.466, lng: -66.118 },
-        //    { lat: 75.321, lng: -64.757 }
-        //   ];
+        
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 17.4471, lng: 78.454 },
             zoom: 10,
@@ -44,7 +34,7 @@ export class MapDialogComponent implements OnInit {
             draggable: true
         });
         //this.map.data.add({ geometry: new google.maps.Data.Polygon([triangleCoords]) })
-        //this.map.data.add({ geometry: new google.maps.Data.Polygon([triangleCoords2]) })
+        
         this.getPolygonDistributors(this.map.data);
         this.bindDataLayerListeners(this.map.data);
 
@@ -53,7 +43,7 @@ export class MapDialogComponent implements OnInit {
     }
     getPolygonDistributors(dataLayer) {
         let distDetails = this.distributorDetails;
-        var input = { area: { user_type: "dealer", user_id: distDetails.userid } };
+        var input = { area: { user_type: "dealer", user_id: distDetails.userid, "apptype": this.authenticationService.appType() } };
         this.distributorService.getpolygonByDistributor(input)
             .subscribe(
             output => this.getPolygonDataResult(output, dataLayer),
