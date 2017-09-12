@@ -12,16 +12,17 @@ declare var google: any;
 })
 export class MapDialogComponent implements OnInit {
     map: any;
-
+    selectedShape: any;
     polygonArray: any = {
         path: []
     }
     constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
     initMap() {
-        
+
         this.map = new google.maps.Map(document.getElementById('map'), {
-            center: { lat: 17.4471, lng: 78.454 },
-            zoom: 10,
+            center: { lat: 17.34932757, lng: 78.48117828 },
+            zoom: 11,
+            disableDoubleClickZoom: true,
             // only show roadmap type of map, and disable ability to switch to other type
             // mapTypeId: google.maps.MapTypeId.ROADMAP,
             mapTypeControl: false,
@@ -34,13 +35,19 @@ export class MapDialogComponent implements OnInit {
             draggable: true
         });
         //this.map.data.add({ geometry: new google.maps.Data.Polygon([triangleCoords]) })
-        
+
+        google.maps.event.addListener(this.map.data, "dblclick", function (event) {
+            console.log("dblclick");
+            // event.setMap(null);
+            this.map.data.remove(event.feature);
+        });
         this.getPolygonDistributors(this.map.data);
         this.bindDataLayerListeners(this.map.data);
 
         //load saved data
         //loadPolygons(map);
     }
+
     getPolygonDistributors(dataLayer) {
         let distDetails = this.distributorDetails;
         var input = { area: { user_type: "dealer", user_id: distDetails.userid, "apptype": this.authenticationService.appType() } };
@@ -58,11 +65,11 @@ export class MapDialogComponent implements OnInit {
         if (output.data && output.data.length > 0) {
             for (let data of output.data) {
                 console.log(data.polygonvalue[0].path);
-                if(data.polygonvalue && data.polygonvalue.length>0){
-                 for (let polygon of data.polygonvalue) {
-                dataLayer.add({ geometry: new google.maps.Data.Polygon([polygon.path]) })
-                 }
-            }
+                if (data.polygonvalue && data.polygonvalue.length > 0) {
+                    for (let polygon of data.polygonvalue) {
+                        dataLayer.add({ geometry: new google.maps.Data.Polygon([polygon.path]) })
+                    }
+                }
 
             }
         }
@@ -71,13 +78,18 @@ export class MapDialogComponent implements OnInit {
         dataLayer.addListener('addfeature', this.savePolygon);
         dataLayer.addListener('removefeature', this.savePolygon);
         dataLayer.addListener('setgeometry', this.savePolygon);
+
     }
+
     savePolygon() {
+
+
         this.map.data.toGeoJson(function (json) {
             console.log(json.features);
             localStorage.setItem('geoData', JSON.stringify(json));
 
         });
+
     }
     saveData(distributorDetails) {
         var input = { area: { user_type: "dealer", user_id: distributorDetails.userid, polygonvalue: [] } }
