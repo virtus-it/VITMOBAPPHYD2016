@@ -101,6 +101,7 @@ export class MapDialogComponent implements OnInit {
                 coord.forEach((item, index) => {
 
                     if (coord.length - 1 != index) {
+                        //var path = { lat: item[1], lng: item[0] };
                         var path = { lat: item[1], lng: item[0] };
                         this.polygonArray.path.push(path);
                     }

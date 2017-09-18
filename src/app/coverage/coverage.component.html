@@ -1,0 +1,7 @@
+﻿<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+  <agm-polygon *ngFor="let p of polygonArray; let i = index" [paths]="p.path"
+               [editable]="false"
+               [draggable]="false"
+               ></agm-polygon>
+
+</agm-map>

@@ -29,7 +29,8 @@ export class DistributorComponent implements OnInit {
     }
     openMapDialog(data) {
         let dialogRef = this.dialog.open(MapDialogComponent, {
-            width: '1000px',
+            height:'600px',
+           width: '1100px',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {

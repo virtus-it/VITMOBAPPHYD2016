@@ -16,6 +16,7 @@ import { OrderComponent } from './order/order.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { DistributorComponent } from './distributor/distributor.component';
 import { MapDialogComponent } from './map-dialog/map-dialog.component';
+import { CoverageComponent } from './coverage/coverage.component';
 
 @NgModule({
     declarations: [
@@ -24,7 +25,8 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
         OrderComponent,
         SideMenuComponent,
         DistributorComponent,
-        MapDialogComponent
+        MapDialogComponent,
+        CoverageComponent
 
     ],
     imports: [
@@ -39,6 +41,7 @@ import { MapDialogComponent } from './map-dialog/map-dialog.component';
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
+            { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
