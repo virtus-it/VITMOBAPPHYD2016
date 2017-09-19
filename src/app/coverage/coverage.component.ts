@@ -2,6 +2,8 @@
 import { DistributorServiceService } from '../distributor/distributor-service.service'
 import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
+import { MapDialogComponent } from '../map-dialog/map-dialog.component';
+import { MdDialog } from '@angular/material';
 @Component({
 
     templateUrl: './coverage.component.html',
@@ -12,7 +14,8 @@ export class CoverageComponent implements OnInit {
     lng: number = 78.4867;
     zoom: number = 12;
     polygonArray: any = [];
-    constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
+    dialogRef: any = '';
+    constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
     mapClicked($event: any) {
 
     }
@@ -41,6 +44,14 @@ export class CoverageComponent implements OnInit {
 
             }
         }
+    }
+    polygonOver(polygon) {
+        
+    }
+    polygonOut(polygon) {
+       
+            //this.dialogRef.close('Pizza!');
+        
     }
     ngOnInit() {
         this.getPolygonDistributors();

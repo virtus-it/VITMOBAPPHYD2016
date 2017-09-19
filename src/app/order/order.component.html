@@ -6,18 +6,27 @@
           (markerClick)="clickedMarker(m.label, i)"
           [latitude]="m.lat"
           [longitude]="m.lng"
-          [iconUrl]="m.icon"></agm-marker>
+          [iconUrl]="m.icon"><agm-info-window>
+  Hi, this is the content of the <strong>info window</strong>
+
+</agm-info-window></agm-marker>
 <agm-marker  *ngFor="let m of ploymarkers; let i = index"
           
           [latitude]="m.lat"
           [longitude]="m.lng"
-          ></agm-marker>
+          ><agm-info-window>
+  Hi, this is the content of the <strong>info window</strong>
+
+</agm-info-window></agm-marker>
            <agm-polygon  *ngFor="let p of distPolygon; let i = index"  [paths]="p.path"
         [editable]="true" 
         [draggable]="true"
         (polyClick)="click(event)" 
         (polyDblClick)="delete(event)"></agm-polygon>
+  <agm-info-window  show="'show'" coords="'coords'">
+    Hi, this is the content of the <strong>info window</strong>
 
+  </agm-info-window>
 </agm-map>
 </div>
 <div>

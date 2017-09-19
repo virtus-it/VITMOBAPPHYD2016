@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import { MaterialModule, MdSidenavModule, MdDialogModule } from '@angular/material';
+import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -37,6 +37,7 @@ import { CoverageComponent } from './coverage/coverage.component';
         MaterialModule,
         MdSidenavModule,
         MdDialogModule,
+        MdTooltipModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },

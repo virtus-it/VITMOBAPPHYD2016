@@ -1,7 +1,14 @@
 ﻿<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
   <agm-polygon *ngFor="let p of polygonArray; let i = index" [paths]="p.path"
+               
                [editable]="false"
                [draggable]="false"
-               ></agm-polygon>
+               >
+    <agm-info-window>
+               Hi, this is the content of the <strong>info window</strong>
+      
+    </agm-info-window>
+  </agm-polygon>
 
 </agm-map>
+
