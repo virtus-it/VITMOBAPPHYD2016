@@ -1,4 +1,5 @@
-﻿<div id="" class="mgtop-5pc col-md-12 ">
+﻿<button md-button (click)="openCreateDialog()">Add</button>
+<div id="" class="mgtop-5pc col-md-12 ">
 
   <table class="table userlist table-hover table-striped">
 
@@ -9,6 +10,7 @@
         <th> Mobile no</th>
         <th >Address</th>
          <th>Service Area</th>
+        <th>Edit</th>
       </tr>
 
     </thead>
@@ -24,6 +26,7 @@
 
         <td>{{dist.address}}</td>
         <td> <button md-button (click)="openMapDialog(dist)">Add service area</button></td>
+        <td> <button md-button (click)="openUpdateDialog(dist)">Edit</button></td>
       </tr>
 
     </tbody>

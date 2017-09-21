@@ -1,7 +1,8 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { DistributorServiceService } from './distributor-service.service'
+import { DistributorServiceService } from './distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
+import { DistributorCreateDialogComponent } from '../distributor-create-dialog/distributor-create-dialog.component';
 import { MdDialog } from '@angular/material';
 @Component({
 
@@ -12,7 +13,7 @@ export class DistributorComponent implements OnInit {
     distributors:any = [];
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
     getDistributors() {
-        let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 10 } }
+        let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
         console.log(input);
         this.distributorService.getAllDistributors(input)
             .subscribe(
@@ -36,6 +37,30 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
+        });
+    }
+    openCreateDialog() {
+        let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
+            height: '400px',
+            width: '800px',
+            data: ''
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            //this.dialogResult = result;
+            this.getDistributors();
+        });
+    }
+    openUpdateDialog(details) {
+        let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
+            height: '400px',
+            width: '800px',
+            data: details
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            //this.dialogResult = result;
+            this.getDistributors();
         });
     }
     ngOnInit() {
