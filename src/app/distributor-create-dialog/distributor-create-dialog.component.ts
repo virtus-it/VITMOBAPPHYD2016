@@ -41,7 +41,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          console.log(this.dist);
          var input:any = {
              "User": {
-                 "user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.dist.phone, "apptype": this.authenticationService.appType()
+                 "user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
          if (this.distributorDetail) {
@@ -86,13 +86,17 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.phone = this.distributorDetail.mobileno;
              _.each(this.distributorDetail.areainfo, function (i, j) {
                  var area:any = i;
-                 var areaDetails = { id: area.areaid, itemName: area.areaname };
-                areatime.push(areaDetails);
+                 var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };
+                 areatime.push(areaDetails);
+                 
              });
              this.dist.selectedItems = areatime;
              
          }
      }
+     onCloseCancel() {
+        this.thisDialogRef.close('Cancel');
+    }
      ngOnInit() {
          this.getAreasName();
          this.getDetails();
@@ -102,7 +106,7 @@ export class DistributorCreateDialogComponent implements OnInit {
              selectAllText: 'Select All',
              unSelectAllText: 'UnSelect All',
              enableSearchFilter: true,
-             badgeShowLimit: 4,
+             badgeShowLimit: 2,
              classes: "myclass custom-class myyy"
          };    
   }

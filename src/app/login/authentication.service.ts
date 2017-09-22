@@ -66,6 +66,35 @@ export class AuthenticationService {
         }
 
     };
+    dealerNo = function () {
+        try {
+            if (this.CurrentSession.mobileno) {
+                return this.CurrentSession.mobileno.toString();
+            }
+            else {
+                return "";
+            }
+        }
+        catch (ex) {
+            return "";
+        }
+
+    };
+    
+    userType= function () {
+        try {
+            if (this.CurrentSession.USERTYPE) {
+                return this.CurrentSession.USERTYPE.toString();
+            }
+            else {
+                return "";
+            }
+        }
+        catch (ex) {
+            return "";
+        }
+
+    };
 }
 
 // {

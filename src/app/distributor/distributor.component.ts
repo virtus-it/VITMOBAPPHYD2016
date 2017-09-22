@@ -41,8 +41,8 @@ export class DistributorComponent implements OnInit {
     }
     openCreateDialog() {
         let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
-            height: '400px',
-            width: '800px',
+            height: '350px',
+            width: '700px',
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -62,6 +62,9 @@ export class DistributorComponent implements OnInit {
             //this.dialogResult = result;
             this.getDistributors();
         });
+    }
+    onScrollFunction(event) {
+        console.log('scroll event', event);
     }
     ngOnInit() {
         this.getDistributors()
