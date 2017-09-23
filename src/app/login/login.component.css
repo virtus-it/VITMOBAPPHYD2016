@@ -1,0 +1,45 @@
+
+.loginBg{
+	background: #f1f5f7;
+	/* background-image: url(/src/assests/images/bg_virtus.png); */
+}
+.loginStyle
+{
+	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+	margin: 5% 0px;
+	border: 1px solid #ddd;
+	padding: 5%;
+	background: #fff;
+	
+}
+.btn{
+    -webkit-box-shadow: 0 10px 6px -6px #777;
+       -moz-box-shadow: 0 10px 6px -6px #777;
+			box-shadow: 0 10px 6px -6px #777;
+			border-radius: 0px;	
+}
+.checkbox + .checkbox, .radio + .radio{
+	margin-top:0px !important;
+  }
+  .checkbox, .radio{
+	margin-bottom:0px !important;
+	margin-top:0px !important;
+	}
+	.input-group-addon{
+		border: 0;
+border-radius: 0px;		
+		background:transparent !important;
+		border-bottom: 1px solid #999;
+	}
+.form-control {
+		border: 0;
+		outline: 0;
+		border-radius: 0px;		
+		background: transparent;
+		border-bottom: 1px solid #999;
+	}
+.form-control:hover{
+	border-bottom: 1px solid #337ab7;
+	
+}
+	

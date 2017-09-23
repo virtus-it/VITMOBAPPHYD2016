@@ -2,11 +2,25 @@
   background-color: #fff !important;
   border-bottom: solid 1px #c5d6de;
 }
+/* .loginBg{
+	background: url(../assest/images/powerby.png);
+} */
 
 .navbar-nav {
   margin: 10px !important;
 }
-
+.wd-60pc{
+  width: 60%;
+}
+.pd-20{
+  padding-top: 20px;
+}
 .btn-customMenu {
   right: 465px
+}
+.footer-style{
+  background: #ddd;
+}
+.right-0{
+	right: 0px;
 }

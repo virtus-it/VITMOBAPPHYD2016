@@ -1,50 +1,55 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
- 
+
 <div style="text-align:center">
- 
-   <div class='container'>
-     <!--<app-side-menu></app-side-menu>-->
 
-     <md-sidenav-container class="demo-sidenav-container">
-       <md-sidenav #focusSidenav>
-         <md-nav-list>
-           <a md-list-item  routerLink="/distributor" (click)="focusSidenav.toggle()">Distributors</a>
-          
-         </md-nav-list>
-       </md-sidenav>
+ <div class=''>
+   <!--<app-side-menu></app-side-menu>-->
 
-       <div class="demo-sidenav-content" >
-        <div *ngIf="!_router.url.includes('login'); else elseBlock">
-        <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu" ><md-icon>menu</md-icon></button>
-         <button md-button (click)="logOut()" >Logout</button>
-        </div>
-         <ng-template #elseBlock>Login page menu</ng-template>
-           
-           <router-outlet></router-outlet>
-           <div>
+   <md-sidenav-container class="demo-sidenav-container">
+     <md-sidenav #focusSidenav>
+       <md-nav-list>
+         <a md-list-item  routerLink="/distributor" (click)="focusSidenav.toggle()">Distributors</a>
+
+       </md-nav-list>
+     </md-sidenav>
+
+     <div class="demo-sidenav-content" >
+      <div *ngIf="!_router.url.includes('login'); else elseBlock">
+        <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 float-left" ><md-icon>menu</md-icon></button>
+        <img src="../assets/images/logo.png" class="float-left" />
+        <button class="float-right" md-button (click)="logOut()" >Logout</button>
+      </div>
+      <ng-template #elseBlock>
+        
+        
+      </ng-template>
+
+      <router-outlet></router-outlet>
+      <div>
 
 
-           </div>
-</div>
-       <footer>
-         <div class="col-md-12  footer-style foot-pd  navbar-fixed-bottom">
-           <div class="col-md-8 footer-copyrights col-md-offset-1">
-
-             <p>Copyright © 2017 developed by <a href="http://www.virtus-it.com/">Virtus-IT </a>India Pvt Ltd, All rights reserved. </p>
-
-           </div>
-           <div class="col-md-2">
-             <!--<a href="http://www.virtus-it.com/"><img src="../assets/images/virtusit.png" alt="" class="img-responsive"></a>-->
-           </div>
-           <div class="col-md-2">
-           </div>
-         </div>
-
-       </footer>
-     </md-sidenav-container>
-    
-
+      </div>
+    </div>
+    <footer class=" footer-style foot-pd  navbar-fixed-bottom pd-20">
+      <div class="container">
+     <div class="row ">
+       <div class="col-6 footer-copyrights">
+         <p>Copyright © 2017 developed by <a href="http://www.virtus-it.com/">Virtus-IT </a>India Pvt Ltd, All rights reserved. </p>
        </div>
-  
+       <div class="col-2">
+        </div>
+       <div class="col-4">
+         <img src="../assets/images/powerby.png" class="img-responsive wd-60pc" />
+         <!--<a href="http://www.virtus-it.com/"><img src="../assets/images/virtusit.png" alt="" class="img-responsive"></a>-->
+       </div>
+
+     </div>
+      </div>
+   </footer>
+ </md-sidenav-container>
+
+
+</div>
+
 </div>
 
