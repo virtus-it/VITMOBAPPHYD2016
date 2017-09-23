@@ -1,36 +1,48 @@
-﻿<div id="" class="mgtop-5pc col-md-12 ">
+﻿<div (window:scroll)="onScrollFunction($event)">
+  <div align="end">
+    <button md-raised-button color="primary" (click)="openCreateDialog()" color="primary"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
+  </div>
+  <div id="" class="mgtop-5pc col-md-12 ">
 
-  <table class="table userlist table-hover table-striped">
+    <table class="table table-hover table-striped">
 
-    <thead>
+      <thead>
 
-      <tr>
-        <th>User</th>
-        <th> Mobile no</th>
-        <th >Address</th>
-         <th>Service Area</th>
-      </tr>
+        <tr>
+          <th>S.No</th>
+          <th>User</th>
+          <th> Mobile no</th>
+          <th>Address</th>
+          <th>Area</th>
+          <th>Product List</th>
+          <th>Service Area</th>
+          <th>Edit</th>
+        </tr>
 
-    </thead>
+      </thead>
 
-    <tbody>
+      <tbody>
 
-      <tr id="Preordrlist" *ngFor="let dist of distributors"> 
-        <td>
-          {{dist.firstname}}
-        </td>
+        <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{dist.firstname}} {{dist.lastname}}</td>
+          <td>{{dist.mobileno}}</td>
+          <td>{{dist.address}}</td>
+          <td>
+            <span *ngFor="let area of dist.areainfo; let isLast=last">
+              {{area.areaname}}{{isLast ? '' : ', '}}
+            </span>
+          </td>
+          <td><button md-button >Products</button></td>
+          <td><button md-button (click)="openMapDialog(dist)">Add service area</button></td>
+          <td><button md-button (click)="openUpdateDialog(dist)">Edit</button></td>
+        </tr>
 
-        <td>{{dist.mobileno}}</td>
+      </tbody>
 
-        <td>{{dist.address}}</td>
-        <td> <button md-button (click)="openMapDialog(dist)">Add service area</button></td>
-      </tr>
-
-    </tbody>
-
-  </table>
+    </table>
 
 
 
+  </div>
 </div>
-

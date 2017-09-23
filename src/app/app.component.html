@@ -1,4 +1,30 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
+<<<<<<< HEAD
+=======
+ 
+<div style="text-align:center">
+ 
+   <div class='container'>
+     <!--<app-side-menu></app-side-menu>-->
+
+     <md-sidenav-container class="demo-sidenav-container">
+       <md-sidenav #focusSidenav>
+         <md-nav-list>
+           <a md-list-item  routerLink="/distributor" (click)="focusSidenav.toggle()">Distributors</a>
+           <a md-list-item routerLink="/coverage" (click)="focusSidenav.toggle()">Coverage</a>
+         </md-nav-list>
+       </md-sidenav>
+
+       <div class="demo-sidenav-content" >
+        <div *ngIf="!_router.url.includes('login'); else elseBlock">
+        <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu" ><md-icon>menu</md-icon></button>
+         <button md-button (click)="logOut()" >Logout</button>
+        </div>
+         <ng-template #elseBlock>Login page menu</ng-template>
+           
+           <router-outlet></router-outlet>
+           <div>
+>>>>>>> 86c1bdd1f44e20f06ea75d01f1aabdb9d16206dc
 
 <div style="text-align:center">
 
