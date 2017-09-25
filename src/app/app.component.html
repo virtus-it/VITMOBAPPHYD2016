@@ -18,10 +18,7 @@
       <div *ngIf="!_router.url.includes('login'); else elseBlock">
         <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 float-left" ><md-icon>menu</md-icon></button>
         <img src="../assets/images/logo.png" class="float-left" />
-        <div class="float-right">
-          <img src="../assets/images/virtusit.png" /><br>
-          <button md-button (click)="logOut()" >Logout</button>
-        </div>
+        <button class="float-right" md-button (click)="logOut()" >Logout</button>
       </div>
       <ng-template #elseBlock>
         <div id="app" class="">
@@ -30,7 +27,7 @@
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
               </button>
-              <div id="navbarNavDropdown" class="navbar-collapse navbar-fixed-top collapse justify-content-end">
+              <div id="navbarNavDropdown" class="navbar-collapse collapse justify-content-end">
                   <ul class="navbar-nav mr-auto">
                       <li class="nav-item ">
                         <a class="nav-link" href="#">Home</a>
