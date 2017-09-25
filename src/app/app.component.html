@@ -18,7 +18,10 @@
       <div *ngIf="!_router.url.includes('login'); else elseBlock">
         <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 float-left" ><md-icon>menu</md-icon></button>
         <img src="../assets/images/logo.png" class="float-left" />
-        <button class="float-right" md-button (click)="logOut()" >Logout</button>
+        <div class="float-right">
+          <img src="../assets/images/virtusit.png" /><br>
+          <button md-button (click)="logOut()" >Logout</button>
+        </div>
       </div>
       <ng-template #elseBlock>
         <div id="app" class="">
