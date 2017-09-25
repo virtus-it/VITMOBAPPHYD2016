@@ -6,7 +6,7 @@
 .loginStyle
 {
 	box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
-	margin: 5% 0px;
+	margin: 4% 0px;
 	border: 1px solid #ddd;
 	padding: 5%;
 	background: #fff;
@@ -40,6 +40,7 @@ border-radius: 0px;
 	}
 .form-control:hover{
 	border-bottom: 1px solid #337ab7;
-	
 }
-	
+.btn-primary{
+	background: #0f75bc;
+}	

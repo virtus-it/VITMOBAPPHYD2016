@@ -20,7 +20,29 @@
 }
 .footer-style{
   background: #ddd;
+  border: 1px  solid #c5d6de;
 }
 .right-0{
 	right: 0px;
+}
+.navbar{
+  padding: 0px 5% !important;
+  box-shadow: 5px 5px 5px #ddd;
+}
+.navbar-light .navbar-nav .nav-link{
+  color: #666;
+}
+.navbar-light .navbar-nav .nav-link:hover{
+  color: #fff;
+  background: #0f75bc;
+}
+.active a{
+  color: #0f75bc !important;
+}
+.active a:hover{
+  color: #fff !important;
+  background: #0f75bc;
+}
+.logo-bg{
+  background: #0f75bc;
 }
