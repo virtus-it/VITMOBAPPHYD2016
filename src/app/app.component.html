@@ -1,6 +1,5 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
 
-
 <div style="text-align:center">
 
  <div class=''>
@@ -14,14 +13,23 @@
        </md-nav-list>
      </md-sidenav>
 
-     <div class="demo-sidenav-content" >
-      <div *ngIf="!_router.url.includes('login'); else elseBlock">
+     <div class="demo-sidenav-content"  >
+      <div *ngIf="!_router.url.includes('login'); else elseBlock" class="row brd-bottom" >
+        <div>
         <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 float-left" ><md-icon>menu</md-icon></button>
-        <img src="../assets/images/logo.png" class="float-left" />
+        </div>
+        <div class=""><img src="../assets/images/logo.png" class="float-left" />
+        </div>
+        <div class="col">
+        </div>
+        <div class="col-3 pdtpright-10x30">
+          <div class="right">
+                  <img src="../assets/images/powerby.png" class="" /></div>
         <button class="float-right" md-button (click)="logOut()" >Logout</button>
+        </div>
       </div>
       <ng-template #elseBlock>
-        <div id="app" class="">
+        <div id="app" class="brd-bottom">
           <nav class="navbar navbar-expand-lg navbar-light bg-faded">
               <a class="navbar-brand" href="#"> <img src="../assets/images/logo.png" class="img-responsive col-md-offset-3" /></a>
               <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +79,7 @@
        <div class="col-2">
         </div>
        <div class="col-4">
-         <img src="../assets/images/powerby.png" class="img-responsive wd-60pc" />
+         <img src="../assets/images/powerby.png" class="img-responsive " />
          <!--<a href="http://www.virtus-it.com/"><img src="../assets/images/virtusit.png" alt="" class="img-responsive"></a>-->
        </div>
 

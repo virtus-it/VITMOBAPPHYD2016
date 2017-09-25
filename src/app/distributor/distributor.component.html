@@ -1,8 +1,42 @@
-﻿<div (window:scroll)="onScrollFunction($event)">
-
+﻿<div class="row dist-style">
+<div (window:scroll)="onScrollFunction($event)" >
+  <div class=" row justify-content-between distIcon-style">
+  <div class="col-2">
+      <h4><i class="fa fa-sitemap"></i> Distributor</h4>
+  </div>
+<div class="col-2">
     <button md-raised-button color="primary" (click)="openCreateDialog()"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
-
-  <div id="" class="mgtop-5pc col-md-12 ">
+    
+</div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+      <div class="col-3 filter-style">
+          <div class="filtercol-style height-500">
+              <label class="float-left">Filter by</label><br>
+                   <div class=" ">
+                      <md-form-field class="example-full-width">
+                        <input class="form-control" mdInput placeholder="First Name"  name="firstName">
+                        <md-error >
+                           Name is <strong>required</strong>
+                        </md-error>
+                      </md-form-field>
+                    </div>
+                    <div class=" form-group">
+                        <md-form-field class="example-full-width">
+                          <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
+                          <md-error >
+                            Mobile No is <strong>required</strong>
+                          </md-error>
+                        </md-form-field>
+                      </div> 
+                <div class="input-group pd-10  ">
+                  <button md-raised-button color="primary" ng-click="clearSearch()">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                  </button>
+                </div>
+              </div>
+       </div>
+<div class="col-9">      
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -11,7 +45,7 @@
           <th>Mobile no</th>
           <th>Address</th>
           <th>Area</th>
-          <th>Product List</th>
+          <th>List</th>
           <th>Service Area</th>
           <th>Edit</th>
         </tr>
@@ -34,4 +68,6 @@
       </tbody>
     </table>
   </div>
+</div>
+</div>
 </div>

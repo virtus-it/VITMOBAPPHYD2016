@@ -46,3 +46,20 @@
 .logo-bg{
   background: #0f75bc;
 }
+.wd-40pc{
+  width: 40%;
+}
+.right{
+  text-align: right;
+}
+.pdtpright-10x30{
+  padding-right: 30px;
+  padding-top: 10px;
+}
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
+  color:#0f75bc !important;
+}
+.brd-bottom{
+  border: 1px solid #c5d6de;
+  box-shadow: 5px 5px 5px #c5d6de;
+}
