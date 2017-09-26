@@ -71,6 +71,7 @@ export class CoverageComponent implements OnInit {
     }
     over(distributor) {
         if (distributor.path) {
+            distributor.color = '';
             this.displayPolygon = [];
             this.displayPolygon.push(distributor);
         }
