@@ -69,14 +69,14 @@ export class CoverageComponent implements OnInit {
 
         };
     }
-    over(distributor) {
+    DistrbutorHover(distributor) {
         if (distributor.path) {
-            distributor.color = '';
             this.displayPolygon = [];
-            this.displayPolygon.push(distributor);
+             this.displayPolygon.push(distributor);
         }
     }
     ShowAllPolygons() {
+        this.listOfDistributors = [];
         this.displayPolygon = this.polygonArray;
     }
     ngOnInit() {

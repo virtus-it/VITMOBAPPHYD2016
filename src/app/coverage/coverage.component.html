@@ -1,7 +1,7 @@
 ﻿<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
   <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
               
-               [fillColor]="'#7FFFD4'"
+               [fillColor]="'#0073e6'"
                  [geodesic]="true" 
                  [strokeWeight]="1"   
                [clickable] = "true"
@@ -23,7 +23,7 @@
          </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" on-mouseover='over(dist)'>
+      <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" on-mouseover='DistrbutorHover(dist)'>
         <th scope="row">{{i+1}}</th>
         <td>{{dist.distributorName}}</td>
         <td><span *ngFor="let sup of dist.supplier; let isLast=last">
