@@ -1,14 +1,36 @@
 ﻿<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
-  <agm-polygon *ngFor="let p of polygonArray; let i = index" [paths]="p.path"
-               
-               [editable]="false"
-               [draggable]="false"
-               >
-    <agm-info-window>
-               Hi, this is the content of the <strong>info window</strong>
-      
-    </agm-info-window>
+  <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
+              
+               [fillColor]="'#7FFFD4'"
+                 [geodesic]="true" 
+                 [strokeWeight]="1"   
+               [clickable] = "true"
+              (polyClick)="click($event,p)" 
+               [editable]="true"
+               [polyDraggable]="true">
+    
   </agm-polygon>
 
 </agm-map>
+<button md-raised-button color="primary" (click)="ShowAllPolygons()">Show All</button>
+<div class="col-9" *ngIf="listOfDistributors.length">
+  <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Distributor</th>
+        <th>supplier</th>
+         </tr>
+    </thead>
+    <tbody>
+      <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" on-mouseover='over(dist)'>
+        <th scope="row">{{i+1}}</th>
+        <td>{{dist.distributorName}}</td>
+        <td><span *ngFor="let sup of dist.supplier; let isLast=last">
+  {{sup.suppliername}}{{isLast ? '' : ', '}}
+</span></td>
+       </tr>
+    </tbody>
+  </table>
+</div>
 

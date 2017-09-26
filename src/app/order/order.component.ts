@@ -18,7 +18,9 @@ interface marker {
 })
 export class OrderComponent implements OnInit {
     dropdownList = [];
+    checkboxlist = [];
     selectedItems = [];
+    SelectionStatus = [];
     dropdownSettings = {};
     map: any;
     drawingManager: any;
@@ -357,6 +359,16 @@ export class OrderComponent implements OnInit {
             { "id": 8, "itemName": "Russia" },
             { "id": 9, "itemName": "Italy" },
             { "id": 10, "itemName": "Sweden" }
+        ];
+        this.checkboxlist = [
+            { number:"14253" },
+            { number: "21467253"},
+            { number: "3142553" },
+            { number: "41446253"},
+            { number: "514253" },
+            { number: "614253" },
+            { number: "714253" }
+           
         ];
         this.selectedItems = [
            
