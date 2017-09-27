@@ -6,23 +6,23 @@
    <!--<app-side-menu></app-side-menu>-->
 
    <md-sidenav-container class="demo-sidenav-container">
-     <md-sidenav #focusSidenav>
+     <md-sidenav #focusSidenav class="sidebar-style col-3">
        <md-nav-list>
-         <a md-list-item  routerLink="/distributor" (click)="focusSidenav.toggle()">Distributors</a>
-         <a md-list-item routerLink="/coverage" (click)="focusSidenav.toggle()">Coverage</a>
+          <a md-list-item  routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()"> </a>          
+         <a md-list-item  routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-sitemap"></i> <span class="pdtoprght-3x10">Distributors</span> </a>
+         <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-globe" aria-hidden="true"></i> <span class="pdtoprght-3x10">  Coverage</span> </a>
        </md-nav-list>
      </md-sidenav>
 
      <div class="demo-sidenav-content"  >
       <div *ngIf="!_router.url.includes('login'); else elseBlock" class="row brd-bottom" >
-        <div>
-        <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 float-left" ><md-icon>menu</md-icon></button>
-        </div>
-        <div class=""><img src="../assets/images/logo.png" class="float-left" />
-        </div>
         <div class="col">
+        <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 right mgtop-12 float-left" ><md-icon>menu</md-icon></button>
+<img src="../assets/images/logo.png" class="float-left" />
         </div>
-        <div class="col-3 pdtpright-10x30">
+        <div class="col-6">
+        </div>
+        <div class="col pdtpright-10x30">
           <div class="right">
                   <img src="../assets/images/powerby.png" class="" /></div>
         <button class="float-right" md-button (click)="logOut()" >Logout</button>

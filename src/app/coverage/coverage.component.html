@@ -1,4 +1,9 @@
-﻿<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)">
+﻿<br>
+<h3><i class="fa fa-globe" aria-hidden="true"></i>   Covered Area</h3>
+<hr width="15%" class="brd-top">
+<div class="row mg-30">
+  <div class="col-7">
+<agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
   <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
               
                [fillColor]="'#0073e6'"
@@ -12,25 +17,28 @@
   </agm-polygon>
 
 </agm-map>
-<button md-raised-button color="primary" (click)="ShowAllPolygons()">Show All</button>
-<div class="col-9" *ngIf="listOfDistributors.length">
+</div>
+<div class="col-5" *ngIf="listOfDistributors.length">
   <table class="table table-hover table-striped">
     <thead>
       <tr>
-        <th>S.No</th>
-        <th>Distributor</th>
-        <th>supplier</th>
+        <th width="3%">S.No</th>
+        <th width="15%">Distributor</th>
+        <th width="15%">supplier</th>
          </tr>
     </thead>
     <tbody>
       <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" on-mouseover='DistrbutorHover(dist)'>
-        <th scope="row">{{i+1}}</th>
-        <td>{{dist.distributorName}}</td>
-        <td><span *ngFor="let sup of dist.supplier; let isLast=last">
+        <td width="3%" class="left" scope="row">{{i+1}}</td>
+        <td width="15%" class="left capital">{{dist.distributorName}}</td>
+        <td width="15%" class="left capital"><span *ngFor="let sup of dist.supplier; let isLast=last">
   {{sup.suppliername}}{{isLast ? '' : ', '}}
 </span></td>
        </tr>
     </tbody>
   </table>
 </div>
+
+</div>
+<button md-raised-button color="primary" (click)="ShowAllPolygons()" class="mgbottom-20"><i class="fa fa-check-square-o" aria-hidden="true"></i> Show All</button>
 
