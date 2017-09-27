@@ -1,0 +1,34 @@
+﻿
+
+<h2 md-dialog-title>Sms schduler</h2>
+<div class="col-md-12">
+
+  <md-dialog-content layout="column">
+    <form class="example-form">
+      <div class=" form-group">
+       
+          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" style="width: 200px">
+            <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
+              {{type.viewValue}}
+            </md-option>
+          </md-select>
+       
+</div>
+     
+      
+      <md-form-field>
+        <input mdInput [mdDatepicker]="minDatePicker" [(ngModel)]="orderinput.formDate" placeholder="Min date"
+               [disabled]="inputDisabled" name="frodate">
+        <md-datepicker-toggle mdSuffix [for]="minDatePicker"></md-datepicker-toggle>
+        <md-datepicker #minDatePicker [touchUi]="touch" [disabled]="datepickerDisabled"></md-datepicker>
+      </md-form-field>
+      <md-form-field>
+        <input mdInput [mdDatepicker]="maxDatePicker" [(ngModel)]="orderinput.toDate" placeholder="Max date"
+               [disabled]="inputDisabled" name="todate">
+        <md-datepicker-toggle mdSuffix [for]="maxDatePicker"></md-datepicker-toggle>
+        <md-datepicker #maxDatePicker [touchUi]="touch" [disabled]="datepickerDisabled"></md-datepicker>
+      </md-form-field>
+    </form>
+  </md-dialog-content>
+  
+</div>

@@ -21,6 +21,7 @@ export class OrderComponent implements OnInit {
     checkboxlist = [];
     selectedItems = [];
     SelectionStatus = [];
+    emailFormArray = [];
     dropdownSettings = {};
     map: any;
     drawingManager: any;
@@ -341,7 +342,17 @@ export class OrderComponent implements OnInit {
     onDeSelectAll(items: any) {
         console.log(items);
     }
-  
+    onChangeCheck(number: string, isChecked: boolean) {
+       
+
+        if (isChecked) {
+            this.emailFormArray.push(number);
+            console.log(this.emailFormArray);
+        } else {
+            this.emailFormArray = _.without(this.emailFormArray, number);
+            console.log(this.emailFormArray);
+        }
+    }
     
     ngOnInit() {
         this._loader.load().then(() => {
