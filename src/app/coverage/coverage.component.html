@@ -24,16 +24,20 @@
       <tr>
         <th width="3%">S.No</th>
         <th width="15%">Distributor</th>
-        <th width="15%">supplier</th>
+        <th width="15%">Mobile number</th>
+        <th width="15%">View Products</th>
+        <th width="15%">View Area</th>
+        
          </tr>
     </thead>
     <tbody>
-      <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" on-mouseover='DistrbutorHover(dist)'>
+      <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" >
         <td width="3%" class="left" scope="row">{{i+1}}</td>
         <td width="15%" class="left capital">{{dist.distributorName}}</td>
-        <td width="15%" class="left capital"><span *ngFor="let sup of dist.supplier; let isLast=last">
-  {{sup.suppliername}}{{isLast ? '' : ', '}}
-</span></td>
+        <td width="15%" class="left capital">5454</td>
+        <td width="15%" class="left capital"><button class="btn btn-link" (click)="ViewProduct(dist)" >View</button></td>
+        <td width="15%" class="left capital"><button class="btn btn-link" (click)="DistrbutorHover(dist)" >View</button></td>
+
        </tr>
     </tbody>
   </table>

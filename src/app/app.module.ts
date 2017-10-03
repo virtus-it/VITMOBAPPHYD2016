@@ -22,6 +22,7 @@ import { CoverageComponent } from './coverage/coverage.component';
 import { DistributorCreateDialogComponent } from './distributor-create-dialog/distributor-create-dialog.component';
 import { SmsComponent } from './sms/sms.component';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
+import { ProductListDialogComponent } from './product-list-dialog/product-list-dialog.component';
 
 @NgModule({
     declarations: [
@@ -34,7 +35,8 @@ import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
         CoverageComponent,
         DistributorCreateDialogComponent,
         SmsComponent,
-        SmsDialogComponent
+        SmsDialogComponent,
+        ProductListDialogComponent
 
     ],
     imports: [
@@ -77,7 +79,7 @@ import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
         LoggedInGuard,
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }  // 
     ],
-    entryComponents: [MapDialogComponent, DistributorCreateDialogComponent, SmsDialogComponent],
+    entryComponents: [MapDialogComponent, DistributorCreateDialogComponent, SmsDialogComponent,ProductListDialogComponent],
     exports: [
         MaterialModule
     ],

@@ -11,7 +11,7 @@ export class SmsDialogComponent implements OnInit {
 
     constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any ) { }
     
-    orderinput = { orderType: "", fromDate: new Date(), toDate: new Date()};
+   // orderinput = { orderType: "", fromDate: new Date(), toDate: new Date()};
     OrderTypeDetails = [
         { value: 'all', viewValue: 'All Orders' },
         { value: 'ordered', viewValue: 'Unassign Orders' },

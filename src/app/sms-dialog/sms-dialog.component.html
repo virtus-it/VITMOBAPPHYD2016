@@ -7,16 +7,16 @@
     <form class="example-form">
       <div class=" form-group">
        
-          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" style="width: 200px">
+          <!-- <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" style="width: 200px">
             <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
-          </md-select>
+          </md-select> -->
        
 </div>
      
       
-      <md-form-field>
+      <!-- <md-form-field>
         <input mdInput [mdDatepicker]="minDatePicker" [(ngModel)]="orderinput.formDate" placeholder="Min date"
                [disabled]="inputDisabled" name="frodate">
         <md-datepicker-toggle mdSuffix [for]="minDatePicker"></md-datepicker-toggle>
@@ -27,7 +27,7 @@
                [disabled]="inputDisabled" name="todate">
         <md-datepicker-toggle mdSuffix [for]="maxDatePicker"></md-datepicker-toggle>
         <md-datepicker #maxDatePicker [touchUi]="touch" [disabled]="datepickerDisabled"></md-datepicker>
-      </md-form-field>
+      </md-form-field> -->
     </form>
   </md-dialog-content>
   

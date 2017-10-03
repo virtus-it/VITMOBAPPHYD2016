@@ -3,6 +3,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
+import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { MdDialog } from '@angular/material';
 declare var google: any;
 @Component({
@@ -33,7 +34,7 @@ export class CoverageComponent implements OnInit {
             });
     }
     getPolygonDataResult(output) {
-        console.log(output);
+      //  console.log(output);
         //9863636315
         //paani
         if (output.data && output.data.length > 0) {
@@ -79,6 +80,23 @@ export class CoverageComponent implements OnInit {
         this.listOfDistributors = [];
         this.displayPolygon = this.polygonArray;
     }
+    ViewProduct(distributor){
+if(distributor){
+    let dialogRef = this.dialog.open(ProductListDialogComponent, {
+        height: '350px',
+        width: '700px',
+        data: distributor
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        //this.dialogResult = result;
+    
+    });
+
+   
+}
+}
+   
     ngOnInit() {
         this.getPolygonDistributors();
     }
