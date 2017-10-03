@@ -46,11 +46,13 @@ table thead {
   .btn-link{
     color: #0f75bc;
   }
-
+  .logo-color{
+    color: #0f75bc !important;
+    
+  }
   .mat-dialog-container{
     padding: 0px !important;
     max-width: 100% !important;
-    height: 90% !important;
     max-height: 100% !important;
     overflow: hidden !important;
   }
@@ -70,6 +72,14 @@ table thead {
 border-bottom: 1px solid #0f75bc;
 color: #0f75bc !important;
 
+}
+.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
+  background: #0f75bc ; 
+  color: #fff;
+}
+.btn-primary{
+  background: #0f75bc ; 
+  color: #fff;
 }
 .modal-title{
 padding: 15px;
@@ -98,4 +108,13 @@ background: transparent;
 }
 .brd-bottom{
     border-bottom: 1px solid #ddd;
+}
+.right{
+  text-align: right;
+}
+.height-150{
+ height: 150px;
+}
+.pdtop-80{
+  padding-top: 80px;
 }
