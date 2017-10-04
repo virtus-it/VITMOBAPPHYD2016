@@ -59,6 +59,9 @@ table thead {
   .mg-30{
       margin: 30px;
   }
+  .active{
+    color: #0f75bc !important;
+  }
 .capital{
     text-transform: capitalize;
 }

@@ -39,6 +39,8 @@
 .active a{
   color: #0f75bc !important;
 }
+
+
 .active a:hover{
   color: #fff !important;
   background: #0f75bc;
@@ -85,4 +87,113 @@ a{
     padding: 3px 0px 0px 10px;
   }
   
-  
+  .form-control{
+    border-radius: 2px;
+      }
+  .btn{
+    border-radius: 2px;   
+  }
+  table{
+    table-layout: fixed;
+  }
+
+
+    header {
+      background: #fff;
+      width: 100%;
+      height: 76px;
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-bottom: 1px solid #4C9CF1;
+      z-index: 100;
+      box-shadow: 5px 5px 5px -1px #ddd;
+    
+    }
+    
+    #logo{
+    
+      margin-left:5%;
+      float: left;
+      display: block;
+    
+    }
+    
+    nav {
+    
+      float: right;
+      padding: 15px 3%;	
+    
+    }
+    
+    #menu-icon {
+    
+      display: hidden;
+      width: 40px;
+      height: 40px;
+      background:url(../assets/images/menu.png) center;
+      
+    }
+
+    
+    ul {
+    
+      list-style: none;
+    
+    }
+    
+    li {
+    
+      display: inline-block;
+      float: left;
+      padding: 10px
+    
+    }
+
+    li a{
+      color: #666 !important;
+    }
+    @media only screen and (max-width : 640px) {
+      
+        header {
+      
+          position: absolute;
+      
+        }
+        #logo img{
+          width: 90%;
+        }
+        #menu-icon {
+          display:inline-block;
+      
+        }
+   nav ul, nav:active ul { 
+      
+          display: none;
+          position: absolute;
+          padding: 10px;
+          background: #fff;
+          border: 1px solid #ddd;
+          right: 20px;
+          top: 60px;
+          font-size: 14px;
+          width: 34%;
+          border-radius: 4px 0 4px 4px;
+      
+        }
+      
+        nav li {
+      
+          text-align: center;
+          width: 100%;
+          padding: 10px 0;
+          margin: 0;
+      
+        }
+      
+        nav:hover ul {
+      
+          display: block;
+      
+        }
+      }
