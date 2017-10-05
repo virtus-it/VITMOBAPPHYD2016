@@ -12,11 +12,7 @@ export class AppComponent {
     constructor(private authenticationService: AuthenticationService, public  _router : Router) { }
     title = 'app';
   location = this._router.url;
-  isIn = false;   // store state
-  toggleState() { // click handler
-      let bool = this.isIn;
-      this.isIn = bool === false ? true : false; 
-  }
+ 
     logOut() {
         
      this.authenticationService.logout();

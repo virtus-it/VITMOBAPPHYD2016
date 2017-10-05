@@ -15,7 +15,7 @@ export class DistributorCreateDialogComponent implements OnInit {
     areaList = [];
 
     dropdownSettings = {};
-    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,) { }
+    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
      emailFormControl = new FormControl('', [
          Validators.required]);
      getAreasName() {

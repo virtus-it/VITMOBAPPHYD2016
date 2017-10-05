@@ -23,6 +23,7 @@ import { DistributorCreateDialogComponent } from './distributor-create-dialog/di
 import { SmsComponent } from './sms/sms.component';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { ProductListDialogComponent } from './product-list-dialog/product-list-dialog.component';
+import { DistributorListDialogComponent } from './distributor-list-dialog/distributor-list-dialog.component';
 
 @NgModule({
     declarations: [
@@ -36,7 +37,8 @@ import { ProductListDialogComponent } from './product-list-dialog/product-list-d
         DistributorCreateDialogComponent,
         SmsComponent,
         SmsDialogComponent,
-        ProductListDialogComponent
+        ProductListDialogComponent,
+        DistributorListDialogComponent
 
     ],
     imports: [
@@ -79,7 +81,13 @@ import { ProductListDialogComponent } from './product-list-dialog/product-list-d
         LoggedInGuard,
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }  // 
     ],
-    entryComponents: [MapDialogComponent, DistributorCreateDialogComponent, SmsDialogComponent,ProductListDialogComponent],
+    entryComponents: [
+        MapDialogComponent, 
+        DistributorCreateDialogComponent,
+         SmsDialogComponent,
+         ProductListDialogComponent,
+         DistributorListDialogComponent
+        ],
     exports: [
         MaterialModule
     ],
