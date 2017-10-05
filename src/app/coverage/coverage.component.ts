@@ -30,7 +30,7 @@ export class CoverageComponent implements OnInit {
             .subscribe(
             output => this.getPolygonDataResult(output),
             error => {
-                console.log("Logged in falied");
+                console.log("falied");
             });
     }
     getPolygonDataResult(output) {
