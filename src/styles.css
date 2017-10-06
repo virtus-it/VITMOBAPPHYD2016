@@ -121,3 +121,21 @@ background: transparent;
 .pdtop-80{
   padding-top: 80px;
 }
+.brd-logo{
+  border:1px solid #0f75bc;
+}
+.logo-bg{
+  background: #0f75bc;
+}
+.pdtop-5{
+  padding-top: 5px;
+}
+.pdtop-15{
+  padding-top: 15px;
+}
+.warning{
+  color:#f79123;
+}
+.capitalize{
+  text-transform: capitalize;
+}

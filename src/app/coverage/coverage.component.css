@@ -7,3 +7,42 @@ margin: 20px;
 .mgbottom-20{
   margin-bottom: 20px;
 }
+.table td, .table th {
+  font-size: 14px;
+}
+.btn-link {
+  font-size: 14px;
+}
+
+label{
+  margin-bottom: 0px;
+}
+.container-fluid{
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.details-style{
+  padding: 10px;
+  background: #0f75bc;
+color: #fff;
+}
+.pdleftright-15{
+  padding-left: 15px !important;
+  padding-right: 15px !important;
+}
+.details-style button{
+  color: #fff;
+  font-weight:500;
+}
+.logo-bg .btn-link{
+  color: #fff
+}
+.label-gray{
+  color: #59717d;
+}
+b, strong {
+  font-weight: 500;
+}
+.form-group{
+  margin-bottom: 10px;
+}

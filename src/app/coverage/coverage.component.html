@@ -40,7 +40,8 @@
         
         </agm-map>
         </div>
-        <div class="col-4" *ngIf="listOfDistributors.length">
+        <div class="col-4" *ngIf="listOfDistributors.length || orderDetails.length">
+        <div class="row" *ngIf="listOfDistributors.length">
           <table class="table table-hover table-striped">
             <thead>
               <tr>
@@ -64,32 +65,94 @@
             </tbody>
           </table>
         </div>
-        <div class="col-4" *ngIf="orderDetails.length">
-            <table class="table table-hover table-striped">
-              <thead>
-                <tr>
-                  <!-- <th width="3%">S.No</th> -->
-                  <th width="15%">Order Id</th>
-                  <th width="15%">Customer Name</th>
-                  <th width="15%">Date Placed</th>
-                  <th width="15%">Customer Mobile</th>
-                  <th width="15%">Status</th>
-                  <th width="15%">Assign</th>
-                   </tr>
-              </thead>
-              <tbody>
-                <tr  *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i" >
-                  <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-                  <td width="15%" class="left capital">{{order.order_id}}</td>
-                  <td width="15%" class="left capital">{{order.orderby_firstname}}</td>
-                  <td width="15%" class="left capital">{{order.ordered_date}}</td>
-                  <td width="15%" class="left capital">{{order.orderby_mobileno}}</td>
-                  <td width="15%" class="left capital">{{order.status}}</td>
-                  <td width="15%" class="left capital"><button class="btn btn-link" (click)="ViewDistributors(order)" >View</button></td>
+        <div class="container-fluid brd-logo"  *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i">
+            <div class=" form-group  row pdleftright-15">
+                <div class="col-9 left details-style ">
+                    <b class="">Order Details </b> 
+                </div>
+                <div class="col-3 right logo-bg pdtop-5 ">
+                    <button class="btn btn-default btn-sm" (click)="ViewDistributors(order)" >Assign</button>                    
+                </div> 
+                </div>
+            
+            <div class="form-group row pdleftright-15">
+              <div class="col-3 left">
+                <label class="label-gray">Order Id</label><br>
+                <b>#{{order.order_id}}</b>
+              </div>
+              <div class="col-9 right">
+                  <label  class="label-gray">Customer Name </label><br>
+                  <b class="capitalize"> {{order.orderby_firstname}} {{order.orderby_lastname}}</b>
+                </div>
+              </div>
+              <div class="form-group row pdleftright-15">
+                  <div class="col-6 left">
+                    <label  class="label-gray">Date Placed</label><br>
+                    <b>{{order.ordered_date}}</b>
+                  </div>
+                  <div class="col-6 right">
+                      <label  class="label-gray">Customer Mobile</label><br>
+                      <b>{{order.orderby_mobileno}}</b>
+                    </div>
+                  </div>
           
-                 </tr>
-              </tbody>
-            </table>
+                  <div class="form-group row pdleftright-15">
+                      <div class="col-6 left">
+                          <label  class="label-gray">Brand Name</label><br>
+                          <b class="capitalize">{{order.brandname}} {{order.prod_type}} ({{order.quantity}} Qty)</b>
+                        </div>
+                      <div class="col-6 right">
+                          <label  class="label-gray">Amount</label><br>
+                          <b>{{order.bill_amount}}</b>
+                        </div>
+                      </div>
+                      <div class="form-group row pdleftright-15">
+                          <div class="col-6 left">
+                              <label  class="label-gray">Forwarded To</label><br>
+                              <b class="capitalize">{{order.dealerdetails.firstname}}</b>
+                            </div>
+                          <div class="col-6 right">
+                              <label  class="label-gray">Payment Type</label><br>
+                              <b>{{order.paymenttype}}</b>
+                            </div>
+                          </div>
+                  <div class="form-group row pdleftright-15">
+            
+                      <div class="col center">
+                          <label  class="label-gray">Delivery Time</label><br>
+                          <label class="warning">{{order.delivery_exceptedtime}}</label>
+                        </div>
+                      </div>
+           
+        </div>
+            <!-- <table  class="table table-borderless">
+              <tbody *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i"><tr >
+                <td> <span class="td-label11">Order Id</span></td>
+                <td> <span class="td-label11 right">Customer Name </span></td>
+              </tr>
+              <tr>
+                <td> <b></b></td>
+                <td> <b class="right"> {{order.orderby_firstname}}</b></td>
+              </tr>
+              <tr class="spaceUnder">
+                <td>  <span class="td-label11">Date Placed</span></td>
+                <td class=""> <span class="td-label11 right ">Customer Mobile</span></td>
+              </tr>
+              <tr >
+                <td> <b> {{order.ordered_date}}</b></td>
+                <td class="right"><b>{{order.orderby_mobileno}}</b></td>
+              </tr>
+              <tr class="spaceUnder">
+                <td>  <span class="td-label11">Status</span> </td>
+                <td width="33%"><span class="td-label11 right">Assign</span></td>
+              </tr>
+              <tr>
+                <td><b> {{order.status}}</b> </td>
+                <td> <b class="right"><button class="btn btn-link" (click)="ViewDistributors(order)" >View</button></b></td>
+              </tr>
+            </tbody>
+          </table> -->
           </div>
+      
   </div>
   </div>
