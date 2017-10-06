@@ -10,22 +10,22 @@ import * as moment from 'moment';
 })
 export class SmsDialogComponent implements OnInit {
 
-    constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any ) { }
-    
-    orderinput = { orderType: "", fromDate: null , toDate: null };
-    OrderTypeDetails = [
-        { value: 'all', viewValue: 'All Orders' },
-        { value: 'ordered', viewValue: 'Unassign Orders' },
-        { value: 'delivered', viewValue: 'Delivered Orders' },
-        { value: 'assigned', viewValue: 'Pending Orders' }
-    ];
-    getMobileNumber(){
-     
-      let input =  { type: this.orderinput.orderType, fromdate: null , todate: null };
+  constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any) { }
+
+  orderinput = { orderType: "", fromDate: null, toDate: null };
+  OrderTypeDetails = [
+    { value: 'all', viewValue: 'All Orders' },
+    { value: 'ordered', viewValue: 'Unassign Orders' },
+    { value: 'delivered', viewValue: 'Delivered Orders' },
+    { value: 'assigned', viewValue: 'Pending Orders' }
+  ];
+  getMobileNumber() {
+
+    let input = { type: this.orderinput.orderType, fromdate: null, todate: null };
     input.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
     input.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
-      console.log(this.orderinput);
-    };
+    console.log(this.orderinput);
+  };
 
   ngOnInit() {
   }

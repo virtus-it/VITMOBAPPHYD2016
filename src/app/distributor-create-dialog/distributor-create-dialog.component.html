@@ -3,56 +3,55 @@
 
 </div> -->
 <div class="row justify-content-between modal-title ">
-    <div class="col-4">
-        <i class="fa fa-sitemap"></i>  Distributors
-    </div>
-    <div class="col-1 right">
-          <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>         
-    </div>
+  <div class="col-4">
+    <i class="fa fa-sitemap"></i> Distributors
   </div>
+  <div class="col-1 right">
+    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+          </strong>
+  </div>
+</div>
 
-    <md-dialog-content layout="column">
-      <form class="example-form" (ngSubmit)="onSubmit()">
-        <div class="row pd-15x25 brd-bottom">
-          <div class="col-6">
-            <div class=" form-group pdright-20">
-              <md-form-field class="example-full-width wd-100pc">
-                <input class="form-control" mdInput placeholder="First Name" [formControl]="emailFormControl" [(ngModel)]="dist.firstName" name="firstName">
-                <md-error *ngIf="emailFormControl.hasError('required')">
-                  First Name is <strong>required</strong>
-                </md-error>
-              </md-form-field>
-            </div>
-            <div class="  pdright-20">
-                <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Phone" [(ngModel)]="dist.phone" name="phone">
-              </md-form-field>
-            </div>
-          </div>
-          <div class="col-6">
-              <div class=" form-group pdright-20">
-                  <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Last Name" [(ngModel)]="dist.lastName" name="lastName">
-              </md-form-field>
-            </div>
+<md-dialog-content layout="column">
+  <form class="example-form" (ngSubmit)="onSubmit()">
+    <div class="row pd-15x25 brd-bottom">
+      <div class="col-6">
+        <div class=" form-group pdright-20">
+          <md-form-field class="example-full-width wd-100pc">
+            <input class="form-control" mdInput placeholder="First Name" [formControl]="emailFormControl" [(ngModel)]="dist.firstName"
+              name="firstName">
+            <md-error *ngIf="emailFormControl.hasError('required')">
+              First Name is <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="  pdright-20">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" [(ngModel)]="dist.phone" name="phone">
+          </md-form-field>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class=" form-group pdright-20">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Last Name" [(ngModel)]="dist.lastName" name="lastName">
+          </md-form-field>
+        </div>
 
-            <div class="  pdright-20">
-                <angular2-multiselect [data]="areaList" [(ngModel)]="dist.selectedItems"
-                                    [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+        <div class="  pdright-20">
+          <angular2-multiselect [data]="areaList" [(ngModel)]="dist.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
 
-            </div>
-          </div>
-          <!--<p>
+        </div>
+      </div>
+      <!--<p>
             <button type="submit" md-raised-button [disabled]="!emailFormControl.valid">Submit</button>
           </p>-->
-        </div>
-      </form>
-    </md-dialog-content>
-    <div class="row float-right pdright-30">
-    <md-dialog-actions align="end">
-      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-      <button type="submit" md-raised-button [disabled]="!emailFormControl.valid" (click)="onSubmit()">SUBMIT</button>
-    </md-dialog-actions>
-  </div>
-
+    </div>
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    <button type="submit" md-raised-button [disabled]="!emailFormControl.valid" (click)="onSubmit()">SUBMIT</button>
+  </md-dialog-actions>
+</div>
