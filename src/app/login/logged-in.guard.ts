@@ -7,7 +7,7 @@ export class LoggedInGuard implements CanActivate {
     constructor(private Auth: AuthenticationService, private router: Router) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
         let url: string = state.url;
-        console.log("test");
+       
         return this.checkLogin(url);
     }
     checkLogin(url: string): boolean {
