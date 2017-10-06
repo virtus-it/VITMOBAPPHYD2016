@@ -52,10 +52,11 @@ table thead {
   }
   .mat-dialog-container{
     padding: 0px !important;
+    max-height: 500px;
     max-width: 100% !important;
-    max-height: 100% !important;
     overflow: hidden !important;
   }
+
   .mg-30{
       margin: 30px;
   }
@@ -138,4 +139,29 @@ background: transparent;
 }
 .capitalize{
   text-transform: capitalize;
+}
+
+.inline{
+  display: inline !important;
+}
+.mat-calendar-table-header {
+  background: none !important;
+}
+.pdleft-15{
+  paddding-left:15px !important;
+}
+.mgleft-15{
+  margin-left: 15px;
+}
+.mgleft-5{
+  margin-left: 5px;
+}
+.mgtop-15{
+  margin-top: 15px;
+}
+.mgtop-20{
+  margin-top: 20px;
+}
+.btn-primary{
+  color: #fff !important;
 }

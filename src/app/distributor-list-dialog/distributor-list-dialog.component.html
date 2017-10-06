@@ -14,19 +14,19 @@
             <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th width="12%">Name</th>
-            <th width="40%">Mobile Number</th>
-            <th width="25%">Area Name</th>
-            <th width="22%">Address</th>
+            <th width="30%">Name</th>
+            <th width="20%">Mobile </th>
+            <th width="20%">Area Name</th>
+            <th width="30%">Address</th>
              </tr>
         </thead>
         <tbody>
           <tr  *ngFor="let dist of distributors; let i = index" [attr.data-index]="i" >
-            <td width="40%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}"><br>
+            <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
               {{dist.firstname}} {{dist.lastname}}</td>
-            <td width="25%" class="left capital">{{dist.mobileno}}</td>
-            <td width="22%" class="left capital">{{dist.areaname}}</td>
-            <td width="22%" class="left capital">{{dist.address}}</td>
+            <td width="20%" class="left capital">{{dist.mobileno}}</td>
+            <td width="20%" class="left capital">{{dist.areaname}}</td>
+            <td width="30%" class="left capital">{{dist.address}}</td>
            </tr>
         </tbody>
       </table>
@@ -35,7 +35,7 @@
     <div class="row float-right pdright-30">
     <md-dialog-actions align="end">
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-      <button type="submit" md-raised-button (click)="forWardOrder()">Forward</button>
+      <button type="submit" md-raised-button (click)="forWardOrder()" class="btn-primary">Forward</button>
     </md-dialog-actions>
   </div>
 

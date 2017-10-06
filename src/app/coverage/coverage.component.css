@@ -46,3 +46,6 @@ b, strong {
 .form-group{
   margin-bottom: 10px;
 }
+.container-fluid{
+  font-size: 14px;
+}

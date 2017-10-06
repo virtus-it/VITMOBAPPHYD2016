@@ -1,43 +1,106 @@
-﻿
-<div class="row justify-content-between modal-title ">
-    <div class="col-4">
-        <i class="fa fa-sitemap"></i>  Sms schduler
-    </div>
-    <div class="col-1 right">
-          <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>         
-    </div>
+﻿<div class="row justify-content-between modal-title ">
+  <div class="col-4">
+    <i class="fa fa-calendar"></i> SMS schduler
   </div>
+  <div class="col-1 right">
+    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+          </strong>
+  </div>
+</div>
+<div class="container-fluid pd-15x25 height-450">
+  <md-dialog-content layout="column">
 
-    <md-dialog-content layout="column">
-        <form class="example-form">
-            <div class=" form-group">
-             
-                <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" style="width: 200px">
-                  <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
-                    {{type.viewValue}}
-                  </md-option>
-                </md-select>
-             
+    <form class="example-form">
+
+      <div class="row">
+
+        <div class="  col-3">
+
+          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type">
+            <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
+              {{type.viewValue}}
+            </md-option>
+          </md-select>
+
+        </div>
+        <div class="  col-3">
+          <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+            <md-datepicker #picker></md-datepicker>
+          </md-form-field>
+        </div>
+        <div class="  col-3">
+
+          <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
+            <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+            <md-datepicker #pickers></md-datepicker>
+          </md-form-field>
+        </div>
+        <div class=" col-3">
+          <md-dialog-actions align="end" class="float-left">
+            <button md-raised-button (click)="getMobileNumber()">SUBMIT</button>
+          </md-dialog-actions>
+        </div>
       </div>
-           <md-form-field>
-                <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
-                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-                <md-datepicker #picker></md-datepicker>
+      <div class="row form-group">
+        <div class="col-3 mgtop-20">
+            <md-form-field class="example-full-width inline ">
+                <input class="form-control" mdInput placeholder="Name">
+                <md-error>
+                  First Name is <strong>required</strong>
+                </md-error>
               </md-form-field>
-              
-              <md-form-field>
-                <input mdInput [mdDatepicker]="pickers" placeholder="To Date"  name="todate" [(ngModel)]="orderinput.toDate">
-                <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-                <md-datepicker #pickers></md-datepicker>
-              </md-form-field>
-               
-          </form>
-    </md-dialog-content>
-    <div class="row float-right pdright-30">
-    <md-dialog-actions align="end">
-     
-      <button  md-raised-button (click)="getMobileNumber()">SUBMIT</button>
-    </md-dialog-actions>
-  </div>
+        </div>
+  
+        <div class="col-9 ">
+            <md-form-field class="example-full-width inline ">
+              <textarea class="form-control" mdInput placeholder="Body"></textarea>
+              <md-error>
+                Body is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+      </div>
+      <div class="row mgleft-5 mobile-div form-group">
+        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                  <input type="checkbox" id="rem"  class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">99990909090</span>
+                </label>
+        </div>
+        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                      <input type="checkbox" id="rem"  class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description">99990909090</span>
+                    </label>
+        </div>
+        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                          <input type="checkbox" id="rem"  class="custom-control-input">
+                          <span class="custom-control-indicator"></span>
+                          <span class="custom-control-description">99990909090</span>
+                        </label>
+        </div>
+        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                  <input type="checkbox" id="rem"  class="custom-control-input">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">99990909090</span>
+                </label>
+        </div>
 
+      </div>
+      <div class="row float-right pdright-30 form-group mgtop-10">
+          <md-dialog-actions align="end">
+            <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+            <button type="submit" md-raised-button class="btn-primary">SAVE</button>
+          </md-dialog-actions>
+        </div>
+      
+    </form>
+  </md-dialog-content>
+</div>
