@@ -98,7 +98,7 @@ export class CoverageComponent implements OnInit {
     ViewProduct(distributor){
 if(distributor){
     let dialogRef = this.dialog.open(ProductListDialogComponent, {
-        height: '350px',
+        
         width: '700px',
         data: distributor
     });
@@ -146,7 +146,7 @@ else if(result.data[0].customer_latitude && result.data[0].customer_longitude){
 ViewDistributors(order){
     
         let dialogRef = this.dialog.open(DistributorListDialogComponent, {
-            height: '450px',
+            
             width: '700px',
             data: order
         });
