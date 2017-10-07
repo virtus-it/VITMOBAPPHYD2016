@@ -2,6 +2,7 @@
 import { FormControl, Validators } from '@angular/forms';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
+import { SmsServiceService } from '../sms/sms-service.service';
 import * as moment from 'moment';
 @Component({
 
@@ -10,7 +11,7 @@ import * as moment from 'moment';
 })
 export class SmsDialogComponent implements OnInit {
 
-  constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any) { }
+  constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService) { }
 
   orderinput = { orderType: "", fromDate: null, toDate: null };
   OrderTypeDetails = [
@@ -24,9 +25,17 @@ export class SmsDialogComponent implements OnInit {
     let input = { type: this.orderinput.orderType, fromdate: null, todate: null };
     input.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
     input.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
-    console.log(this.orderinput);
-  };
-
+    this.smsService.getMobileNumbers(input)
+    .subscribe(
+    output => this.getMobileNumberResult(output),
+    error => {
+      console.log("error in distrbutors");
+    });
+  }
+  getMobileNumberResult(result){
+    console.log(result);
+    
+      }
   ngOnInit() {
   }
 

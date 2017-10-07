@@ -13,6 +13,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './login/authentication.service';
 import { DistributorServiceService } from './distributor/distributor-service.service';
+import { SmsServiceService } from './sms/sms-service.service';
 import { LoggedInGuard } from './login/logged-in.guard';
 import { OrderComponent } from './order/order.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
@@ -24,6 +25,7 @@ import { SmsComponent } from './sms/sms.component';
 import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { ProductListDialogComponent } from './product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from './distributor-list-dialog/distributor-list-dialog.component';
+import { OrderLandingComponent } from './order-landing/order-landing.component';
 
 @NgModule({
     declarations: [
@@ -38,7 +40,8 @@ import { DistributorListDialogComponent } from './distributor-list-dialog/distri
         SmsComponent,
         SmsDialogComponent,
         ProductListDialogComponent,
-        DistributorListDialogComponent
+        DistributorListDialogComponent,
+        OrderLandingComponent
 
     ],
     imports: [
@@ -79,7 +82,8 @@ import { DistributorListDialogComponent } from './distributor-list-dialog/distri
         GoogleMapsAPIWrapper,
         DistributorServiceService,
         LoggedInGuard,
-        { provide: 'API_URL', useValue: 'http://54.213.42.95:2221' }  // 
+        SmsServiceService,
+        { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
     entryComponents: [
         MapDialogComponent, 
