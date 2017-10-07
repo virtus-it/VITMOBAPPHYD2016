@@ -63,7 +63,7 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
             { path: 'orders', component: OrderLandingComponent, canActivate: [LoggedInGuard] },
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
-            { path: 'sms', component: SmsComponent, canActivate: [LoggedInGuard] },
+            { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
