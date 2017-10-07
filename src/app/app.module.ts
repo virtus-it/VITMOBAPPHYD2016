@@ -60,6 +60,7 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },
+            { path: 'orders', component: OrderLandingComponent, canActivate: [LoggedInGuard] },
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: 'sms', component: SmsComponent, canActivate: [LoggedInGuard] },
