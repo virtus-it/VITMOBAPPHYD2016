@@ -19,7 +19,7 @@ export class SmsComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-
+            this.getSmsList();
 
         });
     }

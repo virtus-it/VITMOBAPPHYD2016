@@ -52,11 +52,14 @@ export class DistributorListDialogComponent implements OnInit {
 
     console.log(result);
     if (result.result == "success") {
-      this.onCloseCancel();
+      this.Closedailog();
     }
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+  Closedailog() {
+    this.thisDialogRef.close('suce');
   }
   ngOnInit() {
     this.getDistributors();

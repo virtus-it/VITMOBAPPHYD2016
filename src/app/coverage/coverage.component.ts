@@ -104,7 +104,7 @@ if(distributor){
     });
     dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
-        //this.dialogResult = result;
+        
     
     });
 
@@ -152,7 +152,7 @@ ViewDistributors(order){
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-            //this.dialogResult = result;
+            this.getOrderDetail();
         
         });
     
