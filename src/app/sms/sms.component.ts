@@ -11,7 +11,7 @@ export class SmsComponent implements OnInit {
     constructor(public dialog: MdDialog) { }
     openSmsDialog() {
         let dialogRef = this.dialog.open(SmsDialogComponent, {
-            width: '800px',
+            width: '700px',
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {

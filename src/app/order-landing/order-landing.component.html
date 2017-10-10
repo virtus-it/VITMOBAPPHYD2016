@@ -1,3 +1,257 @@
-<p>
-  order-landing works!
-</p>
+<div class="dist-style">
+    <div class=" row justify-content-between distIcon-style">
+      <div class="col-2">
+        <h4><i class="fa fa-file-text-o"></i> Order</h4>
+      </div>
+      <div class="col-2">
+  
+      </div>
+    </div>
+    <div id="" class="row pd-15x10 mg-0">
+      <div class="col-3 col-sm-3 col-md-3 col-lg-3 filter-style">
+        <div class="filtercol-style height-500">
+          <h6 class="left"><b>Filter by Dates</b> </h6>
+          <div class="row ">
+            <div class="col-6">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="From Date" name="firstName">
+  
+              </md-form-field>
+            </div>
+            <div class="col-6">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="From Date">
+              </md-form-field>
+            </div>
+          </div>
+          <div class=" ">
+            <b class="float-left">Filter by Distributor</b>
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Enter the distributor name">
+              <md-error>
+                Distributor Name is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class=" ">
+            <b class="float-left">Filter by Supplier</b><br>
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Enter the supplier name">
+              <md-error>
+                Supplier Name is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class=" ">
+            <b class="float-left">Filter by Customer</b><br>
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Enter the customer name">
+              <md-error>
+                Customer Name is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class="form-group ">
+  
+            <b class="float-left">Filter by Status</b><br>
+            <md-select placeholder="Order Type" class="wd-100pc left">
+              <md-option>All Orders
+              </md-option>
+              <md-option>Unassinged Orders
+              </md-option>
+              <md-option>Pending Orders
+              </md-option>
+              <md-option>Delivered Orders
+              </md-option>
+            </md-select>
+          </div>
+          <div class="input-group pd-10  ">
+            <button md-raised-button color="primary" class="mgright-5">
+                 <i class="fa fa-search" aria-hidden="true"></i> Search
+                            </button>
+            <button md-raised-button color="primary">
+                          <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                        </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+        <div class="input-group  row form-group ">
+          <div class="col-6 float-right">
+              <button class="btn btn-primary float-right"> Forward Orders</button>
+  <!--             
+            <button md-raised-button color="primary" class="float-right">
+                  Forward Orders   </button> -->
+          </div>
+          <div class="col-2 row">
+              <button class="btn btn-primary float-left">All Orders </button>
+  <!--             
+            <button md-raised-button color="primary" class=" float-left">
+                          All Orders    </button> -->
+          </div>
+          <div class="col-4 float-right">
+              <button class="btn btn-link float-right"> <i class="fa fa-refresh" aria-hidden="true"></i> Refresh </button>
+          </div>
+        </div>
+        <table class="table table-hover table-striped">
+          <tbody >
+            <tr >
+              <td width="35%">
+                <div class="row ">
+                  <div class="col-6 left">
+                    <label class="td-label">Order Id : #</label><br>
+                  </div>
+                  <div class="col-6 right">
+                    <i class="fa fa-edit logo-color "></i>
+                  </div>
+                </div>
+              </td>
+              <td width="32%">
+                <div class=" row ">
+                  <div class="col-6 left">
+                    <label class="td-label">Customer Name : </label><br>
+                  </div>
+                  <div class="col-6 right">
+                    <i class="fa fa-edit logo-color "></i>
+  
+                  </div>
+                </div>
+              </td>
+              <td width="32%">
+                <div class="row ">
+                  <div class="col-6 left">
+                    <label class="td-label">Supplier</label><br>
+                  </div>
+                  <div class="col-6 right">
+                    <label class="td-label">Status</label><br>
+                  </div>
+                </div>
+              </td>
+            </tr>
+  
+            <tr>
+              <td width="35%" class="brd-right">
+                <div class="container-fluid ">
+                  <div class="form-group row ">
+                    <div class="col-9 left">
+                      <label class="td-label">
+                            Date Placed</label><br>
+                      <b></b>
+                    </div>
+                    <div class="col-3 right">
+                      <label class="td-label">Amount</label><br>
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-6 left">
+                      <label class="td-label">Brand Name</label><br>
+                      <b class="capitalize"> </b>
+                    </div>
+                    <div class="col-6 right">
+                      <label class="td-label">Quantity</label><br>
+                      <b></b>
+                    </div>
+                  </div>
+  
+                  <div class="form-group row ">
+                    <div class="col-6 left">
+                      <label class="td-label">Product Type</label><br>
+                      <b></b>
+                    </div>
+                    <div class="col-6 right">
+                      <label class="td-label">Amount</label><br>
+                      <b>{{order.bill_amount}}</b>
+                    </div>
+                  </div>
+  
+                </div>
+              </td>
+              <td width="32%" class="brd-right">
+                <div class="container-fluid ">
+  
+                  <div class="form-group row ">
+                    <div class="col-1">
+                      <b><i class="fa fa-user pdtop-5" aria-hidden="true"></i></b>
+                    </div>
+                    <div class="col-11 ">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-1">
+                      <b><i class="fa fa-mobile pdtop-5" aria-hidden="true"></i></b>
+  
+                    </div>
+                    <div class="col-11 ">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-1">
+                      <b><i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i></b>
+  
+                    </div>
+                    <div class="col-11 ">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-6">
+                      <b>Delivery Time :</b>
+                    </div>
+                    <div class="col-6 ">
+                      <b></b>
+                    </div>
+                  </div>
+                </div>
+  
+              </td>
+              <td width="32%">
+                <div class="container-fluid">
+                  <div class=" mgbottom-10 row ">
+                    <div class="col-6 left">
+                      <label class="td-label"> <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
+                    </div>
+                    <div class="col-6 left">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="mgbottom-10 row ">
+                    <div class="col-6 left">
+                      <label class="td-label"> <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
+                    </div>
+                    <div class="col-6 left">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="mgbottom-10 row ">
+                    <div class="col-6 left">
+                      <label class="td-label"><i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On</label>
+                    </div>
+                    <div class="col-6 left">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="mgbottom-10 row ">
+                    <div class="col-6 left">
+                      <label class="td-label"><i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                    </div>
+                    <div class="col-6 left">
+                      <b></b>
+                    </div>
+                  </div>
+                  <div class="mgbottom-10 row float-right">
+                      <button class="btn btn-primary btn-sm"><i class="fa fa-plus fa-2" aria-hidden="true"></i> View More</button>
+                     
+                  </div>
+                </div>
+              </td>
+  
+            </tr>
+          </tbody>
+        </table>
+  
+      </div>
+    </div>
+  </div>

@@ -41,7 +41,7 @@ export class DistributorComponent implements OnInit {
     }
     openCreateDialog() {
         let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
-            height: '350px',
+            height: '310px',            
             width: '700px',
             data: ''
         });
@@ -53,8 +53,8 @@ export class DistributorComponent implements OnInit {
     }
     openUpdateDialog(details) {
         let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
-            height: '400px',
-            width: '800px',
+            height: '320px',
+            width: '700px',
             data: details
         });
         dialogRef.afterClosed().subscribe(result => {

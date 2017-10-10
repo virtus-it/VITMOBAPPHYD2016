@@ -16,7 +16,7 @@
 
         <div class="  col-3">
 
-          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type">
+          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc">
             <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
@@ -40,7 +40,7 @@
         </div>
         <div class=" col-3">
           <md-dialog-actions align="end" class="float-left">
-            <button md-raised-button (click)="getMobileNumber()">SUBMIT</button>
+            <button md-raised-button (click)="getMobileNumber()" class="btn-primary">SUBMIT</button>
           </md-dialog-actions>
         </div>
       </div>
