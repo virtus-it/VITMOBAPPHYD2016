@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import {LocationStrategy,HashLocationStrategy} from '@angular/common'; 
 import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
@@ -60,7 +61,7 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },
-            { path: 'orders', component: OrderLandingComponent, canActivate: [LoggedInGuard] },
+            { path: 'orders', component: OrderLandingComponent },
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
@@ -84,6 +85,7 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
         DistributorServiceService,
         LoggedInGuard,
         SmsServiceService,
+        {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
     entryComponents: [
