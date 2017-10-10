@@ -27,6 +27,8 @@ import { SmsDialogComponent } from './sms-dialog/sms-dialog.component';
 import { ProductListDialogComponent } from './product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from './distributor-list-dialog/distributor-list-dialog.component';
 import { OrderLandingComponent } from './order-landing/order-landing.component';
+import { AddEditCustomerDailogComponent } from './add-edit-customer-dailog/add-edit-customer-dailog.component';
+import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-dailog.component';
 
 @NgModule({
     declarations: [
@@ -42,7 +44,9 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
         SmsDialogComponent,
         ProductListDialogComponent,
         DistributorListDialogComponent,
-        OrderLandingComponent
+        OrderLandingComponent,
+        AddEditCustomerDailogComponent,
+        OrderDetailDailogComponent
 
     ],
     imports: [
@@ -93,7 +97,9 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
         DistributorCreateDialogComponent,
          SmsDialogComponent,
          ProductListDialogComponent,
-         DistributorListDialogComponent
+         DistributorListDialogComponent,
+         OrderDetailDailogComponent,
+         AddEditCustomerDailogComponent
         ],
     exports: [
         MaterialModule

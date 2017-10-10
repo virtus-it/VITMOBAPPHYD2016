@@ -21,21 +21,21 @@ export class CoverageComponent implements OnInit {
     displayPolygon: any = [];
     listOfDistributors: any = [];
     dialogRef: any = '';
-    order = {orderId:""};
+    order = { orderId: "" };
     orderDetails = "";
-    markers:any = [
+    markers: any = [
         {
             lat: '',
             lng: '',
-         }
+        }
     ]
     constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
     mapClicked($event: any) {
 
     }
-  
+
     getPolygonDistributors() {
-        
+
         var input = { area: { user_type: "dealer", user_id: 0, "apptype": this.authenticationService.appType() } };
         this.distributorService.getpolygonByDistributor(input)
             .subscribe(
@@ -45,12 +45,12 @@ export class CoverageComponent implements OnInit {
             });
     }
     getPolygonDataResult(output) {
-      //  console.log(output);
+        //  console.log(output);
         //9863636315
         //paani
         if (output.data && output.data.length > 0) {
             for (let data of output.data) {
-              
+
                 if (data.polygonvalue && data.polygonvalue.length > 0) {
                     for (let polygon of data.polygonvalue) {
                         polygon.color = '';
@@ -66,12 +66,12 @@ export class CoverageComponent implements OnInit {
             }
         }
     }
-    
+
     click(event, polygon) {
         this.listOfDistributors = [];
         let myLatLng = event.latLng;
-         this.lat = myLatLng.lat();
-         this.lng = myLatLng.lng();
+        this.lat = myLatLng.lat();
+        this.lng = myLatLng.lng();
         for (let dist of this.polygonArray) {
             var latlong = event.latLng;
             var polygonPath = new google.maps.Polygon({
@@ -80,84 +80,84 @@ export class CoverageComponent implements OnInit {
             // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
             if (this.gMaps.containsLocation(latlong, polygonPath)) {
                 this.listOfDistributors.push(dist);
-             }
-           
+            }
+
 
         };
     }
     DistrbutorHover(distributor) {
         if (distributor.path) {
             this.displayPolygon = [];
-             this.displayPolygon.push(distributor);
+            this.displayPolygon.push(distributor);
         }
     }
     ShowAllPolygons() {
         this.listOfDistributors = [];
         this.displayPolygon = this.polygonArray;
     }
-    ViewProduct(distributor){
-if(distributor){
-    let dialogRef = this.dialog.open(ProductListDialogComponent, {
-        
-        width: '700px',
-        data: distributor
-    });
-    dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
-        
-    
-    });
+    ViewProduct(distributor) {
+        if (distributor) {
+            let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
-   
-}
-}
-getOrderDetail(){
-   let input = {appType:this.authenticationService.appType(),orderid:this.order.orderId,userId:this.authenticationService.loggedInUserId()};
-    this.distributorService.getOrderById(input)
-        .subscribe(
-        output => this.getOrderDetailResult(output),
-        error => {
-            console.log("falied");
-        });
-   
-}
-getOrderDetailResult(result){
-    console.log(result);
-    if(result && result.data){
-        let localTime  = moment.utc(result.data[0].ordered_date).toDate();
-        result.data[0].ordered_date = moment(localTime).format('DD-MM-YYYY hh:mm A');
-       this.orderDetails = result.data;
+                width: '700px',
+                data: distributor
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                console.log(`Dialog closed: ${result}`);
 
-if(result.data[0].orderby_latitude && result.data[0].orderby_longitude){
-    this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
-    this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
-}
-else if(result.data[0].customer_latitude && result.data[0].customer_longitude){
-    this.markers[0].lat = parseFloat(result.data[0].customer_latitude);
-    this.markers[0].lng = parseFloat(result.data[0].customer_longitude);
-    
+
+            });
+
+
+        }
     }
-    else{
-        this.markers[0].lat = '';
-        this.markers[0].lng = '';
+    getOrderDetail() {
+        let input = { appType: this.authenticationService.appType(), orderid: this.order.orderId, userId: this.authenticationService.loggedInUserId() };
+        this.distributorService.getOrderById(input)
+            .subscribe(
+            output => this.getOrderDetailResult(output),
+            error => {
+                console.log("falied");
+            });
+
     }
-}
-}
-ViewDistributors(order){
-    
+    getOrderDetailResult(result) {
+        console.log(result);
+        if (result && result.data) {
+            let localTime = moment.utc(result.data[0].ordered_date).toDate();
+            result.data[0].ordered_date = moment(localTime).format('DD-MM-YYYY hh:mm A');
+            this.orderDetails = result.data;
+
+            if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
+                this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
+                this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
+            }
+            else if (result.data[0].customer_latitude && result.data[0].customer_longitude) {
+                this.markers[0].lat = parseFloat(result.data[0].customer_latitude);
+                this.markers[0].lng = parseFloat(result.data[0].customer_longitude);
+
+            }
+            else {
+                this.markers[0].lat = '';
+                this.markers[0].lng = '';
+            }
+        }
+    }
+    ViewDistributors(order) {
+
         let dialogRef = this.dialog.open(DistributorListDialogComponent, {
-            
+
             width: '700px',
             data: order
         });
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             this.getOrderDetail();
-        
+
         });
-    
-       
-    
+
+
+
     }
     ngOnInit() {
         this.getPolygonDistributors();
