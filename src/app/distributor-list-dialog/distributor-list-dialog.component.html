@@ -21,9 +21,15 @@
              </tr>
         </thead>
         <tbody>
+          
           <tr  *ngFor="let dist of distributors; let i = index" [attr.data-index]="i" >
-            <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
-              {{dist.firstname}} {{dist.lastname}}</td>
+              <td width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                  <input type="radio" [(ngModel)]="distributorID"   class="custom-control-input" name="{{dist.userid}}" value="{{dist.userid}}">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{dist.firstname}} {{dist.lastname}}</span>
+                </label></td>
+            <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
+              {{dist.firstname}} {{dist.lastname}}</td> -->
             <td width="20%" class="left capital">{{dist.mobileno}}</td>
             <td width="20%" class="left capital">{{dist.areaname}}</td>
             <td width="30%" class="left capital">{{dist.address}}</td>
@@ -32,7 +38,7 @@
       </table>
     </div>
     </md-dialog-content>
-    <div class="row float-right pdright-30">
+    <div class="row float-right pdright-30  mgbottom-20">
     <md-dialog-actions align="end">
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
       <button type="submit" md-raised-button (click)="forWardOrder()" class="btn-primary">Forward</button>

@@ -15,6 +15,7 @@ table thead {
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;
+    background: #fff;
   }
   .distIcon-style{
     padding: 15px;
@@ -164,4 +165,22 @@ background: transparent;
 }
 .btn-primary{
   color: #fff !important;
+}
+.mgbottom-20{
+  margin-bottom: 20px;
+}
+.wd-100pc{
+  width: 100%;
+}
+b, strong {
+  font-weight: 500;
+}
+.mgright-5{
+  margin-right: 5px !important;
+}
+.brd-right{
+  border-right: 1px solid #ddd;
+}
+.td-label{
+  color: #59717d
 }
