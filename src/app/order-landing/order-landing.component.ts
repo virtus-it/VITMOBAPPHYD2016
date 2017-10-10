@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-dailog.component';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
+import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 @Component({
 
   templateUrl: './order-landing.component.html',
@@ -36,6 +37,19 @@ showOrderDetails(){
                 });
     
   }
+  editQuanity(){
+    let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
+      
+                      width: '700px',
+                      data: ''
+                  });
+                  dialogRefEditQun.afterClosed().subscribe(result => {
+                      console.log(`Dialog closed: ${result}`);
+      
+      
+                  });
+      
+    }
   ngOnInit() {
   }
 

@@ -29,6 +29,7 @@ import { DistributorListDialogComponent } from './distributor-list-dialog/distri
 import { OrderLandingComponent } from './order-landing/order-landing.component';
 import { AddEditCustomerDailogComponent } from './add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-dailog.component';
+import { EditQuantityDailogComponent } from './edit-quantity-dailog/edit-quantity-dailog.component';
 
 @NgModule({
     declarations: [
@@ -46,7 +47,8 @@ import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-d
         DistributorListDialogComponent,
         OrderLandingComponent,
         AddEditCustomerDailogComponent,
-        OrderDetailDailogComponent
+        OrderDetailDailogComponent,
+        EditQuantityDailogComponent
 
     ],
     imports: [
@@ -99,7 +101,8 @@ import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-d
          ProductListDialogComponent,
          DistributorListDialogComponent,
          OrderDetailDailogComponent,
-         AddEditCustomerDailogComponent
+         AddEditCustomerDailogComponent,
+         EditQuantityDailogComponent
         ],
     exports: [
         MaterialModule
