@@ -40,7 +40,7 @@ showOrderDetails(){
   editQuanity(){
     let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
       
-                      width: '700px',
+                      width: '500px',
                       data: ''
                   });
                   dialogRefEditQun.afterClosed().subscribe(result => {
