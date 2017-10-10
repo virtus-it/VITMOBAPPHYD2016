@@ -26,7 +26,7 @@ showEditCustomer(){
 showOrderDetails(){
   let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
     
-                    width: '700px',
+                    width: '90%',
                     data: ''
                 });
                 dialogRefShowOrder.afterClosed().subscribe(result => {
