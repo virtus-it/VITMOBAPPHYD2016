@@ -44,60 +44,37 @@
           </md-dialog-actions>
         </div>
       </div>
+      <div *ngIf="mobileDetails.length">
       <div class="row form-group">
         <div class="col-3 mgtop-20">
             <md-form-field class="example-full-width inline ">
-                <input class="form-control" mdInput placeholder="Name">
-                <md-error>
-                  First Name is <strong>required</strong>
-                </md-error>
+                <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]="smsInput.name">
+               
               </md-form-field>
         </div>
   
         <div class="col-9 ">
             <md-form-field class="example-full-width inline ">
-              <textarea class="form-control" mdInput placeholder="Body"></textarea>
-              <md-error>
-                Body is <strong>required</strong>
-              </md-error>
+              <textarea class="form-control" mdInput placeholder="Body" name ="body" [(ngModel)]="smsInput.body"></textarea>
+             
             </md-form-field>
           </div>
       </div>
       <div class="row mgleft-5 mobile-div form-group">
-        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
+        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group"  *ngFor="let mobile of mobileDetails; let i = index" [attr.data-index]="i" >
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" id="rem"  class="custom-control-input">
+                  <input type="checkbox" id="rem"  class="custom-control-input"  (change)="onChangeCheck(mobile, $event.target.checked)">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">99990909090</span>
+                  <span class="custom-control-description">{{mobile.mobileno}}</span>
                 </label>
         </div>
-        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
-          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                      <input type="checkbox" id="rem"  class="custom-control-input">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">99990909090</span>
-                    </label>
-        </div>
-        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
-          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                          <input type="checkbox" id="rem"  class="custom-control-input">
-                          <span class="custom-control-indicator"></span>
-                          <span class="custom-control-description">99990909090</span>
-                        </label>
-        </div>
-        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group">
-          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" id="rem"  class="custom-control-input">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">99990909090</span>
-                </label>
-        </div>
-
+     
+      </div>
       </div>
       <div class="row float-right pdright-30 form-group mgtop-10">
           <md-dialog-actions align="end">
             <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-            <button type="submit" md-raised-button class="btn-primary">SAVE</button>
+            <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
           </md-dialog-actions>
         </div>
       

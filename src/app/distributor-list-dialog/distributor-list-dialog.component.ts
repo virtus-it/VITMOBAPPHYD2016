@@ -13,7 +13,7 @@ export class DistributorListDialogComponent implements OnInit {
   distributorID = "";
   constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
   getDistributors() {
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
     console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(
@@ -52,11 +52,14 @@ export class DistributorListDialogComponent implements OnInit {
 
     console.log(result);
     if (result.result == "success") {
-      this.onCloseCancel();
+      this.Closedailog();
     }
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+  Closedailog() {
+    this.thisDialogRef.close('suce');
   }
   ngOnInit() {
     this.getDistributors();
