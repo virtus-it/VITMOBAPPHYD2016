@@ -30,6 +30,8 @@ import { OrderLandingComponent } from './order-landing/order-landing.component';
 import { AddEditCustomerDailogComponent } from './add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-dailog.component';
 import { EditQuantityDailogComponent } from './edit-quantity-dailog/edit-quantity-dailog.component';
+import { CustomerDetailDailogComponent } from './customer-detail-dailog/customer-detail-dailog.component';
+import { EmptyCanDailogComponent } from './empty-can-dailog/empty-can-dailog.component';
 
 @NgModule({
     declarations: [
@@ -48,7 +50,9 @@ import { EditQuantityDailogComponent } from './edit-quantity-dailog/edit-quantit
         OrderLandingComponent,
         AddEditCustomerDailogComponent,
         OrderDetailDailogComponent,
-        EditQuantityDailogComponent
+        EditQuantityDailogComponent,
+        CustomerDetailDailogComponent,
+        EmptyCanDailogComponent
 
     ],
     imports: [
@@ -102,7 +106,9 @@ import { EditQuantityDailogComponent } from './edit-quantity-dailog/edit-quantit
          DistributorListDialogComponent,
          OrderDetailDailogComponent,
          AddEditCustomerDailogComponent,
-         EditQuantityDailogComponent
+         EditQuantityDailogComponent,
+         CustomerDetailDailogComponent,
+         EmptyCanDailogComponent
         ],
     exports: [
         MaterialModule

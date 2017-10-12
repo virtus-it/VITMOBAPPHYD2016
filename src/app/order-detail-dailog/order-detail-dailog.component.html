@@ -29,7 +29,7 @@
           <div class=" col-md-6"><span>Customer Details </span>
           </div>
           <div class="col-md-6 right">
-            <button class="btn btn-primary btn-sm float-right"> View More </button>
+            <button class="btn btn-primary btn-sm float-right" (click)='showCustomerDetails()'> View More</button>
           </div>
         </div>
         <div class="row form-group">
@@ -70,7 +70,7 @@
             <!-- <span class="warning">noCansText</span> -->
           </div>
           <div class="col-md-6 right">
-            <i class="fa fa-edit logo-color" aria-hidden="true"></i><br>
+            <i class="fa fa-edit logo-color" aria-hidden="true" (click)='editCan()'></i><br>
           </div>
         </div>
         <div class="row form-group" ng-show="cansList">
