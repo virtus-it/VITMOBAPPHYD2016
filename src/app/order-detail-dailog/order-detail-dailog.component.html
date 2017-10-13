@@ -15,18 +15,18 @@
         <b> Order Details</b>
         <div class="row form-group">
           <div class="col-md-5 col-5 col-sm-5">
-            <small class="gray" id="name"> Order Id: #listview.order_id</small><br>
+            <small class="gray" id="name"> Order Id: #order_id</small><br>
             <small class="black firstlettercap">brandname prod_type (Qty)</small>
           </div>
           <div class="col-md-7 right">
-            <small><span class="gray">Delivery Date : </span> listview.delivery_exceptedtime </small><br>
-            <small><span class="gray">Modified Date : </span> listview.modifieddate</small>
+            <small><span class="gray">Delivery Date : </span>delivery_exceptedtime </small><br>
+            <small><span class="gray">Modified Date : </span>modifieddate</small>
           </div>
         </div>
       </div>
       <div class="container-fluid  border-top pdtop-15">
         <div class="row form-group">
-          <div class=" col-md-6"><span>Customer Details </span>
+          <div class=" col-md-6"> <b>Customer Details </b>
           </div>
           <div class="col-md-6 right">
             <button class="btn btn-primary btn-sm float-right" (click)='showCustomerDetails()'> View More</button>
@@ -45,17 +45,17 @@
         <div class="row  border-top pdtop-15  form-group ">
           <div class="col-md-3">
             <small class="control-label success">Advance Amt</small><br>
-            <small class="control-label success">Rs. listview.customerpaymentdts.advance_amount</small>
+            <small class="control-label success">Rs. advance_amount</small>
           </div>
 
           <div class="col-md-3 center">
             <small class="control-label warning"> Due Amount</small><br>
-            <small class="control-label warning">Rs. listview.customerpaymentdts.amount_pending</small>
+            <small class="control-label warning">Rs. amount_pending</small>
           </div>
 
           <div class="col-md-3 center">
             <small class="control-label gray"> Payment Type</small><br>
-            <small class="control-label gray uppercase">listview.customerpaymentdts.paymenttype</small>
+            <small class="control-label gray uppercase">paymenttype</small>
           </div>
 
           <div class="col-md-3 right">
@@ -99,11 +99,11 @@
     <div class="col-md-3">
       <div class="container-fluid">
       <div class="row">
-        <label class="mgbtm-10">Order Status</label>
+        <b class="mgbtm-10">Order Status</b>
         <div class="row mgtop-15pc">
           <div class="col-lg-6 col-md-6" >
             <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus()'><b>On-hold Order</b></button></div>
-            <div class="col-lg-6 col-md-6 align-right" >
+            <div class="col-lg-6 col-md-6 right" >
               <button class="control-label btn btn-link btn-sm" (click)='editStatus()'><b>Edit Status</b></button></div>
             </div>
       </div>

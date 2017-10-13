@@ -9,13 +9,31 @@
       <md-sidenav #focusSidenav class="sidebar-style col-3">
         <md-nav-list>
           <a md-list-item routerLink="" class="sidebar-list height-150" (click)="focusSidenav.toggle()">
-            <img src="../assets/images/img_user.png"  class="pdtop-80"/> </a>
-            <a md-list-item routerLink="/orders" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-file-text-o" aria-hidden="true"></i> <span class="pdtoprght-3x10">Order</span> </a>
-          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-sitemap"></i> <span class="pdtoprght-3x10">Distributors</span> </a>
-          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-globe" aria-hidden="true"></i> <span class="pdtoprght-3x10">  Coverage</span> </a>
-          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span class="pdtoprght-3x10">  Notifications</span> </a>
-          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span class="pdtoprght-3x10">  Reports</span> </a>
-          <a md-list-item routerLink="/preorder" class="sidebar-list" (click)="focusSidenav.toggle()"><i class="fa fa-commenting-o" aria-hidden="true"></i> <span class="pdtoprght-3x10">  PreOrder</span> </a>
+            <img src="../assets/images/img_user.png" class="pdtop-80" /> </a>
+          <a md-list-item routerLink="/orders" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-file-text-o" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10">Order</span>
+          </a>
+          <a md-list-item routerLink="/preorder" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa fa-files-o" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> PreOrder</span>
+          </a>
+          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-sitemap"></i>
+            <span class="pdtoprght-3x10">Distributors</span>
+          </a>
+          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Coverage</span>
+          </a>
+          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-commenting-o" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Notifications</span>
+          </a>
+          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Reports</span>
+          </a>
         </md-nav-list>
       </md-sidenav>
 
@@ -23,15 +41,21 @@
         <div *ngIf="!_router.url.includes('login'); else elseBlock" class="container-fluid brd-bottom">
           <div class="row">
             <div class="col">
-              <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 right mgtop-12 float-left"><md-icon>menu</md-icon></button>
+              <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 right mgtop-12 float-left">
+                <md-icon>menu</md-icon>
+              </button>
               <img src="../assets/images/logo.png" class="float-left" />
             </div>
             <div class="col-6">
             </div>
             <div class="col pdtpright-10x30">
               <div class="right">
-                <a href="http://www.virtus-it.com/"><img src="../assets/images/powerby.png" class="" /></a></div>
-              <button class="float-right logo-color" md-button (click)="logOut()"><i class="fa fa-sign-out"></i> Logout</button>
+                <a href="http://www.virtus-it.com/">
+                  <img src="../assets/images/powerby.png" class="" />
+                </a>
+              </div>
+              <button class="float-right logo-color" md-button (click)="logOut()">
+                <i class="fa fa-sign-out"></i> Logout</button>
             </div>
           </div>
         </div>
@@ -39,7 +63,9 @@
           <div id="app" class="brd-bottom">
             <header>
 
-              <a href="javascript:void(0)" id="logo"> <img src="../assets/images/logo.png" class="img-responsive" /></a>
+              <a href="javascript:void(0)" id="logo">
+                <img src="../assets/images/logo.png" class="img-responsive" />
+              </a>
 
               <nav>
 
@@ -47,11 +73,23 @@
 
                 <ul>
 
-                  <li><a href="javascript:void(0)" class="current">Home</a></li>
-                  <li><a href="javascript:void(0)">About us</a></li>
-                  <li><a href="javascript:void(0)">Shop</a></li>
-                  <li><a href="javascript:void(0)"><span  class="active">Login</span></a></li>
-                  <li><a href="javascript:void(0)">Contact us</a></li>
+                  <li>
+                    <a href="javascript:void(0)" class="current">Home</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">About us</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">Shop</a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">
+                      <span class="active">Login</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)">Contact us</a>
+                  </li>
 
                 </ul>
 
@@ -102,8 +140,9 @@
         <div class="container">
           <div class="row ">
             <div class="col-6 footer-copyrights">
-              <p>Copyright © 2017 developed by <a href="http://www.virtus-it.com/">Virtus-IT </a>India Pvt Ltd, All rights reserved.
-                </p>
+              <p>Copyright © 2017 developed by
+                <a href="http://www.virtus-it.com/">Virtus-IT </a>India Pvt Ltd, All rights reserved.
+              </p>
             </div>
             <div class="col-2">
             </div>

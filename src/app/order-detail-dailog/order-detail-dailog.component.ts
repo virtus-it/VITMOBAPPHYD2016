@@ -38,7 +38,7 @@ export class OrderDetailDailogComponent implements OnInit {
   }
   onHoldStatus(){
     let dialogRefonHoldStatus = this.dialog.open(OnHoldOrderStatusComponent, {
-                      width: '700px',
+                      width: '550px',
                       data: ''
                   });
                   dialogRefonHoldStatus.afterClosed().subscribe(result => {
@@ -50,7 +50,7 @@ export class OrderDetailDailogComponent implements OnInit {
   }
   editStatus(){
     let dialogRefeditStatus = this.dialog.open(EditOrderStatusComponent, {
-                      width: '700px',
+                      width: '750px',
                       data: ''
                   });
                   dialogRefeditStatus.afterClosed().subscribe(result => {
