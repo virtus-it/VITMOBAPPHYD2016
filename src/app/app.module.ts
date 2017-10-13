@@ -34,6 +34,7 @@ import { CustomerDetailDailogComponent } from './customer-detail-dailog/customer
 import { EmptyCanDailogComponent } from './empty-can-dailog/empty-can-dailog.component';
 import { EditOrderStatusComponent } from './edit-order-status/edit-order-status.component';
 import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order-status.component';
+import { ReportsComponent } from './reports/reports.component';
 
 @NgModule({
     declarations: [
@@ -56,7 +57,8 @@ import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order
         CustomerDetailDailogComponent,
         EmptyCanDailogComponent,
         EditOrderStatusComponent,
-        OnHoldOrderStatusComponent
+        OnHoldOrderStatusComponent,
+        ReportsComponent
 
     ],
     imports: [
@@ -79,6 +81,7 @@ import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
+            { path: 'reports', component: ReportsComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
