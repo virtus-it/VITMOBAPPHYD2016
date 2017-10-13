@@ -1,4 +1,69 @@
-<p>
-  pre-order works!
-  <button (click)="addPreorder()">ADD</button>
-</p>
+
+  <!-- <button (click)="addPreorder()">ADD</button> -->
+  <div class="row dist-style">
+      <div  >
+        <div class=" row justify-content-between distIcon-style">
+        <div class="col-2">
+            <h4><i class="fa fa-file-text"></i> Report</h4>
+        </div>
+      <div class="col-2">        
+      </div>
+        </div>
+        <div id="" class="row pd-15x10 mg-0">
+            <div class="col-3 col-sm-3 col-md-3 col-lg-3 filter-style">
+                <div class="filtercol-style height-500">
+                    <label class="float-left">Filter by</label><br>
+                         <div class=" ">
+                            <md-form-field class="example-full-width">
+                              <input class="form-control" mdInput placeholder="First Name"  name="firstName">
+                              <md-error >
+                                 Name is <strong>required</strong>
+                              </md-error>
+                            </md-form-field>
+                          </div>
+                          <div class=" form-group">
+                              <md-form-field class="example-full-width">
+                                <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
+                                <md-error >
+                                  Mobile No is <strong>required</strong>
+                                </md-error>
+                              </md-form-field>
+                            </div> 
+                      <div class="input-group pd-10  ">
+                        <button md-raised-button color="primary" ng-click="clearSearch()">
+                          <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                        </button>
+                      </div>
+                    </div>
+             </div>
+      <div class="col-9 col-sm-9 col-md-9 col-lg-9">    
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+                <th width="5%">S.No</th>
+                <th width="12%">User</th>
+                <th width="12%">Distributor</th>                
+                <th width="12%">Mobile No</th>
+                <th width="12%">Areaname</th>
+                <th width="12%" class="pdleft-20">Address</th>
+                <th width="15%">Advance Amount</th>
+                <th width="12%">Due Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="Preordrlist" (click)="addPreorder()">
+                <td scope="row">{{i+1}}</td>
+                <td class="left"></td>
+                <td class="left"></td>
+                <td class="left"></td>
+                <td class="left"></td>
+                <td class="left"></td>
+                <td class="left"></td>
+                <td class="left"></td>
+              </tr>
+            </tbody>
+          </table>
+      </div>
+      </div>
+      </div>  
+      </div>

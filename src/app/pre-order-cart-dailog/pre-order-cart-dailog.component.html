@@ -1,3 +1,81 @@
-<p>
-  pre-order-cart-dailog works!
-</p>
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+  <div class="col-4">
+    <i class="fa fa-gift"></i> Pre Order - Cart
+  </div>
+  <div class="col-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <div class="row">
+
+      <div class="  col-3">
+
+        <md-select placeholder="Order Type"  name="type" class="wd-100pc">
+          <md-option >Select Time
+          </md-option>
+          <md-option >9AM-1PM
+            </md-option>
+            <md-option >4PM-7PM
+              </md-option>
+        </md-select>
+
+      </div>
+      <div class="  col-3">
+        <md-form-field class="inline">
+          <input mdInput placeholder="From Date" name="fromdate" >
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
+      </div>
+      <div class="  col-3">
+
+        <md-form-field class="inline">
+          <input mdInput placeholder="To Date" name="todate" >
+          <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+          <md-datepicker #pickers></md-datepicker>
+        </md-form-field>
+      </div>
+      <div class=" col-3">
+        <md-dialog-actions align="end" class="float-left">
+          <button md-raised-button  class="btn-primary">SUBMIT</button>
+        </md-dialog-actions>
+      </div>
+    </div>
+    <div class="">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th width="12%">S.No</th>
+            <th width="40%">Product Name</th>
+            <th width="25%">Type</th>
+            <th width="22%">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr >
+            <td width="12%" class="left" scope="row">{{i+1}}</td>
+            <td width="40%" class="left capital"></td>
+            <td width="25%" class="left capital"></td>
+            <td width="22%" class="left capital"></td>
+
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+      <button md-raised-button >PLACE AN ORDER</button>&nbsp;      
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>
