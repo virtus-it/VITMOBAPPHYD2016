@@ -32,6 +32,8 @@ import { OrderDetailDailogComponent } from './order-detail-dailog/order-detail-d
 import { EditQuantityDailogComponent } from './edit-quantity-dailog/edit-quantity-dailog.component';
 import { CustomerDetailDailogComponent } from './customer-detail-dailog/customer-detail-dailog.component';
 import { EmptyCanDailogComponent } from './empty-can-dailog/empty-can-dailog.component';
+import { EditOrderStatusComponent } from './edit-order-status/edit-order-status.component';
+import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order-status.component';
 
 @NgModule({
     declarations: [
@@ -52,7 +54,9 @@ import { EmptyCanDailogComponent } from './empty-can-dailog/empty-can-dailog.com
         OrderDetailDailogComponent,
         EditQuantityDailogComponent,
         CustomerDetailDailogComponent,
-        EmptyCanDailogComponent
+        EmptyCanDailogComponent,
+        EditOrderStatusComponent,
+        OnHoldOrderStatusComponent
 
     ],
     imports: [
@@ -108,7 +112,9 @@ import { EmptyCanDailogComponent } from './empty-can-dailog/empty-can-dailog.com
          AddEditCustomerDailogComponent,
          EditQuantityDailogComponent,
          CustomerDetailDailogComponent,
-         EmptyCanDailogComponent
+         EmptyCanDailogComponent,
+         EditOrderStatusComponent,
+         OnHoldOrderStatusComponent
         ],
     exports: [
         MaterialModule
