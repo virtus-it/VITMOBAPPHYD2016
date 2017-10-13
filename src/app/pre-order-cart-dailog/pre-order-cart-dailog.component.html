@@ -4,7 +4,7 @@
 </div> -->
 <div class="row justify-content-between modal-title ">
   <div class="col-4">
-    <i class="fa fa-gift"></i> Pre Order - Cart
+    <i class="fa fa-user"></i> Pre Order - Cart
   </div>
   <div class="col-1 right">
     <strong (click)="onCloseCancel()">
@@ -32,16 +32,14 @@
       <div class="  col-3">
         <md-form-field class="inline">
           <input mdInput placeholder="From Date" name="fromdate" >
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-          <md-datepicker #picker></md-datepicker>
+  
         </md-form-field>
       </div>
       <div class="  col-3">
 
         <md-form-field class="inline">
           <input mdInput placeholder="To Date" name="todate" >
-          <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-          <md-datepicker #pickers></md-datepicker>
+  
         </md-form-field>
       </div>
       <div class=" col-3">
@@ -75,7 +73,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button md-raised-button >PLACE AN ORDER</button>&nbsp;      
+      <button md-raised-button class="btn-primary">PLACE AN ORDER</button>&nbsp;      
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
