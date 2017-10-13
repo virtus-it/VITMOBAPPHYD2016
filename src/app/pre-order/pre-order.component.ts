@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialog } from '@angular/material';
+import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart-dailog.component';
 
 @Component({
  
@@ -7,8 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PreOrderComponent implements OnInit {
 
-  constructor() { }
-
+  constructor(public dialog: MdDialog) { }
+  addPreorder(){
+    let dialogRefAddPreOrder = this.dialog.open(PreOrderCartDailogComponent, {
+                      width: '600px',
+                      data: ''
+                  });
+                  dialogRefAddPreOrder.afterClosed().subscribe(result => {
+                      console.log(`Dialog closed: ${result}`);
+      
+      
+                  });
+  
+  }
   ngOnInit() {
   }
 

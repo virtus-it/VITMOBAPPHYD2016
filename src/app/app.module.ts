@@ -36,6 +36,7 @@ import { EditOrderStatusComponent } from './edit-order-status/edit-order-status.
 import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order-status.component';
 import { ReportsComponent } from './reports/reports.component';
 import { PreOrderComponent } from './pre-order/pre-order.component';
+import { PreOrderCartDailogComponent } from './pre-order-cart-dailog/pre-order-cart-dailog.component';
 
 @NgModule({
     declarations: [
@@ -60,7 +61,8 @@ import { PreOrderComponent } from './pre-order/pre-order.component';
         EditOrderStatusComponent,
         OnHoldOrderStatusComponent,
         ReportsComponent,
-        PreOrderComponent
+        PreOrderComponent,
+        PreOrderCartDailogComponent
 
     ],
     imports: [
@@ -120,7 +122,8 @@ import { PreOrderComponent } from './pre-order/pre-order.component';
          CustomerDetailDailogComponent,
          EmptyCanDailogComponent,
          EditOrderStatusComponent,
-         OnHoldOrderStatusComponent
+         OnHoldOrderStatusComponent,
+         PreOrderCartDailogComponent
         ],
     exports: [
         MaterialModule
