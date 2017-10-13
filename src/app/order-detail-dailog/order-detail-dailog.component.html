@@ -34,12 +34,12 @@
         </div>
         <div class="row form-group">
           <div class="col-md-8">
-            <small><i class="fa fa-user" aria-hidden="true"></i> listview.orderby_firstname listview.orderby_lastname</small><br>
-            <small><i class="fa fa-map-marker" aria-hidden="true"></i> listview.address</small>
+            <small><i class="fa fa-user" aria-hidden="true"></i> firstname lastname</small><br>
+            <small><i class="fa fa-map-marker" aria-hidden="true"></i> address</small>
           </div>
           <div class="col-md-4 right">
-            <small><i class="fa fa-phone" aria-hidden="true"></i> listview.orderby_mobileno</small><br>
-            <small><i class="fa fa-location-arrow" aria-hidden="true"></i>  listview.orderby_areaname</small>
+            <small><i class="fa fa-phone" aria-hidden="true"></i> orderby_mobileno</small><br>
+            <small><i class="fa fa-location-arrow" aria-hidden="true"></i> orderby_areaname</small>
           </div>
         </div>
         <div class="row  border-top pdtop-15  form-group ">
@@ -100,89 +100,12 @@
       <div class="container-fluid">
       <div class="row">
         <label class="mgbtm-10">Order Status</label>
-        <ul class="timeline">
-          <li class="timeline-inverted">
-            <div class="timeline-badge default ordcreate-style"><i class="glyphicon glyphicon-edit"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label class="warning">Order Created</label>
-              </div>
-              <div class="timeline-body ">
-                <ul class="pdleft-15">
-                  <li><small class="firstlettercap"><i class="fa fa-user" aria-hidden="true"></i>
-                listview.orderby_firstname listview.orderby_lastname</small></li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                  listview.ordered_date | date:'dd-MM-yyyy hh:mm a'</small> </li>
-                  <li> <small><i class="fa fa-arrow-right" aria-hidden="true"></i> listview.ordered_qty(Qty)</small> </li>
-                </ul>
-              </div>
+        <div class="row mgtop-15pc">
+          <div class="col-lg-6 col-md-6" ng-show="hideOnhold">
+            <button class="control-label btn btn-link btn-sm" ><b>On-hold Order</b></button></div>
+            <div class="col-lg-6 col-md-6 align-right" ng-show="statusDetails">
+              <button class="control-label btn btn-link btn-sm" ><b>Edit Status</b></button></div>
             </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-badge default mgbtm-20 "><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label>Order Assigned</label>
-              </div>
-              <div class="timeline-body">
-                
-                <ul class="pdleft-15" ng-show="ordAsg">
-                  <li><small class="firtercap"><i class="fa fa-user" aria-hidden="true"></i>
-                        <span >
-                       listview.supplierdetails.firstname  listview.supplierdetails.lastname
-                     </span>
-                     <span ng-if="listview.supplierdetails.firstname == undefined">
-                       -
-                     </span>
-                    </small></li>
-                  <li><small><i class="fa fa-phone" aria-hidden="true"></i>
-                      <span>
-                       listview.supplierdetails.mobileno
-                     </span>
-           
-                   </small></li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                
-                    <span >
-                     listview.order_assigneddate | date:'dd-MM-yyyy hh:mm a'
-                   </span>
-                 </small> </li>
-
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-badge default"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label>Order Completed</label>
-              </div>
-              <div class="timeline-body">
-                <ul class="pdleft-15">
-                  <li ng-show="ordDelDeliveredLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Delivered</small></li>
-                  <li ng-show="ordDelNotReachableLbl"><small class="firstlettercap"><i class="fa fa fa-check-square-o" aria-hidden="true"></i> Not Reachable</small></li>
-                  <li ng-show="ordDelRejectLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i> Rejected</small></li>
-                  <li ng-show="ordDelOnholdLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  On Hold</small></li>
-                  <li ng-show="ordDelCantDelLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Can't Deliver</small></li>
-                  <li ng-show="ordDelDoorlockLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Door Locked</small></li>
-                  <li ng-show="ordDelCancelledLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i> Cancelled</small></li>
-                  <li ng-hide="ordDelList"><small class="firstlettercap"><i class="fa fa fa-check-square-o" aria-hidden="true"></i>
-                  listview.supplierdetails.firstname listview.supplierdetails.lastname</small> </li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                   <span>
-                    deliveredHours | limitTo:4 hours ago
-                  </span>
-              </small> </li>
-                  <li><span><small><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  listview.delivered_quantity(Qty)</small><small class="col-md-offset-1"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-                  listview.return_cans(Qty)</small></span></li>
-
-                </ul>
-              </div>
-            </div>
-          </li>
-        </ul>
       </div>
     </div>
   </div>
