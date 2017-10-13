@@ -304,3 +304,9 @@ ul li small{
 .pdtop-10{
   padding-top: 10px;
 }
+.nolist-style{
+  list-style: none;
+}
+.center{
+  text-align: center
+}
