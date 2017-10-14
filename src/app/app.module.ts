@@ -37,6 +37,10 @@ import { OnHoldOrderStatusComponent } from './on-hold-order-status/on-hold-order
 import { ReportsComponent } from './reports/reports.component';
 import { PreOrderComponent } from './pre-order/pre-order.component';
 import { PreOrderCartDailogComponent } from './pre-order-cart-dailog/pre-order-cart-dailog.component';
+import { CustomerComponent } from './customer/customer.component';
+import { SupplierComponent } from './supplier/supplier.component';
+import { ProductsComponent } from './products/products.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 @NgModule({
     declarations: [
@@ -62,7 +66,11 @@ import { PreOrderCartDailogComponent } from './pre-order-cart-dailog/pre-order-c
         OnHoldOrderStatusComponent,
         ReportsComponent,
         PreOrderComponent,
-        PreOrderCartDailogComponent
+        PreOrderCartDailogComponent,
+        CustomerComponent,
+        SupplierComponent,
+        ProductsComponent,
+        FeedbackComponent
 
     ],
     imports: [
@@ -87,6 +95,10 @@ import { PreOrderCartDailogComponent } from './pre-order-cart-dailog/pre-order-c
             { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
             { path: 'reports', component: ReportsComponent, canActivate: [LoggedInGuard] },
             { path: 'preorder', component: PreOrderComponent, canActivate: [LoggedInGuard] },
+            { path: 'customer', component: CustomerComponent, canActivate: [LoggedInGuard] },
+            { path: 'product', component: ProductsComponent, canActivate: [LoggedInGuard] },
+            { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
+            { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
