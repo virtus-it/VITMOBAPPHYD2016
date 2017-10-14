@@ -1,3 +1,79 @@
-<p>
-  customer-detail-dailog works!
-</p>
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+    <div class="col-4">
+      <i class="fa fa-user-circle-o"></i> Customer View      
+    </div>
+    <div class="col-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row">
+                <span class="col-sm-5 right gray9">Customer Name</span>
+                <span class="col-sm-1 center gray9">:</span>
+                   <label class="col-sm-6 left  ng-binding">firasath
+                        <!-- ngIf: customerView.cLname -->
+               
+                   </label>
+            </div>
+              <div class="row"> 
+                <span class=" col-sm-5 right gray9">Mobile Number</span>
+                <span class="col-sm-1 center gray9">:</span>
+                <label class="col-sm-6 left  ng-binding">0000999999</label>
+            </div>
+              <div class="row form-group">
+                <span class=" col-sm-5 right gray9">Area Name</span>
+                <span class="col-sm-1 center gray9">:</span>
+            <label class="col-sm-6 left  ng-binding">toli chowki</label>
+            </div>
+
+
+      <div class="">
+        <table class="table table-hover table-fixedheader">
+          <thead>
+            <tr>
+              <th width="">Order Id</th>
+              <th width="">Product Name</th>
+              <th width="">Cart Id</th>
+              <th width="">Status</th>
+              <th width="">Address</th>
+              <th width="">Ordered Amt</th>
+              <th width="">Received Amt</th>
+                 <th width="">Ordered Qty</th>
+              <th width="">Status</th>
+              <th width="">Returned Qty</th>
+              <th width="">Payment Mode</th>
+              <th width="">Delivery Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr >
+              <td width="" class="left" scope="row"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+              <td width="" class="left capital"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button >CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

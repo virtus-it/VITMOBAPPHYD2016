@@ -14,7 +14,7 @@ export class OrderDetailDailogComponent implements OnInit {
   constructor(public dialog: MdDialog) { }
   showCustomerDetails(){
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
-                      width: '600px',
+                      width: '95%',
                       data: ''
                   });
                   dialogRefEditCustomer.afterClosed().subscribe(result => {
