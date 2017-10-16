@@ -41,6 +41,8 @@ import { CustomerComponent } from './customer/customer.component';
 import { SupplierComponent } from './supplier/supplier.component';
 import { ProductsComponent } from './products/products.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { AddSupplierDailogComponent } from './add-supplier-dailog/add-supplier-dailog.component';
+import { SupplierOrderListComponent } from './supplier-order-list/supplier-order-list.component';
 
 @NgModule({
     declarations: [
@@ -70,7 +72,9 @@ import { FeedbackComponent } from './feedback/feedback.component';
         CustomerComponent,
         SupplierComponent,
         ProductsComponent,
-        FeedbackComponent
+        FeedbackComponent,
+        AddSupplierDailogComponent,
+        SupplierOrderListComponent
 
     ],
     imports: [
@@ -135,7 +139,9 @@ import { FeedbackComponent } from './feedback/feedback.component';
          EmptyCanDailogComponent,
          EditOrderStatusComponent,
          OnHoldOrderStatusComponent,
-         PreOrderCartDailogComponent
+         PreOrderCartDailogComponent,
+         AddSupplierDailogComponent,
+         SupplierOrderListComponent
         ],
     exports: [
         MaterialModule
