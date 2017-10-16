@@ -12,6 +12,9 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
+  th{
+    font-weight: 600;
+  }
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;
@@ -312,4 +315,7 @@ ul li small{
 }
 .gray9{
   color: #999;
+}
+.mgtop-5{
+  margin-top: 5px;
 }

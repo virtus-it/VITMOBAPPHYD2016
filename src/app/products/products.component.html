@@ -1,3 +1,78 @@
-<p>
-  products works!
-</p>
+<div class=" dist-style">
+  <div class=" row justify-content-between distIcon-style">
+    <div class="col-2">
+      <h4>
+        <i class="fa fa-gift"></i> Products</h4>
+    </div>
+    <div class="col-4">
+      <button md-raised-button color="primary">
+        <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Invoice
+      </button>
+      <button md-raised-button color="primary">
+          <i class="fa fa-line-chart" aria-hidden="true"></i>   Stock History
+        </button>
+        <button md-raised-button color="primary">
+            <i class="fa fa-plus fa-2" aria-hidden="true"></i>
+          </button>
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col-3 col-sm-3 col-md-3 col-lg-3 filter-style">
+      <div class="filtercol-style height-500">
+        <label class="float-left">Filter by</label>
+        <br>
+        <div class=" ">
+          <md-form-field class="example-full-width">
+            <input class="form-control" mdInput placeholder=" Product name">
+          </md-form-field>
+        </div>
+        <div class=" ">
+          <md-form-field class="example-full-width">
+            <input class="form-control" mdInput placeholder="Created Date">
+          </md-form-field>
+        </div>
+        <div class=" form-group">
+          <button md-raised-button color="primary">
+            <i class="fa fa-search" aria-hidden="true"></i> Search
+          </button>
+          <button md-raised-button color="primary">
+            <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="18%">Product name</th>
+            <th width="15%">Product type </th>
+            <th width="10%">Cost </th>
+            <th width="15%">Avaliable stock</th>
+            <th width="15%">Created on </th>
+            <th width="15%">Action</th>
+            <th width="10%">Edit</th>
+            <th width="10%">History</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td scope="row"></td>
+            <td class="left"></td>
+            <td class="left"></td>
+            <td class="left"></td>
+            <td scope="row"></td>
+            <td class="left">   
+                 <button md-raised-button color="primary">
+                Add Stock
+              </button>
+              <button md-raised-button color="default" class="mgtop-5"> Make inactive
+                </button></td>
+            <td class="left"></td>
+            <td class="left"></td>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
