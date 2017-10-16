@@ -53,7 +53,7 @@ table thead {
   }
   .mat-dialog-container{
     padding: 0px !important;
-    max-height: 500px;
+    max-height: 700px;
     max-width: 100% !important;
     overflow: hidden !important;
   }
@@ -309,4 +309,7 @@ ul li small{
 }
 .center{
   text-align: center
+}
+.gray9{
+  color: #999;
 }
