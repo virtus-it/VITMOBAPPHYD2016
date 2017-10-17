@@ -8,6 +8,8 @@ import { AuthenticationService } from './authentication.service';
 })
 export class LoginComponent implements OnInit {
     loginDetails: any = {};
+    errorMsg: string ="";
+    hide = true;
     username = new FormControl('', [
         Validators.required]);
         password = new FormControl('', [
@@ -32,6 +34,10 @@ export class LoginComponent implements OnInit {
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
             this.router.navigate(['/distributor']);
             
+        }
+        else{
+this.errorMsg = "Invalid Credentials";
+
         }
     }
 }
