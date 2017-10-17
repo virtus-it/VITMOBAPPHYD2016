@@ -1,11 +1,11 @@
-<<<<<<< HEAD
+
 <div class=" dist-style">
     <div class=" row justify-content-between distIcon-style">
     <div class="col-2">
         <h4><i class="fa fa-truck"></i> Suppliers</h4>
     </div>
   <div class="col-2">
-      <button md-raised-button color="primary" ><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
+      <button md-raised-button color="primary" (click)='addSupplier()' ><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
       
   </div>
     </div>
@@ -58,7 +58,7 @@
             <td class="left"></td>
             <td class="left"></td>
             <td class="left"></td>
-            <td  class="left">Orders</td>
+            <td  class="left" (click)='supplierOrderList()'>Orders</td>
             <td class="left">Assign Area</td>
             <td class="left"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
             <td class="left"><i class="fa fa-trash danger" aria-hidden="true"></i></td>      
@@ -67,10 +67,10 @@
   </div>
   </div>
   </div>  
-=======
+<!-- 
 <p>
   supplier works!
   <button (click)='addSupplier()'>ADD</button>
-  <button (click)='supplierOrderList()'>OrderList</button>
+  <button >OrderList</button>
 </p>
->>>>>>> edd2197df9570d2380371eb8e5390ee665471975
+ -->

@@ -22,7 +22,7 @@ export class SupplierComponent implements OnInit {
   }
   supplierOrderList(){
     let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
-      width: '700px',
+      width: '95%',
       data: ''
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
