@@ -43,6 +43,10 @@ import { ProductsComponent } from './products/products.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { AddSupplierDailogComponent } from './add-supplier-dailog/add-supplier-dailog.component';
 import { SupplierOrderListComponent } from './supplier-order-list/supplier-order-list.component';
+import { AddEditProductDailogComponent } from './add-edit-product-dailog/add-edit-product-dailog.component';
+import { AddInvoiceDailogComponent } from './add-invoice-dailog/add-invoice-dailog.component';
+import { AddStockHistoryComponent } from './add-stock-history/add-stock-history.component';
+import { ProductHistoryDailogComponent } from './product-history-dailog/product-history-dailog.component';
 
 @NgModule({
     declarations: [
@@ -74,7 +78,11 @@ import { SupplierOrderListComponent } from './supplier-order-list/supplier-order
         ProductsComponent,
         FeedbackComponent,
         AddSupplierDailogComponent,
-        SupplierOrderListComponent
+        SupplierOrderListComponent,
+        AddEditProductDailogComponent,
+        AddInvoiceDailogComponent,
+        AddStockHistoryComponent,
+        ProductHistoryDailogComponent
 
     ],
     imports: [
@@ -141,7 +149,11 @@ import { SupplierOrderListComponent } from './supplier-order-list/supplier-order
          OnHoldOrderStatusComponent,
          PreOrderCartDailogComponent,
          AddSupplierDailogComponent,
-         SupplierOrderListComponent
+         SupplierOrderListComponent,
+         AddEditProductDailogComponent,
+         AddInvoiceDailogComponent,
+         AddStockHistoryComponent,
+         ProductHistoryDailogComponent
         ],
     exports: [
         MaterialModule
