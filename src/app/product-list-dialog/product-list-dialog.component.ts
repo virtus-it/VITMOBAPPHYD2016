@@ -13,7 +13,14 @@ export class ProductListDialogComponent implements OnInit {
   listOfProducts:any[];
   constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
 getProducts(distributorDetails){
-  this.distributorService.getDistbutorsProducts(distributorDetails.user_id)
+  let distributorId = '';
+  if(distributorDetails.user_id){
+   distributorId = distributorDetails.user_id;
+  }
+  else if(distributorDetails.userid){
+  distributorId = distributorDetails.userid;
+  }
+  this.distributorService.getDistbutorsProducts(distributorId)
   .subscribe(
   output => this.getProductsResult(output),
   error => {

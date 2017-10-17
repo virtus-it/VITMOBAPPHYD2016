@@ -3,6 +3,7 @@ import { DistributorServiceService } from './distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { DistributorCreateDialogComponent } from '../distributor-create-dialog/distributor-create-dialog.component';
+import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { MdDialog } from '@angular/material';
 @Component({
 
@@ -62,6 +63,23 @@ export class DistributorComponent implements OnInit {
             //this.dialogResult = result;
             this.getDistributors();
         });
+    }
+    ViewProduct(distributor) {
+        console.log(distributor);
+        if (distributor) {
+            let dialogRef = this.dialog.open(ProductListDialogComponent, {
+
+                width: '700px',
+                data: distributor
+            });
+            dialogRef.afterClosed().subscribe(result => {
+                console.log(`Dialog closed: ${result}`);
+
+
+            });
+
+
+        }
     }
     onScrollFunction(event) {
         console.log('scroll event', event);

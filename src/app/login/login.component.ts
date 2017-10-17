@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 @Component({
@@ -7,7 +8,10 @@ import { AuthenticationService } from './authentication.service';
 })
 export class LoginComponent implements OnInit {
     loginDetails: any = {};
-
+    username = new FormControl('', [
+        Validators.required]);
+        password = new FormControl('', [
+            Validators.required]);
     constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
