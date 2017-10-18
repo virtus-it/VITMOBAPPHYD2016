@@ -1,9 +1,9 @@
 ﻿
 <div class="row justify-content-between modal-title ">
-  <div class="col-4">
+  <div class="col-md-4  col-sm-4  col-lg-4">
     <i class="fa fa-sitemap"></i> Distributors
   </div>
-  <div class="col-1 right">
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
           </strong>
   </div>
@@ -12,7 +12,7 @@
 <md-dialog-content layout="column">
   <form class="example-form" (ngSubmit)="onSubmit()">
     <div class="row pd-15x25 brd-bottom">
-      <div class="col-6">
+      <div class="col-md-6  col-sm-6  col-lg-6">
         <div class=" form-group pdright-20">
           <md-form-field class="example-full-width wd-100pc">
             <input class="form-control" mdInput placeholder="First Name" [formControl]="emailFormControl" [(ngModel)]="dist.firstName"
@@ -28,7 +28,7 @@
           </md-form-field>
         </div>
       </div>
-      <div class="col-6">
+      <div class="col-md-6  col-sm-6  col-lg-6">
         <div class=" form-group pdright-20">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput class="form-control" placeholder="Last Name" [(ngModel)]="dist.lastName" name="lastName">

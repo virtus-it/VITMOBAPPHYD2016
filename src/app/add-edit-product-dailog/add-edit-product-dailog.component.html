@@ -1,3 +1,117 @@
-<p>
-  add-edit-product-dailog works!
-</p>
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-gift"></i> Add Product </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row">
+        <div class="col-md-6 col-sm-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Brand Name">
+            <md-error>
+              Brand Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Product Cost">
+            <md-error>
+              Product Cost is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Avaliable Capacity">
+            <md-error>
+              Avaliable Capacity is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Product Type">
+            <md-error>
+              Product Type Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Total Capacity">
+            <md-error>
+              Total Capacity is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+
+      </div>
+      <div class="row mgleftbottom-10x0">
+          <b class="label-style">Week Days<span></span></b>
+        </div>
+      <div class="row mgleftbottom-10x0">
+        <div class="form-check form-check-inline">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Sun</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline ">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Mon</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Tue</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline ">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Wed</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline ">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Thu</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Fri</span>
+          </label>
+        </div>
+        <div class="form-check form-check-inline ">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Sat</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button>CANCEL</button>&nbsp;
+    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+  </md-dialog-actions>
+</div>

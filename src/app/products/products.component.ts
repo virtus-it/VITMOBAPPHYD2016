@@ -15,7 +15,7 @@ export class ProductsComponent implements OnInit {
   addEditProduct() {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
 
-      width: '700px',
+      width: '600px',
       data: ''
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {

@@ -45,3 +45,64 @@ table thead {
   /* .mat-dialog-container{
     height: 90% !important;
   } */
+
+  .dropbtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #0f75bc;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    color: #0f75bc;
+    cursor: pointer;    
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    min-width: 380px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content label {
+  cursor: pointer;   
+}
+.dropdown-content label:hover{
+  cursor: pointer;  
+  background: #f1f5f7;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+@media only screen and (max-width : 640px) {
+  
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  color: #0f75bc;   
+  padding: 7px 10px;
+  background-color: #f9f9f9;
+  min-width: 170px;
+      box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+.dropbtn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #0f75bc;
+}
+
+}
+
