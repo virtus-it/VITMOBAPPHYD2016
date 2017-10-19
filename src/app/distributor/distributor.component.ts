@@ -31,8 +31,7 @@ export class DistributorComponent implements OnInit {
     }
     openMapDialog(data) {
         let dialogRef = this.dialog.open(MapDialogComponent, {
-            height:'600px',
-           width: '1100px',
+           width: '90%',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -42,7 +41,6 @@ export class DistributorComponent implements OnInit {
     }
     openCreateDialog() {
         let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
-            height: '310px',            
             width: '700px',
             data: ''
         });
@@ -54,7 +52,6 @@ export class DistributorComponent implements OnInit {
     }
     openUpdateDialog(details) {
         let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
-            height: '320px',
             width: '700px',
             data: details
         });

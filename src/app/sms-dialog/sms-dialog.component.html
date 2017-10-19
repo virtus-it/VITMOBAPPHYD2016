@@ -1,17 +1,17 @@
 ﻿<div class="row justify-content-between modal-title ">
-  <div class="col-md-4  col-sm-4  col-lg-4">
-    <i class="fa fa-calendar"></i> SMS scheduler
+  <div class="col-md-6  col-sm-6  col-lg-6">
+    <i class="fa fa-calendar"></i> Notification Scheduler
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1right">
     <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
           </strong>
   </div>
 </div>
-<div class="container-fluid pd-15x25 height-450">
+
   <md-dialog-content layout="column">
 
     <form class="example-form">
-
+        <div class="container-fluid pd-15x25 height-450">
       <div class="row">
 
         <div class="  col-sm-3  col-md-3  col-lg-3">
@@ -71,13 +71,14 @@
      
       </div>
       </div>
-      <div class="row float-right pdright-30 form-group mgtop-10">
-          <md-dialog-actions align="end">
-            <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-            <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
-          </md-dialog-actions>
-        </div>
-      
+
+      </div>
     </form>
   </md-dialog-content>
-</div>
+  <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+          <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>          
+        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>
+

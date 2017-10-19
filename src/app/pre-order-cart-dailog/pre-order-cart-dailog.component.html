@@ -16,54 +16,49 @@
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row">
+      <div class="  col-sm-3  col-md-3  col-lg-3 align-self-center center">
+        Date Slot :
+      </div>
+      <div class="  col-sm-4  col-md-4  col-lg-4">
+        <md-form-field class="inline">
+          <input mdInput placeholder="To Date" name="todate">
 
-      <div class="  col-sm-3  col-md-3  col-lg-3">
-
-        <md-select placeholder="Order Type"  name="type" class="wd-100pc">
-          <md-option >Select Time
+        </md-form-field>
+      </div>
+      <div class="  col-sm-4  col-md-4  col-lg-4">
+        <md-select placeholder="Order Type" name="type" class="wd-100pc">
+          <md-option>Select Time
           </md-option>
-          <md-option >9AM-1PM
-            </md-option>
-            <md-option >4PM-7PM
-              </md-option>
+          <md-option>9AM-1PM
+          </md-option>
+          <md-option>4PM-7PM
+          </md-option>
         </md-select>
 
       </div>
-      <div class="  col-sm-3  col-md-3  col-lg-3">
-        <md-form-field class="inline">
-          <input mdInput placeholder="From Date" name="fromdate" >
-  
-        </md-form-field>
-      </div>
-      <div class="  col-sm-3  col-md-3  col-lg-3">
 
-        <md-form-field class="inline">
-          <input mdInput placeholder="To Date" name="todate" >
-  
-        </md-form-field>
-      </div>
-      <div class=" col-sm-3  col-md-3  col-lg-3">
-        <md-dialog-actions align="end" class="float-left">
-          <button md-raised-button  class="btn-primary">SUBMIT</button>
-        </md-dialog-actions>
-      </div>
+
+
     </div>
     <div class="">
       <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th width="12%">S.No</th>
-            <th width="40%">Product Name</th>
-            <th width="25%">Type</th>
-            <th width="22%">Status</th>
+            <th width="20%">Product Name</th>
+            <th width="12%">Quantity</th>
+            <th width="14%">Product Cost</th>
+            <th width="15%">Default Qty</th>
+            <th width="12%">Cost</th>
+
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <td width="12%" class="left" scope="row"></td>
-            <td width="40%" class="left capital"></td>
-            <td width="25%" class="left capital"></td>
-            <td width="22%" class="left capital"></td>
+          <tr>
+            <td width="20%" class="left capital"></td>
+            <td width="12%" class="left capital"></td>
+            <td width="14%" class="left" scope="row"></td>
+            <td width="15%" class="left capital"></td>
+            <td width="12%" class="left capital"></td>
 
           </tr>
         </tbody>
@@ -73,7 +68,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button md-raised-button class="btn-primary">PLACE AN ORDER</button>&nbsp;      
-    <button md-raised-button >CANCEL</button>&nbsp;
+    <button md-raised-button class="btn-primary">PLACE AN ORDER</button>&nbsp;
+    <button md-raised-button>CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

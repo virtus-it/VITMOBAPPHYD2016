@@ -71,6 +71,9 @@
 a{
   color: #0f75bc;
 }
+.btn{
+  padding: .5rem 0.5rem !important;
+}
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
   background: #0f75bc !important;
 }

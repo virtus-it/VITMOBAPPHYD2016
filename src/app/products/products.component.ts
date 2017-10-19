@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
   stockHistory() {
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
 
-      width: '700px',
+      width: '80%',
       data: ''
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {

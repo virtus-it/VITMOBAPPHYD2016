@@ -52,7 +52,7 @@ table thead {
   }
   .logo-color{
     color: #0f75bc !important;
-    
+    cursor: pointer;
   }
   .mat-dialog-container{
     padding: 0px !important;
@@ -109,6 +109,9 @@ background: transparent;
 .pd-15x25{
     padding: 15px 25px;
 }
+.pdright-10{
+  padding-right: 10px;
+}
 .pdright-20{
     padding-right: 20px;
 }
@@ -152,8 +155,11 @@ background: transparent;
 .mat-calendar-table-header {
   background: none !important;
 }
+.pdleft-10{
+  padding-left:10px !important;
+}
 .pdleft-15{
-  paddding-left:15px !important;
+  padding-left:15px !important;
 }
 .mgleft-15{
   margin-left: 15px;
@@ -166,6 +172,13 @@ background: transparent;
 }
 .mgtop-20{
   margin-top: 20px;
+}
+.btn{
+  border-radius: 0px !important;
+}
+.btn-default{
+  background: #fff;
+  color: #0f75bc;
 }
 .btn-primary{
   color: #fff !important;
@@ -326,3 +339,23 @@ ul li small{
   margin-bottom: 10px;
 margin-left: 0px;
 }
+.border-topbottom{
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+table thead th::after{
+  
+      font-family: FontAwesome;
+      content: "\2193";
+      display: inline-block;
+     float: right;
+      vertical-align: middle;
+  }
+  table thead th::after::before{
+    
+        font-family: FontAwesome;
+        content: "\2191";
+        display: inline-block;
+        float: right;
+        vertical-align: middle;
+    }

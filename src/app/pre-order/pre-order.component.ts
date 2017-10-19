@@ -12,7 +12,7 @@ export class PreOrderComponent implements OnInit {
   constructor(public dialog: MdDialog) { }
   addPreorder(){
     let dialogRefAddPreOrder = this.dialog.open(PreOrderCartDailogComponent, {
-                      width: '600px',
+                      width: '700px',
                       data: ''
                   });
                   dialogRefAddPreOrder.afterClosed().subscribe(result => {

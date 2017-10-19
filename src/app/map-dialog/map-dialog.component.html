@@ -9,14 +9,17 @@
   </div>
   <!-- <h2 md-dialog-title>{{distributorDetails.firstname}}</h2> -->
   <hr>
+  <div class="container-fluid">
   <md-dialog-content>
     <div id="map"></div>
   </md-dialog-content>
+  </div>
   <hr>
-  <div class="row float-right pdright-30">
+  <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
+      <button class="btn-primary" (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
     <button md-raised-button (click)="onCloseConfirm()" >CANCEL</button>&nbsp;
-    <button class="btn-primary" (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
+    
   </md-dialog-actions>
 </div>
 
