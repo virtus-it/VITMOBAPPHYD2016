@@ -35,18 +35,21 @@
           <table class="table table-hover table-striped">
             <thead>
               <tr>
+                  <th width="5%">Status</th>                                  
                 <th width="12%">Name</th>
-                <th width="12%">Status</th>                
-                <th width="12%">Mobile Count</th>
-                <th width="40%">Body</th>
-                <th width="12%">Date</th>                                
+                <th width="6%"><i class="fa fa-mobile fs-20" aria-hidden="true"></i> <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+                  
+                  <!-- Mobile Count -->
+                </th>
+                <th width="50%">Body</th>
+                <th width="10%">Date</th>                                
                 
               </tr>
             </thead>
             <tbody>
               <tr id="Preordrlist" *ngFor="let smslist of smsListDetails; let i = index" [attr.data-index]="i">
+                  <td class="left">{{smslist.status}}</td>                  
                 <td class="left">{{smslist.name}}</td>                
-                <td class="left">{{smslist.status}}</td>
                 <td class="left">{{smslist.mcount}}</td>
                 <td class="left">{{smslist.body_desc}}</td>
                 <td></td>
