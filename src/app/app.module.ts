@@ -47,6 +47,13 @@ import { AddEditProductDailogComponent } from './add-edit-product-dailog/add-edi
 import { AddInvoiceDailogComponent } from './add-invoice-dailog/add-invoice-dailog.component';
 import { AddStockHistoryComponent } from './add-stock-history/add-stock-history.component';
 import { ProductHistoryDailogComponent } from './product-history-dailog/product-history-dailog.component';
+import { CustomerOrderListComponent } from './customer-order-list/customer-order-list.component';
+import { CustomerPlaceorderDailogComponent } from './customer-placeorder-dailog/customer-placeorder-dailog.component';
+import { CustomerResendInvitationComponent } from './customer-resend-invitation/customer-resend-invitation.component';
+import { CustomerMakeInactiveComponent } from './customer-make-inactive/customer-make-inactive.component';
+import { CustomerSettingDailogComponent } from './customer-setting-dailog/customer-setting-dailog.component';
+import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/customer-set-payment-cycle.component';
+import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
 
 @NgModule({
     declarations: [
@@ -82,7 +89,14 @@ import { ProductHistoryDailogComponent } from './product-history-dailog/product-
         AddEditProductDailogComponent,
         AddInvoiceDailogComponent,
         AddStockHistoryComponent,
-        ProductHistoryDailogComponent
+        ProductHistoryDailogComponent,
+        CustomerOrderListComponent,
+        CustomerPlaceorderDailogComponent,
+        CustomerResendInvitationComponent,
+        CustomerMakeInactiveComponent,
+        CustomerSettingDailogComponent,
+        CustomerSetPaymentCycleComponent,
+        CustomerScheduleDaiolgComponent
 
     ],
     imports: [
@@ -153,7 +167,14 @@ import { ProductHistoryDailogComponent } from './product-history-dailog/product-
          AddEditProductDailogComponent,
          AddInvoiceDailogComponent,
          AddStockHistoryComponent,
-         ProductHistoryDailogComponent
+         ProductHistoryDailogComponent,
+         CustomerOrderListComponent,
+         CustomerPlaceorderDailogComponent,
+         CustomerResendInvitationComponent,
+         CustomerMakeInactiveComponent,
+         CustomerSettingDailogComponent,
+         CustomerSetPaymentCycleComponent,
+         CustomerScheduleDaiolgComponent
         ],
     exports: [
         MaterialModule

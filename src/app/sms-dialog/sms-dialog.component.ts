@@ -51,7 +51,7 @@ export class SmsDialogComponent implements OnInit {
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
-        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, };
+        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid };
         mobile.push(mobiles);
 
       });

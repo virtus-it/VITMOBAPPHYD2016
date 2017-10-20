@@ -5,7 +5,7 @@
         <i class="fa fa-users"></i> Customers</h4>
     </div>
     <div class="col-md-2 col-sm-2 col-lg-2">
-      <button md-raised-button color="primary">
+      <button md-raised-button color="primary" (click)='showAddCustomer()'>
         <i class="fa fa-plus fa-2" aria-hidden="true"></i>
       </button>
 
@@ -72,30 +72,30 @@
                 <button class="dropbtn">View More</button>
                 <div class="dropdown-content" style="right:0;">
                   <div class="row pdbottom-5">
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showOrderList()'> 
                       <i class="fa fa-file-text-o"></i>
                       Orders</label>
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showPlaceOrder()'>
                       <i class="fa fa-shopping-cart" aria-hidden="true"></i> Place order</label>
                   </div>
                   <div class="row pdbottom-5">
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showResendInvitation()'>
                       <i class="fa fa-reply"></i>
                       Re-send invitation</label>
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showInactive()'>
                       <i class="fa fa-ban"></i> Make inactive</label>
                   </div>
                   <div class="row pdbottom-5">
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showSetting()'>
                       <i class="fa fa-cog"></i>
                       settings</label>
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showSetPayment()'>
                       <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
                   </div>
                   <div class="row pdbottom-5">
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showEditCustomer()'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
-                    <label class="col-md-6">
+                    <label class="col-md-6" (click)='showSchedule()'>
                       <i class="fa fa-calendar"></i> Schedule</label>
                   </div>
                 </div>
