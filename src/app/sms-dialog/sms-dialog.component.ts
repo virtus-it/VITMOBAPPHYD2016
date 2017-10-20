@@ -22,7 +22,11 @@ export class SmsDialogComponent implements OnInit {
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
     { value: 'delivered', viewValue: 'Delivered Orders' },
-    { value: 'assigned', viewValue: 'Pending Orders' }
+    { value: 'assigned', viewValue: 'Pending Orders' },
+    { value: 'allcustomers', viewValue: 'All customers' },
+    { value: 'customerbydisribtuors', viewValue: 'customerbydisribtuors' },
+    { value: 'customerbyarea', viewValue: 'customerbyarea' },
+    { value: 'onlydownload', viewValue: 'onlydownload' }
   ];
   getMobileNumber() {
     let input = {
