@@ -359,3 +359,6 @@ table thead th::after{
         float: right;
         vertical-align: middle;
     }
+    .fs-21{
+      font-size: 21px;
+    }
