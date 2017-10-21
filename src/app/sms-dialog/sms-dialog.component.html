@@ -8,14 +8,13 @@
   </div>
 </div>
 
-  <md-dialog-content layout="column">
+<md-dialog-content layout="column">
 
-    <form class="example-form">
-        <div class="container-fluid pd-15x25 height-450">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 height-450">
+
       <div class="row">
-
         <div class="  col-sm-3  col-md-3  col-lg-3">
-
           <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc">
             <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
               {{type.viewValue}}
@@ -23,14 +22,21 @@
           </md-select>
 
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3">
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'customerbydays'">
+            <md-form-field class="example-full-width inline ">
+                <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="orderinput.days">
+  
+              </md-form-field>
+  
+          </div>
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'customerbydays'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'customerbydays'">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
@@ -38,45 +44,48 @@
             <md-datepicker #pickers></md-datepicker>
           </md-form-field>
         </div>
+
+        
         <div class=" col-sm-3  col-md-3  col-lg-3">
           <md-dialog-actions align="end" class="float-left">
             <button md-raised-button (click)="getMobileNumber()" class="btn-primary">SUBMIT</button>
           </md-dialog-actions>
         </div>
       </div>
+
       <div *ngIf="mobileDetails.length">
-      <div class="row form-group">
-        <div class="col-sm-3  col-md-3  col-lg-3 mgtop-20">
+        <div class="row form-group">
+          <div class="col-sm-3  col-md-3  col-lg-3 mgtop-20">
             <md-form-field class="example-full-width inline ">
-                <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]="smsInput.name">
-               
-              </md-form-field>
-        </div>
-  
-        <div class="col-sm-9  col-md-9  col-lg-9">
-            <md-form-field class="example-full-width inline ">
-              <textarea class="form-control" mdInput placeholder="Body" name ="body" [(ngModel)]="smsInput.body"></textarea>
-             
+              <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]="smsInput.name">
+
             </md-form-field>
           </div>
-      </div>
-      <div class="row mgleft-5 mobile-div form-group">
-        <div class="col-md-3 col-sm-3 col-xs-3 align-items-start form-group"  *ngFor="let mobile of mobileDetails; let i = index" [attr.data-index]="i" >
-          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+
+          <div class="col-sm-9  col-md-9  col-lg-9">
+            <md-form-field class="example-full-width inline ">
+              <textarea class="form-control" mdInput placeholder="Body" name="body" [(ngModel)]="smsInput.body"></textarea>
+
+            </md-form-field>
+          </div>
+        </div>
+        <div class="row mgleft-5 mobile-div form-group">
+          <div class="col-md-3 col-sm-3 col-xs-3 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
+            [attr.data-index]="i">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                   <input type="checkbox" id="rem"  class="custom-control-input"  (change)="onChangeCheck(mobile, $event.target.checked)">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{mobile.mobileno}}</span>
                 </label>
+          </div>
         </div>
       </div>
-      </div>
-      </div>
-    </form>
-  </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20">
-      <md-dialog-actions align="end">
-          <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>          
-        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-      </md-dialog-actions>
     </div>
-
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

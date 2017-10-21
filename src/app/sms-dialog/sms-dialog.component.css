@@ -12,3 +12,6 @@
 .mat-dialog-content{
     overflow: hidden;
   }
+  .my-radio md-radio-button , md-radio-button.md-checked ._md-on{
+    background-color: blue;
+}
