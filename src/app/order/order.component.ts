@@ -1,8 +1,13 @@
 ﻿import { Component, OnInit } from '@angular/core';
+import {FormControl} from '@angular/forms';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { AuthenticationService } from '../login/authentication.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 declare var google: any;
+ 
 interface marker {
 	lat: number;
 	lng: number;
@@ -25,7 +30,8 @@ export class OrderComponent implements OnInit {
     dropdownSettings = {};
     map: any;
     drawingManager: any;
-   
+    stateCtrl: FormControl;
+    filteredStates: Observable<any[]>;
 
     lat: number = 17.3850;
     lng: number = 78.4867;
@@ -43,7 +49,17 @@ export class OrderComponent implements OnInit {
         name: "",
         path: []
     }
-    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader, private authenticationService: AuthenticationService) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader, private authenticationService: AuthenticationService) { 
+
+        this.stateCtrl = new FormControl();
+        this.filteredStates = this.stateCtrl.valueChanges
+            .startWith(null)
+            .map(state => state ? this.filterStates(state) : this.allDistibutors.slice());
+    }
+    filterStates(name: string) {
+        return this.allDistibutors.filter(state =>
+          state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      }
     clickedMarker(label: string, index: number) {
         console.log(`clicked the marker: ${label || index}`)
     }

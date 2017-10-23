@@ -15,29 +15,34 @@ export class SmsDialogComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) { }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null };
+  orderinput = { orderType: "", fromDate: null, toDate: null,days:null };
   smsInput = { name: "", mobilenumber: [], body: "" };
   mobileDetails = [];
+
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
     { value: 'delivered', viewValue: 'Delivered Orders' },
     { value: 'assigned', viewValue: 'Pending Orders' },
     { value: 'allcustomers', viewValue: 'All customers' },
-    { value: 'customerbydisribtuors', viewValue: 'customerbydisribtuors' },
-    { value: 'customerbyarea', viewValue: 'customerbyarea' },
-    { value: 'onlydownload', viewValue: 'onlydownload' }
+    { value: 'customerbydays', viewValue: 'Customer Not order' },
+    { value: 'customerbydisribtuor', viewValue: 'customer By distributor' },
+    { value: 'customerbyarea', viewValue: 'customer By Area' },
+    { value: 'onlydownload', viewValue: 'Only downloaded' }
   ];
   getMobileNumber() {
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null,days:this.orderinput.days
       }
     };
-
+if(this.orderinput.fromDate){
     input.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+}
+if(this.orderinput.toDate){
     input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+}
     this.smsService.getMobileNumbers(input)
       .subscribe(
       output => this.getMobileNumberResult(output),
@@ -48,6 +53,7 @@ export class SmsDialogComponent implements OnInit {
   getMobileNumberResult(result) {
     console.log(result);
     let mobile = [];
+    
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
