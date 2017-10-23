@@ -1,3 +1,404 @@
-<p>
-  customer-set-payment-cycle works!
-</p>
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa  fa-calendar"></i> Schedule
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+            <div class="schedule-popup row">
+                <div class="col-md-4 ">                    
+                    <md-form-field class="">
+                        <input class="form-control" mdInput placeholder="Customer Name">
+                        <md-error>
+                            Customer Name is
+                          <strong>required</strong>
+                        </md-error>
+                      </md-form-field> 
+                </div>
+                <div class="col-md-8 ">                   
+                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                        <input type="radio" id="rem"  class="custom-control-input"  >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                        Set Same Payment Cycle To All Customer.
+                                      </label>
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                    Set To This Customer Only.
+            </label>
+                </div>
+
+        
+            </div>
+            <div class="row  ">
+                    <div class="col-md-4">
+                    <md-select placeholder="Payment Cycle" class="wd-100pc left">
+                        <md-option>Weekdays
+                        </md-option>
+                        <md-option>Days
+                          </md-option>
+                      </md-select>
+                </div>
+              <div class="col-sm-4"> 
+                <md-select placeholder="Time Slot" class="wd-100pc left">
+                    <md-option>       </md-option>
+                    <md-option value="9AM-1PM">9AM-1PM  </md-option>
+                    <md-option value="4PM-7PM">4PM-7PM      </md-option>
+                   </md-select>
+        </div>
+              <div class="col-sm-4"> 
+        </div>
+        </div>
+        <div class="Schedule container-fluid">
+            <div class="my-info-1 row weekday">
+                    <h4 class="mgtop-15">
+                        Weekly :
+                    </h4>
+                    </div>
+        
+                    <div class=" row ">    
+                            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0 warning">
+                        <input type="radio" id="rem"  class="custom-control-input"  >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                     Select All
+                    </label></div>
+                    <div class="row mgtop-5">
+        
+                        <div class="col-sm-4 ">
+                            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                                <input type="radio" id="rem"  class="custom-control-input"  >
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description"></span>
+                                                            Monday
+                        </label>
+                    </div>
+                    <div class="col-sm-4  ">
+                        <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                            <input type="radio" id="rem"  class="custom-control-input"  >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"></span>
+                                                    Tuesday
+                    </label>
+                </div>
+                <div class="col-sm-4  ">
+                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                        <input type="radio" id="rem"  class="custom-control-input"  >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                                            Wednesday
+                </label>
+            </div>
+        </div>
+        <div class="row mgtop-5">
+        
+            <div class="col-sm-4  ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                                    Thursday
+            </label>
+        </div>
+        <div class="col-sm-4  ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                            Friday
+        </label>
+        </div>
+        <div class="col-sm-4 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                            Saturday
+        </label>
+        </div>
+        </div>
+        <div class="row mgtop-5">
+            <div class="col-sm-4 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                                    Sunday
+            </label>
+        </div>
+        <div class="col-sm-8 mgtop-5"></div>
+        </div>
+        </div>
+        <div class="clsdays none">
+            <div class="">
+                <h4 class="mgtop-15">
+                    Days :
+                </h4>
+                <div class="selalldays1 ">
+                  <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0 warning">
+                      <input type="radio" id="rem"  class="custom-control-input"  >
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description"></span>
+                                          Select All
+                </label></div>
+                <div class="row  mgtop-5">
+                    <div class="col-sm-2 ">
+                        <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                            <input type="radio" id="rem"  class="custom-control-input"  >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"></span>
+                                                    1
+                    </label>
+                </div>
+                <div class="col-sm-2 ">
+                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                        <input type="radio" id="rem"  class="custom-control-input"  >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>                    2
+                </label>
+            </div>
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                3
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            4
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            5
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            6
+        </label>
+        </div>
+        </div>
+        
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                7
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            8
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            9
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            10
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            11
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            12
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                13
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            14
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            15
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            16
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            17
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            18
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                19
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            20
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            21
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            22
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            23
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            24
+        </label>
+        </div>
+        </div>
+        
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                25
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            26
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            27
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            28
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            29
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem"  class="custom-control-input"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            30
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" id="rem"  class="custom-control-input"  >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                31
+            </label>
+        </div>
+        <div class="col-sm-10"></div>
+        </div>
+        </div>
+        </div>
+        
+      
+        <div class="createsche  mgtop-10">
+            <input type="button" value="Create" class="createscheduler btn-small btn btn-primary " btntype="create" />
+            <div class="message"></div>
+        </div>
+        
+      </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button>CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

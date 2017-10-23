@@ -362,3 +362,23 @@ table thead th::after{
     .fs-21{
       font-size: 21px;
     }
+    .mat-calendar-table thead th::after{
+          content: "" !important;
+      }
+      .mat-calendar{
+border:2px solid #0f75bc;
+      }
+      .mat-calendar-header{
+        background: #0f75bc;
+        color: #fff;
+      }
+      .mat-calendar-body-today{
+        border-color: #0f75bc;
+        
+      }
+      .nofath thead th::after{
+        content: "" !important;
+      }
+      .none{
+        display: none
+      }

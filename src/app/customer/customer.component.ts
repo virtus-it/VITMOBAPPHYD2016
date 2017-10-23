@@ -28,7 +28,7 @@ export class CustomerComponent implements OnInit {
 }
 showPlaceOrder() {
   let dialogRefPlaceorder = this.dialog.open(CustomerPlaceorderDailogComponent, {
-     width: '90%',
+     width: '700px',
       data: ''
   });
   dialogRefPlaceorder.afterClosed().subscribe(result => {
@@ -38,7 +38,7 @@ showPlaceOrder() {
 }
 showResendInvitation() {
   let dialogRefResend = this.dialog.open(CustomerResendInvitationComponent, {
-     width: '90%',
+     width: '600px',
       data: ''
   });
   dialogRefResend.afterClosed().subscribe(result => {
@@ -48,7 +48,7 @@ showResendInvitation() {
 }
 showInactive() {
   let dialogRefInactive = this.dialog.open(CustomerMakeInactiveComponent, {
-     width: '90%',
+     width: '600px',
       data: ''
   });
   dialogRefInactive.afterClosed().subscribe(result => {
@@ -58,7 +58,7 @@ showInactive() {
 }
 showSetting() {
   let dialogRefSetting = this.dialog.open(CustomerSettingDailogComponent, {
-     width: '90%',
+     width: '810px',
       data: ''
   });
   dialogRefSetting.afterClosed().subscribe(result => {
@@ -68,7 +68,7 @@ showSetting() {
 }
 showSetPayment() {
   let dialogRefSetting = this.dialog.open(CustomerSetPaymentCycleComponent, {
-     width: '90%',
+     width: '700px',
       data: ''
   });
   dialogRefSetting.afterClosed().subscribe(result => {
@@ -78,7 +78,7 @@ showSetPayment() {
 }
 showSchedule() {
   let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
-     width: '90%',
+     width: '700px',
       data: ''
   });
   dialogRefSetting.afterClosed().subscribe(result => {
