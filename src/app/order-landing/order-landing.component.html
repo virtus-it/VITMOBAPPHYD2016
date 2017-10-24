@@ -76,19 +76,17 @@
         </div>
       </div>
       <div class="col-sm-9 col-md-9 col-lg-9">
-        <div class="input-group  row form-group ">
-          <div class="col-sm-6  col-md-6  col-lg-6 float-right">
-              <button class="btn btn-primary float-right"> Forward Orders</button>
-
-          </div>
-          <div class="col-md-2  col-sm-2  col-lg-2 row">
-              <button class="btn btn-default  float-left">All Orders </button>
-
-          </div>
-          <div class="col-sm-4  col-md-4  col-lg-4 float-right">
-              <button class="btn btn-link float-right"> <i class="fa fa-refresh" aria-hidden="true"></i> Refresh </button>
-          </div>
-        </div>
+          <!-- <ul class="nav nav-pills col-sm-offset-6  col-md-offset-4  col-lg-offset-4 pd-20">
+              <li class="nav-item"></li>
+              <li class="nav-item" ><a class="nav-link" href="javascript:void(0)" >ALL ORDERS</a></li>
+              <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></li>
+              <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3 align-right nohover "><a href="javascript:void(0)" class="fa-20" ><b><i class="fa fa-refresh" aria-hidden="true">   </i></b> Refresh </a> </li>
+            </ul> -->
+            <nav class="nav nav-pills flex-column flex-sm-row">
+                <a class="flex-sm-fill text-sm-center nav-link" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARD ORDERS</a>
+                <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)" (click)="showTabPanel('allorder')">ALL ORDERS</a>
+               </nav>
+               <div *ngIf="tabPanelView === 'forward'">
         <table class="table table-hover table-striped">
           <tbody >
             <tr class="border-topbottom">
@@ -249,6 +247,168 @@
             </tr>
           </tbody>
         </table>
+      </div>
+      <div *ngIf="tabPanelView === 'allorder'">
+
+          <tbody >
+              <tr class="border-topbottom">
+                <td width="35%">
+                  <div class="row ">
+                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                      <label class="td-label">Order Id : #</label><br>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity()'>
+                      <i class="fa fa-edit logo-color "></i>
+                    </div>
+                  </div>
+                </td>
+                <td width="32%">
+                  <div class=" row ">
+                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                      <label class="td-label">Customer Name : </label><br>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='showEditCustomer()'>
+                      <i class="fa fa-edit logo-color "></i>
+    
+                    </div>
+                  </div>
+                </td>
+                <td width="32%">
+                  <div class="row ">
+                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                      <label class="td-label">Supplier</label><br>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 right">
+                      <label class="td-label">Status</label><br>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+    
+              <tr>
+                <td width="35%" class="brd-right">
+                  <div class="container-fluid ">
+                    <div class="form-group row ">
+                        <div class="col-sm-6  col-md-6  col-lg-6 left">
+                            <label class="td-label">
+                              Date Placed</label><br>
+                        <b></b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                          <label class="td-label">Amount</label><br>
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label">Brand Name</label><br>
+                        <b class="capitalize"> </b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <label class="td-label">Quantity</label><br>
+                        <b></b>
+                      </div>
+                    </div>
+    
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label">Product Type</label><br>
+                        <b></b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <label class="td-label">Amount</label><br>
+                        <b></b>
+                      </div>
+                    </div>
+    
+                  </div>
+                </td>
+                <td width="32%" class="brd-right">
+                  <div class="container-fluid ">
+    
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b><i class="fa fa-user pdtop-5" aria-hidden="true"></i></b>
+                      </div>
+                      <div class="col-sm-11  col-md-1  col-lg-11">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b><i class="fa fa-mobile pdtop-5" aria-hidden="true"></i></b>
+    
+                      </div>
+                      <div class="col-sm-11  col-md-1  col-lg-11">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b><i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i></b>
+    
+                      </div>
+                      <div class="col-sm-11  col-md-1  col-lg-11">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6">
+                        <b>Delivery Time :</b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 ">
+                        <b></b>
+                      </div>
+                    </div>
+                  </div>
+    
+                </td>
+                <td width="32%">
+                  <div class="container-fluid">
+                    <div class=" mgbottom-10 row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label"> <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="mgbottom-10 row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label"> <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="mgbottom-10 row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label"><i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On</label>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="mgbottom-10 row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <label class="td-label"><i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <b></b>
+                      </div>
+                    </div>
+                    <div class="mgbottom-10 row float-right">                 
+                      
+                        <button class="btn btn-link btn-sm"><i class="fa fa-map-marker fa-2" aria-hidden="true" ></i> Map</button>                      
+                        <button class="btn btn-link btn-sm"  (click)='showOrderDetails()'><i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                       
+                    </div>
+                  </div>
+                </td>
+    
+              </tr>
+            </tbody>
+      </div>
   
       </div>
     </div>

@@ -54,6 +54,7 @@ import { CustomerMakeInactiveComponent } from './customer-make-inactive/customer
 import { CustomerSettingDailogComponent } from './customer-setting-dailog/customer-setting-dailog.component';
 import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/customer-set-payment-cycle.component';
 import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
+import { OrderLandingService } from './order-landing/order-landing.service';
 
 @NgModule({
     declarations: [
@@ -143,6 +144,7 @@ import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/cust
         AuthenticationService,
         GoogleMapsAPIWrapper,
         DistributorServiceService,
+        OrderLandingService,
         LoggedInGuard,
         SmsServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
