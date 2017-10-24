@@ -4,6 +4,10 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { AuthenticationService } from '../login/authentication.service';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 @Component({
@@ -12,13 +16,20 @@ import * as moment from 'moment';
   styleUrls: ['./sms-dialog.component.css']
 })
 export class SmsDialogComponent implements OnInit {
+  stateCtrl: FormControl;
+  filteredStates: Observable<any[]>;
+  constructor(private distributorService: DistributorServiceService,public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) { 
 
-  constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) { }
+    this.stateCtrl = new FormControl();
+    this.filteredStates = this.stateCtrl.valueChanges
+        .startWith(null)
+        .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
+  }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null,days:null };
+  orderinput = { orderType: "", fromDate: null, toDate: null,days:null,distributorid:null };
   smsInput = { name: "", mobilenumber: [], body: "" };
-  mobileDetails = [];
-
+  mobileDetails:any = [];
+  distributors:any = [];
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -26,15 +37,34 @@ export class SmsDialogComponent implements OnInit {
     { value: 'assigned', viewValue: 'Pending Orders' },
     { value: 'allcustomers', viewValue: 'All customers' },
     { value: 'customerbydays', viewValue: 'Customer Not order' },
-    { value: 'customerbydisribtuor', viewValue: 'customer By distributor' },
-    { value: 'customerbyarea', viewValue: 'customer By Area' },
-    { value: 'onlydownload', viewValue: 'Only downloaded' }
+    { value: 'distributorscustomer', viewValue: 'customer By distributor' },
+    { value: 'onlydownloaded', viewValue: 'Only downloaded' }
+   // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
+  filterDistributors(name: string) {
+    console.log(name);
+    let finalDistributors = this.distributors.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      console.log(finalDistributors);
+      if(finalDistributors && finalDistributors.length > 0){
+        let findDistributor:any = {};
+       
+          findDistributor = _.find(finalDistributors,function(k,l){
+            let distDetails: any = k;
+            return distDetails.fullName == name; });
+
+        if(findDistributor){
+          this.orderinput.distributorid = findDistributor.userid;
+        }
+      
+      }
+      return finalDistributors;
+  }
   getMobileNumber() {
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null,days:this.orderinput.days
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null,days:this.orderinput.days,distributorid:this.orderinput.distributorid
       }
     };
 if(this.orderinput.fromDate){
@@ -103,13 +133,41 @@ if(this.orderinput.toDate){
 console.log(result);
 this.thisDialogRef.close(result);
   }
+  getDistributors() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
+    console.log(input);
+    this.distributorService.getAllDistributors(input)
+        .subscribe(
+        output => this.getDistributorsResult(output),
+        error => {
+            console.log("error in distrbutors");
+        });
+}
+getDistributorsResult(data) {
+    console.log(data);
+    if (data.result == 'success') {
+      let distributorCopy = [];
+      
+      if (data.data && data.data.length) {
+        _.each(data.data, function (i, j) {
+          let details: any = i;
+          details.fullName = details.firstname +" "+ details.lastname
+          distributorCopy.push(details);
+  
+        });
+  
+        
+        this.distributors = distributorCopy;
+    }
+}
+}
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
 }
 
 
   ngOnInit() {
-   
+    this.getDistributors()
   }
 
 }

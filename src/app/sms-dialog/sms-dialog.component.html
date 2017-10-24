@@ -29,14 +29,24 @@
               </md-form-field>
   
           </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'customerbydays'">
+          <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'distributorscustomer'">
+          <md-form-field class="example-full-width"  >
+              <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let dist of filteredStates | async" [value]="dist.fullName" >
+                 <span>{{ dist.fullName }}</span>
+                  </md-option>
+              </md-autocomplete>
+            </md-form-field>
+          </div>
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf=" orderinput.orderType == '' || orderinput.orderType == 'all' || orderinput.orderType == 'ordered' || orderinput.orderType == 'delivered' || orderinput.orderType == 'assigned' || orderinput.orderType == 'allcustomers' || orderinput.orderType == 'onlydownloaded'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'customerbydays'">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == '' ||  orderinput.orderType == 'all' || orderinput.orderType == 'ordered' || orderinput.orderType == 'delivered' || orderinput.orderType == 'assigned' || orderinput.orderType == 'allcustomers' || orderinput.orderType == 'onlydownloaded'">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
