@@ -82,10 +82,14 @@
               <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3"></li>
               <li class="col-xs-3 col-sm-3 col-md-3 col-lg-3 align-right nohover "><a href="javascript:void(0)" class="fa-20" ><b><i class="fa fa-refresh" aria-hidden="true">   </i></b> Refresh </a> </li>
             </ul> -->
-            <nav class="nav nav-pills flex-column flex-sm-row">
-                <a class="flex-sm-fill text-sm-center nav-link" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARD ORDERS</a>
-                <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)" (click)="showTabPanel('allorder')">ALL ORDERS</a>
-               </nav>
+            <nav class="nav nav-pills flex-column flex-sm-row row mgbottom-20">
+                <a class="flex-sm-fill text-sm-center nav-link col-xs-4 col-sm-4 col-md-4 col-lg-4"  href="javascript:void(0)" ></a>                                
+                <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARD ORDERS</a>
+                <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)" (click)="showTabPanel('allorder')">ALL ORDERS</a>
+                <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2"  href="javascript:void(0)" ></a>                
+                <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2"  href="javascript:void(0)" ><i class="fa fa-refresh  " aria-hidden="true"></i> REFRESH</a>
+                
+              </nav>
                <div *ngIf="tabPanelView === 'forward'">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i" >
@@ -93,7 +97,7 @@
               <td width="35%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Order Id : #{{forward.order_id}}</label><br>
+                    <b class="td-label">Order Id : #{{forward.order_id}}</b>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity()'>
                     <i class="fa fa-edit logo-color "></i>
@@ -102,10 +106,10 @@
               </td>
               <td width="32%">
                 <div class=" row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Customer Name : {{forward.orderby_firstname}}</label><br>
+                  <div class="col-sm-10  col-md-10  col-lg-10 left">
+                    <b class="td-label">Customer Name : {{forward.orderby_firstname}}</b><br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='showEditCustomer()'>
+                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer()'>
                     <i class="fa fa-edit logo-color "></i>
   
                   </div>
@@ -114,10 +118,10 @@
               <td width="32%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Supplier :{{forward.supplierName}}</label><br>
+                    <b class="td-label">Supplier :{{forward.supplierName}}</b><br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
-                    <label class="td-label">Status : {{forward.status}}</label><br>
+                    <label class="td-label"> {{forward.status}}</label><br>
                   </div>
                 </div>
               </td>
@@ -127,37 +131,35 @@
               <td width="35%" class="brd-right">
                 <div class="container-fluid ">
                   <div class="form-group row ">
-                      <div class="col-sm-6  col-md-6  col-lg-6 left">
-                          <label class="td-label">
-                            Date Placed :{{forward.ordered_date}}</label><br>
-                      <b></b>
+                      <div class="col-sm-8  col-md-8  col-lg-8 left">
+                          <span class="td-label">
+                            Date Placed </span><br>
+                      <b>{{forward.ordered_date}}</b>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                        <label class="td-label">Amount : Rs.{{forward.bill_amount}}</label><br>
-                      <b></b>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
+                        <span class="td-label">Amount  </span><br>
+                      <b>Rs.{{forward.bill_amount}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">Brand Name :{{forward.brandname}}</label><br>
-                      <b class="capitalize"> </b>
+                      <span class="td-label">Brand Name</span><br>
+                      <b class="capitalize">{{forward.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <label class="td-label">Quantity :{{forward.quantity}}</label><br>
-                      <b></b>
+                      <span class="td-label">Quantity </span><br>
+                      <b>{{forward.quantity}}</b>
                     </div>
                   </div>
   
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">Product Type : {{forward.prod_type}}</label><br>
-                      <b></b>
+                      <span class="td-label">Product Type </span><br>
+                      <b>{{forward.prod_type}}</b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <label class="td-label">Payment Type :{{forward.paymenttype}}
-                       
-                        </label><br>
-                      <b></b>
+                      <span class="td-label">Payment Type </span><br>
+                      <b>{{forward.paymenttype}}</b>
                     </div>
                   </div>
   
@@ -168,36 +170,36 @@
   
                   <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b><i class="fa fa-user pdtop-5" aria-hidden="true">{{forward.orderby_firstname}}</i></b>
+                      <b><i class="fa fa-user pdtop-5" aria-hidden="true"></i></b>
                     </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
-                    </div>
-                  </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b><i class="fa fa-mobile pdtop-5" aria-hidden="true">{{forward.orderby_mobileno}}</i></b>
-  
-                    </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b>{{forward.orderby_firstname}} {{forward.orderby_lastname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b><i class="fa fa-map-marker pdtop-5" aria-hidden="true">{{forward.orderby_areaname}}</i></b>
+                      <b><i class="fa fa-mobile pdtop-5" aria-hidden="true"></i></b>
   
                     </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b>{{forward.orderby_mobileno}}</b>
+                    </div>
+                  </div>
+                  <div class="form-group row ">
+                    <div class="col-sm-1  col-md-1  col-lg-1 ">
+                      <b><i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i></b>
+  
+                    </div>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b>{{forward.orderby_areaname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6">
-                      <b>Delivery Time :{{forward.delivery_exceptedtime}}</b>
+                      <span>Delivery Time :</span>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 ">
-                      <b></b>
+                      <span>{{forward.delivery_exceptedtime}}</span>
                     </div>
                   </div>
                 </div>

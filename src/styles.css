@@ -382,3 +382,7 @@ border:2px solid #0f75bc;
       .none{
         display: none
       }
+      .nav-pills .nav-link.active, .show>.nav-pills .nav-link{
+        color: #fff !important;
+        background-color: #0f75bc;
+      }
