@@ -18,7 +18,8 @@ export class OrderLandingComponent implements OnInit {
   tabPanelView: string = "forward";
   forwardOrders: any = [];
   allOrders: any = [];
-
+  forwardClickMore = false;
+  orderClickMore = false;
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
 
@@ -67,7 +68,7 @@ export class OrderLandingComponent implements OnInit {
     if (this.forwardOrders && this.forwardOrders.length) {
       let lastForwardOrder: any = _.last(this.forwardOrders);
       if (lastForwardOrder) {
-        this.orderListInput.order.last_orderid = lastForwardOrder.orderId;
+        this.orderListInput.order.last_orderid = lastForwardOrder.order_id;
       }
 
     }
@@ -80,15 +81,24 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getForwardOrderDetailsResult(result) {
-    this.forwardOrders = result.data;
+   // this.forwardOrders = result.data;
+    console.log(this.forwardOrders);
+    if(result.data && result.data.length > 0){
+      this.forwardClickMore = true;
+      this.forwardOrders = _.union(this.forwardOrders,result.data);
+      }
+      else{
+        this.forwardClickMore = false;
+      }
   }
   getAllOrderDetails() {
     this.orderListInput.order.status = 'all';
     if (this.allOrders && this.allOrders.length) {
       let lastAllOrder: any = _.last(this.allOrders);
       if (lastAllOrder) {
-        this.orderListInput.order.last_orderid = lastAllOrder.orderId;
+        this.orderListInput.order.last_orderid = lastAllOrder.order_id;
       }
+      
 
     }
     let orderInput = this.orderListInput;
@@ -100,7 +110,15 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getAllOrderDetailsResult(result) {
-    this.allOrders = result.data;
+  //  this.allOrders = result.data;
+    console.log(this.allOrders);
+    if(result.data && result.data.length > 0){
+      this.orderClickMore = true;
+    this.allOrders = _.union(this.allOrders,result.data);
+    }
+    else{
+      this.orderClickMore = false;
+    }
   }
   ngOnInit() {
     this.getForwardOrderDetails();
