@@ -5,6 +5,7 @@ import { OrderLandingService } from './order-landing.service';
 import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-dailog.component';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
+import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import * as _ from 'underscore';
 @Component({
 
@@ -37,6 +38,20 @@ export class OrderLandingComponent implements OnInit {
     });
 
   }
+  showCoverageDetails(orderDetails) {
+    let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
+      
+      width: '90%',
+      data: orderDetails
+    });
+    dialogRefCoverageDailog.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.getForwardOrderDetails(true);
+      this.getAllOrderDetails(true);
+
+    });
+
+  }
   showOrderDetails() {
     let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
@@ -63,14 +78,17 @@ export class OrderLandingComponent implements OnInit {
     });
 
   }
-  getForwardOrderDetails() {
+  getForwardOrderDetails(firstcall) {
     this.orderListInput.order.status = 'forwardedorders';
-    if (this.forwardOrders && this.forwardOrders.length) {
+    if (this.forwardOrders && this.forwardOrders.length && !firstcall) {
       let lastForwardOrder: any = _.last(this.forwardOrders);
       if (lastForwardOrder) {
         this.orderListInput.order.last_orderid = lastForwardOrder.order_id;
       }
 
+    }
+    else{
+      this.forwardOrders = [];
     }
     let forwardInput = this.orderListInput
     this.orderLandingService.getOrderList(forwardInput)
@@ -91,15 +109,18 @@ export class OrderLandingComponent implements OnInit {
         this.forwardClickMore = false;
       }
   }
-  getAllOrderDetails() {
+  getAllOrderDetails(firstcall) {
     this.orderListInput.order.status = 'all';
-    if (this.allOrders && this.allOrders.length) {
+    if (this.allOrders && this.allOrders.length && !firstcall) {
       let lastAllOrder: any = _.last(this.allOrders);
       if (lastAllOrder) {
         this.orderListInput.order.last_orderid = lastAllOrder.order_id;
       }
       
 
+    }
+    else{
+      this.allOrders = [];
     }
     let orderInput = this.orderListInput;
     this.orderLandingService.getOrderList(orderInput)
@@ -121,8 +142,8 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   ngOnInit() {
-    this.getForwardOrderDetails();
-    this.getAllOrderDetails();
+    this.getForwardOrderDetails(true);
+    this.getAllOrderDetails(true);
   }
 
 }

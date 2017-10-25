@@ -1,0 +1,67 @@
+
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-sitemap"></i>  Order Coverage
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+        <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+        </strong>         
+  </div>
+</div>
+
+  <md-dialog-content layout="column">
+    <div class="col">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+          <agm-marker  *ngFor="let m of markers; let i = index"
+          [latitude]="m.lat"
+          [longitude]="m.lng"
+          ></agm-marker>
+        <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
+                    
+                     [fillColor]="'#0073e6'"
+                       [geodesic]="true" 
+                       [strokeWeight]="1"   
+                     [clickable] = "true"
+                    (polyClick)="click($event,p)" 
+                     [editable]="false"
+                     [polyDraggable]="false">
+          
+        </agm-polygon>
+      
+      </agm-map>
+      </div>
+      <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
+      <button class="btn" (click)="ViewDistributors()" >Assign</button>
+      <div class="container-fluid" *ngIf="listOfDistributors.length > 0">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <!-- <th width="3%">S.No</th> -->
+              <th width="15%">Distributor</th>
+              <th width="15%">Mobile</th>
+              <th width="15%">Products</th>
+              <th width="15%"> Areas</th>
+              
+               </tr>
+          </thead>
+          <tbody>
+            <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" >
+              <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
+              <td width="15%" class="left capital">{{dist.distributorName}}</td>
+              <td width="15%" class="left capital">{{dist.mobileno}}</td>
+              <td width="15%" class="left capital"><button class="btn btn-link" (click)="ViewProduct(dist)" >View</button></td>
+              <td width="15%" class="left capital"><button class="btn btn-link" (click)="DistrbutorHover(dist)" >View</button></td>
+            
+             </tr>
+          </tbody>
+        </table>
+      </div>
+    
+  </md-dialog-content>
+  <div class="row float-right pdright-30  mgbottom-20">
+  <md-dialog-actions align="end">
+  
+    
+  </md-dialog-actions>
+</div>
+

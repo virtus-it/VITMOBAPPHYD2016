@@ -249,7 +249,7 @@
   
             </tr>
           </tbody>
-          <a href="javascript:void(0);" (click)=getForwardOrderDetails(); *ngIf="forwardClickMore">click for more data</a>
+          <a href="javascript:void(0);" (click)=getForwardOrderDetails(false); *ngIf="forwardClickMore">click for more data</a>
           <span *ngIf="!forwardClickMore">No more data</span>
         </table>
       </div>
@@ -415,7 +415,7 @@
    
               </tr>
             </tbody>
-            <a href="javascript:void(0);" (click)=getAllOrderDetails(); *ngIf="orderClickMore">click for more data</a>
+            <a href="javascript:void(0);" (click)=getAllOrderDetails(false); *ngIf="orderClickMore">click for more data</a>
             <span *ngIf="!orderClickMore">No more data</span>
       </div>
   
