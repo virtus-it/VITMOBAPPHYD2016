@@ -55,6 +55,7 @@ import { CustomerSettingDailogComponent } from './customer-setting-dailog/custom
 import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/customer-set-payment-cycle.component';
 import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
 import { OrderLandingService } from './order-landing/order-landing.service';
+import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 
 @NgModule({
     declarations: [
@@ -97,7 +98,8 @@ import { OrderLandingService } from './order-landing/order-landing.service';
         CustomerMakeInactiveComponent,
         CustomerSettingDailogComponent,
         CustomerSetPaymentCycleComponent,
-        CustomerScheduleDaiolgComponent
+        CustomerScheduleDaiolgComponent,
+        OrderCoverageDetailDailogComponent
 
     ],
     imports: [
@@ -176,7 +178,8 @@ import { OrderLandingService } from './order-landing/order-landing.service';
          CustomerMakeInactiveComponent,
          CustomerSettingDailogComponent,
          CustomerSetPaymentCycleComponent,
-         CustomerScheduleDaiolgComponent
+         CustomerScheduleDaiolgComponent,
+         OrderCoverageDetailDailogComponent
         ],
     exports: [
         MaterialModule
