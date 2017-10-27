@@ -106,8 +106,14 @@ background: transparent;
 .fs-20{
     font-size:20px;
 }
+.capitalize{
+  text-transform: capitalize;
+}
 .pd-15x25{
     padding: 15px 25px;
+}
+.pdright-5{
+  padding-right: 5px;
 }
 .pdright-10{
   padding-right: 10px;
@@ -386,3 +392,6 @@ border:2px solid #0f75bc;
         color: #fff !important;
         background-color: #0f75bc;
       }
+      .success{
+        color: #4cae4c
+      } 
