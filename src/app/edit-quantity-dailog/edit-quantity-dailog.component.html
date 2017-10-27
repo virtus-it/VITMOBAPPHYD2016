@@ -3,7 +3,7 @@
       <i class="fa fa-edit"></i> Edit Quantity
     </div>
     <div class=" col-md-1  col-sm-1  col-lg-1 right">
-      <strong ><i class="fa fa-times fs-20" aria-hidden="true"></i>
+      <strong><i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseModal("cancel")'></i>
               </strong>
     </div>
   </div>
@@ -18,7 +18,7 @@
           <div class="col-md-4">
         
             <md-form-field class="col-md-12">
-              <input class="form-control" mdInput placeholder="Quantity" >
+              <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy">
               <md-error>
                   Quantity is <strong>required</strong>
               </md-error>
@@ -31,8 +31,8 @@
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button>UPDATE</button>&nbsp;
-      <button md-raised-button>CANCEL</button>
+      <button type="submit" class="btn-primary" md-raised-button (click)="updateQuantity()">UPDATE</button>&nbsp;
+      <button md-raised-button (click)='onCloseModal("cancel")'>CANCEL</button>
       
     </md-dialog-actions>
   </div>

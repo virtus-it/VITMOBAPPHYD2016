@@ -65,15 +65,19 @@ export class OrderLandingComponent implements OnInit {
     });
 
   }
-  editQuanity() {
+  editQuanity(orderDetails) {
     let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
 
       width: '500px',
-      data: ''
+      data: orderDetails
     });
     dialogRefEditQun.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-
+      if(result == 'success'){
+        this.getForwardOrderDetails(true);
+        this.getAllOrderDetails(true);
+      
+      }
 
     });
 

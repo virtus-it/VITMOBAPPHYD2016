@@ -111,7 +111,7 @@
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
                     <b class="td-label">Order Id : #{{forward.order_id}}</b>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity()'>
+                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -308,7 +308,7 @@
                     <label class="td-label">Order Id : #{{allorder.order_id}}</label>
                     <br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity()'>
+                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
