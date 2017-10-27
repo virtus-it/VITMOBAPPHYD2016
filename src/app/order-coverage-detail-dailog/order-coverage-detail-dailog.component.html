@@ -11,7 +11,7 @@
 
   <md-dialog-content layout="column">
     <div class="col">
-      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom"  class="">
           <agm-marker  *ngFor="let m of markers; let i = index"
           [latitude]="m.lat"
           [longitude]="m.lng"
@@ -30,9 +30,10 @@
       
       </agm-map>
       </div>
+      <div>
       <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
       <button class="btn" (click)="ViewDistributors()" >Assign</button>
-      <div class="container-fluid" *ngIf="listOfDistributors.length > 0">
+      <div class="container-fluid" *ngIf="listOfDistributors.length">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
@@ -56,7 +57,7 @@
           </tbody>
         </table>
       </div>
-    
+    </div>
   </md-dialog-content>
   <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">

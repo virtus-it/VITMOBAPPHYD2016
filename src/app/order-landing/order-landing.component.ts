@@ -89,6 +89,7 @@ export class OrderLandingComponent implements OnInit {
     }
     else{
       this.forwardOrders = [];
+      this.orderListInput.order.last_orderid = null;
     }
     let forwardInput = this.orderListInput
     this.orderLandingService.getOrderList(forwardInput)
@@ -121,6 +122,7 @@ export class OrderLandingComponent implements OnInit {
     }
     else{
       this.allOrders = [];
+      this.orderListInput.order.last_orderid = null;
     }
     let orderInput = this.orderListInput;
     this.orderLandingService.getOrderList(orderInput)

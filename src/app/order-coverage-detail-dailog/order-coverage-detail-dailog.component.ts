@@ -136,7 +136,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
               }
           }
       }
-      ViewDistributors(order) {
+      ViewDistributors() {
         
                 let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
         
