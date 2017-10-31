@@ -56,6 +56,8 @@ import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/c
 import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
 import { OrderLandingService } from './order-landing/order-landing.service';
 import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
+import { UtcDatePipe } from './pipes/utc-date.pipe';
+
 
 @NgModule({
     declarations: [
@@ -99,7 +101,9 @@ import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dail
         CustomerSettingDailogComponent,
         CustomerSetPaymentCycleComponent,
         CustomerScheduleDaiolgComponent,
-        OrderCoverageDetailDailogComponent
+        OrderCoverageDetailDailogComponent,
+        UtcDatePipe
+        
 
     ],
     imports: [
