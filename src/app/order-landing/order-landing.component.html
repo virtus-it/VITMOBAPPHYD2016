@@ -109,7 +109,9 @@
               <td width="35%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <b class="td-label">Order Id : #{{forward.order_id}}</b>
+                    <label class="td-label">Order Id :
+                      <b> #{{forward.order_id}}</b>
+                    </label>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(forward)'>
                     <i class="fa fa-edit logo-color "></i>
@@ -119,7 +121,9 @@
               <td width="32%">
                 <div class=" row ">
                   <div class="col-sm-10  col-md-10  col-lg-10 left">
-                    <b class="td-label">Customer Name : {{forward.orderby_firstname}}</b>
+                    <label class="td-label">Customer Name :
+                      <b class="capitalize">{{forward.orderby_firstname}}</b>
+                    </label>
                     <br>
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer()'>
@@ -131,7 +135,9 @@
               <td width="32%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <b class="td-label">Supplier :{{forward.supplierName}}</b>
+                    <label class="td-label">Supplier :
+                      <b class="capitalize">{{forward.supplierName}}</b>
+                    </label>
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
@@ -196,7 +202,7 @@
                       </b>
                     </div>
                     <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b>{{forward.orderby_firstname}} {{forward.orderby_lastname}}</b>
+                      <b class="capitalize">{{forward.orderby_firstname}} {{forward.orderby_lastname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
@@ -218,7 +224,7 @@
 
                     </div>
                     <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b>{{forward.orderby_areaname}}</b>
+                      <b class="capitalize">{{forward.orderby_areaname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
@@ -268,7 +274,7 @@
                         <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <b>{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
+                      <b class="capitalize">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
                     </div>
                   </div>
                   <div class="mgbottom-10 row float-right">
@@ -289,7 +295,8 @@
               <td></td>
               <td>
                 <h4 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getForwardOrderDetails(); *ngIf="forwardClickMore"><i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+                  <a href="javascript:void(0);" (click)=getForwardOrderDetails(); *ngIf="forwardClickMore">
+                    <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                 </h4>
                 <h4 *ngIf="!forwardClickMore" class="warning">Record Not Available</h4>
               </td>
@@ -299,13 +306,15 @@
         </table>
       </div>
       <div *ngIf="tabPanelView === 'allorder'">
-        <table>
+        <table class="table table-hover table-striped">
           <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom">
               <td width="35%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Order Id : #{{allorder.order_id}}</label>
+                    <label class="td-label">Order Id :
+                      <b>#{{allorder.order_id}}</b>
+                    </label>
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(allorder)'>
@@ -315,11 +324,13 @@
               </td>
               <td width="32%">
                 <div class=" row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Customer Name : {{allorder.orderby_firstname}}</label>
+                  <div class="col-sm-10  col-md-10  col-lg-10 left">
+                    <label class="td-label">Customer Name :
+                      <b class="capitalize">{{allorder.orderby_firstname}}</b>
+                    </label>
                     <br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='showEditCustomer()'>
+                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer()'>
                     <i class="fa fa-edit logo-color "></i>
 
                   </div>
@@ -328,11 +339,13 @@
               <td width="32%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label class="td-label">Supplier: {{allorder.supplierName}}</label>
+                    <label class="td-label">Supplier:
+                      <b> {{allorder.supplierName}}</b>
+                    </label>
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
-                    <label class="td-label">Status :{{allorder.status}}</label>
+                    <label class="td-label capitalize">{{allorder.status}}</label>
                     <br>
                   </div>
                 </div>
@@ -341,131 +354,132 @@
 
             <tr>
               <td width="35%" class="brd-right">
-                <div class="container-fluid ">
+                <div class="">
                   <div class="form-group row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">
-                        Date Placed {{allorder.ordered_date}}</label>
+                    <div class="col-sm-8  col-md-8  col-lg-8 left">
+                      <span class="td-label">
+                        Date Placed </span>
                       <br>
-                      <b></b>
+                      <b>{{allorder.ordered_date}}</b>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <label class="td-label">Amount Rs.{{allorder.bill_amount}}</label>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
+                      <span class="td-label">Amount </span>
                       <br>
-                      <b></b>
+                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">Brand Name :{{allorder.brandname}}</label>
+                      <span class="td-label">Brand Name </span>
                       <br>
-                      <b class="capitalize"> </b>
+                      <b class="capitalize">{{allorder.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <label class="td-label">Quantity :{{allorder.quantity}}</label>
+                      <span class="td-label">Quantity </span>
                       <br>
-                      <b></b>
+                      <b class="pdright-5">{{allorder.quantity}}</b>
                     </div>
                   </div>
 
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">Product Type : {{allorder.prod_type}}</label>
-                      <br>
-                      <b></b>
+                      <span class="td-label">Product Type </span>
+                        <br>
+                        <b> {{allorder.prod_type}}</b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <label class="td-label">Payment Type :{{allorder.paymenttype}}</label>
-                      <br>
-                      <b></b>
+                      <span class="td-label">Payment Type </span>
+                        <br>
+                        <b class="pdright-5">{{allorder.paymenttype}}</b>
                     </div>
                   </div>
 
                 </div>
               </td>
               <td width="32%" class="brd-right">
-                <div class="container-fluid ">
+                <div class="">
 
                   <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
-                        <i class="fa fa-user pdtop-5" aria-hidden="true"></i>{{allorder.orderby_firstname}}</b>
+                        <i class="fa fa-user pdtop-5" aria-hidden="true"></i>
+                      </b>
                     </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b class="capitalize">{{allorder.orderby_firstname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
-                        <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>{{allorder.orderby_mobileno}}</b>
+                        <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
+                      </b>
 
                     </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b>{{allorder.orderby_mobileno}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
-                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>{{allorder.orderby_areaname}}</b>
+                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
+                      </b>
 
                     </div>
-                    <div class="col-sm-11  col-md-1  col-lg-11">
-                      <b></b>
+                    <div class="col-sm-10  col-md-10  col-lg-10 left">
+                      <b class="capitalize">{{allorder.orderby_areaname}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6">
-                      <b>Delivery Time :{{allorder.delivery_exceptedtime}}</b>
+                    <div class="col-sm-5  col-md-5  col-lg-5">
+                      <label>Delivery Time :</label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 ">
-                      <b></b>
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                      <label class="left warning">{{allorder.delivery_exceptedtime}}</label>
                     </div>
                   </div>
                 </div>
 
               </td>
               <td width="32%">
-                <div class="container-fluid">
+                <div class="">
                   <div class=" mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i>Mobile </label>
+                        <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</span>
                     </div>
+                  </div>
+                  <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <b></b>
+                      <label class="td-label">
+                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                      <span class="warning">{{allorder.order_assigneddate}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On : {{allorder.order_assigneddate}}</label>
+                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <b></b>
+                      <span class="success">{{allorder.order_delivereddate}}</span>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On :{{allorder.order_delivereddate}}</label>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <b></b>
-                    </div>
-                  </div>
-                  <div class="mgbottom-10 row ">
+                  <!-- <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
                         <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
-                      <span *ngIf="allorder.distributor">{{allorder.distributor.firstname +" "+allorder.distributor.lastname }}</span>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <b></b>
+                      <span *ngIf="allorder.distributor">{{allorder.distributor.firstname +" "+allorder.distributor.lastname }}</span>
                     </div>
-                  </div>
+                  </div> -->
                   <div class="mgbottom-10 row float-right">
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
@@ -483,16 +497,15 @@
             <tr>
               <td></td>
               <td>
-                  <h4 class="warning  capitalize">
-                      <a href="javascript:void(0);" (click)=getAllOrderDetails(); *ngIf="orderClickMore"><i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+                <h4 class="warning  capitalize">
+                  <a href="javascript:void(0);" (click)=getAllOrderDetails(); *ngIf="orderClickMore">
+                    <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                   <span *ngIf="!orderClickMore">No more data</span>
                 </h4>
               </td>
             </tr>
           </tfoot>
         </table>
-
-
       </div>
 
     </div>

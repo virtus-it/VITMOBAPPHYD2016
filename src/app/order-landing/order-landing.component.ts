@@ -40,8 +40,7 @@ export class OrderLandingComponent implements OnInit {
   }
   showCoverageDetails(orderDetails) {
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
-      
-      width: '90%',
+      width: '95%',
       data: orderDetails
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
