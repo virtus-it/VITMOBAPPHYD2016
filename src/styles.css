@@ -173,6 +173,9 @@ background: transparent;
 .mgleft-5{
   margin-left: 5px;
 }
+.mgtop-10{
+  margin-top: 10px !important;
+}
 .mgtop-15{
   margin-top: 15px;
 }
