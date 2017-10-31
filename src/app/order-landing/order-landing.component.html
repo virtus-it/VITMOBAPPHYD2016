@@ -256,7 +256,7 @@
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="warning">{{forward.order_assigneddate}}</span>
+                      <span class="warning">{{forward.order_assigneddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -265,7 +265,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{forward.order_delivereddate}}</span>
+                      <span class="success">{{forward.order_delivereddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -459,7 +459,7 @@
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="warning">{{allorder.order_assigneddate}}</span>
+                      <span class="warning">{{allorder.order_assigneddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -468,7 +468,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{allorder.order_delivereddate}}</span>
+                      <span class="success">{{allorder.order_delivereddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <!-- <div class="mgbottom-10 row ">
