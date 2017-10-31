@@ -250,7 +250,7 @@
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="warning">{{forward.order_assigneddate}}</span>
+                      <span class="warning">{{forward.order_assigneddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -259,7 +259,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{forward.order_delivereddate}}</span>
+                      <span class="success">{{forward.order_delivereddate | date: 'medium'}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -441,7 +441,7 @@
                   <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On : {{allorder.order_assigneddate}}</label>
+                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On : {{allorder.order_assigneddate | date: 'medium'}}</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <b></b>
@@ -450,7 +450,7 @@
                   <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On :{{allorder.order_delivereddate}}</label>
+                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On :{{allorder.order_delivereddate | date: 'medium'}}</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <b></b>
