@@ -23,6 +23,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   listOfDistributors: any = [];
   dialogRef: any = '';
   order = { orderId: "" };
+  gpsMessage:string = "";
   //orderDetails = "";
   markers: any = [
       {
@@ -131,6 +132,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   
               }
               else {
+                  this.gpsMessage = "No GPS for this customer";
                   this.markers[0].lat = '';
                   this.markers[0].lng = '';
               }

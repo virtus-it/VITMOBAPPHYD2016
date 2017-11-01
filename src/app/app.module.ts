@@ -56,6 +56,9 @@ import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/c
 import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
 import { OrderLandingService } from './order-landing/order-landing.service';
 import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
+import { UtcDatePipe } from './pipes/utc-date.pipe';
+import { ReportsService } from './reports/reports.service';
+
 
 @NgModule({
     declarations: [
@@ -99,7 +102,9 @@ import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dail
         CustomerSettingDailogComponent,
         CustomerSetPaymentCycleComponent,
         CustomerScheduleDaiolgComponent,
-        OrderCoverageDetailDailogComponent
+        OrderCoverageDetailDailogComponent,
+        UtcDatePipe
+        
 
     ],
     imports: [
@@ -149,6 +154,7 @@ import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dail
         OrderLandingService,
         LoggedInGuard,
         SmsServiceService,
+        ReportsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],

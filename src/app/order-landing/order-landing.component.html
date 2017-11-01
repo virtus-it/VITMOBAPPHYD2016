@@ -156,7 +156,7 @@
                       <span class="td-label">
                         Date Placed </span>
                       <br>
-                      <b>{{forward.ordered_date}}</b>
+                      <b>{{forward.ordered_date | utcDate }}</b>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
@@ -256,7 +256,7 @@
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="warning">{{forward.order_assigneddate | date: 'medium'}}</span>
+                      <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -265,7 +265,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{forward.order_delivereddate | date: 'medium'}}</span>
+                      <span class="success">{{forward.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -360,7 +360,7 @@
                       <span class="td-label">
                         Date Placed </span>
                       <br>
-                      <b>{{allorder.ordered_date}}</b>
+                      <b>{{allorder.ordered_date | utcDate}}</b>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
@@ -459,7 +459,7 @@
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="warning">{{allorder.order_assigneddate | date: 'medium'}}</span>
+                      <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row form-group">
@@ -468,7 +468,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{allorder.order_delivereddate | date: 'medium'}}</span>
+                      <span class="success">{{allorder.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
                   <!-- <div class="mgbottom-10 row ">
