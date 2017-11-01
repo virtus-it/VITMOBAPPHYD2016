@@ -57,6 +57,7 @@ import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/cust
 import { OrderLandingService } from './order-landing/order-landing.service';
 import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import { UtcDatePipe } from './pipes/utc-date.pipe';
+import { ReportsService } from './reports/reports.service';
 
 
 @NgModule({
@@ -153,6 +154,7 @@ import { UtcDatePipe } from './pipes/utc-date.pipe';
         OrderLandingService,
         LoggedInGuard,
         SmsServiceService,
+        ReportsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],

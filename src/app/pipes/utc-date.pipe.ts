@@ -10,7 +10,7 @@ export class UtcDatePipe implements PipeTransform {
       return '';
     }
     const localtime = moment.utc(value).toDate();
-   let utc = moment(localtime).format();
+   let utc = moment(localtime).format("DD-MM-YYYY hh:mm A");
     return utc;
   }
 
