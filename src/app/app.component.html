@@ -57,9 +57,9 @@
         <div *ngIf="!_router.url.includes('login'); else elseBlock" class="container-fluid brd-bottom">
           <div class="row">
             <div class="col">
-              <button md-button (click)="focusSidenav.toggle()" class="btn-customMenu right-0 right mgtop-12 float-left">
+              <span  (click)="focusSidenav.toggle()" class="btn-customMenu menu-style right-0 right float-left">
                 <md-icon>menu</md-icon>
-              </button>
+              </span>
               <img src="../assets/images/logo.png" class="float-left" />
             </div>
             <div class="col-6 pdtpright-10x30">
