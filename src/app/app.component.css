@@ -39,7 +39,10 @@
 .active a{
   color: #0f75bc !important;
 }
-
+.menu-style{
+  margin: 20px;
+  cursor: pointer;
+}
 
 .active a:hover{
   color: #fff !important;
