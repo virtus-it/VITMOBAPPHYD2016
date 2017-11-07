@@ -12,7 +12,7 @@
     <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
       <div class="filtercol-style height-500">
         <h6 class="left">
-          <b>Filter by Dates</b>
+          <b>Filter by</b>
         </h6>
         <div class="row ">
           <div class="col-sm-6  col-md-6  col-lg-6">
@@ -28,7 +28,7 @@
           </div>
         </div>
         <div class=" ">
-          <b class="float-left">Filter by Distributor</b>
+          <!-- <b class="float-left">Filter by Distributor</b> -->
           <md-form-field class="example-full-width">
             <input class="form-control" mdInput placeholder="Enter the distributor name">
             <md-error>
@@ -38,8 +38,7 @@
           </md-form-field>
         </div>
         <div class=" ">
-          <b class="float-left">Filter by Supplier</b>
-          <br>
+          <!-- <b class="float-left">Filter by Supplier</b> -->
           <md-form-field class="example-full-width">
             <input class="form-control" mdInput placeholder="Enter the supplier name">
             <md-error>
@@ -49,8 +48,7 @@
           </md-form-field>
         </div>
         <div class=" ">
-          <b class="float-left">Filter by Customer</b>
-          <br>
+          <!-- <b class="float-left">Filter by Customer</b> -->
           <md-form-field class="example-full-width">
             <input class="form-control" mdInput placeholder="Enter the customer name">
             <md-error>
@@ -61,8 +59,7 @@
         </div>
         <div class="form-group ">
 
-          <b class="float-left">Filter by Status</b>
-          <br>
+          <!-- <b class="float-left">Filter by Status</b> -->
           <md-select placeholder="Order Type" class="wd-100pc left">
             <md-option>All Orders
             </md-option>
@@ -74,6 +71,7 @@
             </md-option>
           </md-select>
         </div>
+        <br>
         <div class="input-group pd-10  ">
           <button md-raised-button color="primary" class="mgright-5">
             <i class="fa fa-search" aria-hidden="true"></i> Search
@@ -120,9 +118,9 @@
               </td>
               <td width="32%">
                 <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left">
+                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
                     <label class="td-label">Customer Name :
-                      <b class="capitalize">{{forward.orderby_firstname}}</b>
+                      <b class="capitalize ">{{forward.orderby_firstname}}</b>
                     </label>
                     <br>
                   </div>
@@ -177,7 +175,7 @@
                     </div>
                   </div>
 
-                  <div class="form-group row ">
+                  <div class="row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Product Type </span>
                       <br>
@@ -240,44 +238,44 @@
               </td>
               <td width="32%">
                 <div class="">
-                  <div class=" mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class=" row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
                       <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <b></b>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span class="success">{{forward.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="  row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
-                        <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                        <i class="fa fa-reply " aria-hidden="true"> </i>Forwarded To</label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
                       <b class="capitalize">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row float-right">
+                  <div class="float-right">
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
@@ -324,9 +322,9 @@
               </td>
               <td width="32%">
                 <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left">
+                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
                     <label class="td-label">Customer Name :
-                      <b class="capitalize">{{allorder.orderby_firstname}}</b>
+                      <b class="capitalize ">{{allorder.orderby_firstname}}</b>
                     </label>
                     <br>
                   </div>
@@ -435,7 +433,7 @@
                     <div class="col-sm-5  col-md-5  col-lg-5">
                       <label>Delivery Time :</label>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 row">
                       <label class="left warning">{{allorder.delivery_exceptedtime}}</label>
                     </div>
                   </div>
@@ -445,29 +443,29 @@
               <td width="32%">
                 <div class="">
                   <div class=" mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row form-group">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span class="success">{{allorder.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
@@ -480,7 +478,7 @@
                       <span *ngIf="allorder.distributor">{{allorder.distributor.firstname +" "+allorder.distributor.lastname }}</span>
                     </div>
                   </div> -->
-                  <div class="mgbottom-10 row float-right">
+                  <div class=" float-right">
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
