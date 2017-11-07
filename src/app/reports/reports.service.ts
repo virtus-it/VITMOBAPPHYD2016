@@ -12,40 +12,14 @@ import 'rxjs/add/observable/throw';
 export class ReportsService {
 
   constructor(private http: Http, @Inject('API_URL') private apiUrl: string) { }
-  newlyDownloded(input) {
-    
+  searchReports(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/getappdownloadsbycustomers/'+input.days+'/'+input.lastId+'/'+input.pagesize+'/'+input.appType, options)
+    return this.http.post(this.apiUrl + '/getReports',bodyString, options)
         .map((res: Response) => res.json())
         .do(data => console.log('All: '))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-  lastDays(input) {
-    
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/getcustomerswithnoorders/'+input.days+'/'+input.lastId+'/'+input.pagesize+'/'+input.appType, options)
-        .map((res: Response) => res.json())
-        .do(data => console.log('All: '))
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
-  pendingOrders(input) {
-    
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/getpendingorders/'+input.days+'/'+input.lastId+'/'+input.pagesize+'/'+input.appType, options)
-        .map((res: Response) => res.json())
-        .do(data => console.log('All: '))
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
-  rejectedOrders(input) {
-    
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/getrejectedorders/'+input.days+'/'+input.lastId+'/'+input.pagesize+'/'+input.appType, options)
-        .map((res: Response) => res.json())
-        .do(data => console.log('All: '))
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-  }
+  
 }

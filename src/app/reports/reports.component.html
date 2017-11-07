@@ -28,7 +28,7 @@
           
                   </div> 
                     <div class="input-group pd-10  ">
-                      <button md-raised-button color="primary" (click)="searchReports()">
+                      <button md-raised-button color="primary" (click)="searchReports(true)">
                         Search
                       </button>
                     </div>
@@ -56,6 +56,18 @@
               <td class="left">{{reports.address}}</td>
             </tr>
           </tbody>
+          <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <h4 class="warning  capitalize">
+                    <a href="javascript:void(0);" (click)=searchReports(false); *ngIf="reportsClickMore">
+                      <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+                    <span *ngIf="!reportsClickMore">No more data</span>
+                  </h4>
+                </td>
+              </tr>
+            </tfoot>
         </table>
     </div>
     </div>

@@ -1,98 +1,62 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
-import {ReportsService} from './reports.service';
+import { ReportsService } from './reports.service';
+import * as _ from 'underscore';
 @Component({
-  
+
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css']
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService,private reportservice : ReportsService) { }
-  reportDetails = {reportType:"", days: "", lastId:"0",pagesize:100,appType:this.authenticationService.appType()};
-reportsInput:any = {};
-reportsData =[];
+  constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService) { }
+  reportDetails = { reportType: "", days: "", lastId: "0", pagesize: 100, appType: this.authenticationService.appType() };
+  reportsClickMore:boolean = false;
+  reportsInput: any = {};
+  reportsData = [];
   reportsType = [
-    { value: 'newlydownloded', viewValue: 'Newly Downloded' },
+    { value: 'newlydownloaded', viewValue: 'Newly Downloded' },
     { value: 'lastdays', viewValue: 'Last Days' },
     { value: 'pendingorders', viewValue: 'Pending Orders' },
-    { value: 'rejected', viewValue: 'Rejected' },
+    { value: 'rejectedorders', viewValue: 'Rejected Orders' },
+    { value: 'onlydownloaded', viewValue: 'Only Downloaded' },
+    { value: 'notregistered', viewValue: 'Not Registered' },
     
   ];
-  searchReports(){
-this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
-    if(this.reportsInput.reportType =='newlydownloded'){
-this.getNewlyDownloded();
-    }
-    else if(this.reportsInput.reportType =='lastdays'){
-
-this.getLastDay()
-    }
-    else if(this.reportsInput.reportType =='pendingorders'){
+  searchReports(firstCall) {
+    this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
+    let input = { "root": { "days": this.reportsInput.days, "lastid": this.reportsInput.lastId, "pagesize": this.reportsInput.pagesize, "transtype": this.reportsInput.reportType, "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+    if (this.reportsData && this.reportsData.length && !firstCall) {
+      let lastRecord: any = _.last(this.reportsData);
+      if (lastRecord) {
+        input.root.lastid = lastRecord.user_id;
+      }
       
-      this.getPendingOrders();
-          }
-          else if(this.reportsInput.reportType =='rejected'){
-            
-            this.getrejectedOrders()
-                }
-  }
-  getNewlyDownloded() {
-   
-    this.reportservice.newlyDownloded(this.reportsInput)
+
+    }
+    else{
+      this.reportsData = [];
+      input.root.lastid = null;
+    }
+    this.reportservice.searchReports(input)
       .subscribe(
-      output => this.getNewlyDownlodedResult(output),
+      output => this.searchReportsResult(output),
       error => {
         console.log("error");
       });
   }
-  getNewlyDownlodedResult(result) {
-  
-   this.reportsData = result.data.output;
-   
+  searchReportsResult(result) {
+    if (result.data && result.data.output && result.data.output.length > 0) {
+      this.reportsClickMore = true;
+      this.reportsData = _.union(this.reportsData,result.data.output);
+   }
+   else{
+    this.reportsClickMore = false;
+   }
+
+
   }
-  getLastDay() {
-    
-     this.reportservice.lastDays(this.reportsInput)
-       .subscribe(
-       output => this.getLastDayResult(output),
-       error => {
-         console.log("error");
-       });
-   }
-   getLastDayResult(result) {
-   
-    this.reportsData = result.data.output;
-    
-   }
-   getPendingOrders() {
-    
-     this.reportservice.pendingOrders(this.reportsInput)
-       .subscribe(
-       output => this.getPendingOrdersResult(output),
-       error => {
-         console.log("error");
-       });
-   }
-   getPendingOrdersResult(result) {
-   
-    this.reportsData = result.data.output;
-    
-   }
-   getrejectedOrders() {
-    
-     this.reportservice.rejectedOrders(this.reportsInput)
-       .subscribe(
-       output => this.getrejectedOrdersResult(output),
-       error => {
-         console.log("error");
-       });
-   }
-   getrejectedOrdersResult(result) {
-   
-    this.reportsData = result.data.output;
-    
-   }
+
   ngOnInit() {
   }
 
