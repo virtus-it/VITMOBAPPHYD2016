@@ -362,18 +362,17 @@ table thead th::after{
   
       font-family: FontAwesome;
       content: "\2193";
-      display: inline-block;
+      display: block;
      float: right;
-      vertical-align: middle;
   }
-  table thead th::after::before{
+  /* table thead th::after::before{
     
         font-family: FontAwesome;
         content: "\2191";
         display: inline-block;
         float: right;
         vertical-align: middle;
-    }
+    } */
     .fs-21{
       font-size: 21px;
     }
