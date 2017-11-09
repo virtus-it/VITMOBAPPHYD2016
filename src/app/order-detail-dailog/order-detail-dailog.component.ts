@@ -31,10 +31,10 @@ export class OrderDetailDailogComponent implements OnInit {
         });
 
     }
-    editCan() {
+    editCan(orderData) {
         let dialogRefEditCan = this.dialog.open(EmptyCanDailogComponent, {
             width: '700px',
-            data: ''
+            data: orderData
         });
         dialogRefEditCan.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
@@ -93,11 +93,11 @@ export class OrderDetailDailogComponent implements OnInit {
             });
 
     }
-    getProductsListByCustomerIdResult(reuslt){
+    getProductsListByCustomerIdResult(result){
         
-                if(reuslt.data.user.stock && reuslt.data.user.stock.length > 0){
-                   
-                    this.customerProductDetails = _.filter(reuslt.data.user.stock, function(e:any) { return e.avaliablecans !== 0; });
+                if(result.data.user.stock && result.data.user.stock.length > 0){
+                   console.log(result.data.user.stock);
+                    this.customerProductDetails = _.filter(result.data.user.stock, function(e:any) { return e.avaliablecans !== 0; });
                     
                 }
             }
