@@ -136,12 +136,12 @@
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
                     <label class="td-label">Supplier :
-                      <b class="capitalize">{{forward.supplierName}}</b>
+                      <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                     </label>
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
-                    <label class="td-label capitalize"> {{forward.status}}</label>
+                    <label class="td-label capitalize" [ngClass]="forward.StatusColor"> {{forward.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
@@ -265,7 +265,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{forward.order_delivereddate | utcDate }}</span>
+                      <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
                   <div class="mgbottom-10 row ">
@@ -281,7 +281,7 @@
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
-                    <button class="btn btn-link btn-sm" (click)='showOrderDetails()'>
+                    <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                   </div>
@@ -340,12 +340,12 @@
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
                     <label class="td-label">Supplier:
-                      <b> {{allorder.supplierName}}</b>
+                      <b *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                     </label>
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
-                    <label class="td-label capitalize">{{allorder.status}}</label>
+                    <label class="td-label capitalize">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
@@ -468,7 +468,7 @@
                         <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success">{{allorder.order_delivereddate | utcDate }}</span>
+                      <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
                   <!-- <div class="mgbottom-10 row ">
@@ -484,7 +484,7 @@
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
-                    <button class="btn btn-link btn-sm" (click)='showOrderDetails()'>
+                    <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                   </div>

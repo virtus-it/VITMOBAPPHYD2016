@@ -51,11 +51,11 @@ export class OrderLandingComponent implements OnInit {
     });
 
   }
-  showOrderDetails() {
+  showOrderDetails(orderData) {
     let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
       width: '90%',
-      data: ''
+      data: orderData
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
@@ -72,10 +72,10 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefEditQun.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      if(result == 'success'){
+      if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
-      
+
       }
 
     });
@@ -90,7 +90,7 @@ export class OrderLandingComponent implements OnInit {
       }
 
     }
-    else{
+    else {
       this.forwardOrders = [];
       this.orderListInput.order.last_orderid = null;
     }
@@ -103,15 +103,60 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getForwardOrderDetailsResult(result) {
-   // this.forwardOrders = result.data;
+    // this.forwardOrders = result.data;
     console.log(this.forwardOrders);
-    if(result.data && result.data.length > 0){
+    if (result.data && result.data.length > 0) {
+      _.each(result.data, function (i, j) {
+        let details: any = i;
+        if (details.status == "onhold") {
+          details.OrderModifiedStatus = "On Hold";
+          details.StatusColor = "warning";
+        }
+        else if (details.status.toLowerCase() == "cancelled") {
+          details.OrderModifiedStatus = "Cancelled";
+          details.StatusColor = "danger";
+        }
+        else if (details.status.toLowerCase() == "rejected") {
+          details.OrderModifiedStatus = "Rejected";
+          details.StatusColor = "danger";
+        }
+        else if (details.status == "assigned") {
+          details.OrderModifiedStatus = "Assign";
+          details.StatusColor = "warning";
+        }
+        else if (details.status.toLowerCase() == "delivered") {
+          details.OrderModifiedStatus = "Delivered";
+          details.StatusColor = "success";
+        }
+        else if (details.status == "doorlock" || details.status == "Door Locked") {
+          details.OrderModifiedStatus = "Door Locked";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
+          details.OrderModifiedStatus = "Cant Deliver";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "Not Reachable" || details.status == "not_reachable") {
+          details.OrderModifiedStatus = "Not Reachable";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "pending" ) {
+          details.OrderModifiedStatus = "Pending";
+          details.StatusColor = "primary";
+        }
+        else if (details.status == "ordered" || details.status == "backtodealer" ) {
+          details.OrderModifiedStatus = "Cancel";
+          details.StatusColor = "warning";
+        }
+        
+
+      });
       this.forwardClickMore = true;
-      this.forwardOrders = _.union(this.forwardOrders,result.data);
-      }
-      else{
-        this.forwardClickMore = false;
-      }
+      this.forwardOrders = _.union(this.forwardOrders, result.data);
+    }
+    else {
+      this.forwardClickMore = false;
+    }
   }
   getAllOrderDetails(firstcall) {
     this.orderListInput.order.status = 'all';
@@ -120,10 +165,10 @@ export class OrderLandingComponent implements OnInit {
       if (lastAllOrder) {
         this.orderListInput.order.last_orderid = lastAllOrder.order_id;
       }
-      
+
 
     }
-    else{
+    else {
       this.allOrders = [];
       this.orderListInput.order.last_orderid = null;
     }
@@ -136,13 +181,58 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getAllOrderDetailsResult(result) {
-  //  this.allOrders = result.data;
+    //  this.allOrders = result.data;
     console.log(this.allOrders);
-    if(result.data && result.data.length > 0){
+    if (result.data && result.data.length > 0) {
+      _.each(result.data, function (i, j) {
+        let details: any = i;
+        if (details.status == "onhold") {
+          details.OrderModifiedStatus = "On Hold";
+          details.StatusColor = "warning";
+        }
+        else if (details.status.toLowerCase() == "cancelled") {
+          details.OrderModifiedStatus = "Cancelled";
+          details.StatusColor = "danger";
+        }
+        else if (details.status.toLowerCase() == "rejected") {
+          details.OrderModifiedStatus = "Rejected";
+          details.StatusColor = "danger";
+        }
+        else if (details.status == "assigned") {
+          details.OrderModifiedStatus = "Assign";
+          details.StatusColor = "warning";
+        }
+        else if (details.status.toLowerCase() == "delivered") {
+          details.OrderModifiedStatus = "Delivered";
+          details.StatusColor = "success";
+        }
+        else if (details.status == "doorlock" || details.status == "Door Locked") {
+          details.OrderModifiedStatus = "Door Locked";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
+          details.OrderModifiedStatus = "Cant Deliver";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "Not Reachable" || details.status == "not_reachable") {
+          details.OrderModifiedStatus = "Not Reachable";
+          details.StatusColor = "warning";
+        }
+        else if (details.status == "pending" ) {
+          details.OrderModifiedStatus = "Pending";
+          details.StatusColor = "primary";
+        }
+        else if (details.status == "ordered" || details.status == "backtodealer" ) {
+          details.OrderModifiedStatus = "Cancel";
+          details.StatusColor = "warning";
+        }
+        
+
+      });
       this.orderClickMore = true;
-    this.allOrders = _.union(this.allOrders,result.data);
+      this.allOrders = _.union(this.allOrders, result.data);
     }
-    else{
+    else {
       this.orderClickMore = false;
     }
   }
