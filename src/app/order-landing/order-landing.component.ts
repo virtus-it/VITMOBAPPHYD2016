@@ -145,8 +145,8 @@ export class OrderLandingComponent implements OnInit {
           details.StatusColor = "primary";
         }
         else if (details.status == "ordered" || details.status == "backtodealer" ) {
-          details.OrderModifiedStatus = "Cancel";
-          details.StatusColor = "warning";
+          details.OrderModifiedStatus = "Assign";
+          details.StatusColor = "primary";
         }
         
 
@@ -223,8 +223,8 @@ export class OrderLandingComponent implements OnInit {
           details.StatusColor = "primary";
         }
         else if (details.status == "ordered" || details.status == "backtodealer" ) {
-          details.OrderModifiedStatus = "Cancel";
-          details.StatusColor = "warning";
+          details.OrderModifiedStatus = "Assign";
+          details.StatusColor = "primary";
         }
         
 
