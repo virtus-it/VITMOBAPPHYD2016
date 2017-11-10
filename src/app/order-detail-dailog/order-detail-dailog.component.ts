@@ -18,11 +18,11 @@ export class OrderDetailDailogComponent implements OnInit {
 
     constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
     dailogOrderDetails: any = {};
-    customerProductDetails:any = [];
-    showCustomerDetails() {
+    customerProductDetails: any = [];
+    showCustomerDetails(orderData) {
         let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
             width: '95%',
-            data: ''
+            data: orderData
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
@@ -32,13 +32,16 @@ export class OrderDetailDailogComponent implements OnInit {
 
     }
     editCan(orderData) {
+        this.customerProductDetails.order_by = orderData.order_by;
         let dialogRefEditCan = this.dialog.open(EmptyCanDailogComponent, {
             width: '700px',
-            data: orderData
+            data: this.customerProductDetails
         });
         dialogRefEditCan.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-
+            if (result == 'success') {
+                this.getProductsListByCustomerId();
+            }
 
         });
 
@@ -83,7 +86,7 @@ export class OrderDetailDailogComponent implements OnInit {
             this.dailogOrderDetails = result.data[0];
         }
     }
-    getProductsListByCustomerId(){
+    getProductsListByCustomerId() {
         let input = { customerID: this.orderDetail.order_by, appType: this.authenticationService.appType() };
         this.orderLandingService.getProductsByCustomerID(input)
             .subscribe(
@@ -93,14 +96,14 @@ export class OrderDetailDailogComponent implements OnInit {
             });
 
     }
-    getProductsListByCustomerIdResult(result){
-        
-                if(result.data.user.stock && result.data.user.stock.length > 0){
-                   console.log(result.data.user.stock);
-                    this.customerProductDetails = _.filter(result.data.user.stock, function(e:any) { return e.avaliablecans !== 0; });
-                    
-                }
-            }
+    getProductsListByCustomerIdResult(result) {
+
+        if (result.data.user.stock && result.data.user.stock.length > 0) {
+            console.log(result.data.user.stock);
+            this.customerProductDetails = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
+
+        }
+    }
     onCloseCancel() {
         this.thisDialogRef.close('Cancel');
     }

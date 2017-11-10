@@ -51,12 +51,30 @@ export class OrderLandingService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
   getProductsByDealrID(input) {
-    
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.apiUrl + '/products/' + input.dealerID + '/' + input.appType, options)
-          .map((res: Response) => res.json())
-          .do(data => console.log('All: '))
-          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-      }
+
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.apiUrl + '/products/' + input.dealerID + '/' + input.appType, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  UpdateProductsQuantity(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/mupdateavaliablecansforcustomer', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  getOrderByPaymentCycle(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getordersofpaymentcycle', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }

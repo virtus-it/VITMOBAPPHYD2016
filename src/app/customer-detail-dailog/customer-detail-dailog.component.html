@@ -8,7 +8,7 @@
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
       <strong>
-        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
       </strong>
     </div>
   </div>
@@ -18,7 +18,7 @@
       <div class="row">
                 <span class="col-sm-5 right gray9">Customer Name</span>
                 <span class="col-sm-1 center gray9">:</span>
-                   <label class="col-sm-6 left  ng-binding">firasath
+                   <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
                         <!-- ngIf: customerView.cLname -->
                
                    </label>
@@ -26,12 +26,12 @@
               <div class="row"> 
                 <span class=" col-sm-5 right gray9">Mobile Number</span>
                 <span class="col-sm-1 center gray9">:</span>
-                <label class="col-sm-6 left  ng-binding">0000999999</label>
+                <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_mobileno}}</label>
             </div>
               <div class="row form-group">
                 <span class=" col-sm-5 right gray9">Area Name</span>
                 <span class="col-sm-1 center gray9">:</span>
-            <label class="col-sm-6 left  ng-binding">toli chowki</label>
+            <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_areaname}}</label>
             </div>
 
 
@@ -42,11 +42,10 @@
               <th width="">Order Id</th>
               <th width="">Product Name</th>
               <th width="">Cart Id</th>
-              <th width="">Status</th>
               <th width="">Address</th>
               <th width="">Ordered Amt</th>
               <th width="">Received Amt</th>
-                 <th width="">Ordered Qty</th>
+              <th width="">Ordered Qty</th>
               <th width="">Status</th>
               <th width="">Returned Qty</th>
               <th width="">Payment Mode</th>
@@ -54,26 +53,36 @@
             </tr>
           </thead>
           <tbody>
-            <tr >
-              <td width="" class="left" scope="row"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
-              <td width="" class="left capital"></td>
+            <tr *ngFor="let customer of customerOrderDetails">
+              <td width="" class="left" scope="row">{{customer.order_id}}</td>
+              <td width="" class="left capital">{{customer.brandname}} {{customer.prod_type}}</td>
+              <td width="" class="left capital">{{customer.cart_id}}</td>
+              <td width="" class="left capital">{{customer.orderby_address}}</td>
+              <td width="" class="left capital">{{customer.bill_amount}}</td>
+              <td width="" class="left capital">{{customer.receivedamount}}</td>
+              <td width="" class="left capital">{{customer.quantity}}</td>
+              <td width="" class="left capital">{{customer.status}}</td>
+              <td width="" class="left capital">{{customer.return_cans}}</td>
+              <td width="" class="left capital">{{customer.paymenttype}}</td>
+              <td width="" class="left capital">{{customer.order_delivereddate | utcDate}}</td>
             </tr>
           </tbody>
+          <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <h4 class="warning  capitalize">
+                  <span *ngIf="noDataError">{{noDataError}}</span>
+                  </h4>
+                </td>
+              </tr>
+            </tfoot>
         </table>
       </div>
     </div>
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
-      <button md-raised-button >CANCEL</button>&nbsp;
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>
