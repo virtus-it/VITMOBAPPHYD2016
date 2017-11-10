@@ -18,7 +18,7 @@
           <div class="col-md-5 col-5 col-sm-5">
             <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
             <br>
-            <small class="black firstlettercap">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
+            <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
           </div>
           <div class="col-md-7 right">
             <small>
@@ -29,32 +29,34 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid  border-top pdtop-15">
+      <div class="container-fluid  border-top pdtop-10">
         <div class="row form-group">
           <div class=" col-md-6">
             <b>Customer Details </b>
           </div>
           <div class="col-md-6 right">
-            <button class="btn btn-primary btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'> View More</button>
+              <button class="btn btn-link btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'> 
+                  <i class="fa fa-chevron-circle-down" aria-hidden="true"> </i>
+                 More Orders</button>
           </div>
         </div>
         <div class="row form-group">
           <div class="col-md-8">
-            <small>
-              <i class="fa fa-user" aria-hidden="true"></i>{{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+            <small class="capital ">
+              <i class="fa fa-user" aria-hidden="true"></i> {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
             <br>
-            <small>
-              <i class="fa fa-map-marker" aria-hidden="true"></i> {{dailogOrderDetails.orderby_address}}</small>
+            <small class="capital ">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> {{dailogOrderDetails.orderby_address}}</small>
           </div>
           <div class="col-md-4 right">
-            <small>
-              <i class="fa fa-phone" aria-hidden="true"></i>{{dailogOrderDetails.orderby_mobileno}} </small>
+              <small class="capital ">
+                  <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.orderby_mobileno}} </small>
             <br>
             <small>
               <i class="fa fa-location-arrow" aria-hidden="true"></i> {{dailogOrderDetails.orderby_areaname}}</small>
           </div>
         </div>
-        <div class="row  border-top pdtop-15  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
+        <div class="row  border-top pdtop-10  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
           <div class="col-md-3">
             <small class="control-label success">Advance Amt</small>
             <br>
@@ -82,10 +84,10 @@
           </div>
         </div>
       </div>
-      <div class="container-fluid  border-top pdtop-15">
+      <div class="container-fluid  border-top pdtop-10">
         <div class="row  form-group">
           <div class=" col-lg-6 col-md-6 col-xl-6 col-sm-6">
-            <span ng-show="canstext">#of Cans with Customer </span>
+            <b ng-show="canstext">#of Cans with Customer </b>
             <!-- <span class="warning">noCansText</span> -->
           </div>
           <div class="col-md-6 right">
@@ -95,7 +97,7 @@
         </div>
         <div class="row form-group">
 
-          <table class="table table-fixed table-striped">
+          <table class="table table-hover table-striped table-fixedheader">
             <thead>
               <tr>
                 <th width="15%">
@@ -116,7 +118,7 @@
                   <small>{{i + 1}}</small>
                 </td>
                 <td width="55%">
-                  <small>{{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
+                  <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                 </td>
                 <td width="30%">
                   <small class="col-md-5 col-5 col-sm-5">{{canDetails.avaliablecans}}</small>
@@ -132,48 +134,125 @@
 
     <div class="col-md-3">
       <div class="container-fluid">
-          <b class="mgbtm-10">Order Status</b>
+        <b class="mgbtm-10">Order Status</b>
 
-
-          <div class="timeline row">
-            
-              <div class="container1 ">
-                <div class="content">
-                  <h2>2016</h2>
+        <div class="row">
+          <ul class="timeline">
+            <li>
+              <div class="timeline-badge">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <small class="timeline-title warning">
+                      <b>Order Created </b></small>
+                </div>
+                <div class="timeline-body">
+                  <ul class="pdleft-15">
+                    <li>
+                      <small class="capital ng-binding">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                        {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        {{dailogOrderDetails.ordered_date | utcDate}}</small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.ordered_qty}}(Qty)</small>
+                    </li>
+                  </ul>
                 </div>
               </div>
-              <div class="container1 ">
-                <div class="content">
-                  <h2>2015</h2>
+            </li>
+            <li>
+              <div class="timeline-badge danger">
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <small class="timeline-title warning">
+                      <b> Order Assigned</b></small>
+                </div>
+                <div class="timeline-body">
+                  <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
+                    <li>
+                      <small class="capital ng-binding">
+                        <i class="fa fa-user" aria-hidden="true"></i>
+                         {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.mobileno}}</small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        {{dailogOrderDetails.order_assigneddate | utcDate}}</small>
+                    </li>
+      
+                  </ul>
                 </div>
               </div>
-            
-              <div class="container ">
-                <div class="content">
-                  <h2>2007</h2>
+            </li>
+            <li>
+              <div class="timeline-badge success">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading">
+                  <small class="timeline-title warning">
+                      <b> Order Completed </b></small>
+                </div>
+                <div class="timeline-body">
+                  <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
+                    <li>
+                      <small class="capital ng-binding">
+                        <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                        {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
+                    </li>
+                    <li>
+                      <small class="ng-binding">
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>  {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
+
+                        <small class="ng-binding">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>  {{dailogOrderDetails.supplierdetails.return_cans}}(Qty)</small>
+                    </li>
+                  </ul>
                 </div>
               </div>
-            </div>
-            
+            </li>
+
+          </ul>
+        </div>
 
 
-          <div class="row mgtop-15pc">
-            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
-              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
-                <b>On-hold Order</b>
-              </button>
-            </div>
-            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
-              <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
-                <b>Edit Status</b>
-              </button>
-            </div>
+        <div class="row mgtop-15pc">
+          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+            <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
+              <b><i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                On-hold Order</b>
+            </button>
           </div>
+          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
+            <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
+              <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                 Edit Status</b>
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <div class="col-md-4 form-group border-left">
-      <label>Messages</label>
-      <ul class="scrollheight row">
+      <b>Messages</b>
+      <ul class="scrollheight ">
         <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
           <i class="fa fa-reply" aria-hidden="true"></i>
           <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
@@ -186,7 +265,7 @@
         </li>
 
       </ul>
-      <div class="row border-top pdtop-15">
+      <div class="row border-top pdtop-10">
         <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
           <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here"></textarea>
         </div>
