@@ -50,6 +50,7 @@ table thead {
   }
   .btn-link{
     color: #0f75bc;
+    cursor: pointer;
   }
   .logo-color{
     color: #0f75bc !important;
@@ -126,6 +127,7 @@ background: transparent;
 }
 .brd-bottom{
     border-bottom: 1px solid #ddd;
+    border-radius: none;
 }
 .right{
   text-align: right;

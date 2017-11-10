@@ -16,68 +16,70 @@
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row">
-                <span class="col-sm-5 right gray9">Customer Name</span>
-                <span class="col-sm-1 center gray9">:</span>
-                   <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
+        <div class="col center">
+                <span class="gray9">  <i class="fa fa-user"></i>  Customer Name : </span>
+                   <label class=" ng-binding capital ">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
                         <!-- ngIf: customerView.cLname -->
                
                    </label>
+
             </div>
-              <div class="row"> 
-                <span class=" col-sm-5 right gray9">Mobile Number</span>
-                <span class="col-sm-1 center gray9">:</span>
-                <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_mobileno}}</label>
+            <div class="col center">
+                <span class=" gray9"> <i class="fa fa-phone"></i>  Mobile Number : </span>
+                <label class=" ng-binding">{{this.orderDetail.orderby_mobileno}}</label>
             </div>
-              <div class="row form-group">
-                <span class=" col-sm-5 right gray9">Area Name</span>
-                <span class="col-sm-1 center gray9">:</span>
-            <label class="col-sm-6 left  ng-binding">{{this.orderDetail.orderby_areaname}}</label>
+            <div class="col center">
+                <span class="gray9"> <i class="fa  fa-map-marker"></i>  Area Name : </span>
+            <label class="ng-binding">{{this.orderDetail.orderby_areaname}}</label>
             </div>
 
-
+</div>
       <div class="">
+    
         <table class="table table-hover table-fixedheader">
           <thead>
             <tr>
-              <th width="">Order Id</th>
-              <th width="">Product Name</th>
-              <th width="">Cart Id</th>
-              <th width="">Address</th>
-              <th width="">Ordered Amt</th>
-              <th width="">Received Amt</th>
-              <th width="">Ordered Qty</th>
-              <th width="">Status</th>
-              <th width="">Returned Qty</th>
-              <th width="">Payment Mode</th>
-              <th width="">Delivery Date</th>
+              <th width="6%"><small>Order Id</small></th>
+              <th width="10%"><small>Product Name</small></th>
+              <th width="7%"><small>Cart Id</small></th>
+              <th width="12%"><small>Address</small></th>
+              <th width="8%"><small>Ordered Amt</small></th>
+              <th width="8%"><small>Received Amt</small></th>
+              <th width="8%"><small>Ordered Qty</small></th>
+              <th width="8%"><small>Status</small></th>
+              <th width="8%"><small>Returned Qty</small></th>
+              <th width="10%"><small>Payment Mode</small></th>
+              <th width="15%"><small>Delivery Date</small></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let customer of customerOrderDetails">
-              <td width="" class="left" scope="row">{{customer.order_id}}</td>
-              <td width="" class="left capital">{{customer.brandname}} {{customer.prod_type}}</td>
-              <td width="" class="left capital">{{customer.cart_id}}</td>
-              <td width="" class="left capital">{{customer.orderby_address}}</td>
-              <td width="" class="left capital">{{customer.bill_amount}}</td>
-              <td width="" class="left capital">{{customer.receivedamount}}</td>
-              <td width="" class="left capital">{{customer.quantity}}</td>
-              <td width="" class="left capital">{{customer.status}}</td>
-              <td width="" class="left capital">{{customer.return_cans}}</td>
-              <td width="" class="left capital">{{customer.paymenttype}}</td>
-              <td width="" class="left capital">{{customer.order_delivereddate | utcDate}}</td>
+              <td width="6%" class="left" scope="row"><small>{{customer.order_id}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.brandname}} {{customer.prod_type}}</small></td>
+              <td width="7%" class="left capital"><small>{{customer.cart_id}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.bill_amount}}</small></td>
+              <td width="8%"class="left capital"><small>{{customer.receivedamount}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.quantity}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.status}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.return_cans}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.paymenttype}}</small></td>
+              <td width="15%" class="left capital"><small>{{customer.order_delivereddate | utcDate}}</small></td>
             </tr>
           </tbody>
           <tfoot>
               <tr>
-                <td></td>
-                <td>
-                  <h4 class="warning  capitalize">
-                  <span *ngIf="noDataError">{{noDataError}}</span>
-                  </h4>
-                </td>
+                <td colspan="5"> 
+              
+                   </td>
               </tr>
             </tfoot>
         </table>
+        <h4 class="warning  capitalize center" *ngIf="noDataError">
+            {{noDataError}}
+            </h4>
       </div>
     </div>
   </md-dialog-content>
