@@ -46,22 +46,24 @@ export class OrderDetailDailogComponent implements OnInit {
         });
 
     }
-    onHoldStatus() {
+    onHoldStatus(orderData) {
         let dialogRefonHoldStatus = this.dialog.open(OnHoldOrderStatusComponent, {
             width: '550px',
-            data: ''
+            data: orderData
         });
         dialogRefonHoldStatus.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-
+            if (result == 'success') {
+                this.getOrderDetailsById();
+            }
 
         });
 
     }
-    editStatus() {
+    editStatus(orderData) {
         let dialogRefeditStatus = this.dialog.open(EditOrderStatusComponent, {
             width: '750px',
-            data: ''
+            data: orderData
         });
         dialogRefeditStatus.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);

@@ -14,7 +14,7 @@
             <!-- <label class=" pdtop-10 center">
                 </label> -->
                 <md-form-field class="wd-100pc">
-                    <input class="form-control" mdInput placeholder="Are you sure you want to onhold the order" name="Return Cans">
+                    <input class="form-control" [(ngModel)]="reasonOnHold" mdInput placeholder="Are you sure you want to onhold the order" name="Return Cans">
               </md-form-field>
           </div>
      </div>
@@ -22,7 +22,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button>YES</button>      
+      <button type="submit" class="btn-primary" md-raised-button (click)="updateOrderOnhold()">YES</button>      
     <button md-raised-button >CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

@@ -16,29 +16,29 @@ export class CustomerDetailDailogComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CustomerDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
   customerOrderDetails = [];
   noDataError = "";
-getCustomerOrder(){
-  
-  let input = {"order":{"userid":this.orderDetail.order_by,"status":this.orderDetail.status,"lastrecordtimestamp":"15","pagesize":"10","apptype":this.authenticationService.appType(),"usertype":"customer","createdthru":"website"}}
-  this.orderLandingService.getOrderByPaymentCycle(input)
-  .subscribe(
-  output => this.getCustomerOrderResult(output),
-  error => {
-      console.log("error in order details");
-  });
-}
-getCustomerOrderResult(result){
-  console.log(result);
-  if(result.result == 'success'){
-this.customerOrderDetails =result.data;
-  }
-  else{
-    this.noDataError = "No more data";
+  getCustomerOrder() {
 
+    let input = { "order": { "userid": this.orderDetail.order_by, "status": this.orderDetail.status, "lastrecordtimestamp": "15", "pagesize": "10", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+    this.orderLandingService.getOrderByPaymentCycle(input)
+      .subscribe(
+      output => this.getCustomerOrderResult(output),
+      error => {
+        console.log("error in order details");
+      });
   }
-}
-onCloseCancel() {
-  this.thisDialogRef.close('Cancel');
-}
+  getCustomerOrderResult(result) {
+    console.log(result);
+    if (result.result == 'success') {
+      this.customerOrderDetails = result.data;
+    }
+    else {
+      this.noDataError = "No more data";
+
+    }
+  }
+  onCloseCancel() {
+    this.thisDialogRef.close('Cancel');
+  }
   ngOnInit() {
     console.log(this.orderDetail);
     this.getCustomerOrder();
