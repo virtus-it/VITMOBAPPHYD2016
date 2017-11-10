@@ -1,23 +1,24 @@
-<div class="row dist-style">
-    <div  >
-      <div class=" row justify-content-between distIcon-style">
+<div class="dist-style">
+
+  <!-- <div class=" row justify-content-between distIcon-style">
       <div class="col-md-2  col-sm-2  col-lg-2">
           <h4><i class="fa fa-file-text"></i> Report</h4>
       </div>
     <div class="col-md-2  col-sm-2  col-lg-2">        
     </div>
-      </div>
-      <div id="" class="row pd-15x10 mg-0">
+      </div> -->
+  <!-- <div id="" class="row pd-15x10 mg-0">
           <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
               <div class="filtercol-style height-500">
-                  <label class="float-left">Filter by</label><br>
-                  <div class="">
+                  <h4 class="left form-group"><i class="fa fa-file-text"></i> Report</h4>
+                  <br>
+                      <div class="">
                     <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
                       <md-option *ngFor="let type of reportsType" [value]="type.value">
                         {{type.viewValue}}
                       </md-option>
                     </md-select>
-          
+
                   </div>
                   <div class="" >
                      
@@ -35,31 +36,122 @@
                   </div>
            </div>
     <div class="col-sm-9 col-md-9 col-lg-9">    
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              
-              <th width="20%">	Customer Name</th>
-              <th width="12%">Mobile No</th>
-              <th width="20%">Createddate</th>
-             
-              <th width="15%" class="pdleft-20">Address</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr id="Preordrlist" *ngFor="let reports of reportsData">
-              
-              <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
-              <td class="left">{{reports.mobileno}}</td>
-              <td class="left">{{reports.createddate | utcDate}}</td>
-              
-              <td class="left">{{reports.address}}</td>
-            </tr>
-          </tbody>
-          <tfoot>
+
+    </div>
+    </div> -->
+  <div class="container-fluid">
+
+    <!-- tabs left -->
+    <div class="tab tabs-left row">
+      <div class="col-lg-3 col-md-3 col-xl-3 col-sm-3">
+          <div class=" row justify-content-between heading-style">
+              <div class="col-md-6  col-sm-6  col-lg-6">
+                  <h4><i class="fa fa-file-text"></i> Report</h4>
+              </div>
+            <div class="col-md-3 col-sm-3  col-lg-3">  
+                <a href="javascript:void(0)" title="Download"><i class="fa fa-download fa-2x" aria-hidden="true"></i></a>       
+            </div>
+              </div>
+        <!-- <ul class="nav nav-tabs ">
+      <li>
+            <a href="javascript:void(0)" data-toggle="tab"></a>
+            <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
+              <md-option *ngFor="let type of reportsType" [value]="type.value">
+                {{type.viewValue}}
+              </md-option>
+            </md-select>
+            <div class="">
+
+              <md-form-field class="example-full-width inline ">
+                <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
+
+              </md-form-field>
+
+            </div>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" (click)="searchReports(true)">
+                Search
+              </button>
+            </div>
+          </li> 
+          <li >
+            <button type="button" class="btn btn-primary btn-lg" >Newly Downloaded</button>
+          </li>
+          <li>
+              <button type="button" class="btn btn-default btn-lg" >Pending Orders</button>
+            </li> 
+        </ul>-->
+        <ul class="nav nav-pills flex-column row">
+            
+          <li class="nav-item">
+          <a class="nav-link active" href="javascript:void(0)">
+              <i class="fa fa-download" aria-hidden="true"></i> <br>           
+            Newly Downloaded</a>
+          </li>
+          
+          <li class="nav-item">
+          <a class="nav-link" href="javascript:void(0)">
+              <i class="fa fa-exchange" aria-hidden="true"></i>  <br> 
+           Last Days</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="javascript:void(0)">
+                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <br> 
+                Pending Orders</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link" href="javascript:void(0)">
+                      <i class="fa fa-stop-circle-o" aria-hidden="true"></i>   <br> 
+                    Rejected Orders</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="javascript:void(0)">
+                          <i class="fa fa-user-plus" aria-hidden="true"></i>
+                          <br> 
+                        Only Downloadeded</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link" href="javascript:void(0)">
+                              <i class="fa fa-user-times" aria-hidden="true"></i>
+                              <br> 
+                            Not Registered</a>
+                          </li>
+                  <!-- <li class="nav-item">
+                      <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
+                          <md-option *ngFor="let type of reportsType" [value]="type.value">
+                            {{type.viewValue}}
+                          </md-option>
+                        </md-select>
+                      </li> -->
+          
+          </ul>
+      </div>
+      <div class="tab-content col-lg-9 col-md-9 col-xl-9 col-sm-9 pdtop-15">
+        <div class="tab-pane active" id="a">
+          <table class="table table-hover table-striped">
+            <thead>
               <tr>
-                <td></td>
-                <td>
+
+                <th width="20%"> Customer Name</th>
+                <th width="12%">Mobile No</th>
+                <th width="20%">Createddate</th>
+
+                <th width="15%" class="pdleft-20">Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="Preordrlist" *ngFor="let reports of reportsData">
+
+                <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
+                <td class="left">{{reports.mobileno}}</td>
+                <td class="left">{{reports.createddate | utcDate}}</td>
+
+                <td class="left">{{reports.address}}</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">
                   <h4 class="warning  capitalize">
                     <a href="javascript:void(0);" (click)=searchReports(false); *ngIf="reportsClickMore">
                       <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
@@ -68,8 +160,15 @@
                 </td>
               </tr>
             </tfoot>
-        </table>
+          </table>
+        </div>
+        <div class="tab-pane" id="b">
+
+
+        </div>
+
+      </div>
     </div>
-    </div>
-    </div>  
-    </div>
+    <!-- /row -->
+
+  </div>

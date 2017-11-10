@@ -2,9 +2,10 @@
   <div class="col-md-4  col-sm-4  col-lg-4">
     <i class="fa fa-file-text-o"></i> Order Details
   </div>
-  <div class="col-md-1  col-sm-1  col-lg-1 right">
-    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-        </strong>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
@@ -15,18 +16,23 @@
         <b> Order Details</b>
         <div class="row form-group">
           <div class="col-md-5 col-5 col-sm-5">
-            <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small><br>
+            <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
+            <br>
             <small class="black firstlettercap">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
           </div>
           <div class="col-md-7 right">
-            <small><span class="gray">Delivery Date : </span>{{dailogOrderDetails.delivery_exceptedtime}} </small><br>
-            <small><span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
+            <small>
+              <span class="gray">Delivery Date : </span>{{dailogOrderDetails.delivery_exceptedtime}} </small>
+            <br>
+            <small>
+              <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
           </div>
         </div>
       </div>
       <div class="container-fluid  border-top pdtop-15">
         <div class="row form-group">
-          <div class=" col-md-6"> <b>Customer Details </b>
+          <div class=" col-md-6">
+            <b>Customer Details </b>
           </div>
           <div class="col-md-6 right">
             <button class="btn btn-primary btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'> View More</button>
@@ -34,43 +40,57 @@
         </div>
         <div class="row form-group">
           <div class="col-md-8">
-            <small><i class="fa fa-user" aria-hidden="true"></i>{{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}}  </small><br>
-            <small><i class="fa fa-map-marker" aria-hidden="true"></i> {{dailogOrderDetails.orderby_address}}</small>
+            <small>
+              <i class="fa fa-user" aria-hidden="true"></i>{{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+            <br>
+            <small>
+              <i class="fa fa-map-marker" aria-hidden="true"></i> {{dailogOrderDetails.orderby_address}}</small>
           </div>
           <div class="col-md-4 right">
-            <small><i class="fa fa-phone" aria-hidden="true"></i>{{dailogOrderDetails.orderby_mobileno}} </small><br>
-            <small><i class="fa fa-location-arrow" aria-hidden="true"></i> {{dailogOrderDetails.orderby_areaname}}</small>
+            <small>
+              <i class="fa fa-phone" aria-hidden="true"></i>{{dailogOrderDetails.orderby_mobileno}} </small>
+            <br>
+            <small>
+              <i class="fa fa-location-arrow" aria-hidden="true"></i> {{dailogOrderDetails.orderby_areaname}}</small>
           </div>
         </div>
         <div class="row  border-top pdtop-15  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
           <div class="col-md-3">
-            <small class="control-label success">Advance Amt</small><br>
+            <small class="control-label success">Advance Amt</small>
+            <br>
             <small class="control-label success">Rs. {{dailogOrderDetails.customerpaymentdts.advance_amount}}</small>
           </div>
 
           <div class="col-md-3 center">
-            <small class="control-label warning"> Due Amount</small><br>
+            <small class="control-label warning"> Due Amount</small>
+            <br>
             <small class="control-label warning">Rs. {{dailogOrderDetails.customerpaymentdts.amount_pending}}</small>
           </div>
 
           <div class="col-md-3 center">
-            <small class="control-label gray"> Payment Type</small><br>
+            <small class="control-label gray"> Payment Type</small>
+            <br>
             <small class="control-label gray uppercase">{{dailogOrderDetails.customerpaymentdts.paymenttype}}</small>
           </div>
 
           <div class="col-md-3 right">
-            <small class="control-label black">Total</small><br>
-            <small class="control-label black">Rs.{{dailogOrderDetails.bill_amount}}<b></b></small>
+            <small class="control-label black">Total</small>
+            <br>
+            <small class="control-label black">Rs.{{dailogOrderDetails.bill_amount}}
+              <b></b>
+            </small>
           </div>
         </div>
       </div>
       <div class="container-fluid  border-top pdtop-15">
         <div class="row  form-group">
-          <div class=" col-lg-6 col-md-6"><span ng-show="canstext">#of Cans with Customer </span>
+          <div class=" col-lg-6 col-md-6 col-xl-6 col-sm-6">
+            <span ng-show="canstext">#of Cans with Customer </span>
             <!-- <span class="warning">noCansText</span> -->
           </div>
           <div class="col-md-6 right">
-            <i class="fa fa-edit logo-color" aria-hidden="true" (click)='editCan(dailogOrderDetails)'></i><br>
+            <i class="fa fa-edit logo-color" aria-hidden="true" (click)='editCan(dailogOrderDetails)'></i>
+            <br>
           </div>
         </div>
         <div class="row form-group">
@@ -78,18 +98,30 @@
           <table class="table table-fixed table-striped">
             <thead>
               <tr>
-                <th width="15%"><small>Sno.</small></th>
-                <th width="55%"><small>Product Name</small></th>
-                <th width="30%" class=""><small>Empty Cans</small></th>
+                <th width="15%">
+                  <small>Sno.</small>
+                </th>
+                <th width="55%">
+                  <small>Product Name</small>
+                </th>
+                <th width="30%" class="">
+                  <small>Empty Cans</small>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor ="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-                
-                <td width="15%"><small>{{i + 1}}</small></td>
-                <td width="55%"> <small>{{canDetails.product.productname}}  {{canDetails.product.product_type}} </small></td>
-                <td width="30%"><small class="col-md-5 col-5 col-sm-5">{{canDetails.avaliablecans}}</small></td>
-              
+              <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
+
+                <td width="15%">
+                  <small>{{i + 1}}</small>
+                </td>
+                <td width="55%">
+                  <small>{{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
+                </td>
+                <td width="30%">
+                  <small class="col-md-5 col-5 col-sm-5">{{canDetails.avaliablecans}}</small>
+                </td>
+
               </tr>
             </tbody>
 
@@ -100,35 +132,66 @@
 
     <div class="col-md-3">
       <div class="container-fluid">
-      <div class="row">
-        <b class="mgbtm-10">Order Status</b>
-        <div class="row mgtop-15pc">
-          <div class="col-lg-6 col-md-6" >
-            <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus()'><b>On-hold Order</b></button></div>
-            <div class="col-lg-6 col-md-6 right" >
-              <button class="control-label btn btn-link btn-sm" (click)='editStatus()'><b>Edit Status</b></button></div>
+          <b class="mgbtm-10">Order Status</b>
+
+
+          <div class="timeline row">
+            
+              <div class="container1 ">
+                <div class="content">
+                  <h2>2016</h2>
+                </div>
+              </div>
+              <div class="container1 ">
+                <div class="content">
+                  <h2>2015</h2>
+                </div>
+              </div>
+            
+              <div class="container ">
+                <div class="content">
+                  <h2>2007</h2>
+                </div>
+              </div>
             </div>
+            
+
+
+          <div class="row mgtop-15pc">
+            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus()'>
+                <b>On-hold Order</b>
+              </button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
+              <button class="control-label btn btn-link btn-sm" (click)='editStatus()'>
+                <b>Edit Status</b>
+              </button>
+            </div>
+          </div>
       </div>
     </div>
-  </div>
     <div class="col-md-4 form-group border-left">
       <label>Messages</label>
-      <ul class="scrollheight">
-        <li class="nolist-style row" *ngFor="let msg of dailogOrderDetails.messages">
-          <div class="messages-style">
-            <i class="fa fa-reply" aria-hidden="true"></i> <small>{{msg.user.firstname}} {{msg.user.lastname}} </small><br>
-            <small>{{ msg.message}} </small><br>
-            <span class="float-right"><small class="gray">{{ msg.createddate | utcDate}} </small></span>
-          </div>
+      <ul class="scrollheight row">
+        <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
+          <i class="fa fa-reply" aria-hidden="true"></i>
+          <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+          <br>
+          <small>{{ msg.message}} </small>
+          <br>
+          <p class="right">
+            <small class="gray">{{ msg.createddate | utcDate}} </small>
+          </p>
         </li>
-        
+
       </ul>
       <div class="row border-top pdtop-15">
-        <div class=" col-lg-10 col-md-10 col-sm-10 ">
+        <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
           <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here"></textarea>
         </div>
-        <div class="col-md-1 right">
-          <i class="fa fa-send fa-send-style"  aria-hidden="true"></i>
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right">
+          <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
         </div>
 
       </div>

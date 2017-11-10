@@ -11,9 +11,8 @@ table thead {
     border: 1px solid #ddd;
     margin: 20px;
   }
-  .distIcon-style{
-    padding: 15px;
-    margin: 0px;
+  .heading-style{
+    padding: 20px 10px 10px 0px;
     border-bottom: 1px solid #c5d6de;
   }
   .pd-15x10{
@@ -45,3 +44,45 @@ table thead {
   /* .mat-dialog-container{
     height: 90% !important;
   } */
+  .nav.nav-tabs {
+    float: left;
+    display: block;
+    padding: 15px;
+    border: 0px;
+}
+/* .nav-tabs li{
+  margin-bottom: 20px !important;
+  
+} */
+
+.nav-tabs .active a{
+    background:#0f75bc;
+    content: "\f078";   
+    color: #fff !important;
+  }
+  .nav-item{
+    border-bottom: 1px solid #ddd;
+  }
+  .nav-link{
+    padding: 20px !important;
+  }
+  .nav-pills .nav-link{
+    border-radius: 0px;
+  }
+
+  .chevron:after {
+    content: "\f078";   
+}
+  .flex-column{
+border: 1px solid #ddd;
+margin-bottom: 15px;
+/* margin-top: 15px; */
+/* border-radius: 5px; */
+  }
+  .fa-exchange {
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
