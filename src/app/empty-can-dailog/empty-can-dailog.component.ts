@@ -16,6 +16,7 @@ export class EmptyCanDailogComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EmptyCanDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
   ProductsCans = [];
   getProducts() {
+    console.log("PROducts and order id from other dailog box",this.orderDetail);
     let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
     this.orderLandingService.getProductsByDealrID(input)
       .subscribe(
@@ -35,14 +36,36 @@ export class EmptyCanDailogComponent implements OnInit {
         let canFormatcopy = JSON.parse(JSON.stringify(canFormat));
         canFormatcopy.root.brandname = details.brandname;
         canFormatcopy.root.brandType = details.ptype;
-        
+        let OrderListCan = _.find(orderdata,function(e:any){
+          return e.productid  == details.productid;
+        });
+        if(OrderListCan){
+          canFormatcopy.root.avaliablecans = OrderListCan.avaliablecans;
+        }
+        else{
         canFormatcopy.root.avaliablecans = details.avaliable_emptycans;
+        }
         canFormatcopy.root.productid = details.productid;
         cansData.push(canFormatcopy);
 
       });
       this.ProductsCans = cansData;
 
+    }
+  }
+  updateCanQuantity(){
+    let input = this.ProductsCans;
+    this.orderLandingService.UpdateProductsQuantity(input)
+    .subscribe(
+    output => this.updateCanQuantityResult(output),
+    error => {
+      console.log("error in order details");
+    });
+  }
+  updateCanQuantityResult(result){
+    console.log(result);
+    if(result.result = 'success'){
+      this.thisDialogRef.close('success');
     }
   }
   onCloseCancel() {

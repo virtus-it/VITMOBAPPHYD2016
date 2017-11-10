@@ -121,8 +121,8 @@ export class OrderLandingComponent implements OnInit {
           details.StatusColor = "danger";
         }
         else if (details.status == "assigned") {
-          details.OrderModifiedStatus = "Assign";
-          details.StatusColor = "warning";
+          details.OrderModifiedStatus = "Re-Assign";
+          details.StatusColor = "primary";
         }
         else if (details.status.toLowerCase() == "delivered") {
           details.OrderModifiedStatus = "Delivered";
@@ -199,8 +199,8 @@ export class OrderLandingComponent implements OnInit {
           details.StatusColor = "danger";
         }
         else if (details.status == "assigned") {
-          details.OrderModifiedStatus = "Assign";
-          details.StatusColor = "warning";
+          details.OrderModifiedStatus = "Re-Assign";
+          details.StatusColor = "primary";
         }
         else if (details.status.toLowerCase() == "delivered") {
           details.OrderModifiedStatus = "Delivered";

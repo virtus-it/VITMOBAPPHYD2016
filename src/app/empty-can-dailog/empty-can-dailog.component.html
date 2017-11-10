@@ -39,7 +39,8 @@
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
       <md-dialog-actions align="end">
-        <button md-raised-button >CANCEL</button>&nbsp;
+        <button type="submit" class="btn-primary" md-raised-button (click)="updateCanQuantity()">UPDATE</button> 
+        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
       </md-dialog-actions>
     </div>
 
