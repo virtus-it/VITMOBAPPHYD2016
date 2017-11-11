@@ -67,7 +67,10 @@ export class OrderDetailDailogComponent implements OnInit {
         });
         dialogRefeditStatus.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-
+            if (result == 'success') {
+                this.getOrderDetailsById();
+                this.getProductsListByCustomerId();
+            }
 
         });
 
