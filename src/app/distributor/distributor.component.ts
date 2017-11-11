@@ -5,6 +5,7 @@ import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { DistributorCreateDialogComponent } from '../distributor-create-dialog/distributor-create-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { MdDialog } from '@angular/material';
+import * as _ from 'underscore';
 @Component({
 
     templateUrl: './distributor.component.html',
@@ -12,9 +13,22 @@ import { MdDialog } from '@angular/material';
 })
 export class DistributorComponent implements OnInit {
     distributors:any = [];
+    distributorClickMore = true;
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 10 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
-    getDistributors() {
-        let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
+    getDistributors(firstCall) {
+        if (this.distributors && this.distributors.length && !firstCall) {
+            let lastdistributor: any = _.last(this.distributors);
+            if (lastdistributor) {
+              this.distributorInput.root.lastuserid = lastdistributor.userid;
+            }
+      
+          }
+          else {
+            this.distributors = [];
+            this.distributorInput.root.lastuserid = null;
+          }
+        let input = this.distributorInput;
         console.log(input);
         this.distributorService.getAllDistributors(input)
             .subscribe(
@@ -26,7 +40,12 @@ export class DistributorComponent implements OnInit {
     getDistributorsResult(data) {
         console.log(data);
         if (data.result == 'success') {
-            this.distributors = data.data;
+            
+            this.distributorClickMore = true;
+            this.distributors = _.union(this.distributors, data.data);
+        }
+        else{
+            this.distributorClickMore = false;   
         }
     }
     openMapDialog(data) {
@@ -47,7 +66,7 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
-            this.getDistributors();
+            this.getDistributors(true);
         });
     }
     openUpdateDialog(details) {
@@ -58,7 +77,7 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
-            this.getDistributors();
+            this.getDistributors(true);
         });
     }
     ViewProduct(distributor) {
@@ -82,7 +101,7 @@ export class DistributorComponent implements OnInit {
         console.log('scroll event', event);
     }
     ngOnInit() {
-        this.getDistributors()
+        this.getDistributors(true)
     }
 
 }

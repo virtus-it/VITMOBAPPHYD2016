@@ -237,14 +237,14 @@
 
 
         <div class="row mgtop-15pc">
-          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
+          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled'">
             <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
               <b><i class="fa fa-hand-paper-o" aria-hidden="true"></i>
                 On-hold Order</b>
             </button>
           </div>
-          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
-            <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
+          <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'On Hold'">
+            <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)' >
               <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                  Edit Status</b>
             </button>

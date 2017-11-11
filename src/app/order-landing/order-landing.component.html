@@ -96,8 +96,8 @@
         <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a>
         <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)"></a>
-        <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)">
-          <i class="fa fa-refresh  " aria-hidden="true"></i> REFRESH</a>
+        <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" (click)="refreshOrders()">
+          <i class="fa fa-refresh  " aria-hidden="true" ></i> REFRESH</a>
 
       </nav>
       <div *ngIf="tabPanelView === 'forward'">
@@ -242,9 +242,10 @@
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
-                      <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span>
+                     
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 left">
+                        <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span>
                       <b></b>
                     </div>
                   </div>
@@ -294,7 +295,7 @@
               <td></td>
               <td>
                 <h4 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getForwardOrderDetails(); *ngIf="forwardClickMore">
+                  <a href="javascript:void(0);" (click)=getForwardOrderDetails(false); *ngIf="forwardClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                 </h4>
                 <h4 *ngIf="!forwardClickMore" class="warning">Record Not Available</h4>
@@ -344,7 +345,7 @@
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 right">
-                    <label class="td-label capitalize">{{allorder.OrderModifiedStatus}}</label>
+                    <label class="td-label capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
@@ -500,7 +501,7 @@
               <td></td>
               <td>
                 <h4 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getAllOrderDetails(); *ngIf="orderClickMore">
+                  <a href="javascript:void(0);" (click)=getAllOrderDetails(false); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                   <span *ngIf="!orderClickMore">No more data</span>
                 </h4>

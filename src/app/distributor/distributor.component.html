@@ -64,7 +64,15 @@
           <td class="left"><button class="btn btn-link" (click)="openUpdateDialog(dist)" ><i class="fa fa-edit" aria-hidden="true"></i></button></td>
         </tr>
       </tbody>
+    
     </table>
+    
+        <h4 class="warning  capitalize">
+          <a href="javascript:void(0);" (click)=getDistributors(false); *ngIf="distributorClickMore">
+            <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+        </h4>
+        <h4 *ngIf="!distributorClickMore" class="warning">Record Not Available</h4>
+      
 </div>
 </div>
 </div>  

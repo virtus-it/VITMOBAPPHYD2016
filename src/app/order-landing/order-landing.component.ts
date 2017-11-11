@@ -20,7 +20,7 @@ export class OrderLandingComponent implements OnInit {
   forwardOrders: any = [];
   allOrders: any = [];
   forwardClickMore = true;
-  orderClickMore = false;
+  orderClickMore = true;
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
 
@@ -235,6 +235,10 @@ export class OrderLandingComponent implements OnInit {
     else {
       this.orderClickMore = false;
     }
+  }
+  refreshOrders(){
+    this.getForwardOrderDetails(true);
+    this.getAllOrderDetails(true);
   }
   ngOnInit() {
     this.getForwardOrderDetails(true);
