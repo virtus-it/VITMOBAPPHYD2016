@@ -268,10 +268,20 @@
 
       </ul>
       <div class="row border-top pdtop-10">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="messageInput.order.ispublic" name="status" value="0">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description"> Customer</span>
+            </label>
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="messageInput.order.ispublic" name="status" value="1">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Distributor</span>
+              </label>
         <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
-          <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here"></textarea>
+          <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here"  [(ngModel)]="messageInput.order.reason" > </textarea>
         </div>
-        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right">
+        <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
           <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
         </div>
 
