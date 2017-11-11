@@ -35,9 +35,9 @@
             <b>Customer Details </b>
           </div>
           <div class="col-md-6 right">
-            <button class="btn btn-link btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'> 
-                <i class="fa fa-chevron-circle-down" aria-hidden="true"> </i>
-               More Orders</button>
+              <button class="btn btn-link btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'> 
+                  <i class="fa fa-chevron-circle-down" aria-hidden="true"> </i>
+                 More Orders</button>
           </div>
           <!-- <button class="btn btn-link btn-sm float-right" (click)='showOrderDetails(forward)'> -->
               
@@ -154,16 +154,16 @@
                     <li>
                       <small class="capital ng-binding">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                         test users </small>
+                        {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
                     </li>
                     <li>
                       <small class="ng-binding">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                         07-11-2017 06:46 PM</small>
+                        {{dailogOrderDetails.ordered_date | utcDate}}</small>
                     </li>
                     <li>
                       <small class="ng-binding">
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i> 2(Qty)</small>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.ordered_qty}}(Qty)</small>
                     </li>
                   </ul>
                 </div>
@@ -179,20 +179,20 @@
                       <b> Order Assigned</b></small>
                 </div>
                 <div class="timeline-body">
-                  <ul class="pdleft-15">
+                  <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
                     <li>
                       <small class="capital ng-binding">
                         <i class="fa fa-user" aria-hidden="true"></i>
-                         test users </small>
+                         {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
                     </li>
                     <li>
                       <small class="ng-binding">
-                        <i class="fa fa-phone" aria-hidden="true"></i> 4546456546</small>
+                        <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.mobileno}}</small>
                     </li>
                     <li>
                       <small class="ng-binding">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                         07-11-2017 06:46 PM</small>
+                        {{dailogOrderDetails.order_assigneddate | utcDate}}</small>
                     </li>
       
                   </ul>
@@ -209,20 +209,23 @@
                       <b> Order Completed </b></small>
                 </div>
                 <div class="timeline-body">
-                  <ul class="pdleft-15">
+                  <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
                     <li>
                       <small class="capital ng-binding">
                         <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
-                         test users </small>
+                        {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
                     </li>
                     <li>
                       <small class="ng-binding">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
-                         07-11-2017 06:46 PM</small>
+                        {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
                     </li>
                     <li>
                       <small class="ng-binding">
-                        <i class="fa fa-arrow-right" aria-hidden="true"></i> 2(Qty)</small>
+                        <i class="fa fa-arrow-right" aria-hidden="true"></i>  {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
+
+                        <small class="ng-binding">
+                            <i class="fa fa-arrow-right" aria-hidden="true"></i>  {{dailogOrderDetails.supplierdetails.return_cans}}(Qty)</small>
                     </li>
                   </ul>
                 </div>
@@ -235,13 +238,13 @@
 
         <div class="row mgtop-15pc">
           <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6">
-            <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus()'>
+            <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
               <b><i class="fa fa-hand-paper-o" aria-hidden="true"></i>
                 On-hold Order</b>
             </button>
           </div>
           <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
-            <button class="control-label btn btn-link btn-sm" (click)='editStatus()'>
+            <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
               <b><i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                  Edit Status</b>
             </button>
