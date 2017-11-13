@@ -1,7 +1,8 @@
 
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-        <i class="fa fa-sitemap"></i>  Assigning Order
+        <i class="fa fa-check-square-o" aria-hidden="true"></i>
+         Assigning Order
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -10,21 +11,21 @@
   </div>
 
     <md-dialog-content layout="column">
-        <nav class="nav nav-pills flex-column flex-sm-row row mgbottom-20">
-            <a class="flex-sm-fill text-sm-center nav-link col-xs-4 col-sm-4 col-md-4 col-lg-4" href="javascript:void(0)"></a>
+        <nav class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10">
+            <p class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></p>
             <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
               (click)="showTabPanel('suppliers')">Suppliers</a>
             <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'distributors'}" href="javascript:void(0)"
               (click)="showTabPanel('distributors')">Distributors</a>
           </nav>
-        <div class="row pd-15x25 brd-bottom" *ngIf="tabPanelView === 'suppliers'">
+        <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'suppliers'">
             <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
             <th width="30%">Name</th>
             <th width="20%">Mobile </th>
-            <th width="20%">Area Name</th>
-            <th width="30%">Address</th>
+            <th width="25%">Area Name</th>
+            <th width="25%">Address</th>
              </tr>
         </thead>
         <tbody>
@@ -38,20 +39,20 @@
             <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
               {{dist.firstname}} {{dist.lastname}}</td> -->
             <td width="20%" class="left capital">{{supplier.mobileno}}</td>
-            <td width="20%" class="left capital">{{supplier.areaname}}</td>
-            <td width="30%" class="left capital">{{supplier.address}}</td>
+            <td width="25%" class="left capital">{{supplier.areaname}}</td>
+            <td width="25%" class="left capital">{{supplier.address}}</td>
            </tr>
         </tbody>
       </table>
     </div>
-    <div class="row pd-15x25 brd-bottom" *ngIf="tabPanelView === 'distributors'">
+    <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'distributors'">
         <table class="table table-hover table-fixedheader">
     <thead>
       <tr>
         <th width="30%">Name</th>
         <th width="20%">Mobile </th>
-        <th width="20%">Area Name</th>
-        <th width="30%">Address</th>
+        <th width="25%">Area Name</th>
+        <th width="25%">Address</th>
          </tr>
     </thead>
     <tbody>
@@ -65,8 +66,8 @@
         <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
           {{dist.firstname}} {{dist.lastname}}</td> -->
         <td width="20%" class="left capital">{{dist.mobileno}}</td>
-        <td width="20%" class="left capital">{{dist.areaname}}</td>
-        <td width="30%" class="left capital">{{dist.address}}</td>
+        <td width="25%" class="left capital">{{dist.areaname}}</td>
+        <td width="25%" class="left capital">{{dist.address}}</td>
        </tr>
     </tbody>
   </table>
@@ -74,8 +75,8 @@
     </md-dialog-content>
     <div class="row float-right pdright-30  mgbottom-20">
     <md-dialog-actions align="end">
-      <button type="submit" md-raised-button *ngIf="tabPanelView === 'suppliers'" (click)="assignOrder()" class="btn-primary">Assign</button>
-      <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" (click)="forWardOrder()" class="btn-primary">Forward</button>&nbsp;
+      <button type="submit" md-raised-button *ngIf="tabPanelView === 'suppliers'" (click)="assignOrder()" class="btn-primary">ASSIGN</button>
+      <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" (click)="forWardOrder()" class="btn-primary">FORWARD</button>&nbsp;
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
       
     </md-dialog-actions>

@@ -46,7 +46,7 @@
             <thead>
               <tr>
                 <!-- <th width="3%">S.No</th> -->
-                <th width="15%">Distributor</th>
+                <th width="25%">Distributor</th>
                 <th width="15%">Mobile</th>
                 <th width="15%">Products</th>
                 <th width="15%"> Areas</th>
@@ -56,10 +56,10 @@
             <tbody>
               <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" >
                 <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-                <td width="15%" class="left capital">{{dist.distributorName}}</td>
+                <td width="25%" class="left capital">{{dist.distributorName}}</td>
                 <td width="15%" class="left capital">{{dist.mobileno}}</td>
-                <td width="15%" class="left capital"><button class="btn btn-link" (click)="ViewProduct(dist)" >View</button></td>
-                <td width="15%" class="left capital"><button class="btn btn-link" (click)="DistrbutorHover(dist)" >View</button></td>
+                <td width="15%" class="left capital"><button class="btn btn-link" (click)="ViewProduct(dist)" ><i class="fa fa-gift fs-20" aria-hidden="true"></i></button></td>
+                <td width="15%" class="left capital"><button class="btn btn-link" (click)="DistrbutorHover(dist)" ><i class="fa fa-map" aria-hidden="true"></i></button></td>
         
                </tr>
             </tbody>
@@ -103,7 +103,7 @@
                         </div>
                       <div class="col-md-6  col-sm-6  col-lg-6 right">
                           <label  class="label-gray">Amount</label><br>
-                          <b>{{order.bill_amount}}</b>
+                          <b>Rs. {{order.bill_amount}}</b>
                         </div>
                       </div>
                       <div class="form-group row pdleftright-15">
