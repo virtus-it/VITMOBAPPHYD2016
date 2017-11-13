@@ -45,8 +45,10 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
+      if(result == 'success'){
       this.getForwardOrderDetails(true);
       this.getAllOrderDetails(true);
+      }
 
     });
 

@@ -32,6 +32,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       }
   ]
   constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog) { }
+  dailogCloseResult = "cancel";
   getPolygonDistributors() {
     
             var input = { area: { user_type: "dealer", user_id: 0, "apptype": this.authenticationService.appType() } };
@@ -43,9 +44,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 });
         }
         getPolygonDataResult(output) {
-            //  console.log(output);
-            //9863636315
-            //paani
+            
             if (output.data && output.data.length > 0) {
                 for (let data of output.data) {
     
@@ -147,7 +146,10 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 });
                 dialogRefDist.afterClosed().subscribe(result => {
                     console.log(`Dialog closed: ${result}`);
+                    if(result == 'success'){
+                    this.dailogCloseResult = 'success';
                     this.getOrderDetail();
+                    }
         
                 });
         
@@ -155,7 +157,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         
             }
       onCloseCancel() {
-        this.thisDialogRef.close('Cancel');
+        this.thisDialogRef.close(this.dailogCloseResult);
       }
   ngOnInit() {
     this.getPolygonDistributors();

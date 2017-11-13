@@ -110,7 +110,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   Closedailog() {
-    this.thisDialogRef.close('suce');
+    this.thisDialogRef.close('success');
   }
   ngOnInit() {
     this.getDistributors();
