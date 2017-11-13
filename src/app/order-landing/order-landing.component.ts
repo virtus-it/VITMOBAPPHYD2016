@@ -15,7 +15,7 @@ import * as _ from 'underscore';
 })
 export class OrderLandingComponent implements OnInit {
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService,private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) { }
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) { }
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 10, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
   forwardOrders: any = [];
@@ -23,6 +23,25 @@ export class OrderLandingComponent implements OnInit {
   forwardClickMore = true;
   orderClickMore = true;
   polygonArray = [];
+  filterInput = { "order": { "pagesize": "100", "searchtype": "status", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  dropdownData = { selectedItems: [] };
+  dropdownSettings = {
+    singleSelection: false,
+    text: "Select Status",
+    selectAllText: 'Select All',
+    unSelectAllText: 'UnSelect All',
+    enableSearchFilter: true,
+    badgeShowLimit: 2,
+    classes: "myclass custom-class myyy"
+  };
+  statusList = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
+  { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+  { "id": "delivered", "itemName": "Delivered" },
+  { "id": "cancelled", "itemName": "Cancelled" },
+  { "id": "doorlock", "itemName": "Doorlock" },
+  { "id": "rejected", "itemName": "Rejected" },
+  { "id": "notreachable", "itemName": "Not Reachable" },
+  { "id": "cantdeliver", "itemName": "Can't Deliver" }];
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
 
@@ -41,16 +60,16 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showCoverageDetails(orderDetails) {
-    let modelData = {orders:orderDetails,polygons:this.polygonArray}
+    let modelData = { orders: orderDetails, polygons: this.polygonArray }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '95%',
       data: modelData
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      if(result == 'success'){
-      this.getForwardOrderDetails(true);
-      this.getAllOrderDetails(true);
+      if (result == 'success') {
+        this.getForwardOrderDetails(true);
+        this.getAllOrderDetails(true);
       }
 
     });
@@ -127,7 +146,7 @@ export class OrderLandingComponent implements OnInit {
         }
         else if (details.status == "assigned") {
           details.OrderModifiedStatus = "Re-Assign";
-          details.StatusColor = "primary";
+          details.StatusColor = "logo-color";
         }
         else if (details.status.toLowerCase() == "delivered") {
           details.OrderModifiedStatus = "Delivered";
@@ -145,15 +164,15 @@ export class OrderLandingComponent implements OnInit {
           details.OrderModifiedStatus = "Not Reachable";
           details.StatusColor = "warning";
         }
-        else if (details.status == "pending" ) {
+        else if (details.status == "pending") {
           details.OrderModifiedStatus = "Pending";
           details.StatusColor = "primary";
         }
-        else if (details.status == "ordered" || details.status == "backtodealer" ) {
+        else if (details.status == "ordered" || details.status == "backtodealer") {
           details.OrderModifiedStatus = "Assign";
-          details.StatusColor = "primary";
+          details.StatusColor = "logo-color";
         }
-        
+
 
       });
       this.forwardClickMore = true;
@@ -223,15 +242,15 @@ export class OrderLandingComponent implements OnInit {
           details.OrderModifiedStatus = "Not Reachable";
           details.StatusColor = "warning";
         }
-        else if (details.status == "pending" ) {
+        else if (details.status == "pending") {
           details.OrderModifiedStatus = "Pending";
           details.StatusColor = "primary";
         }
-        else if (details.status == "ordered" || details.status == "backtodealer" ) {
+        else if (details.status == "ordered" || details.status == "backtodealer") {
           details.OrderModifiedStatus = "Assign";
           details.StatusColor = "primary";
         }
-        
+
 
       });
       this.orderClickMore = true;
@@ -242,36 +261,76 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   getPolygonDistributors() {
-    
-            var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
-            this.distributorService.getpolygonByDistributor(input)
-                .subscribe(
-                output => this.getPolygonDataResult(output),
-                error => {
-                    console.log("falied");
-                });
+
+    var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
+    this.distributorService.getpolygonByDistributor(input)
+      .subscribe(
+      output => this.getPolygonDataResult(output),
+      error => {
+        console.log("falied");
+      });
+  }
+  getPolygonDataResult(output) {
+
+    if (output.data && output.data.length > 0) {
+      for (let data of output.data) {
+
+        if (data.polygonvalue && data.polygonvalue.length > 0) {
+          for (let polygon of data.polygonvalue) {
+            polygon.color = '';
+            polygon.user_id = data.user_id;
+            polygon.distributorName = data.username;
+            polygon.supplier = data.suppliers;
+            polygon.mobileno = data.mobileno;
+            this.polygonArray.push(polygon);
+
+          }
         }
-        getPolygonDataResult(output) {
-            
-            if (output.data && output.data.length > 0) {
-                for (let data of output.data) {
-    
-                    if (data.polygonvalue && data.polygonvalue.length > 0) {
-                        for (let polygon of data.polygonvalue) {
-                            polygon.color = '';
-                            polygon.user_id = data.user_id;
-                            polygon.distributorName = data.username;
-                            polygon.supplier = data.suppliers;
-                            polygon.mobileno = data.mobileno;
-                            this.polygonArray.push(polygon);
-                            
-                        }
-                    }
-    
-                }
-            }
+
+      }
+    }
+  }
+  searchOrderList() {
+    if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
+      for (let data of this.dropdownData.selectedItems) {
+        if (this.filterInput.order.searchtext) {
+          this.filterInput.order.searchtext += "," + data.id;
         }
-  refreshOrders(){
+        else {
+          this.filterInput.order.searchtext += data.id;
+        }
+      }
+      if (this.tabPanelView == 'forward') {
+        this.filterInput.order.status = 'forwardedorders';
+      }
+      else {
+        this.filterInput.order.status = 'all';
+      }
+      this.getFilteredOrders();
+
+    }
+  }
+  getFilteredOrders() {
+    let input = this.filterInput;
+    this.orderLandingService.getOrdersByfilter(input)
+    .subscribe(
+    output => this.getFilteredOrdersResult(output),
+    error => {
+      console.log("falied");
+    });
+  }
+  getFilteredOrdersResult(result){
+console.log(result);
+if(result.result == 'success'){
+  if (this.tabPanelView == 'forward') {
+    this.forwardOrders = result.data;
+  }
+  else {
+    this.allOrders = result.data;
+  }
+}
+  }
+  refreshOrders() {
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getPolygonDistributors();
