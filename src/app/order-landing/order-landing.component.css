@@ -47,7 +47,10 @@ table thead {
     color: #0f75bc;
   }
   .border-topbottom td{
-    padding: 8px 8px 3px !important;
+    padding: 7px 8px 0px !important;
+  }
+  .form-control:focus{
+    background: transparent;
   }
   /* .mat-dialog-container{
     height: 90% !important;

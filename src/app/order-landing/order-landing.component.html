@@ -1,5 +1,5 @@
 <div class="dist-style">
-  <div class=" row justify-content-between distIcon-style">
+  <!-- <div class=" row justify-content-between distIcon-style">
     <div class="col-md-2  col-sm-2  col-lg-2">
       <h4>
         <i class="fa fa-file-text-o"></i> Order</h4>
@@ -7,10 +7,20 @@
     <div class="col-md-2  col-sm-2  col-lg-2">
 
     </div>
-  </div>
-  <div id="" class="row pd-15x10 mg-0">
-    <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
-      <div class="filtercol-style height-500">
+  </div> -->
+  <div id="" class="row pd-20x5 mg-0">
+    
+    <div class="col-sm-3 col-md-3 col-lg-3 ">
+        <div>
+        <div  class=" row justify-content-between heading-style">
+            <div  class="col-md-5  col-sm-6  col-lg-5t">
+                <h4 ><i  class="fa fa-file-text-o"></i> Order</h4>
+            </div>
+          <div  class="col-md-3 col-sm-3  col-lg-3">  
+              <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>       
+          </div>
+            </div>
+      <div class="height-500 filter-style ">
         <h6 class="left">
           <b>Filter by</b>
         </h6>
@@ -74,7 +84,9 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-9 col-md-9 col-lg-9">
+    </div>
+    <div class="col-sm-9 col-md-9 col-lg-9 padding-0">
+      <div>
       <!-- <ul class="nav nav-pills col-sm-offset-6  col-md-offset-4  col-lg-offset-4 pd-20">
               <li class="nav-item"></li>
               <li class="nav-item" ><a class="nav-link" href="javascript:void(0)" >ALL ORDERS</a></li>
@@ -95,8 +107,8 @@
       <div *ngIf="tabPanelView === 'forward'">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
-            <tr class="border-topbottom">
-              <td width="35%">
+            <tr class="border-topbottom bg-eee">
+              <td width="34%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
                     <label class="td-label">Order Id :
@@ -122,24 +134,30 @@
                   </div>
                 </div>
               </td>
-              <td width="32%">
+              <td width="33%">
                 <div class="row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
                     <label class="td-label">Supplier :
                       <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                     </label>
                     <br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right">
+                  <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <label class="td-label capitalize" [ngClass]="forward.StatusColor"> {{forward.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
               </td>
+              <td>                    
+                <i class="fa fa-minus logo-color fs-18"></i>
+                <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+                
+              </td>
+              
             </tr>
 
             <tr>
-              <td width="35%" class="brd-right">
+              <td width="34%" class="brd-right">
                 <div class="">
                   <div class="form-group row ">
                     <div class="col-sm-8  col-md-8  col-lg-8 left">
@@ -228,7 +246,7 @@
                 </div>
 
               </td>
-              <td width="32%">
+              <td width="33%">
                 <div class="">
                   <div class=" row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
@@ -279,7 +297,9 @@
                   </div>
                 </div>
               </td>
-
+              <td>                    
+                  
+                </td>
             </tr>
           </tbody>
           <tfoot>
@@ -300,8 +320,8 @@
       <div *ngIf="tabPanelView === 'allorder'">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
-            <tr class="border-topbottom">
-              <td width="35%">
+              <tr class="border-topbottom bg-eee">
+                  <td width="34%">
                 <div class="row ">
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
                     <label class="td-label">Order Id :
@@ -328,24 +348,29 @@
                   </div>
                 </div>
               </td>
-              <td width="32%">
+              <td width="33%">
                 <div class="row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
                     <label class="td-label">Supplier:
                       <b *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                     </label>
                     <br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right">
+                  <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <label class="td-label capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
               </td>
+              <td>                    
+                  <i class="fa fa-minus logo-color fs-18"></i>
+                  <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+                  
+                </td>
             </tr>
 
             <tr>
-              <td width="35%" class="brd-right">
+              <td width="34%" class="brd-right">
                 <div class="">
                   <div class="form-group row ">
                     <div class="col-sm-8  col-md-8  col-lg-8 left">
@@ -434,7 +459,7 @@
                 </div>
 
               </td>
-              <td width="32%">
+              <td width="33%">
                 <div class="">
                   <div class=" mgbottom-10 row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
@@ -485,7 +510,7 @@
                   </div>
                 </div>
               </td>
-
+              <td></td>
             </tr>
           </tbody>
           <tfoot>
@@ -502,7 +527,7 @@
           </tfoot>
         </table>
       </div>
-
+</div>
     </div>
   </div>
 </div>
