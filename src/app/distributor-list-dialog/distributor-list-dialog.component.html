@@ -1,7 +1,7 @@
 
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-        <i class="fa fa-sitemap"></i>  Distributors
+        <i class="fa fa-sitemap"></i>  Assigning Order
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -10,7 +10,14 @@
   </div>
 
     <md-dialog-content layout="column">
-        <div class="row pd-15x25 brd-bottom">
+        <nav class="nav nav-pills flex-column flex-sm-row row mgbottom-20">
+            <a class="flex-sm-fill text-sm-center nav-link col-xs-4 col-sm-4 col-md-4 col-lg-4" href="javascript:void(0)"></a>
+            <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
+              (click)="showTabPanel('suppliers')">Suppliers</a>
+            <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'distributors'}" href="javascript:void(0)"
+              (click)="showTabPanel('distributors')">Distributors</a>
+          </nav>
+        <div class="row pd-15x25 brd-bottom" *ngIf="tabPanelView === 'suppliers'">
             <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
@@ -22,25 +29,53 @@
         </thead>
         <tbody>
           
-          <tr  *ngFor="let dist of distributors; let i = index" [attr.data-index]="i" >
+          <tr  *ngFor="let supplier of suppliers; let i = index" [attr.data-index]="i" >
               <td width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" [(ngModel)]="distributorID"   class="custom-control-input" name="{{dist.userid}}" value="{{dist.userid}}">
+                  <input type="radio" [(ngModel)]="supplierID"   class="custom-control-input" name="{{supplier.userid}}" value="{{supplier.userid}}">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">{{dist.firstname}} {{dist.lastname}}</span>
+                  <span class="custom-control-description">{{supplier.firstname}} {{supplier.lastname}}</span>
                 </label></td>
             <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
               {{dist.firstname}} {{dist.lastname}}</td> -->
-            <td width="20%" class="left capital">{{dist.mobileno}}</td>
-            <td width="20%" class="left capital">{{dist.areaname}}</td>
-            <td width="30%" class="left capital">{{dist.address}}</td>
+            <td width="20%" class="left capital">{{supplier.mobileno}}</td>
+            <td width="20%" class="left capital">{{supplier.areaname}}</td>
+            <td width="30%" class="left capital">{{supplier.address}}</td>
            </tr>
         </tbody>
       </table>
     </div>
+    <div class="row pd-15x25 brd-bottom" *ngIf="tabPanelView === 'distributors'">
+        <table class="table table-hover table-fixedheader">
+    <thead>
+      <tr>
+        <th width="30%">Name</th>
+        <th width="20%">Mobile </th>
+        <th width="20%">Area Name</th>
+        <th width="30%">Address</th>
+         </tr>
+    </thead>
+    <tbody>
+      
+      <tr  *ngFor="let dist of distributors; let i = index" [attr.data-index]="i" >
+          <td width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" [(ngModel)]="distributorID"   class="custom-control-input" name="{{dist.userid}}" value="{{dist.userid}}">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{dist.firstname}} {{dist.lastname}}</span>
+            </label></td>
+        <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
+          {{dist.firstname}} {{dist.lastname}}</td> -->
+        <td width="20%" class="left capital">{{dist.mobileno}}</td>
+        <td width="20%" class="left capital">{{dist.areaname}}</td>
+        <td width="30%" class="left capital">{{dist.address}}</td>
+       </tr>
+    </tbody>
+  </table>
+</div>
     </md-dialog-content>
     <div class="row float-right pdright-30  mgbottom-20">
     <md-dialog-actions align="end">
-      <button type="submit" md-raised-button (click)="forWardOrder()" class="btn-primary">Forward</button>&nbsp;
+      <button type="submit" md-raised-button *ngIf="tabPanelView === 'suppliers'" (click)="assignOrder()" class="btn-primary">Assign</button>
+      <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" (click)="forWardOrder()" class="btn-primary">Forward</button>&nbsp;
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
       
     </md-dialog-actions>
