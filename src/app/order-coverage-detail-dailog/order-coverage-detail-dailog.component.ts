@@ -2,7 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
-import { DistributorServiceService } from '../distributor/distributor-service.service'
+import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
@@ -33,37 +33,11 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   ]
   constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog) { }
   dailogCloseResult = "cancel";
-  getPolygonDistributors() {
-    
-            var input = { area: { user_type: "dealer", user_id: 0, "apptype": this.authenticationService.appType() } };
-            this.distributorService.getpolygonByDistributor(input)
-                .subscribe(
-                output => this.getPolygonDataResult(output),
-                error => {
-                    console.log("falied");
-                });
+
+        assignPolygon(){
+            this.polygonArray= this.orderDetail.polygons;
+            this.displayPolygon=this.orderDetail.polygons;
         }
-        getPolygonDataResult(output) {
-            
-            if (output.data && output.data.length > 0) {
-                for (let data of output.data) {
-    
-                    if (data.polygonvalue && data.polygonvalue.length > 0) {
-                        for (let polygon of data.polygonvalue) {
-                            polygon.color = '';
-                            polygon.user_id = data.user_id;
-                            polygon.distributorName = data.username;
-                            polygon.supplier = data.suppliers;
-                            polygon.mobileno = data.mobileno;
-                            this.polygonArray.push(polygon);
-                            this.displayPolygon.push(polygon);
-                        }
-                    }
-    
-                }
-            }
-        }
-    
         click(event, polygon) {
             this.listOfDistributors = [];
             let myLatLng = event.latLng;
@@ -109,7 +83,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             }
         }
         getOrderDetail() {
-          let input = { appType: this.authenticationService.appType(), orderid: this.orderDetail.order_id, userId: this.authenticationService.loggedInUserId() };
+          let input = { appType: this.authenticationService.appType(), orderid: this.orderDetail.orders.order_id, userId: this.authenticationService.loggedInUserId() };
           this.distributorService.getOrderById(input)
               .subscribe(
               output => this.getOrderDetailResult(output),
@@ -142,7 +116,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
         
                     width: '700px',
-                    data: this.orderDetail
+                    data: this.orderDetail.orders
                 });
                 dialogRefDist.afterClosed().subscribe(result => {
                     console.log(`Dialog closed: ${result}`);
@@ -160,7 +134,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.thisDialogRef.close(this.dailogCloseResult);
       }
   ngOnInit() {
-    this.getPolygonDistributors();
+    //this.getPolygonDistributors();
+    this.assignPolygon();
     this.getOrderDetail();
   }
 

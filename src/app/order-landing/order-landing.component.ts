@@ -3,6 +3,7 @@ import { MdDialog } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { OrderLandingService } from './order-landing.service';
 import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-dailog.component';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
@@ -14,22 +15,23 @@ import * as _ from 'underscore';
 })
 export class OrderLandingComponent implements OnInit {
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService) { }
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService,private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) { }
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 10, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
   forwardOrders: any = [];
   allOrders: any = [];
   forwardClickMore = true;
   orderClickMore = true;
+  polygonArray = [];
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
 
   }
-  showEditCustomer() {
+  showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
 
       width: '700px',
-      data: ''
+      data: orderDetails
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
@@ -39,9 +41,10 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showCoverageDetails(orderDetails) {
+    let modelData = {orders:orderDetails,polygons:this.polygonArray}
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '95%',
-      data: orderDetails
+      data: modelData
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
@@ -238,11 +241,43 @@ export class OrderLandingComponent implements OnInit {
       this.orderClickMore = false;
     }
   }
+  getPolygonDistributors() {
+    
+            var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
+            this.distributorService.getpolygonByDistributor(input)
+                .subscribe(
+                output => this.getPolygonDataResult(output),
+                error => {
+                    console.log("falied");
+                });
+        }
+        getPolygonDataResult(output) {
+            
+            if (output.data && output.data.length > 0) {
+                for (let data of output.data) {
+    
+                    if (data.polygonvalue && data.polygonvalue.length > 0) {
+                        for (let polygon of data.polygonvalue) {
+                            polygon.color = '';
+                            polygon.user_id = data.user_id;
+                            polygon.distributorName = data.username;
+                            polygon.supplier = data.suppliers;
+                            polygon.mobileno = data.mobileno;
+                            this.polygonArray.push(polygon);
+                            
+                        }
+                    }
+    
+                }
+            }
+        }
   refreshOrders(){
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
+    this.getPolygonDistributors();
   }
   ngOnInit() {
+    this.getPolygonDistributors();
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
   }
