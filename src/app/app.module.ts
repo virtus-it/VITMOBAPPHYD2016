@@ -55,6 +55,7 @@ import { CustomerSettingDailogComponent } from './customer-setting-dailog/custom
 import { CustomerSetPaymentCycleComponent } from './customer-set-payment-cycle/customer-set-payment-cycle.component';
 import { CustomerScheduleDaiolgComponent } from './customer-schedule-daiolg/customer-schedule-daiolg.component';
 import { OrderLandingService } from './order-landing/order-landing.service';
+import { CustomerService } from './customer/customer.service';
 import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import { UtcDatePipe } from './pipes/utc-date.pipe';
 import { ReportsService } from './reports/reports.service';
@@ -155,6 +156,7 @@ import { ReportsService } from './reports/reports.service';
         LoggedInGuard,
         SmsServiceService,
         ReportsService,
+        CustomerService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
