@@ -12,9 +12,10 @@
 <md-dialog-content layout="column">
     <form class="example-form" >
         
-  <div class="container-fluid pd-15x25 brd-bottom mgtop-20">
+  <div class="container-fluid brd-bottom mgtop-20">
     <div class="row">
       <div class="col">
+          <div *ngIf="gpsMessage"><h4 class="warning">{{gpsMessage}}</h4></div>        
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
           <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
           <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path" [fillColor]="'#0073e6'" [geodesic]="true" [strokeWeight]="1"
@@ -23,29 +24,26 @@
         </agm-map>
       </div>
       <div class="col-md-3" *ngIf="listOfDistributors.length">
-          <div *ngIf="gpsMessage"><h4 class="warning">{{gpsMessage}}</h4></div>
-         
           <table class="table table-hover table-fixedheader nofath">
               <thead>
             <tr>
               <!-- <th width="3%">S.No</th> -->
-              <th width="35%">Distributor</th>
-              <th width="25%">Mobile</th>
-              <th width="20%">Products</th>
-              <th width="20%" class="center"> Areas</th>
-
+              <th width="35%"><small> Distributor</small></th>
+              <th width="28%"><small>Mobile</small></th>
+              <th width="22%"><small>Products</small></th>
+              <th width="15%" class="center"> <small>Areas</small></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
               <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-              <td width="35%" class="left capital">{{dist.distributorName}}</td>
-              <td width="25%" class="left capital">{{dist.mobileno}}</td>
+              <td width="35%" class="left capital"><small>{{dist.distributorName}}</small></td>
+              <td width="28%" class="left capital"><small>{{dist.mobileno}}</small></td>
               <td width="20%" class=" capital center">
                 <label (click)="ViewProduct(dist)" class="logo-color"><i class="fa fa-gift fs-20" aria-hidden="true"></i>
                    </label>
               </td>
-              <td width="20%" class=" capital center">
+              <td width="15%" class=" capital center">
                   <label (click)="DistrbutorHover(dist)" class="logo-color"><i class="fa fa-map" aria-hidden="true"></i>
                      </label>
               </td>
@@ -61,7 +59,7 @@
 
 <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
-    <button md-raised-button color="primary" (click)="ShowAllPolygons()"> Show All</button> &nbsp;
+    <button md-raised-button color="primary" (click)="ShowAllPolygons()"> SHOW ALL</button> &nbsp;
     <button class="btn" (click)="ViewDistributors()">Assign</button>
   </md-dialog-actions>
 </div>

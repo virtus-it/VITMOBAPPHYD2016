@@ -21,12 +21,12 @@
           </div>
             </div>
       <div class="height-500 filter-style ">
-        <h6 class="left">
+        <!-- <h6 class="left">
           <b>Filter by</b>
-        </h6>
-        <div class="row ">
-            <div class="  ">
-                <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="example-full-width">
+        </h6> -->
+
+            <div class="form-group">
+                <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
                   <md-option value="name">Customer Name</md-option>
                   <md-option value="mobile">Customer Mobile</md-option>
                   <md-option value="orderid">Order Id</md-option>
@@ -36,7 +36,7 @@
                 </md-select>
       
               </div>
-        </div>
+
         <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
           <!-- <b class="float-left">Filter by Distributor</b> -->
           <md-form-field class="example-full-width">
@@ -69,14 +69,10 @@
                 
                   <md-form-field class="example-full-width">
                     <input class="form-control" mdInput placeholder="Enter Distribitor Name" [(ngModel)]="filterType.distributorid">
-                   
-                    
+ 
                   </md-form-field>
                 </div>
-        <div class="form-group" *ngIf="filterInput.order.searchtype == 'status'">
-
-            
-
+        <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status'">
                 <angular2-multiselect  class="" [data]="statusList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
           </div>
         <br>

@@ -33,7 +33,7 @@ table thead {
     margin: 0px !important;
   }
   .pd-20x5{
-    padding: 20px 5px;
+    padding: 20px 5px 5px;
   }
   .filter-style{
     border: 1px solid #c5d6de;
@@ -216,6 +216,13 @@ background: transparent;
 }
 .wd-100pc{
   width: 100%;
+}
+.full-width{
+  width: 100%;
+ 
+}
+.pure-checkbox{
+  padding: 2px 10px !important;
 }
 b, strong {
   font-weight: 500;
@@ -477,5 +484,8 @@ border:2px solid #0f75bc;
         table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
           float: left;    
           word-wrap:break-word;     
+        }
+        .timeline[_ngcontent-c12]    > li[_ngcontent-c12]    > .timeline-badge[_ngcontent-c12]{
+          top:3px !important;
         }
         

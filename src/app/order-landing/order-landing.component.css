@@ -52,6 +52,10 @@ table thead {
   .form-control:focus{
     background: transparent;
   }
+  .dropdown-list ul li:first-child{
+    padding-top: 7px !important;
+  }
+
   /* .mat-dialog-container{
     height: 90% !important;
   } */

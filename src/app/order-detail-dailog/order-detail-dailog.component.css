@@ -14,7 +14,9 @@
     /* right: 25px; */
     margin-left: -11.5px;
 }
-
+.timeline[_ngcontent-c12]    > li[_ngcontent-c12]    > .timeline-badge[_ngcontent-c12]{
+  top:3px !important;
+}
   .timeline > li {
     margin-bottom: 10px;
     position: relative;
