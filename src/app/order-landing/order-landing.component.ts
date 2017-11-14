@@ -190,6 +190,7 @@ export class OrderLandingComponent implements OnInit {
   getPolygonDataResult(output) {
 
     if (output.data && output.data.length > 0) {
+      this.polygonArray = [];
       for (let data of output.data) {
 
         if (data.polygonvalue && data.polygonvalue.length > 0) {
@@ -319,7 +320,7 @@ export class OrderLandingComponent implements OnInit {
     this.filterRecords = true;
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
-    this.getPolygonDistributors();
+    //this.getPolygonDistributors();
   }
   clearFilter() {
     this.filterRecords = true;
@@ -345,7 +346,7 @@ export class OrderLandingComponent implements OnInit {
       }
       else if (details.status == "assigned") {
         details.OrderModifiedStatus = "Re-Assign";
-        details.StatusColor = "primary";
+        details.StatusColor = "logo-color";
       }
       else if (details.status.toLowerCase() == "delivered") {
         details.OrderModifiedStatus = "Delivered";
@@ -365,11 +366,11 @@ export class OrderLandingComponent implements OnInit {
       }
       else if (details.status == "pending") {
         details.OrderModifiedStatus = "Pending";
-        details.StatusColor = "primary";
+        details.StatusColor = "logo-color";
       }
       else if (details.status == "ordered" || details.status == "backtodealer") {
         details.OrderModifiedStatus = "Assign";
-        details.StatusColor = "primary";
+        details.StatusColor = "logo-color";
       }
 
 
