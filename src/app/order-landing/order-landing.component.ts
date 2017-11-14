@@ -317,6 +317,7 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   refreshOrders() {
+    this.clearFilter();
     this.filterRecords = true;
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
@@ -325,7 +326,7 @@ export class OrderLandingComponent implements OnInit {
   clearFilter() {
     this.filterRecords = true;
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
-    this.filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
   }

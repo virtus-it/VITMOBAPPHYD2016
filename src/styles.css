@@ -314,7 +314,9 @@ ul li small{
 .timeline-badge.danger {
   background-color: #d9534f !important;
 }
-
+.danger {
+  color: #8B1210 !important;
+}
 .timeline-badge.info {
   background-color: #5bc0de !important;
 }
