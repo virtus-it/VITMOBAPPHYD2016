@@ -68,11 +68,8 @@
           </md-form-field>
         </div>
         <div class="form-group ">
-
-            <div class="col-md-12  pdright-20">
                 <angular2-multiselect  class="" [data]="statusList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
-              </div>
-        </div>
+          </div>
         <br>
         <div class="input-group pd-10  ">
           <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
