@@ -313,7 +313,7 @@
               <td></td>
               <td>
                 <h4 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getForwardOrderDetails(false); *ngIf="forwardClickMore">
+                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                 </h4>
                 <h4 *ngIf="!forwardClickMore" class="warning">Record Not Available</h4>
@@ -524,7 +524,7 @@
               <td></td>
               <td>
                 <h4 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getAllOrderDetails(false); *ngIf="orderClickMore">
+                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                   <span *ngIf="!orderClickMore">Record Not Available</span>
                 

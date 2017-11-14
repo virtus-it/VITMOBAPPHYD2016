@@ -24,7 +24,7 @@ export class OrderLandingComponent implements OnInit {
   forwardClickMore = true;
   orderClickMore = true;
   polygonArray = [];
-  filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
   dropdownData = { selectedItems: [] };
   filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
   dropdownSettings = {
@@ -45,8 +45,10 @@ export class OrderLandingComponent implements OnInit {
   { "id": "notreachable", "itemName": "Not Reachable" },
   { "id": "cantdeliver", "itemName": "Can't Deliver" }];
   showTabPanel(panelName) {
+    this.filterRecords = false;
     this.tabPanelView = panelName;
-
+    this.clearFilter();
+    this.refreshOrders();
   }
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
@@ -134,7 +136,7 @@ export class OrderLandingComponent implements OnInit {
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
-      this.forwardOrders = _.union(this.forwardOrders, result.data);
+      this.forwardOrders = _.union(this.forwardOrders, data);
     }
     else {
       this.forwardClickMore = false;
@@ -242,12 +244,41 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.status = 'all';
     }
     console.log(this.filterInput);
-    this.getFilteredOrders();
+    this.getFilteredOrders(true);
 
 
   }
-  getFilteredOrders() {
+  getFilteredOrders(firstcall) {
+    if (!firstcall) {
+      if (this.tabPanelView == 'forward') {
+        let lastForwardOrder: any = _.last(this.forwardOrders);
+        if (lastForwardOrder) {
+          this.filterInput.order.last_orderid = lastForwardOrder.order_id;
+        }
+      }
+
+      else if (this.tabPanelView == 'allorder') {
+        let lastallOrder: any = _.last(this.allOrders);
+        if (lastallOrder) {
+          this.filterInput.order.last_orderid = lastallOrder.order_id;
+        }
+
+      }
+
+
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.allOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+    }
     let input = this.filterInput;
+
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getFilteredOrdersResult(output),
@@ -261,33 +292,37 @@ export class OrderLandingComponent implements OnInit {
       this.filterRecords = true;
       if (this.tabPanelView == 'forward') {
         let data = this.ModifyOrderList(result.data);
-        this.forwardOrders = data;
+        this.forwardClickMore = true;
+        this.forwardOrders = _.union(this.forwardOrders, data);
       }
 
       else if (this.tabPanelView == 'allorder') {
         let data = this.ModifyOrderList(result.data);
-        this.allOrders = data;
+        this.orderClickMore = true;
+        this.allOrders = _.union(this.allOrders, data);
       }
 
     }
     else {
       if (this.tabPanelView == 'forward') {
-        this.forwardOrders = [];
+
         this.forwardClickMore = false;
       }
       else if (this.tabPanelView == 'allorder') {
-        this.allOrders = [];
+
         this.orderClickMore = false;
       }
 
     }
   }
   refreshOrders() {
+    this.filterRecords = true;
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getPolygonDistributors();
   }
   clearFilter() {
+    this.filterRecords = true;
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
     this.filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
@@ -340,6 +375,23 @@ export class OrderLandingComponent implements OnInit {
 
     });
     return result;
+  }
+  getPagingOrderDetails(firstcall, tab) {
+    if (this.filterRecords) {
+
+      this.getFilteredOrders(firstcall);
+    }
+    else {
+      if (tab == 'forward') {
+
+        this.getForwardOrderDetails(firstcall);
+      }
+      else if (tab == 'allorder') {
+
+        this.getAllOrderDetails(firstcall);
+      }
+    }
+
   }
   ngOnInit() {
     this.getPolygonDistributors();
