@@ -14,7 +14,7 @@
     <div class="row">
       <div class=" col-md-5 col-5 col-sm-5 brd-right">
         <div class="container-fluid">
-          <b> Order Details</b>
+          <b> <i class="fa fa-file-text-o"></i>   Order Details</b>
           <div class="row form-group mgtop-10">
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
@@ -98,7 +98,7 @@
               <br>
             </div>
           </div>
-          <div class="row form-group">
+          <div class="form-group">
 
             <table class="table table-hover table-striped table-fixedheader">
               <thead>
@@ -137,7 +137,7 @@
 
       <div class="col-md-3">
         <div class="container-fluid">
-          <b class="">Order Status</b>
+          <b class=""> <i class="fa fa-check-square-o" aria-hidden="true"></i>  Order Status</b>
 
           <div class="row  mgtop-10">
             <ul class="timeline">
@@ -259,8 +259,8 @@
         </div>
       </div>
       <div class="col-md-4 form-group border-left">
-        <b>Messages</b>
-        <ul class="scrollheight  mgtop-10">
+        <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
+        <ul class="scrollheight  mgtop-5">
           <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
             <i class="fa fa-reply" aria-hidden="true"></i>
             <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
