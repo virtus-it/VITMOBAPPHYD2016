@@ -141,7 +141,7 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   getAllOrderDetails(firstcall) {
-   
+
     this.orderListInput.order.status = 'all';
     if (this.allOrders && this.allOrders.length && !firstcall) {
       let lastAllOrder: any = _.last(this.allOrders);
@@ -287,7 +287,7 @@ export class OrderLandingComponent implements OnInit {
     this.getAllOrderDetails(true);
     this.getPolygonDistributors();
   }
-  clearFilter(){
+  clearFilter() {
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
     this.filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
