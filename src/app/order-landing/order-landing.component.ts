@@ -20,11 +20,13 @@ export class OrderLandingComponent implements OnInit {
   tabPanelView: string = "forward";
   forwardOrders: any = [];
   allOrders: any = [];
+  filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
   polygonArray = [];
-  filterInput = { "order": { "pagesize": "100", "searchtype": "status", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
   dropdownData = { selectedItems: [] };
+  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
   dropdownSettings = {
     singleSelection: false,
     text: "Select Status",
@@ -130,51 +132,7 @@ export class OrderLandingComponent implements OnInit {
     // this.forwardOrders = result.data;
     console.log(this.forwardOrders);
     if (result.data && result.data.length > 0) {
-      _.each(result.data, function (i, j) {
-        let details: any = i;
-        if (details.status == "onhold") {
-          details.OrderModifiedStatus = "On Hold";
-          details.StatusColor = "warning";
-        }
-        else if (details.status.toLowerCase() == "cancelled") {
-          details.OrderModifiedStatus = "Cancelled";
-          details.StatusColor = "danger";
-        }
-        else if (details.status.toLowerCase() == "rejected") {
-          details.OrderModifiedStatus = "Rejected";
-          details.StatusColor = "danger";
-        }
-        else if (details.status == "assigned") {
-          details.OrderModifiedStatus = "Re-Assign";
-          details.StatusColor = "logo-color";
-        }
-        else if (details.status.toLowerCase() == "delivered") {
-          details.OrderModifiedStatus = "Delivered";
-          details.StatusColor = "success";
-        }
-        else if (details.status == "doorlock" || details.status == "Door Locked") {
-          details.OrderModifiedStatus = "Door Locked";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
-          details.OrderModifiedStatus = "Cant Deliver";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "Not Reachable" || details.status == "not_reachable") {
-          details.OrderModifiedStatus = "Not Reachable";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "pending") {
-          details.OrderModifiedStatus = "Pending";
-          details.StatusColor = "primary";
-        }
-        else if (details.status == "ordered" || details.status == "backtodealer") {
-          details.OrderModifiedStatus = "Assign";
-          details.StatusColor = "logo-color";
-        }
-
-
-      });
+      let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
       this.forwardOrders = _.union(this.forwardOrders, result.data);
     }
@@ -183,6 +141,7 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   getAllOrderDetails(firstcall) {
+   
     this.orderListInput.order.status = 'all';
     if (this.allOrders && this.allOrders.length && !firstcall) {
       let lastAllOrder: any = _.last(this.allOrders);
@@ -208,53 +167,9 @@ export class OrderLandingComponent implements OnInit {
     //  this.allOrders = result.data;
     console.log(this.allOrders);
     if (result.data && result.data.length > 0) {
-      _.each(result.data, function (i, j) {
-        let details: any = i;
-        if (details.status == "onhold") {
-          details.OrderModifiedStatus = "On Hold";
-          details.StatusColor = "warning";
-        }
-        else if (details.status.toLowerCase() == "cancelled") {
-          details.OrderModifiedStatus = "Cancelled";
-          details.StatusColor = "danger";
-        }
-        else if (details.status.toLowerCase() == "rejected") {
-          details.OrderModifiedStatus = "Rejected";
-          details.StatusColor = "danger";
-        }
-        else if (details.status == "assigned") {
-          details.OrderModifiedStatus = "Re-Assign";
-          details.StatusColor = "primary";
-        }
-        else if (details.status.toLowerCase() == "delivered") {
-          details.OrderModifiedStatus = "Delivered";
-          details.StatusColor = "success";
-        }
-        else if (details.status == "doorlock" || details.status == "Door Locked") {
-          details.OrderModifiedStatus = "Door Locked";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
-          details.OrderModifiedStatus = "Cant Deliver";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "Not Reachable" || details.status == "not_reachable") {
-          details.OrderModifiedStatus = "Not Reachable";
-          details.StatusColor = "warning";
-        }
-        else if (details.status == "pending") {
-          details.OrderModifiedStatus = "Pending";
-          details.StatusColor = "primary";
-        }
-        else if (details.status == "ordered" || details.status == "backtodealer") {
-          details.OrderModifiedStatus = "Assign";
-          details.StatusColor = "primary";
-        }
-
-
-      });
+      let data = this.ModifyOrderList(result.data);
       this.orderClickMore = true;
-      this.allOrders = _.union(this.allOrders, result.data);
+      this.allOrders = _.union(this.allOrders, data);
     }
     else {
       this.orderClickMore = false;
@@ -291,49 +206,140 @@ export class OrderLandingComponent implements OnInit {
     }
   }
   searchOrderList() {
-    if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
-      for (let data of this.dropdownData.selectedItems) {
-        if (this.filterInput.order.searchtext) {
-          this.filterInput.order.searchtext += "," + data.id;
-        }
-        else {
-          this.filterInput.order.searchtext += data.id;
-        }
-      }
-      if (this.tabPanelView == 'forward') {
-        this.filterInput.order.status = 'forwardedorders';
-      }
-      else {
-        this.filterInput.order.status = 'all';
-      }
-      this.getFilteredOrders();
-
+    if (this.filterInput.order.searchtype == 'name') {
+      this.filterInput.order.searchtext = this.filterType.customerName;
     }
+    else if (this.filterInput.order.searchtype == 'mobile') {
+      this.filterInput.order.searchtext = this.filterType.customerMobile;
+    }
+    else if (this.filterInput.order.searchtype == 'orderid') {
+      this.filterInput.order.searchtext = this.filterType.orderid;
+    }
+    else if (this.filterInput.order.searchtype == 'supplierid') {
+      this.filterInput.order.searchtext = this.filterType.supplierid;
+    }
+    else if (this.filterInput.order.searchtype == 'distributorid') {
+      this.filterInput.order.searchtext = this.filterType.distributorid;
+    }
+    else if (this.filterInput.order.searchtype == 'status') {
+      this.filterInput.order.searchtext = "";
+      if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
+        for (let data of this.dropdownData.selectedItems) {
+          if (this.filterInput.order.searchtext) {
+            this.filterInput.order.searchtext += "," + data.id;
+          }
+          else {
+            this.filterInput.order.searchtext += data.id;
+          }
+        }
+      }
+    }
+
+    if (this.tabPanelView == 'forward') {
+      this.filterInput.order.status = 'forwardedorders';
+    }
+    else {
+      this.filterInput.order.status = 'all';
+    }
+    console.log(this.filterInput);
+    this.getFilteredOrders();
+
+
   }
   getFilteredOrders() {
     let input = this.filterInput;
     this.orderLandingService.getOrdersByfilter(input)
-    .subscribe(
-    output => this.getFilteredOrdersResult(output),
-    error => {
-      console.log("falied");
-    });
+      .subscribe(
+      output => this.getFilteredOrdersResult(output),
+      error => {
+        console.log("falied");
+      });
   }
-  getFilteredOrdersResult(result){
-console.log(result);
-if(result.result == 'success'){
-  if (this.tabPanelView == 'forward') {
-    this.forwardOrders = result.data;
-  }
-  else {
-    this.allOrders = result.data;
-  }
-}
+  getFilteredOrdersResult(result) {
+    console.log(result);
+    if (result.result == 'success') {
+      this.filterRecords = true;
+      if (this.tabPanelView == 'forward') {
+        let data = this.ModifyOrderList(result.data);
+        this.forwardOrders = data;
+      }
+
+      else if (this.tabPanelView == 'allorder') {
+        let data = this.ModifyOrderList(result.data);
+        this.allOrders = data;
+      }
+
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardOrders = [];
+        this.forwardClickMore = false;
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.allOrders = [];
+        this.orderClickMore = false;
+      }
+
+    }
   }
   refreshOrders() {
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getPolygonDistributors();
+  }
+  clearFilter(){
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
+    this.filterInput = { "order": { "pagesize": "100", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    this.getForwardOrderDetails(true);
+    this.getAllOrderDetails(true);
+  }
+  ModifyOrderList(result) {
+    _.each(result, function (i, j) {
+      let details: any = i;
+      if (details.status == "onhold") {
+        details.OrderModifiedStatus = "On Hold";
+        details.StatusColor = "warning";
+      }
+      else if (details.status.toLowerCase() == "cancelled") {
+        details.OrderModifiedStatus = "Cancelled";
+        details.StatusColor = "danger";
+      }
+      else if (details.status.toLowerCase() == "rejected") {
+        details.OrderModifiedStatus = "Rejected";
+        details.StatusColor = "danger";
+      }
+      else if (details.status == "assigned") {
+        details.OrderModifiedStatus = "Re-Assign";
+        details.StatusColor = "primary";
+      }
+      else if (details.status.toLowerCase() == "delivered") {
+        details.OrderModifiedStatus = "Delivered";
+        details.StatusColor = "success";
+      }
+      else if (details.status == "doorlock" || details.status == "Door Locked") {
+        details.OrderModifiedStatus = "Door Locked";
+        details.StatusColor = "warning";
+      }
+      else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
+        details.OrderModifiedStatus = "Cant Deliver";
+        details.StatusColor = "warning";
+      }
+      else if (details.status == "Not Reachable" || details.status == "not_reachable") {
+        details.OrderModifiedStatus = "Not Reachable";
+        details.StatusColor = "warning";
+      }
+      else if (details.status == "pending") {
+        details.OrderModifiedStatus = "Pending";
+        details.StatusColor = "primary";
+      }
+      else if (details.status == "ordered" || details.status == "backtodealer") {
+        details.OrderModifiedStatus = "Assign";
+        details.StatusColor = "primary";
+      }
+
+
+    });
+    return result;
   }
   ngOnInit() {
     this.getPolygonDistributors();

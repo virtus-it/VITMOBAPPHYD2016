@@ -25,49 +25,54 @@
           <b>Filter by</b>
         </h6>
         <div class="row ">
-          <div class="col-sm-6  col-md-6  col-lg-6">
-            <md-form-field class="example-full-width">
-              <input class="form-control" mdInput placeholder="From Date" name="firstName">
-
-            </md-form-field>
-          </div>
-          <div class="col-sm-6  col-md-6  col-lg-6">
-            <md-form-field class="example-full-width">
-              <input class="form-control" mdInput placeholder="From Date">
-            </md-form-field>
-          </div>
+            <div class="  col-sm-3  col-md-3  col-lg-3">
+                <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="wd-100pc">
+                  <md-option value="name">Customer Name</md-option>
+                  <md-option value="mobile">Customer Mobile</md-option>
+                  <md-option value="orderid">Order Id</md-option>
+                  <md-option value="status">Status</md-option>
+                  <md-option value="supplierid">Supplier</md-option>
+                  <md-option value="distributorid">Distributor</md-option>
+                </md-select>
+      
+              </div>
         </div>
-        <div class=" ">
+        <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
           <!-- <b class="float-left">Filter by Distributor</b> -->
           <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder="Enter the distributor name">
-            <md-error>
-              Distributor Name is
-              <strong>required</strong>
-            </md-error>
-          </md-form-field>
+            <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
+           </md-form-field>
         </div>
-        <div class=" ">
-          <!-- <b class="float-left">Filter by Supplier</b> -->
+        <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
+         <md-form-field class="example-full-width">
+            <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+            </md-form-field>
+        </div>
+        <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'" >
+        
           <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder="Enter the supplier name">
-            <md-error>
-              Supplier Name is
-              <strong>required</strong>
-            </md-error>
+            <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
+           
+            
           </md-form-field>
         </div>
-        <div class=" ">
-          <!-- <b class="float-left">Filter by Customer</b> -->
-          <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder="Enter the customer name">
-            <md-error>
-              Customer Name is
-              <strong>required</strong>
-            </md-error>
-          </md-form-field>
-        </div>
-        <div class="form-group ">
+        <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
+            
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Supplier Name" [(ngModel)]="filterType.supplierid">
+               
+                
+              </md-form-field>
+            </div>
+            <div class=" " *ngIf="filterInput.order.searchtype == 'distributorid'">
+                
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Distribitor Name" [(ngModel)]="filterType.distributorid">
+                   
+                    
+                  </md-form-field>
+                </div>
+        <div class="form-group" *ngIf="filterInput.order.searchtype == 'status'">
 
             <div class="col-md-12  pdright-20">
                 <angular2-multiselect  class="" [data]="statusList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
@@ -78,7 +83,7 @@
           <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
             <i class="fa fa-search" aria-hidden="true"></i> Search
           </button>
-          <button md-raised-button color="primary">
+          <button md-raised-button color="primary" (click)="clearFilter()">
             <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
           </button>
         </div>
@@ -520,7 +525,8 @@
                 <h4 class="warning  capitalize">
                   <a href="javascript:void(0);" (click)=getAllOrderDetails(false); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
-                  <span *ngIf="!orderClickMore">No more data</span>
+                  <span *ngIf="!orderClickMore">Record Not Available</span>
+                
                 </h4>
               </td>
             </tr>
