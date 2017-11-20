@@ -10,33 +10,43 @@ import * as _ from 'underscore';
 export class ReportsComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService) { }
-  reportDetails = { reportType: "", days: "", lastId: "0", pagesize: 100, appType: this.authenticationService.appType() };
+  reportDetails = { reportType: "", days: null, lastId: "0", pagesize: 10, appType: this.authenticationService.appType() };
   reportsClickMore:boolean = false;
   reportsInput: any = {};
   reportsData = [];
+  tabPanelView = 'newlydownloaded';
   reportsType = [
     { value: 'newlydownloaded', viewValue: 'Newly Downloded' },
     { value: 'lastdays', viewValue: 'Last Days' },
     { value: 'pendingorders', viewValue: 'Pending Orders' },
     { value: 'rejectedorders', viewValue: 'Rejected Orders' },
-    { value: 'onlydownloaded', viewValue: 'Only Downloaded' },
     { value: 'notregistered', viewValue: 'Not Registered' },
     
   ];
-  searchReports(firstCall) {
+  searchReports(firstCall,Rtype) {
     this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
-    let input = { "root": { "days": this.reportsInput.days, "lastid": this.reportsInput.lastId, "pagesize": this.reportsInput.pagesize, "transtype": this.reportsInput.reportType, "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+  
+    this.tabPanelView = Rtype;
+   let input = { "root": { "days": null, "last_id": this.reportsInput.lastId, "pagesize": this.reportsInput.pagesize, "transtype": Rtype, "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
     if (this.reportsData && this.reportsData.length && !firstCall) {
       let lastRecord: any = _.last(this.reportsData);
       if (lastRecord) {
-        input.root.lastid = lastRecord.user_id;
+        if(input.root.transtype == 'pendingorders'){
+          input.root.last_id = lastRecord.orderid; 
+        }
+        else if(input.root.transtype == 'rejectedorders'){
+          input.root.last_id = lastRecord.orderid;
+        }
+        else{
+        input.root.last_id = lastRecord.user_id;
+        }
       }
       
 
     }
     else{
       this.reportsData = [];
-      input.root.lastid = null;
+      input.root.last_id = null;
     }
     this.reportservice.searchReports(input)
       .subscribe(
@@ -58,6 +68,7 @@ export class ReportsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.searchReports(true,'newlydownloaded') 
   }
 
 }

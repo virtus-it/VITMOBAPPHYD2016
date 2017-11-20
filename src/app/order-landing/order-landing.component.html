@@ -32,7 +32,7 @@
                   <md-option value="orderid">Order Id</md-option>
                   <md-option value="status">Status</md-option>
                   <md-option value="supplierid">Supplier</md-option>
-                  <md-option value="distributorid">Distributor</md-option>
+                  <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
                 </md-select>
       
               </div>
@@ -59,22 +59,32 @@
 
         <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
             
-              <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Supplier Name" [(ngModel)]="filterType.supplierid">
-               
-                
-              </md-form-field>
+          <md-form-field class="example-full-width"  >
+            <input mdInput  placeholder="Enter Supplier Name"  aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName" >
+               <span>{{ supplier.fullName }}</span>
+                </md-option>
+            </md-autocomplete>
+          </md-form-field>
             </div>
-            <div class=" " *ngIf="filterInput.order.searchtype == 'distributorid'">
+            <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
                 
-                  <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Distribitor Name" [(ngModel)]="filterType.distributorid">
- 
-                  </md-form-field>
+              <md-form-field class="example-full-width"  >
+                <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName" >
+                   <span>{{ dist.fullName }}</span>
+                    </md-option>
+                </md-autocomplete>
+              </md-form-field>
                 </div>
-        <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status'">
-                <angular2-multiselect  class="" [data]="statusList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+        <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                <angular2-multiselect  class="" [data]="statusListForward"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
           </div>
+          <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+            <angular2-multiselect  class="" [data]="statusListAll"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+      </div>
         <br>
         <div class="input-group pd-10  ">
           <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
@@ -266,7 +276,7 @@
                       <label class="td-label">
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left"  *ngIf="forward.OrderModifiedStatus !== 'Assign'">
                       <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>
@@ -477,7 +487,7 @@
                       <label class="td-label">
                         <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
                       <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
                     </div>
                   </div>

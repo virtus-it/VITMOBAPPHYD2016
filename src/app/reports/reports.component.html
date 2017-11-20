@@ -48,6 +48,14 @@
               <div class="col-md-6  col-sm-6  col-lg-6">
                   <h4><i class="fa fa-file-text"></i> Report</h4>
               </div>
+              <!-- <div class="" >
+                  
+                 <md-form-field class="example-full-width inline ">
+                     <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
+       
+                   </md-form-field>
+       
+               </div>  -->
             <div class="col-md-3 col-sm-3  col-lg-3">  
                 <a href="javascript:void(0)" title="Download"><i class="fa fa-download fa-2x" aria-hidden="true"></i></a>       
             </div>
@@ -83,46 +91,13 @@
         </ul>-->
         <ul class="nav nav-pills flex-column row">
             
-          <li class="nav-item">
-          <a class="nav-link active" href="javascript:void(0)">
+          <li class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+          <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
               <i class="fa fa-download" aria-hidden="true"></i> <br>           
-            Newly Downloaded</a>
+            {{type.viewValue}}</a>
           </li>
           
-          <li class="nav-item">
-          <a class="nav-link" href="javascript:void(0)">
-              <i class="fa fa-exchange" aria-hidden="true"></i>  <br> 
-           Last Days</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="javascript:void(0)">
-                  <i class="fa fa-exclamation-circle" aria-hidden="true"></i> <br> 
-                Pending Orders</a>
-              </li>
-              <li class="nav-item">
-                  <a class="nav-link" href="javascript:void(0)">
-                      <i class="fa fa-stop-circle-o" aria-hidden="true"></i>   <br> 
-                    Rejected Orders</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="javascript:void(0)">
-                          <i class="fa fa-user-plus" aria-hidden="true"></i>
-                          <br> 
-                        Only Downloadeded</a>
-                      </li>
-                      <li class="nav-item">
-                          <a class="nav-link" href="javascript:void(0)">
-                              <i class="fa fa-user-times" aria-hidden="true"></i>
-                              <br> 
-                            Not Registered</a>
-                          </li>
-                  <!-- <li class="nav-item">
-                      <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
-                          <md-option *ngFor="let type of reportsType" [value]="type.value">
-                            {{type.viewValue}}
-                          </md-option>
-                        </md-select>
-                      </li> -->
+         
           
           </ul>
       </div>
@@ -153,7 +128,7 @@
               <tr>
                 <td colspan="4">
                   <h4 class="warning  capitalize">
-                    <a href="javascript:void(0);" (click)=searchReports(false); *ngIf="reportsClickMore">
+                    <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
                       <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
                     <span *ngIf="!reportsClickMore">No more data</span>
                   </h4>

@@ -98,11 +98,14 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
               if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
                   this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
                   this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
+                  this.lat = parseFloat(result.data[0].orderby_latitude);
+                  this.lng = parseFloat(result.data[0].orderby_longitude);
               }
               else if (result.data[0].customer_latitude && result.data[0].customer_longitude) {
                   this.markers[0].lat = parseFloat(result.data[0].customer_latitude);
                   this.markers[0].lng = parseFloat(result.data[0].customer_longitude);
-  
+                  this.lat = parseFloat(result.data[0].customer_latitude);
+                  this.lng = parseFloat(result.data[0].customer_longitude);
               }
               else {
                   this.gpsMessage = "No GPS for this customer";

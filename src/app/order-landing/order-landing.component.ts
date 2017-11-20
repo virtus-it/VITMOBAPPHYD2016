@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { MdDialog } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { OrderLandingService } from './order-landing.service';
@@ -7,6 +8,9 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 @Component({
 
@@ -14,8 +18,25 @@ import * as _ from 'underscore';
   styleUrls: ['./order-landing.component.css']
 })
 export class OrderLandingComponent implements OnInit {
+  DistributorCtrl: FormControl;
+  filteredDistributors: Observable<any[]>;
+  SupplierCtrl: FormControl;
+  filteredSupplier: Observable<any[]>;
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) {
+    this.DistributorCtrl = new FormControl();
+    this.filteredDistributors = this.DistributorCtrl.valueChanges
+      .startWith(null)
+      .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+      this.SupplierCtrl = new FormControl();
+      this.filteredSupplier = this.SupplierCtrl.valueChanges
+        .startWith(null)
+        .map(supplier =>supplier ? this.findSupplier(supplier) : this.supplierList.slice());
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) { }
+  }
+  distributors: any = [];
+  supplierList:any = [];
+  LastfilterRecords = false;
+  selectedDistForFilter: any = "";
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 10, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
   forwardOrders: any = [];
@@ -36,7 +57,7 @@ export class OrderLandingComponent implements OnInit {
     badgeShowLimit: 2,
     classes: "myclass custom-class myyy"
   };
-  statusList = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
+  statusListForward = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
   { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
   { "id": "delivered", "itemName": "Delivered" },
   { "id": "cancelled", "itemName": "Cancelled" },
@@ -44,6 +65,64 @@ export class OrderLandingComponent implements OnInit {
   { "id": "rejected", "itemName": "Rejected" },
   { "id": "notreachable", "itemName": "Not Reachable" },
   { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+  statusListAll = [
+    { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+    { "id": "delivered", "itemName": "Delivered" },
+    { "id": "cancelled", "itemName": "Cancelled" },
+    { "id": "doorlock", "itemName": "Doorlock" },
+    { "id": "rejected", "itemName": "Rejected" },
+    { "id": "notreachable", "itemName": "Not Reachable" },
+    { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+  findDistributors(name: string) {
+    console.log(name);
+    let finalDistributors = this.distributors.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    console.log(finalDistributors);
+    if (finalDistributors && finalDistributors.length > 0) {
+      let findDistributor: any = {};
+
+      findDistributor = _.find(finalDistributors, function (k, l) {
+        let distDetails: any = k;
+        return distDetails.fullName == name;
+      });
+
+      if (findDistributor) {
+        this.filterType.distributorid = findDistributor.userid;
+      }
+
+
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        this.getDistributors();
+      }
+
+
+    }
+    return finalDistributors;
+  }
+  findSupplier(name: string) {
+    console.log(name);
+    let finalsupplier = this.supplierList.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    console.log(finalsupplier);
+    if (finalsupplier && finalsupplier.length > 0) {
+      let findSupplier: any = {};
+
+      findSupplier = _.find(finalsupplier, function (k, l) {
+        let supplierDetails: any = k;
+        return supplierDetails.fullName == name;
+      });
+
+      if (findSupplier) {
+        this.filterType.supplierid = findSupplier.userid;
+      }
+
+
+    }
+  
+    return finalsupplier;
+  }
   showTabPanel(panelName) {
     this.filterRecords = false;
     this.tabPanelView = panelName;
@@ -221,7 +300,7 @@ export class OrderLandingComponent implements OnInit {
     else if (this.filterInput.order.searchtype == 'supplierid') {
       this.filterInput.order.searchtext = this.filterType.supplierid;
     }
-    else if (this.filterInput.order.searchtype == 'distributorid') {
+    else if (this.filterInput.order.searchtype == 'distributor_id') {
       this.filterInput.order.searchtext = this.filterType.distributorid;
     }
     else if (this.filterInput.order.searchtype == 'status') {
@@ -318,13 +397,13 @@ export class OrderLandingComponent implements OnInit {
   }
   refreshOrders() {
     this.clearFilter();
-    this.filterRecords = true;
+    this.filterRecords = false;
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     //this.getPolygonDistributors();
   }
   clearFilter() {
-    this.filterRecords = true;
+    this.filterRecords = false;
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
@@ -395,10 +474,87 @@ export class OrderLandingComponent implements OnInit {
     }
 
   }
+  getDistributors() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
+    if (this.distributors && this.distributors.length) {
+      let lastDistributor: any = _.last(this.distributors);
+      if (lastDistributor) {
+        input.root.lastuserid = lastDistributor.userid;
+      }
+
+
+    }
+    else {
+      this.distributors = [];
+      input.root.lastuserid = null;
+    }
+
+    console.log(input);
+    this.distributorService.getAllDistributors(input)
+      .subscribe(
+      output => this.getDistributorsResult(output),
+      error => {
+        console.log("error in distrbutors");
+      });
+  }
+  getDistributorsResult(data) {
+    console.log(data);
+    if (data.result == 'success') {
+      let distributorCopy = [];
+
+      if (data.data && data.data.length) {
+        _.each(data.data, function (i, j) {
+          let details: any = i;
+          details.fullName = details.firstname + " " + details.lastname
+          distributorCopy.push(details);
+
+        });
+
+        this.distributors = _.union(this.distributors, distributorCopy);
+        //  this.distributors = distributorCopy;
+      }
+    }
+    else {
+      this.LastfilterRecords = true;
+    }
+  }
+  getSupplier() {
+    let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
+   console.log(input);
+    this.distributorService.getAllSuppliers(input)
+      .subscribe(
+      output => this.getSupplierResult(output),
+      error => {
+        console.log("error in distrbutors");
+      });
+  }
+  getSupplierResult(data) {
+    console.log(data);
+    if (data.result == 'success') {
+      let supplierCopy = [];
+
+      if (data.data && data.data.length) {
+        _.each(data.data, function (i, j) {
+          let details: any = i;
+          details.fullName = details.firstname + " " + details.lastname
+          supplierCopy.push(details);
+
+        });
+
+        this.supplierList = _.union(this.supplierList, supplierCopy);
+        //  this.distributors = distributorCopy;
+      }
+    }
+    else {
+      this.LastfilterRecords = true;
+    }
+  }
   ngOnInit() {
     this.getPolygonDistributors();
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
+    this.getDistributors();
+    this.getSupplier();
   }
 
 }
