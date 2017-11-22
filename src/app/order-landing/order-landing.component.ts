@@ -127,7 +127,7 @@ export class OrderLandingComponent implements OnInit {
     this.filterRecords = false;
     this.tabPanelView = panelName;
     this.clearFilter();
-    this.refreshOrders();
+   // this.refreshOrders();
   }
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
@@ -395,13 +395,13 @@ export class OrderLandingComponent implements OnInit {
 
     }
   }
-  refreshOrders() {
-    this.clearFilter();
-    this.filterRecords = false;
-    this.getForwardOrderDetails(true);
-    this.getAllOrderDetails(true);
-    //this.getPolygonDistributors();
-  }
+  // refreshOrders() {
+  //   this.clearFilter();
+  //   this.filterRecords = false;
+  //   this.getForwardOrderDetails(true);
+  //   this.getAllOrderDetails(true);
+  //   //this.getPolygonDistributors();
+  // }
   clearFilter() {
     this.filterRecords = false;
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
