@@ -14,7 +14,7 @@ export class SmsComponent implements OnInit {
     smsListDetails = [];
     openSmsDialog() {
         let dialogRef = this.dialog.open(SmsDialogComponent, {
-            width: '700px',
+            width: '80%',
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {

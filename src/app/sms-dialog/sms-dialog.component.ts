@@ -30,6 +30,7 @@ export class SmsDialogComponent implements OnInit {
   smsInput = { name: "", mobilenumber: [], body: "" };
   mobileDetails:any = [];
   distributors:any = [];
+  checkAll :boolean = false;
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -106,6 +107,19 @@ if(this.orderinput.toDate){
          
      }
  }
+ onChangeCheckAll(isChecked: boolean) {
+  
+
+   if (isChecked) {
+       this.smsInput.mobilenumber = this.mobileDetails;
+       this.checkAll = true;
+       
+   } else {
+       this.smsInput.mobilenumber = [];
+       this.checkAll = false;
+       
+   }
+}
   saveMobileSms() {
     console.log(this.smsInput);
     let createSmsInput = {

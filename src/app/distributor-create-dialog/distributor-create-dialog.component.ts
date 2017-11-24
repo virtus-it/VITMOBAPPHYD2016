@@ -41,7 +41,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          console.log(this.dist);
          var input:any = {
              "User": {
-                 "user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
          if (this.distributorDetail) {
