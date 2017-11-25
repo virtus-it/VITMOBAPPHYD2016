@@ -66,6 +66,10 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             this.listOfDistributors = [];
             this.displayPolygon = this.polygonArray;
         }
+        ClearAllPolygons() {
+            this.listOfDistributors = [];
+            this.displayPolygon = [];
+        }
         ViewProduct(distributor) {
             if (distributor) {
                 let dialogRef = this.dialog.open(ProductListDialogComponent, {
