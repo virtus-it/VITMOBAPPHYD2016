@@ -8,6 +8,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
+import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -22,7 +23,7 @@ export class OrderLandingComponent implements OnInit {
   filteredDistributors: Observable<any[]>;
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService) {
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService,private loaderService: LoaderService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -202,15 +203,18 @@ export class OrderLandingComponent implements OnInit {
       this.orderListInput.order.last_orderid = null;
     }
     let forwardInput = this.orderListInput
+    this.loaderService.display(true);
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(
       output => this.getForwardOrderDetailsResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   getForwardOrderDetailsResult(result) {
     // this.forwardOrders = result.data;
+    this.loaderService.display(false);
     console.log(this.forwardOrders);
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
@@ -237,15 +241,18 @@ export class OrderLandingComponent implements OnInit {
       this.orderListInput.order.last_orderid = null;
     }
     let orderInput = this.orderListInput;
+    this.loaderService.display(true);
     this.orderLandingService.getOrderList(orderInput)
       .subscribe(
       output => this.getAllOrderDetailsResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   getAllOrderDetailsResult(result) {
     //  this.allOrders = result.data;
+    this.loaderService.display(false);
     console.log(this.allOrders);
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
@@ -259,15 +266,17 @@ export class OrderLandingComponent implements OnInit {
   getPolygonDistributors() {
 
     var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
+    this.loaderService.display(true);
     this.distributorService.getpolygonByDistributor(input)
       .subscribe(
       output => this.getPolygonDataResult(output),
       error => {
         console.log("falied");
+        this.loaderService.display(false);
       });
   }
   getPolygonDataResult(output) {
-
+    this.loaderService.display(false);
     if (output.data && output.data.length > 0) {
       this.polygonArray = [];
       for (let data of output.data) {
@@ -358,16 +367,18 @@ export class OrderLandingComponent implements OnInit {
       }
     }
     let input = this.filterInput;
-
+    this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getFilteredOrdersResult(output),
       error => {
         console.log("falied");
+        this.loaderService.display(false);
       });
   }
   getFilteredOrdersResult(result) {
     console.log(result);
+    this.loaderService.display(false);
     if (result.result == 'success') {
       this.filterRecords = true;
       if (this.tabPanelView == 'forward') {
@@ -490,15 +501,18 @@ export class OrderLandingComponent implements OnInit {
     }
 
     console.log(input);
+    this.loaderService.display(true);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   getDistributorsResult(data) {
     console.log(data);
+    this.loaderService.display(false);
     if (data.result == 'success') {
       let distributorCopy = [];
 
@@ -521,15 +535,18 @@ export class OrderLandingComponent implements OnInit {
   getSupplier() {
     let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
    console.log(input);
+   this.loaderService.display(true);
     this.distributorService.getAllSuppliers(input)
       .subscribe(
       output => this.getSupplierResult(output),
       error => {
+        this.loaderService.display(false);
         console.log("error in distrbutors");
       });
   }
   getSupplierResult(data) {
     console.log(data);
+    this.loaderService.display(false);
     if (data.result == 'success') {
       let supplierCopy = [];
 

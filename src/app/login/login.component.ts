@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
             console.log("Logged in and should navigate to diifrent page");
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
-            this.router.navigate(['/distributor']);
+            this.router.navigate(['/orders']);
             
         }
         else{

@@ -59,6 +59,7 @@ import { CustomerService } from './customer/customer.service';
 import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import { UtcDatePipe } from './pipes/utc-date.pipe';
 import { ReportsService } from './reports/reports.service';
+import { LoaderService } from './login/loader.service';
 
 
 @NgModule({
@@ -124,7 +125,7 @@ import { ReportsService } from './reports/reports.service';
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },
-            { path: 'orders', component: OrderLandingComponent },
+            { path: 'orders', component: OrderLandingComponent, canActivate: [LoggedInGuard] },
             { path: 'distributor', component: DistributorComponent, canActivate: [LoggedInGuard] },
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
@@ -134,7 +135,7 @@ import { ReportsService } from './reports/reports.service';
             { path: 'product', component: ProductsComponent, canActivate: [LoggedInGuard] },
             { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
-            { path: '', redirectTo: 'distributor', pathMatch: 'full', canActivate: [LoggedInGuard] },
+            { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
         AgmCoreModule.forRoot({
@@ -157,6 +158,7 @@ import { ReportsService } from './reports/reports.service';
         SmsServiceService,
         ReportsService,
         CustomerService,
+        LoaderService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
