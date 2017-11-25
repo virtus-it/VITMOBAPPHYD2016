@@ -82,7 +82,7 @@
         <div class="row">
         <div class="col-md-3 col-sm-3 col-xs-3 align-items-start form-group">
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-            <input type="checkbox" id="rem"  class="custom-control-input"  (change)="onChangeCheckAll($event.target.checked)">
+            <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAll"  (change)="onChangeCheckAll($event.target.checked)">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">CheckAll</span>
             
@@ -99,7 +99,7 @@
           <div class="col-md-3 col-sm-3 col-xs-3 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
             [attr.data-index]="i">
             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAll" (change)="onChangeCheck(mobile, $event.target.checked)">
+                  <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{mobile.mobileno}}</span>
                 </label>

@@ -10,24 +10,28 @@ import * as _ from 'underscore';
 export class ReportsComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService) { }
-  reportDetails = { reportType: "", days: null, lastId: "0", pagesize: 10, appType: this.authenticationService.appType() };
+  reportDetails = { reportType: "", days: null, lastId: "0", pagesize: 30, appType: this.authenticationService.appType() };
   reportsClickMore:boolean = false;
   reportsInput: any = {};
   reportsData = [];
   tabPanelView = 'newlydownloaded';
   reportsType = [
-    { value: 'newlydownloaded', viewValue: 'Newly Downloded' },
-    { value: 'lastdays', viewValue: 'Last Days' },
+    { value: 'newlydownloaded', viewValue: 'Newly downloaded customers' },
+    { value: 'lastdays', viewValue: 'Customers not ordered in last 10 days' },
     { value: 'pendingorders', viewValue: 'Pending Orders' },
     { value: 'rejectedorders', viewValue: 'Rejected Orders' },
-    { value: 'notregistered', viewValue: 'Not Registered' },
+    { value: 'notregistered', viewValue: 'Customers not registered' },
     
   ];
   searchReports(firstCall,Rtype) {
     this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
   
     this.tabPanelView = Rtype;
+    
    let input = { "root": { "days": null, "last_id": this.reportsInput.lastId, "pagesize": this.reportsInput.pagesize, "transtype": Rtype, "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+   if(Rtype == 'lastdays'){
+    input.root.days = 10;
+        }
     if (this.reportsData && this.reportsData.length && !firstCall) {
       let lastRecord: any = _.last(this.reportsData);
       if (lastRecord) {
