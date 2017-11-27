@@ -12,7 +12,7 @@
                 <form class="example-form" (ngSubmit)="login()">
                     <div class="">                        
                     <md-form-field class="wd-100pc">
-                      <input mdInput placeholder="User" [formControl]="username" [(ngModel)]="loginDetails.username">
+                      <input mdInput placeholder="User" [formControl]="username" name="username" [(ngModel)]="loginDetails.username">
                       <md-error *ngIf="username.hasError('required')">
                         User is <strong>required</strong>
                       </md-error>
@@ -20,25 +20,26 @@
                     </div>
                     <div class="form">
                         <md-form-field class="wd-100pc">
-                            <input mdInput  [formControl]="password" [(ngModel)]="loginDetails.password" placeholder="Password" [type]="hide ? 'password' : 'text'">
+                            <input mdInput  [formControl]="password"  name="password" [(ngModel)]="loginDetails.password" placeholder="Password" [type]="hide ? 'password' : 'text'">
                         <md-icon mdSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</md-icon>
                         <md-error *ngIf="password.hasError('required')">
-                          passowrd is <strong>required</strong>
+                          password is <strong>required</strong>
                         </md-error>                       
                       </md-form-field>
                       </div>
                       <div class="form-group">
 
-                          <md-select placeholder="Order Type" class="wd-100pc left">
-                              <md-option>Moya
+                          <md-select name="apptype" placeholder="Order Type" class="wd-100pc left" [(ngModel)]="loginDetails.apptype" required>
+                              <md-option value="moya">Moya
                               </md-option>
-                              <md-option>Neer
+                              <md-option value="neer">Neer
                               </md-option>
-
+                              
                             </md-select>
+                           
                       </div>
                       <div class="align-items-start float-right">
-                        <button type="submit" class="btn btn-primary " [disabled]="!username.valid || !password.valid" id="userLogin" (click)='login()'>
+                        <button type="submit" class="btn btn-primary "  [disabled]="!username.valid || !password.valid || !loginDetails.apptype" id="userLogin" >
                             <i class="fa fa-sign-in"></i>
                             Login
                         </button>
