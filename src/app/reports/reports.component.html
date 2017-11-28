@@ -1,5 +1,5 @@
-<div class="dist-style">
-
+<div class="dist-style  minheight-500">
+    
   <!-- <div class=" row justify-content-between distIcon-style">
       <div class="col-md-2  col-sm-2  col-lg-2">
           <h4><i class="fa fa-file-text"></i> Report</h4>
@@ -107,11 +107,11 @@
             <thead>
               <tr>
 
-                <th width="20%"> Customer Name</th>
+                <th width="15%"> Customer Name</th>
                 <th width="12%">Mobile No</th>
-                <th width="20%">Createddate</th>
+                <th width="15%">Createddate</th>
 
-                <th width="15%" class="pdleft-20">Address</th>
+                <th width="25%" class="pdleft-20">Address</th>
               </tr>
             </thead>
             <tbody>
@@ -127,10 +127,11 @@
             <tfoot>
               <tr>
                 <td colspan="4">
+                  <br>
                   <h4 class="warning  capitalize">
                     <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
-                      <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
-                    <span *ngIf="!reportsClickMore">No more data</span>
+                      <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                    <span *ngIf="!reportsClickMore"><i _ngcontent-c5="" aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
                   </h4>
                 </td>
               </tr>

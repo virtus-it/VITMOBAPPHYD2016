@@ -16,11 +16,11 @@ export class ReportsComponent implements OnInit {
   reportsData = [];
   tabPanelView = 'newlydownloaded';
   reportsType = [
-    { value: 'newlydownloaded', viewValue: 'Newly downloaded customers' },
-    { value: 'lastdays', viewValue: 'Customers not ordered in last 10 days' },
+    { value: 'newlydownloaded', viewValue: 'Newly Downloaded Customers' },
+    { value: 'lastdays', viewValue: 'Customers not Ordered in Last 10 Days' },
     { value: 'pendingorders', viewValue: 'Pending Orders' },
     { value: 'rejectedorders', viewValue: 'Rejected Orders' },
-    { value: 'notregistered', viewValue: 'Customers not registered' },
+    { value: 'notregistered', viewValue: 'Customers not Registered' },
     
   ];
   searchReports(firstCall,Rtype) {

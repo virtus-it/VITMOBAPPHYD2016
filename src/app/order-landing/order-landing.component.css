@@ -29,7 +29,10 @@ table thead {
   }
   .filter-style{
     border: 1px solid #c5d6de;
-    padding: 20px 30px;
+    padding: 25px 30px;
+    position: fixed;
+    top: 6%;
+    right: 2%;
   }
   .mat-form-field{
     display: inline;
@@ -55,7 +58,50 @@ table thead {
   .dropdown-list ul li:first-child{
     padding-top: 7px !important;
   }
+  .dropbtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: #0f75bc;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    color: #0f75bc;
+    cursor: pointer;    
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    min-width: 380px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content label {
+  cursor: pointer;   
+}
+.dropdown-content label:hover{
+  cursor: pointer;  
+  background: #f1f5f7;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
 
   /* .mat-dialog-container{
     height: 90% !important;
   } */
+.flex-sm-row{
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+}

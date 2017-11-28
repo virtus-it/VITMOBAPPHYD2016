@@ -5,6 +5,10 @@
 /* .loginBg{
 	background: url(../assest/images/powerby.png);
 } */
+.sidebar-nohover >.mat-list-item-content> .mat-list-item-ripple:hover{
+  background: red !important;
+
+}
 
 .navbar-nav {
   margin: 10px !important;
@@ -22,6 +26,7 @@
   background: #ddd;
   border-top: 1px  solid #c5d6de;
 }
+
 .right-0{
 	right: 0px;
 }
@@ -142,7 +147,6 @@ a{
       
     }
 
-    
     ul {
     
       list-style: none;
