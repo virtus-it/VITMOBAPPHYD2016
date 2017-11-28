@@ -7,7 +7,7 @@ import { AuthenticationService } from './authentication.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginDetails: any = { username: "", password: "", apptype: "" };
+    loginDetails: any = { username: "", password: "" };
     errorMsg: string = "";
     hide = true;
     username = new FormControl('', [
@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     }
     login() {
 
-        this.authenticationService.login(this.loginDetails.username, this.loginDetails.password, this.loginDetails.apptype)
+        this.authenticationService.login(this.loginDetails.username, this.loginDetails.password)
             .subscribe(
             output => this.loginResult(output),
             error => {

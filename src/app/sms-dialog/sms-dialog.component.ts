@@ -32,6 +32,7 @@ export class SmsDialogComponent implements OnInit {
   distributors:any = [];
   checkAll :boolean = false;
   checkAllMobile:boolean = false;
+  smallLoader:boolean = false;
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -39,8 +40,10 @@ export class SmsDialogComponent implements OnInit {
     { value: 'assigned', viewValue: 'Pending Orders' },
     { value: 'allcustomers', viewValue: 'All customers' },
     { value: 'customerbydays', viewValue: 'Customer Not order' },
-    { value: 'distributorscustomer', viewValue: 'customer By distributor' },
-    { value: 'onlydownloaded', viewValue: 'Only downloaded' }
+    { value: 'distributorscustomer', viewValue: 'Customer By distributor' },
+    { value: 'onlydownloaded', viewValue: 'Newly downloaded customers' },
+    { value: 'allsuppliers', viewValue: 'All Suppliers' },
+    { value: 'alldistributors', viewValue: 'All Distributors' }
    // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
   filterDistributors(name: string) {
@@ -62,7 +65,15 @@ export class SmsDialogComponent implements OnInit {
       }
       return finalDistributors;
   }
+  onChangeType(){
+    this.orderinput.fromDate =null;
+    this.orderinput.toDate = null
+    this.orderinput.days = null
+    this.orderinput.distributorid = null;
+    
+  }
   getMobileNumber() {
+    this.smallLoader= true;
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,
@@ -80,16 +91,17 @@ if(this.orderinput.toDate){
       output => this.getMobileNumberResult(output),
       error => {
         console.log("error in distrbutors");
+        this.smallLoader= false;
       });
   }
   getMobileNumberResult(result) {
     console.log(result);
     let mobile = [];
-    
+    this.smallLoader= false;
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
-        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid };
+        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid,fullName:details.fullname,referal_code:details.referal_code };
         mobile.push(mobiles);
 
       });
@@ -104,6 +116,7 @@ if(this.orderinput.toDate){
          this.smsInput.mobilenumber.push(number);
          
      } else {
+        this.checkAll =false;
          this.smsInput.mobilenumber = _.without(this.smsInput.mobilenumber, number);
          
      }

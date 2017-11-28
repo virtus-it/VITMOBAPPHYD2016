@@ -6,6 +6,7 @@ import { DistributorCreateDialogComponent } from '../distributor-create-dialog/d
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
 @Component({
 
     templateUrl: './distributor.component.html',
@@ -15,8 +16,9 @@ export class DistributorComponent implements OnInit {
     distributors:any = [];
     distributorClickMore = true;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 10 } };
-    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
+    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     getDistributors(firstCall) {
+        this.loaderService.display(true);
         if (this.distributors && this.distributors.length && !firstCall) {
             let lastdistributor: any = _.last(this.distributors);
             if (lastdistributor) {
@@ -35,10 +37,12 @@ export class DistributorComponent implements OnInit {
             output => this.getDistributorsResult(output),
             error => {
                 console.log("error in distrbutors");
+                this.loaderService.display(false);
             });
     }
     getDistributorsResult(data) {
         console.log(data);
+        this.loaderService.display(false);
         if (data.result == 'success') {
             
             this.distributorClickMore = true;
@@ -97,9 +101,9 @@ export class DistributorComponent implements OnInit {
 
         }
     }
-    onScrollFunction(event) {
-        console.log('scroll event', event);
-    }
+    // onScrollFunction(event) {
+    //     console.log('scroll event', event);
+    // }
     ngOnInit() {
         this.getDistributors(true)
     }

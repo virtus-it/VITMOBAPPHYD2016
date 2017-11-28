@@ -6,6 +6,7 @@ import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import { MdDialog } from '@angular/material';
+import { LoaderService } from '../login/loader.service';
 import * as moment from 'moment';
 declare var google: any;
 @Component({
@@ -29,7 +30,7 @@ export class CoverageComponent implements OnInit {
             lng: '',
         }
     ]
-    constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     mapClicked($event: any) {
 
     }
@@ -37,17 +38,20 @@ export class CoverageComponent implements OnInit {
     getPolygonDistributors() {
 
         var input = { area: { user_type: "dealer", user_id: 0, "apptype": this.authenticationService.appType() } };
+        this.loaderService.display(true);
         this.distributorService.getpolygonByDistributor(input)
             .subscribe(
             output => this.getPolygonDataResult(output),
             error => {
                 console.log("falied");
+                this.loaderService.display(false);
             });
     }
     getPolygonDataResult(output) {
         //  console.log(output);
         //9863636315
         //paani
+        this.loaderService.display(false);
         if (output.data && output.data.length > 0) {
             for (let data of output.data) {
 
@@ -112,17 +116,20 @@ export class CoverageComponent implements OnInit {
         }
     }
     getOrderDetail() {
+        this.loaderService.display(true);
         let input = { appType: this.authenticationService.appType(), orderid: this.order.orderId, userId: this.authenticationService.loggedInUserId() };
         this.distributorService.getOrderById(input)
             .subscribe(
             output => this.getOrderDetailResult(output),
             error => {
                 console.log("falied");
+                this.loaderService.display(false);
             });
 
     }
     getOrderDetailResult(result) {
         console.log(result);
+       
         if (result && result.data) {
             let localTime = moment.utc(result.data[0].ordered_date).toDate();
             result.data[0].ordered_date = moment(localTime).format('DD-MM-YYYY hh:mm A');
@@ -142,6 +149,7 @@ export class CoverageComponent implements OnInit {
                 this.markers[0].lng = '';
             }
         }
+        this.loaderService.display(false);
     }
     ViewDistributors(order) {
 

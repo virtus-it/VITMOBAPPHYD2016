@@ -4,7 +4,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { OrderLandingService } from '../order-landing/order-landing.service';
-
+import { LoaderService } from '../login/loader.service';
 @Component({
   selector: 'app-on-hold-order-status',
   templateUrl: './on-hold-order-status.component.html',
@@ -12,9 +12,10 @@ import { OrderLandingService } from '../order-landing/order-landing.service';
 })
 export class OnHoldOrderStatusComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OnHoldOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
+  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OnHoldOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   reasonOnHold: "";
   updateOrderOnhold() {
+    this.loaderService.display(true);
     let input = { "order": { "orderstatus": "onhold", "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "apptype": this.authenticationService.appType(), "customerid": this.orderDetail.order_by, "reason": this.reasonOnHold, "from": "website" } }
     console.log(input);
     this.orderLandingService.updateOnHold(input)
@@ -22,10 +23,12 @@ export class OnHoldOrderStatusComponent implements OnInit {
       output => this.updateOrderOnholdResult(output),
       error => {
         console.log("error in order details");
+        this.loaderService.display(false);
       });
 
   }
   updateOrderOnholdResult(result) {
+    this.loaderService.display(false);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }

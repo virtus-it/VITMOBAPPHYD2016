@@ -8,6 +8,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } fro
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import * as moment from 'moment';
 import { MdDialog } from '@angular/material';
+import { LoaderService } from '../login/loader.service';
 declare var google: any;
 @Component({
   selector: 'app-order-coverage-detail-dailog',
@@ -31,7 +32,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
           lng: '',
       }
   ]
-  constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog) { }
+  constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog,private loaderService: LoaderService) { }
   dailogCloseResult = "cancel";
 
         assignPolygon(){
@@ -87,17 +88,20 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             }
         }
         getOrderDetail() {
+            this.loaderService.display(true);
           let input = { appType: this.authenticationService.appType(), orderid: this.orderDetail.orders.order_id, userId: this.authenticationService.loggedInUserId() };
           this.distributorService.getOrderById(input)
               .subscribe(
               output => this.getOrderDetailResult(output),
               error => {
                   console.log("falied");
+                  this.loaderService.display(false);
               });
   
       }
       getOrderDetailResult(result) {
-          console.log(result);
+          
+          this.loaderService.display(false);
           if (result && result.data) {
               if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
                   this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);

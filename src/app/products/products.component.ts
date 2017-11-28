@@ -4,6 +4,7 @@ import { AddEditProductDailogComponent } from '../add-edit-product-dailog/add-ed
 import { AddInvoiceDailogComponent } from '../add-invoice-dailog/add-invoice-dailog.component';
 import {AddStockHistoryComponent} from '../add-stock-history/add-stock-history.component';
 import {ProductHistoryDailogComponent} from '../product-history-dailog/product-history-dailog.component';
+import { LoaderService } from '../login/loader.service';
 @Component({
 
   templateUrl: './products.component.html',
@@ -11,7 +12,7 @@ import {ProductHistoryDailogComponent} from '../product-history-dailog/product-h
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(public dialog: MdDialog) { }
+  constructor(public dialog: MdDialog,private loaderService: LoaderService) { }
   addEditProduct() {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
 

@@ -16,8 +16,8 @@ export class AuthenticationService {
         this.loggedIn = !!localStorage.getItem('currentUser');
         this.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
     }
-    login(username: string, password: string,apptype: string) {
-        let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: apptype }); // Stringify payload
+    login(username: string, password: string) {
+        let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/weblogin', bodyString, options)

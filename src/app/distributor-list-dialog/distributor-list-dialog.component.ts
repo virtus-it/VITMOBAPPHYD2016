@@ -3,6 +3,7 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
+import { LoaderService } from '../login/loader.service';
 @Component({
   selector: 'app-distributor-list-dialog',
   templateUrl: './distributor-list-dialog.component.html',
@@ -13,13 +14,14 @@ export class DistributorListDialogComponent implements OnInit {
   suppliers = [];
   distributorID = "";
   supplierID = "";
-  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
+  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
 
   }
   getDistributors() {
+    this.loaderService.display(true);
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
     console.log(input);
     this.distributorService.getAllDistributors(input)
@@ -27,24 +29,29 @@ export class DistributorListDialogComponent implements OnInit {
       output => this.getDistributorsResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    
+    this.loaderService.display(false);
     if (data.result == 'success') {
       this.distributors = data.data;
     }
   }
   getSuppliers() {
+    this.loaderService.display(true);
     let input = { "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() };
     this.distributorService.getAllSuppliers(input)
       .subscribe(
       output => this.getSuppliersResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   getSuppliersResult(result) {
+    this.loaderService.display(false);
     console.log(result);
     if (result.result == 'success') {
       this.suppliers = result.data;
@@ -52,6 +59,7 @@ export class DistributorListDialogComponent implements OnInit {
     }
   }
   forWardOrder() {
+    this.loaderService.display(true);
     let input = {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
@@ -68,17 +76,19 @@ export class DistributorListDialogComponent implements OnInit {
       output => this.forWordOrderResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
 
   }
   forWordOrderResult(result) {
-
-    console.log(result);
+    this.loaderService.display(false);
+    
     if (result.result == "success") {
       this.Closedailog();
     }
   }
   assignOrder(){
+    this.loaderService.display(true);
     let input = {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
@@ -97,11 +107,13 @@ export class DistributorListDialogComponent implements OnInit {
       output => this.assignOrderResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
 
   }
   assignOrderResult(result){
     console.log(result);
+    this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
     }
