@@ -26,10 +26,10 @@
         <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a>
         <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" ></a>
-        <a class="flex-sm-fill right nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" (click)="clearFilter()">
-             <i _ngcontent-c0="" aria-hidden="true" class="fa fa-refresh logo-color mgright-20" title="Refresh" ></i>
-           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-download logo-color mgright-20" title="Download "></i>
-           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+        <a class="flex-sm-fill right nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" >
+             <i _ngcontent-c0="" aria-hidden="true" class="fa fa-refresh logo-color mgright-20" title="Refresh" (click)="clearFilter()"></i>
+           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-download logo-color mgright-20" title="Download " ></i>
+           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
          
         </a>
 
@@ -463,10 +463,10 @@
     </div>
 
   </div>
-  <div class="col-sm-3 col-md-3 col-lg-3 filter-style ">
+  <div class="col-sm-3 col-md-3 col-lg-3 filter-style " *ngIf="showFilterDailog">
 
 
-  <div class="height-500  ">
+  <div class="height-500" >
 
 
         <div class="form-group">

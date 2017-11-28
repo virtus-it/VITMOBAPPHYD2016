@@ -37,6 +37,7 @@ export class OrderLandingComponent implements OnInit {
   distributors: any = [];
   supplierList:any = [];
   LastfilterRecords = false;
+  showFilterDailog = false;
   selectedDistForFilter: any = "";
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 10, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
@@ -334,7 +335,7 @@ export class OrderLandingComponent implements OnInit {
     }
     console.log(this.filterInput);
     this.getFilteredOrders(true);
-
+this.showFilterDailog =false;
 
   }
   getFilteredOrders(firstcall) {
@@ -414,6 +415,7 @@ export class OrderLandingComponent implements OnInit {
   //   //this.getPolygonDistributors();
   // }
   clearFilter() {
+    this.showFilterDailog =false;
     this.filterRecords = false;
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -565,6 +567,9 @@ export class OrderLandingComponent implements OnInit {
     else {
       this.LastfilterRecords = true;
     }
+  }
+  filterDailogToggle(){
+    this.showFilterDailog = !this.showFilterDailog;
   }
   ngOnInit() {
     this.getPolygonDistributors();
