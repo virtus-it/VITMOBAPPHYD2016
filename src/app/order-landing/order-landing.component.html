@@ -73,7 +73,9 @@
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
-                    <label class="td-label capitalize" [ngClass]="forward.StatusColor"> {{forward.OrderModifiedStatus}}</label>
+                      <!-- forward.customersource === 'MoyaCustomer' -->
+                      <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"  title="Moya Customer"></i>  
+                    <label class="td-label capitalize" [ngClass]="forward.StatusColor" >   {{forward.OrderModifiedStatus}} </label>
                     <br>
                   </div>
                 </div>

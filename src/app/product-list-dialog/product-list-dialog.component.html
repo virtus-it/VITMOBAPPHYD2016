@@ -14,10 +14,13 @@
 
   <md-dialog-content layout="column">
       <div class="row pd-15x25 brd-bottom">
-          
-        <span>Distributor Name :</span> <span *ngIf="distributorDetails.distributorName">{{distributorDetails.distributorName}}</span>
+          <div class="col" >
+            <h5 align="center" class="form-group"><i class="fa fa-sitemap"></i> 
+        <!-- <span>Distributor Name :</span>  -->
+        <span *ngIf="distributorDetails.distributorName">{{distributorDetails.distributorName}}</span>
         <span *ngIf="!distributorDetails.distributorName">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span>
-        <span>Mobile Number : {{distributorDetails.mobileno}} </span>
+        <span>- {{distributorDetails.mobileno}} </span></h5>
+      </div>
           <table class="table table-hover table-fixedheader">
       <thead>
         <tr>

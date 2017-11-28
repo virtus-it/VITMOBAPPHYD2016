@@ -126,10 +126,21 @@ export class OrderLandingComponent implements OnInit {
     return finalsupplier;
   }
   showTabPanel(panelName) {
-    this.filterRecords = false;
+    
     this.tabPanelView = panelName;
-    this.clearFilter();
-   // this.refreshOrders();
+    this.showFilterDailog =false;
+    this.filterRecords = false;
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
+    this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    if(panelName== "forward"){
+      this.getForwardOrderDetails(true);
+    }
+    else if(panelName== "allorder"){
+      this.getAllOrderDetails(true);
+    }
+    
+    
+    
   }
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
