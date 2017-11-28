@@ -7,13 +7,13 @@ import { AuthenticationService } from './authentication.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginDetails: any = {};
-    errorMsg: string ="";
+    loginDetails: any = { username: "", password: "" };
+    errorMsg: string = "";
     hide = true;
     username = new FormControl('', [
         Validators.required]);
-        password = new FormControl('', [
-            Validators.required]);
+    password = new FormControl('', [
+        Validators.required]);
     constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
@@ -33,10 +33,10 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
             this.router.navigate(['/orders']);
-            
+
         }
-        else{
-this.errorMsg = "Invalid Credentials";
+        else {
+            this.errorMsg = "Invalid Credentials";
 
         }
     }

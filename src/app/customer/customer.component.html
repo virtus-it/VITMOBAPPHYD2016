@@ -54,19 +54,18 @@
             <th width="12%">Mobile no</th>
             <th width="20%">Deposit Amount </th>
             <th width="20%">Address</th>
-            <th width="20%">Area</th>
             <th width="15%">Action</th>
 
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td class="left"></td>
-            <td class="left"></td>
-            <td class="left"></td>
-            <td class="left">
+          <tr *ngFor="let customers of customerList">
+            <td class="left">{{customers.firstname}} {{customers.lastname}}</td>
+            <td class="left" *ngIf="customers.isappdownloaded">Joined</td>
+            <td class="left" *ngIf="!customers.isappdownloaded">Not Joined</td>
+            <td class="left">{{customers.mobileno}}</td>
+            <td class="left">{{customers.payments.advance_amount}}
             </td>
-            <td class="left"></td>
             <td class="left">
               <div class="dropdown">
                 <button class="dropbtn">View More</button>
@@ -93,7 +92,7 @@
                       <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
                   </div>
                   <div class="row pdbottom-5">
-                    <label class="col-md-6" (click)='showEditCustomer()'>
+                    <label class="col-md-6" (click)='showEditCustomer(customers)'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
                     <label class="col-md-6" (click)='showSchedule()'>
                       <i class="fa fa-calendar"></i> Schedule</label>
@@ -103,6 +102,19 @@
 
             </td>
         </tbody>
+        <tfoot>
+            <tr>
+              <td></td>
+              <td>
+                <h4 class="warning  capitalize">
+                  <a href="javascript:void(0);" (click)=getCustomerList(false); *ngIf="customerClickMore">
+                    <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+                  <span *ngIf="!customerClickMore">Record Not Available</span>
+                
+                </h4>
+              </td>
+            </tr>
+          </tfoot>
       </table>
     </div>
   </div>

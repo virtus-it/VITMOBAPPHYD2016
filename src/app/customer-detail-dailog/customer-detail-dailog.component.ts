@@ -5,6 +5,7 @@ import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
 
 @Component({
   selector: 'app-customer-detail-dailog',
@@ -13,21 +14,23 @@ import * as _ from 'underscore';
 })
 export class CustomerDetailDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CustomerDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
+  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CustomerDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   customerOrderDetails = [];
   noDataError = "";
   getCustomerOrder() {
-
+    this.loaderService.display(true);
     let input = { "order": { "userid": this.orderDetail.order_by, "status": this.orderDetail.status, "lastrecordtimestamp": "15", "pagesize": "10", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
     this.orderLandingService.getOrderByPaymentCycle(input)
       .subscribe(
       output => this.getCustomerOrderResult(output),
       error => {
         console.log("error in order details");
+        this.loaderService.display(false);
       });
   }
   getCustomerOrderResult(result) {
     console.log(result);
+    this.loaderService.display(false);
     if (result.result == 'success') {
       this.customerOrderDetails = result.data;
     }

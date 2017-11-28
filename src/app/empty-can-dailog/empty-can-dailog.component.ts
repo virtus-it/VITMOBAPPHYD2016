@@ -5,7 +5,7 @@ import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import * as _ from 'underscore';
-
+import { LoaderService } from '../login/loader.service';
 @Component({
   selector: 'app-empty-can-dailog',
   templateUrl: './empty-can-dailog.component.html',
@@ -13,19 +13,22 @@ import * as _ from 'underscore';
 })
 export class EmptyCanDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EmptyCanDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService) { }
+  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EmptyCanDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   ProductsCans = [];
   getProducts() {
-    console.log("PROducts and order id from other dailog box",this.orderDetail);
+    this.loaderService.display(true);
+    
     let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
     this.orderLandingService.getProductsByDealrID(input)
       .subscribe(
       output => this.getProductsResult(output),
       error => {
         console.log("error in order details");
+        this.loaderService.display(false);
       });
   }
   getProductsResult(result) {
+    
     console.log(result);
     if (result.data && result.data.length > 0) {
       let orderdata = this.orderDetail;
@@ -52,17 +55,21 @@ export class EmptyCanDailogComponent implements OnInit {
       this.ProductsCans = cansData;
 
     }
+    this.loaderService.display(false);
   }
   updateCanQuantity(){
+    this.loaderService.display(true);
     let input = this.ProductsCans;
     this.orderLandingService.UpdateProductsQuantity(input)
     .subscribe(
     output => this.updateCanQuantityResult(output),
     error => {
       console.log("error in order details");
+      this.loaderService.display(false);
     });
   }
   updateCanQuantityResult(result){
+    this.loaderService.display(false);
     console.log(result);
     if(result.result = 'success'){
       this.thisDialogRef.close('success');

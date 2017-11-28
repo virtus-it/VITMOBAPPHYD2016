@@ -4,7 +4,7 @@ import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { MdDialog } from '@angular/material';
-
+import { LoaderService } from '../login/loader.service';
 @Component({
   selector: 'app-add-edit-customer-dailog',
   templateUrl: './add-edit-customer-dailog.component.html',
@@ -12,22 +12,33 @@ import { MdDialog } from '@angular/material';
 })
 export class AddEditCustomerDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog) { }
+  constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
   customerInput: any = { "User": { "advamt": "0", "user_type": "customer", "state": null, "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "", "city": null, "pincode": "", "address": "", "country": "", "apptype": this.authenticationService.appType() } };
   getCustomerDetails() {
-    if (this.orderDetails.order_by) {
-      let input = { userid: this.orderDetails.order_by, appType: this.authenticationService.appType() };
+  // console.log(this.Details);
+  this.loaderService.display(true);
+    if(this.Details){
+    let input = { userid: 0, appType: this.authenticationService.appType() };
+    if (this.Details.order_by) {
+      input = { userid: this.Details.order_by, appType: this.authenticationService.appType() };
+    }
+    else if(this.Details.userid){
+      input = { userid: this.Details.userid, appType: this.authenticationService.appType() };
+
+    }
       this.customerService.getCustomerById(input)
         .subscribe(
         output => this.getCustomerDetailsResult(output),
         error => {
           console.log("error in distrbutors");
+          this.loaderService.display(false);
         });
-    }
-
+    
+      }
   }
   getCustomerDetailsResult(result) {
     console.log(result);
+    this.loaderService.display(false);
     if (result.result = 'success') {
       this.customerInput = {
         "User": {
@@ -53,28 +64,34 @@ export class AddEditCustomerDailogComponent implements OnInit {
   }
   createCustomer() {
     let input = this.customerInput;
+    this.loaderService.display(true);
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   createCustomerResult(result) {
+    this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
     }
   }
   updateCustomer() {
+    this.loaderService.display(true);
     let input = this.customerInput;
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),
       error => {
         console.log("error in distrbutors");
+        this.loaderService.display(false);
       });
   }
   updateCustomerResult(result) {
+    this.loaderService.display(false);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
 }
@@ -84,7 +101,7 @@ if(result.result == 'success'){
   }
   ngOnInit() {
     // "userid":"1768"
-    console.log(this.orderDetails);
+    console.log(this.Details);
     this.getCustomerDetails()
   }
 

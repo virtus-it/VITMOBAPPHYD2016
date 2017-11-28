@@ -15,7 +15,7 @@
 
       <div class="row">
         <div class="  col-sm-3  col-md-3  col-lg-3">
-          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc">
+          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc"  (change)="onChangeType()" >
             <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
@@ -39,14 +39,14 @@
               </md-autocomplete>
             </md-form-field>
           </div>
-        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf=" orderinput.orderType == '' || orderinput.orderType == 'all' || orderinput.orderType == 'ordered' || orderinput.orderType == 'delivered' || orderinput.orderType == 'assigned' || orderinput.orderType == 'allcustomers' || orderinput.orderType == 'onlydownloaded'">
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == '' ||  orderinput.orderType == 'all' || orderinput.orderType == 'ordered' || orderinput.orderType == 'delivered' || orderinput.orderType == 'assigned' || orderinput.orderType == 'allcustomers' || orderinput.orderType == 'onlydownloaded'">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays'">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
@@ -61,7 +61,7 @@
             <button md-raised-button (click)="getMobileNumber()" class="btn-primary">SUBMIT</button>
           </md-dialog-actions>
         </div>
-        <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center">
+        <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center" *ngIf="smallLoader">
        <img src="assets/images/loader.gif"  class="wd-60">
         </div>
       </div>
@@ -113,7 +113,7 @@
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-  <md-dialog-actions align="end">
+  <md-dialog-actions align="end" *ngIf="mobileDetails.length">
     <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>

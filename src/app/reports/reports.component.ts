@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { ReportsService } from './reports.service';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
 @Component({
 
   templateUrl: './reports.component.html',
@@ -9,7 +10,7 @@ import * as _ from 'underscore';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService) { }
+  constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService,private loaderService: LoaderService) { }
   reportDetails = { reportType: "", days: null, lastId: "0", pagesize: 30, appType: this.authenticationService.appType() };
   reportsClickMore:boolean = false;
   reportsInput: any = {};
@@ -24,6 +25,7 @@ export class ReportsComponent implements OnInit {
     
   ];
   searchReports(firstCall,Rtype) {
+    this.loaderService.display(true);
     this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
   
     this.tabPanelView = Rtype;
@@ -57,9 +59,11 @@ export class ReportsComponent implements OnInit {
       output => this.searchReportsResult(output),
       error => {
         console.log("error");
+        this.loaderService.display(false);
       });
   }
   searchReportsResult(result) {
+    this.loaderService.display(false);
     if (result.data && result.data.output && result.data.output.length > 0) {
       this.reportsClickMore = true;
       this.reportsData = _.union(this.reportsData,result.data.output);

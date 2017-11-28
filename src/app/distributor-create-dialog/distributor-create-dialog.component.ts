@@ -5,6 +5,7 @@ import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
 @Component({
   selector: 'app-distributor-create-dialog',
   templateUrl: './distributor-create-dialog.component.html',
@@ -15,19 +16,22 @@ export class DistributorCreateDialogComponent implements OnInit {
     areaList = [];
 
     dropdownSettings = {};
-    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
+    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
      emailFormControl = new FormControl('', [
          Validators.required]);
      getAreasName() {
+        this.loaderService.display(true);
          var input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
          this.distributorService.getAllArea(input)
              .subscribe(
              output => this.getAreasNameResult(output),
              error => {
                  console.log("error in distrbutors");
+                 this.loaderService.display(false);
              });
      }
      getAreasNameResult(output) {
+        this.loaderService.display(false);
          console.log(output);
          if (output && output.data) {
              
@@ -39,6 +43,7 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      onSubmit() {
          console.log(this.dist);
+         this.loaderService.display(true);
          var input:any = {
              "User": {
                 "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
@@ -61,6 +66,7 @@ export class DistributorCreateDialogComponent implements OnInit {
                  output => this.onSubmitResult(output),
                  error => {
                      console.log("error in distrbutors");
+                     this.loaderService.display(false);
                  });
          }
          else {
@@ -69,11 +75,13 @@ export class DistributorCreateDialogComponent implements OnInit {
                  output => this.onSubmitResult(output),
                  error => {
                      console.log("error in distrbutors");
+                     this.loaderService.display(false);
                  });
          }
      }
      onSubmitResult(result) {
          console.log(result);
+         this.loaderService.display(false);
          if (result.result == 'success') {
              this.thisDialogRef.close('Ploygon created');
          }
