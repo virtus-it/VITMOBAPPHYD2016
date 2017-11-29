@@ -101,9 +101,9 @@ export class DistributorComponent implements OnInit {
 
         }
     }
-    // onScrollFunction(event) {
-    //     console.log('scroll event', event);
-    // }
+    onScrollFunction(event) {
+        console.log('scroll event', event);
+    }
     ngOnInit() {
         this.getDistributors(true)
     }
