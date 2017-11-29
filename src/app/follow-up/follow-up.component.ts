@@ -14,6 +14,7 @@ import {FollowUpService} from '../follow-up/follow-up.service';
 export class FollowUpComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService,private followupService: FollowUpService) { }
+  numbers = 250;
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id,

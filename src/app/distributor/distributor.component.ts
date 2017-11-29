@@ -4,6 +4,8 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { DistributorCreateDialogComponent } from '../distributor-create-dialog/distributor-create-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
+import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
@@ -84,6 +86,35 @@ export class DistributorComponent implements OnInit {
             this.getDistributors(true);
         });
     }
+    showFollowUp(details) {
+        console.log(details);
+        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"distributor","mobileno":details.mobileno};
+        let dialogRefFollow = this.dialog.open(FollowUpComponent, {
+    
+          width: '80%',
+          data: data
+        });
+        dialogRefFollow.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+    
+    
+        });
+    
+      }
+      showFollowUpDetails(details) {
+        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"distributor","mobileno":details.mobileno};
+        let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
+    
+          width: '80%',
+          data: data
+        });
+        dialogRefFollowDetails.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+    
+    
+        });
+    
+      }
     ViewProduct(distributor) {
         console.log(distributor);
         if (distributor) {

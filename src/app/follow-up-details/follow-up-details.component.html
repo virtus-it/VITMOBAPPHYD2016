@@ -11,7 +11,19 @@
     <form class="example-form" >
       <div class="container-fluid pd-15x25 brd-bottom">
           <div class=" ">
-            
+              <ul class="scrollheight  mgtop-5">
+                  <li class="nolist-style  messages-style" *ngFor="let comments of followUpList.messages">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                    <small>&nbsp; {{comments.firstname}} {{comments.lastname}} </small>
+                    <br>
+                    <small>{{ comments.message}} </small>
+                    <br>
+                    <p class="right">
+                      <small class="gray">{{ comments.createddate | utcDate}} </small>
+                    </p>
+                  </li>
+        
+                </ul>
             </div>
        </div>
     </form>

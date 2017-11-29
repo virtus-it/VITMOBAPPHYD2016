@@ -18,7 +18,7 @@
                       <textarea maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
         
                     </md-form-field>
-                    <span >{{followUpInput.User.remarks.length}}</span>
+                    <span >Characters Remanining : {{250 - followUpInput.User.remarks.length}}</span>
             </div>
        </div>
     </form>

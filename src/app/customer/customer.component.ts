@@ -10,6 +10,8 @@ import { CustomerScheduleDaiolgComponent } from '../customer-schedule-daiolg/cus
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
+import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
 @Component({
@@ -118,6 +120,35 @@ export class CustomerComponent implements OnInit {
         });
 
     }
+    showFollowUp(details) {
+        console.log(details);
+        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"customer","mobileno":details.mobileno};
+        let dialogRefFollow = this.dialog.open(FollowUpComponent, {
+    
+          width: '80%',
+          data: data
+        });
+        dialogRefFollow.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+    
+    
+        });
+    
+      }
+      showFollowUpDetails(details) {
+        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"customer","mobileno":details.mobileno};
+        let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
+    
+          width: '80%',
+          data: data
+        });
+        dialogRefFollowDetails.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+    
+    
+        });
+    
+      }
     getCustomerList(firstcall) {
         this.loaderService.display(true);
         let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType() };
