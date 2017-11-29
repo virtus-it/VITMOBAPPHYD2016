@@ -17,9 +17,9 @@
       </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
         <a class="cursor logo-color " title="Add Customer" (click)='showAddCustomer()'><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
-          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
   
-                              <div class="filterView">
+                              <div class="filterView" *ngIf="showFilterDailog">
                           <div class="">
                               <b class="float-left">Filter By</b>
                               <br>
