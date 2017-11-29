@@ -15,7 +15,7 @@ export class FollowUpDetailsComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpDetailsComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService, private followupService: FollowUpService) { }
   followUpList = [];
   getfollowUpdetails() {
-    let input = { "User": { "type": this.details.type, "id": this.details.id, "transtype": "getall" } }
+    let input = { "User": { "type": this.details.type, "typeid": this.details.id, "transtype": "getall" } }
     this.followupService.getFollowUp(input)
       .subscribe(
       output => this.getfollowUpdetailsResult(output),
@@ -27,7 +27,7 @@ export class FollowUpDetailsComponent implements OnInit {
   getfollowUpdetailsResult(result) {
     console.log(result);
     if (result.result == 'success') {
-      this.followUpList = result.data;
+      this.followUpList = result.data.output;
 
     }
   }
