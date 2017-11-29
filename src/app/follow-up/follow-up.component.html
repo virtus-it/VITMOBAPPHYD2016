@@ -1,6 +1,7 @@
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-hand-paper-o"></i>Follow Up
+        <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+         Follow Up
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
       <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
@@ -8,9 +9,12 @@
     </div>
   </div>
   <md-dialog-content layout="column">
-    <span>{{details.firstname}} {{details.lastname}}</span><span>{{details.mobileno}}</span>
+    
     <form class="example-form" >
       <div class="container-fluid pd-15x25 brd-bottom">
+        <h5 class="capitalize">
+          <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+             {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
           <div class=" ">
               <!-- <label class=" pdtop-10 center">
                   </label> -->
@@ -18,7 +22,7 @@
                       <textarea maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
         
                     </md-form-field>
-                    <span >Characters Remanining : {{250 - followUpInput.User.remarks.length}}</span>
+                    <small >Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>
             </div>
        </div>
     </form>

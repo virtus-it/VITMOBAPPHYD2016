@@ -1,6 +1,7 @@
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-hand-paper-o"></i> Follow Up Details
+        <i class="fa fa-phone-square" aria-hidden="true"></i>
+         Follow Up Details
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
       <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
@@ -9,7 +10,7 @@
   </div>
   <md-dialog-content layout="column">
     <form class="example-form" >
-      <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="container-fluid brd-bottom">
           <div class=" ">
               <ul class="scrollheight  mgtop-5">
                   <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
