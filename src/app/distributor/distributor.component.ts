@@ -17,6 +17,7 @@ import { LoaderService } from '../login/loader.service';
 export class DistributorComponent implements OnInit {
     distributors:any = [];
     distributorClickMore = true;
+    showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 10 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     getDistributors(firstCall) {
@@ -135,6 +136,9 @@ export class DistributorComponent implements OnInit {
     onScrollFunction(event) {
         console.log('scroll event', event);
     }
+    filterDailogToggle(){
+        this.showFilterDailog = !this.showFilterDailog;
+      }
     ngOnInit() {
         this.getDistributors(true)
     }

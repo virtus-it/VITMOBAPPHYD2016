@@ -24,6 +24,7 @@ export class CustomerComponent implements OnInit {
     constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private customerService: CustomerService,private loaderService: LoaderService ) { }
     customerClickMore = true;
     customerList: any = [];
+    showFilterDailog = false;
     showOrderList() {
         let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
             width: '90%',
@@ -183,6 +184,9 @@ export class CustomerComponent implements OnInit {
         }
        
     }
+    filterDailogToggle(){
+        this.showFilterDailog = !this.showFilterDailog;
+      }
     ngOnInit() {
         this.getCustomerList(true);
     }
