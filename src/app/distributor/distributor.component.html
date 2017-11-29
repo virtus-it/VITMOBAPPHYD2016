@@ -1,45 +1,48 @@
 ﻿<div class=" dist-style minheight-500">
+    <div class=" row justify-content-between distIcon-style">
+        <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <h4><i class="fa fa-sitemap"></i> Distributor</h4>
+        </div>
+      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center">
+          <a class="cursor logo-color left" title="Add Distributor"><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
+            <a class="cursor logo-color right" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+              <div class="col-sm-3 col-md-3 col-lg-3 ">
+                  
+                                <div class="row filtercol-style height-500 filter-style">
+                            <div class="col">
+                                <label class="float-left">Filter by</label><br>
+                                     <div class=" ">
+                                        <md-form-field class="example-full-width">
+                                          <input class="form-control" mdInput placeholder="First Name"  name="firstName">
+                                          <md-error >
+                                             Name is <strong>required</strong>
+                                          </md-error>
+                                        </md-form-field>
+                                      </div>
+                                      <div class=" form-group">
+                                          <md-form-field class="example-full-width">
+                                            <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
+                                            <md-error >
+                                              Mobile No is <strong>required</strong>
+                                            </md-error>
+                                          </md-form-field>
+                                        </div> 
+                                  <div class="input-group pd-10  ">
+                                    <button md-raised-button color="primary" ng-click="clearSearch()">
+                                      <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                                    </button>
+                                  </div>
+                                </div>
+                         </div>
+                        </div>
+            </a>
+      </div>
+        </div>
 <div (window:scroll)="onScrollFunction($event)" >
 
   <div id="" class="row pd-15x10 mg-0">
-      <div class="col-sm-3 col-md-3 col-lg-3 ">
-          <div class=" row justify-content-between">
-              <div class="col" align="left">
-                  <h4><i class="fa fa-sitemap"></i> Distributor</h4>
-              </div>
-            <div class="col-md-2  col-sm-3 col-lg-2 align-items-center">
-           <b class="cursor logo-color" title="Add Distributor"><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></b>
-                
-            </div>
-              </div>
-              <div class="row filtercol-style height-500 filter-style">
-          <div class="col">
-              <label class="float-left">Filter by</label><br>
-                   <div class=" ">
-                      <md-form-field class="example-full-width">
-                        <input class="form-control" mdInput placeholder="First Name"  name="firstName">
-                        <md-error >
-                           Name is <strong>required</strong>
-                        </md-error>
-                      </md-form-field>
-                    </div>
-                    <div class=" form-group">
-                        <md-form-field class="example-full-width">
-                          <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
-                          <md-error >
-                            Mobile No is <strong>required</strong>
-                          </md-error>
-                        </md-form-field>
-                      </div> 
-                <div class="input-group pd-10  ">
-                  <button md-raised-button color="primary" ng-click="clearSearch()">
-                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                  </button>
-                </div>
-              </div>
-       </div>
-      </div>
-<div class="col-sm-9 col-md-9 col-lg-9">    
+
+<div class="col">    
     <table class="table table-hover table-striped">
       <thead>
         <tr>

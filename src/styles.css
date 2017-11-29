@@ -523,4 +523,32 @@ border:2px solid #0f75bc;
 
   border-radius: 50%;
 }
+/* .loader-style{
+ background-image: url(assets/images/bg.png);
+position: absolute;
+left: 0;  
+  top: 0;
 
+height: 100%;
+width: 100%;
+}
+.loader-style img{
+  position: fixed;
+  left: 50%;  
+    top: 50%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8%;
+} */
+
+/* .loading {
+  position: fixed;
+text-align: center;
+vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  z-index: 9999;
+  opacity: .8;
+} */

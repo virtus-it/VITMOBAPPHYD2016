@@ -1,6 +1,6 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
 
-<div style="text-align:center">
+<div style="text-align:center" >
 
   <div class=''>
     <!--<app-side-menu></app-side-menu>-->
@@ -172,7 +172,12 @@
           </div>
         </ng-template>
 
-        <router-outlet> </router-outlet>
+        <router-outlet > 
+          <div class="loader-style show " data-spy="affix" data-offset-top="205">
+           <img src="assets/images/loader.gif"  class="loading">
+          </div>
+        </router-outlet>
+        <!-- [ngClass]="{'':showLoader}" -->
         <!-- <span *ngIf="showLoader" class="loading">loading..</span> -->
         <div>
 
