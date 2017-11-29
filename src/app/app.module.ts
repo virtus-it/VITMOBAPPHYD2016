@@ -60,6 +60,9 @@ import { OrderCoverageDetailDailogComponent } from './order-coverage-detail-dail
 import { UtcDatePipe } from './pipes/utc-date.pipe';
 import { ReportsService } from './reports/reports.service';
 import { LoaderService } from './login/loader.service';
+import { FollowUpService } from './follow-up/follow-up.service';
+import { FollowUpComponent } from './follow-up/follow-up.component';
+import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
 
 
 @NgModule({
@@ -105,7 +108,9 @@ import { LoaderService } from './login/loader.service';
         CustomerSetPaymentCycleComponent,
         CustomerScheduleDaiolgComponent,
         OrderCoverageDetailDailogComponent,
-        UtcDatePipe
+        UtcDatePipe,
+        FollowUpComponent,
+        FollowUpDetailsComponent
         
 
     ],
@@ -159,6 +164,7 @@ import { LoaderService } from './login/loader.service';
         ReportsService,
         CustomerService,
         LoaderService,
+        FollowUpService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
@@ -189,7 +195,9 @@ import { LoaderService } from './login/loader.service';
          CustomerSettingDailogComponent,
          CustomerSetPaymentCycleComponent,
          CustomerScheduleDaiolgComponent,
-         OrderCoverageDetailDailogComponent
+         OrderCoverageDetailDailogComponent,
+         FollowUpComponent,
+         FollowUpDetailsComponent
         ],
     exports: [
         MaterialModule

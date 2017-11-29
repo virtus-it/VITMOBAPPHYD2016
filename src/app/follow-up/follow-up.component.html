@@ -1,0 +1,31 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-hand-paper-o"></i>Follow Up
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+              </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <span>{{details.firstname}} {{details.lastname}}</span><span>{{details.mobileno}}</span>
+    <form class="example-form" >
+      <div class="container-fluid pd-15x25 brd-bottom">
+          <div class=" ">
+              <!-- <label class=" pdtop-10 center">
+                  </label> -->
+                  <md-form-field class="example-full-width inline ">
+                      <textarea maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
+        
+                    </md-form-field>
+                    <span >Characters Remanining : {{250 - followUpInput.User.remarks.length}}</span>
+            </div>
+       </div>
+    </form>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+        <button type="submit" class="btn-primary" md-raised-button (click)="createFollowUp()">SAVE</button>      
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
