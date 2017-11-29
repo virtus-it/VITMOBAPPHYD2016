@@ -8,6 +8,8 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
+import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -197,6 +199,34 @@ export class OrderLandingComponent implements OnInit {
         this.getAllOrderDetails(true);
 
       }
+
+    });
+
+  }
+  showFollowUp(orderDetails) {
+    let data = {id:orderDetails.order_id,firstname :orderDetails.customer.firstname,lastName :orderDetails.customer.lastname,type:"order","mobileno":orderDetails.customer.mobileno};
+    let dialogRefFollow = this.dialog.open(FollowUpComponent, {
+
+      width: '80%',
+      data: data
+    });
+    dialogRefFollow.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+
+
+    });
+
+  }
+  showFollowUpDetails(orderDetails) {
+    let data = {id:orderDetails.order_id,firstname :orderDetails.customer.firstname,lastName :orderDetails.customer.lastname,type:"order"};
+    let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
+
+      width: '80%',
+      data: data
+    });
+    dialogRefFollowDetails.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+
 
     });
 

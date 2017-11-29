@@ -220,7 +220,10 @@
                     </div>
                   </div>
                   <div class="float-right">
-
+                      <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
+                          <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
+                          <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
+                              <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button>
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
@@ -434,7 +437,10 @@
                     </div>
                   </div> -->
                   <div class=" float-right">
-
+                      <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
+                          <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
+                          <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
+                              <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button>
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
