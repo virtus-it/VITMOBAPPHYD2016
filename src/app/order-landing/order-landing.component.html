@@ -20,17 +20,96 @@
               
     </div> -->
       <nav class="nav nav-pills flex-column flex-sm-row">
-        <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)"><i  class="fa fa-file-text-o"></i> Order</a>
+        <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)"><i  class="fa fa-file-text-o"></i> Orders</a>
         <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
           (click)="showTabPanel('forward')">FORWARD ORDERS</a>
         <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a>
-        <a class="flex-sm-fill text-sm-center nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" ></a>
-        <a class="flex-sm-fill right nav-link col-xs-2 col-sm-2 col-md-2 col-lg-2" href="javascript:void(0)" >
-             <i _ngcontent-c0="" aria-hidden="true" class="fa fa-refresh logo-color mgright-20" title="Refresh" (click)="clearFilter()"></i>
-           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-download logo-color mgright-20" title="Download " ></i>
-           <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
+        <a class="flex-sm-fill text-sm-center nav-link col-xs-3 col-sm-3 col-md-3 col-lg-3" href="javascript:void(0)" ></a>
+       
+            <a class="flex-sm-fill text-sm-center nav-link">    <i _ngcontent-c0="" aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
+            </a> <a class="flex-sm-fill text-sm-center nav-link">  <i _ngcontent-c0="" aria-hidden="true" class="fa fa-download logo-color " title="Download " ></i>
+              </a> <a class="flex-sm-fill text-sm-center nav-link">   <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
          
+     
+                <div class="filterView" *ngIf="showFilterDailog">
+        
+        
+          <div class="height-500" >
+        
+        
+                <div class="form-group">
+                    <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
+                      <md-option value="name">Customer Name</md-option>
+                      <md-option value="mobile">Customer Mobile</md-option>
+                      <md-option value="orderid">Order Id</md-option>
+                      <md-option value="status">Status</md-option>
+                      <md-option value="supplierid">Supplier</md-option>
+                      <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
+                    </md-select>
+          
+                  </div>
+        
+            <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
+        
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
+               </md-form-field>
+            </div>
+            <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
+             <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+                </md-form-field>
+            </div>
+            <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'" >
+            
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
+               
+                
+              </md-form-field>
+            </div>
+        
+            <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
+                
+              <md-form-field class="example-full-width"  >
+                <input mdInput  placeholder="Enter Supplier Name"  aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName" >
+                   <span>{{ supplier.fullName }}</span>
+                    </md-option>
+                </md-autocomplete>
+              </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
+                    
+                  <md-form-field class="example-full-width"  >
+                    <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName" >
+                       <span>{{ dist.fullName }}</span>
+                        </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+                    </div>
+            <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                    <angular2-multiselect  class="" [data]="statusListForward"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+              </div>
+              <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+                <angular2-multiselect  class="" [data]="statusListAll"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+          </div>
+            <br>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+        
+        </div> 
+        </div>
         </a>
 
       </nav>
@@ -75,7 +154,7 @@
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                       <!-- forward.customersource === 'MoyaCustomer' -->
                       <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"  title="Moya Customer"></i>  
-                    <label class="td-label capitalize" [ngClass]="forward.StatusColor" >   {{forward.OrderModifiedStatus}} </label>
+                    <label class=" capitalize" [ngClass]="forward.StatusColor" >   {{forward.OrderModifiedStatus}} </label>
                     <br>
                   </div>
                 </div>
@@ -290,7 +369,7 @@
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
-                    <label class="td-label capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
+                    <label class="capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
@@ -465,83 +544,6 @@
     </div>
 
   </div>
-  <div class="col-sm-3 col-md-3 col-lg-3 filter-style " *ngIf="showFilterDailog">
-
-
-  <div class="height-500" >
-
-
-        <div class="form-group">
-            <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
-              <md-option value="name">Customer Name</md-option>
-              <md-option value="mobile">Customer Mobile</md-option>
-              <md-option value="orderid">Order Id</md-option>
-              <md-option value="status">Status</md-option>
-              <md-option value="supplierid">Supplier</md-option>
-              <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
-            </md-select>
   
-          </div>
-
-    <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
-
-      <md-form-field class="example-full-width">
-        <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
-       </md-form-field>
-    </div>
-    <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
-     <md-form-field class="example-full-width">
-        <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
-        </md-form-field>
-    </div>
-    <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'" >
-    
-      <md-form-field class="example-full-width">
-        <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
-       
-        
-      </md-form-field>
-    </div>
-
-    <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
-        
-      <md-form-field class="example-full-width"  >
-        <input mdInput  placeholder="Enter Supplier Name"  aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
-        <md-autocomplete #auto="mdAutocomplete">
-          <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName" >
-           <span>{{ supplier.fullName }}</span>
-            </md-option>
-        </md-autocomplete>
-      </md-form-field>
-        </div>
-        <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
-            
-          <md-form-field class="example-full-width"  >
-            <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
-            <md-autocomplete #auto="mdAutocomplete">
-              <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName" >
-               <span>{{ dist.fullName }}</span>
-                </md-option>
-            </md-autocomplete>
-          </md-form-field>
-            </div>
-    <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
-            <angular2-multiselect  class="" [data]="statusListForward"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
-      </div>
-      <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
-        <angular2-multiselect  class="" [data]="statusListAll"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
-  </div>
-    <br>
-    <div class="input-group pd-10  ">
-      <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
-        <i class="fa fa-search" aria-hidden="true"></i> Search
-      </button>
-      <button md-raised-button color="primary" (click)="clearFilter()">
-        <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-      </button>
-    </div>
-
-</div> 
-</div>
 
 </div>

@@ -1,12 +1,14 @@
 <div class="dist-style  minheight-500">
     
-  <!-- <div class=" row justify-content-between distIcon-style">
-      <div class="col-md-2  col-sm-2  col-lg-2">
+  <div class=" row justify-content-between distIcon-style">
+      <div class="col-md-2  col-sm-2  col-lg-2 left">
           <h4><i class="fa fa-file-text"></i> Report</h4>
       </div>
-    <div class="col-md-2  col-sm-2  col-lg-2">        
+    <div class="col-md-2  col-sm-2  col-lg-2 right"> 
+        <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
+        
     </div>
-      </div> -->
+
   <!-- <div id="" class="row pd-15x10 mg-0">
           <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
               <div class="filtercol-style height-500">
@@ -43,23 +45,14 @@
 
     <!-- tabs left -->
     <div class="tab tabs-left row">
-      <div class="col-lg-3 col-md-3 col-xl-3 col-sm-3">
-          <div class=" row justify-content-between heading-style">
+      <div class="col">
+          <!-- <div class=" row justify-content-between heading-style">
               <div class="col-md-6  col-sm-6  col-lg-6">
                   <h4><i class="fa fa-file-text"></i> Report</h4>
               </div>
-              <!-- <div class="" >
-                  
-                 <md-form-field class="example-full-width inline ">
-                     <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
-       
-                   </md-form-field>
-       
-               </div>  -->
             <div class="col-md-3 col-sm-3  col-lg-3">  
-                <a href="javascript:void(0)" title="Download"><i class="fa fa-download fa-2x" aria-hidden="true"></i></a>       
-            </div>
-              </div>
+                <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
+              </div> -->
         <!-- <ul class="nav nav-tabs ">
       <li>
             <a href="javascript:void(0)" data-toggle="tab"></a>
@@ -89,19 +82,28 @@
               <button type="button" class="btn btn-default btn-lg" >Pending Orders</button>
             </li> 
         </ul>-->
-        <ul class="nav nav-pills flex-column row">
-            
-          <li class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+        <table class="nav nav-pills flex-column row">
+            <tr>
+              <td width="8%"></td>
+          <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
           <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
               <i class="fa fa-download" aria-hidden="true"></i> <br>           
             {{type.viewValue}}</a>
-          </li>
-          
+            </td>
+          </tr>
+          </table>
+          <!-- <ul class="nav nav-pills navbar-nav flex-column row">
+           
+            <li class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+            <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
+                <i class="fa fa-download" aria-hidden="true"></i> <br>           
+              {{type.viewValue}}</a>
+              </li>
          
-          
-          </ul>
+          </ul> -->
       </div>
-      <div class="tab-content col-lg-9 col-md-9 col-xl-9 col-sm-9 pdtop-15">
+      </div>
+      <div class="tab-content col  pdtop-15">
         <div class="tab-pane active" id="a">
           <table class="table table-hover table-striped">
             <thead>
@@ -124,19 +126,12 @@
                 <td class="left">{{reports.address}}</td>
               </tr>
             </tbody>
-            <tfoot>
-              <tr>
-                <td colspan="4">
-                  <br>
-                  <h4 class="warning  capitalize">
-                    <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
-                      <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-                    <span *ngIf="!reportsClickMore"><i _ngcontent-c5="" aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
-                  </h4>
-                </td>
-              </tr>
-            </tfoot>
           </table>
+          <h4 class="warning  capitalize">
+              <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
+                <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+              <span *ngIf="!reportsClickMore"><i _ngcontent-c5="" aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+            </h4>
         </div>
         <div class="tab-pane" id="b">
 

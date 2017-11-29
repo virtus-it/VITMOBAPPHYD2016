@@ -12,7 +12,7 @@ table thead {
     margin: 20px;
   }
   .distIcon-style{
-    padding: 15px;
+    padding: 12px;
     margin: 0px;
     border-bottom: 1px solid #c5d6de;
   }
@@ -47,3 +47,6 @@ table thead {
   /* .mat-dialog-container{
     height: 90% !important;
   } */
+  .filterView{
+    top: 42px !important;
+  }

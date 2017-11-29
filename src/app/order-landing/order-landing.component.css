@@ -111,3 +111,9 @@ table thead {
   padding: 4px 8px;
   font-size: 12px;
 }
+.filterView::before{
+  right: 15px !important;
+}
+.filterView{
+  top: 42px;
+}

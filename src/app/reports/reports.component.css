@@ -89,3 +89,21 @@ margin-bottom: 15px;
 tbody{
   color: #666
 }
+.nav-item .nav-link {
+  padding: 10px 20px !important;
+}
+.flex-column{
+  margin-bottom: 0px !important;
+}
+
+.nav-link.active::before{
+  position: absolute;
+  content: '';
+  z-index: 100;
+  width: 0;
+  top: 96%;
+  height: 0;
+  border-top: solid 10px #0f75bc;
+  border-left: solid 10px transparent;
+  border-right: solid 10px transparent;
+}

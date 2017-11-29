@@ -1,16 +1,15 @@
 ﻿<div class=" dist-style minheight-500">
-    <div class=" row justify-content-between distIcon-style">
+    <div class=" row justify-content-between distIcon-style left">
         <div class="col-sm-2 col-md-2 col-lg-2 ">
             <h4><i class="fa fa-sitemap"></i> Distributor</h4>
         </div>
-      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center">
-          <a class="cursor logo-color left" title="Add Distributor"><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
-            <a class="cursor logo-color right" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
-              <div class="col-sm-3 col-md-3 col-lg-3 ">
-                  
-                                <div class="row filtercol-style height-500 filter-style">
-                            <div class="col">
-                                <label class="float-left">Filter by</label><br>
+      <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+          <a class="cursor logo-color " title="Add Distributor"><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
+            <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+    
+                                <div class="filterView">
+                            <div class="">
+                                <b class="float-left">Filter By</b><br>
                                      <div class=" ">
                                         <md-form-field class="example-full-width">
                                           <input class="form-control" mdInput placeholder="First Name"  name="firstName">
@@ -34,7 +33,7 @@
                                   </div>
                                 </div>
                          </div>
-                        </div>
+               
             </a>
       </div>
         </div>
@@ -75,7 +74,7 @@
     
         <h4 class="warning  capitalize">
           <a href="javascript:void(0);" (click)=getDistributors(false); *ngIf="distributorClickMore">
-            <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
         </h4>
         <h4 *ngIf="!distributorClickMore" class="warning">Record Not Available</h4>
       

@@ -1,47 +1,48 @@
 <div class="dist-style  minheight-500">
     <div class=" row justify-content-between distIcon-style">
-    <div class="col-md-2  col-sm-2  col-lg-2">
+    <div class="col-md-2  col-sm-2  col-lg-2 left">
       <h4>
         <i class="fa fa-gift"></i> Products</h4>
     </div>
-    <div class="col-md-4  col-sm-4  col-lg-4">
+    <div class="col-md-4  col-sm-4  col-lg-4 right">
       <button md-raised-button color="primary" (click)='addInvoice()'>
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Invoice
       </button>
       <button md-raised-button color="primary" (click)='stockHistory()'>
           <i class="fa fa-line-chart" aria-hidden="true" ></i>   Stock History
         </button>
-        <button md-raised-button color="primary" (click)='addEditProduct()'>
-            <i class="fa fa-plus fa-2" aria-hidden="true"></i>
-          </button>
+          <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()'><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
+          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+            <div class="filterView">
+                <div class="">
+                    <b class="float-left">Filter By</b>
+                    <br>
+                    <div class=" ">
+                        <md-form-field class="example-full-width">
+                          <input class="form-control" mdInput placeholder=" Product name">
+                        </md-form-field>
+                      </div>
+                      <div class=" ">
+                        <md-form-field class="example-full-width">
+                          <input class="form-control" mdInput placeholder="Created Date">
+                        </md-form-field>
+                      </div>
+                    <div class=" form-group">
+                      <button md-raised-button color="primary">
+                        <i class="fa fa-search" aria-hidden="true"></i> Search
+                      </button>
+                      <button md-raised-button color="primary">
+                        <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                      </button>
+                    </div>
+                    </div>
+             </div>
+             </a>
     </div>
   </div>
   <div id="" class="row pd-15x10 mg-0">
-    <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
-      <div class="filtercol-style height-500">
-        <label class="float-left">Filter by</label>
-        <br>
-        <div class=" ">
-          <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder=" Product name">
-          </md-form-field>
-        </div>
-        <div class=" ">
-          <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder="Created Date">
-          </md-form-field>
-        </div>
-        <div class=" form-group">
-          <button md-raised-button color="primary">
-            <i class="fa fa-search" aria-hidden="true"></i> Search
-          </button>
-          <button md-raised-button color="primary">
-            <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-          </button>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm-9 col-md-9 col-lg-9">
+
+    <div class="col">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
