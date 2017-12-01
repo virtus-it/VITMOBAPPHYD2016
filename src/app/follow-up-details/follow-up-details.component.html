@@ -15,7 +15,7 @@
               <ul class="scrollheight  mgtop-5">
                   <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
                     <i class="fa fa-reply" aria-hidden="true"></i>
-                    <small></small>
+                    <small>{{comments.username}}</small>
                     <br>
                     <small>{{ comments.remarks}} </small>
                     <br>

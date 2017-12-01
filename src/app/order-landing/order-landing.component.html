@@ -27,9 +27,9 @@
           (click)="showTabPanel('allorder')">ALL ORDERS</a>
         <a class="flex-sm-fill text-sm-center nav-link col-xs-3 col-sm-3 col-md-3 col-lg-3" href="javascript:void(0)" ></a>
        
-            <a class="flex-sm-fill text-sm-center nav-link">    <i _ngcontent-c0="" aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
-            </a> <a class="flex-sm-fill text-sm-center nav-link">  <i _ngcontent-c0="" aria-hidden="true" class="fa fa-download logo-color " title="Download " ></i>
-              </a> <a class="flex-sm-fill text-sm-center nav-link">   <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
+            <a class="flex-sm-fill text-sm-center nav-link">    <i  aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
+            </a> <a class="flex-sm-fill text-sm-center nav-link">  <i  aria-hidden="true" class="fa fa-download logo-color " title="Download " ></i>
+              </a> <a class="flex-sm-fill text-sm-center nav-link">   <i  aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
          
      
                 <div class="filterView" *ngIf="showFilterDailog">
@@ -119,12 +119,18 @@
             <tr class="border-topbottom bg-eee">
               <td width="34%">
                 <div class="row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">Order Id :
                       <b> #{{forward.order_id}}</b>
                     </label>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(forward)'>
+                  <div class="col-sm-4  col-md-4  col-lg-4 left">
+                    <label >Follow Up :
+                      <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span>
+                      <span (click)='showFollowUp(forward)'><i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i></span>
+                    </label>
+                  </div>
+                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -143,6 +149,7 @@
                   </div>
                 </div>
               </td>
+              
               <td width="33%">
                 <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
@@ -257,6 +264,7 @@
                 </div>
 
               </td>
+              
               <td width="33%">
                 <div class="">
                   <div class=" row ">
@@ -298,11 +306,20 @@
                       <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
                     </div>
                   </div>
+                  <div class="  row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
+                      <label class="td-label">
+                        <i class="fa fa-reply " aria-hidden="true"> </i> Distributor Number</label>
+                    </div>
+                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</b>
+                    </div>
+                  </div>
                   <div class="float-right">
-                      <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
+                      <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
-                              <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button>
+                              <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
@@ -338,13 +355,19 @@
               <tr class="border-topbottom bg-eee">
                   <td width="34%">
                 <div class="row ">
-                  <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">Order Id :
                       <b>#{{allorder.order_id}}</b>
                     </label>
                     <br>
                   </div>
-                  <div class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(allorder)'>
+                  <div class="col-sm-4  col-md-4  col-lg-4 left">
+                    <label >Follow Up :
+                      <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span>
+                      <span (click)='showFollowUp(allorder)'><i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i></span>
+                    </label>
+                  </div>
+                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -516,10 +539,10 @@
                     </div>
                   </div> -->
                   <div class=" float-right">
-                      <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
+                      <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
-                              <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button>
+                              <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>

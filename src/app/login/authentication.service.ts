@@ -80,7 +80,21 @@ export class AuthenticationService {
         }
 
     };
-    
+    userFullName = function () {
+        try {
+            if (this.CurrentSession.first_name) {
+                let fullName = this.CurrentSession.first_name + this.CurrentSession.last_name;
+                return fullName.toString();
+            }
+            else {
+                return "";
+            }
+        }
+        catch (ex) {
+            return "";
+        }
+
+    };
     userType= function () {
         try {
             if (this.CurrentSession.USERTYPE) {

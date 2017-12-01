@@ -17,7 +17,7 @@ export class FollowUpComponent implements OnInit {
   numbers = 250;
   followUpInput = {
     "User": {
-      "type": this.details.type, "typeid": this.details.id,
+      "type": this.details.type, "typeid": this.details.id,"username":this.authenticationService.userFullName(),
       "remarks": "", "mobileno": this.details.mobileno, "transtype": "create","userid":this.authenticationService.loggedInUserId()
     }
   }
