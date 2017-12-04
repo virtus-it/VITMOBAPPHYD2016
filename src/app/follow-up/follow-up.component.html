@@ -10,7 +10,7 @@
   </div>
   <md-dialog-content layout="column">
     
-    <form class="example-form" >
+    <form class="example-form" ngNativeValidate>
       <div class="container-fluid pd-15x25 brd-bottom">
         <h5 class="capitalize">
           <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
@@ -19,7 +19,7 @@
               <!-- <label class=" pdtop-10 center">
                   </label> -->
                   <md-form-field class="example-full-width inline ">
-                      <textarea maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
+                      <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
         
                     </md-form-field>
                     <small >Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>

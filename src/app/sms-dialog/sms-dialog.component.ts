@@ -27,7 +27,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null,days:null,distributorid:null };
-  smsInput = { name: "", mobilenumber: [], body: "" };
+  smsInput = { name: "", mobilenumber: [], body: "",smsType:"sms" };
   mobileDetails:any = [];
   distributors:any = [];
   checkAll :boolean = false;
@@ -143,6 +143,7 @@ if(this.orderinput.toDate){
         "mobilenumber": this.smsInput.mobilenumber,
         "count": this.smsInput.mobilenumber.length,
         "name": this.smsInput.name,
+        "smstype":this.smsInput.smsType,
         "user_type":this.authenticationService.userType(),
         "TransType": "createsms",
         "type": this.orderinput.orderType,

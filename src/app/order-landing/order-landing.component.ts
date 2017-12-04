@@ -75,6 +75,7 @@ export class OrderLandingComponent implements OnInit {
     { "id": "cancelled", "itemName": "Cancelled" },
     { "id": "doorlock", "itemName": "Doorlock" },
     { "id": "rejected", "itemName": "Rejected" },
+    { "id": "ordered", "itemName": "Ordered" },
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
   findDistributors(name: string) {

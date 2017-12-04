@@ -23,7 +23,10 @@ export class FollowUpComponent implements OnInit {
   }
   createFollowUp() {
     console.log(this.followUpInput);
-    this.followupService.createFollowUp(this.followUpInput)
+    let input = this.followUpInput
+    input.User.remarks  = input.User.remarks.replace (/'/g, "");
+    input.User.remarks  = input.User.remarks.replace (/"/g, "");
+    this.followupService.createFollowUp(input)
     .subscribe(
     output => this.createFollowUpResult(output),
     error => {

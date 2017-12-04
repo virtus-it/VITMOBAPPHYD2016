@@ -77,9 +77,10 @@
 
           <div class="col-sm-9  col-md-9  col-lg-9">
             <md-form-field class="example-full-width inline ">
-              <textarea class="form-control" mdInput placeholder="Body" name="body" [(ngModel)]="smsInput.body"></textarea>
+              <textarea maxlength="250" class="form-control" mdInput placeholder="Body" name="body" [(ngModel)]="smsInput.body"></textarea>
 
             </md-form-field>
+            <small >Characters Remanining : <span class="danger"> {{250 - smsInput.body.length}}</span></small>
           </div>
         </div>
         <div class="row">
@@ -114,6 +115,16 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end" *ngIf="mobileDetails.length">
+      <span width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+          <input type="radio" [(ngModel)]="smsInput.smsType"   class="custom-control-input" name="{{smsInput.smsType}}" value="sms">
+          <span class="custom-control-indicator"></span>
+          <span class="custom-control-description">SMS</span>
+        </label></span>
+        <span width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="smsInput.smsType"   class="custom-control-input" name="{{smsInput.smsType}}" value="notification">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">NOTIFICATION</span>
+          </label></span>
     <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>

@@ -145,12 +145,12 @@ import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.
         ]),
         AgmCoreModule.forRoot({
 
-            //apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
+            //apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU' My api key
             //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
             // libraries: ["geometry"],
             libraries: ["drawing"],
-            apiKey: 'AIzaSyAj1ztDeH4uZVpVU-ITDx4LouRJ7TV_DbU'
+            apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko' 
 
         })
     ],
