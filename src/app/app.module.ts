@@ -63,6 +63,7 @@ import { LoaderService } from './login/loader.service';
 import { FollowUpService } from './follow-up/follow-up.service';
 import { FollowUpComponent } from './follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
+import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-distributor.component';
 
 
 @NgModule({
@@ -110,7 +111,8 @@ import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.
         OrderCoverageDetailDailogComponent,
         UtcDatePipe,
         FollowUpComponent,
-        FollowUpDetailsComponent
+        FollowUpDetailsComponent,
+        AddStockDistributorComponent
         
 
     ],
@@ -197,7 +199,8 @@ import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.
          CustomerScheduleDaiolgComponent,
          OrderCoverageDetailDailogComponent,
          FollowUpComponent,
-         FollowUpDetailsComponent
+         FollowUpDetailsComponent,
+         AddStockDistributorComponent
         ],
     exports: [
         MaterialModule

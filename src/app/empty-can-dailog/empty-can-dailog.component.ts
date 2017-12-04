@@ -32,7 +32,7 @@ export class EmptyCanDailogComponent implements OnInit {
     console.log(result);
     if (result.data && result.data.length > 0) {
       let orderdata = this.orderDetail;
-      let canFormat = { "root": { "brandname":"","brandType":"","avaliablecans": "", "loginid": this.authenticationService.loggedInUserId(), "customerid": this.orderDetail.order_by, "dealerid": "289", "productid": "", "apptype": this.authenticationService.appType(), "createdthru": "website" } };
+      let canFormat = { "root": { "brandname":"","brandType":"","avaliablecans": "", "loginid": this.authenticationService.loggedInUserId(), "customerid": this.orderDetail.order_by, "dealerid": this.authenticationService.loggedInUserId(), "productid": "", "apptype": this.authenticationService.appType(), "createdthru": "website" } };
       let cansData = [];
       _.each(result.data, function (i, j) {
         let details: any = i;

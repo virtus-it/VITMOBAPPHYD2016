@@ -73,7 +73,9 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
+            if( result == 'success'){
             this.getDistributors(true);
+            }
         });
     }
     openUpdateDialog(details) {
@@ -84,7 +86,9 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
-            this.getDistributors(true);
+            if( result == 'success'){
+                this.getDistributors(true);
+                }
         });
     }
     showFollowUp(details) {
