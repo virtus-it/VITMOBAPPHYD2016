@@ -205,7 +205,7 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showFollowUp(orderDetails) {
-    let data = {id:orderDetails.order_id,firstname :orderDetails.customer.firstname,lastName :orderDetails.customer.lastname,type:"order","mobileno":orderDetails.customer.mobileno};
+    let data = {id:orderDetails.order_id,firstname :orderDetails.orderby_firstname,lastName :orderDetails.orderby_lastname,type:"order","mobileno":orderDetails.orderby_mobileno};
     let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
       width: '80%',

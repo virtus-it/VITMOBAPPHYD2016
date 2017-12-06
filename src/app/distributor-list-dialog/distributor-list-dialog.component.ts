@@ -4,6 +4,7 @@ import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
+import * as _ from 'underscore';
 @Component({
   selector: 'app-distributor-list-dialog',
   templateUrl: './distributor-list-dialog.component.html',
@@ -12,9 +13,13 @@ import { LoaderService } from '../login/loader.service';
 export class DistributorListDialogComponent implements OnInit {
   distributors = [];
   suppliers = [];
+  distributorsCopy = [];
+  suppliersCopy = [];
   distributorID = "";
   supplierID = "";
-  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
+  searchDistTerm = "";
+  searchSupplierTerm = "";
+  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
@@ -33,10 +38,19 @@ export class DistributorListDialogComponent implements OnInit {
       });
   }
   getDistributorsResult(data) {
-    
+
     this.loaderService.display(false);
+    let distCopyDetails = [];
     if (data.result == 'success') {
-      this.distributors = data.data;
+      _.each(data.data, function (i, j) {
+        let details: any = i;
+        details.fullName = details.firstname + " " + details.lastname
+        distCopyDetails.push(details);
+
+      });
+      this.distributors = distCopyDetails;
+      this.distributorsCopy = distCopyDetails;
+
     }
   }
   getSuppliers() {
@@ -53,9 +67,16 @@ export class DistributorListDialogComponent implements OnInit {
   getSuppliersResult(result) {
     this.loaderService.display(false);
     console.log(result);
+    let supplierCopyDetails = [];
     if (result.result == 'success') {
-      this.suppliers = result.data;
+      _.each(result.data, function (i, j) {
+        let details: any = i;
+        details.fullName = details.firstname + " " + details.lastname
+        supplierCopyDetails.push(details);
 
+      });
+      this.suppliers = supplierCopyDetails;
+      this.suppliersCopy = supplierCopyDetails;
     }
   }
   forWardOrder() {
@@ -82,20 +103,20 @@ export class DistributorListDialogComponent implements OnInit {
   }
   forWordOrderResult(result) {
     this.loaderService.display(false);
-    
+
     if (result.result == "success") {
       this.Closedailog();
     }
   }
-  assignOrder(){
+  assignOrder() {
     this.loaderService.display(true);
     let input = {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
         "from": this.authenticationService.loggedInUserId(),
         "loginid": this.authenticationService.loggedInUserId(),
-        "actiontype":"reassigned",
-        "userid":this.authenticationService.loggedInUserId(),
+        "actiontype": "reassigned",
+        "userid": this.authenticationService.loggedInUserId(),
         "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans",
         "quantity": this.orderDetail.quantity, "to": this.supplierID,
         "usertype": this.authenticationService.userType()
@@ -111,12 +132,25 @@ export class DistributorListDialogComponent implements OnInit {
       });
 
   }
-  assignOrderResult(result){
+  assignOrderResult(result) {
     console.log(result);
     this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
     }
+  }
+  searchDistrubutors() {
+    let term = this.searchDistTerm;
+    this.distributors = this.distributorsCopy.filter(function (e) {
+      return e.fullName.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+    });
+  }
+  searchSupplier() {
+    let term = this.searchSupplierTerm;
+
+    this.suppliers = this.suppliersCopy.filter(function (e) {
+      return e.fullName.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+    });
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');

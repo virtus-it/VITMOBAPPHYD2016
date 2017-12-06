@@ -11,10 +11,28 @@
   <md-dialog-content layout="column">
     
     <form class="example-form" ngNativeValidate>
+        <div class="container-fluid brd-bottom">
+            <h5 class="capitalize">
+                <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
+                   {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
+            <div class=" ">
+                <ul class="scrollheight  mgtop-5">
+                    <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
+                      <i class="fa fa-reply" aria-hidden="true"></i>
+                      <small>{{comments.username}}</small>
+                      <br>
+                      <small>{{ comments.remarks}} </small>
+                      <br>
+                      <p class="right">
+                        <small class="gray">{{ comments.createddate | utcDate}} </small>
+                      </p>
+                    </li>
+          
+                  </ul>
+              </div>
+         </div>
       <div class="container-fluid pd-15x25 brd-bottom">
-        <h5 class="capitalize">
-          <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
-             {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
+        
           <div class=" ">
               <!-- <label class=" pdtop-10 center">
                   </label> -->
