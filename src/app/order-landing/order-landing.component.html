@@ -160,6 +160,8 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                       <!-- forward.customersource === 'MoyaCustomer' -->
+                      
+                      <i class="fa fa-calendar-check-o " *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin'" aria-hidden="true" [ngClass]="forward.StatusColor"   [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i> 
                       <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"  title="Moya Customer"></i>  
                     <label class=" capitalize" [ngClass]="forward.StatusColor" >   {{forward.OrderModifiedStatus}} </label>
                     <br>
@@ -395,6 +397,8 @@
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <i class="fa fa-calendar-check-o " *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'" aria-hidden="true" [ngClass]="allorder.StatusColor"  [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i> 
+                      <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"  title="Moya Customer"></i>
                     <label class="capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
