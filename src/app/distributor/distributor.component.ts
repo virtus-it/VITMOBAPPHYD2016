@@ -18,7 +18,7 @@ export class DistributorComponent implements OnInit {
     distributors:any = [];
     distributorClickMore = true;
     showFilterDailog = false;
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 10 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 30 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     getDistributors(firstCall) {
         this.loaderService.display(true);
