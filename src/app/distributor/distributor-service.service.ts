@@ -15,7 +15,7 @@ export class DistributorServiceService {
     getAllDistributors(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers();
-       // headers.append('apptype', 'moya');
+       //// headers.append('apptype', 'moya');
         headers.append('Content-Type', 'application/json');
         //headers.append('Access-Control-Allow-Origin', '*');
         //headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
