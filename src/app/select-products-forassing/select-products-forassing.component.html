@@ -1,0 +1,52 @@
+
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-check-square-o" aria-hidden="true"></i>
+     Select Product
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+        <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+        </strong>         
+  </div>
+</div>
+
+  <md-dialog-content layout="column">
+    <div class="container-fluid brd-bottom">
+      <table class="table table-hover table-fixedheader">
+  <thead>
+    <tr>
+      <th width="30%">Product</th>
+      <th width="20%">Prduct type </th>
+      <th width="25%">Price per unit</th>
+      <th width="25%">INR</th>
+      <th width="25%">Count</th>
+       </tr>
+  </thead>
+  <tbody>
+    
+    <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
+        <td width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="productID"   class="custom-control-input" name="{{product.productid}}" value="{{product.productid}}">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">{{product.brandname}} </span>
+          </label></td>
+      <td width="20%" class="left capital">{{product.pname}} {{product.ptype}}</td>
+      <td width="25%" class="left capital">{{product.pcost}}</td>
+      <td width="25%" class="left capital"></td>
+      <td width="25%" class="left capital"></td>
+     </tr>
+  </tbody>
+</table>
+</div>
+      
+ 
+  </md-dialog-content>
+  <div class="row float-right pdright-30  mgbottom-20">
+  <md-dialog-actions align="end">
+
+    <button type="submit" md-raised-button  class="btn-primary" (click)="setProducts()">SET</button>&nbsp;
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
+    
+  </md-dialog-actions>
+</div>
+

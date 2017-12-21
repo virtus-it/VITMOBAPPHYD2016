@@ -91,7 +91,7 @@
     <div class="row float-right pdright-30  mgbottom-20">
     <md-dialog-actions align="end">
       <button type="submit" md-raised-button *ngIf="tabPanelView === 'suppliers'" (click)="assignOrder()" class="btn-primary">ASSIGN</button>
-      <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" (click)="forWardOrder()" class="btn-primary">FORWARD</button>&nbsp;
+      <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" (click)="openProductAssingDialog()" class="btn-primary">FORWARD</button>&nbsp;
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
       
     </md-dialog-actions>

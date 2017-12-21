@@ -4,6 +4,8 @@ import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
+import { MdDialog } from '@angular/material';
+import { SelectProductsForassingComponent } from '../select-products-forassing/select-products-forassing.component';
 import * as _ from 'underscore';
 @Component({
   selector: 'app-distributor-list-dialog',
@@ -19,7 +21,7 @@ export class DistributorListDialogComponent implements OnInit {
   supplierID = "";
   searchDistTerm = "";
   searchSupplierTerm = "";
-  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
+  constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService,public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
@@ -152,6 +154,21 @@ export class DistributorListDialogComponent implements OnInit {
       return e.fullName.toLowerCase().indexOf(term.toLowerCase()) >= 0;
     });
   }
+  openProductAssingDialog() {
+    let data = {orderDetails:this.orderDetail,disributorId:this.distributorID};
+
+    let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
+       width: '90%',
+        data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+       
+      if(result == 'success'){
+        this.forWardOrder();
+      }
+    });
+}
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
