@@ -65,7 +65,7 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
 import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-distributor.component';
 import { SelectProductsForassingComponent } from './select-products-forassing/select-products-forassing.component';
-
+import {FeedbackService} from './feedback/feedback.service';
 
 @NgModule({
     declarations: [
@@ -169,6 +169,7 @@ import { SelectProductsForassingComponent } from './select-products-forassing/se
         CustomerService,
         LoaderService,
         FollowUpService,
+        FeedbackService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
@@ -204,6 +205,7 @@ import { SelectProductsForassingComponent } from './select-products-forassing/se
          FollowUpDetailsComponent,
          AddStockDistributorComponent,
          SelectProductsForassingComponent
+
         ],
     exports: [
         MaterialModule
