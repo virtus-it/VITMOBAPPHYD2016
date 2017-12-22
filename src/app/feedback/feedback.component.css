@@ -41,6 +41,16 @@ table thead {
   .btn-link{
     color: #0f75bc;
   }
+
+  .closeicon{
+    color: #35ca5b;
+  }
+  .openicon{
+    color: #dd2121;
+  }
+  .replyicon{
+    color: #3090c7;
+  }
   
   /* .mat-dialog-container{
     height: 90% !important;
