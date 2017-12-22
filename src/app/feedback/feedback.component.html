@@ -1,5 +1,5 @@
 <div class="dist-style  minheight-500">
-    <!-- <div class=" row justify-content-between distIcon-style">
+  <!-- <div class=" row justify-content-between distIcon-style">
     <div class="col-md-2  col-sm-2  col-lg-2">
         <h4><i class="fa fa-comment"></i> Feedback</h4>
     </div>
@@ -8,67 +8,80 @@
       
   </div>
     </div> -->
-    <div class=" row justify-content-between distIcon-style left">
-        <div class="col-sm-2 col-md-2 col-lg-2 ">
-            <h4><i class="fa fa-comment-o"></i> Feedback</h4>
-        </div>
-      <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-          <a class="cursor logo-color " title="Add Feedback" ><i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i></a>
-            <a class="cursor logo-color mgleft-10" (click)="filterViewToggle()"><i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
-    
-                                <div class="filterView"  *ngIf="showFilterDailog">
-                            <div class="">
-                                <b class="float-left">Filter By</b>
-                                <br>
-                                <div class=" ">
-                                    <md-form-field class="example-full-width">
-                                      <input class="form-control" mdInput placeholder=" Name"  >
-                                    </md-form-field>
-                                  </div> 
-                                    <div class=" form-group">
-                                      <md-form-field class="example-full-width">
-                                        <input class="form-control" mdInput placeholder="Created Date" >
-                                      </md-form-field>
-                                  
-                                </div>
-                                <div class=" form-group">
-                                  <button md-raised-button color="primary">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                                  </button>
-                                  <button md-raised-button color="primary">
-                                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                                  </button>
-                                </div>
-                                </div>
-                         </div>
-               
-            </a>
-      </div>
-        </div>
-    <div id="" class="row pd-15x10 mg-0">
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-comment-o"></i> Feedback</h4>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+      <a class="cursor logo-color " title="Add Feedback">
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+      <a class="cursor logo-color mgleft-10" (click)="filterViewToggle()">
+        <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter"></i>
+        </a>
 
-  <div class="col-9 col-sm-9 col-md-9 col-lg-9">    
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="">
+            <b class="float-left">Filter By</b>
+            <br/>
+            <div class=" ">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="First Name">
+                <md-error> Name is
+                  <strong>required </strong>
+                </md-error>
+              </md-form-field>
+            </div>
+            <div class=" form-group">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Created Date" name="createddate">
+                <md-error> Createddate is
+                  <strong>required </strong>
+                </md-error>
+              </md-form-field>
+
+            </div>
+            <div class=" form-group">
+              <button md-raised-button color="primary">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+      
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+
+    <div class="col-9 col-sm-9 col-md-9 col-lg-9">
+
+    </div>
+  </div>
+  <div class='col'>
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width='25%'> Name </th>
+          <th width='30%'> Subject: </th>
+          <th class='pdleft-20' width='0%'> Feedback </th>
+          <th class='pdleft-20' width='0%'> Date </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="FeedbackList" *ngFor="let feed of feedbackList;">
+          <td class="left">
+            <span *ngIf="feed.createdby"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </span>
+          </td>
+          <td class="left"> {{feed.subject}} </td>
+          <td class="left"> {{feed.details}} </td>
+          <td class="left"> {{feed.createddate}} </td>
+        </tr>
+      </tbody>
+    </table>
 
   </div>
-  </div>  
-<div class='col'>
-  <table class="table table-hover table-striped">
-    <thead> 
-     <tr>
-      <th width='25%'> Name </th>
-      <th width='30%'> Subject: </th>
-      <th class='pdleft-20' width='0%'> Feedback </th>
-      <th class='pdleft-20' width='0%'> Date </th> 
-     </tr> 
-    </thead>
-    <tbody>
-      <tr id="FeedbackList" *ngFor= "let feed of feedbackList;"  >
-        <td class="left" ><span *ngIf="feed.createdby"> {{feed.createdby.firstname}}  {{feed.createdby.lastname}}  </span>  </td>
-        <td class="left"> {{feed.subject}} </td>
-        <td class="left"> {{feed.details}} </td>
-        <td class="left"> {{feed.createddate}} </td>
-      </tr>  
-    </tbody> 
-  </table>
-
-</div>
