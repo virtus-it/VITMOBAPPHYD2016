@@ -22,14 +22,14 @@
           </md-select>
 
         </div>
-        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'customerbydays'">
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'customerbydays' && orderinput.orderType != 'sms'">
             <md-form-field class="example-full-width inline ">
                 <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="orderinput.days">
   
               </md-form-field>
   
           </div>
-          <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'distributorscustomer'">
+          <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'distributorscustomer' && orderinput.orderType != 'sms'">
           <md-form-field class="example-full-width"  >
               <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
               <md-autocomplete #auto="mdAutocomplete">
@@ -39,14 +39,14 @@
               </md-autocomplete>
             </md-form-field>
           </div>
-        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays'">
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays'">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms'">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
@@ -56,17 +56,18 @@
         </div>
 
         
-        <div class=" col-sm-2  col-md-2 col-lg-2">
+        <div class=" col-sm-2  col-md-2 col-lg-2" *ngIf="orderinput.orderType != 'sms'">
           <md-dialog-actions align="center" >
             <button md-raised-button (click)="getMobileNumber()" class="btn-primary">SUBMIT</button>
           </md-dialog-actions>
         </div>
+        
         <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center" *ngIf="smallLoader">
        <img src="assets/images/loader.gif"  class="wd-60">
         </div>
       </div>
 
-      <div *ngIf="mobileDetails.length">
+      <div *ngIf="mobileDetails.length && orderinput.orderType != 'sms'">
         <div class="row form-group">
           <div class="col-sm-3  col-md-3  col-lg-3 mgtop-20">
             <md-form-field class="example-full-width inline ">
@@ -110,11 +111,29 @@
           </div>
         </div>
       </div>
+      <div *ngIf="orderinput.orderType == 'sms'">
+        <div class="row form-group">
+         
+
+          <div class="col-sm-9  col-md-9  col-lg-9">
+              <md-form-field class="example-full-width inline ">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="name" [(ngModel)]="smsInput.customMobilenumber">
+    
+                </md-form-field>
+            <md-form-field class="example-full-width inline ">
+              <textarea maxlength="250" class="form-control" mdInput placeholder="Message" name="body" [(ngModel)]="smsInput.customBody"></textarea>
+
+            </md-form-field>
+            <small >Characters Remanining : <span class="danger"> {{250 - smsInput.customBody.length}}</span></small>
+          </div>
+        </div>
+        
+      </div>
     </div>
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-  <md-dialog-actions align="end" *ngIf="mobileDetails.length">
+  <md-dialog-actions align="end" *ngIf="mobileDetails.length || orderinput.orderType == 'sms'">
       <span width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
           <input type="radio" [(ngModel)]="smsInput.smsType"   class="custom-control-input" name="{{smsInput.smsType}}" value="sms">
           <span class="custom-control-indicator"></span>
