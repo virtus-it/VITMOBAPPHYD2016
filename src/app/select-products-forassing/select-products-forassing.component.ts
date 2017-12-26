@@ -41,21 +41,34 @@ export class SelectProductsForassingComponent implements OnInit {
         let details: any = i;
         let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
         if (customerProduct) {
+          customerProduct.quantity = "0";
+          
           productListCopy.push(customerProduct);
 
         }
         else {
+          details.quantity = "0";
           productListCopy.push(details);
         }
 
       });
       this.productList = productListCopy;
-      console.log(" this.productList", this.productList);
+      if(this.orderDetail.orderDetails.prod_id){
+        let id = this.orderDetail.orderDetails.prod_id;
+        let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
+        if(productsDetails){
+        this.productID = id.toString();
+        productsDetails.quantity = this.orderDetail.orderDetails.quantity;
+        }
 
+      }
+      console.log(" this.productList", this.productList);
+      
     }
   }
   setProducts() {
-    let productsDetails = _.find(this.productList, function (e: any) { return e.productid == this.productID; });
+    let id = this.productID;
+    let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
     let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() } };
     this.orderLandingService.updateQuantity(input)
       .subscribe(
