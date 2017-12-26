@@ -13,6 +13,7 @@ import { CustomerService } from '../customer/customer.service';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
 @Component({
 
@@ -21,10 +22,19 @@ import { LoaderService } from '../login/loader.service';
 })
 export class CustomerComponent implements OnInit {
 
-    constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private customerService: CustomerService,private loaderService: LoaderService ) { }
+    constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private customerService: CustomerService, private loaderService: LoaderService) { }
     customerClickMore = true;
     customerList: any = [];
     showFilterDailog = false;
+    followUpdate = null;
+    filterRecords = false;
+    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+    FilterTypeDetails = [
+        { value: 'alias', viewValue: 'Alias' },
+        { value: 'name', viewValue: 'Name' },
+        { value: 'mobile', viewValue: 'Mobile' },
+        { value: 'followupdate', viewValue: 'Followup Date' }
+    ];
     showOrderList() {
         let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
             width: '90%',
@@ -123,33 +133,33 @@ export class CustomerComponent implements OnInit {
     }
     showFollowUp(details) {
         console.log(details);
-        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"customer","mobileno":details.mobileno};
+        let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
-    
-          width: '80%',
-          data: data
+
+            width: '80%',
+            data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
-    
-    
+            console.log(`Dialog closed: ${result}`);
+
+
         });
-    
-      }
-      showFollowUpDetails(details) {
-        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"customer","mobileno":details.mobileno};
+
+    }
+    showFollowUpDetails(details) {
+        let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
         let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
-    
-          width: '80%',
-          data: data
+
+            width: '80%',
+            data: data
         });
         dialogRefFollowDetails.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
-    
-    
+            console.log(`Dialog closed: ${result}`);
+
+
         });
-    
-      }
+
+    }
     getCustomerList(firstcall) {
         this.loaderService.display(true);
         let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType() };
@@ -166,26 +176,84 @@ export class CustomerComponent implements OnInit {
         }
         console.log(input);
         this.customerService.getCustomerList(input)
-        .subscribe(
-        output => this.getCustomerListResult(output),
-        error => {
-          console.log("error in customer");
-          this.loaderService.display(false);
-        });
+            .subscribe(
+            output => this.getCustomerListResult(output),
+            error => {
+                console.log("error in customer");
+                this.loaderService.display(false);
+            });
     }
     getCustomerListResult(result) {
-      
+
         this.loaderService.display(false);
-        if(result.result== 'success'){
-           this.customerList = _.union(this.customerList, result.data);
+        if (result.result == 'success') {
+            this.customerList = _.union(this.customerList, result.data);
         }
-        else{
+        else {
             this.customerClickMore = false;
         }
-       
+
     }
-    filterDailogToggle(){
+    filterDailogToggle() {
         this.showFilterDailog = !this.showFilterDailog;
+    }
+    onChangeType() {
+        this.filterInput.root.searchtext = "";
+    }
+    getCustomerByFilter(firstcall) {
+
+        if (this.filterInput.root.searchtype == 'followupdate') {
+            this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+
+        }
+
+        let input = this.filterInput;
+        if (this.customerList && this.customerList.length && !firstcall) {
+            let lastCustomer: any = _.last(this.customerList);
+            if (lastCustomer) {
+                input.root.lastcustomerid = lastCustomer.userid;
+            }
+
+        }
+        else {
+            this.customerList = [];
+            input.root.lastcustomerid = "0";
+        }
+        this.customerService.searchCustomer(input)
+            .subscribe(
+            output => this.getCustomerByFilterResult(output),
+            error => {
+                console.log("error in customer");
+                this.loaderService.display(false);
+            });
+    }
+    getCustomerByFilterResult(result) {
+        console.log(result);
+        if (result.result == 'success') {
+            this.filterRecords = true;
+            this.customerList = _.union(this.customerList, result.data);
+        }
+        else {
+            this.customerClickMore = false;
+        }
+
+    }
+    getcustomerByPaging() {
+        if (this.filterRecords) {
+            this.getCustomerByFilter(false);
+        }
+        else {
+            this.getCustomerList(false);
+        }
+
+    }
+    clearFilter() {
+        this.showFilterDailog =false;
+        this.filterRecords = false;
+        this.followUpdate = null;
+        this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+        this.getCustomerList(true);
+      
       }
     ngOnInit() {
         this.getCustomerList(true);

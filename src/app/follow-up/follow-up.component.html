@@ -26,6 +26,10 @@
                       <p class="right">
                         <small class="gray">{{ comments.createddate | utcDate}} </small>
                       </p>
+                      
+                      <p class="right">Next Follow Up Date :
+                        <small class="gray"> {{ comments.followupdate  |  date: 'dd-MM-yyyy'}} </small>
+                      </p>
                     </li>
           
                   </ul>
@@ -36,10 +40,22 @@
           <div class=" ">
               <!-- <label class=" pdtop-10 center">
                   </label> -->
-                  <md-form-field class="example-full-width inline ">
+                  <div class="row">    
+                      <div class="col-sm-9  col-md-9  col-lg-9">             
+                    <md-form-field class="example-full-width inline ">
                       <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
         
                     </md-form-field>
+                  </div> 
+                  <div class="col-sm-3  col-md-3  col-lg-3">  
+                    <md-form-field class="inline">
+                        <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followupDate">
+                        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                        <md-datepicker #picker></md-datepicker>
+                      </md-form-field>
+                    </div>
+                    </div>
+                    
                     <small >Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>
             </div>
        </div>

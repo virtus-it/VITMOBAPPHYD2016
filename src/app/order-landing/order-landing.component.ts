@@ -49,7 +49,7 @@ export class OrderLandingComponent implements OnInit {
   forwardClickMore = true;
   orderClickMore = true;
   polygonArray = [];
-  filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  filterInput = { "order": { "pagesize": "50", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
   dropdownData = { selectedItems: [] };
   filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
   dropdownSettings = {
