@@ -62,7 +62,7 @@
 
     </div>
   </div>
-  <div class='col'>
+  <!-- <div class='col'>
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -70,7 +70,7 @@
           <th width='0%'> Subject: </th>
           <th class='pdleft-40' width='0%'> Feedback </th>
           <th class='pdleft-20' width='15%'> Date </th>
-          <th class='pdleft-20' width='0%'> Status</th>
+          <th class='pdleft-20' width='10%'> Status</th>
         </tr>
       </thead>
       <tbody>
@@ -83,7 +83,7 @@
           <td class="left"> {{feed.createddate |utcDate }} </td>
           <td class="left" > <a  class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'"> <i class="fa fa-times-circle openicon" aria-hidden="true"  title = "open"></i> </a>
           <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'"> <i class="fa fa-reply replyicon" aria-hidden="true" title = "reply"></i> </a>
-            <a class="btn btn-close " *ngIf="feed.status == 'close'"> <i class="fa fa-check-circle closeicon" aria-hidden="true" title = "closed" ></i>  </a> </td>
+            <a class="btn btn-close " *ngIf="feed.status == 'close'">  <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true"> CLOSED </i> <br> <br> <i class="fa fa-check-circle closeicon " aria-hidden="true" title = "closed" ></i>  </a> </td>
         
           <div *ngIf="feed.reply">
             <span> <strong> Replies: </strong></span> <br>
@@ -97,4 +97,48 @@
       </tbody>
     </table>
 
-  </div>
+  </div>  -->
+  
+  <div class="col-md-12 pd-brd brd " id="FeedbackList" *ngFor="let feed of feedbackList;" >
+      <div class="row pd-10"> 
+      <div class="col-md-4">
+      <div class="createdby logo-color" > <b *ngIf="feed.createdby"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b> </div>
+      <div class="greytext"> #{{feed.issueid}} </div> 
+     </div>
+     <div class="col-md-5">
+       <div class="">  Subject : <span class="greytext">{{feed.subject}} </span></div>
+       <div class=""><span class="greytext">{{feed.details}}</span></div>
+     </div>
+     <div class="col-md-3">
+     <br>
+      <div class="right pdright-15">  <span> {{feed.createddate |utcDate }} </span></div>
+    </div>
+   </div> 
+      
+   <div>
+      <hr width="100%">
+           <span>Replies</span><br>
+   
+        <div *ngIf="feed.reply">
+        <div *ngFor="let replies of feed.reply"><span class="greytext"> {{replies.message}} </span><br>
+        <div class="col-md-9">
+     </div>
+     <div class="col-md-3 right">
+      <div class="createdby gr right"><span> {{replies.createddate |utcDate }}  </span> </div>
+    </div>
+   </div>
+   </div>
+   <br>
+   </div>
+   
+      <hr width="100%">
+   
+      <div class="col-md-12">
+        <div class="col-md-11">
+            <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'"> <i class="fa fa-reply replyicon" (click)="openReplyModel(feed)" aria-hidden="true" title = "reply"></i> </a>
+            <a  class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'"> <i class="fa fa-times-circle openicon" (click)="openStatus(feed)" aria-hidden="true"  title = "open"></i> </a>
+            <a class="btn btn-close " *ngIf="feed.status == 'close'">  <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true"> CLOSED </i> <br> <br> <i class="fa fa-check-circle closeicon" (click)="closeStatus(feed)" aria-hidden="true" title = "closed" ></i>  </a>
+     </div>
+     </div>
+     
+     

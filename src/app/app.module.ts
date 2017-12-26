@@ -66,6 +66,7 @@ import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.
 import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-distributor.component';
 import { SelectProductsForassingComponent } from './select-products-forassing/select-products-forassing.component';
 import {FeedbackService} from './feedback/feedback.service';
+import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-reply-dialog.component';
 
 @NgModule({
     declarations: [
@@ -114,7 +115,8 @@ import {FeedbackService} from './feedback/feedback.service';
         FollowUpComponent,
         FollowUpDetailsComponent,
         AddStockDistributorComponent,
-        SelectProductsForassingComponent
+        SelectProductsForassingComponent,
+        FeedbackReplyDialogComponent
         
 
     ],
@@ -204,7 +206,8 @@ import {FeedbackService} from './feedback/feedback.service';
          FollowUpComponent,
          FollowUpDetailsComponent,
          AddStockDistributorComponent,
-         SelectProductsForassingComponent
+         SelectProductsForassingComponent,
+         FeedbackReplyDialogComponent
 
         ],
     exports: [
