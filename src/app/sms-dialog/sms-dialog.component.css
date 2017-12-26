@@ -3,7 +3,7 @@
     border: 1px solid;
     padding-top: 10px;
     overflow-y: scroll;
-    max-height: 150px;
+    max-height: 210px;
 }
 .mat-dialog-container{
     max-height:500px !important; 
