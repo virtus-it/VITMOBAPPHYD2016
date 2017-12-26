@@ -51,7 +51,45 @@ table thead {
   .replyicon{
     color: #3090c7;
   }
-  
+  .statusclosed{
+    color: rgb(233, 20, 20);
+  }
+  .pd-brd {
+    padding: 10px;
+    margin: 5px 0px;
+    border: 1px solid #ddd;
+  }
+  .greytext {
+    color: grey;
+  }
+  .col-md-9 {
+    width: 75%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .right {
+    float: right;
+  }
+  .col-md-3{
+    width: 25%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .col-md-12{
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .col-md-9{
+    width: 75%;
+  }
   /* .mat-dialog-container{
     height: 90% !important;
   } */
