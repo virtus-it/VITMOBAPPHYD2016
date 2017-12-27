@@ -5,7 +5,7 @@ import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { FollowUpService } from '../follow-up/follow-up.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-follow-up',
   templateUrl: './follow-up.component.html',
@@ -16,15 +16,19 @@ export class FollowUpComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService, private followupService: FollowUpService) { }
   numbers = 250;
   followUpList = [];
+  followupDate  = null;
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id, "username": this.authenticationService.userFullName(),
-      "remarks": "", "mobileno": this.details.mobileno, "transtype": "create", "userid": this.authenticationService.loggedInUserId()
+      "remarks": "", "mobileno": this.details.mobileno, "transtype": "create", "userid": this.authenticationService.loggedInUserId(),"followupdate":null
     }
   }
   createFollowUp() {
+    if (this.followupDate) {
+      this.followUpInput.User.followupdate = moment(this.followupDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
     console.log(this.followUpInput);
-    let input = this.followUpInput
+    let input = this.followUpInput;
     input.User.remarks = input.User.remarks.replace(/'/g, "");
     input.User.remarks = input.User.remarks.replace(/"/g, "");
     this.followupService.createFollowUp(input)
@@ -41,6 +45,8 @@ export class FollowUpComponent implements OnInit {
       //this.thisDialogRef.close('success');
       this.getfollowUpdetails();
       this.followUpInput.User.remarks = "";
+      this.followUpInput.User.followupdate = null;
+      this.followupDate = null;
     }
   }
  
