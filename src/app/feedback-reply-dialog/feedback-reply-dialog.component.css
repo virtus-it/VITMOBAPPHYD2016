@@ -1,0 +1,47 @@
+.sendbtn{
+    color: #fff;
+    background: #0f75bc;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    overflow: visible;
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 88px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 2px;
+}
+.cancelbtn{
+    box-sizing: border-box;
+    position: relative;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    min-width: 88px;
+    line-height: 36px;
+    padding: 0 16px;
+    border-radius: 2px;
+    background-color: #fff;
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.header{
+    padding: 15px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #fff;
+    line-height: 1.2;
+    background: #0f75bc;
+}
