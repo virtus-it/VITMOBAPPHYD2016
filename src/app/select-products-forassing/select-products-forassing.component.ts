@@ -85,6 +85,14 @@ export class SelectProductsForassingComponent implements OnInit {
       this.thisDialogRef.close('success');
     }
   }
+  changeQuantity(products){
+    _.each(this.productList, function (i, j) {
+      let details: any = i;
+      details.quantity = 0;
+    });
+    products.quantity = this.orderDetail.orderDetails.quantity;
+        
+      }
   onCloseCancel() {
     this.thisDialogRef.close('cancel');
   }

@@ -26,7 +26,7 @@
     
     <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
         <td width="20%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" [(ngModel)]="productID"   class="custom-control-input" name="{{product.productid}}" value="{{product.productid}}">
+            <input type="radio" [(ngModel)]="productID"   class="custom-control-input" name="{{product.productid}}" value="{{product.productid}}" (ngModelChange)="changeQuantity(product)">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">{{product.brandname}} </span>
           </label></td>
