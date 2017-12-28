@@ -12,8 +12,11 @@
               <div class="container-fluid pd-15x25 height-450">
                 <div class="form-group">
                     Please write your reply <br>
-                  <div class="col-md-1  col-sm-1  col-lg-1right">
-                    <textarea rows="5" cols="111" placeholder="Please write here..." name="reply" [(ngModel)]="feedbackInput.root.message" > </textarea>
+                  <div class="col-sm-9  col-md-9  col-lg-9">
+                    <textarea maxlength="250"  rows="5" cols="111" placeholder="Please write here..." name="reply" [(ngModel)]="feedbackInput.root.message" > </textarea>
+                    <small>Characters Remanining :
+                        <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
+                      </small>
                     </div>
                     </div>
                     </div></form> 

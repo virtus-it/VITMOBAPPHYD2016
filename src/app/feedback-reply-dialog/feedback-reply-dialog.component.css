@@ -45,3 +45,14 @@
     line-height: 1.2;
     background: #0f75bc;
 }
+.danger {
+    color: #8B1210;
+}
+.small {
+    font-size: 80%;
+    font-weight: 400;
+    box-sizing: inherit;
+    text-overflow: inherit;
+    overflow: hidden;
+    
+}

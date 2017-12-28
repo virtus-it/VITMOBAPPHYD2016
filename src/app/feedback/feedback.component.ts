@@ -3,10 +3,9 @@ import { AuthenticationService } from '../login/authentication.service';
 import { FeedbackService } from './feedback.service';
 import { LoaderService } from '../login/loader.service';
 import { MdDialog } from '@angular/material';
-import{FeedbackReplyDialogComponent} from '../feedback-reply-dialog/feedback-reply-dialog.component';
+import { FeedbackReplyDialogComponent } from '../feedback-reply-dialog/feedback-reply-dialog.component';
 import * as _ from 'underscore';
-import { error } from 'selenium-webdriver';
-import { Output } from '@angular/core/src/metadata/directives';
+
 @Component({
 
   templateUrl: './feedback.component.html',
@@ -14,9 +13,13 @@ import { Output } from '@angular/core/src/metadata/directives';
 })
 export class FeedbackComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService, private feedbackService: FeedbackService) { }
+  constructor(private authenticationService: AuthenticationService, public dialog: MdDialog, private loaderService: LoaderService, private feedbackService: FeedbackService) { }
   showFilterDailog = false;
   feedbackList = [];
+  searchFeedbackTerm = "";
+  feedbackListCopy = [];
+
+
 
   filterViewToggle() {
     this.showFilterDailog = !this.showFilterDailog;
@@ -28,73 +31,96 @@ export class FeedbackComponent implements OnInit {
       .subscribe(
       output => this.getAllFeedbackResult(output),
       error => {
-        console.log("error in distrbutors");
+        console.log("error in feedbacklist");
         this.loaderService.display(false);
       });
 
   }
-  
+
   getAllFeedbackResult(result) {
     console.log(result)
     if (result.result == "success") {
       this.feedbackList = result.data;
+      this.feedbackListCopy = result.data;
+
     }
 
   }
-  openStatus(feed){
+
+  searchFeedback() {
+    let term = this.searchFeedbackTerm;
+    if (term) {
+      this.feedbackList = this.feedbackListCopy.filter(function (e) {
+
+        if (e.createdby) {
+          let fullName = e.createdby.firstname + " " + e.createdby.lastname;
+          return e.createdby.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+        }
+      });
+    }
+    else {
+      this.feedbackList = this.feedbackListCopy;
+    }
+  }
+
+
+
+
+  openStatus(feed) {
     console.log(feed);
-    let input ={"root":{"issueid":feed.issueid,"loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"status":"close"}};
+    let input = { "root": { "issueid": feed.issueid, "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "status": "close" } };
     this.feedbackService.openAndCloseStatus(input)
-    .subscribe(
+      .subscribe(
       output => this.openStatusResult(output),
       error => {
-        console.log("error");
+        console.log("error in open status");
         this.loaderService.display(false);
       });
-    
-      }
-      openStatusResult(result) {
+
+  }
+  openStatusResult(result) {
     console.log(result)
     if (result.result == 'success') {
       this.getAllFeedback();
-    
-    }
-      }
-    closeStatus(feed){
-      console.log(feed);
-      let input = {"root":{"issueid":feed.issueid,"loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"status":"open"}};
-      this.feedbackService.openAndCloseStatus(input)
-      .subscribe(
-        Output => this.closeStatusResult(Output),
-        error => {
-          console.log("error");
-          this.loaderService.display(false);
-        });
-    }
-    closeStatusResult(result) {
-      console.log(result)
-      if (result.result == 'success') {
-        this.getAllFeedback();
 
-    
-      }
     }
-    openReplyModel(data){
-      let dialogRef = this.dialog.open(FeedbackReplyDialogComponent, {
-        width: '80%',
-        data: data
+  }
+  closeStatus(feed) {
+    console.log(feed);
+    let input = { "root": { "issueid": feed.issueid, "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "status": "open" } };
+    this.feedbackService.openAndCloseStatus(input)
+      .subscribe(
+      Output => this.closeStatusResult(Output),
+      error => {
+        console.log("error in close status");
+        this.loaderService.display(false);
+      });
+  }
+  closeStatusResult(result) {
+    console.log(result)
+    if (result.result == 'success') {
+      this.getAllFeedback();
+
+
+    }
+  }
+  openReplyModel(data) {
+    let dialogRef = this.dialog.open(FeedbackReplyDialogComponent, {
+      width: '80%',
+      data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
-       if( result == 'success'){
+      console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
         this.getAllFeedback();
 
-       }
+      }
 
     });
-    }
-    ngOnInit() {
-      this.getAllFeedback();
-    }
-    }
+  }
+  
+  ngOnInit() {
+    this.getAllFeedback();
+  }
+}
 
