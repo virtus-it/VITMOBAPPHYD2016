@@ -1,8 +1,8 @@
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4 col-sm-4">
-      <i class="fa fa-truck"></i> Add Supplier </div>
+      <i class="fa fa-truck"></i> Supplier</div>
     <div class="col-md-1 col-sm-1 right">
-      <strong ><i class="fa fa-times fs-20" aria-hidden="true"></i>
+      <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
               </strong>
     </div>
   </div>
@@ -12,13 +12,13 @@
         <div class="row">
           <div class="col-md-6 col-sm-6 ">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="First Name" name="firstName">
+              <input class="form-control" mdInput placeholder="Name" name="firstName" [(ngModel)]="supplierInput.firstname">
               <md-error>
                 First Name is <strong>required</strong>
               </md-error>
             </md-form-field>
             <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Alternate Number" name="firstName">
+                <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" [(ngModel)]="supplierInput.altmobileno">
                 <md-error>
                  Alternate  Phone Number is <strong>required</strong>
                 </md-error>
@@ -27,9 +27,9 @@
           </div>
           <div class="col-md-6 col-sm-6">
               <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Phone Number" name="firstName">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" [(ngModel)]="supplierInput.mobileno">
                   <md-error>
-                    Phone Number is <strong>required</strong>
+                    Mobile Number is <strong>required</strong>
                   </md-error>
                 </md-form-field>
 
@@ -89,7 +89,7 @@
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
-        <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>        
-      <button md-raised-button >CANCEL</button>&nbsp;
+        <button type="submit" class="btn-primary" md-raised-button (click)="submitSupplier()">SUBMIT</button>        
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>
