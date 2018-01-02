@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { MdDialog } from '@angular/material';
 import {AddSupplierDailogComponent} from '../add-supplier-dailog/add-supplier-dailog.component';
 import {SupplierOrderListComponent} from '../supplier-order-list/supplier-order-list.component';
+import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { SupplierService} from './supplier.service';
@@ -53,11 +54,11 @@ export class SupplierComponent implements OnInit {
   });
   }
 
-//opening dailg box for supplier order
-  supplierOrderList(){
+//opening dailog box for supplier order
+supplierOrdersList(data){
     let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
       width: '95%',
-      data: ''
+      data: data
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
@@ -85,6 +86,22 @@ export class SupplierComponent implements OnInit {
      
     }
   }
+
+
+  //map for assigning area
+  
+  openMapDialog(data) {
+    let dialogRef = this.dialog.open(MapDialogComponent, {
+       width: '90%',
+        data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        //this.dialogResult = result;
+    });
+}
+
+
 
   filterToggle(){
     this.showFilterDialog = !this.showFilterDialog;

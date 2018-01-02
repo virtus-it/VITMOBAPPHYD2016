@@ -8,16 +8,18 @@
         Order List
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
-          <strong  ><i class="fa fa-times fs-20" aria-hidden="true"></i>
+          <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
           </strong>         
     </div>
   </div>
   
     <md-dialog-content layout="column">
         <div class="row pd-15x25 brd-bottom">
-            <table class="table table-hover table-fixedheader">
-        <thead>
-          <tr>
+            <div id="" class="row pd-15x10 mg-0">
+                <div class="col">    
+                    <table class="table table-hover table-striped">
+                      <thead>
+                        <tr>
             <th width=""> Order Id</th>
             <th width="">Product Name</th>
             <th width="">Quantity</th>
@@ -29,29 +31,33 @@
             <th width="">Customer Name</th>
             <th width=""> Customer Mobile No</th>
             <th width="">Cost</th>
-             </tr>
+          </tr>
         </thead>
         <tbody>
-          <tr   >
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>
-            <td width="" class="left" scope="row"></td>           
+          <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.comments}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.supplierdetails.firstname}}</td>
+            <td width="" class="left" class="cellpadding" scope="row"></td>  
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>
+                     
            </tr>
         </tbody>
       </table>
     </div>
-    </md-dialog-content>
+            </div>
+            </div>
+            </md-dialog-content>
+    
     <div class="row float-right pdright-30 mgbottom-20">
         <md-dialog-actions align="end">
-          <button md-raised-button >CANCEL</button>&nbsp;
+          <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
         </md-dialog-actions>
       </div>
   
