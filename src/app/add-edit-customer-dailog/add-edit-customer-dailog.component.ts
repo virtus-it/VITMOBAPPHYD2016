@@ -13,7 +13,8 @@ import { LoaderService } from '../login/loader.service';
 export class AddEditCustomerDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
-  customerInput: any = { "User": { "advamt": "0", "user_type": "customer", "state": null, "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "", "city": null, "pincode": "", "address": "", "country": "", "apptype": this.authenticationService.appType() } };
+  customerInput: any = { "User": { "advamt": "0",  "TransType": "create","user_type": "customer", "state": null, "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "", "city": null, "pincode": "", "address": "", "country": "", "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+ 
   getCustomerDetails() {
   // console.log(this.Details);
   this.loaderService.display(true);
@@ -65,6 +66,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   createCustomer() {
     let input = this.customerInput;
     this.loaderService.display(true);
+    input.User.pwd =  this.customerInput.User.mobileno;
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
