@@ -113,7 +113,10 @@ export class CustomerComponent implements OnInit {
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
-
+            if(result == "success"){
+                this.getCustomerList(true);
+            
+            }
 
         });
 
@@ -126,7 +129,10 @@ export class CustomerComponent implements OnInit {
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
+if(result == "success"){
+    this.getCustomerList(true);
 
+}
 
         });
 
