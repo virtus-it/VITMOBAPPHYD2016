@@ -6,9 +6,9 @@
         </div>
       <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
           <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()' ><i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i></a>
-            <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
+            <a class="cursor logo-color mgleft-10" ><i  aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter" ></i>
     
-                                <div class="filterView">
+                                <div class="filterView" *ngIf="showFilterDialog">
                             <div class="">
                                 <b class="float-left">Filter By</b>
                                 <br>
@@ -57,17 +57,18 @@
           </tr>
         </thead>
         <tbody>
-          <tr >
-            <td  class="left"></td>
-            <td class="left"></td>
-            <td class="left"></td>
-            <td class="left"></td>
+          <tr  *ngFor = "let supplier of supplierList; let i = index" [attr.data-index]="i">
+            <td  class="left">{{i+1}}</td>
+            <td class="left"> {{supplier.firstname}}</td>
+            <td class="left"> {{supplier.mobileno}}</td>
+            <td class="left"> {{supplier.address}}</td>
             <td  class="left" (click)='supplierOrderList()'>Orders</td>
             <td class="left">Assign Area</td>
-            <td class="left"><i class="fa fa-pencil-square-o" aria-hidden="true"></i></td>
+            <td class="left"><i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)='editSupplier(supplier)'></i></td>
             <td class="left"><i class="fa fa-trash danger" aria-hidden="true"></i></td>      
         </tbody>
       </table>
+      
   </div>
   </div>
   </div>  

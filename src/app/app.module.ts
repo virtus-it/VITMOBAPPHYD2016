@@ -67,6 +67,7 @@ import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-
 import { SelectProductsForassingComponent } from './select-products-forassing/select-products-forassing.component';
 import {FeedbackService} from './feedback/feedback.service';
 import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-reply-dialog.component';
+import {SupplierService} from './supplier/supplier.service';
 
 @NgModule({
     declarations: [
@@ -172,6 +173,7 @@ import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-r
         LoaderService,
         FollowUpService,
         FeedbackService,
+        SupplierService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
