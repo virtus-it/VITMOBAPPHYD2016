@@ -7,7 +7,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { MdDialog } from '@angular/material';
 import { SupplierService } from '../supplier/supplier.service';
-import { error } from 'selenium-webdriver';
+
 @Component({
   selector: 'app-add-supplier-dailog',
   templateUrl: './add-supplier-dailog.component.html',
@@ -41,7 +41,7 @@ export class AddSupplierDailogComponent implements OnInit {
     }
 
   }
-  ///TODO : ADD update supplier funtion as same as sumbit suppiler function
+  /// : ADD update supplier funtion as same as sumbit suppiler function
  updatingSupplier(){
   this.loaderService.display(false);
   let input: any = {"User":{"userid":this.supplierDetails.userid,"firstname":this.supplierInput.firstname,"mobileno":this.supplierInput.mobileno ,"loginid":"289","user_type":"supplier","issuppersupplier":false,"apptype":this.authenticationService.appType() }}

@@ -68,6 +68,7 @@ import { SelectProductsForassingComponent } from './select-products-forassing/se
 import {FeedbackService} from './feedback/feedback.service';
 import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-reply-dialog.component';
 import {SupplierService} from './supplier/supplier.service';
+import { DeletesupplierComponent } from './deletesupplier/deletesupplier.component';
 
 @NgModule({
     declarations: [
@@ -117,7 +118,8 @@ import {SupplierService} from './supplier/supplier.service';
         FollowUpDetailsComponent,
         AddStockDistributorComponent,
         SelectProductsForassingComponent,
-        FeedbackReplyDialogComponent
+        FeedbackReplyDialogComponent,
+        DeletesupplierComponent
         
 
     ],
@@ -209,7 +211,8 @@ import {SupplierService} from './supplier/supplier.service';
          FollowUpDetailsComponent,
          AddStockDistributorComponent,
          SelectProductsForassingComponent,
-         FeedbackReplyDialogComponent
+         FeedbackReplyDialogComponent,
+         DeletesupplierComponent
 
         ],
     exports: [
