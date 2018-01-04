@@ -69,6 +69,20 @@
       </div>
 
       <div *ngIf="mobileDetailsCopy.length && orderinput.orderType != 'sms'">
+          <span width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="smsInput.smsType" class="custom-control-input" name="{{smsInput.smsType}}" value="sms">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">SMS</span>
+              </label>
+            </span>
+            <span width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="smsInput.smsType" class="custom-control-input" name="{{smsInput.smsType}}" value="notification">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">NOTIFICATION</span>
+              </label>
+            </span>
         <div class="row form-group">
           <div class="col-sm-3  col-md-3  col-lg-3 mgtop-20">
             <md-form-field class="example-full-width inline ">
@@ -145,20 +159,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">
-    <span width="30%" class="left capital">
-      <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-        <input type="radio" [(ngModel)]="smsInput.smsType" class="custom-control-input" name="{{smsInput.smsType}}" value="sms">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">SMS</span>
-      </label>
-    </span>
-    <span width="30%" class="left capital">
-      <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-        <input type="radio" [(ngModel)]="smsInput.smsType" class="custom-control-input" name="{{smsInput.smsType}}" value="notification">
-        <span class="custom-control-indicator"></span>
-        <span class="custom-control-description">NOTIFICATION</span>
-      </label>
-    </span>
+   
     <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
