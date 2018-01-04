@@ -14,30 +14,11 @@
                                 <br>
                                 <div class=" ">
                                   <md-form-field class="example-full-width">
-                                    <input class="form-control" mdInput placeholder=" Name">
+                                    <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm" (ngModelChange) = "searchSupplier()" name="searchSupplierTerm">
                                   </md-form-field>
                                 </div>
-                                <div class=" ">
-                                  <md-form-field class="example-full-width">
-                                    <input class="form-control" mdInput placeholder="Mobile Number">
-                                  </md-form-field>
                                 </div>
-                                <div class=" form-group">
-                                  <md-form-field class="example-full-width">
-                                    <input class="form-control" mdInput placeholder="Area">
-                                  </md-form-field>
-                                </div>
-                                <div class=" form-group">
-                                  <button md-raised-button color="primary">
-                                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                                  </button>
-                                  <button md-raised-button color="primary">
-                                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                                  </button>
-                                </div>
-                                </div>
-                         </div>
-               
+                         </div>  
             </a>
       </div>
         </div>
@@ -49,8 +30,8 @@
             <th width="5%">S.No</th>
             <th width="15%">User</th>
             <th width="12%">Mobile no</th>
-            <th width="20%">Address</th>
-            <th width="15%">View Orders</th>
+            <th width="15%">Address</th>
+            <th width="15%"> View Orders</th>
             <th width="12%">Set Areas</th>
             <th width="8%">Edit</th>
             <th width="8%">Delete</th>
@@ -62,10 +43,10 @@
             <td class="left"> {{supplier.firstname}}</td>
             <td class="left"> {{supplier.mobileno}}</td>
             <td class="left"> {{supplier.address}}</td>
-            <td  class="left" (click)='supplierOrderList()'>Orders</td>
-            <td class="left">Assign Area</td>
+            <td  class="left"  (click)='supplierOrdersList(supplier)' class= "btn btn-link" >Orders</td>
+            <td class="left"  class="btn-link" (click)="openMapDialog(supplier)">Assign Area</td>
             <td class="left"><i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)='editSupplier(supplier)'></i></td>
-            <td class="left"><i class="fa fa-trash danger" aria-hidden="true"></i></td>      
+            <td class="left"><i class="fa fa-trash danger" aria-hidden="true" (click)='deleteSupplier(supplier)'></i></td>      
         </tbody>
       </table>
       
