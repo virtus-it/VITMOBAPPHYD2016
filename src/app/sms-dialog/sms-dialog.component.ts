@@ -165,7 +165,7 @@ export class SmsDialogComponent implements OnInit {
         "body": this.smsInput.body
       }
     }
-    if(this.smsInput.smsType == 'sms'){
+    if(this.orderinput.orderType == 'sms'){
       let mobileArray = this.smsInput.customMobilenumber.split(';');
       let modifiedNumbers = [];
       _.each(mobileArray, function (i, j) {
