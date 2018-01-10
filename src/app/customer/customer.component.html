@@ -153,8 +153,12 @@
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showEditCustomer(customers)'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
-                    <label class="col-md-6" (click)='showSchedule()'>
+                    <label class="col-md-6" (click)='showSchedule(customers)'>
                       <i class="fa fa-calendar"></i> Schedule</label>
+                  </div>
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='editScheduleOrder()'>
+                      <i class="fa fa-pencil-square-o btn-link" aria-hidden="true"></i> View Scheduled Orders </label>
                   </div>
                 </div>
               </div>

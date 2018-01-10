@@ -12,7 +12,6 @@ export class CustomerService {
 
   constructor(private http: Http, @Inject('API_URL') private apiUrl: string) { }
   getCustomerById(input) {
-
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
     return this.http.get(this.apiUrl + '/user/user/' + input.userid + '/' + input.appType, options)
@@ -56,4 +55,47 @@ export class CustomerService {
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  createSchedule(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/createscheduler', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  viewScheduleOrders(input) {
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.apiUrl + '/getschedules/' + input.userId + '/' + input.appType+ '/' + input.userType + '/' + input.dealerid, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    
+
+    
+  }
+
+  updateScheduleOrder(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+  let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+  let options = new RequestOptions({ headers: headers });
+  return this.http.put(this.apiUrl + '/user', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  deleteScheduledOrder(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/changeschedulestatus', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+ 
 }

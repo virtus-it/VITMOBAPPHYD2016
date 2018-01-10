@@ -13,6 +13,13 @@ import { LoaderService } from '../login/loader.service';
 export class ProductsComponent implements OnInit {
 
   constructor(public dialog: MdDialog,private loaderService: LoaderService) { }
+
+  showFilterDialog= false;
+
+  filterViewToggle(){
+    this.showFilterDialog = !this.showFilterDialog;
+  }
+  
   addEditProduct() {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
 
@@ -65,6 +72,8 @@ export class ProductsComponent implements OnInit {
     });
 
   }
+
+  
   ngOnInit() {
   }
 

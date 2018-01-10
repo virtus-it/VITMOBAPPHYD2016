@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-customer-placeorder-dailog',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerPlaceorderDailogComponent implements OnInit {
 
-  constructor() { }
+  constructor(public thisDialogRef: MdDialogRef<CustomerPlaceorderDailogComponent>) { }
 
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+  }
+  
   ngOnInit() {
   }
-
+  
 }

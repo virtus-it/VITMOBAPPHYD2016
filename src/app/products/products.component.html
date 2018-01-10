@@ -12,8 +12,8 @@
           <i class="fa fa-line-chart" aria-hidden="true" ></i>   Stock History
         </button>
           <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()'><i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i></a>
-          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
-            <div class="filterView">
+          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)= "filterViewToggle()"></i>
+            <div class="filterView" *ngIf="showFilterDialog">
                 <div class="">
                     <b class="float-left">Filter By</b>
                     <br>

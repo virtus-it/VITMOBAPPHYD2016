@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-customer-setting-dailog',
@@ -7,8 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerSettingDailogComponent implements OnInit {
 
-  constructor() { }
+  constructor(public thisDialogRef: MdDialogRef<CustomerSettingDailogComponent>) { }
 
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+  }
   ngOnInit() {
   }
 
