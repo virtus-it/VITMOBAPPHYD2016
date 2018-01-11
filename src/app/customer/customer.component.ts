@@ -16,6 +16,7 @@ import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dai
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
+import * as FileSaver from 'file-saver';
 @Component({
 
     templateUrl: './customer.component.html',
@@ -29,6 +30,7 @@ export class CustomerComponent implements OnInit {
     showFilterDailog = false;
     followUpdate = null;
     filterRecords = false;
+    replacetext = "test";
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
@@ -225,7 +227,9 @@ if(result == "success"){
         this.filterInput.root.searchtext = "";
     }
     getCustomerByFilter(firstcall) {
-
+       
+        
+        
         if (this.filterInput.root.searchtype == 'followupdate') {
             this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
 
@@ -269,6 +273,38 @@ if(result == "success"){
         else {
             this.getCustomerList(false);
         }
+
+    }
+    downloadCustomer(){
+        let inputjson = {
+            "root": {
+                "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": this.authenticationService.userType(), "status": "assigned",
+                "lastrecordtimestamp": "15",
+                "pagesize": "5", "loginid": this.authenticationService.loggedInUserId(),
+                "searchtext": "", "searchtype": "name","apptype":this.authenticationService.appType()
+            }
+        };
+        this.customerService.getDownloadedFile(inputjson)
+        .subscribe(
+        output => this.downloadCustomerResult(output),
+        error => {
+            console.log("error in customer");
+            this.loaderService.display(false);
+        });
+
+    }
+    downloadCustomerResult(result){
+        let path = result.data.filename;
+        this.customerService.getFile(path)
+        .subscribe(
+        output => this.getFileResult(output),
+        error => {
+            console.log("error in customer");
+            this.loaderService.display(false);
+        });
+    }
+    getFileResult(result){
+        FileSaver.saveAs(result, "excel.xlsx");
 
     }
     clearFilter() {

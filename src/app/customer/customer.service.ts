@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers, RequestOptions } from '@angular/http';
+import { Http, Response, Headers, RequestOptions,ResponseContentType } from '@angular/http';
 import { Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-
+import 'rxjs/Rx'; 
 @Injectable()
 export class CustomerService {
 
@@ -55,6 +55,15 @@ export class CustomerService {
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  getDownloadedFile(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/download_customers', bodyString, options)
+    .map((res: Response) => res.json())
+    .do(data => console.log('All: '))
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+}
   createSchedule(input) {
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
@@ -64,6 +73,13 @@ export class CustomerService {
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  getFile(path: string):Observable<Blob>{
+    let options = new RequestOptions({responseType: ResponseContentType.Blob});
+    
+    return this.http.get(this.apiUrl +'/modules/uploads/'+path, options)
+            .map((response: Response) => <Blob>response.blob())              
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+}
 
   viewScheduleOrders(input) {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()

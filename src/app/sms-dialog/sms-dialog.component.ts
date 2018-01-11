@@ -27,7 +27,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
-  smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "" };
+  smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[],option:[] };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];

@@ -137,9 +137,9 @@ export class DistributorComponent implements OnInit {
 
         }
     }
-    onScrollFunction(event) {
-        console.log('scroll event', event);
-    }
+    // onScrollFunction(event) {
+    //     console.log('scroll event', event);
+    // }
     filterDailogToggle(){
         this.showFilterDailog = !this.showFilterDailog;
       }
