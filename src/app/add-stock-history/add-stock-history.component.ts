@@ -9,6 +9,7 @@ export class AddStockHistoryComponent implements OnInit {
 
   constructor() { }
 
+  
   ngOnInit() {
   }
 

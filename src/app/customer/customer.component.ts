@@ -12,6 +12,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
+import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
@@ -97,15 +98,29 @@ export class CustomerComponent implements OnInit {
             //this.dialogResult = result;
         });
     }
-    showSchedule() {
+    showSchedule(data) {
         let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
             width: '700px',
-            data: ''
+            data: data
         });
         dialogRefSetting.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
+    }
+
+
+    //Edit scheduled orders
+    editScheduleOrder(data){
+        let dialogRefSetting = this.dialog.open(CustomerScheduleEditDailogComponent , {
+            width: "80%",
+            data: data
+        });
+        dialogRefSetting.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+
+        });
+
     }
     showEditCustomer(customerDetails) {
         let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
@@ -192,6 +207,7 @@ if(result == "success"){
             });
     }
     getCustomerListResult(result) {
+        console.log(result);
 
         this.loaderService.display(false);
         if (result.result == 'success') {

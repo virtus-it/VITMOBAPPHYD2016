@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-customer-set-payment-cycle',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CustomerSetPaymentCycleComponent implements OnInit {
 
-  constructor() { }
+  constructor(public thisDialogRef: MdDialogRef<CustomerSetPaymentCycleComponent>) { }
+
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+  }
 
   ngOnInit() {
   }
