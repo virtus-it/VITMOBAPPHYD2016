@@ -99,9 +99,10 @@ export class CustomerComponent implements OnInit {
         });
     }
     showSchedule(data) {
+        let formatteddata:any = {"type":"create", "data":data, customerId:data.userid, customerName:data.firstname }
         let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
             width: '700px',
-            data: data
+            data: formatteddata
         });
         dialogRefSetting.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
@@ -186,6 +187,7 @@ if(result == "success"){
     getCustomerList(firstcall) {
         this.loaderService.display(true);
         let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType() };
+        console.log(input);
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {

@@ -1,12 +1,16 @@
-<div class="dist-style  minheight-500">
-    <div class=" row justify-content-between distIcon-style left">
-        <div class="col-sm-4 col-md-4 col-lg-4 ">
-          <h4>
-            <i class="fa fa-calendar"></i> View scheduled orders </h4>
-        </div>
-        </div>
 
-        <div class="col">
+<div class="row justify-content-between modal-title">
+        <div class="col-sm-4 col-md-4 col-lg-4 ">
+            <i class="fa fa-calendar"></i> View scheduled orders
+        </div>
+        <div class="col-md-1  col-sm-1  col-lg-1 right">
+          <strong>
+            <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+          </strong>
+        </div>
+        </div>
+        <div>
+        <md-dialog-content layout="column">
             <table class="table table-hover table-striped">
               <thead>
                 <tr>
@@ -25,8 +29,9 @@
                   <td class="left">{{schedule.quantity}} </td>
                   <td class="left">{{schedule.scheduletype}}</td>
                   <td class="left">{{schedule.delivery_exceptedtime}}</td>
-                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true"> </i></td>
+                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i></td>
                   <td class="left"> <i class="fa fa-trash danger" aria-hidden="true"></i> </td>
               </tbody>
-            </table></div>
-          </div>
+            </table>
+        </md-dialog-content>
+      </div>
