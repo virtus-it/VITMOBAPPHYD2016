@@ -1,8 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
+import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
+import { CustomerScheduleDaiolgComponent } from '../customer-schedule-daiolg/customer-schedule-daiolg.component';
+import { MdDialog } from '@angular/material';
+import * as _ from 'underscore';
+
 
 @Component({
   selector: 'app-customer-schedule-edit-dailog',
@@ -11,14 +16,15 @@ import { MdDialogRef } from '@angular/material';
 })
 export class CustomerScheduleEditDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService,private customerservice: CustomerService,private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleEditDailogComponent> ) { }
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService,private customerservice: CustomerService,private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleEditDailogComponent>,@Inject(MD_DIALOG_DATA) public Detail: any, ) { }
   scheduleOrdersList=[];
+
 
   
 //View schedule orders
 
   viewScheduleOrders(){
-    let input:any = { "userId":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType(), "appType": this.authenticationService.appType(), "dealerid":this.authenticationService.loggedInUserId() };
+    let input:any = { "userId":this.Detail.userid,"userType":this.authenticationService.userType(), "appType": this.authenticationService.appType(), "dealerid":this.authenticationService.loggedInUserId() };
     console.log(input);
 
     this.customerservice.viewScheduleOrders(input)
@@ -34,6 +40,21 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     if (result.result == "success") {
       this.scheduleOrdersList =result.data;
     }
+  }
+
+  // Edit schedule dialog box
+  editSchedule(data) {
+    let formarteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname }
+    let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
+        width: '700px',
+        data: formarteddata
+    });
+    dialogRefSetting.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if(result == 'success'){
+          this.viewScheduleOrders();
+        }
+    });
   }
 
   //Edit and update schedule orders
@@ -68,6 +89,11 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   ngOnInit() {
     this.viewScheduleOrders();
+    console.log(this.Detail);
+
+    // this.openDialog();
+
+
   }
 
 }

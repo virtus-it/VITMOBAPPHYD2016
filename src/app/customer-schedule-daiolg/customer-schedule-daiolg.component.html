@@ -26,7 +26,7 @@
                       </md-form-field> 
                 </div>
                 <div class="col-md-4 ">                   
-                    <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" > 
+                    <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" [disabled]="Detail.type== 'update'"> 
                         <md-option *ngFor="let prod of productList" [value]="prod" [value]="prod.pname">
                             {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
                         </md-option>
