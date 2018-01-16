@@ -30,7 +30,7 @@
                   <td class="left">{{schedule.scheduletype}}</td>
                   <td class="left">{{schedule.delivery_exceptedtime}}</td>
                   <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i></td>
-                  <td class="left"> <i class="fa fa-trash danger" aria-hidden="true"></i> </td>
+                  <td class="left"> <i class="fa fa-trash danger" aria-hidden="true" (click)="deleteSchedule(schedule)"></i> </td>
               </tbody>
             </table>
         </md-dialog-content>

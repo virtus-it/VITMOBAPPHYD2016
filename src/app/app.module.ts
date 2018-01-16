@@ -70,6 +70,7 @@ import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-r
 import {SupplierService} from './supplier/supplier.service';
 import { DeletesupplierComponent } from './deletesupplier/deletesupplier.component';
 import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
+import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-scheduled-order.component';
 
 @NgModule({
     declarations: [
@@ -121,7 +122,8 @@ import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-da
         SelectProductsForassingComponent,
         FeedbackReplyDialogComponent,
         DeletesupplierComponent,
-        CustomerScheduleEditDailogComponent
+        CustomerScheduleEditDailogComponent,
+        DeleteScheduledOrderComponent
         
 
     ],
@@ -215,6 +217,7 @@ import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-da
          SelectProductsForassingComponent,
          FeedbackReplyDialogComponent,
          DeletesupplierComponent,
+         DeleteScheduledOrderComponent,
          CustomerScheduleEditDailogComponent
 
         ],

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 import { MdDialogRef } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
@@ -17,6 +18,10 @@ import { weekdays } from 'moment';
 export class CustomerScheduleDaiolgComponent implements OnInit {
 
   constructor(private customerservice: CustomerService, private distributorService: DistributorServiceService, private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleDaiolgComponent>, private authenticationService: AuthenticationService, @Inject(MD_DIALOG_DATA) public Detail: any, ) { }
+  FormControl = new FormControl('', [
+    Validators.required]);
+
+
   scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity:"" , timeslot: "" }
   createSchedule = [];
   customerDetails:any = "";
@@ -26,10 +31,11 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   checkAllDay: boolean = false;
   selectAllWeekDays : boolean = false;
   selectAllDays: boolean = false;
+  updateSchedule=[];
+
  
   days = [];
 
-  
   
   //create schedule
 
@@ -61,37 +67,44 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   }
 
-  //Create orUpdate
+  //Update Schedule Order
+  updateScheduleOrder(){
+    let input={}
+    if(this.scheduleInput.schedulefor=="weekdays" ){
+    input={"order":{"schdid":this.Detail.data.id,"apptype":this.authenticationService.appType(),"excepted_time":this.scheduleInput.timeslot,"orderstatus":"ordered","orderto":this.authenticationService.loggedInUserId() ,"orderfrom":this.Detail.userid,"product_cost":this.scheduleInput.productName.pcost ,"paymentmode":"cash","usertype":this.authenticationService.userType() ,"quantity":this.scheduleInput.productQuantity,"loginid":this.authenticationService.loggedInUserId(),"groupid":"289","productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "weekdays":weekdays , "scheduletype": this.scheduleInput.schedulefor , "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin"}};
+    }
+    else{
+      input={"order":{"schdid":this.Detail.data.id,"apptype":this.authenticationService.appType(),"excepted_time":this.scheduleInput.timeslot,"orderstatus":"ordered","orderto":this.authenticationService.loggedInUserId() ,"orderfrom":this.Detail.userid,"product_cost":this.scheduleInput.productName.pcost ,"paymentmode":"cash","usertype":this.authenticationService.userType() ,"quantity":this.scheduleInput.productQuantity,"loginid":this.authenticationService.loggedInUserId(),"groupid":"289","productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.days,  "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin"}};
 
-  
-
-  //getting customers list
-
-  // getCustomerDetails() {
-  //   if (this.Detail) {
-  //     let input = { userid: this.Detail.userid, appType: this.authenticationService.appType() }
-  //     this.customerservice.getCustomerById(input)
-  //       .subscribe(
-  //       output => this.getCustomerDetailsResult(output),
-  //       error => {
-  //         console.log("error in distrbutors");
-  //         this.loaderService.display(false);
-  //       });
-  //   }
-  // }
-
-  // getCustomerDetailsResult(result) {
-  //   console.log(result);
-  //   this.loaderService.display(false);
-  //   if (result.result = 'success') {
+    }
+    console.log(input);
+    this.customerservice.updateScheduleOrder(input)
+    .subscribe(
+      output => this.UpdateScheduleResult(output),
+      error => {
+        console.log("error in updating schedule");
+        this.loaderService.display(false);
+      });
+  }
+  UpdateScheduleResult(result){
+    if(result.result== "success"){
+      this.updateSchedule = result.data;
+      this.thisDialogRef.close("success");
+    }
+  }
 
 
-  //     this.customerDetails = result.data;
-  //     console.log(this.customerDetails)
-  //   }
+   //Create and Update scheduled order
+   createAndUpdateScheduleOrder(){
+    if (this.Detail.type=='create') {
+      this.createScheduledays();
+    }
+    else{
+      this.updateScheduleOrder();
+    }
+  }
 
-  // }
-
+ 
   //get products list
 
     getProductsList() {
@@ -210,7 +223,6 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     }
   }
 
-
   //Check all days
   onChangeCheckAllDays(isChecked: boolean) {
 
@@ -239,7 +251,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     this.scheduleInput.productQuantity=this.Detail.data.quantity;
     this.scheduleInput.schedulefor=this.Detail.data.scheduletype;
     this.scheduleInput.timeslot=this.Detail.data.delivery_exceptedtime;
-let productId = this.Detail.data.productid;
+    let productId = this.Detail.data.productid;
     let productItem = _.find(this.productList, function(k,l) {
       let prodId: any =k;
       return prodId.productid ==  productId;
@@ -258,9 +270,6 @@ let productId = this.Detail.data.productid;
 
     console.log(this.Detail);
     this.getProductsList();
-    // this.createOrUpdate();
-
-  
   }
 
 }
