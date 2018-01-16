@@ -106,13 +106,16 @@ export class SmsDialogComponent implements OnInit {
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
+        if(details.mobileno){
         let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, fullName: details.fullname, referal_code: details.referal_code };
         mobile.push(mobiles);
+      }
 
       });
 
       this.mobileDetails = mobile;
       this.mobileDetailsCopy = mobile;
+    
     }
   }
   searchMobileNo() {

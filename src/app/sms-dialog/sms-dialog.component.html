@@ -144,7 +144,7 @@
         <div class="row mgleft-5 mobile-div form-group">
           <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
             [attr.data-index]="i">
-            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" >
               <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">{{mobile.mobileno}}</span>
