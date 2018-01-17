@@ -97,7 +97,7 @@ export class CustomerService {
     let bodyString = JSON.stringify(input); // Stringify payload
   let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
   let options = new RequestOptions({ headers: headers });
-  return this.http.put(this.apiUrl + '/user', bodyString, options)
+  return this.http.put(this.apiUrl + '/scheduler', bodyString, options)
       .map((res: Response) => res.json())
       .do(data => console.log('All: ' + JSON.stringify(data)))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -108,6 +108,16 @@ export class CustomerService {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/changeschedulestatus', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+  }
+  ScheduleList(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getallschedules', bodyString, options)
       .map((res: Response) => res.json())
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

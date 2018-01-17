@@ -22,6 +22,7 @@ export class SmsDialogComponent implements OnInit {
 
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
+    
       .startWith(null)
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
   }

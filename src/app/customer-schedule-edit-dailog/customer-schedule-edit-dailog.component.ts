@@ -2,6 +2,7 @@ import { Component, OnInit,Inject } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
+import {DeleteScheduledOrderComponent} from '../delete-scheduled-order/delete-scheduled-order.component';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { CustomerScheduleDaiolgComponent } from '../customer-schedule-daiolg/customer-schedule-daiolg.component';
@@ -40,14 +41,19 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     if (result.result == "success") {
       this.scheduleOrdersList =result.data;
     }
+   else{
+     this.scheduleOrdersList =[];
+     console.log("No schedule orders");
+   }
   }
 
   // Edit schedule dialog box
   editSchedule(data) {
-    let formarteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname }
+    console.log(data);
+    let formatteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname }
     let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
         width: '700px',
-        data: formarteddata
+        data: formatteddata
     });
     dialogRefSetting.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
@@ -80,6 +86,27 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     }
 
     //Delete scheduled order
+
+    deleteSchedule(data){
+      console.log(data);
+      let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
+        width: '700px',
+        data: data
+    });
+    dialogRefSetting.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        //this.dialogResult = result;
+        if (result == 'success') {
+          this.scheduleOrdersList =[];
+     console.log("No schedule orders");
+        }
+        this.viewScheduleOrders();
+        
+    });
+
+    }
+
+    
 
     
 

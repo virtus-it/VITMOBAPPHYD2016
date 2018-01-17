@@ -70,6 +70,8 @@ import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-r
 import {SupplierService} from './supplier/supplier.service';
 import { DeletesupplierComponent } from './deletesupplier/deletesupplier.component';
 import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
+import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-scheduled-order.component';
+import { ScheduleComponent } from './schedule/schedule.component';
 
 @NgModule({
     declarations: [
@@ -121,7 +123,9 @@ import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-da
         SelectProductsForassingComponent,
         FeedbackReplyDialogComponent,
         DeletesupplierComponent,
-        CustomerScheduleEditDailogComponent
+        CustomerScheduleEditDailogComponent,
+        DeleteScheduledOrderComponent,
+        ScheduleComponent
         
 
     ],
@@ -151,6 +155,7 @@ import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-da
             { path: 'product', component: ProductsComponent, canActivate: [LoggedInGuard] },
             { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
+            { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -215,6 +220,8 @@ import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-da
          SelectProductsForassingComponent,
          FeedbackReplyDialogComponent,
          DeletesupplierComponent,
+         DeleteScheduledOrderComponent,
+         ScheduleComponent,
          CustomerScheduleEditDailogComponent
 
         ],

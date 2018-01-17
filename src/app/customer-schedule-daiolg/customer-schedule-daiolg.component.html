@@ -18,11 +18,8 @@
             <div class="schedule-popup row">
                 <div class="col-md-4 ">                    
                     <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Customer Name" [(ngModel)]="scheduleInput.CustomerName">
-                        <md-error>
-                            Customer Name is
-                          <strong>required</strong>
-                        </md-error>
+                        <input class="form-control" mdInput placeholder="Customer Name" [(ngModel)]="scheduleInput.CustomerName" disabled>
+                        
                       </md-form-field> 
                 </div>
                 <div class="col-md-4 ">                   
@@ -34,14 +31,15 @@
                 </div>
                 <div class="col-md-3 ">
                     <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="scheduleInput.productQuantity">
-                        <md-error>
+                        <input class="form-control" mdInput placeholder="Quantity" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
+                        <md-error *ngIf="FormControl.hasError('required')">
                           Quantity is
                           <strong>required</strong>
                         </md-error>
                       </md-form-field>                </div>
         
             </div>
+            <br>
             <div class="row  ">
                     <div class="col-md-4">
                     <md-select placeholder="Schedule for" [(ngModel)]="scheduleInput.schedulefor" class="wd-100pc left" >
@@ -394,10 +392,9 @@
         
       
         <div class="createsche  mgtop-10">
-            <input type="button" value="Create" class="createscheduler btn-small btn btn-primary " btntype="create" (click)="createScheduledays()">
+            <input type="button" value={{Detail.type}} class="createscheduler btn-small btn btn-primary capitalize " btntype="create" [disabled]="!FormControl.valid" (click)="createAndUpdateScheduleOrder()">
             <div class="message"></div>
         </div>
-        
       </div>
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
