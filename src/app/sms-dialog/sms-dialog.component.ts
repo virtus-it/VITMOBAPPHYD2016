@@ -28,7 +28,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
-  smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[],option:[] };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];
@@ -36,6 +36,9 @@ export class SmsDialogComponent implements OnInit {
   checkAll: boolean = false;
   checkAllMobile: boolean = false;
   smallLoader: boolean = false;
+  buttonCount:number = 0;
+  optionCount:number = 0;
+  silderCount:number = 0;
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -76,7 +79,10 @@ export class SmsDialogComponent implements OnInit {
     this.orderinput.toDate = null
     this.orderinput.days = null
     this.orderinput.distributorid = null;
-
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  }
+  onChangeSmsType(type){
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: type, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   getMobileNumber() {
     this.smallLoader = true;
@@ -163,12 +169,31 @@ export class SmsDialogComponent implements OnInit {
         "smstype": this.smsInput.smsType,
         "user_type": this.authenticationService.userType(),
         "TransType": "createsms",
-        "type": this.orderinput.orderType,
+        "type": this.smsInput.type,
+        "showcomment":this.smsInput.showcomment,
         "loginid": this.authenticationService.loggedInUserId(),
         "apptype": this.authenticationService.appType(),
-        "body": this.smsInput.body
+        "body": this.smsInput.body,
+        "title": this.smsInput.title,
+        "redirecturl": this.smsInput.redirecturl,
+        "url": this.smsInput.url,
+        "buttons":[],
+        "option": [],
+        "sliderurl":this.smsInput.sliderurl
       }
     }
+    _.each(this.smsInput.buttons, function (i, j) {
+      let details: any = i;
+      
+      createSmsInput.User.buttons.push(details.name);
+
+    });
+    _.each(this.smsInput.option, function (i, j) {
+      let details: any = i;
+     
+      createSmsInput.User.option.push(details.name);
+
+    });
     if(this.orderinput.orderType == 'sms'){
       let mobileArray = this.smsInput.customMobilenumber.split(';');
       let modifiedNumbers = [];
@@ -187,7 +212,7 @@ export class SmsDialogComponent implements OnInit {
       createSmsInput.User.body = this.smsInput.customBody;
     }
     
-    console.log(createSmsInput);
+    console.log("input",createSmsInput);
     this.smsService.CreateSms(createSmsInput)
       .subscribe(
       output => this.saveMobileSmsResult(output),
@@ -231,7 +256,44 @@ export class SmsDialogComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
 
+  addButton(){
+    this.buttonCount = this.buttonCount + 1;
+    let buttonObject = {name:"",count:this.buttonCount};
+this.smsInput.buttons.push(buttonObject);
 
+  }
+  removeButton(item){
+    let filteredButton = _.filter(this.smsInput.buttons, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.buttons = filteredButton;
+  }
+  addOption(){
+    this.optionCount = this.optionCount + 1;
+    let optionObject = {name:"",count:this.optionCount};
+this.smsInput.option.push(optionObject);
+
+  }
+  removeoption(item){
+    let filteredOption = _.filter(this.smsInput.option, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.option = filteredOption;
+  
+  }
+  addSlider(){
+    this.silderCount = this.silderCount + 1;
+    let sliderObject = {image:"",count:this.silderCount};
+this.smsInput.sliderurl.push(sliderObject);
+
+  }
+  removeSilder(item){
+    let filteredOption = _.filter(this.smsInput.sliderurl, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.sliderurl = filteredOption;
+  
+  }
   ngOnInit() {
     this.getDistributors()
   }
