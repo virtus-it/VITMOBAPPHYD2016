@@ -1,10 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { MdDialog } from '@angular/material';
 import { FormControl, Validators } from '@angular/forms';
 import { MdDialogRef } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { CustomerService } from '../customer/customer.service';
+import { DeleteScheduledOrderComponent } from '../delete-scheduled-order/delete-scheduled-order.component';
 import { AuthenticationService } from '../login/authentication.service';
 import * as _ from 'underscore';
 import { weekdays } from 'moment';
@@ -17,7 +19,7 @@ import { weekdays } from 'moment';
 })
 export class CustomerScheduleDaiolgComponent implements OnInit {
 
-  constructor(private customerservice: CustomerService, private distributorService: DistributorServiceService, private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleDaiolgComponent>, private authenticationService: AuthenticationService, @Inject(MD_DIALOG_DATA) public Detail: any, ) { }
+  constructor(private customerservice: CustomerService,public dialog: MdDialog, private distributorService: DistributorServiceService, private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleDaiolgComponent>, private authenticationService: AuthenticationService, @Inject(MD_DIALOG_DATA) public Detail: any, ) { }
   FormControl = new FormControl('', [
     Validators.required]);
 
@@ -263,6 +265,23 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     }
     }
    }
+
+
+   deleteSchedule(data) {
+    console.log();
+    let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
+      width: '700px',
+      data: this.Detail.data
+    });
+    dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      this.thisDialogRef.close("success");
+      this.getProductsList();
+
+
+    });
+
+  }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }

@@ -14,19 +14,19 @@ import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 
-
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
   styleUrls: ['./schedule.component.css']
 })
+
 export class ScheduleComponent implements OnInit {
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
   constructor(private distributorService: DistributorServiceService, public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService, private customerservice: CustomerService) {
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
-    
+
       .startWith(null)
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
   }
@@ -39,98 +39,83 @@ export class ScheduleComponent implements OnInit {
   selectAllDays: boolean = false;
   filterRecords = false;
   distributors: any = [];
+  NoRecords = true;
+  
   //FilterInputs
-  filter: any = { "distributorid": "", "customerNumber": "", "searchtype": "", "weekdays": "", "days": "", "searchtext": "", "date":null };
+  filter: any = { "distributorid": "", "customerNumber": "", "searchtype": "", "weekdays": "", "days": "", "searchtext": "", "date":null , "last_orderid":null };
 
-  //filtered distributors
+  //Scheduled Order list
 
-  filterDistributors(name: string) {
-    console.log(name);
-    let finalDistributors = this.distributors.filter(dist =>
-      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
-    if (finalDistributors && finalDistributors.length > 0) {
-      let findDistributor: any = {};
-
-      findDistributor = _.find(finalDistributors, function (k, l) {
-        let distDetails: any = k;
-        return distDetails.fullName == name;
-      });
-
-      if (findDistributor) {
-        this.filter.distributorid = findDistributor.userid;
-      }
-
-    }
-    return finalDistributors;
-  }
-
-
-
-
-  //clearFilter
-  clearFilter() {
-    this.showFilterDailog = false;
-    this.filterRecords = false;
-    this.selectAllWeekDays = false;
-    this.selectAllDays = false;
-    this.checkAllWeek = false;
-    this.checkAllDay = false;
-
-    this.filter = { distributorid: "", customerNumber: "", date: "", weekdays: "", days: "", searchtype: "", searchtext: "" };
-    this.scheduleOrderList();
-
-  }
-
-  //Search in filter
-
-  searchScheduledOrder() {
-
-    let input :any= { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "searchtext": "", "searchtype": this.filter.searchtype, "apptype": this.authenticationService.appType() } }
-
-
-    if (this.filter.searchtype == 'bydistributor') {
-      input.root.searchtext = this.filter.distributorid;
-    }
-    else if (this.filter.searchtype == 'bycustomer') {
-      input.root.searchtext = this.filter.customerNumber;
-      input.root.cmobilenumber=this.filter.customerNumber;
-
-    }
-    else if (this.filter.searchtype == 'distributorcustomer') {
-      input.root.searchtext = this.filter.distributorid;
-      input.root.cmobilenumber=this.filter.customerNumber;
-    }
-    else if (this.filter.searchtype == 'bydate') {
-      input.root.searchtext = moment(this.filter.date).format('YYYY-MM-DD');
-    }
-    else if (this.filter.searchtype == 'weekdays') {
-      input.root.searchtext = this.filter.weekdays;
-    }
-    else if (this.filter.searchtype == 'days') {
-      input.root.searchtext = this.filter.days;
-    }
+  scheduleOrderList() {
+    this.loaderService.display(false);
+    let input: any = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "apptype": this.authenticationService.appType(), "searchtype": "0", "searchtext": "0" } }
     console.log(input);
-
-    this.loaderService.display(true);
     this.customerservice.ScheduleList(input)
-    .subscribe(
-      output => this.filteredScheduleResult(output),
+      .subscribe(
+      output => this.ScheduleListResult(output),
       error => {
-        console.log("falied");
+        console.log("error in showing schedules");
         this.loaderService.display(false);
       });
-     }
-    filteredScheduleResult(result){
-      console.log(result);
-    this.loaderService.display(false);
+  }
+  ScheduleListResult(result) {
+    console.log(result);
     if (result.result == 'success') {
       this.scheduleOrdersList = result.data;
-
-    }
     }
 
+  }
 
+
+  //Dialog model for creating new schedule
+
+  createSchedule(data) {
+    console.log(data);
+    let formatteddata: any = { "type": "create", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
+    let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
+      width: '700px',
+      data: formatteddata
+    });
+    dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == "success") {
+        this.scheduleOrderList();
+      }
+    });
+  }
+
+  // Dialog Model for Edit
+  editSchedule(data) {
+    console.log(data);
+    let formatteddata: any = { "type": "update", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
+    let dialogRefOrderList = this.dialog.open(CustomerScheduleDaiolgComponent, {
+      width: '700px',
+      data: formatteddata
+    });
+    dialogRefOrderList.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == "success") {
+        this.scheduleOrderList();
+      }
+    });
+  }
+
+  // Dialog model for delete
+
+  deleteSchedule(data) {
+    console.log(data);
+    let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
+      width: '700px',
+      data: data
+    });
+    dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == "success") {
+        this.scheduleOrderList();
+      }
+    });
+
+  }
 
 
   //Filter check weeks and days
@@ -230,6 +215,74 @@ export class ScheduleComponent implements OnInit {
     }
   }
 
+  //Search functionality in filter 
+
+  searchScheduledOrder() {
+
+    let input :any= { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "searchtext": "", "searchtype": this.filter.searchtype, "apptype": this.authenticationService.appType(), "last_orderid": "0" } }
+
+
+    if (this.filter.searchtype == 'bydistributor') {
+      input.root.searchtext = this.filter.distributorid;
+    }
+    else if (this.filter.searchtype == 'bycustomer') {
+      input.root.searchtext = this.filter.customerNumber;
+      input.root.cmobilenumber=this.filter.customerNumber;
+
+    }
+    else if (this.filter.searchtype == 'distributorcustomer') {
+      input.root.searchtext = this.filter.distributorid;
+      input.root.cmobilenumber=this.filter.customerNumber;
+    }
+    else if (this.filter.searchtype == 'bydate') {
+      input.root.searchtext = moment(this.filter.date).format('YYYY-MM-DD');
+    }
+    else if (this.filter.searchtype == 'weekdays') {
+      input.root.searchtext = this.filter.weekdays;
+    }
+    else if (this.filter.searchtype == 'days') {
+      input.root.searchtext = this.filter.days;
+    }
+    
+    console.log(input);
+
+    this.loaderService.display(true);
+    this.customerservice.ScheduleList(input)
+    .subscribe(
+      output => this.filteredScheduleResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+     }
+    filteredScheduleResult(result){
+      console.log(result);
+    this.loaderService.display(false);
+    if (result.result == 'success') {
+      this.scheduleOrdersList = result.data;
+    }
+    else{
+      this.scheduleOrdersList = [];
+      this.NoRecords = false;
+      this.showFilterDailog = false;
+    }
+
+    }
+
+    //clearFilter
+  clearFilter() {
+    this.showFilterDailog = false;
+    this.filterRecords = false;
+    this.selectAllWeekDays = false;
+    this.selectAllDays = false;
+    this.checkAllWeek = false;
+    this.checkAllDay = false;
+
+    this.filter = { distributorid: "", customerNumber: "", date: "", weekdays: "", days: "", searchtype: "", searchtext: "" };
+    this.scheduleOrderList();
+
+  }
+
   //getting distributors
 
 
@@ -261,92 +314,38 @@ export class ScheduleComponent implements OnInit {
   }
 
 
+  //filtered distributors
 
+  filterDistributors(name: string) {
+    console.log(name);
+    let finalDistributors = this.distributors.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    console.log(finalDistributors);
+    if (finalDistributors && finalDistributors.length > 0) {
+      let findDistributor: any = {};
 
-
-
-
-  //Dialog model for creating new schedule
-
-  createSchedule(data) {
-    console.log(data);
-    let formatteddata: any = { "type": "create", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
-    let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
-      width: '700px',
-      data: formatteddata
-    });
-    dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      if (result == "success") {
-        this.scheduleOrderList();
-      }
-    });
-  }
-
-  // Dialog Model for Edit
-  editSchedule(data) {
-    console.log(data);
-    let formatteddata: any = { "type": "update", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
-    let dialogRefOrderList = this.dialog.open(CustomerScheduleDaiolgComponent, {
-      width: '700px',
-      data: formatteddata
-    });
-    dialogRefOrderList.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      if (result == "success") {
-        this.scheduleOrderList();
-      }
-    });
-  }
-
-  // Dialog model for delete
-
-  deleteSchedule(data) {
-    console.log(data);
-    let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
-      width: '700px',
-      data: data
-    });
-    dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
-      if (result == "success") {
-        this.scheduleOrderList();
-      }
-    });
-
-  }
-
-  //Scheduled Order list
-
-  scheduleOrderList() {
-    this.loaderService.display(false);
-    let input: any = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "apptype": this.authenticationService.appType(), "searchtype": "0", "searchtext": "0" } }
-    console.log(input);
-    this.customerservice.ScheduleList(input)
-      .subscribe(
-      output => this.ScheduleListResult(output),
-      error => {
-        console.log("error in showing schedules");
-        this.loaderService.display(false);
+      findDistributor = _.find(finalDistributors, function (k, l) {
+        let distDetails: any = k;
+        return distDetails.fullName == name;
       });
-  }
-  ScheduleListResult(result) {
-    console.log(result);
-    if (result.result == 'success') {
-      this.scheduleOrdersList = result.data;
-    }
 
+      if (findDistributor) {
+        this.filter.distributorid = findDistributor.userid;
+      }
+
+    }
+    return finalDistributors;
   }
+
 
   filterViewToggle() {
     this.showFilterDailog = !this.showFilterDailog;
   }
 
+
   ngOnInit() {
     this.scheduleOrderList();
     this.getDistributors();
-
-
   }
 
 }

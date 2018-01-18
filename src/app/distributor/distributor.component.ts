@@ -16,6 +16,10 @@ import { LoaderService } from '../login/loader.service';
 })
 export class DistributorComponent implements OnInit {
     distributors:any = [];
+    distributorsCopy:any =[];
+    searchDistributorTerm = "";
+    searchDistributorNumber= "";
+    filterType ="";
     distributorClickMore = true;
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 30 } };
@@ -49,10 +53,14 @@ export class DistributorComponent implements OnInit {
         if (data.result == 'success') {
             
             this.distributorClickMore = true;
-            this.distributors = _.union(this.distributors, data.data);
+            let finalDistributor = _.union(this.distributors, data.data);
+            this.distributors = finalDistributor;
+            this.distributorsCopy = finalDistributor;
+            
         }
         else{
-            this.distributorClickMore = false;   
+            this.distributorClickMore = false; 
+          
         }
     }
     openMapDialog(data) {
@@ -137,6 +145,37 @@ export class DistributorComponent implements OnInit {
 
         }
     }
+
+    //Search distributor with name
+
+    searchDistributorByName() {
+        let term = this.searchDistributorTerm;
+        if (term) {
+          this.distributors = this.distributorsCopy.filter(function (e) {
+              return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+           
+          });
+        }
+        else {
+          this.distributors = this.distributorsCopy;
+        }
+      }
+
+      //Search distributor with number
+      searchDistributorbyNumber(){
+        let term = this.searchDistributorNumber;
+        if (term) {
+          this.distributors = this.distributorsCopy.filter(function (e) {
+              return e.mobileno.indexOf(term) >= 0
+          });
+        }
+        else {
+          this.distributors = this.distributorsCopy;
+        }
+      }
+
+
+
     // onScrollFunction(event) {
     //     console.log('scroll event', event);
     // }

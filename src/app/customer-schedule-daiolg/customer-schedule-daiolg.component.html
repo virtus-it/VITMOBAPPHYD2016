@@ -395,8 +395,11 @@
             <input type="button" value={{Detail.type}} class="createscheduler btn-small btn btn-primary capitalize " btntype="create" [disabled]="!FormControl.valid" (click)="createAndUpdateScheduleOrder()">
             <div class="message"></div>
         </div>
+
+        <div *ngIf="Detail.type=='update'">
+            <input type="button" value="Delete" class="btn-small btn deletebtn" (click)="deleteSchedule(Detail.data)">
+        </div>
       </div>
-  </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;

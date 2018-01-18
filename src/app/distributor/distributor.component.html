@@ -9,23 +9,24 @@
     
                                 <div class="filterView" *ngIf="showFilterDailog">
                             <div class="">
-                                <b class="float-left">Filter By</b><br>
-                                     <div class=" ">
+                                <div class="form-group">
+                                  <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType">
+                                    <md-option value="name" >First Name</md-option>
+                                    <md-option value="mobileno">Mobile Number</md-option>
+                                  </md-select></div>
+                                        <div *ngIf="filterType=='name'">
                                         <md-form-field class="example-full-width">
-                                          <input class="form-control" mdInput placeholder="First Name"  name="firstName">
-                                          <md-error >
-                                             Name is <strong>required</strong>
-                                          </md-error>
-                                        </md-form-field>
-                                      </div>
-                                      <div class=" form-group">
-                                          <md-form-field class="example-full-width">
-                                            <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
-                                            <md-error >
-                                              Mobile No is <strong>required</strong>
-                                            </md-error>
-                                          </md-form-field>
-                                        </div> 
+                                          <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange) = "searchDistributorByName()" name="searchDistributorTerm">
+                                         </md-form-field>
+                                        </div>
+                                         
+                                       <div *ngIf="filterType=='mobileno'">
+                                        <md-form-field class="example-full-width">
+                                          <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="searchDistributorNumber" (ngModelChange) = "searchDistributorbyNumber()" name="searchDistributorNumber" maxlength="10">
+                                         </md-form-field>
+                                       </div>
+                                         
+                                  
                                   <div class="input-group pd-10  ">
                                     <button md-raised-button color="primary" ng-click="clearSearch()">
                                       <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
@@ -57,7 +58,7 @@
       <tbody>
         <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
           <td class="left">{{dist.firstname}} {{dist.lastname}}</td>
-          <td class="left">{{dist.mobileno}}</td>
+          <td class="left" >{{dist.mobileno}} </td>
           <td class="left">{{dist.address}}</td>
            <td class="left">
              <!-- <button class="btn btn-link" (click)="showFollowUpDetails(dist)" ><i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
@@ -80,3 +81,22 @@
 </div>
 </div>  
 </div>
+
+
+<!--//Filter old code
+ <div class=" ">
+                                        <md-form-field class="example-full-width">
+                                          <input class="form-control" mdInput placeholder="First Name"  name="firstName">
+                                          <md-error >
+                                             Name is <strong>required</strong>
+                                          </md-error>
+                                        </md-form-field>
+                                      </div>
+                                      <div class=" form-group">
+                                          <md-form-field class="example-full-width">
+                                            <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
+                                            <md-error >
+                                              Mobile No is <strong>required</strong>
+                                            </md-error>
+                                          </md-form-field>
+                                        </div>  -->
