@@ -22,7 +22,7 @@ export class ReportsComponent implements OnInit {
     { value: 'pendingorders', viewValue: 'Pending Orders' },
     { value: 'rejectedorders', viewValue: 'Rejected Orders' },
     { value: 'notregistered', viewValue: 'Customers not Registered' },
-    
+    { value: 'orderdownload', viewValue: 'Order Downloads' }
   ];
   searchReports(firstCall,Rtype) {
     this.loaderService.display(true);

@@ -103,7 +103,7 @@
           </ul> -->
       </div>
       </div>
-      <div class="tab-content col  pdtop-15">
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView != 'orderdownload'">
         <div class="tab-pane active" id="a">
           <table class="table table-hover table-striped">
             <thead>
@@ -137,6 +137,38 @@
 
 
         </div>
+
+      </div>
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'orderdownload'">
+          <div class="row form-group">
+          <div class="col-sm-3  col-md-3  col-lg-3">
+              <md-select placeholder="Filter By" name="type" class="full-width left">
+                <md-option value="date">Date</md-option>
+               
+              </md-select>
+    
+            </div>
+            <div class="col-sm-3  col-md-3  col-lg-3" >
+                <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" >
+                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                  <md-datepicker #picker></md-datepicker>
+                </md-form-field>
+              </div>
+              <div class="  col-sm-3  col-md-3  col-lg-3">
+      
+                <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" >
+                  <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                  <md-datepicker #pickers></md-datepicker>
+                </md-form-field>
+              </div>
+              <div class=" col-sm-2  col-md-2 col-lg-2" >
+                  <md-dialog-actions align="center">
+                    <button md-raised-button  class="btn-primary">DOWNLOAD</button>
+                  </md-dialog-actions>
+                </div>
+              </div>
 
       </div>
     </div>
