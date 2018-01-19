@@ -1,0 +1,69 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-users"></i>  
+      Customers
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+        <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+        </strong>         
+  </div>
+</div>
+<br>
+<div class="col">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="12%">User</th>
+          <th width="12%">Status</th>
+          <th width="12%">Mobile no</th>
+          <th width="20%">Deposit Amount </th>
+          <th width="20%">FollowUp</th>
+          <th width="15%">Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let customer of customersList">
+        <td class="left">{{customer.firstname}}</td>
+        <td class="left" *ngIf="customer.isappdownloaded">Joined</td>
+        <td class="left" *ngIf="!customer.isappdownloaded">Not Joined</td>
+        <td class="left">{{customer.mobileno}}</td>
+        <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
+          <td class="left">
+            <button class="btn btn-link" >
+              <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+            </button>
+          </td>
+          <td class="left">
+            <div class="dropdown">
+              <button class="dropbtn">View More</button>
+              <div class="dropdown-content" style="right:0;">
+                <div class="row pdbottom-5">
+                  <label class="col-md-6" (click)="showEditCustomer(customer)">
+                    <i class="fa fa-pencil-square-o" aria-hidden="true" ></i> Edit</label>
+                  <label class="col-md-6" (click)="showSchedule(customer)" >
+                    <i class="fa fa-calendar" ></i> Schedule</label>
+                </div>
+                <div class="row pdbottom-5">
+                  <label class="col-md-6" (click)="viewScheduledOrders(customer)" >
+                    <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" ></i> Scheduled Orders </label>
+                </div>
+              </div>
+            </div>
+
+          </td>
+      </tbody>
+
+    </table>
+
+   
+
+  </div>
+
+
+
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

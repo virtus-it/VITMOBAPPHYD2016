@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Inject } from '@angular/core';
+import { MD_DIALOG_DATA } from '@angular/material';
 import { DistributorServiceService } from './distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
@@ -6,6 +7,9 @@ import { DistributorCreateDialogComponent } from '../distributor-create-dialog/d
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
+import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
+import { ViewCustomerComponent } from '../view-customer/view-customer.component';
+import { ViewSupplierComponent } from '../view-supplier/view-supplier.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
@@ -15,28 +19,30 @@ import { LoaderService } from '../login/loader.service';
     styleUrls: ['./distributor.component.css']
 })
 export class DistributorComponent implements OnInit {
-    distributors:any = [];
-    distributorsCopy:any =[];
+    ordersList = [];
+    distributors: any = [];
+    distributorsCopy: any = [];
     searchDistributorTerm = "";
-    searchDistributorNumber= "";
-    filterType ="";
+    searchDistributorNumber = "";
+    filterType = "";
     distributorClickMore = true;
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 30 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
+
     getDistributors(firstCall) {
         this.loaderService.display(true);
         if (this.distributors && this.distributors.length && !firstCall) {
             let lastdistributor: any = _.last(this.distributors);
             if (lastdistributor) {
-              this.distributorInput.root.lastuserid = lastdistributor.userid;
+                this.distributorInput.root.lastuserid = lastdistributor.userid;
             }
-      
-          }
-          else {
+
+        }
+        else {
             this.distributors = [];
             this.distributorInput.root.lastuserid = null;
-          }
+        }
         let input = this.distributorInput;
         console.log(input);
         this.distributorService.getAllDistributors(input)
@@ -51,21 +57,21 @@ export class DistributorComponent implements OnInit {
         console.log(data);
         this.loaderService.display(false);
         if (data.result == 'success') {
-            
+
             this.distributorClickMore = true;
             let finalDistributor = _.union(this.distributors, data.data);
             this.distributors = finalDistributor;
             this.distributorsCopy = finalDistributor;
-            
+
         }
-        else{
-            this.distributorClickMore = false; 
-          
+        else {
+            this.distributorClickMore = false;
+
         }
     }
     openMapDialog(data) {
         let dialogRef = this.dialog.open(MapDialogComponent, {
-           width: '90%',
+            width: '90%',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -81,8 +87,8 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
-            if( result == 'success'){
-            this.getDistributors(true);
+            if (result == 'success') {
+                this.getDistributors(true);
             }
         });
     }
@@ -94,40 +100,40 @@ export class DistributorComponent implements OnInit {
         dialogRef.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
-            if( result == 'success'){
+            if (result == 'success') {
                 this.getDistributors(true);
-                }
+            }
         });
     }
     showFollowUp(details) {
         console.log(details);
-        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"distributor","mobileno":details.mobileno};
+        let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "distributor", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
-    
-          width: '80%',
-          data: data
+
+            width: '80%',
+            data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
-    
-    
+            console.log(`Dialog closed: ${result}`);
+
+
         });
-    
-      }
-      showFollowUpDetails(details) {
-        let data = {id:details.userid,firstname :details.firstname,lastName :details.lastname,type:"distributor","mobileno":details.mobileno};
+
+    }
+    showFollowUpDetails(details) {
+        let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "distributor", "mobileno": details.mobileno };
         let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
-    
-          width: '80%',
-          data: data
+
+            width: '80%',
+            data: data
         });
         dialogRefFollowDetails.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
-    
-    
+            console.log(`Dialog closed: ${result}`);
+
+
         });
-    
-      }
+
+    }
     ViewProduct(distributor) {
         console.log(distributor);
         if (distributor) {
@@ -151,39 +157,73 @@ export class DistributorComponent implements OnInit {
     searchDistributorByName() {
         let term = this.searchDistributorTerm;
         if (term) {
-          this.distributors = this.distributorsCopy.filter(function (e) {
-              return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
-           
-          });
+            this.distributors = this.distributorsCopy.filter(function (e) {
+                return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+
+            });
         }
         else {
-          this.distributors = this.distributorsCopy;
+            this.distributors = this.distributorsCopy;
         }
-      }
+    }
 
-      //Search distributor with number
-      searchDistributorbyNumber(){
+    //Search distributor with number
+    searchDistributorbyNumber() {
         let term = this.searchDistributorNumber;
         if (term) {
-          this.distributors = this.distributorsCopy.filter(function (e) {
-              return e.mobileno.indexOf(term) >= 0
-          });
+            this.distributors = this.distributorsCopy.filter(function (e) {
+                return e.mobileno.indexOf(term) >= 0
+            });
         }
         else {
-          this.distributors = this.distributorsCopy;
+            this.distributors = this.distributorsCopy;
         }
-      }
+    }
 
+    //View Orders
+    viewOrders(data) {
+        let formatteddata: any = { "type": "distributorOrder", "data": data };
+        let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
+            width: '95%',
+            data: formatteddata
+        });
+        dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
 
+        });
+    }
 
-    // onScrollFunction(event) {
-    //     console.log('scroll event', event);
-    // }
-    filterDailogToggle(){
+    //view Suppliers
+    viewSuppliers(data) {
+        let dialogRefSupplierOrderList = this.dialog.open(ViewSupplierComponent, {
+            width: '95%',
+            data: data
+        });
+        dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+
+        });
+    }
+
+    //view Customers
+    viewCustomers(data) {
+        let dialogRefSupplierOrderList = this.dialog.open(ViewCustomerComponent, {
+            width: '95%',
+            data: data
+        });
+        dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+
+        });
+    }
+    filterDailogToggle() {
         this.showFilterDailog = !this.showFilterDailog;
-      }
+    }
     ngOnInit() {
-        this.getDistributors(true)
+        this.getDistributors(true);
+
+
+
     }
 
 }
