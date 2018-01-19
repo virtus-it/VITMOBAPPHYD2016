@@ -43,9 +43,10 @@ export class ViewSupplierComponent implements OnInit {
 
   //Orders of supplier
   supplierOrdersList(data){
+    let formatteddata: any = { "type": "supplierOrder", "data": data };
     let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
       width: '95%',
-      data: data
+      data: formatteddata
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
