@@ -28,9 +28,11 @@
         <td class="left" *ngIf="customer.isappdownloaded">Joined</td>
         <td class="left" *ngIf="!customer.isappdownloaded">Not Joined</td>
         <td class="left">{{customer.mobileno}}</td>
+        <td class="left">
         <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
+        </td>
           <td class="left">
-            <button class="btn btn-link" >
+            <button class="btn btn-link" (click)="showFollowUp(customer)" >
               <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
             </button>
           </td>
@@ -52,6 +54,8 @@
             </div>
 
           </td>
+          </tr>
+          
       </tbody>
 
     </table>

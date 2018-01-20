@@ -6,6 +6,7 @@ import { CustomerService } from '../customer/customer.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { MdDialog } from '@angular/material';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { CustomerScheduleDaiolgComponent } from '../customer-schedule-daiolg/customer-schedule-daiolg.component';
 import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 
@@ -84,6 +85,22 @@ dialogRefSetting.afterClosed().subscribe(result => {
 });
 }
 
+
+showFollowUp(details) {
+  console.log(details);
+  let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
+  let dialogRefFollow = this.dialog.open(FollowUpComponent, {
+
+      width: '80%',
+      data: data
+  });
+  dialogRefFollow.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+
+
+  });
+
+}
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');
   }
