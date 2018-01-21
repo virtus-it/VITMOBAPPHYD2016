@@ -5,6 +5,10 @@
 /* .loginBg{
 	background: url(../assest/images/powerby.png);
 } */
+.sidebar-nohover >.mat-list-item-content> .mat-list-item-ripple:hover{
+  background: red !important;
+
+}
 
 .navbar-nav {
   margin: 10px !important;
@@ -22,6 +26,7 @@
   background: #ddd;
   border-top: 1px  solid #c5d6de;
 }
+
 .right-0{
 	right: 0px;
 }
@@ -33,11 +38,15 @@
   color: #666;
 }
 .navbar-light .navbar-nav .nav-link:hover{
-  color: #fff;
+  color: #fff !important;
   background: #0f75bc;
 }
 .active a{
   color: #0f75bc !important;
+}
+.menu-style{
+  margin: 20px;
+  cursor: pointer;
 }
 
 
@@ -70,6 +79,9 @@
 }
 a{
   color: #0f75bc;
+}
+.btn{
+  padding: .5rem 0.5rem !important;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
   background: #0f75bc !important;
@@ -135,7 +147,6 @@ a{
       
     }
 
-    
     ul {
     
       list-style: none;
@@ -146,8 +157,7 @@ a{
     
       display: inline-block;
       float: left;
-      padding: 10px
-    
+      padding: 10px;    
     }
 
     li a{
@@ -197,3 +207,4 @@ a{
       
         }
       }
+    

@@ -1,0 +1,177 @@
+<div class="dist-style  minheight-500">
+    
+  <div class=" row justify-content-between distIcon-style">
+      <div class="col-md-2  col-sm-2  col-lg-2 left">
+          <h4><i class="fa fa-file-text"></i> Report</h4>
+      </div>
+    <div class="col-md-2  col-sm-2  col-lg-2 right"> 
+        <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
+        
+    </div>
+
+  <!-- <div id="" class="row pd-15x10 mg-0">
+          <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
+              <div class="filtercol-style height-500">
+                  <h4 class="left form-group"><i class="fa fa-file-text"></i> Report</h4>
+                  <br>
+                      <div class="">
+                    <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
+                      <md-option *ngFor="let type of reportsType" [value]="type.value">
+                        {{type.viewValue}}
+                      </md-option>
+                    </md-select>
+
+                  </div>
+                  <div class="" >
+                     
+                    <md-form-field class="example-full-width inline ">
+                        <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
+          
+                      </md-form-field>
+          
+                  </div> 
+                    <div class="input-group pd-10  ">
+                      <button md-raised-button color="primary" (click)="searchReports(true)">
+                        Search
+                      </button>
+                    </div>
+                  </div>
+           </div>
+    <div class="col-sm-9 col-md-9 col-lg-9">    
+
+    </div>
+    </div> -->
+  <div class="container-fluid">
+
+    <!-- tabs left -->
+    <div class="tab tabs-left row">
+      <div class="col">
+          <!-- <div class=" row justify-content-between heading-style">
+              <div class="col-md-6  col-sm-6  col-lg-6">
+                  <h4><i class="fa fa-file-text"></i> Report</h4>
+              </div>
+            <div class="col-md-3 col-sm-3  col-lg-3">  
+                <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
+              </div> -->
+        <!-- <ul class="nav nav-tabs ">
+      <li>
+            <a href="javascript:void(0)" data-toggle="tab"></a>
+            <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
+              <md-option *ngFor="let type of reportsType" [value]="type.value">
+                {{type.viewValue}}
+              </md-option>
+            </md-select>
+            <div class="">
+
+              <md-form-field class="example-full-width inline ">
+                <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
+
+              </md-form-field>
+
+            </div>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" (click)="searchReports(true)">
+                Search
+              </button>
+            </div>
+          </li> 
+          <li >
+            <button type="button" class="btn btn-primary btn-lg" >Newly Downloaded</button>
+          </li>
+          <li>
+              <button type="button" class="btn btn-default btn-lg" >Pending Orders</button>
+            </li> 
+        </ul>-->
+        <table class="nav nav-pills flex-column row">
+            <tr>
+              <td width="8%"></td>
+          <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+          <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
+              <i class="fa fa-download" aria-hidden="true"></i> <br>           
+            {{type.viewValue}}</a>
+            </td>
+          </tr>
+          </table>
+          <!-- <ul class="nav nav-pills navbar-nav flex-column row">
+           
+            <li class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+            <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
+                <i class="fa fa-download" aria-hidden="true"></i> <br>           
+              {{type.viewValue}}</a>
+              </li>
+         
+          </ul> -->
+      </div>
+      </div>
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView != 'orderdownload'">
+        <div class="tab-pane active" id="a">
+          <table class="table table-hover table-striped">
+            <thead>
+              <tr>
+
+                <th width="15%"> Customer Name</th>
+                <th width="12%">Mobile No</th>
+                <th width="15%">Createddate</th>
+
+                <th width="25%" class="pdleft-20">Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="Preordrlist" *ngFor="let reports of reportsData">
+
+                <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
+                <td class="left">{{reports.mobileno}}</td>
+                <td class="left">{{reports.createddate | utcDate}}</td>
+
+                <td class="left">{{reports.address}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <h4 class="warning  capitalize">
+              <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
+                <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+              <span *ngIf="!reportsClickMore"><i _ngcontent-c5="" aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+            </h4>
+        </div>
+        <div class="tab-pane" id="b">
+
+
+        </div>
+
+      </div>
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'orderdownload'">
+          <div class="row form-group">
+          <div class="col-sm-3  col-md-3  col-lg-3">
+              <md-select placeholder="Filter By" name="type" class="full-width left">
+                <md-option value="date">Date</md-option>
+               
+              </md-select>
+    
+            </div>
+            <div class="col-sm-3  col-md-3  col-lg-3" >
+                <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" >
+                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                  <md-datepicker #picker></md-datepicker>
+                </md-form-field>
+              </div>
+              <div class="  col-sm-3  col-md-3  col-lg-3">
+      
+                <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" >
+                  <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                  <md-datepicker #pickers></md-datepicker>
+                </md-form-field>
+              </div>
+              <div class=" col-sm-2  col-md-2 col-lg-2" >
+                  <md-dialog-actions align="center">
+                    <button md-raised-button  class="btn-primary">DOWNLOAD</button>
+                  </md-dialog-actions>
+                </div>
+              </div>
+
+      </div>
+    </div>
+    <!-- /row -->
+
+  </div>

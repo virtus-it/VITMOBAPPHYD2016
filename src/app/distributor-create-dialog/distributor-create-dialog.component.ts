@@ -5,29 +5,35 @@ import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
+import { MdDialog } from '@angular/material';
+import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock-distributor.component';
 @Component({
   selector: 'app-distributor-create-dialog',
   templateUrl: './distributor-create-dialog.component.html',
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", selectedItems:[]};
+    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"",selectedItems:[]};
     areaList = [];
 
     dropdownSettings = {};
-    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
+    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService,public dialog: MdDialog) { }
      emailFormControl = new FormControl('', [
          Validators.required]);
      getAreasName() {
+        this.loaderService.display(true);
          var input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
          this.distributorService.getAllArea(input)
              .subscribe(
              output => this.getAreasNameResult(output),
              error => {
                  console.log("error in distrbutors");
+                 this.loaderService.display(false);
              });
      }
      getAreasNameResult(output) {
+        this.loaderService.display(false);
          console.log(output);
          if (output && output.data) {
              
@@ -39,9 +45,10 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      onSubmit() {
          console.log(this.dist);
+         this.loaderService.display(true);
          var input:any = {
              "User": {
-                 "user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "areaid": [], "areaname": [], "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
          if (this.distributorDetail) {
@@ -61,6 +68,7 @@ export class DistributorCreateDialogComponent implements OnInit {
                  output => this.onSubmitResult(output),
                  error => {
                      console.log("error in distrbutors");
+                     this.loaderService.display(false);
                  });
          }
          else {
@@ -69,13 +77,25 @@ export class DistributorCreateDialogComponent implements OnInit {
                  output => this.onSubmitResult(output),
                  error => {
                      console.log("error in distrbutors");
+                     this.loaderService.display(false);
                  });
          }
      }
      onSubmitResult(result) {
          console.log(result);
+         this.loaderService.display(false);
          if (result.result == 'success') {
-             this.thisDialogRef.close('Ploygon created');
+            // this.thisDialogRef.close('success');
+            if (this.distributorDetail) {
+                this.thisDialogRef.close('success');
+               
+            }
+            else{
+                let data = {id:result.data.user_id}
+                this.openStockDialog(data);
+
+            }
+            
          }
      }
      getDetails() {
@@ -84,6 +104,8 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.firstName = this.distributorDetail.firstname;
              this.dist.lastName = this.distributorDetail.lastname;
              this.dist.phone = this.distributorDetail.mobileno;
+             this.dist.companyname = this.distributorDetail.companyname;
+             this.dist.address = this.distributorDetail.address;
              _.each(this.distributorDetail.areainfo, function (i, j) {
                  var area:any = i;
                  var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };
@@ -94,6 +116,19 @@ export class DistributorCreateDialogComponent implements OnInit {
              
          }
      }
+     openStockDialog(data) {
+        let dialogRef = this.dialog.open(AddStockDistributorComponent, {
+            width: '700px',
+            data: data
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            //this.dialogResult = result;
+            if( result == 'success'){
+                this.thisDialogRef.close('success');
+            }
+        });
+    }
      onCloseCancel() {
         this.thisDialogRef.close('Cancel');
     }

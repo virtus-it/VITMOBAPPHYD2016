@@ -1,210 +1,301 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-4">
+  <div class="col-md-4  col-sm-4  col-lg-4">
     <i class="fa fa-file-text-o"></i> Order Details
   </div>
-  <div class="col-1 right">
-    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-        </strong>
+  <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
 <md-dialog-content layout="column">
-  <div class="row pd-15x25 brd-bottom">
-    <div class=" col-md-5 col-5 col-sm-5 brd-right">
-      <div class="container-fluid">
-        <b> Order Details</b>
-        <div class="row form-group">
-          <div class="col-md-5 col-5 col-sm-5">
-            <small class="gray" id="name"> Order Id: #listview.order_id</small><br>
-            <small class="black firstlettercap">brandname prod_type (Qty)</small>
+  <div class="container-fluid brd-bottom mgtop-10">
+    <div class="row">
+      <div class=" col-md-5 col-5 col-sm-5 brd-right">
+        <div class="container-fluid">
+          <b> <i class="fa fa-file-text-o"></i>   Order Details</b>
+          <div class="row form-group mgtop-10">
+            <div class="col-md-5 col-5 col-sm-5">
+              <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
+              <br>
+              <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
+            </div>
+            <div class="col-md-7 right">
+              <small>
+                <span class="gray">Delivery Date : </span>{{dailogOrderDetails.delivery_exceptedtime}} </small>
+              <br>
+              <small>
+                <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
+            </div>
           </div>
-          <div class="col-md-7 right">
-            <small><span class="gray">Delivery Date : </span> listview.delivery_exceptedtime </small><br>
-            <small><span class="gray">Modified Date : </span> listview.modifieddate</small>
+        </div>
+        <div class="container-fluid  border-top pdtop-10">
+          <div class="row form-group">
+            <div class=" col-md-6">
+              <b>Customer Details </b>
+            </div>
+            <div class="col-md-6 right">
+              <button class="btn btn-link btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'>
+                <i class="fa fa-chevron-circle-down" aria-hidden="true"> </i>
+                More Orders</button>
+            </div>
+            <!-- <button class="btn btn-link btn-sm float-right" (click)='showOrderDetails(forward)'> -->
+
+          </div>
+          <div class="row form-group">
+            <div class="col-md-8">
+              <small class="capital ">
+                <i class="fa fa-user" aria-hidden="true"></i> {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+              <br>
+              <small class="capital ">
+                <i class="fa fa-map-marker" aria-hidden="true"></i> {{dailogOrderDetails.orderby_address}}</small>
+            </div>
+            <div class="col-md-4 right">
+              <small class="capital ">
+                <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.orderby_mobileno}} </small>
+              <br>
+              <small>
+                <i class="fa fa-location-arrow" aria-hidden="true"></i> {{dailogOrderDetails.orderby_areaname}}</small>
+            </div>
+          </div>
+          <div class="row  border-top pdtop-10  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
+            <div class="col-md-3">
+              <small class="control-label success">Advance Amt</small>
+              <br>
+              <small class="control-label success">Rs. {{dailogOrderDetails.customerpaymentdts.advance_amount}}</small>
+            </div>
+
+            <div class="col-md-3 center">
+              <small class="control-label warning"> Due Amount</small>
+              <br>
+              <small class="control-label warning">Rs. {{dailogOrderDetails.customerpaymentdts.amount_pending}}</small>
+            </div>
+
+            <div class="col-md-3 center">
+              <small class="control-label gray"> Payment Type</small>
+              <br>
+              <small class="control-label gray uppercase">{{dailogOrderDetails.customerpaymentdts.paymenttype}}</small>
+            </div>
+
+            <div class="col-md-3 right">
+              <small class="control-label black">Total</small>
+              <br>
+              <small class="control-label black">Rs.{{dailogOrderDetails.bill_amount}}
+                <b></b>
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="container-fluid  border-top pdtop-10">
+          <div class="row  form-group">
+            <div class=" col-lg-6 col-md-6 col-xl-6 col-sm-6">
+              <b ng-show="canstext">#of Cans with Customer </b>
+              <!-- <span class="warning">noCansText</span> -->
+            </div>
+            <div class="col-md-6 right">
+              <i class="fa fa-edit logo-color" aria-hidden="true" (click)='editCan(dailogOrderDetails)'></i>
+              <br>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <table class="table table-hover table-striped table-fixedheader">
+              <thead>
+                <tr>
+                  <th width="15%">
+                    <small>Sno.</small>
+                  </th>
+                  <th width="55%">
+                    <small>Product Name</small>
+                  </th>
+                  <th width="30%" class="">
+                    <small>Empty Cans</small>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
+
+                  <td width="15%">
+                    <small>{{i + 1}}</small>
+                  </td>
+                  <td width="55%">
+                    <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
+                  </td>
+                  <td width="30%">
+                    <small class="col-md-5 col-5 col-sm-5">{{canDetails.avaliablecans}}</small>
+                  </td>
+
+                </tr>
+              </tbody>
+
+            </table>
           </div>
         </div>
       </div>
-      <div class="container-fluid  border-top pdtop-15">
-        <div class="row form-group">
-          <div class=" col-md-6"><span>Customer Details </span>
-          </div>
-          <div class="col-md-6 right">
-            <button class="btn btn-primary btn-sm float-right"> View More </button>
-          </div>
-        </div>
-        <div class="row form-group">
-          <div class="col-md-8">
-            <small><i class="fa fa-user" aria-hidden="true"></i> listview.orderby_firstname listview.orderby_lastname</small><br>
-            <small><i class="fa fa-map-marker" aria-hidden="true"></i> listview.address</small>
-          </div>
-          <div class="col-md-4 right">
-            <small><i class="fa fa-phone" aria-hidden="true"></i> listview.orderby_mobileno</small><br>
-            <small><i class="fa fa-location-arrow" aria-hidden="true"></i>  listview.orderby_areaname</small>
-          </div>
-        </div>
-        <div class="row  border-top pdtop-15  form-group ">
-          <div class="col-md-3">
-            <small class="control-label success">Advance Amt</small><br>
-            <small class="control-label success">Rs. listview.customerpaymentdts.advance_amount</small>
+
+      <div class="col-md-3">
+        <div class="container-fluid">
+          <b class=""> <i class="fa fa-check-square-o" aria-hidden="true"></i>  Order Status</b>
+
+          <div class="row  mgtop-10">
+            <ul class="timeline">
+              <li>
+                <div class="timeline-badge">
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <small class="timeline-title warning">
+                      <b>Order Created </b>
+                    </small>
+                  </div>
+                  <div class="timeline-body">
+                    <ul class="pdleft-15">
+                      <li>
+                        <small class="capital ng-binding">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                          {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          {{dailogOrderDetails.ordered_date | utcDate}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.ordered_qty}}(Qty)</small>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-badge danger">
+                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <small class="timeline-title warning">
+                      <b> Order Assigned</b>
+                    </small>
+                  </div>
+                  <div class="timeline-body">
+                    <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
+                      <li>
+                        <small class="capital ng-binding">
+                          <i class="fa fa-user" aria-hidden="true"></i>
+                          {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.mobileno}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          {{dailogOrderDetails.order_assigneddate | utcDate}}</small>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+              </li>
+              <li>
+                <div class="timeline-badge success">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+                <div class="timeline-panel">
+                  <div class="timeline-heading">
+                    <small class="timeline-title warning">
+                      <b> Order Completed </b>
+                    </small>
+                  </div>
+                  <div class="timeline-body">
+                    <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
+                      <li>
+                        <small class="capital ng-binding">
+                          <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                          {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
+
+                        <small class="ng-binding">
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.return_cans}}(Qty)</small>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+            </ul>
           </div>
 
-          <div class="col-md-3 center">
-            <small class="control-label warning"> Due Amount</small><br>
-            <small class="control-label warning">Rs. listview.customerpaymentdts.amount_pending</small>
-          </div>
 
-          <div class="col-md-3 center">
-            <small class="control-label gray"> Payment Type</small><br>
-            <small class="control-label gray uppercase">listview.customerpaymentdts.paymenttype</small>
-          </div>
-
-          <div class="col-md-3 right">
-            <small class="control-label black">Total</small><br>
-            <small class="control-label black">Rs.<b></b></small>
+          <div class="row mgtop-15pc">
+            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled'">
+              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
+                <b>
+                  <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+                  On-hold Order</b>
+              </button>
+            </div>
+            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
+              <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
+                <b>
+                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                  Edit Status</b>
+              </button>
+            </div>
           </div>
         </div>
       </div>
-      <div class="container-fluid  border-top pdtop-15">
-        <div class="row  form-group">
-          <div class=" col-lg-6 col-md-6"><span ng-show="canstext">#of Cans with Customer </span>
-            <!-- <span class="warning">noCansText</span> -->
-          </div>
-          <div class="col-md-6 right">
-            <i class="fa fa-edit logo-color" aria-hidden="true"></i><br>
-          </div>
-        </div>
-        <div class="row form-group" ng-show="cansList">
-
-          <table class="table table-fixed table-striped">
-            <thead>
-              <tr>
-                <th width="15%"><small>Sno.</small></th>
-                <th width="55%"><small>Product Name</small></th>
-                <th width="30%" class=""><small>Empty Cans</small></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="cans in ListofEmptyCans">
-                <td width="15%"><small>$index + 1</small></td>
-                <td width="55%"> <small>cans.product.productname + " "+ cans.product.product_type </small></td>
-                <td width="30%"><small class="col-md-5 col-5 col-sm-5">cans.avaliablecans</small></td>
-              </tr>
-            </tbody>
-
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-3">
-      <div class="container-fluid">
-      <div class="row">
-        <label class="mgbtm-10">Order Status</label>
-        <ul class="timeline">
-          <li class="timeline-inverted">
-            <div class="timeline-badge default ordcreate-style"><i class="glyphicon glyphicon-edit"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label class="warning">Order Created</label>
-              </div>
-              <div class="timeline-body ">
-                <ul class="pdleft-15">
-                  <li><small class="firstlettercap"><i class="fa fa-user" aria-hidden="true"></i>
-                listview.orderby_firstname listview.orderby_lastname</small></li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                  listview.ordered_date | date:'dd-MM-yyyy hh:mm a'</small> </li>
-                  <li> <small><i class="fa fa-arrow-right" aria-hidden="true"></i> listview.ordered_qty(Qty)</small> </li>
-                </ul>
-              </div>
-            </div>
+      <div class="col-md-4 form-group border-left">
+        <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
+        <ul class="scrollheight  mgtop-5">
+          <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
+            <i class="fa fa-reply" aria-hidden="true"></i>
+            <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+            <br>
+            <small>{{ msg.message}} </small>
+            <br>
+            <p class="right">
+              <small class="gray">{{ msg.createddate | utcDate}} </small>
+            </p>
           </li>
-          <li class="timeline-inverted">
-            <div class="timeline-badge default mgbtm-20 "><i class="fa fa-check-square-o" aria-hidden="true"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label>Order Assigned</label>
-              </div>
-              <div class="timeline-body">
-                
-                <ul class="pdleft-15" ng-show="ordAsg">
-                  <li><small class="firtercap"><i class="fa fa-user" aria-hidden="true"></i>
-                        <span >
-                       listview.supplierdetails.firstname  listview.supplierdetails.lastname
-                     </span>
-                     <span ng-if="listview.supplierdetails.firstname == undefined">
-                       -
-                     </span>
-                    </small></li>
-                  <li><small><i class="fa fa-phone" aria-hidden="true"></i>
-                      <span>
-                       listview.supplierdetails.mobileno
-                     </span>
-           
-                   </small></li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                
-                    <span >
-                     listview.order_assigneddate | date:'dd-MM-yyyy hh:mm a'
-                   </span>
-                 </small> </li>
 
-                </ul>
-              </div>
-            </div>
-          </li>
-          <li class="timeline-inverted">
-            <div class="timeline-badge default"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i></div>
-            <div class="timeline-panel">
-              <div class="timeline-heading">
-                <label>Order Completed</label>
-              </div>
-              <div class="timeline-body">
-                <ul class="pdleft-15">
-                  <li ng-show="ordDelDeliveredLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Delivered</small></li>
-                  <li ng-show="ordDelNotReachableLbl"><small class="firstlettercap"><i class="fa fa fa-check-square-o" aria-hidden="true"></i> Not Reachable</small></li>
-                  <li ng-show="ordDelRejectLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i> Rejected</small></li>
-                  <li ng-show="ordDelOnholdLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  On Hold</small></li>
-                  <li ng-show="ordDelCantDelLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Can't Deliver</small></li>
-                  <li ng-show="ordDelDoorlockLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i>  Door Locked</small></li>
-                  <li ng-show="ordDelCancelledLbl"><small class="firstlettercap"> <i class="fa fa fa-check-square-o" aria-hidden="true"></i> Cancelled</small></li>
-                  <li ng-hide="ordDelList"><small class="firstlettercap"><i class="fa fa fa-check-square-o" aria-hidden="true"></i>
-                  listview.supplierdetails.firstname listview.supplierdetails.lastname</small> </li>
-                  <li><small><i class="fa fa-calendar" aria-hidden="true"></i>
-                   <span>
-                    deliveredHours | limitTo:4 hours ago
-                  </span>
-              </small> </li>
-                  <li><span><small><i class="fa fa-arrow-right" aria-hidden="true"></i>
-                  listview.delivered_quantity(Qty)</small><small class="col-md-offset-1"><i class="fa fa-arrow-left" aria-hidden="true"></i>
-                  listview.return_cans(Qty)</small></span></li>
-
-                </ul>
-              </div>
-            </div>
-          </li>
         </ul>
-      </div>
-    </div>
-  </div>
-    <div class="col-md-4 form-group border-left">
-      <label>Messages</label>
-      <ul class="scrollheight">
-        <li class="nolist-style row">
-          <div class="messages-style">
-            <i class="fa fa-reply" aria-hidden="true"></i> <small> messages.user.firstname messages.user.lastname </small><br>
-            <small>messages.message </small><br>
-            <span class="float-right"><small class="gray">messages.createddate</small></span>
+        <div class=" border-top pdtop-10">
+          <div class="form-group">
+            <b class="">Select any one :  &nbsp;</b>
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="0">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Customer</span>
+          </label>
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="1">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Distributor</span>
+          </label>
+        </div>
+        <div class="row">
+          <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
+            <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
           </div>
-        </li>
-      </ul>
-      <div class="row border-top pdtop-15">
-        <div class=" col-lg-10 col-md-10 col-sm-10 ">
-          <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here"></textarea>
+          <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
+            <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
+          </div>
         </div>
-        <div class="col-md-1 right">
-          <i class="fa fa-send fa-send-style"  aria-hidden="true"></i>
         </div>
-
       </div>
     </div>
   </div>

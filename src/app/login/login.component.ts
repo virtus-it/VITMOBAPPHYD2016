@@ -1,4 +1,5 @@
-﻿import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit, Inject } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 @Component({
@@ -6,8 +7,13 @@ import { AuthenticationService } from './authentication.service';
     styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-    loginDetails: any = {};
-
+    loginDetails: any = { username: "", password: "" };
+    errorMsg: string = "";
+    hide = true;
+    username = new FormControl('', [
+        Validators.required]);
+    password = new FormControl('', [
+        Validators.required]);
     constructor(private router: Router, private authenticationService: AuthenticationService) { }
 
     ngOnInit() {
@@ -26,8 +32,12 @@ export class LoginComponent implements OnInit {
             console.log("Logged in and should navigate to diifrent page");
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
-            this.router.navigate(['/distributor']);
-            
+            this.router.navigate(['/orders']);
+
+        }
+        else {
+            this.errorMsg = "Invalid Credentials";
+
         }
     }
 }

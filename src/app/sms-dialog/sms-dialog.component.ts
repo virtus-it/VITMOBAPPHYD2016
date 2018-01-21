@@ -4,6 +4,10 @@ import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { AuthenticationService } from '../login/authentication.service';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 @Component({
@@ -12,60 +16,149 @@ import * as moment from 'moment';
   styleUrls: ['./sms-dialog.component.css']
 })
 export class SmsDialogComponent implements OnInit {
+  stateCtrl: FormControl;
+  filteredStates: Observable<any[]>;
+  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) {
 
-  constructor(public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) { }
+    this.stateCtrl = new FormControl();
+    this.filteredStates = this.stateCtrl.valueChanges
+    
+      .startWith(null)
+      .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
+  }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null };
-  smsInput = { name: "", mobilenumber: [], body: "" };
-  mobileDetails = [];
+  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  mobileDetails: any = [];
+  mobileDetailsCopy:any = [];
+  distributors: any = [];
+  searchMobileNumber:string = "";
+  checkAll: boolean = false;
+  checkAllMobile: boolean = false;
+  smallLoader: boolean = false;
+  buttonCount:number = 0;
+  optionCount:number = 0;
+  silderCount:number = 0;
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
     { value: 'delivered', viewValue: 'Delivered Orders' },
-    { value: 'assigned', viewValue: 'Pending Orders' }
+    { value: 'assigned', viewValue: 'Pending Orders' },
+    { value: 'allcustomers', viewValue: 'All customers' },
+    { value: 'customerbydays', viewValue: 'Customer Not order' },
+    { value: 'distributorscustomer', viewValue: 'Customer By distributor' },
+    { value: 'onlydownloaded', viewValue: 'Newly downloaded customers' },
+    { value: 'allsuppliers', viewValue: 'All Suppliers' },
+    { value: 'alldistributors', viewValue: 'All Distributors' },
+    { value: 'sms', viewValue: 'SMS' }
+
+    // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
+  filterDistributors(name: string) {
+    console.log(name);
+    let finalDistributors = this.distributors.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    console.log(finalDistributors);
+    if (finalDistributors && finalDistributors.length > 0) {
+      let findDistributor: any = {};
+
+      findDistributor = _.find(finalDistributors, function (k, l) {
+        let distDetails: any = k;
+        return distDetails.fullName == name;
+      });
+
+      if (findDistributor) {
+        this.orderinput.distributorid = findDistributor.userid;
+      }
+
+    }
+    return finalDistributors;
+  }
+  onChangeType() {
+    this.orderinput.fromDate = null;
+    this.orderinput.toDate = null
+    this.orderinput.days = null
+    this.orderinput.distributorid = null;
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  }
+  onChangeSmsType(type){
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: type, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  }
   getMobileNumber() {
+    this.smallLoader = true;
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid
       }
     };
-
-    input.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
-    input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    if (this.orderinput.fromDate) {
+      input.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.orderinput.toDate) {
+      input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
     this.smsService.getMobileNumbers(input)
       .subscribe(
       output => this.getMobileNumberResult(output),
       error => {
         console.log("error in distrbutors");
+        this.smallLoader = false;
       });
   }
   getMobileNumberResult(result) {
     console.log(result);
     let mobile = [];
+    this.smallLoader = false;
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
-        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, };
+        if(details.mobileno){
+        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, fullName: details.fullname, referal_code: details.referal_code };
         mobile.push(mobiles);
+      }
 
       });
 
       this.mobileDetails = mobile;
+      this.mobileDetailsCopy = mobile;
+    
     }
   }
-  onChangeCheck(number: any, isChecked: boolean) {
-    
+  searchMobileNo() {
+    let term = this.searchMobileNumber;
 
-     if (isChecked) {
-         this.smsInput.mobilenumber.push(number);
-         
-     } else {
-         this.smsInput.mobilenumber = _.without(this.smsInput.mobilenumber, number);
-         
-     }
- }
+    this.mobileDetails = this.mobileDetailsCopy.filter(function (e) {
+      return e.mobileno.toLowerCase().indexOf(term.toLowerCase()) >= 0;
+    });
+  }
+  onChangeCheck(number: any, isChecked: boolean) {
+
+
+    if (isChecked) {
+      this.smsInput.mobilenumber.push(number);
+
+    } else {
+      this.checkAll = false;
+      this.smsInput.mobilenumber = _.without(this.smsInput.mobilenumber, number);
+
+    }
+  }
+  onChangeCheckAll(isChecked: boolean) {
+
+
+    if (isChecked) {
+      this.smsInput.mobilenumber = this.mobileDetails;
+
+      this.checkAllMobile = true;
+
+    } else {
+      this.smsInput.mobilenumber = [];
+      this.checkAll = false;
+      this.checkAllMobile = false;
+
+    }
+  }
   saveMobileSms() {
     console.log(this.smsInput);
     let createSmsInput = {
@@ -73,33 +166,136 @@ export class SmsDialogComponent implements OnInit {
         "mobilenumber": this.smsInput.mobilenumber,
         "count": this.smsInput.mobilenumber.length,
         "name": this.smsInput.name,
-        "user_type":this.authenticationService.userType(),
+        "smstype": this.smsInput.smsType,
+        "user_type": this.authenticationService.userType(),
         "TransType": "createsms",
-        "type": this.orderinput.orderType,
+        "type": this.smsInput.type,
+        "showcomment":this.smsInput.showcomment,
         "loginid": this.authenticationService.loggedInUserId(),
         "apptype": this.authenticationService.appType(),
-        "body": this.smsInput.body
+        "body": this.smsInput.body,
+        "title": this.smsInput.title,
+        "redirecturl": this.smsInput.redirecturl,
+        "url": this.smsInput.url,
+        "buttons":[],
+        "option": [],
+        "sliderurl":this.smsInput.sliderurl
       }
     }
-    console.log(createSmsInput);
-    this.smsService.CreateSms(createSmsInput)
-    .subscribe(
-    output => this.saveMobileSmsResult(output),
-    error => {
-      console.log("error in distrbutors");
+    _.each(this.smsInput.buttons, function (i, j) {
+      let details: any = i;
+      
+      createSmsInput.User.buttons.push(details.name);
+
     });
+    _.each(this.smsInput.option, function (i, j) {
+      let details: any = i;
+     
+      createSmsInput.User.option.push(details.name);
+
+    });
+    if(this.orderinput.orderType == 'sms'){
+      let mobileArray = this.smsInput.customMobilenumber.split(';');
+      let modifiedNumbers = [];
+      _.each(mobileArray, function (i, j) {
+        let details: any = i;
+        var mobile = {mobileno:""};
+      if(details){
+        mobile.mobileno = details;
+
+      }
+      modifiedNumbers.push(mobile);
+
+      });
+      createSmsInput.User.mobilenumber = modifiedNumbers;
+      createSmsInput.User.count = modifiedNumbers.length;
+      createSmsInput.User.body = this.smsInput.customBody;
+    }
+    
+    console.log("input",createSmsInput);
+    this.smsService.CreateSms(createSmsInput)
+      .subscribe(
+      output => this.saveMobileSmsResult(output),
+      error => {
+        console.log("error in distrbutors");
+      });
   }
-  saveMobileSmsResult(result){
-console.log(result);
-this.thisDialogRef.close(result);
+  saveMobileSmsResult(result) {
+    console.log(result);
+    this.thisDialogRef.close(result);
+  }
+  getDistributors() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
+    console.log(input);
+    this.distributorService.getAllDistributors(input)
+      .subscribe(
+      output => this.getDistributorsResult(output),
+      error => {
+        console.log("error in distrbutors");
+      });
+  }
+  getDistributorsResult(data) {
+    console.log(data);
+    if (data.result == 'success') {
+      let distributorCopy = [];
+
+      if (data.data && data.data.length) {
+        _.each(data.data, function (i, j) {
+          let details: any = i;
+          details.fullName = details.firstname + " " + details.lastname
+          distributorCopy.push(details);
+
+        });
+
+
+        this.distributors = distributorCopy;
+      }
+    }
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
-}
+  }
 
+  addButton(){
+    this.buttonCount = this.buttonCount + 1;
+    let buttonObject = {name:"",count:this.buttonCount};
+this.smsInput.buttons.push(buttonObject);
 
+  }
+  removeButton(item){
+    let filteredButton = _.filter(this.smsInput.buttons, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.buttons = filteredButton;
+  }
+  addOption(){
+    this.optionCount = this.optionCount + 1;
+    let optionObject = {name:"",count:this.optionCount};
+this.smsInput.option.push(optionObject);
+
+  }
+  removeoption(item){
+    let filteredOption = _.filter(this.smsInput.option, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.option = filteredOption;
+  
+  }
+  addSlider(){
+    this.silderCount = this.silderCount + 1;
+    let sliderObject = {image:"",count:this.silderCount};
+this.smsInput.sliderurl.push(sliderObject);
+
+  }
+  removeSilder(item){
+    let filteredOption = _.filter(this.smsInput.sliderurl, function(e:any) {
+      return e.count !== item.count;
+  });
+  this.smsInput.sliderurl = filteredOption;
+  
+  }
   ngOnInit() {
-   
+    this.getDistributors()
   }
 
 }

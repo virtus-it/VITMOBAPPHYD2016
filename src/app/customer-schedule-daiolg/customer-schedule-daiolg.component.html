@@ -1,0 +1,407 @@
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa  fa-calendar"></i> Schedule
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+            <div class="schedule-popup row">
+                <div class="col-md-4 ">                    
+                    <md-form-field class="">
+                        <input class="form-control" mdInput placeholder="Customer Name" [(ngModel)]="scheduleInput.CustomerName" disabled>
+                        
+                      </md-form-field> 
+                </div>
+                <div class="col-md-4 ">                   
+                    <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" [disabled]="Detail.type== 'update'"> 
+                        <md-option *ngFor="let prod of productList" [value]="prod" [value]="prod.pname">
+                            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
+                        </md-option>
+                      </md-select>
+                </div>
+                <div class="col-md-3 ">
+                    <md-form-field class="">
+                        <input class="form-control" mdInput placeholder="Quantity" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
+                        <md-error *ngIf="FormControl.hasError('required')">
+                          Quantity is
+                          <strong>required</strong>
+                        </md-error>
+                      </md-form-field>                </div>
+        
+            </div>
+            <br>
+            <div class="row  ">
+                    <div class="col-md-4">
+                    <md-select placeholder="Schedule for" [(ngModel)]="scheduleInput.schedulefor" class="wd-100pc left" >
+                        <md-option  value="weekdays"> Weekdays
+                        </md-option>
+                        <md-option  value="days">Days
+                          </md-option>
+                      </md-select>
+                </div>
+              <div class="col-sm-4"> 
+                <md-select placeholder="Time Slot" class="wd-100pc left" [(ngModel)]="scheduleInput.timeslot">
+                    <md-option value="9AM-1PM">9AM-1PM  </md-option>
+                    <md-option value="4PM-7PM">4PM-7PM      </md-option>
+                   </md-select>
+        </div>
+              <div class="col-sm-4"> 
+        </div>
+        </div>
+        <div class="Schedule container-fluid" *ngIf="scheduleInput.schedulefor == 'weekdays'" >
+            <div class="my-info-1 row weekday">
+                    <h4 class="mgtop-15">
+                        Weekly :
+                    </h4>
+                    </div>
+        
+                    <div class=" row ">    
+                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
+                            
+                            
+
+                        <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)" [(ngModel)]="selectAllWeekDays">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                     Select All
+                    </label></div>
+                    <div class="row mgtop-5">
+        
+                        <div class="col-sm-4 ">
+                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                                <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllWeek" (change)="onChangeCheckWeek('Monday', $event.target.checked)"   [value]="Monday" >
+                                <span class="custom-control-indicator"></span>
+                                <span class="custom-control-description"></span>
+                                                            Monday
+                        </label>
+                    </div>
+                    <div class="col-sm-4  ">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Tuesday', $event.target.checked)" [value]="Tuesday"  >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"></span>
+                                                    Tuesday
+                    </label>
+                </div>
+                <div class="col-sm-4  ">
+                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                        <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Wednesday', $event.target.checked)" [value]="Wednesday">
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>
+                                            Wednesday
+                </label>
+            </div>
+        </div>
+        <div class="row mgtop-5">
+        
+            <div class="col-sm-4  ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Thursday', $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                                    Thursday
+            </label>
+        </div>
+        <div class="col-sm-4  ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Friday', $event.target.checked)" [value]="Friday" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                            Friday
+        </label>
+        </div>
+        <div class="col-sm-4 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllWeek" (change)="onChangeCheckWeek('Saturday', $event.target.checked)"  [value]="Saturday">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>
+                            Saturday
+        </label>
+        </div>
+        </div>
+        <div class="row mgtop-5">
+            <div class="col-sm-4 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllWeek" (change)="onChangeCheckWeek('Sunday' , $event.target.checked)"  [value]="Sunday">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>
+                                    Sunday
+            </label>
+        </div>
+        <div class="col-sm-8 mgtop-5"></div>
+        </div>
+        </div>
+        
+        <div class="clsdays" *ngIf="scheduleInput.schedulefor == 'days'">
+            <div class="">
+                <h4 class="mgtop-15">
+                    Days :
+                </h4>
+                <div class="selalldays1 ">
+                  <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
+                      <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAll" (change)="onChangeCheckAllDays($event.target.checked)" [(ngModel)]="selectAllDays">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description"></span>
+                                          Select All
+                </label></div>
+                <div class="row  mgtop-5">
+                    <div class="col-sm-2 ">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                            <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(1 , $event.target.checked)" >
+                            <span class="custom-control-indicator"></span>
+                            <span class="custom-control-description"></span>
+                                                    1
+                    </label>
+                </div>
+                <div class="col-sm-2 ">
+                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                        <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(2 , $event.target.checked)" >
+                        <span class="custom-control-indicator"></span>
+                        <span class="custom-control-description"></span>                    2
+                </label>
+            </div>
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(3 , $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                3
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(4 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            4
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(5 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            5
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllDay" (change)="onChangeCheckDay(6 , $event.target.checked)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            6
+        </label>
+        </div>
+        </div>
+        
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(7 , $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                7
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(8 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            8
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(9 , $event.target.checked)"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            9
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(10 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            10
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(11 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            11
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(12 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            12
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(13 , $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                13
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(14 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            14
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(15 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            15
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(16 , $event.target.checked)"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            16
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(17 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            17
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(18 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            18
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllDay" (change)="onChangeCheckDay(19 , $event.target.checked)">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                19
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(20 , $event.target.checked)"  >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            20
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(21 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            21
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(22 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            22
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(23 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            23
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(24 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            24
+        </label>
+        </div>
+        </div>
+        
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(25 , $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                25
+            </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input"  [checked]="checkAllDay" (change)="onChangeCheckDay(26 , $event.target.checked)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            26
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(27 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            27
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(28 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            28
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(29 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            29
+        </label>
+        </div>
+        <div class="col-sm-2 ">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(30 , $event.target.checked)" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>            30
+        </label>
+        </div>
+        </div>
+        <div class="row  mgtop-5">
+            <div class="col-sm-2 ">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem"  class="custom-control-input" [checked]="checkAllDay" (change)="onChangeCheckDay(31 , $event.target.checked)" >
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span>                31
+            </label>
+        </div>
+        <div class="col-sm-10"></div>
+        </div>
+        </div>
+        </div>
+        
+      
+        <div class="createsche  mgtop-10 ">
+            <input type="button" value={{Detail.type}} class="createscheduler btn-small btn btn-primary capitalize " btntype="create" [disabled]="!FormControl.valid" (click)="createAndUpdateScheduleOrder()">
+            <div class="message"></div>
+        </div>
+
+        <div *ngIf="Detail.type=='update'">
+            <input type="button" value="Delete" class="btn-small btn deletebtn" (click)="deleteSchedule(Detail.data)">
+        </div>
+      </div>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

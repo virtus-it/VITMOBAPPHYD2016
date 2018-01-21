@@ -1,0 +1,90 @@
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-user-circle-o"></i> Customer View      
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row">
+        <div class="col center">
+                <span class="gray9">  <i class="fa fa-user"></i>  Customer Name : </span>
+                   <label class=" ng-binding capital ">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
+                        <!-- ngIf: customerView.cLname -->
+               
+                   </label>
+
+            </div>
+            <div class="col center">
+                <span class=" gray9"> <i class="fa fa-phone"></i>  Mobile Number : </span>
+                <label class=" ng-binding">{{this.orderDetail.orderby_mobileno}}</label>
+            </div>
+            <div class="col center">
+                <span class="gray9"> <i class="fa  fa-map-marker"></i>  Area Name : </span>
+            <label class="ng-binding">{{this.orderDetail.orderby_areaname}}</label>
+            </div>
+
+</div>
+      <div class="">
+    
+        <table class="table table-hover table-fixedheader">
+          <thead>
+            <tr>
+              <th width="6%"><small>Order Id</small></th>
+              <th width="10%"><small>Product Name</small></th>
+              <th width="7%"><small>Cart Id</small></th>
+              <th width="12%"><small>Address</small></th>
+              <th width="8%"><small>Ordered Amt</small></th>
+              <th width="8%"><small>Received Amt</small></th>
+              <th width="8%"><small>Ordered Qty</small></th>
+              <th width="8%"><small>Status</small></th>
+              <th width="8%"><small>Returned Qty</small></th>
+              <th width="10%"><small>Payment Mode</small></th>
+              <th width="15%"><small>Delivery Date</small></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customerOrderDetails">
+              <td width="6%" class="left" scope="row"><small>{{customer.order_id}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.brandname}} {{customer.prod_type}}</small></td>
+              <td width="7%" class="left capital"><small>{{customer.cart_id}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.bill_amount}}</small></td>
+              <td width="8%"class="left capital"><small>{{customer.receivedamount}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.quantity}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.status}}</small></td>
+              <td width="8%" class="left capital"><small>{{customer.return_cans}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.paymenttype}}</small></td>
+              <td width="15%" class="left capital"><small>{{customer.order_delivereddate | utcDate}}</small></td>
+            </tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                <td colspan="5"> 
+              
+                   </td>
+              </tr>
+            </tfoot>
+        </table>
+        <h4 class="warning  capitalize center" *ngIf="noDataError">
+            {{noDataError}}
+            </h4>
+      </div>
+    </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

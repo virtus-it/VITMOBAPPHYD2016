@@ -1,14 +1,15 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-4">
+  <div class="col-md-4 col-sm-4">
     <i class="fa fa-edit"></i> Edit Customer
   </div>
-  <div class="col-1 right">
-    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+  <div class="col-md-1 col-sm-1 right">
+    <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
             </strong>
   </div>
 </div>
 <md-dialog-content layout="column">
-  <form class="example-form" (ngSubmit)="onSubmit()">
+  
+  <form class="example-form" >
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row">
         <b class="label-style">Personal Details<span></span></b>
@@ -16,13 +17,13 @@
       <div class="row">
         <div class="col-md-4 col-sm-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First Name" name="firstName">
+            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
             <md-error>
               First Name is <strong>required</strong>
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email Id" name="firstName">
+            <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
             <md-error>
               Email Id is <strong>required</strong>
             </md-error>
@@ -31,13 +32,13 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Last Name" name="firstName">
+            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
             <md-error>
               Last Name is <strong>required</strong>
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Phone Number" name="firstName">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" [(ngModel)]="customerInput.User.mobileno">
             <md-error>
               Phone Number is <strong>required</strong>
             </md-error>
@@ -46,13 +47,13 @@
         </div>
         <div class="col-md-4 col-sm-6">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Alias Name" name="firstName">
+            <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
             <md-error>
               Alias Name is <strong>required</strong>
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Advance Amount" name="firstName">
+            <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt">
             <md-error>
               Advance Amount is <strong>required</strong>
             </md-error>
@@ -66,13 +67,13 @@
       <div class="row mgtop-10 ">
         <div class="col-md-4">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Address" name="firstName">
+            <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="customerInput.User.address">
             <md-error>
               Address is <strong>required</strong>
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Zipcode" name="firstName">
+            <input class="form-control" mdInput placeholder="Zipcode" name="zipcode" [(ngModel)]="customerInput.User.pincode">
             <md-error>
               Zipcode is <strong>required</strong>
             </md-error>
@@ -80,27 +81,22 @@
         </div>
         <div class="col-md-4">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="City" name="firstName">
+            <input class="form-control" mdInput placeholder="City" name="city" [(ngModel)]="customerInput.User.city">
             <md-error>
               City is <strong>required</strong>
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Zipcode" name="firstName">
+            <input class="form-control" mdInput placeholder="State" name="state" [(ngModel)]="customerInput.User.state">
             <md-error>
               State is <strong>required</strong>
             </md-error>
           </md-form-field>
         </div>
         <div class="col-md-4">
+         
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Area Name" name="firstName">
-            <md-error>
-              Area Name is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Country" name="firstName">
+            <input class="form-control" mdInput placeholder="Country" name="country" [(ngModel)]="customerInput.User.country">
             <md-error>
               Country is <strong>required</strong>
             </md-error>
@@ -112,7 +108,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+      <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;   
   </md-dialog-actions>
 </div>

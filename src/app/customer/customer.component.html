@@ -1,0 +1,183 @@
+<div class="dist-style  minheight-500">
+  <!-- <div class=" row justify-content-between distIcon-style">
+    <div class="col-md-2 col-sm-2 col-lg-2">
+      <h4>
+        <i class="fa fa-users"></i> Customers</h4>
+    </div>
+    <div class="col-md-2 col-sm-2 col-lg-2">
+      <button md-raised-button color="primary" >
+        <i class="fa fa-plus fa-2" aria-hidden="true"></i>
+      </button>
+
+    </div>
+  </div> -->
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-users"></i> Customers</h4>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+        <a class="cursor logo-color " title="Add Customer" (click)='downloadCustomer()'>
+            <i class="fa fa-download" aria-hidden="true"></i>
+          </a>
+      <a class="cursor logo-color " title="Add Customer" (click)='showAddCustomer()'>
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+      <a class="cursor logo-color mgleft-10">
+        <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
+
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="">
+            
+            <br>
+            <div class="form-group">
+              <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
+                <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
+                  {{type.viewValue}}
+                </md-option>
+              </md-select>
+            </div>
+            <div class="form-group"  *ngIf="filterInput.root.searchtype != 'followupdate'">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
+              </md-form-field>
+            </div>
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'followupdate'">
+                <md-form-field class="inline">
+                    <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followUpdate">
+                    <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                    <md-datepicker #picker></md-datepicker>
+                  </md-form-field>
+              </div>
+            
+            <div class=" form-group">
+              <button md-raised-button color="primary" (click)="getCustomerByFilter('true')">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </a>
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <!-- <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
+      <div class="filtercol-style height-500">
+          <label class="float-left">Filter by</label>
+          <br>
+          <div class=" ">
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder=" Name">
+            </md-form-field>
+          </div>
+          <div class=" ">
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Alias Name">
+            </md-form-field>
+          </div>
+          <div class=" ">
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Mobile Number">
+            </md-form-field>
+          </div>
+          <div class=" form-group">
+            <md-form-field class="example-full-width">
+              <input class="form-control" mdInput placeholder="Area">
+            </md-form-field>
+          </div>
+          <div class=" form-group">
+            <button md-raised-button color="primary">
+              <i class="fa fa-search" aria-hidden="true"></i> Search
+            </button>
+            <button md-raised-button color="primary">
+              <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+            </button>
+          </div>
+      </div>
+    </div> -->
+    <div class="col">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="12%">User</th>
+            <th width="12%">Status</th>
+            <th width="12%">Mobile no</th>
+            <th width="20%">Deposit Amount </th>
+            <th width="20%">FollowUp</th>
+            <th width="15%">Action</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customers of customerList">
+            <td class="left">{{customers.firstname}} {{customers.lastname}}</td>
+            <td class="left" *ngIf="customers.isappdownloaded">Joined</td>
+            <td class="left" *ngIf="!customers.isappdownloaded">Not Joined</td>
+            <td class="left">{{customers.mobileno}}</td>
+            <td class="left">
+              <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>
+            </td>
+
+            <td class="left">
+              <!-- <button class="btn btn-link" (click)="showFollowUpDetails(customers)" > <i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
+              <button class="btn btn-link" (click)="showFollowUp(customers)">
+                <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+              </button>
+            </td>
+            <td class="left">
+              <div class="dropdown">
+                <button class="dropbtn">View More</button>
+                <div class="dropdown-content" style="right:0;">
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='showOrderList()'>
+                      <i class="fa fa-file-text-o"></i>
+                      Orders</label>
+                    <label class="col-md-6" (click)='showPlaceOrder()'>
+                      <i class="fa fa-shopping-cart" aria-hidden="true"></i> Place order</label>
+                  </div>
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='showResendInvitation()'>
+                      <i class="fa fa-reply"></i>
+                      Re-send invitation</label>
+                    <label class="col-md-6" (click)='showInactive()'>
+                      <i class="fa fa-ban"></i> Make inactive</label>
+                  </div>
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='showSetting()'>
+                      <i class="fa fa-cog"></i>
+                      settings</label>
+                    <label class="col-md-6" (click)='showSetPayment()'>
+                      <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
+                  </div>
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='showEditCustomer(customers)'>
+                      <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
+                    <label class="col-md-6" (click)='showSchedule(customers)'>
+                      <i class="fa fa-calendar"></i> Schedule</label>
+                  </div>
+                  <div class="row pdbottom-5">
+                    <label class="col-md-6" (click)='editScheduleOrder(customers)'>
+                      <i class="fa fa-pencil-square-o btn-link" aria-hidden="true"></i> Scheduled Orders </label>
+                  </div>
+                </div>
+              </div>
+
+            </td>
+        </tbody>
+
+      </table>
+
+      <h4 class="warning  capitalize">
+        <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="customerClickMore">
+          <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+        <span *ngIf="!customerClickMore">Record Not Available</span>
+
+      </h4>
+
+    </div>
+  </div>
+</div>

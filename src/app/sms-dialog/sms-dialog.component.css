@@ -3,7 +3,7 @@
     border: 1px solid;
     padding-top: 10px;
     overflow-y: scroll;
-    max-height: 150px;
+    max-height: 210px;
 }
 .mat-dialog-container{
     max-height:500px !important; 
@@ -12,3 +12,7 @@
 .mat-dialog-content{
     overflow: hidden;
   }
+  .my-radio md-radio-button , md-radio-button.md-checked ._md-on{
+    background-color: blue;
+}
+.wd-60{width:60%}

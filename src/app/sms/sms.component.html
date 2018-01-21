@@ -1,15 +1,16 @@
 ﻿<div class="dist-style">
         <div class=" row justify-content-between distIcon-style">
-        <div class="col-2">
-            <h4 class="left"><i class="fa fa-commenting-o" aria-hidden="true"></i>  SMS</h4>
+        <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <h4 class="left"><i class="fa fa-commenting-o" aria-hidden="true"></i>  Notification</h4>
         </div>
-      <div class="col-2">
-              <button md-raised-button color="primary" (click)="openSmsDialog()"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
+      <div class="col-sm-2 col-md-2 col-lg-2 right">
+              <!-- <button md-raised-button color="primary"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->
+              <a class="cursor logo-color " title=" Notification Scheduler"  (click)="openSmsDialog()"><i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i></a>
               
-      </div>
+            </div>
         </div>
-        <div id="" class="row pd-15x10 mg-0">
-            <div class="col-3 col-sm-3 col-md-3 col-lg-3 filter-style">
+        <div id="" class="row pd-15x10 mg-0 minheight-500">
+            <!-- <div class=" col-sm-3 col-md-3 col-lg-3 filter-style">
                 <div class="filtercol-style height-500">
                     <label class="float-left">Filter by</label><br>
                          <div class=" ">
@@ -30,26 +31,31 @@
                         </button>
                       </div>
                     </div>
-             </div>
-      <div class="col-9 col-sm-9 col-md-9 col-lg-9">    
+             </div> -->
+      <div class="col">    
           <table class="table table-hover table-striped">
             <thead>
               <tr>
-                <th width="5%">S.No</th>
+                  <th width="5%">Status</th>   
+                  <th width="5%">Type</th>                                
                 <th width="12%">Name</th>
-                <th width="12%">Mobile Count</th>
-                <th width="20%">Body</th>
-                <th width="20%">Status</th>
+                <th width="6%"><i class="fa fa-mobile fs-20" aria-hidden="true"></i> <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
+                  <!-- Mobile Count -->
+                </th>
+                <th width="50%">Body</th>
+                <th width="10%">Date</th>                                
                 
               </tr>
+
             </thead>
             <tbody>
               <tr id="Preordrlist" *ngFor="let smslist of smsListDetails; let i = index" [attr.data-index]="i">
-                <td scope="row">{{i+1}}</td>
-                <td class="left">{{smslist.name}}</td>
+                  <td class="left">{{smslist.status}}</td>     
+                  <td class="left">{{smslist.smstype}}</td>              
+                <td class="left">{{smslist.name}}</td>                
                 <td class="left">{{smslist.mcount}}</td>
                 <td class="left">{{smslist.body_desc}}</td>
-                <td class="left">{{smslist.status}}</td>
+                <td>{{smslist.createddate | utcDate}}</td>
               </tr>
             </tbody>
           </table>

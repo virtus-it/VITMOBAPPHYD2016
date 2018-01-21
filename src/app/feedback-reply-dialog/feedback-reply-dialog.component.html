@@ -1,0 +1,30 @@
+<div>
+    <div class="col-md-6  col-sm-6  col-lg-6" class="header">
+        <i class="fa fa-reply" aria-hidden="true"></i> Reply
+    <div class="col-md-9  col-sm-9  col-lg-9right">
+        <strong (click)="onCloseCancel()">
+          <i class="fa fa-times fs-20" aria-hidde n="true"></i>
+        </strong>
+        </div>
+    </div>
+        <md-dialog-content layout="column">
+            <form class="example-form">
+              <div class="container-fluid pd-15x25 height-450">
+                <div class="form-group">
+                    Please write your reply <br>
+                  <div class="col-sm-9  col-md-9  col-lg-9">
+                    <textarea maxlength="250"  rows="5" cols="111" placeholder="Please write here..." name="reply" [(ngModel)]="feedbackInput.root.message" > </textarea>
+                    <small>Characters Remanining :
+                        <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
+                      </small>
+                    </div>
+                    </div>
+                    </div></form> 
+                    </md-dialog-content>
+        <div>
+          <button type="button" class="sendbtn" (click)="sendFeedback()"> Send</button>
+          <button type="button" class="cancelbtn" (click)="onCloseCancel()"> Cancel</button>
+        </div>
+        </div>
+
+

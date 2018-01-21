@@ -1,36 +1,53 @@
 ﻿<div class="row justify-content-between modal-title ">
-  <div class="col-4">
-    <i class="fa fa-calendar"></i> SMS scheduler
+  <div class="col-md-6  col-sm-6  col-lg-6">
+    <i class="fa fa-calendar"></i> Notification Scheduler
   </div>
-  <div class="col-1 right">
-    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
-<div class="container-fluid pd-15x25 height-450">
-  <md-dialog-content layout="column">
 
-    <form class="example-form">
+<md-dialog-content layout="column">
 
-      <div class="row">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 height-450">
 
-        <div class="  col-3">
-
-          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc">
+      <div class="row form-group">
+        <div class="  col-sm-3  col-md-3  col-lg-3">
+          <md-select placeholder="Order Type" [(ngModel)]="orderinput.orderType" name="type" class="wd-100pc" (change)="onChangeType()">
             <md-option *ngFor="let type of OrderTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
           </md-select>
 
         </div>
-        <div class="  col-3">
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'customerbydays'">
+          <md-form-field class="example-full-width inline ">
+            <input class="form-control" mdInput placeholder="Days"  name="days" [(ngModel)]="orderinput.days">
+
+          </md-form-field>
+
+        </div>
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'distributorscustomer'">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let dist of filteredStates | async" [value]="dist.fullName">
+                <span>{{ dist.fullName }}</span>
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
+        </div>
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-3">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms'">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
@@ -38,46 +55,228 @@
             <md-datepicker #pickers></md-datepicker>
           </md-form-field>
         </div>
-        <div class=" col-3">
-          <md-dialog-actions align="end" class="float-left">
+
+
+        <div class=" col-sm-2  col-md-2 col-lg-2" *ngIf="orderinput.orderType != 'sms'">
+          <md-dialog-actions align="center">
             <button md-raised-button (click)="getMobileNumber()" class="btn-primary">SUBMIT</button>
           </md-dialog-actions>
         </div>
-      </div>
-      <div *ngIf="mobileDetails.length">
-      <div class="row form-group">
-        <div class="col-3 mgtop-20">
-            <md-form-field class="example-full-width inline ">
-                <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]="smsInput.name">
-               
-              </md-form-field>
+
+        <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center" *ngIf="smallLoader">
+          <img src="assets/images/loader.gif" class="wd-60">
         </div>
-  
-        <div class="col-9 ">
+      </div>
+
+      <div *ngIf="mobileDetailsCopy.length && orderinput.orderType != 'sms'">
+        <span width="30%" class="left capital">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="smsInput.smsType" (change)="onChangeSmsType('sms')" class="custom-control-input" name="{{smsInput.smsType}}" value="sms">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">SMS</span>
+          </label>
+        </span>
+        <span width="30%" class="left capital">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="smsInput.smsType" class="custom-control-input" (change)="onChangeSmsType('notification')"  name="{{smsInput.smsType}}" value="notification">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">NOTIFICATION</span>
+          </label>
+        </span>
+        <div class="row form-group" *ngIf="smsInput.smsType == 'sms'">
+          <div class="col-sm-3  col-md-3  col-lg-3 mgtop-20">
             <md-form-field class="example-full-width inline ">
-              <textarea class="form-control" mdInput placeholder="Body" name ="body" [(ngModel)]="smsInput.body"></textarea>
-             
+              <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]="smsInput.name">
+
             </md-form-field>
           </div>
-      </div>
-      <div class="row mgleft-5 mobile-div form-group">
-        <div class="col-md-3 col-3 col-sm-3 col-xs-3 align-items-start form-group"  *ngFor="let mobile of mobileDetails; let i = index" [attr.data-index]="i" >
-          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" id="rem"  class="custom-control-input"  (change)="onChangeCheck(mobile, $event.target.checked)">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">{{mobile.mobileno}}</span>
-                </label>
+
+          <div class="col-sm-9  col-md-9  col-lg-9">
+            <md-form-field class="example-full-width inline ">
+              <textarea maxlength="250" class="form-control" mdInput placeholder="Body" name="body" [(ngModel)]="smsInput.body"></textarea>
+
+            </md-form-field>
+            <small class="top-post">Characters Remaining :
+              <span class="danger"> {{250 - smsInput.body.length}}</span>
+            </small>
+          </div>
         </div>
-     
-      </div>
-      </div>
-      <div class="row float-right pdright-30 form-group mgtop-10">
-          <md-dialog-actions align="end">
-            <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-            <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
-          </md-dialog-actions>
+        <div class="" *ngIf="smsInput.smsType == 'notification'" style="max-height:150px;overflow-x:auto">
+          <div class="row align-items-center ">
+          <div class="col-sm-3  col-md-3  col-lg-3">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Title" name="name" [(ngModel)]="smsInput.title">
+
+            </md-form-field>
+          </div>
+          <div class="  col-sm-3  col-md-3  col-lg-3 pdtop-0">
+            <md-select placeholder="Notification Type" [(ngModel)]="smsInput.type" name="type" class="wd-100pc">
+              <md-option value="radio">Radio </md-option>
+              <md-option value="checkbox">CheckBox </md-option>
+              <md-option value="website">Website </md-option>
+              <md-option value="slide">Slide </md-option>
+            </md-select>
+
+          </div>
+          <div class="col-sm-3  col-md-3  col-lg-3">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="rem" class="custom-control-input" [(ngModel)]="smsInput.showcomment" name="showcomments">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Show Comments</span>
+
+            </label>
+          </div>
+        </div>
+          <div class="row align-items-center">
+          <div class="col-sm-8  col-md-8  col-lg-8">
+            <md-form-field class="example-full-width inline ">
+              <textarea maxlength="250" class="form-control" mdInput placeholder="Body" name="body" [(ngModel)]="smsInput.body"></textarea>
+
+            </md-form-field>
+            <small  class="top-post">Characters Remanining :
+              <span class="danger"> {{250 - smsInput.body.length}}</span>
+            </small>
+          </div>
+          <div class="col-sm-4  col-md-4  col-lg-4 ">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Redirect URL" name="redirecturl" [(ngModel)]="smsInput.redirecturl">
+
+            </md-form-field>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-sm-3  col-md-3  col-lg-3">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="URL" name="url" [(ngModel)]="smsInput.url">
+
+            </md-form-field>
+          </div>
+          <div class="col-sm-3  col-md-3  col-lg-3 " *ngFor="let button of smsInput.buttons;let i = index">
+            <div class="row align-items-center">
+<div class="col-8">
+    <md-form-field class="example-full-width inline ">
+        <input class="form-control" mdInput placeholder="Button" name="button{{i}}" [(ngModel)]="button.name">
+
+      </md-form-field>
+</div>
+<div class="col-sm-1  col-md-1  col-lg-1">
+    <a class="cursor logo-color " >
+    <b class="fa fa-plus-circle success fs-22" aria-hidden="true" (click)="addButton()"></b>
+    </a>
+    <!-- <a class="cursor logo-color " (click)="addButton()">
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a> -->
+  </div>
+  <div class="col-sm-1  col-md-1  col-lg-1">
+      <b class="fa fa-trash danger fs-22" (click)="removeButton(button)" aria-hidden="true"></b>
+    </div>
+            </div>
+          </div>
+    
+          <div class="col-sm-3  col-md-3  col-lg-3" *ngFor="let item of smsInput.option;let i = index">
+              <div class="row align-items-center">
+                  <div class="col-8">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Option" name="item{{i}}" [(ngModel)]="item.name">
+
+            </md-form-field>     </div>
+            <div class="col-sm-1  col-md-1  col-lg-1">
+                <a class="cursor logo-color " >
+                <b class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addOption()"></b>
+                </a>
+                <!-- <a class="cursor logo-color " (click)="addOption()">
+                    <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+                  </a> -->
+              </div>
+              <div class="col-sm-1  col-md-1  col-lg-1">
+                  <i class="fa fa-trash danger fs-22 cursor" (click)="removeoption(item)" aria-hidden="true"></i>
+                 </div>
+            
+          </div>
+   </div>
+          <div class="col-sm-3  col-md-3  col-lg-3 " *ngFor="let silder of smsInput.sliderurl;let i = index">
+              <div class="row align-items-center">
+                  <div class="col-8">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Silder Url" name="button{{i}}" [(ngModel)]="silder.image">
+
+            </md-form-field>
+            </div>
+            <div class="col-sm-1  col-md-1  col-lg-1">
+            <a class="cursor logo-color " >
+                <b class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>
+            </a>
+            </div>
+            <div class="col-sm-1  col-md-1  col-lg-1">
+                <b class="fa fa-trash danger fs-22" (click)="removeSilder(silder)" aria-hidden="true"></b>
+          </div>
+ </div>
+          </div>
         </div>
       
-    </form>
-  </md-dialog-content>
+        </div>
+        <div class="row align-items-center  ">
+          <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="rem" class="custom-control-input" [(ngModel)]="checkAll" name="checkall" (change)="onChangeCheckAll($event.target.checked)">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">CheckAll</span>
+
+            </label>
+          </div>
+
+          
+          <div class="col-sm-3  col-md-3  col-lg-3">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Search Mobile Number" name="searchmobile" [(ngModel)]="searchMobileNumber"
+                (ngModelChange)="searchMobileNo()">
+            </md-form-field>
+          </div>
+          <div class="col-sm-2  col-md-2  col-lg-2">
+            <span class="custom-control-description">Total : <b class="success">{{mobileDetails.length}}</b></span>
+          </div>
+          <div class="col-sm-2  col-md-2  col-lg-2">
+            <span class="custom-control-description">Selected : <b class="info">{{smsInput.mobilenumber.length}}</b></span>
+          </div>
+        </div>
+        <div class="row mgleft-5 mobile-div form-group">
+          <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
+            [attr.data-index]="i">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{mobile.mobileno}}</span>
+            </label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="orderinput.orderType == 'sms'">
+        <div class="row ">
+
+
+          <div class="col-sm-9  col-md-9  col-lg-9">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Mobile Number" name="name" [(ngModel)]="smsInput.customMobilenumber">
+
+            </md-form-field>
+            <md-form-field class="example-full-width inline ">
+              <textarea maxlength="250" class="form-control" mdInput placeholder="Message" name="body" [(ngModel)]="smsInput.customBody"></textarea>
+
+            </md-form-field>
+            <small class="top-post">Characters Remaining :
+              <span class="danger"> {{250 - smsInput.customBody.length}}</span>
+            </small>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">
+
+    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
 </div>

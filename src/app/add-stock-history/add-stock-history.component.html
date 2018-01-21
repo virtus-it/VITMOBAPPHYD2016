@@ -1,0 +1,91 @@
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-line-chart"></i> Stock History
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <div class="row">
+
+      <div class="col-md-4 addstock-style">
+        <div class="row">
+          <div class="  col-sm-6 col-md-6  col-lg-6">
+            <md-form-field class="inline">
+              <input mdInput placeholder="From Date" name="fromdate">
+
+            </md-form-field>
+          </div>
+          <div class="  col-sm-6 col-md-6  col-lg-6">
+            <md-form-field class="inline">
+              <input mdInput placeholder="To Date" name="todate">
+            </md-form-field>
+          </div>
+        </div>
+        <div class="form-group">
+          <md-select placeholder="Order Type" class="wd-100pc left">
+            <md-option>
+            </md-option>
+          </md-select>
+        </div>
+        <div class="row form-group">
+          <div class="  col-sm-6 col-md-6  col-lg-6">
+            <md-select placeholder="Order Type" class="wd-100pc left">
+              <md-option>
+              </md-option>
+            </md-select>
+          </div>
+          <div class="  col-sm-6 col-md-6  col-lg-6">
+            <md-select placeholder="Order Type" class="wd-100pc left">
+              <md-option>
+              </md-option>
+            </md-select>
+          </div>
+        </div>
+        <div class="">
+          <button md-raised-button color="primary" class="mgright-5">
+            <i class="fa fa-search" aria-hidden="true"></i> Search
+          </button>
+          <button md-raised-button color="primary">
+            <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+          </button>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <table class="table table-hover table-fixedheader">
+          <thead>
+            <tr>
+              <th width="25%">Product Name</th>
+              <th width="22%">Product Type</th>
+              <th width="25%">Stock Received </th>
+              <th width="25%">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td width="25%" class="left capital"></td>
+              <td width="22%" class="left "></td>
+              <td width="25%" class="left" scope="row"></td>
+              <td width="25%" class="left "></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button >CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

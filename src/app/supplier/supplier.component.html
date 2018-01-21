@@ -1,0 +1,57 @@
+
+<div class=" dist-style minheight-500">
+    <div class=" row justify-content-between distIcon-style left">
+        <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <h4><i class="fa fa-truck"></i> Suppliers</h4>
+        </div>
+      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+          <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()' ><i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i></a>
+            <a class="cursor logo-color mgleft-10" ><i  aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter" ></i>
+    
+                                <div class="filterView" *ngIf="showFilterDialog">
+                            <div class="">
+                                <b class="float-left">Filter By</b>
+                                <br>
+                                <div class=" ">
+                                  <md-form-field class="example-full-width">
+                                    <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm" (ngModelChange) = "searchSupplier()" name="searchSupplierTerm">
+                                  </md-form-field>
+                                </div>
+                                </div>
+                         </div>  
+            </a>
+      </div>
+        </div>
+    <div id="" class="row pd-15x10 mg-0">
+  <div class="col">    
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="5%">S.No</th>
+            <th width="15%">User</th>
+            <th width="12%">Mobile no</th>
+            <th width="15%">Address</th>
+            <th width="15%"> View Orders</th>
+            <th width="12%">Set Areas</th>
+            <th width="8%">Edit</th>
+            <th width="8%">Delete</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr  *ngFor = "let supplier of supplierList; let i = index" [attr.data-index]="i">
+            <td  class="left">{{i+1}}</td>
+            <td class="left"> {{supplier.firstname}}</td>
+            <td class="left"> {{supplier.mobileno}}</td>
+            <td class="left"> {{supplier.address}}</td>
+            <td  class="left"  (click)='supplierOrdersList(supplier)' class= "btn btn-link" >Orders</td>
+            <td class="left"  class="btn-link" (click)="openMapDialog(supplier)">Assign Area</td>
+            <td class="left"><i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)='editSupplier(supplier)'></i></td>
+            <td class="left"><i class="fa fa-trash danger" aria-hidden="true" (click)='deleteSupplier(supplier)'></i></td>      
+        </tbody>
+      </table>
+      
+  </div>
+  </div>
+  <!-- <h4 *ngIf="!NoRecords"  class="warning" > <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4> -->
+  </div>  
+

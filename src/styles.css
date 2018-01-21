@@ -1,4 +1,4 @@
-﻿/* You can add global styles to this file, and also import other style files */
+﻿/* You can add global styles to this file, and also import other style files css*/
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.css";
@@ -8,9 +8,13 @@ table thead {
     color: #fff;
   }
   .table td, .table th{
-    padding: 8px;
-    vertical-align:unset;
+    padding: 5px;
+   border-bottom: none !important;
+    vertical-align: middle !important;
     border-top: none;
+  }
+  th{
+    font-weight: 600;
   }
   .dist-style{
     border: 1px solid #ddd;
@@ -18,19 +22,25 @@ table thead {
     background: #fff;
   }
   .distIcon-style{
-    padding: 15px;
+    padding: 12px;
     margin: 0px;
     border-bottom: 1px solid #c5d6de;
   }
   .pd-15x10{
     padding: 15px 10px;
   }
+
   .mg-0{
     margin: 0px !important;
+  }
+  .pd-15x5{
+    padding: 15px 5px 5px;
   }
   .filter-style{
     border: 1px solid #c5d6de;
     padding: 20px 30px;
+    margin-top: 10px;
+    background:#eceff4;
   }
   .mat-form-field{
     display: inline;
@@ -46,18 +56,40 @@ table thead {
   }
   .btn-link{
     color: #0f75bc;
+    cursor: pointer;
+  }
+  .pageTitle-style{
+    text-align: left;
+    color: #333 !important;
+    font-size: 18px !important;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 1px #DDDDDD;
+  }
+  .wd-60{
+    width: 60px !important;
+  }
+  .mgright-20{
+    margin-right: 20px !important;
   }
   .logo-color{
     color: #0f75bc !important;
-    
+    cursor: pointer;
+  }
+
+  .logo-color:hover{
+    color: #f79123!important;
+    cursor: pointer;
   }
   .mat-dialog-container{
     padding: 0px !important;
-    max-height: 500px;
+    max-height: 700px;
     max-width: 100% !important;
     overflow: hidden !important;
   }
-
+  .bg-eee{
+    background: #eceff4 !important;
+    }
   .mg-30{
       margin: 30px;
   }
@@ -77,6 +109,31 @@ table thead {
 border-bottom: 1px solid #0f75bc;
 color: #0f75bc !important;
 
+}
+.mgleft-10{
+  margin-left: 10px;
+}
+.filterView{
+  position: absolute;
+  width: 300px;
+  z-index: 100;
+  right: 0px;
+  top: 37px;
+  color: #666666;
+  background: #eceff4;
+  border: 1px solid #c5d6de;
+  padding: 20px 30px;
+}
+.filterView::before {
+  z-index: -1;
+  position: absolute;
+  top: -10px;
+  content:'';
+  width: 0;
+  height: 0;
+  border-bottom: solid 10px #eceff4;
+  border-left: solid 10px transparent;
+  border-right: solid 10px transparent;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
   background: #0f75bc ; 
@@ -103,8 +160,20 @@ background: transparent;
 .fs-20{
     font-size:20px;
 }
+.capitalize{
+  text-transform: capitalize;
+}
+.padding-0{
+  padding: 0px;
+}
 .pd-15x25{
     padding: 15px 25px;
+}
+.pdright-5{
+  padding-right: 5px;
+}
+.pdright-10{
+  padding-right: 10px;
 }
 .pdright-20{
     padding-right: 20px;
@@ -114,6 +183,7 @@ background: transparent;
 }
 .brd-bottom{
     border-bottom: 1px solid #ddd;
+    border-radius: none;
 }
 .right{
   text-align: right;
@@ -149,8 +219,11 @@ background: transparent;
 .mat-calendar-table-header {
   background: none !important;
 }
+.pdleft-10{
+  padding-left:10px !important;
+}
 .pdleft-15{
-  paddding-left:15px !important;
+  padding-left:15px !important;
 }
 .mgleft-15{
   margin-left: 15px;
@@ -158,11 +231,27 @@ background: transparent;
 .mgleft-5{
   margin-left: 5px;
 }
+.mgtop-10{
+  margin-top: 10px !important;
+}
 .mgtop-15{
   margin-top: 15px;
 }
 .mgtop-20{
   margin-top: 20px;
+}
+.mgbottom-10 {
+  margin-bottom: 10px;
+}
+.form-group{
+  margin-bottom: 10px !important;
+}
+.btn{
+  border-radius: 0px !important;
+}
+.btn-default{
+  background: #fff;
+  color: #0f75bc;
 }
 .btn-primary{
   color: #fff !important;
@@ -173,6 +262,11 @@ background: transparent;
 .wd-100pc{
   width: 100%;
 }
+.full-width{
+  width: 100%;
+ 
+}
+
 b, strong {
   font-weight: 500;
 }
@@ -188,6 +282,7 @@ b, strong {
 .border-top{
   border-top:1px solid #ddd;
 }
+
 .timeline > li > .timeline-panel:after {
   position: absolute;
   top: 27px;
@@ -262,7 +357,9 @@ ul li small{
 .timeline-badge.danger {
   background-color: #d9534f !important;
 }
-
+.danger {
+  color: #8B1210 !important;
+}
 .timeline-badge.info {
   background-color: #5bc0de !important;
 }
@@ -281,10 +378,15 @@ ul li small{
   margin-top: 5px;
 }
 .messages-style {
-  padding: 10px;
+  padding: 5px 12px;
   margin: 5px 0px;
   background: rgb(236, 239, 244);
-  border-radius: 15px;}
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+.messages-style p{
+  margin-bottom: 0px !important;
+}
   .fa-send-style {
     color: rgb(117, 172, 193);
     padding: 10px;
@@ -304,3 +406,193 @@ ul li small{
 .pdtop-10{
   padding-top: 10px;
 }
+.nolist-style{
+  list-style: none;
+}
+.center{
+  text-align: center !important;
+}
+.gray9{
+  color: #999;
+}
+.mgtop-5{
+  margin-top: 5px;
+}
+.mgtopbottom-10{
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.pdbottom-5{
+  padding-bottom: 5px;
+}
+.mgleftbottom-10x0{
+  margin-bottom: 10px;
+margin-left: 0px;
+}
+.border-topbottom{
+  border-bottom: 1px solid #ddd;
+  border-top: 1px solid #ddd;
+}
+table thead th::after{
+  
+      font-family: FontAwesome;
+      content: "\2193";
+      display: block;
+     float: right;
+  }
+  /* table thead th::after::before{
+    
+        font-family: FontAwesome;
+        content: "\2191";
+        display: inline-block;
+        float: right;
+        vertical-align: middle;
+    } */
+    .fs-21{
+      font-size: 21px;
+    }
+    .mat-calendar-table thead th::after{
+          content: "" !important;
+      }
+      .mat-calendar{
+border:2px solid #0f75bc;
+      }
+      .mat-calendar-header{
+        background: #0f75bc;
+        color: #fff;
+      }
+      .mat-calendar-body-today{
+        border-color: #0f75bc;
+        
+      }
+      .nofath thead th::after{
+        content: "" !important;
+      }
+      .none{
+        display: none
+      }
+      .nav-pills .nav-link.active, .show>.nav-pills .nav-link{
+        color: #fff !important;
+        background-color: #0f75bc;
+      }
+      .success{
+        color: #4cae4c
+      } 
+      .onhovertext {/* width:250px; */text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+      .onhovertext:hover {
+        overflow: visible;
+    }
+    .mat-dialog-content{
+      max-height: 100% !important;
+    }
+    .mat-list-item-content:hover{
+      color: #fff !important;
+      border-left: 5px solid #f79123;
+      /* border-right: 5px solid #f79123; */
+      background-color: #0f75bc !important;
+        }
+    .pdtopleft-80x25{
+      padding: 80px 0px 0px 25px;
+    }
+        .sidebar-nohover > .mat-list-item-content:hover{
+          background: transparent !important;
+          border-left: none !important;
+        }
+        .scrollheight {
+          height: 400px;
+          overflow-y: auto;
+          padding: 10px;
+        }
+        table.table-fixedheader, table.table-fixedheader>thead, table.table-fixedheader>tbody, table.table-fixedheader>thead>tr, table.table-fixedheader>tbody>tr, table.table-fixedheader>thead>tr>th, table.table-fixedheader>tbody>td {
+          display: block;
+        }
+        .form-control:focus{
+          background: transparent;
+        }
+        table.table-fixedheader>thead>tr:after, table.table-fixedheader>tbody>tr:after {
+          content:' ';
+          display: block;
+          visibility: hidden;
+          clear: both;
+        }
+        table.table-fixedheader>tbody {
+          overflow-y: auto;
+          max-height: 300px;
+        }
+        table.table-fixedheader>thead {
+          overflow-y: auto;    
+        }
+        table.table-fixedheader>thead::-webkit-scrollbar {
+          background-color: inherit;
+        }
+        table.table-fixedheader>thead>tr>th:after, table.table-fixedheader>tbody>tr>td:after {
+          content:' ';
+          display: table-cell;
+          visibility: hidden;
+          clear: both;
+        }
+        table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
+          float: left;    
+          word-wrap:break-word;     
+        }
+        .timeline[_ngcontent-c12]    > li[_ngcontent-c12]    > .timeline-badge[_ngcontent-c12]{
+          top:3px !important;
+        }
+ .minheight-500{
+   min-height: 500px;
+ }  
+ .info{
+   color: #5bc0de;
+ }
+ .danger{
+   color: #d9534f;
+ }
+ .plus-style{
+  background: #0f75bc;
+  padding: 5px 8px;
+  color: #fff;
+
+  border-radius: 50%;
+}
+.fs-22{
+  font-size: 22px;
+}
+.top-post{
+  position: absolute !important;
+  top: 80% !important;
+  }
+  .pdtop-0{
+    padding-top: 0px;
+  }
+/* .paddingbtm-0 .mat-form-field-wrapper{
+  padding-bottom: 0px !important;
+  } */
+/* .loader-style{
+ background-image: url(assets/images/bg.png);
+position: absolute;
+left: 0;  
+  top: 0;
+
+height: 100%;
+width: 100%;
+}
+.loader-style img{
+  position: fixed;
+  left: 50%;  
+    top: 50%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 8%;
+} */
+
+/* .loading {
+  position: fixed;
+text-align: center;
+vertical-align: middle;
+  width: 100px;
+  height: 100px;
+  z-index: 9999;
+  opacity: .8;
+} */

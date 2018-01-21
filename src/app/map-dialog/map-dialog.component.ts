@@ -5,6 +5,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 declare var google: any;
+import { LoaderService } from '../login/loader.service';
 @Component({
     selector: 'app-map-dialog',
     templateUrl: './map-dialog.component.html',
@@ -16,9 +17,9 @@ export class MapDialogComponent implements OnInit {
     polygonArray: any = {
         path: []
     }
-    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService) { }
+    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
     initMap() {
-
+        
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: { lat: 17.34932757, lng: 78.48117828 },
             zoom: 11,
@@ -49,6 +50,7 @@ export class MapDialogComponent implements OnInit {
     }
 
     getPolygonDistributors(dataLayer) {
+        this.loaderService.display(true);
         let distDetails = this.distributorDetails;
         var input = { area: { user_type: "dealer", user_id: distDetails.userid, "apptype": this.authenticationService.appType() } };
         this.distributorService.getpolygonByDistributor(input)
@@ -56,9 +58,11 @@ export class MapDialogComponent implements OnInit {
             output => this.getPolygonDataResult(output, dataLayer),
             error => {
                 console.log("Logged in falied");
+                this.loaderService.display(false);
             });
     }
     getPolygonDataResult(output, dataLayer) {
+        this.loaderService.display(false);
         console.log(output);
         //9863636315
         //paani
@@ -92,6 +96,7 @@ export class MapDialogComponent implements OnInit {
 
     }
     saveData(distributorDetails) {
+        this.loaderService.display(true);
         var input = { area: { user_type: "dealer", user_id: distributorDetails.userid, polygonvalue: [] } }
         var data = JSON.parse(localStorage.getItem('geoData'));
         for (let feature of data.features) {
@@ -120,9 +125,11 @@ export class MapDialogComponent implements OnInit {
             output => this.saveDataResult(output),
             error => {
                 console.log("Logged in falied");
+                this.loaderService.display(false);
             });
     }
     saveDataResult(data) {
+        this.loaderService.display(false);
         if (data.result == 'success') {
             this.thisDialogRef.close('Ploygon created');
         }

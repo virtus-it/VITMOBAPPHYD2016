@@ -2,51 +2,62 @@
  <div class="container-fluid loginBg">
 
         <div class="row" id="loginform">
-                <div class="col-4 mgpd-0">
+                <div class="col-md-4 col-sm-4 col-lg-4 mgpd-0">
                 
             </div>
-            <div class="col-4 loginStyle">
-<!--                     <img src="../assets/images/logo.png" class="img-responsive col-md-offset-3" />
- -->                <h3 class="text-center logo-color bold"><md-icon _ngcontent-c0="" class="mat-icon material-icons" role="img" aria-hidden="true">user</md-icon> LOG IN</h3>
+            <div class="col-md-4 col-sm-4 col-lg-4 loginStyle">
+             <h3 class="text-center logo-color bold"><md-icon _ngcontent-c0="" class="mat-icon material-icons" role="img" aria-hidden="true">user</md-icon> LOG IN</h3>
                 <p class=" mgleft-15">Please enter your basic credentials:</p>
-                <form>
-                <div class="log_form ">
-                    <div class="form-group  row">
-                        <div class="input-group ">
-                        <span class="input-group-addon"><i class="material-icons">account_circle</i></span>
-                        <input  id="userName" type="text" class="form-control" name="user" value="" placeholder="User" [(ngModel)]="loginDetails.username">                                        
+                <form class="example-form" (ngSubmit)="login()">
+                    <div class="">                        
+                    <md-form-field class="wd-100pc">
+                      <input mdInput placeholder="User" [formControl]="username" name="username" [(ngModel)]="loginDetails.username">
+                      <md-error *ngIf="username.hasError('required')">
+                        User is <strong>required</strong>
+                      </md-error>
+                    </md-form-field>
                     </div>
-                    </div>
+                    <div class="form">
+                        <md-form-field class="wd-100pc">
+                            <input mdInput  [formControl]="password"  name="password" [(ngModel)]="loginDetails.password" placeholder="Password" [type]="hide ? 'password' : 'text'">
+                        <md-icon mdSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</md-icon>
+                        <md-error *ngIf="password.hasError('required')">
+                          password is <strong>required</strong>
+                        </md-error>                       
+                      </md-form-field>
+                      </div>
+                      <!-- <div class="form-group">
 
-                    <div class="form-group  row">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="material-icons">lock_outline</i></span>
-                        <input id="userPwd" type="password" class="form-control" name="password" placeholder="Password" [(ngModel)]="loginDetails.password"> 
-                    </div>                                                                  
-                    </div>
-                    
-                    <div class="row align-items-start form-group">
-                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                        <input type="checkbox" id="rem"  class="custom-control-input">
-                        <span class="custom-control-indicator"></span>
-                        <span class="custom-control-description">Remember me</span>
-                      </label>
-                    </div>
-                    <!-- <div class="row align-items-start form-group checkbox custom-checkbox">
-                        <label for="rem"><input type="checkbox" id="rem"  class="custom-control-input"/> Remember me</label>                    
-                    </div> -->
-                    <div>
-                    </div>
-                    <div class="row align-items-start">
-                        <button type="submit" class="btn btn-primary " id="userLogin" (click)='login()'>
-                            <i class="fa fa-sign-in"></i>
-                            Login
-                        </button>
-                    </div>
-                    <label id="lblmsg"></label>
-                    
-            </div>
-                </form>
+                          <md-select name="apptype" placeholder="Order Type" class="wd-100pc left" [(ngModel)]="loginDetails.apptype" required>
+                              <md-option value="moya">Moya
+                              </md-option>
+                              <md-option value="neer">Neer
+                              </md-option>
+                              
+                            </md-select>
+                      </div>-->
+                      <div class="form-group">
+                          <md-error *ngIf="errorMsg" align="left">
+                              {{errorMsg}}
+                            </md-error>
+                            </div>
+                          <div class="align-items-start float-right">
+                              <button type="submit" md-raised-button  class=" btn-primary"
+                              [disabled]="!username.valid || !password.valid" id="userLogin"
+                               (click)='login()'>       <i class="fa fa-sign-in"></i>
+                               Login</button>
+                              
+                            <!-- <button type="submit" class="btn btn-primary " >
+                                <i class="fa fa-sign-in"></i>
+                                Login
+                            </button> -->
+                        
+                        </div>
+                              
+                  </form>
+                      </div> 
+                 
             </div>
 
         </div>
+        

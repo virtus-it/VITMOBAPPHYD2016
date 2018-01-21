@@ -1,0 +1,97 @@
+table thead {
+    background: #0f75bc;
+    color: #fff;
+  }
+  .table td, .table th{
+    padding: 8px;
+    vertical-align:unset;
+    border-top: none;
+  }
+  .dist-style{
+    border: 1px solid #ddd;
+    margin: 20px;
+  }
+  .distIcon-style{
+    padding: 15px;
+    margin: 0px;
+    border-bottom: 1px solid #c5d6de;
+  }
+  .pd-15x10{
+    padding: 15px 10px;
+  }
+  .mg-0{
+    margin: 0px !important;
+  }
+  .filter-style{
+    border: 1px solid #c5d6de;
+    padding: 20px 30px;
+  }
+  .mat-form-field{
+    display: inline;
+  }
+  .left{
+    text-align: left;
+  }
+  a{
+    color: #0f75bc;
+  }
+  .pdleft-20{
+    padding-left: 20px !important;
+  }
+  .btn-link{
+    color: #0f75bc;
+  }
+
+  .closeicon{
+    color: #35ca5b;
+  }
+  .openicon{
+    color: #dd2121;
+  }
+  .replyicon{
+    color: #3090c7;
+  }
+  .statusclosed{
+    color: rgb(233, 20, 20);
+  }
+  .pd-brd {
+    padding: 10px;
+    margin: 5px 0px;
+    border: 1px solid #ddd;
+  }
+  .greytext {
+    color: grey;
+  }
+  .col-md-9 {
+    width: 75%;
+    float: left;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .right {
+    float: right;
+  }
+  .col-md-3{
+    width: 25%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .col-md-12{
+    width: 100%;
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .col-md-9{
+    width: 75%;
+  }
+
+
+  /* .mat-dialog-container{
+    height: 90% !important;
+  } */

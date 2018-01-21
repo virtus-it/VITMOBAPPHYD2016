@@ -10,7 +10,7 @@ table.table-fixedheader, table.table-fixedheader>thead, table.table-fixedheader>
   }
   table.table-fixedheader>tbody {
     overflow-y: scroll !important;
-    max-height: 140px !important;
+    max-height: 290px !important;
   }
   table.table-fixedheader>thead {
     overflow-y: scroll;    

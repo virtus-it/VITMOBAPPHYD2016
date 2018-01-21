@@ -1,0 +1,95 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4 col-sm-4">
+      <i class="fa fa-truck"></i> Supplier</div>
+    <div class="col-md-1 col-sm-1 right">
+      <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
+              </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <form class="example-form" >
+      <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row">
+          <div class="col-md-6 col-sm-6 ">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Name" name="firstName" [formControl]="emailFormControl"  [(ngModel)]="supplierInput.firstname">
+              <md-error *ngIf="emailFormControl.hasError('required')">
+                First Name is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+            <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno">
+                <md-error>
+                 Alternate  Phone Number is <strong>required</strong>
+                </md-error>
+              </md-form-field>
+  
+          </div>
+          <div class="col-md-6 col-sm-6">
+              <md-form-field class="">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno">
+                  <md-error>
+                    Mobile Number is <strong>required</strong>
+                  </md-error>
+                </md-form-field>
+
+  
+          </div>
+
+        </div>
+        <!-- <div class="row">
+          <b class="label-style">Address Details<span></span></b>
+        </div>
+        <div class="row mgtop-10 ">
+          <div class="col-md-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Address" name="firstName">
+              <md-error>
+                Address is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Zipcode" name="firstName">
+              <md-error>
+                Zipcode is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class="col-md-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="City" name="firstName">
+              <md-error>
+                City is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Zipcode" name="firstName">
+              <md-error>
+                State is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class="col-md-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Area Name" name="firstName">
+              <md-error>
+                Area Name is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Country" name="firstName">
+              <md-error>
+                Country is <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+        </div> -->
+      </div>
+    </form>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+        <button type="submit" class="btn-primary" [disabled]="!emailFormControl.valid" md-raised-button (click)="createAndUpdateSupplier()">SUBMIT</button>        
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

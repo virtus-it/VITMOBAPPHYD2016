@@ -1,0 +1,37 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+        <i class="fa fa-phone-square" aria-hidden="true"></i>
+         Follow Up Details
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+              </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <form class="example-form" >
+      <div class="container-fluid brd-bottom">
+          <div class=" ">
+              <ul class="scrollheight  mgtop-5">
+                  <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                    <small>{{comments.username}}</small>
+                    <br>
+                    <small>{{ comments.remarks}} </small>
+                    <br>
+                    <p class="right">
+                      <small class="gray">{{ comments.createddate | utcDate}} </small>
+                    </p>
+                  </li>
+        
+                </ul>
+            </div>
+       </div>
+    </form>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+        
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

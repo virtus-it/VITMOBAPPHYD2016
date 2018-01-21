@@ -1,31 +1,34 @@
 ﻿<div class="row justify-content-between modal-title ">
-    <div class="col-4">
+    <div class="col-md-4  col-sm-4  col-lg-4">
           <span ><i class="fa fa-sitemap"></i>  {{distributorDetails.firstname}}</span>
     </div>
-    <div class="col-1 right">
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
           </strong>         
     </div>
   </div>
   <!-- <h2 md-dialog-title>{{distributorDetails.firstname}}</h2> -->
   <hr>
+  <div class="container-fluid">
   <md-dialog-content>
     <div id="map"></div>
   </md-dialog-content>
+  </div>
   <hr>
-  <div class="row float-right pdright-30">
+  <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
+      <button class="btn-primary" md-raised-button (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
     <button md-raised-button (click)="onCloseConfirm()" >CANCEL</button>&nbsp;
-    <button class="btn-primary" (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
+    
   </md-dialog-actions>
 </div>
 
 <!-- 
 <div class="row justify-content-between modal-title ">
-    <div class="col-4">
+    <div class="col-md-4  col-sm-4  col-lg-4">
           <h2 md-dialog-title><i class="fa fa-sitemap"></i>  {{distributorDetails.firstname}}</h2>
     </div>
-    <div class="col-1">
+    <div class="col-md-1  col-sm-1  col-lg-1">
           <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
           </strong>         
     </div>

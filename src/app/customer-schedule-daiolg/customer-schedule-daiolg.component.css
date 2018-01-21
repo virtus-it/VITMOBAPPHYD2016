@@ -1,0 +1,7 @@
+.capitalize {
+    text-transform: capitalize;
+}
+.deletebtn{
+    color: white;
+    background-color: rgb(207, 34, 34);
+}
