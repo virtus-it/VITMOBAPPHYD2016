@@ -24,6 +24,7 @@
             </tr>
           </thead>
           <tbody>
+              <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
             <tr *ngFor="let supplier of supplierList;  let i = index" [attr.data-index]="i">
               <td  class="left">{{i+1}}</td>
               <td class="left">{{supplier.firstname}}</td>
@@ -78,3 +79,4 @@
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
+

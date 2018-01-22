@@ -6,8 +6,8 @@
                   <h4><i class="fa fa-file-text"></i> Preorder</h4>
               </div>
               <div class="col-md-2  col-sm-2 col-lg-2 right">
-                    <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" ></i>
-                      <div class="filterView">
+                    <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()" ></i>
+                      <div class="filterView" *ngIf="showFilterDailog">
                           <div class="">
                               <b class="float-left">Filter By</b>
                               <br>
@@ -19,14 +19,7 @@
                                     </md-error>
                                   </md-form-field>
                                 </div>
-                                <div class=" form-group">
-                                    <md-form-field class="example-full-width">
-                                      <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
-                                      <md-error >
-                                        Mobile No is <strong>required</strong>
-                                      </md-error>
-                                    </md-form-field>
-                                  </div> 
+        
                               <div class=" form-group">
                                 <button md-raised-button color="primary">
                                   <i class="fa fa-search" aria-hidden="true"></i> Search
@@ -46,23 +39,37 @@
             <thead>
               <tr>
                 <th width="12%">User</th>
+                <th width="10%">Status</th>
                 <th width="12%">Distributor</th>                
                 <th width="12%">Mobile No</th>
-                <th width="12%">Areaname</th>
-                <th width="12%" class="pdleft-20">Address</th>
+                <th width="12%" class="pdleft-30">Address</th>
                 <th width="15%">Advance Amount</th>
                 <th width="12%">Due Amount</th>
+                <th width="12%" >Type</th>
+                <th width="12%" >Edit</th>
+                <th width="10%">Assign Pre-Order</th>
+
+
               </tr>
             </thead>
             <tbody>
-              <tr id="Preordrlist" (click)="addPreorder()">
-                <td class="left"></td>
-                <td class="left"></td>
-                <td class="left"></td>
-                <td class="left"></td>
-                <td class="left"></td>
-                <td class="left"></td>
-                <td class="left"></td>
+              <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
+                <tr *ngFor="let preorder of customerList">
+                <td class="left">{{preorder.firstname}} {{preorder.lastname}}</td>
+                <td class="left" *ngIf="preorder.isappdownloaded">Joined</td>
+                <td class="left" *ngIf="!preorder.isappdownloaded">Not Joined</td>
+                <td class="left">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer</td>
+                <td class="left">{{preorder.mobileno}}</td>
+                <td class="left">{{preorder.address}}</td>
+                <td class="left"> <span *ngIf="preorder.payments" >{{preorder.payments.advance_amount}} </span> </td>
+                <td class="left">  <span *ngIf="preorder.payments" >{{preorder.payments.amount_pending}} </span></td>
+                <td class="left"> 
+                  <div *ngIf="preorder.payments"> 
+                    <span *ngIf="preorder.payments.paymenttype=='credit'"> Type:  {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
+                  <span *ngIf="preorder.payments.paymenttype=='cod'"> Type: {{preorder.payments.paymenttype}}</span>
+                  </div> </td>
+                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true"></i> </td>
+                  <td class="left"></td>
               </tr>
             </tbody>
           </table>

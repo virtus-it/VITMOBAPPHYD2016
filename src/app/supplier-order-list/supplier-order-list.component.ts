@@ -14,11 +14,13 @@ export class SupplierOrderListComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<SupplierOrderListComponent>, @Inject(MD_DIALOG_DATA) public Detail: any, private supplierservice: SupplierService, private loaderService: LoaderService) { }
   SupplierOrderList = [];
+  noRecords= false;
+
 
 
   supplierOrderList() {
 
-    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": this.Detail.data.userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
+    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": this.Detail.data.userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
     this.supplierservice.supplierOrder(input)
       .subscribe(
       output => this.supplierOrderresult(output),
@@ -31,7 +33,6 @@ export class SupplierOrderListComponent implements OnInit {
     console.log(result);
     if (result.result == "success") {
       this.SupplierOrderList = result.data;
-
     }
   }
 
@@ -50,7 +51,14 @@ export class SupplierOrderListComponent implements OnInit {
   }
   distributorOrderresult(result) {
     console.log(result);
+    if(result.result == "success"){
+      this.SupplierOrderList = result.data;
     this.loaderService.display(false);
+    }
+    else{
+      this.noRecords= true;
+    }
+
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');

@@ -23,6 +23,7 @@ export class ViewCustomerComponent implements OnInit {
 
 
   customersList:any =[];
+  noRecords= false;
 
 
   getCustomerList() {
@@ -42,6 +43,9 @@ export class ViewCustomerComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.customersList = result.data;
+    }
+    else{
+      this.noRecords = true;
     }
   }
 
