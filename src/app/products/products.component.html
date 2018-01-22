@@ -1,46 +1,49 @@
 <div class="dist-style  minheight-500">
-    <div class=" row justify-content-between distIcon-style">
+  <div class=" row justify-content-between distIcon-style">
     <div class="col-md-2  col-sm-2  col-lg-2 left">
       <h4>
         <i class="fa fa-gift"></i> Products</h4>
     </div>
     <div class="col-md-4  col-sm-4  col-lg-4 right">
-      <button md-raised-button color="primary" (click)='addInvoice()'>
+      <!-- <button md-raised-button color="primary" (click)='addInvoice()'>
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Invoice
       </button>
       <button md-raised-button color="primary" (click)='stockHistory()'>
-          <i class="fa fa-line-chart" aria-hidden="true" ></i>   Stock History
-        </button>
-          <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()'><i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i></a>
-          <a class="cursor logo-color mgleft-10" ><i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)= "filterViewToggle()"></i>
-            <div class="filterView" *ngIf="showFilterDialog">
-                <div class="">
-                    <b class="float-left">Filter By</b>
-                    <br>
-                    <div class=" ">
-                        <md-form-field class="example-full-width">
-                          <input class="form-control" mdInput placeholder=" Product name">
-                        </md-form-field>
-                      </div>
-                      <div class=" ">
-                        <md-form-field class="example-full-width">
-                          <input class="form-control" mdInput placeholder="Created Date">
-                        </md-form-field>
-                      </div>
-                    <div class=" form-group">
-                      <button md-raised-button color="primary">
-                        <i class="fa fa-search" aria-hidden="true"></i> Search
-                      </button>
-                      <button md-raised-button color="primary">
-                        <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                      </button>
-                    </div>
-                    </div>
-             </div>
-             </a>
+        <i class="fa fa-line-chart" aria-hidden="true"></i> Stock History
+      </button> -->
+      <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()'>
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+      <!-- <a class="cursor logo-color mgleft-10">
+        <i _ngcontent-c0="" aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterViewToggle()"></i>
+        <div class="filterView" *ngIf="showFilterDialog">
+          <div class="">
+            <b class="float-left">Filter By</b>
+            <br>
+            <div class=" ">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder=" Product name">
+              </md-form-field>
+            </div>
+            <div class=" ">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Created Date">
+              </md-form-field>
+            </div>
+            <div class=" form-group">
+              <button md-raised-button color="primary">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+          </div>
+        </div>
+      </a> -->
     </div>
   </div>
-  <div id="" class="row pd-15x10 mg-0">
+  <!-- <div id="" class="row pd-15x10 mg-0">
 
     <div class="col">
       <table class="table table-hover table-striped">
@@ -73,5 +76,92 @@
         </tbody>
       </table>
     </div>
+  </div> -->
+  <div>
+    <table class="table table-hover table-striped">
+      <tbody>
+        <tr class="border-topbottom bg-eee">
+          <td width="34%"></td>
+          <td width="33%">
+            <b>Product Name
+              <span class="gray9">Category</span>
+            </b>
+          </td>
+
+
+          <td width="33%" class="">
+            <!-- <p class="right">
+            <i class="fa fa-minus logo-color fs-18"></i>
+            <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+          </p> -->
+          </td>
+        </tr>
+
+        <tr>
+          <td width="34%">
+            <div class="row ">
+                <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <span class="td-label">Product Type </span>
+                    <br>
+                    <b class="">fghf</b>
+                  </div>
+              <div class="col-sm-5  col-md-5  col-lg-5 left">
+                <span class="td-label">Priority </span>
+                <br>
+                <b class="gray9">sdf</b>
+              </div>
+
+            </div>
+          </td>
+          <td width="33%">
+            <div class="row ">
+              <div class="col-sm-4  col-md-4  col-lg-4 left">
+                <span class="danger">Min Qty </span>
+                <br>
+                <b class="danger">66</b>
+              </div>
+              <div class="col-sm-4  col-md-4  col-lg-4 left">
+                <span class="td-label">Cost </span>
+                <br>
+                <b class="">ASD</b>
+              </div>
+              <div class="col-sm-4  col-md-4  col-lg-4 left  ">
+                <span class="warning">Stock </span>
+                <br>
+                <b class="warning">DSF</b>
+              </div>
+            </div>
+          </td>
+          <td width="33%">
+            <div class="row ">
+              <div class="col left">
+                <i class="fa fa-edit logo-color cursor" aria-hidden="true"></i>
+              </div>
+              <div class="col left">
+                <span class="info">Available </span>
+              </div>
+              <div class="col left">
+                <span class="success ">Cans Returable </span>
+              </div>
+            </div>
+          </td>
+
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td></td>
+          <td>
+            <h5 class="warning  capitalize">
+              <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView);>
+                <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+            </h5>
+            <h4 class="warning">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
+
+
+          </td>
+        </tr>
+      </tfoot>
+    </table>
   </div>
-</div>
