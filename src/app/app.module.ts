@@ -74,7 +74,7 @@ import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-s
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
-
+import { ProductsService } from './products/products.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -187,6 +187,7 @@ import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
         FollowUpService,
         FeedbackService,
         SupplierService,
+        ProductsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],

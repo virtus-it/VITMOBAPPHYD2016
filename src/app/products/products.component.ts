@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { AddEditProductDailogComponent } from '../add-edit-product-dailog/add-edit-product-dailog.component';
 import { AddInvoiceDailogComponent } from '../add-invoice-dailog/add-invoice-dailog.component';
-import {AddStockHistoryComponent} from '../add-stock-history/add-stock-history.component';
-import {ProductHistoryDailogComponent} from '../product-history-dailog/product-history-dailog.component';
+import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
+import { ProductHistoryDailogComponent } from '../product-history-dailog/product-history-dailog.component';
+import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
+import { ProductsService } from '../products/products.service';
 @Component({
 
   templateUrl: './products.component.html',
@@ -12,14 +14,14 @@ import { LoaderService } from '../login/loader.service';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(public dialog: MdDialog,private loaderService: LoaderService) { }
+  constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService, private productService: ProductsService) { }
 
-  showFilterDialog= false;
+  showFilterDialog = false;
 
-  filterViewToggle(){
+  filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
   }
-  
+
   addEditProduct() {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
 
@@ -72,9 +74,25 @@ export class ProductsComponent implements OnInit {
     });
 
   }
+  getProducts() {
+    let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+    this.productService.getProducts(input)
+      .subscribe(
+      output => this.getProductsResult(output),
+      error => {
+        console.log("error");
+        this.loaderService.display(false);
+      });
 
-  
+  }
+  getProductsResult(result) {
+    console.log(result);
+
+  }
+ 
   ngOnInit() {
+    this.getProducts();
+   // this.getCustomer();
   }
 
 }
