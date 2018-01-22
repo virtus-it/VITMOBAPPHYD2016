@@ -15,7 +15,7 @@ export class PreOrderCartDailogComponent implements OnInit {
   deliverPreOrder() {
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
-        width: '700px',
+        width: '600px',
         data: ''
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {

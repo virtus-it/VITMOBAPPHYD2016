@@ -66,6 +66,9 @@ table thead {
     text-transform: uppercase;
     text-shadow: 1px 1px 1px #DDDDDD;
   }
+  .width-80pc{
+    width: 80%;
+  }
   .wd-60{
     width: 60px !important;
   }
