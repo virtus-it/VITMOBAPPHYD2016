@@ -74,6 +74,7 @@ import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-s
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
+import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
 
 @NgModule({
     declarations: [
@@ -129,7 +130,8 @@ import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
         DeleteScheduledOrderComponent,
         ScheduleComponent,
         ViewCustomerComponent,
-        ViewSupplierComponent
+        ViewSupplierComponent,
+        DeliverpreorderComponent
         
 
     ],
@@ -228,6 +230,7 @@ import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
          ScheduleComponent,
          CustomerScheduleEditDailogComponent,
          ViewCustomerComponent,
+         DeliverpreorderComponent,
          ViewSupplierComponent
 
 

@@ -13,21 +13,9 @@
                               <br>
                               <div class=" ">
                                   <md-form-field class="example-full-width">
-                                    <input class="form-control" mdInput placeholder="First Name"  name="firstName">
-                                    <md-error >
-                                       Name is <strong>required</strong>
-                                    </md-error>
+                                    <input class="form-control" mdInput placeholder="First Name"  name="firstname" [(ngModel)]="searchPreOrderTerm" (ngModelChange) = "searchPreOrder()" >
                                   </md-form-field>
                                 </div>
-        
-                              <div class=" form-group">
-                                <button md-raised-button color="primary">
-                                  <i class="fa fa-search" aria-hidden="true"></i> Search
-                                </button>
-                                <button md-raised-button color="primary">
-                                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                                </button>
-                              </div>
                               </div>
                        </div>
                        </a>
@@ -68,8 +56,8 @@
                     <span *ngIf="preorder.payments.paymenttype=='credit'"> Type:  {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
                   <span *ngIf="preorder.payments.paymenttype=='cod'"> Type: {{preorder.payments.paymenttype}}</span>
                   </div> </td>
-                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true"></i> </td>
-                  <td class="left"></td>
+                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="showEditCustomer(preorder)"></i> </td>
+                  <td class="left"> <input type="button" (click)="addPreorder()" value="assign"></td>
               </tr>
             </tbody>
           </table>

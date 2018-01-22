@@ -1,0 +1,50 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4 col-sm-4">
+      DELIVER
+    </div>
+</div>
+
+<md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row">
+          <div class="  col-sm-3  col-md-3  col-lg-3 align-self-center center">
+            Quantity :
+          </div>
+          <div class="  col-sm-4  col-md-4  col-lg-4">
+              <md-form-field class="inline">
+                  <input mdInput placeholder="Quantity">
+        
+                </md-form-field> 
+          </div>
+          <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Returned Cans">
+              </md-form-field>
+    
+          <!-- <div class="  col-sm-3  col-md-3  col-lg-3">
+              Returned Cans:
+            
+            <div class="  col-sm-4  col-md-4  col-lg-4">
+              <md-form-field class="inline">
+                  <input mdInput placeholder="Returned cans">
+        
+                </md-form-field>
+              </div>
+          </div> -->
+
+
+        </div></div>
+</md-dialog-content>
+
+
+
+
+
+
+
+  
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button class="btn-primary">CONFIRM</button>&nbsp;
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
