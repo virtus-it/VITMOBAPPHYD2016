@@ -4,6 +4,7 @@ import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart
 import { LoaderService } from '../login/loader.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
+import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 
 
 @Component({
@@ -16,12 +17,14 @@ export class PreOrderComponent implements OnInit {
   constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService,  private customerService: CustomerService ) { }
 
   showFilterDailog = false;
-  customerList:any =[];
+  customerList=[];
+  customerListCopy=[];
+  searchPreOrderTerm:any ="";
 
 
   addPreorder(){
     let dialogRefAddPreOrder = this.dialog.open(PreOrderCartDailogComponent, {
-    width: '700px',
+    width: '800px',
     data: ''
     });
      dialogRefAddPreOrder.afterClosed().subscribe(result => {
@@ -45,6 +48,39 @@ getCustomerListResult(result) {
     console.log(result);
     this.loaderService.display(false);
     this.customerList= result.data;
+    this.customerListCopy=result.data;
+
+}
+
+searchPreOrder(){
+    let term = this.searchPreOrderTerm;
+    if (term) {
+      this.customerList = this.customerListCopy.filter(function (e) {
+        if(e.firstname){
+          return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+        }
+       
+      });
+    }
+    else {
+      this.customerList = this.customerListCopy;
+    }
+  }
+
+  showEditCustomer(data) {
+    let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
+
+        width: '700px',
+        data: data
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if(result == "success"){
+            this.getCustomerList();
+        
+        }
+
+    });
 
 }
 
@@ -53,7 +89,7 @@ getCustomerListResult(result) {
 }
   ngOnInit() {
     this.getCustomerList();
-    
+
   }
 
 

@@ -1,0 +1,94 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+    Delivery
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <div class="row">
+      <div class="  col-6">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Quantity">
+          <md-error>
+            Quantity is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </div>
+      <div class="  col-6">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Returned Cans">
+          <md-error>
+            Returned Cans is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </div>
+    </div>
+
+    <div class="row form-group">
+      <div class="  col-3">
+        <b>Payment Type</b>
+      </div>
+      <div class="  col-2">
+        <div class="form-radio form-radio-inline">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> COD </span>
+          </label>
+        </div>
+      </div>
+      <div class="  col-7">
+        <div class="form-radio form-radio-inline">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> CREDIT </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="  col-4">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Amount">
+          <md-error>
+            Amount is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </div>
+      <div class="  col-8 align-self-center center">
+        <div class="form-checkbox form-checkbox-inline">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+            <input type="checkbox" class="custom-control-input">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Confirm Payment </span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col">
+        <md-select placeholder="Select Category" name="type" class="full-width left">
+          <md-option value="name">Select Supplier</md-option>
+        </md-select>
+      </div>
+    </div>
+
+  </div>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button class="btn-primary">CONFIRM</button>&nbsp;
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

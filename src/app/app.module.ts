@@ -74,8 +74,13 @@ import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-s
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
+
+import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
+
+
 import { ProductsService } from './products/products.service';
 import { AddstockProductComponent } from './addstock-product/addstock-product.component';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -131,7 +136,8 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
         ScheduleComponent,
         ViewCustomerComponent,
         ViewSupplierComponent,
-        AddstockProductComponent
+        AddstockProductComponent,
+        DeliverpreorderComponent
         
 
     ],
@@ -232,7 +238,9 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
          CustomerScheduleEditDailogComponent,
          ViewCustomerComponent,
          ViewSupplierComponent,
-         AddstockProductComponent
+         AddstockProductComponent,
+         DeliverpreorderComponent,
+         ViewSupplierComponent
 
 
         ],

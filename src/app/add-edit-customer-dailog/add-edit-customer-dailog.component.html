@@ -3,152 +3,172 @@
     <i class="fa fa-edit"></i> Edit Customer
   </div>
   <div class="col-md-1 col-sm-1 right">
-    <strong ><i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
-            </strong>
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
   </div>
 </div>
 <md-dialog-content layout="column">
-  
-  <form class="example-form" >
-    <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="row">
-        <b class="label-style">Personal Details<span></span></b>
+
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <div class="row">
+      <b class="label-style col">Personal Details
+        <span></span>
+      </b>
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
+          <md-error>
+            First Name is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
+          <md-error>
+            Email Id is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+
       </div>
-      <div class="row">
-        <div class="col-md-4 col-sm-6 ">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
-            <md-error>
-              First Name is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
-            <md-error>
-              Email Id is <strong>required</strong>
-            </md-error>
-          </md-form-field>
+      <div class="col-md-4 col-sm-6">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
+          <md-error>
+            Last Name is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="customerInput.User.mobileno">
+          <md-error>
+            Phone Number is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
 
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
-            <md-error>
-              Last Name is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="customerInput.User.mobileno">
-            <md-error>
-              Phone Number is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-
-        </div>
-        <div class="col-md-4 col-sm-6">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
-            <md-error>
-              Alias Name is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt">
-            <md-error>
-              Advance Amount is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-
-        </div>
       </div>
-      <div class="row">
-        <b class="label-style">Address Details</b>
-      </div>
-      <div class="col-sm-9  col-md-9  col-lg-9">
-          <md-form-field class="example-full-width inline ">
-            <textarea  class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
-          </md-form-field></div>
+      <div class="col-md-4 col-sm-6">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
+          <md-error>
+            Alias Name is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt">
+          <md-error>
+            Advance Amount is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
 
-          <div class="row">
-              <b class="label-style">Payment type</b> </div>
-              
-          <span width="30%" class="left capital">
+      </div>
+    </div>
+    <div class="row">
+      <b class="label-style col">Address Details</b>
+    </div>
+    <div class="row">
+      <div class="col-10">
+        <md-form-field class="example-full-width inline ">
+          <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
+        </md-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-5">
+        <div class=" form-group">
+          <b class="label-style">Payment Type</b>
+        </div>
+        <div>
+          <div class="">
+            <span width="30%" class="left capital">
               <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                <input type="radio" [(ngModel)]="customerInput.User.paymenttype"  class="custom-control-input" name="paymentType" value="cod">
+                <input type="radio" [(ngModel)]="customerInput.User.paymenttype" class="custom-control-input" name="paymentType" value="cod">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">COD</span>
               </label>
             </span>
             <span width="30%" class="left capital">
               <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                <input type="radio" [(ngModel)]="customerInput.User.paymenttype" class="custom-control-input"   name="paymentType" value="credit">
+                <input type="radio" [(ngModel)]="customerInput.User.paymenttype" class="custom-control-input" name="paymentType" value="credit">
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description">CREDIT</span>
               </label>
             </span>
-            <div *ngIf="customerInput.User.paymenttype=='credit'">
-                    <md-select name="day" id="day" [(ngModel)]="paymentDate">
-                        <md-option value="1">1</md-option>
-                        <md-option value="2">2</md-option>
-                        <md-option value="3">3</md-option>
-                        <md-option value="4">4</md-option>
-                        <md-option value="5">5</md-option>
-                        <md-option value="6">6</md-option>
-                        <md-option value="7">7</md-option>
-                        <md-option value="8">8</md-option>
-                        <md-option value="9">9</md-option>
-                        <md-option value="10">10</md-option>
-                        <md-option value="11">11</md-option>
-                        <md-option value="12">12</md-option>
-                        <md-option value="13">13</md-option>
-                        <md-option value="14">14</md-option>
-                        <md-option value="15">15</md-option>
-                        <md-option value="16">16</md-option>
-                        <md-option value="17">17</md-option>
-                        <md-option value="18">18</md-option>
-                        <md-option value="19">19</md-option>
-                        <md-option value="20">20</md-option>
-                        <md-option value="21">21</md-option>
-                        <md-option value="22">22</md-option>
-                        <md-option value="23">23</md-option>
-                        <md-option value="24">24</md-option>
-                        <md-option value="25">25</md-option>
-                        <md-option value="26">26</md-option>
-                        <md-option value="27">27</md-option>
-                        <md-option value="28">28</md-option>
-                    </md-select>
-            </div>
-    <div class="row">
-      <b class="label-style"> Customer Type</b></div>
+          </div>
+        </div>
+        <div *ngIf="customerInput.User.paymenttype=='credit'">
+          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Select">
+            <md-option value="1">1</md-option>
+            <md-option value="2">2</md-option>
+            <md-option value="3">3</md-option>
+            <md-option value="4">4</md-option>
+            <md-option value="5">5</md-option>
+            <md-option value="6">6</md-option>
+            <md-option value="7">7</md-option>
+            <md-option value="8">8</md-option>
+            <md-option value="9">9</md-option>
+            <md-option value="10">10</md-option>
+            <md-option value="11">11</md-option>
+            <md-option value="12">12</md-option>
+            <md-option value="13">13</md-option>
+            <md-option value="14">14</md-option>
+            <md-option value="15">15</md-option>
+            <md-option value="16">16</md-option>
+            <md-option value="17">17</md-option>
+            <md-option value="18">18</md-option>
+            <md-option value="19">19</md-option>
+            <md-option value="20">20</md-option>
+            <md-option value="21">21</md-option>
+            <md-option value="22">22</md-option>
+            <md-option value="23">23</md-option>
+            <md-option value="24">24</md-option>
+            <md-option value="25">25</md-option>
+            <md-option value="26">26</md-option>
+            <md-option value="27">27</md-option>
+            <md-option value="28">28</md-option>
+          </md-select>
+        </div>
+      </div>
 
-      <span width="30%" class="left capital">
+      <div class="col-7">
+        <div class=" form-group">
+          <b class="label-style"> Customer Type</b>
+        </div>
+
+        <span width="30%" class="left capital">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="commercial">
+            <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="commercial">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Commercial</span>
           </label>
-        </span> 
+        </span>
         <span width="30%" class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="residential">
-              <span class="custom-control-indicator"></span> 
-              <span class="custom-control-description">Residential</span>
-            </label>
-          </span> 
-          <span width="30%" class="left capital">
-              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="corperate">
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description">Corporate</span>
-              </label>
-            </span> 
-    
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="residential">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Residential</span>
+          </label>
+        </span>
+        <span width="30%" class="left capital">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="corperate">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Corporate</span>
+          </label>
+        </span>
+      </div>
     </div>
-  </form>
+  </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
-    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;   
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
