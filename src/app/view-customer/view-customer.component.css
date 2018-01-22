@@ -4,6 +4,9 @@
     cursor: pointer;
     color: #0f75bc;
   }
+  .oneline{
+    white-space: nowrap;
+ }
   
   .dropdown {
     position: relative;

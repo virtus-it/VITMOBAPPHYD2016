@@ -34,6 +34,7 @@
           </tr>
         </thead>
         <tbody>
+            <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
           <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
             <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
             <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
@@ -41,12 +42,11 @@
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.comments}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.supplierdetails.firstname}}</td>
-            <td width="" class="left" class="cellpadding" scope="row"></td>  
+            <td width="" class="left" class="cellpadding" scope="row"> <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span> </td>
+            <td width="" class="left" class="cellpadding" scope="row"></td>   
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>
-                     
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>    
            </tr>
         </tbody>
       </table>
@@ -61,5 +61,6 @@
         </md-dialog-actions>
       </div>
   
+      
   
   

@@ -38,7 +38,7 @@
             </md-error>
           </md-form-field>
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" [(ngModel)]="customerInput.User.mobileno">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="customerInput.User.mobileno">
             <md-error>
               Phone Number is <strong>required</strong>
             </md-error>
@@ -62,47 +62,87 @@
         </div>
       </div>
       <div class="row">
-        <b class="label-style">Address Details<span></span></b>
+        <b class="label-style">Address Details</b>
       </div>
-      <div class="row mgtop-10 ">
-        <div class="col-md-4">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="customerInput.User.address">
-            <md-error>
-              Address is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Zipcode" name="zipcode" [(ngModel)]="customerInput.User.pincode">
-            <md-error>
-              Zipcode is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-        </div>
-        <div class="col-md-4">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="City" name="city" [(ngModel)]="customerInput.User.city">
-            <md-error>
-              City is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="State" name="state" [(ngModel)]="customerInput.User.state">
-            <md-error>
-              State is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-        </div>
-        <div class="col-md-4">
-         
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Country" name="country" [(ngModel)]="customerInput.User.country">
-            <md-error>
-              Country is <strong>required</strong>
-            </md-error>
-          </md-form-field>
-        </div>
-      </div>
+      <div class="col-sm-9  col-md-9  col-lg-9">
+          <md-form-field class="example-full-width inline ">
+            <textarea  class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
+          </md-form-field></div>
+
+          <div class="row">
+              <b class="label-style">Payment type</b> </div>
+              
+          <span width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="customerInput.User.paymenttype"  class="custom-control-input" name="paymentType" value="cod">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">COD</span>
+              </label>
+            </span>
+            <span width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="customerInput.User.paymenttype" class="custom-control-input"   name="paymentType" value="credit">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">CREDIT</span>
+              </label>
+            </span>
+            <div *ngIf="customerInput.User.paymenttype=='credit'">
+                    <md-select name="day" id="day" [(ngModel)]="paymentDate">
+                        <md-option value="1">1</md-option>
+                        <md-option value="2">2</md-option>
+                        <md-option value="3">3</md-option>
+                        <md-option value="4">4</md-option>
+                        <md-option value="5">5</md-option>
+                        <md-option value="6">6</md-option>
+                        <md-option value="7">7</md-option>
+                        <md-option value="8">8</md-option>
+                        <md-option value="9">9</md-option>
+                        <md-option value="10">10</md-option>
+                        <md-option value="11">11</md-option>
+                        <md-option value="12">12</md-option>
+                        <md-option value="13">13</md-option>
+                        <md-option value="14">14</md-option>
+                        <md-option value="15">15</md-option>
+                        <md-option value="16">16</md-option>
+                        <md-option value="17">17</md-option>
+                        <md-option value="18">18</md-option>
+                        <md-option value="19">19</md-option>
+                        <md-option value="20">20</md-option>
+                        <md-option value="21">21</md-option>
+                        <md-option value="22">22</md-option>
+                        <md-option value="23">23</md-option>
+                        <md-option value="24">24</md-option>
+                        <md-option value="25">25</md-option>
+                        <md-option value="26">26</md-option>
+                        <md-option value="27">27</md-option>
+                        <md-option value="28">28</md-option>
+                    </md-select>
+            </div>
+    <div class="row">
+      <b class="label-style"> Customer Type</b></div>
+
+      <span width="30%" class="left capital">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="commercial">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Commercial</span>
+          </label>
+        </span> 
+        <span width="30%" class="left capital">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="residential">
+              <span class="custom-control-indicator"></span> 
+              <span class="custom-control-description">Residential</span>
+            </label>
+          </span> 
+          <span width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="customerInput.User.registertype"  class="custom-control-input" name="customerType" value="corperate">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Corporate</span>
+              </label>
+            </span> 
+    
     </div>
   </form>
 </md-dialog-content>

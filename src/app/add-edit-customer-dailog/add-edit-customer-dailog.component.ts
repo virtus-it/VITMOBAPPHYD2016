@@ -5,6 +5,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { MdDialog } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
+import { Input } from '@angular/core/src/metadata/directives';
 @Component({
   selector: 'app-add-edit-customer-dailog',
   templateUrl: './add-edit-customer-dailog.component.html',
@@ -13,8 +14,11 @@ import { LoaderService } from '../login/loader.service';
 export class AddEditCustomerDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
-  customerInput: any = { "User": { "advamt": "0",  "TransType": "create","user_type": "customer", "state": null, "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "", "city": null, "pincode": "", "address": "", "country": "", "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
- 
+  customerInput: any = { "User": { "advamt": "0", "registertype":"" , "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+
+  paymentDate: any ="";
+
+
   getCustomerDetails() {
   // console.log(this.Details);
   this.loaderService.display(true);
@@ -44,14 +48,18 @@ export class AddEditCustomerDailogComponent implements OnInit {
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno, "state": result.data.user.state, "lastname": result.data.user.lastname, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "city": result.data.user.city, "pincode": result.data.user.pincode, "country": result.data.user.country, "userid": result.data.user.userid, "address": result.data.user.address, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno, "state": result.data.user.state, "lastname": result.data.user.lastname, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
+      if(result.data.user.payment && result.data.user.payment.days){
+        this.paymentDate = result.data.user.payment.days;
+      } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
       }
+
      
-    }
+    } 
   }
   createUpdatecustomer() {
     
@@ -67,6 +75,9 @@ export class AddEditCustomerDailogComponent implements OnInit {
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
+    input.User.TransType = "create";
+    input.User.paymentday= this.paymentDate;
+    
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
@@ -84,6 +95,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   updateCustomer() {
     this.loaderService.display(true);
     let input = this.customerInput;
+    input.User.paymentday= this.paymentDate;
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),

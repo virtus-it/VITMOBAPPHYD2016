@@ -23,6 +23,7 @@
         </tr>
       </thead>
       <tbody>
+          <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
         <tr *ngFor="let customer of customersList">
         <td class="left">{{customer.firstname}}</td>
         <td class="left" *ngIf="customer.isappdownloaded">Joined</td>
@@ -71,3 +72,4 @@
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
+

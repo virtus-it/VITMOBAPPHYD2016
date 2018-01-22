@@ -20,6 +20,7 @@ export class ViewSupplierComponent implements OnInit {
 
 
   supplierList: any =[];
+  noRecords= false;
 
 
   //Getting suppliers list
@@ -37,6 +38,9 @@ export class ViewSupplierComponent implements OnInit {
     console.log(result);
     if (result.result == "success") {
       this.supplierList =result.data;
+    }
+    else{
+      this.noRecords= true;
     }
   }
 
