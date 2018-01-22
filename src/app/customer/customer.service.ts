@@ -88,10 +88,7 @@ export class CustomerService {
       .map((res: Response) => res.json())
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    
-
-    
-  }
+    }
 
   updateScheduleOrder(input){
     let bodyString = JSON.stringify(input); // Stringify payload

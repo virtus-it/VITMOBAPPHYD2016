@@ -130,7 +130,7 @@
           <h4 class="warning  capitalize">
               <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
                 <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-              <span *ngIf="!reportsClickMore"><i _ngcontent-c5="" aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+              <span *ngIf="!reportsClickMore"><i  aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
             </h4>
         </div>
         <div class="tab-pane" id="b">
@@ -142,15 +142,32 @@
       <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'orderdownload'">
           <div class="row form-group">
           <div class="col-sm-3  col-md-3  col-lg-3">
-              <md-select placeholder="Filter By" name="type" class="full-width left">
-                <md-option value="date">Date</md-option>
-               
+              <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
+                <md-option value="all">Date</md-option>
+                <md-option value="customer">Customers</md-option>
               </md-select>
     
             </div>
+            <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="downloadInput.filterBy == 'customer'">
+                <!-- <md-select placeholder="Customer" [(ngModel)]="downloadInput.customerId" name="type" class="wd-100pc" >
+                    <md-option *ngFor="let customer of customerList" [value]="customer.userid">
+                      {{customer.firstname}}{{customer.lastnsame}}
+                    </md-option>
+                  </md-select> -->
+                  <md-form-field class="example-full-width"  >
+                      <input mdInput  placeholder="Customer"  aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
+                      <md-autocomplete #auto="mdAutocomplete">
+                        <md-option *ngFor="let cust of filteredcustomer | async" [value]="cust.fullName" >
+                         <span>{{ cust.fullName }}</span>
+                          </md-option>
+                      </md-autocomplete>
+                    </md-form-field>
+              </div>
+            </div>
+            <div class="row form-group">
             <div class="col-sm-3  col-md-3  col-lg-3" >
                 <md-form-field class="inline">
-                  <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" >
+                  <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate"  [(ngModel)]="downloadInput.fromDate">
                   <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                   <md-datepicker #picker></md-datepicker>
                 </md-form-field>
@@ -158,14 +175,14 @@
               <div class="  col-sm-3  col-md-3  col-lg-3">
       
                 <md-form-field class="inline">
-                  <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" >
+                  <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate"  [(ngModel)]="downloadInput.toDate">
                   <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
                   <md-datepicker #pickers></md-datepicker>
                 </md-form-field>
               </div>
               <div class=" col-sm-2  col-md-2 col-lg-2" >
                   <md-dialog-actions align="center">
-                    <button md-raised-button  class="btn-primary">DOWNLOAD</button>
+                    <button md-raised-button  class="btn-primary" (click)="downloadOrders()">DOWNLOAD</button>
                   </md-dialog-actions>
                 </div>
               </div>
