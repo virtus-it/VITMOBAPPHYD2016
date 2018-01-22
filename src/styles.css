@@ -413,7 +413,7 @@ ul li small{
   text-align: center !important;
 }
 .gray9{
-  color: #999;
+  color: #999 !important;
 }
 .mgtop-5{
   margin-top: 5px;
