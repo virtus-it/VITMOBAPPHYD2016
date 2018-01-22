@@ -7,6 +7,7 @@ import { ProductHistoryDailogComponent } from '../product-history-dailog/product
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
+import * as _ from 'underscore';
 @Component({
 
   templateUrl: './products.component.html',
@@ -17,7 +18,7 @@ export class ProductsComponent implements OnInit {
   constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService, private productService: ProductsService) { }
 
   showFilterDialog = false;
-
+productList = [];
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
   }
@@ -25,7 +26,7 @@ export class ProductsComponent implements OnInit {
   addEditProduct() {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
 
-      width: '600px',
+      width: '700px',
       data: ''
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
@@ -87,12 +88,34 @@ export class ProductsComponent implements OnInit {
   }
   getProductsResult(result) {
     console.log(result);
-
+    if(result.result == 'success'){
+     // let productCopy = [];
+      for (let details of result.data) {
+        //let details: any = i;
+        
+        let findproduct = _.find(this.productList, function (k, l) {
+          let productDetails: any = k;
+          return productDetails.brandName == details.brandname;
+        });
+  
+        if (findproduct) {
+          findproduct.data.push(details);
+        }
+        else{
+          let value = {brandName:details.brandname,category:details.category,data:[]};
+          value.data.push(details);
+          this.productList.push(value);
+        }
+       
+      }
+      console.log("products list ",this.productList)
+  
+    }
   }
  
   ngOnInit() {
     this.getProducts();
-   // this.getCustomer();
+  
   }
 
 }
