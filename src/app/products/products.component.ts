@@ -7,6 +7,7 @@ import { ProductHistoryDailogComponent } from '../product-history-dailog/product
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
+import {AddstockProductComponent} from '../addstock-product/addstock-product.component';
 import * as _ from 'underscore';
 @Component({
 
@@ -31,7 +32,10 @@ productList = [];
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
+if(result=='success'){
 
+  this.getProducts();
+}
 
     });
 
@@ -44,10 +48,28 @@ productList = [];
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-
+      if(result=='success'){
+        
+          this.getProducts();
+        }
 
     });
 
+  }
+  addStock(data) {
+    let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
+
+      width: '700px',
+      data: data
+    });
+    dialogRefAddInvoice.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if(result=='success'){
+        
+        this.getProducts();
+        }
+
+    });
   }
   stockHistory() {
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
@@ -88,6 +110,7 @@ productList = [];
   }
   getProductsResult(result) {
     console.log(result);
+    this.productList= [];
     if(result.result == 'success'){
      // let productCopy = [];
       for (let details of result.data) {

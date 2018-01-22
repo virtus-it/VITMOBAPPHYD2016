@@ -75,6 +75,7 @@ import { ScheduleComponent } from './schedule/schedule.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
 import { ProductsService } from './products/products.service';
+import { AddstockProductComponent } from './addstock-product/addstock-product.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -129,7 +130,8 @@ import { ProductsService } from './products/products.service';
         DeleteScheduledOrderComponent,
         ScheduleComponent,
         ViewCustomerComponent,
-        ViewSupplierComponent
+        ViewSupplierComponent,
+        AddstockProductComponent
         
 
     ],
@@ -229,7 +231,8 @@ import { ProductsService } from './products/products.service';
          ScheduleComponent,
          CustomerScheduleEditDailogComponent,
          ViewCustomerComponent,
-         ViewSupplierComponent
+         ViewSupplierComponent,
+         AddstockProductComponent
 
 
         ],

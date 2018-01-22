@@ -3,7 +3,7 @@
     <i class="fa fa-gift"></i> Add Product </div>
   <div class="col-md-1 col-sm-1 right">
     <strong>
-      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
     </strong>
   </div>
 </div>
@@ -13,11 +13,13 @@
       <div class="row brd-bottom">
         <div class="col-5 ">
 
-          <md-select placeholder="Select Category" name="type" class="full-width left">
-            <md-option value="name">Customer Name</md-option>
+          <md-select placeholder="Select Category" name="type" class="full-width left" [(ngModel)]="productDetails.categoryDetails" >
+              <md-option *ngFor="let type of productCategoryList" [value]="type" >
+                  {{type.category}}
+                </md-option>
           </md-select>
         </div>
-        <div class="col-1 ">
+        <!-- <div class="col-1 ">
           <b>OR</b>
         </div>
         <div class="col-6  ">
@@ -28,50 +30,44 @@
               <strong>required</strong>
             </md-error>
           </md-form-field>
-        </div>
+        </div> -->
       </div>
       <div class="row">
         <div class="col-md-6 col-sm-6 ">
 
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Product Name">
-            <md-error>
-              Product Name is
-              <strong>required</strong>
-            </md-error>
+            <input class="form-control" mdInput placeholder="Product Name"  [(ngModel)]="productDetails.productName" name="productName"> 
+          
           </md-form-field>
         </div>
         <div class="col-md-6 col-sm-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Product Type">
-            <md-error>
-              Product Type Number is
-              <strong>required</strong>
-            </md-error>
+            <input class="form-control" mdInput placeholder="Product Type" [(ngModel)]="productDetails.productType" name="productType">
+           
           </md-form-field>
         </div>
       </div>
       <div class="row ">
         <div class="col-md-4 col-sm-4 col-lg-4">
 
-          <md-select placeholder="Select Currency" name="type" class="full-width left">
-            <md-option value="name">Select Currency Type</md-option>
+          <md-select placeholder="Select Currency" name="type" class="full-width left" [(ngModel)]="productDetails.currency" name="currency">
+            <md-option value="USD">USD</md-option>
+            <md-option value="EUR">EUR</md-option>
+            <md-option value="INR">INR</md-option>
+            <md-option value="SAR">SAR</md-option>
           </md-select>
         </div>
 
         <div class="col-md-4 col-sm-4 col-lg-4">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Cost">
-            <md-error>
-                Cost is
-              <strong>required</strong>
-            </md-error>
+            <input class="form-control" mdInput placeholder="Cost" [(ngModel)]="productDetails.cost" name="cost">
+          
           </md-form-field>
         </div>
         <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
             <div class="form-check form-check-inline">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" class="custom-control-input">
+                  <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.iscanRetrunable" name="iscanRetrunable">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">Is Cans Returnable</span>
                 </label>
@@ -81,27 +77,21 @@
       <div class="row ">
           <div class="col-md-4 col-sm-4 col-lg-4">
               <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Min Qty">
-                <md-error>
-                    Min Qty is
-                  <strong>required</strong>
-                </md-error>
+                <input class="form-control" mdInput placeholder="Min Qty" [(ngModel)]="productDetails.minQty" name="minqty">
+                
               </md-form-field>
             </div>
 
           <div class="col-md-4 col-sm-4 col-lg-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Priority">
-              <md-error>
-                  Priority is
-                <strong>required</strong>
-              </md-error>
+              <input class="form-control" mdInput placeholder="Priority" [(ngModel)]="productDetails.Priority" name="priority">
+            
             </md-form-field>
           </div>
           <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
               <div class="form-check form-check-inline">
                   <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.IsAuthorized" name="IsAuthorized">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">IsAuthorized</span>
                   </label>
@@ -170,7 +160,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
-    <button md-raised-button>CANCEL</button>&nbsp;
+    <button type="submit" class="btn-primary" md-raised-button (click)="createProduct()">SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
