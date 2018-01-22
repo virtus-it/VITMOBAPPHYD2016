@@ -74,12 +74,12 @@ import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-s
 import { ScheduleComponent } from './schedule/schedule.component';
 import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
-<<<<<<< HEAD
+
 import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
 
-=======
+
 import { ProductsService } from './products/products.service';
->>>>>>> 303243dc126057c791b3f3f82c9c694c44b92d94
+
 @NgModule({
     declarations: [
         AppComponent,
