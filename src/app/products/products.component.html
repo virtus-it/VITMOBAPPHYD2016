@@ -79,12 +79,14 @@
   </div> -->
   <div>
     <table class="table table-hover table-striped">
-      <tbody>
+      <tbody *ngFor="let products of productList">
         <tr class="border-topbottom bg-eee">
           <td width="34%"></td>
           <td width="33%">
-            <b>Product Name 
-              <span class="gray9">( Category )</span>
+
+            <b>{{products.brandName}}
+              <span class="gray9">({{products.category}})</span>
+
             </b>
           </td>
 
@@ -97,18 +99,18 @@
           </td>
         </tr>
 
-        <tr>
+        <tr *ngFor="let details of products.data">
           <td width="34%">
             <div class="row ">
                 <div class="col-sm-7  col-md-7  col-lg-7 left">
                     <span class="td-label">Product Type </span>
                     <br>
-                    <b class="">fghf</b>
+                    <b class="">{{details.ptype}}</b>
                   </div>
               <div class="col-sm-5  col-md-5  col-lg-5 left">
                 <span class="td-label">Priority </span>
                 <br>
-                <b class="gray9">sdf</b>
+                <b class="gray9">{{details.priority}}</b>
               </div>
 
             </div>
@@ -118,17 +120,17 @@
               <div class="col-sm-4  col-md-4  col-lg-4 left">
                 <span class="danger">Min Qty </span>
                 <br>
-                <b class="danger">66</b>
+                <b class="danger">{{details.minorderqty}}</b>
               </div>
               <div class="col-sm-4  col-md-4  col-lg-4 left">
                 <span class="td-label">Cost </span>
                 <br>
-                <b class="">ASD</b>
+                <b class="">{{details.pcost}}</b>
               </div>
               <div class="col-sm-4  col-md-4  col-lg-4 left  ">
                 <span class="warning">Stock </span>
                 <br>
-                <b class="warning">DSF</b>
+                <b class="warning">{{details.avaliable_stock}}</b>
               </div>
             </div>
           </td>
@@ -151,7 +153,7 @@
       <tfoot>
         <tr>
           <td></td>
-          <td>
+          <!-- <td>
             <h5 class="warning  capitalize">
               <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView);>
                 <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
@@ -160,7 +162,7 @@
               <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
 
 
-          </td>
+          </td> -->
         </tr>
       </tfoot>
     </table>

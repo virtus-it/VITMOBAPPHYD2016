@@ -21,5 +21,22 @@ export class ReportsService {
         .do(data => console.log('All: '))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-  
+  downloadReports(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/download_orderlist_browser',bodyString, options)
+        .map((res: Response) => res.json())
+        .do(data => console.log('All: '))
+        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  getCustomer(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getcustomerbydelearid', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 }
