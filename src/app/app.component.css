@@ -63,6 +63,25 @@
 .right{
   text-align: right;
 }
+.badge1 {
+  position:relative;
+}
+.badge1 span {
+  content:attr(data-badge);
+  position: absolute;
+  top: -8px;
+  left: 24px;
+  /* right: -9px; */
+  font-size: 10px;
+  background: #f79123;
+  color: white;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  border-radius: 50%;
+  box-shadow: 0 0 2px #666;
+}
 .pdtpright-10x30{
   padding-right: 30px;
   padding-top: 10px;

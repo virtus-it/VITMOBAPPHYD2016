@@ -200,6 +200,9 @@ background: transparent;
     border-bottom: 1px solid #ddd;
     border-radius: none;
 }
+.fs-24{
+  font-size: 24px !important;
+}
 .right{
   text-align: right;
 }
