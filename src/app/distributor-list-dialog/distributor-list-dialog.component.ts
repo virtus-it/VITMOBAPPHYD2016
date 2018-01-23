@@ -21,6 +21,7 @@ export class DistributorListDialogComponent implements OnInit {
   supplierID = "";
   searchDistTerm = "";
   searchSupplierTerm = "";
+  superDealer =true;
   constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService,public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
   showTabPanel(panelName) {
@@ -179,6 +180,7 @@ export class DistributorListDialogComponent implements OnInit {
   ngOnInit() {
     this.getDistributors();
     this.getSuppliers();
+    this.superDealer = this.authenticationService.getSupperDelear();
   }
 
 }

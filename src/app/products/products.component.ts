@@ -17,7 +17,7 @@ import * as _ from 'underscore';
 export class ProductsComponent implements OnInit {
 
   constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService, private productService: ProductsService) { }
-
+  superDealer = true;
   showFilterDialog = false;
 productList = [];
   filterViewToggle() {
@@ -138,7 +138,7 @@ if(result=='success'){
  
   ngOnInit() {
     this.getProducts();
-  
+    this.superDealer = this.authenticationService.getSupperDelear();
   }
 
 }
