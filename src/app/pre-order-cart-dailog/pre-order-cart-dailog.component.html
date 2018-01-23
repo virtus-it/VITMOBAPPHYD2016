@@ -29,7 +29,7 @@
       </div> -->
       <div class="  col-sm-4  col-md-4  col-lg-4">
           <md-form-field class="example-full-width">
-              <input mdInput [mdDatepicker]="picker" placeholder="Select Date">
+              <input mdInput [mdDatepicker]="picker" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date">
               <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
               <md-datepicker #picker></md-datepicker>
           <md-error>
@@ -39,49 +39,52 @@
         </md-form-field>
       </div>
       <div class="  col-sm-4  col-md-4  col-lg-4">
-        <md-select placeholder="Order Type" name="type" class="wd-100pc" >
-          <md-option>Select Time
+        <md-select placeholder="Order Type" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
+          <md-option >Select Time
+          </md-option > 
+          <md-option value="9AM-1PM">9AM-1PM
           </md-option>
-          <md-option>9AM-1PM
-          </md-option>
-          <md-option>4PM-7PM
+          <md-option value="4PM-7PM">4PM-7PM
           </md-option>
         </md-select>
 
       </div>
     </div>
-    <div class="">
+    <div class="table-scroll">
       <table class="table table-hover ">
-        <tbody>
-          <tr class="border-topbottom bg-eee">
+        <tbody *ngFor="let prod of productList">
+          <tr class="border-topbottom bg-eee" >
             <td width="30%"></td>
             <td width="25%">
-              <div class="right">
-                <b>Brand Name
+              <div class="right" >
+                <b class="capital">{{prod.brandName}}
                 </b>
               </div>
             </td>
             <td width="20%" class="">
-              <span class="gray9">( Category )</span>
+              <span class="gray9">({{prod.category}})</span>
             </td>
             <td width="25%"></td>
           </tr>
 
-          <tr>
+          <tr *ngFor="let details of prod.data">
             <td width="30%">
               <div class="form-radio form-radio-inline">
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" class="custom-control-input">
+                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description"> Product Name </span>
+                  <span class="custom-control-description">{{details.pname}}: {{details.ptype}}</span>
                 </label>
               </div>
             </td>
             <td width="25%">
-              <span>Price per Unit </span>
+              <span>Price per Unit : </span>
+              <b class="">{{details.pcost}}</b>
             </td>
             <td width="20%" class="">
-              <span>Cost : </span>
+                <span class="td-label">Cost: </span>
+             
+                <b class="">{{details.pcost*details.quantity}}</b>
             </td>
             <td width="25%">
               <div class="row">
@@ -92,7 +95,7 @@
                 <div class="col-md-6 ">
                   <div class="width-100pc">
                     <md-form-field class="center">
-                      <input class="form-control" mdInput placeholder="0">
+                      <input class="form-control" mdInput placeholder="Quantity" type="number" min="0" step="1" [(ngModel)]="details.quantity" >
                     </md-form-field>
                   </div>
                 </div>
@@ -110,7 +113,7 @@
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
 
-    <button md-raised-button class="btn-primary">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createPreOrder()">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class="btn-primary" (click)="deliverPreOrder()">DELIVERY AS A DISTRIBUTOR</button>&nbsp;
 
   </md-dialog-actions>
