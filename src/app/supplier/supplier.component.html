@@ -32,8 +32,7 @@
             <th width="22%">Address</th>
             <th width="15%"> View Orders</th>
             <th width="12%">Set Areas</th>
-            <th width="5%">Edit</th>
-            <th width="5%">Delete</th>
+            <th width="5%">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -43,8 +42,7 @@
             <td class="left capital"> {{supplier.address}}</td>
             <td  class="left" ><span  (click)='supplierOrdersList(supplier)' class= "logo-color cursor" >Orders</span></td>
             <td class="left"><span  class= "logo-color cursor"  (click)="openMapDialog(supplier)">Assign Area</span></td>
-            <td class="left"><i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)='editSupplier(supplier)'></i></td>
-            <td class="left"><i class="fa fa-trash danger" aria-hidden="true" (click)='deleteSupplier(supplier)'></i></td>      
+            <td class="left"><i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)='editSupplier(supplier)'></i> &nbsp; &nbsp;&nbsp;  <i class="fa fa-trash danger" aria-hidden="true" (click)='deleteSupplier(supplier)'></i></td>      
         </tbody>
       </table>
       
