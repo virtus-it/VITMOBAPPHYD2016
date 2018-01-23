@@ -2,6 +2,7 @@
 import { FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
+
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
             console.log("Logged in and should navigate to diifrent page");
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
+    this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
             this.router.navigate(['/orders']);
 
         }

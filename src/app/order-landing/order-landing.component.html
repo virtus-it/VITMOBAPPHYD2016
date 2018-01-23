@@ -8,222 +8,334 @@
 
     </div>
   </div> -->
-  <div id="" class="row pd-15x5 mg-0 ">
-    
-
+  <div id="" class="row mg-0 ">
     <div class="col padding-0">
-      <div>
-        <!-- <div  class="col-md-5  col-sm-6  col-lg-5t">
-          <h4 ><i  class="fa fa-file-text-o"></i> Order</h4>
-      </div>
-    <div  class="col-md-3 col-sm-3  col-lg-3">  
-              
-    </div> -->
-      <nav class="nav nav-pills flex-column flex-sm-row">
-        <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)"><i  class="fa fa-file-text-o"></i> Orders</a>
-        <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
-          (click)="showTabPanel('forward')">FORWARD ORDERS</a>
-        <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
-          (click)="showTabPanel('allorder')">ALL ORDERS</a>
-        <a class="flex-sm-fill text-sm-center nav-link col-xs-3 col-sm-3 col-md-3 col-lg-3" href="javascript:void(0)" ></a>
-       
-            <a class="flex-sm-fill text-sm-center nav-link">    <i  aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
-            </a> <a class="flex-sm-fill text-sm-center nav-link">  <i  aria-hidden="true" class="fa fa-download logo-color " title="Download " ></i>
-              </a> <a class="flex-sm-fill text-sm-center nav-link">   <i  aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
-         
-     
-                <div class="filterView" *ngIf="showFilterDailog">
-        
-        
-          <div class="height-500" >
-        
-        
-                <div class="form-group">
-                    <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
-                      <md-option value="name">Customer Name</md-option>
-                      <md-option value="mobile">Customer Mobile</md-option>
-                      <md-option value="orderid">Order Id</md-option>
-                      <md-option value="status">Status</md-option>
-                      <md-option value="supplierid">Supplier</md-option>
-                      <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
-                    </md-select>
-          
-                  </div>
-        
-            <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
-        
-              <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
-               </md-form-field>
-            </div>
-            <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
-             <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
-                </md-form-field>
-            </div>
-            <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'" >
+    <div class="row pdtopbottom-15 align-items-center">
+        <div class="col"> 
+          <a class="flex-sm-fill  nav-link pageTitle-style" href="javascript:void(0)">
+            <i class="fa fa-file-text-o"></i> Orders</a>
+          </div>
+        <div class="col ">  
             
-              <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
-               
-                
-              </md-form-field>
-            </div>
-        
-            <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
-                
-              <md-form-field class="example-full-width"  >
-                <input mdInput  placeholder="Enter Supplier Name"  aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
-                <md-autocomplete #auto="mdAutocomplete">
-                  <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName" >
-                   <span>{{ supplier.fullName }}</span>
-                    </md-option>
-                </md-autocomplete>
-              </md-form-field>
+            <button type="submit" md-raised-button  class="  "   [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
+            (click)="showTabPanel('allorder')">ALL ORDERS </button>
+            <button type="submit" md-raised-button  class=" "  *ngIf="superDealer" [ngClass]="{'btn-primary': tabPanelView === 'forward'}" href="javascript:void(0)"
+            (click)="showTabPanel('forward')">FORWARD ORDERS</button>
+            <!-- <a class="flex-sm-fill text-sm-center nav-link " *ngIf="superDealer" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
+          (click)="showTabPanel('forward')">FORWARD ORDERS</a> -->
+        <!-- <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
+          (click)="showTabPanel('allorder')">ALL ORDERS</a> -->
+        </div>
+        <div class="col  pdright-30  right">     
+               <a class="">
+            <i aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
+          </a>&nbsp;&nbsp;&nbsp;
+          <a class="">
+            <i aria-hidden="true" class="fa fa-download logo-color " title="Download "></i>
+          </a>&nbsp;&nbsp;&nbsp;
+          <a class="">
+            <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
+
+
+            <div class="filterView" *ngIf="showFilterDailog">
+
+
+              <div class="height-500">
+
+
+                <div class="form-group">
+                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
+                    <md-option value="name">Customer Name</md-option>
+                    <md-option value="mobile">Customer Mobile</md-option>
+                    <md-option value="orderid">Order Id</md-option>
+                    <md-option value="status">Status</md-option>
+                    <md-option value="supplierid">Supplier</md-option>
+                    <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
+                  </md-select>
+
                 </div>
-                <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
-                    
-                  <md-form-field class="example-full-width"  >
-                    <input mdInput  placeholder="Distributor"  aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+
+                <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
+
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
+                  </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+                  </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
+
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
+
+
+                  </md-form-field>
+                </div>
+
+                <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
+
+                  <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
                     <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName" >
-                       <span>{{ dist.fullName }}</span>
-                        </md-option>
+                      <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
+                        <span>{{ supplier.fullName }}</span>
+                      </md-option>
                     </md-autocomplete>
                   </md-form-field>
-                    </div>
-            <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
-                    <angular2-multiselect  class="" [data]="statusListForward"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
+
+                  <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                        <span>{{ dist.fullName }}</span>
+                      </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+                </div>
+                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                  <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                    name="selectedItem"></angular2-multiselect>
+                </div>
+                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+                  <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                    name="selectedItem"></angular2-multiselect>
+                </div>
+                <br>
+                <div class="input-group pd-10  ">
+                  <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
+                    <i class="fa fa-search" aria-hidden="true"></i> Search
+                  </button>
+                  <button md-raised-button color="primary" (click)="clearFilter()">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                  </button>
+                </div>
+
               </div>
-              <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
-                <angular2-multiselect  class="" [data]="statusListAll"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
-          </div>
-            <br>
-            <div class="input-group pd-10  ">
-              <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
-                <i class="fa fa-search" aria-hidden="true"></i> Search
-              </button>
-              <button md-raised-button color="primary" (click)="clearFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-              </button>
             </div>
-        
-        </div> 
-        </div>
-        </a>
+          </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</div>
+      </div>
+        <!-- <nav class="nav nav-pills flex-column flex-sm-row">
+          <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)">
+            <i class="fa fa-file-text-o"></i> Orders</a>
+          <a class="flex-sm-fill text-sm-center nav-link " *ngIf="superDealer" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
+            (click)="showTabPanel('forward')">FORWARD ORDERS</a>
+          <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
+            (click)="showTabPanel('allorder')">ALL ORDERS</a>
+          <a class="flex-sm-fill text-sm-center nav-link col-xs-3 col-sm-3 col-md-3 col-lg-3" href="javascript:void(0)"></a>
+          <a class="flex-sm-fill text-sm-center nav-link">
+            <i aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
+          </a>
+          <a class="flex-sm-fill text-sm-center nav-link">
+            <i aria-hidden="true" class="fa fa-download logo-color " title="Download "></i>
+          </a>
+          <a class="flex-sm-fill text-sm-center nav-link">
+            <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
 
-      </nav>
-      <div *ngIf="tabPanelView === 'forward'">
-        <table class="table table-hover table-striped">
-          <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
-            <tr class="border-topbottom bg-eee">
-              <td width="34%">
-                <div class="row ">
-                  <div class="col-sm-4  col-md-4  col-lg-4 left">
-                    <label class="td-label">Order Id :
-                      <b> #{{forward.order_id}}</b>
-                    </label>
-                  </div>
-                  <div class="col-sm-4  col-md-4  col-lg-4 left">
-                    <label >Follow Up :
-                      <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
-                      <span (click)='showFollowUp(forward)'><i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i></span>
-                    </label>
-                  </div>
-                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(forward)'>
-                    <i class="fa fa-edit logo-color "></i>
-                  </div>
-                </div>
-              </td>
-              <td width="32%">
-                <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
-                    <label class="td-label">Customer Name :
-                      <b class="capitalize ">{{forward.orderby_firstname}}</b>
-                    </label>
-                    <br>
-                  </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(forward)'>
-                    <i class="fa fa-edit logo-color "></i>
 
-                  </div>
-                </div>
-              </td>
-              
-              <td width="33%">
-                <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
-                    <label class="td-label">Supplier :
-                      <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
-                    </label>
-                    <br>
-                  </div>
-                  <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <!-- forward.customersource === 'MoyaCustomer' -->
-                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor"  *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
-                      <i class="fa fa-calendar-check-o " *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin' || forward.ispreorder === 'scheduler'" aria-hidden="true" [ngClass]="forward.StatusColor"   [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i> 
-                      <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"  title="Moya Customer"></i>  
-                    <label class=" capitalize" [ngClass]="forward.StatusColor" >   {{forward.OrderModifiedStatus}} </label>
-                    <br>
-                  </div>
-                </div>
-              </td>
-              <td>                    
-                <i class="fa fa-minus logo-color fs-18"></i>
-                <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-                
-              </td>
-              
-            </tr>
+            <div class="filterView" *ngIf="showFilterDailog">
 
-            <tr>
-              <td width="34%" class="brd-right">
-                <div class="">
-                  <div class="form-group row ">
-                    <div class="col-sm-8  col-md-8  col-lg-8 left">
-                      <span class="td-label">
-                        Date Placed </span>
-                      <br>
-                      <b>{{forward.ordered_date | utcDate }}</b>
+
+              <div class="height-500">
+
+
+                <div class="form-group">
+                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
+                    <md-option value="name">Customer Name</md-option>
+                    <md-option value="mobile">Customer Mobile</md-option>
+                    <md-option value="orderid">Order Id</md-option>
+                    <md-option value="status">Status</md-option>
+                    <md-option value="supplierid">Supplier</md-option>
+                    <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
+                  </md-select>
+
+                </div>
+
+                <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
+
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
+                  </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+                  </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
+
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
+
+
+                  </md-form-field>
+                </div>
+
+                <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
+
+                  <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
+                        <span>{{ supplier.fullName }}</span>
+                      </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+                </div>
+                <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
+
+                  <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                        <span>{{ dist.fullName }}</span>
+                      </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+                </div>
+                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                  <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                    name="selectedItem"></angular2-multiselect>
+                </div>
+                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+                  <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                    name="selectedItem"></angular2-multiselect>
+                </div>
+                <br>
+                <div class="input-group pd-10  ">
+                  <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
+                    <i class="fa fa-search" aria-hidden="true"></i> Search
+                  </button>
+                  <button md-raised-button color="primary" (click)="clearFilter()">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </a>
+
+        </nav> -->
+        <div *ngIf="tabPanelView === 'forward'">
+          <table class="table table-hover table-striped">
+            <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
+              <tr class="border-topbottom bg-eee">
+                <td width="34%">
+                  <div class="row ">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <label class="td-label">Order Id :
+                        <b> #{{forward.order_id}}</b>
+                      </label>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <span class="td-label">Amount </span>
-                      <br>
-                      <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
+                      <label>Follow Up :
+                        <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
+                        <span (click)='showFollowUp(forward)'>
+                          <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(forward)'>
+                      <i class="fa fa-edit logo-color "></i>
                     </div>
                   </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="td-label">Brand Name</span>
+                </td>
+                <td width="32%">
+                  <div class=" row ">
+                    <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
+                      <label class="td-label">Customer Name :
+                        <b class="capitalize ">{{forward.orderby_firstname}}</b>
+                      </label>
                       <br>
-                      <b class="capitalize">{{forward.brandname}} </b>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Quantity </span>
-                      <br>
-                      <b class="pdright-5">{{forward.quantity}}</b>
-                    </div>
-                  </div>
+                    <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(forward)'>
+                      <i class="fa fa-edit logo-color "></i>
 
+                    </div>
+                  </div>
+                </td>
+
+                <td width="33%">
                   <div class="row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="td-label">Product Type </span>
+                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
+                      <label class="td-label">Supplier :
+                        <b class="capitalize" *ngIf="forward.supplierdetails">{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
+                      </label>
                       <br>
-                      <b>{{forward.prod_type}}</b>
                     </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Payment Type </span>
+                    <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <!-- forward.customersource === 'MoyaCustomer' -->
+                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
+                      <i class="fa fa-calendar-check-o " *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin' || forward.ispreorder === 'scheduler'"
+                        aria-hidden="true" [ngClass]="forward.StatusColor" [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i>
+                      <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"
+                        title="Moya Customer"></i>
+                      <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label>
                       <br>
-                      <b class="pdright-5">{{forward.paymenttype}}</b>
                     </div>
                   </div>
+                </td>
+                <td>
+                  <i class="fa fa-minus logo-color fs-18"></i>
+                  <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
 
-                </div>
-              </td>
-              <td width="32%" class="brd-right">
-                <div class="">
+                </td>
 
-                  <!-- <div class="form-group row ">
+              </tr>
+
+              <tr>
+                <td width="34%" class="brd-right">
+                  <div class="">
+                    <div class="form-group row ">
+                      <div class="col-sm-8  col-md-8  col-lg-8 left">
+                        <span class="td-label">
+                          Date Placed </span>
+                        <br>
+                        <b>{{forward.ordered_date | utcDate }}</b>
+                      </div>
+                      <div class="col-sm-4  col-md-4  col-lg-4 right">
+                        <span class="td-label">Amount </span>
+                        <br>
+                        <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Brand Name</span>
+                        <br>
+                        <b class="capitalize">{{forward.brandname}} </b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Quantity </span>
+                        <br>
+                        <b class="pdright-5">{{forward.quantity}}</b>
+                      </div>
+                    </div>
+
+                    <div class="row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Product Type </span>
+                        <br>
+                        <b>{{forward.prod_type}}</b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Payment Type </span>
+                        <br>
+                        <b class="pdright-5">{{forward.paymenttype}}</b>
+                      </div>
+                    </div>
+
+                  </div>
+                </td>
+                <td width="32%" class="brd-right">
+                  <div class="">
+
+                    <!-- <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
                         <i class="fa fa-user pdtop-5" aria-hidden="true"></i>
@@ -233,233 +345,238 @@
                       <b class="capitalize">{{forward.orderby_firstname}} {{forward.orderby_lastname}}</b>
                     </div>
                   </div> -->
-                  <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
-                      </b>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b>
+                          <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
+                        </b>
 
+                      </div>
+                      <div class="col-sm-10  col-md-10  col-lg-10 left">
+                        <b>{{forward.orderby_mobileno}}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b>{{forward.orderby_mobileno}}</b>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1 ">
+                        <b>
+                          <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
+                        </b>
+
+                      </div>
+                      <div class="col-sm-10  col-md-10  col-lg-10 left">
+                        <b class="capitalize">{{forward.orderby_address}}</b>
+                      </div>
+                    </div>
+                    <div class="form-group row ">
+                      <div class="col-sm-5 col-md-5  col-lg-5">
+                        <span>Delivery Time :</span>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 row">
+                        <label class="left danger">{{forward.delivery_exceptedtime}}</label>
+                      </div>
                     </div>
                   </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1 ">
-                      <b>
-                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
-                      </b>
 
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{forward.orderby_address}}</b>
-                    </div>
-                  </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-5 col-md-5  col-lg-5">
-                      <span>Delivery Time :</span>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 row">
-                      <label class="left danger">{{forward.delivery_exceptedtime}}</label>
-                    </div>
-                  </div>
-                </div>
+                </td>
 
-              </td>
-              
-              <td width="33%">
-                <div class="">
-                  <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
-                     
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                <td width="33%">
+                  <div class="">
+                    <div class=" row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
+
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left">
                         <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span>
-                      <b></b>
+                        <b></b>
+                      </div>
                     </div>
-                  </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
+                    <div class="row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
+                        <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
+                      </div>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left"  *ngIf="forward.OrderModifiedStatus !== 'Assign'">
-                      <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
-                    </div>
-                  </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
+                    <div class="row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
 
+                      </div>
                     </div>
-                  </div>
-                  <div class="  row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                    <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                        <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
+                    <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                        <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</b>
+                      </div>
                     </div>
-                  </div>
-                  <div class="  row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</b>
-                    </div>
-                  </div>
-                  <div class="float-right">
+                    <div class="float-right">
                       <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'>
-                      <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
-                    <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
-                      <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer">
+                        <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                      <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td>                    
-                  
                 </td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td>
-                <h5 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
-                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                    click for more data</a>
-                </h5>
-                <h4 *ngIf="!forwardClickMore" class="warning"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
-              </td>
-            </tr>
-          </tfoot>
+                <td>
 
-        </table>
-      </div>
-      <div *ngIf="tabPanelView === 'allorder'">
-        <table class="table table-hover table-striped">
-          <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
+                </td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <h5 class="warning  capitalize">
+                    <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
+                      <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                      click for more data</a>
+                  </h5>
+                  <h4 *ngIf="!forwardClickMore" class="warning">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
+                </td>
+              </tr>
+            </tfoot>
+
+          </table>
+        </div>
+        <div *ngIf="tabPanelView === 'allorder'">
+          <table class="table table-hover table-striped">
+            <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
               <tr class="border-topbottom bg-eee">
-                  <td width="34%">
-                <div class="row ">
-                  <div class="col-sm-4  col-md-4  col-lg-4 left">
-                    <label class="td-label">Order Id :
-                      <b>#{{allorder.order_id}}</b>
-                    </label>
-                    <br>
+                <td width="34%">
+                  <div class="row ">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <label class="td-label">Order Id :
+                        <b>#{{allorder.order_id}}</b>
+                      </label>
+                      <br>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <label>Follow Up :
+                        <!-- <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
+                        <span (click)='showFollowUp(allorder)'>
+                          <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
+                        </span>
+                      </label>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>
+                      <i class="fa fa-edit logo-color "></i>
+                    </div>
                   </div>
-                  <div class="col-sm-4  col-md-4  col-lg-4 left">
-                    <label >Follow Up :
-                      <!-- <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
-                      <span (click)='showFollowUp(allorder)'><i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i></span>
-                    </label>
-                  </div>
-                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>
-                    <i class="fa fa-edit logo-color "></i>
-                  </div>
-                </div>
-              </td>
-              <td width="32%">
-                <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
-                    <label class="td-label">Customer Name :
-                      <b class="capitalize ">{{allorder.orderby_firstname}}</b>
-                    </label>
-                    <br>
-                  </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(allorder)'>
-                    <i class="fa fa-edit logo-color "></i>
+                </td>
+                <td width="32%">
+                  <div class=" row ">
+                    <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
+                      <label class="td-label">Customer Name :
+                        <b class="capitalize ">{{allorder.orderby_firstname}}</b>
+                      </label>
+                      <br>
+                    </div>
+                    <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(allorder)'>
+                      <i class="fa fa-edit logo-color "></i>
 
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td width="33%">
-                <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
-                    <label class="td-label">Supplier:
-                      <b *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
-                    </label>
-                    <br>
+                </td>
+                <td width="33%">
+                  <div class="row ">
+                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
+                      <label class="td-label">Supplier:
+                        <b *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
+                      </label>
+                      <br>
+                    </div>
+                    <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
+                      <i class="fa fa-calendar-check-o " *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'"
+                        aria-hidden="true" [ngClass]="allorder.StatusColor" [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
+                      <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"
+                        title="Moya Customer"></i>
+                      <label class="capitalize" [ngClass]="allorder.StatusColor" (click)="ViewDistributors(allorder)">{{allorder.OrderModifiedStatus}}</label>
+                      <br>
+                    </div>
                   </div>
-                  <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor"  *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
-                      <i class="fa fa-calendar-check-o " *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'" aria-hidden="true" [ngClass]="allorder.StatusColor"  [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i> 
-                      <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"  title="Moya Customer"></i>
-                    <label class="capitalize"[ngClass]="allorder.StatusColor">{{allorder.OrderModifiedStatus}}</label>
-                    <br>
-                  </div>
-                </div>
-              </td>
-              <td>                    
+                </td>
+                <td>
                   <i class="fa fa-minus logo-color fs-18"></i>
                   <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-                  
+
                 </td>
-            </tr>
+              </tr>
 
-            <tr>
-              <td width="34%" class="brd-right">
-                <div class="">
-                  <div class="form-group row ">
-                    <div class="col-sm-8  col-md-8  col-lg-8 left">
-                      <span class="td-label">
-                        Date Placed </span>
-                      <br>
-                      <b>{{allorder.ordered_date | utcDate}}</b>
+              <tr>
+                <td width="34%" class="brd-right">
+                  <div class="">
+                    <div class="form-group row ">
+                      <div class="col-sm-8  col-md-8  col-lg-8 left">
+                        <span class="td-label">
+                          Date Placed </span>
+                        <br>
+                        <b>{{allorder.ordered_date | utcDate}}</b>
+                      </div>
+                      <div class="col-sm-4  col-md-4  col-lg-4 right">
+                        <span class="td-label">Amount </span>
+                        <br>
+                        <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <span class="td-label">Amount </span>
-                      <br>
-                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Brand Name </span>
+                        <br>
+                        <b class="capitalize">{{allorder.brandname}} </b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Quantity </span>
+                        <br>
+                        <b class="pdright-5">{{allorder.quantity}}</b>
+                      </div>
                     </div>
+
+                    <div class="row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Product Type </span>
+                        <br>
+                        <b> {{allorder.prod_type}}</b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Payment Type </span>
+                        <br>
+                        <b class="pdright-5">{{allorder.paymenttype}}</b>
+                      </div>
+                    </div>
+
                   </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="td-label">Brand Name </span>
-                      <br>
-                      <b class="capitalize">{{allorder.brandname}} </b>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Quantity </span>
-                      <br>
-                      <b class="pdright-5">{{allorder.quantity}}</b>
-                    </div>
-                  </div>
+                </td>
+                <td width="32%" class="brd-right">
+                  <div class="">
 
-                  <div class="row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="td-label">Product Type </span>
-                      <br>
-                      <b> {{allorder.prod_type}}</b>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Payment Type </span>
-                      <br>
-                      <b class="pdright-5">{{allorder.paymenttype}}</b>
-                    </div>
-                  </div>
-
-                </div>
-              </td>
-              <td width="32%" class="brd-right">
-                <div class="">
-
-                  <!-- <div class="form-group row ">
+                    <!-- <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
                         <i class="fa fa-user pdtop-5" aria-hidden="true"></i>
@@ -469,81 +586,81 @@
                       <b class="capitalize">{{allorder.orderby_firstname}}</b>
                     </div>
                   </div> -->
-                  <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
-                      </b>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b>
+                          <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
+                        </b>
 
+                      </div>
+                      <div class="col-sm-10  col-md-10  col-lg-10 left">
+                        <b>{{allorder.orderby_mobileno}}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b>{{allorder.orderby_mobileno}}</b>
-                    </div>
-                  </div>
-                  <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
-                      </b>
+                    <div class="form-group row ">
+                      <div class="col-sm-1  col-md-1  col-lg-1">
+                        <b>
+                          <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
+                        </b>
 
+                      </div>
+                      <div class="col-sm-10  col-md-10  col-lg-10 left">
+                        <b class="capitalize">{{allorder.orderby_address}}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{allorder.orderby_address}}</b>
+                    <div class=" row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5">
+                        <label>Delivery Time :</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 row">
+                        <label class="left danger">{{allorder.delivery_exceptedtime}}</label>
+                      </div>
                     </div>
                   </div>
-                  <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5">
-                      <label>Delivery Time :</label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 row">
-                      <label class="left danger">{{allorder.delivery_exceptedtime}}</label>
-                    </div>
-                  </div>
-                </div>
 
-              </td>
-              <td width="33%">
-                <div class="">
-                  <div class=" mgbottom-10 row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
+                </td>
+                <td width="33%">
+                  <div class="">
+                    <div class=" mgbottom-10 row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left">
+                        <span *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</span>
+                      </div>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <span *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</span>
+                    <div class="mgbottom-10 row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
+                        <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
-                      <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
-                    </div>
-                  </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
-                    </div>
+                    <div class="row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
+                      </div>
 
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
 
-                   
+
+                      </div>
                     </div>
-                  </div>
-                  <div class="  row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
+                    <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                        <b class="capitalize" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</b>
+                      </div>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                      <b class="capitalize" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</b>
-                    </div>
-                  </div>
-                  <!-- <div class="mgbottom-10 row ">
+                    <!-- <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
                         <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
@@ -552,41 +669,42 @@
                       <span *ngIf="allorder.distributor">{{allorder.distributor.firstname +" "+allorder.distributor.lastname }}</span>
                     </div>
                   </div> -->
-                  <div class=" float-right">
+                    <div class=" float-right">
                       <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'>
-                      <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
-                    <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
-                      <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer">
+                        <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                      <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
+                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
+                    </div>
                   </div>
-                </div>
-              </td>
-              <td></td>
-            </tr>
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <td>
-                <h5 class="warning  capitalize">
-                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
-                    <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a></h5>
-                  <h4 *ngIf="!orderClickMore" class="warning"> <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
-                
-              
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+                </td>
+                <td></td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <td>
+                  <h5 class="warning  capitalize">
+                    <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
+                      <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+                  </h5>
+                  <h4 *ngIf="!orderClickMore" class="warning">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
+
+
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
       </div>
-</div>
-    </div>
 
   </div>
-  
+
 
 </div>

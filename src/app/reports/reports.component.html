@@ -1,13 +1,17 @@
 <div class="dist-style  minheight-500">
-    
+
   <div class=" row justify-content-between distIcon-style">
-      <div class="col-md-2  col-sm-2  col-lg-2 left">
-          <h4><i class="fa fa-file-text"></i> Report</h4>
-      </div>
-    <div class="col-md-2  col-sm-2  col-lg-2 right"> 
-        <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
-        
+    <div class="col-md-2  col-sm-2  col-lg-2 left">
+      <h4>
+        <i class="fa fa-file-text"></i> Report</h4>
     </div>
+    <div class="col-md-2  col-sm-2  col-lg-2 right">
+      <a href="javascript:void(0)" title="Download">
+        <i aria-hidden="true" class="fa fa-download fa-2x"></i>
+      </a>
+    </div>
+
+  </div>
 
   <!-- <div id="" class="row pd-15x10 mg-0">
           <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
@@ -46,7 +50,7 @@
     <!-- tabs left -->
     <div class="tab tabs-left row">
       <div class="col">
-          <!-- <div class=" row justify-content-between heading-style">
+        <!-- <div class=" row justify-content-between heading-style">
               <div class="col-md-6  col-sm-6  col-lg-6">
                   <h4><i class="fa fa-file-text"></i> Report</h4>
               </div>
@@ -83,16 +87,50 @@
             </li> 
         </ul>-->
         <table class="nav nav-pills flex-column row">
-            <tr>
-              <td width="8%"></td>
-          <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
-          <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
-              <i class="fa fa-download" aria-hidden="true"></i> <br>           
-            {{type.viewValue}}</a>
+          <tr>
+            <td width="8%"></td>
+            <!-- <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)" *ngIf="type.issuperDelear">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> {{type.viewValue}}
+              </a>
+            </td> -->
+
+         
+            <td class="nav-item" (click)="searchReports(true,'newlydownloaded')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'newlydownloaded'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Newly Downloaded Customers </a>
+            </td>
+            <td class="nav-item" (click)="searchReports(true,'lastdays')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'lastdays'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Customers not Ordered in Last 10 Days </a>
+            </td>
+            <td class="nav-item" (click)="searchReports(true,'pendingorders')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'pendingorders'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Pending Orders </a>
+            </td>
+            <td class="nav-item" (click)="searchReports(true,'rejectedorders')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'rejectedorders'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Rejected
+                Orders</a>
+            </td>
+            <td class="nav-item" (click)="searchReports(true,'notregistered')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'notregistered'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Customers not Registered </a>
+            </td>
+            <td class="nav-item" (click)="searchReports(true,'orderdownload')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'orderdownload'}" href="javascript:void(0)" >
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> Order Downloads</a>
             </td>
           </tr>
-          </table>
-          <!-- <ul class="nav nav-pills navbar-nav flex-column row">
+        </table>
+        <!-- <ul class="nav nav-pills navbar-nav flex-column row">
            
             <li class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
             <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
@@ -102,93 +140,94 @@
          
           </ul> -->
       </div>
+    </div>
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView != 'orderdownload'">
+      <div class="tab-pane active" id="a">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+
+              <th width="15%"> Customer Name</th>
+              <th width="12%">Mobile No</th>
+              <th width="15%">Createddate</th>
+
+              <th width="25%" class="pdleft-20">Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="Preordrlist" *ngFor="let reports of reportsData">
+
+              <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
+              <td class="left">{{reports.mobileno}}</td>
+              <td class="left">{{reports.createddate | utcDate}}</td>
+
+              <td class="left">{{reports.address}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="warning  capitalize">
+          <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
+            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+          <span *ngIf="!reportsClickMore">
+            <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+        </h4>
       </div>
-      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView != 'orderdownload'">
-        <div class="tab-pane active" id="a">
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
+      <div class="tab-pane" id="b">
 
-                <th width="15%"> Customer Name</th>
-                <th width="12%">Mobile No</th>
-                <th width="15%">Createddate</th>
-
-                <th width="25%" class="pdleft-20">Address</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="Preordrlist" *ngFor="let reports of reportsData">
-
-                <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
-                <td class="left">{{reports.mobileno}}</td>
-                <td class="left">{{reports.createddate | utcDate}}</td>
-
-                <td class="left">{{reports.address}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <h4 class="warning  capitalize">
-              <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
-                <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-              <span *ngIf="!reportsClickMore"><i  aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
-            </h4>
-        </div>
-        <div class="tab-pane" id="b">
-
-
-        </div>
 
       </div>
-      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'orderdownload'">
-          <div class="row form-group">
-          <div class="col-sm-3  col-md-3  col-lg-3">
-              <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
-                <md-option value="all">Date</md-option>
-                <md-option value="customer">Customers</md-option>
-              </md-select>
-    
-            </div>
-            <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="downloadInput.filterBy == 'customer'">
-                <!-- <md-select placeholder="Customer" [(ngModel)]="downloadInput.customerId" name="type" class="wd-100pc" >
+
+    </div>
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'orderdownload'">
+      <div class="row form-group">
+        <div class="col-sm-3  col-md-3  col-lg-3">
+          <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
+            <md-option value="all">Date</md-option>
+            <md-option value="customer">Customers</md-option>
+          </md-select>
+
+        </div>
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="downloadInput.filterBy == 'customer'">
+          <!-- <md-select placeholder="Customer" [(ngModel)]="downloadInput.customerId" name="type" class="wd-100pc" >
                     <md-option *ngFor="let customer of customerList" [value]="customer.userid">
                       {{customer.firstname}}{{customer.lastnsame}}
                     </md-option>
                   </md-select> -->
-                  <md-form-field class="example-full-width"  >
-                      <input mdInput  placeholder="Customer"  aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
-                      <md-autocomplete #auto="mdAutocomplete">
-                        <md-option *ngFor="let cust of filteredcustomer | async" [value]="cust.fullName" >
-                         <span>{{ cust.fullName }}</span>
-                          </md-option>
-                      </md-autocomplete>
-                    </md-form-field>
-              </div>
-            </div>
-            <div class="row form-group">
-            <div class="col-sm-3  col-md-3  col-lg-3" >
-                <md-form-field class="inline">
-                  <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate"  [(ngModel)]="downloadInput.fromDate">
-                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-                  <md-datepicker #picker></md-datepicker>
-                </md-form-field>
-              </div>
-              <div class="  col-sm-3  col-md-3  col-lg-3">
-      
-                <md-form-field class="inline">
-                  <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate"  [(ngModel)]="downloadInput.toDate">
-                  <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-                  <md-datepicker #pickers></md-datepicker>
-                </md-form-field>
-              </div>
-              <div class=" col-sm-2  col-md-2 col-lg-2" >
-                  <md-dialog-actions align="center">
-                    <button md-raised-button  class="btn-primary" (click)="downloadOrders()">DOWNLOAD</button>
-                  </md-dialog-actions>
-                </div>
-              </div>
-
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let cust of filteredcustomer | async" [value]="cust.fullName">
+                <span>{{ cust.fullName }}</span>
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
+        </div>
       </div>
-    </div>
-    <!-- /row -->
+      <div class="row form-group">
+        <div class="col-sm-3  col-md-3  col-lg-3">
+          <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="downloadInput.fromDate">
+            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+            <md-datepicker #picker></md-datepicker>
+          </md-form-field>
+        </div>
+        <div class="  col-sm-3  col-md-3  col-lg-3">
 
+          <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="downloadInput.toDate">
+            <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+            <md-datepicker #pickers></md-datepicker>
+          </md-form-field>
+        </div>
+        <div class=" col-sm-2  col-md-2 col-lg-2">
+          <md-dialog-actions align="center">
+            <button md-raised-button class="btn-primary" (click)="downloadOrders()">DOWNLOAD</button>
+          </md-dialog-actions>
+        </div>
+      </div>
+
+    </div>
   </div>
+  <!-- /row -->
+
+</div>

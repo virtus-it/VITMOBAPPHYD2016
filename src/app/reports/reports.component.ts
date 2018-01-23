@@ -34,14 +34,16 @@ export class ReportsComponent implements OnInit {
   reportsData = [];
   customerList = [];
   tabPanelView = 'newlydownloaded';
+  superDealer = true;
   reportsType = [
-    { value: 'newlydownloaded', viewValue: 'Newly Downloaded Customers' },
-    { value: 'lastdays', viewValue: 'Customers not Ordered in Last 10 Days' },
-    { value: 'pendingorders', viewValue: 'Pending Orders' },
-    { value: 'rejectedorders', viewValue: 'Rejected Orders' },
-    { value: 'notregistered', viewValue: 'Customers not Registered' },
-    { value: 'orderdownload', viewValue: 'Order Downloads' }
+    { value: 'newlydownloaded', viewValue: 'Newly Downloaded Customers',issuperDelear:this.superDealer },
+    { value: 'lastdays', viewValue: 'Customers not Ordered in Last 10 Days',issuperDelear:this.superDealer },
+    { value: 'pendingorders', viewValue: 'Pending Orders',issuperDelear:this.superDealer },
+    { value: 'rejectedorders', viewValue: 'Rejected Orders',issuperDelear:this.superDealer },
+    { value: 'notregistered', viewValue: 'Customers not Registered',issuperDelear:this.superDealer },
+    { value: 'orderdownload', viewValue: 'Order Downloads',issuperDelear:true }
   ];
+ 
   searchReports(firstCall,Rtype) {
     this.loaderService.display(true);
     this.reportsInput = JSON.parse(JSON.stringify(this.reportDetails));
@@ -188,6 +190,10 @@ this.customerList = cusotmerCopy;
   ngOnInit() {
     this.searchReports(true,'newlydownloaded');
     this.getCustomer(); 
+    this.superDealer = this.authenticationService.getSupperDelear();
+    if(!this.superDealer){
+      this.tabPanelView = 'orderdownload';
+          }
   }
 
 }

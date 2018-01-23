@@ -11,6 +11,7 @@ import 'rxjs/add/observable/throw';
 @Injectable()
 export class AuthenticationService {
     loggedIn = false;
+    isSuperDelear = true;
     CurrentSession: any = {};
     constructor(private router: Router, private http: Http, @Inject('API_URL') private apiUrl: string) {
         this.loggedIn = !!localStorage.getItem('currentUser');
@@ -106,6 +107,20 @@ export class AuthenticationService {
         }
         catch (ex) {
             return "";
+        }
+
+    };
+    getSupperDelear= function () {
+        try {
+            if (this.CurrentSession.issuperdealer == 'true') {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ex) {
+            return false;
         }
 
     };
