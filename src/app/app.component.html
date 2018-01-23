@@ -69,22 +69,29 @@
             <div class="col-6 pdtpright-10x30">
               <div class="right">
                   <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Distributors">
-                      <i class="fa fa-sitemap logo-color" aria-hidden="true"></i>
+                      <i class="fa fa-sitemap logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vtotaldistributor}}
                     </button>
                     <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Customers">
-                        <i class="fa fa-users logo-color" aria-hidden="true"></i>
+                        <i class="fa fa-users logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vtotalcustomers}}
                       </button>
-                      <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Notifications">
-                          <i class="fa fa-bell-o logo-color" aria-hidden="true"></i>
+                      <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Suppliers">
+                          <i class="fa fa-truck logo-color " aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vtotalsuppliers}}
                         </button>
-                        <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Suppliers">
-                            <i class="fa fa-truck logo-color " aria-hidden="true"></i>
+                        <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="All Orders">
+                            <i class="fa fa-bell-o logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vallordercount}}
                           </button>
+                      <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Deliver Orders">
+                          <i class="fa fa-bell-o logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vdeliverordercount}}
+                        </button>
+                        
                           <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Pending Orders">
-                            <i class="fa fa-dot-circle-o logo-color" aria-hidden="true"></i>
+                            <i class="fa fa-dot-circle-o logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vpendingordercount}}
                           </button>
-                          <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Areas">
-                              <i class="fa fa-map-marker logo-color" aria-hidden="true"></i>
+                          <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Bottels">
+                              <i class="fa fa-dot-circle-o logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vbottlecount}}
+                            </button>
+                          <button type="button" class="btn btn-link" data-toggle="tooltip" data-placement="bottom" title="Totel Sales">
+                              <i class="fa fa-map-marker logo-color" aria-hidden="true"></i>{{authenticationService.dashBoardDetails.vtotalsales}}
                             </button>
                           <button type="button" class="btn btn-link" (click)="logOut()">
                               <i class="fa fa-sign-out"></i> Logout

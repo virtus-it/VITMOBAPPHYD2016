@@ -9,9 +9,9 @@ import { LoaderService } from './login/loader.service';
 })
 
 export class AppComponent implements OnInit {
-    constructor(private authenticationService: AuthenticationService, public  _router : Router,private loaderService: LoaderService) { }
+    constructor(public authenticationService: AuthenticationService, public  _router : Router,private loaderService: LoaderService) { }
     title = 'app';
-    showLoader: boolean;
+  showLoader: boolean;
   location = this._router.url;
   isSuperDealer = this.authenticationService.getSupperDelear();
   
@@ -20,10 +20,11 @@ export class AppComponent implements OnInit {
      this.authenticationService.logout();
   }
   ngOnInit() {
+
     this.loaderService.status.subscribe((val: boolean) => {
         this.showLoader = val;
     });
-    
+    console.log(this.authenticationService.dashBoardDetails);
   
 }
     

@@ -13,9 +13,12 @@ export class AuthenticationService {
     loggedIn = false;
     isSuperDelear = true;
     CurrentSession: any = {};
+    dashBoardDetails: any = {};
     constructor(private router: Router, private http: Http, @Inject('API_URL') private apiUrl: string) {
         this.loggedIn = !!localStorage.getItem('currentUser');
         this.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
+        this.isSuperDelear = this.getSupperDelear();
+        this.dashBoardDetails =JSON.parse(localStorage.getItem('dashboardDetails'));
     }
     login(username: string, password: string) {
         let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload
@@ -29,6 +32,17 @@ export class AuthenticationService {
             .do(data => console.log('All: ' + JSON.stringify(data)))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+    getDashboardDetails(input) {
+        
+        let bodyString = JSON.stringify(input); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.apiUrl + '/dashboard', bodyString, options)
+          .map((res: Response) => res.json())
+          .do(data => console.log('All: ') )
+          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+          
+      }
     logout() {
         localStorage.removeItem('currentUser');
         this.loggedIn = false;
@@ -42,6 +56,20 @@ export class AuthenticationService {
         try {
             if (this.CurrentSession.userid) {
                 return JSON.parse(this.CurrentSession.userid);
+            }
+            else {
+                return 0;
+            }
+        }
+        catch (ex) {
+            return 0;
+        }
+
+    };
+    superDelearId = function () {
+        try {
+            if (this.CurrentSession.superdealerid) {
+                return JSON.parse(this.CurrentSession.superdealerid);
             }
             else {
                 return 0;

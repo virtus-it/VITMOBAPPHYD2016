@@ -11,7 +11,7 @@
       <button md-raised-button color="primary" (click)='stockHistory()'>
         <i class="fa fa-line-chart" aria-hidden="true"></i> Stock History
       </button> -->
-      <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()'>
+      <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()' *ngIf="superDealer">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
       </a>
     </div>
@@ -106,7 +106,7 @@
           <td width="33%">
             <div class="row ">
               <div class="col left">
-                <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product"></i>&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer"></i>&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>
               </div>
               <div class="col left">
