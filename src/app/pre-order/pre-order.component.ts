@@ -22,10 +22,10 @@ export class PreOrderComponent implements OnInit {
   searchPreOrderTerm:any ="";
 
 
-  addPreorder(){
+  addPreorder(data){
     let dialogRefAddPreOrder = this.dialog.open(PreOrderCartDailogComponent, {
-    width: '700px',
-    data: ''
+    width: '800px',
+    data: data
     });
      dialogRefAddPreOrder.afterClosed().subscribe(result => {
      console.log(`Dialog closed: ${result}`); 

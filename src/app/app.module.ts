@@ -79,6 +79,7 @@ import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.comp
 
 
 import { ProductsService } from './products/products.service';
+import { AddstockProductComponent } from './addstock-product/addstock-product.component';
 
 @NgModule({
     declarations: [
@@ -135,6 +136,7 @@ import { ProductsService } from './products/products.service';
         ScheduleComponent,
         ViewCustomerComponent,
         ViewSupplierComponent,
+        AddstockProductComponent,
         DeliverpreorderComponent
         
 
@@ -235,6 +237,8 @@ import { ProductsService } from './products/products.service';
          ScheduleComponent,
          CustomerScheduleEditDailogComponent,
          ViewCustomerComponent,
+         ViewSupplierComponent,
+         AddstockProductComponent,
          DeliverpreorderComponent,
          ViewSupplierComponent
 
