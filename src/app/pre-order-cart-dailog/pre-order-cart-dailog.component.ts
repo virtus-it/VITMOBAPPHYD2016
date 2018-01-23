@@ -10,6 +10,8 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { Observable } from 'rxjs/Observable';
+import { OrderLandingComponent} from '../order-landing/order-landing.component';
+import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -41,11 +43,25 @@ export class PreOrderCartDailogComponent implements OnInit {
   filter: any = { "distributorid": "" };
  
 
+
+  //input  for deliver preorder
+
+
   deliverPreOrder() {
+    let data ={"order":{"orderstatus":"delivered","assignedto":"2140",
+    "paymentstatus":true,
+    "return_cans":"","paymentmode":"cash",
+    "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true,
+    "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype,
+    "product_type":this.createPreOrderInput.productDetails.ptype,"product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),"cart_style":"new",
+    "delivery_address":this.Details.address, "excepted_time":"" , "ispreorderby":"dealer","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
+    
+    }
+    console.log(data);
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
         width: '600px',
-        data: ''
+        data: data
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
@@ -151,6 +167,19 @@ getProductsResult(result) {
 
   }
 }
+ViewDistributors(data) {
+  let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
+      width: '70%',
+      data: data
+  });
+  dialogRefDist.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if(result =='success'){
+        this.thisDialogRef.close('success');
+
+      }
+  });
+}
 
 
 
@@ -161,7 +190,7 @@ onCloseCancel(){
 
 createPreOrder(){
   console.log(this.createPreOrderInput);
-  let input ={"order":
+  let input =[{"order":
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,
@@ -170,28 +199,33 @@ createPreOrder(){
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),
   "cart_style":"new",
   "delivery_address":this.Details.address,
-  "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}
+  "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
 
 
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
-  this.createPreOrderInput.excepted_time= formattedDate + " " + this.createPreOrderInput.timeslot;
+  input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
+  
   console.log(input);
   this.orderLandingService.createPreOrder(input)
   .subscribe(
-    output => this.createPreOrderResult(output),
+    output => this.createPreOrderResult(output,input),
     error => {
       console.log("falied");
       this.loaderService.display(false);
     });
 }
 
-createPreOrderResult(result) {
+createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
-    this.getDistributors();
+    let data = {order_id:result.data.orderid,quantity:input[0].order.quantity};
+    this.ViewDistributors(data);
 
   }
   }
+
+  
+          
 
  
 
