@@ -82,4 +82,30 @@
     border-left: solid 10px transparent;
     border-right: solid 10px transparent;
   }
+  /* .onhovertext {
+    white-space: nowrap; 
+    width: 12em; 
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis; 
+    display: block;
+}
+.onhovertext:hover{overflow: auto;width:auto; text-overflow:auto;background: #f1f1f1} */
 
+.onhovertext {
+        width:100px;
+       text-overflow: ellipsis;
+        white-space: nowrap;
+      overflow: hidden;
+      display: block;
+    }
+    
+    .onhovertext:hover {
+        overflow: visible;
+        position: relative;
+    left: -2px;
+    width: 100%;
+    background: #fff;
+    box-shadow: 0 0 8px #bbb;
+    }
+    

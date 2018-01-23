@@ -10,7 +10,7 @@
   </div> -->
   <div id="" class="row mg-0 ">
     <div class="col padding-0">
-    <div class="row pdtopbottom-15 align-items-center">
+    <div class="row pdtopbottom-12 align-items-center">
         <div class="col"> 
           <a class="flex-sm-fill  nav-link pageTitle-style" href="javascript:void(0)">
             <i class="fa fa-file-text-o"></i> Orders</a>
@@ -221,7 +221,7 @@
           </a>
 
         </nav> -->
-        <div *ngIf="tabPanelView === 'forward'">
+        <div *ngIf="tabPanelView === 'forward'" class="panelview-style">
           <table class="table table-hover table-striped">
             <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
               <tr class="border-topbottom bg-eee">
@@ -464,7 +464,7 @@
 
           </table>
         </div>
-        <div *ngIf="tabPanelView === 'allorder'">
+        <div *ngIf="tabPanelView === 'allorder'" class="panelview-style">
           <table class="table table-hover table-striped">
             <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
               <tr class="border-topbottom bg-eee">

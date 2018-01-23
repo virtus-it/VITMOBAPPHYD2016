@@ -8,7 +8,7 @@ table thead {
     color: #fff;
   }
   .table td, .table th{
-    padding: 5px;
+    padding: 8px;
    border-bottom: none !important;
     vertical-align: middle !important;
     border-top: none;
@@ -152,6 +152,9 @@ color: #0f75bc !important;
   background: #0f75bc !important; 
   color: #fff;
 }
+.pdtopbottom-12{
+  padding: 12px;
+}
 .modal-title{
 padding: 15px;
 font-weight: 600;
@@ -183,6 +186,9 @@ background: transparent;
 }
 .pdright-10{
   padding-right: 10px;
+}
+.no-th-arrow::after{
+  content:"" !important;
 }
 .pdright-20{
     padding-right: 20px;
