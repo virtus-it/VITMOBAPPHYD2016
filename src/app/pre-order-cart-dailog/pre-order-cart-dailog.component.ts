@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import {DeliverpreorderComponent} from '../deliverpreorder/deliverpreorder.component';
 import { FormControl, Validators } from '@angular/forms';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
+import { ProductsService } from '../products/products.service';
+import { LoaderService } from '../login/loader.service';
 import { AuthenticationService } from '../login/authentication.service';
+import { MD_DIALOG_DATA } from '@angular/material';
+import { OrderLandingService } from '../order-landing/order-landing.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 
 
 @Component({
@@ -19,7 +24,7 @@ import * as _ from 'underscore';
 export class PreOrderCartDailogComponent implements OnInit {
   stateCtrl: FormControl;
   filteredDistributor: Observable<any[]>;
-  constructor(public dialog: MdDialog,public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,) {
+  constructor(public dialog: MdDialog,public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,   private orderLandingService: OrderLandingService, private loaderService: LoaderService, private productService: ProductsService, @Inject(MD_DIALOG_DATA) public Details: any) {
     this.stateCtrl = new FormControl();
     this.filteredDistributor = this.stateCtrl.valueChanges
 
@@ -28,8 +33,12 @@ export class PreOrderCartDailogComponent implements OnInit {
    }
 
    distributors: any = [];
+   productList = [];
+
+   //input
+   createPreOrderInput: any = {"timeslot":"",date:null,productDetails:""}
    //FilterInputs
-  filter: any = { "distributorid": "", "customerNumber": "", "searchtype": "", "weekdays": "", "days": "", "searchtext": "", "date":null , "last_orderid":null };
+  filter: any = { "distributorid": "" };
  
 
   deliverPreOrder() {
@@ -100,14 +109,96 @@ filterDistributors(name: string) {
   return finalDistributors;
 }
 
+//Getting products
+
+getProducts() {
+  let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+  this.productService.getProducts(input)
+    .subscribe(
+    output => this.getProductsResult(output),
+    error => {
+      console.log("error");
+      this.loaderService.display(false);
+    });
+
+}
+getProductsResult(result) {
+  console.log(result);
+  this.productList= [];
+  if(result.result == 'success'){
+   // let productCopy = [];
+    for (let details of result.data) {
+      //let details: any = i;
+      
+      let findproduct = _.find(this.productList, function (k, l) {
+        let productDetails: any = k;
+        return productDetails.brandName == details.brandname;
+      });
+
+      if (findproduct) {
+        details.quantity = "";
+        findproduct.data.push(details);
+      }
+      else{
+        let value = {brandName:details.brandname,category:details.category,data:[]};
+        details.quantity = "";
+        value.data.push(details);
+        this.productList.push(value);
+      }
+     
+    }
+    console.log("products list ",this.productList)
+
+  }
+}
+
+
+
 
 onCloseCancel(){
   this.thisDialogRef.close('Cancel');
 }
 
+createPreOrder(){
+  console.log(this.createPreOrderInput);
+  let input ={"order":
+  {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
+  "ispreorder":true,"orderto":this.Details.dealers.user_id,
+  "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,
+  "product_quantity":this.createPreOrderInput.productDetails.ptype,
+  "product_type":this.createPreOrderInput.productDetails.ptype, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost,
+  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),
+  "cart_style":"new",
+  "delivery_address":this.Details.address,
+  "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}
+
+
+  let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
+  this.createPreOrderInput.excepted_time= formattedDate + " " + this.createPreOrderInput.timeslot;
+  console.log(input);
+  this.orderLandingService.createPreOrder(input)
+  .subscribe(
+    output => this.createPreOrderResult(output),
+    error => {
+      console.log("falied");
+      this.loaderService.display(false);
+    });
+}
+
+createPreOrderResult(result) {
+  console.log(result);
+  if(result.result=='success'){
+    this.getDistributors();
+
+  }
+  }
+
+ 
 
   ngOnInit() {
     this.getDistributors();
+    this.getProducts();
+    console.log(this.Details);
   }
 
 }
