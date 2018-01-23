@@ -13,7 +13,8 @@ export class AppComponent implements OnInit {
     title = 'app';
     showLoader: boolean;
   location = this._router.url;
- 
+  isSuperDealer = this.authenticationService.getSupperDelear();
+  
     logOut() {
         
      this.authenticationService.logout();
@@ -22,6 +23,8 @@ export class AppComponent implements OnInit {
     this.loaderService.status.subscribe((val: boolean) => {
         this.showLoader = val;
     });
+    
+  
 }
     
     

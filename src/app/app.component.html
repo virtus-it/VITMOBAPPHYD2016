@@ -18,15 +18,15 @@
             <i class="fa fa fa-files-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> PreOrder</span>
           </a>
-          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()">
+          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
             <i class="fa fa-sitemap"></i>
             <span class="pdtoprght-3x10">Distributors</span>
           </a>
-          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()">
+          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
             <i class="fa fa-globe" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Coverage</span>
           </a>
-          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()">
+          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
             <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Notifications</span>
           </a>

@@ -239,8 +239,7 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
          ViewCustomerComponent,
          ViewSupplierComponent,
          AddstockProductComponent,
-         DeliverpreorderComponent,
-         ViewSupplierComponent
+         DeliverpreorderComponent
 
 
         ],

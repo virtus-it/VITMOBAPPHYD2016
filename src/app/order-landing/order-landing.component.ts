@@ -10,6 +10,7 @@ import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quanti
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
+import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -25,6 +26,7 @@ export class OrderLandingComponent implements OnInit {
   filteredDistributors: Observable<any[]>;
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
+  superDealer = true;
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService,private loaderService: LoaderService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
@@ -613,12 +615,34 @@ this.showFilterDailog =false;
   filterDailogToggle(){
     this.showFilterDailog = !this.showFilterDailog;
   }
+  ViewDistributors(data) {
+    if(data.OrderModifiedStatus == 'Assign' || data.OrderModifiedStatus == 'Re-Assign'){
+            let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
+    
+                width: '70%',
+                data: data
+            });
+            dialogRefDist.afterClosed().subscribe(result => {
+                console.log(`Dialog closed: ${result}`);
+                if(result == 'success'){
+                  this.getForwardOrderDetails(true);
+                  this.getAllOrderDetails(true);
+              
+                }
+    
+            });
+          }
+          }
   ngOnInit() {
     this.getPolygonDistributors();
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getDistributors();
     this.getSupplier();
+    this.superDealer = this.authenticationService.getSupperDelear();
+    if(!this.superDealer){
+this.tabPanelView = 'allorder';
+    }
   }
 
 }
