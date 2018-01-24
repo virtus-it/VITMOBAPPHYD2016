@@ -107,7 +107,7 @@
             <th width="12%">Status</th>
             <th width="12%">Mobile no</th>
             <th width="20%">Deposit Amount </th>
-            <th width="20%">FollowUp</th>
+            <th width="20%" *ngIf="superDealer">FollowUp</th>
             <th width="15%">Action</th>
 
           </tr>
@@ -122,7 +122,7 @@
               <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>
             </td>
 
-            <td class="left">
+            <td class="left" *ngIf="superDealer">
               <!-- <button class="btn btn-link" (click)="showFollowUpDetails(customers)" > <i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
               <button class="btn btn-link" (click)="showFollowUp(customers)">
                 <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
