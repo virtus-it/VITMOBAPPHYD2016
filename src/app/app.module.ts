@@ -80,6 +80,7 @@ import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.comp
 
 import { ProductsService } from './products/products.service';
 import { AddstockProductComponent } from './addstock-product/addstock-product.component';
+import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.component';
 
 @NgModule({
     declarations: [
@@ -137,7 +138,8 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
         ViewCustomerComponent,
         ViewSupplierComponent,
         AddstockProductComponent,
-        DeliverpreorderComponent
+        DeliverpreorderComponent,
+        InvoicedetailsComponent
         
 
     ],
@@ -239,6 +241,7 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
          ViewCustomerComponent,
          ViewSupplierComponent,
          AddstockProductComponent,
+         InvoicedetailsComponent,
          DeliverpreorderComponent
 
 
