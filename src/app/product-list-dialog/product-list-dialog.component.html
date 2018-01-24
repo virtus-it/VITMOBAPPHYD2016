@@ -16,27 +16,32 @@
       <div class="row pd-15x25 brd-bottom">
           <div class="col" >
             <h5 align="center" class="form-group"><i class="fa fa-sitemap"></i> 
-        <!-- <span>Distributor Name :</span>  -->
+        <!-- <span>Distributor Name :</span>  --> Distrirbutor  : 
         <span *ngIf="distributorDetails.distributorName">{{distributorDetails.distributorName}}</span>
-        <span *ngIf="!distributorDetails.distributorName">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span>
-        <span>- {{distributorDetails.mobileno}} </span></h5>
+        <span *ngIf="!distributorDetails.distributorName">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span> -
+        <span class="gray9"> {{distributorDetails.mobileno}} </span></h5>
       </div>
           <table class="table table-hover table-fixedheader">
       <thead>
         <tr>
-          <th width="12%">S.No</th>
-          <th width="40%">Product Name</th>
-          <th width="25%">Type</th>
-          <th width="22%">Status</th>
+          <th width="20%">Product Name</th>
+          <th width="20%">Product Type</th>
+          <th width="12%">Priority</th>
+          <th width="12%">Min Qty</th>
+          <th width="10%">Stock</th>
+          <th width="15%">Status</th>
+          <th width="10%">Cost</th>
            </tr>
       </thead>
       <tbody>
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-          <td width="12%" class="left" scope="row">{{i+1}}</td>
-          <td width="40%" class="left capital">{{prod.brandname}}</td>
-          <td width="25%" class="left capital">{{prod.ptype}}</td>
-          <td width="22%" class="left capital">{{prod.stockstatus}}</td>
-         
+          <td width="20%" class="left capital">{{prod.brandname}}</td>
+          <td width="20%" class="left capital"> {{prod.ptype}}</td>
+          <td width="12%" class="left capital">{{prod.priority}}</td>
+          <td width="12%" class="left capital">{{prod.minorderqty}}</td>
+          <td width="10%" class="left capital">{{prod.avaliable_stock}}</td>
+          <td width="15%" class="left capital">{{prod.stockstatus}}</td>
+          <td width="10%" class="left capital">{{prod.pcost}}</td>
          </tr>
       </tbody>
     </table>

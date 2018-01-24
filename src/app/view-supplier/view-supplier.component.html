@@ -1,45 +1,48 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-truck"></i>  
-      Suppliers
+    <i class="fa fa-truck"></i>
+    Suppliers
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
-        <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
-        </strong>         
+    <strong>
+      <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
-<div id="" class="row pd-15x10 mg-0">
-    <div class="col">    
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th width="15%">S.No</th>
-              <th width="15%">User</th>
-              <th width="15%">Mobile no</th>
-              <th width="15%">Address</th>
-              <th width="15%"> View Orders</th>
-              <th width="15%">Edit</th>
-              <th width="15%">Delete</th>
-            </tr>
-          </thead>
-          <tbody>
-              <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
-            <tr *ngFor="let supplier of supplierList;  let i = index" [attr.data-index]="i">
-              <td  class="left">{{i+1}}</td>
-              <td class="left">{{supplier.firstname}}</td>
-              <td class="left">{{supplier.mobileno}}</td>
-              <td class="left">{{supplier.address}}</td>
-              <td  class="left" class= "btn btn-link" (click)="supplierOrdersList(supplier)" >Orders</td>
-              <td class="left"><i class="fa fa-pencil-square-o btn-link" (click)="editSupplier(supplier)" aria-hidden="true"></i></td>
-            <td class="left"><i class="fa fa-trash danger" (click)="deleteSupplier(supplier)"aria-hidden="true" ></i></td>  
-
-              
-          </tbody>
-        </table>
+<div id="" class="row pd-15 mg-0 brd-bottom">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="20%">Name</th>
+          <th width="12%">Mobile</th>
+          <th width="20%">Address</th>
+          <th width="15%" class="no-th-arrow">View Orders</th>
+          <th width="15%" class="no-th-arrow">Action</th>
+        </tr>
+      </thead>
+      <tbody>
         
-    </div>
-    </div>
+        <tr *ngFor="let supplier of supplierList;  let i = index" [attr.data-index]="i">
+          <td class="left">{{supplier.firstname}}</td>
+          <td class="left">{{supplier.mobileno}}</td>
+          <td class="left">{{supplier.address}}</td>
+          <td class="left" class="btn btn-link" (click)="supplierOrdersList(supplier)">Orders</td>
+          <td class="left">
+            <i class="fa fa-pencil-square-o btn-link" (click)="editSupplier(supplier)" aria-hidden="true"></i> &nbsp;
+            <i class="fa fa-trash danger" (click)="deleteSupplier(supplier)" aria-hidden="true"></i>
+          </td>
+      </tbody>
+      <tfoot>
+        <tr>
+          <td colspan="5">
+              <h4 *ngIf="noRecords" class="warning oneline center"><i class="fa fa-frown-o" aria-hidden="true"></i>
+                 Record Not Available</h4>
+          </td>
+        </tr>
+      </tfoot>
+   </table>
+</div>
 
 <!-- <md-dialog-content layout="column">
   <div class="row pd-15x25 brd-bottom">
@@ -79,4 +82,3 @@
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-

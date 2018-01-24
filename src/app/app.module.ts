@@ -81,6 +81,8 @@ import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.comp
 import { ProductsService } from './products/products.service';
 import { AddstockProductComponent } from './addstock-product/addstock-product.component';
 import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.component';
+import { PaymentsComponent } from './payments/payments.component';
+import { PaymentsService } from './payments/payments.service';
 
 @NgModule({
     declarations: [
@@ -139,7 +141,8 @@ import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.compone
         ViewSupplierComponent,
         AddstockProductComponent,
         DeliverpreorderComponent,
-        InvoicedetailsComponent
+        InvoicedetailsComponent,
+        PaymentsComponent
         
 
     ],
@@ -164,6 +167,7 @@ import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.compone
             { path: 'coverage', component: CoverageComponent, canActivate: [LoggedInGuard] },
             { path: 'notifications', component: SmsComponent, canActivate: [LoggedInGuard] },
             { path: 'reports', component: ReportsComponent, canActivate: [LoggedInGuard] },
+            { path: 'payments', component: PaymentsComponent, canActivate: [LoggedInGuard] },
             { path: 'preorder', component: PreOrderComponent, canActivate: [LoggedInGuard] },
             { path: 'customer', component: CustomerComponent, canActivate: [LoggedInGuard] },
             { path: 'product', component: ProductsComponent, canActivate: [LoggedInGuard] },
@@ -198,6 +202,7 @@ import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.compone
         FeedbackService,
         SupplierService,
         ProductsService,
+        PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
     ],
@@ -242,7 +247,8 @@ import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.compone
          ViewSupplierComponent,
          AddstockProductComponent,
          InvoicedetailsComponent,
-         DeliverpreorderComponent
+         DeliverpreorderComponent,
+         PaymentsComponent
 
 
         ],

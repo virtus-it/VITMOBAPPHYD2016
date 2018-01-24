@@ -80,7 +80,7 @@ showSchedule(data){
 
 viewScheduledOrders(data){
   let dialogRefSetting = this.dialog.open(CustomerScheduleEditDailogComponent , {
-    width: "80%",
+    width: "60%",
     data: data
 });
 dialogRefSetting.afterClosed().subscribe(result => {
