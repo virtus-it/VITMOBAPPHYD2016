@@ -50,7 +50,7 @@ export class PreOrderCartDailogComponent implements OnInit {
   deliverPreOrder() {
     let data ={"order":{"orderstatus":"delivered","assignedto":"2140",
     "paymentstatus":true,
-    "return_cans":"","paymentmode":"cash",
+    "return_cans":"0","paymentmode":"cash",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype,
     "product_type":this.createPreOrderInput.productDetails.ptype,"product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),"cart_style":"new",
@@ -66,6 +66,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     dialogRefEditCustomer.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
         if(result == "success"){
+          this.thisDialogRef.close('success');
         }
 
     });
