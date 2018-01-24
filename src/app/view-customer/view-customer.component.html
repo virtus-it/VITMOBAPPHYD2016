@@ -1,13 +1,15 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-users"></i>  
-      Customers
+    <i class="fa fa-users"></i>
+    Customers
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
-        <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
-        </strong>         
+    <strong>
+      <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
+<<<<<<< HEAD
 <br>
 <div class="col">
     <table class="table table-hover table-striped">
@@ -19,19 +21,41 @@
           <th width="20%">Deposit Amount </th>
           <!-- <th width="20%">FollowUp</th> -->
           <th width="15%">Action</th>
+=======
+>>>>>>> 788075e9e4d3112a94b97f421223eaff1fafcc9d
 
-        </tr>
-      </thead>
-      <tbody>
-          <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
-        <tr *ngFor="let customer of customersList">
+<div id="" class="row pd-15 mg-0 brd-bottom"> 
+   <table class="table table-hover table-striped">
+    <thead>
+      <tr>
+        <th width="15%">Name</th>
+        <th width="10%">Status</th>
+        <th width="10%">Mobile</th>
+        <th width="12%">Email</th>
+        <th width="20%">Address</th>
+        <th width="14%">Deposit Amount </th>
+        <th width="10%" class="no-th-arrow">FollowUp</th>
+        <th width="15%" class="no-th-arrow">Action</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
+      <tr *ngFor="let customer of customersList">
         <td class="left">{{customer.firstname}}</td>
-        <td class="left" *ngIf="customer.isappdownloaded">Joined</td>
-        <td class="left" *ngIf="!customer.isappdownloaded">Not Joined</td>
-        <td class="left">{{customer.mobileno}}</td>
-        <td class="left">
-        <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
+        <td>
+          <span class="left" *ngIf="customer.isappdownloaded">Joined</span>
+          <span class="left" *ngIf="!customer.isappdownloaded">Not Joined
+          </span>
         </td>
+        <td class="left">{{customer.mobileno}}</td>
+        <td class="left">{{customer.emailid}}</td>
+        <td class="left">{{customer.address}}</td>
+
+        <td class="left">
+          <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
+        </td>
+<<<<<<< HEAD
           <!-- <td class="left">
             <button class="btn btn-link" (click)="showFollowUp(customer)" >
               <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
@@ -67,9 +91,24 @@
 
 
 
+=======
+        <td >
+          <button class="btn btn-link" (click)="showFollowUp(customer)">
+            <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+          </button>
+        </td>
+        <td >
+            <i class="fa fa-pencil-square-o logo-color cursor" aria-hidden="true" (click)="showEditCustomer(customer)" title="Edit"></i> &nbsp;
+          <i class="fa fa-calendar logo-color cursor" (click)="showSchedule(customer)" title="Schedule"></i> &nbsp;
+          <i class="fa fa-calendar-plus-o logo-color cursor" aria-hidden="true" (click)="viewScheduledOrders(customer)" title=" Scheduled Orders"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+>>>>>>> 788075e9e4d3112a94b97f421223eaff1fafcc9d
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-

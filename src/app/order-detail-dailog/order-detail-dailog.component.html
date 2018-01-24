@@ -103,9 +103,6 @@
             <table class="table table-hover table-striped table-fixedheader">
               <thead>
                 <tr>
-                  <th width="15%">
-                    <small>Sno.</small>
-                  </th>
                   <th width="55%">
                     <small>Product Name</small>
                   </th>
@@ -116,10 +113,6 @@
               </thead>
               <tbody>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-
-                  <td width="15%">
-                    <small>{{i + 1}}</small>
-                  </td>
                   <td width="55%">
                     <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>

@@ -38,9 +38,8 @@
                     </md-error>
                 </md-form-field>
             </div>
-
         </div>
-        <br>
+
         <div class="row  ">
             <div class="col-md-4">
                 <md-select placeholder="Schedule for" [(ngModel)]="scheduleInput.schedulefor" class="wd-100pc left">
@@ -68,9 +67,6 @@
 
             <div class=" row ">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
-
-
-
                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)"
                         [(ngModel)]="selectAllWeekDays">
                     <span class="custom-control-indicator"></span>
@@ -401,11 +397,6 @@
             </div>
         </div>
 
-
-
-        <div *ngIf="Detail.type=='update'">
-            <input type="button" value="Delete" class="btn-small btn deletebtn" (click)="deleteSchedule(Detail.data)">
-        </div>
     </div>
     <div class="row float-right pdright-30 mgbottom-20">
     
@@ -415,11 +406,14 @@
                 
             </div> -->
             <md-dialog-actions>
-                    <button md-raised-button   class="createscheduler  btn-primary " btntype="create"
+                    <button md-raised-button   class="createscheduler  btn-primary allcaps" btntype="create"
                     [disabled]="!FormControl.valid" (click)="createAndUpdateScheduleOrder()">{{Detail.type}}</button>
                     <!-- <div class="message"></div> -->
-                </md-dialog-actions>
-                <md-dialog-actions align="end">
-                        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
+                   &nbsp;<span *ngIf="Detail.type=='update'">
+                            <button md-raised-button class="bg-danger"   (click)="deleteSchedule(Detail.data)">DELETE</button>
+                            <!-- <input type="button" value="Delete" class="btn-small btn deletebtn" > -->
+                        </span>&nbsp;
+                        <button md-raised-button    (click)="onCloseCancel()">CANCEL</button>
+                        <!-- <div class="message"></div> -->
                     </md-dialog-actions>
-    </div>
+                  </div>

@@ -178,6 +178,9 @@ background: transparent;
 .padding-0{
   padding: 0px;
 }
+.pd-15{
+  padding: 15px;
+}
 .pd-15x25{
     padding: 15px 25px;
 }
@@ -200,6 +203,12 @@ background: transparent;
     border-bottom: 1px solid #ddd;
     border-radius: none;
 }
+.allcaps{
+  text-transform: uppercase !important;
+}
+.fs-20{
+  font-size: 20px !important;
+}
 .fs-24{
   font-size: 24px !important;
 }
@@ -211,6 +220,10 @@ background: transparent;
 }
 .pdtop-80{
   padding-top: 80px;
+}
+.bg-danger{
+  background: #8B1210 !important;
+  color: #fff !important;
 }
 .brd-logo{
   border:1px solid #0f75bc;

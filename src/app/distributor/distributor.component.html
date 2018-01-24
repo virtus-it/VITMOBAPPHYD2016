@@ -1,89 +1,101 @@
 ﻿<div class=" dist-style minheight-500">
-    <div class=" row justify-content-between distIcon-style left">
-        <div class="col-sm-2 col-md-2 col-lg-2 ">
-            <h4><i class="fa fa-sitemap"></i> Distributor</h4>
-        </div>
-      <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-          <a class="cursor logo-color " title="Add Distributor"><i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i></a>
-            <a class="cursor logo-color mgleft-10" ><i  aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
-    
-                                <div class="filterView" *ngIf="showFilterDailog">
-                            <div class="">
-                                <div class="form-group">
-                                  <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType">
-                                    <md-option value="name" >First Name</md-option>
-                                    <md-option value="mobileno">Mobile Number</md-option>
-                                  </md-select></div>
-                                        <div *ngIf="filterType=='name'">
-                                        <md-form-field class="example-full-width">
-                                          <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange) = "searchDistributorByName()" name="searchDistributorTerm">
-                                         </md-form-field>
-                                        </div>
-                                         
-                                       <div *ngIf="filterType=='mobileno'">
-                                        <md-form-field class="example-full-width">
-                                          <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="searchDistributorNumber" (ngModelChange) = "searchDistributorbyNumber()" name="searchDistributorNumber" maxlength="10">
-                                         </md-form-field>
-                                       </div>
-                                         
-                                  
-                                  <div class="input-group pd-10  ">
-                                    <button md-raised-button color="primary" ng-click="clearSearch()">
-                                      <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                                    </button>
-                                  </div>
-                                </div>
-                         </div>
-               
-            </a>
-      </div>
-        </div>
-<div  >
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-sitemap"></i> Distributor</h4>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+      <a class="cursor logo-color " title="Add Distributor">
+        <i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
+      </a>
+      <a class="cursor logo-color mgleft-10">
+        <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
 
-  <div id="" class="row pd-15x10 mg-0">
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="">
+            <div class="form-group">
+              <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType">
+                <md-option value="name">First Name</md-option>
+                <md-option value="mobileno">Mobile Number</md-option>
+              </md-select>
+            </div>
+            <div *ngIf="filterType=='name'">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange)="searchDistributorByName()"
+                  name="searchDistributorTerm">
+              </md-form-field>
+            </div>
 
-<div class="col">    
-    <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th width="18%">User</th>
-          <th width="12%">Mobile no</th>
-          <th width="20%">Address</th>
-          <th width="10%">FollowUp</th>
-          <th width="16%">View Orders</th>
-          <th width="14%">View Suppiers</th>
-          <th width="16%">View Customers</th>
-          <th width="10%" class="pdleft-20">List</th>
-          <th width="15%" class="pdleft-20">Service Area</th>
-          <th class="pdleft-20" width="10%">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
-          <td class="left">{{dist.firstname}} {{dist.lastname}}</td>
-          <td class="left" >{{dist.mobileno}} </td>
-          <td class="left">{{dist.address}}</td>
-           <td class="left">
-             <!-- <button class="btn btn-link" (click)="showFollowUpDetails(dist)" ><i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
-          <button class="btn btn-link" (click)="showFollowUp(dist)" >  <i class="fa fa-volume-control-phone" aria-hidden="true"></i> </button></td>
-          <td class="left"><button class="btn btn-link" (click)="viewOrders(dist)">Orders </button></td>
-          <td class="left"><button class="btn btn-link" (click)="viewSuppliers(dist)">Suppliers </button></td>
-          <td class="left"><button class="btn btn-link" (click)="viewCustomers(dist)"> Customers</button></td>
-          <td class="left"><button class="btn btn-link" (click)="ViewProduct(dist)" >Products</button></td>
-          <td class="left"><button class="btn btn-link"  (click)="openMapDialog(dist)" >Service area</button></td>
-          <td class="left"><button class="btn btn-link" (click)="openUpdateDialog(dist)" ><i class="fa fa-edit" aria-hidden="true"></i></button></td>
-        
-      </tbody>
-    
-    </table>
-    
+            <div *ngIf="filterType=='mobileno'">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="searchDistributorNumber" (ngModelChange)="searchDistributorbyNumber()"
+                  name="searchDistributorNumber" maxlength="10">
+              </md-form-field>
+            </div>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" ng-click="clearSearch()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </a>
+    </div>
+  </div>
+  <div>
+
+    <div id="" class="row pd-15 mg-0">
+
+      <div class="">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th width="22%">Name</th>
+              <th width="12%">Mobile</th>
+              <th width="15%">Email Id</th>
+              <th width="25%">Address</th>
+              <th width="10%" class="no-th-arrow">FollowUp</th>
+              <th width="15%" class="no-th-arrow">Views </th>
+              <th width="18%" class="no-th-arrow">Service Area</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
+              <td class="left capitalize">{{dist.firstname}} {{dist.lastname}}</td>
+              <td class="left">{{dist.mobileno}} </td>
+              <td class="left">{{dist.emailid}} </td>
+              <td class="left capitalize">{{dist.address}}</td>
+              <td class="left">
+                <!-- <button class="btn btn-link" (click)="showFollowUpDetails(dist)" ><i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
+                <button class="btn btn-link" (click)="showFollowUp(dist)">
+                  <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
+                </button>
+              </td>
+              <td class="left">
+                <i class="fa fa-file-text-o logo-color cursor" (click)="viewOrders(dist)" title="Orders"> </i>&nbsp;&nbsp;
+                <i class="fa fa-truck logo-color cursor" (click)="viewSuppliers(dist)" title="Suppliers"></i>&nbsp;&nbsp;
+                <i class="fa fa-users logo-color cursor" (click)="viewCustomers(dist)" title="Customers"> </i>&nbsp;&nbsp;
+                <i class="fa fa-gift logo-color cursor" (click)="ViewProduct(dist)" title="Products"></i>&nbsp;&nbsp;
+                <i class="fa fa-edit logo-color cursor"  title="Edit Distributor" (click)="openUpdateDialog(dist)"></i>
+                <!-- <button class="btn btn-link" (click)="viewOrders(dist)">Orders </button>
+            <button class="btn btn-link" (click)="viewSuppliers(dist)">Suppliers </button>
+            <button class="btn btn-link" (click)="viewCustomers(dist)"> Customers</button>
+            <button class="btn btn-link" (click)="ViewProduct(dist)" >Products</button> -->
+              </td>
+              <td class="left">
+                <button class="btn btn-link" (click)="openMapDialog(dist)">Service area</button>
+              </td>
+          </tbody>
+        </table>
+
         <h4 class="warning  capitalize">
           <a href="javascript:void(0);" (click)=getDistributors(false); *ngIf="distributorClickMore">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
         </h4>
         <h4 *ngIf="!distributorClickMore" class="warning">Record Not Available</h4>
-      
-</div>
-</div>
-</div>  
+
+      </div>
+    </div>
+  </div>
 </div>

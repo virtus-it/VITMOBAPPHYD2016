@@ -1,37 +1,43 @@
-
 <div class="row justify-content-between modal-title">
-        <div class="col-sm-4 col-md-4 col-lg-4 ">
-            <i class="fa fa-calendar"></i> View scheduled orders
-        </div>
-        <div class="col-md-1  col-sm-1  col-lg-1 right">
-          <strong>
-            <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
-          </strong>
-        </div>
-        </div>
-        <div>
-        <md-dialog-content layout="column">
-            <table class="table table-hover table-striped">
-              <thead>
-                <tr>
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-calendar-plus-o"></i> View Scheduled Orders
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+<div>
+  <div id="" class="row pd-15 mg-0 brd-bottom">
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="20%">Product Type</th>
+            <th width="10%">Quantity</th>
+            <th width="14%">Schedule</th>
+            <th width="12%">Expected Time</th>
+            <th width="10%" class="no-th-arrow">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let schedule of scheduleOrdersList">
+            <td class="left">{{schedule.product_type}} {{schedule.product_quantity}}</td>
+            <td class="left">{{schedule.quantity}} </td>
+            <td class="left">{{schedule.scheduletype}}</td>
+            <td class="left">{{schedule.delivery_exceptedtime}}</td>
+            <td class="left">
+              <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i> &nbsp;
+              <i class="fa fa-trash danger" aria-hidden="true" (click)="deleteSchedule(schedule)"></i>
+            </td>
+        </tbody>
+      </table>
 
-                  <th width="25%">Product Name</th>
-                  <th width="10%">Quantity</th>
-                  <th width="14%">Schedule for</th>
-                  <th width="12%">Expected time</th>
-                  <th width="8%">Edit</th>
-                  <th width="8%">Delete</th>
-                </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor = "let schedule of scheduleOrdersList">
-                  <td class="left">{{schedule.product_type}} {{schedule.product_quantity}}</td>
-                  <td class="left">{{schedule.quantity}} </td>
-                  <td class="left">{{schedule.scheduletype}}</td>
-                  <td class="left">{{schedule.delivery_exceptedtime}}</td>
-                  <td class="left"> <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i></td>
-                  <td class="left"> <i class="fa fa-trash danger" aria-hidden="true" (click)="deleteSchedule(schedule)"></i> </td>
-              </tbody>
-            </table>
-        </md-dialog-content>
-      </div>
+    </md-dialog-content>
+  </div>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

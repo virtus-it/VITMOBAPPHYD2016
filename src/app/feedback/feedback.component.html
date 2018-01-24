@@ -113,7 +113,7 @@
         <div class="col-md-11">
             <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'"> <i class="fa fa-reply replyicon" (click)="openReplyModel(feed)" aria-hidden="true" title = "reply"></i> </a>
             <a  class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'"> <i class="fa fa-times-circle openicon" (click)="openStatus(feed)" aria-hidden="true"  title = "open"></i> </a>
-            <a class="btn btn-close " *ngIf="feed.status == 'close'">  <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true"> CLOSED </i> <br> <br> <i class="fa fa-check-circle closeicon" (click)="closeStatus(feed)" aria-hidden="true" title = "closed" ></i>  </a>
+            <a class="btn btn-close " *ngIf="feed.status == 'close'">  <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true"> CLOSED </i> <i class="fa fa-check-circle closeicon" (click)="closeStatus(feed)" aria-hidden="true" title = "closed" ></i>  </a>
      </div>
      </div>
      
