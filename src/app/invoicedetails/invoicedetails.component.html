@@ -1,18 +1,24 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-     <strong><i class="fa fa-file-text" aria-hidden="true"></i> &nbsp; </strong>  Raise Invoice</div>
+    <strong>
+      <i class="fa fa-file-text" aria-hidden="true"></i> &nbsp; </strong> Raise Invoice</div>
   <div class="col-md-1 col-sm-1 right">
-    <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
-            </strong>
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
-<div class="align grey" >
+<div id="" class="row pd-15 mg-0 brd-bottom">
   <br>
-  Invoice Emailed successfully 
+  <div class="col">
+    <h3 class="warning center">
+      <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+      Invoice Emailed Successfully </h3>
+  </div>
 </div>
-<br>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="onCloseCancel()" >CLOSE</button>        
+    <button type="submit" md-raised-button (click)="onCloseCancel()">CLOSE</button>
   </md-dialog-actions>
 </div>
