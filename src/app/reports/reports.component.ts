@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../login/authentication.service';
 import { ReportsService } from './reports.service';
+import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import * as FileSaver from 'file-saver';
 import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
+import { InvoicedetailsComponent } from '../invoicedetails/invoicedetails.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 @Component({
@@ -18,7 +20,7 @@ import 'rxjs/add/operator/map';
 export class ReportsComponent implements OnInit {
   customerCtrl: FormControl;
   filteredcustomer: Observable<any[]>;
-  constructor(private authenticationService: AuthenticationService, private reportservice: ReportsService,private loaderService: LoaderService,private customerService: CustomerService) {
+  constructor(private authenticationService: AuthenticationService, public dialog: MdDialog,private reportservice: ReportsService,private loaderService: LoaderService,private customerService: CustomerService) {
     this.customerCtrl = new FormControl();
     this.filteredcustomer = this.customerCtrl.valueChanges
       .startWith(null)
@@ -187,6 +189,26 @@ this.customerList = cusotmerCopy;
     
     return finalcustomer;
   }
+   
+  //InVoice Dialog box
+
+  showInvoice(){
+      let dialogRefdeleteSupplier=this.dialog.open(InvoicedetailsComponent, {
+        width: '700px',
+        data: ''
+    
+    });
+    dialogRefdeleteSupplier.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if(result == 'success'){
+    
+        }
+    });
+    }
+
+
+
+
   ngOnInit() {
     this.searchReports(true,'newlydownloaded');
     this.getCustomer(); 
