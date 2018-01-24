@@ -6,9 +6,9 @@
         <i class="fa fa-file-text"></i> Report</h4>
     </div>
     <div class="col-md-2  col-sm-2  col-lg-2 right">
-      <a href="javascript:void(0)" title="Download">
+      <!-- <a href="javascript:void(0)" title="Download">
         <i aria-hidden="true" class="fa fa-download fa-2x"></i>
-      </a>
+      </a> -->
     </div>
 
   </div>
@@ -219,10 +219,17 @@
             <md-datepicker #pickers></md-datepicker>
           </md-form-field>
         </div>
-        <div class=" col-sm-2  col-md-2 col-lg-2">
+        
+        <div class=" row">
           <md-dialog-actions align="center">
             <button md-raised-button class="btn-primary" (click)="downloadOrders()">DOWNLOAD</button>
-          </md-dialog-actions>
+          </md-dialog-actions>&nbsp;&nbsp;
+          <md-dialog-actions align="center">
+              <button md-raised-button class="btn-primary" >Print</button>
+            </md-dialog-actions>&nbsp;&nbsp;
+            <md-dialog-actions align="center">
+                <button md-raised-button class="btn-primary" >Raise An Invoice</button>
+              </md-dialog-actions>
         </div>
       </div>
 
