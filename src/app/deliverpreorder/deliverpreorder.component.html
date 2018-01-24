@@ -15,7 +15,7 @@
     <div class="row">
       <div class="  col-6">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Quantity">
+          <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="Detail.order.quantity" >
           <md-error>
             Quantity is
             <strong>required</strong>
@@ -24,7 +24,7 @@
       </div>
       <div class="  col-6">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Returned Cans">
+          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" >
           <md-error>
             Returned Cans is
             <strong>required</strong>
@@ -40,7 +40,7 @@
       <div class="  col-2">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" class="custom-control-input" value="cod" name="paymentType">
+            <input type="radio" class="custom-control-input" value="cod" name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> COD </span>
           </label>
@@ -49,27 +49,27 @@
       <div class="  col-7">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" class="custom-control-input" value="credit" name="paymentType">
+            <input type="radio" class="custom-control-input" value="credit" name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> CREDIT </span>
           </label>
         </div>
       </div>
     </div>
-    <div class="row form-group">
+    <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cod'">
       <div class="  col-4">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Amount">
+          <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
           <md-error>
             Amount is
             <strong>required</strong>
           </md-error>
         </md-form-field>
       </div>
-      <div class="  col-8 align-self-center center">
+      <div class="  col-8 align-self-center center" *ngIf="deliverPreOrderInput.paymentType=='cod'">
         <div class="form-checkbox form-checkbox-inline">
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-            <input type="checkbox" class="custom-control-input">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="deliverPreOrderInput.confirmPayment">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> Confirm Payment </span>
           </label>
@@ -78,8 +78,8 @@
     </div>
     <div class="row form-group">
       <div class="col">
-        <md-select placeholder="Select Category" name="type" class="full-width left">
-          <md-option value="name">Select Supplier</md-option>
+        <md-select placeholder="Select Supplier" name="type" class="full-width left" [(ngModel)]="deliverPreOrderInput.supplierslist">
+          <md-option  *ngFor="let supplier of supplierList"value="name">{{supplier.firstname}}</md-option>
         </md-select>
       </div>
     </div>
@@ -88,7 +88,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary">CONFIRM</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()">CONFIRM</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

@@ -49,7 +49,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
        input = { "order": { "apptype": this.authenticationService.appType(), "excepted_time": this.scheduleInput.timeslot, "orderstatus": "ordered", "orderto": this.authenticationService.loggedInUserId() , "orderfrom":this.Detail.customerId, "paymentmode": "cash", "usertype":this.authenticationService.userType(), "quantity": this.scheduleInput.productQuantity, "loginid": this.authenticationService.loggedInUserId(), "groupid": "289", "productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "weekdays":this.scheduleInput.weekdays , "scheduletype": this.scheduleInput.schedulefor , "product_cost": this.scheduleInput.productName.pcost, "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin" } };
     }
      else{
-     input = { "order": { "apptype": this.authenticationService.appType(), "excepted_time":this.scheduleInput.timeslot , "orderstatus": "ordered", "orderto":this.authenticationService.loggedInUserId(), "orderfrom":this.Detail.userid, "paymentmode": "cash", "usertype":this.authenticationService.userType() , "quantity": this.scheduleInput.productQuantity , "loginid": this.authenticationService.loggedInUserId(), "groupid": "289", "productid": this.scheduleInput.productName.productid , "product_type":this.scheduleInput.productName.ptype , "product_quantity":this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.schedulefor, "product_cost": this.scheduleInput.productName.pcost, "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity), "total_amt":parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin" } };
+     input = { "order": { "apptype": this.authenticationService.appType(), "excepted_time":this.scheduleInput.timeslot , "orderstatus": "ordered", "orderto":this.authenticationService.loggedInUserId(), "orderfrom":this.Detail.customerId, "paymentmode": "cash", "usertype":this.authenticationService.userType() , "quantity": this.scheduleInput.productQuantity , "loginid": this.authenticationService.loggedInUserId(), "groupid": "289", "productid": this.scheduleInput.productName.productid , "product_type":this.scheduleInput.productName.ptype , "product_quantity":this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.schedulefor, "product_cost": this.scheduleInput.productName.pcost, "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity), "total_amt":parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin" } };
    }
     this.customerservice.createSchedule(input)
       .subscribe(
@@ -59,6 +59,27 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         this.loaderService.display(false);
       });  
   }
+  
+  
+  // {"order":{"apptype":"moya","excepted_time":"9AM-1PM","orderstatus":"ordered","orderto":"289","orderfrom":"2167",
+  // "paymentmode":"cash","usertype":"dealer","quantity":"2","loginid":"289","groupid":"289","productid":"1921",
+  // "product_type":"Kinley","product_quantity":"20ltr","days":"2,6,10,14",
+  // "everyday":"0","scheduletype":"Days","product_cost":"70",
+  // "amt":140,"total_amt":140,"total_items":"2","scheduledfrom":"admin"}
+
+  
+  // {"order":{"apptype":"moya","excepted_time":"4PM-7PM","orderstatus":"ordered","orderto":289,"paymentmode":"cash","usertype":"dealer","quantity":"9","loginid":289,"groupid":"289","productid":1816,"product_type":"20 lt","product_quantity":"20 lt","days":"16,2,21","scheduletype":"days","product_cost":100,"amt":900,"total_amt":900,"total_items":"9","scheduledfrom":""}}
+
+
+
+
+
+
+
+
+
+
+
 
   createScheduledaysResult(result) {
     console.log(result)
