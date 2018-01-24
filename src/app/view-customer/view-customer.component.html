@@ -17,7 +17,7 @@
           <th width="12%">Status</th>
           <th width="12%">Mobile no</th>
           <th width="20%">Deposit Amount </th>
-          <th width="20%">FollowUp</th>
+          <!-- <th width="20%">FollowUp</th> -->
           <th width="15%">Action</th>
 
         </tr>
@@ -32,11 +32,11 @@
         <td class="left">
         <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
         </td>
-          <td class="left">
+          <!-- <td class="left">
             <button class="btn btn-link" (click)="showFollowUp(customer)" >
               <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
             </button>
-          </td>
+          </td> -->
           <td class="left">
             <div class="dropdown">
               <button class="dropbtn">View More</button>
