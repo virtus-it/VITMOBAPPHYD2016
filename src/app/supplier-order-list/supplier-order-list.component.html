@@ -23,7 +23,6 @@
             <th width="">Product </th>
             <th width="">Quantity</th>
             <th width="">Status</th>
-            <th width="">Delivered </th>
             <th width=""> Payment Type</th>
             <th width="">Supplier</th>
             <th width="">Request Data</th>
@@ -42,10 +41,8 @@
             <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
             <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.comments}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
             <td width="" class="left" class="cellpadding" scope="row"> <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span> </td>
-            <td width="" class="left" class="cellpadding" scope="row"></td>   
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>    

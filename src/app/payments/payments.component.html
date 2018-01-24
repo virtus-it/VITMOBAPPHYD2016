@@ -1,0 +1,123 @@
+<div class="dist-style  minheight-500">
+
+  <div class=" row justify-content-between distIcon-style">
+    <div class="col-md-2  col-sm-2  col-lg-2 left">
+      <h4>
+        <i class="fa fa-credit-card" aria-hidden="true"></i> Payments</h4>
+    </div>
+    <div class="col-md-2  col-sm-2  col-lg-2 right">
+      
+    </div>
+
+  </div>
+
+  
+  <div class="container-fluid">
+
+      <div class="tab tabs-left row">
+      <div class="col">
+     
+        <table class="nav nav-pills flex-column row">
+          <tr>
+            <td width="8%"></td>
+            <!-- <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)" *ngIf="type.issuperDelear">
+                <i class="fa fa-download" aria-hidden="true"></i>
+                <br> {{type.viewValue}}
+              </a>
+            </td> -->
+
+         
+            <td class="nav-item" (click)="viewTabpanel('cod')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'cod'}" href="javascript:void(0)" >
+                <br> Cash on delivery </a>
+            </td>
+            <td class="nav-item" (click)="viewTabpanel('credit')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'credit'}" href="javascript:void(0)" >
+                <br> Credit </a>
+            </td>
+            <td class="nav-item" (click)="viewTabpanel('bill')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'bill'}" href="javascript:void(0)">
+                <br> Bill </a>
+            </td>
+            <td class="nav-item" (click)="viewTabpanel('collections')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'collections'}" href="javascript:void(0)" >
+                <br> 
+                Collections</a>
+            </td>  
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'cod'">
+        <div class=" ">
+            <ul class="scrollheight  mgtop-5">
+                <li class="nolist-style  messages-style" *ngFor="let payments of codPayments">
+                  <div *ngIf="payments.status=='confirm'">
+                      <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf="payments.status=='rejected'">
+                      <i class="fa fa-times-circle red" aria-hidden="true"></i>
+                  </div>
+                  <div *ngIf="payments.status=='received'">
+                      <i class="fa fa-gratipay orange" aria-hidden="true"></i>
+                  </div>
+
+                  <p> Dealer/Super-Supplier have {{payments.status}}ed Payment</p>
+                  <small> Customer: {{payments.customer.firstname}} {{payments.customer.lastname}} have paid the amount of INR {{payments.amount_received}} to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
+                  <br>
+                  <div *ngIf="payments.status=='rejected'">             
+                  <small> Rejected By: {{payments.dealer.firstname}} {{payments.dealer.lastname}}  </small>
+                </div>
+                <div *ngIf="payments.status=='received'">
+                 <small> <button type="submit" value="reject" (click)="changeStatus('rejected',payments)">REJECT</button> </small> 
+                 <small> <button type="submit" value="confirm" (click)="changeStatus('confirm',payments)">CONFIRM</button> </small>
+
+                </div>
+                <hr>
+                <div>
+                  <small> {{payments.modifieddate | utcDate}}  Order ID:{{payments.orderid}}</small>
+                </div>
+                  <p class="right">
+                    <small class="gray"></small>
+                  </p>
+                </li>
+      
+              </ul>
+          </div>
+      </div>
+
+      
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'credit'">
+          <div class=" ">
+              <ul class="scrollheight  mgtop-5">
+                  <li class="nolist-style  messages-style" *ngFor="let credit of creditPayments">
+                      <div>
+                          <i class="fa fa-check-circle green" aria-hidden="true"></i>
+                      </div>
+        <p> Customer have done the payment</p>
+        <small *ngIf="credit.customer"> Customer: {{credit.customer.firstname}} {{credit.customer.lastname}} have paid the amount of INR {{credit.amount_received}} to Dealer/Supplier:{{credit.dealer.firstname}}{{credit.dealer.lastname}}</small>
+        <hr>
+        <small> {{credit.modifieddate | utcDate }} Order ID:{{credit.orderid}}</small>
+                  
+        <p class="right">
+            <small class="gray"></small>
+          </p>
+
+      </li>
+    
+    </ul>
+          </div>
+      </div>
+
+
+          <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'bill'">
+              Bill table
+              </div>
+              <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
+                  collections table
+            
+                  </div>
+  </div>
+
+</div>
