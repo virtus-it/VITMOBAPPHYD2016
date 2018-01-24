@@ -9,20 +9,6 @@
     </strong>
   </div>
 </div>
-<<<<<<< HEAD
-<br>
-<div class="col">
-    <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th width="12%">User</th>
-          <th width="12%">Status</th>
-          <th width="12%">Mobile no</th>
-          <th width="20%">Deposit Amount </th>
-          <!-- <th width="20%">FollowUp</th> -->
-          <th width="15%">Action</th>
-=======
->>>>>>> 788075e9e4d3112a94b97f421223eaff1fafcc9d
 
 <div id="" class="row pd-15 mg-0 brd-bottom"> 
    <table class="table table-hover table-striped">
@@ -55,43 +41,6 @@
         <td class="left">
           <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
         </td>
-<<<<<<< HEAD
-          <!-- <td class="left">
-            <button class="btn btn-link" (click)="showFollowUp(customer)" >
-              <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
-            </button>
-          </td> -->
-          <td class="left">
-            <div class="dropdown">
-              <button class="dropbtn">View More</button>
-              <div class="dropdown-content" style="right:0;">
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)="showEditCustomer(customer)">
-                    <i class="fa fa-pencil-square-o" aria-hidden="true" ></i> Edit</label>
-                  <label class="col-md-6" (click)="showSchedule(customer)" >
-                    <i class="fa fa-calendar" ></i> Schedule</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)="viewScheduledOrders(customer)" >
-                    <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" ></i> Scheduled Orders </label>
-                </div>
-              </div>
-            </div>
-
-          </td>
-          </tr>
-          
-      </tbody>
-
-    </table>
-
-   
-
-  </div>
-
-
-
-=======
         <td >
           <button class="btn btn-link" (click)="showFollowUp(customer)">
             <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
@@ -106,7 +55,6 @@
     </tbody>
   </table>
 </div>
->>>>>>> 788075e9e4d3112a94b97f421223eaff1fafcc9d
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
