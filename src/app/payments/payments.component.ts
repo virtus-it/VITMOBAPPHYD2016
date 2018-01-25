@@ -186,10 +186,6 @@ this.tabPanelView = type;
 
 
 }
-  
-
-
-
 
   ngOnInit() {
     this.getCod();
