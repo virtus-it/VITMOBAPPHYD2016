@@ -71,11 +71,11 @@ if(result=='success'){
 
     });
   }
-  stockHistory() {
+  stockHistory(data) {
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
 
       width: '80%',
-      data: ''
+      data: data
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);

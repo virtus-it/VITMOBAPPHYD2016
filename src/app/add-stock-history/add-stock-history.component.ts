@@ -3,6 +3,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { ProductsService } from '../products/products.service';
 import { LoaderService } from '../login/loader.service';
 import { MdDialogRef } from '@angular/material';
+import { MD_DIALOG_DATA } from '@angular/material';
 @Component({
   selector: 'app-add-stock-history',
   templateUrl: './add-stock-history.component.html',
@@ -10,12 +11,12 @@ import { MdDialogRef } from '@angular/material';
 })
 export class AddStockHistoryComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private productService: ProductsService, public thisDialogRef: MdDialogRef<AddStockHistoryComponent>) { }
+  constructor(private authenticationService: AuthenticationService, private productService: ProductsService, public thisDialogRef: MdDialogRef<AddStockHistoryComponent>,@Inject(MD_DIALOG_DATA) public Detail: any) { }
 StockList=[];
   getStockHistroy() {
     let input = {
       "root": {
-        "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "pid": "0", "areaid": "", "last_historyid": 100000, "pagesize": "100",
+        "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "pid": this.Detail.productid, "areaid": "", "last_historyid": 100000, "pagesize": "1000",
         "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
       }
     };
@@ -37,6 +38,7 @@ StockList=[];
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
+   // console.log(this.Detail);
     this.getStockHistroy();
   }
 

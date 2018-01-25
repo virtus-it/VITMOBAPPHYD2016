@@ -15,14 +15,16 @@ import { ProductsService } from '../products/products.service';
 export class AddstockProductComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<AddstockProductComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private productsService:ProductsService) { }
-StockInput = { invoiceDate:null,stock:"",itemCost:""};
+StockInput = { invoiceDate:null,stock:"",itemCost:this.Detail.pcost,returnemptycans:"0"};
 
 onCloseCancel() {
   this.thisDialogRef.close('Cancel');
 }
 addStockDetails(){
   console.log(this.StockInput);
-  let input = [{"product":{"pid":this.Detail.productid.toString(),"stock":this.StockInput.stock,"loginid":this.authenticationService.loggedInUserId(),"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType()}}];
+  let input = [{"product":{"pid":this.Detail.productid.toString(),
+  "stock":this.StockInput.stock,returnemptycans:this.StockInput.returnemptycans,
+  "loginid":this.authenticationService.loggedInUserId(),"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType()}}];
   if (this.StockInput.invoiceDate) {
     input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
   }
