@@ -106,7 +106,8 @@
             <th width="10%">Mobile</th>
             <th width="10%">Email</th>
             <th width="22%">Address</th>
-            <th width="10%">Status</th>
+            <th width="10%">Joined</th>
+            <th width="10%">Payment</th>
             <th width="13%">Deposit Amount</th>
             <th width="10%"  *ngIf="superDealer">FollowUp</th>
             <th width="12%" class="no-th-arrow">Action</th>
@@ -121,6 +122,9 @@
             <td class="left">
                 <span *ngIf="customers.isappdownloaded">Joined</span>
                 <span *ngIf="!customers.isappdownloaded">Not Joined</span>
+              </td>
+              <td class="left">
+                  <span *ngIf="customers.payments">{{customers.payments.paymenttype}}</span>
               </td>
             <td class="left">
               <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>

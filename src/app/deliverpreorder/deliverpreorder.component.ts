@@ -16,9 +16,10 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"", "confirmPayment": false , supplierslist: {} };
+  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , supplierslist: {} };
   supplierList = [];
   SupplierListCopy = [];
+  paymentCod: boolean= true;
 
 
   //Get supplier list 
