@@ -67,7 +67,7 @@
                 <strong> Replies: </strong>
               </span>
               <br>
-              <div *ngFor="let replies of feed.reply" style="absolute">
+              <div *ngFor="let replies of feed.reply" >
                 <span> You Replied:</span>
                 <span class="onhovertext">{{replies.message}} </span>
                 <br>
@@ -83,7 +83,7 @@
                 <i class="fa fa-reply replyicon" aria-hidden="true" title="reply"></i>
               </a>
               <a class="btn btn-close " *ngIf="feed.status == 'close'">
-                <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true">  </i>  &nbsp;&nbsp;&nbsp;
+                <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true">  </i>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-check-circle closeicon " aria-hidden="true" title="closed"></i>
               </a>
             </td>
