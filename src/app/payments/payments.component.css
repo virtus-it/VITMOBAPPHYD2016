@@ -18,7 +18,7 @@
     border-bottom: 1px solid #ddd;
   }
   .nav-link{
-    padding: 20px !important;
+    padding: 20px 48px!important;
   }
   .nav-pills .nav-link{
     border-radius: 0px;
@@ -43,9 +43,9 @@ margin-bottom: 15px;
 tbody{
   color: #666
 }
-.nav-item .nav-link {
+/* .nav-item .nav-link {
   padding: 10px 20px !important;
-}
+} */
 .flex-column{
   margin-bottom: 0px !important;
 }
@@ -55,18 +55,17 @@ tbody{
   content: '';
   z-index: 100;
   width: 0;
-  top: 96%;
+  top: 10%;
+  right: -11px;
   height: 0;
-  border-top: solid 10px #0f75bc;
+  border-top: solid 10px #fff;
+  transform: rotate(270deg);
   border-left: solid 10px transparent;
   border-right: solid 10px transparent;
 }
-.red{
-  color: rgb(216, 34, 34);
+.dateview-style{
+  padding: 10px;
+  border-top: 1px solid #ddd;
+  margin:15px 10px 0px 10px !important
 }
-.orange{
-  color:rgb(255, 166, 0);
-}
-.green{
-  color:rgb(10, 235, 10);
-}
+
