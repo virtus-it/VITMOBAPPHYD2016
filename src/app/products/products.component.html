@@ -8,9 +8,9 @@
       <!-- <button md-raised-button color="primary" (click)='addInvoice()'>
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Invoice
       </button>-->
-      <button md-raised-button color="primary" (click)='stockHistory()'>
+      <!-- <button md-raised-button color="primary" (click)='stockHistory()'>
         <i class="fa fa-line-chart" aria-hidden="true"></i> Stock History
-      </button> 
+      </button>  -->
       <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()' *ngIf="superDealer">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
       </a>
@@ -86,21 +86,26 @@
           </td>
           <td width="33%">
             <div class="row ">
-              <div class="col-sm-4  col-md-4  col-lg-4 left">
+              <div class="col left">
                 <span class="danger">Min Qty </span>
                 <br>
                 <b class="danger">{{details.minorderqty}}</b>
               </div>
-              <div class="col-sm-4  col-md-4  col-lg-4 left">
+              <div class="col left">
                 <span class="td-label">Cost </span>
                 <br>
                 <b class="">{{details.pcost}}</b>
               </div>
-              <div class="col-sm-4  col-md-4  col-lg-4 left  ">
+              <div class="col left">
                 <span class="warning">Stock </span>
                 <br>
                 <b class="warning">{{details.avaliable_stock}}</b>
               </div>
+              <div class="col left">
+                  <span class="warning">Return cans</span>
+                  <br>
+                  <b class="warning">{{details.avaliable_emptycans}}</b>
+                </div>
             </div>
           </td>
           <td width="33%">
@@ -108,6 +113,8 @@
               <div class="col left">
                 <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer"></i>&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>
+                <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i>
+
               </div>
               <div class="col left">
                 <span class="info capital">{{details.stockstatus}} </span>
