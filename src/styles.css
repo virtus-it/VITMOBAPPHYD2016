@@ -478,7 +478,7 @@ margin-left: 0px;
 table thead th::after{
   
       font-family: FontAwesome;
-      content: "\2193";
+      /* content: "\2193"; */
       display: block;
      float: right;
   }
