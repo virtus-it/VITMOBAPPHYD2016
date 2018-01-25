@@ -15,7 +15,7 @@
     <div class="row">
       <div class="  col-6">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="Detail.order.quantity" >
+          <input class="form-control" mdInput placeholder="Quantity" (ngModelChange)="amountChange($event)" [(ngModel)]="Detail.order.quantity"  >
           <md-error>
             Quantity is
             <strong>required</strong>
@@ -59,7 +59,7 @@
     <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cod'">
       <div class="  col-4">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
+          <input class="form-control" mdInput placeholder="Amount"    [(ngModel)]="Detail.order.total_amt">
           <md-error>
             Amount is
             <strong>required</strong>

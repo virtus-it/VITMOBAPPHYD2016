@@ -22,6 +22,7 @@ export class DeliverpreorderComponent implements OnInit {
   paymentCod: boolean= true;
 
 
+
   //Get supplier list 
   getSupplierList(){
     let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
@@ -65,6 +66,12 @@ export class DeliverpreorderComponent implements OnInit {
 
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  amountChange(object){
+    this.Detail.order.total_amt =parseInt(this.Detail.order.product_cost) * parseInt(object);
+  
+
   }
 
 
