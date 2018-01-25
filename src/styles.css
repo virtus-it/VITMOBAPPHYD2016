@@ -253,6 +253,16 @@ background: transparent;
 .pdleft-10{
   padding-left:10px !important;
 }
+.mgtopbottom-10x15{
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+.btn-small{
+  font-size: 10px !important;
+  line-height: 30px !important;
+  min-width: 75px !important;
+    padding: 0 14px !important;
+}
 .pdleft-15{
   padding-left:15px !important;
 }
