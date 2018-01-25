@@ -144,31 +144,30 @@
         Bill table
       </div>
       <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
-          <div class=" ">
-            <ul class="scrollheight  mgtop-5">
-              <li class="nolist-style  messages-style" *ngFor="let collection of collections">
-                <div>
-                    <small>{{collection.modifieddate | utcDate}}</small>
-                                  </div>
-                <div class="mgbottom-10">
-                  <b> Customer have done the Payment</b>
-                  <br>
-                  <small *ngIf="credit.customer"> Customer: {{credit.customer.firstname}} {{credit.customer.lastname}} have paid the amount of INR {{credit.amount_received}}
-                    to Dealer/Supplier:{{credit.dealer.firstname}}{{credit.dealer.lastname}}</small>
-                </div>
-  
-                <div class="row dateview-style">
-                  <small class="col-6 gray9">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    {{credit.modifieddate | utcDate }} </small>
-                  <small class="col-6 gray9">Order ID: # Order ID:{{credit.orderid}}</small>
-                </div>
-              </li>
-  
-            </ul>
-          </div>
+        <div class=" ">
+          <ul class="scrollheight  mgtop-5">
+            <li class="nolist-style  messages-style" *ngFor="let collection of collections">
+              <div>
+                <span *ngIf="collection.status=='confirm' || 'received'">
+                  <i class="fa fa-check-circle success fs-24" aria-hidden="true"></i>
+                </span>
+                <br>
+                <small class="gray9"> <i class="fa fa-calendar"></i> {{collection.modifieddate | utcDate}}</small>   <br>
+                <b class="capital ng-binding"> INR. {{collection.amount}}
+                </b>
+                <br>
+              <small>Payment Type : COD</small>
+                  </div>
+                  <!-- <div class="row">
+                      <div class="col-6 gray9"> <i class="fa fa-calendar"></i> <small> {{collection.modifieddate | utcDate}}</small>  </div>
+                      <div class="col-6"> <small>Payment Type : COD</small></div>
+                    </div> -->
+            </li>
+
+          </ul>
         </div>
-      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
+      </div>
+      <!-- <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
    
         <div class="col-md-3">
           <div class="container-fluid">
@@ -199,7 +198,7 @@
           </div>
         </div>
 
-      </div>
-</div>
-</div>
+      </div> -->
+    </div>
+  </div>
 </div>
