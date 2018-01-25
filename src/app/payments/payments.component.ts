@@ -16,11 +16,16 @@ export class PaymentsComponent implements OnInit {
 
 
   codPayments=[];
+  codPaymentsCopy=[];
   creditPayments=[];
-  areaPayments=[];
+  creditPaymentsCopy=[];
+  collections: any=[];
+  collectionsCopy:  any=[];
   billDetails= [];
   tabPanelView = 'cod';
   payments:any= [];
+  showFilterDialog = false;
+  searchPaymentTerm = "";
 
   getCod() {
     let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "all", "type": "cod", "lastrecordtimestamp": "15", "pagesize": 100, "last_paymentid": "0", "apptype": this.authenticationService.appType() } };
@@ -37,6 +42,7 @@ export class PaymentsComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       this.codPayments = result.data;
+      this.codPaymentsCopy = result.data;
     }
 
   }
@@ -56,6 +62,7 @@ export class PaymentsComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       this.creditPayments = result.data;
+      this.creditPaymentsCopy = result.data;
       
     }
 
@@ -80,20 +87,23 @@ export class PaymentsComponent implements OnInit {
 
   }
 
-  getPaymentByArea() {
+  getCollections() {
     let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": this.authenticationService.userType(), "status": "all", "lastrecordtimestamp": "15", "pagesize": 100, "productid": "1", "apptype": this.authenticationService.appType() } };
     this.paymentservice.getPaymentsByArea(input)
       .subscribe(
-      output => this.getPaymentsByAreaResult(output),
+      output => this.getCollectionsResult(output),
       error => {
         console.log("error");
         this.loaderService.display(false);
       });
 
+
   }
-  getPaymentsByAreaResult(result) {
+  getCollectionsResult(result) {
     console.log(result);
     if (result.result == 'success') {
+      this.collections = result.data;
+      this.collectionsCopy = result.data;
 
 
     }
@@ -125,6 +135,57 @@ this.tabPanelView = type;
 
 
   }
+
+  filterToggle(){
+    this.showFilterDialog = !this.showFilterDialog;
+  }
+
+  searchPayment() {
+    let term = this.searchPaymentTerm;
+    if(this.tabPanelView == 'cod'){
+    if (term) {
+      this.codPayments = this.codPaymentsCopy.filter(function (e) {
+          return e.customer.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+       
+      });
+    }
+    
+    else {
+      this.codPayments = this.codPaymentsCopy;
+    }
+  }
+  else if(this.tabPanelView == 'credit'){
+
+    if (term) {
+      this.creditPayments = this.creditPaymentsCopy.filter(function (e) {
+        if (e.customer && e.customer.firstname) {     
+          return e.customer.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+        }
+      });
+    }
+    
+    else {
+      this.creditPayments = this.creditPaymentsCopy;
+    }
+  }
+
+  else if(this.tabPanelView == 'collections'){
+    if (term) {
+      this.collections = this.collectionsCopy.filter(function (e) {
+        if ( e.amount){
+          return e.amount.toString().indexOf(term) >= 0
+        }
+      });
+    }
+    
+    else {
+      this.collections = this.collectionsCopy;
+    }
+
+  }
+
+
+}
   
 
 
@@ -133,7 +194,7 @@ this.tabPanelView = type;
   ngOnInit() {
     this.getCod();
     this.getCredit();
-    this.getPaymentByArea();
+    this.getCollections();
     this.getBillDetails();
 
 
