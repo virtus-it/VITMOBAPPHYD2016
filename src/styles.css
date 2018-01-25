@@ -12,6 +12,7 @@ table thead {
    border-bottom: none !important;
     vertical-align: middle !important;
     border-top: none;
+    text-align: left;
   }
   th{
     font-weight: 600;

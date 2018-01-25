@@ -13,6 +13,7 @@ export class AddStockHistoryComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private productService: ProductsService, public thisDialogRef: MdDialogRef<AddStockHistoryComponent>,@Inject(MD_DIALOG_DATA) public Detail: any) { }
 StockList=[];
+noRecord=false;
   getStockHistroy() {
     let input = {
       "root": {
@@ -31,7 +32,12 @@ StockList=[];
   getStockHistroyResult(result) {
     console.log(result);
     if(result.result == 'success'){
+      this.noRecord=false;
       this.StockList = result.data;
+    }
+    else{
+      this.StockList=[];
+      this.noRecord=true;
     }
   }
   onCloseModal() {
