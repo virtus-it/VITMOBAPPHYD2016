@@ -233,7 +233,7 @@
                       </label>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <label>Follow Up :
+                      <label *ngIf="superDealer">Follow Up :
                         <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                         <span (click)='showFollowUp(forward)'>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
@@ -477,7 +477,7 @@
                       <br>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
-                      <label>Follow Up :
+                      <label *ngIf="superDealer">Follow Up :
                         <!-- <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                         <span (click)='showFollowUp(allorder)'>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
