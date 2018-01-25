@@ -16,115 +16,71 @@
       </a>
     </div>
   </div>
-  <!-- <div id="" class="row pd-15x10 mg-0">
-
-    <div class="col">
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th width="20%">Product name</th>
-            <th width="10%">Cost </th>
-            <th width="15%">Avaliable stock</th>
-            <th width="15%">Created on </th>
-            <th width="15%">Action</th>
-            <th width="10%">Edit</th>
-            <th width="12%">History</th>
-
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td scope="row"></td>
-            <td class="left"></td>
-            <td class="left"></td>
-            <td scope="row"></td>
-            <td class="left">   
-                 <button md-raised-button color="primary">
-                Add Stock
-              </button>
-              <button md-raised-button color="default" class="mgtop-5"> Make inactive
-                </button></td>
-                <td class="left" ><i class="fa fa-edit" aria-hidden="true"></i></td>
-                <td class="left" (click)='productStockHistory()'><i class="fa fa-line-chart" aria-hidden="true"></i></td>
-        </tbody>
-      </table>
-    </div>
-  </div> -->
   <div>
     <table class="table table-hover">
       <tbody *ngFor="let products of productList">
         <tr class="border-topbottom bg-eee">
-          <td width="34%"></td>
-          <td width="33%">
-            <b class="capital">{{products.brandName}}
-              <span class="gray9">({{products.category}})</span>
+          <td class="">
+            <b class="capital">Product Name : {{products.brandName}} <b class="capital"> &nbsp;&nbsp; |  &nbsp;&nbsp;
+                <span class="">Category : {{products.category}}</span></b>
             </b>
-          </td>
-          <td width="33%" class="">
-            <!-- <div class="right">
-            <i class="fa fa-minus logo-color fs-18"></i>
-            <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-          </div> -->
           </td>
         </tr>
 
-        <tr *ngFor="let details of products.data">
-          <td width="34%">
-            <div class="row">
-                <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Product Type </span>
-                    <br>
+        <tr>
+          <td colspan="3">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th width="22%">Type</th>
+                  <th width="8%">Priority </th>
+                  <th width="8%">Min Qty </th>
+                  <th width="8%">Cost </th>
+                  <th width="8%">Stock</th>
+                  <th width="10%">Return cans</th>
+                  <th width="12%">Status</th>
+                  <th width="12%" class="no-th-arrow">Cans Returnable</th>
+                  <th width="12%" class="no-th-arrow">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let details of products.data">
+                  <td>
                     <b class="">{{details.ptype}}</b>
-                  </div>
-              <div class="col-sm-5  col-md-5  col-lg-5 left">
-                <span class="td-label">Priority </span>
-                <br>
-                <b class="gray9">{{details.priority}}</b>
-              </div>
+                  </td>
+                  <td>
+                    <b class="gray9">{{details.priority}}</b>
+                  </td>
+                  <td>
+                    <b class="danger">{{details.minorderqty}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.pcost}}</b>
+                  </td>
+                  <td>
+                    <b class="warning">{{details.avaliable_stock}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.avaliable_emptycans}}</b>
+                  </td>
 
-            </div>
-          </td>
-          <td width="33%">
-            <div class="row ">
-              <div class="col left">
-                <span class="danger">Min Qty </span>
-                <br>
-                <b class="danger">{{details.minorderqty}}</b>
-              </div>
-              <div class="col left">
-                <span class="td-label">Cost </span>
-                <br>
-                <b class="">{{details.pcost}}</b>
-              </div>
-              <div class="col left">
-                <span class="warning">Stock </span>
-                <br>
-                <b class="warning">{{details.avaliable_stock}}</b>
-              </div>
-              <div class="col left">
-                  <span class="warning">Return cans</span>
-                  <br>
-                  <b class="warning">{{details.avaliable_emptycans}}</b>
-                </div>
-            </div>
-          </td>
-          <td width="33%">
-            <div class="row ">
-              <div class="col left">
-                <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer"></i>&nbsp;&nbsp;&nbsp;
-                <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>
-                <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i>
+                  <td>
+                    <span class="info capital">{{details.stockstatus}} </span>
+                  </td>
+                  <td>
+                    <span class="success " *ngIf="details.iscanreturnable == 'true'">Yes </span>
+                    <span class="danger " *ngIf="details.iscanreturnable != 'true'">No </span>
+                  </td>
+                  <td>
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer"></i>&nbsp;
+                    <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
+                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
 
-              </div>
-              <div class="col left">
-                <span class="info capital">{{details.stockstatus}} </span>
-              </div>
-              <div class="col left">
-                <span class="success " *ngIf="details.iscanreturnable == 'true'">Cans Returnable </span>
-              </div>
-            </div>
           </td>
-
         </tr>
       </tbody>
       <!-- <tfoot>

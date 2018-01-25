@@ -74,7 +74,7 @@ if(result=='success'){
   stockHistory(data) {
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
 
-      width: '80%',
+      width: '60%',
       data: data
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {

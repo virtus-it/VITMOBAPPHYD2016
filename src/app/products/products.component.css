@@ -50,3 +50,12 @@ table thead {
   .filterView{
     top: 42px !important;
   }
+  .table[_ngcontent-c5] td[_ngcontent-c5], .table th{
+    text-align: left ;
+  }
+  .table{
+    margin-bottom: 0px !important
+  }
+  tr .center{
+    text-align: center !important;
+  }

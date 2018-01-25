@@ -10,7 +10,7 @@
 <md-dialog-content layout="column">
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="row form-group">
+      <div class="row ">
           <div class="col-md-4 col-sm-4 col-lg-4 ">
 
           <md-select placeholder="Select Category" name="type" class="full-width left" [(ngModel)]="productDetails.categoryDetails" >
@@ -69,7 +69,7 @@
           </div>
       </div>
 
-      <div class="row ">
+      <div class="row form-group">
           <div class="col-md-4 col-sm-4 col-lg-4">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Min Qty" [(ngModel)]="productDetails.minQty" name="minqty">
@@ -77,27 +77,39 @@
               </md-form-field>
             </div>
 
-
-          <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
-              <div class="form-check form-check-inline">
-                  <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.iscanRetrunable" name="iscanRetrunable">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Is Cans Returnable</span>
-                  </label>
+            <div class="col-md-4 col-sm-4 col-lg-4">
+                <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Empty Cans"  >
+                  
+                </md-form-field>
+              </div>      <div class="col-md-4 col-sm-4 col-lg-4">
+                  <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Stock"  >
+                    
+                  </md-form-field>
                 </div>
-          </div>
-          <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
-              <div class="form-check form-check-inline">
-                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                      <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.IsAuthorized" name="IsAuthorized">
-                      <span class="custom-control-indicator"></span>
-                      <span class="custom-control-description">IsAuthorized</span>
-                    </label>
-                  </div>
-            </div>
-            </div>
 
+            </div>
+<div class="row">
+    <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
+        <div class="form-check form-check-inline">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.iscanRetrunable" name="iscanRetrunable">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Is Cans Returnable</span>
+            </label>
+          </div>
+    </div>
+    <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
+        <div class="form-check form-check-inline">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.IsAuthorized" name="IsAuthorized">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">IsAuthorized</span>
+              </label>
+            </div>
+      </div>
+</div>
       <!-- <div class="row mgleftbottom-10x0">
         <b class="label-style">Week Days
           <span></span>
