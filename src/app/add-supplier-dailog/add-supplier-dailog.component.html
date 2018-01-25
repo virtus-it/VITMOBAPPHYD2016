@@ -33,7 +33,17 @@
                   </md-error>
                 </md-form-field>
 
-  
+                <md-form-field class="">
+                    <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="supplierInput.address">
+                    <md-error>
+                      Address is <strong>required</strong>
+                    </md-error>
+                  </md-form-field>
+          </div>
+          <div class="col-md-6 col-sm-6 ">
+              <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Email id" name="emailId"  [(ngModel)]="supplierInput.emailid">
+              </md-form-field>
           </div>
 
         </div>

@@ -16,9 +16,11 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"", "confirmPayment": false , supplierslist: {} };
+  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , supplierslist: {} };
   supplierList = [];
   SupplierListCopy = [];
+  paymentCod: boolean= true;
+
 
 
   //Get supplier list 
@@ -64,6 +66,12 @@ export class DeliverpreorderComponent implements OnInit {
 
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  amountChange(object){
+    this.Detail.order.total_amt =parseInt(this.Detail.order.product_cost) * parseInt(object);
+  
+
   }
 
 
