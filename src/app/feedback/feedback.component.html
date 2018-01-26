@@ -76,13 +76,13 @@
             </div>
           </td>
           <td class="left">
-              <a class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'">
+              <a class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'" (click)="openStatus(feed)">
                 <i class="fa fa-times-circle openicon" aria-hidden="true" title="open"></i>
               </a>
-              <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'">
+              <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'" (click)="openReplyModel(feed)" >
                 <i class="fa fa-reply replyicon" aria-hidden="true" title="reply"></i>
               </a>
-              <a class="btn btn-close " *ngIf="feed.status == 'close'">
+              <a class="btn btn-close " *ngIf="feed.status == 'close'" (click)="closeStatus(feed)" >
                 <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true">  </i>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <i class="fa fa-check-circle closeicon " aria-hidden="true" title="closed"></i>
               </a>
