@@ -15,7 +15,7 @@ import { ProductsService } from '../products/products.service';
 export class AddstockProductComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<AddstockProductComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private productsService:ProductsService) { }
-StockInput = { invoiceDate:null,stock:"",itemCost:this.Detail.pcost,returnemptycans:"0"};
+StockInput = { invoiceDate:new Date(),stock:"",itemCost:this.Detail.pcost,returnemptycans:"0"};
 
 onCloseCancel() {
   this.thisDialogRef.close('Cancel');

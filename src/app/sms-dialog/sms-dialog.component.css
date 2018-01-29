@@ -16,3 +16,13 @@
     background-color: blue;
 }
 .wd-60{width:60%}
+.fa-search-post{
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}
+.smsdialog-scroll{
+    height: 350px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}

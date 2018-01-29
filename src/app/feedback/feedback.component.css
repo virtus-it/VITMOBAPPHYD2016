@@ -90,6 +90,22 @@ table thead {
   .col-md-9{
     width: 75%;
   }
+  .onhovertext {
+    width:100px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: block;
+}
+
+.onhovertext:hover {
+    overflow: visible;
+    position: relative;
+left: -2px;
+width: 100%;
+background: #fff;
+box-shadow: 0 0 8px #bbb;
+}
 
 
   /* .mat-dialog-container{
