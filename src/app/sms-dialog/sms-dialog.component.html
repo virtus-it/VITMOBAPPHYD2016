@@ -172,7 +172,7 @@
                     <a class="cursor logo-color ">
                       <b class="fa fa-plus-circle success fs-22" aria-hidden="true" (click)="addButton()"></b>
                     </a>
-                    <!-- <a class="cursor logo-color " (click)="addButton()">
+                    <!-- <a class="cursor logo-color " (click)="addButton()"> -->
 
                 </div>
                 <div class="col-sm-1  col-md-1  col-lg-1">
@@ -193,9 +193,9 @@
                   <a class="cursor logo-color ">
                     <b class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addOption()"></b>
                   </a>
-                  <!-- <a class="cursor logo-color " (click)="addOption()">
+                  <!-- <a class="cursor logo-color " (click)="addOption()"> 
                     <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
-                  </a> -->
+                 </a> -->
                   </div>
                   <div class="col-sm-1  col-md-1  col-lg-1">
                     <i class="fa fa-trash danger fs-22 cursor" (click)="removeoption(item)" aria-hidden="true"></i>
@@ -265,6 +265,7 @@
             </div>
           </div>
         </div>
+      </div>
         <div *ngIf="orderinput.orderType == 'sms'" class="smsdialog-scroll">
           <div class="row ">
 
@@ -284,15 +285,15 @@
           </div>
 
         </div>
-      </div>
+      
       </div>
     </div>
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20 ">
-  <md-dialog-actions align="end" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">
+  <md-dialog-actions align="end" >
 
-    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()">SAVE</button>
+    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">SAVE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
   <!-- <md-dialog-actions align="end" *ngIf="orderinput.orderType != 'sms'">
