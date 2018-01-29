@@ -11,6 +11,7 @@ import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
+import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart-dailog.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import * as _ from 'underscore';
@@ -42,17 +43,17 @@ export class CustomerComponent implements OnInit {
     showOrderList() {
         let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
             width: '90%',
-            data: ''
+            data: '' 
         });
         dialogRefOrderList.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
-    showPlaceOrder() {
-        let dialogRefPlaceorder = this.dialog.open(CustomerPlaceorderDailogComponent, {
+    showPlaceOrder(data) {
+        let dialogRefPlaceorder = this.dialog.open(PreOrderCartDailogComponent, {
             width: '700px',
-            data: ''
+            data: data
         });
         dialogRefPlaceorder.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
