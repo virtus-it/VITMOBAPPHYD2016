@@ -520,10 +520,10 @@ border:2px solid #0f75bc;
       .success{
         color: #4cae4c
       } 
-      .onhovertext {/* width:250px; */text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
+      /* .onhovertext {text-overflow: ellipsis;white-space: nowrap;overflow: hidden;}
       .onhovertext:hover {
         overflow: visible;
-    }
+    } */
     .mat-dialog-content{
       max-height: 100% !important;
     }
@@ -595,6 +595,23 @@ border:2px solid #0f75bc;
   color: #fff;
 
   border-radius: 50%;
+}
+.onhovertext {
+  width:100px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: block;
+}
+
+.onhovertext:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+width: 100%;
+background: #fff;
+box-shadow: 0 0 8px #bbb;
 }
 .fs-22{
   font-size: 22px;

@@ -7,7 +7,7 @@
     </div>
     <div class="col-md-2  col-sm-2 col-lg-2 right">
       <a class="cursor logo-color mgleft-10">
-        <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
             <b class="float-left">Filter By</b>
@@ -35,21 +35,21 @@
       </a>
     </div>
   </div>
-  <div id="" class="row pd-15x10 mg-0">
-    <div class="col">
+  <div id="" class="row  mg-0">
+    <div class="pd-15">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
             <th width="12%">Customer</th>
-            <th width="8%">Joined</th>
+            <th width="10%">Status</th>
             <th width="12%">Distributor</th>
-            <th width="8%">Mobile No</th>
-            <th width="5%">Email Id</th>
-            <th width="22%">Address</th>
-            <th width="10%">Advance Amt</th>
-            <th width="8%">Due Amt</th>
-            <th width="13%">Payment</th>
-            <th width="10%">Action</th>
+            <th width="8%">Mobile</th>
+            <th width="8%">Email</th>
+            <th width="15%">Address</th>
+            <th width="12%">Advance Amt</th>
+            <th width="7%">Due Amt</th>
+            <th width="7%">Payment</th>
+            <th width="8%">Action</th>
 
 
           </tr>
@@ -57,15 +57,15 @@
         <tbody>
           <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
           <tr *ngFor="let preorder of customerList">
-            <td class="left">{{preorder.firstname}} {{preorder.lastname}}</td>
+            <td class="left capitalize">{{preorder.firstname}} {{preorder.lastname}}</td>
             <td class="left">
               <span *ngIf="preorder.isappdownloaded">Joined</span>
               <span *ngIf="!preorder.isappdownloaded">Not Joined</span>
             </td>
-            <td class="left">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer</td>
+            <td class="left capitalize">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer</td>
             <td class="left">{{preorder.mobileno}}</td>
-            <td class="left">{{preorder.emailid}}</td>            
-            <td class="left">{{preorder.address}}</td>
+            <td class="left " >{{preorder.emailid}}</td>            
+            <td class="left" style="position:absolute"><span class="onhovertext mgtop-10">{{preorder.address}}</span></td>
             <td class="left">
               <span *ngIf="preorder.payments">{{preorder.payments.advance_amount}} </span>
             </td>

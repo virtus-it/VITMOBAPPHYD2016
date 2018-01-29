@@ -118,7 +118,7 @@
             <td class="left capitalize">{{customers.firstname}} {{customers.lastname}}</td>
             <td class="left">{{customers.mobileno}}</td>
             <td class="left"  width="10%">{{customers.emailid}}</td>
-            <td class="left">{{customers.address}}</td>
+            <td class="left" style="position: absolute"><span class="onhovertext">{{customers.address}}</span></td>
             <td class="left">
                 <span *ngIf="customers.isappdownloaded">Joined</span>
                 <span *ngIf="!customers.isappdownloaded">Not Joined</span>
