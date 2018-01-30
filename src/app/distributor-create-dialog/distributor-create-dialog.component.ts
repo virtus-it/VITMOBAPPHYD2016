@@ -14,7 +14,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"",selectedItems:[]};
+    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", selectedItems:[]};
     areaList = [];
 
     dropdownSettings = {};
@@ -48,7 +48,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          this.loaderService.display(true);
          var input:any = {
              "User": {
-                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
          if (this.distributorDetail) {
@@ -106,6 +106,7 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.phone = this.distributorDetail.mobileno;
              this.dist.companyname = this.distributorDetail.companyname;
              this.dist.address = this.distributorDetail.address;
+             this.dist.emailid = this.distributorDetail.emailid;
              _.each(this.distributorDetail.areainfo, function (i, j) {
                  var area:any = i;
                  var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };

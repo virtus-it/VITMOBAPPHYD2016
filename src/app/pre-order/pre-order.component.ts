@@ -32,6 +32,10 @@ export class PreOrderComponent implements OnInit {
     });
      dialogRefAddPreOrder.afterClosed().subscribe(result => {
      console.log(`Dialog closed: ${result}`); 
+     if(result == 'success'){
+       this.getCustomerList(true);
+
+     }
      });
   }
 

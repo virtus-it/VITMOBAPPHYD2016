@@ -148,6 +148,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     //this.getPolygonDistributors();
     this.assignPolygon();
     this.getOrderDetail();
+    console.log(this.orderDetail);
   }
 
 }
