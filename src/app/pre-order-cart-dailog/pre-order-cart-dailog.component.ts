@@ -190,6 +190,7 @@ ViewDistributors(data) {
       console.log(`Dialog closed: ${result}`);
       if(result =='success'){
         this.thisDialogRef.close('success');
+        
 
       }
   });
@@ -232,7 +233,10 @@ createPreOrder(){
 createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
-    let data = {order_id:result.data.orderid,quantity:input[0].order.quantity};
+    let data ={order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:""}};
+    if(this.Details.supplier){
+      data.supplierdetails.userid =this.Details.supplier.supplierid;
+    }
     this.ViewDistributors(data);
 
   }
@@ -245,18 +249,23 @@ createPreOrderResult(result,input) {
     let hours = moment().format("HH");
     if(parseInt(hours) <= 8){
 this.createPreOrderInput.timeslot = "9AM-1PM";
+this.createPreOrderInput.date= new Date();
 this.disableSlot = false;
+
 
     }
     else if(parseInt(hours) <= 15){
+    
+      this.createPreOrderInput.date= new Date();
       this.createPreOrderInput.timeslot = "4PM-7PM";
       this.disableSlot = true;
+      
+
     }
     else {
       this.createPreOrderInput.timeslot = "9AM-1PM";
       var date = new Date();
       this.createPreOrderInput.date = new Date(date.setDate(date.getDate() + 1));
-      
       this.disableSlot = false;
     }
 

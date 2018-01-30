@@ -15,6 +15,7 @@ import * as _ from 'underscore';
 export class DistributorListDialogComponent implements OnInit {
   distributors = [];
   suppliers = [];
+  autoAssign = false;
   distributorsCopy = [];
   suppliersCopy = [];
   distributorID = "";
@@ -80,6 +81,8 @@ export class DistributorListDialogComponent implements OnInit {
       });
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
+      this.supplierID= this.orderDetail.supplierdetails.userid;
+      // before this.orderDetail.supplierid   newchange this.orderDetail.supplierdetails.userid;
     }
   }
   forWardOrder() {
@@ -116,7 +119,7 @@ export class DistributorListDialogComponent implements OnInit {
     let input = {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
-        "from": this.authenticationService.loggedInUserId(),
+        "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
         "loginid": this.authenticationService.loggedInUserId(),
         "actiontype": "reassigned",
         "userid": this.authenticationService.loggedInUserId(),
@@ -177,10 +180,12 @@ export class DistributorListDialogComponent implements OnInit {
   Closedailog() {
     this.thisDialogRef.close('success');
   }
+
   ngOnInit() {
     this.getDistributors();
     this.getSuppliers();
     this.superDealer = this.authenticationService.getSupperDelear();
+    console.log(this.orderDetail);
   }
 
 }
