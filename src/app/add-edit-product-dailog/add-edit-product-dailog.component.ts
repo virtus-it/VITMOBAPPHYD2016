@@ -76,8 +76,9 @@ if (result.result == 'success') {
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
-    // console.log(this.Details);
+     console.log(this.Details);
     this.getProductCategory();
+
   }
 
 }
