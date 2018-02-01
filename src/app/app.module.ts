@@ -85,6 +85,7 @@ import { PaymentsComponent } from './payments/payments.component';
 import { PaymentsService } from './payments/payments.service';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordupdateComponent } from './passwordupdate/passwordupdate.component';
+import { ProductUpdateComponent } from './product-update/product-update.component';
 
 @NgModule({
     declarations: [
@@ -146,7 +147,8 @@ import { PasswordupdateComponent } from './passwordupdate/passwordupdate.compone
         InvoicedetailsComponent,
         PaymentsComponent,
         ProfileComponent,
-        PasswordupdateComponent
+        PasswordupdateComponent,
+        ProductUpdateComponent
         
 
     ],
@@ -254,8 +256,8 @@ import { PasswordupdateComponent } from './passwordupdate/passwordupdate.compone
          InvoicedetailsComponent,
          DeliverpreorderComponent,
          PaymentsComponent,
-         PasswordupdateComponent
-
+         PasswordupdateComponent,
+         ProductUpdateComponent
 
         ],
     exports: [
