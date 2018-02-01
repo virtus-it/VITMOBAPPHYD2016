@@ -240,7 +240,11 @@ createPreOrder(){
 createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
-    let data ={order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:""}};
+    let productid= "";
+    if(input[0].order.productid){
+      productid = input[0].order.productid
+    }
+    let data ={prod_id:productid,ordersfrom:input[0].order.orderfrom,order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:""}};
     if(this.Details.supplier){
       data.supplierdetails.userid =this.Details.supplier.supplierid;
     }
