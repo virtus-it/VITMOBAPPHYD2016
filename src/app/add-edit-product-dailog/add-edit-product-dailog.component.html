@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-    <i class="fa fa-gift"></i> Add Product </div>
+    <i class="fa fa-gift"></i> {{headerValue}} </div>
   <div class="col-md-1 col-sm-1 right">
     <strong>
       <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
@@ -19,7 +19,7 @@
                 </md-option>
           </md-select>
         </div>
-        <div class="col-md-4 col-sm-4 col-lg-4">
+        <div class="col-md-4 col-sm-4 col-lg-4" *ngIf="!Details">
 
             <md-select placeholder="Select Currency" name="type" class="full-width left" [(ngModel)]="productDetails.currency" name="currency">
               <md-option value="USD">USD</md-option>
@@ -171,7 +171,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="createProduct()">SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="onSubimtProducts()">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

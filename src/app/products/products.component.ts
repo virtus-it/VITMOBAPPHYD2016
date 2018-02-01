@@ -8,6 +8,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
 import * as _ from 'underscore';
 @Component({
 
@@ -42,6 +43,22 @@ export class ProductsComponent implements OnInit {
   }
   editProduct(data) {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
+
+      width: '700px',
+      data: data
+    });
+    dialogRefAddProduct.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+
+        this.getProducts();
+      }
+
+    });
+
+  }
+  UpdateStatus(data) {
+    let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
 
       width: '700px',
       data: data

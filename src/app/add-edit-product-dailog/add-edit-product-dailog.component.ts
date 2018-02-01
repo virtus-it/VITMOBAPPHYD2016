@@ -17,7 +17,8 @@ export class AddEditProductDailogComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<AddEditProductDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) { }
   productCategoryList = [];
   productTypeList = [];
-  productDetails:any = {categoryDetails:"",productName:"",productType:"",currency:"",cost:"",iscanRetrunable:"",minQty:"",Priority:"",IsAuthorized:""};
+  headerValue = "Add Products";
+  productDetails: any = { categoryDetails: "", productName: "", productType: "", currency: "", cost: "", iscanRetrunable: "", minQty: "", Priority: "", IsAuthorized: "" };
   getProductCategory() {
     let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType(), userType: this.authenticationService.userType() };
     this.productService.getProductsCategory(input)
@@ -32,12 +33,15 @@ export class AddEditProductDailogComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       this.productCategoryList = result.data;
+      if (this.Details) {
+        this.getProductDetails();
+      }
     }
 
   }
   getProductsByCategory() {
-    if (this.productDetails.categoryDetails) {
-      let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "category": this.productDetails.categoryDetails.category, "categoryid": this.productDetails.categoryDetails.categoryid, "apptype": "moya" } };
+    if (this.Details) {
+      let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "category": this.Details.category, "categoryid": this.Details.categoryid, "apptype": this.authenticationService.appType() } };
       this.productService.getProductsByCategory(input)
         .subscribe(
         output => this.getProductsByCategoryResult(output),
@@ -54,30 +58,79 @@ export class AddEditProductDailogComponent implements OnInit {
       this.productTypeList = result.data;
     }
   }
-  createProduct(){
-  
-    let input = {"product":{"category":this.productDetails.categoryDetails.category,"categoryid":this.productDetails.categoryDetails.categoryid,"currency":this.productDetails.currency,"brandname":this.productDetails.productName,"pname":this.productDetails.productName,"ptype":this.productDetails.productType,"pcost":this.productDetails.cost,"areaid":"0","minorderqty":this.productDetails.minQty,"priority":this.productDetails.Priority,"iscanreturnable":this.productDetails.iscanRetrunable,"isauthorized":this.productDetails.IsAuthorized,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
+  createProduct() {
+
+    let input = { "product": { "category": this.productDetails.categoryDetails.category, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": this.productDetails.currency, "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
     console.log(input);
     this.productService.createProduct(input)
-    .subscribe(
-    output => this.createProductResult(output),
-    error => {
-      console.log("error");
-      this.loaderService.display(false);
-    });
+      .subscribe(
+      output => this.createProductResult(output),
+      error => {
+        console.log("error");
+        this.loaderService.display(false);
+      });
   }
-  createProductResult(result){
-console.log(result);
-if (result.result == 'success') {
-  this.thisDialogRef.close('success');
-}
+  createProductResult(result) {
+    console.log(result);
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
+    }
+  }
+  updateProduct() {
+
+    let input = { "product": { "pid": this.Details.productid, "category": this.productDetails.categoryDetails.category, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": "INR", "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+    console.log(input);
+    this.productService.updateProduct(input)
+      .subscribe(
+      output => this.updateProductResult(output),
+      error => {
+        console.log("error");
+        this.loaderService.display(false);
+      });
+  }
+  updateProductResult(result) {
+    console.log(result);
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
+    }
+  }
+  getProductDetails() {
+    this.headerValue = "Edit Products";
+    let productDetails = this.Details
+    let category = _.find(this.productCategoryList, function (k, l) {
+      let Details: any = k;
+      return Details.categoryid == productDetails.categoryid;
+    });
+    if (category) {
+      this.productDetails.categoryDetails = category;
+    }
+    this.productDetails.productName = this.Details.pname;
+    this.productDetails.productType = this.Details.ptype;
+    this.productDetails.cost = this.Details.pcost;
+    this.productDetails.iscanRetrunable = JSON.parse(this.Details.iscanreturnable);
+    this.productDetails.minQty = this.Details.minorderqty;
+    this.productDetails.Priority = this.Details.priority;
+    this.productDetails.IsAuthorized = JSON.parse(this.Details.isauthorized);
+
+
+
   }
   onCloseModal() {
     this.thisDialogRef.close('cancel');
   }
+  onSubimtProducts() {
+    if (this.Details) {
+      this.updateProduct();
+    }
+    else {
+      this.createProduct();
+    }
+
+  }
   ngOnInit() {
-     console.log(this.Details);
+    console.log(this.Details);
     this.getProductCategory();
+
 
   }
 
