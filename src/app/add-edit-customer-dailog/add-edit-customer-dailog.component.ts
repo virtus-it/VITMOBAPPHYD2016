@@ -17,7 +17,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   customerInput: any = { "User": { "advamt": "0", "registertype":"" , "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
-
+  paymentdueDate:any = "";
 
   getCustomerDetails() {
   // console.log(this.Details);
@@ -53,6 +53,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
+        this.paymentdueDate = result.data.user.payment.paymentdueday;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
@@ -77,7 +78,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     input.User.pwd =  this.customerInput.User.mobileno;
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
-    
+    input.User.paymentdueday= this.paymentdueDate;
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
@@ -96,6 +97,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
+    input.User.paymentdueday= this.paymentdueDate;
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),

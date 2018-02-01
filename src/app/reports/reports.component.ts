@@ -39,7 +39,7 @@ export class ReportsComponent implements OnInit {
     reportType: "", days: null, lastId: "0", pagesize: 30, appType: this.authenticationService.appType
       ()
   };
-  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "",distributorId: "" };
+  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "",distributorId: "",distributorEmail:"",customerEmail:"" };
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
@@ -200,6 +200,7 @@ export class ReportsComponent implements OnInit {
 
       if (findcustomer) {
         this.downloadInput.customerId = findcustomer.userid;
+        this.downloadInput.customerEmail = "";// findcustomer.emailid;
       }
 
 
@@ -210,10 +211,10 @@ export class ReportsComponent implements OnInit {
 
   //InVoice Dialog box
 
-  showInvoice() {
+  showInvoice(data) {
     let dialogRefdeleteSupplier = this.dialog.open(InvoicedetailsComponent, {
       width: '700px',
-      data: ''
+      data: data
 
     });
     dialogRefdeleteSupplier.afterClosed().subscribe(result => {
@@ -228,7 +229,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy,emailid:""
       }
     };
     if (this.downloadInput.fromDate) {
@@ -239,23 +240,24 @@ export class ReportsComponent implements OnInit {
     }
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
+      input.order.emailid = this.downloadInput.customerEmail;
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
+      input.order.emailid = this.downloadInput.distributorEmail;
     }
     console.log(input);
-    this.reportservice.raiseInvoice(input)
-      .subscribe(
-      output => this.raiseInvoiceOfOrderResult(output),
-      error => {
-        console.log("error");
-        this.loaderService.display(false);
-      });
+    this.showInvoice(input);
+    // this.reportservice.raiseInvoice(input)
+    //   .subscribe(
+    //   output => this.raiseInvoiceOfOrderResult(output),
+    //   error => {
+    //     console.log("error");
+    //     this.loaderService.display(false);
+    //   });
 
   }
-  raiseInvoiceOfOrderResult(result){
-console.log(result);
-  }
+ 
 
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
@@ -319,6 +321,7 @@ console.log(result);
 
       if (findDistributor) {
         this.downloadInput.distributorId  = findDistributor.userid;
+        this.downloadInput.distributorEmail =  findDistributor.emailid;
       }
 
 

@@ -10,7 +10,16 @@
 </div>
 <div id="" class="row pd-15 mg-0 brd-bottom">
   <br>
-  <div class="col">
+  <div class="example-container">
+      <md-form-field>
+        <input mdInput placeholder="Enter your email" [(ngModel)]="Detail.order.emailid" name="email" [formControl]="email" required >
+        <md-error *ngIf="email.invalid">{{getErrorMessage()}}</md-error>
+      </md-form-field>
+    </div>
+    <div>
+        <button md-raised-button  [disabled]="email.invalid"  (click)="sendInvoice()" class="btn-primary">SUBMIT</button>
+    </div>
+  <div class="col" *ngIf="messageSent">
     <h3 class="warning center">
       <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
       Invoice Emailed Successfully </h3>
