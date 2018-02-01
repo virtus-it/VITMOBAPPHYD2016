@@ -53,7 +53,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
-        this.paymentdueDate = result.data.user.payment.days;
+        this.paymentdueDate = result.data.user.payment.paymentdueday;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
