@@ -19,8 +19,8 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
-          <md-error>
+          <input class="form-control" [formControl]="emailFormControl"  mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
+          <md-error *ngIf="emailFormControl.hasError('required')">
             First Name is
             <strong>required</strong>
           </md-error>
@@ -200,7 +200,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" [disabled]="!emailFormControl.valid">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

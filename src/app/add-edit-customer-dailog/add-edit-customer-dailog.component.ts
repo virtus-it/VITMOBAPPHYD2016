@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
@@ -14,6 +15,9 @@ import { Input } from '@angular/core/src/metadata/directives';
 export class AddEditCustomerDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
+
+  emailFormControl = new FormControl('', [
+    Validators.required]);
   customerInput: any = { "User": { "advamt": "0", "registertype":"" , "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
