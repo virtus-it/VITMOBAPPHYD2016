@@ -81,7 +81,10 @@ export class DistributorListDialogComponent implements OnInit {
       });
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
-      this.supplierID= this.orderDetail.supplierdetails.userid;
+      if (this.orderDetail.supplierdetails) {
+        this.supplierID= this.orderDetail.supplierdetails.userid;
+      }
+      
       // before this.orderDetail.supplierid   newchange this.orderDetail.supplierdetails.userid;
     }
   }

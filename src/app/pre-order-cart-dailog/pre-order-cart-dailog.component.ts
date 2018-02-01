@@ -142,7 +142,14 @@ filterDistributors(name: string) {
 //Getting products
 
 getProducts() {
-  let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+  let userid = 0
+  if(this.Details.dealers && this.Details.dealers.user_id){ 
+    userid = this.Details.dealers.user_id;
+  }
+  else{
+    userid= this.authenticationService.loggedInUserId();
+  }
+  let input = { userId: userid, appType: this.authenticationService.appType() };
   this.productService.getProducts(input)
     .subscribe(
     output => this.getProductsResult(output),
