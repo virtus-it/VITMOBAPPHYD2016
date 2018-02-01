@@ -18,11 +18,13 @@ export class AddEditCustomerDailogComponent implements OnInit {
 
   paymentDate: any ="";
   paymentdueDate:any = "";
+  headerValue="Add Customer"
 
   getCustomerDetails() {
   // console.log(this.Details);
   this.loaderService.display(true);
     if(this.Details){
+      this.headerValue ="Edit Customer";
     let input = { userid: 0, appType: this.authenticationService.appType() };
     if (this.Details.order_by) {
       input = { userid: this.Details.order_by, appType: this.authenticationService.appType() };
