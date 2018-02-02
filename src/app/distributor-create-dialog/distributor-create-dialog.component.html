@@ -15,9 +15,9 @@
       <div class="row">
       <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="form-control" mdInput placeholder="First Name" [formControl]="emailFormControl" [(ngModel)]="dist.firstName"
-              name="firstName">
-            <md-error *ngIf="emailFormControl.hasError('required')">
+            <input class="form-control" mdInput placeholder="First Name" [formControl]="firstFormControl" [(ngModel)]="dist.firstName"
+              name="firstName" >
+            <md-error *ngIf="firstFormControl.hasError('required')">
               First Name is <strong>required</strong>
             </md-error>
           </md-form-field>
@@ -31,7 +31,11 @@
       </div>
       <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" [(ngModel)]="dist.phone" name="phone" maxlength="10">
+              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10"  >
+            
+              <md-error *ngIf="phoneFormControl.hasError('required')" >
+                  Phone Number is <strong>required</strong>
+                </md-error>
             </md-form-field>
           </div> 
     </div>
@@ -69,7 +73,7 @@
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" md-raised-button class="btn-primary" [disabled]="!emailFormControl.valid" (click)="onSubmit()">SUBMIT</button>
+      <button type="submit" md-raised-button class="btn-primary" [disabled]="!firstFormControl.valid || !phoneFormControl.valid" (click)="onSubmit()">SUBMIT</button>
       &nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
   </md-dialog-actions>

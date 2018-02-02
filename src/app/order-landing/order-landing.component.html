@@ -57,7 +57,7 @@
                 </div>
                 <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
                   <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10">
                   </md-form-field>
                 </div>
                 <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">

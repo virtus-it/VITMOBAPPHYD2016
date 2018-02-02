@@ -16,11 +16,15 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
 export class DistributorCreateDialogComponent implements OnInit {
     dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", selectedItems:[]};
     areaList = [];
+    
 
     dropdownSettings = {};
     constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService,public dialog: MdDialog) { }
-     emailFormControl = new FormControl('', [
+     firstFormControl = new FormControl('', [
          Validators.required]);
+    
+         phoneFormControl = new FormControl({value: '', disabled: false}, [
+            Validators.required]);
      getAreasName() {
         this.loaderService.display(true);
          var input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
@@ -100,7 +104,10 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      getDetails() {
          if (this.distributorDetail) {
-             var areatime =[]
+             var areatime =[];
+             
+             this.phoneFormControl = new FormControl({value: '', disabled: true}, [
+                Validators.required]);
              this.dist.firstName = this.distributorDetail.firstname;
              this.dist.lastName = this.distributorDetail.lastname;
              this.dist.phone = this.distributorDetail.mobileno;
@@ -116,6 +123,7 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.selectedItems = areatime;
              
          }
+         
      }
      openStockDialog(data) {
         let dialogRef = this.dialog.open(AddStockDistributorComponent, {

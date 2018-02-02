@@ -134,6 +134,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                     if(result == 'success'){
                     this.dailogCloseResult = 'success';
                     this.getOrderDetail();
+                    this.thisDialogRef.close('success');
                     }
         
                 });
