@@ -23,7 +23,7 @@ export class ReportsComponent implements OnInit {
   filteredcustomer: Observable<any[]>;
   DistributorCtrl: FormControl;
   filteredDistributors: Observable<any[]>;
-  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private customerService: CustomerService) {
+  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private customerService: CustomerService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -39,7 +39,7 @@ export class ReportsComponent implements OnInit {
     reportType: "", days: null, lastId: "0", pagesize: 30, appType: this.authenticationService.appType
       ()
   };
-  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "",distributorId: "",distributorEmail:"",customerEmail:"" };
+  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" };
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
@@ -229,7 +229,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy,emailid:""
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: ""
       }
     };
     if (this.downloadInput.fromDate) {
@@ -257,7 +257,7 @@ export class ReportsComponent implements OnInit {
     //   });
 
   }
- 
+
 
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
@@ -320,8 +320,8 @@ export class ReportsComponent implements OnInit {
       });
 
       if (findDistributor) {
-        this.downloadInput.distributorId  = findDistributor.userid;
-        this.downloadInput.distributorEmail =  findDistributor.emailid;
+        this.downloadInput.distributorId = findDistributor.userid;
+        this.downloadInput.distributorEmail = findDistributor.emailid;
       }
 
 
@@ -334,6 +334,64 @@ export class ReportsComponent implements OnInit {
 
     }
     return finalDistributors;
+  }
+  printFile() {
+    let input = {
+      order: {
+        userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
+        lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: ""
+      }
+    };
+    if (this.downloadInput.fromDate) {
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.downloadInput.toDate) {
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.downloadInput.filterBy == 'customer') {
+      input.order.filterid = this.downloadInput.customerId;
+      input.order.emailid = this.downloadInput.customerEmail;
+    }
+    if (this.downloadInput.filterBy == 'distributor') {
+      input.order.filterid = this.downloadInput.distributorId;
+      input.order.emailid = this.downloadInput.distributorEmail;
+    }
+    console.log(input);
+    this.reportservice.printInvoice(input)
+      .subscribe(
+      output => this.printFileResult(output),
+      error => {
+        console.log("error");
+        this.loaderService.display(false);
+      });
+    // 
+
+
+  }
+  printFileResult(result) {
+    
+    if(result.result == 'success'){
+      let path = result.data.filename;
+     
+      this.customerService.getPrintFile(path)
+        .subscribe(
+        output => this.printgetFileResult(output),
+        error => {
+          console.log("error in customer");
+          this.loaderService.display(false);
+        });
+    }
+  }
+  printgetFileResult(result){
+    console.log(result);
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = URL.createObjectURL(result);
+
+    document.body.appendChild(iframe);
+    iframe.contentWindow.print();
+
   }
   ngOnInit() {
     this.searchReports(true, 'newlydownloaded');

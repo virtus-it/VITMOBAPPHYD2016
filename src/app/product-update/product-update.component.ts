@@ -16,8 +16,9 @@ import * as _ from 'underscore';
 export class ProductUpdateComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<ProductUpdateComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) { }
+  stockStatusValue = "";
   updateStatus() {
-    let input = { "product": { "pid": this.Details.productid, "status": this.Details.stockstatus, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } }
+    let input = { "product": { "pid": this.Details.productid, "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } }
     this.productService.setProductStatus(input)
       .subscribe(
       output => this.updateStatusResult(output),
@@ -38,6 +39,7 @@ if (result.result == 'success') {
   }
   ngOnInit() {
     console.log(this.Details);
+    this.stockStatusValue = this.Details.stockstatus;
   }
 
 }
