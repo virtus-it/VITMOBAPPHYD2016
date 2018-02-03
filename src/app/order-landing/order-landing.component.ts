@@ -65,6 +65,8 @@ export class OrderLandingComponent implements OnInit {
   };
   statusListForward = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
   { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+  { "id": "ordered", "itemName": "Ordered" },
+  { "id": "backtodealer", "itemName": "Back to dealer" },
   { "id": "delivered", "itemName": "Delivered" },
   { "id": "cancelled", "itemName": "Cancelled" },
   { "id": "doorlock", "itemName": "Doorlock" },
@@ -73,6 +75,8 @@ export class OrderLandingComponent implements OnInit {
   { "id": "cantdeliver", "itemName": "Can't Deliver" }];
   statusListAll = [
     { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+    { "id": "ordered", "itemName": "Ordered" },
+    { "id": "backtodealer", "itemName": "Back to dealer" },
     { "id": "delivered", "itemName": "Delivered" },
     { "id": "cancelled", "itemName": "Cancelled" },
     { "id": "doorlock", "itemName": "Doorlock" },
@@ -101,6 +105,7 @@ export class OrderLandingComponent implements OnInit {
     }
     else {
       if (name.length >= 3 && !this.LastfilterRecords) {
+        
         this.getDistributors();
       }
 
