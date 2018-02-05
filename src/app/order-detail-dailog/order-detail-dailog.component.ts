@@ -182,7 +182,6 @@ ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     console.log(this.orderDetail);
-    console.log(this.dailogOrderDetails);
 }
 
 }

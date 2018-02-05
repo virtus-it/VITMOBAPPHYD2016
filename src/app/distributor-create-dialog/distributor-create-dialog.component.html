@@ -25,7 +25,10 @@
       <div class="col-md-4  col-sm-4  col-lg-4">
           <div class=" form-group pdright-20">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Last Name" [(ngModel)]="dist.lastName" name="lastName">
+            <input mdInput class="form-control" placeholder="Last Name" [(ngModel)]="dist.lastName" [formControl]="lastFormControl"  name="lastName">
+            <md-error *ngIf="lastFormControl.hasError('required')">
+                Last Name is <strong>required</strong>
+              </md-error>
           </md-form-field>
         </div>
       </div>
@@ -57,7 +60,10 @@
         
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Address" [(ngModel)]="dist.address" name="address">
+              <input mdInput class="form-control" placeholder="Address"  [formControl]="addressFormControl" [(ngModel)]="dist.address" name="address">
+              <md-error *ngIf="addressFormControl.hasError('required')">
+                  Address is <strong>required</strong>
+                </md-error>
             </md-form-field>
           </div>
 
@@ -73,7 +79,7 @@
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" md-raised-button class="btn-primary" [disabled]="!firstFormControl.valid || !phoneFormControl.valid" (click)="onSubmit()">SUBMIT</button>
+      <button type="submit" md-raised-button class="btn-primary" [disabled]="!firstFormControl.valid || !phoneFormControl.valid || !lastFormControl.valid || !addressFormControl.valid" (click)="onSubmit()">SUBMIT</button>
       &nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
   </md-dialog-actions>

@@ -22,6 +22,10 @@ export class DistributorCreateDialogComponent implements OnInit {
     constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService,public dialog: MdDialog) { }
      firstFormControl = new FormControl('', [
          Validators.required]);
+         lastFormControl = new FormControl('', [
+            Validators.required]);
+            addressFormControl = new FormControl('', [
+                Validators.required]);
     
          phoneFormControl = new FormControl({value: '', disabled: false}, [
             Validators.required]);

@@ -73,7 +73,11 @@ export class SelectProductsForassingComponent implements OnInit {
   setProducts() {
     let id = this.productID;
     let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
+
+
     let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() } };
+
+
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.setProductsResult(output),
