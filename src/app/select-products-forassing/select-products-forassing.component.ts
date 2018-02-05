@@ -17,6 +17,7 @@ export class SelectProductsForassingComponent implements OnInit {
   constructor(public thisDialogRef: MdDialogRef<SelectProductsForassingComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private loaderService: LoaderService, private orderLandingService: OrderLandingService) { }
   productList = [];
   productID = "";
+  productMessage = false;
 
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -57,10 +58,13 @@ export class SelectProductsForassingComponent implements OnInit {
         let id = this.orderDetail.orderDetails.prod_id;
         let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
         if(productsDetails){
+        this.productMessage= false;
         this.productID = id.toString();
         productsDetails.quantity = this.orderDetail.orderDetails.quantity;
         }
-
+        else{
+          this.productMessage = true;
+        }
       }
       console.log(" this.productList", this.productList);
       

@@ -93,7 +93,7 @@
               <b ng-show="canstext">#of Cans with Customer </b>
               <!-- <span class="warning">noCansText</span> -->
             </div>
-            <div class="col-md-6 right">
+            <div class="col-md-6 right" *ngIf="customerProductDetails.length > 0">
               <i class="fa fa-edit logo-color" aria-hidden="true" (click)='editCan(dailogOrderDetails)'></i>
               <br>
             </div>
