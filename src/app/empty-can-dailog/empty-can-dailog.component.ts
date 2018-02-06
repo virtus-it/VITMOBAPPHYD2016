@@ -81,6 +81,7 @@ export class EmptyCanDailogComponent implements OnInit {
   ngOnInit() {
 
     this.getProducts();
+    console.log(this.orderDetail);
   }
 
 }

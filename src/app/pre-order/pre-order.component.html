@@ -57,12 +57,14 @@
         <tbody>
           <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
           <tr *ngFor="let preorder of customerList">
-            <td class="left capitalize">{{preorder.firstname}} {{preorder.lastname}}</td>
+            <td class="left capitalize">
+               {{preorder.firstname}} {{preorder.lastname}} 
+            </td>
             <td class="left">
               <span *ngIf="preorder.isappdownloaded">Joined</span>
               <span *ngIf="!preorder.isappdownloaded">Not Joined</span>
             </td>
-            <td class="left capitalize">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer</td>
+            <td class="left capitalize"><span *ngIf="preorder.dealers">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer </span></td>
             <td class="left">{{preorder.mobileno}}</td>
             <td class="left " >{{preorder.emailid}}</td>            
             <td class="left" style="position:absolute"><span class="onhovertext mgtop-10">{{preorder.address}}</span></td>
@@ -85,5 +87,12 @@
           </tr>
         </tbody>
       </table>
+
+      <h4 class="warning  capitalize">
+        <a href="javascript:void(0);" (click)=getCustomerList(false); *ngIf="preOrderClickMore">
+          <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+      </h4>
+      <h4 *ngIf="!preOrderClickMore" class="warning">Record Not Available</h4>
+
     </div>
   </div>

@@ -16,13 +16,16 @@
   <thead>
     <tr>
       <th width="20%">Product</th>
-      <th width="20%">Prduct type </th>
+      <th width="20%">Product type </th>
       <th width="20%">Price per unit</th>
       <th width="20%">INR</th>
       <th width="20%">Count</th>
        </tr>
   </thead>
   <tbody>
+    <div *ngIf="productMessage">
+      <small>Customer Ordered: {{orderDetail.orderDetails.brandname}} {{orderDetail.orderDetails.order_id}} <br> Selected Distributor does'nt have same product. Select any one of below</small>
+    </div>
     
     <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
         <td width="20%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">

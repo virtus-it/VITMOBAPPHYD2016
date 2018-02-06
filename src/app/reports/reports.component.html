@@ -135,7 +135,7 @@
             <a class="nav-link"  [ngClass]="{'active': tabPanelView === type.value}" href="javascript:void(0)">
                 <i class="fa fa-download" aria-hidden="true"></i> <br>           
               {{type.viewValue}}</a>
-              </li>
+              </li> 
          
           </ul> -->
       </div>
@@ -188,6 +188,7 @@
             <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
               <md-option value="all">Date</md-option>
               <md-option value="customer">Customers</md-option>
+              <md-option value="distributor">Distributors</md-option>
             </md-select>
 
           </div>
@@ -206,6 +207,17 @@
               </md-autocomplete>
             </md-form-field>
           </div>
+          <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'distributor'">
+             
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                    <span>{{ dist.fullName }}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
         </div>
         <div class="row form-group">
           <div class="col-sm-6  col-md-6  col-lg-6">
@@ -227,8 +239,8 @@
         <div class=" row col">
           <md-dialog-actions align="center">
             <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>&nbsp;&nbsp;
-             <button md-raised-button class="btn-primary">Print</button>&nbsp;&nbsp;        
-            <button md-raised-button class="btn-primary" (click)="showInvoice()">Raise An Invoice</button>
+             <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>&nbsp;&nbsp;        
+            <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrder()">Raise An Invoice</button>
           </md-dialog-actions>
         </div>
       </div>

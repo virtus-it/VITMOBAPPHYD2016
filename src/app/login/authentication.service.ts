@@ -43,6 +43,7 @@ export class AuthenticationService {
           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
           
       }
+
     logout() {
         localStorage.removeItem('currentUser');
         this.loggedIn = false;

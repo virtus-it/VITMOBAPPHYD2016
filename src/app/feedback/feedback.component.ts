@@ -118,6 +118,11 @@ export class FeedbackComponent implements OnInit {
 
     });
   }
+
+  refresh(){
+    this.getAllFeedback();
+    // console.log(result);
+  }
   
   ngOnInit() {
     this.getAllFeedback();

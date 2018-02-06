@@ -19,6 +19,7 @@ export class CustomerService {
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
   createCustomer(input) {
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
@@ -80,7 +81,13 @@ export class CustomerService {
             .map((response: Response) => <Blob>response.blob())              
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 }
-
+getPrintFile(path: string):Observable<Blob>{
+  let options = new RequestOptions({responseType: ResponseContentType.Blob});
+  
+  return this.http.get(this.apiUrl +path, options)
+          .map((response: Response) => <Blob>response.blob())              
+          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+}
   viewScheduleOrders(input) {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });

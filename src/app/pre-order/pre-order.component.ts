@@ -5,6 +5,7 @@ import { LoaderService } from '../login/loader.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
+import * as _ from 'underscore';
 
 
 @Component({
@@ -17,9 +18,11 @@ export class PreOrderComponent implements OnInit {
   constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService,  private customerService: CustomerService ) { }
 
   showFilterDailog = false;
-  customerList=[];
-  customerListCopy=[];
+  customerList : any=[];
+  preOrderClickMore = true;
+  customerListCopy: any =[];
   searchPreOrderTerm:any ="";
+  preOrderInput : any =  { userId: this.authenticationService.loggedInUserId(), lastId: 0 , userType: this.authenticationService.userType(), appType: this.authenticationService.appType(),  };
 
 
   addPreorder(data){
@@ -29,12 +32,27 @@ export class PreOrderComponent implements OnInit {
     });
      dialogRefAddPreOrder.afterClosed().subscribe(result => {
      console.log(`Dialog closed: ${result}`); 
+     if(result == 'success'){
+       this.getCustomerList(true);
+
+     }
      });
   }
 
-  getCustomerList() {
+  getCustomerList(firstCall) {
     this.loaderService.display(true);
-    let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType() };
+    if (this.customerList && this.customerList.length && !firstCall) {
+      let lastPreOrder: any = _.last(this.customerList);
+      if (lastPreOrder) {
+          this.preOrderInput.lastId = lastPreOrder.userid;
+      }
+
+  }
+  else {
+      this.customerList = [];
+      this.preOrderInput.lastId = 0;
+  }
+    let input = this.preOrderInput;
     console.log(input);
     this.customerService.getCustomerList(input)
         .subscribe(
@@ -47,9 +65,18 @@ export class PreOrderComponent implements OnInit {
 getCustomerListResult(result) {
     console.log(result);
     this.loaderService.display(false);
-    this.customerList= result.data;
-    this.customerListCopy=result.data;
+    if (result.result == 'success') {
 
+      this.preOrderClickMore = true;
+      let finalpreOrder = _.union(this.customerList, result.data);
+      this.customerList = finalpreOrder;
+      this.customerListCopy = finalpreOrder;
+
+  }
+  else {
+      this.preOrderClickMore = false;
+
+  }
 }
 
 searchPreOrder(){
@@ -76,7 +103,7 @@ searchPreOrder(){
     dialogRefEditCustomer.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
         if(result == "success"){
-            this.getCustomerList();
+            this.getCustomerList(true);
         
         }
 
@@ -88,7 +115,7 @@ searchPreOrder(){
     this.showFilterDailog = !this.showFilterDailog;
 }
   ngOnInit() {
-    this.getCustomerList();
+    this.getCustomerList(true);
 
   }
 

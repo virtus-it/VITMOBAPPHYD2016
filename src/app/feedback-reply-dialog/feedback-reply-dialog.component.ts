@@ -18,20 +18,33 @@ import * as moment from 'moment';
 })
 export class FeedbackReplyDialogComponent implements OnInit {
 
+  errorMessage = false;
+
   constructor(private feedbackService: FeedbackService,public thisDialogRef: MdDialogRef<FeedbackReplyDialogComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
   feedbackInput = {"root":{"issueid":this.Detail.issueid,"issuetype":"feedback","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"message":""}}
 
+  emailFormControl = new FormControl('', [
+    Validators.required]);
+
 
 sendFeedback(){
-  let Input=this.feedbackInput;
-  this.feedbackService.createReplyToFeedback(Input)
-  .subscribe(
-    Output =>this.sendFeedbackResult(Output),
-    error => {
-      console.log("error");
-      this.loaderService.display(false);
-    });
-    }
+
+  if (this.feedbackInput.root.message.length >= 3) {
+    let Input=this.feedbackInput;
+    this.feedbackService.createReplyToFeedback(Input)
+    .subscribe(
+      Output =>this.sendFeedbackResult(Output),
+      error => {
+        console.log("error");
+        this.loaderService.display(false);
+      });
+      }
+      else{
+        this.errorMessage = true;
+      }
+    
+  }
+  
 
     sendFeedbackResult(result){
       console.log(result);

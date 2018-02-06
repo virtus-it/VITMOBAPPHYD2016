@@ -57,7 +57,7 @@
                 </div>
                 <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
                   <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
+                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10">
                   </md-form-field>
                 </div>
                 <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
@@ -680,8 +680,13 @@
           </tbody>
           <tfoot>
             <tr>
+<<<<<<< HEAD
               <td colspan="3">
                 <h5 class="warning  capitalize center">
+=======
+              <td  colspan="3" >
+                <h5 class="warning  center capitalize">
+>>>>>>> a585b9bad4ee04647a7760c41b561cc744258d6e
                   <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
                 </h5>

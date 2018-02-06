@@ -134,6 +134,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                     if(result == 'success'){
                     this.dailogCloseResult = 'success';
                     this.getOrderDetail();
+                    this.thisDialogRef.close('success');
                     }
         
                 });
@@ -148,6 +149,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     //this.getPolygonDistributors();
     this.assignPolygon();
     this.getOrderDetail();
+    console.log(this.orderDetail);
   }
 
 }

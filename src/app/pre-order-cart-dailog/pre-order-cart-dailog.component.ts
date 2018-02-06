@@ -10,6 +10,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { Observable } from 'rxjs/Observable';
+
 import { OrderLandingComponent} from '../order-landing/order-landing.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import 'rxjs/add/operator/startWith';
@@ -30,17 +31,25 @@ export class PreOrderCartDailogComponent implements OnInit {
     this.stateCtrl = new FormControl();
     this.filteredDistributor = this.stateCtrl.valueChanges
 
+    
+
     .startWith(null)
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
    }
+   FormControl = new FormControl('', [
+    Validators.required]);
 
    distributors: any = [];
    productList = [];
-
+   disableSlot = false;
    //input
-   createPreOrderInput: any = {"timeslot":"9AM-1PM",date:new Date() ,productDetails:""}
-   minDate = new Date() ;
+   createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}}
+    minDate = new Date() ;
     maxDate = new Date(2020, 0, 1);
+
+
+
+    
     
     
     //FilterInputs
@@ -133,7 +142,14 @@ filterDistributors(name: string) {
 //Getting products
 
 getProducts() {
-  let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+  let userid = 0
+  if(this.Details.dealers && this.Details.dealers.user_id){ 
+    userid = this.Details.dealers.user_id;
+  }
+  else{
+    userid= this.authenticationService.loggedInUserId();
+  }
+  let input = { userId: userid, appType: this.authenticationService.appType() };
   this.productService.getProducts(input)
     .subscribe(
     output => this.getProductsResult(output),
@@ -181,6 +197,7 @@ ViewDistributors(data) {
       console.log(`Dialog closed: ${result}`);
       if(result =='success'){
         this.thisDialogRef.close('success');
+        
 
       }
   });
@@ -223,18 +240,74 @@ createPreOrder(){
 createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
-    let data = {order_id:result.data.orderid,quantity:input[0].order.quantity};
+    let productid= "";
+    if(input[0].order.productid){
+      productid = input[0].order.productid
+    }
+    let data ={prod_id:productid,ordersfrom:input[0].order.orderfrom,order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:""}};
+    if(this.Details.supplier){
+      data.supplierdetails.userid =this.Details.supplier.supplierid;
+    }
     this.ViewDistributors(data);
 
   }
   }
 
+  //TimeSlot changes
 
- 
+  autoTimeSlot(){
+
+    let hours = moment().format("HH");
+    if(parseInt(hours) <= 8){
+this.createPreOrderInput.timeslot = "9AM-1PM";
+this.createPreOrderInput.date= new Date();
+this.disableSlot = false;
+
+
+    }
+    else if(parseInt(hours) <= 15){
+    
+      this.createPreOrderInput.date= new Date();
+      this.createPreOrderInput.timeslot = "4PM-7PM";
+      this.disableSlot = true;
+      
+
+    }
+    else {
+      this.createPreOrderInput.timeslot = "9AM-1PM";
+      var date = new Date();
+      this.createPreOrderInput.date = new Date(date.setDate(date.getDate() + 1));
+      this.disableSlot = false;
+    }
+
+  }
+
+  onChangeQuantity(details,event){
+
+
+    this.createPreOrderInput.productDetails = details;
+    // _.each even or for loop  ngModelQuantity 0 for others 
+   // let selectedid= details.productid;
+
+      // _.each(data, function (i, j) {
+      //   let details: any = i;
+      //  if(selectedid != details.productid){
+      //   details.quantity = "0";
+      //  }
+      //  if(selectedid == details.productid){
+      //   details.quantity = event;
+      //  }
+
+      // });
+    
+
+  }
+
 
   ngOnInit() {
     this.getDistributors();
     this.getProducts();
+    this.autoTimeSlot();
     console.log(this.Details);
   }
 

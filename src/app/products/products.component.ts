@@ -7,7 +7,8 @@ import { ProductHistoryDailogComponent } from '../product-history-dailog/product
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
-import {AddstockProductComponent} from '../addstock-product/addstock-product.component';
+import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
 import * as _ from 'underscore';
 @Component({
 
@@ -19,7 +20,7 @@ export class ProductsComponent implements OnInit {
   constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService, private productService: ProductsService) { }
   superDealer = true;
   showFilterDialog = false;
-productList = [];
+  productList = [];
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
   }
@@ -32,10 +33,42 @@ productList = [];
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-if(result=='success'){
+      if (result == 'success') {
 
-  this.getProducts();
-}
+        this.getProducts();
+      }
+
+    });
+
+  }
+  editProduct(data) {
+    let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {
+
+      width: '700px',
+      data: data
+    });
+    dialogRefAddProduct.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+
+        this.getProducts();
+      }
+
+    });
+
+  }
+  UpdateStatus(data) {
+    let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
+
+      width: '700px',
+      data: data
+    });
+    dialogRefAddProduct.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+
+        this.getProducts();
+      }
 
     });
 
@@ -48,10 +81,10 @@ if(result=='success'){
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      if(result=='success'){
-        
-          this.getProducts();
-        }
+      if (result == 'success') {
+
+        this.getProducts();
+      }
 
     });
 
@@ -64,10 +97,10 @@ if(result=='success'){
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      if(result=='success'){
-        
+      if (result == 'success') {
+
         this.getProducts();
-        }
+      }
 
     });
   }
@@ -110,32 +143,32 @@ if(result=='success'){
   }
   getProductsResult(result) {
     console.log(result);
-    this.productList= [];
-    if(result.result == 'success'){
-     // let productCopy = [];
+    this.productList = [];
+    if (result.result == 'success') {
+      // let productCopy = [];
       for (let details of result.data) {
         //let details: any = i;
-        
+
         let findproduct = _.find(this.productList, function (k, l) {
           let productDetails: any = k;
           return productDetails.brandName == details.brandname;
         });
-  
+
         if (findproduct) {
           findproduct.data.push(details);
         }
-        else{
-          let value = {brandName:details.brandname,category:details.category,data:[]};
+        else {
+          let value = { brandName: details.brandname, category: details.category, data: [] };
           value.data.push(details);
           this.productList.push(value);
         }
-       
+
       }
-      console.log("products list ",this.productList)
-  
+      console.log("products list ", this.productList)
+
     }
   }
- 
+
   ngOnInit() {
     this.getProducts();
     this.superDealer = this.authenticationService.getSupperDelear();

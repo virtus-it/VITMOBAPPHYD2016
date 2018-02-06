@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-    <i class="fa fa-edit"></i> Edit Customer
+    <i class="fa fa-edit"></i>  {{headerValue}}
   </div>
   <div class="col-md-1 col-sm-1 right">
     <strong>
@@ -19,8 +19,8 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
-          <md-error>
+          <input class="form-control" [formControl]="emailFormControl"  mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
+          <md-error *ngIf="emailFormControl.hasError('required')">
             First Name is
             <strong>required</strong>
           </md-error>
@@ -133,6 +133,36 @@
             <md-option value="27">27</md-option>
             <md-option value="28">28</md-option>
           </md-select>
+          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Select Payment Due Date">
+              <md-option value="1">1</md-option>
+              <md-option value="2">2</md-option>
+              <md-option value="3">3</md-option>
+              <md-option value="4">4</md-option>
+              <md-option value="5">5</md-option>
+              <md-option value="6">6</md-option>
+              <md-option value="7">7</md-option>
+              <md-option value="8">8</md-option>
+              <md-option value="9">9</md-option>
+              <md-option value="10">10</md-option>
+              <md-option value="11">11</md-option>
+              <md-option value="12">12</md-option>
+              <md-option value="13">13</md-option>
+              <md-option value="14">14</md-option>
+              <md-option value="15">15</md-option>
+              <md-option value="16">16</md-option>
+              <md-option value="17">17</md-option>
+              <md-option value="18">18</md-option>
+              <md-option value="19">19</md-option>
+              <md-option value="20">20</md-option>
+              <md-option value="21">21</md-option>
+              <md-option value="22">22</md-option>
+              <md-option value="23">23</md-option>
+              <md-option value="24">24</md-option>
+              <md-option value="25">25</md-option>
+              <md-option value="26">26</md-option>
+              <md-option value="27">27</md-option>
+              <md-option value="28">28</md-option>
+            </md-select>
         </div>
       </div>
 
@@ -141,18 +171,20 @@
           <b class="label-style"> Customer Type</b>
         </div>
 
-        <span width="30%" class="left capital">
-          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="commercial">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Commercial</span>
-          </label>
-        </span>
+
         <span width="30%" class="left capital">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="residential">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">Residential</span>
+          </label>
+        </span>
+        
+        <span width="30%" class="left capital">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="commercial">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Commercial</span>
           </label>
         </span>
         <span width="30%" class="left capital">
@@ -168,7 +200,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" [disabled]="!emailFormControl.valid">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

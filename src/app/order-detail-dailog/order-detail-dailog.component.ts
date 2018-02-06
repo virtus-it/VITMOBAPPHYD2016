@@ -94,6 +94,47 @@ getOrderDetailsByIdResult(result) {
     console.log(result);
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
+        if (this.dailogOrderDetails .status == "onhold") {
+            this.dailogOrderDetails .OrderModifiedStatus = "On Hold";
+            this.dailogOrderDetails .StatusColor = "warning";
+          }
+          else if (this.dailogOrderDetails .status.toLowerCase() == "cancelled") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Cancelled";
+            this.dailogOrderDetails .StatusColor = "danger";
+          }
+          else if (this.dailogOrderDetails .status.toLowerCase() == "rejected") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Rejected";
+            this.dailogOrderDetails .StatusColor = "danger";
+          }
+          else if (this.dailogOrderDetails .status == "assigned") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Re-Assign";
+            this.dailogOrderDetails .StatusColor = "logo-color";
+          }
+          else if (this.dailogOrderDetails .status.toLowerCase() == "delivered") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Delivered";
+            this.dailogOrderDetails .StatusColor = "success";
+          }
+          else if (this.dailogOrderDetails .status == "doorlock" || this.dailogOrderDetails .status == "Door Locked") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Door Locked";
+            this.dailogOrderDetails .StatusColor = "warning";
+          }
+          else if (this.dailogOrderDetails .status == "cannot_deliver" || this.dailogOrderDetails .status == "Cant Deliver") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Cant Deliver";
+            this.dailogOrderDetails .StatusColor = "warning";
+          }
+          else if (this.dailogOrderDetails .status == "Not Reachable" || this.dailogOrderDetails .status == "not_reachable") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Not Reachable";
+            this.dailogOrderDetails .StatusColor = "warning";
+          }
+          else if (this.dailogOrderDetails .status == "pending") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Pending";
+            this.dailogOrderDetails .StatusColor = "logo-color";
+          }
+          else if (this.dailogOrderDetails .status == "ordered" || this.dailogOrderDetails .status == "backtodealer" || this.dailogOrderDetails .status == "not_broadcasted") {
+            this.dailogOrderDetails .OrderModifiedStatus = "Assign";
+            this.dailogOrderDetails .StatusColor = "logo-color";
+          }
+        console.log(this.dailogOrderDetails);
     }
 }
 getProductsListByCustomerId() {
@@ -140,6 +181,7 @@ onCloseCancel() {
 ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
+    console.log(this.orderDetail);
 }
 
 }

@@ -38,6 +38,9 @@ export class CustomerComponent implements OnInit {
         { value: 'alias', viewValue: 'Alias' },
         { value: 'name', viewValue: 'Name' },
         { value: 'mobile', viewValue: 'Mobile' },
+        { value: 'address' , viewValue: 'Address'},
+        { value:'paymenttype', viewValue:'Payment Mode'},
+        {value: 'customertype' , viewValue:'Customer Type'},
         { value: 'followupdate', viewValue: 'Followup Date' }
     ];
     showOrderList() {

@@ -83,6 +83,9 @@ import { AddstockProductComponent } from './addstock-product/addstock-product.co
 import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.component';
 import { PaymentsComponent } from './payments/payments.component';
 import { PaymentsService } from './payments/payments.service';
+import { ProfileComponent } from './profile/profile.component';
+import { PasswordupdateComponent } from './passwordupdate/passwordupdate.component';
+import { ProductUpdateComponent } from './product-update/product-update.component';
 
 @NgModule({
     declarations: [
@@ -142,7 +145,10 @@ import { PaymentsService } from './payments/payments.service';
         AddstockProductComponent,
         DeliverpreorderComponent,
         InvoicedetailsComponent,
-        PaymentsComponent
+        PaymentsComponent,
+        ProfileComponent,
+        PasswordupdateComponent,
+        ProductUpdateComponent
         
 
     ],
@@ -174,6 +180,7 @@ import { PaymentsService } from './payments/payments.service';
             { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
             { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
+            {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -248,8 +255,9 @@ import { PaymentsService } from './payments/payments.service';
          AddstockProductComponent,
          InvoicedetailsComponent,
          DeliverpreorderComponent,
-         PaymentsComponent
-
+         PaymentsComponent,
+         PasswordupdateComponent,
+         ProductUpdateComponent
 
         ],
     exports: [

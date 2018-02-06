@@ -8,8 +8,10 @@
     <md-sidenav-container class="demo-sidenav-container">
       <md-sidenav #focusSidenav class="sidebar-style col-3">
         <md-nav-list class="row">
-          <a md-list-item routerLink="" class="sidebar-list height-150 sidebar-nohover  align-self-center" >
-            <img src="../assets/images/img_user.png" class="pdtopleft-80x25" /> </a>
+          <a md-list-item routerLink="/profile" class="sidebar-list height-150 sidebar-nohover  align-self-center" (click)="focusSidenav.toggle()" >
+            <img src="../assets/images/img_user.png" class="pdtopleft-80x25" />
+           
+          </a>
           <a md-list-item routerLink="/orders" class="sidebar-list" (click)="focusSidenav.toggle()">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10">Order</span>

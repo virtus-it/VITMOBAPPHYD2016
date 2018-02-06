@@ -42,9 +42,9 @@
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot
           </md-option>
-          <md-option value="9AM-1PM">9AM-1PM
+          <md-option value="9AM-1PM" [disabled]="disableSlot">9AM-1PM
           </md-option>
-          <md-option value="4PM-7PM">4PM-7PM
+          <md-option value="4PM-7PM" >4PM-7PM
           </md-option>
         </md-select>
       </div>
@@ -90,7 +90,10 @@
                 <div class="">                   
               <div class="width-100pc">
                 <md-form-field class="center">
-                  <input class="form-control" mdInput type="number" min="0" step="1" [(ngModel)]="details.quantity">
+                  <input class="form-control" mdInput type="number" min="0" step="1"  [formControl]="FormControl" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
+                  <!-- <md-error *ngIf="FormControl.hasError('required')">
+                      Quantity is <strong>required</strong>
+                    </md-error> -->
                 </md-form-field>
               </div>
                 </div>
@@ -106,7 +109,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="createPreOrder()">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="!FormControl.valid">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class="btn-primary" (click)="deliverPreOrder()">DELIVERY AS A DISTRIBUTOR</button>&nbsp;
   </md-dialog-actions>
 </div>

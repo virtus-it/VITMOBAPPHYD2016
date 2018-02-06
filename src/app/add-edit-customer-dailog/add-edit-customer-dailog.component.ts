@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
@@ -14,15 +15,20 @@ import { Input } from '@angular/core/src/metadata/directives';
 export class AddEditCustomerDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
+
+  emailFormControl = new FormControl('', [
+    Validators.required]);
   customerInput: any = { "User": { "advamt": "0", "registertype":"" , "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
-
+  paymentdueDate:any = "";
+  headerValue="Add Customer"
 
   getCustomerDetails() {
   // console.log(this.Details);
   this.loaderService.display(true);
     if(this.Details){
+      this.headerValue ="Edit Customer";
     let input = { userid: 0, appType: this.authenticationService.appType() };
     if (this.Details.order_by) {
       input = { userid: this.Details.order_by, appType: this.authenticationService.appType() };
@@ -53,6 +59,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
+        this.paymentdueDate = result.data.user.payment.paymentdueday;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
@@ -77,7 +84,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     input.User.pwd =  this.customerInput.User.mobileno;
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
-    
+    input.User.paymentdueday= this.paymentdueDate;
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
@@ -96,6 +103,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
+    input.User.paymentdueday= this.paymentdueDate;
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),

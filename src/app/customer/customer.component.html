@@ -37,11 +37,31 @@
                 </md-option>
               </md-select>
             </div>
-            <div class="form-group" *ngIf="filterInput.root.searchtype != 'followupdate'">
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+                 <!-- ng-if="key == 'City' || key == 'County'"> -->
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
               </md-form-field>
             </div>
+            <!-- <div class="form-group" *ngIf="filterInput.root.searchtype == 'address'">
+              <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">  
+              </md-form-field>
+            </div> -->
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'paymenttype'">
+                    <md-select  placeholder="Filter By" name="paymenttype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
+                        <md-option value="cod">COD</md-option>
+                        <md-option value="credit">CREDIT</md-option>
+                      </md-select>
+              </div>
+              <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
+                  <md-select  placeholder="Filter By" name="customertype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
+                      <md-option value="residential">Residential</md-option>
+                      <md-option value="corperate">Corporate</md-option>
+                      <md-option value="commercial">Commercial</md-option>
+                    </md-select>
+            </div>
+
             <div class="form-group" *ngIf="filterInput.root.searchtype == 'followupdate'">
               <md-form-field class="inline">
                 <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followUpdate">
@@ -124,7 +144,7 @@
                 <span *ngIf="!customers.isappdownloaded">Not Joined</span>
               </td>
               <td class="left">
-                  <span *ngIf="customers.payments">{{customers.payments.paymenttype}}</span>
+                  <span *ngIf="customers.payments">{{customers.paymenttype}}</span>
               </td>
             <td class="left">
               <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>
