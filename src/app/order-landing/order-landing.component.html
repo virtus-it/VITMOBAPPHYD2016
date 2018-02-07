@@ -363,12 +363,21 @@
                   </div>
                   <div class="form-group row ">
                     <div class="col-sm-5 col-md-5  col-lg-5">
-                      <span>Delivery Time :</span>
+                      <span class="td-label">Delivery Time :</span>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 row">
                       <label class="left danger">{{forward.delivery_exceptedtime}}</label>
                     </div>
                   </div>
+                  <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label" *ngIf="superDealer">
+                         Distributor Mobile :</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left">
+                        <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</b>
+                      </div>
+                    </div>
                 </div>
 
               </td>
@@ -414,15 +423,7 @@
                       <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
                     </div>
                   </div>
-                  <div class="  row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label" *ngIf="superDealer">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</b>
-                    </div>
-                  </div>
+
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
@@ -603,12 +604,21 @@
                   </div>
                   <div class=" row ">
                     <div class="col-sm-5  col-md-5  col-lg-5">
-                      <label>Delivery Time :</label>
+                      <label class="td-label">Delivery Time :</label>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 row">
                       <label class="left danger">{{allorder.delivery_exceptedtime}}</label>
                     </div>
                   </div>
+                  <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label" *ngIf="superDealer">
+                          Distributor Mobile :</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                        <b class="capitalize" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</b>
+                      </div>
+                    </div>
                 </div>
 
               </td>
@@ -644,7 +654,7 @@
 
                     </div>
                   </div>
-                  <div class="  row ">
+                  <!-- <div class="  row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label" *ngIf="superDealer">
                         <i class="fa fa-mobile " aria-hidden="true"> </i> Distributor Mobile</label>
@@ -652,7 +662,7 @@
                     <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
                       <b class="capitalize" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</b>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <label class="td-label">
@@ -680,13 +690,8 @@
           </tbody>
           <tfoot>
             <tr>
-<<<<<<< HEAD
-              <td colspan="3">
-                <h5 class="warning  capitalize center">
-=======
               <td  colspan="3" >
                 <h5 class="warning  center capitalize">
->>>>>>> a585b9bad4ee04647a7760c41b561cc744258d6e
                   <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
                 </h5>

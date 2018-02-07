@@ -1,36 +1,38 @@
-<div>
-    <div class="col-md-6  col-sm-6  col-lg-6" class="header">
-        <i class="fa fa-reply" aria-hidden="true"></i> Reply
-    <div class="col-md-9  col-sm-9  col-lg-9right">
-        <strong (click)="onCloseCancel()">
-          <i class="fa fa-times fs-20" aria-hidde n="true"></i>
-        </strong>
-        </div>
+<div class="row justify-content-between modal-title ">
+    <div class=" col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-reply"></i> Reply
     </div>
-        <md-dialog-content layout="column">
-            <form class="example-form">
-              <div class="container-fluid pd-15x25 height-450">
-                <div class="form-group">
-                    Please write your reply <br>
-                  <div class="col-sm-9  col-md-9  col-lg-9">
-                      <md-form-field class="example-full-width wd-100pc">
-                    <textarea maxlength="250"  rows="5" cols="111" mdInput placeholder="Please write here..." [formControl]="emailFormControl" name="reply" [(ngModel)]="feedbackInput.root.message"  > </textarea>
-                    <md-error *ngIf="emailFormControl.hasError('required')">
-                        Feedback required
-                      </md-error>
-                      </md-form-field>
-                    <small>Characters Remanining :
-                        <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
-                      </small>
-                    </div>
-                    </div>
-                    </div></form> 
-                    </md-dialog-content>
-        <div>
-          <button type="button" class="sendbtn" (click)="sendFeedback()" [disabled]="!emailFormControl.valid"> Send</button>
-          <button type="button" class="cancelbtn" (click)="onCloseCancel()"> Cancel</button>
-          <span *ngIf="this.errorMessage"> Feedback cannot be less than three characters</span>
-        </div>
-        </div>
+    <div class=" col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseCancel()'></i>
+              </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
 
-
+      <div class="container-fluid pd-15x25 brd-bottom">
+         <!-- <div class="row">
+         <b class="label-style col"> Please write your reply 
+            <span></span>
+          </b>
+        </div> -->
+        <div class="row">
+            <div class="col">
+              <md-form-field class="example-full-width inline">
+                  <textarea maxlength="250"  mdInput placeholder="Please write here..." [formControl]="emailFormControl" name="reply" [(ngModel)]="feedbackInput.root.message"  > </textarea>
+                <md-error *ngIf="emailFormControl.hasError('required')">
+                    Feedback required
+                </md-error>
+              </md-form-field>
+              <small>Characters Remanining :
+                  <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
+                </small>
+            </div></div>
+      </div></md-dialog-content>
+      <div class="row float-right pdright-30 mgbottom-20">
+          <md-dialog-actions align="end">
+            <button type="submit" class="btn-primary" md-raised-button (click)="sendFeedback()" [disabled]="!emailFormControl.valid">SEND</button>
+            <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp; <br>
+          </md-dialog-actions>
+          <span *ngIf="this.errorMessage"><small> Feedback cannot be less than three characters </small></span>
+        </div>
