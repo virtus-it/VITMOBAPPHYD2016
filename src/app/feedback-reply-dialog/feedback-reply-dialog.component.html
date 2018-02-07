@@ -11,13 +11,13 @@
   <md-dialog-content layout="column">
 
       <div class="container-fluid pd-15x25 brd-bottom">
-        <div class="row">
-          <b class="label-style col"> Please write your reply 
+         <!-- <div class="row">
+         <b class="label-style col"> Please write your reply 
             <span></span>
           </b>
-        </div>
+        </div> -->
         <div class="row">
-            <div class="col-10">
+            <div class="col">
               <md-form-field class="example-full-width inline">
                   <textarea maxlength="250"  mdInput placeholder="Please write here..." [formControl]="emailFormControl" name="reply" [(ngModel)]="feedbackInput.root.message"  > </textarea>
                 <md-error *ngIf="emailFormControl.hasError('required')">
@@ -36,5 +36,3 @@
           </md-dialog-actions>
           <span *ngIf="this.errorMessage"><small> Feedback cannot be less than three characters </small></span>
         </div>
-
-

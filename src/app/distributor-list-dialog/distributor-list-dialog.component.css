@@ -28,3 +28,8 @@ table.table-fixedheader, table.table-fixedheader>thead, table.table-fixedheader>
     float: left;    
     word-wrap:break-word;     
   }
+  .assign-style{
+  border-top: 1px solid #ddd;
+  text-align: center;
+  padding-top: 12px;
+}
