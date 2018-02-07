@@ -10,6 +10,8 @@ import { EditOrderStatusComponent } from '../edit-order-status/edit-order-status
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
+
+
 @Component({
     selector: 'app-order-detail-dailog',
     templateUrl: './order-detail-dailog.component.html',
@@ -19,7 +21,9 @@ export class OrderDetailDailogComponent implements OnInit {
 
     constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
     dailogOrderDetails: any = {};
+    deliveredStatus= false;
     customerProductDetails: any = [];
+    customerProductDetailsCopy: any = [];
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 showCustomerDetails(orderData) {
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
@@ -34,10 +38,10 @@ showCustomerDetails(orderData) {
 
 }
 editCan(orderData) {
-    this.customerProductDetails.order_by = orderData.order_by;
+    this.customerProductDetailsCopy.order_by = orderData.order_by;
     let dialogRefEditCan = this.dialog.open(EmptyCanDailogComponent, {
         width: '700px',
-        data: this.customerProductDetails
+        data: this.customerProductDetailsCopy
     });
     dialogRefEditCan.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
@@ -154,7 +158,19 @@ getProductsListByCustomerIdResult(result) {
     if (result.data.user.stock && result.data.user.stock.length > 0) {
         console.log(result.data.user.stock);
         this.customerProductDetails = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
-
+        this.customerProductDetailsCopy = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
+        _.each(this.customerProductDetails, function (i, j)  {
+            let details: any = i;
+            if (details.avaliablecans < 0 ) {
+                details.showIcon = true;
+                details.avaliablecans = Math.abs(details.avaliablecans);
+            }
+            else{
+                details.showIcon = false;
+            }
+  
+          });
+  
     }
 }
 sendMessage(){
@@ -178,9 +194,20 @@ sendMessageResult(result){
 onCloseCancel() {
     this.thisDialogRef.close('Cancel');
 }
+
+deliveryStatus(){
+    if (this.orderDetail.OrderModifiedStatus == 'Delivered') {
+        this.deliveredStatus = true;
+    }
+    else{
+        this.deliveredStatus = false;
+    }
+
+}
 ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
+    this.deliveryStatus();
     console.log(this.orderDetail);
 }
 

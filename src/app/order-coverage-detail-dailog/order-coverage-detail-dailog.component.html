@@ -61,6 +61,6 @@
   <md-dialog-actions align="end">
       <button md-raised-button color="primary" (click)="ClearAllPolygons()"> CLEAR ALL</button> &nbsp;
     <button md-raised-button color="primary" (click)="ShowAllPolygons()"> SHOW ALL</button> &nbsp;
-    <button class="btn" (click)="ViewDistributors()">Assign</button>
+    <button class="btn" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="ViewDistributors()">Assign</button>
   </md-dialog-actions>
 </div>
