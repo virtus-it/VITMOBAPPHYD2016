@@ -19,13 +19,7 @@
               (click)="showTabPanel('distributors')" *ngIf="superDealer">Distributors</a>
 
 
-              <div class="form-checkbox form-checkbox-inline" *ngIf="tabPanelView =='suppliers'">
-                <label class="custom-control custom-checkbox mb-4 mr-sm-4 mb-sm-4">
-                  <input type="checkbox" class="custom-control-input" [(ngModel)]="this.autoAssign">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description"> Auto-Assign </span>
-                </label>
-              </div>
+
             <!-- <a class="left" type=checkbox value=autoassign>Auto-assign</a> -->
           </nav>
         <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'suppliers'">
@@ -61,6 +55,13 @@
            </tr>
         </tbody>
       </table>
+      <div class="form-checkbox form-checkbox-inline assign-style logo-color" *ngIf="tabPanelView =='suppliers'">
+          <label class="custom-control custom-checkbox mb-4 mr-sm-4 mb-sm-4">
+            <input type="checkbox" class="custom-control-input" [(ngModel)]="this.autoAssign">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Auto-Assign </span>
+          </label>
+        </div>
     </div>
     <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'distributors'">
         <table class="table table-hover table-fixedheader">

@@ -106,7 +106,7 @@ export class FeedbackComponent implements OnInit {
   }
   openReplyModel(data) {
     let dialogRef = this.dialog.open(FeedbackReplyDialogComponent, {
-      width: '80%',
+      width: '40%',
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
