@@ -86,6 +86,7 @@ import { PaymentsService } from './payments/payments.service';
 import { ProfileComponent } from './profile/profile.component';
 import { PasswordupdateComponent } from './passwordupdate/passwordupdate.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
+import { CategoryComponent } from './category/category.component';
 
 @NgModule({
     declarations: [
@@ -148,7 +149,8 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
         PaymentsComponent,
         ProfileComponent,
         PasswordupdateComponent,
-        ProductUpdateComponent
+        ProductUpdateComponent,
+        CategoryComponent
         
 
     ],
@@ -181,6 +183,7 @@ import { ProductUpdateComponent } from './product-update/product-update.componen
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
             { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
             {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
+            {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),

@@ -43,7 +43,7 @@
                     <md-option value="mobile">Customer Mobile</md-option>
                     <md-option value="orderid">Order Id</md-option>
                     <md-option value="status">Status</md-option>
-                    <md-option value="supplierid">Supplier</md-option>
+                    <md-option value="supplierid" *ngIf="tabPanelView === 'allorder'">Supplier</md-option>
                     <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
                   </md-select>
 

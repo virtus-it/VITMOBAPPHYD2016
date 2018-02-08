@@ -117,7 +117,9 @@
                     <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>
                   <td width="30%">
-                    <small class="col-md-5 col-5 col-sm-5">{{canDetails.avaliablecans}}</small>
+                    <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small> 
+                    <a *ngIf="canDetails.showIcon">  <small> <i class="fa fa-exclamation-triangle yellow" title="Customer given extra {{canDetails.avaliablecans}} can to you"></i></small> </a>
+
                   </td>
 
                 </tr>
@@ -168,7 +170,7 @@
                 <div class="timeline-badge danger">
                   <i class="fa fa-check-square-o" aria-hidden="true"></i>
                 </div>
-                <div class="timeline-panel">
+                <div class="timeline-panel" >
                   <div class="timeline-heading">
                     <small class="timeline-title warning">
                       <b> Order Assigned</b>
@@ -196,16 +198,16 @@
                 </div>
               </li>
               <li>
-                <div class="timeline-badge success">
+                <div class="timeline-badge success" >
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                 </div>
-                <div class="timeline-panel">
+                <div class="timeline-panel" >
                   <div class="timeline-heading">
                     <small class="timeline-title warning">
                       <b> Order Completed </b>
                     </small>
                   </div>
-                  <div class="timeline-body">
+                  <div class="timeline-body" *ngIf="this.deliveredStatus">
                     <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
                       <li>
                         <small class="capital ng-binding">
@@ -225,6 +227,26 @@
                           <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.return_cans}}(Qty)</small>
                       </li>
                     </ul>
+
+                    <ul class="pdleft-15" *ngIf="!dailogOrderDetails.supplierdetails">
+                      <li>
+                        <small class="capital ng-binding" *ngIf="dailogOrderDetails.dealerdetails">
+                          <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                          {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
+
+                        <small class="ng-binding">
+                          <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.return_cans}}(Qty)</small>
+                      </li>
+                    </ul>
                   </div>
                 </div>
               </li>
@@ -234,8 +256,8 @@
 
 
           <div class="row mgtop-15pc">
-            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled'">
-              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)'>
+            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
+              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)' *ngIf="dailogOrderDetails.OrderModifiedStatus !='On Hold'">
                 <b>
                   <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
                   On-hold Order</b>
