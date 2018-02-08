@@ -20,9 +20,9 @@
             <i class="fa fa fa-files-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> PreOrder</span>
           </a>
-          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
-            <i class="fa fa-sitemap"></i>
-            <span class="pdtoprght-3x10">Distributors</span>
+          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()">
+            <i class="fa fa-file-text" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Reports</span>
           </a>
           <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
             <i class="fa fa-globe" aria-hidden="true"></i>
@@ -32,13 +32,14 @@
             <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Notifications</span>
           </a>
-          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()">
-            <i class="fa fa-file-text" aria-hidden="true"></i>
-            <span class="pdtoprght-3x10"> Reports</span>
-          </a>
+          
           <a md-list-item routerLink="/payments" class="sidebar-list" (click)="focusSidenav.toggle()">
             <i class="fa fa-credit-card" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Payments</span>
+          </a>
+          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
+            <i class="fa fa-sitemap"></i>
+            <span class="pdtoprght-3x10">Distributors</span>
           </a>
 
           <a md-list-item routerLink="/customer" class="sidebar-list" (click)="focusSidenav.toggle()">

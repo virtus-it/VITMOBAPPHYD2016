@@ -1,0 +1,51 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-gift"></i>  Products
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+        <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+        </strong>         
+  </div>
+</div>
+
+  <md-dialog-content layout="column">
+      <div class="row pd-15x25 brd-bottom">
+          <div class="col" >
+              <h6 align="center" class="form-group"> Category: 
+          <span>{{details.category}}</span> </h6>
+        </div>
+          <table class="table table-hover table-fixedheader">
+      <thead>
+        <tr>
+          <th width="20%">Product Type</th>
+          <th width="12%">Price</th>
+          <th width="25%">Cans returnable</th>
+          <th width="10%">Stock</th>
+          <th width="15%">Status</th>
+          <th width="10%">Action</th>
+           </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productCategory">
+          <td width="20%" class="left capital">{{product.category}} {{product.ptype}}</td>
+          <td width="20%" class="left capital">{{product.pcost}}</td>
+          <td width="12%" class="left capital">{{product.iscanreturnable}}</td>
+          <td width="12%" class="left capital">{{product.avaliable_stock}}</td>
+          <td width="10%" class="left capital">{{product.stockstatus}}</td>
+          <td width="15%" class="left capital">
+           <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add stock" (click)="addStock(product)" ></i>
+           <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Change status" (click)="changeStatus(product)" ></i>
+          </td>
+           
+         </tr>
+      </tbody>
+    </table>
+  </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>
+
+
