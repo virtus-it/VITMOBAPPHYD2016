@@ -13,6 +13,7 @@ import { CustomerService } from '../customer/customer.service';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart-dailog.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
+import { SetpricecustomerComponent } from '../setpricecustomer/setpricecustomer.component';
 import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
@@ -320,6 +321,24 @@ if(result == "success"){
         this.getCustomerList(true);
       
       }
+
+      setPrice(){
+        let dialogRefEditCustomer = this.dialog.open(SetpricecustomerComponent, {
+            width: '700px',
+            data: ''
+        });
+        dialogRefEditCustomer.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+        if(result == "success"){
+            
+        }
+       
+    });
+      }
+
+
+
+
     ngOnInit() {
         this.getCustomerList(true);
         this.superDealer = this.authenticationService.getSupperDelear();

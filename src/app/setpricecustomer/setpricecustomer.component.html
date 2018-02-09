@@ -1,0 +1,62 @@
+<div class="row justify-content-between modal-title">
+    <div class="col-sm-4 col-md-4 col-lg-4 ">
+        <i class="fa fa-money" ></i> Set Prices
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  <div>
+    <div id="" class="row pd-15 mg-0 brd-bottom">
+      <md-dialog-content layout="column">
+
+
+
+          <table class="table table-hover ">
+              <tbody  *ngFor="let prod of productList">
+                <tr class="border-topbottom bg-eee">
+                  <td class="" colspan="4">
+                    <b class="capital">
+                      <i class="fa fa-gift" aria-hidden="true"></i>
+                      Product Name : {{prod.brandName}}
+                      <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                        <span class="">
+                          <i class="fa fa-bars" aria-hidden="true"></i>
+                          Category :{{prod.category}}</span>
+                      </b>
+                    </b>
+                  </td>
+                </tr>
+                <tr class="border-topbottom bg-eee" >
+                  <th width="20%">Type</th>
+                  <th width="20%">Price per Unit</th>
+                  <th width="20%">Quantity</th>
+                  
+                </tr>
+                <tr *ngFor="let details of prod.data">
+                  <td class=""> {{details.ptype}} </td>
+                  <td class="">
+                    <div class="">
+                      <input class="" type="text" [(ngModel)]="details.pcost">
+                    </div>
+                  </td>
+                  <td class=""> 
+                    <div class="">
+                      <input class="" type="text">
+                    </div> </td> 
+                </tr>
+              </tbody>
+            </table>
+
+
+
+  
+      </md-dialog-content>
+    </div>
+    <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>

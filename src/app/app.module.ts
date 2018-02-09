@@ -87,6 +87,9 @@ import { ProfileComponent } from './profile/profile.component';
 import { PasswordupdateComponent } from './passwordupdate/passwordupdate.component';
 import { ProductUpdateComponent } from './product-update/product-update.component';
 import { CategoryComponent } from './category/category.component';
+import { CreateupdatecategoryComponent } from './createupdatecategory/createupdatecategory.component';
+import { CategoryproductsComponent } from './categoryproducts/categoryproducts.component';
+import { SetpricecustomerComponent } from './setpricecustomer/setpricecustomer.component';
 
 @NgModule({
     declarations: [
@@ -150,7 +153,10 @@ import { CategoryComponent } from './category/category.component';
         ProfileComponent,
         PasswordupdateComponent,
         ProductUpdateComponent,
-        CategoryComponent
+        CategoryComponent,
+        CreateupdatecategoryComponent,
+        CategoryproductsComponent,
+        SetpricecustomerComponent
         
 
     ],
@@ -260,7 +266,11 @@ import { CategoryComponent } from './category/category.component';
          DeliverpreorderComponent,
          PaymentsComponent,
          PasswordupdateComponent,
-         ProductUpdateComponent
+         ProductUpdateComponent,
+         CreateupdatecategoryComponent,
+         CategoryproductsComponent,
+         SetpricecustomerComponent
+
 
         ],
     exports: [

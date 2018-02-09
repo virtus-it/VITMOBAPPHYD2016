@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
-import { DistributorServiceService } from '../distributor/distributor-service.service';
+import { ProductsService } from '../products/products.service';
+import { CreateupdatecategoryComponent } from '../createupdatecategory/createupdatecategory.component';
+import {CategoryproductsComponent} from '../categoryproducts/categoryproducts.component';
+import { MdDialog } from '@angular/material';
+
 
 @Component({
   selector: 'app-category',
@@ -9,33 +13,79 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService,private distributorService: DistributorServiceService,) { }
+  constructor(public dialog: MdDialog,private authenticationService: AuthenticationService,  private productService: ProductsService) { }
 
   categoryList :any =[];
 
 
 
 
-  // getProductByCategory(){
-  //   let input={"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
-  //   console.log(input);
+  getProductByCategory(){
+    let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    console.log(input);
 
-  //   this.distributorService.getDistbutorsProducts(input)
-  //   .subscribe(
-  //   output => this.getProductsCategoryResult(output),
-  //   error => {
-  //     console.log("error in products category list");
-  //   });
-  // }
-  // getProductsCategoryResult(result){
-  //   console.log(result);
-  //   if (result.result == "success") {
-  //   }
-  // }
+    this.productService.getProductsCategory(input)
+    .subscribe(
+    output => this.getProductsCategoryResult(output),
+    error => {
+      console.log("error in products category list");
+    });
+  }
+  getProductsCategoryResult(result){
+    console.log(result);
+    if (result.result == "success") {
+      this.categoryList = result.data;
+    }
+  }
+
+  createCustomer(){
+    let dialogRefSetting = this.dialog.open(CreateupdatecategoryComponent, {
+      width: '500px',
+      data: ''
+  });
+  dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      //this.dialogResult = result;
+      if(result == 'success'){
+        this.getProductByCategory();
+
+      }
+  });
+  }
+
+  updateCustomer(data){
+    let dialogRefSetting = this.dialog.open(CreateupdatecategoryComponent, {
+      width: '500px',
+      data: data
+  });
+  dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      //this.dialogResult = result;
+      if(result == 'success'){
+        this.getProductByCategory();
+      }
+  });
+
+  }
+
+  getProducts(data){
+    let dialogRefSetting = this.dialog.open(CategoryproductsComponent, {
+      width: '900px',
+      data: data
+  });
+  dialogRefSetting.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      //this.dialogResult = result;
+   
+   
+  });
+
+  }
+
+
 
   ngOnInit() {
-    // this.getProductByCategory();
-
+    this.getProductByCategory();
   }
 
 }

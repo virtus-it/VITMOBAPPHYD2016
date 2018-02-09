@@ -6,16 +6,16 @@
           <div class="row pdtopbottom-12 align-items-center">
             <div class="col">
               <a class="flex-sm-fill  nav-link pageTitle-style" href="javascript:void(0)">
-                  <i class="fa fa-circle"></i> Category </a>
+                <i class="fa fa-angle-double-right"></i> Category </a>
             </div>
           <div class="col">
               <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'category'}" href="javascript:void(0)">CATEGORY</button>
-            <button type="submit" md-raised-button class=" " [ngClass]="{'btn-primary': tabPanelView === 'products'}"
-              href="javascript:void(0)">PRODUCTS</button>
+            <!-- <button type="submit" md-raised-button class=" " [ngClass]="{'btn-primary': tabPanelView === 'products'}"
+              href="javascript:void(0)">PRODUCTS</button> -->
           </div>
           <div class="col right">
               <a class="cursor logo-color mgleft-10">
-                  <i class="fa fa-plus-circle"></i>
+                  <i class="fa fa-plus-circle" (click)="createCustomer()"></i>
                 </a>
           </div></div>
         </div></div>
@@ -33,9 +33,12 @@
                         <th width="">Action</th>
                       </tr></thead>
                     <tbody>
-                      <tr>
-                        <td class=""></td>
-                        <td class=""></td>
+                      <tr *ngFor="let cat of categoryList">
+                        <td class="">{{cat.category}}</td>
+                        <td class="">
+                          <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit" (click)="updateCustomer(cat)"></i> &nbsp;&nbsp;&nbsp;
+                          <i class="fa fa-gift btn-link" aria-hidden="true" title="products" (click)="getProducts(cat)"></i>
+                        </td>
                         
                 
                       </tr>
