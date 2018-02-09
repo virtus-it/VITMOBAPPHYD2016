@@ -322,14 +322,16 @@ if(result == "success"){
       
       }
 
-      setPrice(){
+      setPrice(details){
         let dialogRefEditCustomer = this.dialog.open(SetpricecustomerComponent, {
             width: '700px',
-            data: ''
+            data: details
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
         if(result == "success"){
+            this.getCustomerList(true);
+
             
         }
        
