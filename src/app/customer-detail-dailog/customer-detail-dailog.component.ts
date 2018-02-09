@@ -19,7 +19,7 @@ export class CustomerDetailDailogComponent implements OnInit {
   noDataError = "";
   getCustomerOrder() {
     this.loaderService.display(true);
-    let input = { "order": { "userid": this.orderDetail.order_by, "status": this.orderDetail.status, "lastrecordtimestamp": "15", "pagesize": "10", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+    let input = { "order": { "userid": this.orderDetail.order_by, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
     this.orderLandingService.getOrderByPaymentCycle(input)
       .subscribe(
       output => this.getCustomerOrderResult(output),
