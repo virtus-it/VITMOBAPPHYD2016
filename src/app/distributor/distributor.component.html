@@ -52,6 +52,7 @@
           <thead>
             <tr>
               <th width="15%">Name</th>
+              <th width="8%">Customer Count</th>
               <th width="8%">Mobile</th>
               <th width="15%">Email Id</th>
               <th width="25%">Address</th>
@@ -64,6 +65,7 @@
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
               <td class="left capitalize">{{dist.firstname}} {{dist.lastname}}</td>
+              <td class="left">{{dist.customercount}} </td>
               <td class="left">{{dist.mobileno}} </td>
               <td class="left">{{dist.emailid}} </td>
               <td class="left capitalize" style="position: absolute"><span class="onhovertext">{{dist.address}}</span></td>
