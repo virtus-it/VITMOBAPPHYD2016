@@ -264,6 +264,7 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
+                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery" title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
                     <i class="fa fa-calendar-check-o " *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin' || forward.ispreorder === 'scheduler'"
                       aria-hidden="true" [ngClass]="forward.StatusColor" [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i>
@@ -521,6 +522,7 @@
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery" title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
                     <i class="fa fa-calendar-check-o " *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'"
                       aria-hidden="true" [ngClass]="allorder.StatusColor" [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
