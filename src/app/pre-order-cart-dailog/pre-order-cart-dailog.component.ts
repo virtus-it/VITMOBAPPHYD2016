@@ -60,7 +60,7 @@ export class PreOrderCartDailogComponent implements OnInit {
 
 
   deliverPreOrder() {
-    let data ={"order":{"orderstatus":"delivered","assignedto":"2140",
+    let data ={"order":{"orderstatus":"delivered","assignedto":"",
     "paymentstatus":true,
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true,

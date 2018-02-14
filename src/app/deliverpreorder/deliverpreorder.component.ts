@@ -16,7 +16,7 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , supplierslist: {} };
+  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , suppliersid: "" };
   supplierList = [];
   SupplierListCopy = [];
   paymentCod: boolean= true;
@@ -44,9 +44,11 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
   confirmDeliverOrder(){
-    this.Detail.order.received_amt = this.Detail.order.total_amt
+    this.Detail.order.received_amt = this.Detail.order.total_amt;
+    this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
     let input =[];
     input.push(this.Detail);
+    console.log(input);
     this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output),
