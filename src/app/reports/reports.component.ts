@@ -11,6 +11,7 @@ import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import { InvoicedetailsComponent } from '../invoicedetails/invoicedetails.component';
+import { InvoiceHistoryComponent } from '../invoice-history/invoice-history.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 @Component({
@@ -212,9 +213,25 @@ export class ReportsComponent implements OnInit {
   //InVoice Dialog box
 
   showInvoice(data) {
+    
     let dialogRefdeleteSupplier = this.dialog.open(InvoicedetailsComponent, {
       width: '700px',
       data: data
+
+    });
+    dialogRefdeleteSupplier.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+
+      }
+    });
+  }
+  
+  invoiceHistory() {
+    let details = this.downloadInput;
+    let dialogRefdeleteSupplier = this.dialog.open(InvoiceHistoryComponent, {
+      width: '700px',
+      data: details
 
     });
     dialogRefdeleteSupplier.afterClosed().subscribe(result => {
