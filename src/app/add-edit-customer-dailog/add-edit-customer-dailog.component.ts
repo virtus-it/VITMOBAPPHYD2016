@@ -18,16 +18,22 @@ export class AddEditCustomerDailogComponent implements OnInit {
 
   emailFormControl = new FormControl('', [
     Validators.required]);
-  customerInput: any = { "User": { "advamt": "0", "registertype":"" , "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+  customerInput: any = { "User": { "advamt": "0", "registertype":"" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
-  headerValue="Add Customer"
+  headerValue="Add Customer";
+
 
   getCustomerDetails() {
-  // console.log(this.Details);
+  console.log(this.Details);
   this.loaderService.display(true);
+
+
+
     if(this.Details){
+      // this.customerInput.User.mobileno_one= this.Details.mobileno_one;
+      // this.customerInput.User.mobileno_two= this.Details.mobileno_two;
       this.headerValue ="Edit Customer";
     let input = { userid: 0, appType: this.authenticationService.appType() };
     if (this.Details.order_by) {
@@ -54,7 +60,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno, "state": result.data.user.state, "lastname": result.data.user.lastname, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.mobileno_one , "mobileno_two": result.data.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
@@ -85,6 +91,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
     input.User.paymentdueday= this.paymentdueDate;
+    console.log(input);
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),

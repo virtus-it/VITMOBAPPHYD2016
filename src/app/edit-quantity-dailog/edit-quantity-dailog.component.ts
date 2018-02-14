@@ -24,8 +24,11 @@ export class EditQuantityDailogComponent implements OnInit {
     hideTimeSlot= false;
   constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<EditQuantityDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog,private loaderService: LoaderService) { }
   updateQuantity() {
+    let date= moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
+    let datetime = date + " " + this.changeTimeSlot.timeslot;
     this.loaderService.display(true);
-    let input = { "order": { "excepted_time": this.orderDetails.delivery_exceptedtime, "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
+    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
+    console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.updateQuantityResult(output),
