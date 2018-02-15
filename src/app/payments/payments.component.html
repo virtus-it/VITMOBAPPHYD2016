@@ -49,6 +49,14 @@
             </td>
           </tr>
           <tr>
+              <td class="nav-item" (click)="viewTabpanel('advamount')">
+                <a class="nav-link" [ngClass]="{'active': tabPanelView === 'advamount'}" href="javascript:void(0)">
+                  <i class="fa fa-inr" aria-hidden="true"></i>
+                  <br> Advance amount </a>
+              </td>
+            </tr>
+
+          <!-- <tr>
             <td class="nav-item" (click)="viewTabpanel('bill')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'bill'}" href="javascript:void(0)">
                 <i class="fa fa-bars" aria-hidden="true"></i>
@@ -62,7 +70,7 @@
                 <br> Collections
               </a>
             </td>
-          </tr>
+          </tr> -->
         </table>
       </div>
 
@@ -164,6 +172,30 @@
               </div>
             </li>
           </ul>
+        </div>
+
+        <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'advamount'">
+            <ul class="cbp_tmtimeline">
+                <li *ngFor="let advance of advAmount">
+                  <time class="cbp_tmtime" ><span>  
+                   {{advance.createddate | utcDate}}   
+                    </span>
+                     <span># {{advance.orderid}}</span></time>
+            <div class="cbp_tmicon cbp_tmicon-favourite"><i class="fa fa-check" aria-hidden="true"></i></div>
+            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+                  
+                  <div class="cbp_tmlabel left">
+                          <b> Customer have paid the advance amount</b>
+                          <br>
+                          <small> Customer: {{advance.fname}} {{advance.lname}} have paid the advance amount of INR. {{advance.advance_amount}} to Dealer/Supplier:</small>
+                  </div>
+                </li>
+              </ul>
+
+        </div>
+
+
+        
           <!-- <ul class="scrollheight  mgtop-5">
             <li class="nolist-style  messages-style" *ngFor="let credit of creditPayments">
               <div>
@@ -186,25 +218,28 @@
 
           </ul> -->
 
-      </div>
-      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'bill'">
+      
+      <!-- <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'bill'">
         Bill table
 
         <ul class="cbp_tmtimeline">
           <li>
             <time class="cbp_tmtime" datetime="2013-04-10 18:30"><span>4/10/13</span> <span>18:30</span></time>
-      <div class="cbp_tmicon cbp_tmicon-favourite"><i class="fa fa-check" aria-hidden="true"></i></div>
+      <div class="cbp_tmicon cbp_tmicon-favourite"><i class="fa fa-check" aria-hidden="true"></i></div> -->
       <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
             <!-- <div class="cbp_tmicon cbp_tmicon-check"></div>  -->
             
-            <div class="cbp_tmlabel">
+            <!-- <div class="cbp_tmlabel">
               <h4>Ricebean black-eyed pea</h4>
               <p>Winter purslane...</p>
             </div>
           </li>
         </ul>
-      </div>
-      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
+      </div> -->
+
+
+
+      <!-- <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'collections'">
         <div class=" ">
           <ul class="scrollheight  mgtop-5">
             <li class="nolist-style  messages-style" *ngFor="let collection of collections">
@@ -218,16 +253,16 @@
                 </b>
                 <br>
               <small>Payment Type : COD</small>
-                  </div>
+                  </div> -->
                   <!-- <div class="row">
                       <div class="col-6 gray9"> <i class="fa fa-calendar"></i> <small> {{collection.modifieddate | utcDate}}</small>  </div>
                       <div class="col-6"> <small>Payment Type : COD</small></div>
                     </div> -->
-            </li>
+            <!-- </li>
 
           </ul>
         </div>
-      </div>
+      </div> -->
 
     </div>
   </div>

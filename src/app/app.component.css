@@ -224,5 +224,8 @@ a{
           display: block;
       
         }
+        .nowrap {
+          white-space: nowrap ;
+        }
       }
     
