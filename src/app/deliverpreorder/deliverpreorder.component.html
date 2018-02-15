@@ -78,8 +78,8 @@
     </div>
     <div class="row form-group">
       <div class="col">
-        <md-select placeholder="Select Supplier" name="type" class="full-width left" [(ngModel)]="deliverPreOrderInput.supplierslist">
-          <md-option  *ngFor="let supplier of supplierList"value="name">{{supplier.firstname}}</md-option>
+        <md-select placeholder="Select Supplier" name="type" class="full-width left" [(ngModel)]="deliverPreOrderInput.suppliersid">
+          <md-option  *ngFor="let supplier of supplierList"  [value]="supplier.userid">{{supplier.firstname}} {{supplier.lastname}}</md-option>
         </md-select>
       </div>
     </div>

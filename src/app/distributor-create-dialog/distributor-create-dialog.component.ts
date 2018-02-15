@@ -14,7 +14,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", selectedItems:[]};
+    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", referCode:"", selectedItems:[]};
     areaList = [];
     
 
@@ -26,9 +26,12 @@ export class DistributorCreateDialogComponent implements OnInit {
             Validators.required]);
             addressFormControl = new FormControl('', [
                 Validators.required]);
+            phoneFormControl = new FormControl('', [
+                    Validators.required]);
+
     
-         phoneFormControl = new FormControl({value: '', disabled: false}, [
-            Validators.required]);
+        //  phoneFormControl = new FormControl({value: '', disabled: false}, [
+        //     Validators.required]);
      getAreasName() {
         this.loaderService.display(true);
          var input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
@@ -56,7 +59,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          this.loaderService.display(true);
          var input:any = {
              "User": {
-                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create", "firstname": this.dist.firstName, "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
          if (this.distributorDetail) {
@@ -110,14 +113,15 @@ export class DistributorCreateDialogComponent implements OnInit {
          if (this.distributorDetail) {
              var areatime =[];
              
-             this.phoneFormControl = new FormControl({value: '', disabled: true}, [
-                Validators.required]);
+            //  this.phoneFormControl = new FormControl({value: '', disabled: true}, [
+            //     Validators.required]);
              this.dist.firstName = this.distributorDetail.firstname;
              this.dist.lastName = this.distributorDetail.lastname;
              this.dist.phone = this.distributorDetail.mobileno;
              this.dist.companyname = this.distributorDetail.companyname;
              this.dist.address = this.distributorDetail.address;
              this.dist.emailid = this.distributorDetail.emailid;
+             this.dist.referCode = this.distributorDetail.reference_code;
              _.each(this.distributorDetail.areainfo, function (i, j) {
                  var area:any = i;
                  var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };
@@ -146,6 +150,7 @@ export class DistributorCreateDialogComponent implements OnInit {
         this.thisDialogRef.close('Cancel');
     }
      ngOnInit() {
+         console.log(this.distributorDetail);
          this.getAreasName();
          this.getDetails();
          this.dropdownSettings = {
@@ -160,3 +165,6 @@ export class DistributorCreateDialogComponent implements OnInit {
   }
 
 }
+
+
+

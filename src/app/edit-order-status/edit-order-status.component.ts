@@ -14,8 +14,12 @@ import { LoaderService } from '../login/loader.service';
 export class EditOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
-  editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": this.orderDetail.delivered_quantity * this.orderDetail.prod_cost, "orderstatus": "delivered", "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
+  editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": this.orderDetail.delivered_quantity * this.orderDetail.prod_cost, "orderstatus": "delivered", 
+  "reason":"Delivered: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is delivered. Please allow us to serve you better, rate us on playstore: https://play.google.com/store/apps/details?id=com.moya",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
 isConfirmed = true;
+
+
+
   updateOrderStatus() {
     this.loaderService.display(true);
     if (!this.editStatusInput.order.received_amt) {
