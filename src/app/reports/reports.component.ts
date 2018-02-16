@@ -37,7 +37,7 @@ export class ReportsComponent implements OnInit {
 
   }
   reportDetails = {
-    reportType: "", days: null, lastId: "0", pagesize: 30, appType: this.authenticationService.appType
+    reportType: "", days: null, lastId: "0", pagesize: 100, appType: this.authenticationService.appType
       ()
   };
   downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" };

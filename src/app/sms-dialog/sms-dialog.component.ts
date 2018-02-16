@@ -49,6 +49,7 @@ export class SmsDialogComponent implements OnInit {
     { value: 'customerbydays', viewValue: 'Customer Not order' },
     { value: 'distributorscustomer', viewValue: 'Customer By distributor' },
     { value: 'onlydownloaded', viewValue: 'Newly downloaded customers' },
+    { value: 'latestdownloadedunassociate', viewValue: 'Newly downloaded unassociate customers' },
     { value: 'allsuppliers', viewValue: 'All Suppliers' },
     { value: 'alldistributors', viewValue: 'All Distributors' },
     { value: 'sms', viewValue: 'SMS' }

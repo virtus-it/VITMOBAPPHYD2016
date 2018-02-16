@@ -53,7 +53,7 @@ export class OrderLandingComponent implements OnInit {
   polygonArray = [];
   filterInput = { "order": { "pagesize": "50", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
   dropdownData = { selectedItems: [] };
-  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
+  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
   dropdownSettings = {
     singleSelection: false,
     text: "Select Status",
@@ -140,7 +140,7 @@ export class OrderLandingComponent implements OnInit {
     this.tabPanelView = panelName;
     this.showFilterDailog =false;
     this.filterRecords = false;
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     if(panelName== "forward"){
       this.getForwardOrderDetails(true);
@@ -362,6 +362,9 @@ export class OrderLandingComponent implements OnInit {
     else if (this.filterInput.order.searchtype == 'distributor_id') {
       this.filterInput.order.searchtext = this.filterType.distributorid;
     }
+    else if (this.filterInput.order.searchtype == 'followupdate') {
+      this.filterInput.order.searchtext = this.filterType.followUpdate;
+    }
     else if (this.filterInput.order.searchtype == 'status') {
       this.filterInput.order.searchtext = "";
       if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
@@ -466,7 +469,7 @@ this.showFilterDailog =false;
   clearFilter() {
     this.showFilterDailog =false;
     this.filterRecords = false;
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "" };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
