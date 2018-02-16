@@ -18,7 +18,11 @@ export class AddEditCustomerDailogComponent implements OnInit {
 
   emailFormControl = new FormControl('', [
     Validators.required]);
-  customerInput: any = { "User": { "advamt": "0", "registertype":"" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+    dateFormControl = new FormControl('', [
+      Validators.required]);
+      dueDateFormControl = new FormControl('', [
+        Validators.required]);
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" , "billpaymentdueday":"",  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
@@ -28,8 +32,6 @@ export class AddEditCustomerDailogComponent implements OnInit {
   getCustomerDetails() {
   console.log(this.Details);
   this.loaderService.display(true);
-
-
 
     if(this.Details){
       // this.customerInput.User.mobileno_one= this.Details.mobileno_one;
@@ -60,12 +62,12 @@ export class AddEditCustomerDailogComponent implements OnInit {
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.mobileno_one , "mobileno_two": result.data.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
-        this.paymentdueDate = result.data.user.payment.paymentdueday;
+        this.paymentdueDate = result.data.user.payment.duedate;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;

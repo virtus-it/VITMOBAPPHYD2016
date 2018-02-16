@@ -124,6 +124,7 @@
           <tr>
             <th width="15%">Name</th>
             <th width="8%">Mobile</th>
+            <th width="18%">Distributor</th>
             <th width="8%">Mobile 1</th>
             <th width="8%">Mobile 2</th>
             <th width="10%">Email</th>
@@ -139,6 +140,7 @@
           <tr *ngFor="let customers of customerList">
             <td class="left capitalize">{{customers.firstname}} {{customers.lastname}}</td>
             <td class="left">{{customers.mobileno}}  </td>
+            <td class="left">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
             <td class="left"> {{customers.mobileno_one}}  </td>
             <td class="left">  {{customers.mobileno_two}}</td>
             <td class="left"  width="10%">{{customers.emailid}}</td>
@@ -185,7 +187,7 @@
                       <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
                   </div>
                   <div class="row pdbottom-5">
-                    <label class="col-md-6" (click)='showEditCustomer(customers)'>
+                  <label class="col-md-6" (click)='showEditCustomer(customers)'>
                       <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</label>
                     <label class="col-md-6" (click)='showSchedule(customers)'>
                       <i class="fa fa-calendar"></i> Schedule</label>

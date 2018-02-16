@@ -42,7 +42,7 @@ export class PreOrderCartDailogComponent implements OnInit {
    productList = [];
    disableSlot = false;
    //input
-   createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}}
+   createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}, }
     minDate = new Date() ;
     maxDate = new Date(2020, 0, 1);
 
@@ -63,7 +63,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     let data ={"order":{"orderstatus":"delivered","assignedto":"",
     "paymentstatus":true,
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
-    "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true,
+    "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amount":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype,
     "product_type":this.createPreOrderInput.productDetails.ptype,"product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),"cart_style":"new",
     "delivery_address":this.Details.address, "excepted_time":"" , "ispreorderby":"dealer","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}

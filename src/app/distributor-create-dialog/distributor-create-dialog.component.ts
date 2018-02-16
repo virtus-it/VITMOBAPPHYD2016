@@ -16,6 +16,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
 export class DistributorCreateDialogComponent implements OnInit {
     dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", referCode:"", selectedItems:[]};
     areaList = [];
+    phone = false;
     
 
     dropdownSettings = {};
@@ -26,12 +27,12 @@ export class DistributorCreateDialogComponent implements OnInit {
             Validators.required]);
             addressFormControl = new FormControl('', [
                 Validators.required]);
+
+            
             phoneFormControl = new FormControl('', [
                     Validators.required]);
 
     
-        //  phoneFormControl = new FormControl({value: '', disabled: false}, [
-        //     Validators.required]);
      getAreasName() {
         this.loaderService.display(true);
          var input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
@@ -111,10 +112,10 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      getDetails() {
          if (this.distributorDetail) {
+             this.phone = true;
              var areatime =[];
-             
-            //  this.phoneFormControl = new FormControl({value: '', disabled: true}, [
-            //     Validators.required]);
+             this.phoneFormControl = new FormControl({valid: true}, [
+             Validators.required]);
              this.dist.firstName = this.distributorDetail.firstname;
              this.dist.lastName = this.distributorDetail.lastname;
              this.dist.phone = this.distributorDetail.mobileno;

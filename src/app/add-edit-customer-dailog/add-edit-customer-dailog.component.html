@@ -112,7 +112,7 @@
           </div>
         </div>
         <div *ngIf="customerInput.User.paymenttype=='credit'">
-          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Select">
+          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Select"  [formControl]="dateFormControl">
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
             <md-option value="3">3</md-option>
@@ -142,7 +142,11 @@
             <md-option value="27">27</md-option>
             <md-option value="28">28</md-option>
           </md-select>
-          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Select Payment Due Date">
+          <md-error *ngIf="dateFormControl.hasError('required')">
+              Select date is
+              <strong>required</strong>
+            </md-error>
+          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Select Payment Due Date" [formControl]="dueDateFormControl">
               <md-option value="1">1</md-option>
               <md-option value="2">2</md-option>
               <md-option value="3">3</md-option>
@@ -172,6 +176,10 @@
               <md-option value="27">27</md-option>
               <md-option value="28">28</md-option>
             </md-select>
+            <md-error *ngIf="dueDateFormControl.hasError('required')">
+                Select due date is
+                <strong>required</strong>
+              </md-error>
         </div>
       </div>
 
@@ -209,7 +217,8 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" [disabled]="!emailFormControl.valid">SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" 
+    [disabled]="!emailFormControl.valid || (customerInput.User.paymenttype=='credit' && !dateFormControl.valid && !dueDateFormControl.valid)">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

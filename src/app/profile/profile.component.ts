@@ -3,6 +3,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { MdDialog } from '@angular/material';
 import { PasswordupdateComponent } from '../passwordupdate/passwordupdate.component';
+import { ProfileupdateComponent } from '../profileupdate/profileupdate.component';
 
 @Component({
   selector: 'app-profile',
@@ -32,6 +33,7 @@ export class ProfileComponent implements OnInit {
     if (result.result == 'success') {
       this.profileUpdate = result.data;
       this.updateStatus = true;
+      // this.updateProfileDialog();
       this.getProfileDetails();
   }
 }
@@ -60,6 +62,18 @@ getProfileDetailsResult(result){
 
 changePassword(){
   let dialogRef = this.dialog.open(PasswordupdateComponent, {
+    width: '550px',
+    data: ''
+});
+dialogRef.afterClosed().subscribe(result => {
+    console.log(`Dialog closed: ${result}`);
+    if (result == 'success') {
+    }
+});
+}
+
+updateProfileDialog(){
+  let dialogRef = this.dialog.open(ProfileupdateComponent, {
     width: '550px',
     data: ''
 });

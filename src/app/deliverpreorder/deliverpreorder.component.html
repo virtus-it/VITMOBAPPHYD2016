@@ -76,6 +76,19 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-4">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount">
+        </md-form-field>
+      </div> &nbsp; &nbsp;&nbsp;
+      <div class="col-4">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.advance_amount" >
+          </md-form-field>
+        </div>
+    </div>
+
     <div class="row form-group">
       <div class="col">
         <md-select placeholder="Select Supplier" name="type" class="full-width left" [(ngModel)]="deliverPreOrderInput.suppliersid">
