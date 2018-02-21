@@ -30,6 +30,7 @@ export class CoverageComponent implements OnInit {
             lng: '',
         }
     ]
+    showFilterDailog= false;
     constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     mapClicked($event: any) {
 
@@ -167,6 +168,9 @@ export class CoverageComponent implements OnInit {
 
 
     }
+    filterDailogToggle(){
+        this.showFilterDailog = !this.showFilterDailog;
+      }
     ngOnInit() {
         this.getPolygonDistributors();
     }

@@ -16,6 +16,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 @Component({
 
   templateUrl: './order-landing.component.html',
@@ -363,7 +364,8 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtext = this.filterType.distributorid;
     }
     else if (this.filterInput.order.searchtype == 'followupdate') {
-      this.filterInput.order.searchtext = this.filterType.followUpdate;
+      this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+     
     }
     else if (this.filterInput.order.searchtype == 'status') {
       this.filterInput.order.searchtext = "";
