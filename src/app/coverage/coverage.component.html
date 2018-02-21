@@ -18,6 +18,39 @@
   <div class="col-md-1  col-sm-1  col-lg-1">
       <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
       </div>
+      <div class="col-md-1  col-sm-1  col-lg-1">
+      <a class="">
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="height-500">
+            <div class="form-group">
+              <md-select placeholder="Filter By"  name="type" class="full-width left">
+                <md-option value="category">Category</md-option>
+               
+              </md-select>
+
+            </div>
+
+                <md-option value="category ">Category Name</md-option>
+                <div class="left mgtop-20" *ngIf="filterInput.user.searchtype == 'category'">
+              <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                name="selectedItem"></angular2-multiselect>
+            </div>
+           
+            <br>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </a>
+    </div>
     </div>
     <div id="" class="row pd-15x10 mg-0">
       <div class="col">
