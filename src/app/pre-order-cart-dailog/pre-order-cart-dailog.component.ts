@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit,Inject} from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import {DeliverpreorderComponent} from '../deliverpreorder/deliverpreorder.component';
@@ -26,7 +26,7 @@ import * as moment from 'moment';
 export class PreOrderCartDailogComponent implements OnInit {
   stateCtrl: FormControl;
   filteredDistributor: Observable<any[]>;
-  constructor(public dialog: MdDialog,public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,   private orderLandingService: OrderLandingService, private loaderService: LoaderService, private productService: ProductsService, @Inject(MD_DIALOG_DATA) public Details: any) {
+  constructor(public dialog: MdDialog, public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,   private orderLandingService: OrderLandingService, private loaderService: LoaderService, private productService: ProductsService, @Inject(MD_DIALOG_DATA) public Details: any) {
     this.stateCtrl = new FormControl();
     this.filteredDistributor = this.stateCtrl.valueChanges
 
@@ -140,53 +140,114 @@ filterDistributors(name: string) {
 
 //Getting products
 
-getProducts() {
-  let userid = 0
-  if(this.Details.dealers && this.Details.dealers.user_id){ 
-    userid = this.Details.dealers.user_id;
-  }
-  else{
-    userid= this.authenticationService.loggedInUserId();
-  }
-  let input = { userId: userid, appType: this.authenticationService.appType() };
-  this.productService.getProducts(input)
+// getProducts() {
+//   let userid = 0
+//   if(this.Details.dealers && this.Details.dealers.user_id){ 
+//     userid = this.Details.dealers.user_id;
+//   }
+//   else{
+//     userid= this.authenticationService.loggedInUserId();
+//   }
+//   let input = { userId: userid, appType: this.authenticationService.appType() };
+//   this.productService.getProducts(input)
+//     .subscribe(
+//     output => this.getProductsResult(output),
+//     error => {
+//       console.log("error");
+//       this.loaderService.display(false);
+//     });
+
+// }
+// getProductsResult(result) {
+//   console.log(result);
+//   this.productList= [];
+//   if(result.result == 'success'){
+//    // let productCopy = [];
+//     for (let details of result.data) {
+//       //let details: any = i;
+//       console.log(result.data);
+      
+//       let findproduct = _.find(this.productList, function (k, l) {
+//         let productDetails: any = k;
+//         return productDetails.brandName == details.brandname;
+//       });
+
+//       if (findproduct) {
+//         details.quantity = "";
+//         findproduct.data.push(details);
+//       }
+//       else{
+//         let value = {brandName:details.brandname,category:details.category,data:[]};
+//         details.quantity = "";
+//         value.data.push(details);
+//         this.productList.push(value);
+//       }
+     
+//     }
+//     console.log("products list ",this.productList)
+
+//   }
+// }
+
+getProductsList() {
+  this.loaderService.display(true);
+  let input = { apptype: this.authenticationService.appType(), userid: this.Details.userid, delearId: this.authenticationService.loggedInUserId()}
+  console.log(input);
+  this.distributorService.getProductsList(input)
     .subscribe(
-    output => this.getProductsResult(output),
+    output => this.getProductsListResult(output),
     error => {
-      console.log("error");
+      console.log("error in distrbutors");
       this.loaderService.display(false);
     });
 
 }
-getProductsResult(result) {
-  console.log(result);
-  this.productList= [];
-  if(result.result == 'success'){
-   // let productCopy = [];
-    for (let details of result.data) {
-      //let details: any = i;
+getProductsListResult(result) {
+  console.log("distributor products list", result);
+  if (result.result == 'success') {
+    let productListCopy = [];
+    _.each(result.data.products, function (i, j) {
+      let details: any = i;
+      let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
+      if (customerProduct) {
+
+
+        productListCopy.push(customerProduct);
+
+      }
+      else {
+        productListCopy.push(details);
+      }
+
+    });
+    for (let details of productListCopy) {
+           
+            console.log(result.data);
+            
+            let findproduct = _.find(this.productList, function (k, l) {
+              let productDetails: any = k;
+              return productDetails.brandName == details.brandname;
+            });
       
-      let findproduct = _.find(this.productList, function (k, l) {
-        let productDetails: any = k;
-        return productDetails.brandName == details.brandname;
-      });
-
-      if (findproduct) {
-        details.quantity = "";
-        findproduct.data.push(details);
-      }
-      else{
-        let value = {brandName:details.brandname,category:details.category,data:[]};
-        details.quantity = "";
-        value.data.push(details);
-        this.productList.push(value);
-      }
-     
-    }
-    console.log("products list ",this.productList)
-
-  }
+            if (findproduct) {
+              details.quantity = "";
+              findproduct.data.push(details);
+            }
+            else{
+              let value = {brandName:details.brandname,category:details.category,data:[]};
+              details.quantity = "";
+              value.data.push(details);
+              this.productList.push(value);
+            }
+           
+          }
+   // this.productList = productListCopy;
+    console.log(this.productList);
 }
+
+}
+
+
 ViewDistributors(data) {
   let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
       width: '70%',
@@ -303,10 +364,18 @@ this.disableSlot = false;
   }
 
 
+
+  minOrderChanged(details,event){
+   details.quantity = details.minorderqty;
+    
+  }
+
+
   ngOnInit() {
     this.getDistributors();
-    this.getProducts();
+    // this.getProducts();
     this.autoTimeSlot();
+    this.getProductsList();
     console.log(this.Details);
   }
 

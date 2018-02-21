@@ -25,7 +25,7 @@
           <tr *ngFor="let schedule of scheduleOrdersList">
             <td class="left">{{schedule.product_type}} {{schedule.product_quantity}}</td>
             <td class="left">{{schedule.quantity}} </td>
-            <td class="left">{{schedule.scheduletype}}</td>
+            <td class="left">{{schedule.weekdays}} {{schedule.days}}</td>
             <td class="left">{{schedule.delivery_exceptedtime}}</td>
             <td class="left">
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i> &nbsp;

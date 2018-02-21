@@ -44,6 +44,9 @@
                   <strong>required</strong>
                 </md-error>
               </md-form-field>
+
+              
+
               
               <md-form-field class="">
                 <input class="form-control" mdInput placeholder="Email-id" name="emailid"   [(ngModel)]="profileUpdate.emailid">
@@ -51,6 +54,21 @@
             
             </div>
           </div>
+          <div class="row">
+          <div class="col-md-4 col-sm-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname"  >
+          </md-form-field>
+        </div>
+
+          <div class="col-md-4 col-sm-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode" >
+          </md-form-field>
+          </div>
+          </div>
+<br>
+
           <div class="row">
             <div class="col-md-4 col-sm-6">
               <md-form-field class="">

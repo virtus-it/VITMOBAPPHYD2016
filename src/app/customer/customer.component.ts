@@ -43,6 +43,7 @@ export class CustomerComponent implements OnInit {
         { value:'paymenttype', viewValue:'Payment Mode'},
         {value: 'customertype' , viewValue:'Customer Type'},
         { value: 'followupdate', viewValue: 'Followup Date' }
+        
     ];
     showOrderList() {
         let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {

@@ -22,7 +22,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       Validators.required]);
       dueDateFormControl = new FormControl('', [
         Validators.required]);
-  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" , "billpaymentdueday":"",  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
@@ -62,15 +62,18 @@ export class AddEditCustomerDailogComponent implements OnInit {
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
-        this.paymentdueDate = result.data.user.payment.duedate;
+        this.paymentdueDate = result.data.user.payment.billpaymentdueday;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
+      }
+      if(result.data.user.payment && result.data.user.payment.paymenttype){
+        this.customerInput.User.paymenttype = result.data.user.payment.paymenttype;
       }
 
      
@@ -92,7 +95,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     input.User.pwd =  this.customerInput.User.mobileno;
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
-    input.User.paymentdueday= this.paymentdueDate;
+    input.User.billpaymentdueday= this.paymentdueDate;
     console.log(input);
     this.customerService.createCustomer(input)
       .subscribe(
@@ -103,6 +106,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       });
   }
   createCustomerResult(result) {
+    console.log(result);
     this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -112,7 +116,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
-    input.User.paymentdueday= this.paymentdueDate;
+    input.User.billpaymentdueday= this.paymentdueDate;
+    console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),
@@ -122,6 +127,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       });
   }
   updateCustomerResult(result) {
+    console.log(result);
     this.loaderService.display(false);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
@@ -133,7 +139,7 @@ if(result.result == 'success'){
   ngOnInit() {
     // "userid":"1768"
     console.log(this.Details);
-    this.getCustomerDetails()
+    this.getCustomerDetails();
   }
 
 }

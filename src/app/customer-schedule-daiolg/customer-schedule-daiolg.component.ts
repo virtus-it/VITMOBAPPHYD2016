@@ -113,6 +113,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     getProductsList() {
       this.loaderService.display(true);
       let input = { apptype: this.authenticationService.appType(), userid: this.Detail.customerId, delearId: this.authenticationService.loggedInUserId()}
+      console.log(input);
       this.distributorService.getProductsList(input)
         .subscribe(
         output => this.getProductsListResult(output),

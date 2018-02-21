@@ -6,6 +6,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 
 
 @Component({
@@ -19,10 +20,24 @@ export class PreOrderComponent implements OnInit {
 
   showFilterDailog = false;
   customerList : any=[];
+  customerClickMore = true;
   preOrderClickMore = true;
   customerListCopy: any =[];
+  followUpdate = null;
+  filterRecords = false;
   searchPreOrderTerm:any ="";
   preOrderInput : any =  { userId: this.authenticationService.loggedInUserId(), lastId: 0 , userType: this.authenticationService.userType(), appType: this.authenticationService.appType(),  };
+
+  filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+  FilterTypeDetails = [
+      { value: 'alias', viewValue: 'Alias' },
+      { value: 'name', viewValue: 'Name' },
+      { value: 'mobile', viewValue: 'Mobile' },
+      { value: 'address' , viewValue: 'Address'},
+      { value:'paymenttype', viewValue:'Payment Mode'},
+      {value: 'customertype' , viewValue:'Customer Type'},
+      { value: 'followupdate', viewValue: 'Followup Date' }
+  ];
 
 
   addPreorder(data){
@@ -79,20 +94,20 @@ getCustomerListResult(result) {
   }
 }
 
-searchPreOrder(){
-    let term = this.searchPreOrderTerm;
-    if (term) {
-      this.customerList = this.customerListCopy.filter(function (e) {
-        if(e.firstname){
-          return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
-        }
+// searchPreOrder(){
+//     let term = this.searchPreOrderTerm;
+//     if (term) {
+//       this.customerList = this.customerListCopy.filter(function (e) {
+//         if(e.firstname){
+//           return e.firstname.toLowerCase().indexOf(term.toLowerCase()) >= 0
+//         }
        
-      });
-    }
-    else {
-      this.customerList = this.customerListCopy;
-    }
-  }
+//       });
+//     }
+//     else {
+//       this.customerList = this.customerListCopy;
+//     }
+//   }
 
   showEditCustomer(data) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
@@ -114,8 +129,72 @@ searchPreOrder(){
   filterDailogToggle() {
     this.showFilterDailog = !this.showFilterDailog;
 }
-  ngOnInit() {
+
+onChangeType() {
+  this.filterInput.root.searchtext = "";
+}
+getCustomerByFilter(firstcall) {
+       
+        
+        
+  if (this.filterInput.root.searchtype == 'followupdate') {
+      this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+
+  }
+
+  let input = this.filterInput;
+  if (this.customerList && this.customerList.length && !firstcall) {
+      let lastCustomer: any = _.last(this.customerList);
+      if (lastCustomer) {
+          input.root.lastcustomerid = lastCustomer.userid;
+      }
+
+  }
+  else {
+      this.customerList = [];
+      input.root.lastcustomerid = "0";
+  }
+  this.customerService.searchCustomer(input)
+      .subscribe(
+      output => this.getCustomerByFilterResult(output),
+      error => {
+          console.log("error in customer");
+          this.loaderService.display(false);
+      });
+}
+getCustomerByFilterResult(result) {
+  console.log(result);
+  if (result.result == 'success') {
+      this.filterRecords = true;
+      this.customerList = _.union(this.customerList, result.data);
+  }
+  else {
+    this.preOrderClickMore = false;
+  }
+
+}
+getcustomerByPaging() {
+  if (this.filterRecords) {
+      this.getCustomerByFilter(false);
+  }
+  else {
+      this.getCustomerList(false);
+  }
+
+}
+
+clearFilter() {
+    this.showFilterDailog =false;
+    this.filterRecords = false;
+    this.followUpdate = null;
+    this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     this.getCustomerList(true);
+  
+  }
+
+  ngOnInit() {
+    this.getcustomerByPaging();
+    
 
   }
 

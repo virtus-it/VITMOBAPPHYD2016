@@ -49,7 +49,9 @@
         </md-select>
       </div>
     </div>
-    <div class="table-scroll">
+
+    <!-- old code starts here -->
+    <!-- <div class="table-scroll">
       <table class="table table-hover ">
         <tbody *ngFor="let prod of productList">
           <tr class="border-topbottom bg-eee">
@@ -78,12 +80,20 @@
                   <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{details.ptype}}</span>
-                  <!-- <span class="custom-control-description">{{}}</span> -->
-                </label>
+                  </label>
               </div>
             </td>
-            <td>
+            <td> -->
+
+<!-- old code ends here -->
+
+                  <!-- <span class="custom-control-description">{{}}</span> -->
+              
               <!-- <span>Price per Unit : </span> -->
+              <!-- {{Details.discountproducts.product_cost}} -->
+
+
+              <!-- old code
               <b class="">{{details.pcost}}</b>
             </td>
             <td>
@@ -91,10 +101,75 @@
               <div class="width-100pc">
                 <md-form-field class="center">
                   <input class="form-control" mdInput type="number" min="0" step="1"  [formControl]="FormControl" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
+
+
+                ends here-->
+
+
+
                   <!-- <md-error *ngIf="FormControl.hasError('required')">
                       Quantity is <strong>required</strong>
                     </md-error> -->
-                </md-form-field>
+
+
+
+                <!-- old code</md-form-field>
+              </div>
+                </div>
+            </td>
+            <td>
+              <b class="">{{details.pcost*details.quantity}}</b>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div> ends here -->
+
+
+    <div class="table-scroll">
+      <table class="table table-hover ">
+        <tbody *ngFor="let prod of productList">
+          <tr class="border-topbottom bg-eee">
+            <td class="" colspan="4">
+              <b class="capital">
+                <i class="fa fa-gift" aria-hidden="true"></i>
+                Product Name : {{prod.brandName}}
+                <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                  <span class="">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    Category : {{prod.category}}</span>
+                </b>
+              </b>
+            </td>
+          </tr>
+          <tr class="border-topbottom bg-eee">
+            <th width="40%">Type</th>
+            <th width="20%">Price per Unit</th>
+            <th width="15%">Quantity</th>
+            <th width="15%">Cost</th>
+          </tr>
+          <tr *ngFor="let details of prod.data">
+            <td>
+              <div class="form-radio form-radio-inline"  >
+
+                  <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
+                  
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged(details,$event.target)">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{details.ptype}}</span>
+                  </label>
+              </div>
+            </td>
+            <td>
+                <b class="">{{details.pcost}}</b>
+              </td>
+              <td>
+                  <div class="">                   
+                <div class="width-100pc">
+                  <md-form-field class="center">
+                    <input class="form-control" mdInput type="number" min="0" step="1"  [formControl]="FormControl" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
+                    </md-form-field>
               </div>
                 </div>
             </td>
@@ -105,6 +180,9 @@
         </tbody>
       </table>
     </div>
+  
+
+
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">

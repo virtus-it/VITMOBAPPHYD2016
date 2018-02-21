@@ -113,6 +113,8 @@
             </div>
           </a>&nbsp;
         </div>
+
+        
       </div>
       <!-- <nav class="nav nav-pills flex-column flex-sm-row">
           <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)">
@@ -230,7 +232,15 @@
                     <label *ngIf="superDealer">Follow Up :
                       <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(forward)'>
+                          <a *ngIf="followupstatus =='close'">
+                      <i class="fa fa-volume-control-phone fa-2 red" title="FollowUp Closed"></i> 
+                      <i class="fa fa-times-circle red"></i>
+                      </a>
+                      <a *ngIf="followupstatus !='close'">
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
+                        </a>
+                      
+
                       </span>
                     </label>
                   </div>
