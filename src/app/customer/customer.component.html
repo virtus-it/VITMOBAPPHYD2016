@@ -128,7 +128,7 @@
             <th width="8%">Status</th>
             
             <th width="18%">Distributor</th>
-            <th width="10%">Assigned to</th>
+            <!-- <th width="10%">Assigned to</th> -->
             <th width="8%">Mobile</th>
             <th width="8%">Mobile 1</th>
             <th width="8%">Mobile 2</th>
@@ -149,11 +149,11 @@
             </td>
             
             <td class="left">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
-            <td class="left">
+            <!-- <td class="left">
               <span *ngIf="customers.enable_autoassign=='true'">
                 {{customers.supplier.suppliername}}
-              </span>
-            </td>
+              </span> 
+            </td> -->
             <td class="left">{{customers.mobileno}}  </td>
             <td class="left"> {{customers.mobileno_one}}  </td>
             <td class="left">  {{customers.mobileno_two}}</td>

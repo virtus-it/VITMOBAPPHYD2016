@@ -5,7 +5,9 @@ import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } fro
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
+import { ProductsService } from '../products/products.service';
 import { MdDialog } from '@angular/material';
+import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
 import * as moment from 'moment';
 declare var google: any;
@@ -31,10 +33,39 @@ export class CoverageComponent implements OnInit {
         }
     ]
     showFilterDailog= false;
-    constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper,  private productService: ProductsService, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
     mapClicked($event: any) {
 
     }
+
+    categoryList :any =[];
+
+    filterInput = {"area":{"user_type":"dealer","user_id":this.authenticationService.loggedInUserId() , "apptype":this.authenticationService.appType(),"searchtype":"",
+    "searchtext":""}};
+    dropdownSettings = {
+        singleSelection: false,
+        text: "Select Status",
+        selectAllText: 'Select All',
+        unSelectAllText: 'UnSelect All',
+        enableSearchFilter: true,
+        badgeShowLimit: 2,
+        classes: "myclass custom-class myyy"
+      };
+    dropdownData = { selectedItems: [] };
+    // categoryname = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
+    // { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+    // { "id": "ordered", "itemName": "Ordered" },
+    // { "id": "backtodealer", "itemName": "Back to dealer" },
+    // { "id": "delivered", "itemName": "Delivered" },
+    // { "id": "cancelled", "itemName": "Cancelled" },
+    // { "id": "doorlock", "itemName": "Doorlock" },
+    // { "id": "rejected", "itemName": "Rejected" },
+    // { "id": "notreachable", "itemName": "Not Reachable" },
+    // { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+    // categoryName = [{"itemName":"details.categoryname"}];
+
+
+
 
     getPolygonDistributors() {
 
@@ -171,8 +202,93 @@ export class CoverageComponent implements OnInit {
     filterDailogToggle(){
         this.showFilterDailog = !this.showFilterDailog;
       }
+
+      searchPolygon(){
+        if (this.filterInput.area.searchtype == 'categoryname') {
+            this.filterInput.area.searchtext = "";
+            if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
+                for (let data of this.dropdownData.selectedItems) {
+                    if (this.filterInput.area.searchtext) {
+                        this.filterInput.area.searchtext += "," + data.itemName;
+                      }
+                      else {
+                        this.filterInput.area.searchtext += data.itemName;
+                      }
+          }
+      }
+    }
+    console.log(this.filterInput);
+    this.filteredList();
+    this.showFilterDailog =false;
+}
+
+filteredList(){
+    let input = this.filterInput;
+    console.log(input);
+    this.distributorService.getFilteredPolygon(input)
+    .subscribe(
+    output => this.getFilteredPolygonResult(output),
+    error => {
+      console.log("error in products category list");
+    });
+
+}
+getFilteredPolygonResult(result){
+console.log(result);
+if(result.result = 'success'){
+
+}
+}
+
+
+getProductByCategory(){
+    let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    console.log(input);
+
+    this.productService.getProductsCategory(input)
+    .subscribe(
+    output => this.getProductsCategoryResult(output),
+    error => {
+      console.log("error in products category list");
+    });
+  }
+  getProductsCategoryResult(result){
+    console.log(result);
+    let categoryListCopy = [];
+    if (result.result == "success") {
+    _.each(result, function (i, j) {
+        _.each(result.data, function(k,l){
+            let details:any = k;
+            let value = { "id": details.categoryid, "itemName": details.category }
+            categoryListCopy.push(value);
+        });
+        
+    });
+
+  
+      this.categoryList = categoryListCopy;
+      
+    }
+  }
+
+  clearFilter() {
+    this.showFilterDailog =false;
+    this.filterInput = {"area":{"user_type":"dealer","user_id":this.authenticationService.loggedInUserId() , "apptype":this.authenticationService.appType(),"searchtype":"",
+    "searchtext":""}};
+    this.dropdownData.selectedItems= [];
+    this.getPolygonDistributors();
+    this.getProductByCategory();
+
+  }
+
+
+
+    
+
+    
     ngOnInit() {
         this.getPolygonDistributors();
+        this.getProductByCategory();
     }
 
 }

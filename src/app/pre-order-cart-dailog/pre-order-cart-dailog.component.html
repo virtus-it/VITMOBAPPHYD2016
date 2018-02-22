@@ -126,7 +126,7 @@
     </div> ends here -->
 
 
-    <div class="table-scroll">
+    <div class="table-scroll scroll">
       <table class="table table-hover ">
         <tbody *ngFor="let prod of productList">
           <tr class="border-topbottom bg-eee">
@@ -155,7 +155,7 @@
                   <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
                   
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged(details,$event.target)">
+                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged($event)">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{details.ptype}}</span>
                   </label>
@@ -168,7 +168,7 @@
                   <div class="">                   
                 <div class="width-100pc">
                   <md-form-field class="center">
-                    <input class="form-control" mdInput type="number" min="0" step="1"  [formControl]="FormControl" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
+                    <input class="form-control" mdInput type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
                     </md-form-field>
               </div>
                 </div>
@@ -186,8 +186,10 @@
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
+  <p class="warning">{{this.message}}</p> &nbsp;&nbsp;
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="!FormControl.valid">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createPreOrder()" >PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class="btn-primary" (click)="deliverPreOrder()">DELIVERY AS A DISTRIBUTOR</button>&nbsp;
   </md-dialog-actions>
 </div>
+<!-- [disabled]="!FormControl.valid"  [formControl]="FormControl"-->

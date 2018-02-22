@@ -18,20 +18,38 @@
         <div class="schedule-popup row">
             <div class="col-md-4 ">
                 <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="Customer Name" [(ngModel)]="scheduleInput.CustomerName" disabled>
+                    <input class="form-control" mdInput placeholder="Customer Name" [(ngModel)]="scheduleInput.CustomerName" name="customerName" disabled>
 
                 </md-form-field>
             </div>
-            <div class="col-md-4 ">
-                <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" [disabled]="Detail.type== 'update'">
+
+            <!-- [disabled]="Detail.type== 'update'" -->
+
+            <div class="col-md-4 " *ngIf="product">
+                <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" [formControl]="ProductFormControl" name="product" disabled="disabled">
                     <md-option *ngFor="let prod of productList" [value]="prod" [value]="prod.pname">
                         {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
                     </md-option>
                 </md-select>
+                <md-error *ngIf="ProductFormControl.hasError('required')">
+                        Product is
+                        <strong>required</strong>
+                    </md-error>
             </div>
+            <div class="col-md-4 " *ngIf="!product">
+                    <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" [formControl]="ProductFormControl" name="product">
+                        <md-option *ngFor="let prod of productList" [value]="prod" [value]="prod.pname">
+                            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
+                        </md-option>
+                    </md-select>
+                    <md-error *ngIf="ProductFormControl.hasError('required')">
+                            Product is
+                            <strong>required</strong>
+                        </md-error>
+                </div>
             <div class="col-md-3 ">
                 <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="Quantity" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
+                    <input class="form-control" mdInput placeholder="Quantity" name="quantity" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
                     <md-error *ngIf="FormControl.hasError('required')">
                         Quantity is
                         <strong>required</strong>
@@ -42,18 +60,26 @@
 
         <div class="row  ">
             <div class="col-md-4">
-                <md-select placeholder="Schedule for" [(ngModel)]="scheduleInput.schedulefor" class="wd-100pc left">
+                <md-select placeholder="Schedule for" [(ngModel)]="scheduleInput.schedulefor" name="scheduledFor" [formControl]="ScheduleFormControl" class="wd-100pc left">
                     <md-option value="weekdays"> Weekdays
                     </md-option>
                     <md-option value="days">Days
                     </md-option>
                 </md-select>
+                <md-error *ngIf="ScheduleFormControl.hasError('required')">
+                        Scheduled For is
+                        <strong>required</strong>
+                    </md-error>
             </div>
             <div class="col-sm-4">
-                <md-select placeholder="Time Slot" class="wd-100pc left" [(ngModel)]="scheduleInput.timeslot">
+                <md-select placeholder="Time Slot" class="wd-100pc left" [(ngModel)]="scheduleInput.timeslot" name="timeSlot" >
                     <md-option value="9AM-1PM">9AM-1PM </md-option>
                     <md-option value="4PM-7PM">4PM-7PM </md-option>
                 </md-select>
+                <!-- <md-error *ngIf="TimeSlotFormControl.hasError('required')">
+                        TimeSlot is
+                        <strong>required</strong>
+                    </md-error> -->
             </div>
             <div class="col-sm-4">
             </div>
@@ -407,7 +433,7 @@
             </div> -->
             <md-dialog-actions>
                     <button md-raised-button   class="createscheduler  btn-primary allcaps" btntype="create"
-                    [disabled]="!FormControl.valid" (click)="createAndUpdateScheduleOrder()">{{Detail.type}}</button>
+                    [disabled]="!FormControl.valid || !ProductFormControl.valid" (click)="createAndUpdateScheduleOrder()">{{Detail.type}}</button>
                     <!-- <div class="message"></div> -->
                    &nbsp;<span *ngIf="Detail.type=='update'">
                             <button md-raised-button class="bg-danger"   (click)="deleteSchedule(Detail.data)">DELETE</button>
@@ -417,3 +443,6 @@
                         <!-- <div class="message"></div> -->
                     </md-dialog-actions>
                   </div>
+
+<!-- 
+                  !TimeSlotFormControl.valid || -->

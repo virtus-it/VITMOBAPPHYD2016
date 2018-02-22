@@ -1,8 +1,11 @@
 .width-100pc .mat-form-field{
     width: 100% !important;
   }
-  .table-scroll{
+  .scroll{
     overflow-x: hidden;
     height: 300px;
     overflow-y: auto;
+}
+.warning{
+  color:red;
 }

@@ -46,6 +46,8 @@ export class PreOrderCartDailogComponent implements OnInit {
     minDate = new Date() ;
     maxDate = new Date(2020, 0, 1);
 
+    message:any="";
+
 
 
     
@@ -60,6 +62,7 @@ export class PreOrderCartDailogComponent implements OnInit {
 
 
   deliverPreOrder() {
+   if(this.validate()){
     let data ={"order":{"orderstatus":"delivered","assignedto":"",
     "paymentstatus":true,
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
@@ -82,8 +85,13 @@ export class PreOrderCartDailogComponent implements OnInit {
         }
 
     });
+   
 
 }
+else{
+  this.message="please set quantity";
+}
+  }
 
 //getting distributors
 
@@ -271,6 +279,7 @@ onCloseCancel(){
 }
 
 createPreOrder(){
+  if(this.validate()){
   console.log(this.createPreOrderInput);
   let input =[{"order":
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
@@ -295,8 +304,12 @@ createPreOrder(){
       console.log("falied");
       this.loaderService.display(false);
     });
-}
 
+}
+else{
+  this.message="please set quantity";
+}
+}
 createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
@@ -365,9 +378,43 @@ this.disableSlot = false;
 
 
 
-  minOrderChanged(details,event){
-   details.quantity = details.minorderqty;
+  minOrderChanged( event){
+  console.log(event);
+  _.each(this.productList, function(i,j){
+    let details:any =i;
+    _.each(i.data, function(k,l){
+      let detailData:any=k;
+      detailData.quantity="";
+    })
+  }
+)
+    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
     
+  }
+
+  validate(){
+   if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.quantity){
+     this.message="";
+     return true;
+   }
+   else{
+     this.message="please set quantity";
+     return false;
+   }
+
+  //   _.each(this.productList, function(i,j){
+  //   let details:any =i;
+  //   _.each(i.data, function(k,l){
+  //     let detailData:any=k;
+  //   if(detailData.quantity){
+  //     return true;
+  //   }
+  //   else{
+  //     return false;
+  //   }
+  // })
+  // });
+  
   }
 
 

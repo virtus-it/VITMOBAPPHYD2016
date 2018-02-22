@@ -20,11 +20,13 @@ import { weekdays } from 'moment';
 export class CustomerScheduleDaiolgComponent implements OnInit {
 
   constructor(private customerservice: CustomerService,public dialog: MdDialog, private distributorService: DistributorServiceService, private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleDaiolgComponent>, private authenticationService: AuthenticationService, @Inject(MD_DIALOG_DATA) public Detail: any, ) { }
-  FormControl = new FormControl('', [
-    Validators.required]);
+  FormControl = new FormControl('', [Validators.required]);
+  ScheduleFormControl = new FormControl('', [Validators.required]);
+  // TimeSlotFormControl = new FormControl('', [Validators.required]);
+  ProductFormControl = new FormControl('', [Validators.required]);
 
 
-  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity:"" , timeslot: "" }
+  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity:"" , timeslot: "9AM-1PM" }
   createSchedule = [];
   customerDetails:any = "";
   productList = [];
@@ -34,6 +36,8 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   selectAllWeekDays : boolean = false;
   selectAllDays: boolean = false;
   updateSchedule=[];
+  product= false;
+
 
  
   days = [];
@@ -251,6 +255,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
    
    }
    else{
+     this.product= true;
+     this.ProductFormControl = new FormControl({valid: true}, [
+      Validators.required]);
      this.scheduleInput.CustomerName=this.Detail.customerName;
     this.scheduleInput.productQuantity=this.Detail.data.quantity;
     this.scheduleInput.schedulefor=this.Detail.data.scheduletype;

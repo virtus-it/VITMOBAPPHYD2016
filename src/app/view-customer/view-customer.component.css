@@ -58,6 +58,13 @@
   cursor: pointer;
   color: #0f75bc;
   }
-  
+  .width-100pc .mat-form-field{
+    width: 100% !important;
+  }
+  .scroll{
+    overflow: scroll;
+    height: 300px;
+}
+
   }
   

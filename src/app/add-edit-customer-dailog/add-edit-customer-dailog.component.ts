@@ -14,19 +14,20 @@ import { Input } from '@angular/core/src/metadata/directives';
 })
 export class AddEditCustomerDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
+  constructor( private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { 
+    
+  }
 
   emailFormControl = new FormControl('', [
     Validators.required]);
-    dateFormControl = new FormControl('', [
-      Validators.required]);
-      dueDateFormControl = new FormControl('', [
-        Validators.required]);
+   
+
   customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
   headerValue="Add Customer";
+  message:any ="";
 
 
   getCustomerDetails() {
@@ -80,16 +81,22 @@ export class AddEditCustomerDailogComponent implements OnInit {
     } 
   }
   createUpdatecustomer() {
-    
+    if(this.valid()){
     if (this.customerInput.User.userid) {
       this.updateCustomer();
     }
     else {
       this.createCustomer();
     }
+    
+  }
+
+
+
 
   }
   createCustomer() {
+
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
@@ -142,4 +149,62 @@ if(result.result == 'success'){
     this.getCustomerDetails();
   }
 
-}
+  // validation(){
+  //   if(this.customerInput.User.paymenttype=='credit' && !this.paymentDate && !this.paymentdueDate){
+  //     this.message="Please set date and due date fields";
+  //     return false;
+  // }
+  // else{
+  //   this.message="";
+  //   return true;
+  // }
+   
+  // }
+
+  valid(){
+    if(this.customerInput.User.paymenttype=='credit'){
+      if(!this.paymentDate){
+        this.message="please set date field";
+        return false;
+      }
+      else if(!this.paymentdueDate){
+        this.message="please set due date field";
+        return false;
+      }
+      else{
+        this.message="";
+        return true;
+
+      }
+        
+      }
+      else{
+        this.message="";
+        return true;
+      }
+    }
+  }
+  // ngAfterViewInit() {
+  //   this.cdr.detectChanges();
+  // }
+
+
+
+
+
+
+// working old 1 
+// createUpdatecustomer() {
+//   if(this.validation()){
+//   if (this.customerInput.User.userid) {
+//     this.updateCustomer();
+//   }
+//   else {
+//     this.createCustomer();
+//   }
+// }
+// else{
+//   this.message="Please set date and due date fields";
+// }
+
+// }
