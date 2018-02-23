@@ -204,11 +204,31 @@ deliveryStatus(){
     }
 
 }
+
+//test function
+// getUserDetails(){
+//     let input={"User":{"userid": this.orderDetail.order_by,"mobileno":this.orderDetail.customer.mobileno,"emailid":this.orderDetail.customer.emailid,"loginid":this.authenticationService.loggedInUserId()}};
+//     console.log(input);
+
+//     this.orderLandingService.getUserDetails(input)
+//     .subscribe(
+//     output => this.getUserDetailsResult(output),
+//     error => {
+//         console.log("error in order details");
+//         this.loaderService.display(false);
+//     });
+// }
+// getUserDetailsResult(result){
+//     console.log(result);
+// }
+
+
 ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     this.deliveryStatus();
     console.log(this.orderDetail);
+    // this.getUserDetails();
 }
 
 }

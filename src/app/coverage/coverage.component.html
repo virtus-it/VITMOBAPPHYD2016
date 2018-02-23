@@ -3,8 +3,11 @@
     <div class="col-md-9  col-sm-9 col-lg-9">
         <h4 class="left"><i class="fa fa-globe"></i> Covered Area</h4>
     </div>
-  <div class="col-md-2  col-sm-2  col-lg-2">
+   
+    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+    
       <form class="example-form" (ngSubmit)="getOrderDetail()">
+        
       <div class="input-group">
           <input type="text" class="form-control" placeholder="Order Id"  name="orderid" [(ngModel)]="order.orderId">
           <span class="input-group-btn">
@@ -17,40 +20,47 @@
     
   <div class="col-md-1  col-sm-1  col-lg-1">
       <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
-      </div>
+      
+
+      <!-- filter code starts here -->
+
       <div class="col-md-1  col-sm-1  col-lg-1">
-      <a class="">
-        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
-        <div class="filterView" *ngIf="showFilterDailog">
-          <div class="height-500">
-            <div class="form-group">
-              <md-select placeholder="Filter By"  name="type" class="full-width left">
-                <md-option value="category">Category</md-option>
+          <a class="">
+            <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+            <div class="filterView" *ngIf="showFilterDailog">
+              <div class="height-500">
+                <div class="form-group">
+                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.area.searchtype"  name="type" class="full-width left">
+                    <md-option value="categoryname">Category</md-option>
+                   
+                  </md-select>
+    
+                </div>
+    
+                    <div class="left mgtop-20" *ngIf="filterInput.area.searchtype == 'categoryname'">
+                  <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                    name="selectedItem"></angular2-multiselect>
+                </div>
                
-              </md-select>
-
+                <br>
+                <div class="input-group pd-10  ">
+                  <button md-raised-button color="primary" class="mgright-5" (click)="searchPolygon()">
+                    <i class="fa fa-search" aria-hidden="true"></i> Search
+                  </button>
+                  <button md-raised-button color="primary" (click)="clearFilter()">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                  </button>
+                </div>
+    
+              </div>
             </div>
-
-                <md-option value="category ">Category Name</md-option>
-                <div class="left mgtop-20" *ngIf="filterInput.user.searchtype == 'category'">
-              <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                name="selectedItem"></angular2-multiselect>
-            </div>
-           
-            <br>
-            <div class="input-group pd-10  ">
-              <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
-                <i class="fa fa-search" aria-hidden="true"></i> Search
-              </button>
-              <button md-raised-button color="primary" (click)="clearFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-              </button>
-            </div>
-
-          </div>
+          </a>
         </div>
-      </a>
-    </div>
+        <!-- filter ends here -->
+
+
+      </div>
+     
     </div>
     <div id="" class="row pd-15x10 mg-0">
       <div class="col">

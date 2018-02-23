@@ -20,6 +20,7 @@ export class DistributorListDialogComponent implements OnInit {
   suppliersCopy = [];
   distributorID = "";
   supplierID = "";
+  supplierName="";
   searchDistTerm = "";
   searchSupplierTerm = "";
   superDealer =true;
@@ -132,6 +133,12 @@ export class DistributorListDialogComponent implements OnInit {
         "usertype": this.authenticationService.userType()
       }
     }
+
+
+
+
+
+
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
     console.log(input);
     this.distributorService.assingOrder(input)
@@ -148,6 +155,9 @@ export class DistributorListDialogComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
+      if(this.autoAssign =true){
+
+      }
     }
   }
   searchDistrubutors() {

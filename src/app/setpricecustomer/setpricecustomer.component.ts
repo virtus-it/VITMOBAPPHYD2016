@@ -82,6 +82,8 @@ export class SetpricecustomerComponent implements OnInit {
       var detailsArray =[];
       var distCustomer = this.Details; 
       var authService = this.authenticationService;
+      
+
       console.log(distCustomer);
       _.each( this.productList, function (i, j) {
       let details: any = i;
@@ -93,6 +95,8 @@ export class SetpricecustomerComponent implements OnInit {
       let input=  {"root":{"dealerid":distCustomer.dealers.user_id,"customerid":distCustomer.userid,"productid":DetailData.productid,"producttype":DetailData.ptype,"product_cost":DetailData.pcost,"quantity":DetailData.minorderqty,"discount_amt":DetailData.pcost,"loginid":distCustomer.userid,"apptype":authService.appType()}};
       detailsArray.push(input);
       console.log(input);
+      
+
     
     });
     });
@@ -109,7 +113,8 @@ export class SetpricecustomerComponent implements OnInit {
     console.log(result);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
-
+      
+      
     }
 
   }

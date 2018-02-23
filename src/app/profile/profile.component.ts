@@ -13,12 +13,12 @@ import { ProfileupdateComponent } from '../profileupdate/profileupdate.component
 export class ProfileComponent implements OnInit {
 
   constructor( private authenticationService: AuthenticationService, private customerService: CustomerService, public dialog: MdDialog,) {  }
-  profileUpdate: any = {"firstname":"","lastname":"","emailid":"","address":"","city":"","state":"","pincode":"","mobileno":"" };
+  profileUpdate: any = {"firstname":"","lastname":"","emailid":"","address":"","city":"","state":"","pincode":"","mobileno":"", "companyname":"", "referCode":"" };
   updateStatus= false;
 
 
   updateProfile(){
-    let input={"User":{"userid":this.authenticationService.loggedInUserId(),"user_type":"dealer","firstname":this.profileUpdate.firstname,"lastname":this.profileUpdate.lastname,"emailid":this.profileUpdate.emailid,
+    let input={"User":{"userid":this.authenticationService.loggedInUserId(),"user_type":"dealer","firstname":this.profileUpdate.firstname,"lastname":this.profileUpdate.lastname,"emailid":this.profileUpdate.emailid, "companyname":this.profileUpdate.companyname, "referCode":this.profileUpdate.referCode,
     "address":this.profileUpdate.address,"city":this.profileUpdate.city,"state":this.profileUpdate.state,"pincode":this.profileUpdate.pincode,"mobileno":this.profileUpdate.mobileno,"appType":this.authenticationService.appType()}};
     console.log(input);
   this.customerService.updateCustomer(input)
@@ -58,6 +58,8 @@ getProfileDetailsResult(result){
   this.profileUpdate.state =result.data.user.state;
   this.profileUpdate.pincode =result.data.user.pincode;
   this.profileUpdate.mobileno =result.data.user.mobileno;
+  this.profileUpdate.companyname = result.data.user.companyname;
+  this.profileUpdate.referCode = result.data.user.reference_code;
 }
 
 changePassword(){

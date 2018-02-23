@@ -14,19 +14,20 @@ import { Input } from '@angular/core/src/metadata/directives';
 })
 export class AddEditCustomerDailogComponent implements OnInit {
 
-  constructor(private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { }
+  constructor( private authenticationService: AuthenticationService, private customerService: CustomerService, public thisDialogRef: MdDialogRef<AddEditCustomerDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog,private loaderService: LoaderService) { 
+    
+  }
 
   emailFormControl = new FormControl('', [
     Validators.required]);
-    dateFormControl = new FormControl('', [
-      Validators.required]);
-      dueDateFormControl = new FormControl('', [
-        Validators.required]);
-  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" , "billpaymentdueday":"",  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+   
+
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
   headerValue="Add Customer";
+  message:any ="";
 
 
   getCustomerDetails() {
@@ -62,37 +63,46 @@ export class AddEditCustomerDailogComponent implements OnInit {
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.payment.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
         this.paymentDate = result.data.user.payment.days;
-        this.paymentdueDate = result.data.user.payment.duedate;
+        this.paymentdueDate = result.data.user.payment.billpaymentdueday;
       } 
       if(result.data.user.payment && result.data.user.payment.advance_amount){
         this.customerInput.User.advamt = result.data.user.payment.advance_amount;
+      }
+      if(result.data.user.payment && result.data.user.payment.paymenttype){
+        this.customerInput.User.paymenttype = result.data.user.payment.paymenttype;
       }
 
      
     } 
   }
   createUpdatecustomer() {
-    
+    if(this.valid()){
     if (this.customerInput.User.userid) {
       this.updateCustomer();
     }
     else {
       this.createCustomer();
     }
+    
+  }
+
+
+
 
   }
   createCustomer() {
+
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
-    input.User.paymentdueday= this.paymentdueDate;
+    input.User.billpaymentdueday= this.paymentdueDate;
     console.log(input);
     this.customerService.createCustomer(input)
       .subscribe(
@@ -103,6 +113,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       });
   }
   createCustomerResult(result) {
+    console.log(result);
     this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -112,7 +123,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
-    input.User.paymentdueday= this.paymentdueDate;
+    input.User.billpaymentdueday= this.paymentdueDate;
+    console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),
@@ -122,6 +134,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       });
   }
   updateCustomerResult(result) {
+    console.log(result);
     this.loaderService.display(false);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
@@ -133,7 +146,65 @@ if(result.result == 'success'){
   ngOnInit() {
     // "userid":"1768"
     console.log(this.Details);
-    this.getCustomerDetails()
+    this.getCustomerDetails();
   }
 
-}
+  // validation(){
+  //   if(this.customerInput.User.paymenttype=='credit' && !this.paymentDate && !this.paymentdueDate){
+  //     this.message="Please set date and due date fields";
+  //     return false;
+  // }
+  // else{
+  //   this.message="";
+  //   return true;
+  // }
+   
+  // }
+
+  valid(){
+    if(this.customerInput.User.paymenttype=='credit'){
+      if(!this.paymentDate){
+        this.message="please set date field";
+        return false;
+      }
+      else if(!this.paymentdueDate){
+        this.message="please set due date field";
+        return false;
+      }
+      else{
+        this.message="";
+        return true;
+
+      }
+        
+      }
+      else{
+        this.message="";
+        return true;
+      }
+    }
+  }
+  // ngAfterViewInit() {
+  //   this.cdr.detectChanges();
+  // }
+
+
+
+
+
+
+// working old 1 
+// createUpdatecustomer() {
+//   if(this.validation()){
+//   if (this.customerInput.User.userid) {
+//     this.updateCustomer();
+//   }
+//   else {
+//     this.createCustomer();
+//   }
+// }
+// else{
+//   this.message="Please set date and due date fields";
+// }
+
+// }

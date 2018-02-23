@@ -9,6 +9,7 @@ import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-
 import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { CustomerScheduleDaiolgComponent } from '../customer-schedule-daiolg/customer-schedule-daiolg.component';
 import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
+import * as _ from 'underscore';
 
 
 
@@ -24,12 +25,24 @@ export class ViewCustomerComponent implements OnInit {
 
   customersList:any =[];
   noRecords= false;
+  customerClickMore = true;
 
 
-  getCustomerList() {
+  getCustomerList(firstcall) {
     this.loaderService.display(true);
-    let input= {"userId":this.Detail.userid,"lastId":0,"userType":"dealer","appType":this.authenticationService.appType()}
+    let input= {"userId":this.Detail.userid,"lastId":"0","userType":"dealer","appType":this.authenticationService.appType()}
     console.log(input);
+    if (this.customersList && this.customersList.length && !firstcall) {
+      let lastCustomer:any = _.last(this.customersList);
+      if (lastCustomer) {
+          input.lastId = lastCustomer.userid;
+      }
+
+  }
+  else {
+      this.customersList = [];
+      input.lastId = "0";
+  }
         this.customerService.getCustomerList(input)
             .subscribe(
             output => this.getCustomerListResult(output),
@@ -42,10 +55,12 @@ export class ViewCustomerComponent implements OnInit {
     console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
-      this.customersList = result.data;
+      this.customersList = _.union(this.customersList, result.data);
     }
     else{
       this.noRecords = true;
+      this.customerClickMore = false;
+
     }
   }
 
@@ -59,7 +74,7 @@ export class ViewCustomerComponent implements OnInit {
     dialogRefEditCustomer.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
         if (result == 'success'){
-          this.getCustomerList();
+          this.getCustomerList(true);
         }
 
     });
@@ -105,13 +120,17 @@ showFollowUp(details) {
   });
 
 }
+
+getcustomerByPaging(){
+  this.getCustomerList(false);
+}
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');
   }
 
   ngOnInit() {
     console.log(this.Detail);
-    this.getCustomerList();
+    this.getCustomerList(true);
 
   }
 

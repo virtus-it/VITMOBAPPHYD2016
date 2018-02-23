@@ -10,7 +10,7 @@
   </div>
 </div>
 
-<div id="" class="row pd-15 mg-0 brd-bottom"> 
+<div   class="row pd-15 mg-0 brd-bottom scroll"> 
    <table class="table table-hover table-striped">
     <thead>
       <tr>
@@ -26,8 +26,9 @@
       </tr>
     </thead>
     <tbody>
-      <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4>
+      <!-- <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4> -->
       <tr *ngFor="let customer of customersList">
+       
         <td class="left">{{customer.firstname}}</td>
         <td>
           <span class="left" *ngIf="customer.isappdownloaded">Joined</span>
@@ -53,6 +54,17 @@
         </td>
       </tr>
     </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="8">
+          <h4 class="warning  capitalize center">
+            <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="customerClickMore">
+              <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+            <span *ngIf="!customerClickMore">Record Not Available</span>
+          </h4>
+        </td>
+      </tr>
+    </tfoot>
   </table>
 </div>
 <div class="row float-right pdright-30 mgbottom-20">

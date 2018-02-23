@@ -41,6 +41,11 @@ a{
 .btn-link{
   color: #0f75bc;
 }
+.scroll{
+  overflow-x: hidden;
+  height: 300px;
+  overflow-y: auto;
+}
 
 /* .mat-dialog-container{
   height: 90% !important;

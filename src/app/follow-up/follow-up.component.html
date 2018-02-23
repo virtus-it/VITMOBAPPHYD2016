@@ -29,7 +29,10 @@
                       
                       <p class="right">Next Follow Up Date :
                         <small class="gray"> {{ comments.followupdate  |  date: 'dd-MM-yyyy'}} </small>
+                        
                       </p>
+                      <br>
+                   
                     </li>
           
                   </ul>
@@ -53,10 +56,13 @@
                         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                         <md-datepicker #picker></md-datepicker>
                       </md-form-field>
+                      <small><button class="btn-primary" md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
+                      
                     </div>
                     </div>
                     
                     <small >Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>
+                  
             </div>
        </div>
     </form>
