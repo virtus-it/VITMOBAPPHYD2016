@@ -72,16 +72,15 @@ export class FollowUpComponent implements OnInit {
   }
 
   followUpCompleted(){
-    let input= {"User":{"typeid": this.details.id,"type": this.details.type,
-    "followupstatus":"close","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
+    let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"close","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
     console.log(input);
-    // this.followupService.followUpCompleted(input)
-    //   .subscribe(
-    //   output => this.followUpCompletedResult(output),
-    //   error => {
-    //     console.log("error in distrbutors");
-    //     this.loaderService.display(false);
-    //   });
+    this.followupService.followUpCompleted(input)
+      .subscribe(
+      output => this.followUpCompletedResult(output),
+      error => {
+        console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
   }
   followUpCompletedResult(result) {
     console.log(result);

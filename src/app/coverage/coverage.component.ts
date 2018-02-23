@@ -40,7 +40,7 @@ export class CoverageComponent implements OnInit {
 
     categoryList :any =[];
 
-    filterInput = {"area":{"user_type":"dealer","user_id":this.authenticationService.loggedInUserId() , "apptype":this.authenticationService.appType(),"searchtype":"",
+    filterInput = {"area":{"user_type":"dealer","user_id":0 , "apptype":this.authenticationService.appType(),"searchtype":"",
     "searchtext":""}};
     dropdownSettings = {
         singleSelection: false,
@@ -236,9 +236,46 @@ filteredList(){
 getFilteredPolygonResult(result){
 console.log(result);
 if(result.result = 'success'){
+    this.polygonArray= [];
+    this.displayPolygon= [];
+    if (result.data && result.data.length > 0) {
+        for (let data of result.data) {
+
+            if (data.polygonvalue && data.polygonvalue.length > 0) {
+                for (let polygon of data.polygonvalue) {
+                    polygon.color = '';
+                    polygon.user_id = data.user_id;
+                    polygon.distributorName = data.username;
+                    polygon.supplier = data.suppliers;
+                    polygon.mobileno = data.mobileno;
+                    this.polygonArray.push(polygon);
+                    this.displayPolygon.push(polygon);
+                }
+            }
+
+        }
+    }
 
 }
 }
+// click1(event, polygon) {
+//     this.listOfDistributors = [];
+//     let myLatLng = event.latLng;
+//     this.lat = myLatLng.lat();
+//     this.lng = myLatLng.lng();
+//     for (let dist of this.polygonArray) {
+//         var latlong = event.latLng;
+//         var polygonPath = new google.maps.Polygon({
+//             paths: dist.path
+//         });
+//         // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
+//         if (this.gMaps.containsLocation(latlong, polygonPath)) {
+//             this.listOfDistributors.push(dist);
+//         }
+
+
+//     };
+// }
 
 
 getProductByCategory(){

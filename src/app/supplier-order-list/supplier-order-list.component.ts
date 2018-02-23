@@ -4,6 +4,7 @@ import { MdDialogRef } from '@angular/material';
 import { SupplierService } from '../supplier/supplier.service';
 import { LoaderService } from '../login/loader.service';
 import { AuthenticationService } from '../login/authentication.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-supplier-order-list',
@@ -15,12 +16,24 @@ export class SupplierOrderListComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<SupplierOrderListComponent>, @Inject(MD_DIALOG_DATA) public Detail: any, private supplierservice: SupplierService, private loaderService: LoaderService) { }
   SupplierOrderList = [];
   noRecords= false;
+  ordersClickMore = true;
 
 
 
-  supplierOrderList() {
+  supplierOrderList(firstcall) {
 
-    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": this.Detail.data.userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
+    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "50", "supplierid": this.Detail.data.userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
+    if (this.SupplierOrderList && this.SupplierOrderList.length && !firstcall) {
+      let lastOrder:any = _.last(this.SupplierOrderList);
+      if (lastOrder) {
+          input.order.customerid = lastOrder.order_id;
+      }
+
+  }
+  else {
+      this.SupplierOrderList = [];
+      input.order.customerid = 0;
+  }
     this.supplierservice.supplierOrder(input)
       .subscribe(
       output => this.supplierOrderresult(output),
@@ -31,10 +44,17 @@ export class SupplierOrderListComponent implements OnInit {
   }
   supplierOrderresult(result) {
     console.log(result);
+
     if (result.result == "success") {
+
       this.SupplierOrderList = result.data;
+      this.ordersClickMore = false;
+    }
+    else{
+      this.ordersClickMore = false;
     }
   }
+  
 
   // Getting distributors orders
   getDistributorsOrders() {
@@ -56,7 +76,7 @@ export class SupplierOrderListComponent implements OnInit {
     this.loaderService.display(false);
     }
     else{
-      this.noRecords= true;
+      this.ordersClickMore= false;;
     }
 
   }
@@ -66,13 +86,17 @@ export class SupplierOrderListComponent implements OnInit {
 
   onInitCheck() {
     if (this.Detail.type == 'supplierOrder') {
-      this.supplierOrderList();
+      this.supplierOrderList(true);
     }
     else {
       this.getDistributorsOrders();
     }
 
 
+  }
+
+  getOrdersByPaging(){
+    this.supplierOrderList(false);
   }
 
   ngOnInit() {
