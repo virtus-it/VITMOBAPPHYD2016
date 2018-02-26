@@ -86,8 +86,16 @@ export class FollowUpComponent implements OnInit {
     console.log(result);
     if (result.result = 'success') {
 
+
   }
 }
+
+// startFollowUp(){
+//   let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
+//   console.log(input);
+//   this.followupService.
+
+// }
   
   ngOnInit() {
     console.log(this.details);

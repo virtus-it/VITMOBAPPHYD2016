@@ -1,0 +1,43 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-gift"></i>
+      Add Products
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <div  class="row pd-15 mg-0 brd-bottom scroll">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="30%">Product Name</th>
+            <th width="30%">Product Type</th>
+            <th width="30%">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          
+          <tr *ngFor="let product of productsList">
+          
+           <td class="left">  <input type="checkbox"> {{product.pname}}</td>
+            <td class="left">{{product.ptype}}</td>
+            <td class="left">{{product.pcost}}</td>
+           
+        </tbody>
+        
+     </table>
+  </div>
+  
+
+  
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+
+      <button md-raised-button btn-primary (click)="confirmProduct()">CONFIRM</button>
+      <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>
+    </md-dialog-actions>
+  </div>

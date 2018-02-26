@@ -10,6 +10,8 @@ import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
 import { ViewCustomerComponent } from '../view-customer/view-customer.component';
 import { ViewSupplierComponent } from '../view-supplier/view-supplier.component';
+import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
+
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
@@ -218,6 +220,18 @@ export class DistributorComponent implements OnInit {
     }
     filterDailogToggle() {
         this.showFilterDailog = !this.showFilterDailog;
+    }
+    addProductsConfirmDialog(data){
+        let dialogRefSupplierOrderList = this.dialog.open(AddproductconfirmComponent, {
+            width: '700px',
+            data: data
+        });
+        dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+
+        })
+
+
     }
     ngOnInit() {
         this.getDistributors(true);

@@ -23,6 +23,7 @@ export class DistributorListDialogComponent implements OnInit {
   supplierName="";
   searchDistTerm = "";
   searchSupplierTerm = "";
+  message:any="";
   superDealer =true;
   constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService,public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
@@ -195,6 +196,16 @@ export class DistributorListDialogComponent implements OnInit {
   Closedailog() {
     this.thisDialogRef.close('success');
   }
+
+
+//   changed(event){
+// if(this.orderDetail.supplierdetails.userid != event || ""){
+
+//   this.message="This Customer has already been assigned to supplier" }
+// else{
+//   this.message="";
+// }
+//   }
 
   ngOnInit() {
     this.getDistributors();

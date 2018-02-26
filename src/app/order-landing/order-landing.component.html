@@ -241,12 +241,12 @@
                     <label *ngIf="superDealer">Follow Up :
                       <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(forward)'>
-                          <a *ngIf="followupstatus =='close'">
+                          <!-- <a *ngIf="followupstatus =='close'">
                       <i class="fa fa-volume-control-phone fa-2 red" title="FollowUp Closed"></i> 
                       <i class="fa fa-times-circle red"></i>
-                      </a>
+                      </a> -->
                       <a *ngIf="followupstatus !='close'">
-                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
+                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp open"></i>
                         </a>
                       
 
@@ -276,8 +276,8 @@
               <td width="33%">
                 <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
-                    <label class="td-label">Supplier :
-                      <b class="capitalize" *ngIf="forward.supplierdetails">{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
+                    <label class="td-label">Distributor:
+                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
                     </label>
                     <br>
                   </div>
@@ -392,13 +392,13 @@
 
                   <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
-                          <label class="td-label" >Distributor Name</label>
+                          <label class="td-label" >Associated Distributor:</label>
                       </div>
                       <div class="col-sm-7  col-md-7  col-lg-7 row">
-                        <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.firstname}}</label>
+                        <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</label>
                       </div>
                     </div>
-                    <div class="  row ">
+                    <!-- <div class="  row ">
                       <div class="col-sm-5  col-md-5  col-lg-5 left">
                         <label class="td-label" *ngIf="superDealer">
                         Distributor Mobile</label>
@@ -406,7 +406,17 @@
                       <div class="col-sm-7  col-md-7  col-lg-7 left row">
                         <label class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</label>
                       </div>
-                    </div>
+                    </div> -->
+                    <div class="  row ">
+                        <div class="col-sm-5  col-md-5  col-lg-5 left">
+                          <label class="td-label" *ngIf="superDealer">
+                          Code: </label>
+                        </div>
+                        <div class="col-sm-7  col-md-7  col-lg-7 left row">
+                          <label class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</label>
+                        </div>
+                      </div>
+
                 </div>
 
               </td>
@@ -420,7 +430,8 @@
 
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span>
+                      <!-- <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span> -->
+                      <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
                       <b></b>
                     </div>
                   </div>
@@ -446,13 +457,23 @@
                   <div class="  row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
-                        <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
+                        <i class="fa fa-reply " aria-hidden="true"> </i> Supplier Name</label>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                      <b class="capitalize" *ngIf="forward.distributor">{{forward.distributor.firstname +" "+forward.distributor.lastname }}</b>
+                      <b class="capitalize" *ngIf="forward.supplierdetails"> {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                     </div>
                   </div>
-                  <div class="form-group row ">
+                  <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label">
+                          <i  class="fa fa-mobile"  aria-hidden="true"> </i> Supplier Mobile: </label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
+                        <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
+                      </div>
+                    </div>
+
+                  <!-- <div class="form-group row ">
                     <div class="col-sm-5 col-md-5  col-lg-5">
                         <label class="td-label">
                             <i class="fa fa fa-dot-circle-o"></i>
@@ -461,7 +482,7 @@
                     <div class="col-sm-7  col-md-7  col-lg-7 row">
                       <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</label>
                     </div>
-                  </div>
+                  </div> -->
   
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
@@ -544,6 +565,12 @@
                     </label>
                     <br>
                   </div>
+                  <!-- <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
+                    <label class="td-label">Distributor:
+                      <b *ngIf="allorder.distributor"> {{allorder.distributor.firstname}} {{allorder.distributor.lastname}}</b>
+                    </label>
+                    <br>
+                  </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                       <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'" title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -653,7 +680,7 @@
                   
                   <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
-                          <label class="td-label" >Distributor Name</label>
+                          <label class="td-label" >Associated Distributor </label>
                       </div>
                       <div class="col-sm-7  col-md-7  col-lg-7 row">
                         <label class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</label>
@@ -662,12 +689,23 @@
                     <div class="  row ">
                       <div class="col-sm-5  col-md-5  col-lg-5 left">
                         <label class="td-label" *ngIf="superDealer">
-                        Distributor Mobile</label>
+                        Associated Distributor Mobile</label>
                       </div>
                       <div class="col-sm-7  col-md-7  col-lg-7 left row">
                         <label class="" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</label>
                       </div>
                     </div>
+
+                    <div class="  row ">
+                        <div class="col-sm-5  col-md-5  col-lg-5 left">
+                          <label class="td-label" *ngIf="superDealer">
+                          Code</label>
+                        </div>
+                        <div class="col-sm-7  col-md-7  col-lg-7 left row">
+                            <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
+                        </div>
+                      </div>
+
                 </div>
 
               </td>
@@ -703,7 +741,7 @@
 
                     </div>
                   </div>
-                  <div class="form-group row ">
+                  <!-- <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
                           <label class="td-label">
                               <i class="fa fa fa-dot-circle-o"></i>
@@ -712,7 +750,7 @@
                       <div class="col-sm-7  col-md-7  col-lg-7 row">
                         <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
                       </div>
-                    </div>
+                    </div> -->
    
                   <!-- <div class="mgbottom-10 row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">

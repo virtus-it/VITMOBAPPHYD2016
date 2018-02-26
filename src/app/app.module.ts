@@ -92,6 +92,8 @@ import { CategoryproductsComponent } from './categoryproducts/categoryproducts.c
 import { SetpricecustomerComponent } from './setpricecustomer/setpricecustomer.component';
 import { InvoiceHistoryComponent } from './invoice-history/invoice-history.component';
 import { ProfileupdateComponent } from './profileupdate/profileupdate.component';
+import { AddproductconfirmComponent } from './addproductconfirm/addproductconfirm.component';
+import { AddProductDealerComponent } from './add-product-dealer/add-product-dealer.component';
 
 @NgModule({
     declarations: [
@@ -160,7 +162,9 @@ import { ProfileupdateComponent } from './profileupdate/profileupdate.component'
         CategoryproductsComponent,
         SetpricecustomerComponent,
         InvoiceHistoryComponent,
-        ProfileupdateComponent
+        ProfileupdateComponent,
+        AddproductconfirmComponent,
+        AddProductDealerComponent
         
 
     ],
@@ -275,7 +279,9 @@ import { ProfileupdateComponent } from './profileupdate/profileupdate.component'
          CategoryproductsComponent,
          SetpricecustomerComponent,
          InvoiceHistoryComponent,
-         ProfileupdateComponent
+         ProfileupdateComponent,
+         AddproductconfirmComponent,
+         AddProductDealerComponent
 
 
         ],

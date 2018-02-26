@@ -1,0 +1,29 @@
+
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4 oneline">
+      <i class="fa fa-gift" ></i>  Add Dealer or Distributor product
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+            </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+      <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row">
+        <div class="col-md-4  col-sm-4  col-lg-4">
+        <p class="center oneline"> Which type of product you want to add ?</p>
+        
+        </div>
+      </div>
+      </div>
+  </md-dialog-content>
+  
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions>
+        <button type="submit" md-raised-button class="btn-primary" (click)="dealerAddProductDialog()">DEALER</button>
+        &nbsp;
+      <button md-raised-button (click)="DistributorAddProductDialog()">DISTRIBUTOR</button>
+    </md-dialog-actions>
+  </div>
+  
