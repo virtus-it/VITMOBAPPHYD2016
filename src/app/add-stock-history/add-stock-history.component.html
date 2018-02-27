@@ -61,25 +61,23 @@
         </div>
       </div> -->
       <div class="col">
+          <h5 class="left capital"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Detail.pname}}</span> - <span class="gray8">{{Detail.ptype}}</span></h5>
         <table class="table table-hover table-fixedheader">
           <thead>
             <tr>
-              <th width="20%">Product Name</th>
-              <th width="15%">Product Type</th>
-              <th width="10%">Cost</th>
-              <th width="10%">Stock</th>
-              <th width="15%">Empty Cans</th>
-              <th width="25%">Date</th>
+              <th width="15%">Cost</th>
+              <th width="15%">Stock</th>
+              <th width="30%">Empty Cans</th>
+              <th width="40%">Date</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let stock of StockList">
-              <td width="20%" class="left capital">{{stock.pname}}</td>
-              <td width="15%" class="left ">{{stock.ptype}}</td>
-              <td width="10%">{{stock.pcost}}</td>
-              <td width="10%" class="left">{{stock.stock}}</td>
-              <td width="15%">{{stock.returnemptycans}}</td>
-              <td width="25%" class="left ">{{stock.modifieddate | utcDate}}</td>
+
+              <td width="15%">{{stock.pcost}}</td>
+              <td width="15%" >{{stock.stock}}</td>
+              <td width="30%">{{stock.returnemptycans}}</td>
+              <td width="40%">{{stock.modifieddate | utcDate}}</td>
             </tr>     
                </tbody>
             <tfoot>

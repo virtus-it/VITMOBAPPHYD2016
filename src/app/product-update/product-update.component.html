@@ -1,7 +1,7 @@
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-4 col-sm-4">
-      <i class="fa fa-gift"></i> Update Status </div>
-    <div class="col-md-1 col-sm-1 right">
+    <div class="col-md-6 col-sm-6">
+      <i class="fa fa-dot-circle-o"></i> Update Status </div>
+    <div class="col-md-2 col-sm-2 right">
       <strong>
         <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
       </strong>
@@ -11,12 +11,12 @@
       <form class="example-form">
         <div class="container-fluid pd-15x25 brd-bottom">
           <div class="form-group">
-         <h5> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Details.brandname}} </span><span class="gray9">{{Details.ptype}} </span> <span class="gray8"> - INR. {{Details.pcost}}</span> </h5>
+         <h5> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Details.brandname}} </span><span class="gray8">{{Details.ptype}} </span> <span class="gray7"> - INR. {{Details.pcost}}</span> </h5>
           </div>
           <div class="row">
             
               
-              <div class="col-md-4 col-sm-4 col-lg-4">
+              <div class="col">
                   <md-select placeholder="Filter By" [(ngModel)]="stockStatusValue" name="type" class="full-width left" >
                       <md-option  value="avaliable"> Avaliable</md-option>
                       <md-option  value="Lowstock"> Lowstock</md-option>

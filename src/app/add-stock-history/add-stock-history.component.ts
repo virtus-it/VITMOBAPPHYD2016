@@ -44,7 +44,7 @@ noRecord=false;
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
-   // console.log(this.Detail);
+   console.log(this.Detail);
     this.getStockHistroy();
   }
 

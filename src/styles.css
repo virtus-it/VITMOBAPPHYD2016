@@ -622,6 +622,12 @@ box-shadow: 0 0 8px #bbb;
 .pdtop-20{
   padding-top: 20px;
 }
+.gray8{
+  color: #888;
+}
+.gray7{
+  color: #777777;
+}
 .top-post{
   position: absolute !important;
   top: 80% !important;
