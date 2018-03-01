@@ -49,13 +49,13 @@ export class DeliverpreorderComponent implements OnInit {
     let input =[];
     input.push(this.Detail);
     console.log(input);
-    this.orderLandingService.createPreOrder(input)
-  .subscribe(
-    output => this.createPreOrderResult(output),
-    error => {
-      console.log("falied");
-      this.loaderService.display(false);
-    });
+  //   this.orderLandingService.createPreOrder(input)
+  // .subscribe(
+  //   output => this.createPreOrderResult(output),
+  //   error => {
+  //     console.log("falied");
+  //     this.loaderService.display(false);
+  //   });
 
   }
   createPreOrderResult(result) {
@@ -71,9 +71,11 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
   amountChange(object){
-    this.Detail.order.total_amt =parseInt(this.Detail.order.product_cost) * parseInt(object);
-  
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
+  }
 
+  totalAmount(){
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
   }
 
 
@@ -81,6 +83,7 @@ export class DeliverpreorderComponent implements OnInit {
   ngOnInit() {
     console.log(this.Detail);
     this.getSupplierList();
+    this.totalAmount();
   }
 
 }

@@ -17,6 +17,7 @@ export class FollowUpComponent implements OnInit {
   numbers = 250;
   followUpList = [];
   followupDate  = null;
+  followUpTemplate=[];
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id, "username": this.authenticationService.userFullName(),
@@ -96,10 +97,32 @@ export class FollowUpComponent implements OnInit {
 //   this.followupService.
 
 // }
+
+
+getFollowUpTemplate(){
+  let input={"User":{"transtype":"getfollowup",apptype:this.authenticationService.appType(),userid:this.authenticationService.loggedInUserId(),loginid:this.authenticationService.loggedInUserId()}};
+  console.log(input);
+  this.followupService.followUpTemplate(input)
+      .subscribe(
+      output => this.getFollowUpTemplateResult(output),
+      error => {
+        console.log("error in getting followUp templates");
+        this.loaderService.display(false);
+      });
+}
+getFollowUpTemplateResult(result){
+  console.log(result);
+  if(result.result){
+    this.followUpTemplate = result.data;
+  }
+  
+
+}
   
   ngOnInit() {
     console.log(this.details);
     this.getfollowUpdetails();
+    this.getFollowUpTemplate();
   }
 
 }

@@ -7,6 +7,12 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
+  .check{
+    color:green;
+  }
+  .cross{
+    color:red;
+  }
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;

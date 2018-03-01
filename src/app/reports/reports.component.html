@@ -149,8 +149,9 @@
               <th width="15%"> Customer Name</th>
               <th width="12%">Mobile No</th>
               <th width="15%">Createddate</th>
-
               <th width="25%" class="pdleft-20">Address</th>
+              <th width="15%">Customer Ordered</th>
+
             </tr>
           </thead>
           <tbody>
@@ -161,6 +162,11 @@
               <td class="left">{{reports.createddate | utcDate}}</td>
 
               <td class="left">{{reports.address}}</td>
+              <td class="left">
+                <span  *ngIf="reports.orderedstatus=='true'"> <i class="fa fa-check-circle-o check"> </i> </span>
+                <span *ngIf="reports.orderedstatus=='false'"><i class="fa fa-times-circle-o cross"></i> </span>
+              
+              </td>
             </tr>
           </tbody>
         </table>

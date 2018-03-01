@@ -16,7 +16,7 @@
                 <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                    {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
             <div class=" ">
-                <ul class="scrollheight  mgtop-5">
+                <ul class="heightgrid  mgtop-5">
                     <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
                       <i class="fa fa-reply" aria-hidden="true"></i>
                       <small>{{comments.username}}</small>
@@ -43,7 +43,13 @@
           <div class=" ">
               <!-- <label class=" pdtop-10 center">
                   </label> -->
-                  <div class="row">    
+                  <div class="row"> 
+                    
+                    <div class="col-sm-9  col-md-9  col-lg-9">
+                        <md-select  placeholder="Select template &nbsp;&nbsp;" [(ngModel)]="followUpInput.User.remarks"  name="template" class="full-width left oneline" >
+                          <md-option  *ngFor="let template of followUpTemplate" [value]="template.template_desc">{{template.template_name}}</md-option>
+                        </md-select>
+                    </div>
                       <div class="col-sm-9  col-md-9  col-lg-9">             
                     <md-form-field class="example-full-width inline ">
                       <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
@@ -58,8 +64,8 @@
                       </md-form-field>
 
 
-                      <small><button class="btn-primary"  *ngIf="followupstatus=='open'" md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
-                      <small><button class="btn-primary" *ngIf="followupstatus=='close'" md-raised-button  (click)="startFollowUp">Start FollowUp </button></small>
+                      <small><button class="btn-primary"   md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
+                      <!-- <small><button class="btn-primary" md-raised-button  (click)="startFollowUp">Start FollowUp </button></small> -->
                       <!-- <small><button class="btn warning" md-raised-button (clsick)="startFollowUp()">Start FollowUp</button></small> -->
                     </div>
                     </div>

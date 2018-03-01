@@ -69,9 +69,12 @@ export class PreOrderCartDailogComponent implements OnInit {
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amount":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype,
     "product_type":this.createPreOrderInput.productDetails.ptype,"product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "ispreorderby":"dealer","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
+    "delivery_address":this.Details.address, "excepted_time":"" ,"ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
     
     }
+    if(this.createPreOrderInput.productDetails.expressdelivery == true){
+      data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
+      }
     console.log(data);
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
@@ -239,11 +242,13 @@ getProductsListResult(result) {
       
             if (findproduct) {
               details.quantity = "";
+              details.expressdelivery=false;
               findproduct.data.push(details);
             }
             else{
               let value = {brandName:details.brandname,category:details.category,data:[]};
               details.quantity = "";
+              details.expressdelivery=false;
               value.data.push(details);
               this.productList.push(value);
             }
@@ -281,6 +286,7 @@ onCloseCancel(){
 createPreOrder(){
   if(this.validate()){
   console.log(this.createPreOrderInput);
+  
   let input =[{"order":
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
@@ -289,8 +295,13 @@ createPreOrder(){
   "product_type":this.createPreOrderInput.productDetails.ptype, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":this.createPreOrderInput.productDetails.pcost,
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost),
   "cart_style":"new",
-  "delivery_address":this.Details.address,
+  "delivery_address":this.Details.address, "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
   "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
+
+  if(this.createPreOrderInput.productDetails.expressdelivery == true){
+  input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
+  }
+  console.log(input);
 
 
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');

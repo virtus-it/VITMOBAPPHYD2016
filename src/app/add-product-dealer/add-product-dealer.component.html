@@ -23,7 +23,7 @@
           
           <tr *ngFor="let product of productsList">
           
-           <td class="left">  <input type="checkbox"> {{product.pname}}</td>
+           <td class="left">  <input type="checkbox" (change)="productDetails(product, $event.target.checked)"> &nbsp;&nbsp;{{product.pname}}</td>
             <td class="left">{{product.ptype}}</td>
             <td class="left">{{product.pcost}}</td>
            

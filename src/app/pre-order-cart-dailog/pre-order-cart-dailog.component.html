@@ -130,7 +130,7 @@
       <table class="table table-hover ">
         <tbody *ngFor="let prod of productList">
           <tr class="border-topbottom bg-eee">
-            <td class="" colspan="4">
+            <td class="" colspan="6">
               <b class="capital">
                 <i class="fa fa-gift" aria-hidden="true"></i>
                 Product Name : {{prod.brandName}}
@@ -145,7 +145,9 @@
           <tr class="border-topbottom bg-eee">
             <th width="40%">Type</th>
             <th width="20%">Price per Unit</th>
-            <th width="15%">Quantity</th>
+            <th width="15%">Quantity</th>   
+            <th width="15%">Express delivery charges</th>
+            <th width="15%">Service charges</th>
             <th width="15%">Cost</th>
           </tr>
           <tr *ngFor="let details of prod.data">
@@ -161,6 +163,7 @@
                   </label>
               </div>
             </td>
+            
             <td>
                 <b class="">{{details.pcost}}</b>
               </td>
@@ -173,6 +176,14 @@
               </div>
                 </div>
             </td>
+            <td class="">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
+                </label>
+               </td>
+            <td class="">{{details.servicecharge}} </td>
             <td>
               <b class="">{{details.pcost*details.quantity}}</b>
             </td>

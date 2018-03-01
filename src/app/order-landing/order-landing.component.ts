@@ -46,6 +46,7 @@ export class OrderLandingComponent implements OnInit {
   selectedDistForFilter: any = "";
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
+  quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
   filterRecords = false;
@@ -137,7 +138,8 @@ export class OrderLandingComponent implements OnInit {
     return finalsupplier;
   }
   showTabPanel(panelName) {
-    
+    // this.clearFilter();
+    this.quickFilterView = "";
     this.tabPanelView = panelName;
     this.showFilterDailog =false;
     this.filterRecords = false;
@@ -347,6 +349,141 @@ export class OrderLandingComponent implements OnInit {
       }
     }
   }
+  // showTabPanel(panelName) {
+    
+  //   this.tabPanelView = panelName;
+  //   this.showFilterDailog =false;
+  //   this.filterRecords = false;
+  //   this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
+  //   this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  //   if(panelName== "forward"){
+  //     this.getForwardOrderDetails(true);
+  //   }
+  //   else if(panelName== "allorder"){
+  //     this.getAllOrderDetails(true);
+  //   }
+
+  quickFilter(type){
+    this.quickFilterView = type;
+    if(this.tabPanelView=='forward'){
+      this.filterInput.order.status = 'forwardedorders';
+    }
+    else{
+      this.filterInput.order.status = 'all';
+    }
+    if(type=='ordered'){
+      this.filterInput.order.searchtype = 'status';
+      this.filterInput.order.searchtext = "ordered";
+    }
+    if(type=='delivered'){
+      this.filterInput.order.searchtype = 'status';
+      this.filterInput.order.searchtext = "delivered";
+    }
+    if(type=='followupdate'){
+      this.filterInput.order.searchtype = 'followupdate';
+      this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD');
+    }
+    console.log(this.filterInput);
+    
+    this.orderLandingService.getOrdersByfilter(this.filterInput)
+      .subscribe(
+      output => this.quickFilterResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  quickFilterResult(result) {
+    console.log(result);
+    if (result.result == 'success') {
+      let data = this.ModifyOrderList(result.data);
+      if(this.tabPanelView=='forward'){
+        this.forwardOrders= data;
+        this.forwardClickMore = true;
+      }
+      else{
+        this.allOrders = data;
+        this.orderClickMore = true;
+      }
+    }
+    else{  
+      this.allOrders = [];
+      this.forwardOrders = [];
+      if (this.tabPanelView == 'forward') {
+        this.forwardClickMore = false;
+      }
+      else if(this.tabPanelView == 'allorder') {
+        this.orderClickMore = false;
+      } 
+    }
+    // this.getFilteredQuickFilter(true);
+  }
+
+  //test code
+
+  // getFilteredQuickFilter(firstcall){
+  //   if (!firstcall) {
+  //     if (this.tabPanelView == 'forward') {
+  //       let lastForwardOrder: any = _.last(this.forwardOrders);
+  //       if (lastForwardOrder) {
+  //         this.filterInput.order.last_orderid = lastForwardOrder.order_id;
+  //       }
+  //     }
+  //     else if (this.tabPanelView == 'allorder') {
+  //       let lastallOrder: any = _.last(this.allOrders);
+  //       if (lastallOrder) {
+  //         this.filterInput.order.last_orderid = lastallOrder.order_id;
+  //       }
+  //     }
+  //   }
+  //   else {
+  //     if (this.tabPanelView == 'forward') {
+  //       this.forwardOrders = [];
+  //       this.filterInput.order.last_orderid = "0";
+  //     }
+  //     else if (this.tabPanelView == 'allorder') {
+  //       this.allOrders = [];
+  //       this.filterInput.order.last_orderid = "0";
+  //     }
+  //   }
+  //   let input = this.filterInput;
+  //   console.log(input);
+  //   this.loaderService.display(true);
+  //   this.orderLandingService.getOrdersByfilter(input)
+  //     .subscribe(
+  //     output => this.getFilteredOrdersResult(output),
+  //     error => {
+  //       console.log("falied");
+  //       this.loaderService.display(false);
+  //     });
+  // }
+  // getFilteredQuickFilterResult(result){
+  //   if (result.result == 'success') {
+  //     this.filterRecords = true;
+  //     if (this.tabPanelView == 'forward') {
+  //       let data = this.ModifyOrderList(result.data);
+  //       this.forwardClickMore = true;
+  //       this.forwardOrders = _.union(this.forwardOrders, data);
+  //     }
+
+  //     else if (this.tabPanelView == 'allorder') {
+  //       let data = this.ModifyOrderList(result.data);
+  //       this.orderClickMore = true;
+  //       this.allOrders = _.union(this.allOrders, data);
+  //     }
+  //   }
+  //   else {
+  //     if (this.tabPanelView == 'forward') {
+  //       this.forwardClickMore = false;
+  //     }
+  //     else if (this.tabPanelView == 'allorder') {
+  //       this.orderClickMore = false;
+  //     }
+  //   }
+  // }
+
+  //test code for pagination ends here
+
   searchOrderList() {
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
@@ -472,6 +609,7 @@ this.showFilterDailog =false;
   clearFilter() {
     this.showFilterDailog =false;
     this.filterRecords = false;
+    this.quickFilterView = "";
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
@@ -480,43 +618,47 @@ this.showFilterDailog =false;
   ModifyOrderList(result) {
     _.each(result, function (i, j) {
       let details: any = i;
-      if (details.status == "onhold") {
+      //test
+      // if(details.status === null){
+      //   return result;
+      // }
+      if (details.status && details.status == "onhold") {
         details.OrderModifiedStatus = "On Hold";
         details.StatusColor = "warning";
       }
-      else if (details.status.toLowerCase() == "cancelled") {
+      else if (details.status && details.status.toLowerCase() == "cancelled") {
         details.OrderModifiedStatus = "Cancelled";
         details.StatusColor = "danger";
       }
-      else if (details.status.toLowerCase() == "rejected") {
+      else if (details.status && details.status.toLowerCase() == "rejected") {
         details.OrderModifiedStatus = "Rejected";
         details.StatusColor = "danger";
       }
-      else if (details.status == "assigned") {
+      else if (details.status &&  details.status == "assigned") {
         details.OrderModifiedStatus = "Re-Assign";
         details.StatusColor = "logo-color";
       }
-      else if (details.status.toLowerCase() == "delivered") {
+      else if (details.status && details.status.toLowerCase() == "delivered") {
         details.OrderModifiedStatus = "Delivered";
         details.StatusColor = "success";
       }
-      else if (details.status == "doorlock" || details.status == "Door Locked") {
+      else if ( details.status && (details.status == "doorlock" || details.status == "Door Locked")) {
         details.OrderModifiedStatus = "Door Locked";
         details.StatusColor = "warning";
       }
-      else if (details.status == "cannot_deliver" || details.status == "Cant Deliver") {
+      else if (details.status && (details.status == "cannot_deliver" || details.status == "Cant Deliver")) {
         details.OrderModifiedStatus = "Cant Deliver";
         details.StatusColor = "warning";
       }
-      else if (details.status == "Not Reachable" || details.status == "not_reachable") {
+      else if (details.status && (details.status == "Not Reachable" || details.status == "not_reachable")) {
         details.OrderModifiedStatus = "Not Reachable";
         details.StatusColor = "warning";
       }
-      else if (details.status == "pending") {
+      else if (details.status && details.status == "pending") {
         details.OrderModifiedStatus = "Pending";
         details.StatusColor = "logo-color";
       }
-      else if (details.status == "ordered" || details.status == "backtodealer") {
+      else if (details.status && (details.status == "ordered" || details.status == "backtodealer")) {
         details.OrderModifiedStatus = "Assign";
         details.StatusColor = "logo-color";
       }
@@ -626,6 +768,47 @@ this.showFilterDailog =false;
   filterDailogToggle(){
     this.showFilterDailog = !this.showFilterDailog;
   }
+
+  acceptOrder(Details){
+    console.log(Details);
+    let input={"order":{"orderid":Details.order_id,"status":"accept","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","apptype":this.authenticationService.appType()}};
+    console.log(input);
+    this.orderLandingService.AcceptOrder(input)
+      .subscribe(
+      output => this.AcceptOrderResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  AcceptOrderResult(result){
+    console.log(result);
+    if(result.result='success'){
+
+    }
+  }
+
+  rejectOrder(Details){
+    console.log(Details);
+    let input={"order":{"orderid":Details.order_id,"loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"reason":"comments","orderstatus":"backtodealer","usertype":"dealer","apptype":this.authenticationService.appType()}};
+    console.log(input);
+    this.orderLandingService.updateOnHold(input)
+      .subscribe(
+      output => this.rejectOrderResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  rejectOrderResult(result){
+    console.log(result);
+    if (result.result == 'success') {
+    
+    }
+  }
+
+
+
   ViewDistributors(data) {
     if(data.OrderModifiedStatus == 'Assign' || data.OrderModifiedStatus == 'Re-Assign'){
             let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
