@@ -124,6 +124,7 @@
                     <md-option value="checkbox">CheckBox </md-option>
                     <md-option value="website">Website </md-option>
                     <md-option value="slide">Slide </md-option>
+                    <md-option value="playstore">PlayStore</md-option>
                   </md-select>
 
                 </div>
@@ -148,7 +149,7 @@
                 </div>
                 <div class="col-sm-4  col-md-4  col-lg-4 align-self-end">
                   <md-form-field class="example-full-width inline ">
-                    <input class="form-control" mdInput placeholder="Redirect URL" name="redirecturl" [(ngModel)]="smsInput.redirecturl">
+                    <input class="form-control" mdInput placeholder="Website Redirect URL" name="redirecturl" [(ngModel)]="smsInput.redirecturl">
 
                   </md-form-field>
                 </div>
@@ -156,7 +157,7 @@
               <div class="row">
                 <div class="col-sm-3  col-md-3  col-lg-3">
                   <md-form-field class="example-full-width inline ">
-                    <input class="form-control" mdInput placeholder="URL" name="url" [(ngModel)]="smsInput.url">
+                    <input class="form-control" mdInput placeholder="Image URL" name="url" [(ngModel)]="smsInput.url">
 
                   </md-form-field>
                 </div>
@@ -324,7 +325,7 @@
 <div class="row float-right pdright-30 mgbottom-20 ">
   <md-dialog-actions align="end">
 
-    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">SAVE</button>
+    <button type="submit" md-raised-button class="btn-primary" (click)="saveMobileSms()" *ngIf="mobileDetailsCopy.length || orderinput.orderType == 'sms'">SUBMIT</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
   <!-- <md-dialog-actions align="end" *ngIf="orderinput.orderType != 'sms'">

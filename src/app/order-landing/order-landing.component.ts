@@ -9,8 +9,13 @@ import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { OrderCoverageDetailDailogComponent } from '../order-coverage-detail-dailog/order-coverage-detail-dailog.component';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
+import { SupplierService } from '../supplier/supplier.service';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
+import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
+import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
+import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
+
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -28,7 +33,10 @@ export class OrderLandingComponent implements OnInit {
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
   superDealer = true;
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService,private loaderService: LoaderService) {
+  SupplierOrderList=[];
+  ordersClickMore = true;
+
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -807,6 +815,30 @@ this.showFilterDailog =false;
     }
   }
 
+  showCustomerAllOrders(orderData) {
+    let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
+        width: '95%',
+        data: orderData
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+        console.log(`Dialog closed: ${result}`);
+
+
+    });
+
+}
+
+  viewDistributorsOrders(data){
+    let formatteddata: any = { "type": "distributorOrder", "data": data };
+        let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
+          width: '95%',
+          data: formatteddata
+      });
+      dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+
+      });
+  }
 
 
   ViewDistributors(data) {
@@ -828,11 +860,13 @@ this.showFilterDailog =false;
           }
           }
   ngOnInit() {
+    // this.getDistributorsOrders();
     this.getPolygonDistributors();
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getDistributors();
     this.getSupplier();
+   
     this.superDealer = this.authenticationService.getSupperDelear();
     if(!this.superDealer){
 this.tabPanelView = 'allorder';

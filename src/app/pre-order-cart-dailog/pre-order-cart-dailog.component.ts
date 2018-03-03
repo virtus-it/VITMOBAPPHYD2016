@@ -325,12 +325,16 @@ createPreOrderResult(result,input) {
   console.log(result);
   if(result.result=='success'){
     let productid= "";
+    let productName= "";
     if(input[0].order.productid){
       productid = input[0].order.productid
     }
-    let data ={prod_id:productid,ordersfrom:input[0].order.orderfrom,order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:""}};
+    let data ={prod_id:productid,ordersfrom:input[0].order.orderfrom,order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
     if(this.Details.supplier){
       data.supplierdetails.userid =this.Details.supplier.supplierid;
+      data.supplierdetails.supplierID = this.Details.supplier.supplierid;
+      data.supplierdetails.supplierMno = this.Details.supplier.mobileno;
+      data.supplierdetails.supplierName = this.Details.supplier.suppliername; 
     }
     this.ViewDistributors(data);
 

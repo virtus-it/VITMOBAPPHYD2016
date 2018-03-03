@@ -64,8 +64,8 @@
                       </md-form-field>
 
 
-                      <small><button class="btn-primary"   md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
-                      <!-- <small><button class="btn-primary" md-raised-button  (click)="startFollowUp">Start FollowUp </button></small> -->
+                      <small><button class="btn-primary" *ngIf=" !followUpStatus || followUpStatus=='open'"   md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
+                      <small><button class="btn-primary" *ngIf="followUpStatus=='close'" md-raised-button  (click)="startFollowUp()">Start FollowUp </button></small>
                       <!-- <small><button class="btn warning" md-raised-button (clsick)="startFollowUp()">Start FollowUp</button></small> -->
                     </div>
                     </div>

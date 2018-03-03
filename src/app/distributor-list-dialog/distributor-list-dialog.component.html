@@ -45,7 +45,7 @@
           
           <tr  *ngFor="let supplier of suppliers; let i = index" [attr.data-index]="i" >
               <td width="30%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" [(ngModel)]="supplierID" class="custom-control-input" name="{{supplier.userid}}" [value]="supplier.userid" >
+                  <input type="radio" [(ngModel)]="supplierID" class="custom-control-input" name="{{supplier.userid}}" [value]="supplier.userid" (change)="autoAssignChange(supplier, $event)" >
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{supplier.firstname}} {{supplier.lastname}}</span>
                 </label></td>

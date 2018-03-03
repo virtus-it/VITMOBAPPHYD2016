@@ -16,6 +16,7 @@ export class FollowUpComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService, private followupService: FollowUpService) { }
   numbers = 250;
   followUpList = [];
+  followUpStatus="";
   followupDate  = null;
   followUpTemplate=[];
   followUpInput = {
@@ -65,8 +66,10 @@ export class FollowUpComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       this.followUpList = result.data.output;
-
+      if(result.data.output){
+      this.followUpStatus = this.followUpList[0].followupstatus;
     }
+  }
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
@@ -91,12 +94,23 @@ export class FollowUpComponent implements OnInit {
   }
 }
 
-// startFollowUp(){
-//   let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
-//   console.log(input);
-//   this.followupService.
+startFollowUp(){
+  let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
+  console.log(input);
+  this.followupService.followUpCompleted(input)
+      .subscribe(
+      output => this.followUpCompletedResult(output),
+      error => {
+        console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
 
-// }
+}
+startFollowUpCompleteResult(result) {
+  console.log(result);
+  if (result.result = 'success') {
+}
+}
 
 
 getFollowUpTemplate(){
