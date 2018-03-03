@@ -49,13 +49,13 @@ export class DeliverpreorderComponent implements OnInit {
     let input =[];
     input.push(this.Detail);
     console.log(input);
-  //   this.orderLandingService.createPreOrder(input)
-  // .subscribe(
-  //   output => this.createPreOrderResult(output),
-  //   error => {
-  //     console.log("falied");
-  //     this.loaderService.display(false);
-  //   });
+    this.orderLandingService.createPreOrder(input)
+  .subscribe(
+    output => this.createPreOrderResult(output),
+    error => {
+      console.log("falied");
+      this.loaderService.display(false);
+    });
 
   }
   createPreOrderResult(result) {

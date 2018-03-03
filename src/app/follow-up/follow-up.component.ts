@@ -89,8 +89,8 @@ export class FollowUpComponent implements OnInit {
   followUpCompletedResult(result) {
     console.log(result);
     if (result.result = 'success') {
-
-
+      // this.thisDialogRef.close('success');
+      this.getfollowUpdetails();
   }
 }
 
@@ -109,6 +109,8 @@ startFollowUp(){
 startFollowUpCompleteResult(result) {
   console.log(result);
   if (result.result = 'success') {
+    // this.thisDialogRef.close('success');
+    this.getfollowUpdetails();
 }
 }
 

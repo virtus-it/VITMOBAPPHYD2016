@@ -123,8 +123,12 @@ export class CoverageComponent implements OnInit {
     }
     DistrbutorHover(distributor) {
         if (distributor.path) {
-            this.displayPolygon = [];
-            this.displayPolygon.push(distributor);
+            let allAreas = _.filter(this.polygonArray, function(e:any) {
+                return e.user_id == distributor.user_id;
+            });
+            // this.displayPolygon = [];
+            // this.displayPolygon.push(distributor);
+            this.displayPolygon = allAreas;
         }
     }
     ShowAllPolygons() {
@@ -161,7 +165,7 @@ export class CoverageComponent implements OnInit {
     }
     getOrderDetailResult(result) {
         console.log(result);
-       
+
         if (result && result.data) {
             let localTime = moment.utc(result.data[0].ordered_date).toDate();
             result.data[0].ordered_date = moment(localTime).format('DD-MM-YYYY hh:mm A');
@@ -299,12 +303,12 @@ getProductByCategory(){
             let value = { "id": details.categoryid, "itemName": details.category }
             categoryListCopy.push(value);
         });
-        
+
     });
 
-  
+
       this.categoryList = categoryListCopy;
-      
+
     }
   }
 
@@ -320,9 +324,9 @@ getProductByCategory(){
 
 
 
-    
 
-    
+
+
     ngOnInit() {
         this.getPolygonDistributors();
         this.getProductByCategory();
