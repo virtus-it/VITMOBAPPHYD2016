@@ -14,7 +14,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", companyname:"",address:"", emailid:"", referCode:"", selectedItems:[]};
+    dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[]};
     areaList = [];
     phone = false;
     
@@ -60,9 +60,10 @@ export class DistributorCreateDialogComponent implements OnInit {
          this.loaderService.display(true);
          var input:any = {
              "User": {
-                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "mobileno_one":this.dist.mobile1, "mobileno_two":this.dist.mobile2,  "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
+         console.log(input);
          if (this.distributorDetail) {
              input.User.userid = this.distributorDetail.userid;
          }
@@ -119,6 +120,8 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.firstName = this.distributorDetail.firstname;
              this.dist.lastName = this.distributorDetail.lastname;
              this.dist.phone = this.distributorDetail.mobileno;
+             this.dist.mobile1 = this.distributorDetail.mobileno_one;
+             this.dist.mobile2 = this.distributorDetail.mobileno_two;
              this.dist.companyname = this.distributorDetail.companyname;
              this.dist.address = this.distributorDetail.address;
              this.dist.emailid = this.distributorDetail.emailid;

@@ -16,6 +16,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
+import { stringify } from 'querystring';
 
 
 @Component({
@@ -41,12 +42,16 @@ export class PreOrderCartDailogComponent implements OnInit {
    distributors: any = [];
    productList = [];
    disableSlot = false;
+   hours:any="";
+   day:any="";
+   nextDay:any="";
+   nextDayValue:any ="";
    //input
    createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}, }
     minDate = new Date() ;
     maxDate = new Date(2020, 0, 1);
-
     message:any="";
+    todaysDate:any = "";
 
 
 
@@ -343,32 +348,58 @@ createPreOrderResult(result,input) {
 
   //TimeSlot changes
 
-  autoTimeSlot(){
+//   autoTimeSlot(){
 
-    let hours = moment().format("HH");
-    if(parseInt(hours) <= 8){
-this.createPreOrderInput.timeslot = "9AM-1PM";
-this.createPreOrderInput.date= new Date();
-this.disableSlot = false;
+//     let hours = moment().format("HH");
+//     if(parseInt(hours) <= 8){
+// this.createPreOrderInput.timeslot = "9AM-1PM";
+// this.createPreOrderInput.date= new Date();
+// this.disableSlot = false;
 
 
-    }
-    else if(parseInt(hours) <= 15){
+//     }
+//     else if(parseInt(hours) <= 15){
     
-      this.createPreOrderInput.date= new Date();
-      this.createPreOrderInput.timeslot = "4PM-7PM";
-      this.disableSlot = true;
+//       this.createPreOrderInput.date= new Date();
+//       this.createPreOrderInput.timeslot = "4PM-7PM";
+//       this.disableSlot = true;
       
 
-    }
-    else {
-      this.createPreOrderInput.timeslot = "9AM-1PM";
-      var date = new Date();
-      this.createPreOrderInput.date = new Date(date.setDate(date.getDate() + 1));
-      this.disableSlot = false;
-    }
+//     }
+//     else {
+//       this.createPreOrderInput.timeslot = "9AM-1PM";
+//       var date = new Date();
+//       this.createPreOrderInput.date = new Date(date.setDate(date.getDate() + 1));
+//       this.disableSlot = false;
+//     }
 
-  }
+//   }
+
+//new changes here 
+
+
+autoTimeSlotforHour(){
+  this.hours = moment().format("HH");
+  this.createPreOrderInput.date= new Date();
+}
+
+dateChanges(event){
+  let eventChanges = moment(event).format('DD-MM-YYYY');
+
+this.todaysDate= moment().format('DD-MM-YYYY');
+if(eventChanges != this.todaysDate){
+  this.hours = "6";
+}
+else{
+  this.hours = moment().format("HH");
+  this.createPreOrderInput.date= new Date();
+}
+}
+
+
+
+
+
 
   onChangeQuantity(details,event){
 
@@ -436,7 +467,7 @@ this.disableSlot = false;
   ngOnInit() {
     this.getDistributors();
     // this.getProducts();
-    this.autoTimeSlot();
+    this.autoTimeSlotforHour();
     this.getProductsList();
     console.log(this.Details);
   }

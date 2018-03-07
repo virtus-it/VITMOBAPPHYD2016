@@ -67,7 +67,9 @@
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
               <td class="left capitalize">{{dist.firstname}} {{dist.lastname}}</td>
               <td class="left">{{dist.customercount}} </td>
-              <td class="left">{{dist.mobileno}} </td>
+              <td class="left numbers">{{dist.mobileno}}
+              <span *ngIf="dist.mobileno_one || dist.mobileno_two"class="hovernumbers onhovertext"> {{dist.mobileno_one}},{{dist.mobileno_two}}</span>  
+              </td>
               <td class="left">{{dist.emailid}} </td>
               <td class="left">{{dist.reference_code}}</td>
               <td class="left capitalize" style="position: absolute"><span class="onhovertext">{{dist.address}}</span></td>
