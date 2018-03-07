@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Inject } from '@angular/core';
+﻿import { Component, OnInit, Inject,ElementRef, NgModule, NgZone,ViewChild  } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
@@ -13,11 +14,14 @@ import { LoaderService } from '../login/loader.service';
 })
 export class MapDialogComponent implements OnInit {
     map: any;
+    public searchControl: FormControl;
     selectedShape: any;
+    @ViewChild("search")
+    public searchElementRef: ElementRef;
     polygonArray: any = {
         path: []
     }
-    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
+    constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService, private ngZone: NgZone) { }
     initMap() {
         
         this.map = new google.maps.Map(document.getElementById('map'), {
@@ -29,7 +33,9 @@ export class MapDialogComponent implements OnInit {
             mapTypeControl: false,
 
         });
-
+        let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+            types: ["address"]
+          });
         this.map.data.setControls(['Polygon']);
         this.map.data.setStyle({
             editable: true,
@@ -42,6 +48,24 @@ export class MapDialogComponent implements OnInit {
             // event.setMap(null);
             this.map.data.remove(event.feature);
         });
+        
+          autocomplete.addListener("place_changed", () => {
+            this.ngZone.run(() => {
+              //get the place result
+              let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+      
+              //verify result
+              if (place.geometry === undefined || place.geometry === null) {
+                return;
+              }
+              this.map.setCenter({
+                lat : place.geometry.location.lat(),
+                lng : place.geometry.location.lng()
+            });
+              //set latitude, longitude and zoom
+             this.map.setZoom(15);
+            });
+          });
         this.getPolygonDistributors(this.map.data);
         this.bindDataLayerListeners(this.map.data);
 
@@ -134,10 +158,12 @@ export class MapDialogComponent implements OnInit {
             this.thisDialogRef.close('Ploygon created');
         }
     }
+   
     ngOnInit() {
         this.loader.load().then(() => {
             this.initMap();
         });
+        this.searchControl = new FormControl();
     }
     onCloseConfirm() {
         this.thisDialogRef.close('Confirm');

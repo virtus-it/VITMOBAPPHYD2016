@@ -1,4 +1,5 @@
-import { Component, OnInit,Inject } from '@angular/core';
+import { Component, OnInit,Inject, ElementRef, NgModule, NgZone,ViewChild } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
@@ -9,6 +10,7 @@ import { DistributorListDialogComponent } from '../distributor-list-dialog/distr
 import * as moment from 'moment';
 import { MdDialog } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
+import {} from '@types/googlemaps';
 declare var google: any;
 @Component({
   selector: 'app-order-coverage-detail-dailog',
@@ -19,20 +21,25 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
   zoom: number = 12;
+  public searchControl: FormControl;
   polygonArray: any = [];
   displayPolygon: any = [];
   listOfDistributors: any = [];
   dialogRef: any = '';
   order = { orderId: "" };
   gpsMessage:string = "";
+  filterInput = {kmvalue:""};
   //orderDetails = "";
+  @ViewChild("search")
+  public searchElementRef: ElementRef;
   markers: any = [
       {
           lat: '',
           lng: '',
       }
   ]
-  constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog,private loaderService: LoaderService) { }
+  constructor(public gMaps: GoogleMapsAPIWrapper, private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any,public dialog: MdDialog,private loaderService: LoaderService, private mapsAPILoader: MapsAPILoader,
+  private ngZone: NgZone) { }
   dailogCloseResult = "cancel";
 
         assignPolygon(){
@@ -145,11 +152,59 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       onCloseCancel() {
         this.thisDialogRef.close(this.dailogCloseResult);
       }
+      filterPolygon(){
+       if(this.filterInput.kmvalue == 'all'){
+        this.listOfDistributors = [];
+        this.displayPolygon = this.polygonArray;
+       }
+       else{
+        var myPosition = new google.maps.LatLng(this.markers[0].lat, this.markers[0].lng);
+        this.displayPolygon = [];
+        for (let dist of this.polygonArray) {
+
+            var polygonPath = new google.maps.Polygon({
+                paths: dist.path
+            });
+            // 0.03 3km
+            // 0.05 5km
+            // 0.1   10km
+           let distance =  parseFloat(this.filterInput.kmvalue);
+            if (google.maps.geometry.poly.isLocationOnEdge(myPosition, polygonPath, distance)) {
+                
+                this.displayPolygon.push(dist);
+              }
+           
+        }
+    }
+
+    }
   ngOnInit() {
     //this.getPolygonDistributors();
     this.assignPolygon();
     this.getOrderDetail();
     console.log(this.orderDetail);
+    this.searchControl = new FormControl();
+    this.mapsAPILoader.load().then(() => {
+        let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
+          types: ["address"]
+        });
+        autocomplete.addListener("place_changed", () => {
+          this.ngZone.run(() => {
+            //get the place result
+            let place: google.maps.places.PlaceResult = autocomplete.getPlace();
+    
+            //verify result
+            if (place.geometry === undefined || place.geometry === null) {
+              return;
+            }
+            
+            //set latitude, longitude and zoom
+            this.lat = place.geometry.location.lat();
+            this.lng = place.geometry.location.lng();
+            this.zoom = 12;
+          });
+        });
+      });
   }
 
 }
