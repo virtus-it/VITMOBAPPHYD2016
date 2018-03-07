@@ -264,7 +264,8 @@ export class OrderLandingComponent implements OnInit {
       this.forwardOrders = [];
       this.orderListInput.order.last_orderid = null;
     }
-    let forwardInput = this.orderListInput
+    let forwardInput = this.orderListInput;
+    console.log(forwardInput);
     this.loaderService.display(true);
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(

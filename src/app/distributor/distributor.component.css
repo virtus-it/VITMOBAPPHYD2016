@@ -46,6 +46,13 @@ a{
   height: 300px;
   overflow-y: auto;
 }
+.hovernumbers{
+  display:none;
+}
+
+.numbers:hover .hovernumbers {
+  display:block
+}
 
 /* .mat-dialog-container{
   height: 90% !important;
