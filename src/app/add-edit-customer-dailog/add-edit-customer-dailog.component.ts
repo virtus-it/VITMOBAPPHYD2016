@@ -20,6 +20,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
 
   emailFormControl = new FormControl('', [
     Validators.required]);
+    mobileFormControl = new FormControl('', [
+      Validators.required]);
    
 
   customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
