@@ -26,7 +26,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   ProductFormControl = new FormControl('', [Validators.required]);
 
 
-  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity:"" , timeslot: "7AM-8AM" }
+  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity: "", timeslot: "7AM-8AM" }
   createSchedule = [];
   customerDetails:any = "";
   productList = [];
@@ -38,16 +38,18 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   updateSchedule=[];
   product= false;
   message="";
+  eventQuantity:any ="";
 
 
  
   days = [];
+  
 
   
   //create schedule
 
   createScheduledays() {
-    if(this.validate()){
+    if(this.validate() && this.validate1()){
     let input = {};
     if(this.scheduleInput.schedulefor=="weekdays" ){
       let weekdays = this.scheduleInput.weekdays.split(',').sort(this.sortWeeks);
@@ -57,6 +59,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
      else{
      input = { "order": { "apptype": this.authenticationService.appType(), "excepted_time":this.scheduleInput.timeslot , "orderstatus": "ordered", "orderto":this.authenticationService.loggedInUserId(), "orderfrom":this.Detail.customerId, "paymentmode": "cash", "usertype":this.authenticationService.userType() , "quantity": this.scheduleInput.productQuantity , "loginid": this.authenticationService.loggedInUserId(), "groupid": "289", "productid": this.scheduleInput.productName.productid , "product_type":this.scheduleInput.productName.ptype , "product_quantity":this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.schedulefor, "product_cost": this.scheduleInput.productName.pcost, "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity), "total_amt":parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin" } };
    }
+   //this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
    console.log(input);
     this.customerservice.createSchedule(input)
       .subscribe(
@@ -66,9 +69,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         this.loaderService.display(false);
       });  
     }
-    else{
-      this.message="please select product";
-    }
+    // else{
+    //   this.message="please select product";
+    // }
   }
   
   createScheduledaysResult(result) {
@@ -83,15 +86,17 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   //Update Schedule Order
   updateScheduleOrder(){
-    if(this.validate()){
+    if(this.validate() && this.validate1()){
     let input={}
     if(this.scheduleInput.schedulefor=="weekdays" ){
     input={"order":{"schdid":this.Detail.data.id,"apptype":this.authenticationService.appType(),"excepted_time":this.scheduleInput.timeslot,"orderstatus":"ordered","orderto":this.authenticationService.loggedInUserId() ,"orderfrom":this.Detail.userid,"product_cost":this.scheduleInput.productName.pcost ,"paymentmode":"cash","usertype":this.authenticationService.userType() ,"quantity":this.scheduleInput.productQuantity,"loginid":this.authenticationService.loggedInUserId(),"groupid":"289","productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "weekdays":this.scheduleInput.weekdays , "scheduletype": this.scheduleInput.schedulefor , "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin"}};
     }
     else{
       input={"order":{"schdid":this.Detail.data.id,"apptype":this.authenticationService.appType(),"excepted_time":this.scheduleInput.timeslot,"orderstatus":"ordered","orderto":this.authenticationService.loggedInUserId() ,"orderfrom":this.Detail.userid,"product_cost":this.scheduleInput.productName.pcost ,"paymentmode":"cash","usertype":this.authenticationService.userType() ,"quantity":this.scheduleInput.productQuantity,"loginid":this.authenticationService.loggedInUserId(),"groupid":"289","productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.schedulefor,  "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin"}};
-
     }
+     // this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
+
+    
     console.log(input);
     this.customerservice.updateScheduleOrder(input)
     .subscribe(
@@ -102,9 +107,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       });
   }
 
-else{
-  this.message="please select product";
-}
+// else{
+//   this.message="please select product";
+// }
   }
   UpdateScheduleResult(result){
     if(result.result== "success"){
@@ -326,9 +331,24 @@ else{
       return true;
     }
     else{
-      this.message="please set quantity";
+      this.message="please select product";
       return false;
     }
+  }
+
+  validate1(){
+    if(this.scheduleInput.weekdays.length > 0){
+      this.message="";
+      return true;
+    }
+    else{
+      this.message="Please select atleast one weekday/day";
+    }
+  }
+
+  minQuantity(product, event){
+    this.eventQuantity = event.value.default_qty;
+    this.scheduleInput.productQuantity = this.eventQuantity;
   }
 
 

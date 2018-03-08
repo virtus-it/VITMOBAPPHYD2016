@@ -443,7 +443,7 @@ else{
     })
   }
 )
-    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
+    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
     
   }
 
@@ -494,6 +494,7 @@ else{
   ngOnInit() {
     this.getDistributors();
     // this.getProducts();
+    
     this.autoTimeSlotforHour();
     this.getProductsList();
     console.log(this.Details);

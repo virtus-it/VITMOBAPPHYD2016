@@ -17,13 +17,23 @@ export class AddEditProductDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<AddEditProductDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) { }
 
-  productPriorityFormControl = new FormControl ('' , [Validators.required]);
-  productNameFormControl = new FormControl('',[Validators.required]);
-  productTypeFormControl = new FormControl('',[Validators.required]);
-  productCostFormControl = new FormControl('',[Validators.required]);
-  productQtyFormControl = new FormControl('',[Validators.required]);
-  serviceChargeFormControl = new FormControl('',[Validators.required]);
-  expressDeliveryFormControl = new FormControl('',[Validators.required]);
+  // productPriorityFormControl = new FormControl ('' , [Validators.required]);
+  // productNameFormControl = new FormControl('',[Validators.required]);
+  // productTypeFormControl = new FormControl('',[Validators.required]);
+  // productCostFormControl = new FormControl('',[Validators.required]);
+  // productQtyFormControl = new FormControl('',[Validators.required]);
+  // serviceChargeFormControl = new FormControl('',[Validators.required]);
+  // expressDeliveryFormControl = new FormControl('',[Validators.required]);
+
+
+
+  p1FC = new FormControl ('' , [Validators.required]);
+  p2FC = new FormControl('',[Validators.required]);
+  p3FC = new FormControl('',[Validators.required]);
+  p4FC = new FormControl('',[Validators.required]);
+  p5FC = new FormControl('',[Validators.required]);
+  p6FC = new FormControl('',[Validators.required]);
+  p7FC = new FormControl('',[Validators.required]);
 
   productCategoryList = [];
   productTypeList = [];
