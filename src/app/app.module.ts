@@ -211,7 +211,7 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
             //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
             // libraries: ["geometry"],
-            libraries: ["drawing"],
+            libraries: ["drawing","places"],
             apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko' 
 
         })
