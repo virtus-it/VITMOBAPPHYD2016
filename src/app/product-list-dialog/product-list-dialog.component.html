@@ -24,24 +24,26 @@
           <table class="table table-hover table-fixedheader">
       <thead>
         <tr>
-          <th width="20%">Product Name</th>
-          <th width="20%">Product Type</th>
+          <th width="15%">Product Name</th>
+          <th width="15%">Product Type</th>
           <th width="12%">Priority</th>
           <th width="12%">Min Qty</th>
           <th width="10%">Stock</th>
           <th width="15%">Status</th>
           <th width="10%">Cost</th>
+          <th width="10%">Edit</th>
            </tr>
       </thead>
       <tbody>
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-          <td width="20%" class="left capital">{{prod.brandname}}</td>
-          <td width="20%" class="left capital"> {{prod.ptype}}</td>
+          <td width="15%" class="left capital">{{prod.brandname}}</td>
+          <td width="15%" class="left capital"> {{prod.ptype}}</td>
           <td width="12%" class="left capital">{{prod.priority}}</td>
           <td width="12%" class="left capital">{{prod.minorderqty}}</td>
           <td width="10%" class="left capital">{{prod.avaliable_stock}}</td>
           <td width="15%" class="left capital">{{prod.stockstatus}}</td>
           <td width="10%" class="left capital">{{prod.pcost}}</td>
+          <td width="10%" class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></td>
          </tr>
       </tbody>
     </table>

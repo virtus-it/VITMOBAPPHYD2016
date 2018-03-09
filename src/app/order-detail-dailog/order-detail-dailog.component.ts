@@ -24,6 +24,7 @@ export class OrderDetailDailogComponent implements OnInit {
     deliveredStatus= false;
     customerProductDetails: any = [];
     customerProductDetailsCopy: any = [];
+    customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 showCustomerDetails(orderData) {
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
@@ -155,6 +156,7 @@ getProductsListByCustomerId() {
 }
 getProductsListByCustomerIdResult(result) {
     this.loaderService.display(false);
+    this.customerAddressDetails =result.data.user.address;
     if (result.data.user.stock && result.data.user.stock.length > 0) {
         console.log(result.data.user.stock);
         this.customerProductDetails = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });

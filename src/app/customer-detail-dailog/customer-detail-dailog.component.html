@@ -39,32 +39,36 @@
         <table class="table table-hover table-fixedheader">
           <thead>
             <tr>
-              <th width="6%"><small>Order Id</small></th>
-              <th width="10%"><small>Product Name</small></th>
+              <th width="5%"><small>Order Id</small></th>
+              <th width="5%"><small>Product Name</small></th>
               <th width="7%"><small>Cart Id</small></th>
-              <th width="12%"><small>Address</small></th>
+              <th width="10%"><small>Address</small></th>
               <th width="8%"><small>Ordered Amt</small></th>
               <th width="8%"><small>Received Amt</small></th>
               <th width="8%"><small>Ordered Qty</small></th>
               <th width="8%"><small>Status</small></th>
               <th width="8%"><small>Returned Qty</small></th>
               <th width="10%"><small>Payment Mode</small></th>
-              <th width="15%"><small>Delivery Date</small></th>
+              <th width="10%"><small>Delivery Date</small></th>
+              <th width="10%"><small>Delivered By</small></th>
+              
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let customer of customerOrderDetails">
-              <td width="6%" class="left" scope="row"><small>{{customer.order_id}}</small></td>
-              <td width="10%" class="left capital"><small>{{customer.brandname}} {{customer.prod_type}}</small></td>
+              <td width="5%" class="left" scope="row"><small>{{customer.order_id}}</small></td>
+              <td width="5%" class="left capital"><small>{{customer.brandname}} {{customer.prod_type}}</small></td>
               <td width="7%" class="left capital"><small>{{customer.cart_id}}</small></td>
-              <td width="12%" class="left capital"><small>{{customer.orderby_address}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.orderby_address}}</small></td>
               <td width="8%" class="left capital"><small>{{customer.bill_amount}}</small></td>
               <td width="8%" class="left capital"><small>{{customer.receivedamount}}</small></td>
               <td width="8%" class="left capital"><small>{{customer.quantity}}</small></td>
               <td width="8%" class="left capital"><small>{{customer.status}}</small></td>
               <td width="8%" class="left capital"><small>{{customer.return_cans}}</small></td>
               <td width="10%" class="left capital"><small>{{customer.paymenttype}}</small></td>
-              <td width="15%" class="left capital"><small>{{customer.order_delivereddate | utcDate}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.order_delivereddate | utcDate}}</small></td>
+              <td width="10%" class="left capital"><small>{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</small></td>
+
             </tr>
           </tbody>
           <tfoot>
