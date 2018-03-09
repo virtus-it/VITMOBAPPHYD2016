@@ -240,7 +240,7 @@ filteredList(){
 getFilteredPolygonResult(result){
 console.log(result);
 if(result.result = 'success'){
-    this.polygonArray= [];
+  //  this.polygonArray= [];
     this.displayPolygon= [];
     if (result.data && result.data.length > 0) {
         for (let data of result.data) {
@@ -252,7 +252,7 @@ if(result.result = 'success'){
                     polygon.distributorName = data.username;
                     polygon.supplier = data.suppliers;
                     polygon.mobileno = data.mobileno;
-                    this.polygonArray.push(polygon);
+                   // this.polygonArray.push(polygon);
                     this.displayPolygon.push(polygon);
                 }
             }
