@@ -54,6 +54,15 @@ a{
   display:block
 }
 
+.warning{
+  color:red;
+}
+
+.green{
+  color:forestgreen;
+}
+
+
 /* .mat-dialog-container{
   height: 90% !important;
 } */

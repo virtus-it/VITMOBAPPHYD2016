@@ -22,6 +22,7 @@ export class EditQuantityDailogComponent implements OnInit {
     disableSlot = false;
     newChange : any ='';
     hideTimeSlot= false;
+    hours:any = "";
   constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<EditQuantityDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog,private loaderService: LoaderService) { }
   updateQuantity() {
     let date= moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
@@ -97,10 +98,15 @@ this.disableSlot = false;
     this.hideTimeSlot= true;
   }
 
+  autoTimeSlotforHour(){
+    this.hours = moment().format("HH");
+    this.changeTimeSlot.date= new Date();
+  }
+
   ngOnInit() {
 
     this.quantity.value = this.orderDetails.quantity;
-    
+    this.autoTimeSlotforHour();
     console.log(this.orderDetails);
   }
 

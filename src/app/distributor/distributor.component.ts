@@ -236,6 +236,48 @@ export class DistributorComponent implements OnInit {
 
 
     }
+
+    deactivateDistributor(dist){
+        let input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+        console.log(input);
+        this.distributorService.createDistributor(input)
+        .subscribe(
+        output => this.deactivateDistributorResult(output),
+        error => {
+            console.log("error in distrbutors");
+            this.loaderService.display(false);
+        });
+    }
+    deactivateDistributorResult(result){
+        console.log(result);
+        if(result.result == 'success'){
+            this.getDistributors(true);
+
+        }
+
+    }
+
+    activateDistributor(dist){
+        let input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+        console.log(input);
+        this.distributorService.createDistributor(input)
+        .subscribe(
+            output => this.activateDistributorResult(output),
+            error => {
+                console.log("error in distrbutors");
+                this.loaderService.display(false);
+            });
+
+    }
+
+    activateDistributorResult(result){
+        console.log(result);
+        if(result.result =='success'){
+            this.getDistributors(true);
+
+        }
+    }
+
     ngOnInit() {
         this.getDistributors(true);
 

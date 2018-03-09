@@ -131,7 +131,7 @@ export class DistributorListDialogComponent implements OnInit {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
         "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
-        "loginid": this.authenticationService.loggedInUserId(),
+        "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.productName,
         "actiontype": "reassigned" ,
         "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
         "userid": this.authenticationService.loggedInUserId(),
