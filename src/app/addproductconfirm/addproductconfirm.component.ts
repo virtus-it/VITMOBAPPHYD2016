@@ -21,33 +21,18 @@ export class AddproductconfirmComponent implements OnInit {
 
 
 
-  // dealerAddProduct(){
-  //   let input={"userId":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
-  //   console.log(input);
-  //   this.productService.getProducts(input)
-  //     .subscribe(
-  //     output => this.dealerAddProductResult(output),
-  //     error => {
-  //       console.log("error in dealer products");
-  //       this.loaderService.display(false);
-  //     });
-  // }
-  // dealerAddProductResult(result){
-  //   console.log(result);
-  //   if (result.result = 'success') {
 
 
-  // }
-  // }
-
-
-  dealerAddProductDialog() {
+  dealerAddProductDialog(data) {
     let dialogRefSupplierOrderList = this.dialog.open(AddProductDealerComponent, {
         width: '700px',
-        data: ''
+        data: data
     });
     dialogRefSupplierOrderList.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
+        if(result == "success"){
+          this.thisDialogRef.close("success");
+        }
 
     });
 }
@@ -55,33 +40,17 @@ export class AddproductconfirmComponent implements OnInit {
 
 
 
-  // DistributorAddProduct(){
-  //   let input={"userId":this.Details.userid,"userType":"dealer","loginid":this.Details.userid,"appType":this.authenticationService.appType()};
-  //   console.log(input);
-  //   this.productService.getProductsCategory(input)
-  //     .subscribe(
-  //     output => this.DistributorAddProductResult(output),
-  //     error => {
-  //       console.log("error in category products");
-  //       this.loaderService.display(false);
-  //     });
-  // }
-  // DistributorAddProductResult(result){
-  //   console.log(result);
-  //   if (result.result = 'success') {
 
-
-  // }
-
-  // }
-
-  DistributorAddProductDialog(){
+  DistributorAddProductDialog(data){
     let dialogRefSupplierOrderList = this.dialog.open(AddEditProductDailogComponent, {
       width: '700px',
-      data: ''
+      data: data
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
+      if(result =="success"){
+        this.thisDialogRef.close("success");
+      }
 
   });
 

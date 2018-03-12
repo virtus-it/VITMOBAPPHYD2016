@@ -94,6 +94,8 @@ import { InvoiceHistoryComponent } from './invoice-history/invoice-history.compo
 import { ProfileupdateComponent } from './profileupdate/profileupdate.component';
 import { AddproductconfirmComponent } from './addproductconfirm/addproductconfirm.component';
 import { AddProductDealerComponent } from './add-product-dealer/add-product-dealer.component';
+import { DistributorOrderListComponent } from './distributor-order-list/distributor-order-list.component';
+
 
 @NgModule({
     declarations: [
@@ -164,7 +166,9 @@ import { AddProductDealerComponent } from './add-product-dealer/add-product-deal
         InvoiceHistoryComponent,
         ProfileupdateComponent,
         AddproductconfirmComponent,
-        AddProductDealerComponent
+        AddProductDealerComponent,
+        DistributorOrderListComponent,
+     
         
 
     ],
@@ -207,7 +211,7 @@ import { AddProductDealerComponent } from './add-product-dealer/add-product-deal
             //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
             // libraries: ["geometry"],
-            libraries: ["drawing"],
+            libraries: ["drawing","places"],
             apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko' 
 
         })
@@ -281,7 +285,9 @@ import { AddProductDealerComponent } from './add-product-dealer/add-product-deal
          InvoiceHistoryComponent,
          ProfileupdateComponent,
          AddproductconfirmComponent,
-         AddProductDealerComponent
+         AddProductDealerComponent,
+         DistributorOrderListComponent
+      
 
 
         ],

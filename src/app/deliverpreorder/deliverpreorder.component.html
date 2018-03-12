@@ -57,9 +57,27 @@
       </div>
     </div>
     <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cod'">
-      <div class="  col-4">
+      <!-- <div class="row">
+        <div class="">
+        <small>Express delivery charges: {{Detail.order.expressdeliverycharges}}</small>
+        <small>Service charges:{{Detail.order.servicecharge}}</small>
+      </div>
+    </div> -->
+
+    <div class= " col-8 ">
+        <div class="col">
+            <small>Express delivery charges: {{Detail.order.expressdeliverycharges}}</small> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <small>Service charges:{{Detail.order.servicecharge}}</small>
+          </div>
+        </div>
+        <br>
+        <br>
+
+
+    
+      <div class="  col">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Amount"    [(ngModel)]="Detail.order.total_amt">
+          <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
           <md-error>
             Amount is
             <strong>required</strong>
@@ -79,12 +97,12 @@
     <div class="row">
       <div class="col-4">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount">
+          <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount" disabled="disabled">
         </md-form-field>
       </div> &nbsp; &nbsp;&nbsp;
       <div class="col-4">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amount" >
+            <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amt" >
           </md-form-field>
         </div>
     </div>

@@ -141,7 +141,7 @@ export class DistributorComponent implements OnInit {
         if (distributor) {
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
-                width: '700px',
+                width: '85%',
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
@@ -228,6 +228,9 @@ export class DistributorComponent implements OnInit {
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             console.log(`Dialog closed: ${result}`);
+            if(result.result="success"){
+                
+            }
 
         })
 

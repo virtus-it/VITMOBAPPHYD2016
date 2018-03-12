@@ -29,7 +29,7 @@
       </div> -->
       <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-form-field class="example-full-width">
-          <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date">
+          <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date" (ngModelChange)="dateChanges($event)">
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
           <md-error>
@@ -40,12 +40,21 @@
       </div>
       <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
-          <md-option>Select Slot
-          </md-option>
-          <md-option value="9AM-1PM" [disabled]="disableSlot">9AM-1PM
-          </md-option>
-          <md-option value="4PM-7PM" >4PM-7PM
-          </md-option>
+          <md-option>Select Slot</md-option>
+          <md-option value="7AM-8AM" [disabled]= '7 <= hours'>7AM-8AM</md-option>
+          <md-option value="8AM-9AM" [disabled]='8 <= hours'>8AM-9AM</md-option>
+          <md-option value="9AM-10AM" [disabled]='9 <= hours'>9AM-10AM</md-option>
+          <md-option value="10AM-11AM" [disabled]='10 <= hours'>10AM-11AM</md-option>
+          <md-option value="11AM-12PM" [disabled]='11 <= hours'>11AM-12PM</md-option>
+          <md-option value="12PM-1PM" [disabled]='12 <= hours'>12PM-1PM</md-option>
+          <md-option value="1PM-2PM" [disabled]='13 <= hours'>1PM-2PM</md-option>
+          <md-option value="2PM-3PM" [disabled]='14 <= hours'>2PM-3PM</md-option>
+          <md-option value="3PM-4PM" [disabled]='15 <= hours'>3PM-4PM</md-option>
+          <md-option value="4PM-5PM" [disabled]='16 <= hours'>4PM-5PM</md-option>
+          <md-option value="5PM-6PM" [disabled]='17 <= hours'>5PM-6PM</md-option>
+          <md-option value="6PM-7PM" [disabled]='18 <= hours'>6PM-7PM</md-option>
+          <md-option value="7PM-8PM" [disabled]='19 <= hours'>7PM-8PM</md-option>
+          <md-option value="8PM-9PM" [disabled]='20 <= hours'>8PM-9PM</md-option>
         </md-select>
       </div>
     </div>
@@ -130,7 +139,7 @@
       <table class="table table-hover ">
         <tbody *ngFor="let prod of productList">
           <tr class="border-topbottom bg-eee">
-            <td class="" colspan="4">
+            <td class="" colspan="6">
               <b class="capital">
                 <i class="fa fa-gift" aria-hidden="true"></i>
                 Product Name : {{prod.brandName}}
@@ -145,7 +154,9 @@
           <tr class="border-topbottom bg-eee">
             <th width="40%">Type</th>
             <th width="20%">Price per Unit</th>
-            <th width="15%">Quantity</th>
+            <th width="15%">Quantity</th>   
+            <th width="15%">Express delivery charges</th>
+            <th width="15%">Service charges</th>
             <th width="15%">Cost</th>
           </tr>
           <tr *ngFor="let details of prod.data">
@@ -161,6 +172,7 @@
                   </label>
               </div>
             </td>
+            
             <td>
                 <b class="">{{details.pcost}}</b>
               </td>
@@ -173,6 +185,14 @@
               </div>
                 </div>
             </td>
+            <td class="">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
+                </label>
+               </td>
+            <td class="">{{details.servicecharge}} </td>
             <td>
               <b class="">{{details.pcost*details.quantity}}</b>
             </td>
@@ -186,7 +206,9 @@
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-  <p class="warning">{{this.message}}</p> &nbsp;&nbsp;
+  <p class="warning">{{message}}</p> &nbsp;&nbsp;
+  <p class="warning">{{message1}}</p> &nbsp;&nbsp;
+ 
   <md-dialog-actions align="end">
     <button md-raised-button class="btn-primary" (click)="createPreOrder()" >PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class="btn-primary" (click)="deliverPreOrder()">DELIVERY AS A DISTRIBUTOR</button>&nbsp;

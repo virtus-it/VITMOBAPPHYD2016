@@ -34,7 +34,8 @@
         </md-form-field>
 
         <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1"   maxlength="10" [(ngModel)]="customerInput.User.mobileno_one">
+            <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1"   maxlength="10"  [(ngModel)]="customerInput.User.mobileno_one">
+           
           </md-form-field>
 
 
@@ -48,11 +49,11 @@
           </md-error>
         </md-form-field>
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="customerInput.User.mobileno">
-          <md-error>
-            Phone Number is
-            <strong>required</strong>
-          </md-error>
+          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno">
+          <md-error *ngIf="mobileFormControl.hasError('required')">
+              Mobile Number is
+              <strong>required</strong>
+            </md-error>
         </md-form-field>
        
         <md-form-field class="">
@@ -220,7 +221,7 @@
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" 
-    [disabled]="!emailFormControl.valid">SUBMIT</button>
+    [disabled]="!emailFormControl.valid || !mobileFormControl.valid ">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

@@ -20,7 +20,9 @@ export class DistributorListDialogComponent implements OnInit {
   suppliersCopy = [];
   distributorID = "";
   supplierID = "";
+  supplierid="";
   supplierName="";
+  supplierNumber:"";
   searchDistTerm = "";
   searchSupplierTerm = "";
   message:any="";
@@ -79,14 +81,18 @@ export class DistributorListDialogComponent implements OnInit {
         let details: any = i;
         details.fullName = details.firstname + " " + details.lastname
         supplierCopyDetails.push(details);
+        // this.supplierName = this.supplierCopyDetails.firstname;
+        // this.supplierNumber = this.supplierCopyDetails.mobileno;
 
       });
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
       if (this.orderDetail.supplierdetails) {
         this.supplierID= this.orderDetail.supplierdetails.userid;
+        // this.supplierNumber = this.orderDetail.supplierdetails.supplierMno;
+        // this.supplierName = this.orderDetail.supplierdetails.supplierName;
       }
-      
+
       // before this.orderDetail.supplierid   newchange this.orderDetail.supplierdetails.userid;
     }
   }
@@ -127,9 +133,9 @@ export class DistributorListDialogComponent implements OnInit {
         "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
         "loginid": this.authenticationService.loggedInUserId(),
         "actiontype": "reassigned" ,
-        "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.", 
+        "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
         "userid": this.authenticationService.loggedInUserId(),
-        "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans",
+        "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
         "quantity": this.orderDetail.quantity, "to": this.supplierID,
         "usertype": this.authenticationService.userType()
       }
@@ -175,7 +181,7 @@ export class DistributorListDialogComponent implements OnInit {
     });
   }
   openProductAssingDialog() {
-    
+
     let data = {orderDetails:this.orderDetail,disributorId:this.distributorID};
 
     let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
@@ -184,7 +190,7 @@ export class DistributorListDialogComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result => {
         console.log(`Dialog closed: ${result}`);
-       
+
       if(result == 'success'){
         this.forWardOrder();
       }
@@ -195,6 +201,14 @@ export class DistributorListDialogComponent implements OnInit {
   }
   Closedailog() {
     this.thisDialogRef.close('success');
+  }
+
+
+  autoAssignChange(supplier, event){
+    console.log(supplier);
+    this.supplierID = this.supplierID;
+    this.supplierNumber = supplier.mobileno;
+    this.supplierName = supplier.fullName;
   }
 
 

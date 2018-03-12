@@ -16,7 +16,8 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "advance_amount":this.Detail.adv_amount};
+  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "adv_amt":this.Detail.adv_amt};
+  
   supplierList = [];
   SupplierListCopy = [];
   paymentCod: boolean= true;
@@ -46,6 +47,12 @@ export class DeliverpreorderComponent implements OnInit {
   confirmDeliverOrder(){
     this.Detail.order.received_amt = this.Detail.order.total_amt;
     this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
+    if(this.deliverPreOrderInput.confirmPayment){
+      this.Detail.order.paymentstatus = "confirm";
+    }
+    else{
+      this.Detail.order.paymentstatus = "";
+    }
     let input =[];
     input.push(this.Detail);
     console.log(input);
@@ -71,9 +78,14 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
   amountChange(object){
-    this.Detail.order.total_amt =parseInt(this.Detail.order.product_cost) * parseInt(object);
-  
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
+    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
 
+  }
+
+  totalAmount(){
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
+    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
   }
 
 
@@ -81,6 +93,7 @@ export class DeliverpreorderComponent implements OnInit {
   ngOnInit() {
     console.log(this.Detail);
     this.getSupplierList();
+    this.totalAmount();
   }
 
 }

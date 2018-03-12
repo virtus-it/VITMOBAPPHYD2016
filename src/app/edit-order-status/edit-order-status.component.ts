@@ -15,7 +15,7 @@ export class EditOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": this.orderDetail.delivered_quantity * this.orderDetail.prod_cost, "orderstatus": "delivered", 
-  "reason":"Delivered: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is delivered. Please allow us to serve you better, rate us on playstore: https://play.google.com/store/apps/details?id=com.moya",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
+  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
 isConfirmed = true;
 
 
@@ -30,6 +30,25 @@ isConfirmed = true;
       this.editStatusInput.order.received_amt = 0;
       this.editStatusInput.order.delivered_qty = 0;
     }
+if(this.editStatusInput.order.orderstatus == "delivered"){
+
+  this.editStatusInput.order.reason ="Delivered: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is delivered. Please allow us to serve you better, rate us on playstore: https://play.google.com/store/apps/details?id=com.moya"
+}
+
+if(this.editStatusInput.order.orderstatus == "rejected"){
+
+  this.editStatusInput.order.reason ="Rejected: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is not delivered as you have rejected the order . You might receive a call from our customer care centre from mobile: 9863636314/15 very soon."
+}
+
+if(this.editStatusInput.order.orderstatus == "doorlock"){
+
+  this.editStatusInput.order.reason ="Door Locked: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is still in process. Supplier found the door is locked.Please call our customer care centre at mobile: 9863636314/15 for any queries."
+}
+
+if(this.editStatusInput.order.orderstatus == "not_reachable"){
+
+  this.editStatusInput.order.reason ="Not reachable: "+ this.orderDetail.brandname +" "+ this.orderDetail.prod_type + "  water cans("+this.orderDetail.quantity+" qty) with order id: "+this.orderDetail.order_id+" from Moya-The Waterman App, is still in process. Supplier tried to reach you on your mobile:"+ this.orderDetail.orderby_mobileno+ ", but there was no response. Please call our customer care centre at mobile: 9863636314/15 for any queries."
+}
 
 
     if (this.editStatusInput.order.paymentype == "credit") {
@@ -62,6 +81,7 @@ if(result.result = '"success"'){
   }
   ngOnInit() {
     console.log(this.editStatusInput);
+    console.log(this.orderDetail);
   }
 
 }

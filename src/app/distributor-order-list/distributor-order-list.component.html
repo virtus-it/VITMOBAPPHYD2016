@@ -1,0 +1,70 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+        <i class="fa fa-file-text-o"></i>  
+        Order List
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+          <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+          </strong>         
+    </div>
+  </div>
+  
+    <md-dialog-content layout="column">
+        <div class="row pd-15x25 brd-bottom">
+                <div class="col scroll">    
+                    <table class="table table-hover table-striped">
+                      <thead>
+                        <tr>
+            <th width=""> Order Id</th>
+            <th width="">Product </th>
+            <th width="">Quantity</th>
+            <th width="">Status</th>
+            <th width=""> Payment Type</th>
+            <!-- <label *ngIf="Detail.type != 'supplierOrder'"> -->
+            <th width="">Supplier</th>
+          <!-- </label> -->
+            <!-- <th width="">Request Data</th> -->
+            <th width="">Customer </th>
+            <th width=""> Customer Mobile</th>
+            <th width="">Cost</th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+            <!-- <label *ngIf="Detail.type != 'supplierOrder'"> -->
+            <td width="" class="left" class="cellpadding" scope="row">   </td> 
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
+            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>    
+           </tr>
+        </tbody>
+        <!-- <tfoot>
+          <tr>
+            <td colspan="8">
+              <h4 class="warning  capitalize center">
+                <a href="javascript:void(0);"  *ngIf="ordersClickMore">
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                <span *ngIf="!ordersClickMore">Record Not Available</span>
+              </h4>
+            </td>
+          </tr>
+        </tfoot> -->
+      </table>
+    </div>
+            </div>
+            </md-dialog-content>
+    
+    <div class="row float-right pdright-30 mgbottom-20">
+        <md-dialog-actions align="end">
+          <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+        </md-dialog-actions>
+      </div>
+  
+      
+  
+  

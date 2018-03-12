@@ -16,7 +16,9 @@ export class FollowUpComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService, private followupService: FollowUpService) { }
   numbers = 250;
   followUpList = [];
+  followUpStatus="";
   followupDate  = null;
+  followUpTemplate=[];
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id, "username": this.authenticationService.userFullName(),
@@ -64,8 +66,10 @@ export class FollowUpComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       this.followUpList = result.data.output;
-
+      if(result.data.output){
+      this.followUpStatus = this.followUpList[0].followupstatus;
     }
+  }
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
@@ -85,21 +89,56 @@ export class FollowUpComponent implements OnInit {
   followUpCompletedResult(result) {
     console.log(result);
     if (result.result = 'success') {
-
-
+      // this.thisDialogRef.close('success');
+      this.getfollowUpdetails();
   }
 }
 
-// startFollowUp(){
-//   let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
-//   console.log(input);
-//   this.followupService.
+startFollowUp(){
+  let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
+  console.log(input);
+  this.followupService.followUpCompleted(input)
+      .subscribe(
+      output => this.followUpCompletedResult(output),
+      error => {
+        console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
 
-// }
+}
+startFollowUpCompleteResult(result) {
+  console.log(result);
+  if (result.result = 'success') {
+    // this.thisDialogRef.close('success');
+    this.getfollowUpdetails();
+}
+}
+
+
+getFollowUpTemplate(){
+  let input={"User":{"transtype":"getfollowup",apptype:this.authenticationService.appType(),userid:this.authenticationService.loggedInUserId(),loginid:this.authenticationService.loggedInUserId()}};
+  console.log(input);
+  this.followupService.followUpTemplate(input)
+      .subscribe(
+      output => this.getFollowUpTemplateResult(output),
+      error => {
+        console.log("error in getting followUp templates");
+        this.loaderService.display(false);
+      });
+}
+getFollowUpTemplateResult(result){
+  console.log(result);
+  if(result.result){
+    this.followUpTemplate = result.data;
+  }
+  
+
+}
   
   ngOnInit() {
     console.log(this.details);
     this.getfollowUpdetails();
+    this.getFollowUpTemplate();
   }
 
 }

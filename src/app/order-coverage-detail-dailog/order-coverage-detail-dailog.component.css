@@ -1,3 +1,6 @@
 agm-map {
     height: 500px;
   }
+  .mgtopleft-20{
+    margin: 20px 0px 0px 20px !important;
+  }

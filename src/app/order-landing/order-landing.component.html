@@ -27,6 +27,16 @@
           (click)="showTabPanel('allorder')">ALL ORDERS</a> -->
         </div>
         <div class="col  right">
+            <a class="">
+                <button  md-raised-button class=" " (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
+              </a>
+              <a class="">
+                <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+                </a>
+                <a class="">
+                    <button  md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}" >FollowUpDate</button>
+                  </a>
+
           <a class="">
             <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="clearFilter()"></i>
           </a>&nbsp;&nbsp;&nbsp;
@@ -315,9 +325,24 @@
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
+                      <b class="pdright-5">Rs.{{forward.bill_amount + forward.expressdeliverycharges + forward.servicecharges}}</b>
                     </div>
                   </div>
+                  <div class="form-group row ">
+                      <div class="col-sm-8  col-md-8  col-lg-8 left">
+                        <span class="td-label">
+                          Express Delivery charges </span>
+                        <br>
+                        <b>Rs.{{forward.expressdeliverycharges}}</b>
+                      </div>
+                      <div class="col-sm-4  col-md-4  col-lg-4 right">
+                        <span class="td-label">Service charges </span>
+                        <br>
+                        <b class="pdright-5">Rs.{{forward.servicecharges}}</b>
+                      </div>
+                    </div>
+
+
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name</span>
@@ -493,8 +518,15 @@
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
-
-                  </div>
+                      <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(distributors)">
+                        <i class="" aria-hidden="true"></i> Distributor Details </button>
+                      <div class="row" *ngIf="forward.customersource != 'DistributorCustomer'">
+                          <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
+                              <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                            <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
+                                <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                        </div>
+                  </div>             
                 </div>
               </td>
               <td>
@@ -603,9 +635,25 @@
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                      <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges + allorder.servicecharges}}</b>
                     </div>
                   </div>
+
+                  <div class="form-group row ">
+                      <div class="col-sm-8  col-md-8  col-lg-8 left">
+                        <span class="td-label">
+                          Express Delivery charges </span>
+                        <br>
+                        <b>Rs.{{allorder.expressdeliverycharges}}</b>
+                      </div>
+                      <div class="col-sm-4  col-md-4  col-lg-4 right">
+                        <span class="td-label">Service charges </span>
+                        <br>
+                        <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
+                      </div>
+                    </div>
+
+
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name </span>
@@ -686,7 +734,8 @@
                         <label class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</label>
                       </div>
                     </div>
-                    <div class="  row ">
+                    
+                    <!-- <div class="  row ">
                       <div class="col-sm-5  col-md-5  col-lg-5 left">
                         <label class="td-label" *ngIf="superDealer">
                         Associated Distributor Mobile</label>
@@ -694,9 +743,9 @@
                       <div class="col-sm-7  col-md-7  col-lg-7 left row">
                         <label class="" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</label>
                       </div>
-                    </div>
+                    </div> -->
 
-                    <div class="  row ">
+                    <!-- <div class="  row ">
                         <div class="col-sm-5  col-md-5  col-lg-5 left">
                           <label class="td-label" *ngIf="superDealer">
                           Code</label>
@@ -704,7 +753,7 @@
                         <div class="col-sm-7  col-md-7  col-lg-7 left row">
                             <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
                         </div>
-                      </div>
+                      </div> -->
 
                 </div>
 
@@ -741,6 +790,15 @@
 
                     </div>
                   </div>
+                  <div class="  row ">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <label class="td-label" *ngIf="superDealer">
+                        Code</label>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 left row">
+                          <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
+                      </div>
+                    </div>
                   <!-- <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
                           <label class="td-label">
@@ -770,6 +828,15 @@
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                     <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                     <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
+                      <i class="fa fa-circle-o " aria-hidden="true"  ></i> Customer all Orders Details</button>
+                      <!-- <div class="row">
+                          <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned'">
+                              <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="allorder.status !='accept' && allorder.status !='delivered' "> 
+                                <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                        </div> -->
+
 
                   </div>
                 </div>
@@ -788,6 +855,9 @@
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
               </td>
             </tr>
+            
+            
+
           </tfoot>
         </table>
       </div>
