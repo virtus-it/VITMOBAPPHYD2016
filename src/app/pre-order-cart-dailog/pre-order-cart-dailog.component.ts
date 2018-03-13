@@ -125,9 +125,10 @@ getDistributorsResult(data) {
     if (data.data && data.data.length) {
       _.each(data.data, function (i, j) {
         let details: any = i;
+        if(details.firstname){
         details.fullName = details.firstname + " " + details.lastname
         distributorCopy.push(details);
-
+        }
       });
       this.distributors = distributorCopy;
     }

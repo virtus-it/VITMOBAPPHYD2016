@@ -1,0 +1,13 @@
+.scroll{
+    overflow-x: hidden;
+    height: 300px;
+    overflow-y: auto;
+}
+.warning{
+    background-color:orangered;
+    color:white;
+}
+.noData{
+    color:orangered;
+    text-align: center;
+}

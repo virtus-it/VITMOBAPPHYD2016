@@ -249,18 +249,18 @@
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right">
                     <label *ngIf="superDealer">Follow Up :
-                      <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(forward)'>
-                          <!-- <a *ngIf="followupstatus =='close'">
-                      <i class="fa fa-volume-control-phone fa-2 red" title="FollowUp Closed"></i> 
-                      <i class="fa fa-times-circle red"></i>
-                      </a> -->
-                      <a *ngIf="followupstatus !='close'">
-                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp open"></i>
+                      <a>
+                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
                         </a>
-                      
-
                       </span>
+                    <span *ngIf="forward.followupstatus == 'close'">
+                      <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                    </span>
+                    <span *ngIf="forward.followupstatus == 'open'">
+                      <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                    </span> 
+                     
                     </label>
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(forward)'>
@@ -568,6 +568,12 @@
                       <span (click)='showFollowUp(allorder)'>
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
                       </span>
+                      <span *ngIf="allorder.followupstatus == 'close'">
+                          <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                        </span>
+                        <span *ngIf="allorder.followupstatus == 'open'">
+                          <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                        </span>
                     </label>
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>

@@ -11,6 +11,8 @@ import { SupplierOrderListComponent } from '../supplier-order-list/supplier-orde
 import { ViewCustomerComponent } from '../view-customer/view-customer.component';
 import { ViewSupplierComponent } from '../view-supplier/view-supplier.component';
 import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
+import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.component';
+import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
 
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
@@ -28,8 +30,9 @@ export class DistributorComponent implements OnInit {
     searchDistributorNumber = "";
     filterType = "";
     distributorClickMore = true;
+    isActive:any= "";
     showFilterDailog = false;
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 500 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
 
     getDistributors(firstCall) {
@@ -237,52 +240,105 @@ export class DistributorComponent implements OnInit {
 
     }
 
-    deactivateDistributor(dist){
-        let input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
-        console.log(input);
-        this.distributorService.createDistributor(input)
-        .subscribe(
-        output => this.deactivateDistributorResult(output),
-        error => {
-            console.log("error in distrbutors");
-            this.loaderService.display(false);
+    // deactivateDistributor(dist){
+    //     let input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+    //     console.log(input);
+    //     this.distributorService.createDistributor(input)
+    //     .subscribe(
+    //     output => this.deactivateDistributorResult(output),
+    //     error => {
+    //         console.log("error in distrbutors");
+    //         this.loaderService.display(false);
+    //     });
+    // }
+    // deactivateDistributorResult(result){
+    //     console.log(result);
+    //     if(result.result == 'success'){
+    //         this.getDistributors(true);
+
+    //     }
+
+    // }
+
+    // activateDistributor(dist){
+    //     let input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+    //     console.log(input);
+    //     this.distributorService.createDistributor(input)
+    //     .subscribe(
+    //         output => this.activateDistributorResult(output),
+    //         error => {
+    //             console.log("error in distrbutors");
+    //             this.loaderService.display(false);
+    //         });
+
+    // }
+
+    // activateDistributorResult(result){
+    //     console.log(result);
+    //     if(result.result =='success'){
+    //         this.getDistributors(true);
+
+    //     }
+    // }
+
+
+
+    stockPoint(data) {
+        let dialogRefCoverageDailog = this.dialog.open(MapStockpointComponent, {
+          width: '95%',
+          data: data
         });
-    }
-    deactivateDistributorResult(result){
-        console.log(result);
-        if(result.result == 'success'){
-            this.getDistributors(true);
+        dialogRefCoverageDailog.afterClosed().subscribe(result => {
+          console.log(`Dialog closed: ${result}`);
+          if (result == 'success') {
+          }
+        });
+      }
 
-        }
+      viewStockPoints(data){
+        let dialogRefCoverageDailog = this.dialog.open(ViewStockpointsComponent, {
+            width: '95%',
+            data: data
+          });
+          dialogRefCoverageDailog.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            if (result == 'success') {
+            }
+          });
 
-    }
+      }
 
-    activateDistributor(dist){
-        let input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
-        console.log(input);
-        this.distributorService.createDistributor(input)
-        .subscribe(
-            output => this.activateDistributorResult(output),
+
+      activateDeactivateDist(dist){
+          let input={};
+          if(dist.isactive == '0'){
+          input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+          }
+          else{
+        input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+          }
+          console.log(input);
+          this.distributorService.createDistributor(input)
+            .subscribe(
+            output => this.activateDeactivateDistributorResult(output),
             error => {
                 console.log("error in distrbutors");
                 this.loaderService.display(false);
             });
-
-    }
-
-    activateDistributorResult(result){
-        console.log(result);
-        if(result.result =='success'){
-            this.getDistributors(true);
-
+      }
+      activateDeactivateDistributorResult(result){
+            console.log(result);
+            if(result.result =='success'){
+                this.getDistributors(true);
+            }
         }
-    }
+
+        
+    
 
     ngOnInit() {
         this.getDistributors(true);
-
-
-
+    
     }
 
 }

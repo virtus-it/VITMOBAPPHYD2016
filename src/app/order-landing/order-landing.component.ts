@@ -232,6 +232,10 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefFollow.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
+      this.getForwardOrderDetails(true);
+      this.getAllOrderDetails(true);
+
+
 
 
     });
@@ -426,71 +430,71 @@ export class OrderLandingComponent implements OnInit {
         this.orderClickMore = false;
       } 
     }
-    // this.getFilteredQuickFilter(true);
+    this.getFilteredQuickFilter(true);
   }
 
   //test code
 
-  // getFilteredQuickFilter(firstcall){
-  //   if (!firstcall) {
-  //     if (this.tabPanelView == 'forward') {
-  //       let lastForwardOrder: any = _.last(this.forwardOrders);
-  //       if (lastForwardOrder) {
-  //         this.filterInput.order.last_orderid = lastForwardOrder.order_id;
-  //       }
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       let lastallOrder: any = _.last(this.allOrders);
-  //       if (lastallOrder) {
-  //         this.filterInput.order.last_orderid = lastallOrder.order_id;
-  //       }
-  //     }
-  //   }
-  //   else {
-  //     if (this.tabPanelView == 'forward') {
-  //       this.forwardOrders = [];
-  //       this.filterInput.order.last_orderid = "0";
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       this.allOrders = [];
-  //       this.filterInput.order.last_orderid = "0";
-  //     }
-  //   }
-  //   let input = this.filterInput;
-  //   console.log(input);
-  //   this.loaderService.display(true);
-  //   this.orderLandingService.getOrdersByfilter(input)
-  //     .subscribe(
-  //     output => this.getFilteredOrdersResult(output),
-  //     error => {
-  //       console.log("falied");
-  //       this.loaderService.display(false);
-  //     });
-  // }
-  // getFilteredQuickFilterResult(result){
-  //   if (result.result == 'success') {
-  //     this.filterRecords = true;
-  //     if (this.tabPanelView == 'forward') {
-  //       let data = this.ModifyOrderList(result.data);
-  //       this.forwardClickMore = true;
-  //       this.forwardOrders = _.union(this.forwardOrders, data);
-  //     }
+  getFilteredQuickFilter(firstcall){
+    if (!firstcall) {
+      if (this.tabPanelView == 'forward') {
+        let lastForwardOrder: any = _.last(this.forwardOrders);
+        if (lastForwardOrder) {
+          this.filterInput.order.last_orderid = lastForwardOrder.order_id;
+        }
+      }
+      else if (this.tabPanelView == 'allorder') {
+        let lastallOrder: any = _.last(this.allOrders);
+        if (lastallOrder) {
+          this.filterInput.order.last_orderid = lastallOrder.order_id;
+        }
+      }
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.allOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+    }
+    let input = this.filterInput;
+    console.log(input);
+    this.loaderService.display(true);
+    this.orderLandingService.getOrdersByfilter(input)
+      .subscribe(
+      output => this.getFilteredOrdersResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  getFilteredQuickFilterResult(result){
+    if (result.result == 'success') {
+      this.filterRecords = true;
+      if (this.tabPanelView == 'forward') {
+        let data = this.ModifyOrderList(result.data);
+        this.forwardClickMore = true;
+        this.forwardOrders = _.union(this.forwardOrders, data);
+      }
 
-  //     else if (this.tabPanelView == 'allorder') {
-  //       let data = this.ModifyOrderList(result.data);
-  //       this.orderClickMore = true;
-  //       this.allOrders = _.union(this.allOrders, data);
-  //     }
-  //   }
-  //   else {
-  //     if (this.tabPanelView == 'forward') {
-  //       this.forwardClickMore = false;
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       this.orderClickMore = false;
-  //     }
-  //   }
-  // }
+      else if (this.tabPanelView == 'allorder') {
+        let data = this.ModifyOrderList(result.data);
+        this.orderClickMore = true;
+        this.allOrders = _.union(this.allOrders, data);
+      }
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardClickMore = false;
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.orderClickMore = false;
+      }
+    }
+  }
 
   //test code for pagination ends here
 
