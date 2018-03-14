@@ -236,7 +236,7 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
         ProductsService,
         PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' }  // 
     ],
     entryComponents: [
         MapDialogComponent, 
