@@ -1,0 +1,40 @@
+
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4 oneline">
+      <i class="fa fa-gift" ></i> View Stock Points
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <!-- <strong class="fa fa-plus fa-2 plus-style" (click)="createStockPoint(Details)"></strong> -->
+      <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
+            </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column" class="scroll">
+    <h4 class="noData">{{noDataError}}</h4>
+    <div class="col-md-12 text-right" (click)="createStockPoint(Details)">
+    <strong class="fa fa-plus fa-2 plus-style .navbar-right" ></strong>
+    </div>
+   
+      <div class="container-fluid pd-15x25 brd-bottom " *ngFor="let stock of stockpoints; let i= index" >
+          
+        <div class="row" >
+            
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <small><b> Stock Point </b></small> <br>
+          <small>Stockpoint: {{i+1}}</small> <br>
+          <small><b>Lat/lng</b></small>  <br>
+          <small>lat/lng : {{stock.latitude}} {{stock.longitude}}</small><br>
+          <button md-raised-button color="primary" (click)="updateStockPoint(stock)"> UPDATE STOCK POINT</button>
+          <button md-raised-button class="warning" (click)="deleteStockPoint(stock)">DELETE STOCK POINT</button>
+
+
+        </div>
+      </div>
+      </div>
+  </md-dialog-content>
+
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions>
+      <!-- <button class="fa fa-plus fa-2 plus-style" (click)="createStockPoint()"></button> -->
+    </md-dialog-actions>
+  </div>

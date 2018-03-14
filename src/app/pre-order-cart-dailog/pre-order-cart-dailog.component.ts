@@ -125,9 +125,10 @@ getDistributorsResult(data) {
     if (data.data && data.data.length) {
       _.each(data.data, function (i, j) {
         let details: any = i;
+        if(details.firstname){
         details.fullName = details.firstname + " " + details.lastname
         distributorCopy.push(details);
-
+        }
       });
       this.distributors = distributorCopy;
     }
@@ -343,7 +344,7 @@ createPreOrderResult(result,input) {
     if(input[0].order.productid){
       productid = input[0].order.productid
     }
-    let data ={prod_id:productid,ordersfrom:input[0].order.orderfrom,order_id:result.data.orderid,quantity:input[0].order.quantity,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
+    let data ={prod_id:productid, ordersfrom:input[0].order.orderfrom, order_id:result.data.orderid, productName:input[0].order.product_type,quantity:input[0].order.quantity,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
     if(this.Details.supplier){
       data.supplierdetails.userid =this.Details.supplier.supplierid;
       data.supplierdetails.supplierID = this.Details.supplier.supplierid;

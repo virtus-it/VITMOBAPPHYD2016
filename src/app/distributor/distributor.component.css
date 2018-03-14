@@ -54,6 +54,19 @@ a{
   display:block
 }
 
+.warning{
+  color:red;
+}
+
+.green{
+  color:forestgreen;
+}
+
+.warn{
+  color:orangered;
+}
+
+
 /* .mat-dialog-container{
   height: 90% !important;
 } */

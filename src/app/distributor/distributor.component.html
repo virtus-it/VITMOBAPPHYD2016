@@ -60,6 +60,7 @@
               <th width="15%">Company Name</th>
               <th width="8%" class="no-th-arrow">FollowUp</th>
               <th width="15%" class="no-th-arrow">Views </th>
+              <th width="10%" class="">Activate/Deactivate</th>
               <th width="15%" class="no-th-arrow">Service Area</th>
             </tr>
           </thead>
@@ -86,11 +87,23 @@
                 <i class="fa fa-users logo-color cursor" (click)="viewCustomers(dist)" title="Customers"> </i>&nbsp;&nbsp;
                 <i class="fa fa-gift logo-color cursor" (click)="ViewProduct(dist)" title="Products"></i>&nbsp;&nbsp;
                 <i class="fa fa-edit logo-color cursor"  title="Edit Distributor" (click)="openUpdateDialog(dist)"></i>
-                <i class="	fa fa-plus-square-o" title="Add products" (click)="addProductsConfirmDialog(dist)"></i>
+                <i class="fa fa-plus-square-o" title="Add products" (click)="addProductsConfirmDialog(dist)"></i>
+                
+                
+                <!-- <i *ngIf="dist.isactive == '1'" class="fa fa-minus-circle warning"  title="Deactivate distributor" (click)="deactivateDistributor(dist)"></i>
+                <i *ngIf="dist.isactive == '0'" class="fa fa-check-circle green" title="Activate distributor" (click)="activateDistributor(dist)"></i> -->
+
+
+
+                <i class="fa fa-vimeo" title="view stockpoints" (click)="viewStockPoints(dist)"></i>
                 <!-- <button class="btn btn-link" (click)="viewOrders(dist)">Orders </button>
             <button class="btn btn-link" (click)="viewSuppliers(dist)">Suppliers </button>
             <button class="btn btn-link" (click)="viewCustomers(dist)"> Customers</button>
             <button class="btn btn-link" (click)="ViewProduct(dist)" >Products</button> -->
+              </td>
+              <td class="left">
+                <button *ngIf="dist.isactive == '0'" class="btn btn-link" (click)="activateDeactivateDist(dist)">Activate distributor</button>
+                <button *ngIf="dist.isactive == '1'" class="btn btn-link warn" (click)="activateDeactivateDist(dist)">Deactivate distributor</button>
               </td>
               <td class="left">
                 <button class="btn btn-link" (click)="openMapDialog(dist)">Service area</button>

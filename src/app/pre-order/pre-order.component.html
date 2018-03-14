@@ -92,9 +92,10 @@
             <th width="8%">Mobile 2</th>
             <th width="8%">Email</th>
             <th width="10%">Address</th>
+            <th width="7%">Payment</th>
             <th width="7%">Advance Amt</th>
             <th width="7%">Due Amt</th>
-            <th width="7%">Payment</th>
+            
             <th width="8%">Action</th>
 
 
@@ -125,17 +126,18 @@
             <td class="left " >{{preorder.emailid}}</td>            
             <td class="left" style="position:absolute"><span class="onhovertext mgtop-10">{{preorder.address}}</span></td>
             <td class="left">
-              <span *ngIf="preorder.payments">{{preorder.payments.advance_amount}} </span>
-            </td>
-            <td class="left">
-              <span *ngIf="preorder.payments">{{preorder.payments.amount_pending}} </span>
-            </td>
-            <td class="left">
               <div *ngIf="preorder.payments">
                 <span *ngIf="preorder.payments.paymenttype=='credit'"> {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
                 <span *ngIf="preorder.payments.paymenttype=='cod'">{{preorder.payments.paymenttype}}</span>
               </div>
             </td>
+            <td class="left">
+              <span *ngIf="preorder.payments">{{preorder.payments.advance_amount}} </span>
+            </td>
+            <td class="left">
+              <span *ngIf="preorder.payments">{{preorder.payments.amount_pending}} </span>
+            </td>
+            
             <td class="left">
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit" (click)="showEditCustomer(preorder)"></i>&nbsp;&nbsp;&nbsp;
               <i class="fa fa-cart-plus btn-link" aria-hidden="true" (click)="addPreorder(preorder)" title="Assign Pre-Order"></i>

@@ -144,13 +144,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let customers of customerList">
-            <td class="left capitalize">{{customers.firstname}} {{customers.lastname}}</td>
+            <td class="left capitalize" *ngIf="customers.firstname">{{customers.firstname}} {{customers.lastname}}</td>
             <td class="left">
               <span *ngIf="customers.isappdownloaded">Joined</span>
               <span *ngIf="!customers.isappdownloaded">Not Joined</span>
             </td>
             
-            <td class="left">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
+            <td class="left"  *ngIf="customers.dealers">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
             <!-- <td class="left">
               <span *ngIf="customers.enable_autoassign=='true'">
                 {{customers.supplier.suppliername}}

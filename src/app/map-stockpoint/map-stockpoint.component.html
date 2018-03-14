@@ -1,0 +1,50 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+    <i class="fa fa-file-text-o"></i> Stock Point
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+    <form class="example-form" >
+  <div class="container-fluid brd-bottom mgtop-20">
+     
+    <div class="row">
+      <div class="col">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class=""  (mapClick)="mapClicked($event)">
+          <agm-marker *ngFor="let m of ploymarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" >
+            <!-- <agm-info-window>
+              {{m.lat}} {{m.lng}}
+      
+            </agm-info-window> -->
+          </agm-marker>
+        </agm-map>
+      </div>
+      
+    </div>
+
+    <!-- <div class="container-fluid brd-bottom mgtop-20" >
+    <div class="row">
+      <div class="col">
+      <agm-map [latitude] = "lat" [longitude]= "lng" [zoom]="zoom" class="">
+          <agm-marker *ngFor="let m of ploymarkers; let i = index" [latitude]= Details.longitude [longitude]= Details.longitude  >
+            </agm-marker>
+      </agm-map>
+      </div>
+    </div>
+    </div> -->
+  </div>
+  </form>
+</md-dialog-content>
+
+<div class="row float-right pdright-30  mgbottom-20">
+  <md-dialog-actions align="end">
+
+    <p class="warning"> {{message}}</p> &nbsp;&nbsp;
+      <button md-raised-button color="primary" (click)="createAndUpdate()">{{buttonValue}}</button>
+  </md-dialog-actions>
+</div> 
