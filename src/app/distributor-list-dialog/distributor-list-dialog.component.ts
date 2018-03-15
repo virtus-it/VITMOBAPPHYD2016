@@ -85,6 +85,13 @@ export class DistributorListDialogComponent implements OnInit {
         // this.supplierNumber = this.supplierCopyDetails.mobileno;
 
       });
+
+      if(this.orderDetail.supplierdetails.userid){
+        this.message="This cutomer is already assigned to  " + this.orderDetail.supplierdetails.supplierName ;
+      }
+      else{
+        this.message="";
+      }
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
       if (this.orderDetail.supplierdetails) {
@@ -161,9 +168,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
-      if(this.autoAssign =true){
 
-      }
     }
   }
   searchDistrubutors() {
@@ -204,6 +209,7 @@ export class DistributorListDialogComponent implements OnInit {
 
 
   autoAssignChange(supplier, event){
+    
     console.log(supplier);
     this.supplierID = this.supplierID;
     this.supplierNumber = supplier.mobileno;

@@ -798,6 +798,8 @@ this.showFilterDailog =false;
   AcceptOrderResult(result){
     console.log(result);
     if(result.result='success'){
+      this.getForwardOrderDetails(true);
+
 
     }
   }
@@ -817,6 +819,7 @@ this.showFilterDailog =false;
   rejectOrderResult(result){
     console.log(result);
     if (result.result == 'success') {
+      this.getForwardOrderDetails(true);
     
     }
   }
