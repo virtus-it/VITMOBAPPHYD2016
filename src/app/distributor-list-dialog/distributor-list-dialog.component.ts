@@ -85,9 +85,9 @@ export class DistributorListDialogComponent implements OnInit {
         // this.supplierNumber = this.supplierCopyDetails.mobileno;
 
       });
-
+      // add below to get name + this.orderDetail.supplierdetails.firstname
       if(this.orderDetail.supplierdetails){
-        this.message="This cutomer is already assigned to  " + this.orderDetail.supplierdetails.firstname ;
+        this.message="This cutomer is already assigned to supplier " ;
       }
       else{
         this.message="";
