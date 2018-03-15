@@ -279,9 +279,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                                 var polygonPath = new google.maps.Polygon({
                                     paths: polygon.path
                                 });
-                                // 0.03 3km
-                                // 0.05 5km
-                                // 0.1   10km
                                 let distance = parseFloat(this.filterInputkmvalue.kmvalue);
                                 var myPosition = new google.maps.LatLng(this.markers[0].lat, this.markers[0].lng);
                                 if (google.maps.geometry.poly.isLocationOnEdge(myPosition, polygonPath, distance)) {
