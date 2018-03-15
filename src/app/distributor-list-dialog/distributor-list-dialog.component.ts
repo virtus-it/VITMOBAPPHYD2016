@@ -86,8 +86,8 @@ export class DistributorListDialogComponent implements OnInit {
 
       });
 
-      if(this.orderDetail.supplierdetails.userid){
-        this.message="This cutomer is already assigned to  " + this.orderDetail.supplierdetails.supplierName ;
+      if(this.orderDetail.supplierdetails){
+        this.message="This cutomer is already assigned to  " + this.orderDetail.supplierdetails.firstname ;
       }
       else{
         this.message="";

@@ -57,6 +57,7 @@ export class OrderLandingComponent implements OnInit {
   quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
+  distId:any="";
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
@@ -94,6 +95,7 @@ export class OrderLandingComponent implements OnInit {
     { "id": "ordered", "itemName": "Ordered" },
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+    
   findDistributors(name: string) {
     console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
@@ -178,7 +180,7 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showCoverageDetails(orderDetails) {
-    let modelData = { orders: orderDetails, polygons: this.polygonArray }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:orderDetails.distributor.userid }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '95%',
       data: modelData
@@ -188,6 +190,7 @@ export class OrderLandingComponent implements OnInit {
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
+        
       }
 
     });
@@ -396,6 +399,10 @@ export class OrderLandingComponent implements OnInit {
     if(type=='followupdate'){
       this.filterInput.order.searchtype = 'followupdate';
       this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD');
+    }
+    if(type=='notDelivered'){
+      this.filterInput.order.searchtype = 'status';
+      this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
     }
     console.log(this.filterInput);
     
