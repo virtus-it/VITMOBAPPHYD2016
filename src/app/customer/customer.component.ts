@@ -75,12 +75,13 @@ export class CustomerComponent implements OnInit {
             //this.dialogResult = result;
         });
     }
-    showInactive() {
+    showInactive(data) {
         let dialogRefInactive = this.dialog.open(CustomerMakeInactiveComponent, {
             width: '600px',
-            data: ''
+            data: data
         });
         dialogRefInactive.afterClosed().subscribe(result => {
+            this.getCustomerList(true);
             //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
@@ -206,7 +207,7 @@ if(result == "success"){
             this.customerList = [];
             input.lastId = 0;
         }
-        //console.log(input);
+        console.log(input);
         this.customerService.getCustomerList(input)
             .subscribe(
             output => this.getCustomerListResult(output),

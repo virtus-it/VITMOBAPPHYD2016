@@ -7,6 +7,14 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
+
+  .hovernumbers{
+    display:none;
+  }
+  
+  .numbers:hover .hovernumbers {
+    display:block
+  }
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;

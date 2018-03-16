@@ -84,12 +84,12 @@
         <thead>
           <tr>
             <th width="10%">Customer</th>
-            <th width="10%">Status</th>
+            <!-- <th width="10%">Status</th> -->
             <th width="12%">Distributor</th>
-            <th width="8%">Assigned to</th>
+            <th width="8%">Supplier</th>
             <th width="8%">Mobile</th>
-            <th width="8%">Mobile 1</th>
-            <th width="8%">Mobile 2</th>
+            <!-- <th width="8%">Mobile 1</th>
+            <th width="8%">Mobile 2</th> -->
             <th width="8%">Email</th>
             <th width="10%">Address</th>
             <th width="7%">Payment</th>
@@ -105,12 +105,15 @@
           <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
           <tr *ngFor="let preorder of customerList">
             <td class="left capitalize">
+                <span *ngIf="preorder.isappdownloaded" class=""><i class="fa fa-thumbs-up success"></i> </span>
+                <span *ngIf="!preorder.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger"></i> </span>
+              &nbsp;&nbsp;
                {{preorder.firstname}} {{preorder.lastname}} 
             </td>
-            <td class="left">
+            <!-- <td class="left">
               <span *ngIf="preorder.isappdownloaded">Joined</span>
               <span *ngIf="!preorder.isappdownloaded">Not Joined</span>
-            </td>
+            </td> -->
             <td class="left capitalize"><span *ngIf="preorder.dealers">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer </span></td>
             
             <!-- <td class="left">{{preorder.mobileno}}</td>  -->
@@ -120,9 +123,12 @@
 
 
 
-            <td class="left">{{preorder.mobileno}}</td>
-            <td class="left">{{preorder.mobileno_one}}</td>
-            <td class="left">{{preorder.mobileno_two}}</td>
+            <td class="left numbers">{{preorder.mobileno}}
+              <span *ngIf="preorder.mobileno_one || preorder.mobileno_one" class="hovernumbers onhovertext" >{{preorder.mobileno_one}} {{preorder.mobileno_one}}</span>
+            </td>
+
+            <!-- <td class="left">{{preorder.mobileno_one}}</td>
+            <td class="left">{{preorder.mobileno_two}}</td> -->
             <td class="left " >{{preorder.emailid}}</td>            
             <td class="left" style="position:absolute"><span class="onhovertext mgtop-10">{{preorder.address}}</span></td>
             <td class="left">

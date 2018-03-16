@@ -42,6 +42,13 @@ table thead {
     color: #0f75bc;
   }
   
+  .hovernumbers{
+    display:none;
+  }
+  
+  .numbers:hover .hovernumbers {
+    display:block
+  }
   /* .mat-dialog-container{
     height: 90% !important;
   } */
