@@ -402,11 +402,13 @@
                                  <span class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</span>
                                 </div>
                                 <div class="col-sm-8  col-md-8  col-lg-8 right" *ngIf="forward.customersource != 'DistributorCustomer'"> 
-                                <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
-                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                            
-                                        <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
-                                      <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                                    <span class="td-label">Associated Distributor</span>
+                                    <br>
+                                    <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">
+                                      <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                                      <span *ngIf="!forward.distributor">-</span></label>
+                             
+                              
                                       </div>
                               </div>
                   <!-- <div class="form-group row ">
@@ -471,12 +473,12 @@
                           <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
                         </div>
                         <div class="col-sm-7  col-md-7  col-lg-7 right">
-                            <span class="td-label">Associated Distributor</span>
-                            <br>
-                            <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">
-                              <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
-                              <span *ngIf="!forward.distributor">-</span></label>
-                     
+                            <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
+                                <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                               
+                                    <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
+                                  <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                            
                            </div>
                       </div>
                       <div class="row form-group">
