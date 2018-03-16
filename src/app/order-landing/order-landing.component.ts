@@ -398,7 +398,7 @@ export class OrderLandingComponent implements OnInit {
     }
     if(type=='followupdate'){
       this.filterInput.order.searchtype = 'followupdate';
-      this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD');
+      this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD 00:02:00');
     }
     if(type=='notDelivered'){
       this.filterInput.order.searchtype = 'status';

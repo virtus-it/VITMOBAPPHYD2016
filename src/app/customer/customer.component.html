@@ -125,17 +125,17 @@
         <thead>
           <tr>
             <th width="15%">Customer</th>
-            <th width="8%">Status</th>
+            <!-- <th width="8%">Status</th> -->
             
             <th width="18%">Distributor</th>
             <!-- <th width="10%">Assigned to</th> -->
             <th width="8%">Mobile</th>
-            <th width="8%">Mobile 1</th>
-            <th width="8%">Mobile 2</th>
+            <!-- <th width="8%">Mobile 1</th>
+            <th width="8%">Mobile 2</th> -->
             <th width="10%">Email</th>
             <th width="14%">Address</th>
             <th width="8%">Payment</th>
-            <th width="8%">Customer Type</th>
+            <th width="8%">Type</th>
             <th width="13%">Deposit Amount</th>
             <th width="8%">Due Amount</th>
             <th width="8%"  *ngIf="superDealer">FollowUp</th>
@@ -144,11 +144,15 @@
         </thead>
         <tbody>
           <tr *ngFor="let customers of customerList">
-            <td class="left capitalize" *ngIf="customers.firstname">{{customers.firstname}} {{customers.lastname}}</td>
-            <td class="left">
+            <td class="left capitalize" *ngIf="customers.firstname">
+                <span *ngIf="customers.isappdownloaded" class=""><i class="fa fa-thumbs-up success"></i> </span>
+                <span *ngIf="!customers.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger"></i> </span>
+              &nbsp;&nbsp;
+              <span>{{customers.firstname}} {{customers.lastname}} </span></td>
+            <!-- <td class="left">
               <span *ngIf="customers.isappdownloaded">Joined</span>
               <span *ngIf="!customers.isappdownloaded">Not Joined</span>
-            </td>
+            </td> -->
             
             <td class="left"  *ngIf="customers.dealers">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
             <!-- <td class="left">
@@ -156,9 +160,10 @@
                 {{customers.supplier.suppliername}}
               </span> 
             </td> -->
-            <td class="left">{{customers.mobileno}}  </td>
-            <td class="left"> {{customers.mobileno_one}}  </td>
-            <td class="left">  {{customers.mobileno_two}}</td>
+            <td class="left numbers">{{customers.mobileno}}
+              <span *ngIf="customers.mobileno_one || customers.mobileno_two" class="hovernumbers onhovertext">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>  </td>
+            <!-- <td class="left"> {{customers.mobileno_one}}  </td>
+            <td class="left">  {{customers.mobileno_two}}</td> -->
             <td class="left"  width="10%">{{customers.emailid}}</td>
             <td class="left" style="position: absolute"><span class="onhovertext">{{customers.address}}</span></td>
            
@@ -193,8 +198,8 @@
                     <label class="col-md-6" (click)='showResendInvitation()'>
                       <i class="fa fa-reply"></i>
                       Re-send invitation</label>
-                    <label class="col-md-6" (click)='showInactive()'>
-                      <i class="fa fa-ban"></i> Make inactive</label>
+                    <label class="col-md-6" (click)='showInactive(customers)'>
+                      <i class="fa fa-ban"></i> Acivate/Deactivate Customer</label>
                   </div>
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showSetting()'>

@@ -15,15 +15,19 @@
   
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="center">
+      <div *ngIf="customerDetails.isactive == '1'" class="center">
         <h5 class="warning center align-self-center">Are You Sure You Want To De-Activate The Customer ? </h5>
       </div>
+
+      <div *ngIf="customerDetails.isactive == '0'" class="center">
+          <h5 class="warning center align-self-center">Are You Sure You Want To Activate The Customer ? </h5>
+        </div>
 
     </div>
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
-      <button md-raised-button class="btn-primary">SAVE CHANGES</button>&nbsp;
+      <button md-raised-button class="btn-primary" (click)="activateDeactivateCustomer(customerDetails)">SAVE CHANGES</button>&nbsp;
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>

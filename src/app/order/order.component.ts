@@ -275,6 +275,26 @@ export class OrderComponent implements OnInit {
         
        
     }
+
+
+    //donut chart
+    // donut(data){
+    // var myDoughnutChart = new Chart(ctx, {
+    //     type: 'doughnut',
+    //     data: data,
+    //     options: options
+    // });
+    // }
+
+
+
+
+
+
+
+
+
+
     initMap() {
         //console.log('now: ', _.now());
          var triangleCoords = [

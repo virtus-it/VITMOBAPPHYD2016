@@ -26,7 +26,7 @@ export class PreOrderComponent implements OnInit {
   followUpdate = null;
   filterRecords = false;
   searchPreOrderTerm:any ="";
-  preOrderInput : any =  { userId: this.authenticationService.loggedInUserId(), lastId: 0 , userType: this.authenticationService.userType(), appType: this.authenticationService.appType(),  };
+  preOrderInput : any =  { userId: this.authenticationService.loggedInUserId(), lastId: 0 , userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype":"getallcustomers" };
 
   filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
   FilterTypeDetails = [
