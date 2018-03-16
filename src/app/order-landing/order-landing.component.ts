@@ -57,6 +57,7 @@ export class OrderLandingComponent implements OnInit {
   quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
+  distId:any="";
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
@@ -94,6 +95,7 @@ export class OrderLandingComponent implements OnInit {
     { "id": "ordered", "itemName": "Ordered" },
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+    
   findDistributors(name: string) {
     console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
@@ -178,7 +180,7 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showCoverageDetails(orderDetails) {
-    let modelData = { orders: orderDetails, polygons: this.polygonArray }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:orderDetails.distributor.userid }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '95%',
       data: modelData
@@ -188,6 +190,7 @@ export class OrderLandingComponent implements OnInit {
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
+        
       }
 
     });
@@ -232,6 +235,10 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefFollow.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
+      this.getForwardOrderDetails(true);
+      this.getAllOrderDetails(true);
+
+
 
 
     });
@@ -393,6 +400,10 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtype = 'followupdate';
       this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD');
     }
+    if(type=='notDelivered'){
+      this.filterInput.order.searchtype = 'status';
+      this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
+    }
     console.log(this.filterInput);
     
     this.orderLandingService.getOrdersByfilter(this.filterInput)
@@ -426,71 +437,71 @@ export class OrderLandingComponent implements OnInit {
         this.orderClickMore = false;
       } 
     }
-    // this.getFilteredQuickFilter(true);
+    this.getFilteredQuickFilter(true);
   }
 
   //test code
 
-  // getFilteredQuickFilter(firstcall){
-  //   if (!firstcall) {
-  //     if (this.tabPanelView == 'forward') {
-  //       let lastForwardOrder: any = _.last(this.forwardOrders);
-  //       if (lastForwardOrder) {
-  //         this.filterInput.order.last_orderid = lastForwardOrder.order_id;
-  //       }
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       let lastallOrder: any = _.last(this.allOrders);
-  //       if (lastallOrder) {
-  //         this.filterInput.order.last_orderid = lastallOrder.order_id;
-  //       }
-  //     }
-  //   }
-  //   else {
-  //     if (this.tabPanelView == 'forward') {
-  //       this.forwardOrders = [];
-  //       this.filterInput.order.last_orderid = "0";
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       this.allOrders = [];
-  //       this.filterInput.order.last_orderid = "0";
-  //     }
-  //   }
-  //   let input = this.filterInput;
-  //   console.log(input);
-  //   this.loaderService.display(true);
-  //   this.orderLandingService.getOrdersByfilter(input)
-  //     .subscribe(
-  //     output => this.getFilteredOrdersResult(output),
-  //     error => {
-  //       console.log("falied");
-  //       this.loaderService.display(false);
-  //     });
-  // }
-  // getFilteredQuickFilterResult(result){
-  //   if (result.result == 'success') {
-  //     this.filterRecords = true;
-  //     if (this.tabPanelView == 'forward') {
-  //       let data = this.ModifyOrderList(result.data);
-  //       this.forwardClickMore = true;
-  //       this.forwardOrders = _.union(this.forwardOrders, data);
-  //     }
+  getFilteredQuickFilter(firstcall){
+    if (!firstcall) {
+      if (this.tabPanelView == 'forward') {
+        let lastForwardOrder: any = _.last(this.forwardOrders);
+        if (lastForwardOrder) {
+          this.filterInput.order.last_orderid = lastForwardOrder.order_id;
+        }
+      }
+      else if (this.tabPanelView == 'allorder') {
+        let lastallOrder: any = _.last(this.allOrders);
+        if (lastallOrder) {
+          this.filterInput.order.last_orderid = lastallOrder.order_id;
+        }
+      }
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.allOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+    }
+    let input = this.filterInput;
+    console.log(input);
+    this.loaderService.display(true);
+    this.orderLandingService.getOrdersByfilter(input)
+      .subscribe(
+      output => this.getFilteredOrdersResult(output),
+      error => {
+        console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  getFilteredQuickFilterResult(result){
+    if (result.result == 'success') {
+      this.filterRecords = true;
+      if (this.tabPanelView == 'forward') {
+        let data = this.ModifyOrderList(result.data);
+        this.forwardClickMore = true;
+        this.forwardOrders = _.union(this.forwardOrders, data);
+      }
 
-  //     else if (this.tabPanelView == 'allorder') {
-  //       let data = this.ModifyOrderList(result.data);
-  //       this.orderClickMore = true;
-  //       this.allOrders = _.union(this.allOrders, data);
-  //     }
-  //   }
-  //   else {
-  //     if (this.tabPanelView == 'forward') {
-  //       this.forwardClickMore = false;
-  //     }
-  //     else if (this.tabPanelView == 'allorder') {
-  //       this.orderClickMore = false;
-  //     }
-  //   }
-  // }
+      else if (this.tabPanelView == 'allorder') {
+        let data = this.ModifyOrderList(result.data);
+        this.orderClickMore = true;
+        this.allOrders = _.union(this.allOrders, data);
+      }
+    }
+    else {
+      if (this.tabPanelView == 'forward') {
+        this.forwardClickMore = false;
+      }
+      else if (this.tabPanelView == 'allorder') {
+        this.orderClickMore = false;
+      }
+    }
+  }
 
   //test code for pagination ends here
 
@@ -794,6 +805,8 @@ this.showFilterDailog =false;
   AcceptOrderResult(result){
     console.log(result);
     if(result.result='success'){
+      this.getForwardOrderDetails(true);
+
 
     }
   }
@@ -813,6 +826,7 @@ this.showFilterDailog =false;
   rejectOrderResult(result){
     console.log(result);
     if (result.result == 'success') {
+      this.getForwardOrderDetails(true);
     
     }
   }

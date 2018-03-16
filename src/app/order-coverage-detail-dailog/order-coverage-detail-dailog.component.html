@@ -15,7 +15,7 @@
           <div class="form-group col-6 align-self-center">
               <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
             </div>
-        <div class="form-group col-4" >
+        <div class="form-group col-2" >
             <md-select placeholder="Filter By" [(ngModel)]="filterInputkmvalue.kmvalue" name="type" class="full-width left">
               <md-option value="0.03">3 KM</md-option>
               <md-option value="0.05">5 KM</md-option>
@@ -24,12 +24,13 @@
             </md-select>
 
           </div>
-          <div class="form-group col-4">
+          <div class="form-group col-2">
               <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem"></angular2-multiselect>
             </div>
           <div class="col-2 align-self-center">
           <button md-raised-button color="primary" (click)="filterPolygon()"> Filter </button> 
+          <button md-raised-button color="primary" (click)="openMapDialog(orderDetail)">Assign Area</button>
           
         </div>
       </div>

@@ -95,6 +95,8 @@ import { ProfileupdateComponent } from './profileupdate/profileupdate.component'
 import { AddproductconfirmComponent } from './addproductconfirm/addproductconfirm.component';
 import { AddProductDealerComponent } from './add-product-dealer/add-product-dealer.component';
 import { DistributorOrderListComponent } from './distributor-order-list/distributor-order-list.component';
+import { MapStockpointComponent } from './map-stockpoint/map-stockpoint.component';
+import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.component';
 
 
 @NgModule({
@@ -168,6 +170,8 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
         AddproductconfirmComponent,
         AddProductDealerComponent,
         DistributorOrderListComponent,
+        MapStockpointComponent,
+        ViewStockpointsComponent,
      
         
 
@@ -232,7 +236,7 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
         ProductsService,
         PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://54.213.42.95:2229' }  // 
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' }  // 
     ],
     entryComponents: [
         MapDialogComponent, 
@@ -286,7 +290,9 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
          ProfileupdateComponent,
          AddproductconfirmComponent,
          AddProductDealerComponent,
-         DistributorOrderListComponent
+         DistributorOrderListComponent,
+         MapStockpointComponent,
+         ViewStockpointsComponent
       
 
 

@@ -28,8 +28,11 @@
         </div>
         <div class="col  right">
             <a class="">
-                <button  md-raised-button class=" " (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
+                <button *ngIf="tabPanelView === 'allorder'" md-raised-button class=" " (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
               </a>
+            <a class="">
+              <button *ngIf="tabPanelView === 'forward'" md-raised-button class=" " (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
+            </a>
               <a class="">
                 <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
                 </a>
@@ -40,9 +43,9 @@
           <a class="">
             <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="clearFilter()"></i>
           </a>&nbsp;&nbsp;&nbsp;
-          <a class="">
+          <!-- <a class="">
             <i aria-hidden="true" class="fa fa-download logo-color fs-20" title="Download "></i>
-          </a>&nbsp;&nbsp;&nbsp;
+          </a>&nbsp;&nbsp;&nbsp; -->
           <a class="">
             <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
             <div class="filterView" *ngIf="showFilterDailog">
@@ -79,7 +82,7 @@
 
                   </md-form-field>
                 </div>
-
+                
                 <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
 
                   <md-form-field class="example-full-width">
@@ -249,18 +252,18 @@
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right">
                     <label *ngIf="superDealer">Follow Up :
-                      <!-- <span (click)='showFollowUpDetails(forward)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(forward)'>
-                          <!-- <a *ngIf="followupstatus =='close'">
-                      <i class="fa fa-volume-control-phone fa-2 red" title="FollowUp Closed"></i> 
-                      <i class="fa fa-times-circle red"></i>
-                      </a> -->
-                      <a *ngIf="followupstatus !='close'">
-                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp open"></i>
+                      <a>
+                        <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
                         </a>
-                      
-
                       </span>
+                    <span *ngIf="forward.followupstatus == 'close'">
+                      <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                    </span>
+                    <span *ngIf="forward.followupstatus == 'open'">
+                      <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                    </span> 
+                     
                     </label>
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(forward)'>
@@ -325,7 +328,7 @@
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{forward.bill_amount + forward.expressdeliverycharges + forward.servicecharges}}</b>
+                      <b class="pdright-5">Rs.{{forward.bill_amount + forward.expressdeliverycharges}}</b>
                     </div>
                   </div>
                   <div class="form-group row ">
@@ -568,6 +571,12 @@
                       <span (click)='showFollowUp(allorder)'>
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
                       </span>
+                      <span *ngIf="allorder.followupstatus == 'close'">
+                          <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                        </span>
+                        <span *ngIf="allorder.followupstatus == 'open'">
+                          <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                        </span>
                     </label>
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>
@@ -635,7 +644,7 @@
                     <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges + allorder.servicecharges}}</b>
+                      <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges }}</b>
                     </div>
                   </div>
 

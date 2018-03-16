@@ -145,3 +145,9 @@
   .yellow{
     color:#FFA500;
   }
+  .oneline{
+    white-space: nowrap;
+  }
+  .centrebtn{
+    margin-left: 75px;
+  }

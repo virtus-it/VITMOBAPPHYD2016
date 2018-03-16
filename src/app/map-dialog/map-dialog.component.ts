@@ -120,8 +120,12 @@ export class MapDialogComponent implements OnInit {
 
     }
     saveData(distributorDetails) {
-        this.loaderService.display(true);
-        var input = { area: { user_type: "dealer", user_id: distributorDetails.userid, polygonvalue: [] } }
+        if(distributorDetails.type == 'assignFromOrders'){
+        var input:any ={ area: { user_type: "dealer", user_id: distributorDetails.data.distId, polygonvalue: [] } }
+        }
+        else{
+        var input:any = { area: { user_type: "dealer", user_id: distributorDetails.userid, polygonvalue: [] } }
+        }
         var data = JSON.parse(localStorage.getItem('geoData'));
         for (let feature of data.features) {
 
@@ -158,8 +162,17 @@ export class MapDialogComponent implements OnInit {
             this.thisDialogRef.close('Ploygon created');
         }
     }
+
+
+    // assignFromOrders(){
+    //     if(){
+
+    //     }
+
+    // }
    
     ngOnInit() {
+        console.log(this.distributorDetails);
         this.loader.load().then(() => {
             this.initMap();
         });

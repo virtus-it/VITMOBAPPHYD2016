@@ -3,6 +3,7 @@ import { FormControl, FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
+import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
@@ -279,9 +280,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                                 var polygonPath = new google.maps.Polygon({
                                     paths: polygon.path
                                 });
-                                // 0.03 3km
-                                // 0.05 5km
-                                // 0.1   10km
                                 let distance = parseFloat(this.filterInputkmvalue.kmvalue);
                                 var myPosition = new google.maps.LatLng(this.markers[0].lat, this.markers[0].lng);
                                 if (google.maps.geometry.poly.isLocationOnEdge(myPosition, polygonPath, distance)) {
@@ -301,6 +299,24 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
         }
     }
+
+
+    openMapDialog(data) {
+        console.log(data);
+        let modelData={"type":"assignFromOrders", data:data}
+        let dialogRef = this.dialog.open(MapDialogComponent, {
+            width: '90%',
+            data: modelData
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+
+           
+        });
+    }
+
+
+
     filterPolygon() {
         if (this.dropdownData.selectedItems) {
             this.searchPolygon();
@@ -315,7 +331,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.assignPolygon();
         this.getOrderDetail();
         this.getProductByCategory();
-        // console.log(this.orderDetail);
+        console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
             let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {

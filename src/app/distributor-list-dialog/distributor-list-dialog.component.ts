@@ -85,6 +85,13 @@ export class DistributorListDialogComponent implements OnInit {
         // this.supplierNumber = this.supplierCopyDetails.mobileno;
 
       });
+      // add below to get name + this.orderDetail.supplierdetails.firstname
+      if(this.orderDetail.supplierdetails && this.orderDetail.supplierdetails.userid != ''){
+        this.message="This cutomer is already assigned to " + this.orderDetail.supplierdetails.supplierName ;
+      }
+      else{
+        this.message="";
+      }
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
       if (this.orderDetail.supplierdetails) {
@@ -131,10 +138,9 @@ export class DistributorListDialogComponent implements OnInit {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
         "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
-        "loginid": this.authenticationService.loggedInUserId(),
-        "actiontype": "reassigned" ,
+        "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.productName,
         "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
-        "userid": this.authenticationService.loggedInUserId(),
+        
         "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
         "quantity": this.orderDetail.quantity, "to": this.supplierID,
         "usertype": this.authenticationService.userType()
@@ -162,9 +168,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
-      if(this.autoAssign =true){
 
-      }
     }
   }
   searchDistrubutors() {
@@ -205,6 +209,7 @@ export class DistributorListDialogComponent implements OnInit {
 
 
   autoAssignChange(supplier, event){
+    
     console.log(supplier);
     this.supplierID = this.supplierID;
     this.supplierNumber = supplier.mobileno;
@@ -229,3 +234,38 @@ export class DistributorListDialogComponent implements OnInit {
   }
 
 }
+
+
+
+
+// changedInput
+// let input={};
+// if(this.orderDetail.supplierdetails.userid != ''){
+//   this.orderDetail.supplierdetails="";
+//   input={"order": {
+//   "apptype": this.authenticationService.appType(), "createdthru": "website",
+//   "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
+//   "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.productName,
+//   "actiontype": "reassigned" ,
+//   "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
+//   "userid": this.authenticationService.loggedInUserId(),
+//   "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
+//   "quantity": this.orderDetail.quantity, "to": this.supplierID,
+//   "usertype": this.authenticationService.userType()
+// }}
+// }
+// else{
+// input = {
+//   "order": {
+//     "apptype": this.authenticationService.appType(), "createdthru": "website",
+//     "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
+//     "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.productName,
+//     "actiontype": "reassigned" ,
+//     "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
+//     "userid": this.authenticationService.loggedInUserId(),
+//     "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans",
+//     "quantity": this.orderDetail.quantity, "to": this.supplierID,"supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
+//     "usertype": this.authenticationService.userType()
+//   }
+// }
+// }

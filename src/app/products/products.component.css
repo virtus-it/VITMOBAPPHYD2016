@@ -59,3 +59,7 @@ table thead {
   tr .center{
     text-align: center !important;
   }
+
+  .oneline{
+    white-space: nowrap;
+  }

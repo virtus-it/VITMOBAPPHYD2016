@@ -98,7 +98,6 @@ export class DistributorCreateDialogComponent implements OnInit {
          console.log(result);
          this.loaderService.display(false);
          if (result.result == 'success') {
-            // this.thisDialogRef.close('success');
             if (this.distributorDetail) {
                 this.thisDialogRef.close('success');
                
