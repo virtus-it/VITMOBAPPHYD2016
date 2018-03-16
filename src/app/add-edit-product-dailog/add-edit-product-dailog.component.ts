@@ -46,12 +46,12 @@ export class AddEditProductDailogComponent implements OnInit {
       .subscribe(
       output => this.getProductCategoryResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   }
   getProductCategoryResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.productCategoryList = result.data;
       if (this.Details) {
@@ -67,14 +67,14 @@ export class AddEditProductDailogComponent implements OnInit {
         .subscribe(
         output => this.getProductsByCategoryResult(output),
         error => {
-          console.log("error");
+          //console.log("error");
           this.loaderService.display(false);
         });
 
     }
   }
   getProductsByCategoryResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.productTypeList = result.data;
     }
@@ -84,18 +84,18 @@ export class AddEditProductDailogComponent implements OnInit {
 
     
     let input = { "product": { "category": this.productDetails.categoryDetails.category, "servicecharge":this.productDetails.servicecharge, "expressdeliverycharges":this.productDetails.expressdeliverycharges, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": this.productDetails.currency, "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
-    console.log(input);
+    //console.log(input);
     this.productService.createProduct(input)
       .subscribe(
       output => this.createProductResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   }
 }
   createProductResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
@@ -104,18 +104,18 @@ export class AddEditProductDailogComponent implements OnInit {
     if(this.validate()){
 
     let input = { "product": { "pid": this.Details.productid, "category": this.productDetails.categoryDetails.category, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": "INR", "brandname": this.productDetails.productName, "servicecharge":this.productDetails.servicecharge ,"expressdeliverycharges": this.productDetails.expressdeliverycharges,"pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
-    console.log(input);
+    //console.log(input);
     this.productService.updateProduct(input)
       .subscribe(
       output => this.updateProductResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   }
 }
   updateProductResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
@@ -152,12 +152,12 @@ export class AddEditProductDailogComponent implements OnInit {
     
 
     let input = { "product": { "category": this.productDetails.categoryDetails.category, "servicecharge":this.productDetails.servicecharge, "expressdeliverycharges":this.productDetails.expressdeliverycharges, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": this.productDetails.currency, "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.Details.userid, "apptype": this.authenticationService.appType() } };
-    console.log(input);
+    //console.log(input);
     this.productService.createProduct(input)
       .subscribe(
       output => this.createProductResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
@@ -165,7 +165,7 @@ export class AddEditProductDailogComponent implements OnInit {
 }
 
   createDistributorProductResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
@@ -201,7 +201,7 @@ export class AddEditProductDailogComponent implements OnInit {
  
    }
   ngOnInit() {
-    console.log(this.Details);
+    //console.log(this.Details);
     this.getProductCategory();
 
 

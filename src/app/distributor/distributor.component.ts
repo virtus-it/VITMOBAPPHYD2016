@@ -49,17 +49,17 @@ export class DistributorComponent implements OnInit {
             this.distributorInput.root.lastuserid = null;
         }
         let input = this.distributorInput;
-        console.log(input);
+        //console.log(input);
         this.distributorService.getAllDistributors(input)
             .subscribe(
             output => this.getDistributorsResult(output),
             error => {
-                console.log("error in distrbutors");
+                //console.log("error in distrbutors");
                 this.loaderService.display(false);
             });
     }
     getDistributorsResult(data) {
-        console.log(data);
+        //console.log(data);
         this.loaderService.display(false);
         if (data.result == 'success') {
 
@@ -80,7 +80,7 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -90,7 +90,7 @@ export class DistributorComponent implements OnInit {
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
             if (result == 'success') {
                 this.getDistributors(true);
@@ -103,7 +103,7 @@ export class DistributorComponent implements OnInit {
             data: details
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
             if (result == 'success') {
                 this.getDistributors(true);
@@ -111,7 +111,7 @@ export class DistributorComponent implements OnInit {
         });
     }
     showFollowUp(details) {
-        console.log(details);
+        //console.log(details);
         let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "distributor", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
@@ -119,7 +119,7 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
 
         });
@@ -133,14 +133,14 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRefFollowDetails.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
 
         });
 
     }
     ViewProduct(distributor) {
-        console.log(distributor);
+        //console.log(distributor);
         if (distributor) {
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
@@ -148,7 +148,7 @@ export class DistributorComponent implements OnInit {
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
-                console.log(`Dialog closed: ${result}`);
+                //console.log(`Dialog closed: ${result}`);
 
 
             });
@@ -193,7 +193,7 @@ export class DistributorComponent implements OnInit {
             data: formatteddata
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
         });
     }
@@ -205,7 +205,7 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
         });
     }
@@ -217,7 +217,7 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
         });
     }
@@ -230,7 +230,7 @@ export class DistributorComponent implements OnInit {
             data: data
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             if(result.result="success"){
                 
             }
@@ -242,17 +242,17 @@ export class DistributorComponent implements OnInit {
 
     // deactivateDistributor(dist){
     //     let input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
-    //     console.log(input);
+    //     //console.log(input);
     //     this.distributorService.createDistributor(input)
     //     .subscribe(
     //     output => this.deactivateDistributorResult(output),
     //     error => {
-    //         console.log("error in distrbutors");
+    //         //console.log("error in distrbutors");
     //         this.loaderService.display(false);
     //     });
     // }
     // deactivateDistributorResult(result){
-    //     console.log(result);
+    //     //console.log(result);
     //     if(result.result == 'success'){
     //         this.getDistributors(true);
 
@@ -262,19 +262,19 @@ export class DistributorComponent implements OnInit {
 
     // activateDistributor(dist){
     //     let input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
-    //     console.log(input);
+    //     //console.log(input);
     //     this.distributorService.createDistributor(input)
     //     .subscribe(
     //         output => this.activateDistributorResult(output),
     //         error => {
-    //             console.log("error in distrbutors");
+    //             //console.log("error in distrbutors");
     //             this.loaderService.display(false);
     //         });
 
     // }
 
     // activateDistributorResult(result){
-    //     console.log(result);
+    //     //console.log(result);
     //     if(result.result =='success'){
     //         this.getDistributors(true);
 
@@ -289,7 +289,7 @@ export class DistributorComponent implements OnInit {
           data: data
         });
         dialogRefCoverageDailog.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
+          //console.log(`Dialog closed: ${result}`);
           if (result == 'success') {
           }
         });
@@ -301,7 +301,7 @@ export class DistributorComponent implements OnInit {
             data: data
           });
           dialogRefCoverageDailog.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             if (result == 'success') {
             }
           });
@@ -317,17 +317,17 @@ export class DistributorComponent implements OnInit {
           else{
         input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
           }
-          console.log(input);
+          //console.log(input);
           this.distributorService.createDistributor(input)
             .subscribe(
             output => this.activateDeactivateDistributorResult(output),
             error => {
-                console.log("error in distrbutors");
+                //console.log("error in distrbutors");
                 this.loaderService.display(false);
             });
       }
       activateDeactivateDistributorResult(result){
-            console.log(result);
+            //console.log(result);
             if(result.result =='success'){
                 this.getDistributors(true);
             }

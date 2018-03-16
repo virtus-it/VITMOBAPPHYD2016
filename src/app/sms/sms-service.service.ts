@@ -18,7 +18,7 @@ export class SmsServiceService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/getmobile', bodyString, options)
         .map((res: Response) => res.json())
-        .do(data => console.log('All: ' + JSON.stringify(data)))
+        .do(data => console.log('All: '))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 }
 CreateSms(input) {
@@ -27,7 +27,7 @@ CreateSms(input) {
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.apiUrl + '/createsms', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 }
 getSmsList(input) {
@@ -36,7 +36,7 @@ getSmsList(input) {
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.apiUrl + '/getsmslist', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 }
 }

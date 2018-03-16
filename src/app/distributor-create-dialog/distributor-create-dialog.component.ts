@@ -40,13 +40,13 @@ export class DistributorCreateDialogComponent implements OnInit {
              .subscribe(
              output => this.getAreasNameResult(output),
              error => {
-                 console.log("error in distrbutors");
+                 //console.log("error in distrbutors");
                  this.loaderService.display(false);
              });
      }
      getAreasNameResult(output) {
         this.loaderService.display(false);
-         console.log(output);
+         //console.log(output);
          if (output && output.data) {
              
              for (let area of output.data) {
@@ -56,14 +56,14 @@ export class DistributorCreateDialogComponent implements OnInit {
          }
      }
      onSubmit() {
-         console.log(this.dist);
+         //console.log(this.dist);
          this.loaderService.display(true);
          var input:any = {
              "User": {
                 "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "mobileno_one":this.dist.mobile1, "mobileno_two":this.dist.mobile2,  "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
              }
          }
-         console.log(input);
+         //console.log(input);
          if (this.distributorDetail) {
              input.User.userid = this.distributorDetail.userid;
          }
@@ -80,7 +80,7 @@ export class DistributorCreateDialogComponent implements OnInit {
                  .subscribe(
                  output => this.onSubmitResult(output),
                  error => {
-                     console.log("error in distrbutors");
+                     //console.log("error in distrbutors");
                      this.loaderService.display(false);
                  });
          }
@@ -89,13 +89,13 @@ export class DistributorCreateDialogComponent implements OnInit {
                  .subscribe(
                  output => this.onSubmitResult(output),
                  error => {
-                     console.log("error in distrbutors");
+                     //console.log("error in distrbutors");
                      this.loaderService.display(false);
                  });
          }
      }
      onSubmitResult(result) {
-         console.log(result);
+         //console.log(result);
          this.loaderService.display(false);
          if (result.result == 'success') {
             if (this.distributorDetail) {
@@ -142,7 +142,7 @@ export class DistributorCreateDialogComponent implements OnInit {
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
             if( result == 'success'){
                 this.thisDialogRef.close('success');
@@ -153,7 +153,7 @@ export class DistributorCreateDialogComponent implements OnInit {
         this.thisDialogRef.close('Cancel');
     }
      ngOnInit() {
-         console.log(this.distributorDetail);
+         //console.log(this.distributorDetail);
          this.getAreasName();
          this.getDetails();
          this.dropdownSettings = {

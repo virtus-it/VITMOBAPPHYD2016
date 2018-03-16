@@ -60,12 +60,12 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
      input = { "order": { "apptype": this.authenticationService.appType(), "excepted_time":this.scheduleInput.timeslot , "orderstatus": "ordered", "orderto":this.Detail.data.dealerid, "orderfrom":this.Detail.customerId, "paymentmode": "cash", "usertype":this.authenticationService.userType() , "quantity": this.scheduleInput.productQuantity , "loginid": this.authenticationService.loggedInUserId(), "groupid": "289", "productid": this.scheduleInput.productName.productid , "product_type":this.scheduleInput.productName.ptype , "product_quantity":this.scheduleInput.productName.ptype , "days": this.scheduleInput.days, "scheduletype": this.scheduleInput.schedulefor, "product_cost": this.scheduleInput.productName.pcost, "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity), "total_amt":parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin" } };
    }
    //this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
-   console.log(input);
+   //console.log(input);
     this.customerservice.createSchedule(input)
       .subscribe(
       output => this.createScheduledaysResult(output),
       error => {
-        console.log("error in create schedule");
+        //console.log("error in create schedule");
         this.loaderService.display(false);
       });  
     }
@@ -75,7 +75,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   }
   
   createScheduledaysResult(result) {
-    console.log(result)
+    //console.log(result)
     if (result.result == "success") {
       this.createSchedule = result.data;
       this.thisDialogRef.close('success');
@@ -97,12 +97,12 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
      // this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
 
     
-    console.log(input);
+    //console.log(input);
     this.customerservice.updateScheduleOrder(input)
     .subscribe(
       output => this.UpdateScheduleResult(output),
       error => {
-        console.log("error in updating schedule");
+        //console.log("error in updating schedule");
         this.loaderService.display(false);
       });
   }
@@ -123,11 +123,11 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
    createAndUpdateScheduleOrder(){
     if (this.Detail.type=='create') {
       this.createScheduledays();
-      console.log(this.createScheduledays);
+      //console.log(this.createScheduledays);
     }
     else{
       this.updateScheduleOrder();
-      console.log(this.updateScheduleOrder);
+      //console.log(this.updateScheduleOrder);
     }
   }
 
@@ -136,7 +136,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     getProductsList() {
       this.loaderService.display(true);
       let input = { apptype: this.authenticationService.appType(), userid: this.Detail.customerId, delearId:0}
-      console.log(input);
+      //console.log(input);
 
       if(this.Detail.data.dealers){
         input.delearId = this.Detail.data.dealers.user_id;
@@ -148,18 +148,18 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       else{
         input.delearId = this.authenticationService.loggedInUserId();
       }
-      console.log(input);
+      //console.log(input);
       this.distributorService.getProductsList(input)
         .subscribe(
         output => this.getProductsListResult(output),
         error => {
-          console.log("error in distrbutors");
+          //console.log("error in distrbutors");
           this.loaderService.display(false);
         });
 
     }
     getProductsListResult(result) {
-      console.log("distributor products list", result);
+      //console.log("distributor products list", result);
       if (result.result == 'success') {
         let productListCopy = [];
         _.each(result.data.products, function (i, j) {
@@ -307,13 +307,13 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
 
    deleteSchedule(data) {
-    console.log();
+    //console.log();
     let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
       width: '700px',
       data: this.Detail.data
     });
     dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       this.thisDialogRef.close("success");
       this.getProductsList();
 
@@ -356,7 +356,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.Detail);
+    //console.log(this.Detail);
     this.getProductsList();
   }
   }

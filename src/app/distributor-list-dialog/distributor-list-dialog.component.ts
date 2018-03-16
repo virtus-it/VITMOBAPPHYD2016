@@ -36,12 +36,12 @@ export class DistributorListDialogComponent implements OnInit {
   getDistributors() {
     this.loaderService.display(true);
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 500 } }
-    console.log(input);
+    //console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
@@ -68,13 +68,13 @@ export class DistributorListDialogComponent implements OnInit {
       .subscribe(
       output => this.getSuppliersResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getSuppliersResult(result) {
     this.loaderService.display(false);
-    console.log(result);
+    //console.log(result);
     let supplierCopyDetails = [];
     if (result.result == 'success') {
       _.each(result.data, function (i, j) {
@@ -120,7 +120,7 @@ export class DistributorListDialogComponent implements OnInit {
       .subscribe(
       output => this.forWordOrderResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
@@ -153,18 +153,18 @@ export class DistributorListDialogComponent implements OnInit {
 
 
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
-    console.log(input);
+    //console.log(input);
     this.distributorService.assingOrder(input)
       .subscribe(
       output => this.assignOrderResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
   }
   assignOrderResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == "success") {
       this.Closedailog();
@@ -193,7 +193,7 @@ export class DistributorListDialogComponent implements OnInit {
         data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
 
       if(result == 'success'){
         this.forWardOrder();
@@ -210,7 +210,7 @@ export class DistributorListDialogComponent implements OnInit {
 
   autoAssignChange(supplier, event){
     
-    console.log(supplier);
+    //console.log(supplier);
     this.supplierID = this.supplierID;
     this.supplierNumber = supplier.mobileno;
     this.supplierName = supplier.fullName;
@@ -230,7 +230,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.getDistributors();
     this.getSuppliers();
     this.superDealer = this.authenticationService.getSupperDelear();
-    console.log(this.orderDetail);
+    //console.log(this.orderDetail);
   }
 
 }

@@ -22,17 +22,17 @@ export class CategoryComponent implements OnInit {
 
   getProductByCategory(){
     let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
-    console.log(input);
+    //console.log(input);
 
     this.productService.getProductsCategory(input)
     .subscribe(
     output => this.getProductsCategoryResult(output),
     error => {
-      console.log("error in products category list");
+      //console.log("error in products category list");
     });
   }
   getProductsCategoryResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.categoryList = result.data;
     }
@@ -44,7 +44,7 @@ export class CategoryComponent implements OnInit {
       data: ''
   });
   dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       //this.dialogResult = result;
       if(result == 'success'){
         this.getProductByCategory();
@@ -59,7 +59,7 @@ export class CategoryComponent implements OnInit {
       data: data
   });
   dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       //this.dialogResult = result;
       if(result == 'success'){
         this.getProductByCategory();
@@ -74,7 +74,7 @@ export class CategoryComponent implements OnInit {
       data: data
   });
   dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       //this.dialogResult = result;
    
    

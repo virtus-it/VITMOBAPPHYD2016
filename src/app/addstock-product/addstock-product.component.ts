@@ -21,30 +21,30 @@ onCloseCancel() {
   this.thisDialogRef.close('Cancel');
 }
 addStockDetails(){
-  console.log(this.StockInput);
+  //console.log(this.StockInput);
   let input = [{"product":{"pid":this.Detail.productid.toString(),
   "stock":this.StockInput.stock,returnemptycans:this.StockInput.returnemptycans,
   "loginid":this.authenticationService.loggedInUserId(),"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType()}}];
   if (this.StockInput.invoiceDate) {
     input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
   }
-  console.log(input);
+  //console.log(input);
   this.productsService.addStockDetails(input)
   .subscribe(
   output => this.addStockDetailsResult(output),
   error => {
-    console.log("error in distrbutors");
+    //console.log("error in distrbutors");
   });
 }
 addStockDetailsResult(result){
 
-console.log(result);
+//console.log(result);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
 }
 }
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
   }
 
 

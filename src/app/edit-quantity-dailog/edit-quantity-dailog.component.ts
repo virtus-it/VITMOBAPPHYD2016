@@ -29,18 +29,18 @@ export class EditQuantityDailogComponent implements OnInit {
     let datetime = date + " " + this.changeTimeSlot.timeslot;
     this.loaderService.display(true);
     let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.updateQuantityResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
   }
   updateQuantityResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.onCloseModal('success')
@@ -83,7 +83,7 @@ this.disableSlot = false;
   }
 
   enableTime(value){
-    console.log(value);
+    //console.log(value);
     let newDate = moment(value).format('DD-MM-YYYY');
     if (this.newChange == newDate  ) {
       this.autoTimeSlot();  
@@ -107,7 +107,7 @@ this.disableSlot = false;
 
     this.quantity.value = this.orderDetails.quantity;
     this.autoTimeSlotforHour();
-    console.log(this.orderDetails);
+    //console.log(this.orderDetails);
   }
 
 }

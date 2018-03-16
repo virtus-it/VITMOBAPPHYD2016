@@ -75,12 +75,12 @@ export class CoverageComponent implements OnInit {
             .subscribe(
             output => this.getPolygonDataResult(output),
             error => {
-                console.log("falied");
+                //console.log("falied");
                 this.loaderService.display(false);
             });
     }
     getPolygonDataResult(output) {
-        //  console.log(output);
+        //  //console.log(output);
         //9863636315
         //paani
         this.loaderService.display(false);
@@ -143,7 +143,7 @@ export class CoverageComponent implements OnInit {
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
-                console.log(`Dialog closed: ${result}`);
+                //console.log(`Dialog closed: ${result}`);
 
 
             });
@@ -158,13 +158,13 @@ export class CoverageComponent implements OnInit {
             .subscribe(
             output => this.getOrderDetailResult(output),
             error => {
-                console.log("falied");
+                //console.log("falied");
                 this.loaderService.display(false);
             });
 
     }
     getOrderDetailResult(result) {
-        console.log(result);
+        //console.log(result);
 
         if (result && result.data) {
             let localTime = moment.utc(result.data[0].ordered_date).toDate();
@@ -195,7 +195,7 @@ export class CoverageComponent implements OnInit {
             data: order
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             this.getOrderDetail();
 
         });
@@ -221,24 +221,24 @@ export class CoverageComponent implements OnInit {
           }
       }
     }
-    console.log(this.filterInput);
+    //console.log(this.filterInput);
     this.filteredList();
     this.showFilterDailog =false;
 }
 
 filteredList(){
     let input = this.filterInput;
-    console.log(input);
+    //console.log(input);
     this.distributorService.getFilteredPolygon(input)
     .subscribe(
     output => this.getFilteredPolygonResult(output),
     error => {
-      console.log("error in products category list");
+      //console.log("error in products category list");
     });
 
 }
 getFilteredPolygonResult(result){
-console.log(result);
+//console.log(result);
 if(result.result = 'success'){
   //  this.polygonArray= [];
     this.displayPolygon= [];
@@ -284,17 +284,17 @@ if(result.result = 'success'){
 
 getProductByCategory(){
     let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
-    console.log(input);
+    //console.log(input);
 
     this.productService.getProductsCategory(input)
     .subscribe(
     output => this.getProductsCategoryResult(output),
     error => {
-      console.log("error in products category list");
+      //console.log("error in products category list");
     });
   }
   getProductsCategoryResult(result){
-    console.log(result);
+    //console.log(result);
     let categoryListCopy = [];
     if (result.result == "success") {
     _.each(result, function (i, j) {

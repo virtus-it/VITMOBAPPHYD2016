@@ -20,16 +20,16 @@ export class ProfileComponent implements OnInit {
   updateProfile(){
     let input={"User":{"userid":this.authenticationService.loggedInUserId(),"user_type":"dealer","firstname":this.profileUpdate.firstname,"lastname":this.profileUpdate.lastname,"emailid":this.profileUpdate.emailid, "companyname":this.profileUpdate.companyname, "referCode":this.profileUpdate.referCode,
     "address":this.profileUpdate.address,"city":this.profileUpdate.city,"state":this.profileUpdate.state,"pincode":this.profileUpdate.pincode,"mobileno":this.profileUpdate.mobileno,"appType":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
   this.customerService.updateCustomer(input)
     .subscribe(
     output => this.profileUpdateResult(output),
     error => {
-      console.log("error in updating profile");
+      //console.log("error in updating profile");
     });
   }
   profileUpdateResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.profileUpdate = result.data;
       this.updateStatus = true;
@@ -40,16 +40,16 @@ export class ProfileComponent implements OnInit {
 
 getProfileDetails(){
   let input ={"userid":this.authenticationService.loggedInUserId(), "appType":this.authenticationService.appType()};
-  console.log(input);
+  //console.log(input);
   this.customerService.getCustomerById(input)
   .subscribe(
     output => this.getProfileDetailsResult(output),
     error => {
-      console.log("error in getting profile details");
+      //console.log("error in getting profile details");
     });
 }
 getProfileDetailsResult(result){
-  console.log(result);
+  //console.log(result);
   this.profileUpdate.firstname =result.data.user.firstname;
   this.profileUpdate.lastname =result.data.user.lastname;
   this.profileUpdate.emailid =result.data.user.emailid;
@@ -68,7 +68,7 @@ changePassword(){
     data: ''
 });
 dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog closed: ${result}`);
+    //console.log(`Dialog closed: ${result}`);
     if (result == 'success') {
     }
 });
@@ -80,7 +80,7 @@ updateProfileDialog(){
     data: ''
 });
 dialogRef.afterClosed().subscribe(result => {
-    console.log(`Dialog closed: ${result}`);
+    //console.log(`Dialog closed: ${result}`);
     if (result == 'success') {
     }
 });

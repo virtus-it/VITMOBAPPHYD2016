@@ -25,12 +25,12 @@ export class LoginComponent implements OnInit {
             .subscribe(
             output => this.loginResult(output),
             error => {
-                console.log("Logged in falied");
+                //console.log("Logged in falied");
             });
     }
     loginResult(data) {
         if (data.data.user) {
-            console.log("Logged in and should navigate to diifrent page");
+            //console.log("Logged in and should navigate to diifrent page");
             localStorage.setItem('currentUser', JSON.stringify(data.data.user));
             this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
             this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
@@ -49,13 +49,13 @@ export class LoginComponent implements OnInit {
             .subscribe(
             output => this.getDashboardDetailsResult(output),
             error => {
-                console.log("Logged in falied");
+                //console.log("Logged in falied");
             });
 
 
     }
     getDashboardDetailsResult(result) {
-        console.log(result);
+        //console.log(result);
         if (result.result == 'success') {
             localStorage.setItem('dashboardDetails', JSON.stringify(result.data));
             this.authenticationService.dashBoardDetails = result.data;

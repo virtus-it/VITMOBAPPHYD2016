@@ -20,17 +20,17 @@ export class AddProductDealerComponent implements OnInit {
 
   dealerAddProduct(){
     let input={"userId":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
-    console.log(input);
+    //console.log(input);
     this.productService.getProducts(input)
       .subscribe(
       output => this.dealerAddProductResult(output),
       error => {
-        console.log("error in dealer products");
+        //console.log("error in dealer products");
         this.loaderService.display(false);
       });
   }
   dealerAddProductResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result = 'success') {
       this.productsList = result.data;
   }
@@ -51,18 +51,18 @@ export class AddProductDealerComponent implements OnInit {
       products.push(input);
     });
 
-    console.log(products);
+    //console.log(products);
 
     this.productService.assignDealerProducts(products)
       .subscribe(
       output => this.confirmProductResult(output),
       error => {
-        console.log("error in dealer products");
+        //console.log("error in dealer products");
         this.loaderService.display(false);
       });
   }
   confirmProductResult(result){
-    console.log(result);
+    //console.log(result);
     if(result.result == "success"){
       this.thisDialogRef.close("success");
     }
@@ -77,7 +77,7 @@ this.productsInput.push(product);
         return e.productid !== product.productid;
 
     });
-    console.log(this.productsInput);
+    //console.log(this.productsInput);
 
 
 
@@ -94,7 +94,7 @@ this.productsInput.push(product);
 
   ngOnInit() {
     this.dealerAddProduct();
-    console.log(this.Details);
+    //console.log(this.Details);
 
   }
 

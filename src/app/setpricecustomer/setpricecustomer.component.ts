@@ -30,13 +30,13 @@ export class SetpricecustomerComponent implements OnInit {
       .subscribe(
       output => this.getProductsResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   
   }
   getProductsResult(result) {
-    console.log(result);
+    //console.log(result);
     this.productList= [];
     if(result.result == 'success'){
 
@@ -74,7 +74,7 @@ export class SetpricecustomerComponent implements OnInit {
         }
        
       }
-      console.log("products list ",this.productList);
+      //console.log("products list ",this.productList);
     }
   }
 
@@ -84,33 +84,33 @@ export class SetpricecustomerComponent implements OnInit {
       var authService = this.authenticationService;
       
 
-      console.log(distCustomer);
+      //console.log(distCustomer);
       _.each( this.productList, function (i, j) {
       let details: any = i;
-      console.log(details);
+      //console.log(details);
       _.each( details.data , function(k , l){
         let DetailData: any = k;
-        console.log(DetailData);
+        //console.log(DetailData);
         
       let input=  {"root":{"dealerid":distCustomer.dealers.user_id,"customerid":distCustomer.userid,"productid":DetailData.productid,"producttype":DetailData.ptype,"product_cost":DetailData.pcost,"quantity":DetailData.minorderqty,"discount_amt":DetailData.pcost,"loginid":distCustomer.userid,"apptype":authService.appType()}};
       detailsArray.push(input);
-      console.log(input);
+      //console.log(input);
       
 
     
     });
     });
-    console.log(detailsArray);
+    //console.log(detailsArray);
     this.productService.setPrice(detailsArray)
     .subscribe(
     output => this.setPriceResult(output),
     error => {
-    console.log("error");
+    //console.log("error");
     this.loaderService.display(false);
   });
   }
   setPriceResult(result){
-    console.log(result);
+    //console.log(result);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
       
@@ -125,7 +125,7 @@ export class SetpricecustomerComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    console.log(this.Details);
+    //console.log(this.Details);
 
   }
 

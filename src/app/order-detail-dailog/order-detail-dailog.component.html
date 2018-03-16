@@ -313,14 +313,23 @@
         </div>
         <div class="row">
           <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
-            <textarea rows="4" cols="50" type="text" class="no-border form-control" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
+            <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
           </div>
+          
           <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
             <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
           </div>
+          <br>
+          <div>
+              <small class="">Characters Remaining :
+                  <span class="danger"> {{500 - messageInput.order.reason.length}}</span>
+                </small>
+          </div>
+         
         </div>
         </div>
       </div>
+     
     </div>
   </div>
 </md-dialog-content>

@@ -25,12 +25,12 @@ noRecord=false;
       .subscribe(
       output => this.getStockHistroyResult(output),
       error => {
-        console.log("error in stock histroy");
+        //console.log("error in stock histroy");
 
       });
   }
   getStockHistroyResult(result) {
-    console.log(result);
+    //console.log(result);
     if(result.result == 'success'){
       this.noRecord=false;
       this.StockList = result.data;
@@ -44,7 +44,7 @@ noRecord=false;
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
-   // console.log(this.Detail);
+   // //console.log(this.Detail);
     this.getStockHistroy();
   }
 

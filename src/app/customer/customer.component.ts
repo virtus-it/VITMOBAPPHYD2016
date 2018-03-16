@@ -51,17 +51,17 @@ export class CustomerComponent implements OnInit {
             data: '' 
         });
         dialogRefOrderList.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
     showPlaceOrder(data) {
         let dialogRefPlaceorder = this.dialog.open(PreOrderCartDailogComponent, {
-            width: '700px',
+            width: '75%',
             data: data
         });
         dialogRefPlaceorder.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -71,7 +71,7 @@ export class CustomerComponent implements OnInit {
             data: ''
         });
         dialogRefResend.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -81,7 +81,7 @@ export class CustomerComponent implements OnInit {
             data: ''
         });
         dialogRefInactive.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -91,7 +91,7 @@ export class CustomerComponent implements OnInit {
             data: ''
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -101,7 +101,7 @@ export class CustomerComponent implements OnInit {
             data: ''
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -112,7 +112,7 @@ export class CustomerComponent implements OnInit {
             data: formatteddata
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
     }
@@ -125,7 +125,7 @@ export class CustomerComponent implements OnInit {
             data: data
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
         });
 
@@ -137,7 +137,7 @@ export class CustomerComponent implements OnInit {
             data: customerDetails
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             if(result == "success"){
                 this.getCustomerList(true);
             
@@ -153,7 +153,7 @@ export class CustomerComponent implements OnInit {
             data: ''
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 if(result == "success"){
     this.getCustomerList(true);
 
@@ -163,7 +163,7 @@ if(result == "success"){
 
     }
     showFollowUp(details) {
-        console.log(details);
+        //console.log(details);
         let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
@@ -171,7 +171,7 @@ if(result == "success"){
             data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
 
         });
@@ -185,7 +185,7 @@ if(result == "success"){
             data: data
         });
         dialogRefFollowDetails.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
 
         });
@@ -194,7 +194,7 @@ if(result == "success"){
     getCustomerList(firstcall) {
         this.loaderService.display(true);
         let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype":"getallcustomers" };
-        console.log(input);
+        //console.log(input);
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {
@@ -206,17 +206,17 @@ if(result == "success"){
             this.customerList = [];
             input.lastId = 0;
         }
-        console.log(input);
+        //console.log(input);
         this.customerService.getCustomerList(input)
             .subscribe(
             output => this.getCustomerListResult(output),
             error => {
-                console.log("error in customer");
+                //console.log("error in customer");
                 this.loaderService.display(false);
             });
     }
     getCustomerListResult(result) {
-        console.log(result);
+        //console.log(result);
 
         this.loaderService.display(false);
         if (result.result == 'success') {
@@ -258,12 +258,12 @@ if(result == "success"){
             .subscribe(
             output => this.getCustomerByFilterResult(output),
             error => {
-                console.log("error in customer");
+                //console.log("error in customer");
                 this.loaderService.display(false);
             });
     }
     getCustomerByFilterResult(result) {
-        console.log(result);
+        //console.log(result);
         if (result.result == 'success') {
             this.filterRecords = true;
             this.customerList = _.union(this.customerList, result.data);
@@ -295,7 +295,7 @@ if(result == "success"){
         .subscribe(
         output => this.downloadCustomerResult(output),
         error => {
-            console.log("error in customer");
+            //console.log("error in customer");
             this.loaderService.display(false);
         });
 
@@ -306,7 +306,7 @@ if(result == "success"){
         .subscribe(
         output => this.getFileResult(output),
         error => {
-            console.log("error in customer");
+            //console.log("error in customer");
             this.loaderService.display(false);
         });
     }
@@ -329,7 +329,7 @@ if(result == "success"){
             data: details
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if(result == "success"){
             this.getCustomerList(true);
 

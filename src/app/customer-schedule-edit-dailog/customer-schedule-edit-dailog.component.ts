@@ -26,37 +26,37 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   viewScheduleOrders(){
     let input:any = { "userId":this.Detail.userid,"userType":this.authenticationService.userType(), "appType": this.authenticationService.appType(), "dealerid":this.authenticationService.loggedInUserId() };
-    console.log(input);
+    //console.log(input);
 
     this.customerservice.viewScheduleOrders(input)
     .subscribe(
     output => this.viewScheduleOrdersResult(output),
     error => {
-      console.log("error in View schedules");
+      //console.log("error in View schedules");
       this.loaderService.display(false);
     });
   }
   viewScheduleOrdersResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.scheduleOrdersList =result.data;
     }
    else{
      this.scheduleOrdersList =[];
-     console.log("No schedule orders");
+     //console.log("No schedule orders");
    }
   }
 
   // Edit schedule dialog box
   editSchedule(data) {
-    console.log(data);
+    //console.log(data);
     let formatteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname }
     let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
         width: '700px',
         data: formatteddata
     });
     dialogRefSetting.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if(result == 'success'){
           this.viewScheduleOrders();
         }
@@ -68,17 +68,17 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
   updatingScheduleOrder(){
     this.loaderService.display(false);
     let input: any = {"User":{"userid":this.authenticationService.loggedInUserId(), "apptype":this.authenticationService.appType() }}
-    console.log(input);
+    //console.log(input);
     this.customerservice.updateScheduleOrder(input)
     .subscribe(
       output => this.updateScheduleOrderResult(output),
       error => {
-        console.log("error in updation of suppliers");
+        //console.log("error in updation of suppliers");
         this.loaderService.display(false);
       });
     }
     updateScheduleOrderResult(result) {
-      console.log(result);
+      //console.log(result);
       if (result.result == 'success') {
       this.thisDialogRef.close('success');
       }
@@ -88,17 +88,17 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     //Delete scheduled order
 
     deleteSchedule(data){
-      console.log(data);
+      //console.log(data);
       let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
         width: '700px',
         data: data
     });
     dialogRefSetting.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         //this.dialogResult = result;
         if (result == 'success') {
           this.scheduleOrdersList =[];
-     console.log("No schedule orders");
+     //console.log("No schedule orders");
         }
         this.viewScheduleOrders();
         
@@ -116,7 +116,7 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   ngOnInit() {
     this.viewScheduleOrders();
-    console.log(this.Detail);
+    //console.log(this.Detail);
 
     // this.openDialog();
 

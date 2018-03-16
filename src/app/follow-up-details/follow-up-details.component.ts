@@ -20,12 +20,12 @@ export class FollowUpDetailsComponent implements OnInit {
       .subscribe(
       output => this.getfollowUpdetailsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getfollowUpdetailsResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.followUpList = result.data.output;
 
@@ -35,7 +35,7 @@ export class FollowUpDetailsComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    console.log(this.details);
+    //console.log(this.details);
     this.getfollowUpdetails();
   }
 

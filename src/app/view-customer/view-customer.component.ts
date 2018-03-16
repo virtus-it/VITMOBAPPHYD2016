@@ -31,7 +31,7 @@ export class ViewCustomerComponent implements OnInit {
   getCustomerList(firstcall) {
     this.loaderService.display(true);
     let input= {"userId":this.Detail.userid,"lastId":"0","userType":"dealer","appType":this.authenticationService.appType()}
-    console.log(input);
+    //console.log(input);
     if (this.customersList && this.customersList.length && !firstcall) {
       let lastCustomer:any = _.last(this.customersList);
       if (lastCustomer) {
@@ -47,12 +47,12 @@ export class ViewCustomerComponent implements OnInit {
             .subscribe(
             output => this.getCustomerListResult(output),
             error => {
-                console.log("error in customer");
+                //console.log("error in customer");
                 this.loaderService.display(false);
             });
   }
   getCustomerListResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.customersList = _.union(this.customersList, result.data);
@@ -65,14 +65,14 @@ export class ViewCustomerComponent implements OnInit {
   }
 
   showEditCustomer(data) {
-    console.log(data);
+    //console.log(data);
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
 
         width: '700px',
         data: data
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if (result == 'success'){
           this.getCustomerList(true);
         }
@@ -88,7 +88,7 @@ showSchedule(data){
       data: formatteddata
   });
   dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
   });
 
 }
@@ -99,14 +99,14 @@ viewScheduledOrders(data){
     data: data
 });
 dialogRefSetting.afterClosed().subscribe(result => {
-    console.log(`Dialog closed: ${result}`);
+    //console.log(`Dialog closed: ${result}`);
 
 });
 }
 
 
 showFollowUp(details) {
-  console.log(details);
+  //console.log(details);
   let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
   let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
@@ -114,7 +114,7 @@ showFollowUp(details) {
       data: data
   });
   dialogRefFollow.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
 
 
   });
@@ -129,7 +129,7 @@ getcustomerByPaging(){
   }
 
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
     this.getCustomerList(true);
 
   }

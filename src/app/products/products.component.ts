@@ -32,7 +32,7 @@ export class ProductsComponent implements OnInit {
       data: ''
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
         this.getProducts();
@@ -48,7 +48,7 @@ export class ProductsComponent implements OnInit {
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
         this.getProducts();
@@ -64,7 +64,7 @@ export class ProductsComponent implements OnInit {
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
         this.getProducts();
@@ -80,7 +80,7 @@ export class ProductsComponent implements OnInit {
       data: ''
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
         this.getProducts();
@@ -96,7 +96,7 @@ export class ProductsComponent implements OnInit {
       data: data
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
         this.getProducts();
@@ -111,7 +111,7 @@ export class ProductsComponent implements OnInit {
       data: data
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -124,7 +124,7 @@ export class ProductsComponent implements OnInit {
       data: ''
     });
     dialogRefProductStrockHitory.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -136,13 +136,13 @@ export class ProductsComponent implements OnInit {
       .subscribe(
       output => this.getProductsResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   getProductsResult(result) {
-    console.log(result);
+    //console.log(result);
     this.productList = [];
     if (result.result == 'success') {
       // let productCopy = [];
@@ -164,7 +164,7 @@ export class ProductsComponent implements OnInit {
         }
 
       }
-      console.log("products list ", this.productList)
+      //console.log("products list ", this.productList)
 
     }
   }

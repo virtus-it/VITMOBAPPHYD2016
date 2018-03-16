@@ -29,7 +29,7 @@ export class FollowUpComponent implements OnInit {
     if (this.followupDate) {
       this.followUpInput.User.followupdate = moment(this.followupDate).format('YYYY-MM-DD HH:MM:SS.sss');
     }
-    console.log(this.followUpInput);
+    //console.log(this.followUpInput);
     let input = this.followUpInput;
     input.User.remarks = input.User.remarks.replace(/'/g, "");
     input.User.remarks = input.User.remarks.replace(/"/g, "");
@@ -37,12 +37,12 @@ export class FollowUpComponent implements OnInit {
       .subscribe(
       output => this.createFollowUpResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   createFollowUpResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result = 'success') {
       //this.thisDialogRef.close('success');
       this.getfollowUpdetails();
@@ -58,12 +58,12 @@ export class FollowUpComponent implements OnInit {
       .subscribe(
       output => this.getfollowUpdetailsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getfollowUpdetailsResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.followUpList = result.data.output;
       if(result.data.output){
@@ -77,17 +77,17 @@ export class FollowUpComponent implements OnInit {
 
   followUpCompleted(){
     let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"close","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
-    console.log(input);
+    //console.log(input);
     this.followupService.followUpCompleted(input)
       .subscribe(
       output => this.followUpCompletedResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   followUpCompletedResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result = 'success') {
       // this.thisDialogRef.close('success');
       this.getfollowUpdetails();
@@ -96,18 +96,18 @@ export class FollowUpComponent implements OnInit {
 
 startFollowUp(){
   let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"open","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
-  console.log(input);
+  //console.log(input);
   this.followupService.followUpCompleted(input)
       .subscribe(
       output => this.followUpCompletedResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
 }
 startFollowUpCompleteResult(result) {
-  console.log(result);
+  //console.log(result);
   if (result.result = 'success') {
     // this.thisDialogRef.close('success');
     this.getfollowUpdetails();
@@ -117,17 +117,17 @@ startFollowUpCompleteResult(result) {
 
 getFollowUpTemplate(){
   let input={"User":{"transtype":"getfollowup",apptype:this.authenticationService.appType(),userid:this.authenticationService.loggedInUserId(),loginid:this.authenticationService.loggedInUserId()}};
-  console.log(input);
+  //console.log(input);
   this.followupService.followUpTemplate(input)
       .subscribe(
       output => this.getFollowUpTemplateResult(output),
       error => {
-        console.log("error in getting followUp templates");
+        //console.log("error in getting followUp templates");
         this.loaderService.display(false);
       });
 }
 getFollowUpTemplateResult(result){
-  console.log(result);
+  //console.log(result);
   if(result.result){
     this.followUpTemplate = result.data;
   }
@@ -136,7 +136,7 @@ getFollowUpTemplateResult(result){
 }
   
   ngOnInit() {
-    console.log(this.details);
+    //console.log(this.details);
     this.getfollowUpdetails();
     this.getFollowUpTemplate();
   }

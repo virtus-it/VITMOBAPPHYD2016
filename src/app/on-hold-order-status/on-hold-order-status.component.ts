@@ -17,12 +17,12 @@ export class OnHoldOrderStatusComponent implements OnInit {
   updateOrderOnhold() {
     this.loaderService.display(true);
     let input = { "order": { "orderstatus": "onhold", "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "apptype": this.authenticationService.appType(), "customerid": this.orderDetail.order_by, "reason": this.reasonOnHold, "from": "website" } }
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.updateOnHold(input)
       .subscribe(
       output => this.updateOrderOnholdResult(output),
       error => {
-        console.log("error in order details");
+        //console.log("error in order details");
         this.loaderService.display(false);
       });
 
@@ -38,7 +38,7 @@ export class OnHoldOrderStatusComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    console.log(this.orderDetail);
+    //console.log(this.orderDetail);
 
   }
 

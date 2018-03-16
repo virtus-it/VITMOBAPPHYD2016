@@ -62,33 +62,33 @@ export class OrderComponent implements OnInit {
           state.name.toLowerCase().indexOf(name.toLowerCase()) === 0);
       }
     clickedMarker(label: string, index: number) {
-        console.log(`clicked the marker: ${label || index}`)
+        //console.log(`clicked the marker: ${label || index}`)
     }
     viewAllDistPolygon(){
         this.distPolygon = this.allDistibutors;
     }
   
     click($event: any) {
-        console.log(`click event is called {$event}`);
+        //console.log(`click event is called {$event}`);
     }
 
     delete($event: any) {
-        console.log(`delete is called {$event}`);
+        //console.log(`delete is called {$event}`);
     }
     savePloygon(dist) {
-        console.log(this.polygonArray);
-        console.log(dist);
+        //console.log(this.polygonArray);
+        //console.log(dist);
         let polygon = Object.assign({}, this.polygonArray);
         polygon.distibutorname = dist.distibutorname;
         this.allDistibutors.push(polygon);
         dist.area.push(polygon);
-        console.log("all distbtors" +this.distubutors);
+        //console.log("all distbtors" +this.distubutors);
         this.polygonArray.name = "";
         this.polygonArray.path = [];
         this.ploymarkers = [];
     }
     saveDistibutor() {
-        console.log(this.polygonArray);
+        //console.log(this.polygonArray);
         
         let distibutors = Object.assign([], this.DistributorArray);
         this.distubutors.push(distibutors);
@@ -105,7 +105,7 @@ export class OrderComponent implements OnInit {
             });
             // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
             if (this.gMaps.containsLocation(latlong, polygonPath)) {
-                console.log(true);
+                //console.log(true);
                 alert("Distibutor location : " + dist.distibutorname);
                 return false;
             }
@@ -276,7 +276,7 @@ export class OrderComponent implements OnInit {
        
     }
     initMap() {
-        console.log('now: ', _.now());
+        //console.log('now: ', _.now());
          var triangleCoords = [
           {lat: 25.774, lng: -80.190},
           {lat: 18.466, lng: -66.118},
@@ -310,7 +310,7 @@ export class OrderComponent implements OnInit {
     }
     savePolygon() {
         this.map.data.toGeoJson(function (json) {
-            console.log(json.features);
+            //console.log(json.features);
             localStorage.setItem('geoData', JSON.stringify(json));
             
         });
@@ -346,28 +346,28 @@ export class OrderComponent implements OnInit {
     //   { lat: 17.359722,  lng: 78.417835 }
     //];
     onItemSelect(item: any) {
-        console.log(item);
-        console.log(this.selectedItems);
+        //console.log(item);
+        //console.log(this.selectedItems);
     }
     OnItemDeSelect(item: any) {
-        console.log(item);
-        console.log(this.selectedItems);
+        //console.log(item);
+        //console.log(this.selectedItems);
     }
     onSelectAll(items: any) {
-        console.log(items);
+        //console.log(items);
     }
     onDeSelectAll(items: any) {
-        console.log(items);
+        //console.log(items);
     }
     onChangeCheck(number: string, isChecked: boolean) {
        
 
         if (isChecked) {
             this.emailFormArray.push(number);
-            console.log(this.emailFormArray);
+            //console.log(this.emailFormArray);
         } else {
             this.emailFormArray = _.without(this.emailFormArray, number);
-            console.log(this.emailFormArray);
+            //console.log(this.emailFormArray);
         }
     }
     

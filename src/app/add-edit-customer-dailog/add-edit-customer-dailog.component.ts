@@ -33,7 +33,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
 
 
   getCustomerDetails() {
-  console.log(this.Details);
+  //console.log(this.Details);
   this.loaderService.display(true);
 
     if(this.Details){
@@ -52,14 +52,14 @@ export class AddEditCustomerDailogComponent implements OnInit {
         .subscribe(
         output => this.getCustomerDetailsResult(output),
         error => {
-          console.log("error in distrbutors");
+          //console.log("error in distrbutors");
           this.loaderService.display(false);
         });
     
       }
   }
   getCustomerDetailsResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result = 'success') {
       this.customerInput = {
@@ -105,17 +105,17 @@ export class AddEditCustomerDailogComponent implements OnInit {
     input.User.TransType = "create";
     input.User.paymentday= this.paymentDate;
     input.User.billpaymentdueday= this.paymentdueDate;
-    console.log(input);
+    //console.log(input);
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   createCustomerResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -126,17 +126,17 @@ export class AddEditCustomerDailogComponent implements OnInit {
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
     input.User.billpaymentdueday= this.paymentdueDate;
-    console.log(input);
+    //console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updateCustomerResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   updateCustomerResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
@@ -147,7 +147,7 @@ if(result.result == 'success'){
   }
   ngOnInit() {
     // "userid":"1768"
-    console.log(this.Details);
+    //console.log(this.Details);
     this.getCustomerDetails();
   }
 

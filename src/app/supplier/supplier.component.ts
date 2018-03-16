@@ -32,7 +32,7 @@ export class SupplierComponent implements OnInit {
 
   });
   dialogRefAddSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       //this.dialogResult = result;
       if(result == 'success'){
         this.getSupplierList();
@@ -49,7 +49,7 @@ export class SupplierComponent implements OnInit {
 
   });
   dialogRefAddSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       //this.dialogResult = result;
       if(result == 'success'){
         this.getSupplierList();
@@ -66,7 +66,7 @@ supplierOrdersList(data){
       data: formatteddata
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       
   });
   }
@@ -80,12 +80,12 @@ supplierOrdersList(data){
     .subscribe(
     output => this.getSupplierListResult(output),
     error => {
-      console.log("error in feedbacklist");
+      //console.log("error in feedbacklist");
       this.loaderService.display(false);
     });
   }
   getSupplierListResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.supplierList =result.data;
       this.SupplierListCopy=result.data;
@@ -102,7 +102,7 @@ supplierOrdersList(data){
         data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
     });
 }
 
@@ -115,7 +115,7 @@ deleteSupplier(data){
 
 });
 dialogRefdeleteSupplier.afterClosed().subscribe(result => {
-    console.log(`Dialog closed: ${result}`);
+    //console.log(`Dialog closed: ${result}`);
     if(result == 'success'){
       this.getSupplierList();
 

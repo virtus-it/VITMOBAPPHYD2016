@@ -35,7 +35,7 @@ sendFeedback(){
     .subscribe(
       Output =>this.sendFeedbackResult(Output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
       }
@@ -47,7 +47,7 @@ sendFeedback(){
   
 
     sendFeedbackResult(result){
-      console.log(result);
+      //console.log(result);
       if (result.result= 'success') {
         
         this.thisDialogRef.close('success');
@@ -57,7 +57,7 @@ sendFeedback(){
       this.thisDialogRef.close('Cancel');
     }
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
   }
 }
 

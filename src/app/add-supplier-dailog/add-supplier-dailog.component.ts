@@ -24,17 +24,17 @@ export class AddSupplierDailogComponent implements OnInit {
   submitSupplier() {
     this.loaderService.display(false);
     let input: any = { "User": { "user_type": "supplier", "TransType": "create", "firstname": this.supplierInput.firstname, "gender": "Male", "pwd": this.supplierInput.mobileno, "address":this.supplierInput.address,  "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.supplierInput.mobileno,  "emailid":this.supplierInput.emailid, "altmobileno": this.supplierInput.altmobileno, "issuppersupplier": false, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType() } };
-    console.log(input);
+    //console.log(input);
     this.supplierservice.createSupplier(input)
       .subscribe(
       output => this.submitSupplierResult(output),
       error => {
-        console.log("error in supplier");
+        //console.log("error in supplier");
         this.loaderService.display(false);
       });
   }
   submitSupplierResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
 
       this.thisDialogRef.close('success');
@@ -45,17 +45,17 @@ export class AddSupplierDailogComponent implements OnInit {
  updatingSupplier(){
   this.loaderService.display(false);
   let input: any = {"User":{"userid":this.supplierDetails.userid,"firstname":this.supplierInput.firstname,"mobileno":this.supplierInput.mobileno , "address":this.supplierInput.address, "emailid":this.supplierInput.emailid, "loginid":"289","user_type":"supplier","issuppersupplier":false,"apptype":this.authenticationService.appType() }}
-  console.log(input);
+  //console.log(input);
   this.supplierservice.updateSupplier(input)
   .subscribe(
     output => this.updateSupplierResult(output),
     error => {
-      console.log("error in updation of suppliers");
+      //console.log("error in updation of suppliers");
       this.loaderService.display(false);
     });
   }
   updateSupplierResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
 
       this.thisDialogRef.close('success');
@@ -67,7 +67,7 @@ export class AddSupplierDailogComponent implements OnInit {
 
   openDailog() {
     if (this.supplierDetails) {
-      console.log(this.supplierDetails);
+      //console.log(this.supplierDetails);
       this.supplierInput.firstname = this.supplierDetails.firstname;
       this.supplierInput.mobileno = this.supplierDetails.mobileno;
       this.supplierInput.altmobileno = "";

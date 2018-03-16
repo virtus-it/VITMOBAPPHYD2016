@@ -28,7 +28,7 @@ export class ProductListDialogComponent implements OnInit {
   .subscribe(
   output => this.getProductsResult(output),
   error => {
-      console.log("Logged in falied");
+      //console.log("Logged in falied");
       this.loaderService.display(false);
   });
 
@@ -50,7 +50,7 @@ getProductsResult(output) {
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getProducts(this.distributorDetails);
         

@@ -19,7 +19,7 @@ export class SmsComponent implements OnInit {
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             this.getSmsList();
 
         });
@@ -31,13 +31,13 @@ export class SmsComponent implements OnInit {
             .subscribe(
             output => this.getSmsListrResult(output),
             error => {
-                console.log("error in distrbutors");
+                //console.log("error in distrbutors");
                 this.loaderService.display(false);
             });
     }
     getSmsListrResult(result) {
         this.loaderService.display(false);
-        console.log(result);
+        //console.log(result);
         this.smsListDetails = result.data;
     }
     ngOnInit() {

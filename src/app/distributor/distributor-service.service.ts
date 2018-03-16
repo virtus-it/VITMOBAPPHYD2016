@@ -30,7 +30,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/getdistributorbydealerid', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     createPolygonDistributors(input) {
@@ -40,7 +40,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/createpolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     updatePolygonDistributors(input) {
@@ -49,7 +49,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/updatepolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getpolygonByDistributor(input) {
@@ -58,7 +58,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/getpolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getAllArea(input) {
@@ -66,7 +66,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.apiUrl + '/getareasbypincode/' + input.userId+'/-1/'+input.appType+'', options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     createDistributor(input) {
@@ -75,7 +75,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/createuser', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     updateDistributor(input) {
@@ -84,7 +84,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.put(this.apiUrl + '/user', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getDistbutorsProducts(userId) {
@@ -92,7 +92,7 @@ export class DistributorServiceService {
          let options = new RequestOptions({ headers: headers });
          return this.http.get(this.apiUrl + '/products/' + userId+'', options)
              .map((res: Response) => res.json())
-             .do(data => console.log('All: ' + JSON.stringify(data)))
+             .do(data => console.log('All: ' ))
              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
      }
      getOrderById(input) {
@@ -108,7 +108,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/forwardorder', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     assingOrder(input) {
@@ -117,7 +117,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/assignorder', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getAllSuppliers(input) {
@@ -133,7 +133,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/massignproduct', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getProductsList(input) {
@@ -149,7 +149,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/searchpolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
      }
@@ -160,7 +160,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/stockpoint', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
      }

@@ -46,7 +46,7 @@ export class PreOrderComponent implements OnInit {
     data: data
     });
      dialogRefAddPreOrder.afterClosed().subscribe(result => {
-     console.log(`Dialog closed: ${result}`); 
+     //console.log(`Dialog closed: ${result}`); 
      if(result == 'success'){
        this.getCustomerList(true);
 
@@ -68,17 +68,17 @@ export class PreOrderComponent implements OnInit {
       this.preOrderInput.lastId = 0;
   }
     let input = this.preOrderInput;
-    console.log(input);
+    //console.log(input);
     this.customerService.getCustomerList(input)
         .subscribe(
         output => this.getCustomerListResult(output),
         error => {
-            console.log("error in customer");
+            //console.log("error in customer");
             this.loaderService.display(false);
         });
 }
 getCustomerListResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
 
@@ -116,7 +116,7 @@ getCustomerListResult(result) {
         data: data
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if(result == "success"){
             this.getCustomerList(true);
         
@@ -158,12 +158,12 @@ getCustomerByFilter(firstcall) {
       .subscribe(
       output => this.getCustomerByFilterResult(output),
       error => {
-          console.log("error in customer");
+          //console.log("error in customer");
           this.loaderService.display(false);
       });
 }
 getCustomerByFilterResult(result) {
-  console.log(result);
+  //console.log(result);
   if (result.result == 'success') {
       this.filterRecords = true;
       this.customerList = _.union(this.customerList, result.data);

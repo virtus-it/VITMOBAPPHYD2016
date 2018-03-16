@@ -23,20 +23,21 @@ export class SelectProductsForassingComponent implements OnInit {
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
     this.loaderService.display(true);
+    this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
     let input = { apptype: this.authenticationService.appType(), userid: this.orderDetail.orderDetails.order_by, delearId: this.orderDetail.disributorId }
-    console.log(input);
+    //console.log(input);
 
     this.distributorService.getProductsList(input)
       .subscribe(
       output => this.getProductsListResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
   }
   getProductsListResult(result) {
-    console.log("distributor products list", result);
+    //console.log("distributor products list", result);
     if (result.result == 'success') {
       let productListCopy = [];
       _.each(result.data.products, function (i, j) {
@@ -67,7 +68,7 @@ export class SelectProductsForassingComponent implements OnInit {
           this.productMessage = true;
         }
       }
-      console.log(" this.productList", this.productList);
+      //console.log(" this.productList", this.productList);
       
     }
   }
@@ -78,17 +79,17 @@ export class SelectProductsForassingComponent implements OnInit {
 
     let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() } };
 
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.setProductsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   setProductsResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result = 'success') {
 
       this.thisDialogRef.close('success');
@@ -109,7 +110,7 @@ export class SelectProductsForassingComponent implements OnInit {
     this.thisDialogRef.close('success');
   }
   ngOnInit() {
-    console.log(this.orderDetail);
+    //console.log(this.orderDetail);
     this.getProductsList();
   }
 

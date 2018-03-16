@@ -21,17 +21,17 @@ export class CreateupdatecategoryComponent implements OnInit {
 
   createCategory(){
     let input = {"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.productService.createCategory(input)
     .subscribe(
     output => this.createCategoryResult(output),
     error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
     });
 
   }
   createCategoryResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.thisDialogRef.close('success');
   }
@@ -41,16 +41,16 @@ export class CreateupdatecategoryComponent implements OnInit {
 updateCategory(){ 
 let input ={"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"categoryid":this.categoryInput.categoryid,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
 
-console.log(input);
+//console.log(input);
     this.productService.updateCategory(input)
     .subscribe(
     output => this.updateCategoryResult(output),
     error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
     });
 }
 updateCategoryResult(result){
-  console.log(result);
+  //console.log(result);
     if (result.result == "success") {
       this.thisDialogRef.close('success');
 }
@@ -67,7 +67,7 @@ createAndUpdateCategory(){
 
 openDailog() {
   if (this.details) {
-    console.log(this.details);
+    //console.log(this.details);
     this.categoryInput.cname = this.details.category;
     this.categoryInput.cdesc = this.details.category_desc;
     this.categoryInput.categoryid = this.details.categoryid;
@@ -81,7 +81,7 @@ onCloseCancel(){
 }
 
   ngOnInit() {
-    console.log(this.details);
+    //console.log(this.details);
     this.openDailog();
   
   }

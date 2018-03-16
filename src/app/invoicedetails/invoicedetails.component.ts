@@ -31,19 +31,19 @@ export class InvoicedetailsComponent implements OnInit {
       .subscribe(
       output => this.sendInvoiceResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
 
       });
 
   }
   sendInvoiceResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.messageSent = true;
     }
   }
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
 }
 
 }

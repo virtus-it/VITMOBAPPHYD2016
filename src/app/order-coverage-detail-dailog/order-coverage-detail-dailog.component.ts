@@ -106,7 +106,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
-                console.log(`Dialog closed: ${result}`);
+                //console.log(`Dialog closed: ${result}`);
 
 
             });
@@ -121,7 +121,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             .subscribe(
             output => this.getOrderDetailResult(output),
             error => {
-                console.log("falied");
+                //console.log("falied");
                 this.loaderService.display(false);
             });
 
@@ -157,7 +157,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             data: this.orderDetail.orders
         });
         dialogRefDist.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
             if (result == 'success') {
                 this.dailogCloseResult = 'success';
                 this.getOrderDetail();
@@ -202,17 +202,17 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     }
     getProductByCategory() {
         let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
-        console.log(input);
+        //console.log(input);
 
         this.productService.getProductsCategory(input)
             .subscribe(
             output => this.getProductsCategoryResult(output),
             error => {
-                console.log("error in products category list");
+                //console.log("error in products category list");
             });
     }
     getProductsCategoryResult(result) {
-        console.log(result);
+        //console.log(result);
         let categoryListCopy = [];
         if (result.result == "success") {
             _.each(result, function (i, j) {
@@ -243,25 +243,25 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 }
             }
         }
-        console.log(this.filterInput);
+        //console.log(this.filterInput);
         this.filteredList();
 
     }
 
     filteredList() {
         let input = this.filterInput;
-        console.log(input);
+        //console.log(input);
         this.distributorService.getFilteredPolygon(input)
             .subscribe(
             output => this.getFilteredPolygonResult(output),
             error => {
-                console.log("error in products category list");
+                //console.log("error in products category list");
             });
 
     }
 
     getFilteredPolygonResult(result) {
-        console.log(result);
+        //console.log(result);
         if (result.result = 'success') {
             //this.polygonArray= [];
             this.displayPolygon = [];
@@ -302,14 +302,14 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
 
     openMapDialog(data) {
-        console.log(data);
+        //console.log(data);
         let modelData={"type":"assignFromOrders", data:data}
         let dialogRef = this.dialog.open(MapDialogComponent, {
             width: '90%',
             data: modelData
         });
         dialogRef.afterClosed().subscribe(result => {
-            console.log(`Dialog closed: ${result}`);
+            //console.log(`Dialog closed: ${result}`);
 
            
         });
@@ -331,7 +331,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.assignPolygon();
         this.getOrderDetail();
         this.getProductByCategory();
-        console.log(this.orderDetail);
+        //console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
             let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {

@@ -49,17 +49,17 @@ export class ScheduleComponent implements OnInit {
   scheduleOrderList() {
     this.loaderService.display(false);
     let input: any = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "apptype": this.authenticationService.appType(), "searchtype": "0", "searchtext": "0" } }
-    console.log(input);
+    //console.log(input);
     this.customerservice.ScheduleList(input)
       .subscribe(
       output => this.ScheduleListResult(output),
       error => {
-        console.log("error in showing schedules");
+        //console.log("error in showing schedules");
         this.loaderService.display(false);
       });
   }
   ScheduleListResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.scheduleOrdersList = result.data;
     }
@@ -70,14 +70,14 @@ export class ScheduleComponent implements OnInit {
   //Dialog model for creating new schedule
 
   createSchedule(data) {
-    console.log(data);
+    //console.log(data);
     let formatteddata: any = { "type": "create", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
     let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
       width: '700px',
       data: formatteddata
     });
     dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == "success") {
         this.scheduleOrderList();
       }
@@ -86,14 +86,14 @@ export class ScheduleComponent implements OnInit {
 
   // Dialog Model for Edit
   editSchedule(data) {
-    console.log(data);
+    //console.log(data);
     let formatteddata: any = { "type": "update", "data": data, customerId: data.customerid, customerName: data.customerdetails.scheduledby }
     let dialogRefOrderList = this.dialog.open(CustomerScheduleDaiolgComponent, {
       width: '700px',
       data: formatteddata
     });
     dialogRefOrderList.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == "success") {
         this.scheduleOrderList();
       }
@@ -103,13 +103,13 @@ export class ScheduleComponent implements OnInit {
   // Dialog model for delete
 
   deleteSchedule(data) {
-    console.log(data);
+    //console.log(data);
     let dialogRefSetting = this.dialog.open(DeleteScheduledOrderComponent, {
       width: '700px',
       data: data
     });
     dialogRefSetting.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == "success") {
         this.scheduleOrderList();
       }
@@ -244,19 +244,19 @@ export class ScheduleComponent implements OnInit {
       input.root.searchtext = this.filter.days;
     }
     
-    console.log(input);
+    //console.log(input);
 
     this.loaderService.display(true);
     this.customerservice.ScheduleList(input)
     .subscribe(
       output => this.filteredScheduleResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
      }
     filteredScheduleResult(result){
-      console.log(result);
+      //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.scheduleOrdersList = result.data;
@@ -288,16 +288,16 @@ export class ScheduleComponent implements OnInit {
 
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
-    console.log(input);
+    //console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    //console.log(data);
     if (data.result == 'success') {
       let distributorCopy = [];
 
@@ -317,10 +317,10 @@ export class ScheduleComponent implements OnInit {
   //filtered distributors
 
   filterDistributors(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
+    //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 

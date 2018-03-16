@@ -58,12 +58,12 @@ if(this.editStatusInput.order.orderstatus == "not_reachable"){
       this.editStatusInput.order.paymentstatus = 'confirm';
     }
     let input = this.editStatusInput;
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.editOrderStatus(input)
       .subscribe(
       output => this.updateOrderStatusResult(output),
       error => {
-        console.log("error in order details");
+        //console.log("error in order details");
         this.loaderService.display(false);
       });
   }
@@ -80,8 +80,8 @@ if(result.result = '"success"'){
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    console.log(this.editStatusInput);
-    console.log(this.orderDetail);
+    //console.log(this.editStatusInput);
+    //console.log(this.orderDetail);
   }
 
 }

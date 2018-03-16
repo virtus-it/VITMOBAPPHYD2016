@@ -38,12 +38,12 @@ export class SupplierOrderListComponent implements OnInit {
       .subscribe(
       output => this.supplierOrderresult(output),
       error => {
-        console.log("error in supplier order list");
+        //console.log("error in supplier order list");
         this.loaderService.display(false);
       });
   }
   supplierOrderresult(result) {
-    console.log(result);
+    //console.log(result);
 
     if (result.result == "success") {
 
@@ -60,17 +60,17 @@ export class SupplierOrderListComponent implements OnInit {
   getDistributorsOrders() {
     this.loaderService.display(true);
     let input = { "order": { "userid": this.Detail.data.userid, "priority": "5", "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": 0, "customerid": 0, "apptype": this.authenticationService.appType() } };
-    console.log(input);
+    //console.log(input);
     this.supplierservice.supplierOrder(input)
       .subscribe(
       output => this.distributorOrderresult(output),
       error => {
-        console.log("error in customer");
+        //console.log("error in customer");
         this.loaderService.display(false);
       });
   }
   distributorOrderresult(result) {
-    console.log(result);
+    //console.log(result);
     if(result.result == "success"){
       this.SupplierOrderList = result.data;
     this.loaderService.display(false);
@@ -102,7 +102,7 @@ export class SupplierOrderListComponent implements OnInit {
   ngOnInit() {
     // this.supplierOrderList();
     this.onInitCheck();
-    console.log(this.Detail);
+    //console.log(this.Detail);
 
 
   }
