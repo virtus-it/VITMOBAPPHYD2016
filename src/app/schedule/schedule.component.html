@@ -416,13 +416,16 @@
       </thead>
       <tbody>
         <tr *ngFor="let schedule of scheduleOrdersList">
-          <td class="left capitalize">{{schedule.customerdetails.scheduledby}} <br> {{schedule.customerdetails.mobileno}}</td>
-          <td class="left capitalize">{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}}</td>
+          <td class="left capitalize" *ngIf="schedule.customerdetails "><span>{{schedule.customerdetails.scheduledby}} <br> {{schedule.customerdetails.mobileno}}
+          </span></td>
+          <td class="left capitalize" *ngIf="schedule.dealerinfo">
+              <span>{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}}
+              </span></td>
           <td class="left" > {{schedule.product_name}} {{schedule.product_quantity}} </td>
           <td class="left">{{schedule.delivery_exceptedtime}}</td>
           <td class="left ">{{schedule.quantity}}</td>
           <td class="left capitalize " style="position:absolute"><span class="onhovertext mgtop-10">{{schedule.weekdays}} {{schedule.days}}</span></td>
-          <td class="left">{{schedule.createdbyinfo.scheduledby}}</td>
+          <td class="left" *ngIf="schedule.createdbyinfo "><span>{{schedule.createdbyinfo.scheduledby}}</span></td>
           <td class="left">{{schedule.createddate | utcDate}}</td>
           <td class="left ">
                             <label class="logo-color cursor" (click)="createSchedule(schedule)">

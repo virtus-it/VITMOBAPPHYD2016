@@ -30,12 +30,12 @@ export class ViewSupplierComponent implements OnInit {
     .subscribe(
     output => this.getSupplierListResult(output),
     error => {
-      console.log("error in supplier list");
+      //console.log("error in supplier list");
       this.loaderService.display(false);
     });
   }
   getSupplierListResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.supplierList =result.data;
     }
@@ -53,7 +53,7 @@ export class ViewSupplierComponent implements OnInit {
       data: formatteddata
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       
   });
 
@@ -68,7 +68,7 @@ export class ViewSupplierComponent implements OnInit {
 
   });
   dialogRefAddSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if(result =='success'){
         this.SupplierList();
       }
@@ -85,7 +85,7 @@ export class ViewSupplierComponent implements OnInit {
   
   });
   dialogRefdeleteSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if(result =='success'){
         this.SupplierList();
       }
@@ -99,7 +99,7 @@ export class ViewSupplierComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
     this.SupplierList();
   }
 

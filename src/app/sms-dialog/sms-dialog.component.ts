@@ -57,10 +57,10 @@ export class SmsDialogComponent implements OnInit {
     // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
   filterDistributors(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
+    //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 
@@ -104,12 +104,12 @@ export class SmsDialogComponent implements OnInit {
       .subscribe(
       output => this.getMobileNumberResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.smallLoader = false;
       });
   }
   getMobileNumberResult(result) {
-    console.log(result);
+    //console.log(result);
     let mobile = [];
     this.smallLoader = false;
     if (result && result.data && result.data.length) {
@@ -162,7 +162,7 @@ export class SmsDialogComponent implements OnInit {
     }
   }
   saveMobileSms() {
-    console.log(this.smsInput);
+    //console.log(this.smsInput);
     let createSmsInput = {
       "User": {
         "mobilenumber": this.smsInput.mobilenumber,
@@ -214,30 +214,30 @@ export class SmsDialogComponent implements OnInit {
       createSmsInput.User.body = this.smsInput.customBody;
     }
     
-    console.log("input",createSmsInput);
+    //console.log("input",createSmsInput);
     this.smsService.CreateSms(createSmsInput)
       .subscribe(
       output => this.saveMobileSmsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
       });
   }
   saveMobileSmsResult(result) {
-    console.log(result);
+    //console.log(result);
     this.thisDialogRef.close(result);
   }
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
-    console.log(input);
+    //console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    //console.log(data);
     if (data.result == 'success') {
       let distributorCopy = [];
 

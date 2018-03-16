@@ -21,17 +21,17 @@ export class CategoryproductsComponent implements OnInit {
 
   getCategoryProducts(){
     let input={"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","category":this.details.category,"categoryid":this.details.categoryid,"apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.productService.getProductsByCategory(input)
     .subscribe(
     output => this.getProductsByCategoryResult(output),
     error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
     }); 
   }
 
   getProductsByCategoryResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.productCategory = result.data;
     }
@@ -44,7 +44,7 @@ export class CategoryproductsComponent implements OnInit {
       data: data
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getCategoryProducts();
       }
@@ -60,7 +60,7 @@ export class CategoryproductsComponent implements OnInit {
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getCategoryProducts();
 
@@ -78,7 +78,7 @@ export class CategoryproductsComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.details);
+    //console.log(this.details);
     this.getCategoryProducts();
   }
 

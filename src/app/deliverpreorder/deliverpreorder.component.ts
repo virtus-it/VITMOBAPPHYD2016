@@ -31,12 +31,12 @@ export class DeliverpreorderComponent implements OnInit {
     .subscribe(
     output => this.getSupplierListResult(output),
     error => {
-      console.log("error in feedbacklist");
+      //console.log("error in feedbacklist");
       this.loaderService.display(false);
     });
   }
   getSupplierListResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
       this.supplierList =result.data;
       this.SupplierListCopy=result.data;
@@ -55,18 +55,18 @@ export class DeliverpreorderComponent implements OnInit {
     }
     let input =[];
     input.push(this.Detail);
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output),
     error => {
-      console.log("falied");
+      //console.log("falied");
       this.loaderService.display(false);
     });
 
   }
   createPreOrderResult(result) {
-    console.log(result);
+    //console.log(result);
     if(result.result=='success'){
       this.thisDialogRef.close('success');
     }
@@ -91,7 +91,7 @@ export class DeliverpreorderComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.Detail);
+    //console.log(this.Detail);
     this.getSupplierList();
     this.totalAmount();
   }

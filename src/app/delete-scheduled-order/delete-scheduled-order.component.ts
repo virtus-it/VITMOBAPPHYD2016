@@ -19,18 +19,18 @@ export class DeleteScheduledOrderComponent implements OnInit {
   
   deleteScheduleOrder(){
     let input={ "product": {"scheid": this.Detail.id , "loginid": this.authenticationService.loggedInUserId() , "activate": "false","usertype": "dealer" ,"apptype": this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.customerservice.deleteScheduledOrder(input)
     .subscribe(
     output => this.deleteScheduleOrderresult(output),
     error => {
-      console.log("error in deleting supplier");
+      //console.log("error in deleting supplier");
     this.loaderService.display(false);
     });
  }
   
  deleteScheduleOrderresult(result) {
-   console.log(result);
+   //console.log(result);
    if (result.result == "success") {
    this.thisDialogRef.close('success');
    

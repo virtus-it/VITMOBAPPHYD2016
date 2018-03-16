@@ -97,10 +97,10 @@ export class OrderLandingComponent implements OnInit {
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
     
   findDistributors(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
+    //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 
@@ -126,10 +126,10 @@ export class OrderLandingComponent implements OnInit {
     return finalDistributors;
   }
   findSupplier(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalsupplier = this.supplierList.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalsupplier);
+    //console.log(finalsupplier);
     if (finalsupplier && finalsupplier.length > 0) {
       let findSupplier: any = {};
 
@@ -172,7 +172,7 @@ export class OrderLandingComponent implements OnInit {
       data: orderDetails
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       this.clearFilter();
 
 
@@ -186,7 +186,7 @@ export class OrderLandingComponent implements OnInit {
       data: modelData
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
@@ -203,7 +203,7 @@ export class OrderLandingComponent implements OnInit {
       data: orderData
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -216,7 +216,7 @@ export class OrderLandingComponent implements OnInit {
       data: orderDetails
     });
     dialogRefEditQun.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
@@ -234,7 +234,7 @@ export class OrderLandingComponent implements OnInit {
       data: data
     });
     dialogRefFollow.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       this.getForwardOrderDetails(true);
       this.getAllOrderDetails(true);
 
@@ -252,7 +252,7 @@ export class OrderLandingComponent implements OnInit {
       data: data
     });
     dialogRefFollowDetails.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -272,20 +272,20 @@ export class OrderLandingComponent implements OnInit {
       this.orderListInput.order.last_orderid = null;
     }
     let forwardInput = this.orderListInput;
-    console.log(forwardInput);
+    //console.log(forwardInput);
     this.loaderService.display(true);
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(
       output => this.getForwardOrderDetailsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getForwardOrderDetailsResult(result) {
     // this.forwardOrders = result.data;
     this.loaderService.display(false);
-    console.log(this.forwardOrders);
+    //console.log(this.forwardOrders);
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
@@ -316,14 +316,14 @@ export class OrderLandingComponent implements OnInit {
       .subscribe(
       output => this.getAllOrderDetailsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getAllOrderDetailsResult(result) {
     //  this.allOrders = result.data;
     this.loaderService.display(false);
-    console.log(this.allOrders);
+    //console.log(this.allOrders);
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
       this.orderClickMore = true;
@@ -341,7 +341,7 @@ export class OrderLandingComponent implements OnInit {
       .subscribe(
       output => this.getPolygonDataResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
@@ -410,7 +410,7 @@ export class OrderLandingComponent implements OnInit {
       .subscribe(
       output => this.quickFilterResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
@@ -468,13 +468,13 @@ export class OrderLandingComponent implements OnInit {
       }
     }
     let input = this.filterInput;
-    console.log(input);
+    //console.log(input);
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getFilteredOrdersResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
@@ -545,7 +545,7 @@ export class OrderLandingComponent implements OnInit {
     else {
       this.filterInput.order.status = 'all';
     }
-    console.log(this.filterInput);
+    //console.log(this.filterInput);
     this.getFilteredOrders(true);
 this.showFilterDailog =false;
 
@@ -580,18 +580,18 @@ this.showFilterDailog =false;
       }
     }
     let input = this.filterInput;
-    console.log(input);
+    //console.log(input);
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getFilteredOrdersResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
   getFilteredOrdersResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.filterRecords = true;
@@ -720,18 +720,18 @@ this.showFilterDailog =false;
       input.root.lastuserid = null;
     }
 
-    console.log(input);
+    //console.log(input);
     this.loaderService.display(true);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    //console.log(data);
     this.loaderService.display(false);
     if (data.result == 'success') {
       let distributorCopy = [];
@@ -754,18 +754,18 @@ this.showFilterDailog =false;
   }
   getSupplier() {
     let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
-   console.log(input);
+   //console.log(input);
    this.loaderService.display(true);
     this.distributorService.getAllSuppliers(input)
       .subscribe(
       output => this.getSupplierResult(output),
       error => {
         this.loaderService.display(false);
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
       });
   }
   getSupplierResult(data) {
-    console.log(data);
+    //console.log(data);
     this.loaderService.display(false);
     if (data.result == 'success') {
       let supplierCopy = [];
@@ -791,19 +791,19 @@ this.showFilterDailog =false;
   }
 
   acceptOrder(Details){
-    console.log(Details);
+    //console.log(Details);
     let input={"order":{"orderid":Details.order_id,"status":"accept","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.AcceptOrder(input)
       .subscribe(
       output => this.AcceptOrderResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
   AcceptOrderResult(result){
-    console.log(result);
+    //console.log(result);
     if(result.result='success'){
       this.getForwardOrderDetails(true);
 
@@ -812,19 +812,19 @@ this.showFilterDailog =false;
   }
 
   rejectOrder(Details){
-    console.log(Details);
+    //console.log(Details);
     let input={"order":{"orderid":Details.order_id,"loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"reason":"comments","orderstatus":"backtodealer","usertype":"dealer","apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.orderLandingService.updateOnHold(input)
       .subscribe(
       output => this.rejectOrderResult(output),
       error => {
-        console.log("falied");
+        //console.log("falied");
         this.loaderService.display(false);
       });
   }
   rejectOrderResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.getForwardOrderDetails(true);
     
@@ -837,7 +837,7 @@ this.showFilterDailog =false;
         data: orderData
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -851,7 +851,7 @@ this.showFilterDailog =false;
           data: formatteddata
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-          console.log(`Dialog closed: ${result}`);
+          //console.log(`Dialog closed: ${result}`);
 
       });
   }
@@ -865,7 +865,7 @@ this.showFilterDailog =false;
                 data: data
             });
             dialogRefDist.afterClosed().subscribe(result => {
-                console.log(`Dialog closed: ${result}`);
+                //console.log(`Dialog closed: ${result}`);
                 if(result == 'success'){
                   this.getForwardOrderDetails(true);
                   this.getAllOrderDetails(true);

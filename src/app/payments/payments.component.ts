@@ -36,13 +36,13 @@ export class PaymentsComponent implements OnInit {
       .subscribe(
       output => this.getCodResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   getCodResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.codPayments = result.data;
       this.codPaymentsCopy = result.data;
@@ -56,13 +56,13 @@ export class PaymentsComponent implements OnInit {
       .subscribe(
       output => this.getCreditResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   getCreditResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.creditPayments = result.data;
       this.creditPaymentsCopy = result.data;
@@ -78,13 +78,13 @@ export class PaymentsComponent implements OnInit {
   //     .subscribe(
   //     output => this.getBillDetailsResult(output),
   //     error => {
-  //       console.log("error");
+  //       //console.log("error");
   //       this.loaderService.display(false);
   //     });
 
   // }
   // getBillDetailsResult(result) {
-  //   console.log(result);
+  //   //console.log(result);
   //   if (result.result == 'success') {
   //   }
 
@@ -96,14 +96,14 @@ export class PaymentsComponent implements OnInit {
   //     .subscribe(
   //     output => this.getCollectionsResult(output),
   //     error => {
-  //       console.log("error");
+  //       //console.log("error");
   //       this.loaderService.display(false);
   //     });
 
 
   // }
   // getCollectionsResult(result) {
-  //   console.log(result);
+  //   //console.log(result);
   //   if (result.result == 'success') {
   //     this.collections = result.data;
   //     this.collectionsCopy = result.data;
@@ -121,20 +121,20 @@ this.tabPanelView = type;
 
   changeStatus(type,data){
 
-    console.log(data);
+    //console.log(data);
     let input = {"root": {"paymentid":data.paymentid,"received_amt":data.amount_received,"orderid":data.orderid,"customerid":data.customerid,"status":type,"userid":this.authenticationService.loggedInUserId(),
     "usertype":this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}
     this.paymentservice.changeStatus(input)
       .subscribe(
       output => this.changeStatusResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   changeStatusResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.getCod();
     }
@@ -216,12 +216,12 @@ getAdvAmount(){
       .subscribe(
       output => this.getAdvanceAmountResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   }
   getAdvanceAmountResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.advAmount = result.data;
       this.advAmountCopy = result.data;

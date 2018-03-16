@@ -18,18 +18,18 @@ export class DeletesupplierComponent implements OnInit {
 
   deleteSupplier(){
     let input = {"root":{"userid":this.details.userid, "loginid":this.authenticationService.loggedInUserId(),"activate":"false","usertype":"supplier","apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
 
      this.supplierservice.deleteSupplier(input)
      .subscribe(
      output => this.deleteSupplierresult(output),
      error => {
-       console.log("error in deleting supplier");
+       //console.log("error in deleting supplier");
      this.loaderService.display(false);
      });
   }
   deleteSupplierresult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == "success") {
     this.thisDialogRef.close('success');
     }
@@ -38,7 +38,7 @@ export class DeletesupplierComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    console.log(this.details);
+    //console.log(this.details);
   }
 
 }

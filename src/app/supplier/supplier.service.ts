@@ -19,7 +19,7 @@ supplierList(input){
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.apiUrl + '/supplierslist/' + input.userId+'/'+input.appType+'', options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: ' ))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 }
 
@@ -29,7 +29,7 @@ createSupplier(input){
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.apiUrl + '/createuser', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
 }
@@ -40,7 +40,7 @@ updateSupplier(input){
   let options = new RequestOptions({ headers: headers });
   return this.http.put(this.apiUrl + '/user', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
 }
@@ -51,7 +51,7 @@ supplierOrder(input){
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.apiUrl + '/ordersbyuserid', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
 }
@@ -62,7 +62,7 @@ deleteSupplier(input){
   let options = new RequestOptions({ headers: headers });
   return this.http.post(this.apiUrl + '/changeuserstatus', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: ' ))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
 }

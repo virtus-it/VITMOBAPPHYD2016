@@ -92,7 +92,7 @@ export class ReportsComponent implements OnInit {
       .subscribe(
       output => this.searchReportsResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
   }
@@ -128,25 +128,25 @@ export class ReportsComponent implements OnInit {
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
     }
-    console.log(input);
+    //console.log(input);
     this.reportservice.downloadReports(input)
       .subscribe(
       output => this.downloadOrdersResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   downloadOrdersResult(result) {
-    console.log("downloaded result", result);
+    //console.log("downloaded result", result);
     if (result.result == 'success') {
       let path = result.data.filename;
       this.customerService.getFile(path)
         .subscribe(
         output => this.getFileResult(output),
         error => {
-          console.log("error in customer");
+          //console.log("error in customer");
           this.loaderService.display(false);
         });
 
@@ -163,13 +163,13 @@ export class ReportsComponent implements OnInit {
       .subscribe(
       output => this.getCusotmerResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
 
   }
   getCusotmerResult(result) {
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       let cusotmerCopy = [];
       _.each(result.data, function (i, j) {
@@ -186,11 +186,11 @@ export class ReportsComponent implements OnInit {
 
   }
   findCustomers(name: string) {
-    // console.log(name);
+    // //console.log(name);
     let finalcustomer = this.customerList.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
 
-    // console.log(finalcustomer);
+    // //console.log(finalcustomer);
     if (finalcustomer && finalcustomer.length > 0) {
       let findcustomer: any = {};
 
@@ -220,7 +220,7 @@ export class ReportsComponent implements OnInit {
 
     });
     dialogRefdeleteSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
       }
@@ -235,7 +235,7 @@ export class ReportsComponent implements OnInit {
 
     });
     dialogRefdeleteSupplier.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
       }
@@ -263,13 +263,13 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
     }
-    console.log(input);
+    //console.log(input);
     this.showInvoice(input);
     // this.reportservice.raiseInvoice(input)
     //   .subscribe(
     //   output => this.raiseInvoiceOfOrderResult(output),
     //   error => {
-    //     console.log("error");
+    //     //console.log("error");
     //     this.loaderService.display(false);
     //   });
 
@@ -291,18 +291,18 @@ export class ReportsComponent implements OnInit {
       input.root.lastuserid = null;
     }
 
-    console.log(input);
+    //console.log(input);
     this.loaderService.display(true);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    //console.log(data);
     this.loaderService.display(false);
     if (data.result == 'success') {
       let distributorCopy = [];
@@ -324,10 +324,10 @@ export class ReportsComponent implements OnInit {
     }
   }
   findDistributors(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
+    //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 
@@ -374,12 +374,12 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
     }
-    console.log(input);
+    //console.log(input);
     this.reportservice.printInvoice(input)
       .subscribe(
       output => this.printFileResult(output),
       error => {
-        console.log("error");
+        //console.log("error");
         this.loaderService.display(false);
       });
     // 
@@ -395,13 +395,13 @@ export class ReportsComponent implements OnInit {
         .subscribe(
         output => this.printgetFileResult(output),
         error => {
-          console.log("error in customer");
+          //console.log("error in customer");
           this.loaderService.display(false);
         });
     }
   }
   printgetFileResult(result){
-    console.log(result);
+    //console.log(result);
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = URL.createObjectURL(result);

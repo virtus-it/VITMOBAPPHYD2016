@@ -56,17 +56,17 @@ buttonValue:any= ""
     else{
       input={"User":{"transtype":"create","address":"","latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.userid,"apptype":this.authenticationService.appType()}};
     }
-    console.log(input);
+    //console.log(input);
     this.distributorService.StockPoint(input)
     .subscribe(
     output => this.createAndUpdateStockPointResult(output),
     error => {
-    console.log("falied");
+    //console.log("falied");
     });
   }
 }
   createAndUpdateStockPointResult(result){
-    console.log(result);
+    //console.log(result);
       if(result.result == 'success'){
          this.thisDialogRef.close('success');
    }
@@ -114,7 +114,7 @@ buttonValue:any= ""
   }
 
   ngOnInit() {
-    console.log(this.Details);
+    //console.log(this.Details);
     if(this.Details.id){
       this.getMarker();
     }
@@ -128,7 +128,7 @@ buttonValue:any= ""
 
 
 // getLatLan(address: string) {
-//   console.log('Getting Address - ', address);
+//   //console.log('Getting Address - ', address);
 //   let geocoder = new google.maps.Geocoder();
 //   return Observable.create(observer => {
 //       geocoder.geocode( { 'address': address}, function(results, status) {
@@ -136,7 +136,7 @@ buttonValue:any= ""
 //               observer.next(results[0].geometry.location);
 //               observer.complete();
 //           } else {
-//               console.log('Error - ', results, ' & Status - ', status);
+//               //console.log('Error - ', results, ' & Status - ', status);
 //               observer.next({});
 //               observer.complete();
 //           }
@@ -147,7 +147,7 @@ buttonValue:any= ""
 
 // getAddress(){
 //   this.mapsAPILoader.load().then(() => {
-//     console.log('google script loaded');
+//     //console.log('google script loaded');
 //     var geocoder = new google.maps.Geocoder();
 //     this.Address=geocoder;
 //   });
@@ -160,16 +160,16 @@ buttonValue:any= ""
 
       // getAllStockPoints(){
   //   let input={"User":{"userid":this.Details.userid,"transtype":"getall","apptype":this.authenticationService.appType()}};
-  //   console.log(input);
+  //   //console.log(input);
   //   // this.distributorService.StockPoint(input)
   //   // .subscribe(
   //   // output => this.getAllStockPointsResult(output),
   //   // error => {
-  //   //     console.log("falied");
+  //   //     //console.log("falied");
   //   // });
   //  }
   //  getAllStockPointsResult(result){
-  //    console.log(result);
+  //    //console.log(result);
   //    if(result.result == 'success'){
  
   //    }
@@ -200,7 +200,7 @@ buttonValue:any= ""
 
 
 // getLatLan(address: string) {
-//   console.log('Getting Address - ', address);
+//   //console.log('Getting Address - ', address);
 //   let geocoder = new google.maps.Geocoder();
 //   return Observable.create(observer => {
 //       geocoder.geocode( { 'address': address}, function(results, status) {
@@ -208,7 +208,7 @@ buttonValue:any= ""
 //               observer.next(results[0].geometry.location);
 //               observer.complete();
 //           } else {
-//               console.log('Error - ', results, ' & Status - ', status);
+//               //console.log('Error - ', results, ' & Status - ', status);
 //               observer.next({});
 //               observer.complete();
 //           }

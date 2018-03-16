@@ -19,16 +19,16 @@ export class PasswordupdateComponent implements OnInit {
 
   updatePassword(){
     let input={"User":{"userid":this.authenticationService.loggedInUserId(),"user_type":"dealer","oldpwd":this.checkPassword.oldpassword,"pwd":this.checkPassword.newpassword,"apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
       output => this.updatePasswordResult(output),
       error => {
-        console.log("error in updating profile");
+        //console.log("error in updating profile");
       });
   }
   updatePasswordResult(result){
-    console.log(result);
+    //console.log(result);
     if (result.result == 'success') {
       this.passwordUpdated = true;
       // this.thisDialogRef.close('success');

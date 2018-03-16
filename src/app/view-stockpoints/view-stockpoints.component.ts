@@ -54,16 +54,16 @@ noDataError:any="";
 
  deleteStockPoint(data){
    let input={"User":{"transtype":"delete","id":data.id}};
-   console.log(input);
+   //console.log(input);
    this.distributorService.StockPoint(input)
    .subscribe(
    output => this.deleteStockPointResult(output),
    error => {
-       console.log("falied");
+       //console.log("falied");
    });
  }
  deleteStockPointResult(result){
-  console.log(result);
+  //console.log(result);
   if(result.result == 'success'){
     this.getAllStockPoints();
   }
@@ -74,16 +74,16 @@ noDataError:any="";
 
   getAllStockPoints(){
     let input={"User":{"userid":this.Details.userid,"transtype":"getall","apptype":this.authenticationService.appType()}};
-    console.log(input);
+    //console.log(input);
     this.distributorService.StockPoint(input)
     .subscribe(
     output => this.getAllStockPointsResult(output),
     error => {
-        console.log("falied");
+        //console.log("falied");
     });
    }
    getAllStockPointsResult(result){
-     console.log(result);
+     //console.log(result);
      if(result.result == 'success'){
        this.stockpoints=result.data;
        this.noDataError="";
@@ -101,7 +101,7 @@ noDataError:any="";
       data: Details
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
       this.getAllStockPoints();
       }
@@ -116,7 +116,7 @@ noDataError:any="";
       data: data
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getAllStockPoints();
       }
@@ -131,7 +131,7 @@ noDataError:any="";
   
   ngOnInit() {
     this.getAllStockPoints();
-    console.log(this.Details);
+    //console.log(this.Details);
     
   }
 

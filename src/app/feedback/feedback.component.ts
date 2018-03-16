@@ -31,14 +31,14 @@ export class FeedbackComponent implements OnInit {
       .subscribe(
       output => this.getAllFeedbackResult(output),
       error => {
-        console.log("error in feedbacklist");
+        //console.log("error in feedbacklist");
         this.loaderService.display(false);
       });
 
   }
 
   getAllFeedbackResult(result) {
-    console.log(result)
+    //console.log(result)
     if (result.result == "success") {
       this.feedbackList = result.data;
       this.feedbackListCopy = result.data;
@@ -67,37 +67,37 @@ export class FeedbackComponent implements OnInit {
 
 
   openStatus(feed) {
-    console.log(feed);
+    //console.log(feed);
     let input = { "root": { "issueid": feed.issueid, "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "status": "close" } };
     this.feedbackService.openAndCloseStatus(input)
       .subscribe(
       output => this.openStatusResult(output),
       error => {
-        console.log("error in open status");
+        //console.log("error in open status");
         this.loaderService.display(false);
       });
 
   }
   openStatusResult(result) {
-    console.log(result)
+    //console.log(result)
     if (result.result == 'success') {
       this.getAllFeedback();
 
     }
   }
   closeStatus(feed) {
-    console.log(feed);
+    //console.log(feed);
     let input = { "root": { "issueid": feed.issueid, "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "status": "open" } };
     this.feedbackService.openAndCloseStatus(input)
       .subscribe(
       Output => this.closeStatusResult(Output),
       error => {
-        console.log("error in close status");
+        //console.log("error in close status");
         this.loaderService.display(false);
       });
   }
   closeStatusResult(result) {
-    console.log(result)
+    //console.log(result)
     if (result.result == 'success') {
       this.getAllFeedback();
 
@@ -110,7 +110,7 @@ export class FeedbackComponent implements OnInit {
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.getAllFeedback();
 
@@ -121,7 +121,7 @@ export class FeedbackComponent implements OnInit {
 
   refresh(){
     this.getAllFeedback();
-    // console.log(result);
+    // //console.log(result);
   }
   
   ngOnInit() {

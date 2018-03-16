@@ -103,7 +103,7 @@ getPrintFile(path: string):Observable<Blob>{
   let options = new RequestOptions({ headers: headers });
   return this.http.put(this.apiUrl + '/scheduler', bodyString, options)
       .map((res: Response) => res.json())
-      .do(data => console.log('All: ' + JSON.stringify(data)))
+      .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 

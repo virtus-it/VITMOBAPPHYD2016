@@ -23,12 +23,12 @@ export class ProductUpdateComponent implements OnInit {
       .subscribe(
       output => this.updateStatusResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
       });
 
   }
   updateStatusResult(result) {
-console.log(result);
+//console.log(result);
 if (result.result == 'success') {
   this.thisDialogRef.close('success');
 }
@@ -38,7 +38,7 @@ if (result.result == 'success') {
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
-    console.log(this.Details);
+    //console.log(this.Details);
     this.stockStatusValue = this.Details.stockstatus;
   }
 

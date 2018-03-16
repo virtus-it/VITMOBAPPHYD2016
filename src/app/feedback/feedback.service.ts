@@ -19,7 +19,7 @@ export class FeedbackService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/getfeed_back', bodyString, options)
         .map((res: Response) => res.json())
-        .do(data => console.log('All: ' + JSON.stringify(data)))
+        .do(data => console.log('All: '))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
   }
@@ -30,7 +30,7 @@ export class FeedbackService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/changeissuestatus', bodyString, options)
         .map((res: Response) => res.json())
-        .do(data => console.log('All: ' + JSON.stringify(data)))
+        .do(data => console.log('All: ' ))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
   createReplyToFeedback(input){
@@ -39,7 +39,7 @@ export class FeedbackService {
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/createreplytoissue', bodyString, options)
         .map((res: Response) => res.json())
-        .do(data => console.log('All: ' + JSON.stringify(data)))
+        .do(data => console.log('All: ' ))
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
   

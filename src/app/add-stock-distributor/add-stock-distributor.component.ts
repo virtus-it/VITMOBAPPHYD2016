@@ -25,13 +25,13 @@ export class AddStockDistributorComponent implements OnInit {
       .subscribe(
       output => this.getProductsResult(output),
       error => {
-        console.log("error in order details");
+        //console.log("error in order details");
         this.loaderService.display(false);
       });
   }
   getProductsResult(result) {
     
-    console.log("result of products",result);
+    //console.log("result of products",result);
     if (result.data && result.data.length > 0) {
       let orderdata = this.details;
       
@@ -48,7 +48,7 @@ export class AddStockDistributorComponent implements OnInit {
 
       });
       this.ProductsList= inputData;
-      console.log(this.ProductsList);
+      //console.log(this.ProductsList);
 
     }
     this.loaderService.display(false);
@@ -62,18 +62,18 @@ export class AddStockDistributorComponent implements OnInit {
       }
     
     });
-    console.log(input);
+    //console.log(input);
     this.distributorService.setStockdistributor(input)
     .subscribe(
     output => this.setStockForDistributorResult(output),
     error => {
-      console.log("error in order details");
+      //console.log("error in order details");
       this.loaderService.display(false);
     });
   }
 
   setStockForDistributorResult(result){
-    console.log(result);
+    //console.log(result);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
     }

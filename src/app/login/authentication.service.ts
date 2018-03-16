@@ -29,7 +29,7 @@ export class AuthenticationService {
                 this.loggedIn = true;
                  return res.json();
             })
-            .do(data => console.log('All: ' + JSON.stringify(data)))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getDashboardDetails(input) {

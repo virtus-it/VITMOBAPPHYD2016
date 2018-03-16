@@ -37,10 +37,10 @@ export class CustomerDetailDailogComponent implements OnInit {
 
 
   findDistributors(name: string) {
-    console.log(name);
+    //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    console.log(finalDistributors);
+    //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 
@@ -81,18 +81,18 @@ export class CustomerDetailDailogComponent implements OnInit {
       input.root.lastuserid = null;
     }
 
-    console.log(input);
+    //console.log(input);
     this.loaderService.display(true);
     this.distributorService.getAllDistributors(input)
       .subscribe(
       output => this.getDistributorsResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
   }
   getDistributorsResult(data) {
-    console.log(data);
+    //console.log(data);
     this.loaderService.display(false);
     if (data.result == 'success') {
       let distributorCopy = [];
@@ -126,12 +126,12 @@ export class CustomerDetailDailogComponent implements OnInit {
       .subscribe(
       output => this.getCustomerOrderResult(output),
       error => {
-        console.log("error in order details");
+        //console.log("error in order details");
         this.loaderService.display(false);
       });
   }
   getCustomerOrderResult(result) {
-    console.log(result);
+    //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.customerOrderDetails = result.data;
@@ -151,7 +151,7 @@ export class CustomerDetailDailogComponent implements OnInit {
         data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
 
       if(result == 'success'){
         this.forWardOrder();
@@ -177,7 +177,7 @@ export class CustomerDetailDailogComponent implements OnInit {
       .subscribe(
       output => this.forWordOrderResult(output),
       error => {
-        console.log("error in distrbutors");
+        //console.log("error in distrbutors");
         this.loaderService.display(false);
       });
 
@@ -193,7 +193,7 @@ export class CustomerDetailDailogComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    console.log(this.orderDetail);
+    //console.log(this.orderDetail);
     this.getCustomerOrder();
     this.getDistributors();
   }

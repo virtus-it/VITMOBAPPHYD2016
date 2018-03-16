@@ -29,7 +29,7 @@ export class AddproductconfirmComponent implements OnInit {
         data: data
     });
     dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if(result == "success"){
           this.thisDialogRef.close("success");
         }
@@ -47,7 +47,7 @@ export class AddproductconfirmComponent implements OnInit {
       data: data
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if(result =="success"){
         this.thisDialogRef.close("success");
       }
@@ -65,7 +65,7 @@ export class AddproductconfirmComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.Details);
+    //console.log(this.Details);
   }
 
 }

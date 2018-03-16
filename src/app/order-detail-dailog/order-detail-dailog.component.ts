@@ -32,7 +32,7 @@ showCustomerDetails(orderData) {
         data: orderData
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        ////console.log(`Dialog closed: ${result}`);
 
 
     });
@@ -45,7 +45,7 @@ editCan(orderData) {
         data: this.customerProductDetailsCopy
     });
     dialogRefEditCan.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        ////console.log(`Dialog closed: ${result}`);
         if (result == 'success') {
             this.getProductsListByCustomerId();
         }
@@ -59,7 +59,7 @@ onHoldStatus(orderData) {
         data: orderData
     });
     dialogRefonHoldStatus.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        ////console.log(`Dialog closed: ${result}`);
         if (result == 'success') {
             this.getOrderDetailsById();
         }
@@ -73,7 +73,7 @@ editStatus(orderData) {
         data: orderData
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        ////console.log(`Dialog closed: ${result}`);
         if (result == 'success') {
             this.getOrderDetailsById();
             this.getProductsListByCustomerId();
@@ -83,20 +83,20 @@ editStatus(orderData) {
 
 }
 getOrderDetailsById() {
-    console.log(this.orderDetail);
+    ////console.log(this.orderDetail);
     this.loaderService.display(true);
     let input = { orderId: this.orderDetail.order_id, appType: this.authenticationService.appType(), userId: this.authenticationService.loggedInUserId() };
     this.orderLandingService.getOrderById(input)
         .subscribe(
         output => this.getOrderDetailsByIdResult(output),
         error => {
-            console.log("error in order details");
+            ////console.log("error in order details");
             this.loaderService.display(false);
         });
 }
 getOrderDetailsByIdResult(result) {
     this.loaderService.display(false);
-    console.log(result);
+    ////console.log(result);
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
         if (this.dailogOrderDetails .status == "onhold") {
@@ -139,7 +139,7 @@ getOrderDetailsByIdResult(result) {
             this.dailogOrderDetails .OrderModifiedStatus = "Assign";
             this.dailogOrderDetails .StatusColor = "logo-color";
           }
-        console.log(this.dailogOrderDetails);
+        ////console.log(this.dailogOrderDetails);
     }
 }
 getProductsListByCustomerId() {
@@ -149,7 +149,7 @@ getProductsListByCustomerId() {
         .subscribe(
         output => this.getProductsListByCustomerIdResult(output),
         error => {
-            console.log("error in order details");
+            ////console.log("error in order details");
             this.loaderService.display(false);
         });
 
@@ -158,7 +158,7 @@ getProductsListByCustomerIdResult(result) {
     this.loaderService.display(false);
     this.customerAddressDetails =result.data.user.address;
     if (result.data.user.stock && result.data.user.stock.length > 0) {
-        console.log(result.data.user.stock);
+        ////console.log(result.data.user.stock);
         this.customerProductDetails = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
         this.customerProductDetailsCopy = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
         _.each(this.customerProductDetails, function (i, j)  {
@@ -182,12 +182,12 @@ sendMessage(){
     .subscribe(
     output => this.sendMessageResult(output),
     error => {
-        console.log("error in order details");
+        ////console.log("error in order details");
     });
 }
 sendMessageResult(result){
     this.loaderService.display(false);
-    console.log(result);
+    ////console.log(result);
     if(result.result == 'success'){
         this.messageInput.order.reason = "";
         this.getOrderDetailsById();
@@ -210,18 +210,18 @@ deliveryStatus(){
 //test function
 // getUserDetails(){
 //     let input={"User":{"userid": this.orderDetail.order_by,"mobileno":this.orderDetail.customer.mobileno,"emailid":this.orderDetail.customer.emailid,"loginid":this.authenticationService.loggedInUserId()}};
-//     console.log(input);
+//     ////console.log(input);
 
 //     this.orderLandingService.getUserDetails(input)
 //     .subscribe(
 //     output => this.getUserDetailsResult(output),
 //     error => {
-//         console.log("error in order details");
+//         ////console.log("error in order details");
 //         this.loaderService.display(false);
 //     });
 // }
 // getUserDetailsResult(result){
-//     console.log(result);
+//     ////console.log(result);
 // }
 
 
@@ -229,7 +229,7 @@ ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     this.deliveryStatus();
-    console.log(this.orderDetail);
+    ////console.log(this.orderDetail);
     // this.getUserDetails();
 }
 

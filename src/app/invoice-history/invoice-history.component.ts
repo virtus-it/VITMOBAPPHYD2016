@@ -21,7 +21,7 @@ this.reportservice.invoiceHistory(input)
 .subscribe(
 output => this.getInvoiceHistoryResult(output),
 error => {
-  console.log("error in distrbutors");
+  //console.log("error in distrbutors");
   this.loaderService.display(false);
 });
   }

@@ -44,7 +44,7 @@ export class MapDialogComponent implements OnInit {
         //this.map.data.add({ geometry: new google.maps.Data.Polygon([triangleCoords]) })
 
         google.maps.event.addListener(this.map.data, "dblclick", function (event) {
-            console.log("dblclick");
+            //console.log("dblclick");
             // event.setMap(null);
             this.map.data.remove(event.feature);
         });
@@ -81,18 +81,18 @@ export class MapDialogComponent implements OnInit {
             .subscribe(
             output => this.getPolygonDataResult(output, dataLayer),
             error => {
-                console.log("Logged in falied");
+                //console.log("Logged in falied");
                 this.loaderService.display(false);
             });
     }
     getPolygonDataResult(output, dataLayer) {
         this.loaderService.display(false);
-        console.log(output);
+        //console.log(output);
         //9863636315
         //paani
         if (output.data && output.data.length > 0) {
             for (let data of output.data) {
-                console.log(data.polygonvalue[0].path);
+                //console.log(data.polygonvalue[0].path);
                 if (data.polygonvalue && data.polygonvalue.length > 0) {
                     for (let polygon of data.polygonvalue) {
                         dataLayer.add({ geometry: new google.maps.Data.Polygon([polygon.path]) })
@@ -113,7 +113,7 @@ export class MapDialogComponent implements OnInit {
 
 
         this.map.data.toGeoJson(function (json) {
-            console.log(json.features);
+            //console.log(json.features);
             localStorage.setItem('geoData', JSON.stringify(json));
 
         });
@@ -144,7 +144,7 @@ export class MapDialogComponent implements OnInit {
             }
             let polygon = Object.assign({}, this.polygonArray);
             input.area.polygonvalue.push(polygon);
-            console.log(input);
+            //console.log(input);
             this.polygonArray.path = [];
         }
         localStorage.setItem('geoData', '');
@@ -152,7 +152,7 @@ export class MapDialogComponent implements OnInit {
             .subscribe(
             output => this.saveDataResult(output),
             error => {
-                console.log("Logged in falied");
+                //console.log("Logged in falied");
                 this.loaderService.display(false);
             });
     }
@@ -172,7 +172,7 @@ export class MapDialogComponent implements OnInit {
     // }
    
     ngOnInit() {
-        console.log(this.distributorDetails);
+        //console.log(this.distributorDetails);
         this.loader.load().then(() => {
             this.initMap();
         });

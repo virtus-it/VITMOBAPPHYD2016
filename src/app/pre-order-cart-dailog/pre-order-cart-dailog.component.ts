@@ -81,14 +81,14 @@ export class PreOrderCartDailogComponent implements OnInit {
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
       }
-    console.log(data);
+    //console.log(data);
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
         width: '600px',
         data: data
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        console.log(`Dialog closed: ${result}`);
+        //console.log(`Dialog closed: ${result}`);
         if(result == "success"){
           this.thisDialogRef.close('success');
         }
@@ -109,16 +109,16 @@ export class PreOrderCartDailogComponent implements OnInit {
 
 getDistributors() {
   let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
-  console.log(input);
+  //console.log(input);
   this.distributorService.getAllDistributors(input)
     .subscribe(
     output => this.getDistributorsResult(output),
     error => {
-      console.log("error in distrbutors");
+      //console.log("error in distrbutors");
     });
 }
 getDistributorsResult(data) {
-  console.log(data);
+  //console.log(data);
   if (data.result == 'success') {
     let distributorCopy = [];
 
@@ -138,10 +138,10 @@ getDistributorsResult(data) {
 //filtered distributors
 
 filterDistributors(name: string) {
-  console.log(name);
+  //console.log(name);
   let finalDistributors = this.distributors.filter(dist =>
     dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-  console.log(finalDistributors);
+  //console.log(finalDistributors);
   if (finalDistributors && finalDistributors.length > 0) {
     let findDistributor: any = {};
 
@@ -173,19 +173,19 @@ filterDistributors(name: string) {
 //     .subscribe(
 //     output => this.getProductsResult(output),
 //     error => {
-//       console.log("error");
+//       //console.log("error");
 //       this.loaderService.display(false);
 //     });
 
 // }
 // getProductsResult(result) {
-//   console.log(result);
+//   //console.log(result);
 //   this.productList= [];
 //   if(result.result == 'success'){
 //    // let productCopy = [];
 //     for (let details of result.data) {
 //       //let details: any = i;
-//       console.log(result.data);
+//       //console.log(result.data);
       
 //       let findproduct = _.find(this.productList, function (k, l) {
 //         let productDetails: any = k;
@@ -204,7 +204,7 @@ filterDistributors(name: string) {
 //       }
      
 //     }
-//     console.log("products list ",this.productList)
+//     //console.log("products list ",this.productList)
 
 //   }
 // }
@@ -212,7 +212,7 @@ filterDistributors(name: string) {
 getProductsList() {
   this.loaderService.display(true);
   let input = { apptype: this.authenticationService.appType(), userid: this.Details.userid, delearId:0};
-  console.log(input);
+  //console.log(input);
   if(this.Details.dealers){
     input.delearId= this.Details.dealers.user_id;
   }
@@ -223,13 +223,13 @@ getProductsList() {
     .subscribe(
     output => this.getProductsListResult(output),
     error => {
-      console.log("error in distrbutors");
+      //console.log("error in distrbutors");
       this.loaderService.display(false);
     });
 
 }
 getProductsListResult(result) {
-  console.log("distributor products list", result);
+  //console.log("distributor products list", result);
   if (result.result == 'success') {
     let productListCopy = [];
     _.each(result.data.products, function (i, j) {
@@ -248,7 +248,7 @@ getProductsListResult(result) {
     });
     for (let details of productListCopy) {
            
-            console.log(result.data);
+            //console.log(result.data);
             
             let findproduct = _.find(this.productList, function (k, l) {
               let productDetails: any = k;
@@ -270,7 +270,7 @@ getProductsListResult(result) {
            
           }
    // this.productList = productListCopy;
-    console.log(this.productList);
+    //console.log(this.productList);
 }
 
 }
@@ -282,7 +282,7 @@ ViewDistributors(data) {
       data: data
   });
   dialogRefDist.afterClosed().subscribe(result => {
-      console.log(`Dialog closed: ${result}`);
+      //console.log(`Dialog closed: ${result}`);
       if(result =='success'){
         this.thisDialogRef.close('success');
         
@@ -300,7 +300,7 @@ onCloseCancel(){
 
 createPreOrder(){
   if(this.validate() && this.validate1()){
-  console.log(this.createPreOrderInput);
+  //console.log(this.createPreOrderInput);
   
   let input =[{"order":
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
@@ -316,18 +316,18 @@ createPreOrder(){
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
   }
-  console.log(input);
+  //console.log(input);
 
 
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
   
-  console.log(input);
+  //console.log(input);
   this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output,input),
     error => {
-      console.log("falied");
+      //console.log("falied");
       this.loaderService.display(false);
     });
 
@@ -337,7 +337,7 @@ createPreOrder(){
 // }
 }
 createPreOrderResult(result,input) {
-  console.log(result);
+  //console.log(result);
   if(result.result=='success'){
     let productid= "";
     let productName= "";
@@ -435,7 +435,7 @@ else{
 
 
   minOrderChanged( event){
-  console.log(event);
+  //console.log(event);
   _.each(this.productList, function(i,j){
     let details:any =i;
     _.each(i.data, function(k,l){
@@ -498,7 +498,7 @@ else{
     
     this.autoTimeSlotforHour();
     this.getProductsList();
-    console.log(this.Details);
+    //console.log(this.Details);
   }
 
 }

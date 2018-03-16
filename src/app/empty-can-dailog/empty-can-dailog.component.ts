@@ -23,13 +23,13 @@ export class EmptyCanDailogComponent implements OnInit {
       .subscribe(
       output => this.getProductsResult(output),
       error => {
-        console.log("error in order details");
+        //console.log("error in order details");
         this.loaderService.display(false);
       });
   }
   getProductsResult(result) {
     
-    console.log(result);
+    //console.log(result);
     if (result.data && result.data.length > 0) {
       let orderdata = this.orderDetail;
       let canFormat = { "root": { "brandname":"","brandType":"","avaliablecans": "", "loginid": this.authenticationService.loggedInUserId(), "customerid": this.orderDetail.order_by, "dealerid": this.authenticationService.loggedInUserId(), "productid": "", "apptype": this.authenticationService.appType(), "createdthru": "website" } };
@@ -64,13 +64,13 @@ export class EmptyCanDailogComponent implements OnInit {
     .subscribe(
     output => this.updateCanQuantityResult(output),
     error => {
-      console.log("error in order details");
+      //console.log("error in order details");
       this.loaderService.display(false);
     });
   }
   updateCanQuantityResult(result){
     this.loaderService.display(false);
-    console.log(result);
+    //console.log(result);
     if(result.result = 'success'){
       this.thisDialogRef.close('success');
     }
@@ -81,7 +81,7 @@ export class EmptyCanDailogComponent implements OnInit {
   ngOnInit() {
 
     this.getProducts();
-    console.log(this.orderDetail);
+    //console.log(this.orderDetail);
   }
 
 }
