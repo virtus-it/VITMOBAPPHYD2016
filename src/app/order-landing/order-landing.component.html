@@ -332,21 +332,6 @@
                     </div>
                   </div>
                   <div class="form-group row ">
-                      <div class="col-sm-8  col-md-8  col-lg-8 left">
-                        <span class="td-label">
-                          Express Delivery charges </span>
-                        <br>
-                        <b>Rs.{{forward.expressdeliverycharges}}</b>
-                      </div>
-                      <div class="col-sm-4  col-md-4  col-lg-4 right">
-                        <span class="td-label">Service charges </span>
-                        <br>
-                        <b class="pdright-5">Rs.{{forward.servicecharges}}</b>
-                      </div>
-                    </div>
-
-
-                  <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name</span>
                       <br>
@@ -359,7 +344,7 @@
                     </div>
                   </div>
 
-                  <div class="row ">
+                  <div class="row form-group">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Product Type </span>
                       <br>
@@ -371,23 +356,60 @@
                       <b class="pdright-5">{{forward.paymenttype}}</b>
                     </div>
                   </div>
-
+                  <div class="row ">
+                    <div class="col-sm-8  col-md-8  col-lg-8 left">
+                      <span class="td-label">
+                        Express Delivery charges </span>
+                      <br>
+                      <b>Rs.{{forward.expressdeliverycharges}}</b>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
+                      <span class="td-label">Service charges </span>
+                      <br>
+                      <b class="pdright-5">Rs.{{forward.servicecharges}}</b>
+                    </div>
+                  </div>
                 </div>
               </td>
               <td width="32%" class="brd-right">
-                <div class="">
+                  <div class="row form-group">
+                      <div class="col-sm-5  col-md-5  col-lg-5 left">
+                        <span class="td-label">
+                           Mobile</span>
+                        <br>
+                        <b>{{forward.orderby_mobileno}}</b>
+                      </div>
+                      <div class="col-sm-7  col-md-7  col-lg-7 right">
+                          <span class="td-label">Delivery Time</span>                       
+                          <br>
+                        <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
+                      </div>
+                    </div>
 
+                      <div class="row form-group">
+                          <div class="col left">
+                            <span class="td-label">
+                                Address</span>
+                            <br>
+                            <b class="capitalize">{{forward.orderby_address}}</b>       
+                                         </div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-sm-4  col-md-4  col-lg-4 left">
+                                <span class="td-label">
+                                    Supplier Code</span>
+                                 <br>
+                                 <span class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</span>
+                                </div>
+                                <div class="col-sm-8  col-md-8  col-lg-8 right" *ngIf="forward.customersource != 'DistributorCustomer'"> 
+                                <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
+                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                            
+                                        <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
+                                      <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                                      </div>
+                              </div>
                   <!-- <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-user pdtop-5" aria-hidden="true"></i>
-                      </b>
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{forward.orderby_firstname}} {{forward.orderby_lastname}}</b>
-                    </div>
-                  </div> -->
-                  <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
                         <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
@@ -397,8 +419,9 @@
                     <div class="col-sm-10  col-md-10  col-lg-10 left">
                       <b>{{forward.orderby_mobileno}}</b>
                     </div>
-                  </div>
-                  <div class="form-group row ">
+                  </div> -->
+  
+                  <!-- <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1 ">
                       <b>
                         <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
@@ -408,16 +431,16 @@
                     <div class="col-sm-10  col-md-10  col-lg-10 left">
                       <b class="capitalize">{{forward.orderby_address}}</b>
                     </div>
-                  </div>
-                  <div class="form-group row ">
+                  </div> -->
+                  <!-- <div class="form-group row ">
                     <div class="col-sm-5 col-md-5  col-lg-5">
                       <span class="td-label">Delivery Time</span>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 row">
                       <label class="left danger">{{forward.delivery_exceptedtime}}</label>
                     </div>
-                  </div>
-
+                  </div> -->
+<!-- 
                   <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
                           <label class="td-label" >Associated Distributor:</label>
@@ -426,15 +449,6 @@
                         <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</label>
                       </div>
                     </div>
-                    <!-- <div class="  row ">
-                      <div class="col-sm-5  col-md-5  col-lg-5 left">
-                        <label class="td-label" *ngIf="superDealer">
-                        Distributor Mobile</label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 left row">
-                        <label class="capitalize" *ngIf="forward.distributor">{{forward.distributor.mobileno }}</label>
-                      </div>
-                    </div> -->
                     <div class="  row ">
                         <div class="col-sm-5  col-md-5  col-lg-5 left">
                           <label class="td-label" *ngIf="superDealer">
@@ -443,22 +457,68 @@
                         <div class="col-sm-7  col-md-7  col-lg-7 left row">
                           <label class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</label>
                         </div>
-                      </div>
-
-                </div>
+                      </div> -->
 
               </td>
 
               <td width="33%">
                 <div class="">
-                  <div class=" row ">
+                    <div class="row form-group">
+                        <div class="col-sm-5  col-md-5  col-lg-5 left">
+                          <span class="td-label">
+                              Mobile</span>
+                          <br>
+                          <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
+                        </div>
+                        <div class="col-sm-7  col-md-7  col-lg-7 right">
+                            <span class="td-label">Associated Distributor</span>
+                            <br>
+                            <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">
+                              <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                              <span *ngIf="!forward.distributor">-</span></label>
+                     
+                           </div>
+                      </div>
+                      <div class="row form-group">
+                          <div class="col-sm-5  col-md-5  col-lg-5 left">
+                            <span class="td-label">
+                                Supplier Name</span>
+                            <br>
+                            <b class="capitalize" *ngIf="forward.supplierdetails"> {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
+                          </div>
+                          <div class="col-sm-7  col-md-7  col-lg-7 right">
+                              <span class="td-label">
+                                  Supplier Mobile</span>
+                              <br>
+                              <span class="left" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
+                                  <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
+                                </span>
+                             </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-sm-5  col-md-5  col-lg-5 left">
+                              <span class="td-label">
+                                  Delivered On </span>
+                              <br>
+                              <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
+                            </div>
+                            <div class="col-sm-7  col-md-7  col-lg-7 right">
+                                <span class="td-label">
+                                    Assigned On</span>
+                                    <br>
+                                    <span class="" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
+                                        <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
+                                      </span>
+                               </div>
+                          </div>
+
+                  <!-- <div class=" row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
 
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <!-- <span *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</span> -->
                       <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
                       <b></b>
                     </div>
@@ -471,18 +531,10 @@
                     <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
                       <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                     </div>
-                  </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
+                  </div> -->
+    
 
-                    </div>
-                  </div>
-                  <div class="  row ">
+                  <!-- <div class="  row ">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <label class="td-label">
                         <i class="fa fa-reply " aria-hidden="true"> </i> Supplier Name</label>
@@ -499,7 +551,7 @@
                       <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
                         <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
                       </div>
-                    </div>
+                    </div> -->
 
                   <!-- <div class="form-group row ">
                     <div class="col-sm-5 col-md-5  col-lg-5">
@@ -523,12 +575,7 @@
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                       <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(distributors)">
                         <i class="" aria-hidden="true"></i> Distributor Details </button>
-                      <div class="row" *ngIf="forward.customersource != 'DistributorCustomer'">
-                          <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
-                              <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                            <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
-                                <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
-                        </div>
+    
                   </div>             
                 </div>
               </td>
@@ -647,22 +694,6 @@
                       <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges }}</b>
                     </div>
                   </div>
-
-                  <div class="form-group row ">
-                      <div class="col-sm-8  col-md-8  col-lg-8 left">
-                        <span class="td-label">
-                          Express Delivery charges </span>
-                        <br>
-                        <b>Rs.{{allorder.expressdeliverycharges}}</b>
-                      </div>
-                      <div class="col-sm-4  col-md-4  col-lg-4 right">
-                        <span class="td-label">Service charges </span>
-                        <br>
-                        <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
-                      </div>
-                    </div>
-
-
                   <div class="form-group row ">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name </span>
@@ -676,7 +707,7 @@
                     </div>
                   </div>
 
-                  <div class="row ">
+                  <div class="row form-group">
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Product Type </span>
                       <br>
@@ -689,6 +720,19 @@
                     </div>
                   </div>
 
+                  <div class=" row ">
+                    <div class="col-sm-8  col-md-8  col-lg-8 left">
+                      <span class="td-label">
+                        Express Delivery charges </span>
+                      <br>
+                      <b>Rs.{{allorder.expressdeliverycharges}}</b>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
+                      <span class="td-label">Service charges </span>
+                      <br>
+                      <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
+                    </div>
+                  </div>
                 </div>
               </td>
               <td width="32%" class="brd-right">

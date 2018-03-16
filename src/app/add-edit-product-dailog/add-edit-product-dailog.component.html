@@ -19,19 +19,7 @@
                 </md-option>
           </md-select>
         </div>
-        <div class="col-md-4 col-sm-4 col-lg-4 ">
-            
-                      <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Product Name"  [(ngModel)]="productDetails.productName" name="productName"> 
-                      
-                      </md-form-field>
-                    </div>
-                    <div class="col-md-4 col-sm-4 col-lg-4 ">
-                      <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Product Type" [(ngModel)]="productDetails.productType" name="productType">
-                       
-                      </md-form-field>
-                    </div>
+        <div class="col-md-4 col-sm-4 col-lg-4" *ngIf="!Details">
 
             <md-select placeholder="Select Currency" name="type" class="full-width left" [(ngModel)]="productDetails.currency" name="currency">
               <md-option value="USD">USD</md-option>
@@ -62,6 +50,7 @@
         </div> -->
       </div>
       <div class="row ">
+          <div class="col-md-4 col-sm-4 col-lg-4 ">
 
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Product Name" [formControl]="p2FC"  [(ngModel)]="productDetails.productName" name="productName" > 
@@ -89,6 +78,9 @@
             
             </md-form-field>
           </div>
+      </div>
+
+      <div class="row form-group">
           <div class="col-md-4 col-sm-4 col-lg-4">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Min Qty"  [formControl]="p5FC" [(ngModel)]="productDetails.minQty" name="minqty">
@@ -98,26 +90,6 @@
                 
               </md-form-field>
             </div>
-                        <div class="col-md-4 col-sm-4 col-lg-4">
-                            <md-form-field class="">
-                              <input class="form-control" mdInput placeholder="Priority" [(ngModel)]="productDetails.Priority" name="priority">
-                            
-                            </md-form-field>
-                          </div>
-           
-      </div>
-
-      <div class="row form-group">
-
-            <div class="col-md-4 col-sm-4 col-lg-4" *ngIf="!Details">
-                
-                            <md-select placeholder="Select Currency" name="type" class="full-width left" [(ngModel)]="productDetails.currency" name="currency">
-                              <md-option value="USD">USD</md-option>
-                              <md-option value="EUR">EUR</md-option>
-                              <md-option value="INR">INR</md-option>
-                              <md-option value="SAR">SAR</md-option>
-                            </md-select>
-                          </div>
             <div class="col-md-4 col-sm-4 col-lg-4">
                 <md-form-field class="">
                   <input class="form-control" mdInput placeholder="Service Charge"   [formControl]="p6FC" [(ngModel)]="productDetails.servicecharge" name="servicecharge">
