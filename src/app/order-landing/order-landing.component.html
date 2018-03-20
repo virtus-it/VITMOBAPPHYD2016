@@ -1,13 +1,5 @@
 <div class="dist-style minheight-500">
-  <!-- <div class=" row justify-content-between distIcon-style">
-    <div class="col-md-2  col-sm-2  col-lg-2">
-      <h4>
-        <i class="fa fa-file-text-o"></i> Order</h4>
-    </div>
-    <div class="col-md-2  col-sm-2  col-lg-2">
 
-    </div>
-  </div> -->
   <div id="" class="row mg-0 ">
     <div class="col padding-0">
       <div class="row pdtopbottom-12 align-items-center">
@@ -135,116 +127,13 @@
             </div>
           </a>&nbsp;
         </div>
-
-        
-      </div>
-      <!-- <nav class="nav nav-pills flex-column flex-sm-row">
-          <a class="flex-sm-fill  nav-link col-xs-5 col-sm-5 col-md-5 col-lg-5 pageTitle-style" href="javascript:void(0)">
-            <i class="fa fa-file-text-o"></i> Orders</a>
-          <a class="flex-sm-fill text-sm-center nav-link " *ngIf="superDealer" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
-            (click)="showTabPanel('forward')">FORWARD ORDERS</a>
-          <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
-            (click)="showTabPanel('allorder')">ALL ORDERS</a>
-          <a class="flex-sm-fill text-sm-center nav-link col-xs-3 col-sm-3 col-md-3 col-lg-3" href="javascript:void(0)"></a>
-          <a class="flex-sm-fill text-sm-center nav-link">
-            <i aria-hidden="true" class="fa fa-refresh logo-color " title="Refresh" (click)="clearFilter()"></i>
-          </a>
-          <a class="flex-sm-fill text-sm-center nav-link">
-            <i aria-hidden="true" class="fa fa-download logo-color " title="Download "></i>
-          </a>
-          <a class="flex-sm-fill text-sm-center nav-link">
-            <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
-
-
-            <div class="filterView" *ngIf="showFilterDailog">
-
-
-              <div class="height-500">
-
-
-                <div class="form-group">
-                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
-                    <md-option value="name">Customer Name</md-option>
-                    <md-option value="mobile">Customer Mobile</md-option>
-                    <md-option value="orderid">Order Id</md-option>
-                    <md-option value="status">Status</md-option>
-                    <md-option value="supplierid">Supplier</md-option>
-                    <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
-                  </md-select>
-
-                </div>
-
-                <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
-
-                  <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
-                  </md-form-field>
-                </div>
-                <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
-                  <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile">
-                  </md-form-field>
-                </div>
-                <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
-
-                  <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
-
-
-                  </md-form-field>
-                </div>
-
-                <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
-
-                  <md-form-field class="example-full-width">
-                    <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
-                    <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
-                        <span>{{ supplier.fullName }}</span>
-                      </md-option>
-                    </md-autocomplete>
-                  </md-form-field>
-                </div>
-                <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
-
-                  <md-form-field class="example-full-width">
-                    <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
-                    <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
-                        <span>{{ dist.fullName }}</span>
-                      </md-option>
-                    </md-autocomplete>
-                  </md-form-field>
-                </div>
-                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
-                  <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                    name="selectedItem"></angular2-multiselect>
-                </div>
-                <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
-                  <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                    name="selectedItem"></angular2-multiselect>
-                </div>
-                <br>
-                <div class="input-group pd-10  ">
-                  <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
-                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                  </button>
-                  <button md-raised-button color="primary" (click)="clearFilter()">
-                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </a>
-
-        </nav> -->
+         </div>
       <div *ngIf="tabPanelView === 'forward'" class="panelview-style">
         <table class="table table-hover table-striped">
-          <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
+          <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i" >
             <tr class="border-topbottom bg-eee">
-              <td width="25%">
-                <div class="row ">
+              <td width="25%" >
+                <div class="row " >
                   <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">
                       <!-- Order Id : -->Id :
@@ -384,6 +273,20 @@
                     <b>{{forward.ordered_date | utcDate }}</b>
                     </div>
                     </div>
+                    <div class="row form-group">
+                        
+                           <div class="col-sm-7  col-md-7  col-lg-7 left">
+                               <span class="td-label">Delivery Time</span>                       
+                               <br>
+                             <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
+                           </div>
+                           <div class="col-sm-5  col-md-5  col-lg-5 right">
+                               <span class="td-label">
+                                   Supplier Code</span>
+                                <br>
+                                <b class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</b>
+                               </div>
+                         </div>
                   <div class="row form-group">
                       <div class="col-5 left">
                           <span class="td-label">
@@ -393,28 +296,14 @@
                         </div>
 
                           <div class="col right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                            <span class="td-label">Asso Distributor</span>
+                            <span class="td-label">Ass Distributor</span>
                             <br>
-                            <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                            <b *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                           </div>
                           <div class="col right" *ngIf = "forward.customersource == 'MoyaCustomer'">
-                              <span class="td-label">Asso Distributor</span>
+                              <span class="td-label">Ass Distributor</span>
                               <br>
-                              <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
-                          </div>
-                    </div>
-                  <div class="row form-group">
-                   
-                      <div class="col-sm-7  col-md-7  col-lg-7 left">
-                          <span class="td-label">Delivery Time</span>                       
-                          <br>
-                        <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
-                      </div>
-                      <div class="col-sm-5  col-md-5  col-lg-5 right">
-                          <span class="td-label">
-                              Supplier Code</span>
-                           <br>
-                           <span class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</span>
+                              <b *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                           </div>
                     </div>
 
@@ -427,55 +316,7 @@
                               </div>
                 
                               </div>
-                  <!-- <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-mobile pdtop-5" aria-hidden="true"></i>
-                      </b>
 
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b>{{forward.orderby_mobileno}}</b>
-                    </div>
-                  </div> -->
-  
-                  <!-- <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1 ">
-                      <b>
-                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
-                      </b>
-
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{forward.orderby_address}}</b>
-                    </div>
-                  </div> -->
-                  <!-- <div class="form-group row ">
-                    <div class="col-sm-5 col-md-5  col-lg-5">
-                      <span class="td-label">Delivery Time</span>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 row">
-                      <label class="left danger">{{forward.delivery_exceptedtime}}</label>
-                    </div>
-                  </div> -->
-<!-- 
-                  <div class="form-group row ">
-                      <div class="col-sm-5 col-md-5  col-lg-5">
-                          <label class="td-label" >Associated Distributor:</label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 row">
-                        <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</label>
-                      </div>
-                    </div>
-                    <div class="  row ">
-                        <div class="col-sm-5  col-md-5  col-lg-5 left">
-                          <label class="td-label" *ngIf="superDealer">
-                          Code: </label>
-                        </div>
-                        <div class="col-sm-7  col-md-7  col-lg-7 left row">
-                          <label class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</label>
-                        </div>
-                      </div> -->
 
               </td>
 
@@ -528,57 +369,6 @@
                                 </div>
                           </div>
 
-                  <!-- <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile</label>
-
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
-                      <b></b>
-                    </div>
-                  </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On</label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
-                      <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
-                    </div>
-                  </div> -->
-    
-
-                  <!-- <div class="  row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-reply " aria-hidden="true"> </i> Supplier Name</label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                      <b class="capitalize" *ngIf="forward.supplierdetails"> {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
-                    </div>
-                  </div>
-                  <div class="  row ">
-                      <div class="col-sm-5  col-md-5  col-lg-5 left">
-                        <label class="td-label">
-                          <i  class="fa fa-mobile"  aria-hidden="true"> </i> Supplier Mobile: </label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 left onhovertext">
-                        <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
-                      </div>
-                    </div> -->
-
-                  <!-- <div class="form-group row ">
-                    <div class="col-sm-5 col-md-5  col-lg-5">
-                        <label class="td-label">
-                            <i class="fa fa fa-dot-circle-o"></i>
-                      Supplier Code</label> 
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 row">
-                      <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</label>
-                    </div>
-                  </div> -->
   
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
@@ -764,6 +554,18 @@
                               <b>{{allorder.ordered_date | utcDate}}</b>
                         </div>
                       </div>
+                      <div class=" row form-group">
+                          <div class="col-sm-7  col-md-7  col-lg-7 ">
+                            <span class="td-label">Delivery Time</span>
+                            <br>
+                            <b class="left danger">{{allorder.delivery_exceptedtime}}</b>                      
+                          </div>
+                          <div class="col-sm-5  col-md-5  col-lg-5 right">
+                              <span class="td-label">Supplier Code</span>
+                              <br>
+                            <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b> 
+                          </div>
+                        </div>
                     <div class="row form-group">
                         <div class="col-5 left">
                             <span class="td-label">
@@ -777,17 +579,6 @@
                           <b class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</b>
                         </div>    
                       </div>
-                  <!-- <div class="form-group row ">
-                    <div class="col-sm-1  col-md-1  col-lg-1">
-                      <b>
-                        <i class="fa fa-user pdtop-5" aria-hidden="true"></i>
-                      </b>
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{allorder.orderby_firstname}}</b>
-                    </div>
-                  </div> -->
-
                   <div class="form-group row ">
                     <div class="col">
                         <span class="td-label">
@@ -796,39 +587,6 @@
                       <b class="capitalize onhovertext300">{{allorder.orderby_address}}</b>
                     </div>
                   </div>
-                  <div class=" row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7 ">
-                      <span class="td-label">Delivery Time</span>
-                      <br>
-                      <b class="left danger">{{allorder.delivery_exceptedtime}}</b>                      
-                    </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right">
-                        <span class="td-label">Supplier Code</span>
-                        <br>
-                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b> 
-                    </div>
-                  </div>
-
-                    <!-- <div class="  row ">
-                      <div class="col-sm-5  col-md-5  col-lg-5 left">
-                        <label class="td-label" *ngIf="superDealer">
-                        Associated Distributor Mobile</label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 left row">
-                        <label class="" *ngIf="allorder.distributor">{{allorder.distributor.mobileno }}</label>
-                      </div>
-                    </div> -->
-
-                    <!-- <div class="  row ">
-                        <div class="col-sm-5  col-md-5  col-lg-5 left">
-                          <label class="td-label" *ngIf="superDealer">
-                          Code</label>
-                        </div>
-                        <div class="col-sm-7  col-md-7  col-lg-7 left row">
-                            <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
-                        </div>
-                      </div> -->
-
                 </div>
 
               </td>
@@ -855,27 +613,6 @@
                       <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
-
-                  <!-- <div class="form-group row ">
-                      <div class="col-sm-5 col-md-5  col-lg-5">
-                          <label class="td-label">
-                              <i class="fa fa fa-dot-circle-o"></i>
-                        Supplier Code</label> 
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 row">
-                        <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.user_reference_code}}</label>
-                      </div>
-                    </div> -->
-   
-                  <!-- <div class="mgbottom-10 row ">
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <label class="td-label">
-                        <i class="fa fa-reply " aria-hidden="true"> </i> Forwarded To</label>
-                    </div>
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
-                      <span *ngIf="allorder.distributor">{{allorder.distributor.firstname +" "+allorder.distributor.lastname }}</span>
-                    </div>
-                  </div> -->
                   <div class=" float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
