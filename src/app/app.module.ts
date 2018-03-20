@@ -185,7 +185,6 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
     imports: [
         BrowserModule,
         FormsModule,
-       
         ReactiveFormsModule,
         HttpModule,
         BrowserAnimationsModule,

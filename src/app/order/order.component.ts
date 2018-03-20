@@ -5,7 +5,6 @@ import { AuthenticationService } from '../login/authentication.service';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
-// import { GaugeModule } from 'angular-gauge';
 import { NgxGaugeModule } from 'ngx-gauge';
 import * as _ from 'underscore';
 import * as moment from 'moment';
@@ -43,13 +42,21 @@ export class OrderComponent implements OnInit {
     selectedItems = [];
     SelectionStatus = [];
     emailFormArray = [];
-    orderedTime:any="";
-    currentTime:any= "";
-    deliveryTime:any="";
+
+
+    orderedDate:any = "";
+    orderedHour:any = "";
+    deliveryDate:any = "";
+    deliveryHour:any = "";
+    nextDate:any = "";
+    nextDaytimeRemainingHours:any = "";
+    samedaytimeRemainingHours:any ="";
+    currentHour:any = "";
+    currentdate:any ="";
     
     dropdownSettings = {};
     forwardOrdersData=[
-        {delivery_exceptedtime:"19-03-2018 8PM-9PM", ordered_date:"2018-03-15T09:25:31.236664"},
+        {delivery_exceptedtime:"25-03-2018 8PM-9PM", ordered_date:"2018-03-17T09:25:31.236664"},
         {delivery_exceptedtime:"15-03-2018 7PM-8PM",ordered_date:"2018-03-15T10:28:52.54987" },
         {delivery_exceptedtime:"09-03-2018 9AM-1PM",ordered_date:"2018-03-08T11:03:38.260876" }];
     map: any;
@@ -379,32 +386,128 @@ export class OrderComponent implements OnInit {
 
 
 //time
-
-  //simulator
-
-  timesimu(){
-      let input= this.forwardOrdersData;
+timesim(){
+    let input= this.forwardOrdersData;
       for(let data of this.forwardOrdersData){
-          let orderedTime = this.forwardOrdersData[0].ordered_date;
-          let forderedDate = moment(orderedTime).format("HH"); // ordered date in hours
-          let deliveryTime:any = this.forwardOrdersData[0].delivery_exceptedtime; // del exp time
-          let f3deliveryDate = deliveryTime.split(" ").pop(''); // removes date part to give time part 
-          let f2deliveryDate = f3deliveryDate.split("-")[0]; // gives ground time i.e 3-4 --> 3pm
+          if(this.nextDate == this.currentdate){
+          //deliveryhour for same day
+          this.deliveryDate = data.delivery_exceptedtime; 
+          let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); 
+          let f2deliveryDate = f3deliveryDate.split("-")[0]; 
           let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
-          var timein24 = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format
-          var ifNextDate = this.forwardOrdersData[0].delivery_exceptedtime; // if next date
-          let nextdelDate = ifNextDate.slice(0,10);
-          var currentDate = new Date();
-          var currentdate = moment(currentDate).format("DD-MM-YYYY");
-          
+          this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //time24
+        // delivary date only for same day
+          var ifNextDate = data.delivery_exceptedtime;
+          let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
+          this.nextDate = nextdelDate; //same day del date
+          // current hour for same day 
           var currentDateTime = new Date(); //Initialising current time
-          var currentHour = moment(currentDateTime).format("HH"); // getting current Hour
-          this.timeRemaining = parseInt(timein24) - parseInt(currentHour) // Time remaining
-          console.log(this.timeRemaining);
+          this.currentHour = moment(currentDateTime).format("HH");
+          // current date for same day 
+          var currentDate = new Date(); // for comparing del date and current date
+          this.currentdate = moment(currentDate).format("DD-MM-YYYY");
+          // same day dh - ch
+          this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour);
+          //result
+          console.log(this.samedaytimeRemainingHours);
+          }
+          else{
+              //different day delivery
+              //different day delivery hour
+              this.deliveryDate = data.delivery_exceptedtime;
+              let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); 
+              let f2deliveryDate = f3deliveryDate.split("-")[0]; 
+              let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
+              this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format
 
-      }
+              var ifNextDate = data.delivery_exceptedtime; // if next date
+              let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
+              this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
+              var currentDate = new Date(); // for comparing del date and current date
+              this.currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
+              var date1 = new Date(this.currentdate); 
+              var ms1 = date1.getTime(); 
+              var date2 = new Date(this.nextDate);
+              var ms2 = date2.getTime();
+              this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
+              console.log(this.nextDaytimeRemainingHours);
+          }
 
-  }
+      
+    
+    }
+
+}
+
+onInItConditions(){
+    let input= this.forwardOrdersData;
+      for(let data of this.forwardOrdersData){
+    var ifNextDate = data.delivery_exceptedtime;
+    let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
+    this.nextDate = nextdelDate; //same day del date
+    var currentDateTime = new Date(); //Initialising current time
+          this.currentHour = moment(currentDateTime).format("HH");
+          // current date for same day 
+          var currentDate = new Date(); // for comparing del date and current date
+          this.currentdate = moment(currentDate).format("DD-MM-YYYY");
+}
+this.timesim();
+}
+
+
+  
+//   timesimu(){
+//       let input= this.forwardOrdersData;
+//       for(let data of this.forwardOrdersData){
+//           this.orderedDate = data.ordered_date;          // orderedDate
+//           this.orderedHour = moment(this.orderedDate).format("HH"); // ordered date in hours ; orderedHour
+//            this.deliveryDate = data.delivery_exceptedtime; // del exp time ; deliveryDate
+//           let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); // removes date part to give time part 
+//           let f2deliveryDate = f3deliveryDate.split("-")[0]; // gives ground time i.e 3-4 --> 3pm
+//           let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
+//           this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format ; deliveryHour
+//           var ifNextDate = data.delivery_exceptedtime; // if next date
+//           let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
+//           this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
+//           var currentDate = new Date(); // for comparing del date and current date
+//           this.currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
+//           var date1 = new Date(currentdate); 
+//           var ms1 = date1.getTime(); 
+//           var date2 = new Date(this.nextDate);
+//           var ms2 = date2.getTime();
+//           this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
+//           console.log(this.nextDaytimeRemainingHours);
+//           var currentDateTime = new Date(); //Initialising current time
+//           this.currentHour = moment(currentDateTime).format("HH"); // getting current Hour ; currentHour
+//           this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour) // samedaytimeRemainingHours
+//           console.log(this.timeRemaining);
+//       if(this.currentdate == this.deliveryDate){
+//         this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour); 
+//       }
+//       else{
+//         var ifNextDate = data.delivery_exceptedtime; // if next date
+//         let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
+//         this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
+//         var currentDate = new Date(); // for comparing del date and current date
+//         var currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
+//         var date1 = new Date(currentdate); 
+//         var ms1 = date1.getTime(); 
+//         var date2 = new Date(this.nextDate);
+//         var ms2 = date2.getTime();
+//         this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
+//         console.log(this.nextDaytimeRemainingHours);
+//       }
+//     }
+
+//   }
+
+
+ 
+     //   var now = moment(new Date()); //todays date
+        //   var end = moment(nextdelDate); // another date
+        //   var duration = moment.duration(now.diff(end));
+        //   var hours = duration.asHours();
+        //   console.log(hours);
 
 
 
@@ -470,30 +573,7 @@ export class OrderComponent implements OnInit {
 
     
     ngOnInit() {
-        this.timesimu();
-
-
-        // const updateValues = (): void => {
-        //     this.gaugeValues = {
-        //       1: Math.round(Math.random() * 100),
-        //       2: Math.round(Math.random() * 100),
-        //       3: Math.round(Math.random() * 100),
-        //       4: Math.round(Math.random() * 100),
-        //       5: Math.round(Math.random() * 200),
-        //       6: Math.round(Math.random() * 100),
-        //       7: Math.round(Math.random() * 100)
-        //     };
-        //   };
-      
-        //   const INTERVAL: number = 5000;
-      
-        //   this.interval = setInterval(updateValues, INTERVAL);
-        //   updateValues();
-        // this.timesimu();
-        // this._loader.load().then(() => {
-        //     this.initMap();
-        // });
-        
+        this.onInItConditions();
         this.dropdownList = [
             { "id": 1, "itemName": "India" },
             { "id": 2, "itemName": "Singapore" },
@@ -530,47 +610,5 @@ export class OrderComponent implements OnInit {
         };        
     
   }
-//   ngOnDestroy(): void {
-//     clearInterval(this.interval);
-//   }
-   
+
 }
-
-
-
-//chart code
-
-//var ctx=  document.getElementById("timeChart");;
-// var timeChart = new Chart(ctx, {
-//     type: 'doughnut',
-//     data:{
-//         labels: ["green","orangered","red"],
-//         datasets: [{
-//             labels: 'time remining',
-//             data: [],
-//             backgroundColor: [
-//                 'rgb(0,128,0)',
-//                 'rgb(255,69,0)',
-//                 'rgb(255,0,0)',
-//             ],
-//             borderWidth:1
-
-//         }]
-//     },
-    
-//     options: {
-//         scales: {
-//             yAxes: [{
-//                 ticks: {
-//                     beginAtZero:true
-//                 }
-//             }]
-//         }
-//     }
-// });    
-
-
-//time code
-
-
-
