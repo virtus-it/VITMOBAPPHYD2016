@@ -12,8 +12,11 @@
 <md-dialog-content layout="column">
     <form class="example-form" >
       <div class="row mg-20 form-group" >
-          <div class=" col-4 align-self-center">
-              <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+          <div class=" col-3 ">
+              <md-form-field class="wd-100pc">
+                  <input class="form-control" [(ngModel)]="reasonOnHold" autocorrect="off" autocapitalize="off" spellcheck="off" mdInput placeholder="search for location" name="Return Cans"  class="form-control" #search [formControl]="searchControl">
+            </md-form-field>
+              <!-- <input placeholder="search for location"  type="text"> -->
             </div>
         <div class="col-2" >
             <md-select placeholder="Filter By" [(ngModel)]="filterInputkmvalue.kmvalue" name="type" class="full-width left">
@@ -24,11 +27,11 @@
             </md-select>
 
           </div>
-          <div class=" col-2">
+          <div class=" col-3">
               <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem"></angular2-multiselect>
             </div>
-          <div class="col-4 align-self-center">
+          <div class="col-3 ">
           <button md-raised-button color="primary" (click)="filterPolygon()"> Filter </button> 
           <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail)">Assign Area</button>
           

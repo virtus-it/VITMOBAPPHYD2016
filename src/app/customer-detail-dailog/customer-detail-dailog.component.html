@@ -15,32 +15,32 @@
   
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="row">
-        <div class="col center">
-                <span class="gray9">  <i class="fa fa-user"></i>  Customer Name : </span>
-                   <label class=" ng-binding capital ">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
-                        <!-- ngIf: customerView.cLname -->
-               
-                   </label>
-
+        <div class="details-style">
+      <div class="row ">
+        <div class="col align-self-center">
+            <h5>
+                <small>Name</small><br>
+                   <b class=" capital pdleft-5">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
+                   </b>
+                  </h5>
             </div>
-            <div class="col center">
-                <span class=" gray9"> <i class="fa fa-phone"></i>  Mobile Number : </span>
-                <label class=" ng-binding">{{this.orderDetail.orderby_mobileno}}</label>
+            <div class="col align-self-center">
+                <h5><small>Mobile</small><br>
+                <b class="pdleft-5">{{this.orderDetail.orderby_mobileno}}</b>
+                </h5>
             </div>
             <!-- <div class="col center">
                 <span class="gray9"> <i class="fa  fa-map-marker"></i>  Area Name : </span>
             <label class="ng-binding">{{this.orderDetail.orderby_areaname}}</label>
             </div> -->
 
-            <div class="col center">
-              <span class="gray9">
-                <i class="fa fa-map-marker"></i> Address:
-              </span>
-              <label class="ng-binding">{{this.orderDetail.user_address}}</label>
+            <div class="col-4 align-self-center">
+              <h5>
+                  <small>Address</small><br>
+              <b class="pdleft-5 onhovertext300">{{this.orderDetail.user_address}}</b>
+            </h5>
             </div>
-
-            <div class=" " >
+            <div class="col-3 ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -51,43 +51,46 @@
               </md-form-field>
             </div>
             
-
+            <div class="col-1 align-self-center" >
             <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
+            </div>
+            </div>
             </div>
       <div class="">
     
-        <table class="table table-hover table-fixedheader">
+        <table class="table table-hover table-striped table-fixedheader">
           <thead>
-            <tr>
-              <th width="5%"><small>Order Id</small></th>
-              <th width="5%"><small>Product Name</small></th>
-              <!-- <th width="7%"><small>Cart Id</small></th> -->
-              <!-- <th width="10%"><small>Address</small></th> -->
-              <th width="8%"><small>Ordered Amt</small></th>
-              <th width="8%"><small>Received Amt</small></th>
-              <th width="8%"><small>Ordered Qty</small></th>
-              <th width="8%"><small>Status</small></th>
-              <th width="8%"><small>Returned Qty</small></th>
-              <!-- <th width="10%"><small>Payment Mode</small></th> -->
-              <th width="10%"><small>Delivery Date</small></th>
-              <th width="10%"><small>Delivered By</small></th>
+            <tr class="wd-99pc">
+              <th width="8%">Order Id</th>
+              <th width="10%">Product Name</th>
+              <!-- <th width="7%">Cart Id</th> -->
+              <th width="14%">Address</th>
+              <th width="8%" title="Advance Amount">Ord Qty</th>
+              <th width="8%" title="Order Amount">Ord Amt</th>
+              <th width="8%" title="Received Amount">Recv Amt</th>
+              <th width="8%" title="Return Quantity">Ret Qty</th>
+              <th width="10%">Status</th>
+              <!-- <th width="10%">Payment Mode</th> -->
+              <th width="14%" title="Delivery Date">Del Date</th>
+              <th width="12%" title="Delivered By">Del By</th>
               
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let customer of customerOrderDetails">
-              <td width="5%" class="left" scope="row"><small>{{customer.order_id}}</small></td>
-              <td width="5%" class="left capital"><small>{{customer.brandname}} {{customer.prod_type}}</small></td>
-              <!-- <td width="7%" class="left capital"><small>{{customer.cart_id}}</small></td> -->
-              <!-- <td width="10%" class="left capital"><small>{{customer.orderby_address}}</small></td> -->
-              <td width="8%" class="left capital"><small>{{customer.bill_amount}}</small></td>
-              <td width="8%" class="left capital"><small>{{customer.receivedamount}}</small></td>
-              <td width="8%" class="left capital"><small>{{customer.quantity}}</small></td>
-              <td width="8%" class="left capital"><small>{{customer.status}}</small></td>
-              <td width="8%" class="left capital"><small>{{customer.return_cans}}</small></td>
-              <!-- <td width="10%" class="left capital"><small>{{customer.paymenttype}}</small></td> -->
-              <td width="10%" class="left capital"><small>{{customer.order_delivereddate | utcDate}}</small></td>
-              <td width="10%" class="left capital"><small>{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</small></td>
+              <td width="8%" class="left" scope="row">{{customer.order_id}}</td>
+              <td width="10%" class=" capital">{{customer.brandname}} {{customer.prod_type}}</td>
+              <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
+              <td width="14%" class=" capital"><span class="onhovertext">{{customer.orderby_address}}</span></td>
+              <td width="8%" class=" capital">{{customer.quantity}}</td>            
+              <td width="8%" class=" capital">{{customer.bill_amount}}</td>
+              <td width="8%" class=" capital">{{customer.receivedamount}}</td>
+              <td width="8%" class=" capital">{{customer.return_cans}}</td>
+              <td width="10%" class=" capital">{{customer.status}}</td>
+            
+              <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
+              <td width="14%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
+              <td width="12%" class=" capital">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</td>
 
             </tr>
           </tbody>

@@ -599,6 +599,9 @@ border:2px solid #0f75bc;
 
   border-radius: 50%;
 }
+.mg-20{
+  margin: 20px;
+}
 .onhovertext300 {
   width:300px !important;
  text-overflow: ellipsis;
@@ -606,17 +609,15 @@ border:2px solid #0f75bc;
 overflow: hidden;
 display: block;
 }
-.mg-20{
-  margin: 20px;
-}
+
 .onhovertext300:hover {
   padding: 0px 5px 0px;
   overflow: visible;
   position: relative;
 left: -2px;
 width: 100%;
-background: #fff;
-box-shadow: 0 0 8px #bbb;
+/* background: #fff;
+box-shadow: 0 0 8px #bbb; */
 }
 .onhovertext {
   width:100px;
@@ -632,14 +633,34 @@ display: block;
   position: relative;
 left: -2px;
 width: 100%;
-background: #fff;
-box-shadow: 0 0 8px #bbb;
+/* background: #fff;
+box-shadow: 0 0 8px #bbb; */
+}
+.onhovertext150 {
+  width:150px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: block;
+}
+
+.onhovertext150:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+width: 100%;
+/* background: #fff;
+box-shadow: 0 0 8px #bbb; */
 }
 .brd-top-gray{
   border-top:1px solid #ddd;
 }
 .fs-22{
   font-size: 22px;
+}
+.pdleft-20{
+  padding-left: 20px;
 }
 .pdtop-20{
   padding-top: 20px;
@@ -653,6 +674,9 @@ box-shadow: 0 0 8px #bbb;
 .top-post{
   position: absolute !important;
   top: 80% !important;
+  }
+  .wd-99pc{
+    width: 99%;
   }
   .pdtop-0{
     padding-top: 0px;
