@@ -425,6 +425,9 @@
                             <br>
                             <b class="capitalize onhovertext300">{{forward.orderby_address}}</b>       
                               </div>
+                              <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(forward)' >
+                                  <i class="fa fa-user " aria-hidden="true"  ></i> Orders  </button> &nbsp;&nbsp;
+                              
                 
                               </div>
                   <!-- <div class="form-group row ">
@@ -593,6 +596,7 @@
                               
                               <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                     
            
                       <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(distributors)">
                         <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Details </button>
@@ -772,7 +776,7 @@
                       <b>{{allorder.orderby_mobileno}}</b>
                           </div>
                       <div class="col right"> 
-                          <span class="td-label">Ass Distributor</span>
+                          <span class="td-label">Asso Distributor</span>
                           <br>
                           <b class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</b>
                         </div>    
