@@ -2,11 +2,14 @@
 import {FormControl} from '@angular/forms';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { AuthenticationService } from '../login/authentication.service';
-
+import Chart from 'chart.js';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
+// import { GaugeModule } from 'angular-gauge';
+import { NgxGaugeModule } from 'ngx-gauge';
 import * as _ from 'underscore';
+import * as moment from 'moment';
 declare var google: any;
  
 interface marker {
@@ -23,12 +26,33 @@ interface marker {
     styleUrls: ['./order.component.css']
 })
 export class OrderComponent implements OnInit {
+    timeRemaining:any = '';
+
+    thresholdConfig = {
+        '0': {color: 'green'},
+        '40': {color: 'orange'},
+        '75.5': {color: 'red'}
+    };
+
+    gaugeType = "arch";
+    gaugeValue = this.timeRemaining;
+    gaugeLabel = 'Time Remaining';
+    gaugeAppendText = "Hours";
+    
     dropdownList = [];
     checkboxlist = [];
     selectedItems = [];
     SelectionStatus = [];
     emailFormArray = [];
+    orderedTime:any="";
+    currentTime:any= "";
+    deliveryTime:any="";
+    
     dropdownSettings = {};
+    forwardOrdersData=[
+        {delivery_exceptedtime:"19-03-2018 8PM-9PM", ordered_date:"2018-03-15T09:25:31.236664"},
+        {delivery_exceptedtime:"15-03-2018 7PM-8PM",ordered_date:"2018-03-15T10:28:52.54987" },
+        {delivery_exceptedtime:"09-03-2018 9AM-1PM",ordered_date:"2018-03-08T11:03:38.260876" }];
     map: any;
     drawingManager: any;
     stateCtrl: FormControl;
@@ -50,7 +74,13 @@ export class OrderComponent implements OnInit {
         name: "",
         path: []
     }
+
+    
+
     constructor(public gMaps: GoogleMapsAPIWrapper, private _loader: MapsAPILoader, private authenticationService: AuthenticationService) { 
+        // this.percentageValue = function(value: number): string {
+        //     return `${Math.round(value)} / ${this['max']}`;
+        //   };
 
         this.stateCtrl = new FormControl();
         this.filteredStates = this.stateCtrl.valueChanges
@@ -277,24 +307,6 @@ export class OrderComponent implements OnInit {
     }
 
 
-    //donut chart
-    // donut(data){
-    // var myDoughnutChart = new Chart(ctx, {
-    //     type: 'doughnut',
-    //     data: data,
-    //     options: options
-    // });
-    // }
-
-
-
-
-
-
-
-
-
-
     initMap() {
         //console.log('now: ', _.now());
          var triangleCoords = [
@@ -335,6 +347,69 @@ export class OrderComponent implements OnInit {
             
         });
     }
+
+      //simulator
+//   timeSimultor(){
+//     //all orders time
+//     let orderedtime = this.forwardOrders.ordered_date;
+//     let time1 = moment(orderedtime).format("HH");
+//     let time2 = this.forwardOrders.delivery_exceptedtime;
+//     // let abc = time2.split(" ").pop('');
+//     // console.log(abc);
+//     // let def = abc.split("-")
+//     let deliverytime= time2;
+//     // deliverytime.split(" ")[1]
+//     var time = deliverytime.split(" ")[1]
+//     console.log(time.substring(0,3));
+//     let timeinAMPM = time.substring(0,3);
+
+//     //1
+//     var time24 = moment("3PM", ["hA"]).format("HH:mm");
+//     // org  let newHour = moment(timeinAMPM).format("HH");
+//     //2
+//     // '3pm'.replace(
+//     //   /(\d+)([ap]m)?/,
+//     //   (match, digits, ampm) => +digits + (ampm === "pm" ? 12 : 0)
+//     // );
+
+
+    
+    
+//     console.log(time24); 
+//   }
+
+
+//time
+
+  //simulator
+
+  timesimu(){
+      let input= this.forwardOrdersData;
+      for(let data of this.forwardOrdersData){
+          let orderedTime = this.forwardOrdersData[0].ordered_date;
+          let forderedDate = moment(orderedTime).format("HH"); // ordered date in hours
+          let deliveryTime:any = this.forwardOrdersData[0].delivery_exceptedtime; // del exp time
+          let f3deliveryDate = deliveryTime.split(" ").pop(''); // removes date part to give time part 
+          let f2deliveryDate = f3deliveryDate.split("-")[0]; // gives ground time i.e 3-4 --> 3pm
+          let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
+          var timein24 = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format
+          var ifNextDate = this.forwardOrdersData[0].delivery_exceptedtime; // if next date
+          let nextdelDate = ifNextDate.slice(0,10);
+          var currentDate = new Date();
+          var currentdate = moment(currentDate).format("DD-MM-YYYY");
+          
+          var currentDateTime = new Date(); //Initialising current time
+          var currentHour = moment(currentDateTime).format("HH"); // getting current Hour
+          this.timeRemaining = parseInt(timein24) - parseInt(currentHour) // Time remaining
+          console.log(this.timeRemaining);
+
+      }
+
+  }
+
+
+
+
     saveP(dist) {
         var data = JSON.parse(localStorage.getItem('geoData'));
 
@@ -390,11 +465,35 @@ export class OrderComponent implements OnInit {
             //console.log(this.emailFormArray);
         }
     }
+
+
+    //guage code
+
     
     ngOnInit() {
-        this._loader.load().then(() => {
-            this.initMap();
-        });
+        this.timesimu();
+
+
+        // const updateValues = (): void => {
+        //     this.gaugeValues = {
+        //       1: Math.round(Math.random() * 100),
+        //       2: Math.round(Math.random() * 100),
+        //       3: Math.round(Math.random() * 100),
+        //       4: Math.round(Math.random() * 100),
+        //       5: Math.round(Math.random() * 200),
+        //       6: Math.round(Math.random() * 100),
+        //       7: Math.round(Math.random() * 100)
+        //     };
+        //   };
+      
+        //   const INTERVAL: number = 5000;
+      
+        //   this.interval = setInterval(updateValues, INTERVAL);
+        //   updateValues();
+        // this.timesimu();
+        // this._loader.load().then(() => {
+        //     this.initMap();
+        // });
         
         this.dropdownList = [
             { "id": 1, "itemName": "India" },
@@ -432,5 +531,47 @@ export class OrderComponent implements OnInit {
         };        
     
   }
+//   ngOnDestroy(): void {
+//     clearInterval(this.interval);
+//   }
    
 }
+
+
+
+//chart code
+
+//var ctx=  document.getElementById("timeChart");;
+// var timeChart = new Chart(ctx, {
+//     type: 'doughnut',
+//     data:{
+//         labels: ["green","orangered","red"],
+//         datasets: [{
+//             labels: 'time remining',
+//             data: [],
+//             backgroundColor: [
+//                 'rgb(0,128,0)',
+//                 'rgb(255,69,0)',
+//                 'rgb(255,0,0)',
+//             ],
+//             borderWidth:1
+
+//         }]
+//     },
+    
+//     options: {
+//         scales: {
+//             yAxes: [{
+//                 ticks: {
+//                     beginAtZero:true
+//                 }
+//             }]
+//         }
+//     }
+// });    
+
+
+//time code
+
+
+

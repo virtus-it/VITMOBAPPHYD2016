@@ -308,13 +308,13 @@
                   </div>
                 </div>
               </td>
-              <td  width="24%">
+              <!-- <td  width="24%">
                   <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
                 <i class="fa fa-minus logo-color fs-18 none"></i>
                 <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
 
-              </td>
+              </td> -->
 
             </tr>
 
@@ -391,13 +391,17 @@
                           <br>
                           <b>{{forward.orderby_mobileno}}</b>
                         </div>
-                    <div class="col right" *ngIf="forward.customersource != 'DistributorCustomer'"> 
-                        <span class="td-label">Ass Distributor</span>
-                        <br>
-                        <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">
-                          <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
-                          <span *ngIf="!forward.distributor">-</span></label>
-                          </div>    
+
+                          <div class="col right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                            <span class="td-label">Asso Distributor</span>
+                            <br>
+                            <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                          </div>
+                          <div class="col right" *ngIf = "forward.customersource == 'MoyaCustomer'">
+                              <span class="td-label">Asso Distributor</span>
+                              <br>
+                              <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                          </div>
                     </div>
                   <div class="row form-group">
                    
@@ -596,9 +600,9 @@
                   </div>             
                 </div>
               </td>
-              <td width="24%" >
-                <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
-                </td>
+              <!-- <td width="24%" >
+                  <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
+                </td> -->
             </tr>
           </tbody>
           <tfoot>
@@ -621,7 +625,7 @@
         <table class="table table-hover table-striped">
           <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
-              <td width="25%">
+              <td width="33%">
                 <div class="row ">
                   <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">
@@ -637,11 +641,11 @@
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
                       </span>
                       <span *ngIf="allorder.followupstatus == 'close'">
-                          <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
-                        </span>
-                        <span *ngIf="allorder.followupstatus == 'open'">
-                          <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
-                        </span>
+                        <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                      </span>
+                      <span *ngIf="allorder.followupstatus == 'open'">
+                        <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                      </span> 
                     </label>
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(allorder)'>
@@ -649,7 +653,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%">
+              <td width="33%">
                 <div class=" row ">
                   <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
                     <label class="td-label">Customer :
@@ -663,7 +667,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%">
+              <td width="33%">
                 <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
                     <label class="td-label">Supplier:
@@ -689,10 +693,10 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <!-- <td>
                 <i class="fa fa-minus logo-color fs-18"></i>
                 <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-              </td>
+              </td> -->
             </tr>
             <tr>
               <td width="25%" class="brd-right">

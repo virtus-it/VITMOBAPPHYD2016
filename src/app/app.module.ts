@@ -9,6 +9,7 @@ import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInp
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
+import { NgxGaugeModule } from 'ngx-gauge';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -97,6 +98,10 @@ import { AddProductDealerComponent } from './add-product-dealer/add-product-deal
 import { DistributorOrderListComponent } from './distributor-order-list/distributor-order-list.component';
 import { MapStockpointComponent } from './map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.component';
+import { TimeChartComponent } from './time-chart/time-chart.component';
+import { ChartsModule } from 'ng2-charts';
+import { GaugeModule } from 'angular-gauge';
+
 
 
 @NgModule({
@@ -172,6 +177,8 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
         DistributorOrderListComponent,
         MapStockpointComponent,
         ViewStockpointsComponent,
+        TimeChartComponent,
+        
      
         
 
@@ -179,6 +186,7 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
     imports: [
         BrowserModule,
         FormsModule,
+        ChartsModule,
         ReactiveFormsModule,
         HttpModule,
         BrowserAnimationsModule,
@@ -187,6 +195,8 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
         MdDialogModule,
         MdTooltipModule,
         MdInputModule,
+        // GaugeModule.forRoot(),
+        NgxGaugeModule,
         MdNativeDateModule,
         AngularMultiSelectModule,
         RouterModule.forRoot([
@@ -292,7 +302,9 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
          AddProductDealerComponent,
          DistributorOrderListComponent,
          MapStockpointComponent,
-         ViewStockpointsComponent
+         ViewStockpointsComponent,
+         TimeChartComponent,
+    
       
 
 
