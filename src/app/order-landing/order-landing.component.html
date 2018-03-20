@@ -577,6 +577,22 @@
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                       <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(distributors)">
                         <i class="" aria-hidden="true"></i> Distributor Details </button>
+                        
+                        
+                        <i class="fa fa-circle-o-notch big" aria-hidden="true"></i>
+                        
+                        
+                        <!-- <button class="" (click)="timeRemaining(forward)">TIME</button> -->
+                        <!-- <div style="display: block">
+                          <canvas baseChart
+                                      [data]="doughnutChartData"
+                                      [labels]="doughnutChartLabels"
+                                      [colors]="chartColors"
+                                      [chartType]="doughnutChartType"
+                                      (chartHover)="chartHovered($event)"
+                                      (chartClick)="chartClicked($event)"></canvas>
+                        </div> -->
+
     
                   </div>             
                 </div>
@@ -621,11 +637,11 @@
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
                       </span>
                       <span *ngIf="allorder.followupstatus == 'close'">
-                          <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
-                        </span>
-                        <span *ngIf="allorder.followupstatus == 'open'">
-                          <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
-                        </span>
+                        <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                      </span>
+                      <span *ngIf="allorder.followupstatus == 'open'">
+                        <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                      </span> 
                     </label>
                   </div>
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='editQuanity(allorder)'>
@@ -885,6 +901,11 @@
                       <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                      <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
                       <i class="fa fa-circle-o " aria-hidden="true"  ></i> Customer all Orders Details</button>
+                      
+                      <i class="fa fa-circle-o-notch big" aria-hidden="true"></i>
+
+
+                      <!-- <button class="" (click)="timeRemaining(allorder)">TIME</button> -->
                       <!-- <div class="row">
                           <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned'">
                               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>

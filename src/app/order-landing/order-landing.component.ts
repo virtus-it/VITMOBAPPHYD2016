@@ -15,7 +15,6 @@ import { DistributorListDialogComponent } from '../distributor-list-dialog/distr
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
-
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -35,8 +34,11 @@ export class OrderLandingComponent implements OnInit {
   superDealer = true;
   SupplierOrderList=[];
   ordersClickMore = true;
+  followUpResultStatus:any = "";
 
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
+
+    
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -58,6 +60,9 @@ export class OrderLandingComponent implements OnInit {
   forwardOrders: any = [];
   allOrders: any = [];
   distId:any="";
+  orderedTime:any="";
+  currentTime:any= "";
+  deliveryTime:any="";
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
@@ -180,7 +185,14 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showCoverageDetails(orderDetails) {
-    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:orderDetails.distributor.userid }
+    let distributorId ="";
+    if(orderDetails.distributor){
+    distributorId = orderDetails.distributor.userid;
+    }
+    else{
+      distributorId = "";
+    }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '95%',
       data: modelData
@@ -227,20 +239,22 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showFollowUp(orderDetails) {
-    let data = {"id":orderDetails.order_id,"firstname" :orderDetails.orderby_firstname,"lastName" :orderDetails.orderby_lastname,"type":"order","mobileno":orderDetails.orderby_mobileno, "followupstatus":orderDetails.followupstatus };
+    let data = {"id":orderDetails.order_id,"firstname" :orderDetails.orderby_firstname,"lastName" :orderDetails.orderby_lastname,"type":"order","mobileno":orderDetails.orderby_mobileno, "followupstatus":orderDetails.followupstatus , "refresh":"" };
     let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
       width: '80%',
       data: data
     });
     dialogRefFollow.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
-      this.getForwardOrderDetails(true);
-      this.getAllOrderDetails(true);
-
-
-
-
+      console.log(`Dialog closed: ${result}`);
+      if(data.refresh == 'success'){
+        if(this.tabPanelView=='forward'){
+            this.getForwardOrderDetails(true);
+           }
+           else{
+            this.getAllOrderDetails(true);
+           }
+      }
     });
 
   }
@@ -285,7 +299,7 @@ export class OrderLandingComponent implements OnInit {
   getForwardOrderDetailsResult(result) {
     // this.forwardOrders = result.data;
     this.loaderService.display(false);
-    //console.log(this.forwardOrders);
+    console.log(this.forwardOrders);
     if (result.data && result.data.length > 0) {
       let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
@@ -545,7 +559,7 @@ export class OrderLandingComponent implements OnInit {
     else {
       this.filterInput.order.status = 'all';
     }
-    //console.log(this.filterInput);
+    console.log(this.filterInput);
     this.getFilteredOrders(true);
 this.showFilterDailog =false;
 
@@ -857,6 +871,44 @@ this.showFilterDailog =false;
   }
 
 
+
+
+
+
+
+
+
+
+  //let vvv = moment().startOf('hour').;
+    // let abc = moment(end.diff(this.forwardOrders.ordered_date)).format("m[m] s[s]");
+    // var duration = moment.duration(.diff(this.forwardOrders.ordered_date));
+    // var hours = duration.asHours();
+
+  //time(){
+    // let orderedDate =  this.forwardOrders.ordered_date;
+    // let B = moment(orderedDate).endOf('hour').fromNow();
+    // console.log(B);
+    // this.timeRemaining = B;
+
+// let orderedDate = this.forwardOrders.ordered_date;
+// let formatttedOrderedDate = moment(this.forwardOrders.ordered_date).format('YYYY-MM-DD HH:MM:SS');
+// let deliveryDate = this.forwardOrders.delivery_exceptedtime;
+// let formatttedDeliveryDate = moment(this.forwardOrders.delivery_exceptedtime).format('YYYY-MM-DD HH:MM:SS');
+// var timeStart:any = moment(new Date(formatttedOrderedDate)).format('HH');
+// var timeEnd:any = moment(new Date(formatttedDeliveryDate)).format('HH');
+// var timeStart = new Date(formatttedOrderedDate).getTime();
+// var timeEnd = new Date(formatttedDeliveryDate).getTime();
+ //var hourDiff = timeEnd - timeStart; //in ms
+//var secDiff = hourDiff / 1000; //in s
+//var minDiff = hourDiff / 60 / 1000; //in minutes
+// var hDiff = hourDiff / 3600 / 1000; //in hours
+// console.log(hDiff);
+// var humanReadable = {};
+// humanReadable.hours = Math.floor(hDiff);
+// humanReadable.minutes = minDiff - 60 * humanReadable.hours;
+// console.log(humanReadable); //{hours: 0, minutes: 30}
+ // }
+
   ViewDistributors(data) {
     if(data.OrderModifiedStatus == 'Assign' || data.OrderModifiedStatus == 'Re-Assign'){
             let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
@@ -882,6 +934,7 @@ this.showFilterDailog =false;
     this.getAllOrderDetails(true);
     this.getDistributors();
     this.getSupplier();
+
    
     this.superDealer = this.authenticationService.getSupperDelear();
     if(!this.superDealer){

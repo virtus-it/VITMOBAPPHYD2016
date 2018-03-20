@@ -82,16 +82,16 @@ export class SmsDialogComponent implements OnInit {
     this.orderinput.toDate = null
     this.orderinput.days = null
     this.orderinput.distributorid = null;
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   onChangeSmsType(type){
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: type, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   getMobileNumber() {
     this.smallLoader = true;
     let input = {
       User: {
-        "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,
+        "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,"smstype":"",
         "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid
       }
     };
@@ -100,6 +100,12 @@ export class SmsDialogComponent implements OnInit {
     }
     if (this.orderinput.toDate) {
       input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if(this.smsInput.smsType == 'sms'){
+      input.User.smstype = this.smsInput.smsType
+    }
+    else{
+      input.User.smstype = this.smsInput.smsType
     }
     this.smsService.getMobileNumbers(input)
       .subscribe(

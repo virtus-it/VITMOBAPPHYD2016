@@ -33,10 +33,10 @@ export class CustomerMakeInactiveComponent implements OnInit {
 activateDeactivateCustomer(customer){
     let input={};
     if(customer.isactive == '0'){
-    input={"User":{"TransType":"activate","userid":customer.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+    input={"User":{"TransType":"activate","userid":customer.userid,"user_type":"customer","devicetype":"","moyaversioncode":""}};
     }
     else{
-  input={"User":{"TransType":"deactivate","userid":customer.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+  input={"User":{"TransType":"deactivate","userid":customer.userid,"user_type":"customer","devicetype":"","moyaversioncode":""}};
     }
     console.log(input);
     this.customerService.createCustomer(input)
@@ -47,7 +47,7 @@ activateDeactivateCustomer(customer){
 }
 activateDeactivateCustomerResult(result){
       if(result.result =='success'){
-        this.thisDialogRef.close('success');
+        this.thisDialogRef.close('cancel');
       }
   }
 

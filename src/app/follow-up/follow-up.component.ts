@@ -19,6 +19,7 @@ export class FollowUpComponent implements OnInit {
   followUpStatus="";
   followupDate  = null;
   followUpTemplate=[];
+  refresh:any = "";
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id, "username": this.authenticationService.userFullName(),
@@ -27,7 +28,7 @@ export class FollowUpComponent implements OnInit {
   }
   createFollowUp() {
     if (this.followupDate) {
-      this.followUpInput.User.followupdate = moment(this.followupDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      this.followUpInput.User.followupdate = moment(this.followupDate).format('YYYY-MM-DD 00:02:00');
     }
     //console.log(this.followUpInput);
     let input = this.followUpInput;
@@ -78,6 +79,7 @@ export class FollowUpComponent implements OnInit {
   followUpCompleted(){
     let input= {"User":{"typeid": this.details.id,"type": this.details.type,"followupstatus":"close","transtype":"followupstatus","userid":this.authenticationService.loggedInUserId()}}
     //console.log(input);
+    
     this.followupService.followUpCompleted(input)
       .subscribe(
       output => this.followUpCompletedResult(output),
@@ -89,8 +91,9 @@ export class FollowUpComponent implements OnInit {
   followUpCompletedResult(result) {
     //console.log(result);
     if (result.result = 'success') {
-      // this.thisDialogRef.close('success');
+      this.details.refresh = 'success'; 
       this.getfollowUpdetails();
+
   }
 }
 
@@ -109,8 +112,9 @@ startFollowUp(){
 startFollowUpCompleteResult(result) {
   //console.log(result);
   if (result.result = 'success') {
-    // this.thisDialogRef.close('success');
+    this.details.refresh = 'success'; 
     this.getfollowUpdetails();
+  
 }
 }
 
@@ -136,7 +140,7 @@ getFollowUpTemplateResult(result){
 }
   
   ngOnInit() {
-    //console.log(this.details);
+    console.log(this.details);
     this.getfollowUpdetails();
     this.getFollowUpTemplate();
   }

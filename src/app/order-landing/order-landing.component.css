@@ -127,3 +127,7 @@ table thead {
 .green{
   color:green;
 }
+.big{
+  width: 24px !important;
+    height: 24px !important;
+}
