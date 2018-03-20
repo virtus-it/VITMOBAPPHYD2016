@@ -308,13 +308,13 @@
                   </div>
                 </div>
               </td>
-              <td  width="24%">
+              <!-- <td  width="24%">
                   <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
                 <i class="fa fa-minus logo-color fs-18 none"></i>
                 <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
 
-              </td>
+              </td> -->
 
             </tr>
 
@@ -391,13 +391,17 @@
                           <br>
                           <b>{{forward.orderby_mobileno}}</b>
                         </div>
-                    <div class="col right" *ngIf="forward.customersource != 'DistributorCustomer'"> 
-                        <span class="td-label">Ass Distributor</span>
-                        <br>
-                        <label class="left" *ngIf="forward.customersource == 'DistributorCustomer'">
-                          <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
-                          <span *ngIf="!forward.distributor">-</span></label>
-                          </div>    
+
+                          <div class="col right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                            <span class="td-label">Asso Distributor</span>
+                            <br>
+                            <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                          </div>
+                          <div class="col right" *ngIf = "forward.customersource == 'MoyaCustomer'">
+                              <span class="td-label">Asso Distributor</span>
+                              <br>
+                              <span *ngIf="forward.distributor">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</span>
+                          </div>
                     </div>
                   <div class="row form-group">
                    
@@ -596,9 +600,9 @@
                   </div>             
                 </div>
               </td>
-              <td width="24%" >
+              <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
-                </td>
+                </td> -->
             </tr>
           </tbody>
           <tfoot>
@@ -689,10 +693,10 @@
                   </div>
                 </div>
               </td>
-              <td>
+              <!-- <td>
                 <i class="fa fa-minus logo-color fs-18"></i>
                 <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-              </td>
+              </td> -->
             </tr>
             <tr>
               <td width="25%" class="brd-right">
