@@ -419,7 +419,7 @@
                             <span class="td-label">
                                 Address</span>
                             <br>
-                            <b class="capitalize onhovertext150">{{forward.orderby_address}}</b>       
+                            <b class="capitalize onhovertext300">{{forward.orderby_address}}</b>       
                               </div>
                 
                               </div>
@@ -482,7 +482,7 @@
                           <span class="td-label">
                               Mobile</span>
                           <br>
-                          <span *ngIf="forward.distributor">{{forward.distributor.mobileno}}</span>
+                          <b *ngIf="forward.distributor">{{forward.distributor.mobileno}}</b>
                         </div>
                         <div class="col-sm-7  col-md-7  col-lg-7 right">
                            
@@ -501,7 +501,7 @@
                               <span class="td-label">
                                   Supplier Mobile</span>
                               <br>
-                            <b class="capitalize"  *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
+                            <b *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
                             
                             </div>
                         </div>
@@ -597,7 +597,7 @@
                 </div>
               </td>
               <td width="24%" >
-                  <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
+                <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td>
             </tr>
           </tbody>
@@ -667,7 +667,7 @@
                 <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
                     <label class="td-label">Supplier:
-                      <b *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
+                      <b class="capitalize" *ngIf="allorder.supplierdetails"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                     </label>
                     <br>
                   </div>
@@ -743,7 +743,7 @@
                           <br>
                           <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges }}</b>
                         </div>
-                      <div class="col  right">
+                      <div class="col align-self-center right">
                           <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
                               <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                       </div>
@@ -752,7 +752,27 @@
               </td>
               <td width="25%" class="brd-right">
                 <div class="">
-
+                    <div class="form-group row ">
+                        <div class="col">
+                            <span class="td-label">
+                                Date Placed </span>
+                              <br>
+                              <b>{{allorder.ordered_date | utcDate}}</b>
+                        </div>
+                      </div>
+                    <div class="row form-group">
+                        <div class="col-5 left">
+                            <span class="td-label">
+                               Mobile</span>
+                            <br>
+                      <b>{{allorder.orderby_mobileno}}</b>
+                          </div>
+                      <div class="col right"> 
+                          <span class="td-label">Ass Distributor</span>
+                          <br>
+                          <b class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</b>
+                        </div>    
+                      </div>
                   <!-- <div class="form-group row ">
                     <div class="col-sm-1  col-md-1  col-lg-1">
                       <b>
@@ -763,47 +783,28 @@
                       <b class="capitalize">{{allorder.orderby_firstname}}</b>
                     </div>
                   </div> -->
+
                   <div class="form-group row ">
                     <div class="col">
                         <span class="td-label">
-                            Date Placed </span>
+                           Address</span>
                           <br>
-                          <b>{{allorder.ordered_date | utcDate}}</b>
-
-                    </div>
-                    <div class="col left">
-                      <b>{{allorder.orderby_mobileno}}</b>
-                    </div>
-                  </div>
-                  <div class="form-group row ">
-                    <div class="col">
-                      <b>
-                        <i class="fa fa-map-marker pdtop-5" aria-hidden="true"></i>
-                      </b>
-
-                    </div>
-                    <div class="col-sm-10  col-md-10  col-lg-10 left">
-                      <b class="capitalize">{{allorder.orderby_address}}</b>
+                      <b class="capitalize onhovertext300">{{allorder.orderby_address}}</b>
                     </div>
                   </div>
                   <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5">
-                      <label class="td-label">Delivery Time</label>
+                    <div class="col-sm-7  col-md-7  col-lg-7 ">
+                      <span class="td-label">Delivery Time</span>
+                      <br>
+                      <b class="left danger">{{allorder.delivery_exceptedtime}}</b>                      
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 row">
-                      <label class="left danger">{{allorder.delivery_exceptedtime}}</label>
+                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                        <span class="td-label">Supplier Code</span>
+                        <br>
+                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b> 
                     </div>
                   </div>
-                  
-                  <div class="form-group row ">
-                      <div class="col-sm-5 col-md-5  col-lg-5">
-                          <label class="td-label" >Associated Distributor </label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 row">
-                        <label class="left capitalize" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.firstname}}</label>
-                      </div>
-                    </div>
-                    
+
                     <!-- <div class="  row ">
                       <div class="col-sm-5  col-md-5  col-lg-5 left">
                         <label class="td-label" *ngIf="superDealer">
@@ -829,45 +830,28 @@
               </td>
               <td width="25%">
                 <div class="">
-                  <div class=" mgbottom-10 row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-mobile " aria-hidden="true"> </i> Mobile </label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <span *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</span>
+                  <div class="form-group row ">
+                    <div class="col left">
+                      <span class="td-label">Mobile </span>
+                 <br>
+                      <b *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</b>
                     </div>
                   </div>
-                  <div class="mgbottom-10 row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-plus-circle" aria-hidden="true"> </i> Assigned On </label>
-                    </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7 left" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
-                      <span class="warning">{{allorder.order_assigneddate | utcDate }}</span>
-                    </div>
+                  <div class="form-group row ">
+                    <div class="col left">
+                      <span class="td-label"> Assigned On </span>
+                    <br>
+                    <span class="warning" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
+                      {{allorder.order_assigneddate | utcDate }}</span>
+                    </div>  
                   </div>
-                  <div class="row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <label class="td-label">
-                        <i class="fa fa-check-square-o" aria-hidden="true"> </i> Delivered On </label>
-                    </div>
-
-                    <div class="col-sm-6  col-md-6  col-lg-6 left">
+                  <div class="row form-group">
+                    <div class="col left">
+                      <span class="td-label"> Delivered On </span><br>
                       <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
-
-
                     </div>
                   </div>
-                  <div class="  row ">
-                      <div class="col-sm-5  col-md-5  col-lg-5 left">
-                        <label class="td-label" *ngIf="superDealer">
-                        Code</label>
-                      </div>
-                      <div class="col-sm-7  col-md-7  col-lg-7 left row">
-                          <label class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</label>
-                      </div>
-                    </div>
+
                   <!-- <div class="form-group row ">
                       <div class="col-sm-5 col-md-5  col-lg-5">
                           <label class="td-label">
@@ -897,15 +881,13 @@
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                
                      <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
-                      <i class="fa fa-circle-o " aria-hidden="true"  ></i> Customer all Orders Details</button>
+                      <i class="fa fa-user " aria-hidden="true"  ></i> Customer  Details</button>
                       <!-- <div class="row">
                           <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned'">
                               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
                             <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="allorder.status !='accept' && allorder.status !='delivered' "> 
                                 <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
                         </div> -->
-
-
                   </div>
                 </div>
               </td>

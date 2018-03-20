@@ -599,15 +599,15 @@ border:2px solid #0f75bc;
 
   border-radius: 50%;
 }
-.onhovertext150 {
-  width:150px !important;
+.onhovertext300 {
+  width:300px !important;
  text-overflow: ellipsis;
   white-space: nowrap;
 overflow: hidden;
 display: block;
 }
 
-.onhovertext150:hover {
+.onhovertext300:hover {
   padding: 0px 5px 0px;
   overflow: visible;
   position: relative;
