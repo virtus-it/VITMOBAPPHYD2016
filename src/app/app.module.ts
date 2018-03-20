@@ -99,8 +99,7 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
 import { MapStockpointComponent } from './map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.component';
 import { TimeChartComponent } from './time-chart/time-chart.component';
-import { ChartsModule } from 'ng2-charts';
-import { GaugeModule } from 'angular-gauge';
+
 
 
 
@@ -186,7 +185,7 @@ import { GaugeModule } from 'angular-gauge';
     imports: [
         BrowserModule,
         FormsModule,
-        ChartsModule,
+       
         ReactiveFormsModule,
         HttpModule,
         BrowserAnimationsModule,
@@ -195,7 +194,6 @@ import { GaugeModule } from 'angular-gauge';
         MdDialogModule,
         MdTooltipModule,
         MdInputModule,
-        // GaugeModule.forRoot(),
         NgxGaugeModule,
         MdNativeDateModule,
         AngularMultiSelectModule,
