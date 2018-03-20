@@ -90,7 +90,9 @@ table thead {
   cursor: pointer;  
   background: #f1f5f7;
 }
-
+.mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button{
+  padding: 0px 14px !important;
+}
 .dropdown-content a:hover {background-color: #f1f1f1}
 
 .dropdown:hover .dropdown-content {

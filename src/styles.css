@@ -154,7 +154,7 @@ color: #0f75bc !important;
   color: #fff;
 }
 .pdtopbottom-12{
-  padding: 12px;
+  padding: 12px 0px;
 }
 .modal-title{
 padding: 15px;
@@ -589,12 +589,32 @@ border:2px solid #0f75bc;
  .danger{
    color: #d9534f;
  }
+ .height-95pc{
+    height: 95%;
+  }
  .plus-style{
   background: #0f75bc;
   padding: 5px 8px;
   color: #fff;
 
   border-radius: 50%;
+}
+.onhovertext150 {
+  width:150px !important;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: block;
+}
+
+.onhovertext150:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+width: 100%;
+background: #fff;
+box-shadow: 0 0 8px #bbb;
 }
 .onhovertext {
   width:100px;
