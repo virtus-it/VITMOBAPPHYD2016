@@ -8,6 +8,7 @@ import { EmptyCanDailogComponent } from '../empty-can-dailog/empty-can-dailog.co
 import { OnHoldOrderStatusComponent } from '../on-hold-order-status/on-hold-order-status.component';
 import { EditOrderStatusComponent } from '../edit-order-status/edit-order-status.component';
 import { OrderLandingService } from '../order-landing/order-landing.service';
+import { SmsServiceService } from '../sms/sms-service.service';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
@@ -19,13 +20,16 @@ import * as _ from 'underscore';
 })
 export class OrderDetailDailogComponent implements OnInit {
 
-    constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
+    constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService, private smsService: SmsServiceService) { }
     dailogOrderDetails: any = {};
     deliveredStatus= false;
     customerProductDetails: any = [];
     customerProductDetailsCopy: any = [];
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
+
+    notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""],"option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
+
 showCustomerDetails(orderData) {
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
         width: '95%',
@@ -225,11 +229,63 @@ deliveryStatus(){
 // }
 
 
+notification(type){
+    let input = this.notificationsInput;
+    if(type == 'radio'){
+        this.notificationsInput.User.smstype = "notification";
+        this.notificationsInput.User.type = "radio";
+        this.notificationsInput.User.body= "body tag message here";
+        this.notificationsInput.User.title = "title bar message";
+        this.notificationsInput.User.buttons = ["Radio Button"];
+    }
+    if(type == 'checkbox'){
+        input.User.smstype = "notification";
+        input.User.type = "checkbox";
+        input.User.body= "body tag message here";
+        input.User.title = "title bar message";
+        input.User.buttons = ["Radio Button"];
+        input.User.option= ["option1"]; 
+    }
+    if(type=='website'){
+        input.User.smstype = "notification";
+        input.User.type = "website";
+        input.User.body= "body tag message here";
+        input.User.title = "title bar message";
+        input.User.redirecturl = "http://www.moya.online";
+    }
+    if(type=='slide'){ 
+        input.User.smstype = "notification";
+        input.User.type = "slide";
+        input.User.body= "body tag message here";
+        input.User.title = "title bar message";
+        input.User.sliderurl= [{"image":"https://images.pexels.com/photos/40784/drops-of-water-water-nature-liquid-40784.jpeg?h=350&auto=compress&cs=tinysrgb","count":0}];
+    }
+    if(type == 'playstore'){
+        input.User.smstype = "notification";
+        input.User.type = "playstore";
+        input.User.body= "body tag message here";
+        input.User.title = "title bar message";
+        input.User.buttons = ["Rate us now!!"];
+    }
+    console.log(input);
+    this.smsService.CreateSms(input)
+    .subscribe(
+    output => this.saveMobileSmsResult(output),
+    error => {
+    });
+}
+saveMobileSmsResult(result) {
+  if(result.result == 'success'){
+
+  }
+}
+    
+
 ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     this.deliveryStatus();
-    ////console.log(this.orderDetail);
+    console.log(this.orderDetail);
     // this.getUserDetails();
 }
 

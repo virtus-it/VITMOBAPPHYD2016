@@ -188,7 +188,7 @@
                 <button class="dropbtn">View More</button>
                 <div class="dropdown-content" style="right:0;">
                   <div class="row pdbottom-5">
-                    <label class="col-md-6" (click)='showOrderList()'>
+                    <label class="col-md-6" (click)='showCustomerAllOrders(customers)'>
                       <i class="fa fa-file-text-o"></i>
                       Orders</label>
                     <label class="col-md-6" (click)='showPlaceOrder(customers)'>
@@ -205,7 +205,7 @@
                     <label class="col-md-6" (click)='showSetting()'>
                       <i class="fa fa-cog"></i>
                       Settings</label>
-                    <label class="col-md-6" (click)='showSetPayment()'>
+                    <label class="col-md-6" (click)='showSetPayment(customers)'>
                       <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
                   </div>
                   <div class="row pdbottom-5">

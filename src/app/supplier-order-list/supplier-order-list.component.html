@@ -6,7 +6,8 @@
     <div class="col-md-4  col-sm-4  col-lg-4">
         <i class="fa fa-file-text-o"></i>  
         Order List
-    </div>
+    </div> 
+    <p> Dist Name: {{Detail.data.firstname}} {{Detail.data.lastname}}</p>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
           </strong>         
@@ -24,9 +25,7 @@
             <th width="">Quantity</th>
             <th width="">Status</th>
             <th width=""> Payment Type</th>
-            <label *ngIf="Detail.type != 'supplierOrder'">
-            <th width="">Supplier</th>
-          </label>
+            <th *ngIf="Detail.type == 'supplierOrder'"> Supplier</th>
             <!-- <th width="">Request Data</th> -->
             <th width="">Customer </th>
             <th width=""> Customer Mobile</th>
@@ -44,8 +43,10 @@
             <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <label *ngIf="Detail.type != 'supplierOrder'">
-            <td width="" class="left" class="cellpadding" scope="row"> <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span> </td> </label>
+            <td *ngIf="Detail.type == 'supplierOrder'"  class="left" class="cellpadding">
+            <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span>
+          <span> - </span>
+          </td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
             <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>    

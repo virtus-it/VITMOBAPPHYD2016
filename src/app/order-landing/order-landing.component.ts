@@ -859,7 +859,7 @@ this.showFilterDailog =false;
 }
 
   viewDistributorsOrders(data){
-    let formatteddata: any = { "type": "distributorOrder", "data": data };
+    let formatteddata: any = { "type": "distributorOrder", "data": data , distributorId: data.distributor.userid };
         let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
           width: '95%',
           data: formatteddata

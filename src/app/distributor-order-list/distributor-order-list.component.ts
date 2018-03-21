@@ -58,7 +58,7 @@ export class DistributorOrderListComponent implements OnInit {
     // Getting distributors orders
     getDistributorsOrders() {
       this.loaderService.display(true);
-      let input = { "order": { "userid": this.Detail.data[0].userid , "priority": "5", "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": 0, "customerid": 0, "apptype": this.authenticationService.appType() } };
+      let input = { "order": { "userid": this.Detail.distributorId , "priority": "5", "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": 0, "customerid": 0, "apptype": this.authenticationService.appType() } };
       //console.log(input);
       this.supplierservice.supplierOrder(input)
         .subscribe(
@@ -96,7 +96,7 @@ export class DistributorOrderListComponent implements OnInit {
 
   ngOnInit() {
     this.onInitCheck();
-  //console.log(this.Detail);
+  console.log(this.Detail);
   }
 
 }

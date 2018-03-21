@@ -15,6 +15,7 @@ import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import { SetpricecustomerComponent } from '../setpricecustomer/setpricecustomer.component';
 import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
+import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
@@ -45,16 +46,31 @@ export class CustomerComponent implements OnInit {
         { value: 'followupdate', viewValue: 'Followup Date' }
         
     ];
-    showOrderList() {
-        let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
-            width: '90%',
-            data: '' 
+    // showOrderList(data) {
+    //     let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
+    //         width: '90%',
+    //         data: data
+    //     });
+    //     dialogRefOrderList.afterClosed().subscribe(result => {
+    //         //console.log(`Dialog closed: ${result}`);
+    //         //this.dialogResult = result;
+    //     });
+    // }
+
+
+    showCustomerAllOrders(orderData) {
+        let formatteddata:any = {"type":"customersPage", "data":orderData }
+        let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
+            width: '95%',
+            data: formatteddata
         });
-        dialogRefOrderList.afterClosed().subscribe(result => {
+        dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-            //this.dialogResult = result;
         });
+    
     }
+
+
     showPlaceOrder(data) {
         let dialogRefPlaceorder = this.dialog.open(PreOrderCartDailogComponent, {
             width: '75%',
@@ -81,7 +97,9 @@ export class CustomerComponent implements OnInit {
             data: data
         });
         dialogRefInactive.afterClosed().subscribe(result => {
-            this.getCustomerList(true);
+            if(result == 'success'){
+           this.getCustomerList(true);
+            }
             //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
         });
@@ -96,10 +114,10 @@ export class CustomerComponent implements OnInit {
             //this.dialogResult = result;
         });
     }
-    showSetPayment() {
+    showSetPayment(data) {
         let dialogRefSetting = this.dialog.open(CustomerSetPaymentCycleComponent, {
             width: '700px',
-            data: ''
+            data: data
         });
         dialogRefSetting.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);

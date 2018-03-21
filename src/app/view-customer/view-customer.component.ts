@@ -129,7 +129,7 @@ getcustomerByPaging(){
   }
 
   ngOnInit() {
-    //console.log(this.Detail);
+    console.log(this.Detail);
     this.getCustomerList(true);
 
   }

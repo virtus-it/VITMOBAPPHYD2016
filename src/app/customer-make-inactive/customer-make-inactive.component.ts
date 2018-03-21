@@ -10,25 +10,7 @@ import { CustomerService } from '../customer/customer.service';
 export class CustomerMakeInactiveComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<CustomerMakeInactiveComponent>,  @Inject(MD_DIALOG_DATA) public customerDetails: any, private customerService: CustomerService) { }
-
-
-
-  // makeInactive(customer){
-  //   let input={"User":{"TransType":"activate","userid":customer.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
-  //   console.log(input);
-  //   this.customerService.createCustomer(input)
-  //   .subscribe(
-  //   output => this.activateDeactivateCustomer(output),
-  //   error => {
-  //   });
-  // }
-  // activateDeactivateCustomer(result){
-  //   if(result.result == 'success'){
-  //     this.thisDialogRef.close('success');
-  //   }
-
-  // }
-
+  refresh:any = "";
 
 activateDeactivateCustomer(customer){
     let input={};
@@ -46,15 +28,16 @@ activateDeactivateCustomer(customer){
     });
 }
 activateDeactivateCustomerResult(result){
-      if(result.result =='success'){
-        this.thisDialogRef.close('cancel');
+      if(result.result =='success'){  
+        this.refresh = 'success';
+        this.thisDialogRef.close(this.refresh);
       }
   }
 
 
 
   onCloseCancel(){
-    this.thisDialogRef.close('Cancel');
+    this.thisDialogRef.close(this.refresh);
   }
 
   ngOnInit() {
@@ -62,3 +45,7 @@ activateDeactivateCustomerResult(result){
   }
 
 }
+
+
+
+ 

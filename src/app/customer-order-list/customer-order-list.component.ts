@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject} from '@angular/core';
 import { MdDialogRef } from '@angular/material';
+import { MD_DIALOG_DATA } from '@angular/material';
 
 @Component({
   selector: 'app-customer-order-list',
@@ -8,12 +9,13 @@ import { MdDialogRef } from '@angular/material';
 })
 export class CustomerOrderListComponent implements OnInit {
 
-  constructor(public thisDialogRef: MdDialogRef<CustomerOrderListComponent>) { }
+  constructor(public thisDialogRef: MdDialogRef<CustomerOrderListComponent>,  @Inject(MD_DIALOG_DATA) public orderDetails: any) { }
 
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
+    console.log(this.orderDetails);
   }
 
 }

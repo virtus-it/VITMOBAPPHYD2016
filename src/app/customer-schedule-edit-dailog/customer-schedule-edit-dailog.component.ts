@@ -19,6 +19,7 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService,private customerservice: CustomerService,private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleEditDailogComponent>,@Inject(MD_DIALOG_DATA) public Detail: any, ) { }
   scheduleOrdersList=[];
+  noRecord=false;
 
 
   
@@ -40,9 +41,11 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     //console.log(result);
     if (result.result == "success") {
       this.scheduleOrdersList =result.data;
+      this.noRecord=false;
     }
    else{
      this.scheduleOrdersList =[];
+     this.noRecord = true;
      //console.log("No schedule orders");
    }
   }

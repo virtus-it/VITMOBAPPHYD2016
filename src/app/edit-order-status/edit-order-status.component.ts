@@ -14,7 +14,7 @@ import { LoaderService } from '../login/loader.service';
 export class EditOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
-  editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": this.orderDetail.delivered_quantity * this.orderDetail.prod_cost, "orderstatus": "delivered", 
+  editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": (this.orderDetail.delivered_quantity * this.orderDetail.prod_cost)  + (this.orderDetail.delivered_quantity * this.orderDetail.servicecharges) + (this.orderDetail.expressdeliverycharges) , "orderstatus": "delivered", 
   "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
 isConfirmed = true;
 
@@ -81,7 +81,7 @@ if(result.result = '"success"'){
   }
   ngOnInit() {
     //console.log(this.editStatusInput);
-    //console.log(this.orderDetail);
+    console.log(this.orderDetail);
   }
 
 }

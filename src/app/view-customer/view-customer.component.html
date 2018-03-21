@@ -3,6 +3,8 @@
     <i class="fa fa-users"></i>
     Customers
   </div>
+
+  <p *ngIf="Detail.firstname">Dist Name: {{Detail.firstname}} {{Detail.lastname}} </p>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
       <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>

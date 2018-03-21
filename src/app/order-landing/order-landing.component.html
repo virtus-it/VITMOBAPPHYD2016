@@ -51,6 +51,7 @@
                     <md-option value="followupdate">FollowUp Date</md-option>
                     <md-option value="supplierid" *ngIf="tabPanelView === 'allorder'">Supplier</md-option>
                     <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
+                    <md-option value="deliverySlot">Delivery Slot</md-option>
                   </md-select>
 
                 </div>
@@ -253,7 +254,8 @@
                   <div class=" row ">
                       <div class="col-sm-7  col-md-7  col-lg-7  left align-self-center">
                           <span class="td-label">Amount </span><br>
-                          <b class="pdright-5">Rs.{{forward.bill_amount + forward.expressdeliverycharges}}</b>
+                          <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
+                          <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                          </div>
                     <div class="col-sm-5  col-md-5  col-lg-5 right align-self-center">
                         <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
@@ -384,7 +386,7 @@
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                      
            
-                      <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(distributors)">
+                      <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
                         <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Orders </button>
     
                   </div>             
@@ -535,7 +537,8 @@
                       <div class="col left">
                           <span class="td-label">Amount </span>
                           <br>
-                          <b class="pdright-5">Rs.{{allorder.bill_amount + allorder.expressdeliverycharges }}</b>
+                          <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                          <!-- <b class="pdright-5" *ngIf="allorder.receivedamt > 0">Rs.{{allorder.receivedamt}}</b>  -->
                         </div>
                       <div class="col align-self-center right">
                           <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
