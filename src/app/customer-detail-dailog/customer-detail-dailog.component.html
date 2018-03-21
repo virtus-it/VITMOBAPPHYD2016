@@ -17,16 +17,17 @@
     <div class="container-fluid pd-15x25 brd-bottom">
         <div class="details-style">
       <div class="row ">
-        <div class="col align-self-center">
+        <div class="col align-self-center" >
             <h5>
                 <small>Name</small><br>
-                   <b class=" capital pdleft-5">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}
-                   </b>
+                   <b class=" capital pdleft-5">{{this.orderDetail.orderby_firstname}}{{this.orderDetail.orderby_lastname}}</b>
+                   <b class="capital pdleft-5" *ngIf="this.orderDetail.type == 'customersPage'" >{{orderDetail.data.firstname}}</b>
                   </h5>
             </div>
             <div class="col align-self-center">
                 <h5><small>Mobile</small><br>
                 <b class="pdleft-5">{{this.orderDetail.orderby_mobileno}}</b>
+                <b class="pdleft-5" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.mobileno}}</b>
                 </h5>
             </div>
             <!-- <div class="col center">
@@ -37,9 +38,13 @@
             <div class="col-4 align-self-center">
               <h5>
                   <small>Address</small><br>
-              <b class="pdleft-5 onhovertext300">{{this.orderDetail.user_address}}</b>
+              <b class="pdleft-5 onhovertext300" >{{this.orderDetail.user_address}}</b>
+              <b class="pdleft-5 onhovertext300" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.address}}</b>
             </h5>
             </div>
+
+
+
             <div class="col-3 ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
@@ -55,6 +60,9 @@
             <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
             </div>
             </div>
+
+
+            
             </div>
       <div class="">
     

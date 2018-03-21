@@ -33,6 +33,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     gpsMessage: string = "";
     filterInputkmvalue = { kmvalue: "" };
     categoryList: any = [];
+    reasonOnHold:any;
     dropdownSettings = {
         singleSelection: false,
         text: "Select Status",

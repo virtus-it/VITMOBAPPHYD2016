@@ -120,8 +120,14 @@ export class CustomerDetailDailogComponent implements OnInit {
 
 
   getCustomerOrder() {
-    this.loaderService.display(true);
-    let input = { "order": { "userid": this.orderDetail.order_by, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+    let input = {};
+    if(this.orderDetail.type == 'customersPage'){
+      input = { "order": { "userid": this.orderDetail.data.userid, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+    }
+    else{
+     input = { "order": { "userid": this.orderDetail.order_by, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+    }
+    console.log(input);
     this.orderLandingService.getOrderByPaymentCycle(input)
       .subscribe(
       output => this.getCustomerOrderResult(output),
@@ -129,7 +135,7 @@ export class CustomerDetailDailogComponent implements OnInit {
         //console.log("error in order details");
         this.loaderService.display(false);
       });
-  }
+}
   getCustomerOrderResult(result) {
     //console.log(result);
     this.loaderService.display(false);
@@ -193,7 +199,7 @@ export class CustomerDetailDailogComponent implements OnInit {
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
-    //console.log(this.orderDetail);
+    console.log(this.orderDetail);
     this.getCustomerOrder();
     this.getDistributors();
   }
