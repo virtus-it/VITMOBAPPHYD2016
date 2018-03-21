@@ -17,7 +17,7 @@
           <b> <i class="fa fa-file-text-o"></i>   Order Details</b>
           <div class="row form-group mgtop-5">
             <div class="col-md-5 col-5 col-sm-5">
-              <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
+              <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
               <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
             </div>
@@ -309,6 +309,9 @@
             <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="1">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> Distributor</span>
+          </label>
+          <label class="">
+            <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template"></i>
           </label>
         </div>
         <div class="row">

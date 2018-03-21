@@ -647,7 +647,14 @@ box-shadow: 0 0 8px #bbb; */
  text-overflow: ellipsis;
   white-space: nowrap;
 overflow: hidden;
-display: block;
+display: inline-block;
+}
+.onhovertooltip {
+  width:200px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
 }
 
 .onhovertext150:hover {
@@ -656,9 +663,33 @@ display: block;
   position: relative;
 left: -2px;
 width: 100%;
+z-index: 1;
+width: auto;
+background-color: #fff;
 /* background: #fff;
 box-shadow: 0 0 8px #bbb; */
 }
+.onhovertabletext-200 {
+  width:200px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
+
+.onhovertabletext-200:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+width: 100%;
+z-index: 1;
+width: auto;
+background-color: #fff;
+/* background: #fff;
+box-shadow: 0 0 8px #bbb; */
+}
+
 .brd-top-gray{
   border-top:1px solid #ddd;
 }
