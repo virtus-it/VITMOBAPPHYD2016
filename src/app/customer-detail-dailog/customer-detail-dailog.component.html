@@ -4,7 +4,7 @@
 </div> -->
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-user-circle-o"></i> Customer View      
+      <i class="fa fa-user-circle-o"></i> Customer Orders      
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
       <strong>
@@ -40,7 +40,7 @@
               <b class="pdleft-5 onhovertext300">{{this.orderDetail.user_address}}</b>
             </h5>
             </div>
-            <div class="col-3 ">
+            <div class="col-2 ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -51,7 +51,7 @@
               </md-form-field>
             </div>
             
-            <div class="col-1 align-self-center" >
+            <div class="col-2 align-self-center" >
             <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
             </div>
             </div>
@@ -61,18 +61,17 @@
         <table class="table table-hover table-striped table-fixedheader">
           <thead>
             <tr class="wd-99pc">
-              <th width="8%">Order Id</th>
+              <th width="8%">Id</th>
               <th width="10%">Product Name</th>
               <!-- <th width="7%">Cart Id</th> -->
               <th width="14%">Address</th>
-              <th width="8%" title="Advance Amount">Ord Qty</th>
-              <th width="8%" title="Order Amount">Ord Amt</th>
-              <th width="8%" title="Received Amount">Recv Amt</th>
+              <th width="8%" title="Order Quantity">Qty</th>
               <th width="8%" title="Return Quantity">Ret Qty</th>
+              <th width="8%" title="Order Amount">Amt</th>
+              <th width="8%" title="Received Amount">Recv Amt</th>
               <th width="10%">Status</th>
-              <!-- <th width="10%">Payment Mode</th> -->
-              <th width="14%" title="Delivery Date">Del Date</th>
-              <th width="12%" title="Delivered By">Del By</th>
+              <th width="14%" title="Delivery Date">Delv Date</th>
+              <th width="12%" title="Delivered By">Delv By</th>
               
             </tr>
           </thead>
@@ -82,22 +81,19 @@
               <td width="10%" class=" capital">{{customer.brandname}} {{customer.prod_type}}</td>
               <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
               <td width="14%" class=" capital"><span class="onhovertext">{{customer.orderby_address}}</span></td>
-              <td width="8%" class=" capital">{{customer.quantity}}</td>            
+              <td width="8%" class=" capital">{{customer.quantity}}</td>        
+              <td width="8%" class=" capital">{{customer.return_cans}}</td>    
               <td width="8%" class=" capital">{{customer.bill_amount}}</td>
               <td width="8%" class=" capital">{{customer.receivedamount}}</td>
-              <td width="8%" class=" capital">{{customer.return_cans}}</td>
               <td width="10%" class=" capital">{{customer.status}}</td>
-            
               <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
               <td width="14%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
               <td width="12%" class=" capital">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</td>
-
             </tr>
           </tbody>
           <tfoot>
               <tr>
                 <td colspan="5"> 
-              
                    </td>
               </tr>
             </tfoot>
