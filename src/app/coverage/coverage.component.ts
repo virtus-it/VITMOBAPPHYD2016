@@ -323,6 +323,10 @@ getProductByCategory(){
   }
 
 
+//   refresh(): void {
+//     window.location.reload();
+// }
+
 
 
 

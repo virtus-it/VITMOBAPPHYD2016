@@ -102,7 +102,7 @@ export class SupplierOrderListComponent implements OnInit {
   ngOnInit() {
     // this.supplierOrderList();
     this.onInitCheck();
-    //console.log(this.Detail);
+    console.log(this.Detail);
 
 
   }

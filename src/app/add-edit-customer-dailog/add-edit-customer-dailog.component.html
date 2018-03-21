@@ -114,7 +114,7 @@
           </div>
         </div>
         <div *ngIf="customerInput.User.paymenttype=='credit'">
-          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Select" >
+          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Date" >
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
             <md-option value="3">3</md-option>
@@ -148,7 +148,7 @@
               Select date is
               <strong>required</strong>
             </md-error> -->
-          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Select Payment Due Date" >
+          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Due Date" >
               <md-option value="1">1</md-option>
               <md-option value="2">2</md-option>
               <md-option value="3">3</md-option>

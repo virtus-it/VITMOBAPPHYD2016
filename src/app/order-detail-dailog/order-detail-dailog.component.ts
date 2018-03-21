@@ -232,11 +232,11 @@ deliveryStatus(){
 notification(type){
     let input = this.notificationsInput;
     if(type == 'radio'){
-        input.User.smstype = "notification";
-        input.User.type = "radio";
-        input.User.body= "body tag message here";
-        input.User.title = "title bar message";
-        input.User.buttons = ["Radio Button"];
+        this.notificationsInput.User.smstype = "notification";
+        this.notificationsInput.User.type = "radio";
+        this.notificationsInput.User.body= "body tag message here";
+        this.notificationsInput.User.title = "title bar message";
+        this.notificationsInput.User.buttons = ["Radio Button"];
     }
     if(type == 'checkbox'){
         input.User.smstype = "notification";
@@ -267,11 +267,12 @@ notification(type){
         input.User.title = "title bar message";
         input.User.buttons = ["Rate us now!!"];
     }
-    // this.smsService.CreateSms(input)
-    // .subscribe(
-    // output => this.saveMobileSmsResult(output),
-    // error => {
-    // });
+    console.log(input);
+    this.smsService.CreateSms(input)
+    .subscribe(
+    output => this.saveMobileSmsResult(output),
+    error => {
+    });
 }
 saveMobileSmsResult(result) {
   if(result.result == 'success'){

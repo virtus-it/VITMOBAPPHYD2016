@@ -75,7 +75,16 @@
                 <textarea class="form-control" mdInput placeholder="Address" name="Address"  [(ngModel)]="profileUpdate.address"  ></textarea>
               </md-form-field>
             </div>
+            
+              
+          
           </div>
+          <div class="row">
+            <small class="">Characters Remaining :
+              <span class="danger"> {{500 - profileUpdate.address.length}}</span>
+            </small>
+          </div>
+
 
           <!-- <div class="row">
             <div class="col-md-4 col-sm-6">

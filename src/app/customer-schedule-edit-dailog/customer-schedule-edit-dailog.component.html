@@ -33,6 +33,13 @@
             </td>
         </tbody>
       </table>
+      <tr *ngIf="noRecord">
+        <td colspan="4">
+          <h4 class="warning oneline center">
+            <i aria-hidden="true" class="fa fa-frown-o"></i>
+            Record Not Available</h4>
+        </td>
+      </tr>
 
     </md-dialog-content>
   </div>

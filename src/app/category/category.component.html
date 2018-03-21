@@ -30,11 +30,13 @@
                     <thead>
                       <tr>
                         <th width="">Category</th>
+                        <th width="">Category Details</th>
                         <th width="">Action</th>
                       </tr></thead>
                     <tbody>
                       <tr *ngFor="let cat of categoryList">
                         <td class="">{{cat.category}}</td>
+                        <td class="">{{cat.category_desc}}</td>
                         <td class="">
                           <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit" (click)="updateCustomer(cat)"></i> &nbsp;&nbsp;&nbsp;
                           <i class="fa fa-gift btn-link" aria-hidden="true" title="products" (click)="getProducts(cat)"></i>
