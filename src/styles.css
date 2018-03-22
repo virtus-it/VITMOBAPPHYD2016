@@ -689,7 +689,23 @@ background-color: #fff;
 /* background: #fff;
 box-shadow: 0 0 8px #bbb; */
 }
+.onhovertabletext-100 {
+  width:100px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
 
+.onhovertabletext-100:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+z-index: 1;
+width: auto !important;
+background-color: #fff;
+}
 .brd-top-gray{
   border-top:1px solid #ddd;
 }
