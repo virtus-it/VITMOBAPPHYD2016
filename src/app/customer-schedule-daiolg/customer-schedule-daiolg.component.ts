@@ -337,7 +337,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   }
 
   validate1(){
-    if(this.scheduleInput.weekdays.length > 0){
+    if(this.scheduleInput.weekdays.length > 0 || this.scheduleInput.days.length > 0){
       this.message="";
       return true;
     }
@@ -356,7 +356,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   ngOnInit() {
 
-    //console.log(this.Detail);
+    console.log(this.Detail);
     this.getProductsList();
   }
   }
