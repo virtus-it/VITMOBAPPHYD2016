@@ -119,7 +119,7 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   ngOnInit() {
     this.viewScheduleOrders();
-    //console.log(this.Detail);
+    console.log(this.Detail);
 
     // this.openDialog();
 
