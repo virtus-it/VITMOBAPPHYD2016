@@ -10,21 +10,41 @@
   <md-dialog-content layout="column">
     <form class="example-form" >
       <div class="container-fluid pd-15x25 brd-bottom">
-          <div class="row mgtop-10 ">
-          <div class="col-md-5 right pdtop-10">
+          <div class="row ">
+              <div class="col-md-4 ">
+        
+                <md-form-field class="wd-100pc">
+                  <input  mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy">
+                  <md-error>
+                      Quantity is <strong>required</strong>
+                  </md-error>
+                </md-form-field>
+              </div>
+              <div class="col-md-8" >
+                  
+          <div class="row  ">
+          <div class="col-md-7 ">
             <b>DELIVERY TIME</b> <br>
               <small>{{ orderDetails.delivery_exceptedtime }}</small>
           </div>
+          <div class="col-md-5 align-self-center">
           <button class="btn btn-link btn-sm" (click)="showSlot()">Change</button>
-          <div class="  col-sm-4  col-md-4  col-lg-4" *ngIf="this.hideTimeSlot">
-            <md-form-field class="example-full-width">
+          </div>
+        </div>
+      </div>  
+          
+    </div>
+        <div class="row "   *ngIf="this.hideTimeSlot">
+          <div class="  col-6">
+            <md-form-field class="example-full-width wd-100pc">
               <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" name="date" [(ngModel)]="changeTimeSlot.date" (ngModelChange)="enableTime($event)">
               <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
               <md-datepicker #picker></md-datepicker>
             </md-form-field>
+            </div>
         
-          <div class="  col-sm-4  col-md-4  col-lg-4">
-            <md-select placeholder="Select Time" name="type" class="wd-100pc" name="time" [(ngModel)]="changeTimeSlot.timeslot">
+          <div class="  col-6">
+            <md-select placeholder="Select Slot" name="type" class="wd-100pc" name="time" [(ngModel)]="changeTimeSlot.timeslot">
               <md-option>Select Slot
               </md-option>
               <md-option value="7AM-8AM" [disabled]= '7 <= hours'>7AM-8AM</md-option>
@@ -47,24 +67,8 @@
               </md-option> -->
             </md-select>
           </div>
-          </div>
-        </div>
+          </div>    
 
-        <div class="row mgtop-10 ">
-          <div class="col-md-5 right pdtop-10">
-<b>Quantity :</b>
-          </div>
-          <div class="col-md-4">
-        
-            <md-form-field class="col-md-12">
-              <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy">
-              <md-error>
-                  Quantity is <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-
-        </div>
       </div>
     </form>
   </md-dialog-content>
