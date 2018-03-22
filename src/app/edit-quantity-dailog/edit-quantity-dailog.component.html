@@ -11,7 +11,20 @@
     <form class="example-form" >
       <div class="container-fluid pd-15x25 brd-bottom">
           <div class="row mgtop-10 ">
-          <div class="col-md-5 right pdtop-10">
+              <div class="col-md-4  pdtop-10">
+                    <b>Quantity :</b>
+                     <br>
+                <md-form-field class="full">
+                  <input  mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy">
+                  <md-error>
+                      Quantity is <strong>required</strong>
+                  </md-error>
+                </md-form-field>
+              </div>
+              <div class="col-md-8 right pdtop-10">
+                  
+          <div class="row mgtop-10 ">
+          <div class="col-md-9 right pdtop-10">
             <b>DELIVERY TIME</b> <br>
               <small>{{ orderDetails.delivery_exceptedtime }}</small>
           </div>
@@ -49,22 +62,9 @@
           </div>
           </div>
         </div>
-
-        <div class="row mgtop-10 ">
-          <div class="col-md-5 right pdtop-10">
-<b>Quantity :</b>
-          </div>
-          <div class="col-md-4">
-        
-            <md-form-field class="col-md-12">
-              <input class="form-control" mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy">
-              <md-error>
-                  Quantity is <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-
         </div>
+      </div>
+
       </div>
     </form>
   </md-dialog-content>
