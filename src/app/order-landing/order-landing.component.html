@@ -295,6 +295,7 @@
                              Mobile</span>
                           <br>
                           <b>{{forward.orderby_mobileno}}</b>
+                          
                         </div>
 
                           <div class="col right" *ngIf="forward.customersource == 'DistributorCustomer'">
@@ -348,6 +349,7 @@
                                   Supplier Mobile</span>
                               <br>
                             <b *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
+                            
                             
                             </div>
                         </div>
@@ -600,6 +602,7 @@
                       <span class="td-label">Mobile </span>
                  <br>
                       <b *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</b>
+                      <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </div>
                   </div>
                   <div class="form-group row ">
@@ -608,12 +611,14 @@
                     <br>
                     <span class="warning" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
                       {{allorder.order_assigneddate | utcDate }}</span>
+                      <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </div>  
                   </div>
                   <div class="row form-group">
                     <div class="col left">
                       <span class="td-label"> Delivered On </span><br>
                       <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
+                      <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </div>
                   </div>
                   <div class=" float-right">
