@@ -18,7 +18,7 @@ export class SelectProductsForassingComponent implements OnInit {
   productList = [];
   productID = "";
   productMessage = false;
-
+  noRecord = false;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
@@ -39,6 +39,7 @@ export class SelectProductsForassingComponent implements OnInit {
   getProductsListResult(result) {
     //console.log("distributor products list", result);
     if (result.result == 'success') {
+      this.noRecord=false;
       let productListCopy = [];
       _.each(result.data.products, function (i, j) {
         let details: any = i;
@@ -71,15 +72,19 @@ export class SelectProductsForassingComponent implements OnInit {
       //console.log(" this.productList", this.productList);
       
     }
+    else{
+      this.noRecord = true;
+    }
+    
   }
   setProducts() {
     let id = this.productID;
     let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
 
 
-    let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() } };
+    let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "servicecharges": productsDetails.servicecharge , "expressdeliverycharges": productsDetails.expressdeliverycharges } };
 
-    //console.log(input);
+    console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.setProductsResult(output),

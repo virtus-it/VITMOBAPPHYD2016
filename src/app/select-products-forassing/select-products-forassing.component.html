@@ -42,6 +42,16 @@
         </md-form-field></td> 
      </tr>
   </tbody>
+  <tfoot>
+      <tr *ngIf="noRecord">
+        <td colspan="4">
+          <h4 class="warning oneline center">
+            <i aria-hidden="true" class="fa fa-frown-o"></i>
+            Record Not Available</h4>
+        </td>
+      </tr>
+
+  </tfoot>
 </table>
 </div>
       

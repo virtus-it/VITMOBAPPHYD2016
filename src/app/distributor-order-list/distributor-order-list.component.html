@@ -3,7 +3,8 @@
         <i class="fa fa-file-text-o"></i>  
         Order List
     </div>
-    <!-- <p> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</p> -->
+    <p *ngIf="Detail.data.distributor.firstname"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</p> 
+    <p *ngIf="Detail.data.distributor.mobileno"> Dist No : {{Detail.data.distributor.mobileno}}</p>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
           </strong>         
@@ -22,8 +23,8 @@
             <th width="10%">Cost</th>
             <th width="10%">Status</th>
             <th width="10%">Mode</th>
-            <th width="12%">Customer </th>
-            <th width="10%"> Cust Mobile</th>
+            <!-- <th width="12%">Customer </th>
+            <th width="10%"> Cust Mobile</th> -->
        
           </tr>
         </thead>
@@ -35,8 +36,8 @@
             <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>               
             <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <td width="12%" class="left" class="cellpadding" scope="row"> {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}} </td>
-            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
+            <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>
+            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
            </tr>
         </tbody>
         <!-- <tfoot>
