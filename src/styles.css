@@ -93,7 +93,7 @@ table thead {
   }
   .mat-dialog-container{
     padding: 0px !important;
-    max-height: 700px;
+    max-height: 620px;
     max-width: 100% !important;
     overflow: hidden !important;
   }
@@ -536,14 +536,20 @@ border:2px solid #0f75bc;
     .pdtopleft-80x25{
       padding: 80px 0px 0px 25px;
     }
+    .mgleft-20{
+      margin-left: 20px;
+    }
+    .fs-12{
+      font-size: 12px;
+    }
         .sidebar-nohover > .mat-list-item-content:hover{
           background: transparent !important;
           border-left: none !important;
         }
         .scrollheight {
-          height: 400px;
+          height: 290px;
           overflow-y: auto;
-          padding: 10px;
+          padding: 6px;
         }
         table.table-fixedheader, table.table-fixedheader>thead, table.table-fixedheader>tbody, table.table-fixedheader>thead>tr, table.table-fixedheader>tbody>tr, table.table-fixedheader>thead>tr>th, table.table-fixedheader>tbody>td {
           display: block;
@@ -641,7 +647,14 @@ box-shadow: 0 0 8px #bbb; */
  text-overflow: ellipsis;
   white-space: nowrap;
 overflow: hidden;
-display: block;
+display: inline-block;
+}
+.onhovertooltip {
+  width:200px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
 }
 
 .onhovertext150:hover {
@@ -650,9 +663,33 @@ display: block;
   position: relative;
 left: -2px;
 width: 100%;
+z-index: 1;
+width: auto;
+background-color: #fff;
 /* background: #fff;
 box-shadow: 0 0 8px #bbb; */
 }
+.onhovertabletext-200 {
+  width:200px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
+
+.onhovertabletext-200:hover {
+  padding: 0px 5px 0px;
+  overflow: visible;
+  position: relative;
+left: -2px;
+width: 100%;
+z-index: 1;
+width: auto;
+background-color: #fff;
+/* background: #fff;
+box-shadow: 0 0 8px #bbb; */
+}
+
 .brd-top-gray{
   border-top:1px solid #ddd;
 }
@@ -676,7 +713,7 @@ box-shadow: 0 0 8px #bbb; */
   top: 80% !important;
   }
   .wd-99pc{
-    width: 99%;
+    width: 99% !important;
   }
   .pdtop-0{
     padding-top: 0px;

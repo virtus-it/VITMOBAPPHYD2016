@@ -211,7 +211,7 @@ export class OrderLandingComponent implements OnInit {
   showOrderDetails(orderData) {
     let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
-      width: '90%',
+      width: '95%',
       data: orderData
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {

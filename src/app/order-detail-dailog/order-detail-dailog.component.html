@@ -15,9 +15,9 @@
       <div class=" col-md-5 col-5 col-sm-5 brd-right">
         <div class="container-fluid">
           <b> <i class="fa fa-file-text-o"></i>   Order Details</b>
-          <div class="row form-group mgtop-10">
+          <div class="row form-group mgtop-5">
             <div class="col-md-5 col-5 col-sm-5">
-              <small class="gray" id="name"> Order Id: #{{dailogOrderDetails.order_id}}</small>
+              <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
               <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
             </div>
@@ -30,8 +30,8 @@
             </div>
           </div>
         </div>
-        <div class="container-fluid  border-top pdtop-10">
-          <div class="row form-group">
+        <div class="container-fluid  border-top pdtop-5">
+          <div class="row">
             <div class=" col-md-6">
               <b>Customer Details </b>
               
@@ -53,19 +53,21 @@
               <br>
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                Order Address:<br> {{dailogOrderDetails.orderby_address}}</small>
+                <span class="gray9">Order Address</span><br> {{dailogOrderDetails.orderby_address}}</small>
                 <br>
-                <small class="capital">
-                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                    Profile Address:<br> {{customerAddressDetails}}
-                </small>
+
             </div>
             <div class="col-md-4 right">
               <small class="capital ">
                 <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.orderby_mobileno}} </small>
               <br>
-              <small>
-                <i class="fa fa-location-arrow" aria-hidden="true"></i> {{dailogOrderDetails.orderby_areaname}}</small>
+              <small class="capital">
+                <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span class="gray9">Profile Address</span><br> {{customerAddressDetails}}
+            </small>
+              <!-- <small>
+                <i class="fa fa-location-arrow" aria-hidden="true"></i>
+                {{dailogOrderDetails.orderby_areaname}}</small> -->
             </div>
           </div>
           <div class="row  border-top pdtop-10  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
@@ -96,7 +98,7 @@
             </div>
           </div>
         </div>
-        <div class="container-fluid  border-top pdtop-10">
+        <div class="container-fluid  border-top pdtop-5">
           <div class="row  form-group">
             <div class=" col-lg-6 col-md-6 col-xl-6 col-sm-6">
               <b ng-show="canstext">#of Cans with Customer </b>
@@ -293,16 +295,14 @@
       </div>
       <div class="col-md-4 form-group border-left">
         <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
-        <ul class="scrollheight  mgtop-5">
+        <ul class="scrollheight">
           <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
-            <i class="fa fa-reply" aria-hidden="true"></i>
-            <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
-            <br>
+            <div class="row">
+              <div class="col">  <i class="fa fa-reply" aria-hidden="true"></i>
+                <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small></div>
+              <div class="col right"> <small class="gray9">{{ msg.createddate | utcDate}} </small></div>
+            </div>
             <small>{{ msg.message}} </small>
-            <br>
-            <p class="right">
-              <small class="gray">{{ msg.createddate | utcDate}} </small>
-            </p>
           </li>
 
         </ul>
@@ -319,17 +319,20 @@
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> Distributor</span>
           </label>
+          <label class="">
+            <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template"></i>
+          </label>
         </div>
         <div class="row">
           <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
-            <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
+            <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
           </div>
           
           <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
             <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
           </div>
           <br>
-          <div>
+          <div class="mgleft-20">
               <small class="">Characters Remaining :
                   <span class="danger"> {{500 - messageInput.order.reason.length}}</span>
                 </small>

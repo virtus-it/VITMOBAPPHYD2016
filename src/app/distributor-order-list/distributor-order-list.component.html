@@ -12,35 +12,32 @@
     <md-dialog-content layout="column">
         <div class="row pd-15x25 brd-bottom">
                 <div class="col scroll">    
-                    <table class="table table-hover table-striped">
+                    <table class="table table-hover table-striped  table-fixedheader">
                       <thead>
                         <tr>
-            <th width=""> Order Id</th>
-            <th width="">Product </th>
-            <th width="">Quantity</th>
-            <th width="">Status</th>
-            <th width=""> Payment Type</th>
-            <!-- <label *ngIf="Detail.type != 'supplierOrder'"> -->
-            <!-- <th width="">Supplier</th> -->
-          <!-- </label> -->
-            <!-- <th width="">Request Data</th> -->
-            <th width="">Customer </th>
-            <th width=""> Customer Mobile</th>
-            <th width="">Cost</th>
+            <th width="8%">Id</th>
+            <th width="12%">Product </th>
+            <th width="8%">Qty</th>
+            <th width="10%">Cost</th>
+            <th width="10%">Status</th>
+            <th width="10%">Mode</th>
+            <th width="12%">Supplier</th>
+            <th width="12%">Customer </th>
+            <th width="10%"> Cust Mobile</th>
+       
           </tr>
         </thead>
         <tbody>
             <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
-            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
-            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
-            <td width="" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <!-- <label *ngIf="Detail.type != 'supplierOrder'"> -->
-            <!-- <td width="" class="left" class="cellpadding" scope="row">   </td>  -->
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
-            <td width="" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>    
+            <td width="8%" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
+            <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+            <td width="8%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
+            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>               
+            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+            <td width="12" class="left" class="cellpadding" scope="row">   </td> 
+            <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
+            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
            </tr>
         </tbody>
         <!-- <tfoot>

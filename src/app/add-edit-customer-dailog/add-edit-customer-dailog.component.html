@@ -80,10 +80,7 @@
       </div>
     </div>
     <div class="row">
-      <b class="label-style col">Address Details</b>
-    </div>
-    <div class="row">
-      <div class="col-10">
+      <div class="col">
         <md-form-field class="example-full-width inline ">
           <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
         </md-form-field>
@@ -91,11 +88,10 @@
     </div>
     <div class="row">
       <div class="col-5">
-        <div class=" form-group">
-          <b class="label-style">Payment Type</b>
+        <div class=" form-group  row">
+          <b class="label-style col">Payment Type</b>
         </div>
-        <div>
-          <div class="">
+        <div class=" form-group  row">
             <span width="30%" class="left capital">
               <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
                 <input type="radio" [(ngModel)]="customerInput.User.paymenttype" class="custom-control-input" name="paymentType" value="cod">
@@ -112,9 +108,10 @@
               </label>
             </span>
           </div>
-        </div>
-        <div *ngIf="customerInput.User.paymenttype=='credit'">
-          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Date" >
+
+        <div *ngIf="customerInput.User.paymenttype=='credit'" class="row">
+            <div class="col">
+          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Select" >
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
             <md-option value="3">3</md-option>
@@ -144,11 +141,9 @@
             <md-option value="27">27</md-option>
             <md-option value="28">28</md-option>
           </md-select>
-          <!-- <md-error *ngIf="dateFormControl.hasError('required')">
-              Select date is
-              <strong>required</strong>
-            </md-error> -->
-          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Due Date" >
+        </div>
+        <div class="col">
+          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Select Payment Due Date" >
               <md-option value="1">1</md-option>
               <md-option value="2">2</md-option>
               <md-option value="3">3</md-option>
@@ -184,8 +179,9 @@
                 <strong>required</strong>
               </md-error> -->
         </div>
-      </div>
+        </div>
 
+      </div>
       <div class="col-7">
         <div class=" form-group">
           <b class="label-style"> Customer Type</b>
