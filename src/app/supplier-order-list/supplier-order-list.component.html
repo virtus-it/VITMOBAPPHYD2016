@@ -2,12 +2,12 @@
 <h2 md-dialog-title>Distributors</h2><br>
 
 </div> -->
-<div class="row justify-content-between modal-title ">
+<div class="row modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
         <i class="fa fa-file-text-o"></i>  
         Order List
     </div> 
-    <div class="col-md-4  col-sm-4  col-lg-4 capitalize">
+    <div class="col-md-7  col-sm-7  col-lg-7  capitalize">
         <i class="fa fa-sitemap"></i>  
         Dist Name: {{Detail.data.firstname}} {{Detail.data.lastname}}
     </div> 
@@ -24,14 +24,14 @@
                         <thead>
                         <tr>
             <th width="10%"> Order Id</th>
-            <th width="12%">Product </th>
-            <th width="8%">Quantity</th>
+            <th width="15%">Product </th>
+            <th width="8%">Qty</th>
             <th width="8%">Cost</th>
             <th width="10%">Status</th>
             <th width="8%">Mode</th>
-            <th *ngIf="Detail.type == 'supplierOrder'" width="10%"> Supplier</th>
+            <th *ngIf="Detail.type == 'supplierOrder'" width="12%"> Supplier</th>
             <!-- <th width="">Request Data</th> -->
-            <th width="12%">Customer </th>
+            <th width="15%">Customer </th>
             <th width="12%"> Cust Mobile</th>
            
           </tr>
@@ -43,16 +43,16 @@
           </td> </tr> -->
             <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
             <td width="10%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
-            <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+            <td width="15%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
             <td width="8%"  class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
             <td width="8%"  class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>   
             <td width="10%"  class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <td *ngIf="Detail.type == 'supplierOrder'"  class="left" class="cellpadding" width="10%">
+            <td *ngIf="Detail.type == 'supplierOrder'"  class="left" class="cellpadding" width="12%">
             <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span>
           <span> - </span>
           </td>
-            <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
+            <td width="15%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
             <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
            
            </tr>

@@ -512,7 +512,7 @@ border:2px solid #0f75bc;
         content: "" !important;
       }
       .none{
-        display: none
+        display: none;
       }
       .nav-pills .nav-link.active, .show>.nav-pills .nav-link{
         color: #fff !important;
