@@ -23,9 +23,17 @@ export class SelectProductsForassingComponent implements OnInit {
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
     this.loaderService.display(true);
+    // if(this.orderDetail.orderDetails.type = "customersPage"){
+    //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
+    // }
+    if( this.orderDetail.orderDetails.type == "customersPage"){
+      this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
+    }
+    else{
     this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
+    }
     let input = { apptype: this.authenticationService.appType(), userid: this.orderDetail.orderDetails.order_by, delearId: this.orderDetail.disributorId }
-    //console.log(input);
+    console.log(input);
 
     this.distributorService.getProductsList(input)
       .subscribe(

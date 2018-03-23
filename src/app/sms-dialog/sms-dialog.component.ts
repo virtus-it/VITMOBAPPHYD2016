@@ -28,7 +28,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
-  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "" , count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];
@@ -37,6 +37,7 @@ export class SmsDialogComponent implements OnInit {
   checkAllMobile: boolean = false;
   smallLoader: boolean = false;
   buttonCount:number = 0;
+  buttonActionCount:number = 0;
   optionCount:number = 0;
   silderCount:number = 0;
   OrderTypeDetails = [
@@ -82,10 +83,10 @@ export class SmsDialogComponent implements OnInit {
     this.orderinput.toDate = null
     this.orderinput.days = null
     this.orderinput.distributorid = null;
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "",count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   onChangeSmsType(type){
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "", count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   getMobileNumber() {
     this.smallLoader = true;
@@ -187,6 +188,7 @@ export class SmsDialogComponent implements OnInit {
         "redirecturl": this.smsInput.redirecturl,
         "url": this.smsInput.url,
         "buttons":[],
+        "buttonactions":[],
         "option": [],
         "sliderurl":this.smsInput.sliderurl
       }
@@ -199,10 +201,17 @@ export class SmsDialogComponent implements OnInit {
     });
     _.each(this.smsInput.option, function (i, j) {
       let details: any = i;
-     
       createSmsInput.User.option.push(details.name);
+    });
+
+    _.each(this.smsInput.buttonactions, function (i, j) {
+      let details: any = i;
+      
+      createSmsInput.User.buttonactions.push(details.name);
 
     });
+
+
     if(this.orderinput.orderType == 'sms'){
       let mobileArray = this.smsInput.customMobilenumber.split(';');
       let modifiedNumbers = [];
@@ -269,12 +278,19 @@ export class SmsDialogComponent implements OnInit {
     this.buttonCount = this.buttonCount + 1;
     let buttonObject = {name:"",count:this.buttonCount};
 this.smsInput.buttons.push(buttonObject);
+this.buttonActionCount = this.buttonActionCount + 1;
+let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
+this.smsInput.buttonactions.push(buttonActionObject);
 
   }
   removeButton(item){
     let filteredButton = _.filter(this.smsInput.buttons, function(e:any) {
-      return e.count !== item.count;
+      return e.count !== item.count;  
   });
+  let filteredActionButton = _.filter(this.smsInput.buttonactions, function(e:any) {
+    return e.count !== item.count;
+  });
+  this.smsInput.buttonactions = filteredActionButton;
   this.smsInput.buttons = filteredButton;
   }
   addOption(){

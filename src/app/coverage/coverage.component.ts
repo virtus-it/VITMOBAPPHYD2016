@@ -329,7 +329,9 @@ getProductByCategory(){
 
 
 
-
+refresh(){
+    this.orderDetails = "";
+}
 
     ngOnInit() {
         this.getPolygonDistributors();

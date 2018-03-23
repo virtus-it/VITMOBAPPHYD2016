@@ -264,6 +264,7 @@ background: transparent;
   min-width: 75px !important;
     padding: 0 14px !important;
 }
+
 .pdleft-15{
   padding-left:15px !important;
 }
@@ -293,7 +294,7 @@ background: transparent;
 }
 .btn-default{
   background: #fff;
-  color: #0f75bc;
+  color: #0f75bc !important;
 }
 .btn-primary{
   color: #fff !important;

@@ -60,6 +60,7 @@ export class OrderLandingComponent implements OnInit {
   forwardOrders: any = [];
   allOrders: any = [];
   distId:any="";
+  time:any =""
   orderedTime:any="";
   currentTime:any= "";
   deliveryTime:any="";
@@ -69,7 +70,7 @@ export class OrderLandingComponent implements OnInit {
   polygonArray = [];
   filterInput = { "order": { "pagesize": "50", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
   dropdownData = { selectedItems: [] };
-  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
+  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
   dropdownSettings = {
     singleSelection: false,
     text: "Select Status",
@@ -130,6 +131,12 @@ export class OrderLandingComponent implements OnInit {
     }
     return finalDistributors;
   }
+
+
+  someFunction(){
+    this.filterType.date = moment(this.filterType.date).format('DD-MM-YYYY');
+    this.filterInput.order.searchtext = this.filterType.date + " " + this.time;
+  }
   findSupplier(name: string) {
     //console.log(name);
     let finalsupplier = this.supplierList.filter(dist =>
@@ -158,7 +165,7 @@ export class OrderLandingComponent implements OnInit {
     this.tabPanelView = panelName;
     this.showFilterDailog =false;
     this.filterRecords = false;
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     if(panelName== "forward"){
       this.getForwardOrderDetails(true);
@@ -414,6 +421,10 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtype = 'followupdate';
       this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD 00:02:00');
     }
+    // if(type == 'deliverySlot'){
+    //   this.filterInput.order.searchtype = 'deliverySlot';
+    //   this.filterInput.order.searchtext = moment()
+    // }
     if(type=='notDelivered'){
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
@@ -520,6 +531,7 @@ export class OrderLandingComponent implements OnInit {
   //test code for pagination ends here
 
   searchOrderList() {
+    this.someFunction();
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
     }
@@ -645,7 +657,7 @@ this.showFilterDailog =false;
     this.showFilterDailog =false;
     this.filterRecords = false;
     this.quickFilterView = "";
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
@@ -695,6 +707,10 @@ this.showFilterDailog =false;
       }
       else if (details.status && (details.status == "ordered" || details.status == "backtodealer")) {
         details.OrderModifiedStatus = "Assign";
+        details.StatusColor = "logo-color";
+      }
+      else if(details.status && details.status == 'accept' ){
+        details.OrderModifiedStatus = 'Assign';
         details.StatusColor = "logo-color";
       }
 
@@ -807,7 +823,7 @@ this.showFilterDailog =false;
   acceptOrder(Details){
     //console.log(Details);
     let input={"order":{"orderid":Details.order_id,"status":"accept","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","apptype":this.authenticationService.appType()}};
-    //console.log(input);
+    console.log(input);
     this.orderLandingService.AcceptOrder(input)
       .subscribe(
       output => this.AcceptOrderResult(output),
@@ -817,7 +833,7 @@ this.showFilterDailog =false;
       });
   }
   AcceptOrderResult(result){
-    //console.log(result);
+    console.log(result);
     if(result.result='success'){
       this.getForwardOrderDetails(true);
 
