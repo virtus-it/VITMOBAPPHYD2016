@@ -114,42 +114,6 @@
                         </div>      </div>
                 </li>
               </ul>
-          <ul class="scrollheight  mgtop-5">
-            <li class="nolist-style  messages-style" *ngFor="let payments of codPayments">
-              <div *ngIf="payments.status=='confirm'">
-                <i class="fa fa-check-circle success fs-24" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="payments.status=='rejected'">
-                <i class="fa fa-times-circle danger fs-24" aria-hidden="true"></i>
-              </div>
-              <div *ngIf="payments.status=='received'">
-                <i class="fa fa-gratipay warning fs-24" aria-hidden="true"></i>
-              </div>
-              <div class="mgbottom-10">
-                <b> Dealer/Super-Supplier have {{payments.status}}ed Payment</b>
-                <br>
-                <small ca> Customer: {{payments.customer.firstname}} {{payments.customer.lastname}} have paid the amount of INR {{payments.amount_received}}
-                  to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
-                <div *ngIf="payments.status=='rejected'" class="mgbottom-10">
-                  <small> Rejected By: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
-                </div>
-              </div>
-
-              <div *ngIf="payments.status=='received'">
-                <md-dialog-actions align="end">
-                  <button md-raised-button class="btn-primary btn-small" (click)="changeStatus('confirm',payments)">CONFIRM</button>
-                  <button md-raised-button class="btn-small" (click)="changeStatus('rejected',payments)">REJECT</button>&nbsp;
-                </md-dialog-actions>
-              </div>
-              <div class="row dateview-style">
-                <small class="col-6 gray9">
-                  <i class="fa fa-calendar" aria-hidden="true"></i>
-                  {{payments.modifieddate | utcDate}} </small>
-                <small class="col-6 gray9">Order ID: #{{payments.orderid}}</small>
-              </div>
-            </li>
-
-          </ul>
         </div>
       </div>
 

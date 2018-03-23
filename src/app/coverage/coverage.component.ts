@@ -139,7 +139,7 @@ export class CoverageComponent implements OnInit {
         if (distributor) {
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
-                width: '700px',
+                width: '65%',
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
