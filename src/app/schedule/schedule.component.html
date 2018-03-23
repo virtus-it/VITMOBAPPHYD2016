@@ -419,17 +419,6 @@
           <td class="left capitalize"  width="12%">
               <span *ngIf="schedule.customerdetails "  class="onhovertabletext-100" >{{schedule.customerdetails.scheduledby}}({{schedule.customerdetails.mobileno}})
           </span></td>
-<<<<<<< HEAD
-          <td class="left capitalize" *ngIf="schedule.dealerinfo">{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}} </td>
-          <td *ngIf="schedule.dealerinfo === null"> - </td>
-          <td class="left" > {{schedule.product_name}} {{schedule.product_quantity}} </td>
-          <td class="left">{{schedule.delivery_exceptedtime}}</td>
-          <td class="left ">{{schedule.quantity}}</td>
-          <td class="left capitalize " style="position:absolute"><span class="onhovertext mgtop-10">{{schedule.weekdays}} {{schedule.days}}</span></td>
-          <td class="left" *ngIf="schedule.createdbyinfo "><span>{{schedule.createdbyinfo.scheduledby}}</span></td>
-          <td class="left" *ngIf="schedule.createddate" > <span>{{schedule.createddate | utcDate}} </span></td>
-          <td class="left ">
-=======
           <td class="left capitalize" width="12%">
               <span  *ngIf="schedule.dealerinfo"  class="onhovertabletext-100" >{{schedule.dealerinfo.scheduledby}}({{schedule.dealerinfo.mobileno}})
               </span></td>
@@ -440,7 +429,6 @@
           <td class="left" width="12%"><span  *ngIf="schedule.createdbyinfo ">{{schedule.createdbyinfo.scheduledby}}</span></td>
           <td class="left" width="14%"> <span *ngIf="schedule.createddate" >{{schedule.createddate | utcDate}} </span></td>
           <td class="left " width="10%">
->>>>>>> 7340d55d09fd9b240083663b68a128734574e209
                             <label class="logo-color cursor" (click)="createSchedule(schedule)">
                                 <i class="fa fa-calendar-plus-o" aria-hidden="true" title="Create"></i>
                              </label>&nbsp;&nbsp;
