@@ -62,7 +62,7 @@ export class SupplierComponent implements OnInit {
 supplierOrdersList(data){
   let formatteddata:any = {"type":"supplierOrder", "data":data };
     let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
-      width: '75%',
+      width: '70%',
       data: formatteddata
   });
   dialogRefSupplierOrderList.afterClosed().subscribe(result => {
