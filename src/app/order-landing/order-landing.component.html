@@ -406,7 +406,7 @@
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                              <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned'">
+                              <button class="btn btn-link btn-sm"   (click)="acceptOrder(forward)" *ngIf="(forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned') && (forward.status != 'accept')" >
                                   <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
                                  
                                       <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered' " (click)="rejectOrder(forward)">
