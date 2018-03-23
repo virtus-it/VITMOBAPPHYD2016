@@ -196,8 +196,13 @@
                               <div class="col-8">
                                 <md-form-field class="example-full-width inline ">
                                   <input class="form-control" mdInput placeholder="Button" name="button{{i}}" [(ngModel)]="button.name">
-
                                 </md-form-field>
+
+                                <md-select placeholder = "Action Type" name="actionType" [(ngModel)]="button.actiontype">
+                                  <md-option value="playstore"  name="action1">PlayStore</md-option>
+                                  <md-option value="api" name="action2">Api</md-option>
+                                </md-select>
+                               
                               </div>
                               <div class="col-sm-1  col-md-1  col-lg-1">
                                 <b title="Remove Button " class="fa fa-trash danger fs-22" (click)="removeButton(button)" aria-hidden="true"></b>
@@ -210,9 +215,12 @@
                   </div>
                 </div>
 
+                <!-- <md-select placeholder = "Action Type" name="actionType" *ngFor="let button of smsInput.buttonactions">
+                  <md-option value="playstore"  name="action1"  [(ngModel)]="button" >PlayStore</md-option>
+                  <md-option value="api" name="action2"  [(ngModel)]="button">Api</md-option>
+                </md-select> -->
 
-
-                <div class="col-sm-3  col-md-3  col-lg-3">
+                <!-- <div class="col-sm-3  col-md-3  col-lg-3">
                     <div class="row">
                       <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">
                         <a class="cursor logo-color ">
@@ -226,7 +234,8 @@
                               <div class="row align-items-center">
                                 <div class="col-8">
                                   <md-form-field class="example-full-width inline ">
-                                    <input class="form-control" mdInput placeholder="Actions" name="button{{i}}" [(ngModel)]="button.name">
+                                    <input class="form-control" mdInput placeholder="Actions" name="button{{i}}" [(ngModel)]="button.text">
+                                   
   
                                   </md-form-field>
                                 </div>
@@ -239,7 +248,7 @@
                         </table>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
 
 
                 <div class="col-sm-3  col-md-3  col-lg-3">

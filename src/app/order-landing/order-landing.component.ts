@@ -184,9 +184,10 @@ export class OrderLandingComponent implements OnInit {
       data: orderDetails
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
+      if(result == 'success'){
       //console.log(`Dialog closed: ${result}`);
       this.clearFilter();
-
+      }
 
     });
 

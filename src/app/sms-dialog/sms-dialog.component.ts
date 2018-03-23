@@ -28,7 +28,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
-  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "" , count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];
@@ -83,10 +83,10 @@ export class SmsDialogComponent implements OnInit {
     this.orderinput.toDate = null
     this.orderinput.days = null
     this.orderinput.distributorid = null;
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "",count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"",count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   onChangeSmsType(type){
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",count:0}], buttonactions:[{text: "", actiontype: "", count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",  actiontype:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   getMobileNumber() {
     this.smallLoader = true;
@@ -197,6 +197,8 @@ export class SmsDialogComponent implements OnInit {
       let details: any = i;
       
       createSmsInput.User.buttons.push(details.name);
+      var action =  {text:details.name, actiontype: details.actiontype};
+      createSmsInput.User.buttonactions.push(action);
 
     });
     _.each(this.smsInput.option, function (i, j) {
@@ -207,7 +209,7 @@ export class SmsDialogComponent implements OnInit {
     _.each(this.smsInput.buttonactions, function (i, j) {
       let details: any = i;
       
-      createSmsInput.User.buttonactions.push(details.name);
+      createSmsInput.User.buttonactions.push(details.text,details.actiontype);
 
     });
 
@@ -230,7 +232,7 @@ export class SmsDialogComponent implements OnInit {
       createSmsInput.User.body = this.smsInput.customBody;
     }
     
-    //console.log("input",createSmsInput);
+    console.log("input",createSmsInput);
     this.smsService.CreateSms(createSmsInput)
       .subscribe(
       output => this.saveMobileSmsResult(output),
@@ -280,7 +282,7 @@ export class SmsDialogComponent implements OnInit {
 this.smsInput.buttons.push(buttonObject);
 this.buttonActionCount = this.buttonActionCount + 1;
 let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
-this.smsInput.buttonactions.push(buttonActionObject);
+// this.smsInput.buttonactions.push(buttonActionObject);
 
   }
   removeButton(item){

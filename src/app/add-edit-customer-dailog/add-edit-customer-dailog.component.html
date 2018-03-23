@@ -111,7 +111,7 @@
 
         <div *ngIf="customerInput.User.paymenttype=='credit'" class="row justify-content-around">
             <div class="col-5 row">
-          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Date" >
+          <md-select name="day" id="day" [(ngModel)]="paymentDate" placeholder="Bill day" >
             <md-option value="1">1</md-option>
             <md-option value="2">2</md-option>
             <md-option value="3">3</md-option>
@@ -143,7 +143,7 @@
           </md-select>
         </div>
         <div class="col-5">
-          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Due Date" >
+          <md-select name="day" id="day" [(ngModel)]="paymentdueDate" placeholder="Due day" >
               <md-option value="1">1</md-option>
               <md-option value="2">2</md-option>
               <md-option value="3">3</md-option>
