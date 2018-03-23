@@ -399,35 +399,36 @@
 </div>
 
   <div class="row pd-15x10 mg-0">
-    <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped" style="table-layout:fixed">
       <thead>
         <tr>
           <th width="12%">Customer</th>
           <th width="12%">Distributor</th>
-          <th width="14%">Product </th>
-          <th width="10%">Expected Slot </th>
-          <th width="7%">Quantity</th>
+          <th width="12%">Product </th>
+          <th width="8%">Slot </th>
+          <th width="5%">Qty</th>
           <th width="12%">Schedule For</th>
           <th width="12%">Created by</th>
           <th width="14%">Created Date</th>
-          <th width="8% " class="no-th-arrow">Action</th>
+          <th width="10% " class="no-th-arrow">Action</th>
 
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let schedule of scheduleOrdersList">
-          <td class="left capitalize" *ngIf="schedule.customerdetails "><span>{{schedule.customerdetails.scheduledby}} <br> {{schedule.customerdetails.mobileno}}
+          <td class="left capitalize"  width="12%">
+              <span *ngIf="schedule.customerdetails "  class="onhovertabletext-100" >{{schedule.customerdetails.scheduledby}}({{schedule.customerdetails.mobileno}})
           </span></td>
-          <td class="left capitalize" *ngIf="schedule.dealerinfo">
-              <span>{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}}
+          <td class="left capitalize" width="12%">
+              <span  *ngIf="schedule.dealerinfo"  class="onhovertabletext-100" >{{schedule.dealerinfo.scheduledby}}({{schedule.dealerinfo.mobileno}})
               </span></td>
-          <td class="left" > {{schedule.product_name}} {{schedule.product_quantity}} </td>
-          <td class="left">{{schedule.delivery_exceptedtime}}</td>
-          <td class="left ">{{schedule.quantity}}</td>
-          <td class="left capitalize " style="position:absolute"><span class="onhovertext mgtop-10">{{schedule.weekdays}} {{schedule.days}}</span></td>
-          <td class="left" *ngIf="schedule.createdbyinfo "><span>{{schedule.createdbyinfo.scheduledby}}</span></td>
-          <td class="left" *ngIf="schedule.createddate" > <span>{{schedule.createddate | utcDate}} </span></td>
-          <td class="left ">
+          <td class="left" width="12%"> {{schedule.product_name}} {{schedule.product_quantity}} </td>
+          <td class="left" width="8%">{{schedule.delivery_exceptedtime}}</td>
+          <td class="left " width="5%">{{schedule.quantity}}</td>
+          <td class="left capitalize " width="12%"><span class="onhovertooltip" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span></td>
+          <td class="left" width="12%"><span  *ngIf="schedule.createdbyinfo ">{{schedule.createdbyinfo.scheduledby}}</span></td>
+          <td class="left" width="14%"> <span *ngIf="schedule.createddate" >{{schedule.createddate | utcDate}} </span></td>
+          <td class="left " width="10%">
                             <label class="logo-color cursor" (click)="createSchedule(schedule)">
                                 <i class="fa fa-calendar-plus-o" aria-hidden="true" title="Create"></i>
                              </label>&nbsp;&nbsp;
@@ -437,22 +438,6 @@
                               <label class="cursor" (click)="deleteSchedule(schedule)">
                                     <i class="fa fa-trash danger" aria-hidden="true"  title="Delete"></i> </label>
 
-              <!-- <div class="dropdown">
-                  <button class="dropbtn">View More</button>
-                  <div class="dropdown-content" style="right:0;">
-                    <div class="row pdbottom-5">
-                      <label class="col-md-6" (click)="editSchedule(schedule)">
-                        <i class="fa fa-pencil-square-o"></i>
-                        Edit</label>
-                      <label class="col-md-6" (click)="deleteSchedule(schedule)">
-                        <i class="fa fa-trash danger" aria-hidden="true"></i> Delete</label>
-                    </div>
-                    <div class="row pdbottom-5">
-                      <label class="col-md-6" (click)="createSchedule(schedule)">
-                          <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
-                        Create New</label>
-                        </div>
-                  </div></div>-->
                 </td> 
         </tr>
         </tbody>

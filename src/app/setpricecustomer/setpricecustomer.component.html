@@ -9,8 +9,9 @@
     </div>
   </div>
   <div>
-    <div class="table-scroll">
       <md-dialog-content layout="column">
+        <div class="container-fluid pd-15x25 brd-bottom">
+                <div class="table-scroll row">
           <table class="table table-hover">
               <tbody  *ngFor="let prod of productList">
                 <tr class="border-topbottom bg-eee">
@@ -36,22 +37,27 @@
                   <td class=""> {{details.ptype}} </td>
                   <td class="">
                     <div class="">
-                      <input class="" type="text" [(ngModel)]="details.pcost">
+                        <md-form-field class="">
+                            <input class="form-control" mdInput placeholder="qty"  [(ngModel)]="details.pcost">
+                          </md-form-field>
+                  
                     </div>
                   </td>
                   <td class=""> 
                     <div class="">
-                      <input class="" type="text" [(ngModel)]="details.minorderqty">
+                        <md-form-field class="">
+                            <input class="form-control" mdInput placeholder="qty"  [(ngModel)]="details.minorderqty">
+                          </md-form-field>
                     </div> </td> 
                 </tr>
               </tbody>
             </table>
 
-
+          </div></div>
 
   
       </md-dialog-content>
-    </div>
+    
     <div class="row float-right pdright-30 mgbottom-20">
       <md-dialog-actions align="end">
           <button md-raised-button class="btn-primary" (click)="setPrice()">SET PRICES</button>
