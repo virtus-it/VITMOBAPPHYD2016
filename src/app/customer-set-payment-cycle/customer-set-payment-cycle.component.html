@@ -76,14 +76,15 @@
               <div class="col-sm-4"> 
         </div>
         </div>
-        <div class="Schedule container-fluid" *ngIf="setPaymentInput.schedulefor == 'weekdays'">
-            <div class="my-info-1 row weekday">
-                <h4 class="mgtop-15">
+        <div class="Schedule " *ngIf="setPaymentInput.schedulefor == 'weekdays'">
+            <div class="my-info-1 row weekday mgtop-15">
+                    <div class="col-2"> 
+                <h5 class="">
                     Weekly :
-                </h4>
+                </h5>
             </div>
 
-            <div class=" row ">
+            <div class="col  align-self-end">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)"
                         [(ngModel)]="selectAllWeekDays">
@@ -92,8 +93,8 @@
                     Select All
                 </label>
             </div>
+            </div>
             <div class="row mgtop-5">
-
                 <div class="col-sm-4 ">
                     <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                         <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Monday', $event.target.checked)"
@@ -167,11 +168,12 @@
 
 
         <div class="clsdays" *ngIf="setPaymentInput.schedulefor == 'days'">
-            <div class="">
-                <h4 class="mgtop-15">
+            <div class="row">
+                    <div class="col-2 ">
+                <h5 class="mgtop-15">
                     Days :
-                </h4>
-                <div class="selalldays1 ">
+                </h5></div>
+                <div class="selalldays1 col  align-self-end">
                     <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
                         <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAllDays($event.target.checked)"
                             [(ngModel)]="selectAllDays">
@@ -179,6 +181,7 @@
                         <span class="custom-control-description"></span>
                         Select All
                     </label>
+                </div>
                 </div>
                 <div class="row  mgtop-5">
                     <div class="col-sm-2 ">
@@ -413,19 +416,18 @@
                     </div>
                     <div class="col-sm-10"></div>
                 </div>
-            </div>
-        </div>
-        
+            </div>      
       
         <div class="createsche  mgtop-10">
-            <input type="button" value="Create" class="createscheduler btn-small btn btn-primary " btntype="create"  >
+            <!-- <input type="button" value="Create" class="createscheduler btn-small btn btn-primary " btntype="create"  > -->
             <div class="message"></div>
         </div>
         
       </div>
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
-    <md-dialog-actions align="end">
+        <md-dialog-actions align="end">
+     <button md-raised-button class="createscheduler btn-primary" >CREATE</button>&nbsp;
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>

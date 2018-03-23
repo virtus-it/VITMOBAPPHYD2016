@@ -13,7 +13,7 @@
     <form class="example-form" ngNativeValidate>
         <div class="container-fluid brd-bottom">
           <br>
-            <h5 class="capitalize">
+            <h5 class="capitalize mgleft-15">
                 <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                    {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
             <div class=" ">
@@ -46,34 +46,36 @@
                   </label> -->
                   <div class="row"> 
                     
-                    <div class="col-sm-9  col-md-9  col-lg-9">
+                    <div class="col-4">
                         <md-select  placeholder="Select template &nbsp;&nbsp;" [(ngModel)]="followUpInput.User.remarks"  name="template" class="full-width left oneline" >
                           <md-option  *ngFor="let template of followUpTemplate" [value]="template.template_desc">{{template.template_name}}</md-option>
                         </md-select>
                     </div>
-                      <div class="col-sm-9  col-md-9  col-lg-9">             
-                    <md-form-field class="example-full-width inline ">
-                      <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
-        
-                    </md-form-field>
-                  </div> 
-                  <div class="col-sm-3  col-md-3  col-lg-3">  
+      
+                  <div class="col-4">  
                     <md-form-field class="inline">
                         <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followupDate">
                         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                         <md-datepicker #picker></md-datepicker>
                       </md-form-field>
-
-
+                    </div>
+                      <div class="col-4">  
                       <small><button class="btn-primary" *ngIf=" !followUpStatus || followUpStatus=='open'"   md-raised-button (click)="followUpCompleted()">FollowUp Completed</button> </small>
                       <small><button class="btn-primary" *ngIf="followUpStatus=='close'" md-raised-button  (click)="startFollowUp()">Start FollowUp </button></small>
                       <!-- <small><button class="btn warning" md-raised-button (clsick)="startFollowUp()">Start FollowUp</button></small> -->
                     </div>
-                    </div>
-                    
-                    <small >Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>
-                  
-            </div>
+                  </div>
+                  <div class="row"> 
+                    <div class="col-10">             
+                        <md-form-field class="example-full-width inline ">
+                          <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
+            
+                        </md-form-field>
+                        <small class="charStyle">Characters Remanining : <span class="danger"> {{250 - followUpInput.User.remarks.length}}</span></small>
+                      </div> 
+                      </div>
+          
+       </div>
        </div>
     </form>
   </md-dialog-content>

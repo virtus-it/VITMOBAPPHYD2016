@@ -121,69 +121,59 @@
           </div>
       </div>
     </div> -->
-      <table class="table table-hover table-striped">
+    <table class="table table-hover table-striped" style="table-layout:fixed">
         <thead>
           <tr>
-            <th width="15%">Customer</th>
-            <!-- <th width="8%">Status</th> -->
-            
-            <th width="18%">Distributor</th>
-            <!-- <th width="10%">Assigned to</th> -->
+            <th width="12%">Customer</th>         
+            <th width="12%">Distributor</th>
             <th width="8%">Mobile</th>
-            <!-- <th width="8%">Mobile 1</th>
-            <th width="8%">Mobile 2</th> -->
             <th width="10%">Email</th>
-            <th width="14%">Address</th>
-            <th width="8%">Payment</th>
-            <th width="8%">Type</th>
-            <th width="13%">Deposit Amount</th>
-            <th width="8%">Due Amount</th>
-            <th width="8%"  *ngIf="superDealer">FollowUp</th>
-            <th width="15%" class="no-th-arrow">Action</th>
+            <th width="15%">Address</th>
+            <th width="8%">Mode</th>
+            <th width="10%">Type</th>
+            <th width="10%" title="Deposit Amount">Dep Amt</th>
+            <th width="10%" title="Due Amount">Due Amt</th>
+            <th width="12%" class="no-th-arrow">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let customers of customerList">
-            <td class="left capitalize" *ngIf="customers.firstname">
-                <span *ngIf="customers.isappdownloaded" class=""><i class="fa fa-thumbs-up success"></i> </span>
-                <span *ngIf="!customers.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger"></i> </span>
-              &nbsp;&nbsp;
-              <span>{{customers.firstname}} {{customers.lastname}} </span></td>
-            <!-- <td class="left">
-              <span *ngIf="customers.isappdownloaded">Joined</span>
-              <span *ngIf="!customers.isappdownloaded">Not Joined</span>
-            </td> -->
-            
-            <td class="left"  *ngIf="customers.dealers">{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer</td>
-            <!-- <td class="left">
-              <span *ngIf="customers.enable_autoassign=='true'">
-                {{customers.supplier.suppliername}}
-              </span> 
-            </td> -->
-            <td class="left numbers">{{customers.mobileno}}
-              <span *ngIf="customers.mobileno_one || customers.mobileno_two" class="hovernumbers onhovertext">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>  </td>
+            <td class="left capitalize" *ngIf="customers.firstname" width="12%">
+                <span class="onhovertabletext-100">
+                <span *ngIf="customers.isappdownloaded" class=""><i class="fa fa-thumbs-up success" title="Joined"></i> </span>
+                <span *ngIf="!customers.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger" title="Not Joined"></i> </span>
+                {{customers.firstname}} {{customers.lastname}} 
+            </span>
+            </td>
+            <td class="left"  *ngIf="customers.dealers" width="12%">
+                <span class="onhovertabletext-100">
+              {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
+            </span>
+            </td>
+
+            <td class="left numbers" width="8%">{{customers.mobileno}}
+              <span *ngIf="customers.mobileno_one || customers.mobileno_two" class="">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>  </td>
             <!-- <td class="left"> {{customers.mobileno_one}}  </td>
             <td class="left">  {{customers.mobileno_two}}</td> -->
-            <td class="left"  width="10%">{{customers.emailid}}</td>
-            <td class="left" style="position: absolute"><span class="onhovertext">{{customers.address}}</span></td>
+            <td class="left"  width="10%">
+                <span class="onhovertabletext-100">
+              {{customers.emailid}}
+            </span>
+            </td>
+            <td class="left" width="15%"><span class="onhovertooltip" title="{{customers.address}}">{{customers.address}}</span></td>
            
-              <td class="left">
+              <td class="left"  width="8%">
                   <span *ngIf="customers.payments">{{customers.paymenttype}}</span>
               </td>
-              <td class="left">{{customers.registertype}}</td>
-            <td class="left">
+              <td class="left" width="10%">{{customers.registertype}}</td>
+            <td class="left" width="10%">
               <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>
             </td>
-            <td class="left">
+            <td class="left" width="10%">
               <span *ngIf="customers.payments">{{customers.payments.amount_pending}}</span>
             </td>
-            <td class="left"  *ngIf="superDealer">
-              <!-- <button class="btn btn-link" (click)="showFollowUpDetails(customers)" > <i class="fa fa-phone-square" aria-hidden="true"></i></button> -->
-              <button class="btn btn-link" (click)="showFollowUp(customers)">
-                <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
-              </button>
-            </td>
-            <td class="left">
+
+            <td class="left" width="12%">
               <div class="dropdown">
                 <button class="dropbtn">View More</button>
                 <div class="dropdown-content" style="right:0;">
@@ -199,7 +189,7 @@
                       <i class="fa fa-reply"></i>
                       Re-send invitation</label>
                     <label class="col-md-6" (click)='showInactive(customers)'>
-                      <i class="fa fa-ban"></i> Acivate/Deactivate Customer</label>
+                      <i class="fa fa-ban"></i> Activate/Deactivate</label>
                   </div>
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showSetting()'>
@@ -216,10 +206,16 @@
                   </div>
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='editScheduleOrder(customers)'>
-                      <i class="fa fa-calendar-plus-o btn-link" aria-hidden="true"></i> Scheduled Orders </label>
+                      <i class="fa fa-calendar-plus-o btn-link" aria-hidden="true"></i> Scheduled List </label>
                       <label class="col-md-6" (click)="setPrice(customers)">
                           <i class="fa fa-money" ></i> Set price</label>  
                   </div>
+                  <div class="row pdbottom-5">
+                      <div class="col-md-6" *ngIf="superDealer" (click)="showFollowUp(customers)">
+                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
+                              </div>
+                       <label class="col-md-6" >          </label>               
+                    </div>
                 </div>
               </div>
 

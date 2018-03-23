@@ -152,12 +152,13 @@
             </td>
           </tr>
           <tr class="border-topbottom bg-eee">
-            <th width="40%">Type</th>
-            <th width="20%">Price per Unit</th>
-            <th width="15%">Quantity</th>   
-            <th width="15%">Express delivery charges</th>
-            <th width="15%">Service charges</th>
+            <th width="20%">Type</th>
+            <th width="15%">Price per Unit</th>
+            <th width="12%">Qty</th>   
             <th width="15%">Cost</th>
+            <th width="15%" title="Express Delivery Charge">Express Delv</th>
+            <th width="15%">Service Charges</th>
+    
           </tr>
           <tr *ngFor="let details of prod.data">
             <td>
@@ -185,6 +186,9 @@
               </div>
                 </div>
             </td>
+            <td>
+                <b class="">{{details.pcost*details.quantity}}</b>
+              </td>
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                     <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery">
@@ -193,9 +197,7 @@
                 </label>
                </td>
             <td class="">{{details.servicecharge}} </td>
-            <td>
-              <b class="">{{details.pcost*details.quantity}}</b>
-            </td>
+   
           </tr>
         </tbody>
       </table>

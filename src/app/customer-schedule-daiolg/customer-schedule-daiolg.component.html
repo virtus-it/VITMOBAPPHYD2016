@@ -22,9 +22,6 @@
 
                 </md-form-field>
             </div>
-
-            <!-- [disabled]="Detail.type== 'update'" -->
-
             <div class="col-md-4 " *ngIf="product">
                 <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName" name="product" disabled="disabled">
                     <md-option *ngFor="let prod of productList" [value]="prod" [value]="prod.pname">
@@ -102,19 +99,17 @@
                   <md-option value="8PM-9PM" >8PM-9PM</md-option>
                 </md-select>
               </div>
-
-
             <div class="col-sm-4">
             </div>
         </div>
-        <div class="Schedule container-fluid" *ngIf="scheduleInput.schedulefor == 'weekdays'">
-            <div class="my-info-1 row weekday">
-                <h4 class="mgtop-15">
-                    Weekly :
-                </h4>
-            </div>
-
-            <div class=" row ">
+        <div class="Schedule schedule-style" *ngIf="scheduleInput.schedulefor == 'weekdays'">
+                <div class="row weekday">
+                        <div class="col-2"> 
+                    <h5 class="">                                      
+                    Weekly :    
+                        </h5>
+        </div>
+        <div class="col  align-self-end">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)"
                         [(ngModel)]="selectAllWeekDays">
@@ -123,6 +118,8 @@
                     Select All
                 </label>
             </div>
+            </div>
+            <hr width="100%">
             <div class="row mgtop-5">
 
                 <div class="col-sm-4 ">
@@ -196,13 +193,15 @@
             </div>
         </div>
 
-        <div class="clsdays" *ngIf="scheduleInput.schedulefor == 'days'">
-            <div class="">
-                <h4 class="mgtop-15">
+        <div class="clsdays schedule-style" *ngIf="scheduleInput.schedulefor == 'days'">
+                <div class="row">
+                        <div class="col-2 ">
+                <h5 class="">
                     Days :
-                </h4>
-                <div class="selalldays1 ">
-                    <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
+                </h5>
+                </div>
+                <div class="selalldays1 col  align-self-end">
+                        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
                         <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAllDays($event.target.checked)"
                             [(ngModel)]="selectAllDays">
                         <span class="custom-control-indicator"></span>
@@ -210,6 +209,8 @@
                         Select All
                     </label>
                 </div>
+                </div>
+                <hr width="100%">                
                 <div class="row  mgtop-5">
                     <div class="col-sm-2 ">
                         <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
@@ -444,8 +445,6 @@
                     <div class="col-sm-10"></div>
                 </div>
             </div>
-        </div>
-
     </div>
     <div class="row float-right pdright-30 mgbottom-20">
     
