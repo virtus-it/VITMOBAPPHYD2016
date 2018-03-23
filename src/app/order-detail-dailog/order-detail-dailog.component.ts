@@ -28,7 +28,7 @@ export class OrderDetailDailogComponent implements OnInit {
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
-    notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""],"option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
+    notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""], "buttonactions":[{}], "option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
 
 showCustomerDetails(orderData) {
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
@@ -237,6 +237,7 @@ notification(type){
         this.notificationsInput.User.body= "body tag message here";
         this.notificationsInput.User.title = "title bar message";
         this.notificationsInput.User.buttons = ["Radio Button"];
+        
     }
     if(type == 'checkbox'){
         input.User.smstype = "notification";
@@ -266,6 +267,7 @@ notification(type){
         input.User.body= "body tag message here";
         input.User.title = "title bar message";
         input.User.buttons = ["Rate us now!!"];
+        input.User.buttonactions = [{text: "Rate Now", actiontype: "playstore"}];
     }
     console.log(input);
     this.smsService.CreateSms(input)

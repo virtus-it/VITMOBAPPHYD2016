@@ -209,6 +209,39 @@
                     </div>
                   </div>
                 </div>
+
+
+
+                <div class="col-sm-3  col-md-3  col-lg-3">
+                    <div class="row">
+                      <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">
+                        <a class="cursor logo-color ">
+                          <b title="Add Button"  class="fa fa-plus-circle success fs-22" aria-hidden="true" (click)="addAction()"></b>
+                        </a>
+                      </div>
+                      <div class="col-10">
+                        <table>
+                          <tr *ngFor="let button of smsInput.buttonactions;let i = index">
+                            <td>
+                              <div class="row align-items-center">
+                                <div class="col-8">
+                                  <md-form-field class="example-full-width inline ">
+                                    <input class="form-control" mdInput placeholder="Actions" name="button{{i}}" [(ngModel)]="button.name">
+  
+                                  </md-form-field>
+                                </div>
+                                <div class="col-sm-1  col-md-1  col-lg-1">
+                                  <b title="Remove Button " class="fa fa-trash danger fs-22" (click)="removeAction(button)" aria-hidden="true"></b>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+
+
                 <div class="col-sm-3  col-md-3  col-lg-3">
                   <div class="row">
                     <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">

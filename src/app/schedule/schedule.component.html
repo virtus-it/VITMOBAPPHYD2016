@@ -418,9 +418,8 @@
         <tr *ngFor="let schedule of scheduleOrdersList">
           <td class="left capitalize" *ngIf="schedule.customerdetails "><span>{{schedule.customerdetails.scheduledby}} <br> {{schedule.customerdetails.mobileno}}
           </span></td>
-          <td class="left capitalize" *ngIf="schedule.dealerinfo">
-              <span>{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}}
-              </span></td>
+          <td class="left capitalize" *ngIf="schedule.dealerinfo">{{schedule.dealerinfo.scheduledby}}<br>{{schedule.dealerinfo.mobileno}} </td>
+          <td *ngIf="schedule.dealerinfo === null"> - </td>
           <td class="left" > {{schedule.product_name}} {{schedule.product_quantity}} </td>
           <td class="left">{{schedule.delivery_exceptedtime}}</td>
           <td class="left ">{{schedule.quantity}}</td>

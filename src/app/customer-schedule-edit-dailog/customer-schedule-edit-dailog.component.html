@@ -17,6 +17,7 @@
             <th width="20%">Product Type</th>
             <th width="10%">Quantity</th>
             <th width="14%">Schedule</th>
+            <!-- <th width="">Created By</th> -->
             <th width="12%">Expected Time</th>
             <th width="10%" class="no-th-arrow">Action</th>
           </tr>
@@ -26,6 +27,7 @@
             <td class="left">{{schedule.product_type}} {{schedule.product_quantity}}</td>
             <td class="left">{{schedule.quantity}} </td>
             <td class="left">{{schedule.weekdays}} {{schedule.days}}</td>
+            <!-- <td class="left" *ngIf="schedule">{{}}</td> -->
             <td class="left">{{schedule.delivery_exceptedtime}}</td>
             <td class="left">
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i> &nbsp;
