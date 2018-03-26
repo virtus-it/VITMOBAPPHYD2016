@@ -6,6 +6,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
+import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
 import { MdDialog } from '@angular/material';
 import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock-distributor.component';
 @Component({
@@ -105,11 +106,17 @@ export class DistributorCreateDialogComponent implements OnInit {
             else{
                 let data = {id:result.data.user_id}
                 this.openStockDialog(data);
+                
+                
 
             }
             
          }
      }
+
+
+
+
      getDetails() {
          if (this.distributorDetail) {
              this.phone = true;

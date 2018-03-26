@@ -30,6 +30,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   paymentdueDate:any = "";
   headerValue="Add Customer";
   message:any ="";
+refresh:any = "";
 
 
   getCustomerDetails() {
@@ -119,6 +120,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
+      this.refresh = "success";
     }
   }
   updateCustomer() {
@@ -140,8 +142,11 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(false);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
+  this.refresh = "success";
 }
   }
+
+
   onCloseModal() {
     this.thisDialogRef.close('cancel');
   }
