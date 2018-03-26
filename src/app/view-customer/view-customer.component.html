@@ -3,7 +3,7 @@
     <i class="fa fa-users"></i>
     Customers
   </div>
-
+  <div class="col-md-4">
   <p *ngIf="Detail.firstname">Dist Name: {{Detail.firstname}} {{Detail.lastname}} </p>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
@@ -13,17 +13,16 @@
 </div>
 
 <div   class="row pd-15 mg-0 brd-bottom scroll"> 
-   <table class="table table-hover table-striped">
-    <thead>
+    <table class="table table-hover table-fixedheader">
+        <thead>
       <tr>
         <th width="15%">Name</th>
         <th width="10%">Status</th>
         <th width="10%">Mobile</th>
-        <th width="12%">Email</th>
-        <th width="20%">Address</th>
-        <th width="14%">Deposit Amount </th>
-        <th width="10%" class="no-th-arrow">FollowUp</th>
-        <th width="15%" class="no-th-arrow">Action</th>
+        <th width="18%">Email</th>
+        <th width="22%">Address</th>
+        <th width="10%">Dep Amt </th>
+        <th width="12%" class="no-th-arrow">Action</th>
 
       </tr>
     </thead>
@@ -31,28 +30,25 @@
       <!-- <h4 *ngIf="noRecords" class="warning oneline">Record Not Available</h4> -->
       <tr *ngFor="let customer of customersList">
        
-        <td class="left">{{customer.firstname}}</td>
-        <td>
+        <td class="left" width="15%"><span class="capitalize">{{customer.firstname}} </span></td>
+        <td width="10%">
           <span class="left" *ngIf="customer.isappdownloaded">Joined</span>
           <span class="left" *ngIf="!customer.isappdownloaded">Not Joined
           </span>
         </td>
-        <td class="left">{{customer.mobileno}}</td>
-        <td class="left">{{customer.emailid}}</td>
-        <td class="left">{{customer.address}}</td>
+        <td class="left" width="10%">{{customer.mobileno}}</td>
+        <td class="left" width="18%">{{customer.emailid}}</td>
+        <td class="left" width="22%">{{customer.address}}</td>
 
-        <td class="left">
+        <td class="left" width="10%">
           <span *ngIf="customer.payments">{{customer.payments.advance_amount}}</span>
         </td>
-        <td >
-          <button class="btn btn-link" (click)="showFollowUp(customer)">
-            <i class="fa fa-volume-control-phone" aria-hidden="true"></i>
-          </button>
-        </td>
-        <td >
+        <td width="12%">
             <i class="fa fa-pencil-square-o logo-color cursor" aria-hidden="true" (click)="showEditCustomer(customer)" title="Edit"></i> &nbsp;
           <i class="fa fa-calendar logo-color cursor" (click)="showSchedule(customer)" title="Schedule"></i> &nbsp;
           <i class="fa fa-calendar-plus-o logo-color cursor" aria-hidden="true" (click)="viewScheduledOrders(customer)" title=" Scheduled Orders"></i>
+          <i class="fa fa-volume-control-phone logo-color cursor" aria-hidden="true" (click)="showFollowUp(customer)" title=" FollowUp"></i>
+          
         </td>
       </tr>
     </tbody>

@@ -189,7 +189,7 @@ export class DistributorComponent implements OnInit {
     viewOrders(data) {
         let formatteddata: any = { "type": "distributorOrder", "data": data };
         let dialogRefSupplierOrderList = this.dialog.open(SupplierOrderListComponent, {
-            width: '95%',
+            width: '65%',
             data: formatteddata
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
@@ -201,7 +201,7 @@ export class DistributorComponent implements OnInit {
     //view Suppliers
     viewSuppliers(data) {
         let dialogRefSupplierOrderList = this.dialog.open(ViewSupplierComponent, {
-            width: '95%',
+            width: '65%',
             data: data
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
