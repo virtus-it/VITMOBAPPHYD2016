@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
 import { NgxGaugeModule } from 'ngx-gauge';
-
+import { ClipboardModule } from 'ngx-clipboard';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './login/authentication.service';
@@ -177,7 +177,7 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
         MapStockpointComponent,
         ViewStockpointsComponent,
         TimeChartComponent,
-        
+
      
         
 
@@ -187,6 +187,7 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
         FormsModule,
         ReactiveFormsModule,
         HttpModule,
+        ClipboardModule,
         BrowserAnimationsModule,
         MaterialModule,
         MdSidenavModule,

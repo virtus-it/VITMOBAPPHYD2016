@@ -13,18 +13,43 @@ import { MdDialog } from '@angular/material';
 })
 export class ProductListDialogComponent implements OnInit {
   listOfProducts:any[];
+  distributorId:any = "";
+
   constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, public dialog: MdDialog, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
 
-  getProducts(distributorDetails){
+//   getProducts(distributorDetails){
+//   this.loaderService.display(true);
+//   let distributorId = '';
+//   let appType = "";
+//   if(distributorDetails.user_id){
+//    distributorId = distributorDetails.user_id;
+//    appType = this.authenticationService.appType();
+//   }
+//   else if(distributorDetails.userid){
+//   distributorId = distributorDetails.userid;
+//   appType = this.authenticationService.appType();
+//   }
+//   this.distributorService.getDistbutorsProducts(distributorId, appType)
+//   .subscribe(
+//   output => this.getProductsResult(output),
+//   error => {
+//       //console.log("Logged in falied");
+//       this.loaderService.display(false);
+//   });
+
+// }
+
+getProducts(distributorDetails){
   this.loaderService.display(true);
-  let distributorId = '';
   if(distributorDetails.user_id){
-   distributorId = distributorDetails.user_id;
-  }
-  else if(distributorDetails.userid){
-  distributorId = distributorDetails.userid;
-  }
-  this.distributorService.getDistbutorsProducts(distributorId)
+    this.distributorId = distributorDetails.user_id;
+   }
+   else if(distributorDetails.userid){
+   this.distributorId = distributorDetails.userid;
+   }
+let input = {userId: this.distributorId, appType: this.authenticationService.appType() };
+  console.log(input);
+  this.distributorService.getDistbutorsProducts(input)
   .subscribe(
   output => this.getProductsResult(output),
   error => {
@@ -33,7 +58,6 @@ export class ProductListDialogComponent implements OnInit {
   });
 
 }
-
 
 getProductsResult(output) {
   this.loaderService.display(false);

@@ -172,7 +172,7 @@ export class MapDialogComponent implements OnInit {
     // }
    
     ngOnInit() {
-        //console.log(this.distributorDetails);
+        console.log(this.distributorDetails);
         this.loader.load().then(() => {
             this.initMap();
         });
