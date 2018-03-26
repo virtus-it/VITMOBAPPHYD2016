@@ -17,7 +17,6 @@ import { DistributorOrderListComponent } from '../distributor-order-list/distrib
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
-import { ClipboardModule } from 'ngx-clipboard';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -38,8 +37,6 @@ export class OrderLandingComponent implements OnInit {
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
-  isCopied1: boolean = false;
-  isCopied2: boolean = false;
     
 
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
