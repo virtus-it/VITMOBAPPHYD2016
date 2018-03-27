@@ -25,7 +25,7 @@ export class AddproductconfirmComponent implements OnInit {
 
   dealerAddProductDialog(data) {
     let dialogRefSupplierOrderList = this.dialog.open(AddProductDealerComponent, {
-        width: '700px',
+        width: '500px',
         data: data
     });
     dialogRefSupplierOrderList.afterClosed().subscribe(result => {

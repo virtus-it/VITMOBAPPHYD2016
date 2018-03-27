@@ -54,24 +54,35 @@
               <thead>
             <tr>
               <!-- <th width="3%">S.No</th> -->
-              <th width="35%"><small> Distributor</small></th>
-              <th width="28%"><small>Mobile</small></th>
-              <th width="22%"><small>Products</small></th>
-              <th width="15%" class="center"> <small>Areas</small></th>
+              <th width="20%"><small> Distributor</small></th>
+              <th width="20%"><small>Mobile</small></th>
+              <th width="20%"><small>Products</small></th>
+              <th width="20%" class="center"> <small>Areas</small></th>
+              <th width="10%" class=""><small>orders</small></th>
+              <th width="10%" class=""><small>Assign</small></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
               <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-              <td width="35%" class="left capital"><small>{{dist.distributorName}}</small></td>
-              <td width="28%" class="left capital"><small>{{dist.mobileno}}</small></td>
+              <td width="20%" class="left capital"><small>{{dist.distributorName}}</small></td>
+              <td width="20%" class="left capital"><small>{{dist.mobileno}}</small></td>
               <td width="20%" class=" capital center">
                 <label (click)="ViewProduct(dist)" class="logo-color"><i class="fa fa-gift fs-20" aria-hidden="true"></i>
                    </label>
               </td>
-              <td width="15%" class=" capital center">
+              <td width="20%" class=" capital center">
                   <label (click)="DistrbutorHover(dist)" class="logo-color"><i class="fa fa-map" aria-hidden="true"></i>
                      </label>
+              </td>
+              <td width="10%" class="">
+                <label class="logo-color" title="Orders"  (click)="distributorsOrders(dist)"><i class="fa fa-file-text-o" ></i> 
+                </label>
+              </td>
+
+              <td width="10%" class="">
+                <label class="logo-color" title="Assign" (click)="assignToDistributor()" > <i class="fa fa-check-circle-o"></i>
+                </label>
               </td>
 
             </tr>
@@ -84,6 +95,13 @@
 </md-dialog-content>
 
 <div class="row float-right pdright-30  mgbottom-20">
+  <div class="">
+  <small >Customer Name: {{orderDetail.orders.customer.firstname}}</small>
+  <small >Brand : {{orderDetail.orders.brandname}}</small>
+  <small>Type: {{orderDetail.orders.prod_type}}</small>
+  <small>Quantity: {{orderDetail.orders.quantity}}</small>
+  </div>
+  
   <md-dialog-actions align="end">
      
       <button md-raised-button color="primary" (click)="ClearAllPolygons()"> CLEAR ALL</button> &nbsp;

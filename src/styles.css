@@ -3,8 +3,16 @@
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.css";
 
+:root {
+  --logo-color: #0f75bc;
+  --warning:#f79123;
+  --danger:#d43f3a;
+  --gray6:#666;
+  --gray9:#999;
+}
+
 table thead {
-    background: #0f75bc;
+    background: var( --logo-color);
     color: #fff;
   }
   .table td, .table th{
@@ -50,13 +58,13 @@ table thead {
     text-align: left;
   }
   a{
-    color: #0f75bc;
+    color: var( --logo-color);
   }
   .pdleft-20{
     padding-left: 20px !important;
   }
   .btn-link{
-    color: #0f75bc;
+    color: var( --logo-color);
     cursor: pointer;
   }
   .pageTitle-style{
@@ -80,12 +88,12 @@ table thead {
     margin-right: 20px !important;
   }
   .logo-color{
-    color: #0f75bc !important;
+    color: var( --logo-color) !important;
     cursor: pointer;
   }
 
   .logo-color:hover{
-    color: #f79123!important;
+    color: var( --warning) !important;
     cursor: pointer;
   }
   .pdtopbottom-15{
@@ -104,7 +112,7 @@ table thead {
       margin: 30px;
   }
   .active{
-    color: #0f75bc !important;
+    color: var( --logo-color) !important;
   }
 .capital{
     text-transform: capitalize;
@@ -116,8 +124,8 @@ table thead {
     margin-bottom: 20px;
 }
 .sidebar-list{
-border-bottom: 1px solid #0f75bc;
-color: #0f75bc !important;
+border-bottom: 1px solid var( --logo-color);
+color: var( --logo-color) !important;
 
 }
 .mgleft-10{
@@ -146,11 +154,11 @@ color: #0f75bc !important;
   border-right: solid 10px transparent;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
-  background: #0f75bc ; 
+  background: var( --logo-color) ; 
   color: #fff;
 }
 .btn-primary{
-  background: #0f75bc !important; 
+  background: var( --logo-color) !important; 
   color: #fff;
 }
 .pdtopbottom-12{
@@ -162,7 +170,7 @@ font-weight: 600;
 font-size: 18px;
 color: #fff;
 line-height: 1.2;
-background: #0f75bc ;
+background: var( --logo-color) ;
 }
 .nobg{
 background: transparent;
@@ -227,10 +235,10 @@ background: transparent;
   color: #fff !important;
 }
 .brd-logo{
-  border:1px solid #0f75bc;
+  border:1px solid var( --logo-color);
 }
 .logo-bg{
-  background: #0f75bc;
+  background: var( --logo-color);
 }
 .pdtop-5{
   padding-top: 5px;
@@ -239,7 +247,7 @@ background: transparent;
   padding-top: 15px;
 }
 .warning{
-  color:#f79123;
+  color:var( --warning);
 }
 .capitalize{
   text-transform: capitalize;
@@ -294,7 +302,7 @@ background: transparent;
 }
 .btn-default{
   background: #fff;
-  color: #0f75bc !important;
+  color: var( --logo-color) !important;
 }
 .btn-primary{
   color: #fff !important;
@@ -440,7 +448,7 @@ ul li small{
     border-radius: 50%;
 }
 .fa-send-style:hover {
-  color:#f79123
+  color:var( --warning)
 }
 .label-style {
   color: #666;
@@ -498,14 +506,14 @@ table thead th::after{
           content: "" !important;
       }
       .mat-calendar{
-border:2px solid #0f75bc;
+border:2px solid var( --logo-color);
       }
       .mat-calendar-header{
-        background: #0f75bc;
+        background: var( --logo-color);
         color: #fff;
       }
       .mat-calendar-body-today{
-        border-color: #0f75bc;
+        border-color: var( --logo-color);
         
       }
       .nofath thead th::after{
@@ -516,7 +524,7 @@ border:2px solid #0f75bc;
       }
       .nav-pills .nav-link.active, .show>.nav-pills .nav-link{
         color: #fff !important;
-        background-color: #0f75bc;
+        background-color: var( --logo-color);
       }
       .success{
         color: #4cae4c
@@ -530,9 +538,9 @@ border:2px solid #0f75bc;
     }
     .mat-list-item-content:hover{
       color: #fff !important;
-      border-left: 5px solid #f79123;
-      /* border-right: 5px solid #f79123; */
-      background-color: #0f75bc !important;
+      border-left: 5px solid var( --warning);
+      /* border-right: 5px solid var( --warning); */
+      background-color: var( --logo-color) !important;
         }
     .pdtopleft-80x25{
       padding: 80px 0px 0px 25px;
@@ -600,7 +608,7 @@ border:2px solid #0f75bc;
     height: 95%;
   }
  .plus-style{
-  background: #0f75bc;
+  background: var( --logo-color);
   padding: 5px 8px;
   color: #fff;
 
@@ -735,6 +743,12 @@ background-color: #fff;
   .pdtop-0{
     padding-top: 0px;
   }
+.fs-30{
+  font-size: 30px;
+}
+.wd-85pc{
+  width: 85%;
+}
 /* .paddingbtm-0 .mat-form-field-wrapper{
   padding-bottom: 0px !important;
   } */

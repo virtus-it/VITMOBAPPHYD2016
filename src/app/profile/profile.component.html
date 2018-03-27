@@ -10,16 +10,11 @@
           </a>
       </div>
     </div>
-      <md-dialog-content layout="column">
       
-        <div class="container-fluid pd-15x25 brd-bottom">
-          <!-- <div class="row">
-            <b class="label-style col">Profile Update
-              <span></span>
-            </b>
-          </div> -->
+    <div class="container">
+        <div class="jumbotron">
           <div class="row">
-            <div class="col-md-4 col-sm-6 ">
+            <div class="col-6 ">
               <md-form-field class="">
                 <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname" >
                 <md-error>
@@ -27,16 +22,10 @@
                   <strong>required</strong>
                 </md-error>
               </md-form-field>
-              <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno" >
-                  <md-error>
-                    Phone Number is
-                    <strong>required</strong>
-                  </md-error>
-                </md-form-field>
+
       
             </div>
-            <div class="col-md-4 col-sm-6">
+            <div class="col-6">
               <md-form-field class="">
                 <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname">
                 <md-error>
@@ -48,43 +37,73 @@
               
 
               
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Email-id" name="emailid"   [(ngModel)]="profileUpdate.emailid">
-              </md-form-field>
+     
             
             </div>
           </div>
           <div class="row">
-          <div class="col-md-4 col-sm-6 ">
+              <div class="col-6 ">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno" >
+              <md-error>
+                Phone Number is
+                <strong>required</strong>
+              </md-error>
+            </md-form-field>
+            </div>
+            <div class="col-6 ">
+                <md-form-field class="">
+                    <input class="form-control" mdInput placeholder="Email id" name="emailid"   [(ngModel)]="profileUpdate.emailid">
+                    <md-error>
+                        Email id is
+                        <strong>required</strong>
+                      </md-error>
+                  </md-form-field>
+              </div>
+          </div>
+
+          <div class="row">
+          <div class="col-6 ">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname"  >
           </md-form-field>
         </div>
 
-          <div class="col-md-4 col-sm-6 ">
+          <div class="col-6 ">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode" >
           </md-form-field>
           </div>
           </div>
-<br>
+
 
           <div class="row">
-            <div class="col-md-4 col-sm-6">
-              <md-form-field class="">
+            <div class="col">
+              <div class="">
+              <md-form-field class="wd-85pc">
                 <textarea class="form-control" mdInput placeholder="Address" name="Address"  [(ngModel)]="profileUpdate.address"  ></textarea>
               </md-form-field>
             </div>
-            
-              
-          
-          </div>
-          <div class="row">
-            <small class="">Characters Remaining :
-              <span class="danger"> {{500 - profileUpdate.address.length}}</span>
-            </small>
+            <div class="smalltxt-style">
+              <small class="">Characters Remaining :
+                <span class="danger"> {{500 - profileUpdate.address.length}}</span>
+              </small>
+              </div>
+              <div *ngIf="updateStatus">
+                  <span >Profile Updated successfully</span>
+                </div> 
+            </div>
+
           </div>
 
+          <div class="row">
+              <div class="col align-self-center">
+ <button md-raised-button class="btn-primary" (click)="updateProfile()">UPDATE</button>&nbsp;
+</div>
+</div>
+</div>
+</div>
+</div>
 
           <!-- <div class="row">
             <div class="col-md-4 col-sm-6">
@@ -107,19 +126,4 @@
             </div> -->
 
 
-            <br> <br>
-            <div class="">
-                <div *ngIf="updateStatus">
-                    <span >Profile Updated successfully</span>
-                  </div> 
-                  
-                  <br>
-                <md-dialog-actions>
-                  <button md-raised-button class="btn-primary" (click)="updateProfile()">UPDATE</button>&nbsp;
-                </md-dialog-actions>
- </div>
-
-</div>
-      </md-dialog-content>
-  </div>
   

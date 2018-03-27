@@ -9,16 +9,138 @@
         </div>
         <div class="col ">
 
+          
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ALL ORDERS </button>
           <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
-            href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARD ORDERS</button>
+            href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
+
+            <!-- <button type="submit" md-raised-button class=" " *ngIf="superDealer && tabPanelView != 'complete'" [ngClass]="{'btn-primary': tabPanelView === 'complete'}"
+            href="javascript:void(0)" (click)="showTabPanel('complete')">Complete ORDERS</button> -->
+
+
           <!-- <a class="flex-sm-fill text-sm-center nav-link " *ngIf="superDealer" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
           (click)="showTabPanel('forward')">FORWARD ORDERS</a> -->
           <!-- <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a> -->
         </div>
+
+
+          <!-- for complete tab filter -->
+
+          
         <div class="col  right">
+          <a class="">
+            <md-select placeholder="Global Search"  [(ngModel)]="globalFilterInput.order.searchtype"   name="type" class="full-width left">
+                <md-option value="name">Customer</md-option>
+                <md-option value="mobile">Customer Mobile</md-option>
+                <md-option value="orderid">Order Id</md-option>
+                <md-option value="status">Status</md-option>
+                <md-option value="followupdate">FollowUp Date</md-option>
+                <md-option value="supplierid">Supplier</md-option>
+                <md-option value="distributor_id">Distributor</md-option>
+                <md-option value="deliverySlot">Delivery Slot</md-option>
+            
+            </md-select>
+
+          
+
+            <div class=" " *ngIf="globalFilterInput.order.searchtype == 'name'">
+
+                <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="globalfilterType.customerName">
+                </md-form-field>
+              </div>
+              <div class=" " *ngIf="globalFilterInput.order.searchtype == 'mobile'">
+                <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10">
+                </md-form-field>
+              </div>
+              <div class=" " *ngIf="globalFilterInput.order.searchtype == 'orderid'">
+
+                <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid">
+
+
+                </md-form-field>
+              </div>
+              
+              <div class=" " *ngIf="globalFilterInput.order.searchtype == 'supplierid'">
+
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                  <md-autocomplete #auto="mdAutocomplete">
+                    <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
+                      <span>{{ supplier.fullName }}</span>
+                    </md-option>
+                  </md-autocomplete>
+                </md-form-field>
+              </div>
+              <div class=" " *ngIf="globalFilterInput.order.searchtype == 'distributor_id'">
+
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                  <md-autocomplete #auto="mdAutocomplete">
+                    <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                      <span>{{ dist.fullName }}</span>
+                    </md-option>
+                  </md-autocomplete>
+                </md-form-field>
+              </div>
+              <div class="form-group" *ngIf="globalFilterInput.order.searchtype == 'followupdate'">
+                <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="globalfilterType.followUpdate">
+                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                  <md-datepicker #picker></md-datepicker>
+                </md-form-field>
+              </div>
+  
+              <div class="left mgtop-20" *ngIf="globalFilterInput.order.searchtype == 'status'">
+                <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                  name="selectedItem"></angular2-multiselect>
+              </div>
+              <div class="left mgtop-20" *ngIf="globalFilterInput.order.searchtype == 'status'">
+                <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                  name="selectedItem"></angular2-multiselect>
+              </div>
+
+              <div class="" *ngIf="globalFilterInput.order.searchtype =='deliverySlot'">
+                  <md-form-field class="inline">
+                      <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date" [(ngModel)]="globalfilterType.date">
+                      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                      <md-datepicker #picker></md-datepicker>
+                    </md-form-field>
+
+                    <md-select placeholder="Time Slot"  class="wd-100pc left"  name="timeSlot"  [(ngModel)]="time">
+                        <md-option value="7AM-8AM" >7AM-8AM</md-option>
+                        <md-option value="8AM-9AM" >8AM-9AM</md-option>
+                        <md-option value="9AM-10AM" >9AM-10AM</md-option>
+                        <md-option value="10AM-11AM" >10AM-11AM</md-option>
+                        <md-option value="11AM-12PM" >11AM-12PM</md-option>
+                        <md-option value="12PM-1PM" >12PM-1PM</md-option>
+                        <md-option value="1PM-2PM" >1PM-2PM</md-option>
+                        <md-option value="2PM-3PM" >2PM-3PM</md-option>
+                        <md-option value="3PM-4PM" >3PM-4PM</md-option>
+                        <md-option value="4PM-5PM" >4PM-5PM</md-option>
+                        <md-option value="5PM-6PM">5PM-6PM</md-option>
+                        <md-option value="6PM-7PM" >6PM-7PM</md-option>
+                        <md-option value="7PM-8PM" >7PM-8PM</md-option>
+                        <md-option value="8PM-9PM" >8PM-9PM</md-option>
+                      </md-select>
+
+
+
+              </div>
+              <br>
+              <!--  complete page  filter ends here -->
+
+          </a>
+
+          <a class="input-group pd-10  ">
+              <button md-raised-button color="primary" class="mgright-5" (click)="globalSearch()">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+            </a>
             <a class="">
                 <button *ngIf="tabPanelView === 'allorder'" md-raised-button class=" " (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
               </a>
@@ -192,7 +314,7 @@
               </td>
               <td width="25%">
                 <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
+                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
                     <label class="td-label">Customer :
                       <b class="capitalize ">{{forward.orderby_firstname}}</b>
                     </label>
@@ -200,8 +322,11 @@
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(forward)'>
                     <i class="fa fa-edit logo-color "></i>
+                    <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  (click)='showCustomerAllOrders(forward)' >
+                      <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
 
                   </div>
+                  
                 </div>
               </td>
 
@@ -343,10 +468,9 @@
                             <span class="td-label">
                                 Address</span>
                             <br>
-                            <b class="capitalize onhovertext300">{{forward.orderby_address}}</b>       
+                            <b class="capitalize onhovertext300" >{{forward.orderby_address}}</b>   
+             
                               </div>
-                              <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(forward)' >
-                                  <i class="fa fa-user " aria-hidden="true"  ></i> Orders  </button> &nbsp;&nbsp;
                                          </div>
               </td>
 
@@ -477,7 +601,7 @@
               </td>
               <td width="33%">
                 <div class=" row ">
-                  <div class="col-sm-10  col-md-10  col-lg-10 left onhovertext">
+                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
                     <label class="td-label">Customer :
                       <b class="capitalize ">{{allorder.orderby_firstname}}</b>
                     </label>
@@ -485,6 +609,10 @@
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
+
+                    <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm " (click)='showCustomerAllOrders(allorder)' >
+                      <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
+
 
                   </div>
                 </div>
@@ -618,7 +746,6 @@
                         <span class="td-label">
                            Address</span>
                           <br>
-                      <b class="capitalize onhovertext300">{{allorder.orderby_address}}</b>
                     </div>
                   </div>
                 </div>
@@ -658,8 +785,8 @@
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                
-                     <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
-                      <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button>
+                     <!-- <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
+                      <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button> -->
                       <!-- <div class="row">
                           <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned'">
                               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
@@ -689,6 +816,297 @@
           </tfoot>
         </table>
       </div>
+
+
+      <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
+          <table class="table table-hover table-striped">
+            <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i" >
+              <tr class="border-topbottom bg-eee">
+                <td width="25%" >
+                  <div class="row " >
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <label class="td-label">
+                        <!-- Order Id : -->Id :
+                        <b> #{{complete.order_id}}</b>
+                      </label>
+                    </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 ">
+                      <label *ngIf="superDealer">Follow Up :
+                        <span (click)='showFollowUp(complete)'>
+                        <a>
+                          <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
+                          </a>
+                        </span>
+                      <span *ngIf="complete.followupstatus == 'close'">
+                        <i class="fa fa-volume-control-phone red" title="Follow Up completed"></i>
+                      </span>
+                      <span *ngIf="complete.followupstatus == 'open'">
+                        <i class="fa fa-volume-control-phone green" title="Follow up open"></i>
+                      </span> 
+                       
+                      </label>
+                    </div>
+                    <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(complete)'>
+                      <i class="fa fa-edit logo-color "></i>
+                    </div>
+                  </div>
+                </td>
+                <td width="25%">
+                  <div class=" row ">
+                    <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
+                      <label class="td-label">Customer :
+                        <b class="capitalize ">{{complete.orderby_firstname}}</b>
+                      </label>
+                      <br>
+                    </div>
+                    <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(complete)'>
+                      <i class="fa fa-edit logo-color "></i>
+                      <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  (click)='showCustomerAllOrders(complete)' >
+                        <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
+  
+                    </div>
+                    
+                  </div>
+                </td>
+  
+                <td width="25%">
+                  <div class="row ">
+                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertext">
+                      <label class="td-label">Distributor:
+                        <b class="capitalize" *ngIf="complete.distributor">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
+                      </label>
+                      <br>
+                    </div>
+                    <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <!-- forward.customersource === 'MoyaCustomer' -->
+                      <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'" title="Express Delivery"></i>
+                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
+                      <i class="fa fa-calendar-check-o " *ngIf="complete.ispreorder === 'true' || complete.ispreorder === 'MoyaCustomer' || complete.ispreorder === 'Admin' || complete.ispreorder === 'scheduler'"
+                        aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
+                      <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
+                        title="Moya Customer"></i>
+                      <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
+                      <br>
+                    </div>
+                  </div>
+                </td>
+                <!-- <td  width="24%">
+                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                      </label>
+                  <i class="fa fa-minus logo-color fs-18 none"></i>
+                  <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+  
+                </td> -->
+  
+              </tr>
+  
+              <tr>
+                <td width="25%" class="brd-right">
+                  <div class="">
+   
+                    <div class="form-group row ">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Brand Name</span>
+                        <br>
+                        <b class="capitalize">{{complete.brandname}} </b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Quantity </span>
+                        <br>
+                        <b class="pdright-5">{{complete.quantity}}</b>
+                      </div>
+                    </div>
+  
+                    <div class="row form-group">
+                      <div class="col-sm-6  col-md-6  col-lg-6 left">
+                        <span class="td-label">Product Type </span>
+                        <br>
+                        <b>{{complete.prod_type}}</b>
+                      </div>
+                      <div class="col-sm-6  col-md-6  col-lg-6 right">
+                        <span class="td-label">Payment Type </span>
+                        <br>
+                        <b class="pdright-5">{{complete.paymenttype}}</b>
+                      </div>
+                    </div>
+  
+                    <div class="row form-group">
+                      <div class="col-sm-7  col-md-7  col-lg-7 left">
+                        <span class="td-label">
+                          Express Delivery charges </span>
+                        <br>
+                        <b>Rs.{{complete.expressdeliverycharges}}</b>
+                      </div>
+                      <div class="col-sm-5  col-md-5  col-lg-5 right">
+                        <span class="td-label">Service charges </span>
+                        <br>
+                        <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
+                      </div>
+                    </div>
+                    <div class=" row ">
+                        <div class="col-sm-7  col-md-7  col-lg-7  left align-self-center">
+                            <span class="td-label">Amount </span><br>
+                            <b class="pdright-5">Rs.{{complete.bill_amount}}</b>
+                            <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
+                           </div>
+                      <div class="col-sm-5  col-md-5  col-lg-5 right align-self-center">
+                          <button class="btn btn-link btn-sm" (click)='showOrderDetails(complete)'>
+                              <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+             
+                      </div>
+              
+                    </div>
+                  </div>
+                </td>
+                <td width="25%" class="brd-right">
+                    <div class="row form-group">
+                        <div class="col left">
+                    <span class="td-label">
+                        Date Placed </span>
+                      <br>
+                      <b>{{complete.ordered_date | utcDate }}</b>
+                      </div>
+                      </div>
+                      <div class="row form-group">
+                          
+                             <div class="col-sm-7  col-md-7  col-lg-7 left">
+                                 <span class="td-label">Delivery Time</span>                       
+                                 <br>
+                               <b class="pdright-5 danger">{{complete.delivery_exceptedtime}}</b>
+                             </div>
+                             <div class="col-sm-5  col-md-5  col-lg-5 right">
+                                 <span class="td-label">
+                                     Supplier Code</span>
+                                  <br>
+                                  <b class="capitalize"*ngIf="complete.customersource == 'DistributorCustomer'">{{complete.customer.suppliercode}}</b>
+                                 </div>
+                           </div>
+                    <div class="row form-group">
+                        <div class="col-5 left">
+                            <span class="td-label">
+                               Mobile</span>
+                            <br>
+                            <b>{{complete.orderby_mobileno}}</b>
+                            
+                          </div>
+  
+                            <div class="col right" *ngIf="complete.customersource == 'DistributorCustomer'">
+                              <span class="td-label">Ass Distributor</span>
+                              <br>
+                              <b *ngIf="complete.distributor">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                            </div>
+                            <div class="col right" *ngIf = "complete.customersource == 'MoyaCustomer'">
+                                <span class="td-label">Ass Distributor</span>
+                                <br>
+                                <b *ngIf="complete.distributor">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                            </div>
+                      </div>
+  
+                        <div class="row form-group">
+                            <div class="col left">
+                              <span class="td-label">
+                                  Address</span>
+                              <br>
+                              <b class="capitalize onhovertext300">{{complete.orderby_address}}</b>   
+                              
+                                </div>
+                               
+                                           </div>
+                </td>
+  
+                <td width="25%" class="brd-right">
+                  <div class="">
+                      <div class="row form-group">
+                          <div class="col-sm-5  col-md-5  col-lg-5 left">
+                            <span class="td-label">
+                                Mobile</span>
+                            <br>
+                            <b *ngIf="complete.distributor">{{complete.distributor.mobileno}}</b>
+                          </div>
+                          <div class="col-sm-7  col-md-7  col-lg-7 right">
+                             
+                             </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col left">
+                              <span class="td-label">
+                                  Supplier</span>
+                              <br>
+                              <b class="capitalize" *ngIf="complete.supplierdetails"> {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
+                             
+                              
+                            </div>
+                            <div class="col-sm-7  col-md-7  col-lg-7 right">
+                                <span class="td-label">
+                                    Supplier Mobile</span>
+                                <br>
+                              <b *ngIf="complete.supplierdetails">{{complete.supplierdetails.mobileno}}</b>
+                              
+                              
+                              </div>
+                          </div>
+                          <div class="row form-group">
+                              
+                                    <div class="col">
+                                        <span class="td-label">
+                                            Assigned On</span>
+                                            <br>
+                                            <span class="" *ngIf="complete.OrderModifiedStatus !== 'Assign'">
+                                                <span class="warning">{{complete.order_assigneddate | utcDate }}</span>
+                                              </span>
+                                       </div>
+                            
+                                 <div class="col right">
+                                    <span class="td-label">
+                                        Delivered On </span>
+                                    <br>
+                                    <span class="success" *ngIf="complete.OrderModifiedStatus == 'Delivered' || complete.OrderModifiedStatus == 'Rejected'">{{complete.order_delivereddate | utcDate }}</span>
+                                  </div>
+                            </div>
+  
+    
+                    <div class="float-right">
+                      <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
+                            <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
+                            <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
+                                <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
+                                <button class="btn btn-link btn-sm"   (click)="acceptOrder(complete)" *ngIf="(complete.status != 'delivered' || complete.status == 'backtodealer' || complete.status == 'assigned') && (complete.status != 'accept')" >
+                                    <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                                   
+                                        <button class="btn red btn-link btn-sm" *ngIf="complete.status !='accept' && complete.status !='delivered' " (click)="rejectOrder(complete)">
+                                      <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                                
+                                <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer">
+                        <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                       
+             
+                        <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(complete)">
+                          <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Orders </button>
+      
+                    </div>             
+                  </div>
+                </td>
+                <!-- <td width="24%" >
+                    <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
+                  </td> -->
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3">
+                  <h5 class="warning  capitalize center">
+                    <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
+                      <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+                      click for more data</a>
+                  </h5>
+                  <h4 *ngIf="!completeClickMore" class="warning center">
+                    <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+                  </td>
+              </tr>
+            </tfoot>
+  
+          </table>
+        </div>
     </div>
 
   </div>

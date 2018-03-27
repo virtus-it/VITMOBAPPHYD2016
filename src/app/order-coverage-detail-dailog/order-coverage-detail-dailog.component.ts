@@ -13,6 +13,7 @@ import { MdDialog } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import * as _ from 'underscore';
+import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { } from '@types/googlemaps';
 declare var google: any;
 @Component({
@@ -316,6 +317,18 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         });
     }
 
+        distributorsOrders(data){
+            let formatteddata: any = { "type": "distributorOrdersfromCoverage", "data": this.orderDetail , distributorId: data.user_id , distributorName: data.distributorName , distributorNumber : data.mobileno };
+                let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
+                  width: '95%',
+                  data: formatteddata
+              });
+              dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+                  //console.log(`Dialog closed: ${result}`);
+        
+              });
+            }
+
 
 
     filterPolygon() {
@@ -332,7 +345,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.assignPolygon();
         this.getOrderDetail();
         this.getProductByCategory();
-        //console.log(this.orderDetail);
+        console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
             let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
