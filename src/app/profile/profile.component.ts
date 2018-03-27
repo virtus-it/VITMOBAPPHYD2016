@@ -64,7 +64,7 @@ getProfileDetailsResult(result){
 
 changePassword(){
   let dialogRef = this.dialog.open(PasswordupdateComponent, {
-    width: '550px',
+    width: '400px',
     data: ''
 });
 dialogRef.afterClosed().subscribe(result => {
