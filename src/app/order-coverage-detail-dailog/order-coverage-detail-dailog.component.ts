@@ -319,7 +319,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
 
     filterPolygon() {
-        if (this.dropdownData.selectedItems) {
+        if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
             this.searchPolygon();
 
         }
