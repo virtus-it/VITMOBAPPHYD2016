@@ -70,7 +70,7 @@ export class CategoryComponent implements OnInit {
 
   getProducts(data){
     let dialogRefSetting = this.dialog.open(CategoryproductsComponent, {
-      width: '900px',
+      width: '800px',
       data: data
   });
   dialogRefSetting.afterClosed().subscribe(result => {

@@ -1,7 +1,5 @@
 <div class="dist-style  minheight-500">
-
-
-    <div class=" row justify-content-between distIcon-style left">
+    <!-- <div class=" row justify-content-between distIcon-style left">
         <div class="col padding-0">
           <div class="row pdtopbottom-12 align-items-center">
             <div class="col">
@@ -10,16 +8,26 @@
             </div>
           <div class="col">
               <button type="submit" md-raised-button class="btn-primary"  href="javascript:void(0)">CATEGORY</button>
-            <!-- <button type="submit" md-raised-button class=" " [ngClass]="{'btn-primary': tabPanelView === 'products'}"
-              href="javascript:void(0)">PRODUCTS</button> -->
           </div>
           <div class="col right">
               <a class="cursor logo-color mgleft-10">
                   <i class="fa fa-plus-circle" (click)="createCustomer()"></i>
                 </a>
           </div></div>
-        </div></div>
-          <div  class="panelview-style">
+        </div></div> -->
+        <div class=" row justify-content-between distIcon-style left">
+          <div class="col-sm-2 col-md-2 col-lg-2 ">
+            <h4>
+              <i class="fa 	fa fa-th"></i> Category</h4>
+          </div>
+          <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+
+            <a class="cursor logo-color  mgleft-10" title="Create Customer" (click)="createCustomer()">
+              <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
+            </a>
+          </div>
+        </div>
+          <div  class="panelview-style none">
               <table class="table table-hover table-striped">
               </table></div>
         
