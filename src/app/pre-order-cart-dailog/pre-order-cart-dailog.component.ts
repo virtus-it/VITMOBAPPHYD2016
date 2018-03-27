@@ -73,8 +73,8 @@ export class PreOrderCartDailogComponent implements OnInit {
     "paymentstatus":"",
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
-    "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype,
-    "product_type":this.createPreOrderInput.productDetails.ptype,"product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges),"cart_style":"new",
+    "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
+    "product_type":this.createPreOrderInput.productDetails.ptype, "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges),"cart_style":"new",
     "delivery_address":this.Details.address, "excepted_time":"" ,"ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
     }
    
@@ -305,9 +305,9 @@ createPreOrder(){
   let input =[{"order":
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
-  "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,
+  "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
   "product_quantity":this.createPreOrderInput.productDetails.ptype,
-  "product_type":this.createPreOrderInput.productDetails.ptype, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
+  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
@@ -316,13 +316,13 @@ createPreOrder(){
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
   }
-  //console.log(input);
+  console.log(input);
 
 
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
   
-  //console.log(input);
+  console.log(input);
   this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output,input),
@@ -341,10 +341,14 @@ createPreOrderResult(result,input) {
   if(result.result=='success'){
     let productid= "";
     let productName= "";
+    let categoryId = "";
     if(input[0].order.productid){
       productid = input[0].order.productid
     }
-    let data ={prod_id:productid, ordersfrom:input[0].order.orderfrom, order_id:result.data.orderid, productName:input[0].order.product_type,quantity:input[0].order.quantity,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
+    if(input[0].order.categoryId){
+      categoryId = input[0].order.categoryId;
+    }
+    let data ={prod_id:productid, ordersfrom:input[0].order.orderfrom, order_id:result.data.orderid, brandName:input[0].order.brandName , quantity:input[0].order.quantity , categoryid: categoryId ,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
     if(this.Details.supplier){
       data.supplierdetails.userid =this.Details.supplier.supplierid;
       data.supplierdetails.supplierID = this.Details.supplier.supplierid;

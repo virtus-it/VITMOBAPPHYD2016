@@ -64,6 +64,7 @@ export class DistributorListDialogComponent implements OnInit {
   getSuppliers() {
     this.loaderService.display(true);
     let input = { "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() };
+    console.log(input);
     this.distributorService.getAllSuppliers(input)
       .subscribe(
       output => this.getSuppliersResult(output),
@@ -74,7 +75,7 @@ export class DistributorListDialogComponent implements OnInit {
   }
   getSuppliersResult(result) {
     this.loaderService.display(false);
-    //console.log(result);
+    console.log(result);
     let supplierCopyDetails = [];
     if (result.result == 'success') {
       _.each(result.data, function (i, j) {
@@ -230,7 +231,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.getDistributors();
     this.getSuppliers();
     this.superDealer = this.authenticationService.getSupperDelear();
-    //console.log(this.orderDetail);
+    console.log(this.orderDetail);
   }
 
 }
