@@ -87,10 +87,10 @@ export class DistributorServiceService {
             .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
-    getDistbutorsProducts(userId) {
+    getDistbutorsProducts(input) {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
          let options = new RequestOptions({ headers: headers });
-         return this.http.get(this.apiUrl + '/products/' + userId+'', options)
+         return this.http.get(this.apiUrl + '/products/' + input.userId+'/' + input.appType, options)
              .map((res: Response) => res.json())
              .do(data => console.log('All: ' ))
              .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

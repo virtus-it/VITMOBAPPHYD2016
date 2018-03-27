@@ -10,7 +10,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
 import { NgxGaugeModule } from 'ngx-gauge';
-
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './login/authentication.service';
@@ -177,7 +176,7 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
         MapStockpointComponent,
         ViewStockpointsComponent,
         TimeChartComponent,
-        
+
      
         
 

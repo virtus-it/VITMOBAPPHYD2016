@@ -332,7 +332,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.assignPolygon();
         this.getOrderDetail();
         this.getProductByCategory();
-        //console.log(this.orderDetail);
+        console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
             let autocomplete = new google.maps.places.Autocomplete(this.searchElementRef.nativeElement, {
