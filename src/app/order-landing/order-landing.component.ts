@@ -110,6 +110,17 @@ export class OrderLandingComponent implements OnInit {
     { "id": "ordered", "itemName": "Ordered" },
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+
+    statusListComplete = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
+    { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+    { "id": "ordered", "itemName": "Ordered" },
+    { "id": "backtodealer", "itemName": "Back to dealer" },
+    { "id": "delivered", "itemName": "Delivered" },
+    { "id": "cancelled", "itemName": "Cancelled" },
+    { "id": "doorlock", "itemName": "Doorlock" },
+    { "id": "rejected", "itemName": "Rejected" },
+    { "id": "notreachable", "itemName": "Not Reachable" },
+    { "id": "cantdeliver", "itemName": "Can't Deliver" }];
     
   findDistributors(name: string) {
     //console.log(name);

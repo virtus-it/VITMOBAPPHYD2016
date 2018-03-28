@@ -19,6 +19,9 @@ export class SelectProductsForassingComponent implements OnInit {
   productID = "";
   productMessage = false;
   noRecord = false;
+  categoryId :any = "";
+  assignCategoryId='';
+  categoryName:any = "";
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
@@ -45,7 +48,7 @@ export class SelectProductsForassingComponent implements OnInit {
 
   }
   getProductsListResult(result) {
-    //console.log("distributor products list", result);
+    console.log("distributor products list", result);
     if (result.result == 'success') {
       this.noRecord=false;
       let productListCopy = [];
@@ -64,29 +67,69 @@ export class SelectProductsForassingComponent implements OnInit {
         }
 
       });
+      var orderDetailCategoryId = this.orderDetail.orderDetails.categoryid;
+      var orderDetailBrandName = this.orderDetail.orderDetails.brandName;
+      let productid = '';
+        _.each(result.data.products , function (i, j) {
+          let details: any = i;
+          if(details.categoryid == orderDetailCategoryId){
+           // category = details.categoryid;
+           if(details.brandname == orderDetailBrandName){
+            productid = details.productid;
+          }
+
+          }
+         
+        });
+       this.productID =productid;
       this.productList = productListCopy;
-      if(this.orderDetail.orderDetails.prod_id){
-        let id = this.orderDetail.orderDetails.prod_id;
-        let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
-        if(productsDetails){
-        this.productMessage= false;
-        this.productID = id.toString();
-        productsDetails.quantity = this.orderDetail.orderDetails.quantity;
+      if(this.productID){
+        if(this.productID  == productid){
+          this.productMessage = false;
         }
         else{
-          this.productMessage = true;
-        }
+               this.productMessage = true;
+            }
       }
+      else{
+        this.productMessage = true;
+      }
+    }
+
+
+      // if(this.orderDetail.orderDetails.prod_id){
+      //   let id = this.orderDetail.orderDetails.prod_id;
+      //   let catId = this.orderDetail.orderDetails.categoryid;
+      //   let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
+      //   if(productsDetails){
+      //   this.productMessage= false;
+      //   this.productID = id.toString();
+      //   // category = category.toString();
+      //   productsDetails.quantity = this.orderDetail.orderDetails.quantity;
+      //   }
+      //   else{
+      //     this.productMessage = true;
+      //   }
+        
+        
+      // }
+      
       //console.log(" this.productList", this.productList);
       
-    }
+ 
+    
     else{
       this.noRecord = true;
     }
     
+    
+    
   }
+
+  
   setProducts() {
     let id = this.productID;
+
     let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
 
 
@@ -123,7 +166,7 @@ export class SelectProductsForassingComponent implements OnInit {
     this.thisDialogRef.close('success');
   }
   ngOnInit() {
-    //console.log(this.orderDetail);
+    console.log(this.orderDetail);
     this.getProductsList();
   }
 

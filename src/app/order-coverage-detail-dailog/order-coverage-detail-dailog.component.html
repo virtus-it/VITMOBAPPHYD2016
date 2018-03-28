@@ -82,13 +82,13 @@
                   <label (click)="DistrbutorHover(dist)" class="logo-color"><i class="fa fa-map" aria-hidden="true"></i>
                      </label>
               </td>
-              <td width="13%" class="center">
-                <label class="logo-color" title="Orders" ><i class="fa fa-file-text-o" ></i> 
+              <td width="13%" class="">
+                <label class="logo-color" title="Orders"  (click)="distributorsOrders(dist)"><i class="fa fa-file-text-o" ></i> 
                 </label>
               </td>
 
-              <td width="13%" class="center">
-                <label class="logo-color" title="Assign" > <i class="fa fa-check-circle-o"></i>
+              <td width="13%" class="">
+                <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="ViewDistributors()" > <i class="fa fa-check-circle-o"></i>
                 </label>
               </td>
 

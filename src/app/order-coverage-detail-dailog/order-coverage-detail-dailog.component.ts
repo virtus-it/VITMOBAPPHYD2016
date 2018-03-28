@@ -12,7 +12,9 @@ import * as moment from 'moment';
 import { MdDialog } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
+import { SelectProductsForassingComponent } from '../select-products-forassing/select-products-forassing.component';
 import * as _ from 'underscore';
+import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { } from '@types/googlemaps';
 declare var google: any;
 @Component({
@@ -212,24 +214,39 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 //console.log("error in products category list");
             });
     }
+    // getProductsCategoryResult(result) {
+    //     //console.log(result);
+    //     let categoryListCopy = [];
+    //     if (result.result == "success") {
+    //         _.each(result, function (i, j) {
+    //             _.each(result.data, function (k, l) {
+    //                 let details: any = k;
+    //                 let value = { "id": details.categoryid, "itemName": details.category }
+    //                 categoryListCopy.push(value);
+    //             });
+
+    //         });
+
+
+    //         this.categoryList = categoryListCopy;
+
+    //     }
+    // }
+
     getProductsCategoryResult(result) {
         //console.log(result);
         let categoryListCopy = [];
         if (result.result == "success") {
-            _.each(result, function (i, j) {
-                _.each(result.data, function (k, l) {
-                    let details: any = k;
+            _.each(result.data, function (i, j) {
+                    let details: any = i;
                     let value = { "id": details.categoryid, "itemName": details.category }
                     categoryListCopy.push(value);
                 });
-
-            });
-
-
             this.categoryList = categoryListCopy;
-
         }
     }
+
+
     searchPolygon() {
         if (this.filterInput.area.searchtype == 'categoryname') {
             this.filterInput.area.searchtext = "";
@@ -316,10 +333,40 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         });
     }
 
+        distributorsOrders(data){
+            let formatteddata: any = { "type": "distributorOrdersfromCoverage", "data": this.orderDetail , distributorId: data.user_id , distributorName: data.distributorName , distributorNumber : data.mobileno };
+                let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
+                  width: '95%',
+                  data: formatteddata
+              });
+              dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+                  //console.log(`Dialog closed: ${result}`);
+        
+              });
+            }
+
+
+        // openProductAssingDialog (dist){
+        //     let data = {orderDetails:this.orderDetail,disributorId: dist.user_id};
+
+        //     let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
+        //        width: '90%',
+        //         data: data
+        //     });
+        //     dialogRef.afterClosed().subscribe(result => {
+        //         //console.log(`Dialog closed: ${result}`);
+        
+        //       if(result == 'success'){
+        //         // this.forWardOrder();
+        //       }
+        //     });
+
+        //     }
+
 
 
     filterPolygon() {
-        if (this.dropdownData.selectedItems) {
+        if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
             this.searchPolygon();
 
         }
