@@ -226,7 +226,7 @@ export class OrderLandingComponent implements OnInit {
     }
     let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
-      width: '95%',
+      width: '98%',
       data: modelData
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {

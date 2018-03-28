@@ -129,3 +129,6 @@ table thead {
 .green{
   color:green;
 }
+.mat-raised-button{
+  padding: 0px 8px !important;
+}
