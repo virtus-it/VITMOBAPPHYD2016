@@ -57,6 +57,9 @@ table thead {
   .left{
     text-align: left;
   }
+  .mgbottom-5{
+    margin-bottom: 5px;
+  }
   a{
     color: var( --logo-color);
   }
