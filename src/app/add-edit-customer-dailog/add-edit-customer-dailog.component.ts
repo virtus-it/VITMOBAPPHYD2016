@@ -24,7 +24,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       Validators.required]);
    
 
-  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
@@ -66,7 +66,7 @@ refresh:any = "";
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "locality":result.data.user.locality , "buildingname":result.data.user.buildingname ,   "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){

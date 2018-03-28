@@ -38,6 +38,10 @@
            
           </md-form-field>
 
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
+          </md-form-field>
+
 
       </div>
       <div class="col-md-4 col-sm-6">
@@ -59,6 +63,10 @@
         <md-form-field class="">
             <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile2" maxlength="10" [(ngModel)]="customerInput.User.mobileno_two">
           </md-form-field>
+
+          <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
+            </md-form-field>
 
       </div>
       <div class="col-md-4 col-sm-6">

@@ -66,7 +66,8 @@
             <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
               <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
               <td width="20%" class="left capital"><small>{{dist.distributorName}}</small></td>
-              <td width="20%" class="left capital"><small>{{dist.mobileno}}</small></td>
+              <td width="20%" class="left capital"><small>{{dist.mobileno}} {{dist.mobileno1}} {{dist.mobileno2}}</small>
+              </td>
               <td width="20%" class=" capital center">
                 <label (click)="ViewProduct(dist)" class="logo-color"><i class="fa fa-gift fs-20" aria-hidden="true"></i>
                    </label>

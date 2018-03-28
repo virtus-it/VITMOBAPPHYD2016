@@ -29,18 +29,56 @@ export class SelectProductsForassingComponent implements OnInit {
     // if(this.orderDetail.orderDetails.type = "customersPage"){
     //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
     // }
-    if(this.orderDetail.orderDetails){
-    if( this.orderDetail.orderDetails.type == "customersPage"){
-      this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
-    }
+  //   if(this.orderDetail.orderDetails){
+  //   if( this.orderDetail.type == "customersPage"){
+  //     this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.userid;
+  //   }
+  // }
+  //   else if(this.orderDetail.type == 'coveragePage'){
+  //     this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.customer.userid
+  //   }
+  //   else{
+  //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
+  //   }
+  //   let UserId:any = '';
+  //   if(this.orderDetail.type='coveragePage'){
+  //    UserId = this.orderDetail.data.orders.order_by;
+  //   }
+  //   else if(this.orderDetail.type == "customersPage"){
+  //     UserId = this.orderDetail.orderDetails.order_by;
+  //   }
+  //   else{
+  //     UserId = this.orderDetail.orderDetails.order_by;
+  //   }
+   
+
+
+  if(this.orderDetail.orderDetails){
+    if(this.orderDetail.type == 'customersPage'){
+    this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
   }
-    else if(this.orderDetail.orders.type == 'coveragePage'){
-      this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
+}
+else if(this.orderDetail.type == 'coveragePage'){
+      this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.customer.userid
+     }
+     else{
+       this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
+        }
+
+        let UserId:any = '';
+    if(this.orderDetail.type =='coveragePage'){
+     UserId = this.orderDetail.data.orders.order_by;
+    }
+    else if(this.orderDetail.type == "customersPage"){
+      UserId = this.orderDetail.orderDetails.order_by;
     }
     else{
-    this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
+      UserId = this.orderDetail.orderDetails.order_by;
     }
-    let input = { apptype: this.authenticationService.appType(), userid: this.orderDetail.orderDetails.order_by, delearId: this.orderDetail.disributorId }
+
+
+    let input = { apptype: this.authenticationService.appType(), userid:UserId, delearId: this.orderDetail.disributorId }
+ 
     console.log(input);
 
     this.distributorService.getProductsList(input)
@@ -72,8 +110,10 @@ export class SelectProductsForassingComponent implements OnInit {
         }
 
       });
+      if(this.orderDetail.type !== 'coveragePage'){
       var orderDetailCategoryId = this.orderDetail.orderDetails.categoryid;
       var orderDetailBrandName = this.orderDetail.orderDetails.brandName;
+      }
       let productid = '';
         _.each(result.data.products , function (i, j) {
           let details: any = i;
@@ -136,9 +176,18 @@ export class SelectProductsForassingComponent implements OnInit {
     let id = this.productID;
 
     let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
+let orderId= '';
+    if(this.orderDetail.type == "coveragePage"){
+      orderId = this.orderDetail.data.orders.order_id;
+    }
+    else if(this.orderDetail.type == 'customersPage'){
+      orderId = this.orderDetail.orderDetails.order_id;
+    }
+    else{
+      orderId = this.orderDetail.orderDetails.order_id;
+    }
 
-
-    let input = { "order": { "orderid": this.orderDetail.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "servicecharges": productsDetails.servicecharge , "expressdeliverycharges": productsDetails.expressdeliverycharges } };
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "servicecharges": productsDetails.servicecharge , "expressdeliverycharges": productsDetails.expressdeliverycharges } };
 
     console.log(input);
     this.orderLandingService.updateQuantity(input)
@@ -157,13 +206,29 @@ export class SelectProductsForassingComponent implements OnInit {
     }
   }
   changeQuantity(products){
+    if(this.orderDetail.type == 'coveragePage'){
     _.each(this.productList, function (i, j) {
       let details: any = i;
       details.quantity = 0;
     });
-    products.quantity = this.orderDetail.orderDetails.quantity;
-        
-      }
+    products.quantity = this.orderDetail.data.orders.quantity;
+  }
+  else if (this.orderDetail.type == 'customersPage'){
+  _.each(this.productList, function (i, j) {
+    let details: any = i;
+    details.quantity = 0;
+  });
+  products.quantity = this.orderDetail.orderDetails.quantity;
+}
+else{
+  _.each(this.productList, function (i, j) {
+    let details: any = i;
+    details.quantity = 0;
+  });
+  products.quantity = this.orderDetail.orderDetails.quantity;
+}
+}
+
   onCloseCancel() {
     this.thisDialogRef.close('cancel');
   }

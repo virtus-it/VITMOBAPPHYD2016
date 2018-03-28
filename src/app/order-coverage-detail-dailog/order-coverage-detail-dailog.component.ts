@@ -293,6 +293,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                             polygon.distributorName = data.username;
                             polygon.supplier = data.suppliers;
                             polygon.mobileno = data.mobileno;
+                            polygon.mobileno1 = data.mobileno1;
+                            polygon.mobileno2 = data.mobileno2;
                             // this.polygonArray.push(polygon);
                             if(this.filterInputkmvalue.kmvalue && this.filterInputkmvalue.kmvalue != 'all'){
                                 var polygonPath = new google.maps.Polygon({
@@ -355,6 +357,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             });
             dialogRef.afterClosed().subscribe(result => {
               if(result == 'success'){
+                this.thisDialogRef.close('success');
               }
             });
 
