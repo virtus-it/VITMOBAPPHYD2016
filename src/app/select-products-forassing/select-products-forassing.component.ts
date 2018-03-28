@@ -29,7 +29,12 @@ export class SelectProductsForassingComponent implements OnInit {
     // if(this.orderDetail.orderDetails.type = "customersPage"){
     //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
     // }
+    if(this.orderDetail.orderDetails){
     if( this.orderDetail.orderDetails.type == "customersPage"){
+      this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
+    }
+  }
+    else if(this.orderDetail.orders.type == 'coveragePage'){
       this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
     }
     else{
