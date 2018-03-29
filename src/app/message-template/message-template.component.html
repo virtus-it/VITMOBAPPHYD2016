@@ -1,0 +1,94 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-edit"></i> Templates
+  </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+
+    <ul class="scrollheight">
+        <li class="nolist-style  messages-style">
+          <div class="row">
+            <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+              <small>&nbsp; Order Received:</small></div>
+            <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+          </div>
+          <small>Order Received: Thank you for placing an order with Moya-The Waterman App. We will process your request shortly.</small>
+        </li>
+
+
+        <li class="nolist-style  messages-style">
+            <div class="row">
+              <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                <small>&nbsp; Order Confirmed :</small></div>
+              <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+            </div>
+            <small>Order Confirmed : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is confirmed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.
+            </small>
+          </li>
+          <li class="nolist-style  messages-style">
+              <div class="row">
+                <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                  <small>&nbsp; Order In-process:</small></div>
+                <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+              </div>
+              <small>Order In-process: Your order is still in process. We are yet to receive a confirmation from the supplier near your delivery location. You might receive a call from our customer care centre from mobile: 9863636314/15 .</small>
+            </li>
+            <li class="nolist-style  messages-style">
+                <div class="row">
+                  <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                    <small>&nbsp; Out for Delivery:</small></div>
+                  <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                </div>
+                <small>Out for Delivery : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, will be delivered soon by the supplier. To save your time, please keep the empty bottle/s ready for return. </small>
+              </li>
+              <li class="nolist-style  messages-style">
+                  <div class="row">
+                    <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                      <small>&nbsp; Delivered : </small></div>
+                    <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                  </div>
+                  <small>Delivered : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is delivered. Please allow us to serve you better, rate us on Playstore: https://play.google.com/store/apps/details?id=com.moya</small>
+                </li>
+                <li class="nolist-style  messages-style">
+                    <div class="row">
+                      <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                        <small>&nbsp; Door Lock : </small></div>
+                      <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                    </div>
+                    <small> Door Lock : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is still in process. Supplier found the door is lock. Please call our customer care centre at mobile: 9863636314/15 for any queries. </small>
+                  </li>
+                  <li class="nolist-style  messages-style">
+                      <div class="row">
+                        <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                          <small>&nbsp; Rejected : </small></div>
+                        <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                      </div>
+                      <small> Rejected : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is not delivered as you have rejected the order. You might receive a call from our customer care centre from mobile : 9863636314/15 very soon.</small>
+                    </li>
+                    <li class="nolist-style  messages-style">
+                        <div class="row">
+                          <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                            <small>&nbsp; Not Reachable: </small></div>
+                          <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                        </div>
+                        <small>Not Reachable :  {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is still in process. Supplier tried to reach you on your mobile: {{this.Details.customer.mobileno}} , but there was no response. Please call our customer care centre at mobile: 9863636314/15 for any queries.</small>
+                      </li>
+                      <li class="nolist-style  messages-style">
+                          <div class="row">
+                            <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
+                              <small>&nbsp; Cant Deliver : </small></div>
+                            <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
+                          </div>
+                          <small> Cant Deliver : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is still in process. Assigned supplier could not deliver your order. We will process your request and assign it to other supplier. Please call our customer care centre at mobile : 9863636314/15  </small>
+                        </li>
+
+
+      </ul>
+
+
+</md-dialog-content>

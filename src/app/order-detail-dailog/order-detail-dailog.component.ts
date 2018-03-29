@@ -9,6 +9,7 @@ import { OnHoldOrderStatusComponent } from '../on-hold-order-status/on-hold-orde
 import { EditOrderStatusComponent } from '../edit-order-status/edit-order-status.component';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { SmsServiceService } from '../sms/sms-service.service';
+import { MessageTemplateComponent } from '../message-template/message-template.component';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
@@ -81,6 +82,20 @@ editStatus(orderData) {
         if (result == 'success') {
             this.getOrderDetailsById();
             this.getProductsListByCustomerId();
+        }
+
+    });
+
+}
+
+messageTemplate(data){
+    let dialogRefeditStatus = this.dialog.open(MessageTemplateComponent, {
+        width: '900px',
+        data: data
+    });
+    dialogRefeditStatus.afterClosed().subscribe(result => {
+        ////console.log(`Dialog closed: ${result}`);
+        if (result == 'success') {
         }
 
     });

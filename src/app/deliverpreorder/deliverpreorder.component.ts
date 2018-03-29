@@ -46,7 +46,13 @@ export class DeliverpreorderComponent implements OnInit {
 
   confirmDeliverOrder(){
     this.Detail.order.received_amt = this.Detail.order.total_amt;
-    this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
+    
+    if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
+      this.Detail.order.assignedto = '' ;
+    }
+    else{
+      this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
+    }
     if(this.deliverPreOrderInput.confirmPayment){
       this.Detail.order.paymentstatus = "confirm";
     }
