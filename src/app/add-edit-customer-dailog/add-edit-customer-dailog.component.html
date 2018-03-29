@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" [formControl]="emailFormControl"  mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname">
+          <input class="form-control" [formControl]="emailFormControl"  mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname" required>
           <md-error *ngIf="emailFormControl.hasError('required')">
             First Name is
             <strong>required</strong>
@@ -78,7 +78,7 @@
           </md-error>
         </md-form-field>
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno">
+          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno" required>
           <md-error *ngIf="mobileFormControl.hasError('required')">
               Mobile Number is
               <strong>required</strong>

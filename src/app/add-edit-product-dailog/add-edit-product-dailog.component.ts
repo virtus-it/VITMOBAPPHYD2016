@@ -39,7 +39,8 @@ export class AddEditProductDailogComponent implements OnInit {
   productTypeList = [];
   headerValue = "Add Products";
   message:any="";
-  productDetails: any = { categoryDetails: "", productName: "", productType: "", currency: "", cost: "", iscanRetrunable: "", minQty: "", Priority: "", IsAuthorized: "", servicecharge:"", expressdeliverycharges:"" };
+  
+  productDetails: any = { categoryDetails: "", productName: "", productType: "", currency: "", cost: "", iscanRetrunable:true, minQty: "", Priority: "", IsAuthorized: "", servicecharge:"", expressdeliverycharges:"" };
   getProductCategory() {
     let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType(), userType: this.authenticationService.userType() };
     this.productService.getProductsCategory(input)

@@ -15,11 +15,13 @@
       <table class="table table-hover table-fixedheader">
   <thead>
     <tr>
-      <th width="20%">Product</th>
-      <th width="20%">Product type </th>
-      <th width="20%">Price per unit</th>
-      <th width="20%">INR</th>
-      <th width="20%">Count</th>
+      <th width="13%">Product</th>
+      <th width="13%">Product type </th>
+      <th width="13%">Price per unit</th>
+      <th width="13%">INR</th>
+      <th width="13%">Exp Del Chgs</th>
+      <th width="13%">Serv Chgs</th>
+      <th width="13%">Count</th>
        </tr>
   </thead>
   <tbody>
@@ -28,15 +30,17 @@
     </div>
     
     <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
-        <td width="20%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+        <td width="13%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'  class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">{{product.brandname}} </span>
           </label></td>
-      <td width="20%" class="left capital">{{product.pname}} {{product.ptype}}</td>
-      <td width="20%" class="left capital">{{product.pcost}}</td>
-      <td width="20%" class="left capital">{{product.pcost * product.quantity}}</td>
-      <td width="20%" class="left capital"> <md-form-field class="example-full-width inline ">
+      <td width="13%" class="left capital">{{product.pname}} {{product.ptype}}</td>
+      <td width="13%" class="left capital">{{product.pcost}}</td>
+      <td class="left capital" width="15%">{{product.expressdeliverycharges}}</td>
+      <td class="left capital" width="15%">{{product.servicecharge}}</td>
+      <td width="13%" class="left capital">{{product.pcost * product.quantity}}</td>
+      <td width="13%" class="left capital"> <md-form-field class="example-full-width inline ">
           <input class="form-control" mdInput placeholder="Count" name="count" [(ngModel)]="product.quantity">
           <!-- (ngModelChange)="searchMobileNo()"-->
         </md-form-field></td> 
