@@ -30,7 +30,7 @@
           </div> -->
           <div class="col-md-4 col-sm-4 col-lg-4">
               <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Priority" [(ngModel)]="productDetails.Priority" [formControl]="p1FC" name="priority">
+                <input class="form-control" mdInput placeholder="Priority" [(ngModel)]="productDetails.Priority" [formControl]="p1FC" name="priority" required>
                 <md-error *ngIf="p1FC.hasError('required')">
                   Priority is <strong>required</strong>
                 </md-error>
@@ -53,7 +53,7 @@
           <div class="col-md-4 col-sm-4 col-lg-4 ">
 
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Product Name" [formControl]="p2FC"  [(ngModel)]="productDetails.productName" name="productName" > 
+            <input class="form-control" mdInput placeholder="Product Name" [formControl]="p2FC"  [(ngModel)]="productDetails.productName" name="productName" required > 
             <md-error *ngIf="p2FC.hasError('required')">
               Product Name is <strong>required</strong>
             </md-error>
@@ -62,7 +62,7 @@
         </div>
         <div class="col-md-4 col-sm-4 col-lg-4 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Product Type" [formControl]="p3FC" [(ngModel)]="productDetails.productType" name="productType">
+            <input class="form-control" mdInput placeholder="Product Type" [formControl]="p3FC" [(ngModel)]="productDetails.productType" name="productType" required>
             <md-error *ngIf="p3FC.hasError('required')">
               Product Type is <strong>required</strong>
             </md-error>
@@ -70,8 +70,8 @@
           </md-form-field>
         </div>
         <div class="col-md-4 col-sm-4 col-lg-4">
-            <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Cost"  [formControl]="p4FC" [(ngModel)]="productDetails.cost" name="cost">
+            <md-form-field class="" required>
+              <input class="form-control" mdInput placeholder="Cost"  [formControl]="p4FC" [(ngModel)]="productDetails.cost" name="cost" required>
               <md-error *ngIf="p4FC.hasError('required')">
                 Product Cost is <strong>required</strong>
               </md-error>
@@ -83,7 +83,7 @@
       <div class="row form-group">
           <div class="col-md-4 col-sm-4 col-lg-4">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Min Qty"  [formControl]="p5FC" [(ngModel)]="productDetails.minQty" name="minqty">
+                <input class="form-control" mdInput placeholder="Min Qty"  [formControl]="p5FC" [(ngModel)]="productDetails.minQty" name="minqty" required>
                 <md-error *ngIf="p5FC.hasError('required')">
                   Product Quantity is <strong>required</strong>
                 </md-error>
@@ -92,7 +92,7 @@
             </div>
             <div class="col-md-4 col-sm-4 col-lg-4">
                 <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Service Charge"   [formControl]="p6FC" [(ngModel)]="productDetails.servicecharge" name="servicecharge">
+                  <input class="form-control" mdInput placeholder="Service Charge"   [formControl]="p6FC" [(ngModel)]="productDetails.servicecharge" name="servicecharge" required>
                   <md-error *ngIf="p6FC.hasError('required')">
                     Service Charge is <strong>required</strong>
                   </md-error>
@@ -101,7 +101,7 @@
               </div>
               <div class="col-md-4 col-sm-4 col-lg-4">
                   <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="Express delivery"  [formControl]="p7FC" [(ngModel)]="productDetails.expressdeliverycharges" name="expressdeliverycharges">
+                    <input class="form-control" mdInput placeholder="Express delivery"  [formControl]="p7FC" [(ngModel)]="productDetails.expressdeliverycharges" name="expressdeliverycharges" required>
                     <md-error *ngIf="p7FC.hasError('required')">
                       Express Delivery Charges is <strong>required</strong>
                     </md-error>
@@ -127,7 +127,7 @@
     <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
         <div class="form-check form-check-inline">
             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-              <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.iscanRetrunable" name="iscanRetrunable">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="productDetails.iscanRetrunable" name="iscanRetrunable" checked>
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Is Cans Returnable</span>
             </label>

@@ -144,7 +144,7 @@
                 <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
                 </a>
                 &nbsp;&nbsp; <a class="align-self-center">
-                    <button  md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}" >FollowUpDate</button>
+                    <button  md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}" >Todays FollowUp</button>
                   </a>
                   &nbsp;&nbsp;
           <a class="align-self-center">
@@ -433,6 +433,7 @@
                                    Supplier Code</span>
                                 <br>
                                 <b class="capitalize"*ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</b>
+                                <b class="" *ngIf="forward.customer.suppliercode === null"> - </b>
                                </div>
                          </div>
                   <div class="row form-group">
@@ -486,6 +487,7 @@
                                 Supplier</span>
                             <br>
                             <b class="capitalize" *ngIf="forward.supplierdetails"> {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
+                            <b class="capitalize" *ngIf = "forward.supplierdetails === null" > - </b>
                            
                             
                           </div>
@@ -494,6 +496,7 @@
                                   Supplier Mobile</span>
                               <br>
                             <b *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
+                            <b class="capitalize" *ngIf = "forward.supplierdetails === null" > - </b>
                             
                             
                             </div>
@@ -504,16 +507,18 @@
                                       <span class="td-label">
                                           Assigned On</span>
                                           <br>
-                                          <span class="" *ngIf="forward.OrderModifiedStatus !== 'Assign'">
+                                          <span class="" >
                                               <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                                             </span>
+                                            
                                      </div>
                           
                                <div class="col right">
                                   <span class="td-label">
                                       Delivered On </span>
                                   <br>
-                                  <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered' || forward.OrderModifiedStatus == 'Rejected'">{{forward.order_delivereddate | utcDate }}</span>
+                                  <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered'">{{forward.order_delivereddate | utcDate }}</span>
+                                  <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                                 </div>
                           </div>
 
@@ -735,11 +740,13 @@
                     <div class="col">
                         <span class="td-label" id='foo'> 
                            Address</span>
+                           <br>
+                            <b class="capitalize onhovertext300" >{{allorder.orderby_address}}</b>   
 
                            <!-- <button class="btn" data-clipboard-target="#foo">
                               <img src="assets/clippy.svg" alt="Copy to clipboard">
                           </button> -->
-                          <br>
+                        
                     </div>
                   </div>
                 </div>
@@ -761,14 +768,16 @@
                     <br>
                     <span class="warning" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
                       {{allorder.order_assigneddate | utcDate }}</span>
-                      <b *ngIf="allorder.supplierdetails === null"> - </b>
+                      <b *ngIf="allorder.OrderModifiedStatus == 'Assign'"> - </b>
+                      <b *ngIf="allorder.order_assigneddate === null"> - </b>
                     </div>  
                   </div>
                   <div class="row form-group">
                     <div class="col left">
                       <span class="td-label"> Delivered On </span><br>
-                      <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered' || allorder.OrderModifiedStatus == 'Rejected'">{{allorder.order_delivereddate | utcDate }}</span>
-                      <b *ngIf="allorder.supplierdetails === null"> - </b>
+                      <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered'">{{allorder.order_delivereddate | utcDate }}</span>
+                      <b *ngIf="allorder.OrderModifiedStatus !== 'Delivered'"> - </b>
+                     
                     </div>
                   </div>
                   <div class=" float-right">
