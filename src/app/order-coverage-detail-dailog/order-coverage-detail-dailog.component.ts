@@ -293,6 +293,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                             polygon.distributorName = data.username;
                             polygon.supplier = data.suppliers;
                             polygon.mobileno = data.mobileno;
+                            polygon.mobileno1 = data.mobileno1;
+                            polygon.mobileno2 = data.mobileno2;
                             // this.polygonArray.push(polygon);
                             if(this.filterInputkmvalue.kmvalue && this.filterInputkmvalue.kmvalue != 'all'){
                                 var polygonPath = new google.maps.Polygon({
@@ -346,22 +348,20 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             }
 
 
-        // openProductAssingDialog (dist){
-        //     let data = {orderDetails:this.orderDetail,disributorId: dist.user_id};
+        openProductAssingDialog (data){
+            let formattedData = {'data' : this.orderDetail,   disributorId:data.user_id , "type":"coveragePage"};
 
-        //     let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
-        //        width: '90%',
-        //         data: data
-        //     });
-        //     dialogRef.afterClosed().subscribe(result => {
-        //         //console.log(`Dialog closed: ${result}`);
-        
-        //       if(result == 'success'){
-        //         // this.forWardOrder();
-        //       }
-        //     });
+            let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
+               width: '90%',
+                data: formattedData
+            });
+            dialogRef.afterClosed().subscribe(result => {
+              if(result == 'success'){
+                this.thisDialogRef.close('success');
+              }
+            });
 
-        //     }
+            }
 
 
 

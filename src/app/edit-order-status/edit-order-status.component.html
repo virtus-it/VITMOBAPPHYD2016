@@ -104,6 +104,12 @@
               <span class=" col-md-5 ">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</span>
             </div>
           </div>
+          <div class="" >
+            <label class="" >Advance Amount: </label>
+            <md-form-field class="">
+            <input class="" mdInput placeholder="Amount" name='advamt'  [(ngModel)]="editStatusInput.order.advanceAmount" > 
+          </md-form-field>
+          </div>
           <div class="col-md-6" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div  *ngIf="editStatusInput.order.paymentype == 'cash'">
             <div class="row pdtop-15">

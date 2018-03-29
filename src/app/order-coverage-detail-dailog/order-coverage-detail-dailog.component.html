@@ -66,7 +66,7 @@
               <th width="16%"><small>Products</small></th>
               <th width="15%" class="center"> <small>Areas</small></th>
               <th width="13%" class=""><small>orders</small></th>
-              <th width="13%" class=""><small>Assign</small></th>
+              <th width="13%" class=""  *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" ><small>Assign</small></th>
             </tr>
           </thead>
           <tbody>
@@ -88,7 +88,7 @@
               </td>
 
               <td width="13%" class="">
-                <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="ViewDistributors()" > <i class="fa fa-check-circle-o"></i>
+                <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="openProductAssingDialog(dist)" > <i class="fa fa-check-circle-o"></i>
                 </label>
               </td>
 

@@ -310,7 +310,7 @@ createPreOrder(){
   "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
   "cart_style":"new",
-  "delivery_address":this.Details.address, "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
+  "delivery_address":this.Details.address, "delivery_locality":this.Details.locality, "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
   "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
@@ -502,7 +502,7 @@ else{
     
     this.autoTimeSlotforHour();
     this.getProductsList();
-    //console.log(this.Details);
+    console.log(this.Details);
   }
 
 }

@@ -672,13 +672,6 @@ this.showFilterDailog =false;
         this.orderClickMore = true;
         this.allOrders = _.union(this.allOrders, data);
       }
-
-      else if(this.tabPanelView == 'complete'){
-        let data = this.ModifyOrderList(result.data);
-        this.completeClickMore = true;
-        this.completeOrders = _.union(this.completeOrders , data);
-      }
-
     }
     else {
       if (this.tabPanelView == 'forward') {
@@ -740,23 +733,50 @@ this.showFilterDailog =false;
       this.globalFilterInput.order.status = 'complete';
     }
     console.log(this.globalFilterInput);
-this.showFilterDailog =false;
+    this.globalFilteredOrders(true);
+// this.showFilterDailog =false;
+// let input = this.globalFilterInput;
+// this.orderLandingService.getOrdersByfilter(input)
+//       .subscribe(
+//       output => this.getGlobalFilteredOrdersResult(output),
+//       error => {
+//         //console.log("falied");
+//         this.loaderService.display(false);
+//       });
+
+  }
+  globalFilteredOrders(firstcall){
+    if(!firstcall){
+         if(this.tabPanelView == 'complete'){
+        let lastCompleteOrder:any = _.last(this.completeOrders);
+        if(lastCompleteOrder){
+          this.globalFilterInput.order.last_orderid = lastCompleteOrder.order_id;
+        }
+    }
+    else{
+      if(this.tabPanelView == 'complete'){
+        this.completeOrders = [];
+        this.globalFilterInput.order.last_orderid = '0';
+    }
+  }
+    }
+  this.showFilterDailog =false;
 let input = this.globalFilterInput;
 this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getGlobalFilteredOrdersResult(output),
       error => {
-        //console.log("falied");
         this.loaderService.display(false);
       });
-  }
+  
+}
   getGlobalFilteredOrdersResult(result) {
     this.loaderService.display(false);
     if (result.result == 'success') {
       if(this.tabPanelView == 'complete'){
         let data = this.ModifyOrderList(result.data);
         this.completeClickMore = true;
-        this.completeOrders = _.union(this.completeOrders , data);
+        this.completeOrders = _.union(data);
       }
     }
     else {
@@ -779,6 +799,7 @@ this.orderLandingService.getOrdersByfilter(input)
     this.filterRecords = false;
     this.quickFilterView = "";
     this.tabPanelView = 'forward';
+    // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -855,6 +876,9 @@ this.orderLandingService.getOrdersByfilter(input)
       else if (tab == 'allorder') {
 
         this.getAllOrderDetails(firstcall);
+      }
+      else if(tab == 'complete'){
+       this.globalFilteredOrders(firstcall);
       }
     }
 
