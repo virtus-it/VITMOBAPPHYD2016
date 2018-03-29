@@ -25,15 +25,13 @@
                       <small>{{ comments.remarks}} </small>
                       <br>
                       <p class="right">
-                        <small class="gray">{{ comments.createddate | utcDate}} </small>
+                        <small class="gray9">{{ comments.createddate | utcDate}} </small>
                       </p>
                       
                       <p *ngIf="comments.followupdate" class="right">Next Follow Up Date :
-                        <small class="gray"> {{ comments.followupdate  |  date: 'dd-MM-yyyy'}} </small>
+                        <small class="gray9"> {{ comments.followupdate  |  date: 'dd-MM-yyyy'}} </small>
                         
-                      </p>
-                      <br>
-                   
+                      </p>                   
                     </li>
           
                   </ul>

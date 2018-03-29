@@ -306,7 +306,7 @@
               </td>
               <td width="25%">
                 <div class=" row ">
-                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
+                  <div class="col-sm-9  col-md-9  col-lg-9 left onhovertext">
                     <label class="td-label">Customer :
                       <b class="capitalize ">{{forward.orderby_firstname}}</b>
                     </label>
@@ -314,8 +314,9 @@
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(forward)'>
                     <i class="fa fa-edit logo-color "></i>
-                    <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  (click)='showCustomerAllOrders(forward)' >
-                      <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
+                    <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  > -->
+                      <i class="fa fa-user logo-color" aria-hidden="true"  title="Customers orders" (click)='showCustomerAllOrders(forward)' ></i>
+                    <!-- </button> -->
 
                   </div>
                   
@@ -461,7 +462,7 @@
                             <span class="td-label">
                                 Address</span>
                             <br>
-                            <b class="capitalize onhovertext300" >{{forward.orderby_address}}</b>   
+                            <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.orderby_address}}</b>   
              
                               </div>
                                          </div>
@@ -536,8 +537,7 @@
                               <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                      
-           
-                      <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
+                                <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
                         <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Orders </button>
     
                   </div>             
@@ -598,7 +598,7 @@
               </td>
               <td width="33%">
                 <div class=" row ">
-                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
+                  <div class="col-sm-9  col-md-9  col-lg-9 left onhovertext">
                     <label class="td-label">Customer :
                       <b class="capitalize ">{{allorder.orderby_firstname}}</b>
                     </label>
@@ -606,11 +606,9 @@
                   </div>
                   <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
-
-                    <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm " (click)='showCustomerAllOrders(allorder)' >
-                      <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
-
-
+<!--              <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm " > -->
+                      <i class="fa fa-user logo-color" aria-hidden="true"  title="Customers orders" (click)='showCustomerAllOrders(allorder)'  ></i>
+                    <!-- </button> -->
                   </div>
                 </div>
               </td>
@@ -815,14 +813,9 @@
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
               </td>
             </tr>
-            
-            
-
           </tfoot>
         </table>
       </div>
-
-
       <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
           <table class="table table-hover table-striped">
             <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i" >
@@ -858,7 +851,7 @@
                 </td>
                 <td width="25%">
                   <div class=" row ">
-                    <div class="col-sm-8  col-md-8  col-lg-8 left onhovertext">
+                    <div class="col-sm-9  col-md-9  col-lg-9 left onhovertext">
                       <label class="td-label">Customer :
                         <b class="capitalize ">{{complete.orderby_firstname}}</b>
                       </label>
@@ -866,8 +859,9 @@
                     </div>
                     <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(complete)'>
                       <i class="fa fa-edit logo-color "></i>
-                      <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  (click)='showCustomerAllOrders(complete)' >
-                        <i class="fa fa-user " aria-hidden="true"  title="Customers orders" ></i></button>
+                      <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "   > -->
+                        <i class="fa fa-user logo-color" aria-hidden="true"  title="Customers orders" (click)='showCustomerAllOrders(complete)'></i>
+                      <!-- </button> -->
   
                     </div>
                     
@@ -1012,7 +1006,7 @@
                               <span class="td-label">
                                   Address</span>
                               <br>
-                              <b class="capitalize onhovertext300">{{complete.orderby_address}}</b>   
+                              <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>   
                               
                                 </div>
                                

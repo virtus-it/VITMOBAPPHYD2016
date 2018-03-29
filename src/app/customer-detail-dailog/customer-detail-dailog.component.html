@@ -38,8 +38,8 @@
             <div class="col-4 align-self-center">
               <h5>
                   <small>Address</small><br>
-              <b class="pdleft-5 onhovertext300" >{{this.orderDetail.user_address}}</b>
-              <b class="pdleft-5 onhovertext300" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.address}}</b>
+              <b class="pdleft-5 onhovertooltip-300" title="{{this.orderDetail.user_address}}" >{{this.orderDetail.user_address}}</b>
+              <b class="pdleft-5 onhovertooltip-300"  title="{{this.orderDetail.data.address}}" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.address}}</b>
             </h5>
             </div>
             <div class="col-2 ">
@@ -67,33 +67,31 @@
           <thead>
             <tr class="wd-99pc">
               <th width="8%">Id</th>
-              <th width="10%">Product Name</th>
+              <th width="18%">Product Name</th>
               <!-- <th width="7%">Cart Id</th> -->
-              <!-- <th width="14%">Address</th> -->
-              <th width="8%" title="Order Quantity">Qty</th>
-              <th width="8%" title="Return Quantity">Ret Qty</th>
-              <th width="8%" title="Order Amount">Amt</th>
+              <th width="7%" title="Order Quantity">Qty</th>
+              <th width="7%" title="Return Quantity">Ret Qty</th>
+              <th width="7%" title="Order Amount">Amt</th>
               <th width="8%" title="Received Amount">Recv Amt</th>
               <th width="10%">Status</th>
               <th width="14%" title="Delivery Date">Delv Date</th>
-              <th width="12%" title="Delivered By">Delv By</th>
+              <th width="18%" title="Delivered By">Delv By</th>
               
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let customer of customerOrderDetails">
-              <td width="8%" class="left" scope="row">{{customer.order_id}}</td>
-              <td width="10%" class=" capital">{{customer.brandname}} {{customer.prod_type}}</td>
+              <td width="8%" class="left" scope="row">#{{customer.order_id}}</td>
+              <td width="18%" class=" capital">{{customer.brandname}} {{customer.prod_type}}</td>
               <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
-              <!-- <td width="14%" class=" capital"><span class="onhovertext">{{customer.orderby_address}}</span></td> -->
-              <td width="8%" class=" capital">{{customer.quantity}}</td>        
-              <td width="8%" class=" capital">{{customer.return_cans}}</td>    
-              <td width="8%" class=" capital">{{customer.bill_amount}}</td>
+              <td width="7%" class=" capital">{{customer.quantity}}</td>        
+              <td width="7%" class=" capital">{{customer.return_cans}}</td>    
+              <td width="7%" class=" capital">{{customer.bill_amount}}</td>
               <td width="8%" class=" capital">{{customer.receivedamount}}</td>
               <td width="10%" class=" capital">{{customer.status}}</td>
               <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
               <td width="14%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
-              <td width="12%" class=" capital">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</td>
+              <td width="18%" class=" capital">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</td>
             </tr>
           </tbody>
           <tfoot>
