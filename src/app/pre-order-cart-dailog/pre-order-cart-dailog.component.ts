@@ -54,6 +54,10 @@ export class PreOrderCartDailogComponent implements OnInit {
     todaysDate:any = "";
     message1:any="";
 
+  idValue= '';
+  value = '';
+  nextIdValue = '';
+
 
 
     
@@ -478,7 +482,17 @@ else{
    }
 
   }
+
+
+  // availableTimeSlot(){
+  //   this.hours = moment().format("HH");
+  //   if(this.hours <= this.idValue ){
+  //     this.value = this.nextIdValue;
+  //   }
+
+  // }
    
+
 
   //   _.each(this.productList, function(i,j){
   //   let details:any =i;
@@ -497,6 +511,7 @@ else{
 
 
   ngOnInit() {
+    // this.availableTimeSlot();
     this.getDistributors();
     // this.getProducts();
     

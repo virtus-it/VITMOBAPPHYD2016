@@ -41,20 +41,20 @@
       <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot</md-option>
-          <md-option value="7AM-8AM" [disabled]= '7 <= hours'>7AM-8AM</md-option>
-          <md-option value="8AM-9AM" [disabled]='8 <= hours'>8AM-9AM</md-option>
-          <md-option value="9AM-10AM" [disabled]='9 <= hours'>9AM-10AM</md-option>
-          <md-option value="10AM-11AM" [disabled]='10 <= hours'>10AM-11AM</md-option>
-          <md-option value="11AM-12PM" [disabled]='11 <= hours'>11AM-12PM</md-option>
-          <md-option value="12PM-1PM" [disabled]='12 <= hours'>12PM-1PM</md-option>
-          <md-option value="1PM-2PM" [disabled]='13 <= hours'>1PM-2PM</md-option>
-          <md-option value="2PM-3PM" [disabled]='14 <= hours'>2PM-3PM</md-option>
-          <md-option value="3PM-4PM" [disabled]='15 <= hours'>3PM-4PM</md-option>
-          <md-option value="4PM-5PM" [disabled]='16 <= hours'>4PM-5PM</md-option>
-          <md-option value="5PM-6PM" [disabled]='17 <= hours'>5PM-6PM</md-option>
-          <md-option value="6PM-7PM" [disabled]='18 <= hours'>6PM-7PM</md-option>
-          <md-option value="7PM-8PM" [disabled]='19 <= hours'>7PM-8PM</md-option>
-          <md-option value="8PM-9PM" [disabled]='20 <= hours'>8PM-9PM</md-option>
+          <md-option value="7AM-8AM" [disabled]= '7 <= hours' idValue = '7' nextIdValue='8' >7AM-8AM</md-option>
+          <md-option value="8AM-9AM" [disabled]='8 <= hours' idValue = '8' nextIdValue='9'>8AM-9AM</md-option>
+          <md-option value="9AM-10AM" [disabled]='9 <= hours' idValue = '9' nextIdValue='10'>9AM-10AM</md-option>
+          <md-option value="10AM-11AM" [disabled]='10 <= hours' idValue = '10' nextIdValue='11'>10AM-11AM</md-option>
+          <md-option value="11AM-12PM" [disabled]='11 <= hours' idValue = '11' nextIdValue='12'>11AM-12PM</md-option>
+          <md-option value="12PM-1PM" [disabled]='12 <= hours' idValue = '12' nextIdValue='13'>12PM-1PM</md-option>
+          <md-option value="1PM-2PM" [disabled]='13 <= hours' idValue = '13' nextIdValue='14'>1PM-2PM</md-option>
+          <md-option value="2PM-3PM" [disabled]='14 <= hours' idValue = '14' nextIdValue='15'>2PM-3PM</md-option>
+          <md-option value="3PM-4PM" [disabled]='15 <= hours' idValue = '15' nextIdValue='16'>3PM-4PM</md-option>
+          <md-option value="4PM-5PM" [disabled]='16 <= hours' idValue = '16' nextIdValue='17'>4PM-5PM</md-option>
+          <md-option value="5PM-6PM" [disabled]='17 <= hours' idValue = '17' nextIdValue='18'>5PM-6PM</md-option>
+          <md-option value="6PM-7PM" [disabled]='18 <= hours' idValue = '18' nextIdValue='19'>6PM-7PM</md-option>
+          <md-option value="7PM-8PM" [disabled]='19 <= hours' idValue = '19' nextIdValue='20'>7PM-8PM</md-option>
+          <md-option value="8PM-9PM" [disabled]='20 <= hours' idValue = '20' >8PM-9PM</md-option>
         </md-select>
       </div>
     </div>
@@ -187,7 +187,7 @@
                 </div>
             </td>
             <td>
-                <b class="">{{details.pcost*details.quantity}}</b>
+                <b class="">{{details.pcost*details.quantity}} </b>
               </td>
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">

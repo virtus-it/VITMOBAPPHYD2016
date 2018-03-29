@@ -37,6 +37,7 @@ export class OrderLandingComponent implements OnInit {
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
+
     
 
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
@@ -71,6 +72,8 @@ export class OrderLandingComponent implements OnInit {
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
+  // forwardAddress:any = ""
+  // allAddress:any = this.allOrders.orderby_address;
   completeClickMore = false;
   polygonArray = [];
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -336,6 +339,7 @@ export class OrderLandingComponent implements OnInit {
       let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
       this.forwardOrders = _.union(this.forwardOrders, data);
+
     }
     else {
       this.forwardClickMore = false;
