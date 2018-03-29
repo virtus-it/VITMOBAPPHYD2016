@@ -32,27 +32,22 @@ table thead {
   .left{
     text-align: left;
   }
-  a{
-    color: #0f75bc;
-  }
+
   .pdleft-20{
     padding-left: 20px !important;
   }
-  .btn-link{
-    color: #0f75bc;
-  }
 
   .closeicon{
-    color: #35ca5b;
+    color: var( --danger);
   }
   .openicon{
-    color: #dd2121;
+    color: var( --success);
   }
   .replyicon{
-    color: #3090c7;
+    color: var( --logo-color);
   }
   .statusclosed{
-    color: rgb(233, 20, 20);
+    color: var( --danger);
   }
   .pd-brd {
     padding: 10px;
@@ -103,7 +98,7 @@ table thead {
     position: relative;
 left: -2px;
 width: 100%;
-background: #fff;
+background:var( --white);;
 box-shadow: 0 0 8px #bbb;
 }
 

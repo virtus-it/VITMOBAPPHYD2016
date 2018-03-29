@@ -23,19 +23,19 @@ label{
 }
 .details-style{
   padding: 10px;
-  background: #0f75bc;
-color: #fff;
+  background:  var(--logo-color);
+color: var( --white);
 }
 .pdleftright-15{
   padding-left: 15px !important;
   padding-right: 15px !important;
 }
 .details-style button{
-  color: #fff;
+  color: var(--white);
   font-weight:500;
 }
 .logo-bg .btn-link{
-  color: #fff
+  color: var(--white);
 }
 .label-gray{
   color: #59717d;

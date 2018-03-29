@@ -407,8 +407,8 @@
           <th width="12%">Product </th>
           <th width="8%">Slot </th>
           <th width="5%">Qty</th>
-          <th width="12%">Schedule For</th>
-          <th width="12%">Created by</th>
+          <th width="18%">Schedule For</th>
+          <th width="14%">Created by</th>
           <th width="14%">Created Date</th>
           <th width="10% " class="no-th-arrow">Action</th>
 
@@ -425,9 +425,9 @@
           <td class="left" width="12%"> {{schedule.product_name}} {{schedule.product_quantity}} </td>
           <td class="left" width="8%">{{schedule.delivery_exceptedtime}}</td>
           <td class="left " width="5%">{{schedule.quantity}}</td>
-          <td class="left capitalize " width="12%"><span class="onhovertooltip" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span></td>
-          <td class="left" width="12%"><span  *ngIf="schedule.createdbyinfo ">{{schedule.createdbyinfo.scheduledby}}</span></td>
-          <td class="left" width="14%"> <span *ngIf="schedule.createddate" >{{schedule.createddate | utcDate}} </span></td>
+          <td class="left capitalize " width="18%"><span class="onhovertooltip" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span></td>
+          <td class="left" width="14%"><span  *ngIf="schedule.createdbyinfo " class="onhovertabletext-100">{{schedule.createdbyinfo.scheduledby}}</span></td>
+          <td class="left capitalize" width="14%"> <span *ngIf="schedule.createddate" >{{schedule.createddate | utcDate}} </span></td>
           <td class="left " width="10%">
                             <label class="logo-color cursor" (click)="createSchedule(schedule)">
                                 <i class="fa fa-calendar-plus-o" aria-hidden="true" title="Create"></i>
@@ -437,7 +437,6 @@
                                    </label>&nbsp;&nbsp;
                               <label class="cursor" (click)="deleteSchedule(schedule)">
                                     <i class="fa fa-trash danger" aria-hidden="true"  title="Delete"></i> </label>
-
                 </td> 
         </tr>
         </tbody>

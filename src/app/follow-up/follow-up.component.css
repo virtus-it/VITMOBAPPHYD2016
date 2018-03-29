@@ -13,3 +13,8 @@
     position: absolute;
     bottom: 0px;
 }
+.scroll{
+    overflow-x: hidden;
+    height:280px;
+    overflow-y: auto;
+}

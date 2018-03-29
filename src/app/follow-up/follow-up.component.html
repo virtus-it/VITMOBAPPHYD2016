@@ -16,21 +16,24 @@
             <h5 class="capitalize mgleft-15">
                 <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>
                    {{details.firstname}} {{details.lastname}}</span> - <span>{{details.mobileno}}</span></h5>
-            <div class=" ">
+            <div class=" scroll">
                 <ul class="heightgrid  mgtop-5">
                     <li class="nolist-style  messages-style" *ngFor="let comments of followUpList">
-                      <i class="fa fa-reply" aria-hidden="true"></i>
-                      <small>{{comments.username}}</small>
-                      <br>
-                      <small>{{ comments.remarks}} </small>
-                      <br>
-                      <p class="right">
-                        <small class="gray9">{{ comments.createddate | utcDate}} </small>
+                    
+                      <div class="row">
+                        <div class="col">
+                            <i class="fa fa-reply" aria-hidden="true"></i> <small>{{comments.username}}</small>
+                        </div>
+                        <div class="col right">
+                            <small class="gray9">{{ comments.createddate | utcDate}} </small>
+                        </div>
+                      </div>
+                      <p class="">
+                         <small>{{ comments.remarks}} </small>                        
                       </p>
-                      
-                      <p *ngIf="comments.followupdate" class="right">Next Follow Up Date :
+                        <p *ngIf="comments.followupdate" class="
+                      right">  <small>Next Follow Up Date : </small>
                         <small class="gray9"> {{ comments.followupdate  |  date: 'dd-MM-yyyy'}} </small>
-                        
                       </p>                   
                     </li>
           
