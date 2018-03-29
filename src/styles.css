@@ -4,16 +4,27 @@
 @import "~font-awesome/css/font-awesome.css";
 
 :root {
-  --logo-color: #0f75bc;
+  --logo-color: #1ebea5;
   --warning:#f79123;
   --danger:#d43f3a;
   --gray6:#666;
   --gray9:#999;
+  --grayd:#ddd;
+  --white:#fff;
+  --gray157:#f1f5f7;
+  --success:#28a745;
+  
 }
-
+/* .custom-control-input:checked~.custom-control-indicator{
+  background: var( --logo-color) !important;
+  color: var( --white) !important;
+} */
+.btn-link{
+  color: var( --logo-color) !important;
+}
 table thead {
-    background: var( --logo-color);
-    color: #fff;
+    background: var( --logo-color) !important;
+    color: var( --white) !important;
   }
   .table td, .table th{
     padding: 8px;
@@ -28,7 +39,7 @@ table thead {
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;
-    background: #fff;
+    background: var( --white);
   }
   .distIcon-style{
     padding: 12px;
@@ -158,11 +169,11 @@ color: var( --logo-color) !important;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
   background: var( --logo-color) ; 
-  color: #fff;
+  color: var( --white);
 }
 .btn-primary{
   background: var( --logo-color) !important; 
-  color: #fff;
+  color: var( --white);
 }
 .pdtopbottom-12{
   padding: 12px 0px;
@@ -171,7 +182,7 @@ color: var( --logo-color) !important;
 padding: 15px;
 font-weight: 600;
 font-size: 18px;
-color: #fff;
+color: var( --white);
 line-height: 1.2;
 background: var( --logo-color) ;
 }
@@ -304,7 +315,7 @@ background: transparent;
   border-radius: 0px !important;
 }
 .btn-default{
-  background: #fff;
+  background: var( --white);
   color: var( --logo-color) !important;
 }
 .btn-primary{
@@ -343,8 +354,8 @@ b, strong {
   right: -14px;
   display: inline-block;
   border-top: 14px solid transparent;
-  border-left: 14px solid #fff;
-  border-right: 0 solid #fff;
+  border-left: 14px solid var( --white);
+  border-right: 0 solid var( --white);
   border-bottom: 14px solid transparent;
   content: " ";
 }
@@ -358,11 +369,11 @@ ul li small{
   border-left: 1px solid #ddd;
 }
 .no-border{
-  border: 1px solid #fff;
+  border: 1px solid var( --white);
 }
 .timeline > li > .timeline-badge {
   color: #666;
-  background: #fff;
+  background: var( --white);
   width: 50px;
   height: 50px;
   line-height: 48px;
@@ -513,7 +524,7 @@ border:2px solid var( --logo-color);
       }
       .mat-calendar-header{
         background: var( --logo-color);
-        color: #fff;
+        color: var( --white);
       }
       .mat-calendar-body-today{
         border-color: var( --logo-color);
@@ -613,7 +624,7 @@ border:2px solid var( --logo-color);
  .plus-style{
   background: var( --logo-color);
   padding: 5px 8px;
-  color: #fff;
+  color: var( --white);
 
   border-radius: 50%;
 }
@@ -634,7 +645,7 @@ display: block;
   position: relative;
 left: -2px;
 width: 100%;
-/* background: #fff;
+/* background: var( --white);
 box-shadow: 0 0 8px #bbb; */
 }
 .onhovertext {
@@ -651,7 +662,7 @@ display: block;
   position: relative;
 left: -2px;
 width: 100%;
-/* background: #fff;
+/* background: var( --white);
 box-shadow: 0 0 8px #bbb; */
 }
 .onhovertext150 {
@@ -683,8 +694,8 @@ left: -2px;
 width: 100%;
 z-index: 1;
 width: auto;
-background-color: #fff;
-/* background: #fff;
+background-color: var( --white);
+/* background: var( --white);
 box-shadow: 0 0 8px #bbb; */
 }
 .onhovertabletext-200 {
@@ -703,8 +714,8 @@ left: -2px;
 width: 100%;
 z-index: 1;
 width: auto;
-background-color: #fff;
-/* background: #fff;
+background-color: var( --white);
+/* background: var( --white);
 box-shadow: 0 0 8px #bbb; */
 }
 .onhovertabletext-100 {
@@ -722,7 +733,7 @@ display: inline-block;
 left: -2px;
 z-index: 1;
 width: auto !important;
-background-color: #fff;
+background-color: var( --white);
 }
 .brd-top-gray{
   border-top:1px solid #ddd;
