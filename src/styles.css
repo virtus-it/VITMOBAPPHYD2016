@@ -668,7 +668,13 @@ display: inline-block;
 overflow: hidden;
 display: inline-block;
 }
-
+.onhovertooltip-300 {
+  width:300px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
 .onhovertext150:hover {
   padding: 0px 5px 0px;
   overflow: visible;

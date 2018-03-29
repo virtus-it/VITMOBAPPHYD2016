@@ -7,6 +7,9 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
+  .table{
+    margin-bottom: 0px !important;
+  }
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;
