@@ -34,6 +34,7 @@ export class AddEditProductDailogComponent implements OnInit {
   p5FC = new FormControl('',[Validators.required]);
   p6FC = new FormControl('',[Validators.required]);
   p7FC = new FormControl('',[Validators.required]);
+  superDealer = true;
 
   productCategoryList = [];
   productTypeList = [];
@@ -202,8 +203,9 @@ export class AddEditProductDailogComponent implements OnInit {
  
    }
   ngOnInit() {
-    //console.log(this.Details);
+    console.log(this.Details);
     this.getProductCategory();
+    this.superDealer = this.authenticationService.getSupperDelear();
 
 
   }

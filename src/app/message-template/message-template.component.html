@@ -39,12 +39,17 @@
               <small>Order In-process: Your order is still in process. We are yet to receive a confirmation from the supplier near your delivery location. You might receive a call from our customer care centre from mobile: 9863636314/15 .</small>
             </li>
             <li class="nolist-style  messages-style">
-                <div class="row">
-                  <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
-                    <small>&nbsp; Out for Delivery:</small></div>
+                <div class="row"  (click)="copyDiv($event)" >  
+                  
+                    <!-- event.currentTarget.children["0"].innerText -->
+                  
+                  <!-- .target.childNodes["0"].wholeText -->
+                  <!-- <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i> 
+                    <small>&nbsp; Out for Delivery:</small></div>  -->
                   <!-- <div class="col right"> <small class="gray9"> Date </small></div> -->
-                </div>
-                <small>Out for Delivery : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, will be delivered soon by the supplier. To save your time, please keep the empty bottle/s ready for return. </small>
+                
+                <small >Out for Delivery : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, will be delivered soon by the supplier. To save your time, please keep the empty bottle/s ready for return. </small>
+              </div>
               </li>
               <li class="nolist-style  messages-style">
                   <div class="row">

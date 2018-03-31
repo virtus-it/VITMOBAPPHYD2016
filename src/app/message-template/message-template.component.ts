@@ -11,7 +11,12 @@ export class MessageTemplateComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<MessageTemplateComponent> ,  @Inject(MD_DIALOG_DATA) public Details: any) { }
 
-
+  divText:any = "";
+  
+copyDiv(event){
+console.log(event.target.innerText);
+this.divText = JSON.stringify(event.target.innerText);
+  }
 
   onCloseModal(){
     this.thisDialogRef.close('cancel');

@@ -69,9 +69,11 @@ export class OrderLandingComponent implements OnInit {
   orderedTime:any="";
   currentTime:any= "";
   deliveryTime:any="";
+  cantFilterMessage:any = '';
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
+  cantFilter = false;
   // forwardAddress:any = ""
   // allAddress:any = this.allOrders.orderby_address;
   completeClickMore = false;
@@ -218,6 +220,38 @@ export class OrderLandingComponent implements OnInit {
 
     });
 
+  }
+
+  filterValidation(){
+    if(this.filterInput.order.searchtype == ""){
+      this.cantFilter = true;
+    }
+    if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+
+  
+    else{
+      this.cantFilter = false;
+    }
   }
   showCoverageDetails(orderDetails) {
     let distributorId ="";
@@ -560,7 +594,9 @@ export class OrderLandingComponent implements OnInit {
   //test code for pagination ends here
 
   searchOrderList() {
+   
     this.deliverySlot();
+ 
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
     }
@@ -594,6 +630,18 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
+
+    if(this.cantFilter == true){
+      this.cantFilterMessage="Please Select to filter";
+      this.showFilterDailog =true;
+    }
+    else{
+      this.cantFilter == false;
+      this.cantFilterMessage = '';
+    }
+
+    this.filterValidation();
+
     if (this.tabPanelView == 'forward') {
       this.filterInput.order.status = 'forwardedorders';
     }
@@ -601,8 +649,10 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.status = 'all';
     }
     console.log(this.filterInput);
+    if(this.cantFilter == false){
     this.getFilteredOrders(true);
-this.showFilterDailog =false;
+    }
+// this.showFilterDailog =false;
 
   }
   getFilteredOrders(firstcall) {
@@ -803,6 +853,8 @@ this.orderLandingService.getOrdersByfilter(input)
     this.filterRecords = false;
     this.quickFilterView = "";
     this.tabPanelView = 'forward';
+    this.cantFilterMessage = "";
+
     // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };

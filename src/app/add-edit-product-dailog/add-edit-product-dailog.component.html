@@ -11,7 +11,7 @@
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row ">
-          <div class="col-md-4 col-sm-4 col-lg-4 ">
+          <div class="col-md-4 col-sm-4 col-lg-4 " *ngIf = "superDealer">
 
           <md-select placeholder="Select Category" name="type" class="full-width left" [(ngModel)]="productDetails.categoryDetails" >
               <md-option *ngFor="let type of productCategoryList" [value]="type" >
@@ -54,7 +54,7 @@
 
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Product Name" [formControl]="p2FC"  [(ngModel)]="productDetails.productName" name="productName" required > 
-            <md-error *ngIf="p2FC.hasError('required')">
+            <md-error *ngIf="p2FC.hasError('required')"  >
               Product Name is <strong>required</strong>
             </md-error>
           
