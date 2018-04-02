@@ -98,6 +98,7 @@ import { DistributorOrderListComponent } from './distributor-order-list/distribu
 import { MapStockpointComponent } from './map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.component';
 import { TimeChartComponent } from './time-chart/time-chart.component';
+import { MessageTemplateComponent } from './message-template/message-template.component';
 
 
 
@@ -176,6 +177,7 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
         MapStockpointComponent,
         ViewStockpointsComponent,
         TimeChartComponent,
+        MessageTemplateComponent,
 
      
         
@@ -300,6 +302,7 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
          MapStockpointComponent,
          ViewStockpointsComponent,
          TimeChartComponent,
+         MessageTemplateComponent
     
       
 

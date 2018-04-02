@@ -47,13 +47,13 @@
                   </label> -->
                   <div class="row"> 
                     
-                    <div class="col-4">
+                    <div class="col-4" *ngIf=" !followUpStatus || followUpStatus=='open'">
                         <md-select  placeholder="Select template &nbsp;&nbsp;" [(ngModel)]="followUpInput.User.remarks"  name="template" class="full-width left oneline" >
                           <md-option  *ngFor="let template of followUpTemplate" [value]="template.template_desc">{{template.template_name}}</md-option>
                         </md-select>
                     </div>
       
-                  <div class="col-4">  
+                  <div class="col-4" *ngIf=" !followUpStatus || followUpStatus=='open'">  
                     <md-form-field class="inline">
                         <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followupDate">
                         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -66,7 +66,7 @@
                       <!-- <small><button class="btn warning" md-raised-button (clsick)="startFollowUp()">Start FollowUp</button></small> -->
                     </div>
                   </div>
-                  <div class="row"> 
+                  <div class="row" *ngIf=" !followUpStatus || followUpStatus=='open'"> 
                     <div class="col-10">             
                         <md-form-field class="example-full-width inline ">
                           <textarea  maxlength="250" class="form-control" mdInput placeholder="Remarks" name="body" [(ngModel)]="followUpInput.User.remarks"></textarea>
@@ -80,7 +80,7 @@
        </div>
     </form>
   </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20">
+  <div class="row float-right pdright-30 mgbottom-20" *ngIf=" !followUpStatus || followUpStatus=='open'">
     <md-dialog-actions align="end">
         <button type="submit" class="btn-primary" md-raised-button (click)="createFollowUp()">SAVE</button>      
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;

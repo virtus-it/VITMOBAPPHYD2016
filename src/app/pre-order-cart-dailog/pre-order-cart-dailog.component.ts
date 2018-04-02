@@ -54,6 +54,10 @@ export class PreOrderCartDailogComponent implements OnInit {
     todaysDate:any = "";
     message1:any="";
 
+  idValue= '';
+  value = '';
+  nextIdValue = '';
+
 
 
     
@@ -478,7 +482,55 @@ else{
    }
 
   }
+
+
+  availableTimeSlot(){
+    if(this.hours <= 6){
+      this.createPreOrderInput.timeslot = '7AM-8AM'
+    }
+    else if(this.hours <= 7){
+      this.createPreOrderInput.timeslot = "8AM-9AM"; 
+    }
+    else if(this.hours <= 8){
+      this.createPreOrderInput.timeslot = "9AM-10AM";
+    } 
+    else if(this.hours <= 9){
+      this.createPreOrderInput.timeslot = "10AM-11AM";
+    }
+    else if(this.hours <= 10){
+      this.createPreOrderInput.timeslot = "11AM-12PM";
+    }
+    else if(this.hours <= 11){
+      this.createPreOrderInput.timeslot = "12PM-1PM";
+    }
+    else if(this.hours <= 12){
+      this.createPreOrderInput.timeslot = "1PM-2PM";
+    }
+    else if(this.hours <= 13){
+      this.createPreOrderInput.timeslot = "2PM-3PM";
+    }
+    else if(this.hours <= 14){
+      this.createPreOrderInput.timeslot = "3PM-4PM";
+    }
+    else if(this.hours <= 15){
+      this.createPreOrderInput.timeslot = "4PM-5PM";
+    }
+    else if(this.hours <= 16){
+      this.createPreOrderInput.timeslot = "5PM-6PM";
+    }
+    else if(this.hours <= 17){
+      this.createPreOrderInput.timeslot = "6PM-7PM";
+    }
+    else if(this.hours <= 18){
+      this.createPreOrderInput.timeslot = "7PM-8PM";
+    }
+    else if(this.hours <= 19){
+      this.createPreOrderInput.timeslot = "8PM-9PM";
+    }
+
+  }
    
+
 
   //   _.each(this.productList, function(i,j){
   //   let details:any =i;
@@ -497,12 +549,14 @@ else{
 
 
   ngOnInit() {
+    
     this.getDistributors();
     // this.getProducts();
     
     this.autoTimeSlotforHour();
     this.getProductsList();
     console.log(this.Details);
+    this.availableTimeSlot();
   }
 
 }

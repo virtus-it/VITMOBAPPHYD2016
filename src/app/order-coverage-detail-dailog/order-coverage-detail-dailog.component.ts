@@ -33,7 +33,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     dialogRef: any = '';
     order = { orderId: "" };
     gpsMessage: string = "";
-    filterInputkmvalue = { kmvalue: "" };
+    filterInputkmvalue = { kmvalue: "0.03" };
     categoryList: any = [];
     reasonOnHold:any;
     dropdownSettings = {

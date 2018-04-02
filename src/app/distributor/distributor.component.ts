@@ -231,7 +231,7 @@ export class DistributorComponent implements OnInit {
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-            if(result.result == 'success'){
+            if(result == 'success'){
                 
             }
 
