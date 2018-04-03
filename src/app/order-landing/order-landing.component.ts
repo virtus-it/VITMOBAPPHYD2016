@@ -15,6 +15,7 @@ import { DistributorListDialogComponent } from '../distributor-list-dialog/distr
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
+import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -1151,6 +1152,42 @@ this.orderLandingService.getOrdersByfilter(input)
             });
           }
           }
+          getMessage() {
+            this.orderLandingService
+                .getMessages()
+                .subscribe((message: string) => {
+                    console.log(message);
+                    var praseMsg = JSON.parse(message);
+                   this.opensocketMessage(praseMsg);
+                });
+    
+        }
+        getMessagesfromWebsite() {
+          this.orderLandingService
+              .getMessagesfromWebsite()
+              .subscribe((message: string) => {
+                  console.log(message);
+                  var praseMsg = JSON.parse(message);
+                 this.opensocketMessage(praseMsg);
+              });
+  
+      }
+        opensocketMessage(data){
+          let dialogRef= this.dialog.open(SocketmessagesComponent, {
+            
+                  width: '500px',
+                  data: data
+                });
+                dialogRef.afterClosed().subscribe(result => {
+                  
+                  if (result == 'success') {
+                   
+            
+                  }
+            
+                });
+
+        }
   ngOnInit() {
     // this.getDistributorsOrders();
     this.getPolygonDistributors();
@@ -1158,7 +1195,8 @@ this.orderLandingService.getOrdersByfilter(input)
     this.getAllOrderDetails(true);
     this.getDistributors();
     this.getSupplier();
-
+    this.getMessage();
+    this.getMessagesfromWebsite();
    
     this.superDealer = this.authenticationService.getSupperDelear();
     if(!this.superDealer){

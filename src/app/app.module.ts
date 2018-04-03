@@ -99,6 +99,7 @@ import { MapStockpointComponent } from './map-stockpoint/map-stockpoint.componen
 import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.component';
 import { TimeChartComponent } from './time-chart/time-chart.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
+import { SocketmessagesComponent } from './socketmessages/socketmessages.component';
 
 
 
@@ -178,6 +179,7 @@ import { MessageTemplateComponent } from './message-template/message-template.co
         ViewStockpointsComponent,
         TimeChartComponent,
         MessageTemplateComponent,
+        SocketmessagesComponent,
 
      
         
@@ -244,7 +246,8 @@ import { MessageTemplateComponent } from './message-template/message-template.co
         ProductsService,
         PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' }  // 
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' },
+        { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }   // 
     ],
     entryComponents: [
         MapDialogComponent, 
@@ -302,8 +305,8 @@ import { MessageTemplateComponent } from './message-template/message-template.co
          MapStockpointComponent,
          ViewStockpointsComponent,
          TimeChartComponent,
-         MessageTemplateComponent
-    
+         MessageTemplateComponent,
+         SocketmessagesComponent
       
 
 
