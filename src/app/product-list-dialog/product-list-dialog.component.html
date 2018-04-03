@@ -24,28 +24,28 @@
           <table class="table table-hover table-fixedheader">
       <thead>
         <tr>
-          <th width="10%">Product Name</th>
-          <th width="10%">Product Type</th>
-          <th width="10%">Priority</th>
-          <th width="10%">Cost</th>   
-          <th width="10%">Exp Del</th>
-          <th width="10%">Serv Chgs</th>      
-          <th width="10%">Min Qty</th>
-          <th width="10%">Stock</th>
+          <th width="18%">Product Name</th>
+          <th width="13%">Product Type</th>
+          <th width="8%">Priority</th>
+          <th width="8%" title="Minimum Quantity">Min Qty</th>          
+          <th width="7%">Cost</th>   
+          <th width="8%" title="Expres Delivery">Exp Del</th>
+          <th width="10%" title="Service Charge">Serv Chgs</th>      
+          <th width="8%">Stock</th>
           <th width="10%">Status</th>
-          <th width="10%">Edit</th>
+          <th width="10%">Action</th>
            </tr>
       </thead>
       <tbody>
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-          <td width="10%" class="left capital">{{prod.brandname}}</td>
-          <td width="10%" class="left capital"> {{prod.ptype}}</td>
-          <td width="10%" class="left capital">{{prod.priority}}</td>
-          <td width="10%" class="left capital">{{prod.pcost}}</td>      
-          <td width="10%" class="left capital">{{prod.expressdeliverycharges}}</td> 
+          <td width="18%" class="left capital">{{prod.brandname}}</td>
+          <td width="13%" class="left capital"> {{prod.ptype}}</td>
+          <td width="8%" class="left capital">{{prod.priority}}</td>
+          <td width="8%" class="left capital">{{prod.minorderqty}}</td>          
+          <td width="7%" class="left capital">{{prod.pcost}}</td>      
+          <td width="8%" class="left capital">{{prod.expressdeliverycharges}}</td> 
           <td width="10%" class="left capital">{{prod.servicecharge}}</td>    
-          <td width="10%" class="left capital">{{prod.minorderqty}}</td>
-          <td width="10%" class="left capital">{{prod.avaliable_stock}}</td>
+          <td width="8%" class="left capital">{{prod.avaliable_stock}}</td>
           <td width="10%" class="left capital">{{prod.stockstatus}}</td>
           <td width="10%" class="fa fa-edit logo-color cursor" (click)="editProduct(prod)">
             <i class="fa fa-plus" title="Add stock" (click)="addStock(prod)"></i>
