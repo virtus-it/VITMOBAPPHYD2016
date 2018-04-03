@@ -62,7 +62,7 @@
       </div> -->
       <div class="col">
           <h5 class="left capital"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Detail.pname}}</span> - <span class="gray8">{{Detail.ptype}}</span></h5>
-        <table class="table table-hover table-fixedheader">
+        <table class="table table-hover table-striped table-fixedheader">
           <thead>
             <tr>
               <th width="15%">Cost</th>
@@ -74,7 +74,7 @@
           <tbody>
             <tr *ngFor="let stock of StockList">
 
-              <td width="15%">{{stock.pcost}}</td>`
+              <td width="15%">{{stock.pcost}}</td>
               <td width="15%" >{{stock.stock}}</td>
               <td width="30%">{{stock.returnemptycans}}</td>
               <td width="40%">{{stock.modifieddate | utcDate}}</td>

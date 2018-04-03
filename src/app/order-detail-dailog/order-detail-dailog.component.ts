@@ -74,7 +74,7 @@ onHoldStatus(orderData) {
 }
 editStatus(orderData) {
     let dialogRefeditStatus = this.dialog.open(EditOrderStatusComponent, {
-        width: '750px',
+        width: '550px',
         data: orderData
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {

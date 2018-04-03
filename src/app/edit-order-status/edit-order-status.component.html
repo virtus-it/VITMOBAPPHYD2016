@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class=" col-md-4  col-sm-4  col-lg-4">
-    <i class="fa fa-edit"></i> Edit Customer
+    <i class="fa fa-edit"></i> Edit Status
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong >
@@ -11,82 +11,74 @@
 <md-dialog-content layout="column">
   <form class="example-form" >
     <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="row">
-        <ul class="nolist-style  ">
-          <li class="">
+      <div class="row form-group">
+          <div class="col-4 form-group">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="delivered">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Delivered</span>
             </label>
-          </li>
-          <li class="">
+          </div>
+          <div class="col-4 form-group">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="doorlock">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description"> Door Locked</span>
             </label>
-          </li>
-          <li class="">
+          </div>
+          <div class="col-4 form-group">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input "  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="rejected">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description"> Rejected</span>
             </label>
-          </li>
-          <li class="">
+          </div>
+          <div class="col-4 form-group">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="not_reachable">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description"> Not Reachable</span>
             </label>
-          </li>
-          <li class="">
+          </div>
+          <div class="col-4 form-group">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="cannot_deliver">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Can't Deliver</span>
             </label>
-          </li>
-        </ul>
-
+          </div>
       </div>
-      <div class="row " *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-        <div class="col-md-6">
-          <div class="row ">
-            <label class="col-md-5 pdtop-10 center">Quantity </label>
-            <label class=" col-md-1 pdtop-10">:</label>
-            <span class="col-md-5">
+      <div class="row pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+        <div class="col-3">
+
               <md-form-field class="wd-100pc">
                 <input class="form-control" mdInput placeholder="Quantity" name="Quantity"  [(ngModel)]="editStatusInput.order.delivered_qty" (ngModelChange)="changeAmount()">
 
               </md-form-field>
-            </span>
-          </div>
         </div>
-        <div class="col-md-6">
-          <div class="row ">
-            <label class="col-md-5  pdtop-10 center">Return Cans </label>
-            <label class=" col-md-1 pdtop-10">:</label>
-            <label class="col-md-5">
+        <div class="col-3">
                 <md-form-field class="wd-100pc">
                     <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans">
-
               </md-form-field>
+          </div>
+          <div class="col align-self-center">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+              <input type="checkbox" id="rem"  class="custom-control-input" name="isConfirmed" [(ngModel)]="isConfirmed">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Confirm Payment</span>
             </label>
           </div>
-        </div>
       </div>
-      <div class="container-fluid border-top pdtop-10" >
-        <div class="row " *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-          <div class="col-md-6  ">
+      <div class="border-top pdtop-10" >
+        <div class="row form-group" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+          <div class="col-2">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input" name="type" value="cash" [(ngModel)]="editStatusInput.order.paymentype">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">COD</span>
             </label>
           </div>
-          <div class="col-md-6">
+          <div class="col">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input" name="type" value="credit" [(ngModel)]="editStatusInput.order.paymentype">
               <span class="custom-control-indicator"></span>
@@ -95,43 +87,26 @@
           </div>
 
         </div>
-        <div class="row">
-          <div class="col-md-6 align-self-center">
-            <div class="row ">
-
-              <label class=" col-md-5 ">Due Amount</label>
-              <label class=" col-md-1">:</label>
-              <span class=" col-md-5 ">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</span>
-            </div>
+        <div class="row pdtop-5">
+          <div class="col-3">
+              <small class=" ">Due Amount</small><br>
+              <b class=" ">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+           
           </div>
-          <div class="" >
-            <label class="" >Advance Amount: </label>
-            <md-form-field class="">
-            <input class="" mdInput placeholder="Amount" name='advamt'  [(ngModel)]="editStatusInput.order.advanceAmount" > 
+          <div class="col-4 pdtop-5" >
+            <md-form-field class="wd-100pc">
+            <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.advanceAmount" > 
           </md-form-field>
           </div>
-          <div class="col-md-6" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+          <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div  *ngIf="editStatusInput.order.paymentype == 'cash'">
-            <div class="row pdtop-15">
-              <label class=" col-md-5 pdtop-10">Amount</label>
-              <label class=" col-md-1 pdtop-10">:</label>
               <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->
-              <span class=" col-md-5">
                 <md-form-field class="wd-100pc">
-                  <input class="form-control" mdInput placeholder="Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  >
+                  <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  >
                 </md-form-field>
-              </span>
             </div>
           </div>
         </div>
-        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-            <input type="checkbox" id="rem"  class="custom-control-input" name="isConfirmed" [(ngModel)]="isConfirmed">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">Confirm Payment</span>
-          </label>
-        </div>
-     
-    
     </div>
      </div>
   </form>
