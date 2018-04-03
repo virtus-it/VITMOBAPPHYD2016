@@ -18,6 +18,7 @@ console.log(event.target.innerText);
 this.divText = JSON.stringify(event.target.innerText);
   }
 
+
   onCloseModal(){
     this.thisDialogRef.close('cancel');
   }
