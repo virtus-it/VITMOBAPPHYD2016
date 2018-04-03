@@ -1,0 +1,10 @@
+.schedule-style  {
+    border: 1px solid #ccc;
+    padding: 10px 5px 10px 15px;
+    margin-top: 20px;
+}
+hr{
+    margin-top: 0px;
+    background: #ccc;
+    margin-bottom:10px;
+}
