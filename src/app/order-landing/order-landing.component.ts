@@ -18,6 +18,7 @@ import { SupplierOrderListComponent } from '../supplier-order-list/supplier-orde
 import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -41,7 +42,7 @@ export class OrderLandingComponent implements OnInit {
 
     
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router) {
 
     
     this.DistributorCtrl = new FormControl();
@@ -1158,7 +1159,11 @@ this.orderLandingService.getOrdersByfilter(input)
                 .subscribe((message: string) => {
                     console.log(message);
                     var praseMsg = JSON.parse(message);
-                   this.opensocketMessage(praseMsg);
+                    let currentUrl = this.router.url.split('/');
+                    if(currentUrl[1] != 'preorder'){
+                      this.opensocketMessage(praseMsg);
+  
+                    }
                 });
     
         }
@@ -1168,7 +1173,12 @@ this.orderLandingService.getOrdersByfilter(input)
               .subscribe((message: string) => {
                   console.log(message);
                   var praseMsg = JSON.parse(message);
-                 this.opensocketMessage(praseMsg);
+                  let currentUrl = this.router.url.split('/');
+                  if(currentUrl[1] != 'preorder'){
+                    this.opensocketMessage(praseMsg);
+
+                  }
+                 
               });
   
       }
@@ -1197,6 +1207,7 @@ this.orderLandingService.getOrdersByfilter(input)
     this.getSupplier();
     this.getMessage();
     this.getMessagesfromWebsite();
+    
    
     this.superDealer = this.authenticationService.getSupperDelear();
     if(!this.superDealer){
