@@ -21,6 +21,7 @@ noRecord=false;
         "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
       }
     };
+    console.log(input);
     this.productService.getStockHistroy(input)
       .subscribe(
       output => this.getStockHistroyResult(output),

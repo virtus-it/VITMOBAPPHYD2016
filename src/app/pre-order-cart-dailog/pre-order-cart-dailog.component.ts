@@ -45,6 +45,7 @@ export class PreOrderCartDailogComponent implements OnInit {
    hours:any="";
    day:any="";
    nextDay:any="";
+   amount:any = 0;
    nextDayValue:any ="";
    //input
    createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}, }
@@ -78,7 +79,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
-    "product_type":this.createPreOrderInput.productDetails.ptype, "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges),"cart_style":"new",
+    "product_type":this.createPreOrderInput.productDetails.ptype, "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
     "delivery_address":this.Details.address, "excepted_time":"" ,"ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
     }
    
@@ -260,7 +261,7 @@ getProductsListResult(result) {
             });
       
             if (findproduct) {
-              details.quantity = "";
+              details.quantity ="";
               details.expressdelivery=false;
               findproduct.data.push(details);
             }
@@ -311,8 +312,8 @@ createPreOrder(){
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
   "product_quantity":this.createPreOrderInput.productDetails.ptype,
-  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
-  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
+  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,
+  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "delivery_locality":this.Details.locality, "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
   "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
@@ -401,6 +402,17 @@ autoTimeSlotforHour(){
   this.createPreOrderInput.date= new Date();
 }
 
+expressDeliveryCharge(details,  isChecked: boolean){
+ 
+  if(isChecked == true){
+    this.amount = details.expressdeliverycharges*details.quantity; 
+  }
+  else{
+    this.amount = 0;
+  }
+
+}
+
 dateChanges(event){
   let eventChanges = moment(event).format('DD-MM-YYYY');
 
@@ -452,8 +464,13 @@ else{
     })
   }
 )
+
+if(this.createPreOrderInput.productDetails.default_qty){
     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
-    
+}
+else{
+  this.createPreOrderInput.productDetails.quantity = 1;
+}
   }
 
   validate(){
@@ -552,7 +569,7 @@ else{
     
     this.getDistributors();
     // this.getProducts();
-    
+    // this.expressDeliveryCharge(true);
     this.autoTimeSlotforHour();
     this.getProductsList();
     console.log(this.Details);

@@ -38,9 +38,13 @@
             <div class="col-4 align-self-center">
               <h5>
                   <small>Address</small><br>
-              <b class="pdleft-5 onhovertooltip-300" title="{{this.orderDetail.user_address}}" >{{this.orderDetail.user_address}}</b>
+              <!-- <b class="pdleft-5 onhovertooltip-300" title="{{this.orderDetail.user_address}}" >{{this.orderDetail.user_address}}</b> -->
+              <b class="pdleft-5 onhovertooltip-300" *ngIf="this.orderDetail.type != 'customersPage'">{{this.orderDetail.orderby_address}}</b>
               <b class="pdleft-5 onhovertooltip-300"  title="{{this.orderDetail.data.address}}" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.address}}</b>
             </h5>
+            </div>
+            <div class="" >
+              <i class="fa fa-edit logo-color" title="edit customer" (click)="editCustomer(orderDetail)"></i>
             </div>
             <div class="col-2 ">
               <md-form-field class="example-full-width">

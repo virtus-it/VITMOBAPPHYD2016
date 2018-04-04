@@ -95,7 +95,10 @@ messageTemplate(data){
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
-        if (result == 'success') {
+        if (result != '') {
+
+            this.messageInput.order.reason = result; 
+
         }
 
     });

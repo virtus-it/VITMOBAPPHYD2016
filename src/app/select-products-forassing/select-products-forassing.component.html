@@ -27,7 +27,7 @@
   </thead>
   <tbody>
     <div *ngIf="productMessage && this.orderDetail.type !== 'coveragePage'">
-      <small>Customer Ordered: {{orderDetail.orderDetails.brandName}} with Order id : {{orderDetail.orderDetails.order_id}} <br> Selected Distributor does'nt have same product. Select any one of below</small>
+      <small>Customer Ordered: {{orderDetail.orderDetails.brandname}} with Order id : {{orderDetail.orderDetails.order_id}} <br> Selected Distributor does'nt have same product. Select any one of below</small>
     </div>
     
     <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >

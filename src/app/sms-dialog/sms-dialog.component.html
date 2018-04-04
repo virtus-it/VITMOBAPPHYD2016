@@ -132,6 +132,15 @@
             </div>
             <div class=" " *ngIf="smsInput.smsType == 'notification'">
               <div class="row">
+                <div class="col-sm-3  col-md-3  col-lg-3 ">
+                  <md-form-field>
+                  <input class="form-control" mdInput placeholder="Template name" name="name" [(ngModel)]="smsInput.tempname">
+                </md-form-field>
+                <br>
+                <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
+                <input type="radio" name="template" class=""  value="overWrite" [(ngModel)]="smsInput.radioOverWrite" >Overwrite
+                <input type="radio" name="template" class=""  value="dontsave" [(ngModel)]="smsInput.radioDontsave" >Dont save
+                </div>
                 <div class="col-sm-3  col-md-3  col-lg-3">
                   <md-form-field class="example-full-width inline ">
                     <input class="form-control" mdInput placeholder="Title" name="name" [(ngModel)]="smsInput.title">

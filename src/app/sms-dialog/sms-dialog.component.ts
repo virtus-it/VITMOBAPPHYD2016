@@ -6,6 +6,7 @@ import { SmsServiceService } from '../sms/sms-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { Observable } from 'rxjs/Observable';
+import { FollowUpService } from '../follow-up/follow-up.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -16,19 +17,30 @@ import * as moment from 'moment';
   styleUrls: ['./sms-dialog.component.css']
 })
 export class SmsDialogComponent implements OnInit {
+  templateCtrl: FormControl;
+  filteredTemplates: Observable<any[]>;
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
-  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private authenticationService: AuthenticationService) {
+  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService,  private authenticationService: AuthenticationService) {
+
+    
 
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
-    
       .startWith(null)
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
+
+
+      this.templateCtrl = new FormControl();
+      this.filteredTemplates = this.templateCtrl.valueChanges
+        .startWith(null)
+        .map(dist => dist ? this.findTemplate() : this.template.slice());
+
+
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
-  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];
@@ -40,6 +52,7 @@ export class SmsDialogComponent implements OnInit {
   buttonActionCount:number = 0;
   optionCount:number = 0;
   silderCount:number = 0;
+  template:any = "";
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -78,6 +91,10 @@ export class SmsDialogComponent implements OnInit {
     }
     return finalDistributors;
   }
+
+  findTemplate(){
+
+  }
   onChangeType() {
     this.orderinput.fromDate = null;
     this.orderinput.toDate = null
@@ -108,6 +125,7 @@ export class SmsDialogComponent implements OnInit {
     else{
       input.User.smstype = this.smsInput.smsType
     }
+    console.log(input);
     this.smsService.getMobileNumbers(input)
       .subscribe(
       output => this.getMobileNumberResult(output),
@@ -178,7 +196,7 @@ export class SmsDialogComponent implements OnInit {
         "name": this.smsInput.name,
         "smstype": this.smsInput.smsType,
         "user_type": this.authenticationService.userType(),
-        "TransType": "createsms",
+        "transtype": "createsms",
         "type": this.smsInput.type,
         "showcomment":this.smsInput.showcomment,
         "loginid": this.authenticationService.loggedInUserId(),
@@ -190,15 +208,20 @@ export class SmsDialogComponent implements OnInit {
         "buttons":[],
         "buttonactions":[],
         "option": [],
-        "sliderurl":this.smsInput.sliderurl
+        "sliderurl":this.smsInput.sliderurl,
+        "tempname": this.smsInput.tempname
       }
     }
+   
+
     _.each(this.smsInput.buttons, function (i, j) {
       let details: any = i;
       
       createSmsInput.User.buttons.push(details.name);
       var action =  {text:details.name, actiontype: details.actiontype};
+      if(action.text.length > 0 && action.actiontype.length > 0 ){
       createSmsInput.User.buttonactions.push(action);
+      }
 
     });
     _.each(this.smsInput.option, function (i, j) {
@@ -239,11 +262,58 @@ export class SmsDialogComponent implements OnInit {
       error => {
         //console.log("error in distrbutors");
       });
+      if(this.smsInput.radiosave == "save"){
+        this.saveTemplate(createSmsInput);
+      }
+      else if(this.smsInput.radioOverWrite == "overWrite"){
+        // this.templateOverwrite(createSmsInput);
+      }
+      
   }
   saveMobileSmsResult(result) {
     //console.log(result);
     this.thisDialogRef.close(result);
   }
+
+
+  saveTemplate(data){
+    let input = Object.assign({}, data)
+   input.User.transtype = "notification";
+    console.log(input);
+    this.followupService.followUpTemplate(input)
+    .subscribe(
+      output => this.saveTemplateResult(output),
+      error => {
+      });
+  }
+  saveTemplateResult(result){
+    if(result.result == 'success'){
+
+    }
+  }
+
+  // templateOverwrite(data){
+  //   let input = Object.assign({}, data)
+  //   input.transtype = "notification";
+  //   console.log(input);
+  //   // this.followupService.followUpTemplate(input)
+  //   // .subscribe(
+  //   //   output => this.updateTemplateResult(output),
+  //   //   error => {
+  //   //   });
+  // }
+  // updateTemplate(result){
+  //   if(result.result == 'success'){
+
+  //   }
+
+  // }
+
+  // getAllTemplates(){
+
+  // }
+
+
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
     //console.log(input);

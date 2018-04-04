@@ -90,11 +90,7 @@
               </div>
   
               <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'status'">
-                <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                  name="selectedItem"></angular2-multiselect>
-              </div>
-              <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'status'">
-                <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                <angular2-multiselect class="" [data]="statusListComplete" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                   name="selectedItem"></angular2-multiselect>
               </div>
 
@@ -148,7 +144,8 @@
                   </a>
                   &nbsp;&nbsp;
           <a class="align-self-center">
-            <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="clearFilter()"></i>
+            <i aria-hidden="true" class="fa fa-cog logo-color" title="Reset" (click)="clearFilter()"></i> 
+            <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()"></i>
           </a>&nbsp;&nbsp;&nbsp;
   
           <a class="align-self-center">

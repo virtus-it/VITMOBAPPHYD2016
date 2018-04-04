@@ -745,7 +745,7 @@ export class OrderLandingComponent implements OnInit {
   }
 
 
-  globalSearch(){
+  globalSearch(firstcall){
     this.tabPanelView = 'complete';
     this.deliverySlot();
     if (this.globalFilterInput.order.searchtype == 'name') {
@@ -788,19 +788,7 @@ export class OrderLandingComponent implements OnInit {
       this.globalFilterInput.order.status = 'complete';
     }
     console.log(this.globalFilterInput);
-    this.globalFilteredOrders(true);
-// this.showFilterDailog =false;
-// let input = this.globalFilterInput;
-// this.orderLandingService.getOrdersByfilter(input)
-//       .subscribe(
-//       output => this.getGlobalFilteredOrdersResult(output),
-//       error => {
-//         //console.log("falied");
-//         this.loaderService.display(false);
-//       });
 
-  }
-  globalFilteredOrders(firstcall){
     if(!firstcall){
          if(this.tabPanelView == 'complete'){
         let lastCompleteOrder:any = _.last(this.completeOrders);
@@ -863,6 +851,24 @@ this.orderLandingService.getOrdersByfilter(input)
     this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
+  }
+
+
+  refresh(){
+    this.showFilterDailog =false;
+    this.quickFilterView = "";
+    this.cantFilterMessage = "";
+    // this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    // this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+    if(this.tabPanelView == 'forward'){
+      this.getForwardOrderDetails(true);
+    }
+    else if(this.tabPanelView == 'allorder'){
+      this.getAllOrderDetails(true);
+    }
+    else if(this.tabPanelView == 'complete'){
+      this.globalSearch(true);
+    }    
   }
   ModifyOrderList(result) {
     _.each(result, function (i, j) {
@@ -935,7 +941,7 @@ this.orderLandingService.getOrdersByfilter(input)
         this.getAllOrderDetails(firstcall);
       }
       else if(tab == 'complete'){
-       this.globalFilteredOrders(firstcall);
+       this.globalSearch(firstcall);
       }
     }
 

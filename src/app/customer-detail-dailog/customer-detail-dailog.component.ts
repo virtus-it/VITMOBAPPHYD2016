@@ -7,6 +7,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { SelectProductsForassingComponent } from '../select-products-forassing/select-products-forassing.component';
 import { OrderLandingService } from '../order-landing/order-landing.service';
+import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -197,6 +198,20 @@ export class CustomerDetailDailogComponent implements OnInit {
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  editCustomer(orderDetail){
+    let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
+
+      width: '700px',
+      data: orderDetail
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+      if(result == 'success'){
+      //console.log(`Dialog closed: ${result}`);
+      }
+
+    });
   }
   ngOnInit() {
     console.log(this.orderDetail);
