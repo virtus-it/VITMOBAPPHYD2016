@@ -614,6 +614,9 @@ border:2px solid var( --logo-color);
  .danger{
    color: #d9534f;
  }
+ .white{
+   color: #ddd;
+ }
  .height-95pc{
     height: 95%;
   }
