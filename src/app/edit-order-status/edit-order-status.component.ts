@@ -11,7 +11,7 @@ import { LoaderService } from '../login/loader.service';
   templateUrl: './edit-order-status.component.html',
   styleUrls: ['./edit-order-status.component.css']
 })
-export class EditOrderStatusComponent implements OnInit { adv_amt
+export class EditOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": (this.orderDetail.delivered_quantity * this.orderDetail.prod_cost)  + (this.orderDetail.delivered_quantity * this.orderDetail.servicecharges) + (this.orderDetail.expressdeliverycharges) , "orderstatus": "delivered", 
