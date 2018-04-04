@@ -11,11 +11,11 @@ import { LoaderService } from '../login/loader.service';
   templateUrl: './edit-order-status.component.html',
   styleUrls: ['./edit-order-status.component.css']
 })
-export class EditOrderStatusComponent implements OnInit {
+export class EditOrderStatusComponent implements OnInit { adv_amt
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": (this.orderDetail.delivered_quantity * this.orderDetail.prod_cost)  + (this.orderDetail.delivered_quantity * this.orderDetail.servicecharges) + (this.orderDetail.expressdeliverycharges) , "orderstatus": "delivered", 
-  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype , "advanceAmount":this.orderDetail.customerpaymentdts.advance_amount } };
+  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype , "adv_amt":this.orderDetail.customerpaymentdts.advance_amount } };
 isConfirmed = true;
 
 
