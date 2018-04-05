@@ -118,7 +118,7 @@ getOrderDetailsById() {
 }
 getOrderDetailsByIdResult(result) {
     this.loaderService.display(false);
-    ////console.log(result);
+    console.log(result);
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
         if (this.dailogOrderDetails .status == "onhold") {

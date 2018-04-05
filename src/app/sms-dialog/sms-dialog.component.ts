@@ -67,7 +67,8 @@ export class SmsDialogComponent implements OnInit {
     { value: 'latestdownloadedunassociate', viewValue: 'Newly downloaded unassociate customers' },
     { value: 'allsuppliers', viewValue: 'All Suppliers' },
     { value: 'alldistributors', viewValue: 'All Distributors' },
-    { value: 'sms', viewValue: 'SMS' }
+    { value: 'sms', viewValue: 'SMS' },
+    {value: 'notregistered' , viewValue:'Not registered'}
 
     // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];

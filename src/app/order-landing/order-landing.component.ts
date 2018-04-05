@@ -1089,7 +1089,7 @@ this.orderLandingService.getOrdersByfilter(input)
   viewDistributorsOrders(data){
     let formatteddata: any = { "type": "distributorOrder", "data": data , distributorId: data.distributor.userid };
         let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
-          width: '60%',
+          width: '80%',
           data: formatteddata
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {

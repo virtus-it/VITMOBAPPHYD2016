@@ -176,7 +176,7 @@
             </td>
             
             <td>
-                <b class="">{{details.pcost }} </b>
+                <b class="">{{details.pcost}} </b>
               </td>
               <td>
                   <div class="">                   
@@ -190,7 +190,7 @@
             
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details,$event.target.checked)" >
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)" >
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
                 </label>
@@ -198,6 +198,8 @@
             <td class="">{{details.servicecharge}} </td>
             <td >
               <b class="" *ngIf="createPreOrderInput.productDetails">{{details.pcost*details.quantity + amount + details.servicecharge }} </b>
+              <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
+              <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
             </td>
    
           </tr>

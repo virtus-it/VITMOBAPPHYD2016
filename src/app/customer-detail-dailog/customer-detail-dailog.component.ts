@@ -138,7 +138,7 @@ export class CustomerDetailDailogComponent implements OnInit {
       });
 }
   getCustomerOrderResult(result) {
-    //console.log(result);
+    console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.customerOrderDetails = result.data;

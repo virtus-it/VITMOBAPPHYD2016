@@ -142,7 +142,7 @@ export class ProductsComponent implements OnInit {
 
   }
   getProductsResult(result) {
-    //console.log(result);
+    console.log(result);
     this.productList = [];
     if (result.result == 'success') {
       // let productCopy = [];

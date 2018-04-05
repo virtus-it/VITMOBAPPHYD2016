@@ -19,7 +19,7 @@
                 <md-option value="mobileno">Mobile Number</md-option>
               </md-select>
             </div>
-            <div *ngIf="filterType=='name'">
+            <div *ngIf="filterType=='name'"> 
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange)="searchDistributorByName()"
                   name="searchDistributorTerm">
@@ -33,7 +33,7 @@
               </md-form-field>
             </div>
             <div class="input-group pd-10  ">
-              <button md-raised-button color="primary" ng-click="clearSearch()">
+              <button md-raised-button color="primary" (click)="clearSearch()">
                 <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
               </button>
             </div>

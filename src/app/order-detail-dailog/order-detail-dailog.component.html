@@ -53,7 +53,11 @@
               <br>
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span class="gray9">Order Address</span><br> {{dailogOrderDetails.orderby_address}}</small>
+                <span class="gray9">Order Address</span><br>
+                <b>Landmark: </b>
+                <b>Flat Number:</b>
+                <br>
+                {{dailogOrderDetails.orderby_address}}</small>
                 <br>
 
             </div>
@@ -63,7 +67,11 @@
               <br>
               <small class="capital">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span class="gray9">Profile Address</span><br> {{customerAddressDetails}}
+              <span class="gray9">Profile Address</span><br>
+              <b>Landmark: </b>
+              <b>Flat Number: </b>
+              <br>
+              {{customerAddressDetails}}
             </small>
               <!-- <small>
                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
@@ -123,8 +131,10 @@
                 </tr>
               </thead>
               <tbody>
+                  <small  *ngIf = "customerProductDetails.length <= 0"> There are no available cans for this customer </small>  
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-                  <td width="55%">
+                  <td width="55%">    
+                               
                     <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>
                   <td width="30%">
@@ -132,8 +142,9 @@
                     <a *ngIf="canDetails.showIcon">  <small> <i class="fa fa-exclamation-triangle yellow" title="Customer given extra {{canDetails.avaliablecans}} can to you"></i></small> </a>
 
                   </td>
-
+                 
                 </tr>
+                
               </tbody>
 
             </table>
@@ -303,9 +314,10 @@
       <div class="col-md-4 form-group border-left">
         <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
         <ul class="scrollheight">
-          <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
+          <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2}" *ngFor="let msg of dailogOrderDetails.messages">
             <div class="row">
-              <div class="col">  <i class="fa fa-reply" aria-hidden="true"></i>
+              <div class="col" >  <i class="fa fa-reply" aria-hidden="true"></i>
+                <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
                 <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small></div>
               <div class="col right"> <small class="gray9">{{ msg.createddate | utcDate}} </small></div>
             </div>

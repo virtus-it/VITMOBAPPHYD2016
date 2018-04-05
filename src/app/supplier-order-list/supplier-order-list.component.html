@@ -27,12 +27,14 @@
             <th width="15%">Product </th>
             <th width="6%">Qty</th>
             <th width="7%">Cost</th>
+            <th width="7%">Amount</th>
             <th width="10%">Status</th>
             <th width="8%">Mode</th>
             <th *ngIf="Detail.type == 'supplierOrder'" width="15%"> Supplier</th>
             <!-- <th width="">Request Data</th> -->
             <th width="15%">Customer </th>
             <th width="12%"> Cust Mobile</th>
+
            
           </tr>
         </thead>
@@ -45,16 +47,24 @@
             <td width="9%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
             <td width="15%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
             <td width="6%"  class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-            <td width="7%"  class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>   
+            <td width="7%"  class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>  
+            <td width="7%"  class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                
             <td width="10%"  class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
             <td *ngIf="Detail.type == 'supplierOrder'"  class="left" class="cellpadding" width="15%">
             <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span>
           <span> - </span>
           </td>
-            <td width="15%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
-            <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td>
-           
+            <!-- <td width="15%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.firstname}}</td>
+            <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
+            <td width="15%" class="left cellpadding" scope="row">
+              <span *ngIf="Detail.type=='distributorOrder'">{{supplierOrder.orderby_firstname}}</span>
+              <span *ngIf="Detail.type=='supplierOrder'">{{supplierOrder.customer.firstname}}</span>
+            </td>
+            <td width="15%" class="left cellpadding" scope="row">
+<span *ngIf="Detail.type == 'distributorOrder'">{{supplierOrder.orderby_mobileno}}</span>     
+<span *ngIf="Detail.type=='supplierOrder'">{{supplierOrder.customer.mobileno}}</span>
+      </td>
            </tr>
         </tbody>
         <tfoot>

@@ -25,6 +25,10 @@ isConfirmed = true;
     if (!this.editStatusInput.order.received_amt) {
       this.editStatusInput.order.received_amt = 0;
     }
+    if(this.editStatusInput.order.return_cans === null || this.editStatusInput.order.return_cans == ''){
+      this.editStatusInput.order.return_cans = 0;
+    }
+
 
     if (this.editStatusInput.order.orderstatus !== "delivered") {
       this.editStatusInput.order.received_amt = 0;
@@ -73,6 +77,11 @@ if(result.result = '"success"'){
   this.thisDialogRef.close('success');
 }
   }
+
+
+  onInit(){
+    this.editStatusInput.order.return_cans = this.editStatusInput.order.delivered_qty;
+  }
   changeAmount() {
     this.editStatusInput.order.received_amt = this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost
   }
@@ -80,6 +89,7 @@ if(result.result = '"success"'){
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
+    this.onInit();
     //console.log(this.editStatusInput);
     console.log(this.orderDetail);
   }

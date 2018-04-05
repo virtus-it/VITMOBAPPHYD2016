@@ -61,7 +61,10 @@
         </div>
       </div> -->
       <div class="col">
-          <h5 class="left capital"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Detail.pname}}</span> - <span class="gray8">{{Detail.ptype}}</span></h5>
+          <h5 class="left capital" *ngIf= "Detail.type != 'distributorspage'"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Detail.pname}}</span> - <span class="gray8">{{Detail.ptype}}</span></h5>
+          <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'"><i class="fa fa-gift fs-20"></i>
+          <span class="gray6">{{Detail.data.pname}}</span> - <span class="gray8">{{Detail.data.ptype}}</span>
+        </h5>
         <table class="table table-hover table-striped table-fixedheader">
           <thead>
             <tr>
