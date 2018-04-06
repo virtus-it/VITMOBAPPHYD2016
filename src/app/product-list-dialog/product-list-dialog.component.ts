@@ -7,6 +7,7 @@ import { AddEditProductDailogComponent } from '../add-edit-product-dailog/add-ed
 import { LoaderService } from '../login/loader.service';
 import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
+import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import { MdDialog } from '@angular/material';
 @Component({
   selector: 'app-product-list-dialog',
@@ -86,6 +87,21 @@ getProductsResult(output) {
   
   }
 
+  stockHistory(data , distributorDetails) {
+    let formattedData = {"type":"distributorspage", data:data , distributorId: distributorDetails.userid}
+    let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
+
+      width: '40%',
+      data: formattedData
+    });
+    dialogRefStrockHitory.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+
+
+    });
+
+  }
+
 
 
   addStock(data){
@@ -123,6 +139,7 @@ getProductsResult(output) {
 }
   ngOnInit() {
     this.getProducts(this.distributorDetails);
+    console.log(this.distributorDetails);
   }
 
 }

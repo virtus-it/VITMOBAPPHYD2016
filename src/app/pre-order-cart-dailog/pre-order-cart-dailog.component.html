@@ -155,9 +155,10 @@
             <th width="20%">Type</th>
             <th width="15%">Price per Unit</th>
             <th width="12%">Qty</th>   
-            <th width="15%">Cost</th>
+            
             <th width="15%" title="Express Delivery Charge">Express Delv</th>
             <th width="15%">Service Charges</th>
+            <th width="15%">Cost</th>
     
           </tr>
           <tr *ngFor="let details of prod.data">
@@ -175,7 +176,7 @@
             </td>
             
             <td>
-                <b class="">{{details.pcost}}</b>
+                <b class="">{{details.pcost}} </b>
               </td>
               <td>
                   <div class="">                   
@@ -186,17 +187,20 @@
               </div>
                 </div>
             </td>
-            <td>
-                <b class="">{{details.pcost*details.quantity}} </b>
-              </td>
+            
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)" >
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
                 </label>
                </td>
             <td class="">{{details.servicecharge}} </td>
+            <td >
+              <b class="" *ngIf="createPreOrderInput.productDetails">{{details.pcost*details.quantity + amount + details.servicecharge }} </b>
+              <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
+              <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
+            </td>
    
           </tr>
         </tbody>

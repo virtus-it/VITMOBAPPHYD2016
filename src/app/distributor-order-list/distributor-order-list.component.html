@@ -21,12 +21,17 @@
                   <table class="table table-hover table-striped  table-fixedheader">
                     <thead>
                       <tr>
-          <th width="14%">Id</th>
-          <th width="25%">Product </th>
-          <th width="12%">Qty</th>
-          <th width="14%">Cost</th>
-          <th width="15%">Status</th>
-          <th width="14%">Mode</th>
+          <th width="9%">Id</th>
+          <th width="9%">Product </th>
+          <th width="9%">Qty</th>
+          <th width="9%">Cost</th>
+          <th width="9%">Amount</th>
+          <th width="9%">Status</th>
+          <th width="9%">Mode</th>
+          <th class="" width="9%">Ret Qty</th>
+          <th class="" width="9%">Serv chgs</th>
+          <th class="" width="9%">Exp del chgs</th>
+          <th class="" width="9%">Received amt</th>
           <!-- <th width="12%">Customer </th>
           <th width="10%"> Cust Mobile</th> -->
      
@@ -34,12 +39,29 @@
       </thead>
       <tbody>
           <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
-          <td width="14%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
-          <td width="25%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
-          <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-          <td width="14%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>               
-          <td width="15%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
-          <td width="14%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td> 
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                         
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+          <span *ngIf="supplierOrder.return_cans_count =='' || supplierOrder.return_cans_count === null"> 0 </span>
+          <span *ngIf="supplierOrder.return_cans_count">{{supplierOrder.return_cans_count}} </span>
+          </td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+            <span *ngIf="supplierOrder.servicecharges == '' || supplierOrder.servicecharges === null"> 0 </span>
+            <span *ngIf="supplierOrder.servicecharges">{{supplierOrder.servicecharges}}</span>            
+            </td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+              <span *ngIf="supplierOrder.expressdeliverycharges == '' || supplierOrder.expressdeliverycharges === null"> 0 </span>
+              <span *ngIf="supplierOrder.expressdeliverycharges">{{supplierOrder.expressdeliverycharges}}</span></td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+            <span *ngIf="supplierOrder.receivedamount == '' || supplierOrder.receivedamount === null"> 0 </span>
+            <span *ngIf="supplierOrder.receivedamount > 0">{{supplierOrder.receivedamount}} </span> 
+            </td>
+          
           <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>
           <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
          </tr>

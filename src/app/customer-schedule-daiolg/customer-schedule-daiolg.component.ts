@@ -49,7 +49,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   //create schedule
 
   createScheduledays() {
-    if(this.validate() && this.validate1()){
+    if(this.validate() && this.validate1() && this.validate2()){
     let input = {};
     if(this.scheduleInput.schedulefor=="weekdays" ){
       let weekdays = this.scheduleInput.weekdays.split(',').sort(this.sortWeeks);
@@ -86,7 +86,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   //Update Schedule Order
   updateScheduleOrder(){
-    if(this.validate() && this.validate1()){
+    if(this.validate() && this.validate1() && this.validate2()){
     let input={}
     if(this.scheduleInput.schedulefor=="weekdays" ){
     input={"order":{"schdid":this.Detail.data.id,"apptype":this.authenticationService.appType(),"excepted_time":this.scheduleInput.timeslot,"orderstatus":"ordered","orderto":this.Detail.data.dealerid ,"orderfrom":this.Detail.userid,"product_cost":this.scheduleInput.productName.pcost ,"paymentmode":"cash","usertype":this.authenticationService.userType() ,"quantity":this.scheduleInput.productQuantity,"loginid":this.authenticationService.loggedInUserId(),"groupid":"289","productid": this.scheduleInput.productName.productid, "product_type": this.scheduleInput.productName.ptype  , "product_quantity": this.scheduleInput.productName.ptype , "weekdays":this.scheduleInput.weekdays , "scheduletype": this.scheduleInput.schedulefor , "amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_amt": parseInt(this.scheduleInput.productName.pcost) * parseInt(this.scheduleInput.productQuantity) , "total_items": this.scheduleInput.productQuantity   , "scheduledfrom": "admin"}};
@@ -344,6 +344,25 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     else{
       this.message="Please select atleast one weekday/day";
     }
+  }
+
+  validate2(){
+    // if((this.scheduleInput.productName && this.scheduleInput.productName.productid) && (this.scheduleInput.weekdays.length > 0 || this.scheduleInput.days.length > 0)){
+    //   this.message="";
+    //   return true;
+    // }
+    // else{
+    //   this.message="Please select Product quantity and weekdays/day to create a schedule";
+    // }
+
+    if(this.scheduleInput.productQuantity >  0){
+      this.message= "";
+      return true;
+    }
+    else{
+      this.message= "Please select quantity";
+    }
+
   }
 
   minQuantity(product, event){

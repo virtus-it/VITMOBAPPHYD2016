@@ -48,7 +48,7 @@ export class DeliverpreorderComponent implements OnInit {
     this.Detail.order.received_amt = this.Detail.order.total_amt;
     
     if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
-      this.Detail.order.assignedto = '' ;
+      this.Detail.order.assignedto = 0 ;
     }
     else{
       this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;

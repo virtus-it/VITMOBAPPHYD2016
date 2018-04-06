@@ -333,7 +333,13 @@ export class DistributorComponent implements OnInit {
             }
         }
 
-        
+        clearSearch(){
+            this.showFilterDailog = false;
+            this.filterType = "";
+             this.searchDistributorTerm= "";
+            this.searchDistributorNumber = "";
+            this.getDistributors(true);
+        }
     
 
     ngOnInit() {

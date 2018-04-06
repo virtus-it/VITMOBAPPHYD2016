@@ -74,7 +74,7 @@ onHoldStatus(orderData) {
 }
 editStatus(orderData) {
     let dialogRefeditStatus = this.dialog.open(EditOrderStatusComponent, {
-        width: '750px',
+        width: '550px',
         data: orderData
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
@@ -95,7 +95,10 @@ messageTemplate(data){
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
-        if (result == 'success') {
+        if (result != '') {
+
+            this.messageInput.order.reason = result; 
+
         }
 
     });
@@ -115,7 +118,7 @@ getOrderDetailsById() {
 }
 getOrderDetailsByIdResult(result) {
     this.loaderService.display(false);
-    ////console.log(result);
+    console.log(result);
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
         if (this.dailogOrderDetails .status == "onhold") {

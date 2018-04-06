@@ -26,6 +26,7 @@ export class DistributorListDialogComponent implements OnInit {
   searchDistTerm = "";
   searchSupplierTerm = "";
   message:any="";
+  autoAssignedSuppliername:any = '';
   superDealer =true;
   constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService,public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
@@ -87,12 +88,19 @@ export class DistributorListDialogComponent implements OnInit {
 
       });
       // add below to get name + this.orderDetail.supplierdetails.firstname
-      if(this.orderDetail.supplierdetails && this.orderDetail.supplierdetails.userid != ''){
-        this.message="This cutomer is already assigned to " + this.orderDetail.supplierdetails.supplierName ;
+      if(this.orderDetail.supplierdetails && this.orderDetail.supplierdetails.userid != '' && !this.orderDetail.supplierdetails.firstname){
+        this.autoAssignedSuppliername = this.orderDetail.supplierdetails.supplierName;
       }
-      else{
-        this.message="";
+      else if(this.orderDetail.supplierdetails.firstname){
+        this.autoAssignedSuppliername = this.orderDetail.supplierdetails.firstname;
       }
+      
+      if(this.autoAssignedSuppliername){
+        this.message="This cutomer is already assigned to " + this.autoAssignedSuppliername ;
+      }
+        // else{
+      //   this.message="";
+      // }
       this.suppliers = supplierCopyDetails;
       this.suppliersCopy = supplierCopyDetails;
       if (this.orderDetail.supplierdetails) {
@@ -139,8 +147,8 @@ export class DistributorListDialogComponent implements OnInit {
       "order": {
         "apptype": this.authenticationService.appType(), "createdthru": "website",
         "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
-        "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.productName,
-        "reason":"Order Confirmed: "+ this.orderDetail.brandname +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
+        "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.brandName,
+        "reason":"Order Confirmed: "+ this.orderDetail.brandName +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
         
         "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
         "quantity": this.orderDetail.quantity, "to": this.supplierID,
@@ -154,7 +162,7 @@ export class DistributorListDialogComponent implements OnInit {
 
 
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
-    //console.log(input);
+    console.log(input);
     this.distributorService.assingOrder(input)
       .subscribe(
       output => this.assignOrderResult(output),

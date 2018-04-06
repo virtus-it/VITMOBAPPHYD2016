@@ -31,6 +31,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   headerValue="Add Customer";
   message:any ="";
 refresh:any = "";
+messageError:any = "";
 
 
   getCustomerDetails() {
@@ -99,7 +100,7 @@ refresh:any = "";
 
   }
   createCustomer() {
-
+    if(this.validation1() && this.validation2()){
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
@@ -115,6 +116,7 @@ refresh:any = "";
         this.loaderService.display(false);
       });
   }
+}
   createCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
@@ -124,6 +126,7 @@ refresh:any = "";
     }
   }
   updateCustomer() {
+    if(this.validation1() && this.validation2()){
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
@@ -137,6 +140,7 @@ refresh:any = "";
         this.loaderService.display(false);
       });
   }
+}
   updateCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
@@ -167,6 +171,27 @@ if(result.result == 'success'){
   // }
    
   // }
+
+
+  validation1(){
+    if(this.customerInput.User.firstname.length > 0){
+      this.messageError = '';
+      return true;
+    }
+    else{
+      this.messageError="Please enter customers first name";
+    }
+  }
+
+  validation2(){
+    if(this.customerInput.User.mobileno.length > 0){
+      this.messageError = '';
+      return true;
+    }
+    else{
+      this.messageError="Please enter customers phone number";
+    }
+  }
 
   valid(){
     if(this.customerInput.User.paymenttype=='credit'){
