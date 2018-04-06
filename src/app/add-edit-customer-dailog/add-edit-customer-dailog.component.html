@@ -181,7 +181,7 @@
               <md-option value="27">27</md-option>
               <md-option value="28">28</md-option>
             </md-select>
-            <p class="red">{{this.message}}</p>
+            <small class="red oneline">{{this.message}}</small>
             <!-- <md-error *ngIf="dueDateFormControl.hasError('required')">
                 Select due date is
                 <strong>required</strong>
@@ -222,10 +222,11 @@
     </div>
   </div>
 </md-dialog-content>
+<small class="red">{{this.messageError}}</small>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()" 
-    [disabled]="!emailFormControl.valid || !mobileFormControl.valid ">SUBMIT</button>
+   >SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

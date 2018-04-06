@@ -130,12 +130,40 @@
                 </small>
               </div>
             </div>
+
+            <!-- <div class="col-2 ">
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                  <md-autocomplete #auto="mdAutocomplete">
+                    <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                      <span>{{ dist.fullName }}</span>
+                    </md-option>
+                  </md-autocomplete>
+                </md-form-field>
+              </div> -->
+
+
+
+
             <div class=" " *ngIf="smsInput.smsType == 'notification'">
               <div class="row">
                 <div class="col-sm-3  col-md-3  col-lg-3 ">
-                  <md-form-field>
+                  <!-- <md-form-field>
                   <input class="form-control" mdInput placeholder="Template name" name="name" [(ngModel)]="smsInput.tempname">
-                </md-form-field>
+                </md-form-field> -->
+
+
+                <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name">
+                        <span>{{ temp.template_name }}</span>
+                      </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+
+
+
                 <br>
                 <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
                 <input type="radio" name="template" class=""  value="overWrite" [(ngModel)]="smsInput.radioOverWrite" >Overwrite

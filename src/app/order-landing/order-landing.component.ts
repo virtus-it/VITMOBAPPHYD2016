@@ -615,7 +615,7 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtext = this.filterType.distributorid;
     }
     else if (this.filterInput.order.searchtype == 'followupdate') {
-      this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+      this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD 00:02:00');
      
     }
     else if (this.filterInput.order.searchtype == 'status') {
@@ -765,7 +765,7 @@ export class OrderLandingComponent implements OnInit {
       this.globalFilterInput.order.searchtext = this.globalfilterType.distributorid;
     }
     else if (this.globalFilterInput.order.searchtype == 'followupdate') {
-      this.globalFilterInput.order.searchtext = moment(this.globalfilterType.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+      this.globalFilterInput.order.searchtext = moment(this.globalfilterType.followUpdate).format('YYYY-MM-DD 00:02:00');
      
     }
     else if (this.globalFilterInput.order.searchtype == 'status') {

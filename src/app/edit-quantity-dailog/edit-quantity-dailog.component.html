@@ -37,7 +37,7 @@
         <div class="row "   *ngIf="this.hideTimeSlot">
           <div class="  col-6">
             <md-form-field class="example-full-width wd-100pc">
-              <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" name="date" [(ngModel)]="changeTimeSlot.date" (ngModelChange)="enableTime($event)">
+              <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" name="date" [(ngModel)]="changeTimeSlot.date" (ngModelChange)="dateChanges($event)">
               <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
               <md-datepicker #picker></md-datepicker>
             </md-form-field>

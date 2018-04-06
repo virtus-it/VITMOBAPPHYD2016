@@ -43,15 +43,20 @@
           <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
           <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
           <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td> 
-          <td width="9%" class="left" class="cellpadding" scope="row">Total amount</td>                         
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                         
           <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
           <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
           <td width="9%" class="left" class="cellpadding" scope="row">
           <span *ngIf="supplierOrder.return_cans_count =='' || supplierOrder.return_cans_count === null"> 0 </span>
           <span *ngIf="supplierOrder.return_cans_count">{{supplierOrder.return_cans_count}} </span>
           </td>
-          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.servicecharges}}</td>
-          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.expressdeliverycharges}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+            <span *ngIf="supplierOrder.servicecharges == '' || supplierOrder.servicecharges === null"> 0 </span>
+            <span *ngIf="supplierOrder.servicecharges">{{supplierOrder.servicecharges}}</span>            
+            </td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+              <span *ngIf="supplierOrder.expressdeliverycharges == '' || supplierOrder.expressdeliverycharges === null"> 0 </span>
+              <span *ngIf="supplierOrder.expressdeliverycharges">{{supplierOrder.expressdeliverycharges}}</span></td>
           <td width="9%" class="left" class="cellpadding" scope="row">
             <span *ngIf="supplierOrder.receivedamount == '' || supplierOrder.receivedamount === null"> 0 </span>
             <span *ngIf="supplierOrder.receivedamount > 0">{{supplierOrder.receivedamount}} </span> 

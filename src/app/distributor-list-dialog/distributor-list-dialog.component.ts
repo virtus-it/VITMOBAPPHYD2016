@@ -95,8 +95,10 @@ export class DistributorListDialogComponent implements OnInit {
         this.autoAssignedSuppliername = this.orderDetail.supplierdetails.firstname;
       }
       
+      if(this.autoAssignedSuppliername){
         this.message="This cutomer is already assigned to " + this.autoAssignedSuppliername ;
-      // else{
+      }
+        // else{
       //   this.message="";
       // }
       this.suppliers = supplierCopyDetails;

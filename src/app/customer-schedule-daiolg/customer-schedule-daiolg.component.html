@@ -456,7 +456,7 @@
             <p class="warningred" >{{message}}</p> &nbsp;&nbsp;
             <md-dialog-actions>
                     <button md-raised-button   class="createscheduler  btn-primary allcaps" btntype="create"
-                    [disabled]="!FormControl.valid || !ProductFormControl.valid" (click)="createAndUpdateScheduleOrder()">{{Detail.type}}</button>
+                    (click)="createAndUpdateScheduleOrder()">{{Detail.type}}</button>
                     <!-- <div class="message"></div> -->
                    &nbsp;<span *ngIf="Detail.type=='update'">
                             <button md-raised-button class="bg-danger"   (click)="deleteSchedule(Detail.data)">DELETE</button>

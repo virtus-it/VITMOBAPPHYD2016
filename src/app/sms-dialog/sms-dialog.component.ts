@@ -19,8 +19,12 @@ import * as moment from 'moment';
 export class SmsDialogComponent implements OnInit {
   templateCtrl: FormControl;
   filteredTemplates: Observable<any[]>;
+
+
   stateCtrl: FormControl;
   filteredStates: Observable<any[]>;
+
+
   constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService,  private authenticationService: AuthenticationService) {
 
     
@@ -34,7 +38,7 @@ export class SmsDialogComponent implements OnInit {
       this.templateCtrl = new FormControl();
       this.filteredTemplates = this.templateCtrl.valueChanges
         .startWith(null)
-        .map(dist => dist ? this.findTemplate() : this.template.slice());
+        .map(temp => temp ? this.findTemplate(temp) : this.getAllTemplates.slice());
 
 
   }
@@ -46,7 +50,9 @@ export class SmsDialogComponent implements OnInit {
   distributors: any = [];
   searchMobileNumber:string = "";
   checkAll: boolean = false;
+  getAllTemplates:any = [];
   checkAllMobile: boolean = false;
+  tempName:any = "";
   smallLoader: boolean = false;
   buttonCount:number = 0;
   buttonActionCount:number = 0;
@@ -69,9 +75,10 @@ export class SmsDialogComponent implements OnInit {
     { value: 'alldistributors', viewValue: 'All Distributors' },
     { value: 'sms', viewValue: 'SMS' },
     {value: 'notregistered' , viewValue:'Not registered'}
-
     // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
+
+
   filterDistributors(name: string) {
     //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
@@ -93,9 +100,25 @@ export class SmsDialogComponent implements OnInit {
     return finalDistributors;
   }
 
-  findTemplate(){
+  findTemplate(name:string){
+    console.log(name);
+    if(this.getAllTemplates && this.getAllTemplates.template_name){
+    let finalTemplates = this.getAllTemplates.filter(temp =>
+      temp.template_name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    console.log(finalTemplates);
+    if (finalTemplates && finalTemplates.length > 0) {
+      let findTemplate: any = {};
 
+      findTemplate = _.find(finalTemplates, function (k, l) {
+        let tempDetails: any = k;
+        return tempDetails.template_name == name;
+      });
+    }
+  
+
+    return finalTemplates;
   }
+}
   onChangeType() {
     this.orderinput.fromDate = null;
     this.orderinput.toDate = null
@@ -136,7 +159,7 @@ export class SmsDialogComponent implements OnInit {
       });
   }
   getMobileNumberResult(result) {
-    //console.log(result);
+    console.log(result);
     let mobile = [];
     this.smallLoader = false;
     if (result && result.data && result.data.length) {
@@ -152,6 +175,10 @@ export class SmsDialogComponent implements OnInit {
       this.mobileDetails = mobile;
       this.mobileDetailsCopy = mobile;
     
+    }
+    else{
+     this.mobileDetails= [];
+     this.mobileDetailsCopy = [];
     }
   }
   searchMobileNo() {
@@ -254,9 +281,43 @@ export class SmsDialogComponent implements OnInit {
       createSmsInput.User.mobilenumber = modifiedNumbers;
       createSmsInput.User.count = modifiedNumbers.length;
       createSmsInput.User.body = this.smsInput.customBody;
+
     }
-    
+
+
+      if( this.checkAll = true && createSmsInput.User.count > 500){
+        createSmsInput.User.mobilenumber = [];
+        let formattedInput:any = {
+          type:'checkall',
+          getAllMobileInput : {User: {"user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(),type: this.orderinput.orderType,"smstype":"","apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid }},
+          sendSmsInput : createSmsInput,
+        }
+        if (this.orderinput.fromDate) {
+          formattedInput.getAllMobileInput.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+        }
+        if (this.orderinput.toDate) {
+          formattedInput.getAllMobileInput.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+        }
+        if(this.smsInput.smsType == 'sms'){
+          formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
+        }
+        else{
+          formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
+        }
+        console.log(formattedInput);
+      }
+      else{
+        let formattedInput:any = {
+          type:'',
+          getAllMobileInput : {},
+          sendSmsInput : createSmsInput,
+        }
+        console.log(formattedInput);
+      }
+
+      
     console.log("input",createSmsInput);
+   
     this.smsService.CreateSms(createSmsInput)
       .subscribe(
       output => this.saveMobileSmsResult(output),
@@ -392,8 +453,29 @@ this.smsInput.sliderurl.push(sliderObject);
   this.smsInput.sliderurl = filteredOption;
   
   }
+
+
+  getTemplates(){
+    let input = {"User":{"user_type":"dealer","transtype":"getnotification","loginid":this.authenticationService.loggedInUserId()}};
+    console.log(input);
+    this.followupService.followUpTemplate(input)
+    .subscribe(
+    output => this.getTemplatesResult(output),
+    error => {
+    });
+  }
+  getTemplatesResult(result){
+    console.log(result);
+    if(result.result == 'success'){
+      this.getAllTemplates = result.data; 
+      console.log(this.getAllTemplates);
+    //  this.tempName = this.getAllTemplates.template_name ;
+    }
+  }
   ngOnInit() {
-    this.getDistributors()
+    this.getDistributors();
+    this.getTemplates();
+
   }
 
 }
