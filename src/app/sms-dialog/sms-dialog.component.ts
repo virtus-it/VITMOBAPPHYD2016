@@ -284,10 +284,10 @@ export class SmsDialogComponent implements OnInit {
 
     }
 
-
-      if( this.checkAll = true && createSmsInput.User.count > 500){
+    let formattedInput:any = {}
+      if( this.checkAll = true && createSmsInput.User.count > 400){
         createSmsInput.User.mobilenumber = [];
-        let formattedInput:any = {
+         formattedInput = {
           type:'checkall',
           getAllMobileInput : {User: {"user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(),type: this.orderinput.orderType,"smstype":"","apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid }},
           sendSmsInput : createSmsInput,
@@ -307,7 +307,7 @@ export class SmsDialogComponent implements OnInit {
         console.log(formattedInput);
       }
       else{
-        let formattedInput:any = {
+         formattedInput = {
           type:'',
           getAllMobileInput : {},
           sendSmsInput : createSmsInput,
@@ -316,9 +316,9 @@ export class SmsDialogComponent implements OnInit {
       }
 
       
-    console.log("input",createSmsInput);
+    console.log("input",formattedInput);
    
-    this.smsService.CreateSms(createSmsInput)
+    this.smsService.CreateSms(formattedInput)
       .subscribe(
       output => this.saveMobileSmsResult(output),
       error => {
