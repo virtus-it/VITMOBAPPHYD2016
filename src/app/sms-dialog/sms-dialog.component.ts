@@ -53,6 +53,8 @@ export class SmsDialogComponent implements OnInit {
   getAllTemplates:any = [];
   checkAllMobile: boolean = false;
   tempName:any = "";
+  filterType:any = {template_name:"", template_desc: ""};
+  LastfilterRecords = false;
   smallLoader: boolean = false;
   buttonCount:number = 0;
   buttonActionCount:number = 0;
@@ -82,7 +84,9 @@ export class SmsDialogComponent implements OnInit {
   filterDistributors(name: string) {
     //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
+      
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    
     //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
@@ -101,10 +105,10 @@ export class SmsDialogComponent implements OnInit {
   }
 
   findTemplate(name:string){
-    console.log(name);
-    if(this.getAllTemplates && this.getAllTemplates.template_name){
-    let finalTemplates = this.getAllTemplates.filter(temp =>
-      temp.template_name.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    // console.log(name);
+    if(this.getAllTemplates){
+    let finalTemplates = this.getAllTemplates.filter(temp =>  
+      temp.template_name.toLowerCase().indexOf(temp.template_name.toLowerCase()) === 0);
     console.log(finalTemplates);
     if (finalTemplates && finalTemplates.length > 0) {
       let findTemplate: any = {};
@@ -113,17 +117,98 @@ export class SmsDialogComponent implements OnInit {
         let tempDetails: any = k;
         return tempDetails.template_name == name;
       });
+
+      if (findTemplate) {
+        this.filterType.template_name = findTemplate.template_name;
+        this.filterType.template_desc = findTemplate.template_desc;
+        let  JsonObj:any = {};
+        if( this.filterType.template_desc){
+          JsonObj = JSON.parse(this.filterType.template_desc);
+        
+        console.log("json parsed successfully" , JsonObj  );
+        }
+
+        // smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
+        this.smsInput.body = JsonObj.body;
+        this.smsInput.name = JsonObj.name;    
+        this.smsInput.redirecturl = JsonObj.redirecturl;
+        this.smsInput.showcomment = JsonObj.showcomment;
+        // this.smsInput.tempname = JsonObj.tempname;
+        this.smsInput.title = JsonObj.title;
+        this.smsInput.type = JsonObj.type;
+        this.smsInput.url = JsonObj.url;
+        this.smsInput.tempname = JsonObj.tempname;        
+        // let buttonObject = {name:"", actiontype:"", count:0};
+
+        
+        if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
+          let buttons= [];
+          this.smsInput.buttons= [];
+          _.each(JsonObj.buttonactions, function(i,j){
+            let buttonDetails:any = i;
+            let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
+            buttons.push(buttonObject)
+          });
+          this.smsInput.buttons = buttons;
+        }
+        console.log(this.smsInput.buttons);
+
+
+        if(JsonObj.option && JsonObj.option.length > 0){
+          let options =[];
+          _.each(JsonObj.option , function(i, j){
+            let optionDetails:any = i;
+            if(optionDetails && optionDetails.length > 0){
+            let optionObject = {name: optionDetails ,count:j+1}
+            options.push(optionObject);
+            }
+            else{
+              let optionObject = {}
+              options.push(optionObject);
+            }
+          });
+          this.smsInput.option = options;
+        }
+
+        if(JsonObj.sliderurl && JsonObj.sliderurl.length > 0){
+          let slider = [];
+          _.each(JsonObj.sliderurl , function(i , j){
+            let sliderDetails:any = i;
+        if(sliderDetails.image){
+            let sliderObject = {image: sliderDetails.image ,count:j+1}
+            slider.push(sliderObject);
+        }
+        else{
+          let sliderObject = {}
+          slider.push(sliderObject);          
+        }
+          });
+          this.smsInput.sliderurl = slider;
+          
+        }
+        console.log(this.smsInput); 
+       
+      }
+
     }
-  
 
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        
+        this.getTemplates();
+      }
+    }
     return finalTemplates;
-
-
   }
-
-
   // 
 }
+
+trackByFn(index, item) {
+  return index; // or item.id
+}
+
+
+
   onChangeType() {
     this.orderinput.fromDate = null;
     this.orderinput.toDate = null
@@ -337,7 +422,7 @@ export class SmsDialogComponent implements OnInit {
       
   }
   saveMobileSmsResult(result) {
-    //console.log(result);
+    console.log(result);
     this.thisDialogRef.close(result);
   }
 
@@ -358,22 +443,25 @@ export class SmsDialogComponent implements OnInit {
     }
   }
 
-  // templateOverwrite(data){
-  //   let input = Object.assign({}, data)
-  //   input.transtype = "notification";
-  //   console.log(input);
-  //   // this.followupService.followUpTemplate(input)
-  //   // .subscribe(
-  //   //   output => this.updateTemplateResult(output),
-  //   //   error => {
-  //   //   });
-  // }
-  // updateTemplate(result){
-  //   if(result.result == 'success'){
+  templateOverwrite(data){
+    let input = Object.assign({}, data)
+    input.transtype = "notification";
+    input.id = 
+    console.log(input);
+    // this.followupService.followUpTemplate(input)
+    // .subscribe(
+    //   output => this.updateTemplateResult(output),
+    //   error => {
+    //   });
+  }
+  updateTemplateResult(result){
+    if(result.result == 'success'){
 
-  //   }
+    }
 
-  // }
+  }
+
+
 
   // getAllTemplates(){
 
@@ -416,8 +504,8 @@ export class SmsDialogComponent implements OnInit {
     this.buttonCount = this.buttonCount + 1;
     let buttonObject = {name:"",count:this.buttonCount};
 this.smsInput.buttons.push(buttonObject);
-this.buttonActionCount = this.buttonActionCount + 1;
-let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
+// this.buttonActionCount = this.buttonActionCount + 1;
+// let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
 // this.smsInput.buttonactions.push(buttonActionObject);
 
   }
@@ -471,16 +559,19 @@ this.smsInput.sliderurl.push(sliderObject);
   getTemplatesResult(result){
     console.log(result);
     if(result.result == 'success'){
-      this.getAllTemplates = result.data; 
-      if(result.data && result.data.length){
-      _.each(result.data , function(i, j){
+      let allTemplates = [];
+      if(result.data && result.data.length >0){
+      _.each(result.data, function(i,j){
         let details:any = i;
-        // _.each(details.template_desc , function(k,l){
-        //   let detailData:any =k;
-        })
-      // })
+        if(details.template_name !== null){ 
+          allTemplates.push(details);
+          console.log(allTemplates);
+        }
+      });
+    
     }
-
+    this.getAllTemplates = allTemplates; 
+    console.log("check" ,  this.getAllTemplates);
     }
   }
 
@@ -495,37 +586,7 @@ this.smsInput.sliderurl.push(sliderObject);
 
 
 
-  // sampleInput(){
-  //   let inputObject = { name: "", mobilenumber: [], body: this.getAllTemplates[3].template_desc.body, smsType: "sms", customBody: this.getAllTemplates[3].template_desc.customBody, customMobilenumber: "",title:this.getAllTemplates[3].template_desc.title,type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
 
-
-  //   let bodyObject = this.getAllTemplates[3].template_desc.body;
-  // // if(this.getAllTemplates ){
-  //   // this.smsInput.name.push(inputObject.name);
-  //   // this.smsInput.name.push(inputObject.mobilenumber);
-  //   this.smsInput.body.push(bodyObject);
-  //   // this.smsInput.name.push(inputObject.smsType);
-
-
-  //   // this.smsInput.name.push(inputObject.customBody);
-
-
-  //   // this.smsInput.name.push(inputObject.customMobilenumber);
-
-
-  //   // this.smsInput.name.push(inputObject.title);
-
-
-  //   // this.smsInput.name.push(inputObject.type);
-  //   // this.smsInput.name.push(inputObject.redirecturl);
-  //   // this.smsInput.name.push(inputObject.showcomment);
-  //   // this.smsInput.name.push(inputObject.url);
-  //   // this.smsInput.name.push(inputObject.buttons);
-  //   // this.smsInput.name.push(inputObject.option);
-  //   // this.smsInput.name.push(inputObject.sliderurl);
-  
-  // // }
-  // }
 
 
 

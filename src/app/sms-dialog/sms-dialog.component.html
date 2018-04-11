@@ -154,7 +154,7 @@
 
 
                 <md-form-field class="example-full-width">
-                    <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl">
+                    <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl" [(ngModel)] = "smsInput.tempname">
                     <md-autocomplete #auto="mdAutocomplete">
                       <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name"> 
                         <span>{{ temp.template_name }}</span>
@@ -331,12 +331,12 @@
                     </div>
                     <div class="col-10">
                       <table>
-                        <tr *ngFor="let silder of smsInput.sliderurl;let i = index">
+                        <tr *ngFor="let silder of smsInput.sliderurl; trackBy: trackByFn let i = index">
                           <td>
                             <div class="row align-items-center">
                               <div class="col-8">
                                 <md-form-field class="example-full-width inline ">
-                                  <input class="form-control" mdInput placeholder="Slider Url" name="button{{i}}" [(ngModel)]="silder.image">
+                                  <input class="form-control" mdInput placeholder="Slider Url" name="button{{i}}" [(ngModel)]="silder.image" >
                                 </md-form-field>
                               </div>
 
