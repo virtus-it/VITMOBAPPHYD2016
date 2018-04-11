@@ -8,18 +8,16 @@
     </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
-
+    <div class="container-fluid pd-15x25 brd-bottom">
+   
     <ul class="scrollheight">
-      <div class="row" *ngFor= "let messageText of messageDetails" (click)="getMessage(messageText.message)">
-        
-        <div>
-          <br> {{messageText.message}} <br> <hr></div>
-
-      </div>
-
-
-
+      <li class="nolist-style messages-style" *ngFor= "let messageText of messageDetails">
+      <div class=""  (click)="getMessage(messageText.message)">
+          <i class="fa fa-reply" aria-hidden="true" ></i> {{messageText.message}}  </div>
+    </li>
+  
     </ul>
 
 
@@ -114,5 +112,13 @@
 
 
 
-
+                      </div>
 </md-dialog-content>
+
+<div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)="onCloseConfirm()" >OK</button>&nbsp;
+      
+    </md-dialog-actions>
+  </div>
+  

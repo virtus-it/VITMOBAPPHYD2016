@@ -131,7 +131,7 @@
                 </tr>
               </thead>
               <tbody>
-                  <small  *ngIf = "customerProductDetails.length <= 0"> There are no available cans for this customer </small>  
+                  <b  *ngIf = "customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>  
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="55%">    
                                
@@ -294,11 +294,26 @@
             </div>
           </div>
 <!-- notification buttons -->
+<div class="row mgtop-10">
+  <div class="col">
 <button class="mat-raised-button mat-primary" > button 1</button> 
+</div>
+<div class="col">
 <button class="mat-raised-button mat-primary">button 2</button> 
+</div>
+</div>
+<div class="row mgtop-10">
+    <div class="col">
 <button class="mat-raised-button mat-primary">button 3</button>
-<button class="mat-raised-button mat-primary">button 4</button>
+</div>
+<div class="col">
+<button class="mat-raised-button mat-primary">button 4</button> 
+</div>
+</div>
+<div class="row mgtop-10">
+    <div class="col">
 <button class="mat-raised-button mat-primary">button 5</button>
+</div></div>
 <!-- radio, checkbox, website , slide , playstore 
 
 (click)="notification('radio')"

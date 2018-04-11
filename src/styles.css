@@ -671,6 +671,13 @@ box-shadow: 0 0 8px #bbb; */
 overflow: hidden;
 display: inline-block;
 }
+.onhovertooltip-150{
+  width:150px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
 .onhovertooltip {
   width:200px;
  text-overflow: ellipsis;
