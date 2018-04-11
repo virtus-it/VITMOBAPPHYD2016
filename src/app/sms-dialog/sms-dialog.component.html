@@ -156,7 +156,7 @@
                 <md-form-field class="example-full-width">
                     <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl">
                     <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name">
+                      <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name"> 
                         <span>{{ temp.template_name }}</span>
                       </md-option>
                     </md-autocomplete>

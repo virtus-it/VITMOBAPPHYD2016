@@ -117,7 +117,12 @@ export class SmsDialogComponent implements OnInit {
   
 
     return finalTemplates;
+
+
   }
+
+
+  // 
 }
   onChangeType() {
     this.orderinput.fromDate = null;
@@ -322,7 +327,6 @@ export class SmsDialogComponent implements OnInit {
       .subscribe(
       output => this.saveMobileSmsResult(output),
       error => {
-        //console.log("error in distrbutors");
       });
       if(this.smsInput.radiosave == "save"){
         this.saveTemplate(createSmsInput);
@@ -468,10 +472,64 @@ this.smsInput.sliderurl.push(sliderObject);
     console.log(result);
     if(result.result == 'success'){
       this.getAllTemplates = result.data; 
-      console.log(this.getAllTemplates);
-    //  this.tempName = this.getAllTemplates.template_name ;
+      if(result.data && result.data.length){
+      _.each(result.data , function(i, j){
+        let details:any = i;
+        // _.each(details.template_desc , function(k,l){
+        //   let detailData:any =k;
+        })
+      // })
+    }
+
     }
   }
+
+
+  // addTemplateInput(){
+  //   let bodyObject = this.getAllTemplates.template_desc;
+  //   this.smsInput.body.push(bodyObject);
+  // }
+
+
+
+
+
+
+  // sampleInput(){
+  //   let inputObject = { name: "", mobilenumber: [], body: this.getAllTemplates[3].template_desc.body, smsType: "sms", customBody: this.getAllTemplates[3].template_desc.customBody, customMobilenumber: "",title:this.getAllTemplates[3].template_desc.title,type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
+
+
+  //   let bodyObject = this.getAllTemplates[3].template_desc.body;
+  // // if(this.getAllTemplates ){
+  //   // this.smsInput.name.push(inputObject.name);
+  //   // this.smsInput.name.push(inputObject.mobilenumber);
+  //   this.smsInput.body.push(bodyObject);
+  //   // this.smsInput.name.push(inputObject.smsType);
+
+
+  //   // this.smsInput.name.push(inputObject.customBody);
+
+
+  //   // this.smsInput.name.push(inputObject.customMobilenumber);
+
+
+  //   // this.smsInput.name.push(inputObject.title);
+
+
+  //   // this.smsInput.name.push(inputObject.type);
+  //   // this.smsInput.name.push(inputObject.redirecturl);
+  //   // this.smsInput.name.push(inputObject.showcomment);
+  //   // this.smsInput.name.push(inputObject.url);
+  //   // this.smsInput.name.push(inputObject.buttons);
+  //   // this.smsInput.name.push(inputObject.option);
+  //   // this.smsInput.name.push(inputObject.sliderurl);
+  
+  // // }
+  // }
+
+
+
+
   ngOnInit() {
     this.getDistributors();
     this.getTemplates();

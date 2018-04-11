@@ -100,6 +100,7 @@ import { ViewStockpointsComponent } from './view-stockpoints/view-stockpoints.co
 import { TimeChartComponent } from './time-chart/time-chart.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { SocketmessagesComponent } from './socketmessages/socketmessages.component';
+import { QuickNotificationComponent } from './quick-notification/quick-notification.component';
 
 
 
@@ -180,6 +181,7 @@ import { SocketmessagesComponent } from './socketmessages/socketmessages.compone
         TimeChartComponent,
         MessageTemplateComponent,
         SocketmessagesComponent,
+        QuickNotificationComponent,
 
      
         
@@ -306,7 +308,8 @@ import { SocketmessagesComponent } from './socketmessages/socketmessages.compone
          ViewStockpointsComponent,
          TimeChartComponent,
          MessageTemplateComponent,
-         SocketmessagesComponent
+         SocketmessagesComponent,
+         QuickNotificationComponent
       
 
 

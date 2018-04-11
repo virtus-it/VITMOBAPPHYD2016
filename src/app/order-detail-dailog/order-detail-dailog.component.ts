@@ -8,6 +8,7 @@ import { EmptyCanDailogComponent } from '../empty-can-dailog/empty-can-dailog.co
 import { OnHoldOrderStatusComponent } from '../on-hold-order-status/on-hold-order-status.component';
 import { EditOrderStatusComponent } from '../edit-order-status/edit-order-status.component';
 import { OrderLandingService } from '../order-landing/order-landing.service';
+import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { MessageTemplateComponent } from '../message-template/message-template.component';
 import { LoaderService } from '../login/loader.service';
@@ -300,6 +301,21 @@ saveMobileSmsResult(result) {
   }
 }
     
+
+getTemplates(){
+    let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
+        width: '900px',
+        data: ''
+    });
+    dialogRefeditStatus.afterClosed().subscribe(result => {
+        ////console.log(`Dialog closed: ${result}`);
+        if (result.result =='success') {
+
+        }
+
+    });
+
+}
 
 ngOnInit() {
     this.getOrderDetailsById();

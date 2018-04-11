@@ -91,7 +91,7 @@ export class DistributorListDialogComponent implements OnInit {
       if(this.orderDetail.supplierdetails && this.orderDetail.supplierdetails.userid != '' && !this.orderDetail.supplierdetails.firstname){
         this.autoAssignedSuppliername = this.orderDetail.supplierdetails.supplierName;
       }
-      else if(this.orderDetail.supplierdetails.firstname){
+      else if( this.orderDetail.supplierdetails && this.orderDetail.supplierdetails.firstname){
         this.autoAssignedSuppliername = this.orderDetail.supplierdetails.firstname;
       }
       

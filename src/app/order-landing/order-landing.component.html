@@ -298,7 +298,7 @@
                      
                     </label>
                   </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(forward)'>
+                  <div *ngIf="forward.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -338,6 +338,8 @@
                       aria-hidden="true" [ngClass]="forward.StatusColor" [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i>
                     <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"
                       title="Moya Customer"></i>
+
+                      <i class="fa fa-frown-o red" title="Revert" *ngIf="forward.status == 'backtodealer'"></i>
                     <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label> 
                     <!-- assign button -->
                     <br>
@@ -591,7 +593,7 @@
                       </span> 
                     </label>
                   </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(allorder)'>
+                  <div *ngIf="allorder.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -634,6 +636,7 @@
                       aria-hidden="true" [ngClass]="allorder.StatusColor" [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
                     <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"
                       title="Moya Customer"></i>
+                      <i class="fa fa-frown-o red" title="Revert" *ngIf="allorder.status == 'backtodealer'"></i>
                     <label class="capitalize" [ngClass]="allorder.StatusColor" (click)="ViewDistributors(allorder)">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
@@ -844,7 +847,7 @@
                        
                       </label>
                     </div>
-                    <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(complete)'>
+                    <div *ngIf="complete.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(complete)'>
                       <i class="fa fa-edit logo-color "></i>
                     </div>
                   </div>
@@ -884,6 +887,7 @@
                         aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
                       <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
                         title="Moya Customer"></i>
+                        <i class="fa fa-frown-o red" title="Revert" *ngIf="complete.status == 'backtodealer'"></i>
                       <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
                       <br>
                     </div>
