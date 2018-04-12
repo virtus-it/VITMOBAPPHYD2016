@@ -16,6 +16,7 @@
         <span></span>
       </b>
     </div>
+    <!-- first row starts>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
@@ -25,33 +26,40 @@
             <strong>required</strong>
           </md-error>
         </md-form-field>
+        </div>
+        <div class="col-md-4 col-sm-6 ">
+            <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
+                <md-error>
+                  Last Name is
+                  <strong>required</strong>
+                </md-error>
+              </md-form-field>
+       
+        </div>
+        <div class="col-md-4 col-sm-6 ">
+            <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
+                <md-error>
+                  Alias Name is
+                  <strong>required</strong>
+                </md-error>
+              </md-form-field>
+      
+          </div></div>
+<!-- first row finished -->
+<div class="row">
+    <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
-          <md-error>
-            Email Id is
-            <strong>required</strong>
-          </md-error>
-        </md-form-field>
-
-        <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1"   maxlength="10"  [(ngModel)]="customerInput.User.mobileno_one">
-           
+            <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
+            <md-error>
+              Email Id is
+              <strong>required</strong>
+            </md-error>
           </md-form-field>
-
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
-          </md-form-field>
-
-
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
-          <md-error>
-            Last Name is
-            <strong>required</strong>
-          </md-error>
-        </md-form-field>
+         
+</div>
+        <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt">
           <md-error>
@@ -59,41 +67,52 @@
             <strong>required</strong>
           </md-error>
         </md-form-field>
-      
-        <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile2" maxlength="10" [(ngModel)]="customerInput.User.mobileno_two">
+      </div>
+      <div class="col-md-4 col-sm-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno" required>
+            <md-error *ngIf="mobileFormControl.hasError('required')">
+                Mobile Number is
+                <strong>required</strong>
+              </md-error>
           </md-form-field>
-
+  </div>
+      </div>
+      <!-- second row finished -->
+      <div class="row"> 
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1" maxlength="10" [(ngModel)]="customerInput.User.mobileno_one">
+          </md-form-field>
+</div>
+<div class="col-md-4 col-sm-6 ">
+          <md-form-field class="">
+         <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile 2" maxlength="10" [(ngModel)]="customerInput.User.mobileno_two">
+          </md-form-field>
+</div>
+    
+      <div class="col-md-4 col-sm-6">
           <md-form-field class="">
               <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
             </md-form-field>
-
-      </div>
-      <div class="col-md-4 col-sm-6">
-        <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
-          <md-error>
-            Alias Name is
-            <strong>required</strong>
-          </md-error>
+      
+        </div>
+        </div>
+        <!-- third row finished -->
+        <div class="row">
+           
+<div class="col-md-4 col-sm-6 align-self-end">
+        <md-form-field class="example-full-width">
+          <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
         </md-form-field>
-        <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno" required>
-          <md-error *ngIf="mobileFormControl.hasError('required')">
-              Mobile Number is
-              <strong>required</strong>
-            </md-error>
-        </md-form-field>
-
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <md-form-field class="example-full-width inline ">
-          <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
-        </md-form-field>
-      </div>
-    </div>
+</div>
+<div class="col-md-8 col-sm-8">
+    <md-form-field class="wd-100pc">
+        <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
+      </md-form-field>
+</div>
+</div>
+<!-- forth row finished -->
     <div class="row">
       <div class="col-5">
         <div class=" form-group  row">
