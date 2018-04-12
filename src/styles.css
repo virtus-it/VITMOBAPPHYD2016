@@ -67,6 +67,14 @@ table thead {
     color: var( --logo-color);
     cursor: pointer;
   }
+  .onhovertooltip-100{
+    width:100px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  
   .pageTitle-style{
     text-align: left;
     color: #333 !important;

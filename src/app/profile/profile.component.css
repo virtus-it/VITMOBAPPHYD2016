@@ -16,6 +16,10 @@ margin-top:  -20px;
 margin-left: 45px;
     text-align: left;
 }
+.fa-key:before {
+    content: "\F084";
+    padding: 4px;
+}
 
 /* .bg-imglogo{
     background-image:url(../assets/images/bg_virtus.png);

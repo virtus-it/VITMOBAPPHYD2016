@@ -63,12 +63,13 @@
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
-              <td class="left capitalize" width="15%">   <span class="onhovertabletext-100">{{dist.firstname}} {{dist.lastname}}</span></td>
+              <td class="left capitalize" width="15%">   <span class="onhovertooltip-100" title="{{dist.firstname}} {{dist.lastname}}">{{dist.firstname}} {{dist.lastname}}</span></td>
               <td class="left" width="10%">{{dist.customercount}} </td>
-              <td class="left numbers" width="12%"><span class="onhovertabletext-100">{{dist.mobileno}}
-              <span *ngIf="dist.mobileno_one || dist.mobileno_two" > {{dist.mobileno_one}},{{dist.mobileno_two}}</span></span>  
+              <td class="left numbers" width="12%">
+                <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
+           <span *ngIf="dist.mobileno_one || dist.mobileno_two" > {{dist.mobileno_one}} {{dist.mobileno_two}}</span></span>  
               </td>
-              <td class="left" width="10%">{{dist.emailid}} </td>
+              <td class="left" width="10%"><span class="onhovertooltip-100" title="{{dist.emailid}}">{{dist.emailid}}</span> </td>
               <td class="left" width="10%">{{dist.reference_code}}</td>
               <td class="left capitalize" width="20%"><span class="onhovertooltip" title="{{dist.address}}">{{dist.address}}</span></td>
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
