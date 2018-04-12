@@ -1,6 +1,6 @@
 
 table thead {
-    background: #0f75bc;
+    background: var( --logo-color);
     color: #fff;
   }
   tbody.collapse.in {
@@ -41,13 +41,12 @@ table thead {
     text-align: left;
   }
   a{
-    color: #0f75bc;
+    color: var( --logo-color);
   }
   .pdleft-20{
-    padding-left: 20px !important;
-  }
+    padding-left: 20px !important;  }
   .btn-link{
-    color: #0f75bc;
+    color: var( --logo-color);
   }
   .border-topbottom td{
     padding: 7px 8px 0px !important;
@@ -58,11 +57,14 @@ table thead {
   .dropdown-list ul li:first-child{
     padding-top: 7px !important;
   }
+.selected-list{
+  text-align: left !important;
+}
   .dropbtn {
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #0f75bc;
+    color: var( --logo-color);
 }
 
 .dropdown {
@@ -74,7 +76,7 @@ table thead {
     display: none;
     position: absolute;
     right: 0;
-    color: #0f75bc;
+    color: var( --logo-color);
     cursor: pointer;    
     padding: 15px 20px;
     background-color: #f9f9f9;
@@ -129,4 +131,6 @@ table thead {
 .green{
   color:green;
 }
-
+.mat-raised-button{
+  padding: 0px 8px !important;
+}

@@ -33,7 +33,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     dialogRef: any = '';
     order = { orderId: "" };
     gpsMessage: string = "";
-    filterInputkmvalue = { kmvalue: "" };
+    filterInputkmvalue = { kmvalue: "0.03" };
     categoryList: any = [];
     reasonOnHold:any;
     dropdownSettings = {
@@ -105,7 +105,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         if (distributor) {
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
-                width: '700px',
+                width: '80%',
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {
@@ -357,12 +357,42 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             });
             dialogRef.afterClosed().subscribe(result => {
               if(result == 'success'){
-                this.thisDialogRef.close('success');
+                this.forWardOrder(data);
+                // this.thisDialogRef.close('success');
               }
             });
 
-            }
+            } 
 
+            forWardOrder(data) {
+                let input = {
+                  "order": {
+                    "apptype": this.authenticationService.appType(), "createdthru": "website",
+                    "from": this.authenticationService.loggedInUserId(),
+                    "loginid": this.authenticationService.loggedInUserId(),
+                    "orderid": this.orderDetail.orders.order_id, "orderstatus": "ordered", "product_type": "cans",
+                    "quantity": this.orderDetail.orders.quantity, "to": data.user_id,
+                    "usertype": this.authenticationService.userType()
+                  }
+                }
+                console.log(input);
+                //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
+                this.distributorService.forwardOrder(input)
+                  .subscribe(
+                  output => this.forWordOrderResult(output),
+                  error => {
+                    //console.log("error in distrbutors");
+                    this.loaderService.display(false);
+                  });
+            
+              }
+              forWordOrderResult(result) {
+                this.loaderService.display(false);
+            
+                if (result.result == "success") {
+                    this.thisDialogRef.close('success');
+                }
+              }
 
 
     filterPolygon() {

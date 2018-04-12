@@ -17,6 +17,7 @@ import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { stringify } from 'querystring';
+import { SupplierService } from '../supplier/supplier.service';
 
 
 @Component({
@@ -25,26 +26,50 @@ import { stringify } from 'querystring';
   styleUrls: ['./pre-order-cart-dailog.component.css']
 })
 export class PreOrderCartDailogComponent implements OnInit {
+
+  DistributorCtrl: FormControl;
+  filteredDistributors: Observable<any[]>;
+
   stateCtrl: FormControl;
   filteredDistributor: Observable<any[]>;
-  constructor(public dialog: MdDialog, public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService,   private orderLandingService: OrderLandingService, private loaderService: LoaderService, private productService: ProductsService, @Inject(MD_DIALOG_DATA) public Details: any) {
+
+  supplierCtrl: FormControl;
+  filteredSuppliers: Observable<any[]>;
+
+  constructor(public dialog: MdDialog, public thisDialogRef: MdDialogRef<PreOrderCartDailogComponent>,   private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private supplierservice :SupplierService,   private orderLandingService: OrderLandingService, private loaderService: LoaderService, private productService: ProductsService, @Inject(MD_DIALOG_DATA) public Details: any) {
+
+
+
+    this.DistributorCtrl = new FormControl();
+    this.filteredDistributors = this.DistributorCtrl.valueChanges
+
+    .startWith(null)
+    .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+
     this.stateCtrl = new FormControl();
     this.filteredDistributor = this.stateCtrl.valueChanges
 
-    
-
     .startWith(null)
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
+
+
+   this.supplierCtrl = new FormControl();
+   this.filteredSuppliers = this.supplierCtrl.valueChanges
+
+   .startWith(null)
+   .map(supp => supp ? this.filterSuppliers(supp) : this.suppliers.slice());
    }
    FormControl = new FormControl('', [
     Validators.required]);
 
    distributors: any = [];
+   suppliers:any =[];
    productList = [];
    disableSlot = false;
    hours:any="";
    day:any="";
    nextDay:any="";
+   amount:any = 0;
    nextDayValue:any ="";
    //input
    createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}, }
@@ -53,6 +78,17 @@ export class PreOrderCartDailogComponent implements OnInit {
     message:any="";
     todaysDate:any = "";
     message1:any="";
+    filterType = {distributorid: ""};
+    filterTypeSupplier = {supplierid: ""};
+    
+
+
+    soldout:any = false;
+    LastfilterRecords = false;
+
+    supplierList = [];
+    SupplierListCopy = [];
+
 
 
 
@@ -74,14 +110,14 @@ export class PreOrderCartDailogComponent implements OnInit {
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
-    "product_type":this.createPreOrderInput.productDetails.ptype, "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges),"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" ,"ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
+    "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
     }
    
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
       }
-    //console.log(data);
+    console.log(data);
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
         width: '600px',
@@ -134,6 +170,106 @@ getDistributorsResult(data) {
     }
   }
 }
+
+
+
+
+
+findDistributors(name: string) {
+  //console.log(name);
+  let finalDistributors = this.distributors.filter(dist =>
+    dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  //console.log(finalDistributors);
+  if (finalDistributors && finalDistributors.length > 0) {
+    let findDistributor: any = {};
+
+    findDistributor = _.find(finalDistributors, function (k, l) {
+      let distDetails: any = k;
+      return distDetails.fullName == name;
+    });
+
+    if (findDistributor) {
+      this.filterType.distributorid = findDistributor.userid;
+    }
+
+
+  }
+  else {
+    if (name.length >= 3 && !this.LastfilterRecords) {
+      
+      this.getDistributors();
+    }
+
+
+  }
+  return finalDistributors;
+}
+
+
+
+//Get supplier list 
+getSupplierList(){
+  let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
+  this.supplierservice.supplierList(input)
+  .subscribe(
+  output => this.getSupplierListResult(output),
+  error => {
+    //console.log("error in feedbacklist");
+    this.loaderService.display(false);
+  });
+}
+getSupplierListResult(result) {
+  //console.log(result);
+  if (result.result == "success") {
+    this.supplierList =result.data;
+    this.SupplierListCopy=result.data;
+    // this.supplierList = [];
+    // this.SupplierListCopy = [];
+  }
+
+  if (result.data && result.data.length) {
+    let suppliersCopy = [];
+    _.each(result.data, function (i, j) {
+      let details: any = i;
+      if(details.firstname){
+      details.fullName = details.firstname + " " + details.lastname
+      suppliersCopy.push(details);
+      }
+    });
+    this.suppliers = suppliersCopy;
+  }
+}
+
+
+filterSuppliers(name : string){
+  let finalSuppliers = this.suppliers.filter(supp =>
+  supp.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  if (finalSuppliers && finalSuppliers.length > 0) {
+    let findSupplier: any = {};
+
+    findSupplier = _.find(finalSuppliers, function (k, l) {
+      let suppDetails: any = k;
+      return suppDetails.fullName == name;
+    });
+
+    if (findSupplier) {
+      this.filterTypeSupplier.supplierid = findSupplier.userid;
+    }
+
+
+  }
+  else {
+    if (name.length >= 3 && !this.LastfilterRecords) {
+      
+      this.getSupplierList();
+    }
+
+
+  }
+  return finalSuppliers;
+}
+
+
 
 //filtered distributors
 
@@ -256,7 +392,7 @@ getProductsListResult(result) {
             });
       
             if (findproduct) {
-              details.quantity = "";
+              details.quantity ="";
               details.expressdelivery=false;
               findproduct.data.push(details);
             }
@@ -269,6 +405,8 @@ getProductsListResult(result) {
             }
            
           }
+
+
    // this.productList = productListCopy;
     //console.log(this.productList);
 }
@@ -306,11 +444,11 @@ createPreOrder(){
   {"paymentmode":"cash","orderstatus":"ordered","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
-  "product_quantity":this.createPreOrderInput.productDetails.ptype,
-  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
-  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + parseInt(this.createPreOrderInput.productDetails.expressdeliverycharges) ,
+  "product_quantity":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname, 
+  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,
+  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
   "cart_style":"new",
-  "delivery_address":this.Details.address, "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
+  "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
   "excepted_time":"","ispreorderby":"distributor","loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
@@ -321,8 +459,12 @@ createPreOrder(){
 
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
+
+  let slotDate = moment(this.createPreOrderInput.date).format('YYYY-MM-DD 00:00:00');
+  input[0].order.slotdate = slotDate;
   
   console.log(input);
+  JSON.stringify(input);
   this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output,input),
@@ -355,7 +497,13 @@ createPreOrderResult(result,input) {
       data.supplierdetails.supplierMno = this.Details.supplier.mobileno;
       data.supplierdetails.supplierName = this.Details.supplier.suppliername; 
     }
+
+    if(this.Details.dealers.user_id == 289){
     this.ViewDistributors(data);
+    }
+    else{
+      this.thisDialogRef.close('Cancel');
+    }
 
   }
   }
@@ -395,6 +543,17 @@ createPreOrderResult(result,input) {
 autoTimeSlotforHour(){
   this.hours = moment().format("HH");
   this.createPreOrderInput.date= new Date();
+}
+
+expressDeliveryCharge(details,  isChecked: boolean){
+ 
+  if(isChecked == true){
+    this.amount = details.expressdeliverycharges*details.quantity; 
+  }
+  else{
+    this.amount = 0;
+  }
+
 }
 
 dateChanges(event){
@@ -448,8 +607,13 @@ else{
     })
   }
 )
+
+if(this.createPreOrderInput.productDetails.default_qty){
     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
-    
+}
+else{
+  this.createPreOrderInput.productDetails.quantity = 1;
+}
   }
 
   validate(){
@@ -478,7 +642,55 @@ else{
    }
 
   }
+
+
+  availableTimeSlot(){
+    if(this.hours <= 6){
+      this.createPreOrderInput.timeslot = '7AM-8AM'
+    }
+    else if(this.hours <= 7){
+      this.createPreOrderInput.timeslot = "8AM-9AM"; 
+    }
+    else if(this.hours <= 8){
+      this.createPreOrderInput.timeslot = "9AM-10AM";
+    } 
+    else if(this.hours <= 9){
+      this.createPreOrderInput.timeslot = "10AM-11AM";
+    }
+    else if(this.hours <= 10){
+      this.createPreOrderInput.timeslot = "11AM-12PM";
+    }
+    else if(this.hours <= 11){
+      this.createPreOrderInput.timeslot = "12PM-1PM";
+    }
+    else if(this.hours <= 12){
+      this.createPreOrderInput.timeslot = "1PM-2PM";
+    }
+    else if(this.hours <= 13){
+      this.createPreOrderInput.timeslot = "2PM-3PM";
+    }
+    else if(this.hours <= 14){
+      this.createPreOrderInput.timeslot = "3PM-4PM";
+    }
+    else if(this.hours <= 15){
+      this.createPreOrderInput.timeslot = "4PM-5PM";
+    }
+    else if(this.hours <= 16){
+      this.createPreOrderInput.timeslot = "5PM-6PM";
+    }
+    else if(this.hours <= 17){
+      this.createPreOrderInput.timeslot = "6PM-7PM";
+    }
+    else if(this.hours <= 18){
+      this.createPreOrderInput.timeslot = "7PM-8PM";
+    }
+    else if(this.hours <= 19){
+      this.createPreOrderInput.timeslot = "8PM-9PM";
+    }
+
+  }
    
+
 
   //   _.each(this.productList, function(i,j){
   //   let details:any =i;
@@ -497,12 +709,14 @@ else{
 
 
   ngOnInit() {
+    
     this.getDistributors();
     // this.getProducts();
-    
+    // this.expressDeliveryCharge(true);
     this.autoTimeSlotforHour();
     this.getProductsList();
-    //console.log(this.Details);
+    console.log(this.Details);
+    this.availableTimeSlot();
   }
 
 }

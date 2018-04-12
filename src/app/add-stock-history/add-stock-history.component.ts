@@ -15,12 +15,24 @@ export class AddStockHistoryComponent implements OnInit {
 StockList=[];
 noRecord=false;
   getStockHistroy() {
-    let input = {
+    let input = {};
+    if(this.Detail.type == 'distributorspage'){
+      input = {
+        "root": {
+          "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "pid": this.Detail.productid, "areaid": "", "last_historyid": 100000, "pagesize": "1000",
+          "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
+        }
+      };
+    }
+    else{
+    input = {
       "root": {
         "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "pid": this.Detail.productid, "areaid": "", "last_historyid": 100000, "pagesize": "1000",
         "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
       }
     };
+  }
+    console.log(input);
     this.productService.getStockHistroy(input)
       .subscribe(
       output => this.getStockHistroyResult(output),
@@ -44,7 +56,7 @@ noRecord=false;
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
-   // //console.log(this.Detail);
+   console.log(this.Detail);
     this.getStockHistroy();
   }
 

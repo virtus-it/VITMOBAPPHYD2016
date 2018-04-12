@@ -38,11 +38,16 @@
           </md-error>
         </md-form-field>
       </div>
+
+
+ 
+
+
       <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot</md-option>
-          <md-option value="7AM-8AM" [disabled]= '7 <= hours'>7AM-8AM</md-option>
-          <md-option value="8AM-9AM" [disabled]='8 <= hours'>8AM-9AM</md-option>
+          <md-option value="7AM-8AM" [disabled]= '7 <= hours' >7AM-8AM</md-option>
+          <md-option value="8AM-9AM" [disabled]='8 <= hours' >8AM-9AM</md-option>
           <md-option value="9AM-10AM" [disabled]='9 <= hours'>9AM-10AM</md-option>
           <md-option value="10AM-11AM" [disabled]='10 <= hours'>10AM-11AM</md-option>
           <md-option value="11AM-12PM" [disabled]='11 <= hours'>11AM-12PM</md-option>
@@ -50,13 +55,40 @@
           <md-option value="1PM-2PM" [disabled]='13 <= hours'>1PM-2PM</md-option>
           <md-option value="2PM-3PM" [disabled]='14 <= hours'>2PM-3PM</md-option>
           <md-option value="3PM-4PM" [disabled]='15 <= hours'>3PM-4PM</md-option>
-          <md-option value="4PM-5PM" [disabled]='16 <= hours'>4PM-5PM</md-option>
+          <md-option value="4PM-5PM" [disabled]='16 <= hours' >4PM-5PM</md-option>
           <md-option value="5PM-6PM" [disabled]='17 <= hours'>5PM-6PM</md-option>
           <md-option value="6PM-7PM" [disabled]='18 <= hours'>6PM-7PM</md-option>
           <md-option value="7PM-8PM" [disabled]='19 <= hours'>7PM-8PM</md-option>
           <md-option value="8PM-9PM" [disabled]='20 <= hours'>8PM-9PM</md-option>
         </md-select>
       </div>
+
+
+      <div class="col-2 ">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+              <span>{{ dist.fullName }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div>
+
+    
+
+      <!-- <div class="col-2 ">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Supplier"  [mdAutocomplete]="auto" [formControl]="supplierCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let supp of filteredSuppliers | async" [value]="supp.fullName">
+              <span>{{ supp.fullName }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div> -->
+
+
     </div>
 
     <!-- old code starts here -->
@@ -155,9 +187,10 @@
             <th width="20%">Type</th>
             <th width="15%">Price per Unit</th>
             <th width="12%">Qty</th>   
-            <th width="15%">Cost</th>
+            
             <th width="15%" title="Express Delivery Charge">Express Delv</th>
             <th width="15%">Service Charges</th>
+            <th width="15%">Cost</th>
     
           </tr>
           <tr *ngFor="let details of prod.data">
@@ -165,9 +198,9 @@
               <div class="form-radio form-radio-inline"  >
 
                   <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
-                  
+                <b *ngIf="details.stockstatus == 'Soldout'"> <i class="fa fa-close warning" title="sold out"></i></b>
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged($event)">
+                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged($event)" [disabled]="details.stockstatus == 'Soldout'">
                   <span class="custom-control-indicator"></span>
                   <span class="custom-control-description">{{details.ptype}}</span>
                   </label>
@@ -175,7 +208,7 @@
             </td>
             
             <td>
-                <b class="">{{details.pcost}}</b>
+                <b class="">{{details.pcost}} </b>
               </td>
               <td>
                   <div class="">                   
@@ -186,17 +219,20 @@
               </div>
                 </div>
             </td>
-            <td>
-                <b class="">{{details.pcost*details.quantity}}</b>
-              </td>
+            
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)" >
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
                 </label>
                </td>
             <td class="">{{details.servicecharge}} </td>
+            <td >
+              <b class="" *ngIf="createPreOrderInput.productDetails">{{details.pcost*details.quantity + amount + details.servicecharge }} </b>
+              <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
+              <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
+            </td>
    
           </tr>
         </tbody>

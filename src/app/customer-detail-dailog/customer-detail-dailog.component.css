@@ -7,6 +7,13 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
+  .table{
+    margin-bottom: 0px !important;
+  }
+  .mg20-fs20{
+    margin: 20px;
+    font-size: 20px;
+  }
   .dist-style{
     border: 1px solid #ddd;
     margin: 20px;

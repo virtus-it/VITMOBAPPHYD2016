@@ -24,13 +24,14 @@ export class AddEditCustomerDailogComponent implements OnInit {
       Validators.required]);
    
 
-  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() } };
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
   headerValue="Add Customer";
   message:any ="";
 refresh:any = "";
+messageError:any = "";
 
 
   getCustomerDetails() {
@@ -66,7 +67,7 @@ refresh:any = "";
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address,  "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "locality":result.data.user.locality , "buildingname":result.data.user.buildingname ,   "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
@@ -99,7 +100,7 @@ refresh:any = "";
 
   }
   createCustomer() {
-
+    if(this.validation1() && this.validation2()){
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
@@ -115,6 +116,7 @@ refresh:any = "";
         this.loaderService.display(false);
       });
   }
+}
   createCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
@@ -124,6 +126,7 @@ refresh:any = "";
     }
   }
   updateCustomer() {
+    if(this.validation1() && this.validation2()){
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
@@ -137,6 +140,7 @@ refresh:any = "";
         this.loaderService.display(false);
       });
   }
+}
   updateCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
@@ -167,6 +171,27 @@ if(result.result == 'success'){
   // }
    
   // }
+
+
+  validation1(){
+    if(this.customerInput.User.firstname.length > 0){
+      this.messageError = '';
+      return true;
+    }
+    else{
+      this.messageError="Please enter customers first name";
+    }
+  }
+
+  validation2(){
+    if(this.customerInput.User.mobileno.length > 0){
+      this.messageError = '';
+      return true;
+    }
+    else{
+      this.messageError="Please enter customers phone number";
+    }
+  }
 
   valid(){
     if(this.customerInput.User.paymenttype=='credit'){

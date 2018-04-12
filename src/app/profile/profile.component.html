@@ -1,5 +1,6 @@
 <!-- <button (click)="addPreorder()">ADD</button> -->
 <div class="dist-style minheight-500">
+<<<<<<< HEAD
   <div class=" row justify-content-between distIcon-style">
     <div class="col-md-2  col-sm-2  col-lg-2 left">
       <h4>
@@ -8,6 +9,31 @@
    
 <!-- 
     search starts here -->
+=======
+    <div class=" row justify-content-between distIcon-style">
+      <div class="col-md-2  col-sm-2  col-lg-2 left">
+        <h4>
+          <i class="fa fa-file-text"></i> Profile Update</h4>
+      </div>
+      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+          <a class="cursor logo-color " title="Change Password" (click)='changePassword()'>
+              <i class="fa fa-key" aria-hidden="true"></i><small>Change Password</small>
+          </a>
+      </div>
+    </div>
+      
+    <div class="container-fluid contbg">
+        <div class="jumbotron boxsdw">
+          <div class="row">
+            <div class="col-6 ">
+              <md-form-field class="">
+                <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname" >
+                <md-error>
+                  First Name is
+                  <strong>required</strong>
+                </md-error>
+              </md-form-field>
+>>>>>>> 7cda610324f231756454dd85c649c9a763d82849
 
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
      
@@ -29,8 +55,11 @@
             <div class="form-group" ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
 
 
-              <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
+          <div class="row">
+            <div class="col">
+              <div class="">
+              <md-form-field class="wd-80pc">
+                <textarea class="form-control" mdInput placeholder="Address" name="Address"  [(ngModel)]="profileUpdate.address"  ></textarea>
               </md-form-field>
             </div>
             

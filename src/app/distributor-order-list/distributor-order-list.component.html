@@ -1,69 +1,92 @@
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-4  col-sm-4  col-lg-4">
-        <i class="fa fa-file-text-o"></i>  
-        Order List
-    </div>
-    <p *ngIf="Detail.type=='distributorOrder'"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</p> 
-    <p *ngIf="Detail.type=='distributorOrder'"> Dist No : {{Detail.data.distributor.mobileno}}</p>
-    <p *ngIf="Detail.type=='distributorOrdersfromCoverage'"> Dist Name : {{Detail.distributorName}} </p>
-    <p *ngIf="Detail.type=='distributorOrdersfromCoverage'">Dist No: {{Detail.distributorNumber}}</p>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-          <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
-          </strong>         
-    </div>
+  <div class="col-md-3 col-sm-3  col-lg-3">
+      <i class="fa fa-file-text-o"></i>  
+      Order List
   </div>
-  
-    <md-dialog-content layout="column">
-        <div class="row pd-15x25 brd-bottom">
-                <div class="col scroll">    
-                    <table class="table table-hover table-striped  table-fixedheader">
-                      <thead>
-                        <tr>
-            <th width="8%">Id</th>
-            <th width="12%">Product </th>
-            <th width="8%">Qty</th>
-            <th width="10%">Cost</th>
-            <th width="10%">Status</th>
-            <th width="10%">Mode</th>
-            <!-- <th width="12%">Customer </th>
-            <th width="10%"> Cust Mobile</th> -->
-       
-          </tr>
-        </thead>
-        <tbody>
-            <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
-            <td width="8%" class="left" class="cellpadding" scope="row"> {{supplierOrder.order_id}}</td>
-            <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
-            <td width="8%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>               
-            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
-            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-            <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>
-            <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
-           </tr>
-        </tbody>
-        <!-- <tfoot>
-          <tr>
-            <td colspan="8">
-              <h4 class="warning  capitalize center">
-                <a href="javascript:void(0);"  *ngIf="ordersClickMore">
-                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-                <span *ngIf="!ordersClickMore">Record Not Available</span>
-              </h4>
+  <div class="col">
+  <span *ngIf="Detail.type=='distributorOrder'" class="capitalize"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</span> 
+  <span *ngIf="Detail.type=='distributorOrder'">  -  {{Detail.data.distributor.mobileno}}</span>
+  <span *ngIf="Detail.type=='distributorOrdersfromCoverage'" class="capitalize"> Dist Name : {{Detail.distributorName}} </span>
+  <span *ngIf="Detail.type=='distributorOrdersfromCoverage'">  -  {{Detail.distributorNumber}}</span>
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+        <strong  ><i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+        </strong>         
+  </div>
+</div>
+
+  <md-dialog-content layout="column">
+      <div class="row pd-15x25 brd-bottom">
+              <div class="col scroll">    
+                  <table class="table table-hover table-striped  table-fixedheader">
+                    <thead>
+                      <tr>
+          <th width="9%">Id</th>
+          <th width="9%">Product </th>
+          <th width="9%">Qty</th>
+          <th width="9%">Cost</th>
+          <th width="9%">Amount</th>
+          <th width="9%">Status</th>
+          <th width="9%">Mode</th>
+          <th class="" width="9%">Ret Qty</th>
+          <th class="" width="9%">Serv chgs</th>
+          <th class="" width="9%">Exp del chgs</th>
+          <th class="" width="9%">Received amt</th>
+          <!-- <th width="12%">Customer </th>
+          <th width="10%"> Cust Mobile</th> -->
+     
+        </tr>
+      </thead>
+      <tbody>
+          <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
+          <td width="9%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td> 
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                         
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+          <span *ngIf="supplierOrder.return_cans_count =='' || supplierOrder.return_cans_count === null"> 0 </span>
+          <span *ngIf="supplierOrder.return_cans_count">{{supplierOrder.return_cans_count}} </span>
+          </td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+            <span *ngIf="supplierOrder.servicecharges == '' || supplierOrder.servicecharges === null"> 0 </span>
+            <span *ngIf="supplierOrder.servicecharges">{{supplierOrder.servicecharges}}</span>            
             </td>
-          </tr>
-        </tfoot> -->
-      </table>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+              <span *ngIf="supplierOrder.expressdeliverycharges == '' || supplierOrder.expressdeliverycharges === null"> 0 </span>
+              <span *ngIf="supplierOrder.expressdeliverycharges">{{supplierOrder.expressdeliverycharges}}</span></td>
+          <td width="9%" class="left" class="cellpadding" scope="row">
+            <span *ngIf="supplierOrder.receivedamount == '' || supplierOrder.receivedamount === null"> 0 </span>
+            <span *ngIf="supplierOrder.receivedamount > 0">{{supplierOrder.receivedamount}} </span> 
+            </td>
+          
+          <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>
+          <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
+         </tr>
+      </tbody>
+      <!-- <tfoot>
+        <tr>
+          <td colspan="8">
+            <h4 class="warning  capitalize center">
+              <a href="javascript:void(0);"  *ngIf="ordersClickMore">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+              <span *ngIf="!ordersClickMore">Record Not Available</span>
+            </h4>
+          </td>
+        </tr>
+      </tfoot> -->
+    </table>
+  </div>
+          </div>
+          </md-dialog-content>
+  
+  <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      </md-dialog-actions>
     </div>
-            </div>
-            </md-dialog-content>
+
     
-    <div class="row float-right pdright-30 mgbottom-20">
-        <md-dialog-actions align="end">
-          <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
-        </md-dialog-actions>
-      </div>
-  
-      
-  
-  
+

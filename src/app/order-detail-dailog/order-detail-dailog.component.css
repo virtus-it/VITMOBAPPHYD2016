@@ -155,3 +155,13 @@
   font-size: 20px;
   margin-left: 10px;
 }
+.red{
+  color:red;
+}
+.highlight{
+  background: #f79123;
+  color: #fff;
+}
+.highlight .gray9{
+  color: #fff !important;
+}

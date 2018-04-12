@@ -45,8 +45,21 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
   confirmDeliverOrder(){
+    if(this.Detail.order.adv_amt == '' || this.Detail.order.adv_amt === null){
+    this.Detail.order.adv_amt = 0;
+    }
+    else{
+      this.deliverPreOrderInput.adv_amt = this.Detail.order.adv_amt;
+    }
+
     this.Detail.order.received_amt = this.Detail.order.total_amt;
-    this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
+    
+    if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
+      this.Detail.order.assignedto = 0 ;
+    }
+    else{
+      this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
+    }
     if(this.deliverPreOrderInput.confirmPayment){
       this.Detail.order.paymentstatus = "confirm";
     }

@@ -7,13 +7,32 @@ import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/throw';
-
+import * as io from 'socket.io-client';
 
 @Injectable()
 export class OrderLandingService {
 
-  constructor(private http: Http, @Inject('API_URL') private apiUrl: string,private loaderService: LoaderService) { }
+  constructor(private http: Http, @Inject('API_URL') private apiUrl: string,private loaderService: LoaderService,@Inject('App_URL') private appUrl: string) { 
 
+    this.socket = io.connect(this.appUrl);
+    this.websitesocket = io.connect(this.apiUrl);
+  }
+  socket;
+  websitesocket;
+  public getMessages = () => {
+    return Observable.create((observer) => {
+        this.socket.on('orderSocket', (message) => {
+            observer.next(message);
+        });
+    });
+}
+public getMessagesfromWebsite = () => {
+  return Observable.create((observer) => {
+      this.websitesocket.on('orderSocket', (message) => {
+          observer.next(message);
+      });
+  });
+}
   getOrderList(input) {
     
     let bodyString = JSON.stringify(input); // Stringify payload

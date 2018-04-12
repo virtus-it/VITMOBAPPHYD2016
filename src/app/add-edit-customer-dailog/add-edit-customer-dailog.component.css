@@ -1,3 +1,7 @@
 .red{
     color:red;
 }
+
+.oneline {
+    white-space: nowrap ;
+  }

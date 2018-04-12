@@ -5,6 +5,9 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import { AddEditProductDailogComponent } from '../add-edit-product-dailog/add-edit-product-dailog.component';
 import { LoaderService } from '../login/loader.service';
+import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
+import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import { MdDialog } from '@angular/material';
 @Component({
   selector: 'app-product-list-dialog',
@@ -83,11 +86,60 @@ getProductsResult(output) {
     });
   
   }
+
+  stockHistory(data , distributorDetails) {
+    let formattedData = {"type":"distributorspage", data:data , distributorId: distributorDetails.userid}
+    let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
+
+      width: '40%',
+      data: formattedData
+    });
+    dialogRefStrockHitory.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+
+
+    });
+
+  }
+
+
+
+  addStock(data){
+    let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
+
+      width: '600px',
+      data: data
+    });
+    dialogRefAddInvoice.afterClosed().subscribe(result => {
+      if (result == 'success') {
+      }
+
+    });
+
+  }
+
+
+  changeStockStatus(data){
+    let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
+
+      width: '400px',
+      data: data
+    });
+    dialogRefAddProduct.afterClosed().subscribe(result => {
+      if (result == 'success') {
+      }
+
+    });
+
+  }
+
+
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
 }
   ngOnInit() {
     this.getProducts(this.distributorDetails);
+    console.log(this.distributorDetails);
   }
 
 }

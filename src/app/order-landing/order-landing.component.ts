@@ -15,8 +15,10 @@ import { DistributorListDialogComponent } from '../distributor-list-dialog/distr
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
+import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
+import { Router } from '@angular/router';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -37,9 +39,10 @@ export class OrderLandingComponent implements OnInit {
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
+
     
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService) {
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router) {
 
     
     this.DistributorCtrl = new FormControl();
@@ -68,9 +71,13 @@ export class OrderLandingComponent implements OnInit {
   orderedTime:any="";
   currentTime:any= "";
   deliveryTime:any="";
+  cantFilterMessage:any = '';
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
+  cantFilter = false;
+  // forwardAddress:any = ""
+  // allAddress:any = this.allOrders.orderby_address;
   completeClickMore = false;
   polygonArray = [];
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -216,6 +223,38 @@ export class OrderLandingComponent implements OnInit {
     });
 
   }
+
+  filterValidation(){
+    if(this.filterInput.order.searchtype == ""){
+      this.cantFilter = true;
+    }
+    if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+    else if(this.filterInput.order.searchtext == ''){
+      this.cantFilter = true;
+    }
+
+  
+    else{
+      this.cantFilter = false;
+    }
+  }
   showCoverageDetails(orderDetails) {
     let distributorId ="";
     if(orderDetails.distributor){
@@ -226,7 +265,7 @@ export class OrderLandingComponent implements OnInit {
     }
     let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
-      width: '95%',
+      width: '98%',
       data: modelData
     });
     dialogRefCoverageDailog.afterClosed().subscribe(result => {
@@ -274,7 +313,7 @@ export class OrderLandingComponent implements OnInit {
     let data = {"id":orderDetails.order_id,"firstname" :orderDetails.orderby_firstname,"lastName" :orderDetails.orderby_lastname,"type":"order","mobileno":orderDetails.orderby_mobileno, "followupstatus":orderDetails.followupstatus , "refresh":"" };
     let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
-      width: '80%',
+      width: '70%',
       data: data
     });
     dialogRefFollow.afterClosed().subscribe(result => {
@@ -336,6 +375,7 @@ export class OrderLandingComponent implements OnInit {
       let data = this.ModifyOrderList(result.data);
       this.forwardClickMore = true;
       this.forwardOrders = _.union(this.forwardOrders, data);
+
     }
     else {
       this.forwardClickMore = false;
@@ -556,7 +596,9 @@ export class OrderLandingComponent implements OnInit {
   //test code for pagination ends here
 
   searchOrderList() {
+   
     this.deliverySlot();
+ 
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
     }
@@ -573,7 +615,7 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtext = this.filterType.distributorid;
     }
     else if (this.filterInput.order.searchtype == 'followupdate') {
-      this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+      this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD 00:02:00');
      
     }
     else if (this.filterInput.order.searchtype == 'status') {
@@ -590,6 +632,18 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
+
+    if(this.cantFilter == true){
+      this.cantFilterMessage="Please Select to filter";
+      this.showFilterDailog =true;
+    }
+    else{
+      this.cantFilter == false;
+      this.cantFilterMessage = '';
+    }
+
+    this.filterValidation();
+
     if (this.tabPanelView == 'forward') {
       this.filterInput.order.status = 'forwardedorders';
     }
@@ -597,8 +651,10 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.status = 'all';
     }
     console.log(this.filterInput);
+    if(this.cantFilter == false){
     this.getFilteredOrders(true);
-this.showFilterDailog =false;
+    }
+// this.showFilterDailog =false;
 
   }
   getFilteredOrders(firstcall) {
@@ -690,7 +746,7 @@ this.showFilterDailog =false;
   }
 
 
-  globalSearch(){
+  globalSearch(firstcall){
     this.tabPanelView = 'complete';
     this.deliverySlot();
     if (this.globalFilterInput.order.searchtype == 'name') {
@@ -709,7 +765,7 @@ this.showFilterDailog =false;
       this.globalFilterInput.order.searchtext = this.globalfilterType.distributorid;
     }
     else if (this.globalFilterInput.order.searchtype == 'followupdate') {
-      this.globalFilterInput.order.searchtext = moment(this.globalfilterType.followUpdate).format('YYYY-MM-DD HH:MM:SS');
+      this.globalFilterInput.order.searchtext = moment(this.globalfilterType.followUpdate).format('YYYY-MM-DD 00:02:00');
      
     }
     else if (this.globalFilterInput.order.searchtype == 'status') {
@@ -733,6 +789,7 @@ this.showFilterDailog =false;
       this.globalFilterInput.order.status = 'complete';
     }
     console.log(this.globalFilterInput);
+<<<<<<< HEAD
     this.globalFilteredOrders(true);
 // this.showFilterDailog =false;
 // let input = this.globalFilterInput;
@@ -746,6 +803,9 @@ this.showFilterDailog =false;
 
   }
   globalFilteredOrders(firstcall){
+=======
+
+>>>>>>> 7cda610324f231756454dd85c649c9a763d82849
     if(!firstcall){
          if(this.tabPanelView == 'complete'){
         let lastCompleteOrder:any = _.last(this.completeOrders);
@@ -799,6 +859,8 @@ this.orderLandingService.getOrdersByfilter(input)
     this.filterRecords = false;
     this.quickFilterView = "";
     this.tabPanelView = 'forward';
+    this.cantFilterMessage = "";
+
     // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -806,6 +868,24 @@ this.orderLandingService.getOrdersByfilter(input)
     this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
+  }
+
+
+  refresh(){
+    this.showFilterDailog =false;
+    this.quickFilterView = "";
+    this.cantFilterMessage = "";
+    // this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    // this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+    if(this.tabPanelView == 'forward'){
+      this.getForwardOrderDetails(true);
+    }
+    else if(this.tabPanelView == 'allorder'){
+      this.getAllOrderDetails(true);
+    }
+    else if(this.tabPanelView == 'complete'){
+      this.globalSearch(true);
+    }    
   }
   ModifyOrderList(result) {
     _.each(result, function (i, j) {
@@ -878,7 +958,11 @@ this.orderLandingService.getOrdersByfilter(input)
         this.getAllOrderDetails(firstcall);
       }
       else if(tab == 'complete'){
+<<<<<<< HEAD
        this.globalFilteredOrders(firstcall);
+=======
+       this.globalSearch(firstcall);
+>>>>>>> 7cda610324f231756454dd85c649c9a763d82849
       }
     }
 
@@ -1025,7 +1109,7 @@ this.orderLandingService.getOrdersByfilter(input)
   viewDistributorsOrders(data){
     let formatteddata: any = { "type": "distributorOrder", "data": data , distributorId: data.distributor.userid };
         let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
-          width: '95%',
+          width: '80%',
           data: formatteddata
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {
@@ -1095,6 +1179,51 @@ this.orderLandingService.getOrdersByfilter(input)
             });
           }
           }
+          getMessage() {
+            this.orderLandingService
+                .getMessages()
+                .subscribe((message: string) => {
+                    console.log(message);
+                    var praseMsg = JSON.parse(message);
+                    let currentUrl = this.router.url.split('/');
+                    if(currentUrl[1] != 'preorder'){
+                      this.opensocketMessage(praseMsg);
+  
+                    }
+                });
+    
+        }
+        getMessagesfromWebsite() {
+          this.orderLandingService
+              .getMessagesfromWebsite()
+              .subscribe((message: string) => {
+                  console.log(message);
+                  var praseMsg = JSON.parse(message);
+                  let currentUrl = this.router.url.split('/');
+                  if(currentUrl[1] != 'preorder'){
+                    this.opensocketMessage(praseMsg);
+
+                  }
+                 
+              });
+  
+      }
+        opensocketMessage(data){
+          let dialogRef= this.dialog.open(SocketmessagesComponent, {
+            
+                  width: '500px',
+                  data: data
+                });
+                dialogRef.afterClosed().subscribe(result => {
+                  
+                  if (result == 'success') {
+                   
+            
+                  }
+            
+                });
+
+        }
   ngOnInit() {
     // this.getDistributorsOrders();
     this.getPolygonDistributors();
@@ -1102,7 +1231,9 @@ this.orderLandingService.getOrdersByfilter(input)
     this.getAllOrderDetails(true);
     this.getDistributors();
     this.getSupplier();
-
+    this.getMessage();
+    this.getMessagesfromWebsite();
+    
    
     this.superDealer = this.authenticationService.getSupperDelear();
     if(!this.superDealer){

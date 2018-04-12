@@ -1,7 +1,13 @@
-<div class="row justify-content-between modal-title ">
+<div class="row  modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
     <i class="fa fa-file-text-o"></i> Order Coverage
   </div>
+  <div class="col">
+      <span >Customer : {{orderDetail.orders.customer.firstname}}</span>  
+      <span class="mgleft-10">Brand : {{orderDetail.orders.brandname}}</span> 
+      <span>{{orderDetail.orders.prod_type}}</span> - 
+      <span>{{orderDetail.orders.quantity}}(qty)</span>
+      </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -40,7 +46,7 @@
   <div class="container-fluid brd-bottom">
      
     <div class="row">
-      <div class="col">
+      <div class="col mgbottom-10">
           <div *ngIf="gpsMessage"><h4 class="warning">{{gpsMessage}}</h4></div>        
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
           <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
@@ -48,40 +54,40 @@
             [clickable]="true" (polyClick)="click($event,p)" [editable]="false" [polyDraggable]="false">
           </agm-polygon>
         </agm-map>
+      
       </div>
-      <div class="col-md-3" *ngIf="listOfDistributors.length">
-          <table class="table table-hover table-fixedheader nofath">
+      <div class="col-md-4" *ngIf="listOfDistributors.length">
+          <table class="table table-hover table-striped table-fixedheader nofath">
               <thead>
             <tr>
               <!-- <th width="3%">S.No</th> -->
-              <th width="20%"><small> Distributor</small></th>
-              <th width="20%"><small>Mobile</small></th>
-              <th width="20%"><small>Products</small></th>
-              <th width="20%" class="center"> <small>Areas</small></th>
-              <th width="10%" class=""><small>orders</small></th>
-              <th width="10%" class=""><small>Assign</small></th>
+              <th width="22%"><small> Distributor</small></th>
+              <th width="21%"><small>Mobile</small></th>
+              <th width="16%"><small>Products</small></th>
+              <th width="15%" class="center"> <small>Areas</small></th>
+              <th width="13%" class=""><small>orders</small></th>
+              <th width="13%" class=""  *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" ><small>Assign</small></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
               <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-              <td width="20%" class="left capital"><small>{{dist.distributorName}}</small></td>
-              <td width="20%" class="left capital"><small>{{dist.mobileno}} {{dist.mobileno1}} {{dist.mobileno2}}</small>
-              </td>
-              <td width="20%" class=" capital center">
+              <td width="22%" class="left capital"><small>{{dist.distributorName}}</small></td>
+              <td width="21%" class="left capital"><small>{{dist.mobileno}}</small></td>
+              <td width="16%" class=" capital center">
                 <label (click)="ViewProduct(dist)" class="logo-color"><i class="fa fa-gift fs-20" aria-hidden="true"></i>
                    </label>
               </td>
-              <td width="20%" class=" capital center">
+              <td width="15%" class=" capital center">
                   <label (click)="DistrbutorHover(dist)" class="logo-color"><i class="fa fa-map" aria-hidden="true"></i>
                      </label>
               </td>
-              <td width="10%" class="">
+              <td width="13%" class="">
                 <label class="logo-color" title="Orders"  (click)="distributorsOrders(dist)"><i class="fa fa-file-text-o" ></i> 
                 </label>
               </td>
 
-              <td width="10%" class="">
+              <td width="13%" class="">
                 <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="openProductAssingDialog(dist)" > <i class="fa fa-check-circle-o"></i>
                 </label>
               </td>
@@ -91,17 +97,13 @@
         </table>
       </div>
     </div>
+
   </div>
   </form>
 </md-dialog-content>
 
 <div class="row float-right pdright-30  mgbottom-20">
-  <div class="">
-  <small >Customer Name: {{orderDetail.orders.customer.firstname}}</small>
-  <small >Brand : {{orderDetail.orders.brandname}}</small>
-  <small>Type: {{orderDetail.orders.prod_type}}</small>
-  <small>Quantity: {{orderDetail.orders.quantity}}</small>
-  </div>
+
   
   <md-dialog-actions align="end">
      

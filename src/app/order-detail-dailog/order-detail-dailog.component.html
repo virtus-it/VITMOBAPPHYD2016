@@ -47,23 +47,31 @@
 
           </div>
           <div class="row form-group">
-            <div class="col-md-8">
+            <div class="col-md-6">
               <small class="capital ">
                 <i class="fa fa-user" aria-hidden="true"></i> {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
               <br>
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span class="gray9">Order Address</span><br> {{dailogOrderDetails.orderby_address}}</small>
+                <span class="gray9">Order Address</span><br>
+                <b>Landmark: </b>
+                <b>Flat Number:</b>
+                <br>
+                {{dailogOrderDetails.orderby_address}}</small>
                 <br>
 
             </div>
-            <div class="col-md-4 right">
+            <div class="col-md-6 right">
               <small class="capital ">
                 <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.orderby_mobileno}} </small>
               <br>
               <small class="capital">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span class="gray9">Profile Address</span><br> {{customerAddressDetails}}
+              <span class="gray9">Profile Address</span><br>
+              <b>Landmark: </b>
+              <b>Flat Number: </b>
+              <br>
+              {{customerAddressDetails}}
             </small>
               <!-- <small>
                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
@@ -123,8 +131,10 @@
                 </tr>
               </thead>
               <tbody>
+                  <b  *ngIf = "customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>  
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-                  <td width="55%">
+                  <td width="55%">    
+                               
                     <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>
                   <td width="30%">
@@ -132,8 +142,9 @@
                     <a *ngIf="canDetails.showIcon">  <small> <i class="fa fa-exclamation-triangle yellow" title="Customer given extra {{canDetails.avaliablecans}} can to you"></i></small> </a>
 
                   </td>
-
+                 
                 </tr>
+                
               </tbody>
 
             </table>
@@ -178,8 +189,8 @@
                 </div>
               </li>
               <li>
-                <div class="timeline-badge danger">
-                  <i class="fa fa-check-square-o" aria-hidden="true"></i>
+                <div class="timeline-badge info">
+                  <i class="fa fa-check-square-o white" aria-hidden="true"></i>
                 </div>
                 <div class="timeline-panel" >
                   <div class="timeline-heading">
@@ -283,12 +294,34 @@
             </div>
           </div>
 <!-- notification buttons -->
-<button class="mat-raised-button mat-primary" (click)="notification('radio')">Radio button</button>
-<button class="mat-raised-button mat-primary" (click)="notification('checkbox')">checkbox</button> 
-<button class="mat-raised-button mat-primary" (click)="notification('website')">website</button>
-<button class="mat-raised-button mat-primary" (click)="notification('slide')">slide</button>
-<button class="mat-raised-button mat-primary" (click)="notification('playstore')">playstore</button>
+<div class="row mgtop-10">
+  <div class="col">
+<button class="mat-raised-button mat-primary"  > Read notification</button> 
+</div>
+<div class="col">
+<button class="mat-raised-button mat-primary" (click)="getTemplates()">Remainder 2</button> 
+</div>
+</div>
+<div class="row mgtop-10">
+    <div class="col">
+<button class="mat-raised-button mat-primary" (click)="getTemplates()" >Remainder 3</button>
+</div>
+<div class="col">
+<button class="mat-raised-button mat-primary" (click)="getTemplates()" >Remainder 4</button> 
+</div>
+</div>
+<div class="row mgtop-10">
+    <div class="col">
+<button class="mat-raised-button mat-primary" (click)="getTemplates()" >Delivered</button>
+</div></div>
+<!-- radio, checkbox, website , slide , playstore 
 
+(click)="notification('radio')"
+ (click)="notification('checkbox')"
+  (click)="notification('website')"
+   (click)="notification('slide')"
+    (click)="notification('playstore')"
+-->
 
 
         </div>
@@ -296,9 +329,10 @@
       <div class="col-md-4 form-group border-left">
         <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
         <ul class="scrollheight">
-          <li class="nolist-style  messages-style" *ngFor="let msg of dailogOrderDetails.messages">
+          <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2}" *ngFor="let msg of dailogOrderDetails.messages">
             <div class="row">
-              <div class="col">  <i class="fa fa-reply" aria-hidden="true"></i>
+              <div class="col" >  <i class="fa fa-reply" aria-hidden="true"></i>
+                <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
                 <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small></div>
               <div class="col right"> <small class="gray9">{{ msg.createddate | utcDate}} </small></div>
             </div>
@@ -320,7 +354,7 @@
             <span class="custom-control-description"> Distributor</span>
           </label>
           <label class="">
-            <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template"></i>
+            <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i>
           </label>
         </div>
         <div class="row">
@@ -334,7 +368,7 @@
           <br>
           <div class="mgleft-20">
               <small class="">Characters Remaining :
-                  <span class="danger"> {{500 - messageInput.order.reason.length}}</span>
+                  <span class="danger">{{500 - messageInput.order.reason.length}}</span>
                 </small>
           </div>
          

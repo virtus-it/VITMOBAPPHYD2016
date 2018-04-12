@@ -1,0 +1,32 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+      <i _ngcontent-c5="" aria-hidden="true" class="fa fa-send-o"></i>Quick Notifications</div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+
+      
+        <md-form-field class="example-full-width">
+            <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name"> 
+                <span>{{ temp.template_name }}</span>
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
+
+    </div>
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" md-raised-button >SUBMIT</button>
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

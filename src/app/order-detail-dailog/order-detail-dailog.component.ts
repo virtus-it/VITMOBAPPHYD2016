@@ -8,7 +8,9 @@ import { EmptyCanDailogComponent } from '../empty-can-dailog/empty-can-dailog.co
 import { OnHoldOrderStatusComponent } from '../on-hold-order-status/on-hold-order-status.component';
 import { EditOrderStatusComponent } from '../edit-order-status/edit-order-status.component';
 import { OrderLandingService } from '../order-landing/order-landing.service';
+import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
 import { SmsServiceService } from '../sms/sms-service.service';
+import { MessageTemplateComponent } from '../message-template/message-template.component';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
@@ -73,7 +75,7 @@ onHoldStatus(orderData) {
 }
 editStatus(orderData) {
     let dialogRefeditStatus = this.dialog.open(EditOrderStatusComponent, {
-        width: '750px',
+        width: '550px',
         data: orderData
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
@@ -81,6 +83,23 @@ editStatus(orderData) {
         if (result == 'success') {
             this.getOrderDetailsById();
             this.getProductsListByCustomerId();
+        }
+
+    });
+
+}
+
+messageTemplate(data){
+    let dialogRefeditStatus = this.dialog.open(MessageTemplateComponent, {
+        width: '900px',
+        data: data
+    });
+    dialogRefeditStatus.afterClosed().subscribe(result => {
+        ////console.log(`Dialog closed: ${result}`);
+        if (result != '') {
+
+            this.messageInput.order.reason = result; 
+
         }
 
     });
@@ -100,7 +119,7 @@ getOrderDetailsById() {
 }
 getOrderDetailsByIdResult(result) {
     this.loaderService.display(false);
-    ////console.log(result);
+    console.log(result);
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
         if (this.dailogOrderDetails .status == "onhold") {
@@ -230,58 +249,73 @@ deliveryStatus(){
 
 
 // notification(type){
-//     let input = this.notificationsInput;
-//     if(type == 'radio'){
-//         this.notificationsInput.User.smstype = "notification";
-//         this.notificationsInput.User.type = "radio";
-//         this.notificationsInput.User.body= "body tag message here";
-//         this.notificationsInput.User.title = "title bar message";
-//         this.notificationsInput.User.buttons = ["Radio Button"];
+    // let input = this.notificationsInput;
+    // if(type == 'radio'){
+    //     this.notificationsInput.User.smstype = "notification";
+    //     this.notificationsInput.User.type = "radio";
+    //     this.notificationsInput.User.body= "body tag message here";
+    //     this.notificationsInput.User.title = "title bar message";
+    //     this.notificationsInput.User.buttons = ["Radio Button"];
         
-//     }
-//     if(type == 'checkbox'){
-//         input.User.smstype = "notification";
-//         input.User.type = "checkbox";
-//         input.User.body= "body tag message here";
-//         input.User.title = "title bar message";
-//         input.User.buttons = ["Radio Button"];
-//         input.User.option= ["option1"]; 
-//     }
-//     if(type=='website'){
-//         input.User.smstype = "notification";
-//         input.User.type = "website";
-//         input.User.body= "body tag message here";
-//         input.User.title = "title bar message";
-//         input.User.redirecturl = "http://www.moya.online";
-//     }
-//     if(type=='slide'){ 
-//         input.User.smstype = "notification";
-//         input.User.type = "slide";
-//         input.User.body= "body tag message here";
-//         input.User.title = "title bar message";
-//         input.User.sliderurl= [{"image":"https://images.pexels.com/photos/40784/drops-of-water-water-nature-liquid-40784.jpeg?h=350&auto=compress&cs=tinysrgb","count":0}];
-//     }
-//     if(type == 'playstore'){
-//         input.User.smstype = "notification";
-//         input.User.type = "playstore";
-//         input.User.body= "body tag message here";
-//         input.User.title = "title bar message";
-//         input.User.buttons = ["Rate us now!!"];
-//         input.User.buttonactions = [{text: "Rate Now", actiontype: "playstore"}];
-//     }
-//     console.log(input);
-//     this.smsService.CreateSms(input)
-//     .subscribe(
-//     output => this.saveMobileSmsResult(output),
-//     error => {
-//     });
+    // }
+    // if(type == 'checkbox'){
+    //     input.User.smstype = "notification";
+    //     input.User.type = "checkbox";
+    //     input.User.body= "body tag message here";
+    //     input.User.title = "title bar message";
+    //     input.User.buttons = ["Radio Button"];
+    //     input.User.option= ["option1"]; 
+    // }
+    // if(type=='website'){
+    //     input.User.smstype = "notification";
+    //     input.User.type = "website";
+    //     input.User.body= "body tag message here";
+    //     input.User.title = "title bar message";
+    //     input.User.redirecturl = "http://www.moya.online";
+    // }
+    // if(type=='slide'){ 
+    //     input.User.smstype = "notification";
+    //     input.User.type = "slide";
+    //     input.User.body= "body tag message here";
+    //     input.User.title = "title bar message";
+    //     input.User.sliderurl= [{"image":"https://images.pexels.com/photos/40784/drops-of-water-water-nature-liquid-40784.jpeg?h=350&auto=compress&cs=tinysrgb","count":0}];
+    // }
+    // if(type == 'playstore'){
+    //     input.User.smstype = "notification";
+    //     input.User.type = "playstore";
+    //     input.User.body= "body tag message here";
+    //     input.User.title = "title bar message";
+    //     input.User.buttons = ["Rate us now!!"];
+    //     input.User.buttonactions = [{text: "Rate Now", actiontype: "playstore"}];
+    // }
+    // console.log(input);
+    // this.smsService.CreateSms(input)
+    // .subscribe(
+    // output => this.saveMobileSmsResult(output),
+    // error => {
+    // });
 // }
-// saveMobileSmsResult(result) {
-//   if(result.result == 'success'){
+saveMobileSmsResult(result) {
+  if(result.result == 'success'){
 
-//   }
-// }
+  }
+}
     
+
+getTemplates(){
+    let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
+        width: '900px',
+        data: ''
+    });
+    dialogRefeditStatus.afterClosed().subscribe(result => {
+        ////console.log(`Dialog closed: ${result}`);
+        if (result.result =='success') {
+
+        }
+
+    });
+
+}
 
 ngOnInit() {
     this.getOrderDetailsById();

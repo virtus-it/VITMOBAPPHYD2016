@@ -28,7 +28,6 @@
 
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
-
             <br>
             <div class="form-group">
               <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
@@ -126,8 +125,8 @@
           <tr>
             <th width="12%">Customer</th>         
             <th width="12%">Distributor</th>
-            <th width="8%">Mobile</th>
-            <th width="10%">Email</th>
+            <th width="12%">Mobile</th>
+            <!-- <th width="10%">Email</th> -->
             <th width="15%">Address</th>
             <th width="8%">Mode</th>
             <th width="10%">Type</th>
@@ -139,27 +138,28 @@
         <tbody>
           <tr *ngFor="let customers of customerList">
             <td class="left capitalize" *ngIf="customers.firstname" width="12%">
-                <span class="onhovertabletext-100">
+                <span class="onhovertooltip-150" title=" {{customers.firstname}} {{customers.lastname}} ">
                 <span *ngIf="customers.isappdownloaded" class=""><i class="fa fa-thumbs-up success" title="Joined"></i> </span>
                 <span *ngIf="!customers.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger" title="Not Joined"></i> </span>
                 {{customers.firstname}} {{customers.lastname}} 
             </span>
             </td>
             <td class="left"  *ngIf="customers.dealers" width="12%">
-                <span class="onhovertabletext-100">
+                <span class="onhovertooltip-150" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
               {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
             </span>
             </td>
 
-            <td class="left numbers" width="8%">{{customers.mobileno}}
-              <span *ngIf="customers.mobileno_one || customers.mobileno_two" class="">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>  </td>
+            <td class="left numbers" width="12%">
+              <span class="onhovertooltip-150" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}} 
+              <span *ngIf="customers.mobileno_one || customers.mobileno_two" >{{customers.mobileno_one}} {{customers.mobileno_two}}</span></span>  </td>
             <!-- <td class="left"> {{customers.mobileno_one}}  </td>
             <td class="left">  {{customers.mobileno_two}}</td> -->
-            <td class="left"  width="10%">
+            <!-- <td class="left"  width="10%">
                 <span class="onhovertabletext-100">
               {{customers.emailid}}
             </span>
-            </td>
+            </td> -->
             <td class="left" width="15%"><span class="onhovertooltip" title="{{customers.address}}">{{customers.address}}</span></td>
            
               <td class="left"  width="8%">
@@ -186,8 +186,7 @@
                   </div>
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showResendInvitation()'>
-                      <i class="fa fa-reply"></i>
-                      Re-send invitation</label>
+                      <i class="fa fa-reply"></i> Re-send invitation</label>
                     <label class="col-md-6" (click)='showInactive(customers)'>
                       <i class="fa fa-ban"></i> Activate/Deactivate</label>
                   </div>

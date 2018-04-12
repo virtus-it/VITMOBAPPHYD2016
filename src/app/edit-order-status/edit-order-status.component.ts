@@ -15,7 +15,7 @@ export class EditOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EditOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": (this.orderDetail.delivered_quantity * this.orderDetail.prod_cost)  + (this.orderDetail.delivered_quantity * this.orderDetail.servicecharges) + (this.orderDetail.expressdeliverycharges) , "orderstatus": "delivered", 
-  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype } };
+  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype , "adv_amt":this.orderDetail.customerpaymentdts.advance_amount } };
 isConfirmed = true;
 
 
@@ -25,6 +25,10 @@ isConfirmed = true;
     if (!this.editStatusInput.order.received_amt) {
       this.editStatusInput.order.received_amt = 0;
     }
+    if(this.editStatusInput.order.return_cans === null || this.editStatusInput.order.return_cans == ''){
+      this.editStatusInput.order.return_cans = 0;
+    }
+
 
     if (this.editStatusInput.order.orderstatus !== "delivered") {
       this.editStatusInput.order.received_amt = 0;
@@ -58,7 +62,7 @@ if(this.editStatusInput.order.orderstatus == "not_reachable"){
       this.editStatusInput.order.paymentstatus = 'confirm';
     }
     let input = this.editStatusInput;
-    //console.log(input);
+    console.log(input);
     this.orderLandingService.editOrderStatus(input)
       .subscribe(
       output => this.updateOrderStatusResult(output),
@@ -73,6 +77,11 @@ if(result.result = '"success"'){
   this.thisDialogRef.close('success');
 }
   }
+
+
+  onInit(){
+    this.editStatusInput.order.return_cans = this.editStatusInput.order.delivered_qty;
+  }
   changeAmount() {
     this.editStatusInput.order.received_amt = this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost
   }
@@ -80,6 +89,7 @@ if(result.result = '"success"'){
     this.thisDialogRef.close('Cancel');
   }
   ngOnInit() {
+    this.onInit();
     //console.log(this.editStatusInput);
     console.log(this.orderDetail);
   }
