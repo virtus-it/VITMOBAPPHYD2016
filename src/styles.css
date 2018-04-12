@@ -117,6 +117,9 @@ table thead {
     max-width: 100% !important;
     overflow: hidden !important;
   }
+  .wd-80pc{
+    width: 80%;
+  }
   .bg-eee{
     background: #eceff4 !important;
     }
@@ -666,6 +669,13 @@ box-shadow: 0 0 8px #bbb; */
 }
 .onhovertext150 {
   width:150px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
+.onhovertooltip-100{
+  width:100px;
  text-overflow: ellipsis;
   white-space: nowrap;
 overflow: hidden;

@@ -6,13 +6,13 @@
       </div>
       <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
           <a class="cursor logo-color " title="Change Password" (click)='changePassword()'>
-              <i class="fa fa-key" aria-hidden="true"></i>
+              <i class="fa fa-key" aria-hidden="true"></i><small>Change Password</small>
           </a>
       </div>
     </div>
       
-    <div class="container">
-        <div class="jumbotron">
+    <div class="container-fluid contbg">
+        <div class="jumbotron boxsdw">
           <div class="row">
             <div class="col-6 ">
               <md-form-field class="">
@@ -80,7 +80,7 @@
           <div class="row">
             <div class="col">
               <div class="">
-              <md-form-field class="wd-85pc">
+              <md-form-field class="wd-80pc">
                 <textarea class="form-control" mdInput placeholder="Address" name="Address"  [(ngModel)]="profileUpdate.address"  ></textarea>
               </md-form-field>
             </div>
