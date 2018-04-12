@@ -302,14 +302,14 @@ saveMobileSmsResult(result) {
 }
     
 
-getTemplates(){
+getTemplates(data){
     let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
         width: '900px',
-        data: ''
+        data: data
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
-        if (result.result =='success') {
+        if (result =='success') {
 
         }
 
