@@ -1,0 +1,60 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-edit"></i> Messages
+  </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <!-- <div class="row">
+      <b class="label-style col">Personal Details
+        <span></span>
+      </b>
+    </div> -->
+   
+    <div class="" >
+      <md-select placeholder="type">
+<md-option>message</md-option>
+<md-option>Remainder</md-option>
+<md-option>status</md-option>
+<md-option>sms</md-option>
+</md-select>
+</div>
+
+<div class="">
+  <input type="radio" name="Customer">
+  <input type="radio" name="Distributor">
+</div>
+
+<div class="">
+  <md-select placeholder="Order status">
+    <md-option>Order Created</md-option>
+    <md-option>Out for delivery</md-option>
+    <md-option>Cancelled</md-option>
+    <md-option>Rejected</md-option>
+    <md-option>Cant deliver</md-option>
+    <md-option>Distributor pending</md-option>
+  </md-select>
+</div>
+<div class="">
+  <input class="" type="text">
+  <textarea class="" ></textarea>
+</div>
+    
+
+  </div>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" md-raised-button 
+   >SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>
+
+
