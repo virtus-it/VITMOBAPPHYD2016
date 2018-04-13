@@ -789,23 +789,6 @@ export class OrderLandingComponent implements OnInit {
       this.globalFilterInput.order.status = 'complete';
     }
     console.log(this.globalFilterInput);
-<<<<<<< HEAD
-    this.globalFilteredOrders(true);
-// this.showFilterDailog =false;
-// let input = this.globalFilterInput;
-// this.orderLandingService.getOrdersByfilter(input)
-//       .subscribe(
-//       output => this.getGlobalFilteredOrdersResult(output),
-//       error => {
-//         //console.log("falied");
-//         this.loaderService.display(false);
-//       });
-
-  }
-  globalFilteredOrders(firstcall){
-=======
-
->>>>>>> 7cda610324f231756454dd85c649c9a763d82849
     if(!firstcall){
          if(this.tabPanelView == 'complete'){
         let lastCompleteOrder:any = _.last(this.completeOrders);
@@ -958,11 +941,7 @@ this.orderLandingService.getOrdersByfilter(input)
         this.getAllOrderDetails(firstcall);
       }
       else if(tab == 'complete'){
-<<<<<<< HEAD
-       this.globalFilteredOrders(firstcall);
-=======
        this.globalSearch(firstcall);
->>>>>>> 7cda610324f231756454dd85c649c9a763d82849
       }
     }
 

@@ -165,3 +165,26 @@
 .highlight .gray9{
   color: #fff !important;
 }
+
+
+.btncol{
+  font-size: small;
+  font-weight: normal;
+}
+
+.btncol[_ngcontent-c13] {
+  font-size: small;
+  font-weight: normal;
+  /* padding-right: 54px; */
+  width: 260px;
+  /* padding-left: 50px; */
+  margin-bottom: 5px;
+  line-height: 26px;
+}
+
+
+
+
+.lastbot{
+margin-bottom: 3px;
+}
