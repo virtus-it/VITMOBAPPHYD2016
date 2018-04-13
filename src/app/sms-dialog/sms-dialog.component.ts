@@ -53,7 +53,7 @@ export class SmsDialogComponent implements OnInit {
   getAllTemplates:any = [];
   checkAllMobile: boolean = false;
   tempName:any = "";
-  filterType:any = {template_name:"", template_desc: ""};
+  filterType:any = {template_name:"", template_desc: "", id: ""};
   LastfilterRecords = false;
   smallLoader: boolean = false;
   buttonCount:number = 0;
@@ -76,7 +76,15 @@ export class SmsDialogComponent implements OnInit {
     { value: 'allsuppliers', viewValue: 'All Suppliers' },
     { value: 'alldistributors', viewValue: 'All Distributors' },
     { value: 'sms', viewValue: 'SMS' },
-    {value: 'notregistered' , viewValue:'Not registered'}
+    {value: 'notregistered' , viewValue:'Not registered'},
+    {value: 'distributorsdeliveredcustomer' , viewValue:'Distributors Delivered Customers'},
+    {value: 'distributorsdeliveredorders' , viewValue:'Distributors Delivered Orders'},
+    {value: 'distributorspendingorders' , viewValue:'Distributors Pending Orders '},
+    {value: 'customerspendingorders' , viewValue:'Customers Pending Orders '},
+    {value: 'distributorsdeliveryslot' , viewValue:'Distributors Delivery-Slot '},
+    {value: 'deliveryslotcustomers' , viewValue:'Delivery-Slot Customers '}
+    
+
     // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
 
@@ -121,26 +129,21 @@ export class SmsDialogComponent implements OnInit {
       if (findTemplate) {
         this.filterType.template_name = findTemplate.template_name;
         this.filterType.template_desc = findTemplate.template_desc;
+        this.filterType.id = findTemplate.id;
+
         let  JsonObj:any = {};
         if( this.filterType.template_desc){
           JsonObj = JSON.parse(this.filterType.template_desc);
-        
         console.log("json parsed successfully" , JsonObj  );
         }
-
-        // smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
         this.smsInput.body = JsonObj.body;
         this.smsInput.name = JsonObj.name;    
         this.smsInput.redirecturl = JsonObj.redirecturl;
         this.smsInput.showcomment = JsonObj.showcomment;
-        // this.smsInput.tempname = JsonObj.tempname;
         this.smsInput.title = JsonObj.title;
         this.smsInput.type = JsonObj.type;
         this.smsInput.url = JsonObj.url;
-        this.smsInput.tempname = JsonObj.tempname;        
-        // let buttonObject = {name:"", actiontype:"", count:0};
-
-        
+        this.smsInput.tempname = JsonObj.tempname;                
         if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
           let buttons= [];
           this.smsInput.buttons= [];
@@ -305,6 +308,8 @@ trackByFn(index, item) {
 
     }
   }
+
+  
   saveMobileSms() {
     //console.log(this.smsInput);
     let createSmsInput = {
@@ -417,8 +422,9 @@ trackByFn(index, item) {
         this.saveTemplate(createSmsInput);
       }
       else if(this.smsInput.radioOverWrite == "overWrite"){
-        // this.templateOverwrite(createSmsInput);
+         this.templateOverwrite(createSmsInput);
       }
+      
       
   }
   saveMobileSmsResult(result) {
@@ -445,27 +451,24 @@ trackByFn(index, item) {
 
   templateOverwrite(data){
     let input = Object.assign({}, data)
-    input.transtype = "notification";
-    input.id = 
+    console.log(data);
+    input.User.transtype = "updatenotification";
+    input.User.id = this.filterType.id;
     console.log(input);
-    // this.followupService.followUpTemplate(input)
-    // .subscribe(
-    //   output => this.updateTemplateResult(output),
-    //   error => {
-    //   });
+    this.followupService.followUpTemplate(input)
+    .subscribe(
+      output => this.updateTemplateResult(output),
+      error => {
+      });
   }
   updateTemplateResult(result){
-    if(result.result == 'success'){
+    if(result == 'success'){
 
     }
 
   }
 
 
-
-  // getAllTemplates(){
-
-  // }
 
 
   getDistributors() {

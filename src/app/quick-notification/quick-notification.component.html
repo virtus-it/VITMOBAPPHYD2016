@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-      <i _ngcontent-c5="" aria-hidden="true" class="fa fa-send-o"></i>Quick Notifications</div>
+      <i _ngcontent-c5="" aria-hidden="true" class="fa fa-send-o"></i>  Quick Notifications</div>
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -26,7 +26,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button >SUBMIT</button>
+    <button type="submit" class="btn-primary" (click)="sendNotification()" md-raised-button >SUBMIT</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

@@ -144,6 +144,7 @@ export class OrderLandingComponent implements OnInit {
 
       if (findDistributor) {
         this.filterType.distributorid = findDistributor.userid;
+        this.globalfilterType.distributorid = findDistributor.userid;
       }
 
 
@@ -179,6 +180,7 @@ export class OrderLandingComponent implements OnInit {
 
       if (findSupplier) {
         this.filterType.supplierid = findSupplier.userid;
+        this.globalfilterType.supplierid = findSupplier.userid;
       }
 
 
