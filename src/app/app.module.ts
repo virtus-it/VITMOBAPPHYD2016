@@ -101,6 +101,8 @@ import { TimeChartComponent } from './time-chart/time-chart.component';
 import { MessageTemplateComponent } from './message-template/message-template.component';
 import { SocketmessagesComponent } from './socketmessages/socketmessages.component';
 import { QuickNotificationComponent } from './quick-notification/quick-notification.component';
+import { TemplatesComponent } from './templates/templates.component';
+import { CreateUpdateTemplateComponent } from './create-update-template/create-update-template.component';
 
 
 
@@ -182,6 +184,8 @@ import { QuickNotificationComponent } from './quick-notification/quick-notificat
         MessageTemplateComponent,
         SocketmessagesComponent,
         QuickNotificationComponent,
+        TemplatesComponent,
+        CreateUpdateTemplateComponent,
 
      
         
@@ -218,6 +222,7 @@ import { QuickNotificationComponent } from './quick-notification/quick-notificat
             { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
             {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
             {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
+            {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -309,7 +314,9 @@ import { QuickNotificationComponent } from './quick-notification/quick-notificat
          TimeChartComponent,
          MessageTemplateComponent,
          SocketmessagesComponent,
-         QuickNotificationComponent
+         QuickNotificationComponent,
+         TemplatesComponent,
+         CreateUpdateTemplateComponent
       
 
 
