@@ -26,7 +26,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   ProductFormControl = new FormControl('', [Validators.required]);
 
 
-  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity: "", timeslot: "7AM-8AM" }
+  scheduleInput:any = { schedulefor: "weekdays" , CustomerName:"" , productName: {} , weekdays:""  , days:"" , productQuantity: "", timeslot: "8AM-11AM" }
   createSchedule = [];
   customerDetails:any = "";
   productList = [];

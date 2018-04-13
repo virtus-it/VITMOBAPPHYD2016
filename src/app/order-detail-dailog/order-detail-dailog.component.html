@@ -54,8 +54,17 @@
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span class="gray9">Order Address</span><br>
-                <b>Landmark: </b>
-                <b>Flat Number:</b>
+                <b>Landmark:
+                  <span> {{dailogOrderDetails.locality}} </span>
+                  <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
+
+                  </b>
+                <b>Flat Number:
+                  <span> {{dailogOrderDetails.buildingname}}
+                    </span>
+                    <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
+                    
+                  </b>
                 <br>
                 {{dailogOrderDetails.orderby_address}}</small>
                 <br>
@@ -68,8 +77,17 @@
               <small class="capital">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
               <span class="gray9">Profile Address</span><br>
-              <b>Landmark: </b>
-              <b>Flat Number: </b>
+              <b>Landmark: <span>{{dailogOrderDetails.locality}} </span>
+
+                <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
+                
+                
+              </b>
+              <b>Flat Number: <span>{{dailogOrderDetails.buildingname}} </span>
+
+                <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
+                
+               </b>
               <br>
               {{customerAddressDetails}}
             </small>
