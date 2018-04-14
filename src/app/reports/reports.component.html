@@ -157,11 +157,11 @@
           <tbody>
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
-              <td class="left">{{reports.firstname}} {{reports.lastname}}</td>
+              <td class="left"><span class="onhovertooltip-150" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span></td>
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate}}</td>
 
-              <td class="left">{{reports.address}}</td>
+              <td class="left"><span class="onhovertooltip-300" title="{{reports.address}}">{{reports.address}}</span></td>
               <td class="left">
                 <span  *ngIf="reports.orderedstatus=='true'"> <i class="fa fa-check-circle-o check"> </i> </span>
                 <span *ngIf="reports.orderedstatus=='false'"><i class="fa fa-times-circle-o cross"></i> </span>

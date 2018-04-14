@@ -1,0 +1,27 @@
+.minwid[_ngcontent-c7] {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    min-width: 173px;
+    cursor: pointer;
+    position: relative;
+    box-sizing: border-box;
+    margin-right: -48px;
+}
+.capital {
+    text-transform: capitalize;
+    margin-left: -27px;
+}
+
+.brd-bottom {
+    border-bottom: 1px solid #ddd;
+    border-radius: none;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+.martop {
+    margin-top: 20px;
+}
