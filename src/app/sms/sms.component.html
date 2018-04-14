@@ -58,6 +58,18 @@
                 <td>{{smslist.createddate | utcDate}}</td>
               </tr>
             </tbody>
+            <tfoot>
+                <tr>
+                  <td colspan="8">
+                    <h4 class="warning  capitalize center">
+                      <a href="javascript:void(0);" (click)=getsmsByPaging(); *ngIf="smsClickMore">
+                        <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                      <span *ngIf="!smsClickMore">Record Not Available</span>
+                    </h4>
+                  </td>
+                </tr>
+              </tfoot>
+
           </table>
       </div>
       </div>

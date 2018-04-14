@@ -3,6 +3,7 @@ import { MdDialog } from '@angular/material';
 import { SmsDialogComponent } from '../sms-dialog/sms-dialog.component';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { AuthenticationService } from '../login/authentication.service';
+import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
 @Component({
 
@@ -13,6 +14,7 @@ export class SmsComponent implements OnInit {
 
     constructor(public dialog: MdDialog, private smsService: SmsServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
     smsListDetails = [];
+    smsClickMore = true;
     openSmsDialog() {
         let dialogRef = this.dialog.open(SmsDialogComponent, {
             width: '80%',
@@ -20,13 +22,28 @@ export class SmsComponent implements OnInit {
         });
         dialogRef.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-            this.getSmsList();
+            this.getSmsList(true);
 
         });
     }
-    getSmsList() {
+    getSmsList(firstcall) {
         this.loaderService.display(true);
-        let getInput = { "User": { "user_type": this.authenticationService.userType(), "TransType": "getsms", "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+        let getInput = { "User": { "user_type": this.authenticationService.userType(), "TransType": "getsms", "loginid": this.authenticationService.loggedInUserId(), "lastid": 0 ,  "apptype": this.authenticationService.appType() , "pagesize": 100 } };
+
+        if (this.smsListDetails && this.smsListDetails.length && !firstcall) {
+            let lastSms: any = _.last(this.smsListDetails);
+            if (lastSms) {
+                getInput.User.lastid = lastSms.id;
+            }
+            
+        }
+        else {
+            this.smsListDetails = [];
+            getInput.User.lastid = 0;
+        }
+        
+
+        console.log(getInput);
         this.smsService.getSmsList(getInput)
             .subscribe(
             output => this.getSmsListrResult(output),
@@ -37,11 +54,24 @@ export class SmsComponent implements OnInit {
     }
     getSmsListrResult(result) {
         this.loaderService.display(false);
-        //console.log(result);
-        this.smsListDetails = result.data;
+        console.log(result);
+        // this.smsListDetails = result.data;
+        if(result.result == 'success'){
+            this.smsListDetails = _.union(this.smsListDetails, result.data);
+        }
+        else {
+            this.smsClickMore = false;
+        }
+    }
+
+
+    getsmsByPaging() {
+       
+            this.getSmsList(false);
+
     }
     ngOnInit() {
-        this.getSmsList();
+        this.getSmsList(true);
     }
 
 }

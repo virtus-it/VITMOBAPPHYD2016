@@ -185,7 +185,7 @@
                   </md-select>
 
                 </div>
-                <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
+                <div class="col-sm-3  col-md-3  col-lg-3 align-self-center" *ngIf="smsInput.type == 'radio' || smsInput.type == 'checkbox'  || smsInput.type == 'playstore' || smsInput.type == '' ">
                   <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                     <input type="checkbox" id="rem" class="custom-control-input" [(ngModel)]="smsInput.showcomment" name="showcomments">
                     <span class="custom-control-indicator"></span>
@@ -204,7 +204,7 @@
                     <span class="danger"> {{500 - smsInput.body.length}}</span>
                   </small>
                 </div>
-                <div class="col-sm-4  col-md-4  col-lg-4 align-self-end">
+                <div class="col-sm-4  col-md-4  col-lg-4 align-self-end" *ngIf="smsInput.type == 'website' || smsInput.type == '' ">
                   <md-form-field class="example-full-width inline ">
                     <input class="form-control" mdInput placeholder="Website Redirect URL" name="redirecturl" [(ngModel)]="smsInput.redirecturl">
 
@@ -212,14 +212,14 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-3  col-md-3  col-lg-3">
+                <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="smsInput.type != 'slide' || smsInput.type == '' ">
                   <md-form-field class="example-full-width inline ">
                     <input class="form-control" mdInput placeholder="Image URL" name="url" [(ngModel)]="smsInput.url">
 
                   </md-form-field>
                 </div>
                 <div class="col-sm-3  col-md-3  col-lg-3">
-                  <div class="row">
+                  <div class="row" *ngIf="smsInput.type != 'slide' || smsInput.type == '' " >
                     <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">
                       <a class="cursor logo-color ">
                         <b title="Add Button"  class="fa fa-plus-circle success fs-22" aria-hidden="true" (click)="addButton()"></b>
@@ -289,7 +289,7 @@
 
 
                 <div class="col-sm-3  col-md-3  col-lg-3">
-                  <div class="row">
+                  <div class="row" *ngIf="smsInput.type == 'playstore' || smsInput.type == 'checkbox' || smsInput.type == 'radio' || smsInput.type == '' ">
                     <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">
                         <a class="cursor logo-color ">                            
                             <b title="Add Option"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addOption()"></b>
@@ -323,7 +323,7 @@
                   </div>
                 </div>
                 <div class="col-sm-3  col-md-3  col-lg-3 ">
-                  <div class="row">
+                  <div class="row" *ngIf="smsInput.type == 'slide' || smsInput.type == ''">
                     <div class="col-sm-1  col-md-1  col-lg-1 pdtop-20">
                       <a class="cursor logo-color ">
                         <b title="Add Slider"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>

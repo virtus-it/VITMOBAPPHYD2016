@@ -460,8 +460,14 @@ createPreOrder(){
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
 
-  let slotDate = moment(this.createPreOrderInput.date).format('YYYY-MM-DD 00:00:00');
-  input[0].order.slotdate = slotDate;
+  let slotDate = moment(this.createPreOrderInput.date).format('YYYY-MM-DD');
+  let selectedTime = this.createPreOrderInput.timeslot;
+  let endTime = selectedTime.split('-');
+  let endTime2 = endTime[1];
+  let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
+  console.log("time24" , time24);
+  input[0].order.slotdate = slotDate + " " + time24 ;
+
   
   console.log(input);
   JSON.stringify(input);
@@ -643,52 +649,70 @@ else{
 
   }
 
+// available time slot for 1 hr
+  // availableTimeSlot(){
+  //   if(this.hours <= 6){
+  //     this.createPreOrderInput.timeslot = '7AM-8AM'
+  //   }
+  //   else if(this.hours <= 7){
+  //     this.createPreOrderInput.timeslot = "8AM-9AM"; 
+  //   }
+  //   else if(this.hours <= 8){
+  //     this.createPreOrderInput.timeslot = "9AM-10AM";
+  //   } 
+  //   else if(this.hours <= 9){
+  //     this.createPreOrderInput.timeslot = "10AM-11AM";
+  //   }
+  //   else if(this.hours <= 10){
+  //     this.createPreOrderInput.timeslot = "11AM-12PM";
+  //   }
+  //   else if(this.hours <= 11){
+  //     this.createPreOrderInput.timeslot = "12PM-1PM";
+  //   }
+  //   else if(this.hours <= 12){
+  //     this.createPreOrderInput.timeslot = "1PM-2PM";
+  //   }
+  //   else if(this.hours <= 13){
+  //     this.createPreOrderInput.timeslot = "2PM-3PM";
+  //   }
+  //   else if(this.hours <= 14){
+  //     this.createPreOrderInput.timeslot = "3PM-4PM";
+  //   }
+  //   else if(this.hours <= 15){
+  //     this.createPreOrderInput.timeslot = "4PM-5PM";
+  //   }
+  //   else if(this.hours <= 16){
+  //     this.createPreOrderInput.timeslot = "5PM-6PM";
+  //   }
+  //   else if(this.hours <= 17){
+  //     this.createPreOrderInput.timeslot = "6PM-7PM";
+  //   }
+  //   else if(this.hours <= 18){
+  //     this.createPreOrderInput.timeslot = "7PM-8PM";
+  //   }
+  //   else if(this.hours <= 19){
+  //     this.createPreOrderInput.timeslot = "8PM-9PM";
+  //   }
+
+  // }
 
   availableTimeSlot(){
-    if(this.hours <= 6){
-      this.createPreOrderInput.timeslot = '7AM-8AM'
-    }
-    else if(this.hours <= 7){
-      this.createPreOrderInput.timeslot = "8AM-9AM"; 
-    }
-    else if(this.hours <= 8){
-      this.createPreOrderInput.timeslot = "9AM-10AM";
-    } 
-    else if(this.hours <= 9){
-      this.createPreOrderInput.timeslot = "10AM-11AM";
-    }
-    else if(this.hours <= 10){
-      this.createPreOrderInput.timeslot = "11AM-12PM";
-    }
-    else if(this.hours <= 11){
-      this.createPreOrderInput.timeslot = "12PM-1PM";
-    }
-    else if(this.hours <= 12){
-      this.createPreOrderInput.timeslot = "1PM-2PM";
-    }
-    else if(this.hours <= 13){
-      this.createPreOrderInput.timeslot = "2PM-3PM";
-    }
-    else if(this.hours <= 14){
-      this.createPreOrderInput.timeslot = "3PM-4PM";
-    }
-    else if(this.hours <= 15){
-      this.createPreOrderInput.timeslot = "4PM-5PM";
-    }
-    else if(this.hours <= 16){
-      this.createPreOrderInput.timeslot = "5PM-6PM";
-    }
-    else if(this.hours <= 17){
-      this.createPreOrderInput.timeslot = "6PM-7PM";
-    }
-    else if(this.hours <= 18){
-      this.createPreOrderInput.timeslot = "7PM-8PM";
-    }
-    else if(this.hours <= 19){
-      this.createPreOrderInput.timeslot = "8PM-9PM";
-    }
+    if(this.hours <= 7){
+          this.createPreOrderInput.timeslot = '8AM-11AM'
+        }
+        else if(this.hours <= 10){
+          this.createPreOrderInput.timeslot = "11AM-2PM"; 
+        }
+        else if(this.hours <= 13){
+          this.createPreOrderInput.timeslot = "2PM-5PM";
+        } 
+        else if(this.hours <= 16){
+          this.createPreOrderInput.timeslot = "5PM-8PM";
+        }
 
   }
+
+
    
 
 
