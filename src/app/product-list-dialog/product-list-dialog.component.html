@@ -24,38 +24,38 @@
           <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
-          <th width="10%">Product Name</th>
-          <th width="10%">Product Type</th>
+          <th width="11%">Product Name</th>
+          <th width="11%">Product Type</th>
           <th width="8%">Priority</th>
           <th width="8%" title="Minimum Quantity">Min Qty</th>          
           <th width="7%">Cost</th>   
           <th width="8%" title="Expres Delivery">Exp Del</th>
-          <th width="7%" title="Service Charge">Serv Chgs</th>   
-          <th width="8%">Is Authorised ?</th>   
+          <th width="8%" title="Service Charge">Serv Chgs</th>   
+          <th width="12%">Is Authorised ?</th>   
           <th width="8%">Stock</th>
-          <th width="10%">Status</th>
-          <th width="10%">Action</th>
+          <th width="8%">Status</th>
+          <th width="8%">Action</th>
            </tr>
       </thead>
       <tbody>
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-          <td width="10%" class="left capital">{{prod.brandname}}</td>
-          <td width="10%" class="left capital"> {{prod.ptype}}</td>
+          <td width="11%" class="left capital"><span class="{{prod.brandname}}" title="onhovertooltip-100">{{prod.brandname}}</span></td>
+          <td width="11%" class="left capital"> <span class="{{prod.ptype}}" title="onhovertooltip-100">{{prod.ptype}}</span></td>
           <td width="8%" class="left capital">{{prod.priority}}</td>
           <td width="8%" class="left capital">{{prod.minorderqty}}</td>          
           <td width="7%" class="left capital">{{prod.pcost}}</td>      
-          <td width="8%" class="left capital">{{prod.expressdeliverycharges}}</td> 
-          <td width="7%" class="left capital">{{prod.servicecharge}}</td>  
-          <td class="" width="8%">
+          <td width="9%" class="left capital">{{prod.expressdeliverycharges}}</td> 
+          <td width="8%" class="left capital">{{prod.servicecharge}}</td>  
+          <td class="" width="11%">
             <span  *ngIf="prod.isauthorized == 'true'"> Yes </span>
             <span *ngIf="prod.isauthorized != 'true'">No</span>
           </td>  
           <td width="8%" class="left capital">{{prod.avaliable_stock}}</td>
-          <td width="10%" class="left capital">{{prod.stockstatus}}</td>
-          <td width="10%" class="fa fa-edit logo-color cursor" (click)="editProduct(prod)">
-            <i class="fa fa-plus" title="Add stock" (click)="addStock(prod)"></i>
-            <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(prod)"></i>
-            <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod, distributorDetails)"></i>
+          <td width="8%" class="left capital">{{prod.stockstatus}}</td>
+          <td width="10%" class="fa fa-edit logo-color cursor" (click)="editProduct(prod)">&nbsp;
+             <i class="fa fa-plus" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
+             <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(prod)"></i>&nbsp;
+          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod, distributorDetails)"></i>
           </td>
           
          </tr>

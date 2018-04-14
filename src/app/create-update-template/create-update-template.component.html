@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-    <i class="fa fa-edit"></i> Messages
+    <i class="fa fa-comments-o"></i> Messages
   </div>
   <div class="col-md-1 col-sm-1 right">
     <strong>
@@ -17,21 +17,41 @@
       </b>
     </div> -->
    
-    <div class="" >
+    <div class="row" >
+      <div class="col-3">
+          
       <md-select placeholder="type">
+        
 <md-option>message</md-option>
 <md-option>Remainder</md-option>
 <md-option>status</md-option>
 <md-option>sms</md-option>
+
 </md-select>
 </div>
+<div class="col-2 align-self-end">
 
-<div class="">
-  <input type="radio" name="Customer">
-  <input type="radio" name="Distributor">
-</div>
+<span width="30%" class="left capital">
+    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+      <input type="radio"  class="custom-control-input" name="customerType" value="residential">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">Customer</span>
+    </label>
+  </span>
+  </div>
+  <div class="col-2 align-self-end marleft">
+  <span width="30%" class="left capital">
+    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+      <input type="radio" class="custom-control-input" name="customerType" value="commercial">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description">distributor </span>
+    </label>
+  </span>
+  </div>
 
-<div class="">
+
+<div class="col-4">
+ 
   <md-select placeholder="Order status">
     <md-option>Order Created</md-option>
     <md-option>Out for delivery</md-option>
@@ -40,19 +60,32 @@
     <md-option>Cant deliver</md-option>
     <md-option>Distributor pending</md-option>
   </md-select>
+ 
 </div>
-<div class="">
-  <input class="" type="text">
-  <textarea class="" ></textarea>
-</div>
-    
 
-  </div>
+</div>
+
+<md-form-field class="martop">
+    <input class="form-control" mdInput placeholder="Template Name" name="landmark">
+  </md-form-field>
+
+
+  <md-form-field class="wd-100pc">
+      <textarea class="form-control" mdInput placeholder="Body" name="Address"></textarea>
+    </md-form-field>
+
+</div>
+
+
+
+
+
+
+
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button 
-   >SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

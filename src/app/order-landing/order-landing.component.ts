@@ -837,7 +837,6 @@ export class OrderLandingComponent implements OnInit {
       this.globalFilterInput.order.status = 'complete';
     }
     console.log(this.globalFilterInput);
-
     if(!firstcall){
          if(this.tabPanelView == 'complete'){
         let lastCompleteOrder:any = _.last(this.completeOrders);

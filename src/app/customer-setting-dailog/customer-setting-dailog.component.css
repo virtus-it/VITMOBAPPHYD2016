@@ -1,0 +1,4 @@
+.mat-button, .mat-icon-button, .mat-raised-button {
+    color: currentColor;
+    margin-bottom: 10px;
+}

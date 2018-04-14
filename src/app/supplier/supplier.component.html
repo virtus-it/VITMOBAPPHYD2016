@@ -36,9 +36,9 @@
         </thead>
         <tbody>
           <tr  *ngFor = "let supplier of supplierList; let i = index" [attr.data-index]="i">
-            <td class="left capital" width="15%"> {{supplier.firstname}}</td>
+            <td class="left capital" width="15%"><span class="onhovertooltip-100" title="{{supplier.firstname}}"> {{supplier.firstname}}</span></td>
             <td class="left" width="10%"> {{supplier.mobileno}}</td>
-            <td class="left"  width="12%"> {{supplier.emailid}}</td>
+            <td class="left"  width="12%"><span class="onhovertoltip-150" title="{{supplier.emailid}}"> {{supplier.emailid}}</span></td>
             <td class="left capital"  width="30%"> {{supplier.address}}</td>
             <td class="left" width="12%" >
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier" (click)='editSupplier(supplier)'></i>
