@@ -125,7 +125,7 @@
             <!-- <td class="left">{{preorder.mobileno_one}}</td>
             <td class="left">{{preorder.mobileno_two}}</td> -->
             <td class="left" width="10%"><span class="onhovertooltip-100" title="{{preorder.emailid}}">{{preorder.emailid}}</span></td>            
-            <td class="left" width="15%"><span class="onhovertooltip-100" title="{{preorder.address}}">{{preorder.address}}</span></td>
+            <td class="left" width="15%"><span class="onhovertooltip-100  capitalize" title="{{preorder.address}}">{{preorder.address}}</span></td>
             <td class="left" width="6%">
               <div *ngIf="preorder.payments">
                 <span *ngIf="preorder.payments.paymenttype=='credit'"> {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
