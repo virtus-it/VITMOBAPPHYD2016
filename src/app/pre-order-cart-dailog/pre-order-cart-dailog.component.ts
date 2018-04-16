@@ -723,6 +723,15 @@ else{
         else if(this.hours <= 16){
           this.createPreOrderInput.timeslot = "5PM-8PM";
         }
+        else if(this.hours > 17){
+          this.hours = "6";
+          var today = new Date();
+          var tomorrow = new Date(today);
+          tomorrow.setDate(today.getDate() + 1);
+          console.log(tomorrow);
+          this.createPreOrderInput.date = tomorrow;
+          this.createPreOrderInput.timeslot = "8AM-11AM";
+        }
 
   }
 

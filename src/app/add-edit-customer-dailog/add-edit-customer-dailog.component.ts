@@ -32,7 +32,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   message:any ="";
 refresh:any = "";
 messageError:any = "";
-
+dup:any = false;
 
   getCustomerDetails() {
   //console.log(this.Details);
@@ -108,6 +108,8 @@ messageError:any = "";
     input.User.paymentday= this.paymentDate;
     input.User.billpaymentdueday= this.paymentdueDate;
     //console.log(input);
+    this.dup = true;
+    if(this.dup == true){
     this.customerService.createCustomer(input)
       .subscribe(
       output => this.createCustomerResult(output),
@@ -117,12 +119,14 @@ messageError:any = "";
       });
   }
 }
+}
   createCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
       this.refresh = "success";
+      this.dup = false;
     }
   }
   updateCustomer() {

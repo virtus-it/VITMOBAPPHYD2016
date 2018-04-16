@@ -50,7 +50,7 @@ export class OrderLandingComponent implements OnInit {
       '75.5': {color: 'red'}
   };
   gaugeType = "arch";
-  gaugeValue = this.timeRemaining;
+  gaugeValue = 28.3;
   gaugeLabel = 'Time Remaining';
   gaugeAppendText = "Hours";
 
