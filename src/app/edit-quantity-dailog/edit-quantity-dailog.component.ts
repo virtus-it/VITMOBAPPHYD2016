@@ -45,7 +45,7 @@ export class EditQuantityDailogComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.onCloseModal('success')
-      
+ 
     }
   }
   onCloseModal(message) {
@@ -93,6 +93,7 @@ export class EditQuantityDailogComponent implements OnInit {
   //     this.disableSlot =  false;
   //   }
   // }
+
 
   showSlot(){
     // this.autoTimeSlot();

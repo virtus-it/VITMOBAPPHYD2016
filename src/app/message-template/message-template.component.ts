@@ -39,12 +39,19 @@ export class MessageTemplateComponent implements OnInit {
 
 getMessage(details){
 console.log(details);
-this.closeDialog(details);
+
+if(details === null || details == ''){
+  details = "no reason error";
+  this.closeDialog(details);
+}
+else{
+  this.closeDialog(details);
+}
 
 }
 
   onCloseModal(){
-    this.thisDialogRef.close('cancel');
+    this.thisDialogRef.close('');
   }
 
 closeDialog(details){

@@ -316,6 +316,9 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
+
+                    <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
+                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
@@ -339,9 +342,9 @@
 
               </td> -->
 
-              <!-- 
+              
                 
-                updated new guage
+                <!-- updated new guage -->
                 
                 <td width="24%">
                 <div class="row ">
@@ -351,7 +354,7 @@
                     <i class="fa fa-minus logo-color fs-18 none"></i>
                     <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
                     </div>
-                  </div></td> -->
+                  </div></td>
                   
 
             </tr>
@@ -538,10 +541,10 @@
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null)">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered'  && (forward.distributor != null && forward.supplierdetails === null)"
+                    <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered'  && (forward.distributor != null && forward.supplierdetails === null)  && (forward.forwardedby && forward.forwardedby > 0) "
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
@@ -557,15 +560,15 @@
               <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
-                <!-- <td width="24%" >
+                <td width="24%" >
                 <ngx-gauge 
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
-                [value]= timeRemaining 
+                [value]= 'gaugeValue' 
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText">
                 </ngx-gauge>
-              </td> -->
+              </td>
 
 
             </tr>
@@ -651,6 +654,8 @@
                     <br>
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
+                      <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -826,12 +831,14 @@
 
                     <!-- <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
                       <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button> -->
-                    <!-- <div class="row">
-                          <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned'">
+                    <div class="row" *ngIf != 'superDealer'>
+                          <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
                               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="allorder.status !='accept' && allorder.status !='delivered' "> 
+                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) "> 
                                 <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
-                        </div> -->
+                        </div>
+
+
                   </div>
                 </div>
               </td>
@@ -880,7 +887,8 @@
 
                     </label>
                   </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(complete)'>
+          
+                  <div class="col-sm-2  col-md-2  col-lg-2 right" *ngIf="complete.status != 'delivered'" (click)='editQuanity(complete)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
                 </div>
@@ -911,6 +919,8 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
+                    <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
+                      <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -943,9 +953,7 @@
                       <br>
                       <b class="capitalize">{{complete.brandname}} </b>
                     </div>
-                    <div *ngIf="complete.status != 'delivered'" class="col-sm-6  col-md-6  col-lg-6 right" (click)='editQuanity(complete)'>
-                      <i class="fa fa-edit logo-color "></i>
-                    </div>
+                    
                   </div>
 
                   <div class="row form-group">
@@ -1118,6 +1126,7 @@
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                                 <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
                     <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status != 'delivered' || complete.status == 'backtodealer' || complete.status == 'assigned') && (complete.status != 'accept')">
+
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
                     <button class="btn red btn-link btn-sm" *ngIf="complete.status !='accept' && complete.status !='delivered' " (click)="rejectOrder(complete)">

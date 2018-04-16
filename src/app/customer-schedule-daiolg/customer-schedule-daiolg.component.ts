@@ -165,6 +165,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         _.each(result.data.products, function (i, j) {
           let details: any = i;
           let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
+         
           if (customerProduct) {
 
 
@@ -175,7 +176,11 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             productListCopy.push(details);
           }
 
+       
+
+
         });
+
         this.productList = productListCopy;
     }
     this.createOrUpdate();
