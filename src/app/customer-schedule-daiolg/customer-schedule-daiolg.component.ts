@@ -12,6 +12,7 @@ import * as _ from 'underscore';
 import { weekdays } from 'moment';
 
 
+
 @Component({
   selector: 'app-customer-schedule-daiolg',
   templateUrl: './customer-schedule-daiolg.component.html',
@@ -162,6 +163,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       //console.log("distributor products list", result);
       if (result.result == 'success') {
         let productListCopy = [];
+        let filteredArray = [];
         _.each(result.data.products, function (i, j) {
           let details: any = i;
           let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
@@ -176,12 +178,25 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             productListCopy.push(details);
           }
 
-       
+          // if(details.stockstatus != 'Soldout'){
+            
+          // }
 
 
         });
 
         this.productList = productListCopy;
+        // filteredArray = _.without(this.productList, function(i,j){
+        //   let details:any = i;
+        //   return details.stockstatus === 'Soldout';
+        // });
+
+        // this.productList = filteredArray;
+
+        this.productList = _.filter(result.data.products, function (e: any) { return e.stockstatus !== 'Soldout'; });
+
+
+
     }
     this.createOrUpdate();
 
