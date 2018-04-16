@@ -43,7 +43,7 @@ export class SmsDialogComponent implements OnInit {
 
   }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null };
+  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null , date: null };
   smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
@@ -214,9 +214,11 @@ trackByFn(index, item) {
 
   onChangeType() {
     this.orderinput.fromDate = null;
-    this.orderinput.toDate = null
-    this.orderinput.days = null
+    this.orderinput.toDate = null;
+    this.orderinput.date = null;    
+    this.orderinput.days = null;
     this.orderinput.distributorid = null;
+
     this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"",count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
   }
   onChangeSmsType(type){
@@ -227,7 +229,7 @@ trackByFn(index, item) {
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,"smstype":"",
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid , date:null
       }
     };
     if (this.orderinput.fromDate) {
@@ -236,6 +238,10 @@ trackByFn(index, item) {
     if (this.orderinput.toDate) {
       input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
     }
+    // if(this.orderinput.date){
+
+
+    // }
     if(this.smsInput.smsType == 'sms'){
       input.User.smstype = this.smsInput.smsType
     }

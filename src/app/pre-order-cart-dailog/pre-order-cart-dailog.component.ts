@@ -117,7 +117,21 @@ export class PreOrderCartDailogComponent implements OnInit {
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
       }
+
+      let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
+      data.order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
+    
+      let slotDate = moment(this.createPreOrderInput.date).format('YYYY-MM-DD');
+      let selectedTime = this.createPreOrderInput.timeslot;
+      let endTime = selectedTime.split('-');
+      let endTime2 = endTime[1];
+      let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
+      console.log("time24" , time24);
+      data.order.slotdate = slotDate + " " + time24 ;
+
+
     console.log(data);
+
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
         width: '600px',

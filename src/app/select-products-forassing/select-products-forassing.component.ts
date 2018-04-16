@@ -55,7 +55,7 @@ export class SelectProductsForassingComponent implements OnInit {
 
   if(this.orderDetail.orderDetails){
     if(this.orderDetail.type == 'customersPage'){
-    this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
+    this.orderDetail.orderDetails.order_by = this.orderDetail.disributorId;
   }
 }
 else if(this.orderDetail.type == 'coveragePage'){
