@@ -97,7 +97,10 @@
             <td width="10%" class=" capital">{{customer.status}}</td>
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
             <td width="14%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
-            <td width="19%" class=" capital">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</td>
+            <td width="19%" class=" capital">
+              <span *ngIf="customer.status !== 'ordered'">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}} </span>
+            <span *ngIf="customer.status == 'ordered'"> - </span>
+            </td>
           </tr>
         </tbody>
         <tfoot>

@@ -24,7 +24,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
       Validators.required]);
    
 
-  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" } };
+  customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" , "promocode":"" } };
 
   paymentDate: any ="";
   paymentdueDate:any = "";
@@ -67,7 +67,7 @@ messageError:any = "";
       this.customerInput = {
         "User": {
           "advamt": "0"
-          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "locality":result.data.user.locality , "buildingname":result.data.user.buildingname ,   "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
+          , "user_type": "customer", "aliasname": result.data.user.aliasname, "mobileno": result.data.user.mobileno,  "state": result.data.user.state, "lastname": result.data.user.lastname,  "mobileno_one":  result.data.user.mobileno_one , "mobileno_two": result.data.user.mobileno_two, "emailid": result.data.user.emailid, "loginid": this.authenticationService.loggedInUserId(), "firstname": result.data.user.firstname, "userid": result.data.user.userid, "address": result.data.user.address, "locality":result.data.user.locality , "promocode":result.data.user.promo_code , "buildingname":result.data.user.buildingname ,   "paymenttype": result.data.user.paymenttype, "registertype":result.data.user.registertype, "apptype": this.authenticationService.appType()
         }
       };
       if(result.data.user.payment && result.data.user.payment.days){
@@ -100,7 +100,7 @@ messageError:any = "";
 
   }
   createCustomer() {
-    if(this.validation1() && this.validation2()){
+    if(this.validation1() && this.validation2() && this.validation3()){
     let input = this.customerInput;
     this.loaderService.display(true);
     input.User.pwd =  this.customerInput.User.mobileno;
@@ -126,7 +126,7 @@ messageError:any = "";
     }
   }
   updateCustomer() {
-    if(this.validation1() && this.validation2()){
+    if(this.validation1() && this.validation2() && this.validation3()){
     this.loaderService.display(true);
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
@@ -156,7 +156,7 @@ if(result.result == 'success'){
   }
   ngOnInit() {
     // "userid":"1768"
-    //console.log(this.Details);
+    console.log(this.Details);
     this.getCustomerDetails();
   }
 
@@ -184,7 +184,7 @@ if(result.result == 'success'){
   }
 
   validation2(){
-    if(this.customerInput.User.mobileno.length > 0){
+    if(this.customerInput.User.mobileno.length > 0 && this.customerInput.User.mobileno.length == 10){
       this.messageError = '';
       return true;
     }
@@ -192,6 +192,19 @@ if(result.result == 'success'){
       this.messageError="Please enter customers phone number";
     }
   }
+
+
+  validation3(){
+    if(this.customerInput.User.address.length > 0){
+      this.messageError = "";
+      return true;
+    }
+    else{
+      this.messageError = "Please enter address of customer";
+      
+    }
+  }
+  
 
   valid(){
     if(this.customerInput.User.paymenttype=='credit'){
