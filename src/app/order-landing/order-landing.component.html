@@ -289,13 +289,13 @@
               </td>
               <td width="25%">
                 <div class=" row ">
-                  <div class="col-sm-9  col-md-9  col-lg-9 left onhovertooltip-300">
+                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                     <label class="td-label">Customer :
                       <b class="capitalize " title="{{forward.orderby_firstname}}">{{forward.orderby_firstname}}</b>
                     </label>
                     <br>
                   </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(forward)'>
+                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  > -->
                     <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(forward)'></i>
@@ -308,17 +308,20 @@
 
               <td width="25%">
                 <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
-                    <label class="td-label">Distributor:
-                      <b class="capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
+                  <div class="col-sm-7  col-md-7  col-lg-7  left">
+                    <label class="td-label"> 
+                      <div class="row">
+                      <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
+                      <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
+                    </div>
                     </label>
-                    <br>
+            
+                
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
 
-                    <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
+                    
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
@@ -403,14 +406,19 @@
                     </div>
                   </div>
                   <div class=" row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7  left align-self-center">
+                    <div class="col-sm-5  col-md-5  col-lg-5  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right align-self-center">
-                      <button class="btn btn-link btn-sm" (click)='showOrderDetails(forward)'>
+                    <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
+                      
+                    <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
+                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
+                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(forward)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                     </div>
@@ -450,28 +458,27 @@
                     <b>{{forward.orderby_mobileno}}</b>
 
                   </div>
-
-                  <div class="col right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                  <div class="col-7 right" *ngIf="forward.customersource == 'DistributorCustomer'">
                     <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                     <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                   </div>
-                  <div class="col right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                  <div class="col-7 right" *ngIf="forward.customersource == 'MoyaCustomer'">
                     <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                     <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip capitalize"  title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize"  title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                   </div>
                 </div>
 
                 <div class="row form-group">
-                  <div class="col left">
+                  <div class="col-7 left">
                     <span class="td-label">
                       Address</span>
                     <br>
                     <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
 
                   </div>
-                  <div class="">
+                  <div class="col-5 right">
                     <span class="td-label">
                       Promo Code
                     </span> <br>
@@ -495,7 +502,7 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <div class="col left">
+                    <div class="col-7 left">
                       <span class="td-label">
                         Supplier</span>
                       <br>
@@ -504,7 +511,7 @@
 
 
                     </div>
-                    <div class="col right">
+                    <div class="col-5 right">
                       <span class="td-label">
                         Supplier Mobile</span>
                       <br>
@@ -561,13 +568,15 @@
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
                 <td width="24%" >
-                <ngx-gauge 
+                
+                <ngx-gauge
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'gaugeValue' 
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText">
                 </ngx-gauge>
+               
               </td>
 
 
@@ -623,14 +632,14 @@
               </td>
               <td width="33%">
                 <div class=" row ">
-                    <div class="col-sm-9  col-md-9  col-lg-9 left onhovertooltip-300">
+                    <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                         <label class="td-label">Customer :
                           <b class="capitalize " title="{{allorder.orderby_firstname}}">{{allorder.orderby_firstname}}</b>
                         </label>
                         <br>
                       </div>
 
-                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(allorder)'>
+                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!--              <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm " > -->
                     <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(allorder)'></i>
@@ -640,7 +649,7 @@
               </td>
               <td width="33%">
                 <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-150">
                     <label class="td-label">Supplier:
                       <b class="capitalize" *ngIf="allorder.supplierdetails" title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                       <b *ngIf="allorder.supplierdetails === null"> - </b>
@@ -654,8 +663,6 @@
                     <br>
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -718,14 +725,18 @@
                     </div>
                   </div>
                   <div class="row ">
-                    <div class="col left">
+                    <div class="col-5 left">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="allorder.receivedamt > 0">Rs.{{allorder.receivedamt}}</b>  -->
                     </div>
-                    <div class="col align-self-center right">
-                      <button class="btn btn-link btn-sm" (click)='showOrderDetails(allorder)'>
+                    <div class="col-3 center align-self-center" >
+                        <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
+                        <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                    </div>
+                    <div class="col-4 align-self-center right">
+                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(allorder)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                     </div>
                   </div>
@@ -754,24 +765,24 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <div class="col-5 left">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
                       <span class="td-label">
                         Mobile</span>
                       <br>
                       <b>{{allorder.orderby_mobileno}}</b>
                     </div>
-                    <div class="col right">
+                    <div class="col-sm-7  col-md-7  col-lg-7  right">
                       <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                       <br>
                       <b class=" capitalize onhovertooltip" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
                   <div class=" row ">
-                    <div class="col">
+                    <div class="col-7 left">
                       <span class="td-label" id='foo'>
                         Address</span>
                       <br>
-                      <b class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.customer.address}}</b>
+                      <b class="capitalize onhovertooltip-150" title="{{allorder.orderby_address}}">{{allorder.customer.address}}</b>
 
                       <!-- <button class="btn" data-clipboard-target="#foo">
                               <img src="assets/clippy.svg" alt="Copy to clipboard">
@@ -779,7 +790,7 @@
 
                     </div>
 
-                    <div class="">
+                    <div class="col-5 right">
                       <span class="td-label">
                         Promo Code
                       </span> <br>
@@ -895,13 +906,13 @@
               </td>
               <td width="25%">
                 <div class=" row ">
-                  <div class="col-sm-9  col-md-9  col-lg-9 left onhovertooltip-300">
+                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                     <label class="td-label">Customer :
                       <b class="capitalize " title="{{complete.orderby_firstname}}">{{complete.orderby_firstname}}</b>
                     </label>
                     <br>
                   </div>
-                  <div class="col-sm-2  col-md-2  col-lg-2 " (click)='showEditCustomer(complete)'>
+                  <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(complete)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "   > -->
                     <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(complete)'></i>
@@ -911,16 +922,14 @@
               </td>
               <td width="25%">
                 <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
-                    <label class="td-label">Distributor:
-                      <b class="capitalize" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
+                  <div class="col-sm-7  col-md-7  col-lg-7  left">
+                    <label class="td-label"> <b class="fa fa-sitemap onhovertooltip-150" title="Distributor Name"></b>
+                    <b class="capitalize onhovertooltip-150" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
                     </label>
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
-                    <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -991,14 +1000,18 @@
                     </div>
                   </div>
                   <div class=" row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7  left align-self-center">
+                    <div class="col-sm-5  col-md-5  col-lg-5  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right align-self-center">
-                      <button class="btn btn-link btn-sm" (click)='showOrderDetails(complete)'>
+                    <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
+                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
+                        <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                    </div>
+                    <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
+                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(complete)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                     </div>
@@ -1038,20 +1051,20 @@
 
                   </div>
 
-                  <div class="col right" *ngIf="complete.customersource == 'DistributorCustomer'">
+                  <div class="col-7 right" *ngIf="complete.customersource == 'DistributorCustomer'">
                     <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                     <br>
-                    <b *ngIf="complete.distributor" class="onhovertooltip capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>
-                  <div class="col right" *ngIf="complete.customersource == 'MoyaCustomer'">
+                  <div class="col-7 right" *ngIf="complete.customersource == 'MoyaCustomer'">
                     <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
                     <br>
-                    <b *ngIf="complete.distributor" class="onhovertooltip capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>
                 </div>
 
                 <div class="row form-group">
-                  <div class="col left">
+                  <div class="col-7 left">
                     <span class="td-label">
                       Address</span>
                     <br>
@@ -1060,7 +1073,7 @@
                   </div>
 
 
-                  <div class="">
+                  <div class="col-5 right">
                     <span class="td-label">
                       Promo Code
                     </span> <br>
@@ -1087,13 +1100,13 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <div class="col left">
+                    <div class="col-7 left">
                       <span class="td-label">
                         Supplier</span>
                       <br>
-                      <b class="capitalize" *ngIf="complete.supplierdetails" class="onhovertooltip" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}"> {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
+                      <b class="capitalize" *ngIf="complete.supplierdetails" class="onhovertooltip-100" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}"> {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
                     </div>
-                    <div class="col  right">
+                    <div class="col-5  right">
                       <span class="td-label">
                         Supplier Mobile</span>
                       <br>
