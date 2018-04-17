@@ -16,6 +16,10 @@ margin-top:  -20px;
 margin-left: 65px;
     text-align: left;
 }
+.fa-key:before {
+    content: "\F084";
+    padding: 4px;
+}
 
 .boxsdw{
     box-shadow: 0 19px 41px -6px #777;

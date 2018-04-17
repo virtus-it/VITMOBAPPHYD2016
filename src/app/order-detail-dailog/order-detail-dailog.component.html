@@ -14,7 +14,8 @@
     <div class="row">
       <div class=" col-md-5 col-5 col-sm-5 brd-right">
         <div class="container-fluid">
-          <b> <i class="fa fa-file-text-o"></i>   Order Details</b>
+          <b>
+            <i class="fa fa-file-text-o"></i> Order Details</b>
           <div class="row form-group mgtop-5">
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
@@ -34,11 +35,11 @@
           <div class="row">
             <div class=" col-md-6">
               <b>Customer Details </b>
-              
+
             </div>
-            
+
             <div class="col-md-6 right">
-               
+
               <button class="btn btn-link btn-sm float-right" (click)='showCustomerDetails(dailogOrderDetails)'>
                 <i class="fa fa-chevron-circle-down" aria-hidden="true"> </i>
                 More Orders</button>
@@ -53,21 +54,22 @@
               <br>
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-                <span class="gray9">Order Address</span><br>
+                <span class="gray9">Order Address</span>
+                <br>
                 <b>Landmark:
                   <span> {{dailogOrderDetails.locality}} </span>
                   <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
 
-                  </b>
+                </b>
                 <b>Flat Number:
                   <span> {{dailogOrderDetails.buildingname}}
-                    </span>
-                    <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
-                    
-                  </b>
-                <br>
-                {{dailogOrderDetails.orderby_address}}</small>
-                <br>
+                  </span>
+                  <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
+
+                </b>
+                <br> {{dailogOrderDetails.orderby_address}}
+              </small>
+              <br>
 
             </div>
             <div class="col-md-6 right">
@@ -76,21 +78,23 @@
               <br>
               <small class="capital">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
-              <span class="gray9">Profile Address</span><br>
-              <b>Landmark: <span>{{dailogOrderDetails.locality}} </span>
+                <span class="gray9">Profile Address</span>
+                <br>
+                <b>Landmark:
+                  <span>{{dailogOrderDetails.locality}} </span>
 
-                <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
-                
-                
-              </b>
-              <b>Flat Number: <span>{{dailogOrderDetails.buildingname}} </span>
+                  <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
 
-                <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
-                
-               </b>
-              <br>
-              {{customerAddressDetails}}
-            </small>
+
+                </b>
+                <b>Flat Number:
+                  <span>{{dailogOrderDetails.buildingname}} </span>
+
+                  <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
+
+                </b>
+                <br> {{customerAddressDetails}}
+              </small>
               <!-- <small>
                 <i class="fa fa-location-arrow" aria-hidden="true"></i>
                 {{dailogOrderDetails.orderby_areaname}}</small> -->
@@ -149,20 +153,24 @@
                 </tr>
               </thead>
               <tbody>
-                  <b  *ngIf = "customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>  
+                <b *ngIf="customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-                  <td width="55%">    
-                               
+                  <td width="55%">
+
                     <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>
                   <td width="30%">
-                    <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small> 
-                    <a *ngIf="canDetails.showIcon">  <small> <i class="fa fa-exclamation-triangle yellow" title="Customer given extra {{canDetails.avaliablecans}} can to you"></i></small> </a>
+                    <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small>
+                    <a *ngIf="canDetails.showIcon">
+                      <small>
+                        <i class="fa fa-exclamation-triangle yellow" title="Customer given extra {{canDetails.avaliablecans}} can to you"></i>
+                      </small>
+                    </a>
 
                   </td>
-                 
+
                 </tr>
-                
+
               </tbody>
 
             </table>
@@ -172,7 +180,10 @@
 
       <div class="col-md-3">
         <div class="container-fluid">
-          <b class=""> <i class="fa fa-check-square-o" aria-hidden="true"></i>  Order Status :  <label class=" capitalize" [ngClass]="dailogOrderDetails.StatusColor" > {{dailogOrderDetails.OrderModifiedStatus}} </label></b>
+          <b class="">
+            <i class="fa fa-check-square-o" aria-hidden="true"></i> Order Status :
+            <label class=" capitalize" [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </label>
+          </b>
 
           <div class="row  mgtop-10">
             <ul class="timeline">
@@ -210,7 +221,7 @@
                 <div class="timeline-badge info">
                   <i class="fa fa-check-square-o white" aria-hidden="true"></i>
                 </div>
-                <div class="timeline-panel" >
+                <div class="timeline-panel">
                   <div class="timeline-heading">
                     <small class="timeline-title warning">
                       <b> Order Assigned</b>
@@ -238,10 +249,10 @@
                 </div>
               </li>
               <li>
-                <div class="timeline-badge success" >
+                <div class="timeline-badge success">
                   <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
                 </div>
-                <div class="timeline-panel" >
+                <div class="timeline-panel">
                   <div class="timeline-heading">
                     <small class="timeline-title warning">
                       <b> Order Completed </b>
@@ -311,16 +322,19 @@
               </button>
             </div>
           </div>
-<!-- notification buttons -->
-<div class="row mgtop-10">
-  <!-- <div class="col">
+
+          <!-- notification buttons -->
+          <div class="row mgtop-10">
+            <!-- <div class="col">
 <button class="mat-raised-button mat-primary"   (click)="getTemplates(dailogOrderDetails)"  > Read notification</button> 
 </div> -->
-<div class="col">
-<button class="mat-raised-button mat-primary" (click)="getTemplates(dailogOrderDetails)">Quick notification</button> 
-</div>
-</div>
-<!-- <div class="row mgtop-10">
+            <div class="p-0">
+              <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Quick notification</button>
+            </div>
+
+
+
+            <!-- <div class="row mgtop-10">
     <div class="col">
 <button class="mat-raised-button mat-primary" (click)="getTemplates(dailogOrderDetails)" >Remainder 3</button>
 </div>
@@ -328,11 +342,11 @@
 <button class="mat-raised-button mat-primary" (click)="getTemplates(dailogOrderDetails)" >Remainder 4</button> 
 </div>
 </div> -->
-<!-- <div class="row mgtop-10">
+            <!-- <div class="row mgtop-10">
     <div class="col">
 <button class="mat-raised-button mat-primary" (click)="getTemplates(dailogOrderDetails)" >Delivered</button>
 </div></div> -->
-<!-- radio, checkbox, website , slide , playstore 
+            <!-- radio, checkbox, website , slide , playstore 
 
 (click)="notification('radio')"
  (click)="notification('checkbox')"
@@ -342,58 +356,73 @@
 -->
 
 
+          </div>
         </div>
       </div>
-      <div class="col-md-4 form-group border-left">
-        <b><i class="fa fa-comments-o" aria-hidden="true"></i>          Messages</b>
-        <ul class="scrollheight">
-          <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2}" *ngFor="let msg of dailogOrderDetails.messages">
-            <div class="row">
-              <div class="col" >  <i class="fa fa-reply" aria-hidden="true"></i>
-                <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
-                <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small></div>
-              <div class="col right"> <small class="gray9">{{ msg.createddate | utcDate}} </small></div>
-            </div>
-            <small>{{ msg.message}} </small>
-          </li>
 
-        </ul>
-        <div class=" border-top pdtop-10">
-          <div class="form-group">
-            <b class="">Select any one :  &nbsp;</b>
-          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="0">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> Customer</span>
-          </label>
-          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="1">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> Distributor</span>
-          </label>
-          <label class="">
-            <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i>
-          </label>
-        </div>
-        <div class="row">
-          <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
-            <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here" [(ngModel)]="messageInput.order.reason"> </textarea>
-          </div>
-          
-          <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
-            <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
-          </div>
-          <br>
-          <div class="mgleft-20">
-              <small class="">Characters Remaining :
+
+      <div class="col-md-4">
+        <div class=" form-group border-left pdleft-10">
+          <b class="">
+            <i class="fa fa-comments-o" aria-hidden="true"></i> Messages</b>
+          <ul class="scrollheight">
+            <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2}" *ngFor="let msg of dailogOrderDetails.messages">
+              <div class="row">
+                <div class="col">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
+                  <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+                </div>
+                <div class="col right">
+                  <small class="gray9">{{ msg.createddate | utcDate}} </small>
+                </div>
+              </div>
+              <small>{{ msg.message}} </small>
+            </li>
+
+          </ul>
+          <div class=" border-top pdtop-10">
+            <div class="form-group">
+              <b class="">Select any one : &nbsp;</b>
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="0">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Customer</span>
+              </label>
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="messageInput.order.ispublic" name="status" value="1">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> Distributor</span>
+              </label>
+              <label class="">
+                <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i>
+              </label>
+            </div>
+            <div class="row">
+              <div class=" col-lg-10 col-md-10 col-sm-10 col-xl-10 ">
+                <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here"
+                  [(ngModel)]="messageInput.order.reason"> </textarea>
+              </div>
+
+              <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
+                <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
+              </div>
+              <br>
+              <div class="mgleft-20">
+                <small class="">Characters Remaining :
                   <span class="danger">{{500 - messageInput.order.reason.length}}</span>
                 </small>
+              </div>
+
+            </div>
           </div>
-         
-        </div>
+
         </div>
       </div>
-     
+
+
+
     </div>
+
   </div>
 </md-dialog-content>

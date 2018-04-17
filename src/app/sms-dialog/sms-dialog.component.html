@@ -60,14 +60,14 @@
             </md-autocomplete>
           </md-form-field>
         </div>
-        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms' && orderinput.orderType != 'distributorsdeliveredcustomer' " >
+        <div class="col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' && orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms' && orderinput.orderType != 'distributorsdeliveredcustomer' && orderinput.orderType != 'deliveryslotcustomers' && orderinput.orderType != 'distributorsdeliveryslot' " >
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="orderinput.fromDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms' && orderinput.orderType != 'distributorsdeliveredcustomer'">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType != 'distributorscustomer' &&  orderinput.orderType != 'customerbydays' && orderinput.orderType != 'sms' && orderinput.orderType != 'distributorsdeliveredcustomer' && orderinput.orderType != 'deliveryslotcustomers' && orderinput.orderType != 'distributorsdeliveryslot' ">
 
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="orderinput.toDate">
@@ -75,6 +75,29 @@
             <md-datepicker #pickers></md-datepicker>
           </md-form-field>
         </div>
+
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot' ">
+
+          <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="pickers" placeholder="Date" name="date">
+            <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+            <md-datepicker #pickers></md-datepicker>
+          </md-form-field>
+        </div>
+
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot' ">
+
+         
+            <md-select placeholder="Select Time" name="type" class="wd-100pc">
+            <md-option value="8AM-11AM">8AM-11AM</md-option>
+            <md-option value="11AM-2PM" >11AM-2PM</md-option>
+            <md-option value="2PM-5PM">2PM-5PM</md-option>
+            <md-option value="5PM-8PM" >5PM-8PM</md-option>
+          </md-select>
+
+        </div>
+
+
 
 
         <div class=" col-sm-2  col-md-2 col-lg-2" *ngIf="orderinput.orderType != 'sms'">

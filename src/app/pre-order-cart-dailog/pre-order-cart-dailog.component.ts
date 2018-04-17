@@ -117,7 +117,21 @@ export class PreOrderCartDailogComponent implements OnInit {
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
       }
+
+      let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
+      data.order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
+    
+      let slotDate = moment(this.createPreOrderInput.date).format('YYYY-MM-DD');
+      let selectedTime = this.createPreOrderInput.timeslot;
+      let endTime = selectedTime.split('-');
+      let endTime2 = endTime[1];
+      let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
+      console.log("time24" , time24);
+      data.order.slotdate = slotDate + " " + time24 ;
+
+
     console.log(data);
+
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
         width: '600px',
@@ -708,6 +722,15 @@ else{
         } 
         else if(this.hours <= 16){
           this.createPreOrderInput.timeslot = "5PM-8PM";
+        }
+        else if(this.hours > 17){
+          this.hours = "6";
+          var today = new Date();
+          var tomorrow = new Date(today);
+          tomorrow.setDate(today.getDate() + 1);
+          console.log(tomorrow);
+          this.createPreOrderInput.date = tomorrow;
+          this.createPreOrderInput.timeslot = "8AM-11AM";
         }
 
   }

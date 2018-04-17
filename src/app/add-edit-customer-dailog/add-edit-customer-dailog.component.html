@@ -51,7 +51,7 @@
 <div class="row">
     <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email Id" name="emaildid" [(ngModel)]="customerInput.User.emailid">
+            <input class="form-control" mdInput placeholder="Email Id" name="emailid" [(ngModel)]="customerInput.User.emailid">
             <md-error>
               Email Id is
               <strong>required</strong>
@@ -106,9 +106,27 @@
           <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
         </md-form-field>
 </div>
+
+<div class="col-md-4 col-sm-6">
+  <md-form-field class="">
+      <input class="form-control" mdInput placeholder="Promo Code" name="promocode" [(ngModel)]='customerInput.User.promocode'>
+    </md-form-field>
+
+</div>
+
+
+<div class="col-md-4 col-sm-6">
+<md-form-field class="wd-100pc">
+  <textarea class="form-control" mdInput placeholder="Order Address" name="Address" ></textarea>
+</md-form-field>
+
+</div>
+
+
+
 <div class="col-md-8 col-sm-8">
     <md-form-field class="wd-100pc">
-        <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
+        <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
       </md-form-field>
 </div>
 </div>
