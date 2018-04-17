@@ -35,6 +35,7 @@ export class CustomerDetailDailogComponent implements OnInit {
   LastfilterRecords = false;
   filterType = {distributorid: ""};
   distributorID = "";
+  customersOrdersClickMore = true;
 
 
   findDistributors(name: string) {

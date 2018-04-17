@@ -317,6 +317,9 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
+      if(result == 'success' || result == 'Cancel' || result === undefined){
+        this.refresh();
+      }
 
 
     });
@@ -333,6 +336,7 @@ export class OrderLandingComponent implements OnInit {
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
+        this.refresh();
 
       }
 
@@ -1099,6 +1103,7 @@ this.orderLandingService.getOrdersByfilter(input)
     console.log(result);
     if(result.result='success'){
       this.getForwardOrderDetails(true);
+      this.refresh();
 
 
     }
@@ -1120,7 +1125,7 @@ this.orderLandingService.getOrdersByfilter(input)
     //console.log(result);
     if (result.result == 'success') {
       this.getForwardOrderDetails(true);
-    
+    this.refresh();
     }
   }
 
@@ -1204,6 +1209,7 @@ this.orderLandingService.getOrdersByfilter(input)
                 if(result == 'success'){
                   this.getForwardOrderDetails(true);
                   this.getAllOrderDetails(true);
+                  this.refresh();
               
                 }
     

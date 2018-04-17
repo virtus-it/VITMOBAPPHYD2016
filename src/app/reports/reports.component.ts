@@ -55,7 +55,8 @@ export class ReportsComponent implements OnInit {
     { value: 'pendingorders', viewValue: 'Pending Orders', issuperDelear: this.superDealer },
     { value: 'rejectedorders', viewValue: 'Rejected Orders', issuperDelear: this.superDealer },
     { value: 'notregistered', viewValue: 'Customers not Registered', issuperDelear: this.superDealer },
-    { value: 'orderdownload', viewValue: 'Order Downloads', issuperDelear: true }
+    { value: 'orderdownload', viewValue: 'Order Downloads', issuperDelear: true },
+    { value:"distributorsorders" ,  viewValue:"Distributors Orders" , issuperDelear : this.superDealer}
   ];
 
   searchReports(firstCall, Rtype) {
@@ -108,6 +109,29 @@ export class ReportsComponent implements OnInit {
 
 
   }
+
+  searchDistributorsOrders(){
+    let input = {
+      order:{"userid":this.authenticationService.loggedInUserId(),"transtype":'distributorsdetails'}};
+      console.log(input);
+      this.reportservice.searchReports(input)
+        .subscribe(
+        output => this.searchDistributorOrdersResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
+  }
+  searchDistributorOrdersResult(result){
+    if(result.result == 'success'){
+      
+    }
+
+
+  }
+
+
+
   downloadOrders() {
     let input = {
       order: {

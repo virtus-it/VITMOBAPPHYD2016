@@ -127,6 +127,14 @@
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                 <br> Order Downloads</a>
             </td>
+
+            <td class="nav-item" (click)="searchDistributorsOrders()">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'distributorsorders'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-users" aria-hidden="true"></i>
+                <br>Distributors Orders </a>
+            </td>
+
+
           </tr>
         </table>
         <!-- <ul class="nav nav-pills navbar-nav flex-column row">

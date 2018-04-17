@@ -100,12 +100,14 @@ else if(this.orderDetail.type == 'coveragePage'){
         let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
         if (customerProduct) {
           customerProduct.quantity = "0";
+          customerProduct.expressCheck = false;
           
           productListCopy.push(customerProduct);
 
         }
         else {
           details.quantity = "0";
+          details.expressCheck = false;
           productListCopy.push(details);
         }
 
@@ -187,16 +189,23 @@ let orderId= '';
       orderId = this.orderDetail.orderDetails.order_id;
     }
 
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "servicecharges": productsDetails.servicecharge , "expressdeliverycharges": productsDetails.expressdeliverycharges } };
+    
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "servicecharges": productsDetails.servicecharge , "expressdeliverycharges": 0 } };
+
+    
+if(productsDetails.expressCheck == true){
+  input.order.expressdeliverycharges = productsDetails.expressdeliverycharges;
+}
 
     console.log(input);
-    this.orderLandingService.updateQuantity(input)
-      .subscribe(
-      output => this.setProductsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      });
+
+    // this.orderLandingService.updateQuantity(input)
+    //   .subscribe(
+    //   output => this.setProductsResult(output),
+    //   error => {
+    //     //console.log("error in distrbutors");
+    //     this.loaderService.display(false);
+    //   });
   }
   setProductsResult(result) {
     //console.log(result);

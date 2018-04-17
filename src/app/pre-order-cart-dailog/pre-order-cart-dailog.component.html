@@ -229,7 +229,7 @@
                   <div class="">                   
                 <div class="width-100pc">
                   <md-form-field class="center">
-                    <input class="form-control" mdInput type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"  >
+                    <input class="form-control" mdInput type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
                     </md-form-field>
               </div>
                 </div>

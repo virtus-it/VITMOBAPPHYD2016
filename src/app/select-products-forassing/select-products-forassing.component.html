@@ -44,8 +44,12 @@
             <!-- (ngModelChange)="searchMobileNo()"-->
           </md-form-field></td> 
       <td class="left capital" width="10%"> {{product.pcost * product.quantity}}</td>
+
+
       <td class="left capital" width="13%">  {{product.expressdeliverycharges}}
-          <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressdeliverycharges" name="iscanRetrunable" checked>
+        
+          <input type="checkbox"  name="expressdelivery"[(ngModel)]="product.expressCheck">
+          <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
       </td>
       <td width="13%" class="left capital"> {{product.servicecharge}} </td> 
   

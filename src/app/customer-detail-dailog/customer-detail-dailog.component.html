@@ -109,6 +109,18 @@
             </td>
           </tr>
         </tfoot>
+        <tfoot>
+          <tr>
+            <td colspan="8">
+              <h4 class="warning  capitalize center">
+                <a href="javascript:void(0);"  *ngIf="customersOrdersClickMore">
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                <span *ngIf="!customersOrdersClickMore">Record Not Available</span>
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+
       </table>
       <h4 class="warning  capitalize center" *ngIf="noDataError">
         {{noDataError}}

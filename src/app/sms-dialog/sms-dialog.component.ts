@@ -43,7 +43,7 @@ export class SmsDialogComponent implements OnInit {
 
   }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null , date: null };
+  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null , date: null , timeSlot:"" };
   smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
@@ -229,7 +229,7 @@ trackByFn(index, item) {
     let input = {
       User: {
         "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,"smstype":"",
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid , date:null
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid , date:null , timeSlot: ""
       }
     };
     if (this.orderinput.fromDate) {
@@ -237,6 +237,20 @@ trackByFn(index, item) {
     }
     if (this.orderinput.toDate) {
       input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if(this.orderinput.date){
+      input.User.date = moment(this.orderinput.date).format('YYYY-MM-DD');
+    }
+    if(this.orderinput.timeSlot){
+
+      let selectedTime = this.orderinput.timeSlot;
+      let endTime = selectedTime.split('-');
+      let endTime2 = endTime[1];
+  let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
+  console.log("time24" , time24);
+
+
+      input.User.timeSlot = time24;
     }
     // if(this.orderinput.date){
 

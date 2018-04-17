@@ -318,7 +318,7 @@
                     <!-- forward.customersource === 'MoyaCustomer' -->
 
                     <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
+                    <i *ngIf="forward.preorderby !== null" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
@@ -335,10 +335,7 @@
                 </div>
               </td>
 
-              <td width="25%">
-                <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
-                    </div></div></td>
+   
 
               <!-- <td  width="25%">
               <ngx-gauge [thresholds]="thresholdConfig"
@@ -662,7 +659,7 @@
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                       <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
+                      <i *ngIf="allorder.preorderby !== null" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -927,7 +924,7 @@
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
                     <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk"></i>
+                      <i *ngIf="complete.preorderby !== null" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -960,6 +957,12 @@
                       <br>
                       <b class="capitalize">{{complete.brandname}} </b>
                     </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 right">
+                      <span class="td-label">Quantity </span>
+                      <br>
+                      <b class="pdright-5">{{complete.quantity}}</b>
+                    </div>
+
                     
                   </div>
 
@@ -983,20 +986,13 @@
                       <br>
                       <b>Rs.{{complete.expressdeliverycharges}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <!-- forward.customersource === 'MoyaCustomer' -->
-                      <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'" title="Express Delivery"></i>
-                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
-                      <i class="fa fa-calendar-check-o " *ngIf="complete.ispreorder === 'true' || complete.ispreorder === 'MoyaCustomer' || complete.ispreorder === 'Admin' || complete.ispreorder === 'scheduler'"
-                        aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
-                      <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
-                        title="Moya Customer"></i>
-                        <i class="fa fa-frown-o red" title="Revert" *ngIf="complete.status == 'backtodealer'"></i>
-                      <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
+
+                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                      <span class="td-label">Service charges </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
                     </div>
-                  </div>
+                    </div>
                   <div class=" row ">
                     <div class="col-sm-7  col-md-7  col-lg-7  left align-self-center">
                       <span class="td-label">Amount </span>

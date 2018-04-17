@@ -138,7 +138,7 @@ export class DistributorListDialogComponent implements OnInit {
     this.loaderService.display(false);
 
     if (result.result == "success") {
-      this.Closedailog();
+      this.Closedailog('success');
     }
   }
   assignOrder() {
@@ -176,7 +176,7 @@ export class DistributorListDialogComponent implements OnInit {
     //console.log(result);
     this.loaderService.display(false);
     if (result.result == "success") {
-      this.Closedailog();
+      this.Closedailog('success');
 
     }
   }
@@ -212,8 +212,10 @@ export class DistributorListDialogComponent implements OnInit {
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
-  Closedailog() {
-    this.thisDialogRef.close('success');
+
+
+  Closedailog(message) {
+    this.thisDialogRef.close(message);
   }
 
 
