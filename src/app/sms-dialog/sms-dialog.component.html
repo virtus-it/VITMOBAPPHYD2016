@@ -76,19 +76,19 @@
           </md-form-field>
         </div>
 
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot' ">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot'">
 
           <md-form-field class="inline">
-            <input mdInput [mdDatepicker]="pickers" placeholder="Date" name="date">
+            <input mdInput [mdDatepicker]="pickers" placeholder="Date" name="date" [(ngModel)]="orderinput.date">
             <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
             <md-datepicker #pickers></md-datepicker>
           </md-form-field>
         </div>
 
-        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot' ">
+        <div class="  col-sm-3  col-md-3  col-lg-3" *ngIf="orderinput.orderType == 'deliveryslotcustomers' || orderinput.orderType == 'distributorsdeliveryslot'">
 
          
-            <md-select placeholder="Select Time" name="type" class="wd-100pc">
+            <md-select placeholder="Select Time" class="wd-100pc"  name="type" [(ngModel)]="orderinput.timeSlot">
             <md-option value="8AM-11AM">8AM-11AM</md-option>
             <md-option value="11AM-2PM" >11AM-2PM</md-option>
             <md-option value="2PM-5PM">2PM-5PM</md-option>

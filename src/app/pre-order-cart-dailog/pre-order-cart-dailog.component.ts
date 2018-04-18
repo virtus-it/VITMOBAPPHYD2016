@@ -596,7 +596,7 @@ else{
 
   onChangeQuantity(details,event){
 
-
+console.log(details);
     this.createPreOrderInput.productDetails = details;
     // _.each even or for loop  ngModelQuantity 0 for others 
    // let selectedid= details.productid;
@@ -628,12 +628,17 @@ else{
   }
 )
 
-if(this.createPreOrderInput.productDetails.default_qty){
-    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
+if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.default_qty){
+  this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
 }
-else{
-  this.createPreOrderInput.productDetails.quantity = 1;
+
+if(!this.createPreOrderInput.productDetails.default_qty){
+  if(this.createPreOrderInput.productDetails.minorderqty == 0){
+    this.createPreOrderInput.productDetails.minorderqty = 1;
+  }
+    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
 }
+
   }
 
   validate(){
@@ -723,7 +728,7 @@ else{
         else if(this.hours <= 16){
           this.createPreOrderInput.timeslot = "5PM-8PM";
         }
-        else if(this.hours > 17){
+        else if(this.hours >= 17){
           this.hours = "6";
           var today = new Date();
           var tomorrow = new Date(today);

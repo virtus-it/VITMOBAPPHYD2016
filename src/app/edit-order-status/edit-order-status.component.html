@@ -98,6 +98,23 @@
             <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" > 
           </md-form-field>
           </div>
+          <div class=""  *ngIf="editStatusInput.order.orderstatus == 'delivered'" >
+            <div class="col-3">
+              <small class="">Ordered Amount</small><br>
+              <b class="" >Rs.{{orderDetail.bill_amount}}</b>
+            </div>
+            <div class="">
+              <small class="">Service Charge</small><br>
+              <b class=""> Rs. {{orderDetail.servicecharges}} </b>
+            </div>
+
+            <div class="">
+              <small class="">Exp delv chgs</small><br>
+              <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b> 
+            </div>
+
+
+          </div>
           <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div  *ngIf="editStatusInput.order.paymentype == 'cash'">
               <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->

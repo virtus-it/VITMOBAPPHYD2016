@@ -337,12 +337,16 @@
                   </div>
                 </div>
               </td>
-              <!-- <td  width="24%">
-                  <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
-                    </label>
-                <i class="fa fa-minus logo-color fs-18 none"></i>
-                <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
 
+   
+
+              <!-- <td  width="25%">
+              <ngx-gauge [thresholds]="thresholdConfig"
+              [type]="gaugeType" 
+              [value]= timeRemaining 
+              [label]="gaugeLabel"  
+              [append]="gaugeAppendText">
+            </ngx-gauge>
               </td> -->
 
               
@@ -663,6 +667,8 @@
                     <br>
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
+                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
+                      <i *ngIf="allorder.preorderby !== null" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -930,6 +936,8 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
+                    <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
+                      <i *ngIf="complete.preorderby !== null" class="fa fa-asterisk"></i>
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -962,6 +970,12 @@
                       <br>
                       <b class="capitalize">{{complete.brandname}} </b>
                     </div>
+                    <div class="col-sm-6  col-md-6  col-lg-6 right">
+                      <span class="td-label">Quantity </span>
+                      <br>
+                      <b class="pdright-5">{{complete.quantity}}</b>
+                    </div>
+
                     
                   </div>
 
@@ -985,20 +999,13 @@
                       <br>
                       <b>Rs.{{complete.expressdeliverycharges}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <!-- forward.customersource === 'MoyaCustomer' -->
-                      <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'" title="Express Delivery"></i>
-                      <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
-                      <i class="fa fa-calendar-check-o " *ngIf="complete.ispreorder === 'true' || complete.ispreorder === 'MoyaCustomer' || complete.ispreorder === 'Admin' || complete.ispreorder === 'scheduler'"
-                        aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
-                      <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
-                        title="Moya Customer"></i>
-                        <i class="fa fa-frown-o red" title="Revert" *ngIf="complete.status == 'backtodealer'"></i>
-                      <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
+
+                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                      <span class="td-label">Service charges </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
                     </div>
-                  </div>
+                    </div>
                   <div class=" row ">
                     <div class="col-sm-5  col-md-5  col-lg-5  left align-self-center">
                       <span class="td-label">Amount </span>
