@@ -415,7 +415,7 @@
                     <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
                       
                     <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
-                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(forward)'>
@@ -733,7 +733,7 @@
                     </div>
                     <div class="col-3 center align-self-center" >
                         <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
-                        <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                        <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                     </div>
                     <div class="col-4 align-self-center right">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(allorder)'>
@@ -1007,8 +1007,8 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
-                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
-                        <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
+                        <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"title="Preorder"></i>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(complete)'>
