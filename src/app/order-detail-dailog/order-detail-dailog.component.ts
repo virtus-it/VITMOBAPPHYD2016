@@ -27,6 +27,7 @@ export class OrderDetailDailogComponent implements OnInit {
     deliveredStatus= false;
     customerProductDetails: any = [];
     customerProductDetailsCopy: any = [];
+    message  = "";
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
@@ -81,6 +82,7 @@ editStatus(orderData) {
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
         if (result == 'success') {
+            this.message = "success";
             this.getOrderDetailsById();
             this.getProductsListByCustomerId();
         }
@@ -239,6 +241,10 @@ deliveryStatus(){
         this.deliveredStatus = false;
     }
 
+}
+
+onCloseModel(message){
+    this.thisDialogRef.close(this.message);
 }
 
 //test function

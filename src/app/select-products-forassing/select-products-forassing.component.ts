@@ -199,13 +199,13 @@ if(productsDetails.expressCheck == true){
 
     console.log(input);
 
-    // this.orderLandingService.updateQuantity(input)
-    //   .subscribe(
-    //   output => this.setProductsResult(output),
-    //   error => {
-    //     //console.log("error in distrbutors");
-    //     this.loaderService.display(false);
-    //   });
+    this.orderLandingService.updateQuantity(input)
+      .subscribe(
+      output => this.setProductsResult(output),
+      error => {
+        //console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
   }
   setProductsResult(result) {
     //console.log(result);

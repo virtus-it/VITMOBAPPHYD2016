@@ -20,6 +20,8 @@ export class EditOrderStatusComponent implements OnInit {
   "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype , "adv_amt":this.orderDetail.customerpaymentdts.advance_amount } };
 isConfirmed = true;
 
+message = "";
+
 
 
   updateOrderStatus() {
@@ -75,8 +77,11 @@ if(this.editStatusInput.order.orderstatus == "not_reachable"){
   }
   updateOrderStatusResult(result){
     this.loaderService.display(false);
-if(result.result = '"success"'){
-  this.thisDialogRef.close('success');
+if(result.result == 'success'){
+ 
+  this.message= "success";
+  // this.thisDialogRef.close(this.message);
+  this.onCloseModel(this.message)
 }
   }
 
@@ -89,6 +94,10 @@ if(result.result = '"success"'){
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  onCloseModel(message){
+    this.thisDialogRef.close(this.message)
   }
   ngOnInit() {
     //console.log(this.editStatusInput);

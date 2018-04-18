@@ -323,10 +323,10 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
     openMapDialog(data) {
         //console.log(data);
-        let modelData={"type":"assignFromOrders", data:data}
+        // let modelData={data:data.distDetails}
         let dialogRef = this.dialog.open(MapDialogComponent, {
             width: '90%',
-            data: modelData
+            data: data
         });
         dialogRef.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
