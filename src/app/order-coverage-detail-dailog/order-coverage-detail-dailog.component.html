@@ -42,6 +42,12 @@
           <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail.distDetails)">Assign Area</button>
           
         </div>
+
+        <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center" *ngIf="smallLoader">
+          <img src="assets/images/loader.gif" class="wd-60">
+        </div>
+
+        
       </div>
   <div class="container-fluid brd-bottom">
      

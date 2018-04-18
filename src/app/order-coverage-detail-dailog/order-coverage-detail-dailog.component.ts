@@ -34,6 +34,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     order = { orderId: "" };
     gpsMessage: string = "";
     filterInputkmvalue = { kmvalue: "0.03" };
+    smallLoader: boolean = false;
     categoryList: any = [];
     reasonOnHold:any;
     dropdownSettings = {
@@ -202,6 +203,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             }
         }
 
+        this.smallLoader = false;
+
     }
     getProductByCategory() {
         let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
@@ -281,6 +284,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     getFilteredPolygonResult(result) {
         //console.log(result);
         if (result.result = 'success') {
+
             //this.polygonArray= [];
             this.displayPolygon = [];
             if (result.data && result.data.length > 0) {
@@ -315,6 +319,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                     }
 
                 }
+                this.smallLoader = false;
             }
 
         }
@@ -396,6 +401,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
 
     filterPolygon() {
+        this.smallLoader = true;
         if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
             this.searchPolygon();
 
