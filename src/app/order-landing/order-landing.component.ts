@@ -293,7 +293,7 @@ export class OrderLandingComponent implements OnInit {
     else{
       distributorId = "";
     }
-    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId , distDetails: orderDetails.distributor  }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '98%',
       data: modelData
@@ -317,7 +317,7 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
-      if(result == 'success' || result == 'Cancel' || result === undefined){
+      if(result == 'success'){
         this.refresh();
       }
 

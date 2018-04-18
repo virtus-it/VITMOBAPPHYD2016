@@ -39,7 +39,7 @@
             </div>
           <div class="col-3 ">
           <button md-raised-button color="primary" (click)="filterPolygon()"> Filter </button> 
-          <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail)">Assign Area</button>
+          <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail.distDetails)">Assign Area</button>
           
         </div>
       </div>

@@ -1,7 +1,7 @@
 ﻿<div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
           <span ><i class="fa fa-sitemap"></i>  {{distributorDetails.firstname}}</span>
-          <span *ngIf="distributorDetails.type == 'assignFromOrders' && distributorDetails.data.orders.distributor" > {{distributorDetails.data.orders.distributor.firstname}} {{distributorDetails.data.orders.distributor.lastname}}</span>
+          <!-- <span *ngIf="distributorDetails.type == 'assignFromOrders' && distributorDetails.data.orders.distributor" > {{distributorDetails.data.orders.distributor.firstname}} {{distributorDetails.data.orders.distributor.lastname}}</span> -->
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
