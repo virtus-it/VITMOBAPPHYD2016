@@ -44,14 +44,16 @@ export class OrderLandingComponent implements OnInit {
 
   //for guage
   timeRemaining:any = '';
+  min:any = -10000;
+  max:any = 10000;
   thresholdConfig = {
-      '0': {color: 'green'},
-      '40': {color: 'orange'},
-      '75.5': {color: 'red'}
+      '-10000' : {color: 'red'},
+      '1': {color: 'orange'},
+      '3': {color: 'green'}
   };
-  gaugeType = "arch";
-  gaugeValue = 28.3;
-  gaugeLabel = 'Time Remaining';
+  gaugeType = "semi";
+  gaugeValue = 'value'
+  gaugeLabel = '';
   gaugeAppendText = "Hours";
 
   orderedDate:any = "";
@@ -83,6 +85,8 @@ export class OrderLandingComponent implements OnInit {
         .map(supplier =>supplier ? this.findSupplier(supplier) : this.supplierList.slice());
 
   }
+
+  timesRemaining:any = [];
   distributors: any = [];
   supplierList:any = [];
   completeOrders:any =[];
@@ -293,7 +297,7 @@ export class OrderLandingComponent implements OnInit {
     else{
       distributorId = "";
     }
-    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId , distDetails: orderDetails.distributor  }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '98%',
       data: modelData
@@ -317,7 +321,7 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
-      if(result == 'success' || result == 'Cancel' || result === undefined){
+      if(result == 'success'){
         this.refresh();
       }
 
@@ -927,51 +931,93 @@ this.orderLandingService.getOrdersByfilter(input)
     }    
   }
   ModifyOrderList(result) {
+   
     _.each(result, function (i, j) {
       let details: any = i;
-      //test
-      // if(details.status === null){
-      //   return result;
-      // }
+      details.timeRemaining = "";
+      let currentTime = moment(new Date());
+      if(details.slotdate){
+        let deliveryTime = moment(details.slotdate);
+        var duration = moment.duration(deliveryTime.diff(currentTime));
+        var hours = duration.asHours();
+        let floorValue = Math.floor(hours);
+          // console.log(hours);
+        details.timeRemaining = floorValue;
+        // console.log('success1' , details.timeRemaining );
+      }
+      else{
+        let delivery_exceptedtime = details.delivery_exceptedtime;
+        let onlyDate = delivery_exceptedtime.split(" ");
+        let datePart = "";
+        datePart = onlyDate[0];
+        let endTimeValue = onlyDate[1];
+        let formattedDate = moment(datePart , 'DD-MM-YYYY').format('YYYY-MM-DD');
+        // console.log("formatted date" , formattedDate );
+         let expectedTime = details.delivery_exceptedtime;
+        let    timeConvert = endTimeValue;
+         let   time24 = moment(timeConvert, ["hA"]).format("HH:MM:SS");
+            let date =  formattedDate+ " " +time24;
+             let deliveryTimetest = moment(date);
+             var duration = moment.duration(deliveryTimetest.diff(currentTime));
+             var hours = duration.asHours();
+             let floorValue = Math.floor(hours);
+              //  console.log(hours);
+             details.timeRemaining = floorValue;
+            //  console.log('success 2' , details.timeRemaining);
+      } 
+      
+      // this.timesRemaining = details.timeRemaining;
+    
+     
       if (details.status && details.status == "onhold") {
         details.OrderModifiedStatus = "On Hold";
         details.StatusColor = "warning";
+
       }
       else if (details.status && details.status.toLowerCase() == "cancelled") {
         details.OrderModifiedStatus = "Cancelled";
         details.StatusColor = "danger";
+
       }
       else if (details.status && details.status.toLowerCase() == "rejected") {
         details.OrderModifiedStatus = "Rejected";
         details.StatusColor = "danger";
+     
       }
       else if (details.status &&  details.status == "assigned") {
         details.OrderModifiedStatus = "Re-Assign";
         details.StatusColor = "logo-color";
+   
       }
       else if (details.status && details.status.toLowerCase() == "delivered") {
         details.OrderModifiedStatus = "Delivered";
         details.StatusColor = "success";
+
       }
       else if ( details.status && (details.status == "doorlock" || details.status == "Door Locked")) {
         details.OrderModifiedStatus = "Door Locked";
         details.StatusColor = "warning";
+     
       }
       else if (details.status && (details.status == "cannot_deliver" || details.status == "Cant Deliver")) {
         details.OrderModifiedStatus = "Cant Deliver";
         details.StatusColor = "warning";
+  
       }
       else if (details.status && (details.status == "Not Reachable" || details.status == "not_reachable")) {
         details.OrderModifiedStatus = "Not Reachable";
         details.StatusColor = "warning";
+
       }
       else if (details.status && details.status == "pending") {
         details.OrderModifiedStatus = "Pending";
         details.StatusColor = "logo-color";
+     
       }
       else if (details.status && (details.status == "ordered" || details.status == "backtodealer")) {
         details.OrderModifiedStatus = "Assign";
         details.StatusColor = "logo-color";
+ 
       }
       else if(details.status && details.status == 'accept' ){
         details.OrderModifiedStatus = 'Assign';
@@ -980,6 +1026,8 @@ this.orderLandingService.getOrdersByfilter(input)
 
 
     });
+    // this.timesRemaining = details.timeRemaining;
+
     return result;
   }
   getPagingOrderDetails(firstcall, tab) {
@@ -1262,167 +1310,7 @@ this.orderLandingService.getOrdersByfilter(input)
 
         }
 
-      //   timeSimultor(){
-      //     //all orders time
-      //     let orderedTime:any = [];
-      //     let deliveryTime:any = []; 
-      //     let orderedHour:any = [];
-      //     let deliveryDateString:any = [];
-      //     let timeDifference:any = "";
-      //     let time24:any = "";
-      //     var orderedDate = _.each(this.forwardOrders , function(i,j){
-      //       let details:any = i;
-      //       orderedTime = details.ordered_date;
-      //       deliveryTime = details.delivery_exceptedtime;
 
-      //       orderedHour = moment(orderedTime).format("HH");
-
-      //       deliveryDateString = deliveryTime;
-      //       let deliverySlot = deliveryDateString.split(" ").pop('');
-      //       let endTime = deliverySlot.split("-");
-      //       let endTimeValue = endTime[1];
-      //       let timeConvert ="";
-      //       timeConvert = endTimeValue;
-      //       time24 = moment(timeConvert, ["hA"]).format("HH");
-            
-
-      //     });
-
-      //     timeDifference = time24 - orderedHour;
-      //     console.log(" time difference",timeDifference);
-           
-      //   }
-      
-      
-
-      // timesim(){
-      //   let input= this.forwardOrders;
-      //     for(let data of this.forwardOrders){
-      //         if(this.nextDate == this.currentdate){
-      //         //deliveryhour for same day
-      //         this.deliveryDate = data.delivery_exceptedtime; 
-      //         let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); 
-      //         let f2deliveryDate = f3deliveryDate.split("-")[0]; 
-      //         let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
-      //         this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //time24
-      //       // delivary date only for same day
-      //         var ifNextDate = data.delivery_exceptedtime;
-      //         let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
-      //         this.nextDate = nextdelDate; //same day del date
-      //         // current hour for same day 
-      //         var currentDateTime = new Date(); //Initialising current time
-      //         this.currentHour = moment(currentDateTime).format("HH");
-      //         // current date for same day 
-      //         var currentDate = new Date(); // for comparing del date and current date
-      //         this.currentdate = moment(currentDate).format("DD-MM-YYYY");
-      //         // same day dh - ch
-      //         this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour);
-      //         //result
-      //         console.log(this.samedaytimeRemainingHours);
-      //         }
-      //         else{
-      //             //different day delivery
-      //             //different day delivery hour
-      //             this.deliveryDate = data.delivery_exceptedtime;
-      //             let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); 
-      //             let f2deliveryDate = f3deliveryDate.split("-")[0]; 
-      //             let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
-      //             this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format
-      
-      //             var ifNextDate = data.delivery_exceptedtime; // if next date
-      //             let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
-      //             this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
-      //             var currentDate = new Date(); // for comparing del date and current date
-      //             this.currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
-      //             var date1 = new Date(this.currentdate); 
-      //             var ms1 = date1.getTime(); 
-      //             var date2 = new Date(this.nextDate);
-      //             var ms2 = date2.getTime();
-      //             this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
-      //             console.log(this.nextDaytimeRemainingHours);
-      //         }
-      
-          
-        
-      //   }
-      
-      // }
-      
-      // onInItConditions(){
-      //   let input= this.forwardOrders;
-      //     for(let data of this.forwardOrders){
-      //   var ifNextDate = data.delivery_exceptedtime;
-      //   let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
-      //   this.nextDate = nextdelDate; //same day del date
-      //   var currentDateTime = new Date(); //Initialising current time
-      //         this.currentHour = moment(currentDateTime).format("HH");
-      //         // current date for same day 
-      //         var currentDate = new Date(); // for comparing del date and current date
-      //         this.currentdate = moment(currentDate).format("DD-MM-YYYY");
-      // }
-      // this.timesim();
-      // }
-      
-      
-      
-      //   timesimu(){
-      //       let input= this.forwardOrders;
-      //       for(let data of this.forwardOrders){
-      //           this.orderedDate = data.ordered_date;          // orderedDate
-      //           this.orderedHour = moment(this.orderedDate).format("HH"); // ordered date in hours ; orderedHour
-      //            this.deliveryDate = data.delivery_exceptedtime; // del exp time ; deliveryDate
-      //           let f3deliveryDate =  this.deliveryDate.split(" ").pop(''); // removes date part to give time part 
-      //           let f2deliveryDate = f3deliveryDate.split("-")[0]; // gives ground time i.e 3-4 --> 3pm
-      //           let f1deliveryDate = f2deliveryDate.substring(0,3); //3pm
-      //           this.deliveryHour = moment(f1deliveryDate, ["hA"]).format("HH"); //value in 24hours format ; deliveryHour
-      //           var ifNextDate = data.delivery_exceptedtime; // if next date
-      //           let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
-      //           this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
-      //           var currentDate = new Date(); // for comparing del date and current date
-      //           this.currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
-      //           var date1 = new Date(currentdate); 
-      //           var ms1 = date1.getTime(); 
-      //           var date2 = new Date(this.nextDate);
-      //           var ms2 = date2.getTime();
-      //           this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
-      //           console.log(this.nextDaytimeRemainingHours);
-      //           var currentDateTime = new Date(); //Initialising current time
-      //           this.currentHour = moment(currentDateTime).format("HH"); // getting current Hour ; currentHour
-      //           this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour) // samedaytimeRemainingHours
-      //           console.log(this.timeRemaining);
-      //       if(this.currentdate == this.deliveryDate){
-      //         this.samedaytimeRemainingHours = parseInt(this.deliveryHour) - parseInt(this.currentHour); 
-      //       }
-      //       else{
-      //         var ifNextDate = data.delivery_exceptedtime; // if next date
-      //         let nextdelDate = ifNextDate.slice(0,10); //Getting only date of del exp time
-      //         this.nextDate = moment(nextdelDate, "DD-MM-YYYY").format('MM-DD-YYYY'); // now the new date format is here ; nextDate
-      //         var currentDate = new Date(); // for comparing del date and current date
-      //         var currentdate = moment(currentDate).format("MM-DD-YYYY"); // current date format
-      //         var date1 = new Date(currentdate); 
-      //         var ms1 = date1.getTime(); 
-      //         var date2 = new Date(this.nextDate);
-      //         var ms2 = date2.getTime();
-      //         this.nextDaytimeRemainingHours = Math.abs(ms2 - ms1) / 36e5; //nextDaytimeRemainingHours
-      //         console.log(this.nextDaytimeRemainingHours);
-      //       }
-      //     }
-      
-      //   }
-      
-
-      //   oneFuncForAll(){
-      //     this.onInItConditions();
-      //     this.timesimu();
-      //     this.timeSimultor();
-      //   }
-      
-      
-          //  var now = moment(new Date()); //todays date
-          //     var end = moment(nextdelDate); // another date
-          //     var duration = moment.duration(now.diff(end));
-          //     var hours = duration.asHours();
-          //     console.log(hours);
 
 
   ngOnInit() {
@@ -1445,41 +1333,5 @@ this.tabPanelView = 'allorder';
   }
 
 }
-
-
-//guage total rnd
-
-      //simulator
-
-
-
-      //dumped code
-
-
-      // let orderedtime = this.forwardOrders.ordered_date;
-          // let time1 = moment(orderedtime).format("HH");
-          // let time2 = this.forwardOrders.delivery_exceptedtime;
-          // let abc = time2.split(" ").pop('');
-          // console.log(abc);
-          // let def = abc.split("-")
-          // let deliverytime= time2;
-          // deliverytime.split(" ")[1]
-          // var time = deliverytime.split(" ")[1]
-          // console.log(time.substring(0,3));
-          // let timeinAMPM = time.substring(0,3);
-      
-          //1
-          // var time24 = moment("3PM", ["hA"]).format("HH:mm");
-          // org  let newHour = moment(timeinAMPM).format("HH");
-          //2
-          // '3pm'.replace(
-          //   /(\d+)([ap]m)?/,
-          //   (match, digits, ampm) => +digits + (ampm === "pm" ? 12 : 0)
-          // );
-      
-      
-          
-          
-          // console.log(time24);
 
 

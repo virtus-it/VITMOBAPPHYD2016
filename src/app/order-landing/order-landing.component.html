@@ -340,20 +340,13 @@
 
    
 
-              <!-- <td  width="25%">
-              <ngx-gauge [thresholds]="thresholdConfig"
-              [type]="gaugeType" 
-              [value]= timeRemaining 
-              [label]="gaugeLabel"  
-              [append]="gaugeAppendText">
-            </ngx-gauge>
-              </td> -->
+      
 
               
                 
-                <!-- updated new guage -->
+      
                 
-                <td width="24%">
+                <td width="24%" >
                 <div class="row ">
                     <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
@@ -419,7 +412,7 @@
                     <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
                       
                     <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
-                    <i *ngIf="forward.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
+                    <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(forward)'>
@@ -573,12 +566,16 @@
                 </td> -->
                 <td width="24%" >
                 
-                <ngx-gauge
+                <ngx-gauge *ngIf="forward.status != 'delivered'"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
-                [value]= 'gaugeValue' 
+                [value]= 'forward.timeRemaining'
                 [label]="gaugeLabel"  
-                [append]="gaugeAppendText">
+                [append]="gaugeAppendText"
+                [min]= '-10000'
+                [max] = '10000'
+                [size]='100'
+                >
                 </ngx-gauge>
                
               </td>
@@ -667,8 +664,7 @@
                     <br>
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="allorder.preorderby !== null" class="fa fa-asterisk"></i>
+                      
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -682,6 +678,18 @@
                   </div>
                 </div>
               </td>
+
+              <td width="24%">
+                <div class="row ">
+                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                    </label>
+                    <i class="fa fa-minus logo-color fs-18 none"></i>
+                    <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+                    </div>
+                  </div></td>
+
+
               <!-- <td>
                 <i class="fa fa-minus logo-color fs-18"></i>
                 <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
@@ -739,7 +747,7 @@
                     </div>
                     <div class="col-3 center align-self-center" >
                         <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
-                        <i *ngIf="allorder.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
+                        <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-4 align-self-center right">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(allorder)'>
@@ -859,7 +867,22 @@
                   </div>
                 </div>
               </td>
-              <td></td>
+
+
+             <td width="24%"  >
+                
+                <ngx-gauge *ngIf="allorder.status != 'delivered'"
+                [thresholds]="thresholdConfig"
+                [type]="gaugeType" 
+                [value]= 'allorder.timeRemaining'
+                [label]="gaugeLabel"  
+                [append]="gaugeAppendText"
+                [min]= '-10000'
+                [max] = '10000'>
+                </ngx-gauge>
+               
+              </td>
+
             </tr>
           </tbody>
           <tfoot>
@@ -936,8 +959,7 @@
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
-                    <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" title="Preorder" ></i>
-                      <i *ngIf="complete.preorderby !== null" class="fa fa-asterisk"></i>
+                    
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -950,6 +972,18 @@
                   </div>
                 </div>
               </td>
+
+              <td width="24%">
+                <div class="row ">
+                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                    </label>
+                    <i class="fa fa-minus logo-color fs-18 none"></i>
+                    <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+                    </div>
+                  </div></td>
+
+
               <!-- <td  width="24%">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                       </label>
@@ -1014,8 +1048,8 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
-                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
-                        <i *ngIf="complete.preorderby !== 'dealer'" class="fa fa-asterisk" style="color:tomato"title="Preorder"></i>
+                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
+                        <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(complete)'>
@@ -1162,6 +1196,22 @@
                   </div>
                 </div>
               </td>
+
+              <td width="24%"  >
+                
+                <ngx-gauge *ngIf="complete.status != 'delivered'"
+                [thresholds]="thresholdConfig"
+                [type]="gaugeType" 
+                [value]= 'complete.timeRemaining'
+                [label]="gaugeLabel"  
+                [append]="gaugeAppendText"
+                [min]= '-10000'
+                [max] = '10000'
+                >
+                </ngx-gauge>
+               
+              </td>
+
               <!-- <td width="24%" >
                     <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                   </td> -->
@@ -1194,13 +1244,4 @@
 
 
 
-<!-- guage timer for delivery hour
 
-
-<ngx-gauge 
-[thresholds]="thresholdConfig"
-[type]="gaugeType" 
-         [value]= timeRemaining 
-         [label]="gaugeLabel"  
-         [append]="gaugeAppendText">
-</ngx-gauge> -->

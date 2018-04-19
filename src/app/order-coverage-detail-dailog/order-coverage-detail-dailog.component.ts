@@ -34,6 +34,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     order = { orderId: "" };
     gpsMessage: string = "";
     filterInputkmvalue = { kmvalue: "0.03" };
+    smallLoader: boolean = false;
     categoryList: any = [];
     reasonOnHold:any;
     dropdownSettings = {
@@ -90,7 +91,15 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     DistrbutorHover(distributor) {
         if (distributor.path) {
             this.displayPolygon = [];
-            this.displayPolygon.push(distributor);
+            var findDistributor = _.filter(this.polygonArray, function (k, l) {
+                let distDetails: any = k;
+                return distDetails.user_id == distributor.user_id;
+              });
+              if(findDistributor){
+
+                this.displayPolygon = findDistributor;
+              }
+           // this.displayPolygon.push(distributor);
         }
     }
     ShowAllPolygons() {
@@ -202,6 +211,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             }
         }
 
+        this.smallLoader = false;
+
     }
     getProductByCategory() {
         let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
@@ -281,6 +292,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     getFilteredPolygonResult(result) {
         //console.log(result);
         if (result.result = 'success') {
+
             //this.polygonArray= [];
             this.displayPolygon = [];
             if (result.data && result.data.length > 0) {
@@ -315,6 +327,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                     }
 
                 }
+                this.smallLoader = false;
             }
 
         }
@@ -323,10 +336,10 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
     openMapDialog(data) {
         //console.log(data);
-        let modelData={"type":"assignFromOrders", data:data}
+        // let modelData={data:data.distDetails}
         let dialogRef = this.dialog.open(MapDialogComponent, {
             width: '90%',
-            data: modelData
+            data: data
         });
         dialogRef.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
@@ -396,6 +409,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
 
     filterPolygon() {
+        this.smallLoader = true;
         if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
             this.searchPolygon();
 
