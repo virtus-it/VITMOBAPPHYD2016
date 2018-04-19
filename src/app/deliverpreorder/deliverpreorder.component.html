@@ -13,7 +13,7 @@
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row">
-      <div class="  col-6">
+      <div class="  col-5">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Quantity" (ngModelChange)="amountChange($event)" [(ngModel)]="Detail.order.quantity"  >
           <md-error>
@@ -22,7 +22,7 @@
           </md-error>
         </md-form-field>
       </div>
-      <div class="  col-6">
+      <div class="  col-5">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" >
           <md-error>
@@ -64,19 +64,15 @@
       </div>
     </div> -->
 
-    <div class= " col-8 ">
-        <div class="col">
-            <small>Express delivery charges: {{Detail.order.expressdeliverycharges}}</small> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <small>Service charges:{{Detail.order.servicecharge}}</small>
+   
+        <div class="p-2">
+            <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+            </div>
+            <div class= "p-2">
+            <span>Service charges<br><b>{{Detail.order.servicecharge}}</b></span>
           </div>
-        </div>
-        <br>
-        <br>
-
-
-    
-      <div class="  col">
-        <md-form-field class="">
+      <div class="p-2">
+        <md-form-field class="wd-50">
           <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
           <md-error>
             Amount is
@@ -84,7 +80,10 @@
           </md-error>
         </md-form-field>
       </div>
-      <div class="  col-8 align-self-center center" *ngIf="deliverPreOrderInput.paymentType=='cod'">
+      </div>
+    
+      <div class="row">
+      <div class="  col-8 align-self-center" *ngIf="deliverPreOrderInput.paymentType=='cod'">
         <div class="form-checkbox form-checkbox-inline">
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
             <input type="checkbox" class="custom-control-input" [(ngModel)]="deliverPreOrderInput.confirmPayment">
@@ -93,14 +92,14 @@
           </label>
         </div>
       </div>
-    </div>
+    </div><br>
     <div class="row">
-      <div class="col-4">
+      <div class="col-5">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount" disabled="disabled">
         </md-form-field>
       </div> &nbsp; &nbsp;&nbsp;
-      <div class="col-4">
+      <div class="col-5">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amt" >
           </md-form-field>

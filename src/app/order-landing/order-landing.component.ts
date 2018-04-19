@@ -241,7 +241,7 @@ export class OrderLandingComponent implements OnInit {
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
 
-      width: '75%',
+      width: '700px',
       data: orderDetails
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {

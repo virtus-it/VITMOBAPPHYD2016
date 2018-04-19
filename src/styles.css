@@ -75,6 +75,12 @@ table thead {
   .pdleft-20{
     padding-left: 20px !important;
   }
+  .mgleft-20{
+  margin-left: 20px;
+}
+.mgbottom-15{
+   margin-bottom: 14px;
+}
   .btn-link{
     color: var( --logo-color);
     cursor: pointer;
