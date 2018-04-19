@@ -9,3 +9,19 @@
 .warning{
   color:red;
 }
+.form-control{
+  border: none !important;
+  border-bottom-left-radius: 0px !important;
+  border-bottom-right-radius:0px !important;
+}
+.brd-bottom{
+  border-bottom: 1px solid #999 !important;
+
+}
+.width-50pc{
+  width: 50%;
+}
+
+.width-100pc{
+  width: 100%;
+}

@@ -19,7 +19,11 @@ if(this.details && this.details.data.orderid){
 this.MessageInfo = "Order Created Order ID :" + this.details.data.orderid;
 }
 else if(this.details && this.details.data.order){
-  this.MessageInfo = "Recived Message from Order ID :" + this.details.data.order.orderid +" Message : "+this.details.data.order.reason;
+  this.MessageInfo = "Received Message from Order ID :" + this.details.data.order.orderid +" Message : "+this.details.data.order.reason;
+
+}
+else if(this.details && this.details.data.orderdetails){
+  this.MessageInfo = "Received Feedback From Customer :" + this.details.data.userdetails.firstname + "("+this.details.data.userdetails.mobileno+") Message :" +this.details.data.orderdetails.root.subject;
 
 }
 

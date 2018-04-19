@@ -21,7 +21,8 @@ export class FeedbackReplyDialogComponent implements OnInit {
   errorMessage = false;
 
   constructor(private feedbackService: FeedbackService,public thisDialogRef: MdDialogRef<FeedbackReplyDialogComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
-  feedbackInput = {"root":{"issueid":this.Detail.issueid,"issuetype":"feedback","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"message":""}}
+  feedbackInput = {"root":{"issueid":this.Detail.issueid,"issuetype":"feedback","loginid":this.authenticationService.loggedInUserId(),"userid":this.Detail.createdby.userid,"message":""
+}}
 
   emailFormControl = new FormControl('', [
     Validators.required]);
@@ -57,7 +58,7 @@ sendFeedback(){
       this.thisDialogRef.close('Cancel');
     }
   ngOnInit() {
-    //console.log(this.Detail);
+    console.log(this.Detail);
   }
 }
 

@@ -102,10 +102,10 @@
           <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
           <tr *ngFor="let preorder of customerList">
             <td class="left capitalize" width="10%">
-                
+                <span class="onhovertooltip-100" title="{{preorder.firstname}} {{preorder.lastname}}"> 
                 <span *ngIf="preorder.isappdownloaded" class=""><i class="fa fa-thumbs-up success" title="Joined"></i> </span>
-                <span *ngIf="!preorder.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger" title="Not Joined"></i> </span>
-                <span class="onhovertooltip-100" title="{{preorder.firstname}} {{preorder.lastname}}"> {{preorder.firstname}} {{preorder.lastname}} </span>
+                <span *ngIf="!preorder.isappdownloaded" class="text-align-start"> <i class="fa fa-thumbs-down danger" title="Not Joined"></i> </span>
+                {{preorder.firstname}} {{preorder.lastname}} </span>
             </td>
             <!-- <td class="left">
               <span *ngIf="preorder.isappdownloaded">Joined</span>

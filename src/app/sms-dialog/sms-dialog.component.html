@@ -185,12 +185,10 @@
                     </md-autocomplete>
                   </md-form-field>
 
-
-
                 <br>
-                <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
+                <!-- <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
                 <input type="radio" name="template" class=""  value="overWrite" [(ngModel)]="smsInput.radioOverWrite" >Overwrite
-                <input type="radio" name="template" class=""  value="dontsave" [(ngModel)]="smsInput.radioDontsave" >Dont save
+                <input type="radio" name="template" class=""  value="dontsave" [(ngModel)]="smsInput.radioDontsave" >Dont save -->
                 </div>
                 <div class="col-sm-3  col-md-3  col-lg-3">
                   <md-form-field class="example-full-width inline ">
@@ -217,6 +215,35 @@
                   </label>
                 </div>
               </div>
+
+<div class="d-flex flex-row">
+ <div class="p-2">
+              <span class="right capital">
+                  <label class=" radbtn custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio"  class="custom-control-input" name="template" value="save" [(ngModel)]="smsInput.radiosave">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Save</span>
+                  </label>
+                </span></div>
+    <div class="p-2">            
+                 <span class="left capital">
+                  <label class=" radbtn custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio"  class="custom-control-input" name="template"value="overWrite" [(ngModel)]="smsInput.radioOverWrite">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Overwrite</span>
+                  </label>
+                </span></div>
+   <div class="p-2">             
+                <span class="left capital">
+                  <label class="radbtn custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                    <input type="radio" class="custom-control-input" name="template" value="dontsave" [(ngModel)]="smsInput.radioDontsave">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">Dont save</span>
+                  </label>
+                </span></div>
+
+</div>
+
               <div class="row form-group">
                 <div class="col-sm-8  col-md-8  col-lg-8">
                   <md-form-field class="example-full-width inline ">
@@ -253,21 +280,19 @@
                         <tr *ngFor="let button of smsInput.buttons;let i = index">
                           <td>
                             <div class="row align-items-center">
-                              <div class="col-8">
-                                <md-form-field class="example-full-width inline ">
-                                  <input class="form-control" mdInput placeholder="Button" name="button{{i}}" [(ngModel)]="button.name">
-                                </md-form-field>
-
-                                <md-select placeholder = "Action Type" name="actionType" [(ngModel)]="button.actiontype">
-                                  <md-option value="playstore"  name="action1">PlayStore</md-option>
-                                  <md-option value="api" name="action2">Api</md-option>
-                                </md-select>
-                               
+                              <div class="col-10">
+                                  <md-form-field class="example-full-width inline">
+                                      <input class="form-control" mdInput placeholder="Button" name="button{{i}}" [(ngModel)]="button.name">
+                                    </md-form-field>
                               </div>
-                              <div class="col-sm-1  col-md-1  col-lg-1">
+                              <div class="  col-sm-1  col-md-1  col-lg-1  ">
                                 <b title="Remove Button " class="fa fa-trash danger fs-22" (click)="removeButton(button)" aria-hidden="true"></b>
-                              </div>
-                            </div>
+                              </div>               
+                                     </div>
+                                     <md-select placeholder = "Action Type" class="mgbottom-15" name="actionType" [(ngModel)]="button.actiontype">
+                                      <md-option value="playstore"  name="action1">PlayStore</md-option>
+                                      <md-option value="api" name="action2">Api</md-option>
+                                    </md-select>
                           </td>
                         </tr>
                       </table>

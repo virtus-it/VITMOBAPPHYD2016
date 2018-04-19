@@ -49,15 +49,15 @@
           </div>
       </div>
       <div class="row pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-        <div class="col-3">
+        <div class="col-3 pleft">
 
-              <md-form-field class="wd-100pc">
+              <md-form-field class="wd-60pc">
                 <input class="form-control" mdInput placeholder="Quantity" name="Quantity"  [(ngModel)]="editStatusInput.order.delivered_qty" (ngModelChange)="changeAmount()">
 
               </md-form-field>
         </div>
         <div class="col-3">
-                <md-form-field class="wd-100pc">
+                <md-form-field class="wd-60pc">
                     <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans">
               </md-form-field>
           </div>
@@ -87,28 +87,35 @@
           </div>
 
         </div>
-        <div class="row pdtop-5">
-          <div class="col-3">
-              <small class=" ">Due Amount</small><br>
-              <b class=" ">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+        <div class="row">
+          <div class="col-4 pleft">
+              <small class="">Due Amount</small><br>
+              <b class="">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
            
           </div>
-          <div class="col-4 pdtop-5" >
-            <md-form-field class="wd-100pc">
+          <div class="col-4" >
+            <md-form-field class="wd-60pc">
             <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" > 
           </md-form-field>
           </div>
-          <div class=""  *ngIf="editStatusInput.order.orderstatus == 'delivered'" >
-            <div class="col-3">
+          <div class="col-4">
+          <md-form-field class="wd-60pc">
+              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  >
+            </md-form-field>
+            </div>
+          </div>
+          
+          <div class="row"  *ngIf="editStatusInput.order.orderstatus == 'delivered'" >
+            <div class="col-4 pleft">
               <small class="">Ordered Amount</small><br>
               <b class="" >Rs.{{orderDetail.bill_amount}}</b>
             </div>
-            <div class="">
+            <div class="col-4">
               <small class="">Service Charge</small><br>
               <b class=""> Rs. {{orderDetail.servicecharges}} </b>
             </div>
 
-            <div class="">
+            <div class="col-4">
               <small class="">Exp delv chgs</small><br>
               <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b> 
             </div>
@@ -118,14 +125,13 @@
           <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div  *ngIf="editStatusInput.order.paymentype == 'cash'">
               <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->
-                <md-form-field class="wd-100pc">
-                  <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  >
-                </md-form-field>
+               
             </div>
           </div>
-        </div>
+    
     </div>
      </div>
+    
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">

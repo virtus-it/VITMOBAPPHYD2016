@@ -222,15 +222,29 @@
               </div>
             </td>
             
-            
+          
+
+           
               <td>
-                  <div class="">                   
-                <div class="width-100pc">
-                  <md-form-field class="center">
-                    <input class="form-control" mdInput type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
-                    </md-form-field>
+                  <div class="row">  
+                      <div class="col-2">
+                          <a class="cursor logo-color ">
+                            <b title="Add Slider"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>
+                          </a>
+                        </div>    
+                    
+                <div class="col-7">
+                    <input class="brd-bottom form-control btn-sm"  type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
+                    </div>
+                    <div class="col-2  row">
+                        <a class="cursor logo-color">
+                          <b title="Add Slider"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>
+                        </a>
+                      </div>    
+
+            
               </div>
-                </div>
+               
             </td>
 
             <td>

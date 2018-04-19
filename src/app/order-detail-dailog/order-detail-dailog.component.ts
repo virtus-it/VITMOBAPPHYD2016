@@ -243,7 +243,7 @@ deliveryStatus(){
 
 }
 
-onCloseModel(message){
+onCloseModel(){
     this.thisDialogRef.close(this.message);
 }
 

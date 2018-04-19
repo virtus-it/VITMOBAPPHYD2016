@@ -5,3 +5,17 @@
 .oneline {
     white-space: nowrap ;
   }
+
+  input.mat-input-element {
+    margin-top: -5px !important;
+}
+
+.mat-dialog-actions:last-child {
+    margin-bottom: 0px;
+}
+
+.pdright-30 {
+    padding-right: 30px;
+    margin-top: -5px;
+    margin-bottom: 20 !important;
+}
