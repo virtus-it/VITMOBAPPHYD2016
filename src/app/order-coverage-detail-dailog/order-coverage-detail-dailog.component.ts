@@ -91,7 +91,15 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     DistrbutorHover(distributor) {
         if (distributor.path) {
             this.displayPolygon = [];
-            this.displayPolygon.push(distributor);
+            var findDistributor = _.filter(this.polygonArray, function (k, l) {
+                let distDetails: any = k;
+                return distDetails.user_id == distributor.user_id;
+              });
+              if(findDistributor){
+
+                this.displayPolygon = findDistributor;
+              }
+           // this.displayPolygon.push(distributor);
         }
     }
     ShowAllPolygons() {
