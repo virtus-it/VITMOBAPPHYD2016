@@ -44,15 +44,16 @@ export class OrderLandingComponent implements OnInit {
 
   //for guage
   timeRemaining:any = '';
-  min:any = -10000;
-  max:any = 10000;
+  guageValue:any = ""
+  // min:any = -10000;
+  // max:any = 10000;
   thresholdConfig = {
       '-10000' : {color: 'red'},
       '1': {color: 'orange'},
       '3': {color: 'green'}
   };
-  gaugeType = "semi";
-  gaugeValue = 'value'
+  gaugeType = "arch";
+  gaugeValue = 24
   gaugeLabel = '';
   gaugeAppendText = "Hours";
 
@@ -933,6 +934,7 @@ this.orderLandingService.getOrdersByfilter(input)
   ModifyOrderList(result) {
    
     _.each(result, function (i, j) {
+      let GV ="";
       let details: any = i;
       details.timeRemaining = "";
       let currentTime = moment(new Date());
@@ -965,6 +967,8 @@ this.orderLandingService.getOrdersByfilter(input)
              details.timeRemaining = floorValue;
             //  console.log('success 2' , details.timeRemaining);
       } 
+
+      GV = details.timeRemaining;
       
       // this.timesRemaining = details.timeRemaining;
     

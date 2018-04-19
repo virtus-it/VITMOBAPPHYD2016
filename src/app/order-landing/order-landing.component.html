@@ -572,11 +572,17 @@
                 [value]= 'forward.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'
-                [size]='100'
+                [min]= '-24'
+                [max] = '24'
+                [size]='130'
                 >
+               
                 </ngx-gauge>
+
+                <!-- &&   -24 < forward.timeRemaining < 24
+
+                <b *ngIf="forward.timeRemaining < -24">{{forward.timeRemaining + (-2)* forward.timeRemaining}} Over Due </b> -->
+
                
               </td>
 
@@ -877,8 +883,9 @@
                 [value]= 'allorder.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'>
+                [min]= '-24'
+                [max] = '24'
+                [size]='130'>
                 </ngx-gauge>
                
               </td>
@@ -1198,15 +1205,19 @@
               </td>
 
               <td width="24%"  >
+              
+                 
                 
-                <ngx-gauge *ngIf="complete.status != 'delivered'"
+                <ngx-gauge *ngIf="complete.status != 'delivered' "
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'complete.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'
+                [min]= '-24'
+                [max] = '24'
+                [size]='130'
+                
                 >
                 </ngx-gauge>
                

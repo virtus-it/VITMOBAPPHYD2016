@@ -200,9 +200,9 @@
           </tr>
           <tr class="border-topbottom bg-eee">
             <th width="20%">Type</th>
-            <th width="15%">Price per Unit</th>
+           
             <th width="12%">Qty</th>   
-            
+            <th width="15%">Price per Unit</th>
             <th width="15%" title="Express Delivery Charge">Express Delv</th>
             <th width="15%">Service Charges</th>
             <th width="15%">Cost</th>
@@ -222,9 +222,7 @@
               </div>
             </td>
             
-            <td>
-                <b class="">{{details.pcost}} </b>
-              </td>
+            
               <td>
                   <div class="">                   
                 <div class="width-100pc">
@@ -234,6 +232,11 @@
               </div>
                 </div>
             </td>
+
+            <td>
+              <b class="">{{details.pcost}} </b>
+            </td>
+            
             
             <td class="">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
@@ -244,7 +247,8 @@
                </td>
             <td class="">{{details.servicecharge}} </td>
             <td >
-              <b class="" *ngIf="createPreOrderInput.productDetails">{{details.pcost*details.quantity + amount + details.servicecharge }} </b>
+              <b class="" *ngIf="createPreOrderInput.productDetails && details.quantity">{{details.pcost*details.quantity + amount + details.servicecharge*details.quantity }} </b>
+              <b class="" *ngIf="details.quantity == 0 || detailsquantity == ''"> 0 </b>
               <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
               <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
             </td>

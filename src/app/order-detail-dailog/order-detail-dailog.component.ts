@@ -175,7 +175,7 @@ getOrderDetailsByIdResult(result) {
             this.dailogOrderDetails .OrderModifiedStatus = "Assign";
             this.dailogOrderDetails .StatusColor = "logo-color";
           }
-        ////console.log(this.dailogOrderDetails);
+        console.log(this.dailogOrderDetails);
     }
 }
 getProductsListByCustomerId() {

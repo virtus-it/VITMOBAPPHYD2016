@@ -16,7 +16,7 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "adv_amt":this.Detail.adv_amt};
+  deliverPreOrderInput : any ={"paymentType":"", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "adv_amt":this.Detail.adv_amt};
   
   supplierList = [];
   SupplierListCopy = [];
@@ -53,22 +53,32 @@ export class DeliverpreorderComponent implements OnInit {
     }
 
     this.Detail.order.received_amt = this.Detail.order.total_amt;
-    
+
+    this.Detail.order.paymentmode = this.deliverPreOrderInput.paymentType;
+    // if(this.Detail.order.paymentmode == 'credit'){
+    // this.Detail.order.paymentstatus = "";
+    // }
+
     if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
       this.Detail.order.assignedto = 0 ;
     }
     else{
       this.Detail.order.assignedto = this.deliverPreOrderInput.suppliersid;
     }
-    if(this.deliverPreOrderInput.confirmPayment){
+
+ 
+    if(this.Detail.order.paymentmode == 'cod' && this.deliverPreOrderInput.confirmPayment){
       this.Detail.order.paymentstatus = "confirm";
     }
     else{
       this.Detail.order.paymentstatus = "";
     }
+  
+
+
     let input =[];
     input.push(this.Detail);
-    //console.log(input);
+    console.log(input);
     this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output),
@@ -79,7 +89,7 @@ export class DeliverpreorderComponent implements OnInit {
 
   }
   createPreOrderResult(result) {
-    //console.log(result);
+    console.log(result);
     if(result.result=='success'){
       this.thisDialogRef.close('success');
     }
@@ -104,7 +114,7 @@ export class DeliverpreorderComponent implements OnInit {
 
 
   ngOnInit() {
-    //console.log(this.Detail);
+    console.log(this.Detail);
     this.getSupplierList();
     this.totalAmount();
   }

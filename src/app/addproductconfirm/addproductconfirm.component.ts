@@ -7,6 +7,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { AddProductDealerComponent } from '../add-product-dealer/add-product-dealer.component';
 import { MdDialog } from '@angular/material';
 import { AddEditProductDailogComponent } from'../add-edit-product-dailog/add-edit-product-dailog.component';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
 
 
 
@@ -17,16 +18,18 @@ import { AddEditProductDailogComponent } from'../add-edit-product-dailog/add-edi
 })
 export class AddproductconfirmComponent implements OnInit {
 
-  constructor(public thisDialogRef: MdDialogRef<AddproductconfirmComponent>, private authenticationService: AuthenticationService, private productService: ProductsService, private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog) { }
+  constructor(public thisDialogRef: MdDialogRef<AddproductconfirmComponent>, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private productService: ProductsService, private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog) { }
+
+  distributorId = "";
+  listOfProducts : any = [];
 
 
 
-
-
-  dealerAddProductDialog(data) {
+  dealerAddProductDialog(data , distProducts) {
+    let formattedData = {data:data , distProducts : distProducts}
     let dialogRefSupplierOrderList = this.dialog.open(AddProductDealerComponent, {
         width: '500px',
-        data: data
+        data: formattedData
     });
     dialogRefSupplierOrderList.afterClosed().subscribe(result => {
         //console.log(`Dialog closed: ${result}`);
@@ -56,6 +59,36 @@ export class AddproductconfirmComponent implements OnInit {
 
   }
 
+  getProducts(distributorDetails){
+    this.loaderService.display(true);
+    console.log(distributorDetails);
+    if(distributorDetails.user_id){
+      this.distributorId = distributorDetails.user_id;
+     }
+     else if(distributorDetails.userid){
+     this.distributorId = distributorDetails.userid;
+     }
+  let input = {userId: this.distributorId, appType: this.authenticationService.appType() };
+    console.log(input);
+    this.distributorService.getDistbutorsProducts(input)
+    .subscribe(
+    output => this.getProductsResult(output),
+    error => {
+        //console.log("Logged in falied");
+        this.loaderService.display(false);
+    });
+  
+  }
+  
+  getProductsResult(output) {
+    this.loaderService.display(false);
+    if(output.result == 'success'){
+      this.listOfProducts = output.data;
+    }
+    }
+
+
+
 
 
 
@@ -65,7 +98,8 @@ export class AddproductconfirmComponent implements OnInit {
   }
 
   ngOnInit() {
-    //console.log(this.Details);
+    this.getProducts(this.Details);
+    console.log(this.Details);
   }
 
 }
