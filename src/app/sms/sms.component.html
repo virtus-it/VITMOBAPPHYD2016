@@ -56,9 +56,9 @@
                 <td class="left">{{smslist.name}}</td>                
                 <td class="left">{{smslist.mcount}}</td>
                 <td class="left">{{smslist.body_desc}}</td>
-                <!-- <td class="left" *ngFor="let mobile of smslist.mobileno">
-                  <span *ngIf="smslist.mobileno">{{mobile.mobileno}} </span>
-                <span *ngIf ="smslist.mobileno === null || smslist.mobileno == ''"> - </span>
+                <!-- <td class="left" >
+                  <span >{{mobile.mobileno}} </span>
+                <span *ngIf ="smsListDetails.mobileno === null || smsListDetails.mobileno == ''"> - </span>
                 </td>                 -->
                 <td>{{smslist.createddate | utcDate}}</td>
               </tr>

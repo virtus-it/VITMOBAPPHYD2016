@@ -59,6 +59,13 @@ export class DeliverpreorderComponent implements OnInit {
     // this.Detail.order.paymentstatus = "";
     // }
 
+    if(this.Detail.order.paymentmode == 'credit'){
+      this.Detail.order.paymentype = "credit";
+    }
+    else{
+      this.Detail.order.paymenttype = 'cash';
+    }
+
     if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
       this.Detail.order.assignedto = 0 ;
     }

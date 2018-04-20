@@ -34,15 +34,15 @@
     
     <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
         <td width="15%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'  class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
+            <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'  class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description">{{product.brandname}} </span>
           </label></td>
-      <td width="15%" class="left capital">{{product.pname}} {{product.ptype}}</td>
+      <td width="15%" class="left capital" >{{product.pname}} {{product.ptype}}</td>
      
       <td width="13%" class="left capital"> 
           <md-form-field class="example-full-width inline ">
-            <input class="form-control" mdInput placeholder="Count" name="count" [(ngModel)]="product.quantity">
+            <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'"  [(ngModel)]="product.quantity">
             <!-- (ngModelChange)="searchMobileNo()"-->
           </md-form-field></td> 
 
@@ -54,7 +54,7 @@
 
       <td class="left capital" width="13%">  {{product.expressdeliverycharges}}
         
-          <input type="checkbox"  name="expressdelivery"[(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)" >
+          <input type="checkbox"  name="expressdelivery"[(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"  [disabled]="product.stockstatus== 'Soldout'">
           <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
       </td>
       <td width="13%" class="left capital"> {{product.servicecharge}} </td> 
