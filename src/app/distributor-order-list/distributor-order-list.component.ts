@@ -22,7 +22,7 @@ export class DistributorOrderListComponent implements OnInit {
 
 
   supplierOrderList(firstcall) {
-
+    this.loaderService.display(true);
     let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "50", "supplierid": this.Detail.data[0].userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
     if (this.SupplierOrderList && this.SupplierOrderList.length && !firstcall) {
       let lastOrder:any = _.last(this.SupplierOrderList);
@@ -45,7 +45,7 @@ export class DistributorOrderListComponent implements OnInit {
   }
   supplierOrderresult(result) {
     //console.log(result);
-
+    this.loaderService.display(false);
     if (result.result == "success") {
 
       this.SupplierOrderList = result.data;
