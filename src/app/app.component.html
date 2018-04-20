@@ -226,9 +226,10 @@
         </ng-template>
 
         <router-outlet > 
-          <div class="loader-style  none" data-spy="affix" data-offset-top="205">
+          <!-- <div class="loader-style"   data-spy="affix" data-offset-top="205">
            <img src="assets/images/loader.gif"  class="loading">
-          </div>
+          </div> -->
+          <span *ngIf="showLoader" class="loading"></span>
         </router-outlet>
         <!-- [ngClass]="{'':showLoader}" -->
         <!-- <span *ngIf="showLoader" class="loading">loading..</span> -->
