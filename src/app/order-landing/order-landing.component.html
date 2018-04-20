@@ -566,7 +566,7 @@
                 </td> -->
                 <td width="24%" >
                 
-                <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24"
+                <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'forward.timeRemaining'
@@ -882,7 +882,7 @@
 
              <td width="24%"  >
                 
-                <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24"
+                <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'allorder.timeRemaining'
@@ -897,6 +897,7 @@
 
                 <b *ngIf="allorder.timeRemaining < -24 && allorder.status != 'delivered' " class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
                 <b *ngIf="allorder.timeRemaining > 24 && allorder.status != 'delivered'"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
+                
                
               </td>
 
@@ -1218,7 +1219,7 @@
               
                  
                 
-                <ngx-gauge *ngIf="complete.status != 'delivered'  &&   -24 < complete.timeRemaining && complete.timeRemaining < 24"
+                <ngx-gauge *ngIf="complete.status != 'delivered'  &&   -24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'complete.timeRemaining'
