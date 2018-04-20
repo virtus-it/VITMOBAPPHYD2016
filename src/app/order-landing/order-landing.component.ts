@@ -44,18 +44,21 @@ export class OrderLandingComponent implements OnInit {
 
   //for guage
   timeRemaining:any = '';
-  guageValue:any = ""
+  guageValue:any = "";
+  guageMinimum = -12;
+  guageMaximum = 12;
   // min:any = -10000;
   // max:any = 10000;
   thresholdConfig = {
-      '-10000' : {color: 'red'},
+    '-12': {color: 'red'},
       '1': {color: 'orange'},
       '3': {color: 'green'}
   };
   gaugeType = "arch";
-  gaugeValue = 24
+
   gaugeLabel = '';
   gaugeAppendText = "Hours";
+  guageBackGround = '#ff0000'
 
   orderedDate:any = "";
   orderedHour:any = "";
