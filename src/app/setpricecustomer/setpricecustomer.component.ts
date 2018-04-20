@@ -125,7 +125,7 @@ export class SetpricecustomerComponent implements OnInit {
 
   ngOnInit() {
     this.getProducts();
-    //console.log(this.Details);
+    console.log(this.Details);
 
   }
 
