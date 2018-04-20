@@ -239,7 +239,7 @@ trackByFn(index, item) {
       input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
     }
     if(this.orderinput.date){
-      input.User.date = moment(this.orderinput.date).format('YYYY-MM-DD');
+      input.User.date = moment(this.orderinput.date).format('YYYY-MM-DD 00:00:00');
     }
     if(this.orderinput.timeSlot){
 
@@ -249,8 +249,12 @@ trackByFn(index, item) {
   let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
   console.log("time24" , time24);
 
+  input.User.date = moment(this.orderinput.date).format("YYYY-MM-DD");
+  var slotDate = input.User.date + " " + time24; 
+  
+  input.User.date = slotDate;
 
-      input.User.timeSlot = time24;
+      // input.User.timeSlot = time24;
     }
     // if(this.orderinput.date){
 
