@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
     this.loaderService.status.subscribe((val: boolean) => {
         this.showLoader = val;
     });
-    console.log(this.authenticationService.dashBoardDetails);
+   
   
 }
     
