@@ -42,7 +42,8 @@
                 <th width="6%"><i class="fa fa-mobile fs-20" aria-hidden="true"></i> <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
                   <!-- Mobile Count -->
                 </th>
-                <th width="50%">Body</th>
+                <th width="38%">Body</th>
+                <!-- <th width="20%">Mobile No</th> -->
                 <th width="14%">Date</th>                                
                 
               </tr>
@@ -55,6 +56,10 @@
                 <td class="left">{{smslist.name}}</td>                
                 <td class="left">{{smslist.mcount}}</td>
                 <td class="left">{{smslist.body_desc}}</td>
+                <!-- <td class="left" >
+                  <span >{{mobile.mobileno}} </span>
+                <span *ngIf ="smsListDetails.mobileno === null || smsListDetails.mobileno == ''"> - </span>
+                </td>                 -->
                 <td>{{smslist.createddate | utcDate}}</td>
               </tr>
             </tbody>

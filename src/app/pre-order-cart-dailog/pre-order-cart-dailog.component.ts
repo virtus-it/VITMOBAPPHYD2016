@@ -107,12 +107,13 @@ export class PreOrderCartDailogComponent implements OnInit {
    if(this.validate() && this.validate1()){
     let data ={"order":{"orderstatus":"delivered","assignedto":"",
     "paymentstatus":"",
-    "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"cash",
+    "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"",
     "received_amt":"","quantity":this.createPreOrderInput.productDetails.quantity,"total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
     "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
     "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}
     }
+    console.log(data);
    
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
@@ -568,7 +569,7 @@ autoTimeSlotforHour(){
 expressDeliveryCharge(details,  isChecked: boolean){
  
   if(isChecked == true){
-    this.amount = details.expressdeliverycharges*details.quantity; 
+    this.amount = details.expressdeliverycharges;
   }
   else{
     this.amount = 0;
@@ -624,6 +625,7 @@ console.log(details);
     _.each(i.data, function(k,l){
       let detailData:any=k;
       detailData.quantity="";
+      // detailData.expressdeliverycharges = "";
     })
   }
 )
@@ -638,6 +640,10 @@ if(!this.createPreOrderInput.productDetails.default_qty){
   }
     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
 }
+
+// if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.expressdeliverycharges){
+//   this.createPreOrderInput.productDetails.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
+// }
 
   }
 

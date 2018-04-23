@@ -569,17 +569,28 @@
                 </td> -->
                 <td width="24%" >
                 
-                <ngx-gauge *ngIf="forward.status != 'delivered'"
+                <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'forward.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'
-                [size]='100'
+                [min]= 'guageMinimum'
+                [max] = 'guageMaximum'
+                [size]='130'
+                [backgroundColor]="guageBackGround"
+                
                 >
+               
                 </ngx-gauge>
+
+                <b *ngIf="forward.timeRemaining < -24 && forward.status != 'delivered' " class="red" >{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="forward.timeRemaining > 24 && forward.status != 'delivered'"  class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
+
+                <!-- &&   -24 < forward.timeRemaining < 24
+
+                -->
+
                
               </td>
 
@@ -875,15 +886,22 @@
 
              <td width="24%"  >
                 
-                <ngx-gauge *ngIf="allorder.status != 'delivered'"
+                <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'allorder.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'>
+                [min]= 'guageMinimum'
+                [max] = 'guageMaximum'
+                [size]='130'
+                [backgroundColor]="guageBackGround"
+               >
                 </ngx-gauge>
+
+                <b *ngIf="allorder.timeRemaining < -24 && allorder.status != 'delivered' " class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="allorder.timeRemaining > 24 && allorder.status != 'delivered'"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
+                
                
               </td>
 
@@ -1203,23 +1221,30 @@
               </td>
 
               <td width="24%"  >
+              
+                 
                 
-                <ngx-gauge *ngIf="complete.status != 'delivered'"
+                <ngx-gauge *ngIf="complete.status != 'delivered'  &&   -24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType" 
                 [value]= 'complete.timeRemaining'
                 [label]="gaugeLabel"  
                 [append]="gaugeAppendText"
-                [min]= '-10000'
-                [max] = '10000'
+                [min]= 'guageMinimum'
+                [max] = 'guageMaximum'
+                [size]='130'
+                [backgroundColor]="guageBackGround"
+               
+               
                 >
                 </ngx-gauge>
+
+                <b *ngIf="complete.timeRemaining < -24 && complete.status != 'delivered' " class="red" >{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="complete.timeRemaining > 24 && complete.status != 'delivered'"  class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
                
               </td>
 
-              <!-- <td width="24%" >
-                    <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
-                  </td> -->
+            
             </tr>
           </tbody>
           <tfoot>

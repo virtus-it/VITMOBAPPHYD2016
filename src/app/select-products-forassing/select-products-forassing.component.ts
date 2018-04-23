@@ -21,6 +21,7 @@ export class SelectProductsForassingComponent implements OnInit {
   noRecord = false;
   categoryId :any = "";
   assignCategoryId='';
+  amount:any = 0;
   categoryName:any = "";
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -214,6 +215,22 @@ if(productsDetails.expressCheck == true){
       this.thisDialogRef.close('success');
     }
   }
+
+  expressDeliveryCharge(product,  isChecked: boolean){
+ 
+    if(isChecked == true){
+      if(product.productid){
+      this.amount = product.expressdeliverycharges;
+    }
+  }
+    else{
+      this.amount = 0;
+    }
+  
+  }
+ 
+
+
   changeQuantity(products){
     if(this.orderDetail.type == 'coveragePage'){
     _.each(this.productList, function (i, j) {
