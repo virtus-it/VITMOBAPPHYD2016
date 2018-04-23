@@ -1,6 +1,6 @@
 
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-4  col-sm-4  col-lg-4 oneline">
+    <div class="col-md-7  col-sm-7  col-lg-7 oneline">
       <i class="fa fa-gift" ></i> View Stock Points
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
@@ -12,25 +12,62 @@
   <md-dialog-content layout="column" class="scroll">
     <h4 class="noData">{{noDataError}}</h4>
     <div class="col-md-12 text-right" (click)="createStockPoint(Details)">
+        <span><b>Add stock point</b></span>
     <strong class="fa fa-plus fa-2 plus-style .navbar-right" ></strong>
     </div>
-   
-      <div class="container-fluid pd-15x25 brd-bottom " *ngFor="let stock of stockpoints; let i= index" >
+
+
+    <div id="" class="row pd-15x10 mg-0">
+
+    <table class="table table-hover table-striped" style="table-layout:fixed">
+        <thead>
+          <tr>
+              
+            <th width="30%">Stockpoint</th>
+ 
+            <th width="40%">Lat/lng</th>
+           
+            <th width="30%">Action</th>
+           
+         
+          </tr>
+        </thead>
+
+        <tbody>
+            <tr class="container-fluid pd-15x25 brd-bottom " *ngFor="let stock of stockpoints; let i= index" >
           
-        <div class="row" >
-            
-        <div class="col-md-4  col-sm-4  col-lg-4">
-          <small><b> Stock Point </b></small> <br>
-          <small>Stockpoint: {{i+1}}</small> <br>
-          <small><b>Lat/lng</b></small>  <br>
-          <small>lat/lng : {{stock.latitude}} {{stock.longitude}}</small><br>
-          <button md-raised-button color="primary" (click)="updateStockPoint(stock)"> UPDATE STOCK POINT</button>
-          <button md-raised-button class="warning" (click)="deleteStockPoint(stock)">DELETE STOCK POINT</button>
+               
+              
 
 
-        </div>
-      </div>
-      </div>
+
+                
+                  <td class="left" width="30%">
+                      <span>{{i+1}}</span>
+                    </td>
+                 
+                      <td class="left" width="40%">
+                          <span>Lat {{stock.latitude}}<br>Lng {{stock.longitude}}</span>
+                        </td>
+                          <td class="left" width="30%">
+   
+                          <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier"  (click)="updateStockPoint(stock)"></i>
+                          &nbsp; &nbsp;&nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)="deleteStockPoint(stock)"></i>
+                        </td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
   </md-dialog-content>
 
   <div class="row float-right pdright-30 mgbottom-20">

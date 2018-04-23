@@ -258,7 +258,7 @@
         <table class="table table-hover table-striped">
           <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
-              <td width="25%">
+              <td width="30%">
                 <div class="row ">
                   <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">
@@ -287,7 +287,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%">
+              <td width="30%">
                 <div class=" row ">
                   <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                     <label class="td-label">Customer :
@@ -306,8 +306,8 @@
                 </div>
               </td>
 
-              <td width="25%">
-                <div class="row ">
+              <td width="30%">
+                <div class="row pd-top-0">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label"> 
                       <div class="row">
@@ -346,13 +346,15 @@
                 
       
                 
-                <td width="24%" >
+                <td width="10%" >
                 <div class="row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+                    <div class="col-sm-9  col-md-9  col-lg-9  left onhovertooltip-100">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
-                    <i class="fa fa-minus logo-color fs-18 none"></i>
-                    <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
+                    <div class="">
+                    <i class="fa fa-minus logo-color fs-18 none "></i>
+                    <i class="fa fa-plus fs-18  logo-color none " aria-hidden="true"></i>
+                   </div>
                     </div>
                   </div></td>
                   
@@ -360,7 +362,7 @@
             </tr>
 
             <tr>
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right pd-top-0">
                 <div class="">
 
                   <div class="form-group row ">
@@ -423,21 +425,13 @@
                   </div>
                 </div>
               </td>
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right">
                 <div class="row form-group">
-                  <div class="col left">
+                  <div class="col-7 left">
                     <span class="td-label">
                       Date Placed </span>
                     <br>
                     <b>{{forward.ordered_date | utcDate }}</b>
-                  </div>
-                </div>
-                <div class="row form-group">
-
-                  <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Delivery Time</span>
-                    <br>
-                    <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5 right">
                     <span class="td-label">
@@ -448,23 +442,38 @@
                   </div>
                 </div>
                 <div class="row form-group">
-                  <div class="col-5 left">
+
+                  <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <span class="td-label">Delivery Time</span>
+                    <br>
+                    <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
+                  </div>
+                  <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                      <br>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    </div>
+                    <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                      <br>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize"  title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-7 left">
                     <span class="td-label">
                       Mobile</span>
                     <br>
                     <b>{{forward.orderby_mobileno}}</b>
 
                   </div>
-                  <div class="col-7 right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
-                  <div class="col-7 right" *ngIf="forward.customersource == 'MoyaCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize"  title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
+                  <div class="col-5 right">
+                      <span class="td-label">
+                        Promo Code
+                      </span> <br>
+                      <b  *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
+                      <b class="" *ngIf="forward.user_reference_code === null"> - </b> 
+                    </div>
                 </div>
 
                 <div class="row form-group">
@@ -475,17 +484,11 @@
                     <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
 
                   </div>
-                  <div class="col-5 right">
-                    <span class="td-label">
-                      Promo Code
-                    </span> <br>
-                    <b  *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
-                    <b class="" *ngIf="forward.user_reference_code === null"> - </b> 
-                  </div>
+                 
                 </div>
               </td>
 
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right pd-top-0">
                 <div class="">
                   <div class="row form-group">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
@@ -765,6 +768,11 @@
                       <br>
                       <b>{{allorder.ordered_date | utcDate}}</b>
                     </div>
+                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                      <span class="td-label">Supplier Code</span>
+                      <br>
+                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b>
+                    </div>
                   </div>
                   <div class=" row form-group">
                     <div class="col-sm-7  col-md-7  col-lg-7 ">
@@ -772,24 +780,27 @@
                       <br>
                       <b class="left danger">{{allorder.delivery_exceptedtime}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right">
-                      <span class="td-label">Supplier Code</span>
-                      <br>
-                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b>
-                    </div>
+                    <div class="col-sm-5  col-md-5  col-lg-5  right">
+                        <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                        <br>
+                        <b class=" capitalize onhovertooltip-100" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
+                      </div>
                   </div>
                   <div class="row form-group">
-                    <div class="col-sm-5  col-md-5  col-lg-5 left">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
                       <span class="td-label">
                         Mobile</span>
                       <br>
                       <b>{{allorder.orderby_mobileno}}</b>
                     </div>
-                    <div class="col-sm-7  col-md-7  col-lg-7  right">
-                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                      <br>
-                      <b class=" capitalize onhovertooltip" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
-                    </div>
+                    <div class="col-5 right">
+                        <span class="td-label">
+                          Promo Code
+                        </span> <br>
+                        <b  *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
+                        <b class="" *ngIf="allorder.user_reference_code === null"> - </b> 
+                      </div>
+  
                   </div>
                   <div class=" row ">
                     <div class="col-7 left">
@@ -804,14 +815,7 @@
 
                     </div>
 
-                    <div class="col-5 right">
-                      <span class="td-label">
-                        Promo Code
-                      </span> <br>
-                      <b  *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
-                      <b class="" *ngIf="allorder.user_reference_code === null"> - </b> 
-                    </div>
-
+                    
 
                   </div>
                 </div>
@@ -995,7 +999,7 @@
             </tr>
 
             <tr>
-              <td width="25%" class="brd-right">
+              <td width="25%" class="brd-right pd-top-0">
                 <div class="">
 
                   <div class="form-group row ">
@@ -1068,14 +1072,6 @@
                     <br>
                     <b>{{complete.ordered_date | utcDate }}</b>
                   </div>
-                </div>
-                <div class="row form-group">
-
-                  <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Delivery Time</span>
-                    <br>
-                    <b class="pdright-5 danger">{{complete.delivery_exceptedtime}}</b>
-                  </div>
                   <div class="col-sm-5  col-md-5  col-lg-5 right">
                     <span class="td-label">
                       Supplier Code</span>
@@ -1084,24 +1080,39 @@
                   </div>
                 </div>
                 <div class="row form-group">
-                  <div class="col-5 left">
+
+                  <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <span class="td-label">Delivery Time</span>
+                    <br>
+                    <b class="pdright-5 danger">{{complete.delivery_exceptedtime}}</b>
+                  </div>
+                  <div class="col-5 right" *ngIf="complete.customersource == 'DistributorCustomer'">
+                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                      <br>
+                      <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    </div>
+                    <div class="col-5 right" *ngIf="complete.customersource == 'MoyaCustomer'">
+                      <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
+                      <br>
+                      <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    </div>
+                </div>
+                <div class="row form-group">
+                  <div class="col-7 left">
                     <span class="td-label">
                       Mobile</span>
                     <br>
                     <b>{{complete.orderby_mobileno}}</b>
 
                   </div>
-
-                  <div class="col-7 right" *ngIf="complete.customersource == 'DistributorCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
-                  </div>
-                  <div class="col-7 right" *ngIf="complete.customersource == 'MoyaCustomer'">
-                    <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
-                  </div>
+                  <div class="col-5 right">
+                      <span class="td-label">
+                        Promo Code
+                      </span> <br>
+                      <b  *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
+                      <b class="" *ngIf="complete.user_reference_code === null"> - </b> 
+                    </div>
+                  
                 </div>
 
                 <div class="row form-group">
@@ -1114,13 +1125,7 @@
                   </div>
 
 
-                  <div class="col-5 right">
-                    <span class="td-label">
-                      Promo Code
-                    </span> <br>
-                    <b  *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
-                    <b class="" *ngIf="complete.user_reference_code === null"> - </b> 
-                  </div>
+               
 
 
 

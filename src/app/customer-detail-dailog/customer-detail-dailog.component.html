@@ -21,8 +21,8 @@
           <h6>
             <small>Name</small>
             <br>
-            <b class=" capital pdleft-5 onhovertooltip-150" title="{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}">{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}</b>
-            <b class="capital pdleft-5 onhovertooltip-150" *ngIf="this.orderDetail.type == 'customersPage'" title="{{orderDetail.data.firstname}}">{{orderDetail.data.firstname}}</b>
+            <b class="capital pdleft-5" title="{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}">{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}</b>
+            <b class="capital pdleft-5" *ngIf="this.orderDetail.type == 'customersPage'" title="{{orderDetail.data.firstname}}">{{orderDetail.data.firstname}}</b>
           </h6>
         </div>
         <div class="col-2 align-self-center">
@@ -60,7 +60,8 @@
 
         <div class="col-3 align-self-center">
           <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
-          <button type="submit" md-raised-button (click)="editCustomer(orderDetail)" class="btn-primary">Edit Customer</button>
+          <button type="submit" md-raised-button  (click)="editCustomer(orderDetail)" class="btn-primary">EDIT</button>
+
         </div>
       </div>
 
@@ -72,38 +73,38 @@
       <table class="table table-hover table-striped table-fixedheader">
         <thead>
           <tr class="wd-99pc">
-            <th width="8%">Id</th>
-            <th width="20%">Product Name</th>
+            <th width="6%">Id</th>
+            <th width="17%">Product Name</th>
             <!-- <th width="7%">Cart Id</th> -->
-            <th width="7%" title="Order Quantity">Qty</th>
-            <th width="7%" title="Return Quantity">Ret Qty</th>
-            <th width="7%" title="service charge">Serv Chgs</th>
-            <th width="7%" title="Exp Del Chgs">Exp Del Chgs</th>            
-            <th width="7%" title="Order Amount">Amt</th>
+            <th width="5%" title="Order Quantity">Qty</th>
+            <th width="6%" title="Return Quantity">Ret Qty</th>
+            <th width="8%" title="service charge">Serv Chgs</th>
+            <th width="10%" title="Exp Del Chgs">Exp Del Chgs</th>            
+            <th width="6%" title="Order Amount">Amt</th>
             <th width="8%" title="Received Amount">Recv Amt</th>
-            <th width="10%">Status</th>
-            <th width="18%" title="Delivery Date">Delv Date</th>
-            <th width="14%" title="Delivered By">Delv By</th>
+            <th width="7%">Status</th>
+            <th width="15%" title="Delivery Date">Delv Date</th>
+            <th width="10%" title="Delivered By">Delv By</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let customer of customerOrderDetails">
-            <td width="8%" class="left" scope="row">#{{customer.order_id}}</td>
-            <td width="20%" class=" capital"><span class="onhovertooltip-150" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span></td>
+            <td width="6%" class="left" scope="row">#{{customer.order_id}}</td>
+            <td width="17%" class=" capital"><span class="onhovertooltip-150" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span></td>
             <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
-            <td width="7%" class=" capital">{{customer.quantity}}</td>
-            <td width="7%" class=" capital">{{customer.return_cans}}</td>
+            <td width="5%" class=" capital">{{customer.quantity}}</td>
+            <td width="6%" class=" capital">{{customer.return_cans}}</td>
 
-            <td width="7%" class=" capital">{{customer.servicecharges}}</td>
-            <td width="7%" class=" capital">{{customer.expressdeliverycharges}}</td> 
+            <td width="8%" class=" capital">{{customer.servicecharges}}</td>
+            <td width="10%" class=" capital">{{customer.expressdeliverycharges}}</td> 
 
-            <td width="7%" class=" capital">{{customer.bill_amount}}</td>
+            <td width="6%" class=" capital">{{customer.bill_amount}}</td>
             <td width="8%" class=" capital">{{customer.receivedamount}}</td>
-            <td width="10%" class=" capital">{{customer.status}}</td>
+            <td width="7%" class=" capital">{{customer.status}}</td>
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
-            <td width="18%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
-            <td width="14%" class=" capital">
+            <td width="15%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
+            <td width="10%" class=" capital">
               <span *ngIf="customer.status !== 'ordered'"><span class="onhovertooltip-100" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span> </span>
             <span *ngIf="customer.status == 'ordered'"> - </span>
             </td>

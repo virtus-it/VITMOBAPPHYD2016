@@ -142,3 +142,14 @@ table thead {
 .rightbtn{
   padding-left: 0px;
 }
+
+.ngx-gauge-meter {
+  display: inline-block;
+  text-align: center;
+  position: relative;
+  margin-left: 5px;
+}
+
+.pd-top-0{
+  padding-top: 0px !important;
+}
