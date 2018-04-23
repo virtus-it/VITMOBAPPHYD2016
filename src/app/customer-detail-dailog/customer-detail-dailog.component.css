@@ -52,7 +52,9 @@ table thead {
     border: 1px solid #ccc;
     padding: 15px 10px 5px 20px;
   }
-
+.mg-left-12{
+  margin-left: 12px;
+}
   /* .mat-dialog-container{
     height: 90% !important;
   } */

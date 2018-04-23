@@ -25,3 +25,22 @@
 .martop {
     margin-top: 20px;
 }
+
+.mg-0 {
+    margin-right: 0px;
+    margin-left: 5px;
+}
+
+.mg-top-10{
+    margin-top: 10px !important;
+}
+
+
+.capital[_ngcontent-c7] {
+    text-transform: capitalize;
+    margin-left: -2px;
+}
+
+.pd-left-30{
+    padding-left: 30px;
+}

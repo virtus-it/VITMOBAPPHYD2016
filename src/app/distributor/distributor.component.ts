@@ -297,7 +297,7 @@ export class DistributorComponent implements OnInit {
 
       viewStockPoints(data){
         let dialogRefCoverageDailog = this.dialog.open(ViewStockpointsComponent, {
-            width: '95%',
+            width: '40%',
             data: data
           });
           dialogRefCoverageDailog.afterClosed().subscribe(result => {
