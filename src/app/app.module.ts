@@ -103,6 +103,8 @@ import { SocketmessagesComponent } from './socketmessages/socketmessages.compone
 import { QuickNotificationComponent } from './quick-notification/quick-notification.component';
 import { TemplatesComponent } from './templates/templates.component';
 import { CreateUpdateTemplateComponent } from './create-update-template/create-update-template.component';
+import { PromocodeComponent } from './promocode/promocode.component';
+import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocode-dialog.component';
 
 
 
@@ -186,6 +188,8 @@ import { CreateUpdateTemplateComponent } from './create-update-template/create-u
         QuickNotificationComponent,
         TemplatesComponent,
         CreateUpdateTemplateComponent,
+        PromocodeComponent,
+        AddPromocodeDialogComponent,
 
      
         
@@ -223,6 +227,7 @@ import { CreateUpdateTemplateComponent } from './create-update-template/create-u
             {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
             {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
             {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
+            {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -253,7 +258,7 @@ import { CreateUpdateTemplateComponent } from './create-update-template/create-u
         ProductsService,
         PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' },
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2221' },
        { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  
     ],
     entryComponents: [
@@ -316,7 +321,8 @@ import { CreateUpdateTemplateComponent } from './create-update-template/create-u
          SocketmessagesComponent,
          QuickNotificationComponent,
          TemplatesComponent,
-         CreateUpdateTemplateComponent
+         CreateUpdateTemplateComponent,
+         AddPromocodeDialogComponent
       
 
 
