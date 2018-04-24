@@ -52,8 +52,9 @@
           </td>  
           <td width="8%" class="left capital">{{prod.avaliable_stock}}</td>
           <td width="8%" class="left capital">{{prod.stockstatus}}</td>
-          <td width="10%" class="fa fa-edit logo-color cursor" (click)="editProduct(prod)">&nbsp;
-             <i class="fa fa-plus" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
+          <td width="10%">
+             <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
+             <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
              <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(prod)"></i>&nbsp;
           <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod, distributorDetails)"></i>
           </td>
