@@ -253,7 +253,7 @@ import { CreateUpdateTemplateComponent } from './create-update-template/create-u
         ProductsService,
         PaymentsService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://104.211.247.42:2229' },
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2221' },
        { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  
     ],
     entryComponents: [
