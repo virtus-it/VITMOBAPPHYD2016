@@ -266,29 +266,6 @@ export class OrderLandingComponent implements OnInit {
     if(this.filterInput.order.searchtype == ""){
       this.cantFilter = true;
     }
-    if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-    else if(this.filterInput.order.searchtext == ''){
-      this.cantFilter = true;
-    }
-
-  
     else{
       this.cantFilter = false;
     }
@@ -940,7 +917,7 @@ this.orderLandingService.getOrdersByfilter(input)
       let GV ="";
       let details: any = i;
       details.timeRemaining = "";
-      let currentTime = moment(new Date());
+      let currentTime = moment.utc(new Date());
       if(details.slotdate){
         let deliveryTime = moment(details.slotdate);
         var duration = moment.duration(deliveryTime.diff(currentTime));

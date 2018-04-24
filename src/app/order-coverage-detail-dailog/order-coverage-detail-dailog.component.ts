@@ -69,6 +69,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     assignPolygon() {
         this.polygonArray = this.orderDetail.polygons;
         this.displayPolygon = this.orderDetail.polygons;
+      
     }
     click(event, polygon) {
         this.listOfDistributors = [];
@@ -420,9 +421,12 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     }
     ngOnInit() {
         //this.getPolygonDistributors();
-        this.assignPolygon();
+         this.assignPolygon();
+        
         this.getOrderDetail();
         this.getProductByCategory();
+        // setTimeout(function() { this.filterPolygon() }, 2000);
+       
         console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
@@ -446,6 +450,11 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 });
             });
         });
+        setTimeout(()=>{    
+            this.filterPolygon()
+       },2000);
+     
+        
     }
 
 }
