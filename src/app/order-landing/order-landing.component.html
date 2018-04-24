@@ -348,7 +348,7 @@
                 
                 <td width="10%" >
                 <div class="row ">
-                    <div class="col-sm-9  col-md-9  col-lg-9  left onhovertooltip-100">
+                    <div class="col-sm-12  col-md-12  col-lg-12  left">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
                     <div class="">
@@ -481,7 +481,7 @@
                     <span class="td-label">
                       Address</span>
                     <br>
-                    <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
+                    <b class="capitalize onhovertooltip-100" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
 
                   </div>
                  
@@ -567,7 +567,7 @@
               <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
-                <td width="24%" >
+                <td width="10%" >
                 
                 <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                 [thresholds]="thresholdConfig"
@@ -597,9 +597,7 @@
 
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">
+         <br>
                 <h5 class="warning  capitalize center">
                   <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
                     <i class="fa fa-cloud-upload" aria-hidden="true"></i>
@@ -607,9 +605,7 @@
                 </h5>
                 <h4 *ngIf="!forwardClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-              </td>
-            </tr>
-          </tfoot>
+          
 
         </table>
       </div>
@@ -617,7 +613,7 @@
         <table class="table table-hover table-striped">
           <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
-              <td width="33%">
+              <td width="30%">
                 <div class="row ">
                   <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">
@@ -645,7 +641,7 @@
                   </div>
                 </div>
               </td>
-              <td width="33%">
+              <td width="30%">
                 <div class=" row ">
                     <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                         <label class="td-label">Customer :
@@ -662,9 +658,9 @@
                   </div>
                 </div>
               </td>
-              <td width="33%">
-                <div class="row ">
-                  <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-150">
+              <td width="30%">
+                <div class="row">
+                  <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">Supplier:
                       <b class="capitalize" *ngIf="allorder.supplierdetails" title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                       <b *ngIf="allorder.supplierdetails === null"> - </b>
@@ -693,9 +689,9 @@
                 </div>
               </td>
 
-              <td width="24%">
-                <div class="row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+              <td width="10%">
+                <div class="row">
+                    <div class="col-sm-12  col-md-12  col-lg-12  left">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
                     <i class="fa fa-minus logo-color fs-18 none"></i>
@@ -710,7 +706,7 @@
               </td> -->
             </tr>
             <tr>
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right pd-top-0">
                 <div class="">
 
                   <div class="form-group row ">
@@ -770,7 +766,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right">
                 <div class="">
                   <div class="form-group row ">
                     <div class="col">
@@ -832,7 +828,7 @@
                 </div>
 
               </td>
-              <td width="25%">
+              <td width="30%" class="brd-right pd-top-0">
                 <div class="">
                   <div class="form-group row ">
                     <div class="col left">
@@ -884,7 +880,7 @@
               </td>
 
 
-             <td width="24%"  >
+             <td width="10%"  >
                 
                 <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
@@ -907,25 +903,21 @@
 
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">
+     <br>
                 <h5 class="warning  center capitalize">
                   <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
                     <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
                 </h5>
                 <h4 *ngIf="!orderClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-              </td>
-            </tr>
-          </tfoot>
+          
         </table>
       </div>
       <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
-              <td width="25%">
+              <td width="30%">
                 <div class="row ">
                   <div class="col-sm-4  col-md-4  col-lg-4 left">
                     <label class="td-label">
@@ -955,7 +947,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%">
+              <td width="30%">
                 <div class=" row ">
                   <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
                     <label class="td-label">Customer :
@@ -971,7 +963,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%">
+              <td width="30%">
                 <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label"> <b class="fa fa-sitemap onhovertooltip-150" title="Distributor Name"></b>
@@ -995,9 +987,9 @@
                 </div>
               </td>
 
-              <td width="24%">
-                <div class="row ">
-                    <div class="col-sm-7  col-md-7  col-lg-7  left onhovertooltip-300">
+              <td width="10%">
+                <div class="row">
+                    <div class="col-sm-12  col-md-12  col-lg-12  left">
                     <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
                     </label>
                     <i class="fa fa-minus logo-color fs-18 none"></i>
@@ -1017,7 +1009,7 @@
             </tr>
 
             <tr>
-              <td width="25%" class="brd-right pd-top-0">
+              <td width="30%" class="brd-right pd-top-0">
                 <div class="">
 
                   <div class="form-group row ">
@@ -1082,7 +1074,7 @@
                   </div>
                 </div>
               </td>
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right">
                 <div class="row form-group">
                   <div class="col left">
                     <span class="td-label">
@@ -1138,7 +1130,7 @@
                     <span class="td-label">
                       Address</span>
                     <br>
-                    <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.customer.address}}</b>
+                    <b class="capitalize onhovertooltip-100" title="{{complete.orderby_address}}">{{complete.customer.address}}</b>
 
                   </div>
 
@@ -1150,7 +1142,7 @@
                 </div>
               </td>
 
-              <td width="25%" class="brd-right">
+              <td width="30%" class="brd-right">
                 <div class="">
                   <div class="row form-group">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
@@ -1220,7 +1212,7 @@
                 </div>
               </td>
 
-              <td width="24%"  >
+              <td width="10%"  >
               
                  
                 
@@ -1247,19 +1239,17 @@
             
             </tr>
           </tbody>
-          <tfoot>
-            <tr>
-              <td colspan="3">
+        
+        <br>
                 <h5 class="warning  capitalize center">
                   <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
                     <i class="fa fa-cloud-upload" aria-hidden="true"></i>
                     click for more data</a>
                 </h5>
+
                 <h4 *ngIf="!completeClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-              </td>
-            </tr>
-          </tfoot>
+              
 
         </table>
       </div>

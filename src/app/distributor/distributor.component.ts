@@ -115,7 +115,7 @@ export class DistributorComponent implements OnInit {
         let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "distributor", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
-            width: '80%',
+            width: '70%',
             data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
