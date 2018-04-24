@@ -145,13 +145,20 @@ export class ProductsComponent implements OnInit {
     console.log(result);
     this.productList = [];
     if (result.result == 'success') {
+
+
       // let productCopy = [];
       for (let details of result.data) {
+        if(details.stockstatus == 'Soldout'){
+          details.stockColor = 'warn';
+          }
+
         //let details: any = i;
 
         let findproduct = _.find(this.productList, function (k, l) {
           let productDetails: any = k;
           return productDetails.brandName == details.brandname;
+          
         });
 
         if (findproduct) {

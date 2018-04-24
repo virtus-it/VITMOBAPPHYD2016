@@ -66,10 +66,10 @@
         <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot</md-option>
-          <md-option value="8AM-11AM" [disabled]= '8 <= hours'>8AM-11AM</md-option>
-          <md-option value="11AM-2PM" [disabled]= '11 <= hours'>11AM-2PM</md-option>
-          <md-option value="2PM-5PM" [disabled]= '14 <= hours'>2PM-5PM</md-option>
-          <md-option value="5PM-8PM" [disabled]= '17 <= hours'>5PM-8PM</md-option>
+          <md-option value="8AM-11AM" [disabled]= '7 <= hours'>8AM-11AM</md-option>
+          <md-option value="11AM-2PM" [disabled]= '10 <= hours'>11AM-2PM</md-option>
+          <md-option value="2PM-5PM" [disabled]= '13 <= hours'>2PM-5PM</md-option>
+          <md-option value="5PM-8PM" [disabled]= '16 <= hours'>5PM-8PM</md-option>
         </md-select>
       </div>
 

@@ -722,16 +722,16 @@ if(!this.createPreOrderInput.productDetails.default_qty){
   // }
 
   availableTimeSlot(){
-    if(this.hours <= 7){
+    if(this.hours < 7){
           this.createPreOrderInput.timeslot = '8AM-11AM'
         }
-        else if(this.hours <= 10){
+        else if(this.hours < 10){
           this.createPreOrderInput.timeslot = "11AM-2PM"; 
         }
-        else if(this.hours <= 13){
+        else if(this.hours < 13){
           this.createPreOrderInput.timeslot = "2PM-5PM";
         } 
-        else if(this.hours <= 16){
+        else if(this.hours < 16){
           this.createPreOrderInput.timeslot = "5PM-8PM";
         }
         else if(this.hours >= 17){

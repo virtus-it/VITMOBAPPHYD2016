@@ -63,3 +63,7 @@ table thead {
   .oneline{
     white-space: nowrap;
   }
+
+  .warn {
+    color: red;
+  }

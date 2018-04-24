@@ -51,7 +51,7 @@
             <span *ngIf="prod.isauthorized != 'true'">No</span>
           </td>  
           <td width="8%" class="left capital">{{prod.avaliable_stock}}</td>
-          <td width="8%" class="left capital">{{prod.stockstatus}}</td>
+          <td width="8%" class="left capital" [ngClass]="{'warn':prod.stockstatus == 'Soldout'}">{{prod.stockstatus}}</td>
           <td width="10%">
              <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;

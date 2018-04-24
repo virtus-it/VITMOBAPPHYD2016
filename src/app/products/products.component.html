@@ -75,7 +75,7 @@
                   </td>
 
                   <td>
-                    <span class="info capital">{{details.stockstatus}} </span>
+                    <span class="info capital" [ngClass]="details.stockColor">{{details.stockstatus}} </span>
                   </td>
                   <td>
                     <span class="success " *ngIf="details.iscanreturnable == 'true'">Yes </span>
