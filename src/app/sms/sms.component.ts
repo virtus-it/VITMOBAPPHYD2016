@@ -58,6 +58,20 @@ export class SmsComponent implements OnInit {
         // this.smsListDetails = result.data;
         if(result.result == 'success'){
             this.smsListDetails = _.union(this.smsListDetails, result.data);
+            // let nums:any = [];
+            // let phoneNumbers:any = [];
+            // let phoneNumbersCopy:any = [];
+            let mobNumbers = _.each(this.smsListDetails , function(i , j){
+                let details:any = i;
+                if(details.mobileno){
+              
+                details.mobileno = JSON.parse(details.mobileno);
+                }
+                // else{
+                //     details = "";
+                // }
+                
+            }); 
         }
         else {
             this.smsClickMore = false;
