@@ -63,7 +63,10 @@
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
-              <td class="left capitalize" width="15%">   <span class="onhovertooltip-100" title="{{dist.firstname}} {{dist.lastname}}">{{dist.firstname}} {{dist.lastname}}</span></td>
+              <td class="left capitalize" width="15%">
+                <span class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></span>
+                <span class="fa fa-thumbs-down warning" *ngIf="dist.isactive == '0'"  (click)="activateDeactivateDist(dist)" title="click to activate"></span>
+                <span class="onhovertooltip-100" title="{{dist.firstname}} {{dist.lastname}}"> &nbsp; &nbsp;{{dist.firstname}} {{dist.lastname}}</span></td>
               <td class="left" width="10%">{{dist.customercount}} </td>
               <td class="left numbers" width="12%">
                 <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
@@ -99,17 +102,20 @@
                             <i class="fa fa-gift logo-color cursor"  title="Products"></i> Products</label>
                       </div>
                       <div class="row pdbottom-5">
-                        <label class="col-md-6" >
+                        <!-- <label class="col-md-6" >
                             <span *ngIf="dist.isactive == '0'"  (click)="activateDeactivateDist(dist)"> <i class="fa fa-ban"></i> Activate </span>
                             <span *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)"> <i class="fa fa-ban"></i> Deactivate </span>
-                    </label>
+                    </label> -->
+
+                    <label class="col-md-6"  (click)="showFollowUp(dist)">
+                      <i class="fa fa-volume-control-phone logo-color cursor" title="Customers"></i> FollowUp
+</label>
+
                         <label class="col-md-6"  (click)="openMapDialog(dist)">
                             <i class="fa fa-globe logo-color cursor"  title="Products"></i> Service area</label>
                       </div>
                       <div class="row pdbottom-5">
-                          <label class="col-md-6"  (click)="showFollowUp(dist)">
-                              <i class="fa fa-volume-control-phone logo-color cursor" title="Customers"></i> FollowUp
-</label>
+                          
                           <label class="col-md-6" (click)="viewStockPoints(dist)">
                               <i class="fa fa-vimeo"  ></i>Stock Points</label>
                         </div>

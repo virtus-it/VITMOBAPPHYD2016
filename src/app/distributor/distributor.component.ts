@@ -115,7 +115,7 @@ export class DistributorComponent implements OnInit {
         let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "distributor", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
-            width: '80%',
+            width: '70%',
             data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {
@@ -312,12 +312,12 @@ export class DistributorComponent implements OnInit {
       activateDeactivateDist(dist){
           let input={};
           if(dist.isactive == '0'){
-          input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+          input={"User":{"TransType":"activate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":"", "apptype": this.authenticationService.appType()}};
           }
           else{
-        input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":""}};
+        input={"User":{"TransType":"deactivate","userid":dist.userid,"user_type":"dealer","devicetype":"","moyaversioncode":"" , "apptype": this.authenticationService.appType()}};
           }
-          //console.log(input);
+          console.log(input);
           this.distributorService.createDistributor(input)
             .subscribe(
             output => this.activateDeactivateDistributorResult(output),
@@ -327,7 +327,7 @@ export class DistributorComponent implements OnInit {
             });
       }
       activateDeactivateDistributorResult(result){
-            //console.log(result);
+            console.log(result);
             if(result.result =='success'){
                 this.getDistributors(true);
             }

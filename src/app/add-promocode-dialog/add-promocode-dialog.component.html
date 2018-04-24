@@ -1,0 +1,100 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-barcode"></i> Promo code
+  </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <!-- <div class="row">
+      <b class="label-style col">Personal Details
+        <span></span>
+      </b>
+    </div> -->
+   
+    <div class="row pd-top-0" >
+      <div class="col-4">
+          
+      <md-select placeholder="Type">
+        
+<md-option>col-1</md-option>
+<md-option>col-2</md-option>
+<md-option>col-3</md-option>
+<md-option>col-4</md-option>
+
+</md-select>
+</div>
+
+
+<div class="col-4">
+ 
+    <md-select >
+      <md-option>Order Created</md-option>
+      <md-option>Out for delivery</md-option>
+      <md-option>Cancelled</md-option>
+      <md-option>Rejected</md-option>
+      <md-option>Cant deliver</md-option>
+      <md-option>Distributor pending</md-option>
+    </md-select>
+  </div>
+
+  <div class="col-4">
+ 
+      <md-select placeholder="End Date">
+        <md-option>Order Created</md-option>
+        <md-option>Out for delivery</md-option>
+        <md-option>Cancelled</md-option>
+        <md-option>Rejected</md-option>
+        <md-option>Cant deliver</md-option>
+        <md-option>Distributor pending</md-option>
+      </md-select>
+    </div>
+
+</div>
+
+<br>
+<div class="row">
+<div class="p-2">
+    <md-form-field class="mg-left-0">
+        <input class="form-control" mdInput placeholder="Promo Code" name="landmark">
+      </md-form-field>
+    </div>
+<div class="p-2 align-self-center">
+    <button type="submit" class="btn-primary" md-raised-button>Generate Promo Code</button>
+</div>
+</div>
+
+
+<div class="row">
+<div class="col">
+  <md-form-field class="wd-100pc">
+      <textarea class="form-control" mdInput placeholder="Description" name="Address"></textarea>
+    </md-form-field>
+</div>
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+
+
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>
+
+

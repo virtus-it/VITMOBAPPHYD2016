@@ -23,17 +23,17 @@
                     <table class="table table-hover table-striped table-fixedheader">
                         <thead>
                         <tr>
-            <th width="9%"> Order Id</th>
-            <th width="13%">Product </th>
+            <th width="10%"> Order Id</th>
+            <th width="15%">Product </th>
             <th width="6%">Qty</th>
-            <th width="8%">Cost</th>
-            <th width="9%">Amount</th>
-            <th width="8%">Status</th>
+            <th width="6%">Cost</th>
+            <th width="10%">Amount</th>
+            <th width="10%">Status</th>
             <th width="8%">Mode</th>
-            <th *ngIf="Detail.type == 'supplierOrder'" width="12%"> Supplier</th>
+            <th *ngIf="Detail.type == 'supplierOrder'" width="11%"> Supplier</th>
             <!-- <th width="">Request Data</th> -->
             <th width="12%">Customer </th>
-            <th width="12%"> Cust Mobile</th>
+            <th width="14%"> Cust Mobile</th>
            
           </tr>
         </thead>
@@ -44,11 +44,11 @@
           </td> </tr> -->
             <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
             <td width="10%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
-            <td width="13%" class="left " class="cellpadding" scope="row"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.brandname}}"> {{supplierOrder.brandname}}</span></td>
+            <td width="16%" class="left " class="cellpadding" scope="row"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.brandname}}"> {{supplierOrder.brandname}}</span></td>
             <td width="6%"  class="left " class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-            <td width="9%"  class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>  
-            <td width="8%"  class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                
-            <td width="9%"  class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
+            <td width="6%"  class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}}</td>  
+            <td width="10%"  class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                
+            <td width="11%"  class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
             <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
             <td *ngIf="Detail.type == 'supplierOrder'"  class="left" class="cellpadding" width="12%">
             <span *ngIf="supplierOrder.supplierdetails"> {{supplierOrder.supplierdetails.firstname}} </span>
@@ -60,13 +60,13 @@
               <span *ngIf="Detail.type=='distributorOrder'"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.orderby_firstname}}">{{supplierOrder.orderby_firstname}}</span></span>
               <span *ngIf="Detail.type=='supplierOrder'"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.customer.firstname}}">{{supplierOrder.customer.firstname}}</span></span>
             </td>
-            <td width="12%" class="left cellpadding" scope="row">
+            <td width="14%" class="left cellpadding" scope="row">
 <span *ngIf="Detail.type == 'distributorOrder'">{{supplierOrder.orderby_mobileno}}</span>     
 <span *ngIf="Detail.type=='supplierOrder'">{{supplierOrder.customer.mobileno}}</span>
       </td>
            </tr>
         </tbody>
-      
+      <br>
               <h4 class="warning  capitalize center">
                 <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="ordersClickMore">
                   <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>

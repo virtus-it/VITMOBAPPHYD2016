@@ -32,6 +32,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     listOfDistributors: any = [];
     dialogRef: any = '';
     order = { orderId: "" };
+    gpsLocation:any = "";
     gpsMessage: string = "";
     filterInputkmvalue = { kmvalue: "0.03" };
     smallLoader: boolean = false;
@@ -39,7 +40,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     reasonOnHold:any;
     dropdownSettings = {
         singleSelection: false,
-        text: "Select Status",
+        text: "Select Category",
         selectAllText: 'Select All',
         unSelectAllText: 'UnSelect All',
         enableSearchFilter: true,
@@ -69,6 +70,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     assignPolygon() {
         this.polygonArray = this.orderDetail.polygons;
         this.displayPolygon = this.orderDetail.polygons;
+      
     }
     click(event, polygon) {
         this.listOfDistributors = [];
@@ -142,6 +144,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
         this.loaderService.display(false);
         if (result && result.data) {
+            this.gpsLocation = true;
+
             if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
                 this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
                 this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
@@ -160,6 +164,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 this.markers[0].lng = '';
             }
         }
+        
     }
     ViewDistributors() {
 
@@ -272,6 +277,13 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 }
             }
         }
+
+       
+
+        
+
+
+
         //console.log(this.filterInput);
         this.filteredList();
 
@@ -419,10 +431,15 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         }
     }
     ngOnInit() {
-        //this.getPolygonDistributors();
-        this.assignPolygon();
+        //this.getPolygonDistributors(); [this.orderDetail.orders.productdetails.category]
+         this.assignPolygon();
+        this.dropdownData.selectedItems = [{
+            id:this.orderDetail.orders.prod_id , itemName: this.orderDetail.orders.productdetails.category
+        }];
         this.getOrderDetail();
         this.getProductByCategory();
+        // setTimeout(function() { this.filterPolygon() }, 2000);
+       
         console.log(this.orderDetail);
         this.searchControl = new FormControl();
         this.mapsAPILoader.load().then(() => {
@@ -446,6 +463,17 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                 });
             });
         });
+
+    
+        setTimeout(()=>{  
+if(!this.gpsMessage){
+            this.filterPolygon();
+            
+}
+       },2000);
+    
+     
+        
     }
 
 }
