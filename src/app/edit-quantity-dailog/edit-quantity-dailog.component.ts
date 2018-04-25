@@ -120,16 +120,16 @@ export class EditQuantityDailogComponent implements OnInit {
 
 
   availableTimeSlot(){
-    if(this.hours <= 7){
+    if(this.hours < 7){
           this.changeTimeSlot.timeslot = '8AM-11AM'
         }
-        else if(this.hours <= 10){
+        else if(this.hours < 10){
           this.changeTimeSlot.timeslot = "11AM-2PM"; 
         }
-        else if(this.hours <= 13){
+        else if(this.hours < 13){
           this.changeTimeSlot.timeslot = "2PM-5PM";
         } 
-        else if(this.hours <= 16){
+        else if(this.hours < 16){
           this.changeTimeSlot.timeslot = "5PM-8PM";
         }
 

@@ -29,32 +29,34 @@
               <th width="7%">Order Status</th>
               <th width="10%">Name</th>
               <th width="10%" >Action</th>
+              <th class="" width ="10%">Message type</th>
               
            
             </tr>
           </thead>
           <tbody>
       
-            <tr>
-              <td class="left capitalize" width="6%">Message
-                  
+            <tr *ngFor="let temp of AllTemplates">
+              <td class="left capitalize" width="6%"> 
+                {{temp.template_type}}
                   
               </td>
              
-              <td class="left capitalize" width="10%">Customer
+              <td class="left capitalize" width="10%">{{temp.type}}
                  </td>
 
                
               
-             <td class="left numbers" width="7%">Order Created
+             <td class="left numbers" width="7%">{{temp.orderstatus}}
              
               </td>
               
-              <td class="left capitalize" width="10%" >Shoeb</td>            
+              <td class="left capitalize" width="10%" >{{temp.template_name}}</td>   
+              <td class="" width ="10%">{{temp.messagetype}}</td>         
           
               <td class="left" width="10%">
-                  <i class="fa fa-edit logo-color pad-fa" aria-hidden="true" title="Edit"></i>
-                   <i class="fa fa-trash danger pad-fa" aria-hidden="true" title="Delete Supplier"></i>
+                  <i class="fa fa-edit logo-color pad-fa" aria-hidden="true" title="Edit" (click)="editTemplate(temp)"></i>
+                   <i class="fa fa-trash danger pad-fa" aria-hidden="true" title="Delete"></i>
                 <i class="fa fa-file-text-o btn-link" aria-hidden="true" title="History"></i>
                  
               </td>

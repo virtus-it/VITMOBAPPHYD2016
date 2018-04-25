@@ -380,8 +380,10 @@ getProductsList() {
 
 }
 getProductsListResult(result) {
+  this.loaderService.display(false);
   //console.log("distributor products list", result);
   if (result.result == 'success') {
+    this.loaderService.display(false);
     let productListCopy = [];
     _.each(result.data.products, function (i, j) {
       let details: any = i;
@@ -734,7 +736,7 @@ if(!this.createPreOrderInput.productDetails.default_qty){
         else if(this.hours < 16){
           this.createPreOrderInput.timeslot = "5PM-8PM";
         }
-        else if(this.hours >= 17){
+        else if(this.hours >= 16){
           this.hours = "6";
           var today = new Date();
           var tomorrow = new Date(today);
