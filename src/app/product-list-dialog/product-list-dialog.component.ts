@@ -65,10 +65,12 @@ let input = {userId: this.distributorId, appType: this.authenticationService.app
 getProductsResult(output) {
   this.loaderService.display(false);
   if(output.result == 'success'){
+
     this.listOfProducts = output.data;
-  }
+    
   }
 
+}
 
   editProduct(data) {
     let dialogRefAddProduct = this.dialog.open(AddEditProductDailogComponent, {

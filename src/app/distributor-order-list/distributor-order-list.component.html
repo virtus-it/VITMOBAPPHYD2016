@@ -22,12 +22,13 @@
                     <thead>
                       <tr>
           <th width="8%">Id</th>
-          <th width="13%">Product </th>
+          <th width="12%">Product </th>
           <th width="6%">Qty</th>
-          <th width="6%" class="nowrap">Cost(Exp Del + Serv chgs)</th>
-          <th width="8%">Amount</th>
+          <th width="10%">Cost,Exp,Serv</th>
+          
           <th width="8%">Status</th>
           <th width="6%">Mode</th>
+          <th width="8%">Amount</th>
           <th class="" width="7%">Ret Qty</th>
           <!-- <th class="" width="9%">Serv chgs</th>
           <th class="" width="9%">Exp del chgs</th> -->
@@ -43,12 +44,19 @@
       <tbody>
           <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
           <td width="8%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
-          <td width="14%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
+          <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
           <td width="6%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-          <td width="6%" class="left" class="cellpadding" scope="row">{{supplierOrder.prod_cost}} + ({{supplierOrder.expressdeliverycharges}} + {{supplierOrder.servicecharges}})</td> 
-          <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>                         
+          <td width="10%" class="left" class="cellpadding" scope="row">
+<span>{{supplierOrder.prod_cost}}</span> , 
+<span *ngIf="supplierOrder.expressdeliverycharges == 0 || supplierOrder.expressdeliverycharges === null ||  supplierOrder.expressdeliverycharges == '' ">-</span>
+<span *ngIf="supplierOrder.expressdeliverycharges > 0 ">{{supplierOrder.expressdeliverycharges}}</span> , 
+<span *ngIf="supplierOrder.servicecharges == '' || supplierOrder.servicecharges === null || supplierOrder.servicecharges == 0">-</span>
+<span *ngIf="supplierOrder.servicecharges > 0 ">{{supplierOrder.servicecharges}}</span>
+</td> 
+                               
           <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
           <td width="6%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
+          <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>    
           <td width="7%" class="left" class="cellpadding" scope="row">
           <span *ngIf="supplierOrder.return_cans_count =='' || supplierOrder.return_cans_count === null"> 0 </span>
           <span *ngIf="supplierOrder.return_cans_count">{{supplierOrder.return_cans_count}} </span>
@@ -65,8 +73,8 @@
             <span *ngIf="supplierOrder.receivedamount > 0">{{supplierOrder.receivedamount}} </span> 
             </td>
 
-            <td class="" width="13%">{{supplierOrder.ordered_date}}</td>
-            <td class="" width="13%">{{supplierOrder.order_delivereddate}}</td>
+            <td class="" width="13%">{{supplierOrder.ordered_date | utcDate}}</td>
+            <td class="" width="13%">{{supplierOrder.order_delivereddate | utcDate}}</td>
             
           
           <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>

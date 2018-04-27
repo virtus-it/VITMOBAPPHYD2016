@@ -20,7 +20,7 @@
     <div class="row mg-top-10" >
       <div class="col-4">
           
-      <md-select placeholder="Type" style="width: 180px;">
+      <md-select placeholder="Type" [(ngModel)]="createTemplateInput.temptype"  name="type" style="width: 180px;">
         
 <md-option>Message</md-option>
 <md-option>Remainder</md-option>
@@ -33,18 +33,19 @@
 
 <div class="col-3">
  
-    <md-select placeholder="Order status">
-      <md-option>Order Created</md-option>
-      <md-option>Out for delivery</md-option>
-      <md-option>Cancelled</md-option>
-      <md-option>Rejected</md-option>
-      <md-option>Cant deliver</md-option>
-      <md-option>Distributor pending</md-option>
+    <md-select placeholder="Order status" [(ngModel)]="createTemplateInput.orderstatus" name="status">
+      <md-option value="OrderCreated">Order Created</md-option>
+      <md-option value="OrderAssigned">Order Assigned</md-option>      
+      <md-option value="OutForDelivery">Out for delivery</md-option>
+      <md-option value="Cancelled">Cancelled</md-option>
+      <md-option value="Rejected">Rejected</md-option>
+      <md-option value="Cantdeliver">Cant deliver</md-option>
+      <md-option value="Distributorpending">Distributor pending</md-option>
     </md-select>
   </div>
   <div class="col-3">
       <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Template Name" name="landmark">
+          <input class="form-control" mdInput placeholder="Template Name" name="tempname" [(ngModel)]="createTemplateInput.tempname">
         </md-form-field>
       </div>
 </div>
@@ -73,7 +74,7 @@
        
         <span class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio"  class="custom-control-input" name="customerType" value="residential">
+              <input type="radio"  class="custom-control-input" name="customerType" value="Customer" [(ngModel)]= "createTemplateInput.type">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Customer</span>
             </label>
@@ -82,7 +83,7 @@
           <div class="col-3 align-self-end marleft">
           <span class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" name="customerType" value="commercial">
+              <input type="radio" class="custom-control-input" [(ngModel)]= "createTemplateInput.type" name="customerType" value="Distributor">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">distributor </span>
             </label>
@@ -96,7 +97,7 @@
        
               <span  class="left capital">
                   <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio"  class="custom-control-input" name="state" value="residential">
+                    <input type="radio"  class="custom-control-input" name="state" value="static" [(ngModel)]= "createTemplateInput.messagetype">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Static</span>
                   </label>
@@ -105,7 +106,7 @@
                 <div class="col-2 align-self-end marleft">
                 <span class="left capital">
                   <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio" class="custom-control-input" name="state" value="commercial">
+                    <input type="radio" class="custom-control-input" name="state" value="dynamic" [(ngModel)]= "createTemplateInput.messagetype">
                     <span class="custom-control-indicator"></span>
                     <span class="custom-control-description">Dynamic</span>
                   </label>
@@ -118,7 +119,7 @@
 <div class="row">
 <div class="col">
   <md-form-field class="wd-100pc" >
-      <textarea class="form-control" mdInput placeholder="Body" style="height: 80px;" name="Address"></textarea>
+      <textarea class="form-control" mdInput placeholder="Body"  [(ngModel)]="createTemplateInput.template_desc" style="height: 80px;" name="Address"></textarea>
     </md-form-field>
 </div>
 </div>
@@ -137,7 +138,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdateTemplate()">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

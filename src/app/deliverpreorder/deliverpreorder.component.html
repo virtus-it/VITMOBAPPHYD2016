@@ -81,6 +81,19 @@
         </md-form-field>
       </div>
       </div>
+
+      <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='credit'">
+          <div class="p-2">
+              <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+              </div>
+              <div class= "p-2">
+              <span>Service charges<br><b>{{Detail.order.servicecharge}}</b></span>
+              </div>
+              <div class= "p-2">
+                  <span>Amount<br><b>{{Detail.order.total_amt}}</b></span>
+                </div>
+
+        </div>
     
       <div class="row">
       <div class="  col-8 align-self-center" *ngIf="deliverPreOrderInput.paymentType=='cod'">

@@ -28,3 +28,7 @@ table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
   float: left;    
   word-wrap:break-word;     
 }
+
+.warn{
+  color:red;
+}
