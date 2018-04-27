@@ -17,7 +17,7 @@ export class TemplatesComponent implements OnInit {
 
   addMessages(){
     let dialogRef = this.dialog.open(CreateUpdateTemplateComponent, {
-      width: '50%',
+      width: '50%', 
       data: ''
   });
   dialogRef.afterClosed().subscribe(result => {

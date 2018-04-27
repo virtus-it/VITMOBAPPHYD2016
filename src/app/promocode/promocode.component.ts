@@ -15,7 +15,7 @@ export class PromocodeComponent implements OnInit {
 
   addPromoCode(){
     let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
-      width: '40%',
+      width: '50%',
       data: ''
   });
   dialogRef.afterClosed().subscribe(result => {
