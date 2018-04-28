@@ -21,10 +21,12 @@
       <div class="col-3">
           
       <md-select placeholder="Type" [(ngModel)]="createTemplateInput.temptype"  name="type">     
-      <md-option value="message">message</md-option>
+      <md-option value="message">Message</md-option>
       <md-option value="Remainder">Remainder</md-option>
-      <md-option value="status">status</md-option>
-      <md-option value="sms">sms</md-option>
+      <md-option value="status">Status</md-option>
+      <md-option value="sms">Sms</md-option>
+      <md-option value="sharemarket">Share Market</md-option>
+      
 
 </md-select>
 </div>
@@ -39,7 +41,14 @@
       <md-option value="Cancelled">Cancelled</md-option>
       <md-option value="Rejected">Rejected</md-option>
       <md-option value="Cantdeliver">Cant deliver</md-option>
-      <md-option value="Distributorpending">Distributor pending</md-option>
+      <md-option value="PendingWithDistributor">Pending With Distributor</md-option>
+      <md-option value="Delivered">Delivered</md-option>
+      <md-option value="Accept">Accept</md-option>
+      <md-option value="Not reachable">Not reachable</md-option>
+      <md-option value="Backtodealer">Back to dealer</md-option>
+      <md-option value="Onhold">Onhold</md-option>
+      
+
     </md-select>
   </div>
   <div class="col-3">
