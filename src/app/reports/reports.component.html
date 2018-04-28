@@ -148,7 +148,8 @@
           </ul> -->
       </div>
     </div>
-    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView != 'orderdownload'">
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'newlydownloaded' || tabPanelView == 'lastdays'||
+    tabPanelView == 'pendingorders'||tabPanelView == 'rejectedorders'||tabPanelView == 'notregistered'">
       <div class="tab-pane active" id="a">
         <table class="table table-hover table-striped">
           <thead>
@@ -180,6 +181,45 @@
         </table>
         <h4 class="warning  capitalize">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
+            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+          <span *ngIf="!reportsClickMore">
+            <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+        </h4>
+      </div>
+      <div class="tab-pane" id="b">
+
+
+      </div>
+
+    </div>
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'distributorsorders'">
+      <div class="tab-pane active" id="a">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+
+              <th width="15%"> Distributors Name</th>
+              <th width="12%">Delivered Orders</th>
+              <th width="15%">Cancelled Orders</th>
+              <th width="25%">Other Orders</th>
+              <th width="15%">Pending Orders</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="Preordrlist" *ngFor="let dist of distributorsorderData">
+
+              <td class="left"><span class="onhovertooltip-150" title="{{dist.fullname}}">{{dist.fullname}} </span></td>
+              <td class="left">{{dist.deliveredorders}}</td>
+              <td class="left">{{dist.cancelledorders}}</td>
+
+              <td class="left">{{dist.otherorders}}</td>
+              <td class="left">{{dist.pendingorders}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="warning  capitalize">
+          <a href="javascript:void(0);"  *ngIf="reportsClickMore">
             <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
           <span *ngIf="!reportsClickMore">
             <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>

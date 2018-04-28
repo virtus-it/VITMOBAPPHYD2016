@@ -1,3 +1,20 @@
 .mg-left-0{
     margin-left: 6px;
 }
+
+.pd-top-0{
+    padding-top: 0%;
+}
+.pd-right-0 {
+     padding-right: 0px;
+}
+
+.mat-select {
+    display: inline-block;
+    outline: 0;
+    width: 100%;
+}
+
+.pd-top-17 {
+    margin-top: -17px;
+}
