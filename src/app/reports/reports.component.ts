@@ -49,6 +49,7 @@ export class ReportsComponent implements OnInit {
   tabPanelView = 'newlydownloaded';
   superDealer = true;
   LastfilterRecords = false;
+  distributorsorderData = [];
   reportsType = [
     { value: 'newlydownloaded', viewValue: 'Newly Downloaded Customers', issuperDelear: this.superDealer },
     { value: 'lastdays', viewValue: 'Customers not Ordered in Last 10 Days', issuperDelear: this.superDealer },
@@ -111,8 +112,9 @@ export class ReportsComponent implements OnInit {
   }
 
   searchDistributorsOrders(){
+    this.tabPanelView = 'distributorsorders';
     let input = {
-      order:{"userid":this.authenticationService.loggedInUserId(),"transtype":'distributorsdetails'}};
+      root:{"userid":this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(),"transtype":'distributorsdetails'}};
       console.log(input);
       this.reportservice.searchReports(input)
         .subscribe(
@@ -124,7 +126,7 @@ export class ReportsComponent implements OnInit {
   }
   searchDistributorOrdersResult(result){
     if(result.result == 'success'){
-      
+      this.distributorsorderData = result.data;
     }
 
 

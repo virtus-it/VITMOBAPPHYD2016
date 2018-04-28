@@ -15,28 +15,28 @@ export class DistributorServiceService {
     getAllDistributors(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers();
-       //// headers.append('apptype', 'moya');
+        //// headers.append('apptype', 'moya');
         headers.append('Content-Type', 'application/json');
         //headers.append('Access-Control-Allow-Origin', '*');
         //headers.append('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, DELETE, OPTIONS');
         //headers.append('Access-Control-Allow-Headers', 'Origin, Content-Type, X-Auth-Token');
-       
-        
 
-    
-      //  let headers = new Headers({'Content-Type': 'application/json',}); // ... Set content type to JSON  res.json()
-       
+
+
+
+        //  let headers = new Headers({'Content-Type': 'application/json',}); // ... Set content type to JSON  res.json()
+
 
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/getdistributorbydealerid', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     createPolygonDistributors(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({'Content-Type': 'application/json'});
-       // headers.append('apptype', 'moya');// ... Set content type to JSON  res.json()
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        // headers.append('apptype', 'moya');// ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/createpolygon', bodyString, options)
             .map((res: Response) => res.json())
@@ -58,15 +58,15 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/getpolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getAllArea(input) {
-       let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.apiUrl + '/getareasbypincode/' + input.userId+'/-1/'+input.appType+'', options)
+        return this.http.get(this.apiUrl + '/getareasbypincode/' + input.userId + '/-1/' + input.appType + '', options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     createDistributor(input) {
@@ -75,7 +75,7 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/createuser', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     updateDistributor(input) {
@@ -89,20 +89,20 @@ export class DistributorServiceService {
     }
     getDistbutorsProducts(input) {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-         let options = new RequestOptions({ headers: headers });
-         return this.http.get(this.apiUrl + '/products/' + input.userId+'/' + input.appType, options)
-             .map((res: Response) => res.json())
-             .do(data => console.log('All: ' ))
-             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-     }
-     getOrderById(input) {
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.apiUrl + '/products/' + input.userId + '/' + input.appType, options)
+            .map((res: Response) => res.json())
+            .do(data => console.log('All: '))
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+    getOrderById(input) {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-         let options = new RequestOptions({ headers: headers });
-         return this.http.get(this.apiUrl + '/getorderbyid/' + input.appType+'/'+input.orderid+'/'+input.userId+'', options)
-             .map((res: Response) => res.json())
-             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-     }
-     forwardOrder(input) {
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.apiUrl + '/getorderbyid/' + input.appType + '/' + input.orderid + '/' + input.userId + '', options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+    forwardOrder(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
@@ -117,17 +117,17 @@ export class DistributorServiceService {
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/assignorder', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
     getAllSuppliers(input) {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-         let options = new RequestOptions({ headers: headers });
-         return this.http.get(this.apiUrl + '/supplierslist/' + input.loginid+'/'+input.appType+'', options)
-             .map((res: Response) => res.json())
-             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-     }
-     setStockdistributor(input) {
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.apiUrl + '/supplierslist/' + input.loginid + '/' + input.appType + '', options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+    setStockdistributor(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
@@ -138,32 +138,32 @@ export class DistributorServiceService {
     }
     getProductsList(input) {
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-         let options = new RequestOptions({ headers: headers });
-         return this.http.get(this.apiUrl + '/getproductsbycustomerid/' + input.userid+'/'+input.delearId+'/'+input.apptype, options)
-             .map((res: Response) => res.json())
-             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-     }
-     getFilteredPolygon(input){
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.apiUrl + '/getproductsbycustomerid/' + input.userid + '/' + input.delearId + '/' + input.apptype, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    }
+    getFilteredPolygon(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/searchpolygon', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-     }
+    }
 
-     StockPoint(input){
+    StockPoint(input) {
         let bodyString = JSON.stringify(input); // Stringify payload
         let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
         let options = new RequestOptions({ headers: headers });
         return this.http.post(this.apiUrl + '/stockpoint', bodyString, options)
             .map((res: Response) => res.json())
-            .do(data => console.log('All: ' ))
+            .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-     }
-     
-    
+    }
+
+
 }
