@@ -101,6 +101,22 @@ table thead {
   display: inline-block;
   }
   
+  .onhovertooltip-450{
+    width:450px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+
+  .onhovertooltip-550{
+    width:550px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+
   .pageTitle-style{
     text-align: left;
     color: #333 !important;
