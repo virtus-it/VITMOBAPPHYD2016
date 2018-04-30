@@ -1,0 +1,42 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
+import { MD_DIALOG_DATA } from '@angular/material';
+import { FollowUpService } from '../follow-up/follow-up.service';
+import { LoaderService } from '../login/loader.service';
+
+@Component({
+  selector: 'app-delete-template',
+  templateUrl: './delete-template.component.html',
+  styleUrls: ['./delete-template.component.css']
+})
+export class DeleteTemplateComponent implements OnInit {
+
+  constructor(public thisDialogRef: MdDialogRef<DeleteTemplateComponent> ,  @Inject(MD_DIALOG_DATA)  public Detail: any , private followupService: FollowUpService, private loaderService: LoaderService) { }
+
+
+  deleteTemplate(){
+    let input = {"User":{"transtype":"delete","id":this.Detail.id}};
+    console.log(input);
+    this.followupService.followUpTemplate(input)
+    .subscribe(
+    output => this.deleteTemplateResult(output),
+    error => {
+      //console.log("error in distrbutors");
+      this.loaderService.display(false);
+    });
+  }
+  deleteTemplateResult(result){
+if(result.result == 'success'){
+  this.thisDialogRef.close('success');
+}
+  }
+
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+  }
+
+  ngOnInit() {
+    console.log(this.Detail);
+  }
+
+}

@@ -1,0 +1,19 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-xs-7 col-sm-6 col-lg-8">
+     <strong><i class="fa fa-ban banbtn" aria-hidden="true" ></i> &nbsp; </strong>  Delete Template</div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
+            </strong>
+  </div>
+</div>
+<div class="align grey" >
+  <br>
+  Are you sure you want to delete the template ?
+</div>
+<br>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+      <button type="submit" class="btn-primary" md-raised-button (click)="deleteTemplate()">YES</button> &nbsp;       
+    <button type="submit" class="btn-primary" md-raised-button (click)="onCloseCancel()">NO</button>&nbsp;
+  </md-dialog-actions>
+</div>

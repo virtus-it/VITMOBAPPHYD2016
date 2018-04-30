@@ -6,6 +6,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
+import { DeleteTemplateComponent } from '../delete-template/delete-template.component';
 
 
 @Component({
@@ -69,6 +70,24 @@ export class TemplatesComponent implements OnInit {
   });
 
   }
+
+  deleteTemplate(data){
+    let dialogRef = this.dialog.open(DeleteTemplateComponent, {
+      width: '50%', 
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+      this.getAllTemplates();
+    }
+
+  });
+
+
+
+  }
+
+
   ngOnInit() {
     this.getAllTemplates();
   }

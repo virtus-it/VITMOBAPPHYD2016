@@ -23,17 +23,17 @@ export class DistributorOrderListComponent implements OnInit {
 
   supplierOrderList(firstcall) {
     this.loaderService.display(true);
-    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "50", "supplierid": this.Detail.data[0].userid, "customerid": 0, "apptype": this.authenticationService.appType() } }
+    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": this.Detail.data[0].userid, "customerid": 0, "apptype": this.authenticationService.appType() , "lastid":0 } }
     if (this.SupplierOrderList && this.SupplierOrderList.length && !firstcall) {
-      let lastOrder:any = _.last(this.SupplierOrderList);
+      let lastOrder: any = _.last(this.SupplierOrderList);
       if (lastOrder) {
-          input.order.customerid = lastOrder.order_id;
+        input.order.lastid = lastOrder.order_id;
       }
-
+      
   }
   else {
       this.SupplierOrderList = [];
-      input.order.customerid = 0;
+      input.order.lastid = 0;
   }
     this.supplierservice.supplierOrder(input)
       .subscribe(
@@ -48,7 +48,7 @@ export class DistributorOrderListComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == "success") {
 
-      this.SupplierOrderList = result.data;
+      this.SupplierOrderList = _.union(this.SupplierOrderList , result.data);
       this.ordersClickMore = false;
     }
     else{
@@ -57,10 +57,21 @@ export class DistributorOrderListComponent implements OnInit {
   }
 
     // Getting distributors orders
-    getDistributorsOrders() {
+    getDistributorsOrders(firstcall) {
       this.loaderService.display(true);
-      let input = { "order": { "userid": this.Detail.distributorId , "priority": "5",   "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": 0, "customerid": 0, "apptype": this.authenticationService.appType() } };
-      //console.log(input);
+      let input = { "order": { "userid": this.Detail.distributorId , "priority": "5",   "usertype": "dealer", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": 0, "customerid": 0, "apptype": this.authenticationService.appType() , "lastid": 0 } };
+      if (this.SupplierOrderList && this.SupplierOrderList.length && !firstcall) {
+        let lastOrder: any = _.last(this.SupplierOrderList);
+        if (lastOrder) {
+          input.order.lastid = lastOrder.order_id;
+        }
+        
+    }
+    else {
+        this.SupplierOrderList = [];
+        input.order.lastid = 0;
+    }
+      console.log(input);
       this.supplierservice.supplierOrder(input)
         .subscribe(
         output => this.distributorOrderresult(output),
@@ -72,7 +83,7 @@ export class DistributorOrderListComponent implements OnInit {
     distributorOrderresult(result) {
       //console.log(result);
       if(result.result == "success"){
-        this.SupplierOrderList = result.data;
+        this.SupplierOrderList = _.union(this.SupplierOrderList , result.data);
       this.loaderService.display(false);
       }
       else{
@@ -89,12 +100,22 @@ export class DistributorOrderListComponent implements OnInit {
         this.supplierOrderList(true);
       }
       else {
-        this.getDistributorsOrders();
+        this.getDistributorsOrders(true);
       }
   
   
     }
 
+    getOrdersByPaging() {
+      if (this.Detail.type == 'supplierOrder') {
+        this.supplierOrderList(false);
+      }
+      else {
+        this.getDistributorsOrders(false);
+      }
+      
+      
+}
   ngOnInit() {
     this.onInitCheck();
   console.log(this.Detail);

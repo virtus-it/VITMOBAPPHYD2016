@@ -13,15 +13,48 @@
     <div class="container-fluid pd-15x25 brd-bottom">
    
     <ul class="scrollheight">
-      <li class="nolist-style messages-style" *ngFor= "let messageText of messageDetails">
+      <!-- <li class="nolist-style messages-style" *ngFor= "let messageText of messageDetails">
       <div class=""  (click)="getMessage(messageText.message)">
           <i class="fa fa-reply" aria-hidden="true" ></i> {{messageText.message}}  </div>
+    </li> -->
+
+    <li class="nolist-style messages-style" *ngFor= "let message of dynamicMessages">
+      <div class="">
+          <i class="fa fa-reply" aria-hidden="true" ></i> {{message.template_desc}} 
+        <button class="btn btn-link btn-sm" (click)="selectTemplate(message.template_desc)" >select</button>
+        </div>
     </li>
+    
   
     </ul>
 
 
-        <!-- <li class="nolist-style  messages-style">
+       
+
+
+
+
+                      </div>
+</md-dialog-content>
+
+<div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+        <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+      <!-- <button md-raised-button (click)="onCloseConfirm()" >OK</button>&nbsp; -->
+      
+    </md-dialog-actions>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+   <!-- <li class="nolist-style  messages-style">
           <div class="row">
             <div class="col">  <i class="fa fa-paper-plane-o" aria-hidden="true"></i>
               <small>&nbsp; Order Received:</small></div>
@@ -108,18 +141,3 @@
                           <small> Cant Deliver : {{this.Details.prod_type}} water cans({{this.Details.quantity}} qty) with order id : {{this.Details.order_id}} from Moya-The Waterman App, is still in process. Assigned supplier could not deliver your order. We will process your request and assign it to other supplier. Please call our customer care centre at mobile : 9863636314/15  </small>
                         </div>
                         </li> -->
-
-
-
-
-                      </div>
-</md-dialog-content>
-
-<div class="row float-right pdright-30 mgbottom-20">
-    <md-dialog-actions align="end">
-        <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
-      <!-- <button md-raised-button (click)="onCloseConfirm()" >OK</button>&nbsp; -->
-      
-    </md-dialog-actions>
-  </div>
-  

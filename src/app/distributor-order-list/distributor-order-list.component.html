@@ -33,8 +33,11 @@
           <!-- <th class="" width="9%">Serv chgs</th>
           <th class="" width="9%">Exp del chgs</th> -->
           <th class="" width="9%">Received amt</th>
-          <th class="" width="13%">Created Date</th>
-          <th class="" width="13%">Delivered Date</th>
+          <th class="" width="13%">Ctd Date</th>
+          <th class="" width="13%">Del Date</th>
+          <!-- <th class="" width="5%">Flw up</th>
+          <th class="" width="5%">Address</th>
+           -->
           
           <!-- <th width="12%">Customer </th>
           <th width="10%"> Cust Mobile</th> -->
@@ -75,18 +78,32 @@
 
             <td class="" width="13%">{{supplierOrder.ordered_date | utcDate}}</td>
             <td class="" width="13%">{{supplierOrder.order_delivereddate | utcDate}}</td>
+            <!-- <td class="" width="13%">
+
+
+
+            </td>
+            <td class="" width="13%">
+
+            </td> -->
             
+     
           
           <!-- <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.customer.firstname}} </td>
           <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
          </tr>
       </tbody>
-     <br>
+      <tfoot>
+        <tr>
+          <td colspan="8">
             <h4 class="warning  capitalize center">
-              <a href="javascript:void(0);"  *ngIf="ordersClickMore">
+              <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="ordersClickMore">
                 <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
               <span *ngIf="!ordersClickMore">Record Not Available</span>
             </h4>
+          </td>
+        </tr>
+      </tfoot>
         
     </table>
 
