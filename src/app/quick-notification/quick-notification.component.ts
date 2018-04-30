@@ -18,6 +18,7 @@ import { Observable } from 'rxjs/Observable';
 export class QuickNotificationComponent implements OnInit {
   templateCtrl: FormControl;
   filteredTemplates: Observable<any[]>;
+  LastfilterRecords = false;
 
 
   constructor(public thisDialogRef: MdDialogRef<QuickNotificationComponent>, private followupService: FollowUpService,  private authenticationService: AuthenticationService, @Inject(MD_DIALOG_DATA) public Details: any, private smsService: SmsServiceService) {
@@ -41,6 +42,7 @@ export class QuickNotificationComponent implements OnInit {
       temp.template_name.toLowerCase().indexOf(name.toLowerCase()) === 0);
     console.log(finalTemplates);
     let JsonObj:any = {};
+  
     if (finalTemplates && finalTemplates.length > 0) {
       let findTemplate: any = {};
       findTemplate = _.find(finalTemplates, function (k, l) {
@@ -49,12 +51,20 @@ export class QuickNotificationComponent implements OnInit {
       });
       if(findTemplate){
         this.filterType.template_desc = findTemplate.template_desc;
+        let replace = this.Details;
        
         if( this.filterType.template_desc){
           JsonObj = JSON.parse(this.filterType.template_desc);
-          // let mobilenumber = [];
+          this.filterType.template_desc = JsonObj.body;
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<CUSTOMER_NAME>>" , replace.orderby_firstname);
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<ORDER_ID>>" , replace.order_id);
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<ORDER_QUANTITY>>" , replace.quantity);
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<PRODUCT_NAME>>" , replace.brandname);
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<PRODUCT_TYPE>>" , replace.prod_type);
+          this.filterType.template_desc = this.filterType.template_desc.replace("<<CUSTOMER_PHNO>>" , replace.orderby_mobileno);
+
         
-          let mobileObject = [{"mobileno":this.Details.orderby_mobileno,"gcm_regid":this.Details.gcm_regid,"fullName":this.Details.orderby_firstname}] ;
+          let mobileObject = [{"mobileno":this.Details.orderby_mobileno,"gcm_regid":this.Details.gcm_regid,"fullName":this.Details.orderby_firstname}];
           JsonObj.mobilenumber =mobileObject;
           JsonObj.transtype = "createsms";
           var key = 'id';
@@ -68,14 +78,21 @@ export class QuickNotificationComponent implements OnInit {
 
     
 }
+  }
 
-console.log(this.smsInput);
-
-
-
+  else {
+    if (name.length >= 3 && !this.LastfilterRecords) {
+      
+      this.getTemplates();
     }
   }
+  return finalTemplates;
+
+  }
    }
+
+
+
   saveMobileSmsResult(result){
     if(result == 'success'){
 
@@ -114,6 +131,7 @@ getTemplatesResult(result){
 
 sendNotification(){
   let input = this.smsInput;
+  this.smsInput.User.body = this.filterType.template_desc;
   let formattedInput:any = {type:'',getAllMobileInput : {}, sendSmsInput : input}
   console.log(formattedInput)
   this.smsService.CreateSms(formattedInput)

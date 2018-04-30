@@ -518,7 +518,7 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
     }
     console.log(this.filterInput);
-    
+    this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(this.filterInput)
       .subscribe(
       output => this.quickFilterResult(output),
@@ -592,7 +592,9 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getFilteredQuickFilterResult(result){
+    this.loaderService.display(false);
     if (result.result == 'success') {
+      
       this.filterRecords = true;
       if (this.tabPanelView == 'forward') {
         let data = this.ModifyOrderList(result.data);
@@ -1132,6 +1134,7 @@ this.orderLandingService.getOrdersByfilter(input)
       });
   }
   AcceptOrderResult(result){
+    this.loaderService.display(false);
     console.log(result);
     if(result.result='success'){
       this.getForwardOrderDetails(true);
@@ -1155,6 +1158,7 @@ this.orderLandingService.getOrdersByfilter(input)
   }
   rejectOrderResult(result){
     //console.log(result);
+    this.loaderService.display(false);
     if (result.result == 'success') {
       this.getForwardOrderDetails(true);
     this.refresh();
@@ -1181,7 +1185,16 @@ this.orderLandingService.getOrdersByfilter(input)
           data: formatteddata
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+
+        if(result == 'success'){
+          this.loaderService.display(false);
+        }
+        else{
+          this.loaderService.display(false);
+        }
+       
           //console.log(`Dialog closed: ${result}`);
+        
 
       });
   }
