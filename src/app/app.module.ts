@@ -76,6 +76,8 @@ import { ViewCustomerComponent } from './view-customer/view-customer.component';
 import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
 
 import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
+import { PromocodeServiceService } from './promocode/promocode-service.service';
+
 
 
 import { ProductsService } from './products/products.service';
@@ -105,6 +107,8 @@ import { TemplatesComponent } from './templates/templates.component';
 import { CreateUpdateTemplateComponent } from './create-update-template/create-update-template.component';
 import { PromocodeComponent } from './promocode/promocode.component';
 import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocode-dialog.component';
+import { DeleteTemplateComponent } from './delete-template/delete-template.component';
+import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.component';
 
 
 
@@ -190,6 +194,8 @@ import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocod
         CreateUpdateTemplateComponent,
         PromocodeComponent,
         AddPromocodeDialogComponent,
+        DeleteTemplateComponent,
+        DeletePromocodeComponent,
 
      
         
@@ -257,6 +263,7 @@ import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocod
         SupplierService,
         ProductsService,
         PaymentsService,
+        PromocodeServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         { provide: 'API_URL', useValue: 'http://104.211.247.42:2221' },
        { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  
@@ -322,7 +329,9 @@ import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocod
          QuickNotificationComponent,
          TemplatesComponent,
          CreateUpdateTemplateComponent,
-         AddPromocodeDialogComponent
+         AddPromocodeDialogComponent,
+         DeleteTemplateComponent,
+         DeletePromocodeComponent
       
 
 

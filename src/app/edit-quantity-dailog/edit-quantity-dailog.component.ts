@@ -24,13 +24,22 @@ export class EditQuantityDailogComponent implements OnInit {
     newChange : any ='';
     hideTimeSlot= false;
     hours:any = "";
+    expressAmount:any = "";
   constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<EditQuantityDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog,private loaderService: LoaderService) { }
   updateQuantity() {
+
+    if(this.orderDetails.expressdelivery == "true"){
+      this.expressAmount = this.orderDetails.expressdeliverycharges;
+    }
+    else{
+      this.expressAmount = 0;
+    }
+
     let date= moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
     let datetime = date + " " + this.changeTimeSlot.timeslot;
     this.loaderService.display(true);
-    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
-    //console.log(input);
+    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.servicecharges) , "expressdeliverycharges": this.expressAmount } };
+    console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.updateQuantityResult(output),
@@ -95,6 +104,7 @@ export class EditQuantityDailogComponent implements OnInit {
   // }
 
 
+ 
   showSlot(){
     // this.autoTimeSlot();
     this.hideTimeSlot= true;
@@ -141,7 +151,7 @@ export class EditQuantityDailogComponent implements OnInit {
     this.quantity.value = this.orderDetails.quantity;
     this.autoTimeSlotforHour();
     this.availableTimeSlot();
-    //console.log(this.orderDetails);
+    console.log(this.orderDetails);
   }
 
 }

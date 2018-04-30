@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { AddPromocodeDialogComponent } from '../add-promocode-dialog/add-promocode-dialog.component';
+import { PromocodeServiceService } from '../promocode/promocode-service.service';
+
+
 
 
 @Component({
@@ -10,7 +13,7 @@ import { AddPromocodeDialogComponent } from '../add-promocode-dialog/add-promoco
 })
 export class PromocodeComponent implements OnInit {
 
-  constructor( public dialog: MdDialog) { }
+  constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ) { }
 
 
   addPromoCode(){
@@ -22,6 +25,40 @@ export class PromocodeComponent implements OnInit {
 
   });
   }
+
+  editPromoCode(data){
+    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
+      width: '50%',
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+
+    }
+
+  });
+
+  }
+
+  deletePromocode(){
+    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
+      width: '50%',
+      data: ''
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+
+    }
+
+  });
+
+  }
+
+  getAllpromocodes(){
+    let input = {};
+
+  }
+
 
   ngOnInit() {
   }

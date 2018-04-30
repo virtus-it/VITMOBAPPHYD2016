@@ -78,13 +78,13 @@
             <!-- <th width="7%">Cart Id</th> -->
             <th width="5%" title="Order Quantity">Qty</th>
             <th width="6%" title="Return Quantity">Ret Qty</th>
-            <th width="8%" title="service charge">Serv Chgs</th>
-            <th width="10%" title="Exp Del Chgs">Exp Del Chgs</th>            
+            <th width="8%" title="service charge">S Chgs</th>
+            <th width="10%" title="Exp Del Chgs">Exp Chgs</th>            
             <th width="6%" title="Order Amount">Amt</th>
-            <th width="8%" title="Received Amount">Recv Amt</th>
+            <th width="8%" title="Received Amount">Rec Amt</th>
             <th width="7%">Status</th>
             <th width="15%" title="Delivery Date">Delv Date</th>
-            <th width="10%" title="Delivered By">Delv By</th>
+            <th width="10%" title="Delivered By">Last Handled Distributor</th>
 
           </tr>
         </thead>
@@ -105,30 +105,26 @@
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
             <td width="15%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
             <td width="10%" class=" capital">
-              <span *ngIf="customer.status == 'delivered'"><span class="onhovertooltip-100" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span> </span>
-            <span *ngIf="customer.status !== 'delivered'"> - </span>
+              <span *ngIf="customer.status !== 'ordered'"><span>{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span> </span>
+            <span *ngIf="customer.status == 'ordered'"> - </span>
             </td>
           </tr>
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="5">
+            <td colspan="8">
+              <h4 class="warning  capitalize center">
+                <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="OrdersClickMore">
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                <span *ngIf="!OrdersClickMore">Record Not Available</span>
+              </h4>
             </td>
           </tr>
         </tfoot>
-    
-    
-              <h4 class="warning  capitalize center">
-                <a href="javascript:void(0);"  *ngIf="customersOrdersClickMore">
-                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-                <span *ngIf="!customersOrdersClickMore">Record Not Available</span>
-              </h4>
-        
-
       </table>
-      <h4 class="warning  capitalize center" *ngIf="noDataError">
+      <!-- <h4 class="warning  capitalize center" *ngIf="noDataError">
         {{noDataError}}
-      </h4>
+      </h4> -->
     </div>
   </div>
 </md-dialog-content>

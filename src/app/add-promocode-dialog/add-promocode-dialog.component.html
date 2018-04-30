@@ -20,12 +20,12 @@
     <div class="row pd-top-0" >
       <div class="col-4 ">
           
-      <md-select placeholder="Type">
+      <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype">
         
-<md-option>col-1</md-option>
-<md-option>col-2</md-option>
-<md-option>col-3</md-option>
-<md-option>col-4</md-option>
+<md-option value="type1">type-1</md-option>
+<md-option value="type2">type-2</md-option>
+<md-option value="type3">type-3</md-option>
+
 
 </md-select>
 </div>
@@ -33,26 +33,28 @@
 
 <div class="col-4">
  
-    <md-select placeholder="Start date">
-      <md-option>Order Created</md-option>
-      <md-option>Out for delivery</md-option>
-      <md-option>Cancelled</md-option>
-      <md-option>Rejected</md-option>
-      <md-option>Cant deliver</md-option>
-      <md-option>Distributor pending</md-option>
-    </md-select>
+  <md-form-field class="example-full-width">
+    <input mdInput [mdDatepicker]="picker"  placeholder="Start Date" [(ngModel)]="promoCodeInput.startdate" >
+    <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+    <md-datepicker #picker></md-datepicker>
+    <md-error>
+      Date is
+      <strong>required</strong>
+    </md-error>
+  </md-form-field>
   </div>
 
   <div class="col-4">
  
-      <md-select placeholder="End Date">
-        <md-option>Order Created</md-option>
-        <md-option>Out for delivery</md-option>
-        <md-option>Cancelled</md-option>
-        <md-option>Rejected</md-option>
-        <md-option>Cant deliver</md-option>
-        <md-option>Distributor pending</md-option>
-      </md-select>
+    <md-form-field class="example-full-width">
+      <input mdInput [mdDatepicker]="pickers"  placeholder="End Date" [(ngModel)]="promoCodeInput.enddate" >
+      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+      <md-datepicker #pickers></md-datepicker>
+      <md-error>
+        Date is
+        <strong>required</strong>
+      </md-error>
+    </md-form-field>
     </div>
 
 </div>
@@ -62,17 +64,17 @@
 
 <div class="row">
   <div class="col-4">
-      <md-select placeholder="Criteria">
+      <md-select placeholder="Criteria" [(ngModel)]="promoCodeInput.criteria">
         
-          <md-option>Total cost</md-option>
-          <md-option>Service charge</md-option>
-          <md-option>Delivery charge</md-option>
+          <md-option value="totalcost">Total cost</md-option>
+          <md-option value="Servicecharge">Service charge</md-option>
+          <md-option value="DeliveryCharge">Delivery charge</md-option>
           
           
           </md-select>
   </div>
 <div class="col-4">
-    <md-select placeholder="Promo Type">
+    <md-select placeholder="Promo Type" [(ngModel)]="promoCodeInput.promotype">
         
         <md-option value="value">Value</md-option>
         <md-option value="percentage">Percentage</md-option>
@@ -83,10 +85,12 @@
 
 <div class="col-4 ">
    
-<md-form-field class="pd-top-17">
-    <textarea mdInput placeholder="Value" mdTextareaAutosize mdAutosizeMinRows="2"
-              mdAutosizeMaxRows="5"></textarea>
+
+  <md-form-field class="wd-100pc">
+    <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent'>
   </md-form-field>
+
+
 </div>
 </div>
   
@@ -96,22 +100,22 @@
 
 <div class="row pd-top-0">
     <div class="col-4">
-        <md-select placeholder="Product Category">
+        <md-select placeholder="Product Category" [(ngModel)]="promoCodeInput.category">
             
-            <md-option>All</md-option>
-            <md-option>col-2</md-option>
-            <md-option>col-3</md-option>
-            <md-option>col-4</md-option>
+            <md-option value="value" >All</md-option>
+            <md-option value="value1">col-2</md-option>
+            <md-option value="value2">col-3</md-option>
+            <md-option value="value3" >col-4</md-option>
             
             </md-select>
     </div>
 <div class="col-4">
     <md-form-field class="mg-left-0">
-        <input class="form-control" mdInput placeholder="Promo Code" name="landmark">
+        <input class="form-control" mdInput placeholder="Promo Code" name="code" [(ngModel)]="promoCodeInput.promocode">
       </md-form-field>
     </div>
 <div class="col-4 align-self-center">
-    <button type="submit" class="btn-primary" md-raised-button>Generate Promo Code</button>
+    <button type="submit" class="btn-primary" (click)="createPromoCode()" md-raised-button>Generate Promo Code</button>
 </div>
 
 
@@ -123,7 +127,7 @@
 <div class="row pd-top-0">
 <div class="col">
   <md-form-field class="wd-100pc">
-      <textarea class="form-control" mdInput placeholder="Description" name="Address"></textarea>
+      <textarea class="form-control" mdInput placeholder="Description" name="desc" [(ngModel)]="promoCodeInput.description"></textarea>
     </md-form-field>
 </div>
 </div>
@@ -142,7 +146,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button >SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

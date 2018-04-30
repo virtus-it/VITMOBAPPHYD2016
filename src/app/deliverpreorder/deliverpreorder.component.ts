@@ -16,7 +16,7 @@ export class DeliverpreorderComponent implements OnInit {
 
   constructor( public thisDialogRef: MdDialogRef<DeliverpreorderComponent>,  private loaderService: LoaderService, private supplierservice :SupplierService, private authenticationService: AuthenticationService,  private orderLandingService: OrderLandingService, @Inject(MD_DIALOG_DATA) public Detail: any) { }
 
-  deliverPreOrderInput : any ={"paymentType":"cod", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "adv_amt":this.Detail.adv_amt};
+  deliverPreOrderInput : any ={"paymentType":"cash", "confirmPayment": false , suppliersid: "" , "pending_amount":this.Detail.pending_amount, "adv_amt":this.Detail.adv_amt};
   
   supplierList = [];
   SupplierListCopy = [];
@@ -63,7 +63,7 @@ export class DeliverpreorderComponent implements OnInit {
       this.Detail.order.paymentype = "credit";
     }
     else{
-      this.Detail.order.paymenttype = 'cash';
+      this.Detail.order.paymentype = 'cash';
     }
 
     if(this.deliverPreOrderInput.suppliersid === null || this.deliverPreOrderInput.suppliersid ==''){
@@ -74,11 +74,14 @@ export class DeliverpreorderComponent implements OnInit {
     }
 
  
-    if(this.Detail.order.paymentmode == 'cod' && this.deliverPreOrderInput.confirmPayment){
+    if(this.Detail.order.paymentmode == 'cash' && this.deliverPreOrderInput.confirmPayment){
       this.Detail.order.paymentstatus = "confirm";
     }
     else{
       this.Detail.order.paymentstatus = "";
+    }
+    if(this.Detail.order.paymentmode == 'credit'){
+      this.Detail.order.received_amt = 0 ;
     }
   
 

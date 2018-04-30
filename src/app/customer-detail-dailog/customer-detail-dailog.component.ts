@@ -36,6 +36,7 @@ export class CustomerDetailDailogComponent implements OnInit {
   filterType = {distributorid: ""};
   distributorID = "";
   customersOrdersClickMore = true;
+  OrdersClickMore = true;
 
 
   findDistributors(name: string) {
@@ -121,13 +122,27 @@ export class CustomerDetailDailogComponent implements OnInit {
 
 
 
-  getCustomerOrder() {
-    let input = {};
+  getCustomerOrder(firstcall) {
+   
+    let input:any = {};
+    
     if(this.orderDetail.type == 'customersPage'){
-      input = { "order": { "userid": this.orderDetail.data.userid, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+      input = { "order": { "userid": this.orderDetail.data.userid, "status": "all", "lastrecordtimestamp": "15", "pagesize": 10, "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" , "last_orderid": "0" ,  } }
     }
     else{
-     input = { "order": { "userid": this.orderDetail.order_by, "status": "all", "lastrecordtimestamp": "15", "pagesize": "100", "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" } }
+     input = { "order": { "userid": this.orderDetail.order_by, "status": "all", "lastrecordtimestamp": "15", "pagesize": 10, "apptype": this.authenticationService.appType(), "usertype": "customer", "createdthru": "website" , "last_orderid": "0" } }
+    }
+
+    if(this.customerOrderDetails && this.customerOrderDetails.length && !firstcall){
+      let lastCustomerOrder: any = _.last(this.customerOrderDetails);
+      if (lastCustomerOrder) {
+        input.order.last_orderid = lastCustomerOrder.order_id;
+      }
+
+    }
+    else {
+      this.customerOrderDetails = [];
+      input.order.last_orderid = null;
     }
     console.log(input);
     this.orderLandingService.getOrderByPaymentCycle(input)
@@ -142,10 +157,12 @@ export class CustomerDetailDailogComponent implements OnInit {
     console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
-      this.customerOrderDetails = result.data;
+      this.customerOrderDetails = _.union(this.customerOrderDetails, result.data);
+      
     }
     else {
       this.noDataError = "No more data";
+      this.OrdersClickMore = false;
 
     }
   }
@@ -214,9 +231,15 @@ export class CustomerDetailDailogComponent implements OnInit {
 
     });
   }
+
+  getOrdersByPaging() {
+       
+    this.getCustomerOrder(false);
+
+}
   ngOnInit() {
     console.log(this.orderDetail);
-    this.getCustomerOrder();
+    this.getCustomerOrder(true);
     this.getDistributors();
   }
 
