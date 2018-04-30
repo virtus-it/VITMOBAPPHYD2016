@@ -50,11 +50,26 @@ table thead {
   }
   .details-style{
     border: 1px solid #ccc;
-    padding: 15px 10px 5px 20px;
+    padding: 0px 0px 0px 28px;
   }
+
 .mg-left-12{
   margin-left: 12px;
 }
   /* .mat-dialog-container{
     height: 90% !important;
   } */
+
+  .mg-left-38{
+    margin-left: -38px;
+
+  }
+
+  .mg-left-2{
+        margin-left: -2px;
+  }
+
+  table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 260px !important;
+}
