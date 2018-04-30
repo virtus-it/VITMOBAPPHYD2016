@@ -40,24 +40,7 @@ export class PromocodeComponent implements OnInit {
 
   }
 
-  deletePromocode(){
-    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
-      width: '50%',
-      data: ''
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if(result == 'success'){
 
-    }
-
-  });
-
-  }
-
-  getAllpromocodes(){
-    let input = {};
-
-  }
 
 
   ngOnInit() {
