@@ -51,9 +51,9 @@
           <table class="table table-hover table-striped" style="table-layout:fixed">
               <thead>
             <tr>
-              <th width="15%">Name</th>
-              <th width="10%" title="Customer Count">Cust Count</th>
-              <th width="12%">Mobile</th>
+              <th width="20%">Name</th>
+              <th width="8%" title="Customer Count">Cust Count</th>
+              <th width="10%">Mobile</th>
               <!-- <th width="10%">Email Id</th> -->
               <th width="10%">Refer Code</th>
               <th width="20%">Address</th>
@@ -66,7 +66,7 @@
               <td class="left capitalize" width="15%">
                 <span class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></span>
                 <span class="fa fa-thumbs-down warning" *ngIf="dist.isactive == '0'"  (click)="activateDeactivateDist(dist)" title="click to activate"></span>
-                <span class="onhovertooltip-100" title="{{dist.firstname}} {{dist.lastname}}"> &nbsp; &nbsp;{{dist.firstname}} {{dist.lastname}}</span></td>
+                <span class="onhovertooltip-200" title="{{dist.firstname}} {{dist.lastname}}"> &nbsp; &nbsp;{{dist.firstname}} {{dist.lastname}}</span></td>
               <td class="left" width="10%">{{dist.customercount}} </td>
               <td class="left numbers" width="12%">
                 <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
