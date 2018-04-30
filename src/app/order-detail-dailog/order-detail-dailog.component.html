@@ -366,7 +366,7 @@
           <b class="">
             <i class="fa fa-comments-o" aria-hidden="true"></i> Messages</b>
           <ul class="scrollheight">
-            <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2}" *ngFor="let msg of dailogOrderDetails.messages">
+            <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2 , 'dist-msg' : msg.ispublic == 1}" *ngFor="let msg of dailogOrderDetails.messages">
               <div class="row">
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
