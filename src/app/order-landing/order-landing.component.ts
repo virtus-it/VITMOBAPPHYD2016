@@ -16,6 +16,8 @@ import { CustomerDetailDailogComponent } from '../customer-detail-dailog/custome
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
 import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
+import { InboxComponent } from '../inbox/inbox.component';
+
 import { NgxGaugeModule } from 'ngx-gauge';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
@@ -931,6 +933,7 @@ this.orderLandingService.getOrdersByfilter(input)
       }
       else{
         let delivery_exceptedtime = details.delivery_exceptedtime;
+        if(delivery_exceptedtime){
         let onlyDate = delivery_exceptedtime.split(" ");
         let datePart = "";
         datePart = onlyDate[0];
@@ -948,7 +951,8 @@ this.orderLandingService.getOrdersByfilter(input)
               //  console.log(hours);
              details.timeRemaining = floorValue;
             //  console.log('success 2' , details.timeRemaining);
-      } 
+      }
+    } 
 
       GV = details.timeRemaining;
       
@@ -1304,6 +1308,25 @@ this.orderLandingService.getOrdersByfilter(input)
                   }
             
                 });
+
+        }
+
+        inbox(){
+          let dialogRef= this.dialog.open(InboxComponent, {
+            
+            width: '80%',
+            data: ''
+          });
+          dialogRef.afterClosed().subscribe(result => {
+            
+            if (result == 'success') {
+             
+      
+            }
+      
+          });
+
+
 
         }
 

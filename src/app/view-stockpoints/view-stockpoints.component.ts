@@ -35,12 +35,19 @@ export class ViewStockpointsComponent implements OnInit {
 ploymarkers: marker[] = [];
 stockpoints:any = [];
 noDataError:any="";
+addressLat:any = "";
+addressLng:any = "";
+
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>,   @Inject(MD_DIALOG_DATA) public Details: any, private authenticationService: AuthenticationService, public dialog: MdDialog,  private distributorService: DistributorServiceService,) { }
 
-  mapClicked($event: any) { 
+  mapClicked($event: any , originalEventArgs , ok) { 
     this.ploymarkers =[];
     // this.getAddress();
+    var e = originalEventArgs[0];
+    this.addressLat = e.latLng.lat();
+    this.addressLng.dev_longitude = e.latLng.lng();
+
     
      this.ploymarkers.push({
          lat: $event.coords.lat,

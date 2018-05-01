@@ -109,6 +109,7 @@ import { PromocodeComponent } from './promocode/promocode.component';
 import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocode-dialog.component';
 import { DeleteTemplateComponent } from './delete-template/delete-template.component';
 import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.component';
+import { InboxComponent } from './inbox/inbox.component';
 
 
 
@@ -196,6 +197,7 @@ import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.co
         AddPromocodeDialogComponent,
         DeleteTemplateComponent,
         DeletePromocodeComponent,
+        InboxComponent,
 
      
         
@@ -331,7 +333,8 @@ import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.co
          CreateUpdateTemplateComponent,
          AddPromocodeDialogComponent,
          DeleteTemplateComponent,
-         DeletePromocodeComponent
+         DeletePromocodeComponent,
+         InboxComponent
       
 
 

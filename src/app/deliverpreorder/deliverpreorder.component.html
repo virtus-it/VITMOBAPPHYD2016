@@ -56,7 +56,7 @@
         </div>
       </div>
     </div>
-    <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cod'">
+    <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cash'">
       <!-- <div class="row">
         <div class="">
         <small>Express delivery charges: {{Detail.order.expressdeliverycharges}}</small>
@@ -96,7 +96,7 @@
         </div>
     
       <div class="row">
-      <div class="  col-8 align-self-center" *ngIf="deliverPreOrderInput.paymentType=='cod'">
+      <div class="  col-8 align-self-center" *ngIf="deliverPreOrderInput.paymentType=='cash'">
         <div class="form-checkbox form-checkbox-inline">
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
             <input type="checkbox" class="custom-control-input" [(ngModel)]="deliverPreOrderInput.confirmPayment">

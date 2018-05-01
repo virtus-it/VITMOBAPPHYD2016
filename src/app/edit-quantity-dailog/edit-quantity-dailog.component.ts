@@ -38,7 +38,10 @@ export class EditQuantityDailogComponent implements OnInit {
     let date= moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
     let datetime = date + " " + this.changeTimeSlot.timeslot;
     this.loaderService.display(true);
-    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.servicecharges) , "expressdeliverycharges": this.expressAmount } };
+    if(this.orderDetails.productdetails.servicecharge === null){
+      this.orderDetails.productdetails.servicecharge = 0;
+    }
+    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.productdetails.servicecharge) , "expressdeliverycharges": this.expressAmount } };
     console.log(input);
     this.orderLandingService.updateQuantity(input)
       .subscribe(

@@ -9,6 +9,7 @@
             Orders</a>
         </div>
         <div class="col-3">
+          <i class="fa fa-envelope logo-color cursor" title="Inbox" (click)="inbox()"></i>
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ALL ORDERS </button>
           <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
