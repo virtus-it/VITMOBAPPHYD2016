@@ -83,6 +83,10 @@ export class DeliverpreorderComponent implements OnInit {
     if(this.Detail.order.paymentmode == 'credit'){
       this.Detail.order.received_amt = 0 ;
     }
+
+    if(this.Detail.order.quantity){
+      this.Detail.order.delivered_qty = this.Detail.order.quantity;
+    }
   
 
 

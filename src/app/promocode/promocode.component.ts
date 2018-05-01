@@ -16,48 +16,31 @@ export class PromocodeComponent implements OnInit {
   constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ) { }
 
 
-  addPromoCode(){
-    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
-      width: '50%',
-      data: ''
-  });
-  dialogRef.afterClosed().subscribe(result => {
+  // addPromoCode(){
+  //   let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
+  //     width: '50%',
+  //     data: ''
+  // });
+  // dialogRef.afterClosed().subscribe(result => {
 
-  });
-  }
+  // });
+  // }
 
-  editPromoCode(data){
-    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
-      width: '50%',
-      data: data
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if(result == 'success'){
+  // editPromoCode(data){
+  //   let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
+  //     width: '50%',
+  //     data: data
+  // });
+  // dialogRef.afterClosed().subscribe(result => {
+  //   if(result == 'success'){
 
-    }
+  //   }
 
-  });
+  // });
 
-  }
+  // }
 
-  deletePromocode(){
-    let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
-      width: '50%',
-      data: ''
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if(result == 'success'){
 
-    }
-
-  });
-
-  }
-
-  getAllpromocodes(){
-    let input = {};
-
-  }
 
 
   ngOnInit() {

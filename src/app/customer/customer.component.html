@@ -140,7 +140,7 @@
             <td class="left capitalize" *ngIf="customers.firstname" width="15%">
                 <span class="onhovertooltip-150" title=" {{customers.firstname}} {{customers.lastname}} ">
                  
-                <span class="success"> {{customers.isappdownloaded}}</span>
+                <!-- <span class="success"></span> -->
                 <span  *ngIf="customers.isappdownloaded" class=""><i class="fa fa-thumbs-up success" title="Joined"></i> </span>
                 <span *ngIf="!customers.isappdownloaded" class=""> <i class="fa fa-thumbs-down danger" title="Not Joined"></i> </span>
                 {{customers.firstname}} {{customers.lastname}} 

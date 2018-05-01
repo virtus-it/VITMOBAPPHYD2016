@@ -1,0 +1,86 @@
+<!-- <div class="row">
+<h2 md-dialog-title>Distributors</h2><br>
+
+</div> -->
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-envelope-o"></i> Inbox
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+     
+      <div class="">
+          <div class="row">
+          <div class="col-4">
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="filterInput.fromDate">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker></md-datepicker>
+              </md-form-field>
+            </div>
+            <div class="col-4">
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="filterInput.toDate">
+                <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                <md-datepicker #pickers></md-datepicker>
+              </md-form-field>
+            </div>
+            <div class="col-4">
+            <button class="btn btn-link btn-sm" (click)="filterMessages()">FILTER</button>
+            <button class="btn btn-link btn-sm" (click)="clearFilter()">CLEAR</button>
+            
+  </div>
+  </div>
+        <table class="table table-hover table-striped table-fixedheader">
+          <thead>
+            <tr class="wd-99pc">
+              <th width="20%">Order Id</th>
+              <th width="20%">Created date</th>
+              
+              <th width="20%" title="">Message</th>
+              <th width="20%">Type</th>
+              <th width="20%" title="">Action</th>
+              
+  
+            </tr>
+          </thead>
+          <tbody>
+
+              <!-- *ngFor="let msg of AllMessages"
+               -->
+            <tr *ngFor="let msg of AllMessages" >
+            <td class="" width="20%">{{msg.orderid}}</td>
+            <td class="" width="20%">{{msg.createddate | utcDate}}</td>
+            <td class="" width="20%">{{msg.message}}</td>
+            <td class="" width="20%">
+              <span class="warn" *ngIf="msg.ispublic == 2">COMPLIANT</span>
+              <span class="green" *ngIf="msg.ispublic == 0">MESSAGE</span>
+
+
+            </td>
+            <td class="" width="20%">
+              <button class="btn btn-link btn-sm" (click)="showOrderDetails(msg)">select</button>
+              
+            </td>
+          </tr>
+          </tbody>
+        
+          
+        </table>
+     
+      </div>
+    </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
+  <br>

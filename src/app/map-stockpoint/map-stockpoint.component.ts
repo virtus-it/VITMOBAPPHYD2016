@@ -32,20 +32,49 @@ export class MapStockpointComponent implements OnInit {
 ploymarkers: marker[] = [];
 address:any = "";
 message:any="";
-buttonValue:any= ""
+buttonValue:any= "";
+addressLat:any = "";
+addressLng:any = "";
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private distributorService: DistributorServiceService, private mapsAPILoader: MapsAPILoader, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, ) {
    }
 
-  mapClicked($event: any) { 
+  mapClicked($event: any ) { 
     this.ploymarkers =[];
     // this.getAddress();
+   
     
      this.ploymarkers.push({
          lat: $event.coords.lat,
          lng: $event.coords.lng        
-     });   
+     }); 
+     
+    //  this.getAddress();
  }
+
+//  getAddress(){
+//    var address = new google.maps.LatLng(this.ploymarkers[0].lat , this.ploymarkers[0].lng);
+//   //  var myOptions = {
+//   //    zoom:12,
+//   //    center: address
+//   //  }
+//   //  var map = 
+//   var geocoder = new google.maps.Geocoder();
+//   var map = 
+
+//   google.maps.event.addListener( $eve {
+//   geocoder.geocode({
+//     'latLng': event.latLng
+//   }, function(results, status) {
+//     if (status == google.maps.GeocoderStatus.OK) {
+//       if (results[0]) {
+//         alert(results[0].formatted_address);
+//       }
+//     }
+//   });
+// });
+//  }
+
 
   createAndUpdate(){
     if(this.validate()){
