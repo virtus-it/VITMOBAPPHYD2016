@@ -444,39 +444,52 @@ export class OrderLandingComponent implements OnInit {
       this.orderClickMore = false;
     }
   }
-  getPolygonDistributors() {
 
-    var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
-    this.loaderService.display(true);
-    this.distributorService.getpolygonByDistributor(input)
-      .subscribe(
-      output => this.getPolygonDataResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
-  }
-  getPolygonDataResult(output) {
-    this.loaderService.display(false);
-    if (output.data && output.data.length > 0) {
-      this.polygonArray = [];
-      for (let data of output.data) {
 
-        if (data.polygonvalue && data.polygonvalue.length > 0) {
-          for (let polygon of data.polygonvalue) {
-            polygon.color = '';
-            polygon.user_id = data.user_id;
-            polygon.distributorName = data.username;
-            polygon.supplier = data.suppliers;
-            polygon.mobileno = data.mobileno;
-            this.polygonArray.push(polygon);
 
-          }
-        }
 
-      }
-    }
-  }
+
+
+  // getPolygonDistributors() {
+
+  //   var input = { area: { user_type: "dealer", user_id: "0", "apptype": this.authenticationService.appType() } };
+  //   this.loaderService.display(true);
+  //   this.distributorService.getpolygonByDistributor(input)
+  //     .subscribe(
+  //     output => this.getPolygonDataResult(output),
+  //     error => {
+  //       //console.log("falied");
+  //       this.loaderService.display(false);
+  //     });
+  // }
+  // getPolygonDataResult(output) {
+  //   this.loaderService.display(false);
+  //   if (output.data && output.data.length > 0) {
+  //     this.polygonArray = [];
+  //     for (let data of output.data) {
+
+  //       if (data.polygonvalue && data.polygonvalue.length > 0) {
+  //         for (let polygon of data.polygonvalue) {
+  //           polygon.color = '';
+  //           polygon.user_id = data.user_id;
+  //           polygon.distributorName = data.username;
+  //           polygon.supplier = data.suppliers;
+  //           polygon.mobileno = data.mobileno;
+  //           this.polygonArray.push(polygon);
+
+  //         }
+  //       }
+
+  //     }
+  //   }
+  // }
+
+
+
+
+
+
+
   // showTabPanel(panelName) {
     
   //   this.tabPanelView = panelName;
@@ -1314,7 +1327,7 @@ this.orderLandingService.getOrdersByfilter(input)
         inbox(){
           let dialogRef= this.dialog.open(InboxComponent, {
             
-            width: '80%',
+            width: '65%',
             data: ''
           });
           dialogRef.afterClosed().subscribe(result => {
@@ -1335,7 +1348,7 @@ this.orderLandingService.getOrdersByfilter(input)
 
   ngOnInit() {
     // this.getDistributorsOrders();
-    this.getPolygonDistributors();
+    // this.getPolygonDistributors();
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
     this.getDistributors();

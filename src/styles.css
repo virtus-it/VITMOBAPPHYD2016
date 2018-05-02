@@ -92,7 +92,9 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
-
+  .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button {
+    font-weight: 400 !important;
+}
   .onhovertooltip-200{
     width:200px;
    text-overflow: ellipsis;

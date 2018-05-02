@@ -477,12 +477,12 @@
                     </div>
                 </div>
 
-                <div class="row form-group">
-                  <div class="col-7 left">
+                <div class="row ">
+                  <div class="col left">
                     <span class="td-label">
                       Address</span>
                     <br>
-                    <b class="capitalize onhovertooltip-100" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
+                    <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
 
                   </div>
                  
@@ -542,17 +542,18 @@
                       <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                     </div>
                   </div>
-
+                
 
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered'  && (forward.distributor != null && forward.supplierdetails === null)  && (forward.forwardedby && forward.forwardedby > 0) "
+                    <button class="btn red btn-link btn-sm"  *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
+
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
@@ -812,11 +813,11 @@
   
                   </div>
                   <div class=" row ">
-                    <div class="col-7 left">
+                    <div class="col left">
                       <span class="td-label" id='foo'>
                         Address</span>
                       <br>
-                      <b class="capitalize onhovertooltip-150" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</b>
+                      <b class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</b>
 
                       <!-- <button class="btn" data-clipboard-target="#foo">
                               <img src="assets/clippy.svg" alt="Copy to clipboard">
@@ -1131,12 +1132,12 @@
                   
                 </div>
 
-                <div class="row form-group">
-                  <div class="col-7 left">
+                <div class="row">
+                  <div class="col left">
                     <span class="td-label">
                       Address</span>
                     <br>
-                    <b class="capitalize onhovertooltip-100" title="{{complete.orderby_address}}">{{complete.customer.address}}</b>
+                    <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.customer.address}}</b>
 
                   </div>
 
@@ -1200,11 +1201,11 @@
                             <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                                 <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status != 'delivered' || complete.status == 'backtodealer' || complete.status == 'assigned') && (complete.status != 'accept')">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')">
 
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="complete.status !='accept' && complete.status !='delivered' " (click)="rejectOrder(complete)">
+                    <button class="btn red btn-link btn-sm"  *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')"  (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer">
