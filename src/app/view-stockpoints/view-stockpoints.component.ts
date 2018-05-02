@@ -44,11 +44,6 @@ addressLng:any = "";
   mapClicked($event: any , originalEventArgs , ok) { 
     this.ploymarkers =[];
     // this.getAddress();
-    var e = originalEventArgs[0];
-    this.addressLat = e.latLng.lat();
-    this.addressLng.dev_longitude = e.latLng.lng();
-
-    
      this.ploymarkers.push({
          lat: $event.coords.lat,
          lng: $event.coords.lng

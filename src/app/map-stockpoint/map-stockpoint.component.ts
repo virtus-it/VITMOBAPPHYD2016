@@ -6,6 +6,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import { } from '@types/googlemaps';
 
+
 declare var google: any; 
 interface marker {
 	lat: number;
@@ -32,25 +33,32 @@ export class MapStockpointComponent implements OnInit {
 ploymarkers: marker[] = [];
 address:any = "";
 message:any="";
+stockPointAddress: any = "";
 buttonValue:any= "";
 addressLat:any = "";
 addressLng:any = "";
+latitiude:any ="";
+longitude:any = "";
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private distributorService: DistributorServiceService, private mapsAPILoader: MapsAPILoader, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, ) {
    }
 
   mapClicked($event: any ) { 
     this.ploymarkers =[];
-    // this.getAddress();
+    
    
     
      this.ploymarkers.push({
          lat: $event.coords.lat,
          lng: $event.coords.lng        
      }); 
+     this.getGeoLocation();
      
-    //  this.getAddress();
  }
+
+
+
+ 
 
 //  getAddress(){
 //    var address = new google.maps.LatLng(this.ploymarkers[0].lat , this.ploymarkers[0].lng);
@@ -76,16 +84,55 @@ addressLng:any = "";
 //  }
 
 
+public getGeoLocation(){
+  if (navigator.geolocation) {
+      var options = {
+        enableHighAccuracy: true
+      };
+
+      navigator.geolocation.getCurrentPosition(position=> {
+        this.latitiude = this.ploymarkers[0].lat;
+        this.longitude = this.ploymarkers[0].lng;
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(this.latitiude, this.longitude);
+        let request = {
+          latLng: latlng
+        };   
+
+        geocoder.geocode(request, (results, status) => {       //<<<===removed function keyword and added arrowfunction
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0] != null) {
+             this.stockPointAddress = results[0].formatted_address;                      
+
+
+            } 
+            
+            else {
+              alert("No address available");
+            }
+          }
+});
+
+      }, error => {
+        console.log(error);
+      }, options);
+  }
+}
+
+
+
+
   createAndUpdate(){
     if(this.validate()){
     let input= {};
     if(this.Details.id){
-      input={"User":{"transtype":"update","id":this.Details.id,"address":"","latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.user_id,"apptype":this.authenticationService.appType()}};
+      input={"User":{"transtype":"update","id":this.Details.id, "latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.user_id,"apptype":this.authenticationService.appType() , "address": this.stockPointAddress}};
     }
     else{
-      input={"User":{"transtype":"create","address":"","latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.userid,"apptype":this.authenticationService.appType()}};
+      input={"User":{"transtype":"create","address":this.stockPointAddress,"latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.userid,"apptype":this.authenticationService.appType()}};
     }
-    //console.log(input);
+    console.log(input);
     this.distributorService.StockPoint(input)
     .subscribe(
     output => this.createAndUpdateStockPointResult(output),
@@ -101,8 +148,7 @@ addressLng:any = "";
    }
   }
 
-  
-
+  getAdd
   
   onCloseCancel(){
     this.thisDialogRef.close('cancel');

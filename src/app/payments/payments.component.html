@@ -96,10 +96,10 @@
                   
                   <div class="cbp_tmlabel left">
   
-                        <div class="mgbottom-10">
+                        <div class="mgbottom-10" *ngIf="payments.customer && payments.dealer">
                           <b> Dealer/Super-Supplier have {{payments.status}}ed Payment</b>
                           <br>
-                          <small ca> Customer: {{payments.customer.firstname}} {{payments.customer.lastname}} have paid the amount of INR {{payments.amount_received}}
+                          <small> Customer: {{payments.customer.firstname}} {{payments.customer.lastname}} have paid the amount of INR {{payments.amount_received}}
                             to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
                           <div *ngIf="payments.status=='rejected'" class="mgbottom-10">
                             <small> Rejected By: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>

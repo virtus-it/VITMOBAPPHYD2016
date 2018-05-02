@@ -14,11 +14,14 @@ export class AuthenticationService {
     isSuperDelear = true;
     CurrentSession: any = {};
     dashBoardDetails: any = {};
+    polygons:any = {};
+
     constructor(private router: Router, private http: Http, @Inject('API_URL') private apiUrl: string) {
         this.loggedIn = !!localStorage.getItem('currentUser');
         this.CurrentSession = JSON.parse(localStorage.getItem('currentUser'));
         this.isSuperDelear = this.getSupperDelear();
         this.dashBoardDetails =JSON.parse(localStorage.getItem('dashboardDetails'));
+        this.polygons = JSON.parse(localStorage.getItem('polygons'));
     }
     login(username: string, password: string) {
         let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload
@@ -32,6 +35,8 @@ export class AuthenticationService {
             .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+
+
     getDashboardDetails(input) {
         
         let bodyString = JSON.stringify(input); // Stringify payload
@@ -43,6 +48,9 @@ export class AuthenticationService {
           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
           
       }
+
+     
+
 
     logout() {
         localStorage.removeItem('currentUser');
@@ -153,6 +161,21 @@ export class AuthenticationService {
         }
 
     };
+
+    getPolygons = function(){
+        try{
+            if(this.polygons){
+                return this.polygons
+            }
+            else{
+                return "" ;
+            }
+        }
+        catch (ex){
+            return false;
+        }
+    }
+
 }
 
 // {

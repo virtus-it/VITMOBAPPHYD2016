@@ -68,8 +68,11 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     dailogCloseResult = "cancel";
 
     assignPolygon() {
-        this.polygonArray = this.orderDetail.polygons;
-        this.displayPolygon = this.orderDetail.polygons;
+       // this.polygonArray = this.orderDetail.polygons;
+        //this.displayPolygon = this.orderDetail.polygons;
+       
+        this.polygonArray =  this.authenticationService.getPolygons();
+        this.displayPolygon =  this.authenticationService.getPolygons();
       
     }
     click(event, polygon) {
@@ -432,6 +435,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     }
     ngOnInit() {
         //this.getPolygonDistributors(); [this.orderDetail.orders.productdetails.category]
+
+        this.polygonArray = this.authenticationService.getPolygons();
          this.assignPolygon();
         this.dropdownData.selectedItems = [{
             id:this.orderDetail.orders.prod_id , itemName: this.orderDetail.orders.productdetails.category
