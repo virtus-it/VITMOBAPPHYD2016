@@ -1314,7 +1314,7 @@ this.orderLandingService.getOrdersByfilter(input)
         inbox(){
           let dialogRef= this.dialog.open(InboxComponent, {
             
-            width: '80%',
+            width: '65%',
             data: ''
           });
           dialogRef.afterClosed().subscribe(result => {
