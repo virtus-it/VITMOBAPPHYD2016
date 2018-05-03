@@ -100,7 +100,7 @@
           </div>
           <div class="col-4" *ngIf="editStatusInput.order.paymentype == 'cash'">
           <md-form-field class="wd-60pc">
-              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  >
+              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.bill_amount">
             </md-form-field>
             </div>
           </div>
@@ -125,7 +125,7 @@
       
 
                 <small class="">Bill Amount</small><br>
-                <b class="">Rs.{{editStatusInput.order.received_amt}}</b>
+                <b class="">Rs.{{orderDetail.bill_amount}}</b>
 
 
                 <!-- <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  > -->
@@ -141,7 +141,7 @@
           <div class="row" >
             <div class="col-4 pleft">
               <small class="">Ordered Amount</small><br>
-              <b class="" >Rs.{{orderDetail.bill_amount}}</b>
+              <b class="" >Rs.{{orderDetail.prod_cost}} * {{orderDetail.quantity}}</b>
             </div>
             <div class="col-4">
               <small class="">Service Charge</small><br>

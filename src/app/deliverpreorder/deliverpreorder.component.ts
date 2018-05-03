@@ -84,8 +84,8 @@ export class DeliverpreorderComponent implements OnInit {
       this.Detail.order.received_amt = 0 ;
     }
 
-    if(this.Detail.order.quantity){
-      this.Detail.order.delivered_qty = this.Detail.order.quantity;
+    if(this.Detail.order.delivered_qty){
+      this.Detail.order.delivered_qty = this.Detail.order.delivered_qty;
     }
   
 
@@ -115,19 +115,23 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
   amountChange(object){
-    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
-    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) * parseInt(object)) + parseInt(this.Detail.order.expressdeliverycharges);
+    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost) * parseInt(object)) + (parseInt(this.Detail.order.servicecharge) * parseInt(object)) + parseInt(this.Detail.order.expressdeliverycharges);
 
   }
 
   totalAmount(){
-    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
-    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost)) + (parseInt(this.Detail.order.servicecharge) + parseInt(this.Detail.order.expressdeliverycharges));
+    this.Detail.order.total_amt =  (parseInt(this.Detail.order.product_cost)  + (parseInt(this.Detail.order.servicecharge)) ) * parseInt(this.Detail.order.delivered_qty) + parseInt(this.Detail.order.expressdeliverycharges);
+    this.Detail.order.amt =  (parseInt(this.Detail.order.product_cost) + (parseInt(this.Detail.order.servicecharge))) * parseInt(this.Detail.order.delivered_qty) + parseInt(this.Detail.order.expressdeliverycharges);
   }
 
 
 
   ngOnInit() {
+    if(this.Detail.order.adv_amt > 0){
+      this.Detail.order.adv_amt = 0;
+    }
+
     console.log(this.Detail);
     this.getSupplierList();
     this.totalAmount();

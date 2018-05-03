@@ -5,6 +5,7 @@ import { AuthenticationService } from './authentication.service';
 import { LoaderService } from '../login/loader.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import * as moment from 'moment';
+import * as _ from 'underscore';
 @Component({
     templateUrl: './login.component.html',
     styleUrls: ['./login.component.css']
@@ -18,6 +19,9 @@ export class LoginComponent implements OnInit {
     password = new FormControl('', [
         Validators.required]);
     polygonArray = [];
+    distributors = [];
+    supplierList:any = [];
+    LastfilterRecords = false;
 
     constructor(private router: Router, private authenticationService: AuthenticationService , private distributorService: DistributorServiceService , private loaderService: LoaderService) { }
 
@@ -40,6 +44,8 @@ export class LoginComponent implements OnInit {
             this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
           //  this.getDashboardDetails();
             this.getPolygonDistributors();
+            this.getDistributors();
+            this.getSupplier();
             this.router.navigate(['/orders']);
 
         }
@@ -86,7 +92,7 @@ export class LoginComponent implements OnInit {
                 }
               }
             localStorage.setItem('polygons', JSON.stringify(polygonArray));
-            this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('polygons'));
+            this.authenticationService.polygons = JSON.parse(localStorage.getItem('polygons'));
           
            
            
@@ -95,6 +101,76 @@ export class LoginComponent implements OnInit {
         
         
       }
+
+
+      getDistributors() {
+        let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": null, "apptype": this.authenticationService.appType(), "pagesize": 1000 } }
+        
+      
+          this.distributors = [];
+         
+        
+        this.distributorService.getAllDistributors(input)
+          .subscribe(
+          output => this.getDistributorsResult(output),
+          error => {
+            //console.log("error in distrbutors");
+            this.loaderService.display(false);
+          });
+      }
+      getDistributorsResult(data) {
+        if (data.result == 'success') {
+          let distributorCopy = [];
+    
+          if (data.data && data.data.length) {
+            _.each(data.data, function (i, j) {
+              let details: any = i;
+              details.fullName = details.firstname + " " + details.lastname
+              distributorCopy.push(details);
+    
+            });
+            localStorage.setItem('distributors', JSON.stringify(distributorCopy));
+            this.authenticationService.distributors = JSON.parse(localStorage.getItem('distributors'));
+        
+            
+          }
+        }
+
+
+       
+      }
+
+
+      getSupplier() {
+        let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
+        this.distributorService.getAllSuppliers(input)
+          .subscribe(
+          output => this.getSupplierResult(output),
+          error => {
+            this.loaderService.display(false);
+          });
+      }
+      getSupplierResult(data) {
+        if (data.result == 'success') {
+          let supplierCopy = [];
+    
+          if (data.data && data.data.length) {
+            _.each(data.data, function (i, j) {
+              let details: any = i;
+              details.fullName = details.firstname + " " + details.lastname
+              supplierCopy.push(details);
+    
+            });
+    
+            localStorage.setItem('suppliers', JSON.stringify(supplierCopy));
+            this.authenticationService.suppliers = JSON.parse(localStorage.getItem('suppliers'));
+          }
+        }
+      
+      }
+
+
+
 
 
 

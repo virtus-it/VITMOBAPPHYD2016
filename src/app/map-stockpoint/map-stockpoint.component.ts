@@ -99,7 +99,7 @@ public getGeoLocation(){
           latLng: latlng
         };   
 
-        geocoder.geocode(request, (results, status) => {       //<<<===removed function keyword and added arrowfunction
+        geocoder.geocode(request, (results, status) => {      
 
           if (status == google.maps.GeocoderStatus.OK) {
             if (results[0] != null) {
@@ -120,6 +120,11 @@ public getGeoLocation(){
   }
 }
 
+
+// myLocation(){
+//   var lati = "17.3761668";
+//   var longi = "78.40496280000002";
+// }
 
 
 
@@ -188,12 +193,45 @@ public getGeoLocation(){
   
   }
 
+
+
+  getMyLocation(){
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          position => {
+            this.latitiude = "17.391636";
+            this.longitude = "78.440065";
+          },
+          error => {
+              switch (error.code) {
+                  case 1:
+                      console.log('Permission Denied');
+                      break;
+                  case 2:
+                      console.log('Position Unavailable');
+                      break;
+                  case 3:
+                      console.log('Timeout');
+                      break;
+              }
+          }
+      );
+  };
+
+
+
+    
+  }
+
   ngOnInit() {
     //console.log(this.Details);
     if(this.Details.id){
       this.getMarker();
+      this.getMyLocation();
     }
     this.button();
+
+
   
    
 }

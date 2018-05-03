@@ -187,14 +187,14 @@ export class OrderLandingComponent implements OnInit {
 
 
     }
-    else {
-      if (name.length >= 3 && !this.LastfilterRecords) {
+    // else {
+    //   if (name.length >= 3 && !this.LastfilterRecords) {
         
-        this.getDistributors();
-      }
+    //     this.getDistributors();
+    //   }
 
 
-    }
+    // }
     return finalDistributors;
   }
 
@@ -1053,87 +1053,95 @@ this.orderLandingService.getOrdersByfilter(input)
     }
 
   }
-  getDistributors() {
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 500 } }
-    if (this.distributors && this.distributors.length) {
-      let lastDistributor: any = _.last(this.distributors);
-      if (lastDistributor) {
-        input.root.lastuserid = lastDistributor.userid;
-      }
 
 
-    }
-    else {
-      this.distributors = [];
-      input.root.lastuserid = null;
-    }
 
-    //console.log(input);
-    this.loaderService.display(true);
-    this.distributorService.getAllDistributors(input)
-      .subscribe(
-      output => this.getDistributorsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      });
-  }
-  getDistributorsResult(data) {
-    //console.log(data);
-    this.loaderService.display(false);
-    if (data.result == 'success') {
-      let distributorCopy = [];
+  // getDistributors() {
+  //   let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 500 } }
+  //   if (this.distributors && this.distributors.length) {
+  //     let lastDistributor: any = _.last(this.distributors);
+  //     if (lastDistributor) {
+  //       input.root.lastuserid = lastDistributor.userid;
+  //     }
 
-      if (data.data && data.data.length) {
-        _.each(data.data, function (i, j) {
-          let details: any = i;
-          details.fullName = details.firstname + " " + details.lastname
-          distributorCopy.push(details);
 
-        });
+  //   }
+  //   else {
+  //     this.distributors = [];
+  //     input.root.lastuserid = null;
+  //   }
 
-        this.distributors = _.union(this.distributors, distributorCopy);
-        //  this.distributors = distributorCopy;
-      }
-    }
-    else {
-      this.LastfilterRecords = true;
-    }
-  }
-  getSupplier() {
-    let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
-   //console.log(input);
-   this.loaderService.display(true);
-    this.distributorService.getAllSuppliers(input)
-      .subscribe(
-      output => this.getSupplierResult(output),
-      error => {
-        this.loaderService.display(false);
-        //console.log("error in distrbutors");
-      });
-  }
-  getSupplierResult(data) {
-    //console.log(data);
-    this.loaderService.display(false);
-    if (data.result == 'success') {
-      let supplierCopy = [];
+  //   //console.log(input);
+  //   this.loaderService.display(true);
+  //   this.distributorService.getAllDistributors(input)
+  //     .subscribe(
+  //     output => this.getDistributorsResult(output),
+  //     error => {
+  //       //console.log("error in distrbutors");
+  //       this.loaderService.display(false);
+  //     });
+  // }
+  // getDistributorsResult(data) {
+  //   //console.log(data);
+  //   this.loaderService.display(false);
+  //   if (data.result == 'success') {
+  //     let distributorCopy = [];
 
-      if (data.data && data.data.length) {
-        _.each(data.data, function (i, j) {
-          let details: any = i;
-          details.fullName = details.firstname + " " + details.lastname
-          supplierCopy.push(details);
+  //     if (data.data && data.data.length) {
+  //       _.each(data.data, function (i, j) {
+  //         let details: any = i;
+  //         details.fullName = details.firstname + " " + details.lastname
+  //         distributorCopy.push(details);
 
-        });
+  //       });
 
-        this.supplierList = _.union(this.supplierList, supplierCopy);
-        //  this.distributors = distributorCopy;
-      }
-    }
-    else {
-      this.LastfilterRecords = true;
-    }
-  }
+  //       this.distributors = _.union(this.distributors, distributorCopy);
+  //       //  this.distributors = distributorCopy;
+  //     }
+  //   }
+  //   else {
+  //     this.LastfilterRecords = true;
+  //   }
+  // }
+
+
+  // getSupplier() {
+  //   let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
+  //  //console.log(input);
+  //  this.loaderService.display(true);
+  //   this.distributorService.getAllSuppliers(input)
+  //     .subscribe(
+  //     output => this.getSupplierResult(output),
+  //     error => {
+  //       this.loaderService.display(false);
+  //       //console.log("error in distrbutors");
+  //     });
+  // }
+  // getSupplierResult(data) {
+  //   //console.log(data);
+  //   this.loaderService.display(false);
+  //   if (data.result == 'success') {
+  //     let supplierCopy = [];
+
+  //     if (data.data && data.data.length) {
+  //       _.each(data.data, function (i, j) {
+  //         let details: any = i;
+  //         details.fullName = details.firstname + " " + details.lastname
+  //         supplierCopy.push(details);
+
+  //       });
+
+  //       this.supplierList = _.union(this.supplierList, supplierCopy);
+  //       //  this.distributors = distributorCopy;
+  //     }
+  //   }
+  //   else {
+  //     this.LastfilterRecords = true;
+  //   }
+  // }
+
+
+
   filterDailogToggle(){
     this.showFilterDailog = !this.showFilterDailog;
   }
@@ -1349,12 +1357,19 @@ this.orderLandingService.getOrdersByfilter(input)
   ngOnInit() {
     // this.getDistributorsOrders();
     // this.getPolygonDistributors();
+
+    if(this.tabPanelView == 'forward'){
     this.getForwardOrderDetails(true);
+    }
+    else if(this.tabPanelView == 'allorder'){
     this.getAllOrderDetails(true);
-    this.getDistributors();
-    this.getSupplier();
+    }
+    // this.getDistributors();
+    // this.getSupplier();
     this.getMessage();
     this.getMessagesfromWebsite();
+    this.distributors = this.authenticationService.getDistributors();
+    this.supplierList = this.authenticationService.getSuppliers();
     // this.onInItConditions();
     // this.timesimu();
     // this.timeSimultor();
