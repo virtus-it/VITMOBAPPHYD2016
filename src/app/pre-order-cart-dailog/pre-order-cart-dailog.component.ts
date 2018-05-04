@@ -462,7 +462,7 @@ createPreOrder(){
   //console.log(this.createPreOrderInput);
   
   let input =[{"order":
-  {"paymentmode":"cash","orderstatus":"ordered",  "delivered_qty": this.createPreOrderInput.productDetails.quantity ,"total_items":this.createPreOrderInput.productDetails.quantity,
+  {"paymentmode":"cash","orderstatus":"ordered",  "quantity": this.createPreOrderInput.productDetails.quantity ,"total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
   "product_quantity":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname, 

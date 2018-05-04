@@ -70,6 +70,36 @@
             [latitude]="m.lat"
             [longitude]="m.lng"
             ></agm-marker>
+
+            
+
+            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
+            [iconUrl]="m.icon">
+            <agm-info-window>
+              Hi, this is the 1  <strong>info window</strong>
+      
+            </agm-info-window>
+          </agm-marker>
+
+
+
+
+          <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
+            [iconUrl]="m.icon">
+            <agm-info-window>
+            <strong>{{m.name}} , {{m.productType}}( {{m.quantity}} Qty)
+              # {{m.orderid}} 
+
+            </strong>
+      
+            </agm-info-window>
+          </agm-marker>
+
+
+
+
+
+
           <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
                       
                        [fillColor]="'#0073e6'"

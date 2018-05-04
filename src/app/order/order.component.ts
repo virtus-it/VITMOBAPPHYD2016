@@ -354,12 +354,29 @@ export class OrderComponent implements OnInit {
         });
     }
 
+
+    getAllOrdersMarkers(){
+
+    }
+
+
+    // getMarker(){
+    //     this.ploymarkers =[];
+    //     this.ploymarkers.push({
+    //       lat: parseFloat(this.Details.latitude),
+    //       lng: parseFloat(this.Details.longitude)        
+    //   });   
+      
+      
+    //   }
+
       //simulator
 //   timeSimultor(){
 //     //all orders time
 //     let orderedtime = this.forwardOrders.ordered_date;
 //     let time1 = moment(orderedtime).format("HH");
 //     let time2 = this.forwardOrders.delivery_exceptedtime;
+
 //     // let abc = time2.split(" ").pop('');
 //     // console.log(abc);
 //     // let def = abc.split("-")
@@ -452,6 +469,7 @@ onInItConditions(){
           this.currentdate = moment(currentDate).format("DD-MM-YYYY");
 }
 this.timesim();
+console.log("markers", this.markers)
 }
 
 

@@ -17,8 +17,11 @@ export class EditOrderStatusComponent implements OnInit {
 
   
   editStatusInput:any = { "order": { "delivered_qty": this.orderDetail.delivered_quantity, "received_amt": (this.orderDetail.delivered_quantity * this.orderDetail.prod_cost)  + (this.orderDetail.delivered_quantity * this.orderDetail.servicecharges) + (this.orderDetail.expressdeliverycharges) , "orderstatus": "delivered", 
-  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans, "paymentype": this.orderDetail.paymenttype , "adv_amt":this.orderDetail.customerpaymentdts.advance_amount } };
+  "reason":"",  "product_type": "cans", "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "usertype": this.authenticationService.userType(), "apptype": this.authenticationService.appType(), "return_cans": this.orderDetail.return_cans , "adv_amt":this.orderDetail.customerpaymentdts.advance_amount } };
 isConfirmed = true;
+
+
+
 
 message = "";
 
@@ -59,12 +62,19 @@ if(this.editStatusInput.order.orderstatus == "not_reachable"){
 }
 
 
+if(this.editStatusInput.order.orderstatus == "delivered"){
+  this.editStatusInput.order.paymentype =  this.orderDetail.paymenttype
+
+
     if (this.editStatusInput.order.paymentype == "credit") {
       this.editStatusInput.order.received_amt = 0;
     }
     if (this.isConfirmed) {
       this.editStatusInput.order.paymentstatus = 'confirm';
     }
+  }
+
+
     let input = this.editStatusInput;
     console.log(input);
     this.orderLandingService.editOrderStatus(input)
@@ -90,7 +100,7 @@ if(result.result == 'success'){
   //   this.editStatusInput.order.return_cans = this.editStatusInput.order.delivered_qty;
   // }
   changeAmount() {
-    this.editStatusInput.order.received_amt = this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges;
   }
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
@@ -101,6 +111,8 @@ if(result.result == 'success'){
   }
   ngOnInit() {
     //console.log(this.editStatusInput);
+    this.editStatusInput.order.paymentype = 'cash';
+    this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;
     console.log(this.orderDetail);
   }
 

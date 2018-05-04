@@ -15,6 +15,8 @@ export class AuthenticationService {
     CurrentSession: any = {};
     dashBoardDetails: any = {};
     polygons:any = {};
+    distributors:any = [];
+    suppliers = [];
 
     constructor(private router: Router, private http: Http, @Inject('API_URL') private apiUrl: string) {
         this.loggedIn = !!localStorage.getItem('currentUser');
@@ -22,6 +24,8 @@ export class AuthenticationService {
         this.isSuperDelear = this.getSupperDelear();
         this.dashBoardDetails =JSON.parse(localStorage.getItem('dashboardDetails'));
         this.polygons = JSON.parse(localStorage.getItem('polygons'));
+        this.distributors = JSON.parse(localStorage.getItem('distributors'));
+        this.suppliers = JSON.parse(localStorage.getItem('suppliers'));
     }
     login(username: string, password: string) {
         let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload
@@ -173,6 +177,35 @@ export class AuthenticationService {
         }
         catch (ex){
             return "";
+        }
+    }
+
+    getDistributors = function(){
+        try{
+            if(this.distributors){
+                return this.distributors
+            }
+            else{
+                return "";
+            }
+        }
+        catch(ex){
+            return false;
+        }
+    }
+
+
+    getSuppliers = function(){
+        try{
+            if(this.suppliers){
+                return this.suppliers;
+            }
+            else{
+                return "";
+            }
+        }
+        catch(ex){
+            return false;
         }
     }
 

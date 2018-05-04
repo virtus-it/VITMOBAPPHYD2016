@@ -23,6 +23,11 @@ export class MapStockpointComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
   zoom: number = 12;
+
+
+
+
+
  
   markers: any = [
     {
@@ -39,6 +44,8 @@ addressLat:any = "";
 addressLng:any = "";
 latitiude:any ="";
 longitude:any = "";
+currentlongitude:any = "";
+currentlatitude:any = "";
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private distributorService: DistributorServiceService, private mapsAPILoader: MapsAPILoader, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, ) {
    }
@@ -99,7 +106,7 @@ public getGeoLocation(){
           latLng: latlng
         };   
 
-        geocoder.geocode(request, (results, status) => {       //<<<===removed function keyword and added arrowfunction
+        geocoder.geocode(request, (results, status) => {      
 
           if (status == google.maps.GeocoderStatus.OK) {
             if (results[0] != null) {
@@ -119,6 +126,20 @@ public getGeoLocation(){
       }, options);
   }
 }
+
+
+// myLocation(){
+//   var lati = "17.3761668";
+//   var longi = "78.40496280000002";
+// }
+
+
+// hhh(){
+// navigator.geolocation.getCurrentPosition(success => { 
+//   success.coords = {lat : "" , lng: ''};
+//   success.timestamp = new Date();
+// }
+// )};
 
 
 
@@ -188,12 +209,62 @@ public getGeoLocation(){
   
   }
 
+
+
+
+//   navigator.geolocation.getCurrentPosition = function(success, failure) { 
+//     success({ coords: { 
+//         latitude: 30, 
+//         longitude: -105,
+
+//     }, timestamp: Date.now() }); 
+// }
+
+
+
+
+
+
+
+  getMyLocation(){
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          position => {
+            this.latitiude = "17.391636";
+            this.longitude = "78.440065";
+          },
+          error => {
+              switch (error.code) {
+                  case 1:
+                      console.log('Permission Denied');
+                      break;
+                  case 2:
+                      console.log('Position Unavailable');
+                      break;
+                  case 3:
+                      console.log('Timeout');
+                      break;
+              }
+          }
+      );
+  };
+
+
+
+    
+  }
+
   ngOnInit() {
     //console.log(this.Details);
     if(this.Details.id){
       this.getMarker();
+      this.getMyLocation();
+      
     }
+    
     this.button();
+
+
   
    
 }
