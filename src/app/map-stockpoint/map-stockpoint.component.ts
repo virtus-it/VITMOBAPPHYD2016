@@ -23,6 +23,11 @@ export class MapStockpointComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
   zoom: number = 12;
+
+
+
+
+
  
   markers: any = [
     {
@@ -39,6 +44,8 @@ addressLat:any = "";
 addressLng:any = "";
 latitiude:any ="";
 longitude:any = "";
+currentlongitude:any = "";
+currentlatitude:any = "";
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private distributorService: DistributorServiceService, private mapsAPILoader: MapsAPILoader, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, ) {
    }
@@ -127,6 +134,15 @@ public getGeoLocation(){
 // }
 
 
+// hhh(){
+// navigator.geolocation.getCurrentPosition(success => { 
+//   success.coords = {lat : "" , lng: ''};
+//   success.timestamp = new Date();
+// }
+// )};
+
+
+
 
   createAndUpdate(){
     if(this.validate()){
@@ -195,6 +211,21 @@ public getGeoLocation(){
 
 
 
+
+//   navigator.geolocation.getCurrentPosition = function(success, failure) { 
+//     success({ coords: { 
+//         latitude: 30, 
+//         longitude: -105,
+
+//     }, timestamp: Date.now() }); 
+// }
+
+
+
+
+
+
+
   getMyLocation(){
     if (window.navigator && window.navigator.geolocation) {
       window.navigator.geolocation.getCurrentPosition(
@@ -228,7 +259,9 @@ public getGeoLocation(){
     if(this.Details.id){
       this.getMarker();
       this.getMyLocation();
+      
     }
+    
     this.button();
 
 

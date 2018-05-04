@@ -22,6 +22,7 @@ export class InboxComponent implements OnInit {
   filteredData:any = [];
 
   filterInput ={"fromDate":null , "toDate":null};
+  noMessages = false;
   
 
 
@@ -41,6 +42,9 @@ export class InboxComponent implements OnInit {
   getAllMessagesResult(result){
     if(result.result == 'success'){
       this.AllMessages= result.data;
+    }
+    else{
+      this.noMessages = true;
     }
   }
 

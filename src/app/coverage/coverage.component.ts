@@ -9,8 +9,27 @@ import { ProductsService } from '../products/products.service';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
+import { OrderLandingService } from '../order-landing/order-landing.service';
 import * as moment from 'moment';
 declare var google: any;
+
+
+interface marker {
+	lat: any;
+	lng: any;
+  label?: string;
+  icon?:string;
+	
+}
+
+
+
+
+
+
+
+
+
 @Component({
 
     templateUrl: './coverage.component.html',
@@ -32,8 +51,20 @@ export class CoverageComponent implements OnInit {
             lng: '',
         }
     ]
+
+
+
+    ordersMap: any = [{
+        lat:"",
+        lng:"",
+        name:"",
+
+    }]
+
+
+    orderslocationData:marker[] = [];
     showFilterDailog= false;
-    constructor(public gMaps: GoogleMapsAPIWrapper,  private productService: ProductsService, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
+    constructor(public gMaps: GoogleMapsAPIWrapper,  private productService: ProductsService, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog, private orderLandingService: OrderLandingService , private loaderService: LoaderService) { }
     mapClicked($event: any) {
 
     }
@@ -52,6 +83,8 @@ export class CoverageComponent implements OnInit {
         classes: "myclass custom-class myyy"
       };
     dropdownData = { selectedItems: [] };
+
+    allOrdersDetails:any = [];
     // categoryname = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
     // { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
     // { "id": "ordered", "itemName": "Ordered" },
@@ -322,6 +355,11 @@ getProductByCategory(){
 
   }
 
+//   clickedMarker(label: string, index: number) {
+// }
+
+
+
 
 //   refresh(): void {
 //     window.location.reload();
@@ -333,9 +371,77 @@ refresh(){
     this.orderDetails = "";
 }
 
+
+getOrdersOnMap(){
+    let input= {"order":{"userid": this.authenticationService.loggedInUserId(),"priority":289,"usertype":"dealer","status":null,"pagesize":100,"last_orderid":null,"apptype":this.authenticationService.appType(),"createdthru":"website" , "transtype":"getordersonmap"}};
+    console.log(input);
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+      output => this.getOrderDetailsResult(output),
+      error => {
+        this.loaderService.display(false);
+      });
+}
+getOrderDetailsResult(result){
+    if(result.result == 'success'){
+        this.allOrdersDetails  = result.data;
+       
+        let orderLocationArray = [];
+        let data = _.each(this.allOrdersDetails , function(i, j){
+            let details:any = i;
+            let UserData:any = {lat:"" , lng : "" , name:"" , status:"" ,orderid:"", icon:"" , label:"" , productType:"" , quantity:""};
+          
+            UserData.lat = parseFloat(details.latitude);
+            UserData.lng = parseFloat(details.longitude);
+            UserData.name = details.firstname;
+            UserData.orderid = details.order_id;
+            UserData.status = details.orderstatus;
+            UserData.productType = details.product_type;
+            UserData.quantity = details.quantity;
+            if(UserData.status == 'delivered'){
+                UserData.icon = '../assets/images/green.png';
+            }
+            else{
+                UserData.icon = '../assets/images/red.png'
+            }
+            if(UserData.lat && UserData.lng ){
+
+            orderLocationArray.push(UserData);
+            }
+
+        });
+
+        this.orderslocationData = orderLocationArray;
+        console.log("lats and lngs" ,this.orderslocationData);
+
+    }
+}
+
+
+clickedMarker(label: string, index: number) {
+    //console.log(`clicked the marker: ${label || index}`)
+}
+
+pointers: marker[] = [
+    {
+        lat: "17.407073254851742",
+        lng: "78.40179428458215",
+        label: 'A',
+        icon: '../assets/images/green.png'
+    },
+    {
+        lat: "17.70732548",
+        lng: "78.179428458215",
+        label: 'B',
+        icon: '../assets/images/red.png'
+    }
+]
+
+
     ngOnInit() {
         this.getPolygonDistributors();
         this.getProductByCategory();
+        this.getOrdersOnMap();
     }
 
 }
