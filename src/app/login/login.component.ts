@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
         Validators.required]);
     password = new FormControl('', [
         Validators.required]);
-    polygonArray = [];
+  
 
     constructor(private router: Router, private authenticationService: AuthenticationService , private distributorService: DistributorServiceService , private loaderService: LoaderService) { }
 
@@ -86,7 +86,7 @@ export class LoginComponent implements OnInit {
                 }
               }
             localStorage.setItem('polygons', JSON.stringify(polygonArray));
-            this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('polygons'));
+            this.authenticationService.polygons = JSON.parse(localStorage.getItem('polygons'));
           
            
            

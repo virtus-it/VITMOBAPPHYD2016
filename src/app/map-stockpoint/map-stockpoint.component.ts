@@ -109,7 +109,7 @@ public getGeoLocation(){
             } 
             
             else {
-              alert("No address available");
+              console.log("No address available");
             }
           }
 });
