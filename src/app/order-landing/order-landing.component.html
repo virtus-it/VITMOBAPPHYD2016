@@ -543,17 +543,18 @@
                       <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                     </div>
                   </div>
-
+                
 
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status != 'delivered' || forward.status == 'backtodealer' || forward.status == 'assigned') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="forward.status !='accept' && forward.status !='delivered'  && (forward.distributor != null && forward.supplierdetails === null)  && (forward.forwardedby && forward.forwardedby > 0) "
+                    <button class="btn red btn-link btn-sm"  *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
+
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
@@ -1201,11 +1202,11 @@
                             <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                                 <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status != 'delivered' || complete.status == 'backtodealer' || complete.status == 'assigned') && (complete.status != 'accept')">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')">
 
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="complete.status !='accept' && complete.status !='delivered' " (click)="rejectOrder(complete)">
+                    <button class="btn red btn-link btn-sm"  *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')"  (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer">

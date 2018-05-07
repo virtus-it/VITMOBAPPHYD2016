@@ -6,6 +6,7 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { AuthenticationService } from '../login/authentication.service';
 import { } from '@types/googlemaps';
 
+
 declare var google: any; 
 interface marker {
 	lat: number;
@@ -22,6 +23,11 @@ export class MapStockpointComponent implements OnInit {
   lat: number = 17.3850;
   lng: number = 78.4867;
   zoom: number = 12;
+
+
+
+
+
  
   markers: any = [
     {
@@ -32,25 +38,34 @@ export class MapStockpointComponent implements OnInit {
 ploymarkers: marker[] = [];
 address:any = "";
 message:any="";
+stockPointAddress: any = "";
 buttonValue:any= "";
 addressLat:any = "";
 addressLng:any = "";
+latitiude:any ="";
+longitude:any = "";
+currentlongitude:any = "";
+currentlatitude:any = "";
 
   constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private distributorService: DistributorServiceService, private mapsAPILoader: MapsAPILoader, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, ) {
    }
 
   mapClicked($event: any ) { 
     this.ploymarkers =[];
-    // this.getAddress();
+    
    
     
      this.ploymarkers.push({
          lat: $event.coords.lat,
          lng: $event.coords.lng        
      }); 
+     this.getGeoLocation();
      
-    //  this.getAddress();
  }
+
+
+
+ 
 
 //  getAddress(){
 //    var address = new google.maps.LatLng(this.ploymarkers[0].lat , this.ploymarkers[0].lng);
@@ -76,16 +91,69 @@ addressLng:any = "";
 //  }
 
 
+public getGeoLocation(){
+  if (navigator.geolocation) {
+      var options = {
+        enableHighAccuracy: true
+      };
+
+      navigator.geolocation.getCurrentPosition(position=> {
+        this.latitiude = this.ploymarkers[0].lat;
+        this.longitude = this.ploymarkers[0].lng;
+        let geocoder = new google.maps.Geocoder();
+        let latlng = new google.maps.LatLng(this.latitiude, this.longitude);
+        let request = {
+          latLng: latlng
+        };   
+
+        geocoder.geocode(request, (results, status) => {      
+
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (results[0] != null) {
+             this.stockPointAddress = results[0].formatted_address;                      
+
+
+            } 
+            
+            else {
+              alert("No address available");
+            }
+          }
+});
+
+      }, error => {
+        console.log(error);
+      }, options);
+  }
+}
+
+
+// myLocation(){
+//   var lati = "17.3761668";
+//   var longi = "78.40496280000002";
+// }
+
+
+// hhh(){
+// navigator.geolocation.getCurrentPosition(success => { 
+//   success.coords = {lat : "" , lng: ''};
+//   success.timestamp = new Date();
+// }
+// )};
+
+
+
+
   createAndUpdate(){
     if(this.validate()){
     let input= {};
     if(this.Details.id){
-      input={"User":{"transtype":"update","id":this.Details.id,"address":"","latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.user_id,"apptype":this.authenticationService.appType()}};
+      input={"User":{"transtype":"update","id":this.Details.id, "latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.user_id,"apptype":this.authenticationService.appType() , "address": this.stockPointAddress}};
     }
     else{
-      input={"User":{"transtype":"create","address":"","latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.userid,"apptype":this.authenticationService.appType()}};
+      input={"User":{"transtype":"create","address":this.stockPointAddress,"latitude":this.ploymarkers[0].lat,"longitude":this.ploymarkers[0].lng,"userid":this.Details.userid,"apptype":this.authenticationService.appType()}};
     }
-    //console.log(input);
+    console.log(input);
     this.distributorService.StockPoint(input)
     .subscribe(
     output => this.createAndUpdateStockPointResult(output),
@@ -101,8 +169,7 @@ addressLng:any = "";
    }
   }
 
-  
-
+  getAdd
   
   onCloseCancel(){
     this.thisDialogRef.close('cancel');
@@ -142,12 +209,62 @@ addressLng:any = "";
   
   }
 
+
+
+
+//   navigator.geolocation.getCurrentPosition = function(success, failure) { 
+//     success({ coords: { 
+//         latitude: 30, 
+//         longitude: -105,
+
+//     }, timestamp: Date.now() }); 
+// }
+
+
+
+
+
+
+
+  getMyLocation(){
+    if (window.navigator && window.navigator.geolocation) {
+      window.navigator.geolocation.getCurrentPosition(
+          position => {
+            this.latitiude = "17.391636";
+            this.longitude = "78.440065";
+          },
+          error => {
+              switch (error.code) {
+                  case 1:
+                      console.log('Permission Denied');
+                      break;
+                  case 2:
+                      console.log('Position Unavailable');
+                      break;
+                  case 3:
+                      console.log('Timeout');
+                      break;
+              }
+          }
+      );
+  };
+
+
+
+    
+  }
+
   ngOnInit() {
     //console.log(this.Details);
     if(this.Details.id){
       this.getMarker();
+      this.getMyLocation();
+      
     }
+    
     this.button();
+
+
   
    
 }

@@ -23,6 +23,7 @@ import { LoaderService } from '../login/loader.service';
     styleUrls: ['./distributor.component.css']
 })
 export class DistributorComponent implements OnInit {
+    setPosition: any = "";
     ordersList = [];
     distributors: any = [];
     distributorsCopy: any = [];
@@ -297,7 +298,7 @@ export class DistributorComponent implements OnInit {
 
       viewStockPoints(data){
         let dialogRefCoverageDailog = this.dialog.open(ViewStockpointsComponent, {
-            width: '40%',
+            width: '75%',
             data: data
           });
           dialogRefCoverageDailog.afterClosed().subscribe(result => {
@@ -344,6 +345,15 @@ export class DistributorComponent implements OnInit {
 
     ngOnInit() {
         this.getDistributors(true);
+        // if(window.navigator.geolocation){
+        //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
+        //     };
+
+
+
+
+
+        
     
     }
 

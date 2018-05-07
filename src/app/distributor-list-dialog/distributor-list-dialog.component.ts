@@ -120,10 +120,15 @@ export class DistributorListDialogComponent implements OnInit {
         "from": this.authenticationService.loggedInUserId(),
         "loginid": this.authenticationService.loggedInUserId(),
         "orderid": this.orderDetail.order_id, "orderstatus": "ordered", "product_type": "cans",
-        "quantity": this.orderDetail.quantity, "to": this.distributorID,
-        "usertype": this.authenticationService.userType()
+         "to": this.distributorID,
+        "usertype": this.authenticationService.userType() , "orderto":this.authenticationService.loggedInUserId() , "reason":"reason"
       }
     }
+
+
+
+
+
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
     this.distributorService.forwardOrder(input)
       .subscribe(
