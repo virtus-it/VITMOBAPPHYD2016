@@ -53,7 +53,9 @@ export class AuthenticationService {
           
       }
 
-     
+     static showLog(value){
+         console.log(value);
+     }
 
 
     logout() {
