@@ -36,7 +36,7 @@ export class PaymentsComponent implements OnInit {
       .subscribe(
       output => this.getCodResult(output),
       error => {
-        //console.log("error");
+        console.log("error");
         this.loaderService.display(false);
       });
 
@@ -221,7 +221,9 @@ getAdvAmount(){
       });
   }
   getAdvanceAmountResult(result){
-    //console.log(result);
+    AuthenticationService.showLog(result);
+    AuthenticationService.showLog("getAdvanceAmountResult called");
+
     if (result.result == 'success') {
       this.advAmount = result.data;
       this.advAmountCopy = result.data;
