@@ -2,3 +2,7 @@
     color: currentColor;
     margin-bottom: 10px;
 }
+.disp-init{
+    
+        display: initial !important;
+}

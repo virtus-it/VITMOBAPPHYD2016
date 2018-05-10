@@ -73,7 +73,7 @@ export class CustomerComponent implements OnInit {
 
     showPlaceOrder(data) {
         let dialogRefPlaceorder = this.dialog.open(PreOrderCartDailogComponent, {
-            width: '75%',
+            width: '80%',
             data: data
         });
         dialogRefPlaceorder.afterClosed().subscribe(result => {
@@ -83,7 +83,7 @@ export class CustomerComponent implements OnInit {
     }
     showResendInvitation() {
         let dialogRefResend = this.dialog.open(CustomerResendInvitationComponent, {
-            width: '600px',
+            width: '700px',
             data: ''
         });
         dialogRefResend.afterClosed().subscribe(result => {
@@ -186,7 +186,7 @@ if(result == "success"){
         let data = { id: details.userid, firstname: details.firstname, lastName: details.lastname, type: "customer", "mobileno": details.mobileno };
         let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
-            width: '80%',
+            width: '50%',
             data: data
         });
         dialogRefFollow.afterClosed().subscribe(result => {

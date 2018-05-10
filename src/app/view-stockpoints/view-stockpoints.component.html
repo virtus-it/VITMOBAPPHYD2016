@@ -13,7 +13,7 @@
     <h4 class="noData">{{noDataError}}</h4>
     <div class="col-md-12 text-right" (click)="createStockPoint(Details)">
         <span><b>Add stock point</b></span>
-    <strong class="fa fa-plus fa-2 plus-style .navbar-right" ></strong>
+    <i class="fa fa-plus fa-2 plus-style .navbar-right" ></i>
     </div>
 
 
@@ -83,3 +83,9 @@
       <!-- <button class="fa fa-plus fa-2 plus-style" (click)="createStockPoint()"></button> -->
     </md-dialog-actions>
   </div>
+
+    <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>

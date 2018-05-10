@@ -302,7 +302,7 @@ background: transparent;
   padding-top: 15px;
 }
 .warning{
-  color:var( --warning);
+  color:var( --warning) !important;
 }
 .capitalize{
   text-transform: capitalize;
@@ -858,3 +858,10 @@ vertical-align: middle;
   z-index: 9999;
   opacity: .8;
 } */
+
+.font-12px{
+  font-size: 12px;
+}
+.gray6{
+  color:var( --gray6) !important; 
+}

@@ -104,14 +104,14 @@
         <div class="row">
            
 
-            <div class="col-md-4 col-sm-4">
-                <md-form-field class="">
+            <div class="col-md-6 col-sm-6">
+                <md-form-field class="wd-100pc">
                     <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
                   </md-form-field>
             
               </div>
 
-<div class="col-md-4 col-sm-4 align-self-end">
+<div class="col-md-6 col-sm-6 align-self-end">
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
         </md-form-field>
@@ -123,7 +123,7 @@
 </div>
 <div class="row">
 
-<div class="col-6" *ngIf="this.Details.order_id">
+<div class="col-8" *ngIf="this.Details.order_id">
 <md-form-field class="wd-100pc">
   <textarea class="form-control" mdInput placeholder="Order Address" name="Address" [(ngModel)]="customerInput.User.orderaddress" ></textarea>
 </md-form-field>
@@ -132,7 +132,7 @@
 
 
 
-<div class="col-6">
+<div class="col-8">
     <md-form-field class="wd-100pc">
         <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
       </md-form-field>

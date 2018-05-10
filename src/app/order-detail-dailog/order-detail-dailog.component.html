@@ -152,7 +152,7 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody class="tab-heigt">
                 <b *ngIf="customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="55%">
