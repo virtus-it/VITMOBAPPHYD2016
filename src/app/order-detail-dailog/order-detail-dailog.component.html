@@ -371,7 +371,7 @@
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
                   <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
-                  <small>&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+                  <small *ngIf="msg.user">&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
                 </div>
                 <div class="col right">
                   <small class="gray9">{{ msg.createddate | utcDate}} </small>

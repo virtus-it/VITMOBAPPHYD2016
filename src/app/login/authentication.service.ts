@@ -53,7 +53,9 @@ export class AuthenticationService {
           
       }
 
-     
+     static showLog(value){
+         console.log(value);
+     }
 
 
     logout() {
@@ -169,14 +171,14 @@ export class AuthenticationService {
     getPolygons = function(){
         try{
             if(this.polygons){
-                return this.polygons
+                return this.polygons;
             }
             else{
                 return "" ;
             }
         }
         catch (ex){
-            return false;
+            return "";
         }
     }
 
