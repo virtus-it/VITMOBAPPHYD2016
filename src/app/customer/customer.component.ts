@@ -140,7 +140,7 @@ export class CustomerComponent implements OnInit {
     //Edit scheduled orders
     editScheduleOrder(data){
         let dialogRefSetting = this.dialog.open(CustomerScheduleEditDailogComponent , {
-            width: "55%",
+            width: "65%",
             data: data
         });
         dialogRefSetting.afterClosed().subscribe(result => {

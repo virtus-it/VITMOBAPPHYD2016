@@ -46,105 +46,62 @@
 
 
     <div class="row brd-box-box" id="FeedbackList" *ngFor="let feed of feedbackList;">
-      <div class="col-2 left bg-color-bg">
+      <div class="col-3 left bg-color-bg">
 
-       <span class="fa fa-user"></span>
-        <b *ngIf="feed.createdby" > {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b>
+        <span class="fa fa-user"></span>
+        <b *ngIf="feed.createdby" class="capital"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b>
         <br>
-<span class="fa fa-tasks"></span>
-     
-         <b> Subject:</b>
-          <span>{{feed.subject}} </span>
+        <span class="fa fa-tasks"></span>
+
+        <b> Subject:</b>
+        <span>{{feed.subject}} </span>
         <br>
-        <span class="left fa fa-clock-o"></span>
-          <span> {{feed.createddate |utcDate }} </span>
+        <p class="right grayd mgtop-5">
+          <span class=" fa fa-clock-o"></span>
+          {{feed.createddate |utcDate }} </p>
 
       </div>
 
-      <div class="col-9 brd-box-mg pd-top-btm-7">
+      <div class="col-8 brd-box-mg pd-top-btm-7">
 
         <div class="left">
 
-         
-            <b>Details:</b> <span class="td-label">{{feed.details}} </span>
-          <br>
+
+          <b>Details:</b>
+          <p class="gray6">{{feed.details}} </p>
+
           <div *ngIf="feed.reply" class="left">
             <span>
               <strong> Replies: </strong>
             </span>
-            <br>
+
             <div *ngFor="let replies of feed.reply">
 
               <b> You Replied:</b>
-              <span class="td-label"> {{replies.message}} </span>
-              <br>
+              <p class="gray6 mgbottom-5"> {{replies.message}} </p>
+
               <!-- <span>Date:</span>  -->
-              <small class="td-label" style="font-size: x-small;"> {{replies.createddate |utcDate }} </small>
+              <p class="gray9 small"> {{replies.createddate |utcDate }} </p>
             </div>
           </div>
         </div>
       </div>
       <div class="p-1">
 
-        <a class="btn btn-open fnt-size-30" *ngIf="feed.status == 'open' || feed.status =='created'" (click)="openStatus(feed)">
-          <i class="fa fa-times-circle openicon cursor fnt-size-30" aria-hidden="true" title="closed"></i>
+        <a class="btn btn-open fs-30" *ngIf="feed.status == 'open' || feed.status =='created'" (click)="openStatus(feed)">
+          <i class="fa fa-times-circle openicon cursor fs-30 danger" aria-hidden="true" title="closed"></i>
         </a>
         <br>
-        <a class="btn btn-reply cursor fnt-size-30" *ngIf="feed.status == 'open' || feed.status == 'created'" (click)="openReplyModel(feed)">
-          <i class="fa fa-reply replyicon cursor fnt-size-30" aria-hidden="true" title="reply"></i>
+        <a class="btn btn-reply cursor fs-30" *ngIf="feed.status == 'open' || feed.status == 'created'" (click)="openReplyModel(feed)">
+          <i class="fa fa-reply replyicon cursor fs-30" aria-hidden="true" title="reply"></i>
         </a>
-     
-        <a class="btn btn-close fnt-size-30" *ngIf="feed.status == 'close'" (click)="closeStatus(feed)">
+
+        <a class="btn btn-close fs-30" *ngIf="feed.status == 'close'" (click)="closeStatus(feed)">
           <br>
-          <i class="fa fa-ban statusclosed cursor fnt-size-30" title="closed" aria-hidden="true"> </i>
+          <i class="fa fa-ban statusclosed cursor fs-30" title="closed" aria-hidden="true"> </i>
           <br>
-          <i class="fa fa-check-circle closeicon cursor fnt-size-30" aria-hidden="true" title="closed"></i>
+          <i class="fa fa-check-circle closeicon cursor fs-30" aria-hidden="true" title="closed"></i>
         </a>
       </div>
     </div>
   </div>
-
-
-
-
-  <!-- <div class="col-md-12 pd-brd brd " id="FeedbackList" *ngFor="let feed of feedbackList;" >
-      <div class="row pd-10">
-      <div class="col-md-4">
-      <div class="createdby logo-color" > <b *ngIf="feed.createdby"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b> </div>
-      <div class="greytext"> #{{feed.issueid}} </div>
-     </div>
-     <div class="col-md-5">
-       <div class="">  Subject : <span class="greytext">{{feed.subject}} </span></div>
-       <div class=""><span class="greytext">{{feed.details}}</span></div>
-     </div>
-     <div class="col-md-3">
-     <br>
-      <div class="right pdright-15">  <span> {{feed.createddate |utcDate }} </span></div>
-    </div>
-   </div>
-
-   <div>
-      <hr width="100%">
-           <span>Replies</span><br>
-
-        <div *ngIf="feed.reply">
-        <div *ngFor="let replies of feed.reply"><span class="greytext"> {{replies.message}} </span><br>
-        <div class="col-md-9">
-     </div>
-     <div class="col-md-3 right">
-      <div class="createdby gr right"><span> {{replies.createddate |utcDate }}  </span> </div>
-    </div>
-   </div>
-   </div>
-   <br>
-   </div>
-
-      <hr width="100%">
-
-      <div class="col-md-12">
-        <div class="col-md-11">
-            <a class="btn btn-reply " *ngIf="feed.status == 'open' || feed.status == 'created'"> <i class="fa fa-reply replyicon" (click)="openReplyModel(feed)" aria-hidden="true" title = "reply"></i> </a>
-            <a  class="btn btn-open" *ngIf="feed.status == 'open' || feed.status =='created'"> <i class="fa fa-times-circle openicon" (click)="openStatus(feed)" aria-hidden="true"  title = "open"></i> </a>
-            <a class="btn btn-close " *ngIf="feed.status == 'close'">  <i class="fa fa-ban statusclosed" title="closed" aria-hidden="true"> CLOSED </i> <i class="fa fa-check-circle closeicon" (click)="closeStatus(feed)" aria-hidden="true" title = "closed" ></i>  </a>
-     </div>
-     </div>-->

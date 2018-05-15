@@ -1,19 +1,22 @@
-<div class="row justify-content-between modal-title">
+<div class="row modal-title">
     <div class="col-sm-4 col-md-4 col-lg-4 ">
         <i class="fa fa-money" ></i> Set Prices
     </div>
-    <b class=""> Customer name: {{this.Details.firstname}} {{this.Details.lastname}}</b>
+    <div class="col-7">
+        <i class="fa fa-user"></i> <b class="text-capitalize">Customer name: {{this.Details.firstname}} {{this.Details.lastname}}</b>
+    </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
       <strong>
         <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
       </strong>
     </div>
   </div>
-  <div>
+  
       <md-dialog-content layout="column">
+        
         <div class="container-fluid pd-15x25 brd-bottom">
-                <div class="table-scroll row">
-          <table class="table table-hover">
+                <div class="table-scroll">
+          <table class="table table-hover table-striped">
               <tbody  *ngFor="let prod of productList">
                 <tr class="border-topbottom bg-eee">
                   <td class="" colspan="4">
@@ -28,28 +31,29 @@
                     </b>
                   </td>
                 </tr>
-                <tr class="border-topbottom bg-eee" >
-                  <th width="20%">Type</th>
-                  <th width="20%">Price per Unit</th>
-                  <th width="20%">Quantity</th>
+                <tr class="border-topbottom bg-logo" >
+                  <th width="56%">Type</th>
+                  <th width="22%">Price per Unit</th>
+                  <th width="22%">Quantity</th>
                   
                 </tr>
                 <tr *ngFor="let details of prod.data">
-                  <td class=""> {{details.ptype}} </td>
+                  <td class="text-capitalize"> {{details.ptype}} </td>
                   <td class="">
                     <div class="">
-                        <md-form-field class="">
-                            <input class="form-control" mdInput placeholder="qty"  [(ngModel)]="details.pcost">
+                        <md-form-field class="wd-50pc">
+                            <input class="form-control" mdInput placeholder="Price"  [(ngModel)]="details.pcost">
                           </md-form-field>
                   
                     </div>
                   </td>
                   <td class=""> 
                     <div class="">
-                        <md-form-field class="">
-                            <input class="form-control" mdInput placeholder="qty"  [(ngModel)]="details.minorderqty">
+                        <md-form-field class="wd-50pc">
+                            <input class="form-control" mdInput placeholder="Quantity"  [(ngModel)]="details.minorderqty">
                           </md-form-field>
-                    </div> </td> 
+                    </div> 
+                  </td> 
                 </tr>
               </tbody>
             </table>

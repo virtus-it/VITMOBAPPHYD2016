@@ -44,7 +44,7 @@ export class SupplierComponent implements OnInit {
 
   editSupplier(Details){
     let dialogRefAddSupplier = this.dialog.open(AddSupplierDailogComponent, {
-      width: '700px',
+      width: '600px',
       data: Details
 
   });

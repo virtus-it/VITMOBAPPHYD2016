@@ -9,34 +9,35 @@
             </strong>
     </div>
   </div>
-  <md-dialog-content layout="column" class="scroll">
+  <md-dialog-content layout="column" class="brd-bottom">
     <h4 class="noData">{{noDataError}}</h4>
     <div class="col-md-12 text-right" (click)="createStockPoint(Details)">
         <span><b>Add stock point</b></span>
     <i class="fa fa-plus fa-2 plus-style .navbar-right" ></i>
     </div>
 
+<div class="container-fluid">
+    <div  class="row pd-15x10 mg-0">
 
-    <div id="" class="row pd-15x10 mg-0">
-
-    <table class="table table-hover table-striped" style="table-layout:fixed">
+    <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
         <thead>
           <tr>
               
-            <th width="25%">Stockpoint</th>
+            <th width="10%">Stockpoint</th>
  
-            <th width="25%">Lat/lng</th>
+            <th width="20%" title="latitude">Lat</th>
+            <th width="20%" title="longitude">Lng</th>
 
-            <th class="" width = "25%">Address</th>
+            <th width="40%">Address</th>
            
-            <th width="25%">Action</th>
+            <th width="10%">Action</th>
            
          
           </tr>
         </thead>
 
         <tbody>
-            <tr class="container-fluid pd-15x25 brd-bottom " *ngFor="let stock of stockpoints; let i= index" >
+            <tr class="" *ngFor="let stock of stockpoints; let i= index" >
           
                
               
@@ -44,27 +45,30 @@
 
 
                 
-                  <td class="left" width="25%">
+                  <td class="left" width="10%">
                       <span>{{i+1}}</span>
                     </td>
                  
-                      <td class="left" width="25%">
-                          <span>Lat {{stock.latitude}}<br>Lng {{stock.longitude}}</span>
+                      <td class="left" width="20%">
+                          <span>{{stock.latitude}}</span>
+                        </td>
+                        <td class="left" width="20%">
+                          <span>{{stock.longitude}}</span>
                         </td>
 
-
-                        <td class="left" width = "25%">
-                          <span >Address: {{stock.address}}</span>
+                        <td class="left" width = "42%">
+                          <span class="onhovertooltip-350" title="{{stock.address}}">{{stock.address}}</span>
                           <span *ngIf="stock.address == '' || stock.address === null"> - </span>
                         </td>
-                          <td class="left" width="25%">
+                          <td class="left" width="8%">
    
                           <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier"  (click)="updateStockPoint(stock)"></i>
-                          &nbsp; &nbsp;&nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)="deleteStockPoint(stock)"></i>
+                          &nbsp;&nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)="deleteStockPoint(stock)"></i>
                         </td>
 </tr>
 </tbody>
 </table>
+</div>
 </div>
 
 
@@ -73,10 +77,11 @@
 
 
 
-
-
-
   </md-dialog-content>
+
+
+
+
 
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions>
