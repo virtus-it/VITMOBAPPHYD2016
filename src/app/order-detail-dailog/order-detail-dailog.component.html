@@ -20,7 +20,7 @@
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
-              <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
+              <small class="black capital"> <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b> <br>{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
             </div>
             <div class="col-md-7 right">
               <small>
@@ -152,12 +152,12 @@
                   </th>
                 </tr>
               </thead>
-              <tbody class="tab-heigt">
-                <h5 *ngIf="customerProductDetails.length <= 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
+              <tbody>
+                <b *ngIf="customerProductDetails.length == 0" class="warning"> There are no available cans for this customer </b>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="55%">
 
-                    <small> {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
+                    <small>{{canDetails.product.category}} {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
                   </td>
                   <td width="30%">
                     <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small>

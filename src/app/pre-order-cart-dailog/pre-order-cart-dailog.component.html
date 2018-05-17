@@ -218,7 +218,7 @@
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
                   <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged($event)" [disabled]="details.stockstatus == 'Soldout'">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">{{details.ptype}}</span>
+                  <span class="custom-control-description"><b>{{details.category}}</b> {{details.ptype}}</span>
                   </label>
               </div>
             </td>

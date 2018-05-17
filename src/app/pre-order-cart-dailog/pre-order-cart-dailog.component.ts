@@ -111,7 +111,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     "received_amt":"","total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
     "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "reason":"reason"}
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "reason":"reason"}
     }
     console.log(data);
 
@@ -469,7 +469,7 @@ createPreOrder(){
   "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
   "cart_style":"new",
-  "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge":this.createPreOrderInput.productDetails.servicecharge,
+  "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),
   "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
@@ -489,8 +489,9 @@ createPreOrder(){
   console.log("time24" , time24);
   input[0].order.slotdate = slotDate + " " + time24 ;
 
-  
-  console.log(input);
+  AuthenticationService.showLog("Create Order input : ");
+
+  AuthenticationService.showLog(JSON.stringify(input));
   this.orderLandingService.createPreOrder(input)
   .subscribe(
     output => this.createPreOrderResult(output,input),
@@ -505,7 +506,8 @@ createPreOrder(){
 // }
 }
 createPreOrderResult(result,input) {
-  //console.log(result);
+  AuthenticationService.showLog("Create Order output : ");
+  AuthenticationService.showLog(result);
   if(result.result=='success'){
     let productid= "";
     let productName= "";
