@@ -110,11 +110,11 @@
             </td>
           </tr>
         </tbody>
-      
+      <br>
               <h4 class="warning  capitalize center">
                 <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="OrdersClickMore">
                   <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a></h4>
-               <h4><span *ngIf="!OrdersClickMore">Record Not Available</span>
+               <h4 class="warning center" *ngIf="!OrdersClickMore" ><span class="fa fa-frown-o"></span> Record Not Available
               </h4>
         
       </table>

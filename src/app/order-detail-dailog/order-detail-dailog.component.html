@@ -152,8 +152,8 @@
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <b *ngIf="customerProductDetails.length <= 0" class="warning"> There are no available cans for this customer </b>
+              <tbody class="tab-heigt">
+                <h5 *ngIf="customerProductDetails.length <= 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="55%">
 

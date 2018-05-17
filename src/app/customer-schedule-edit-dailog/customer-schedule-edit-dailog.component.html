@@ -9,24 +9,24 @@
   </div>
 </div>
 <div>
-  <div id="" class="row pd-15 mg-0 brd-bottom">
+  <div id="" class="container-fluid pd-15x25 brd-bottom">
     <md-dialog-content layout="column">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
             <th width="20%">Product Type</th>
-            <th width="10%">Quantity</th>
-            <th width="14%">Schedule</th>
+            <th width="6%" title="Quantity">Qty</th>
+            <th width="18%">Schedule</th>
             <!-- <th width="">Created By</th> -->
             <th width="12%">Expected Time</th>
-            <th width="10%" class="no-th-arrow">Action</th>
+            <th width="8%" class="no-th-arrow">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let schedule of scheduleOrdersList">
-            <td class="left">{{schedule.product_type}} {{schedule.product_quantity}}</td>
+            <td class="left"><span class="onhovertooltip-200" title="{{schedule.product_type}} {{schedule.product_quantity}}">{{schedule.product_type}} {{schedule.product_quantity}}</span></td>
             <td class="left">{{schedule.quantity}} </td>
-            <td class="left">{{schedule.weekdays}} {{schedule.days}}</td>
+            <td class="left"><span class="onhovertooltip-250" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span></td>
             <!-- <td class="left" *ngIf="schedule">{{}}</td> -->
             <td class="left">{{schedule.delivery_exceptedtime}}</td>
             <td class="left">
@@ -35,11 +35,14 @@
             </td>
         </tbody>
       </table>
-      <tr *ngIf="noRecord">
+<br>
+      
           <h4 class="warning oneline center">
+              <a *ngIf="noRecord">
             <i aria-hidden="true" class="fa fa-frown-o"></i>
-            Record Not Available</h4>
-    </tr>
+
+                      Record Not Available</a> </h4>
+    
 
     </md-dialog-content>
   </div>
