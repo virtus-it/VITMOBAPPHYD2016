@@ -111,7 +111,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     "received_amt":"","total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
     "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "reason":"reason"}
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason"}
     }
     console.log(data);
 
@@ -462,7 +462,7 @@ createPreOrder(){
   //console.log(this.createPreOrderInput);
   
   let input =[{"order":
-  {"paymentmode":"cash","orderstatus":"ordered",  "quantity": this.createPreOrderInput.productDetails.quantity ,"total_items":this.createPreOrderInput.productDetails.quantity,
+  {"paymentmode":"cash","orderstatus":"ordered",  "quantity": this.createPreOrderInput.productDetails.quantity , "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "total_items":this.createPreOrderInput.productDetails.quantity,
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
   "product_quantity":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname, 

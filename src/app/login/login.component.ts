@@ -142,7 +142,7 @@ export class LoginComponent implements OnInit {
 
 
       getSupplier() {
-        let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() }; 
+        let input = { "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() , "transtype":"website"}; 
         this.distributorService.getAllSuppliers(input)
           .subscribe(
           output => this.getSupplierResult(output),

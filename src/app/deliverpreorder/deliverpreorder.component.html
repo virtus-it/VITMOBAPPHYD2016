@@ -66,11 +66,15 @@
 
    
         <div class="p-2">
-            <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+            <span>Exp del chgs<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
             </div>
             <div class= "p-2">
-            <span>Service charges<br><b>{{Detail.order.servicecharge}}</b></span>
+            <span>Serv chgs<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
           </div>
+          <div class= "p-2">
+            <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
+          </div>
+
       <div class="p-2">
         <md-form-field class="wd-50">
           <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
@@ -84,11 +88,16 @@
 
       <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='credit'">
           <div class="p-2">
-              <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+              <span>Exp del chgs<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
               </div>
               <div class= "p-2">
-              <span>Service charges<br><b>{{Detail.order.servicecharge}}</b></span>
+              <span>Serv chgs<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
               </div>
+
+              <div class= "p-2">
+                <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
+              </div>
+
               <div class= "p-2">
                   <span>Amount<br><b>{{Detail.order.total_amt}}</b></span>
                 </div>

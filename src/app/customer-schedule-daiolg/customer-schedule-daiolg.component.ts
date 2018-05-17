@@ -50,6 +50,40 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   cbFri: boolean = false;
   cbSat: boolean = false;
   cbSun: boolean = false;
+
+
+
+  cb1: boolean = false;
+  cb2: boolean = false;
+  cb3: boolean = false;
+  cb4: boolean = false;
+  cb5: boolean = false;
+  cb6: boolean = false;
+  cb7: boolean = false;
+  cb8: boolean = false;
+  cb9: boolean = false;
+  cb10: boolean = false;
+  cb11: boolean = false;
+  cb12: boolean = false;
+  cb13: boolean = false;
+  cb14: boolean = false;
+  cb15: boolean = false;
+  cb16: boolean = false;
+  cb17: boolean = false;
+  cb18: boolean = false;
+  cb19: boolean = false;
+  cb20: boolean = false;
+  cb21: boolean = false;
+  cb22: boolean = false;
+  cb23: boolean = false;
+  cb24: boolean = false;
+  cb25: boolean = false;
+  cb26: boolean = false;
+  cb27: boolean = false;
+  cb28: boolean = false;
+  cb29: boolean = false;
+  cb30: boolean = false;
+  cb31: boolean = false;
   updateSchedule = [];
   product = false;
   message = "";
@@ -118,6 +152,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
           }
         };
       }
+      this.loaderService.display(true);
       //this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
       //console.log(input);
       this.customerservice.createSchedule(input)
@@ -125,7 +160,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
           output => this.createScheduledaysResult(output),
           error => {
             //console.log("error in create schedule");
-            this.loaderService.display(false);
+            
           });
     }
     // else{
@@ -136,6 +171,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   createScheduledaysResult(result) {
     //console.log(result)
     if (result.result == "success") {
+      this.loaderService.display(false);
       this.createSchedule = result.data;
       this.thisDialogRef.close('success');
     }
@@ -201,6 +237,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
           }
         };
       }
+      this.loaderService.display(true);
       // this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
 
       AuthenticationService.showLog("update schedule input")
@@ -222,6 +259,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   UpdateScheduleResult(result) {
     if (result.result == "success") {
       this.updateSchedule = result.data;
+      this.loaderService.display(false);
       this.thisDialogRef.close("success");
     }
   }
@@ -249,7 +287,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     if (this.Detail.data.dealers) {
       input.delearId = this.Detail.data.dealers.user_id;
     }
-    else if (this.Detail.data) {
+    else if (this.Detail.data && this.Detail.data.dealerid) {
       input.delearId = this.Detail.data.dealerid;
 
     }
@@ -262,7 +300,6 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         output => this.getProductsListResult(output),
         error => {
           //console.log("error in distrbutors");
-          this.loaderService.display(false);
         });
 
   }
@@ -270,6 +307,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   getProductsListResult(result) {
     //console.log("distributor products list", result);
     if (result.result == 'success') {
+      this.loaderService.display(false);
       let productListCopy = [];
       let filteredArray = [];
       _.each(result.data.products, function (i, j) {
@@ -497,9 +535,16 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   }
 
   minQuantity(product, event) {
-    this.eventQuantity = event.value.default_qty;
+
+    if(event.value.minorderqty){
+    this.eventQuantity = event.value.minorderqty;
     this.scheduleInput.productQuantity = this.eventQuantity;
   }
+  else{
+    this.eventQuantity = event.order.default_qty;
+    this.scheduleInput.productQuantity = this.eventQuantity;
+  }
+}
 
   validateScheduleDays() {
     if(this.Detail.data.scheduletype){
@@ -531,78 +576,74 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         }
       }
     } else if (this.Detail.data.scheduletype.toLowerCase() == 'days') {
-      // if (this.Detail.data.days) {
-      //   let days = this.Detail.data.days
-      //   AuthenticationService.showLog(days);
-      //   if (days.indexOf('') != -1) {
-      //     this.cb1 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb2 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb3 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb4 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb5 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb6 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb7 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb8 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb9 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb10 = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }if (days.indexOf('') != -1) {
-      //     this.cb = true;
-      //   }
-      //
-      // }
+      if (this.Detail.data.days) {
+        let days = this.Detail.data.days
+        AuthenticationService.showLog(days);
+        if (days.indexOf('1') != -1) {
+          this.cb1 = true;
+        }if (days.indexOf('2') != -1) {
+          this.cb2 = true;
+        }if (days.indexOf('3') != -1) {
+          this.cb3 = true;
+        }if (days.indexOf('4') != -1) {
+          this.cb4 = true;
+        }if (days.indexOf('5') != -1) {
+          this.cb5 = true;
+        }if (days.indexOf('6') != -1) {
+          this.cb6 = true;
+        }if (days.indexOf('7') != -1) {
+          this.cb7 = true;
+        }if (days.indexOf('8') != -1) {
+          this.cb8 = true;
+        }if (days.indexOf('9') != -1) {
+          this.cb9 = true;
+        }if (days.indexOf('10') != -1) {
+          this.cb10 = true;
+        }if (days.indexOf('11') != -1) {
+          this.cb11 = true;
+        }if (days.indexOf('12') != -1) {
+          this.cb12 = true;
+        }if (days.indexOf('13') != -1) {
+          this.cb13 = true;
+        }if (days.indexOf('14') != -1) {
+          this.cb14 = true;
+        }if (days.indexOf('15') != -1) {
+          this.cb15 = true;
+        }if (days.indexOf('16') != -1) {
+          this.cb16 = true;
+        }if (days.indexOf('17') != -1) {
+          this.cb17 = true;
+        }if (days.indexOf('18') != -1) {
+          this.cb18 = true;
+        }if (days.indexOf('19') != -1) {
+          this.cb19 = true;
+        }if (days.indexOf('20') != -1) {
+          this.cb20 = true;
+        }if (days.indexOf('21') != -1) {
+          this.cb21 = true;
+        }if (days.indexOf('22') != -1) {
+          this.cb22 = true;
+        }if (days.indexOf('23') != -1) {
+          this.cb23 = true;
+        }if (days.indexOf('24') != -1) {
+          this.cb24 = true;
+        }if (days.indexOf('25') != -1) {
+          this.cb25 = true;
+        }if (days.indexOf('26') != -1) {
+          this.cb26 = true;
+        }if (days.indexOf('27') != -1) {
+          this.cb27 = true;
+        }if (days.indexOf('28') != -1) {
+          this.cb28 = true;
+        }if (days.indexOf('29') != -1) {
+          this.cb29 = true;
+        }if (days.indexOf('30') != -1) {
+          this.cb30 = true;
+        }if (days.indexOf('31') != -1) {
+          this.cb31 = true;
+        }
+      
+      }
 
     }
     AuthenticationService.showLog(this.scheduleInput.weekdays);
@@ -615,6 +656,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     AuthenticationService.showLog("Edit Schedule details ")
     console.log(this.Detail);
     this.getProductsList();
+    if(this.Detail.type == 'update'){
     this.validateScheduleDays();
   }
+
+}
 }

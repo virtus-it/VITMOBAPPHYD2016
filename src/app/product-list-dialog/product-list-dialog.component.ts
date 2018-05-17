@@ -68,6 +68,7 @@ getProductsResult(output) {
 
     this.listOfProducts = output.data;
     
+    
   }
 
 }

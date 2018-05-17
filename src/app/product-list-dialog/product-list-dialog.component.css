@@ -32,3 +32,11 @@ table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
 .warn{
   color:red;
 }
+
+.success{
+  color: green;
+}
+
+.blue{
+color: skyblue;
+}
