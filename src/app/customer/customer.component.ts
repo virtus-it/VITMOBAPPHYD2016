@@ -44,7 +44,7 @@ export class CustomerComponent implements OnInit {
         { value:'paymenttype', viewValue:'Payment Mode'},
         {value: 'customertype' , viewValue:'Customer Type'},
         { value: 'followupdate', viewValue: 'Followup Date' }
-        
+
     ];
     // showOrderList(data) {
     //     let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
@@ -60,14 +60,14 @@ export class CustomerComponent implements OnInit {
 
     showCustomerAllOrders(orderData) {
         let formatteddata:any = {"type":"customersPage", "data":orderData }
-        let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
+        let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent,{
             width: '95%',
             data: formatteddata
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
         });
-    
+
     }
 
 
@@ -159,7 +159,7 @@ export class CustomerComponent implements OnInit {
             //console.log(`Dialog closed: ${result}`);
             if(result == "success"){
                 this.getCustomerList(true);
-            
+
             }
 
         });
@@ -219,7 +219,7 @@ if(result == "success"){
             if (lastCustomer) {
                 input.lastId = lastCustomer.userid;
             }
-            
+
         }
         else {
             this.customerList = [];
@@ -253,9 +253,9 @@ if(result == "success"){
         this.filterInput.root.searchtext = "";
     }
     getCustomerByFilter(firstcall) {
-       
-        
-        
+
+
+
         if (this.filterInput.root.searchtype == 'followupdate') {
             this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
 
@@ -339,7 +339,7 @@ if(result == "success"){
         this.followUpdate = null;
         this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
         this.getCustomerList(true);
-      
+
       }
 
       setPrice(details){
@@ -352,9 +352,9 @@ if(result == "success"){
         if(result == "success"){
             this.getCustomerList(true);
 
-            
+
         }
-       
+
     });
       }
 

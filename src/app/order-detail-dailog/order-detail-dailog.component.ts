@@ -133,6 +133,7 @@ getOrderDetailsById() {
 getOrderDetailsByIdResult(result) {
     this.loaderService.display(false);
     console.log(result);
+    console.log("getOrderDetails");
     if (result.data && result.data.length > 0) {
         this.dailogOrderDetails = result.data[0];
         if (this.dailogOrderDetails .status == "onhold") {
@@ -191,6 +192,9 @@ getProductsListByCustomerId() {
 
 }
 getProductsListByCustomerIdResult(result) {
+    AuthenticationService.showLog(result);
+    AuthenticationService.showLog("stock data");
+
     this.loaderService.display(false);
     this.customerAddressDetails =result.data.user.address;
     if (result.data.user.stock && result.data.user.stock.length > 0) {

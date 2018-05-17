@@ -9,7 +9,7 @@
             Orders</a>
         </div>
         <div class="col-3">
-         
+
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ALL ORDERS </button>
           <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
@@ -311,19 +311,19 @@
               <td width="30%">
                 <div class="row pd-top-0">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
-                    <label class="td-label"> 
+                    <label class="td-label">
                       <div class="row">
                       <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
                       <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
                     </div>
                     </label>
-            
-                
+
+
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
 
-                    
+
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
@@ -333,21 +333,21 @@
                       title="Moya Customer"></i>
 
                       <i class="fa fa-frown-o red" title="Revert" *ngIf="forward.status == 'backtodealer'"></i>
-                    <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label> 
+                    <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label>
                     <!-- assign button -->
                     <br>
                   </div>
                 </div>
               </td>
 
-   
 
-      
 
-              
-                
-      
-                
+
+
+
+
+
+
                 <td width="10%" >
                 <div class="row ">
                     <div class="col-sm-12  col-md-12  col-lg-12  left">
@@ -359,7 +359,7 @@
                    </div>
                     </div>
                   </div></td>
-                  
+
 
             </tr>
 
@@ -371,7 +371,7 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name</span>
                       <br>
-                      <b class="capitalize">{{forward.brandname}} </b>
+                      <b class="capitalize"><b>{{forward.productdetails.category}}</b> {{forward.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -414,7 +414,7 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
-                      
+
                     <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
                     <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
@@ -474,7 +474,7 @@
                         Promo Code
                       </span> <br>
                       <b  *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
-                      <b class="" *ngIf="forward.user_reference_code === null"> - </b> 
+                      <b class="" *ngIf="forward.user_reference_code === null"> - </b>
                     </div>
                 </div>
 
@@ -486,7 +486,7 @@
                     <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
 
                   </div>
-                 
+
                 </div>
               </td>
 
@@ -543,7 +543,7 @@
                       <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                     </div>
                   </div>
-                
+
 
                   <div class="float-right">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
@@ -571,20 +571,20 @@
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
                 <td width="10%" >
-                
+
                 <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                 [thresholds]="thresholdConfig"
-                [type]="gaugeType" 
+                [type]="gaugeType"
                 [value]= 'forward.timeRemaining'
-                [label]="gaugeLabel"  
+                [label]="gaugeLabel"
                 [append]="gaugeAppendText"
                 [min]= 'guageMinimum'
                 [max] = 'guageMaximum'
                 [size]='130'
                 [backgroundColor]="guageBackGround"
-                
+
                 >
-               
+
                 </ngx-gauge>
 
                 <b *ngIf="forward.timeRemaining < -24 && forward.status != 'delivered' " class="red" >{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
@@ -594,7 +594,7 @@
 
                 -->
 
-               
+
               </td>
 
 
@@ -609,9 +609,9 @@
                 </h5>
                 <h4 *ngIf="!forwardClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-          
 
-        
+
+
       </div>
       <div *ngIf="tabPanelView === 'allorder'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -678,7 +678,7 @@
                     <br>
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      
+
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
@@ -717,7 +717,7 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name </span>
                       <br>
-                      <b class="capitalize">{{allorder.brandname}} </b>
+                      <b class="capitalize"><b>{{allorder.productdetails.category}}</b> {{allorder.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -809,9 +809,9 @@
                           Promo Code
                         </span> <br>
                         <b  *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
-                        <b class="" *ngIf="allorder.user_reference_code === null"> - </b> 
+                        <b class="" *ngIf="allorder.user_reference_code === null"> - </b>
                       </div>
-  
+
                   </div>
                   <div class=" row ">
                     <div class="col left">
@@ -826,7 +826,7 @@
 
                     </div>
 
-                    
+
 
                   </div>
                 </div>
@@ -874,7 +874,7 @@
                     <div class="row" *ngIf != 'superDealer'>
                           <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
                               <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) "> 
+                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
                                 <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
                         </div>
 
@@ -885,12 +885,12 @@
 
 
              <td width="10%"  >
-                
+
                 <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
-                [type]="gaugeType" 
+                [type]="gaugeType"
                 [value]= 'allorder.timeRemaining'
-                [label]="gaugeLabel"  
+                [label]="gaugeLabel"
                 [append]="gaugeAppendText"
                 [min]= 'guageMinimum'
                 [max] = 'guageMaximum'
@@ -901,8 +901,8 @@
 
                 <b *ngIf="allorder.timeRemaining < -24 && allorder.status != 'delivered' " class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
                 <b *ngIf="allorder.timeRemaining > 24 && allorder.status != 'delivered'"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
-                
-               
+
+
               </td>
 
             </tr>
@@ -915,8 +915,8 @@
                 </h5>
                 <h4 *ngIf="!orderClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-          
-        
+
+
       </div>
       <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -946,7 +946,7 @@
 
                     </label>
                   </div>
-          
+
                   <div class="col-sm-2  col-md-2  col-lg-2 right" *ngIf="complete.status != 'delivered'" (click)='editQuanity(complete)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
@@ -975,13 +975,13 @@
                       <div class="row">
                       <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
                     <b class="col-10 rightbtn" class=" capitalize onhovertooltip-150" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
-                  </div>  
+                  </div>
                   </label>
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
-                    
+
                     <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
                       title="Express Delivery"></i>
                     <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
@@ -1011,7 +1011,7 @@
                       </label>
                   <i class="fa fa-minus logo-color fs-18 none"></i>
                   <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-  
+
                 </td> -->
 
             </tr>
@@ -1032,7 +1032,7 @@
                       <b class="pdright-5">{{complete.quantity}}</b>
                     </div>
 
-                    
+
                   </div>
 
                   <div class="row form-group">
@@ -1128,9 +1128,9 @@
                         Promo Code
                       </span> <br>
                       <b  *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
-                      <b class="" *ngIf="complete.user_reference_code === null"> - </b> 
+                      <b class="" *ngIf="complete.user_reference_code === null"> - </b>
                     </div>
-                  
+
                 </div>
 
                 <div class="row">
@@ -1143,7 +1143,7 @@
                   </div>
 
 
-               
+
 
 
 
@@ -1221,30 +1221,30 @@
               </td>
 
               <td width="10%"  >
-              
-                 
-                
+
+
+
                 <ngx-gauge *ngIf="complete.status != 'delivered'  &&   -24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
-                [type]="gaugeType" 
+                [type]="gaugeType"
                 [value]= 'complete.timeRemaining'
-                [label]="gaugeLabel"  
+                [label]="gaugeLabel"
                 [append]="gaugeAppendText"
                 [min]= 'guageMinimum'
                 [max] = 'guageMaximum'
                 [size]='130'
                 [backgroundColor]="guageBackGround"
-               
-               
+
+
                 >
                 </ngx-gauge>
 
                 <b *ngIf="complete.timeRemaining < -24 && complete.status != 'delivered' " class="red" >{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
                 <b *ngIf="complete.timeRemaining > 24 && complete.status != 'delivered'"  class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
-               
+
               </td>
 
-            
+
             </tr>
           </tbody>
         </table>
@@ -1257,9 +1257,9 @@
 
                 <h4 *ngIf="!completeClickMore" class="warning center">
                   <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-              
 
-      
+
+
       </div>
     </div>
 

@@ -863,6 +863,8 @@ export class OrderLandingComponent implements OnInit {
     }
   this.showFilterDailog =false;
 let input = this.globalFilterInput;
+AuthenticationService.showLog("Search Input");
+AuthenticationService.showLog(JSON.stringify(input));
 this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getGlobalFilteredOrdersResult(output),
@@ -872,6 +874,7 @@ this.orderLandingService.getOrdersByfilter(input)
   
 }
   getGlobalFilteredOrdersResult(result) {
+    AuthenticationService.showLog(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       if(this.tabPanelView == 'complete'){
