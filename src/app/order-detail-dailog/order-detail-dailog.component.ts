@@ -325,7 +325,7 @@ saveMobileSmsResult(result) {
 
 getTemplates(data){
     let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
-        width: '900px',
+        width: '600px',
         data: data
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {

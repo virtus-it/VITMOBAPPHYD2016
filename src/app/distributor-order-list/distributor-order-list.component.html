@@ -3,7 +3,7 @@
       <i class="fa fa-file-text-o"></i>  
       Order List
   </div>
-  <div class="col">
+  <div class="col-7">
   <span *ngIf="Detail.type=='distributorOrder'" class="capitalize"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</span> 
   <span *ngIf="Detail.type=='distributorOrder'">  -  {{Detail.data.distributor.mobileno}}</span>
   <span *ngIf="Detail.type=='distributorOrdersfromCoverage'" class="capitalize"> Dist Name : {{Detail.distributorName}} </span>
@@ -16,25 +16,27 @@
 </div>
 
   <md-dialog-content layout="column">
-      <div class="row pd-15x25 brd-bottom">
+      <div class="pd-15x25 brd-bottom">
+        
+        
               <div class="col scroll">    
                   <table class="table table-hover table-striped  table-fixedheader">
                     <thead>
                       <tr>
-          <th width="8%">Id</th>
-          <th width="12%">Product </th>
-          <th width="6%">Qty</th>
-          <th width="10%">Cost,Exp,Serv</th>
+          <th width="6%">Id</th>
+          <th width="10%">Product </th>
+          <th width="4%" title="Quantity">Qty</th>
+          <th width="10%" title="Cost, Express Delivery Charge, Service Charge">Cost,Exp,Serv</th>
           
-          <th width="8%">Status</th>
+          <th width="10%">Status</th>
           <th width="6%">Mode</th>
           <th width="8%">Amount</th>
-          <th class="" width="7%">Ret Qty</th>
+          <th class="" width="7%" title="Return Quantity">Ret Qty</th>
           <!-- <th class="" width="9%">Serv chgs</th>
           <th class="" width="9%">Exp del chgs</th> -->
-          <th class="" width="9%">Received amt</th>
-          <th class="" width="13%">Ctd Date</th>
-          <th class="" width="13%">Del Date</th>
+          <th class="" width="8%" title="Recive Amount">Recv Amt</th>
+          <th class="" width="14%">Created Date</th>
+          <th class="" width="14%">Delivery Date</th>
           <!-- <th class="" width="5%">Flw up</th>
           <th class="" width="5%">Address</th>
            -->
@@ -46,10 +48,10 @@
       </thead>
       <tbody>
           <tr  *ngFor= "let supplierOrder of SupplierOrderList" >
-          <td width="8%" class="left" class="cellpadding" scope="row"> #{{supplierOrder.order_id}}</td>
-          <td width="12%" class="left" class="cellpadding" scope="row"> {{supplierOrder.brandname}}</td>
-          <td width="6%" class="left" class="cellpadding" scope="row"> {{supplierOrder.quantity}}</td>
-          <td width="10%" class="left" class="cellpadding" scope="row">
+          <td width="6%" class="left cellpadding"  scope="row">#{{supplierOrder.order_id}}</td>
+          <td width="10%" class="capitalize left cellpadding"  scope="row"> <span class="onhovertooltip-100" title="{{supplierOrder.brandname}}">{{supplierOrder.brandname}}</span></td>
+          <td width="4%" class="left cellpadding"  scope="row"><span class="text-info">{{supplierOrder.quantity}}</span></td>
+          <td width="10%" class="left cellpadding"  scope="row">
 <span>{{supplierOrder.prod_cost}}</span> , 
 <span *ngIf="supplierOrder.expressdeliverycharges == 0 || supplierOrder.expressdeliverycharges === null ||  supplierOrder.expressdeliverycharges == '' ">-</span>
 <span *ngIf="supplierOrder.expressdeliverycharges > 0 ">{{supplierOrder.expressdeliverycharges}}</span> , 
@@ -57,13 +59,13 @@
 <span *ngIf="supplierOrder.servicecharges > 0 ">{{supplierOrder.servicecharges}}</span>
 </td> 
                                
-          <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.status}}</td>
-          <td width="6%" class="left" class="cellpadding" scope="row">{{supplierOrder.paymenttype}}</td>
-          <td width="8%" class="left" class="cellpadding" scope="row">{{supplierOrder.bill_amount}}</td>    
-          <td width="7%" class="left" class="cellpadding" scope="row">
+          <td width="11%" class="left capitalize cellpadding" scope="row"><span class="text-warning">{{supplierOrder.status}}</span></td>
+          <td width="6%" class="left capitalize cellpadding" scope="row"><span class=" text-info">{{supplierOrder.paymenttype}}</span></td>
+          <td width="8%" class="left cellpadding" scope="row"><span class=" text-danger">{{supplierOrder.bill_amount}}</span></td>    
+          <td width="7%" class="left cellpadding"  scope="row"><span class="text-success">
           <span *ngIf="supplierOrder.return_cans_count =='' || supplierOrder.return_cans_count === null"> 0 </span>
           <span *ngIf="supplierOrder.return_cans_count">{{supplierOrder.return_cans_count}} </span>
-          </td>
+          </span></td>
           <!-- <td width="8%" class="left" class="cellpadding" scope="row">
             <span *ngIf="supplierOrder.servicecharges == '' || supplierOrder.servicecharges === null"> 0 </span>
             <span *ngIf="supplierOrder.servicecharges">{{supplierOrder.servicecharges}}</span>            
@@ -71,13 +73,13 @@
           <td width="13%" class="left" class="cellpadding" scope="row">
               <span *ngIf="supplierOrder.expressdeliverycharges == '' || supplierOrder.expressdeliverycharges === null"> 0 </span>
               <span *ngIf="supplierOrder.expressdeliverycharges">{{supplierOrder.expressdeliverycharges}}</span></td> -->
-          <td width="9%" class="left" class="cellpadding" scope="row">
+          <td width="8%" class="left cellpadding" scope="row"><span class="text-success">
             <span *ngIf="supplierOrder.receivedamount == '' || supplierOrder.receivedamount === null"> 0 </span>
             <span *ngIf="supplierOrder.receivedamount > 0">{{supplierOrder.receivedamount}} </span> 
-            </td>
+            </span></td>
 
-            <td class="" width="13%">{{supplierOrder.ordered_date | utcDate}}</td>
-            <td class="" width="13%">{{supplierOrder.order_delivereddate | utcDate}}</td>
+            <td class="" width="14%"><span class="gray6">{{supplierOrder.ordered_date | utcDate}}</span></td>
+            <td class="" width="14%"><span class="gray6">{{supplierOrder.order_delivereddate | utcDate}}</span></td>
             <!-- <td class="" width="13%">
 
 

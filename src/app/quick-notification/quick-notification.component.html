@@ -1,5 +1,5 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-md-4 col-sm-4">
+  <div class="col-md-10 col-sm-10">
       <i _ngcontent-c5="" aria-hidden="true" class="fa fa-send-o"></i>  Quick Notifications</div>
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()">
@@ -7,12 +7,13 @@
     </strong>
   </div>
 </div>
+
+
 <md-dialog-content layout="column">
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
 
-      
-        <md-form-field class="example-full-width">
+        <md-form-field class="wd-100pc">
             <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl">
             <md-autocomplete #auto="mdAutocomplete">
               <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name"> 
@@ -20,15 +21,13 @@
               </md-option>
             </md-autocomplete>
           </md-form-field>
-
+              <md-form-field class="wd-100pc">
+                  <textarea class="form-control" mdInput placeholder="Template Description" name="body" [(ngModel)]="filterType.template_desc"></textarea>
+                </md-form-field>
          
-
-          <textarea class="form-control" mdInput placeholder="Template Description" name="body" [(ngModel)]="filterType.template_desc" ></textarea>
-
-    </div>
-
- 
-  </form>
+</div>
+</form>
+  
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">

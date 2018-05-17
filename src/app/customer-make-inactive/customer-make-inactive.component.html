@@ -16,11 +16,11 @@
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div *ngIf="customerDetails.isactive == '1'" class="center">
-        <h5 class="warning center align-self-center">Are You Sure You Want To De-Activate The Customer ? </h5>
+        <h5 class="warning center align-self-center"><span class="fa fa-user-times"></span> Are You Sure You Want To De-Activate The Customer ? </h5>
       </div>
 
       <div *ngIf="customerDetails.isactive == '0'" class="center">
-          <h5 class="warning center align-self-center">Are You Sure You Want To Activate The Customer ? </h5>
+          <h5 class="warning center align-self-center"><span class="fa fa-user-plus"></span> Are You Sure You Want To Activate The Customer ? </h5>
         </div>
 
     </div>

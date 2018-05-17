@@ -13,11 +13,18 @@
   --white:#fff;
   --gray157:#f1f5f7;
   --success:#28a745;
+  --red:#FF0000;
   }
 /* .custom-control-input:checked~.custom-control-indicator{
   background: var( --logo-color) !important;
   color: var( --white) !important;
 } */
+.wd-96pc{
+  width: 96%;
+}
+.red{
+  color: var( --red) !important;
+}
 .btn-link{
   color: var( --logo-color) !important;
 }
@@ -97,6 +104,27 @@ table thead {
 }
   .onhovertooltip-200{
     width:200px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-250{
+    width:250px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-350{
+    width:350px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-400{
+    width:400px;
    text-overflow: ellipsis;
     white-space: nowrap;
   overflow: hidden;
@@ -302,7 +330,7 @@ background: transparent;
   padding-top: 15px;
 }
 .warning{
-  color:var( --warning);
+  color:var( --warning) !important;
 }
 .capitalize{
   text-transform: capitalize;
@@ -367,6 +395,9 @@ background: transparent;
 }
 .wd-100pc{
   width: 100%;
+}
+.wd-90pc{
+  width: 90%;
 }
 .full-width, .wd-100pc{
   width: 100%;
@@ -858,3 +889,10 @@ vertical-align: middle;
   z-index: 9999;
   opacity: .8;
 } */
+
+.font-12px{
+  font-size: 12px;
+}
+.gray6{
+  color:var( --gray6) !important; 
+}

@@ -48,7 +48,7 @@ export class SupplierOrderListComponent implements OnInit {
     if (result.result == "success") {
 
       this.SupplierOrderList = result.data;
-      this.ordersClickMore = false;
+      this.ordersClickMore = true;
     }
     else{
       this.ordersClickMore = false;

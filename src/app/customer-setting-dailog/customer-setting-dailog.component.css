@@ -2,3 +2,11 @@
     color: currentColor;
     margin-bottom: 10px;
 }
+.disp-init{
+    
+        display: initial !important;
+}
+.mgtopbtm-10x15{
+    margin-bottom: 15px;
+    margin-top: 10px;
+}

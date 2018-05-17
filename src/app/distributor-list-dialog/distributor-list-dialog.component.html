@@ -12,7 +12,7 @@
 
     <md-dialog-content layout="column">
         <nav class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10">
-            <p class="col-xs-4 col-sm-4 col-md-4 col-lg-4"></p>
+            <p class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></p>
             <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
               (click)="showTabPanel('suppliers')">Suppliers</a>
             <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'distributors'}" href="javascript:void(0)"
@@ -23,14 +23,16 @@
             <!-- <a class="left" type=checkbox value=autoassign>Auto-assign</a> -->
           </nav>
         <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'suppliers'">
-            <table class="table table-hover table-fixedheader">
-                <div class="row">
-                    <div class="col-md-10  col-sm-10  col-lg-10">
-                        <md-form-field class="example-full-width wd-100pc">
-                            <input mdInput class="form-control" placeholder="Search Name" [(ngModel)]="searchSupplierTerm"  (ngModelChange) = "searchSupplier()" name="searchSupplierTerm">
-                          </md-form-field>
-                        </div> 
-                        </div>
+            <span class="fa fa-search"></span>
+                                
+            <md-form-field class="wd-96pc">                          
+                <input mdInput class="form-control" placeholder="Search Name" [(ngModel)]="searchSupplierTerm"  (ngModelChange) = "searchSupplier()" name="searchSupplierTerm">
+              </md-form-field>
+          <table class="table table-hover table-fixedheader">
+     
+            
+               
+                        
         <thead>
           <tr>
             <th width="30%">Name</th>
@@ -57,11 +59,11 @@
            </tr>
         </tbody>
       </table>
-      <div class="form-checkbox form-checkbox-inline assign-style logo-color" *ngIf="tabPanelView =='suppliers'">
+      <div class="form-checkbox form-checkbox-inline assign-style" *ngIf="tabPanelView =='suppliers'">
           <label class="custom-control custom-checkbox mb-4 mr-sm-4 mb-sm-4">
             <input type="checkbox" class="custom-control-input" [(ngModel)]="this.autoAssign">
             <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> Auto-Assign </span>
+            <span class="custom-control-description logo-color"> Auto-Assign </span>
           </label>
         </div>
    
@@ -71,16 +73,14 @@
         <!-- <span *ngIf="this.orderDetail.supplierdetails.userid">This customer is already auto assigned to supplier</span> -->
     </div>
     <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'distributors'">
-        <table class="table table-hover table-fixedheader">
-          
-            <div class="row">
-                <div class="col-md-10  col-sm-10  col-lg-10">
-                    <md-form-field class="example-full-width wd-100pc">
-                        <input mdInput class="form-control" placeholder="Search Name" [(ngModel)]="searchDistTerm"  (ngModelChange) = "searchDistrubutors()" name="searchSupplierTerm">
-                      </md-form-field>
-                    </div> 
-                    </div>
-    <thead>
+        <span class="fa fa-search"></span>
+                <md-form-field class="example-full-width wd-96pc">
+                    <input mdInput class="form-control" placeholder="Search Name" [(ngModel)]="searchDistTerm"  (ngModelChange) = "searchDistrubutors()" name="searchSupplierTerm">
+                  </md-form-field>
+
+      <table class="table table-hover table-fixedheader">
+               
+                                 <thead>
       <tr>
         <th width="30%">Name</th>
         <th width="20%">Mobile </th>

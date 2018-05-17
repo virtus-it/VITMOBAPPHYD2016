@@ -27,6 +27,9 @@
               <small>Characters Remanining :
                   <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
                 </small>
+
+                <h5 *ngIf="this.errorMessage" class="warning center mgtop-10"> <span class="fa fa-warning"></span> Feedback cannot be less than three characters </h5>
+
             </div></div>
       </div></md-dialog-content>
       <div class="row float-right pdright-30 mgbottom-20">
@@ -34,5 +37,5 @@
             <button type="submit" class="btn-primary" md-raised-button (click)="sendFeedback()" [disabled]="!emailFormControl.valid">SEND</button>
             <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp; <br>
           </md-dialog-actions>
-          <span *ngIf="this.errorMessage"><small> Feedback cannot be less than three characters </small></span>
+          
         </div>

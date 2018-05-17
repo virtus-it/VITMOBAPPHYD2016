@@ -1,16 +1,16 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-     <strong><i class="fa fa-ban banbtn" aria-hidden="true" ></i> &nbsp; </strong>  Delete Supplier</div>
+     <strong><i class="fa fa-ban " aria-hidden="true" ></i></strong> Delete Supplier</div>
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
             </strong>
   </div>
 </div>
-<div class="align grey" >
+<div class="container-fluid brd-bottom">
   <br>
-  Are you sure you want to delete this supplier?
-</div>
+<h5 class="warning center"> <span class="fa fa-trash-o"></span> Are you sure you want to delete this supplier?</h5>
 <br>
+</div>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
       <button type="submit" class="btn-primary" md-raised-button (click)="deleteSupplier()" >YES</button>        
