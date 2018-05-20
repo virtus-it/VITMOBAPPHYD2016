@@ -386,11 +386,13 @@
                       <br>
                       <b>{{forward.prod_type}}</b>
                     </div>
+
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Payment Type </span>
+                      <span class="td-label">Product Cost </span>
                       <br>
-                      <b class="pdright-5">{{forward.paymenttype}}</b>
-                    </div>
+                      <b class="pdright-5">{{forward.prod_cost}}</b>
+                    </div> 
+                 
                   </div>
 
                   <div class="row form-group">
@@ -407,19 +409,27 @@
                     </div>
                   </div>
                   <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5  left align-self-center">
+                    <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
-                    <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <span class="td-label">Payment Type </span>
+                      <br>
+                      <b class="pdright-5">{{forward.paymenttype}}</b>
+                    </div>
+
+
+                    <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
 
                     <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
                     <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(forward)'>
+                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
+                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(forward)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                     </div>
@@ -571,8 +581,8 @@
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
                 <td width="10%" >
-
-                <ngx-gauge *ngIf="forward.status != 'delivered' &&   -24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
+<span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
+                <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType"
                 [value]= 'forward.timeRemaining'
@@ -587,13 +597,13 @@
 
                 </ngx-gauge>
 
-                <b *ngIf="forward.timeRemaining < -24 && forward.status != 'delivered' " class="red" >{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="forward.timeRemaining > 24 && forward.status != 'delivered'"  class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
+                <b *ngIf="forward.timeRemaining < -24" class="red" >{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "  class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
 
                 <!-- &&   -24 < forward.timeRemaining < 24
 
                 -->
-
+              </span>
 
               </td>
 
@@ -733,9 +743,9 @@
                       <b> {{allorder.prod_type}}</b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Payment Type </span>
+                      <span class="td-label">Product Cost</span>
                       <br>
-                      <b class="pdright-5">{{allorder.paymenttype}}</b>
+                      <b class="pdright-5">{{allorder.prod_cost}}</b>
                     </div>
                   </div>
 
@@ -753,18 +763,26 @@
                     </div>
                   </div>
                   <div class="row ">
-                    <div class="col-5 left">
+                    <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="allorder.receivedamt > 0">Rs.{{allorder.receivedamt}}</b>  -->
                     </div>
-                    <div class="col-3 center align-self-center" >
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <span class="td-label">Payment Type </span>
+                      <br>
+                      <b class="pdright-5">{{allorder.paymenttype}}</b>
+                    </div>
+
+
+                    <div class="col-sm-2  col-md-2  col-lg-2 align-self-center" >
                         <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
                         <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-4 align-self-center right">
-                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(allorder)'>
+                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
+                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;"  (click)='showOrderDetails(allorder)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                     </div>
                   </div>
@@ -885,8 +903,8 @@
 
 
              <td width="10%"  >
-
-                <ngx-gauge *ngIf="allorder.status != 'delivered'  &&   -24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
+<span *ngIf= "((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept'))">
+                <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType"
                 [value]= 'allorder.timeRemaining'
@@ -899,10 +917,10 @@
                >
                 </ngx-gauge>
 
-                <b *ngIf="allorder.timeRemaining < -24 && allorder.status != 'delivered' " class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="allorder.timeRemaining > 24 && allorder.status != 'delivered'"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
+                <b *ngIf="allorder.timeRemaining < -24" class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="allorder.timeRemaining > 24"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
 
-
+              </span>
               </td>
 
             </tr>
@@ -1042,9 +1060,9 @@
                       <b>{{complete.prod_type}}</b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Payment Type </span>
+                      <span class="td-label">Product Cost </span>
                       <br>
-                      <b class="pdright-5">{{complete.paymenttype}}</b>
+                      <b class="pdright-5">{{complete.prod_cost}}</b>
                     </div>
                   </div>
 
@@ -1063,18 +1081,26 @@
                     </div>
                     </div>
                   <div class=" row ">
-                    <div class="col-sm-5  col-md-5  col-lg-5  left align-self-center">
+                    <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
-                    <div class="col-sm-3  col-md-3  col-lg-3 center align-self-center ">
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <span class="td-label">Payment Type </span>
+                      <br>
+                      <b class="pdright-5">{{complete.paymenttype}}</b>
+                    </div>
+
+
+                    <div class="col-sm-2  col-md-2  col-lg-2 align-self-center ">
                         <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
                         <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-sm-4  col-md-4  col-lg-4 right align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" (click)='showOrderDetails(complete)'>
+                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
+                      <button class="btn btn-link btn-sm rightbtn"  style=" margin-left: -15px;" (click)='showOrderDetails(complete)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                     </div>
@@ -1223,8 +1249,8 @@
               <td width="10%"  >
 
 
-
-                <ngx-gauge *ngIf="complete.status != 'delivered'  &&   -24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
+<span *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
+                <ngx-gauge *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
                 [thresholds]="thresholdConfig"
                 [type]="gaugeType"
                 [value]= 'complete.timeRemaining'
@@ -1239,9 +1265,11 @@
                 >
                 </ngx-gauge>
 
-                <b *ngIf="complete.timeRemaining < -24 && complete.status != 'delivered' " class="red" >{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="complete.timeRemaining > 24 && complete.status != 'delivered'"  class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
+                <b *ngIf="complete.timeRemaining < -24 " class="red" >{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
+                <b *ngIf="complete.timeRemaining > 24"  class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
 
+
+              </span>
               </td>
 
 
