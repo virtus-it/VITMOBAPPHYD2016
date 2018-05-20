@@ -8,18 +8,27 @@ import { LoaderService } from './login/loader.service';
   styleUrls: ['./app.component.css']
 })
 
+
+
 export class AppComponent implements OnInit {
     constructor(public authenticationService: AuthenticationService, public  _router : Router,private loaderService: LoaderService,) { }
     title = 'app';
   showLoader: boolean =false;
   location = this._router.url;
   isSuperDealer = this.authenticationService.getSupperDelear();
+  themecolor = '#ff0000';
+
+
   
     logOut() {
         
      this.authenticationService.logout();
   }
   ngOnInit() {
+
+    // if(this.isSuperDealer == false){
+    //   <style src = '../assets/customstyle.css'> 
+    // }
 
     this.loaderService.status.subscribe((val: boolean) => {
       setTimeout(() => {

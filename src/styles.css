@@ -2,6 +2,9 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import "~font-awesome/css/font-awesome.css";
+/* @import '~@angular/material/prebuilt-themes/deeppurple-amber.css'; */
+
+
 
 :root {
   --logo-color: #0f75bc;
@@ -19,6 +22,15 @@
   background: var( --logo-color) !important;
   color: var( --white) !important;
 } */
+
+.newTheme{
+  color: whitesmoke !important;
+  background-color: red !important;
+}
+
+.newLogo{
+  color: red;
+}
 .wd-96pc{
   width: 96%;
 }
