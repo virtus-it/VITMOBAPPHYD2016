@@ -48,6 +48,7 @@ export class LoginComponent implements OnInit {
             this.getSupplier();
             this.router.navigate(['/orders']);
 
+
         }
         else {
             this.errorMsg = "Invalid Credentials";

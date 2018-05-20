@@ -12,11 +12,16 @@ import 'rxjs/add/observable/throw';
 export class AuthenticationService {
     loggedIn = false;
     isSuperDelear = true;
+    salesLogin = true;
+    manufacturerLogin = true;
     CurrentSession: any = {};
     dashBoardDetails: any = {};
     polygons:any = {};
     distributors:any = [];
     suppliers = [];
+    hideData: boolean = false;
+    sales:any = {};
+    manufacturer:any = {};
 
     constructor(private router: Router, private http: Http, @Inject('API_URL') private apiUrl: string) {
         this.loggedIn = !!localStorage.getItem('currentUser');
@@ -26,6 +31,10 @@ export class AuthenticationService {
         this.polygons = JSON.parse(localStorage.getItem('polygons'));
         this.distributors = JSON.parse(localStorage.getItem('distributors'));
         this.suppliers = JSON.parse(localStorage.getItem('suppliers'));
+        this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
+        this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
+        this.salesLogin = this.newSalesFunction();
+        
     }
     login(username: string, password: string) {
         let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload
@@ -39,6 +48,21 @@ export class AuthenticationService {
             .do(data => console.log('All: '))
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
+
+    newSalesFunction= function () {
+        try {
+            if (this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'manufacturer' || this.CurrentSession.USERTYPE == 'sales')) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch (ex) {
+            return false;
+        }
+
+    };
 
 
     getDashboardDetails(input) {
@@ -95,6 +119,39 @@ export class AuthenticationService {
         }
 
     };
+
+    salesFunction = function () {
+        try {
+            if(this.currentUser){
+               return JSON.parse(this.currentUser).USERTYPE;
+            }
+            else{
+                return 0;
+            }
+
+        }
+    catch(ex){
+        return 0;
+    }
+};
+
+manufacturerFunction = function () {
+    try {
+        if(this.currentUser){
+           return JSON.parse(this.currentUser).USERTYPE;
+        }
+        else{
+            return 0;
+        }
+
+    }
+catch(ex){
+    return 0;
+}
+};
+
+
+
 
     appType = function () {
         try {
@@ -167,6 +224,7 @@ export class AuthenticationService {
         }
 
     };
+
 
     getPolygons = function(){
         try{
