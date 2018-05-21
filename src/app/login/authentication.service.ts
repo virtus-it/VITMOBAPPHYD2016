@@ -31,8 +31,8 @@ export class AuthenticationService {
         this.polygons = JSON.parse(localStorage.getItem('polygons'));
         this.distributors = JSON.parse(localStorage.getItem('distributors'));
         this.suppliers = JSON.parse(localStorage.getItem('suppliers'));
-        this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
-        this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
+       //  this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
+       //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
         this.salesLogin = this.newSalesFunction();
         
     }
@@ -120,35 +120,35 @@ export class AuthenticationService {
 
     };
 
-    salesFunction = function () {
-        try {
-            if(this.currentUser){
-               return JSON.parse(this.currentUser).USERTYPE;
-            }
-            else{
-                return 0;
-            }
+//     salesFunction = function () {
+//         try {
+//             if(this.currentUser){
+//                return JSON.parse(this.currentUser).USERTYPE;
+//             }
+//             else{
+//                 return 0;
+//             }
 
-        }
-    catch(ex){
-        return 0;
-    }
-};
+//         }
+//     catch(ex){
+//         return 0;
+//     }
+// };
 
-manufacturerFunction = function () {
-    try {
-        if(this.currentUser){
-           return JSON.parse(this.currentUser).USERTYPE;
-        }
-        else{
-            return 0;
-        }
+// manufacturerFunction = function () {
+//     try {
+//         if(this.currentUser){
+//            return JSON.parse(this.currentUser).USERTYPE;
+//         }
+//         else{
+//             return 0;
+//         }
 
-    }
-catch(ex){
-    return 0;
-}
-};
+//     }
+// catch(ex){
+//     return 0;
+// }
+// };
 
 
 
