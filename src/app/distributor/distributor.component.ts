@@ -145,7 +145,7 @@ export class DistributorComponent implements OnInit {
         if (distributor) {
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
-                width: '85%',
+                width: '95%',
                 data: distributor
             });
             dialogRef.afterClosed().subscribe(result => {

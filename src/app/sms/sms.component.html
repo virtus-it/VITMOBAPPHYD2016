@@ -1,85 +1,61 @@
 ﻿<div class="dist-style">
-        <div class=" row justify-content-between distIcon-style">
-        <div class="col-sm-2 col-md-2 col-lg-2 ">
-            <h4 class="left"><i class="fa fa-commenting-o" aria-hidden="true"></i>  Notification</h4>
+  <div class=" row justify-content-between distIcon-style">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4 class="left">
+        <i class="fa fa-commenting-o" aria-hidden="true"></i> Notification</h4>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 right">
+      <!-- <button md-raised-button color="primary"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->
+      <a class="cursor logo-color " title=" Notification Scheduler" (click)="openSmsDialog()">
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+  <div class='pd-15'>
+    <div class="row brd-box-box" id="Preordrlist" *ngFor="let smslist of smsListDetails; let i = index" [attr.data-index]="i">
+      <div class="col-5 left bg-color-bg brd-left-5">
+        <div class="row">
+          <div class="col-6">
+           
+            <b class="left">Name: {{smslist.name}}</b>
+            <br>
+            <span class="left capital">
+              <b>Status:</b> {{smslist.status}}</span>
+            <br>
+            <span class="left capital">
+              <b>Type:</b> {{smslist.smstype}}</span>
+            <br>
+          </div>
+          <div class="col-6">
+            <span class="left">
+                <span class="fa fa-phone"></span>  <span *ngFor="let mobile of smslist.mobileno">
+               {{mobile.mobileno}} {{item}}{{i ? '' : ', '}} </span>
+              <span *ngIf="smslist.mobileno === null "> - </span>
+            </span>
+            <br>
+            <span class="left">
+              <b>Mobile Count:</b> {{smslist.mcount}}</span>
+            <br>
+            <span class="fa fa-clock-o"></span>
+            <span>{{smslist.createddate | utcDate}}</span>
+            <br>
+          </div>
         </div>
-      <div class="col-sm-2 col-md-2 col-lg-2 right">
-              <!-- <button md-raised-button color="primary"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->
-              <a class="cursor logo-color " title=" Notification Scheduler"  (click)="openSmsDialog()"><i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i></a>
-              
-            </div>
+      </div>
+      <div class="col-7 mg-top">
+        <div class="left">
+          <span class="body-bg">Body:</span>
+          <br>
+          <p class="left">{{smslist.body_desc}}</p>
         </div>
-        <div id="" class="row pd-15x10 mg-0 minheight-500">
-            <!-- <div class=" col-sm-3 col-md-3 col-lg-3 filter-style">
-                <div class="filtercol-style height-500">
-                    <label class="float-left">Filter by</label><br>
-                         <div class=" ">
-                            <md-form-field class="example-full-width">
-                              <input class="form-control" mdInput placeholder="First Name"  name="firstName">
-                              
-                            </md-form-field>
-                          </div>
-                          <div class=" form-group">
-                              <md-form-field class="example-full-width">
-                                <input class="form-control" mdInput placeholder="Mobile Number"  name="mobile">
-                               
-                              </md-form-field>
-                            </div> 
-                      <div class="input-group pd-10  ">
-                        <button md-raised-button color="primary" >
-                          <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                        </button>
-                      </div>
-                    </div>
-             </div> -->
-      <div class="col">    
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                  <th width="5%">Status</th>   
-                  <th width="5%">Type</th>                                
-                <th width="12%">Name</th>
-                <th width="6%"><i class="fa fa-mobile fs-20" aria-hidden="true"></i> <i class="fa fa-sort-numeric-asc" aria-hidden="true"></i>
-                  <!-- Mobile Count -->
-                </th>
-                <th width="38%">Body</th>
-                <th width="20%">Mobile No</th>
-                <th width="14%">Date</th>                                
-                
-              </tr>
-
-            </thead>
-            <tbody>
-              <tr id="Preordrlist" *ngFor="let smslist of smsListDetails; let i = index" [attr.data-index]="i">
-                  <td class="left">{{smslist.status}}</td>     
-                  <td class="left">{{smslist.smstype}}</td>              
-                <td class="left">{{smslist.name}}</td>                
-                <td class="left">{{smslist.mcount}}</td>
-                <td class="left">{{smslist.body_desc}}</td>
-                <td class="left">
-                  <span  *ngFor="let mobile of smslist.mobileno" >{{mobile.mobileno}} {{item}}{{i ? '' : ', '}} </span>
-                <span *ngIf="smslist.mobileno === null "> - </span>
-                </td>     
-               
-                <!-- <td class="left"> numbers</td>  -->
-                <td>{{smslist.createddate | utcDate}}</td>
-              </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                  <td colspan="8">
-                    <h4 class="warning  capitalize center">
-                      <a href="javascript:void(0);" (click)=getsmsByPaging(); *ngIf="smsClickMore">
-                        <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-                      <span *ngIf="!smsClickMore">Record Not Available</span>
-                    </h4>
-                  </td>
-                </tr>
-              </tfoot>
-
-          </table>
       </div>
-      </div>
-      </div>
-      <!-- <button md-raised-button color="primary" (click)="openSmsDialog()"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->
-      
+    </div>
+  </div>
+  <br>
+  <h4 class="warning  capitalize center">
+    <a href="javascript:void(0);" (click)=getsmsByPaging(); *ngIf="smsClickMore">
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+    <span *ngIf="!smsClickMore">Record Not Available</span>
+  </h4>
+</div>
+<!-- <button md-raised-button color="primary" (click)="openSmsDialog()"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->

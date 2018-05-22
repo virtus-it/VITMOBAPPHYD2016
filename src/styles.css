@@ -128,6 +128,13 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
+  .onhovertooltip-300{
+    width:300px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .onhovertooltip-350{
     width:350px;
    text-overflow: ellipsis;

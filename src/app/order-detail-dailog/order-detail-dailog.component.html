@@ -144,22 +144,22 @@
             <table class="table table-hover table-striped table-fixedheader">
               <thead>
                 <tr>
-                  <th width="55%">
+                  <th width="80%">
                     <small>Product Name</small>
                   </th>
-                  <th width="30%" class="">
+                  <th width="20%">
                     <small>Empty Cans</small>
                   </th>
                 </tr>
               </thead>
-              <tbody>
-                <b *ngIf="customerProductDetails.length == 0" class="warning"> There are no available cans for this customer </b>
+              <tbody class="tab-heigt center">
+                <h5 *ngIf="customerProductDetails.length == 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
-                  <td width="55%">
+                  <td width="80%">
 
-                    <small>{{canDetails.product.category}} {{canDetails.product.productname}} {{canDetails.product.product_type}} </small>
+                    <small><span class="onhovertooltip-350" title="{{canDetails.product.productname}} {{canDetails.product.product_type}}">{{canDetails.product.productname}} {{canDetails.product.product_type}}</span> </small>
                   </td>
-                  <td width="30%">
+                  <td width="20%">
                     <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small>
                     <a *ngIf="canDetails.showIcon">
                       <small>

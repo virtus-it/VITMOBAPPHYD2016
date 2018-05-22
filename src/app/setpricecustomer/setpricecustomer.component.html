@@ -18,8 +18,8 @@
                 <div class="table-scroll">
           <table class="table table-hover table-striped">
               <tbody  *ngFor="let prod of productList">
-                <tr class="border-topbottom bg-eee">
-                  <td class="" colspan="4">
+                <tr class="border-topbottom">
+                  <td class="head-color" colspan="4">
                     <b class="capital">
                       <i class="fa fa-gift" aria-hidden="true"></i>
                       Product Name : {{prod.brandName}}
@@ -31,7 +31,8 @@
                     </b>
                   </td>
                 </tr>
-                <tr class="border-topbottom bg-logo" >
+                <tr class="border-topbottom" style="background: #0f75bc;
+                color: white;">
                   <th width="56%">Type</th>
                   <th width="22%">Price per Unit</th>
                   <th width="22%">Quantity</th>

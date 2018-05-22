@@ -83,17 +83,17 @@
               <td width="40%">{{stock.modifieddate | utcDate}}</td>
             </tr>     
                </tbody>
-    
-              <tr *ngIf="noRecord">
-                <td colspan="4">
+</table>
+              <div *ngIf="noRecord">
+       
                   <h4 class="warning oneline center">
                     <i aria-hidden="true" class="fa fa-frown-o"></i>
                     Record Not Available</h4>
-                </td>
-              </tr>
+             
+              </div>
 
        
-        </table>
+      
       </div>
     </div>
   </div>
