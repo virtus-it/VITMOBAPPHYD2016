@@ -9,8 +9,8 @@ table.table-fixedheader>thead>tr:after, table.table-fixedheader>tbody>tr:after {
   clear: both;
 }
 table.table-fixedheader>tbody {
-  overflow-y: scroll !important;
-  max-height: 140px !important;
+  overflow-y: auto !important;
+  max-height: 350px !important;
 }
 table.table-fixedheader>thead {
   overflow-y: scroll;    
@@ -31,4 +31,8 @@ table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
 
 .warn{
   color:red;
+}
+
+.table {
+  margin-bottom: 0rem !important;
 }

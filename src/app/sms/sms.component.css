@@ -47,3 +47,59 @@ table thead {
   .md-dialog-container{
     height: 500px;
   }
+
+  /* here feedback adds */
+
+
+
+  .brd-box-box {
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    margin: 0px;
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 20px -6px #777;
+    border-radius: 0px;
+}
+
+.bg-color-bg{
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background: #0f75bc !important;
+  color: white;
+}
+
+p::first-letter {
+  text-transform: capitalize;
+}
+p.mgbottom-5{
+  margin-bottom: 5px !important;
+}
+
+
+.mgtop-5{
+  margin-top: 0px !important;
+}
+
+
+.brd-left-5{
+  border-left: 5px solid orange;
+}
+
+.body-bg{
+  background: var( --warning) !important;
+  color: #fff;
+  border-radius: 5px;
+  padding-left: 5px;
+  padding-bottom: 2px;
+  padding-right: 5px;
+}
+
+.mg-top{
+  margin-top: 3px;
+}
+
+p{
+  line-height: 1.2;
+  color: #666;
+}

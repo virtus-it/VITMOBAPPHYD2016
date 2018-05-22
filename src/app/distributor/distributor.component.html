@@ -19,7 +19,7 @@
                 <md-option value="mobileno">Mobile Number</md-option>
               </md-select>
             </div>
-            <div *ngIf="filterType=='name'"> 
+            <div *ngIf="filterType=='name'">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange)="searchDistributorByName()"
                   name="searchDistributorTerm">
@@ -48,8 +48,8 @@
     <div id="" class="row pd-15 mg-0">
 
       <div class="">
-          <table class="table table-hover table-striped" style="table-layout:fixed">
-              <thead>
+        <table class="table table-hover table-striped" style="table-layout:fixed">
+          <thead>
             <tr>
               <th width="20%">Name</th>
               <th width="8%" title="Customer Count">Cust Count</th>
@@ -64,79 +64,83 @@
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
               <td class="left capitalize" width="15%">
-                  <span class="onhovertooltip-200" title="{{dist.firstname}} {{dist.lastname}}">
-                <span class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></span>
-                <span class="fa fa-thumbs-down danger" *ngIf="dist.isactive == '0'"  (click)="activateDeactivateDist(dist)" title="click to activate"></span>
-                 &nbsp; &nbsp;{{dist.firstname}} {{dist.lastname}}</span></td>
+                <span class="onhovertooltip-200" title="{{dist.firstname}} {{dist.lastname}}">
+                  <span class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></span>
+                  <span class="fa fa-thumbs-down danger" *ngIf="dist.isactive == '0'" (click)="activateDeactivateDist(dist)" title="click to activate"></span>
+                  &nbsp; &nbsp;{{dist.firstname}} {{dist.lastname}}</span>
+              </td>
               <td class="left" width="10%">{{dist.customercount}} </td>
               <td class="left numbers" width="12%">
                 <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
-           <span *ngIf="dist.mobileno_one || dist.mobileno_two" > {{dist.mobileno_one}} {{dist.mobileno_two}}</span></span>  
+                  <span *ngIf="dist.mobileno_one || dist.mobileno_two"> {{dist.mobileno_one}} {{dist.mobileno_two}}</span>
+                </span>
               </td>
               <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{dist.emailid}}">{{dist.emailid}}</span> </td> -->
               <td class="left" width="10%">{{dist.reference_code}}</td>
-              <td class="left capitalize" width="20%"><span class="onhovertooltip" title="{{dist.address}}">{{dist.address}}</span></td>
+              <td class="left capitalize" width="20%">
+                <span class="onhovertooltip" title="{{dist.address}}">{{dist.address}}</span>
+              </td>
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
               <td class="left" width="12%">
-                  <div class="dropdown">
-                    <button class="dropbtn">View More</button>
-                    <div class="dropdown-content" style="right:0;">
-                        <div class="row pdbottom-5">
-                            <label class="col-md-6"  (click)="openUpdateDialog(dist)">
-                                <i class="fa fa-edit logo-color cursor" title="Edit Distributor"></i> Edit Distributor
-  </label>
-                            <label class="col-md-6" (click)="addProductsConfirmDialog(dist)">
-                                <i class="fa fa-plus"  ></i> Add products</label>
-                          </div>
-                      <div class="row pdbottom-5">
-                        <label class="col-md-6" (click)="viewOrders(dist)">
-                            <i class="fa fa-file-text-o logo-color cursor"  title="Orders"></i>   
-                                                     Orders</label>
-                        <label class="col-md-6" (click)="viewSuppliers(dist)">
-                            <i class="fa fa-truck logo-color cursor"  title="Suppliers"></i> Suppliers</label>
-                      </div>
-                      <div class="row pdbottom-5">
-                        <label class="col-md-6"  (click)="viewCustomers(dist)">
-                            <i class="fa fa-users logo-color cursor" title="Customers"></i>
-                                Customers</label>
-                        <label class="col-md-6" (click)="ViewProduct(dist)">
-                            <i class="fa fa-gift logo-color cursor"  title="Products"></i> Products</label>
-                      </div>
-                      <div class="row pdbottom-5">
-                        <!-- <label class="col-md-6" >
+                <div class="dropdown">
+                  <button class="dropbtn">View More</button>
+                  <div class="dropdown-content" style="right:0;">
+                    <div class="row pdbottom-5">
+                      <label class="col-md-6" (click)="openUpdateDialog(dist)">
+                        <i class="fa fa-edit logo-color cursor" title="Edit Distributor"></i> Edit Distributor
+                      </label>
+                      <label class="col-md-6" (click)="addProductsConfirmDialog(dist)">
+                        <i class="fa fa-plus"></i> Add products</label>
+                    </div>
+                    <div class="row pdbottom-5">
+                      <label class="col-md-6" (click)="viewOrders(dist)">
+                        <i class="fa fa-file-text-o logo-color cursor" title="Orders"></i>
+                        Orders</label>
+                      <label class="col-md-6" (click)="viewSuppliers(dist)">
+                        <i class="fa fa-truck logo-color cursor" title="Suppliers"></i> Suppliers</label>
+                    </div>
+                    <div class="row pdbottom-5">
+                      <label class="col-md-6" (click)="viewCustomers(dist)">
+                        <i class="fa fa-users logo-color cursor" title="Customers"></i>
+                        Customers</label>
+                      <label class="col-md-6" (click)="ViewProduct(dist)">
+                        <i class="fa fa-gift logo-color cursor" title="Products"></i> Products</label>
+                    </div>
+                    <div class="row pdbottom-5">
+                      <!-- <label class="col-md-6" >
                             <span *ngIf="dist.isactive == '0'"  (click)="activateDeactivateDist(dist)"> <i class="fa fa-ban"></i> Activate </span>
                             <span *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)"> <i class="fa fa-ban"></i> Deactivate </span>
                     </label> -->
 
-                    <label class="col-md-6"  (click)="showFollowUp(dist)">
-                      <i class="fa fa-volume-control-phone logo-color cursor" title="Customers"></i> FollowUp
-</label>
+                      <label class="col-md-6" (click)="showFollowUp(dist)">
+                        <i class="fa fa-volume-control-phone logo-color cursor" title="Customers"></i> FollowUp
+                      </label>
 
-                        <label class="col-md-6"  (click)="openMapDialog(dist)">
-                            <i class="fa fa-globe logo-color cursor"  title="Products"></i> Service area</label>
-                      </div>
-                      <div class="row pdbottom-5">
-                          
-                          <label class="col-md-6" (click)="viewStockPoints(dist)">
-                              <i class="fa fa-vimeo"  ></i>Stock Points</label>
-                        </div>
-             
+                      <label class="col-md-6" (click)="openMapDialog(dist)">
+                        <i class="fa fa-globe logo-color cursor" title="Products"></i> Service area</label>
                     </div>
+                    <div class="row">
+
+                      <label class="col-md-6" (click)="viewStockPoints(dist)">
+                        <i class="fa fa-vimeo"></i> Stock Points</label>
+                    </div>
+
                   </div>
-    
-                </td>
+                </div>
+
+              </td>
               <td class="left" class="none">
                 <i class="fa fa-file-text-o logo-color cursor" (click)="viewOrders(dist)" title="Orders"> </i>&nbsp;&nbsp;
                 <i class="fa fa-truck logo-color cursor" (click)="viewSuppliers(dist)" title="Suppliers"></i>&nbsp;&nbsp;
                 <i class="fa fa-users logo-color cursor" (click)="viewCustomers(dist)" title="Customers"> </i>&nbsp;&nbsp;
                 <i class="fa fa-gift logo-color cursor" (click)="ViewProduct(dist)" title="Products"></i>&nbsp;&nbsp;
-                <i class="fa fa-edit logo-color cursor"  title="Edit Distributor" (click)="openUpdateDialog(dist)"></i>
+                <i class="fa fa-edit logo-color cursor" title="Edit Distributor" (click)="openUpdateDialog(dist)"></i>
                 <i class="fa fa-plus-square-o" title="Add products" (click)="addProductsConfirmDialog(dist)"></i>
                 <button *ngIf="dist.isactive == '0'" class="btn btn-link" (click)="activateDeactivateDist(dist)">Activate distributor</button>
                 <button *ngIf="dist.isactive == '1'" class="btn btn-link warn" (click)="activateDeactivateDist(dist)">Deactivate distributor</button>
-        
+
                 <button class="btn btn-link" (click)="openMapDialog(dist)">Service area</button>
-                
+
                 <!-- <i *ngIf="dist.isactive == '1'" class="fa fa-minus-circle warning"  title="Deactivate distributor" (click)="deactivateDistributor(dist)"></i>
                 <i *ngIf="dist.isactive == '0'" class="fa fa-check-circle green" title="Activate distributor" (click)="activateDistributor(dist)"></i> -->
 
@@ -148,7 +152,7 @@
             <button class="btn btn-link" (click)="viewCustomers(dist)"> Customers</button>
             <button class="btn btn-link" (click)="ViewProduct(dist)" >Products</button> -->
               </td>
-       
+
           </tbody>
         </table>
 
