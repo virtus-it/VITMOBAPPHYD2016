@@ -6,7 +6,9 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 import * as _ from 'underscore';
+import {IMyDrpOptions, IMyDateRangeModel} from 'mydaterangepicker';
 import * as moment from 'moment';
 declare var google: any;
  
@@ -17,6 +19,8 @@ interface marker {
   icon?:string;
 	
 }
+
+
  
 @Component({
     
@@ -42,6 +46,18 @@ export class OrderComponent implements OnInit {
     selectedItems = [];
     SelectionStatus = [];
     emailFormArray = [];
+
+    myDateRangePickerOptions: IMyDrpOptions = {
+        // other options...
+        dateFormat: 'dd-mm-yyyy',
+        sunHighlight: true,
+        height: '34px',
+        width: '260px',
+        inline: false,
+        alignSelectorRight: false,
+        indicateInvalidDateRange: true
+    };
+
 
 
     orderedDate:any = "";
@@ -107,6 +123,21 @@ export class OrderComponent implements OnInit {
     click($event: any) {
         //console.log(`click event is called {$event}`);
     }
+
+    onDateRangeChanged(event: IMyDateRangeModel) {
+        console.log('onDateRangeChanged(): Begin date: ', event.beginDate, ' End date: ', event.endDate);
+        console.log('onDateRangeChanged(): Formatted: ', event.formatted);
+        console.log('onDateRangeChanged(): BeginEpoc timestamp: ', event.beginEpoc, ' - endEpoc timestamp: ', event.endEpoc);
+    }
+
+
+    // we will get unix time stamp in console.log i.e in the event when the date is selected. Convert the unox time stamp using moment.js
+    //use the code --- var dateString = moment.unix('value').format("MM/DD/YYYY");
+    // We will get the date. Send the date to the from date and to date
+
+    // source     https://github.com/kekeh/mydaterangepicker
+
+    
 
     delete($event: any) {
         //console.log(`delete is called {$event}`);

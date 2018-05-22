@@ -512,7 +512,8 @@
                     <span class="td-label">
                       Address</span>
                     <br>
-                    <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}">{{forward.customer.address}}</b>
+                    <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}"> {{forward.customer.address}}</b>
+                       <span class="fa fa-copy" (click)="copyElement(forward.customer.address)"  title="click to copy"> </span>
 
                   </div>
 
@@ -857,6 +858,9 @@
                       <br>
                       <b class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</b>
 
+                      <span class="fa fa-copy" (click)="copyElement(allorder.orderby_address)" title="click to copy" ></span>
+                      
+
                       <!-- <button class="btn" data-clipboard-target="#foo">
                               <img src="assets/clippy.svg" alt="Copy to clipboard">
                           </button> -->
@@ -1184,13 +1188,9 @@
                       Address</span>
                     <br>
                     <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
+                    <span  class="fa fa-copy" (click)="copyElement(complete.orderby_address)" value="click to copy" ></span>
 
                   </div>
-
-
-
-
-
 
                 </div>
               </td>

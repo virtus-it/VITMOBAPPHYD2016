@@ -1428,6 +1428,21 @@ this.orderLandingService.getOrdersByfilter(input)
 
         }
 
+        copyElement(val: string){
+          let selectedElement = document.createElement('textarea');
+          selectedElement.style.position = 'fixed';
+          selectedElement.style.left = '0';
+          selectedElement.style.top = '0';
+          selectedElement.style.opacity = '0';
+          selectedElement.value = val;
+          document.body.appendChild(selectedElement);
+          selectedElement.focus();
+          selectedElement.select();
+          document.execCommand('copy');
+          document.body.removeChild(selectedElement);
+        }
+
+
 
 
 

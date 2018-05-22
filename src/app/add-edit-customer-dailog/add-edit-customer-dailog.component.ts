@@ -115,7 +115,7 @@ dup:any = false;
       output => this.createCustomerResult(output),
       error => {
         //console.log("error in distrbutors");
-        this.loaderService.display(false);
+        
       });
   }
 }

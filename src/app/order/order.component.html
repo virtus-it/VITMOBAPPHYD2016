@@ -40,6 +40,8 @@
       </md-form-field>
 </div>
 <div>
+
+
   <angular2-multiselect [data]="dropdownList" [(ngModel)]="selectedItems" [settings]="dropdownSettings"></angular2-multiselect>
   <div class="col-md-6  col-sm-6  col-lg-6">
     <nav class="navbar navbar-light bg-faded">
@@ -125,6 +127,15 @@
 
 
 
+<form #myForm="ngForm" novalidate>
+    <my-date-range-picker name="mydaterange" [options]="myDateRangePickerOptions"
+                    [(ngModel)]="model" (dateRangeChanged)="onDateRangeChanged($event)"  required></my-date-range-picker>
+</form>
+
+
+
+
+
   <!-- trying new ngx guages  -->
 
   <ngx-gauge 
@@ -134,6 +145,12 @@
            [label]="gaugeLabel"  
            [append]="gaugeAppendText">
 </ngx-gauge>
+
+
+
+
+
+
 
 
 
