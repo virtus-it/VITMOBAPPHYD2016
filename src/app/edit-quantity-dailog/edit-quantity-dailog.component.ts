@@ -41,8 +41,11 @@ export class EditQuantityDailogComponent implements OnInit {
     if(this.orderDetails.productdetails.servicecharge === null){
       this.orderDetails.productdetails.servicecharge = 0;
     }
+    
     let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.productdetails.servicecharge) , "expressdeliverycharges": this.expressAmount } };
-    console.log(input);
+    
+    AuthenticationService.showLog("Edit order input");
+    AuthenticationService.showLog(JSON.stringify(input));
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.updateQuantityResult(output),
@@ -53,7 +56,8 @@ export class EditQuantityDailogComponent implements OnInit {
 
   }
   updateQuantityResult(result) {
-    //console.log(result);
+    AuthenticationService.showLog("Edit order output");
+    AuthenticationService.showLog(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.onCloseModal('success')

@@ -111,6 +111,10 @@ export class DistributorListDialogComponent implements OnInit {
 
       // before this.orderDetail.supplierid   newchange this.orderDetail.supplierdetails.userid;
     }
+    else{
+      this.getSuppliers();
+
+    }
   }
   forWardOrder() {
     this.loaderService.display(true);

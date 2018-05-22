@@ -41,17 +41,17 @@
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
           <td width="11%" class="left capital"><span class="{{prod.brandname}}" title="onhovertooltip-100">{{prod.brandname}}</span></td>
           <td width="11%" class="left capital"> <span class="{{prod.ptype}}" title="onhovertooltip-100">{{prod.ptype}}</span></td>
-          <td width="8%" class="left capital">{{prod.priority}}</td>
-          <td width="8%" class="left capital">{{prod.minorderqty}}</td>          
-          <td width="7%" class="left capital">{{prod.pcost}}</td>      
+          <td width="8%" class="left capital gray9">{{prod.priority}}</td>
+          <td width="8%" class="left capital danger">{{prod.minorderqty}}</td>          
+          <td width="7%" class="left capital ">{{prod.pcost}}</td>      
           <td width="9%" class="left capital">{{prod.expressdeliverycharges}}</td> 
           <td width="8%" class="left capital">{{prod.servicecharge}}</td>  
           <td class="" width="11%">
-            <span  *ngIf="prod.isauthorized == 'true'"> Yes </span>
-            <span *ngIf="prod.isauthorized != 'true'">No</span>
+            <span class="success" *ngIf="prod.isauthorized == 'true'"> Yes </span>
+            <span class="warn" *ngIf="prod.isauthorized != 'true'">No</span>
           </td>  
-          <td width="8%" class="left capital">{{prod.avaliable_stock}}</td>
-          <td width="8%" class="left capital" [ngClass]="{'warn':prod.stockstatus == 'Soldout'}">{{prod.stockstatus}}</td>
+          <td width="8%" class="left capital warning">{{prod.avaliable_stock}}</td>
+          <td width="8%" class="left capital" [ngClass]="{'warn':prod.stockstatus == 'Soldout' , 'blue':prod.stockstatus != 'Soldout'}">{{prod.stockstatus}}</td>
           <td width="10%">
              <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;

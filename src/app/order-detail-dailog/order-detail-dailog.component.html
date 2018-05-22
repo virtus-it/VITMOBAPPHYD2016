@@ -20,7 +20,7 @@
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
-              <small class="black capital">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
+              <small class="black capital"> <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b> <br>{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
             </div>
             <div class="col-md-7 right">
               <small>
@@ -153,7 +153,7 @@
                 </tr>
               </thead>
               <tbody class="tab-heigt center">
-                <h5 *ngIf="customerProductDetails.length <= 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
+                <h5 *ngIf="customerProductDetails.length == 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="80%">
 

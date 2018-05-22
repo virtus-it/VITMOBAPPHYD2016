@@ -97,7 +97,7 @@
                   <div class="cbp_tmlabel left">
   
                         <div class="mgbottom-10" *ngIf="payments.customer && payments.dealer">
-                          <b> Dealer/Super-Supplier have {{payments.status}}ed Payment</b>
+                          <b> Dealer/Super-Supplier have {{payments.status}} Payment</b>
                           <br>
                           <small> Customer: {{payments.customer.firstname}} {{payments.customer.lastname}} have paid the amount of INR {{payments.amount_received}}
                             to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
@@ -129,10 +129,10 @@
         <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
               
               <div class="cbp_tmlabel left">
-                      <b> Customer have done the Payment</b>
+                      <b> Customer has taken the credit</b>
                       <br>
-                      <small *ngIf="credit.customer"> Customer: {{credit.customer.firstname}} {{credit.customer.lastname}} have paid the amount of INR {{credit.amount_received}}
-                        to Dealer/Supplier:{{credit.dealer.firstname}}{{credit.dealer.lastname}}</small>
+                      <small *ngIf="credit.customer"> Customer: {{credit.customer.firstname}} {{credit.customer.lastname}} has taken the credit of amount INR {{credit.amount_received}}
+                        from Dealer/Supplier:{{credit.dealer.firstname}}{{credit.dealer.lastname}}</small>
               </div>
             </li>
           </ul>

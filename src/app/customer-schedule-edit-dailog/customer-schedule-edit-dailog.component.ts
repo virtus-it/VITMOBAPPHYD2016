@@ -27,6 +27,7 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
   viewScheduleOrders(){
     let input:any = { "userId":this.Detail.userid,"userType":this.authenticationService.userType(), "appType": this.authenticationService.appType(), "dealerid":this.authenticationService.loggedInUserId() };
+    this.loaderService.display(true);
     //console.log(input);
 
     this.customerservice.viewScheduleOrders(input)
@@ -34,17 +35,19 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
     output => this.viewScheduleOrdersResult(output),
     error => {
       //console.log("error in View schedules");
-      this.loaderService.display(false);
+      
     });
   }
   viewScheduleOrdersResult(result) {
     //console.log(result);
     if (result.result == "success") {
       this.scheduleOrdersList =result.data;
+      this.loaderService.display(false);
       this.noRecord=false;
     }
    else{
      this.scheduleOrdersList =[];
+     this.loaderService.display(false);
      this.noRecord = true;
      //console.log("No schedule orders");
    }
@@ -69,20 +72,21 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
   //Edit and update schedule orders
 
   updatingScheduleOrder(){
-    this.loaderService.display(false);
+    
     let input: any = {"User":{"userid":this.authenticationService.loggedInUserId(), "apptype":this.authenticationService.appType() }}
+    this.loaderService.display(true);
     //console.log(input);
     this.customerservice.updateScheduleOrder(input)
     .subscribe(
       output => this.updateScheduleOrderResult(output),
       error => {
         //console.log("error in updation of suppliers");
-        this.loaderService.display(false);
       });
     }
     updateScheduleOrderResult(result) {
       //console.log(result);
       if (result.result == 'success') {
+        this.loaderService.display(false);
       this.thisDialogRef.close('success');
       }
   

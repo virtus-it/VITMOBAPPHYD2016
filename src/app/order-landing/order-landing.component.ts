@@ -17,7 +17,7 @@ import { DistributorOrderListComponent } from '../distributor-order-list/distrib
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
 import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
 import { InboxComponent } from '../inbox/inbox.component';
-
+import { ProductsService } from '../products/products.service';
 import { NgxGaugeModule } from 'ngx-gauge';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
@@ -42,6 +42,7 @@ export class OrderLandingComponent implements OnInit {
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
+  // categoryList:any = [];
 
 
   //for guage
@@ -78,7 +79,7 @@ export class OrderLandingComponent implements OnInit {
 
     
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router) {
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router ,   private productService: ProductsService) {
 
     
     this.DistributorCtrl = new FormControl();
@@ -166,6 +167,9 @@ export class OrderLandingComponent implements OnInit {
     { "id": "rejected", "itemName": "Rejected" },
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+
+
+    // categories = [];
     
   findDistributors(name: string) {
     //console.log(name);
@@ -827,6 +831,25 @@ export class OrderLandingComponent implements OnInit {
         }
       }
     }
+
+    // else if(this.globalFilterInput.order.searchtype == 'category'){
+
+    //   this.globalFilterInput.order.searchtext = "";
+    //   if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
+    //     for (let data of this.dropdownData.selectedItems) {
+    //       if (this.globalFilterInput.order.searchtext) {
+    //         this.globalFilterInput.order.searchtext += "," + data.id;
+    //       }
+    //       else {
+    //         this.globalFilterInput.order.searchtext += data.id;
+    //       }
+    //     }
+    //   }
+
+
+
+
+    // }
     else if(this.globalFilterInput.order.searchtype == 'deliveryslot'){
       this.globalFilterInput.order.searchtext = "";
       let date:any= "";
@@ -863,6 +886,8 @@ export class OrderLandingComponent implements OnInit {
     }
   this.showFilterDailog =false;
 let input = this.globalFilterInput;
+AuthenticationService.showLog("Search Input");
+AuthenticationService.showLog(JSON.stringify(input));
 this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
       output => this.getGlobalFilteredOrdersResult(output),
@@ -872,6 +897,7 @@ this.orderLandingService.getOrdersByfilter(input)
   
 }
   getGlobalFilteredOrdersResult(result) {
+    AuthenticationService.showLog(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       if(this.tabPanelView == 'complete'){
@@ -1054,6 +1080,26 @@ this.orderLandingService.getOrdersByfilter(input)
 
   }
 
+
+
+  // getProductByCategory(){
+  //   let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+  //   //console.log(input);
+
+  //   this.productService.getProductsCategory(input)
+  //   .subscribe(
+  //   output => this.getProductsCategoryResult(output),
+  //   error => {
+  //     //console.log("error in products category list");
+  //   });
+  // }
+  // getProductsCategoryResult(result){
+  //   //console.log(result);
+  //   if (result.result == "success") {
+  //     this.categoryList = result.data;
+  //     this.categories = this.categoryList;
+  //   }
+  // }
 
 
   // getDistributors() {
@@ -1366,6 +1412,8 @@ this.orderLandingService.getOrdersByfilter(input)
     }
     // this.getDistributors();
     // this.getSupplier();
+    // this.getProductByCategory();
+
     this.getMessage();
     this.getMessagesfromWebsite();
     this.distributors = this.authenticationService.getDistributors();
