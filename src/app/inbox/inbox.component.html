@@ -34,45 +34,47 @@
         </div>
         <div class="col-4 align-self-center">
           <button class="btn-primary btn-sm" md-raised-button (click)="filterMessages()">FILTER</button>
-          <button class="btn-danger btn-sm" md-raised-button (click)="clearFilter()">CLEAR</button>
+          <button class="btn-default btn-sm" md-raised-button (click)="clearFilter()">CLEAR</button>
 
         </div>
       </div>
-      <table class="table table-hover table-striped table-fixedheader">
-        <thead>
-          <tr class="wd-99pc">
-            <th width="12%">Order Id</th>
-            <th width="25%">Created date</th>
-            <th width="33%" title="">Message</th>
-            <th width="15%">Type</th>
-            <th width="10%" title="">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- *ngFor="let msg of AllMessages"
-               -->
-          <tr *ngFor="let msg of AllMessages">
-            <td class="" width="12%">#{{msg.orderid}}</td>
-            <td class="" width="25%">{{msg.createddate | utcDate}}</td>
-            <td class="" width="33%">{{msg.message}}</td>
-            <td class="" width="15%">
+      <div class="row box-style" *ngFor="let msg of AllMessages">
+        <div class="col-4 col-1-style">
+          <div class="row">
+            <div class="col-8">
+              <b>Id: #{{msg.orderid}} </b>
+              <br>
+              <b>Type: </b>
               <span class="danger" *ngIf="msg.ispublic == 2">Complaint</span>
               <span class="success" *ngIf="msg.ispublic == 0">Message</span>
-            </td>
-            <td class="" width="10%">
-              <button md-raised-button class="btn-primary " (click)="showOrderDetails(msg)">SELECT</button>
-            </td>
-          </tr>
-        </tbody>
-  
-          <!-- <h5 class="fa fa-frown-o orange" *ngIf="noMessages">No messages yet!!</h5> -->
-<br>
-          <h4 *ngIf="noMessages" class="warning center">
-            <i class="fa fa-frown-o" aria-hidden="true"></i>   No Messages</h4>
+              <br>
+              <span class="left grayd">
+                <span class="fa fa-clock-o"></span> {{msg.createddate | utcDate}}</span>
+            </div>
+            <div class="col-4">
+              <button  class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(msg)">SELECT</button>
+            </div>
+          </div>
+        </div>
 
 
-      
-      </table>
+        <div class="col-8">
+
+          <span class="bold logo-color">Message:</span>
+          <p>{{msg.message}}</p>
+        </div>
+
+      </div>
+
+
+      <!-- <h5 class="fa fa-frown-o orange" *ngIf="noMessages">No messages yet!!</h5> -->
+      <br>
+      <h4 *ngIf="noMessages" class="warning center">
+        <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>
+
+
+
+
     </div>
   </div>
 </md-dialog-content>

@@ -27,7 +27,9 @@
   color: whitesmoke !important;
   background-color: red !important;
 }
-
+.bold{
+  font-weight: bold;
+}
 .newLogo{
   color: red;
 }
