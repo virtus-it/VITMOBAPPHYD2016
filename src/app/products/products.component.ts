@@ -9,6 +9,12 @@ import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
+
+
+import { DeleteTemplateComponent } from '../delete-template/delete-template.component';
+import { ProductServiceAreaComponent } from '../product-service-area/product-service-area.component';
+
+
 import * as _ from 'underscore';
 @Component({
 
@@ -17,7 +23,7 @@ import * as _ from 'underscore';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService, private productService: ProductsService) { }
+  constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService,  private productService: ProductsService) { }
   superDealer = true;
   showFilterDialog = false;
   productList = [];
@@ -131,8 +137,8 @@ export class ProductsComponent implements OnInit {
 
   }
   getProducts() {
-    let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
-    this.productService.getProducts(input)
+    let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+    this.productService.createProduct(input)
       .subscribe(
       output => this.getProductsResult(output),
       error => {
@@ -175,6 +181,66 @@ export class ProductsComponent implements OnInit {
 
     }
   }
+
+  productArea(data){
+
+    let dialogRef = this.dialog.open(ProductServiceAreaComponent, {
+      width: '75%', 
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+    }
+
+  });
+
+
+  }
+
+
+  activateProduct(data){
+  let input = {"product":{"transtype":"delete","pid": data.productid ,  userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "isactive": 1 }};
+    console.log(input);
+    this.productService.createProduct(input)
+    .subscribe(
+    output => this.activateProductResult(output),
+    error => {
+      //console.log("error in distrbutors");
+    });
+  }
+  activateProductResult(result){
+if(result.result == 'success'){
+  console.log('product activated');
+  this.getProducts();
+
+}
+  }
+
+
+
+
+
+
+
+  deleteProduct(data){
+    let dialogRef = this.dialog.open(DeleteTemplateComponent, {
+      width: '50%', 
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+      this.getProducts();
+
+    }
+
+  });
+
+
+
+  }
+
+
+
 
   ngOnInit() {
     this.getProducts();

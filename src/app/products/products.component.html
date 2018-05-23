@@ -51,6 +51,12 @@
               <tbody>
                 <tr *ngFor="let details of products.data">
                   <td>
+
+                      <span class="fa fa-thumbs-up green" *ngIf="details.isactive == '1'" ></span>
+                      <span class="fa fa-thumbs-down warn" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
+
+
+
                     <b class=""><span class="onhovertooltip-250" title="{{details.ptype}}">{{details.ptype}}</span></b>
                   </td>
                   <td>
@@ -85,8 +91,12 @@
                   </td>
                   <td>
                      
-                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"></i>&nbsp;
-                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"></i>&nbsp;
+                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"  *ngIf="superDealer" (click)="productArea(details)"></i>&nbsp;
+
+
+                          <i class="fa fa-trash disable" aria-hidden="true"  *ngIf="superDealer && details.isactive == '0'" disabled ></i>&nbsp;
+                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"  *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)"></i>&nbsp;
+
                     <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)"></i>&nbsp;
                     <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;

@@ -67,3 +67,10 @@ table thead {
   .warn {
     color: red;
   }
+
+  .green{
+    color:forestgreen;
+  }
+  .disable{
+    color: grey;
+  }

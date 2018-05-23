@@ -113,6 +113,7 @@ import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.co
 import { InboxComponent } from './inbox/inbox.component';
 import { UsersComponent } from './users/users.component';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
+import { ProductServiceAreaComponent } from './product-service-area/product-service-area.component';
 
 
 
@@ -206,6 +207,7 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
         InboxComponent,
         UsersComponent,
         AddEditUserComponent,
+        ProductServiceAreaComponent,
 
      
         
@@ -345,7 +347,8 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
          DeleteTemplateComponent,
          DeletePromocodeComponent,
          InboxComponent,
-         AddEditUserComponent
+         AddEditUserComponent,
+         ProductServiceAreaComponent
       
 
 
