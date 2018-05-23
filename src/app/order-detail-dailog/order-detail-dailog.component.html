@@ -28,7 +28,13 @@
               <br>
               <small>
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
+
+                <small>
+                  <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}} ({{dailogOrderDetails.dealerdetails.mobileno}})</small>
+
+
             </div>
+
           </div>
         </div>
         <div class="container-fluid  border-top pdtop-5">
