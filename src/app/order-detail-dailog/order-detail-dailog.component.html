@@ -29,11 +29,11 @@
               <small>
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
 
-                <small  *ngIf="dailogOrderDetails.dealerdetails.firstname">
+                <small  *ngIf="dailogOrderDetails.dealerdetails">
                   <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}} ({{dailogOrderDetails.dealerdetails.mobileno}})</small>
 
-                  <small *ngIf="dailogOrderDetails.dealerdetails.firstname == '' || dailogOrderDetails.dealerdetails.firstname === null">
-                    <span class="gray" >Distributor Name : </span> -  ({{dailogOrderDetails.dealerdetails.mobileno}})</small>
+                  <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null ">
+                    <span class="gray" >Distributor Name : </span> - </small>
 
 
             </div>
