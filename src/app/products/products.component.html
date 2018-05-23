@@ -34,23 +34,24 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th width="10%">Type</th>
-                  <th width="8%">Priority </th>
-                  <th width="8%">Min Qty </th>
-                  <th width="8%">Cost </th>
-                  <th width="8%">Stock</th>
-                  <th width="9%" title="Return cans">Ret cans</th>
-                  <th width="9%" title="Service Charge">Serv charge</th>
-                  <th width="9%" class="oneline" title="Express Delivery Charge">Exp Del</th>
-                  <th width="10%">Status</th>
-                  <th width="12%" class="no-th-arrow">Cans Return?</th>
+                  <th width="20%">Type</th>
+                  <th width="7%">Priority </th>
+                  <th width="7%">Min Qty </th>
+                  <th width="6%">Cost </th>
+                  <th width="8%" title="Service Charge">Serv charge</th>
+                  <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
+                  <th width="6%">Stock</th>
+                  <th width="8%" title="Return cans">Ret cans</th>
+                 
+                  <th width="7%">Status</th>
+                  <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
                   <th width="12%" class="no-th-arrow">Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let details of products.data">
                   <td>
-                    <b class=""><span class="onhovertooltip-100" title="{{details.ptype}}">{{details.ptype}}</span></b>
+                    <b class=""><span class="onhovertooltip-250" title="{{details.ptype}}">{{details.ptype}}</span></b>
                   </td>
                   <td>
                     <b class="gray9">{{details.priority}}</b>
@@ -62,17 +63,18 @@
                     <b class="">{{details.pcost}}</b>
                   </td>
                   <td>
-                    <b class="warning">{{details.avaliable_stock}}</b>
-                  </td>
-                  <td>
-                    <b class="">{{details.avaliable_emptycans}}</b>
-                  </td>
-                  <td>
                     <b class="">{{details.servicecharge}}</b>
                   </td>
                   <td>
                     <b class="">{{details.expressdeliverycharges}}</b>
                   </td>
+                  <td>
+                    <b class="warning">{{details.avaliable_stock}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.avaliable_emptycans}}</b>
+                  </td>
+                 
 
                   <td>
                     <span class="info capital" [ngClass]="details.stockColor">{{details.stockstatus}} </span>
@@ -82,6 +84,9 @@
                     <span class="danger " *ngIf="details.iscanreturnable != 'true'">No </span>
                   </td>
                   <td>
+                     
+                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"></i>&nbsp;
+                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"></i>&nbsp;
                     <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)"></i>&nbsp;
                     <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
