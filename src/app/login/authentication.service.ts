@@ -35,6 +35,7 @@ export class AuthenticationService {
        //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
         this.salesLogin = this.newSalesFunction();
         
+        
     }
     login(username: string, password: string) {
         let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: "moya" }); // Stringify payload

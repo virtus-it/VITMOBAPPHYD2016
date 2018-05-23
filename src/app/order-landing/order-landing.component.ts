@@ -42,7 +42,7 @@ export class OrderLandingComponent implements OnInit {
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
-  // categoryList:any = [];
+  categoryList:any = [];
 
 
   //for guage
@@ -122,9 +122,18 @@ export class OrderLandingComponent implements OnInit {
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
 
   globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+
+
+//   {"order":{"userid":"289","usertype":"dealer","status":"ordered","last_orderid":"0",
+// "searchtype":"category","searchtext":"Bailey, Bisleri","pagesize":"10","apptype":"moya"}}
+
+
+
   globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
 
   dropdownData = { selectedItems: [] };
+
+  categoryProduct = { selectedItems : []};
   filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
   dropdownSettings = {
     singleSelection: false,
@@ -169,7 +178,7 @@ export class OrderLandingComponent implements OnInit {
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
 
 
-    // categories = [];
+    categories = [];
     
   findDistributors(name: string) {
     //console.log(name);
@@ -676,6 +685,21 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
+    else if (this.filterInput.order.searchtype == 'category'){
+      this.filterInput.order.searchtext = "";
+      if(this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0){
+        for(let data of this.categoryProduct.selectedItems){
+          if(this.filterInput.order.searchtext){
+            this.filterInput.order.searchtext += "," + data.itemName; 
+          }
+          else {
+            this.filterInput.order.searchtext += data.itemName;
+          }
+
+        }
+      }
+    }
+
     else if(this.filterInput.order.searchtype == 'deliveryslot'){   
     }
 
@@ -832,25 +856,21 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
-    // else if(this.globalFilterInput.order.searchtype == 'category'){
+    else if (this.globalFilterInput.order.searchtype == 'category'){
+      this.globalFilterInput.order.searchtext = "";
+      if(this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0){
+        for(let data of this.categoryProduct.selectedItems){
+          if(this.globalFilterInput.order.searchtext){
+            this.globalFilterInput.order.searchtext += "," + data.itemName; 
+          }
+          else {
+            this.globalFilterInput.order.searchtext += data.itemName;
+          }
 
-    //   this.globalFilterInput.order.searchtext = "";
-    //   if (this.dropdownData.selectedItems && this.dropdownData.selectedItems.length > 0) {
-    //     for (let data of this.dropdownData.selectedItems) {
-    //       if (this.globalFilterInput.order.searchtext) {
-    //         this.globalFilterInput.order.searchtext += "," + data.id;
-    //       }
-    //       else {
-    //         this.globalFilterInput.order.searchtext += data.id;
-    //       }
-    //     }
-    //   }
-
-
-
-
-    // }
-    else if(this.globalFilterInput.order.searchtype == 'deliveryslot'){
+        }
+      }
+    }
+   else if(this.globalFilterInput.order.searchtype == 'deliveryslot'){
       this.globalFilterInput.order.searchtext = "";
       let date:any= "";
       let time:any = "";
@@ -1082,24 +1102,35 @@ this.orderLandingService.getOrdersByfilter(input)
 
 
 
-  // getProductByCategory(){
-  //   let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
-  //   //console.log(input);
+  getAllCategories(){
+    let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    //console.log(input);
 
-  //   this.productService.getProductsCategory(input)
-  //   .subscribe(
-  //   output => this.getProductsCategoryResult(output),
-  //   error => {
-  //     //console.log("error in products category list");
-  //   });
-  // }
-  // getProductsCategoryResult(result){
-  //   //console.log(result);
-  //   if (result.result == "success") {
-  //     this.categoryList = result.data;
-  //     this.categories = this.categoryList;
-  //   }
-  // }
+    this.productService.getProductsCategory(input)
+    .subscribe(
+    output => this.getProductsCategoryResult(output),
+    error => {
+      //console.log("error in products category list");
+    });
+  }
+  getProductsCategoryResult(result){
+    //console.log(result);
+    if (result.result == "success") {
+      // this.categoryList = result.data;
+      let categoryProducts = [];
+      if(result.data && result.data.length > 0){
+        _.each(result.data , function(i, j){
+          let details :any = i ;
+          let categoryJSON = {"id": details.categoryid , "itemName":details.category };
+          categoryProducts.push(categoryJSON);
+        });
+        
+        this.categories = categoryProducts;
+      }
+      
+      
+    }
+  }
 
 
   // getDistributors() {
@@ -1397,6 +1428,21 @@ this.orderLandingService.getOrdersByfilter(input)
 
         }
 
+        copyElement(val: string){
+          let selectedElement = document.createElement('textarea');
+          selectedElement.style.position = 'fixed';
+          selectedElement.style.left = '0';
+          selectedElement.style.top = '0';
+          selectedElement.style.opacity = '0';
+          selectedElement.value = val;
+          document.body.appendChild(selectedElement);
+          selectedElement.focus();
+          selectedElement.select();
+          document.execCommand('copy');
+          document.body.removeChild(selectedElement);
+        }
+
+
 
 
 
@@ -1412,8 +1458,8 @@ this.orderLandingService.getOrdersByfilter(input)
     }
     // this.getDistributors();
     // this.getSupplier();
-    // this.getProductByCategory();
 
+    this.getAllCategories();
     this.getMessage();
     this.getMessagesfromWebsite();
     this.distributors = this.authenticationService.getDistributors();

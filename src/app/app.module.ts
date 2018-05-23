@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
 import { NgxGaugeModule } from 'ngx-gauge';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from './login/authentication.service';
@@ -110,6 +111,8 @@ import { AddPromocodeDialogComponent } from './add-promocode-dialog/add-promocod
 import { DeleteTemplateComponent } from './delete-template/delete-template.component';
 import { DeletePromocodeComponent } from './delete-promocode/delete-promocode.component';
 import { InboxComponent } from './inbox/inbox.component';
+import { UsersComponent } from './users/users.component';
+import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 
 
 
@@ -201,6 +204,8 @@ import { InboxComponent } from './inbox/inbox.component';
         DeleteTemplateComponent,
         DeletePromocodeComponent,
         InboxComponent,
+        UsersComponent,
+        AddEditUserComponent,
 
      
         
@@ -209,6 +214,7 @@ import { InboxComponent } from './inbox/inbox.component';
     imports: [
         BrowserModule,
         FormsModule,
+        MyDateRangePickerModule,
         ReactiveFormsModule,
         HttpModule,
         BrowserAnimationsModule,
@@ -239,6 +245,7 @@ import { InboxComponent } from './inbox/inbox.component';
             {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
             {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
             {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
+            {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -337,7 +344,8 @@ import { InboxComponent } from './inbox/inbox.component';
          AddPromocodeDialogComponent,
          DeleteTemplateComponent,
          DeletePromocodeComponent,
-         InboxComponent
+         InboxComponent,
+         AddEditUserComponent
       
 
 
