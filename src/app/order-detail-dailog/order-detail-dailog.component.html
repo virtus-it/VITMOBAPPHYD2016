@@ -389,6 +389,21 @@
               <small>{{ msg.message}} </small>
             </li>
 
+
+            <li class="nolist-style  messages-style" [ngClass]="{'followupmessage':msg.typeid}" *ngFor="let msg of followUpList">
+              <div class="row" *ngIf="msg.typeid">
+                <div class="col">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  <small *ngIf="msg.typeid">&nbsp; Follow Up message </small>
+                </div>
+                <div class="col right">
+                  <small class="">{{ msg.createddate | utcDate}} </small>
+                </div>
+              </div>
+              <small>{{ msg.remarks}} </small>
+            </li>
+
+
           </ul>
           <div class=" border-top pdtop-10">
             <div class="form-group">
