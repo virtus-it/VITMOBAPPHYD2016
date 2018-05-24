@@ -164,11 +164,12 @@ getPolygonProducts(dataLayer) {
 }
 getPolygonProductsResult(output, dataLayer) {
   this.loaderService.display(false);
-  if (output.data && output.data.length > 0) {
-      for (let data of output.data) {
-          if (data.polygonvalue && data.polygonvalue.length > 0) {
-              for (let polygon of data.polygonvalue) {
-                  dataLayer.add({ geometry: new google.maps.Data.Polygon([polygon.path]) })
+  if (output.data && output.data.message &&  output.data.message.length > 0) {
+
+      for (let data of output.data.message) {
+          if (data.serviceareas && data.serviceareas.length > 0) {
+              for (let servicearea of data.serviceareas) {
+                  dataLayer.add({ geometry: new google.maps.Data.Polygon([servicearea.path]) })
               }
           }
 
