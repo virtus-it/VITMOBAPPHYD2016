@@ -4,6 +4,7 @@ import { CustomerService } from '../customer/customer.service';
 import { MdDialog } from '@angular/material';
 import { PasswordupdateComponent } from '../passwordupdate/passwordupdate.component';
 import { ProfileupdateComponent } from '../profileupdate/profileupdate.component';
+import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,9 +13,10 @@ import { ProfileupdateComponent } from '../profileupdate/profileupdate.component
 })
 export class ProfileComponent implements OnInit {
 
-  constructor( private authenticationService: AuthenticationService, private customerService: CustomerService, public dialog: MdDialog,) {  }
+  constructor( private authenticationService: AuthenticationService, private customerService: CustomerService, public dialog: MdDialog, private productService: ProductsService) {  }
   profileUpdate: any = {"firstname":"","lastname":"","emailid":"","address":"","city":"","state":"","pincode":"","mobileno":"", "companyname":"", "referCode":"" };
   updateStatus= false;
+  base64textString:any = "";
 
 
   updateProfile(){
@@ -60,6 +62,7 @@ getProfileDetailsResult(result){
   this.profileUpdate.mobileno =result.data.user.mobileno;
   this.profileUpdate.companyname = result.data.user.companyname;
   this.profileUpdate.referCode = result.data.user.reference_code;
+  this.profileUpdate.userid = result.data.user.userid;
 }
 
 changePassword(){
@@ -82,9 +85,75 @@ updateProfileDialog(){
 dialogRef.afterClosed().subscribe(result => {
     //console.log(`Dialog closed: ${result}`);
     if (result == 'success') {
+
     }
 });
 }
+
+updateUser(){
+  let input = {"User":{"userid": this.authenticationService.loggedInUserId() , "user_type": this.authenticationService.userType() ,"isimageupdate":true,"imageurl":'dealer_'+this.profileUpdate.userid ,"imagename":"dealer_"+this.profileUpdate.userid ,"apptype":this.authenticationService.appType()}} ;
+  this.productService.updateUserOnImage(input)
+  .subscribe(
+  output => this.updateUserResult(output),
+  error => {
+    //console.log("error in distrbutors");
+  });
+}
+updateUserResult(result){
+  if(result.result == 'success'){
+    this.getProfileDetails();
+  }
+}
+
+
+
+
+// onFileSelected(event){
+
+//   var files = event.target.files;
+//   var file = files[0];
+
+// if (files && file) {
+//     var reader = new FileReader();
+
+//     reader.onload =this._handleReaderLoaded.bind(this);
+
+//     reader.readAsBinaryString(file);
+
+// }
+// }
+
+// _handleReaderLoaded(readerEvt) {
+// var binaryString = readerEvt.target.result;
+//        this.base64textString= btoa(binaryString);
+//        console.log(btoa(binaryString));
+// }
+
+// // //  /uploadimg   data.productid pname
+
+
+
+// uploadImage(){
+//  let input = {"image":{"base64string": this.base64textString , "filename": 'dealer_'+this.profileUpdate.userid }};
+//  this.productService.uploadImage(input)
+// .subscribe(
+// output => this.uploadImageResult(output),
+// error => {
+//   //console.log("error in distrbutors");
+// });
+// }
+// uploadImageResult(result){
+//  if(result.result == 'success'){
+//    console.log('image uploaded successfully');
+//   //  this.updateUser();
+
+
+//  }
+// }
+
+
+
+
 
 
 

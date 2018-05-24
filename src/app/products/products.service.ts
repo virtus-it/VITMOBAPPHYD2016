@@ -139,4 +139,14 @@ export class ProductsService {
 
       }
 
+      updateUserOnImage(input){
+        let bodyString = JSON.stringify(input); // Stringify payload
+        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+        let options = new RequestOptions({ headers: headers });
+        return this.http.post(this.apiUrl + '/user', bodyString, options)
+            .map((res: Response) => res.json())
+            .do(data => console.log('All: '))
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
+      }
 }

@@ -241,54 +241,50 @@ if(result.result == 'success'){
 
   }
 
-  // onFileSelected(event){
+  onFileSelected(event){
 
-  //     var files = event.target.files;
-  //     var file = files[0];
+      var files = event.target.files;
+      var file = files[0];
     
-  //   if (files && file) {
-  //       var reader = new FileReader();
+    if (files && file) {
+        var reader = new FileReader();
 
-  //       reader.onload =this._handleReaderLoaded.bind(this);
+        reader.onload =this._handleReaderLoaded.bind(this);
 
-  //       reader.readAsBinaryString(file);
+        reader.readAsBinaryString(file);
     
-  // }
-  // }
+  }
+  }
 
-  // _handleReaderLoaded(readerEvt) {
-  //   var binaryString = readerEvt.target.result;
-  //          this.base64textString= btoa(binaryString);
-  //          console.log(btoa(binaryString));
-  //  }
+  _handleReaderLoaded(readerEvt) {
+    var binaryString = readerEvt.target.result;
+           this.base64textString= btoa(binaryString);
+           console.log(btoa(binaryString));
+   }
 
   // //  /uploadimg   data.productid pname
 
 
 
-  //  uploadImage(data){
-  //    let input = {"image":{"base64string": this.base64textString , "filename": 'product_'+data.productid }};
-  //    this.productService.uploadImage(input)
-  //   .subscribe(
-  //   output => this.uploadImageResult(output),
-  //   error => {
-  //     //console.log("error in distrbutors");
-  //   });
-  //  }
-  //  uploadImageResult(result){
-  //    if(result.result == 'success'){
-  //     this.getProducts();
+   uploadImage(data){
+     let input = {"image":{"base64string": this.base64textString , "filename": 'product_'+data.productid }};
+     this.productService.uploadImage(input)
+    .subscribe(
+    output => this.uploadImageResult(output),
+    error => {
+      //console.log("error in distrbutors");
+    });
+   }
+   uploadImageResult(result){
+     if(result.result == 'success'){
+      this.getProducts();
 
-  //    }
-  //  }
-
-
+     }
+   }
 
 
-  // uploadImage(){
-  //   var imageData = $base64.encode(this.selectedFile);
 
-  // }
+
 
 
 
