@@ -5,10 +5,9 @@
         <h4>
           <i class="fa fa-users"></i> Users</h4>
       </div>
-      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-        
-        <a class="cursor logo-color  mgleft-10" title="Add User"  (click)="addUser()">
-          <i class="fa fa-plus-circle fs-20" aria-hidden="true"></i>
+      <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+          <a class="cursor logo-color " title="Add User">
+              <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true" (click)="addUser()"></i>
         </a>
 
       </div>
@@ -18,11 +17,11 @@
       <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead>
             <tr>
-              <th width="20%">Name</th>         
-              <th width="20%">User Type</th>
-              <th width="20%">Mobile</th>
-              <th width="20%">Address</th>
-              <th class="" width= "20%">Action</th>
+              <th width="35%">Name</th>         
+              <th width="10%">User Type</th>
+              <th width="10%">Mobile</th>
+              <th width="35%">Address</th>
+              <th class="" width= "10%">Action</th>
               <!-- <th width="10%"></th>
               <th width="10%">Type</th>
               <th width="10%" >Dep Amt</th>
@@ -32,25 +31,25 @@
           </thead>
           <tbody>
             <tr *ngFor="let user of allUsers">
-              <td class="left" width="20%" >
+              <td class="left" width="35%" >
                 <span  *ngIf="user.firstname"> {{user.firstname}} </span>
               <span *ngIf="user.firstname == '' || user.firstname === null"> - </span>
               </td>
-              <td class="left" width="20%" >
+              <td class="left" width="10%" >
                   <span  *ngIf="user.usertype"> {{user.usertype}} </span>
                 <span *ngIf="user.usertype == '' || user.usertype === null"> - </span>
                 </td>
-                <td class="left" width="20%" >
+                <td class="left" width="10%" >
                     <span  *ngIf="user.mobileno"> {{user.mobileno}} </span>
                   <span *ngIf="user.mobileno == '' || user.mobileno === null"> - </span>
                   </td>
-                  <td class="left" width="20%" >
+                  <td class="left" width="35%" >
                       <span  *ngIf="user.address"> {{user.address}} </span>
                     <span *ngIf="user.address == '' || user.address === null"> - </span>
                     </td>
 
-                    <td>
-                      <i class="fa fa-edit logo-color " title="Edit User" (click)="editUser(user)"></i>
+                    <td class="left" width="10%">
+                      <i class="fa fa-edit logo-color " title="Edit User"  (click)="editUser(user)"></i>
                     </td>
 
             

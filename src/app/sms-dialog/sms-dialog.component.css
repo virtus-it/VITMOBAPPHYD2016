@@ -30,3 +30,51 @@
     border-top: 1px solid #999;
 }
 
+.add-btn-1{
+        border: 1px solid darkgray;
+        border-radius: 5px;
+        background: #dbf0ff;
+        margin: -7px;
+        height: 112%;
+        max-height: 200px;
+        overflow-y: auto;
+}
+.add-btn-2{
+border: 1px solid darkgray;
+border-radius: 5px;
+background: #ffdbdb;
+margin: -7px;
+height: 112%;
+max-height: 200px;
+overflow-y: auto;
+}
+.add-btn-3{
+    border: 1px solid darkgray;
+    border-radius: 5px;
+    background: #dbffea;
+    margin: -7px;
+    height: 112%;
+    max-height: 200px;
+    overflow-y: auto;
+    }
+
+    .messages-style {
+        padding: 5px 12px;
+    margin: 5px 0px;
+    background: rgb(254, 250, 255);
+    border-radius: 4px;
+    border: 1px solid #000;
+    height: 178%;
+    }
+
+  
+    .nav-link {
+        display: block;
+        padding: .5em 1em;
+        border: 1px solid;
+        color: white;
+        background: #0f75bc;
+        margin-bottom: 4px;
+        border-radius: 4px;
+    }
+    

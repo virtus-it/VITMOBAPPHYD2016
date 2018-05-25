@@ -1,56 +1,51 @@
 ﻿<div class="row justify-content-between modal-title ">
-    <div class="col-md-4  col-sm-4  col-lg-4">
-          <span ><i class="fa fa-sitemap"></i>  {{distributorDetails.firstname}}</span>
-          <!-- <span *ngIf="distributorDetails.type == 'assignFromOrders' && distributorDetails.data.orders.distributor" > {{distributorDetails.data.orders.distributor.firstname}} {{distributorDetails.data.orders.distributor.lastname}}</span> -->
-    </div>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-          <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>         
-    </div>
+  <div class="col-md-4  col-sm-4  col-lg-4">
+    <span>
+      <i class="fa fa-sitemap"></i> {{distributorDetails.firstname}}</span>
+    <!-- <span *ngIf="distributorDetails.type == 'assignFromOrders' && distributorDetails.data.orders.distributor" > {{distributorDetails.data.orders.distributor.firstname}} {{distributorDetails.data.orders.distributor.lastname}}</span> -->
   </div>
-  <!-- <h2 md-dialog-title>{{distributorDetails.firstname}}</h2> -->
-  <hr>
-  <div class="container-fluid">
-  <md-dialog-content>
-      <div class="form-group">
-          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-        </div>
-    <div id="map"></div>
-  </md-dialog-content>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
-  <hr>
-  <div class="row float-right pdright-30 mgbottom-20">
-  <md-dialog-actions align="end">
-      <button class="btn-primary" md-raised-button (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
-    <button md-raised-button (click)="onCloseConfirm()" >CANCEL</button>&nbsp;
-    
-  </md-dialog-actions>
 </div>
+<!-- <h2 md-dialog-title>{{distributorDetails.firstname}}</h2> -->
 
-<!-- 
-<div class="row justify-content-between modal-title ">
-    <div class="col-md-4  col-sm-4  col-lg-4">
-          <h2 md-dialog-title><i class="fa fa-sitemap"></i>  {{distributorDetails.firstname}}</h2>
+
+
+<md-dialog-content>
+
+  <div class="row">
+
+    <div class="col-10 pd-5">
+
+      <div id="map" class="wd-100pc">
+
+      </div>
     </div>
-    <div class="col-md-1  col-sm-1  col-lg-1">
-          <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>         
-    </div>
-  </div>
 
-    <md-dialog-content layout="column">
-        <div class="row brd-bottom">
-            <div id="map pd-15x25 "></div>
-          
 
+    <div class="col-2 pd-leftright-0">
+      <div class="row height-91pc pd-5">
+
+        <div class="">
+          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control"
+            #search [formControl]="searchControl">
         </div>
 
-      </md-dialog-content>
-    <div class="row float-right pdright-30">
-        <md-dialog-actions align="end">
-            <button md-raised-button (click)="onCloseConfirm()" >CANCEL</button>&nbsp;
-            <button md-raised-button (click)="saveData(distributorDetails)">ASSIGN AREA</button>&nbsp;
-          </md-dialog-actions>
-  </div>
+      </div>
 
- -->
+      <div class="row pd-5 d-flex justify-content-around">
+
+
+        <button class="btn-primary btn-sm" md-raised-button (click)="saveData(distributorDetails)">ASSIGN</button>
+        <button class="btn-default btn-sm" md-raised-button (click)="onCloseConfirm()">CANCEL</button>
+
+
+
+
+      </div>
+
+    </div>
+

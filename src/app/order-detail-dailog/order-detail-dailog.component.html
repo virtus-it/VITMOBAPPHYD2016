@@ -20,11 +20,10 @@
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
-              <small class="black capital"> <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b> <br>{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</small>
+              <small class="black capital"> <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b> <br><span class="onhovertooltip-200" title="{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</span></small>
             </div>
             <div class="col-md-7 right">
-              <small>
-                <span class="gray">Delivery Date : </span>{{dailogOrderDetails.delivery_exceptedtime}} </small>
+              <small class="gray">Delivery Date : {{dailogOrderDetails.delivery_exceptedtime}} </small>
               <br>
               <small>
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
