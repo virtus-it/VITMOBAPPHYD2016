@@ -36,6 +36,23 @@ addUser() {
 
 }
 
+editUser(data){
+
+  let dialogRefEditCustomer = this.dialog.open(AddEditUserComponent, {
+
+    width: '700px',
+    data: data
+});
+dialogRefEditCustomer.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+    if(result == "success"){
+      this.getAllUsers();
+    }
+
+});
+
+}
+
 
 getAllUsers(){
   let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getall",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
