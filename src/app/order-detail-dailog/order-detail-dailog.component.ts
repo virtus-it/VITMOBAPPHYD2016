@@ -11,6 +11,7 @@ import { OrderLandingService } from '../order-landing/order-landing.service';
 import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { MessageTemplateComponent } from '../message-template/message-template.component';
+import { FollowUpService } from '../follow-up/follow-up.service';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
@@ -22,12 +23,13 @@ import * as _ from 'underscore';
 })
 export class OrderDetailDailogComponent implements OnInit {
 
-    constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService, private smsService: SmsServiceService) { }
+    constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OrderDetailDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private followupService: FollowUpService, private orderLandingService: OrderLandingService,private loaderService: LoaderService, private smsService: SmsServiceService) { }
     dailogOrderDetails: any = {};
     deliveredStatus= false;
     customerProductDetails: any = [];
     customerProductDetailsCopy: any = [];
     message  = "";
+    followUpList:any = [];
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
@@ -338,10 +340,34 @@ getTemplates(data){
 
 }
 
+
+getfollowUpdetails() {
+    let input = { "User": { "type": "order" , "typeid": this.orderDetail.order_id, "transtype": "getall" } }
+    this.followupService.getFollowUp(input)
+      .subscribe(
+      output => this.getfollowUpdetailsResult(output),
+      error => {
+        //console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
+  }
+  getfollowUpdetailsResult(result) {
+    //console.log(result);
+    if (result.result == 'success') {
+      this.followUpList = result.data.output;
+ 
+  }
+  }
+
+
+
+
+
 ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     this.deliveryStatus();
+    this.getfollowUpdetails();
     console.log(this.orderDetail);
     // this.getUserDetails();
 }

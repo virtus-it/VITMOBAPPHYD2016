@@ -1,6 +1,13 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-xs-7 col-sm-6 col-lg-8">
+
+  <div class="col-xs-7 col-sm-6 col-lg-8" *ngIf="!Detail.productid">
      <strong><i class="fa fa-ban" aria-hidden="true" ></i></strong> Delete Template</div>
+
+     <div class="col-xs-7 col-sm-6 col-lg-8" *ngIf="Detail.productid">
+      <strong><i class="fa fa-ban" aria-hidden="true" ></i></strong> Delete Product</div>
+
+
+
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
             </strong>
@@ -9,13 +16,16 @@
 <div class="container-fluid brd-bottom">
 <br>
 
-<h4 class="center warning"><span class="fa fa-trash-o"></span> Are you sure you want to delete the template ?</h4>
+<h4 class="center warning" *ngIf="!Detail.productid"><span class="fa fa-trash-o"></span> Are you sure you want to delete the template ?</h4>
+
+<h4 class="center warning" *ngIf="Detail.productid"><span class="fa fa-trash-o"></span> Are you sure you want to delete the product ?</h4>
+
 
 <br>
 </div>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="deleteTemplate()">YES</button> &nbsp;       
+      <button type="submit" class="btn-primary" md-raised-button (click)="delete()">YES</button> &nbsp;       
     <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()">NO</button>&nbsp;
   </md-dialog-actions>
 </div>

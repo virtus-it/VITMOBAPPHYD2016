@@ -25,9 +25,18 @@
             <div class="col-md-7 right">
               <small class="gray">Delivery Date : {{dailogOrderDetails.delivery_exceptedtime}} </small>
               <br>
-              <small class="gray">Modified Date : {{dailogOrderDetails.modifieddate | utcDate}}</small>
-                <br>
-               <small class="fa fa-sitemap">Distributor Name (Mobile No.)</small>            </div>
+              <small>
+                <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
+
+                <small  *ngIf="dailogOrderDetails.dealerdetails">
+                  <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}} ({{dailogOrderDetails.dealerdetails.mobileno}})</small>
+
+                  <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null ">
+                    <span class="gray" >Distributor Name : </span> - </small>
+
+
+            </div>
+
           </div>
         </div>
         <div class="container-fluid  border-top pdtop-5">
@@ -378,6 +387,21 @@
               </div>
               <small>{{ msg.message}} </small>
             </li>
+
+
+            <li class="nolist-style  messages-style" [ngClass]="{'followupmessage':msg.typeid}" *ngFor="let msg of followUpList">
+              <div class="row" *ngIf="msg.typeid">
+                <div class="col">
+                  <i class="fa fa-reply" aria-hidden="true"></i>
+                  <small *ngIf="msg.typeid">&nbsp; Follow Up message </small>
+                </div>
+                <div class="col right">
+                  <small class="">{{ msg.createddate | utcDate}} </small>
+                </div>
+              </div>
+              <small>{{ msg.remarks}} </small>
+            </li>
+
 
           </ul>
           <div class=" border-top pdtop-10">

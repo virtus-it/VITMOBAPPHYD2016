@@ -160,7 +160,7 @@ export class DistributorCreateDialogComponent implements OnInit {
         this.thisDialogRef.close('Cancel');
     }
      ngOnInit() {
-         //console.log(this.distributorDetail);
+         console.log(this.distributorDetail);
          this.getAreasName();
          this.getDetails();
          this.dropdownSettings = {

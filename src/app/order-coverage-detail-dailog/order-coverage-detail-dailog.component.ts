@@ -299,6 +299,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             .subscribe(
             output => this.getFilteredPolygonResult(output),
             error => {
+                this.smallLoader = false;
                 //console.log("error in products category list");
             });
 
@@ -307,6 +308,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     getFilteredPolygonResult(result) {
         //console.log(result);
         if (result.result = 'success') {
+
 
             //this.polygonArray= [];
             this.displayPolygon = [];
@@ -342,6 +344,9 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
                     }
 
                 }
+                this.smallLoader = false;
+            }
+            else{
                 this.smallLoader = false;
             }
 
