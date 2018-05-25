@@ -199,13 +199,10 @@
                     <div class="">    
                         <ul class="nav nav-tabs flex-column">
                           <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" (click)="showTabPanel('link1')" [ngClass]="{'btn-primary': tabPanelView === 'link1'}" >Link1</a>
                           </li>
                           <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
+                            <a class="nav-link" (click)="showTabPanel('link2')"  [ngClass]="{'btn-primary': tabPanelView === 'link2'}" >Link2</a>
                           </li>
                         </ul>
                       </div>
@@ -218,7 +215,7 @@
 
 
 
-
+<div class="" *ngIf="tabPanelView == 'link1'">
   
     <div class="row">
         <div class="col">
@@ -355,9 +352,12 @@
 
 
   </div>
+  <span class="fa fa-caret-square-o-right" (click)="showTabPanel('link2')"></span>
+
+</div>
 
 
-  <div class="row">
+  <div class="row" *ngIf="tabPanelView == 'link2'">
                 
 
 
@@ -485,13 +485,25 @@
                       <b title="Remove Slider" class="fa fa-trash danger fs-22" (click)="removeSilder(silder)" aria-hidden="true"></b>
                     </div>
                   </div>
-
+                
                 </td>
               </tr>
             </table>
+
           </div>
+         
+
+
         </div>
       </div>
+
+      <div class="" >
+        <span class="fa fa-caret-square-o-left" (click)="showTabPanel('link1')"></span>
+      </div>
+
+     
+
+
     </div>
 
 

@@ -61,6 +61,7 @@ export class SmsDialogComponent implements OnInit {
   optionCount:number = 0;
   silderCount:number = 0;
   template:any = "";
+  tabPanelView: string = "link1";
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -609,7 +610,10 @@ this.smsInput.sliderurl.push(sliderObject);
   // }
 
 
-
+  showTabPanel(panelName) {
+    this.tabPanelView = panelName;
+      
+  }
 
 
 
