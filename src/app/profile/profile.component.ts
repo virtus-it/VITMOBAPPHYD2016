@@ -102,54 +102,56 @@ updateUser(){
 updateUserResult(result){
   if(result.result == 'success'){
     this.getProfileDetails();
+    console.log('update user called');
   }
 }
 
 
 
 
-// onFileSelected(event){
+onFileSelected(event){
 
-//   var files = event.target.files;
-//   var file = files[0];
+  var files = event.target.files;
+  var file = files[0];
 
-// if (files && file) {
-//     var reader = new FileReader();
+if (files && file) {
+    var reader = new FileReader();
 
-//     reader.onload =this._handleReaderLoaded.bind(this);
+    reader.onload =this._handleReaderLoaded.bind(this);
 
-//     reader.readAsBinaryString(file);
+    reader.readAsBinaryString(file);
 
-// }
-// }
+}
+}
 
-// _handleReaderLoaded(readerEvt) {
-// var binaryString = readerEvt.target.result;
-//        this.base64textString= btoa(binaryString);
-//        console.log(btoa(binaryString));
-// }
+_handleReaderLoaded(readerEvt) {
+var binaryString = readerEvt.target.result;
+       this.base64textString= btoa(binaryString);
+       console.log('converted to base64');
+      //  console.log(btoa(binaryString));
+}
 
-// // //  /uploadimg   data.productid pname
-
-
-
-// uploadImage(){
-//  let input = {"image":{"base64string": this.base64textString , "filename": 'dealer_'+this.profileUpdate.userid }};
-//  this.productService.uploadImage(input)
-// .subscribe(
-// output => this.uploadImageResult(output),
-// error => {
-//   //console.log("error in distrbutors");
-// });
-// }
-// uploadImageResult(result){
-//  if(result.result == 'success'){
-//    console.log('image uploaded successfully');
-//   //  this.updateUser();
+// //  /uploadimg   data.productid pname
 
 
-//  }
-// }
+
+uploadImage(){
+ let input = {"image":{"base64string": this.base64textString , "filename": 'dealer_'+this.profileUpdate.userid }};
+ this.productService.uploadImage(input)
+.subscribe(
+output => this.uploadImageResult(output),
+error => {
+  //console.log("error in distrbutors");
+});
+}
+uploadImageResult(result){
+ if(result.result == 'success'){
+   console.log('image uploaded successfully');
+   this.updateUser();
+
+
+ }
+}
 
 
 
