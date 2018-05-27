@@ -1,0 +1,6 @@
+.orderStyle{
+    color: var( --warning) !important;
+    font-size: 18px;
+    margin:10px 0px  5px !important;
+    text-align: center;
+}

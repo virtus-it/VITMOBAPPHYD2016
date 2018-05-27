@@ -1,93 +1,96 @@
-
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-check-square-o" aria-hidden="true"></i>
-     Select Product
+    <i class="fa fa-check-square-o" aria-hidden="true"></i>
+    Select Product
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
-        <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-        </strong>         
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
-  <md-dialog-content layout="column">
-    <div class="container-fluid brd-bottom">
-      <br>
-      <table class="table table-hover table-striped table-fixedheader">
-  <thead>
-    <tr>
-      <th width="15%">Product</th>
-      <th width="15%">Product type </th>
-     
-      <th width="13%">Count</th>    
-      <th width="13%">Price per unit</th>
-
-      <th width="13%">Exp Del Chgs</th>
-      <th width="13%">Serv Chgs</th>
-      <th width="10%">INR</th>
-       </tr>
-  </thead>
-  <tbody>
+<md-dialog-content layout="column">
+  <div class="container-fluid brd-bottom">
     <div *ngIf="productMessage && this.orderDetail.type !== 'coveragePage'">
-      <small>Customer Ordered: {{orderDetail.orderDetails.brandname}} with Order id : {{orderDetail.orderDetails.order_id}} <br> Selected Distributor does'nt have same product. Select any one of below</small>
+      <p class="orderStyle"><i class="fa fa-exclamation-triangle"></i> Customer Ordered:
+        <span class="capitalize">{{orderDetail.orderDetails.brandname}}</span> with Order id : {{orderDetail.orderDetails.order_id}} Selected Distributor
+        does'nt have same product. Select any one of below</p>
     </div>
-    
-    <tr  *ngFor="let product of productList; let i = index" [attr.data-index]="i" >
-        <td width="15%" class="left capital"> <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'  class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description">{{product.brandname}} </span>
-          </label></td>
-      <td width="15%" class="left capital" >{{product.pname}} {{product.ptype}}</td>
-     
-      <td width="13%" class="left capital"> 
-          <md-form-field class="example-full-width inline ">
-            <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'"  [(ngModel)]="product.quantity">
-            <!-- (ngModelChange)="searchMobileNo()"-->
-          </md-form-field></td> 
+    <table class="table table-hover table-striped table-fixedheader mgtop-10">
+      <thead>
+        <tr>
+          <th width="22%">Product</th>
+          <th width="25%">Product Type </th>
+          <th width="10%">Count</th>
+          <th width="12%">Price per unit</th>
+          <th width="10%">Exp Del Chgs</th>
+          <th width="10%">Serv Chgs</th>
+          <th width="8%">INR</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productList; let i = index" [attr.data-index]="i">
+          <td width="22%" class="left capital">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
+                class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description onhovertooltip-250" title="{{product.brandname}}">{{product.brandname}} </span>
+            </label>
+          </td>
+          <td width="25%" class="left capital">
+            <span class="onhovertooltip-250" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
 
-          <td width="13%" class="left capital">{{product.pcost}}</td>
+          <td width="10%" class="left capital">
+            <md-form-field class="example-full-width inline ">
+              <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'" [(ngModel)]="product.quantity">
+              <!-- (ngModelChange)="searchMobileNo()"-->
+            </md-form-field>
+          </td>
+
+          <td width="12%" class="left capital">{{product.pcost}}</td>
+          <td class="left capital" width="10%">           
+             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" name="expressdelivery" [(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"
+                [disabled]="product.stockstatus== 'Soldout'" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span>  {{product.expressdeliverycharges}}
+            </label>
+            <!-- <input type="checkbox" name="expressdelivery" [(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"
+              [disabled]="product.stockstatus== 'Soldout'"> -->
+            <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
+          </td>
+          <td width="10%" class="left capital"> {{product.servicecharge}} </td>
 
 
-      
+          <td class="left capital" width="8%">
+            <span *ngIf="product.quantity > 0"> {{product.pcost * product.quantity + product.servicecharge * product.quantity + amount}} </span>
+            <span *ngIf="product.quantity == 0"> 0 </span>
+          </td>
+
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr *ngIf="noRecord">
+          <td colspan="4">
+            <h4 class="warning oneline center">
+              <i aria-hidden="true" class="fa fa-frown-o"></i>
+              Record Not Available</h4>
+          </td>
+        </tr>
+
+      </tfoot>
+    </table>
+  </div>
 
 
-      <td class="left capital" width="13%">  {{product.expressdeliverycharges}}
-        
-          <input type="checkbox"  name="expressdelivery"[(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"  [disabled]="product.stockstatus== 'Soldout'">
-          <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
-      </td>
-      <td width="13%" class="left capital"> {{product.servicecharge}} </td> 
-
-
-      <td class="left capital" width="10%"> 
-        <span *ngIf="product.quantity > 0"> {{product.pcost * product.quantity + product.servicecharge * product.quantity + amount}} </span>
-     <span *ngIf="product.quantity == 0"> 0 </span>
-      </td>
-  
-     </tr>
-  </tbody>
-  <tfoot>
-      <tr *ngIf="noRecord">
-        <td colspan="4">
-          <h4 class="warning oneline center">
-            <i aria-hidden="true" class="fa fa-frown-o"></i>
-            Record Not Available</h4>
-        </td>
-      </tr>
-
-  </tfoot>
-</table>
-</div>
-      
- 
-  </md-dialog-content>
-  <div class="row float-right pdright-30  mgbottom-20">
+</md-dialog-content>
+<div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
 
-    <button type="submit" md-raised-button  class="btn-primary" (click)="setProducts()">SET</button>&nbsp;
+    <button type="submit" md-raised-button class="btn-primary" (click)="setProducts()">SET</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
-    
+
   </md-dialog-actions>
 </div>
-
