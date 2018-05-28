@@ -74,3 +74,6 @@ table thead {
   .disable{
     color: grey;
   }
+  .bgcolor-fade-blue{
+    box-shadow: 0px 0px 50px #0f75bc inset !important;
+}

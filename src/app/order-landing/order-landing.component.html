@@ -509,11 +509,21 @@
 
                 <div class="row ">
                   <div class="col left">
-                    <span class="td-label">
-                      Address</span>
-                    <br>
-                    <b class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}"> {{forward.customer.address}}</b>
-                        <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button> 
+                   
+                   <div class="row">
+                     <div class="col-9">
+                        <span class="td-label">
+                            Address</span>
+                            <br>
+                    <b> <span class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span></b>
+                    </div>
+                    <div class="col-3 right align-self-center"> 
+                        <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(forward.customer.address)">
+                        <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                    </div>
+                    </div>
+                
+
                   </div>
 
                 </div>

@@ -16,28 +16,32 @@
       <div class="col-5 left bg-color-bg brd-left-5">
         <div class="row">
           <div class="col-6">
-           
-            <b class="left">Name: {{smslist.name}}</b>
+
+            <b class="left">Name: <span class="grayd">{{smslist.name}}</span></b>
             <br>
-            <span class="left capital">
-              <b>Status:</b> {{smslist.status}}</span>
+            <b>Status:</b> 
+            <span class="left capital grayd">
+              {{smslist.status}}</span>
             <br>
-            <span class="left capital">
-              <b>Type:</b> {{smslist.smstype}}</span>
+            <b>Type:</b>
+            <span class="left capital grayd">
+              {{smslist.smstype}}</span>
             <br>
           </div>
           <div class="col-6">
             <span class="left">
-                <span class="fa fa-phone"></span>  <span *ngFor="let mobile of smslist.mobileno">
-               {{mobile.mobileno}} {{item}}{{i ? '' : ', '}} </span>
+              <span class="fa fa-phone"></span>
+              <span *ngFor="let mobile of smslist.mobileno">
+                {{mobile.mobileno}} {{item}}{{i ? '' : ', '}} </span>
               <span *ngIf="smslist.mobileno === null "> - </span>
             </span>
             <br>
-            <span class="left">
-              <b>Mobile Count:</b> {{smslist.mcount}}</span>
+            <b>Mobile Count:</b>
+            <span class="left grayd">
+               {{smslist.mcount}}</span>
             <br>
             <span class="fa fa-clock-o"></span>
-            <span>{{smslist.createddate | utcDate}}</span>
+            <span class="grayb">{{smslist.createddate | utcDate}}</span>
             <br>
           </div>
         </div>

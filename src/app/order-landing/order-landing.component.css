@@ -160,3 +160,9 @@ table thead {
 .env-size{
   font-size: 20px;
 }
+
+.copy-btn{
+    border: 1px solid;
+    padding-left: 6px;
+    padding-top: 5px;
+}

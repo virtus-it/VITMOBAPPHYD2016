@@ -17,7 +17,7 @@ export class SmsComponent implements OnInit {
     smsClickMore = true;
     openSmsDialog() {
         let dialogRef = this.dialog.open(SmsDialogComponent, {
-            width: '80%',
+            width: '95%',
             data: ''
         });
         dialogRef.afterClosed().subscribe(result => {

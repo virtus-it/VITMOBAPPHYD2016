@@ -52,7 +52,7 @@
             <span class="warn" *ngIf="prod.isauthorized != 'true'">No</span>
           </td>  
           <td width="6%" class="left capital warning">{{prod.avaliable_stock}}</td>
-          <td width="7%" class="left capital" [ngClass]="{'warn':prod.stockstatus == 'Soldout' , 'blue':prod.stockstatus != 'Soldout'}">{{prod.stockstatus}}</td>
+          <td width="7%" class="left capital" [ngClass]="{'red':prod.stockstatus == 'Soldout' , 'success':prod.stockstatus == 'Avaliable'||'avaliable', 'warning':prod.stockstatus == 'Lowstock'}">{{prod.stockstatus}}</td>
           <td width="10%">
              <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
