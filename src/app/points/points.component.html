@@ -1,49 +1,138 @@
-
 <div class=" dist-style minheight-500">
-    <div class=" row justify-content-between distIcon-style left">
-      <div class="col-sm-2 col-md-2 col-lg-2 ">
-        <h4>
-          <i class="fa fa-sitemap"></i> Points</h4>
-          
-         
-      </div>
-      <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-        
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-file-powerpoint-o"></i> Points</h4>
 
-      </div>
+
     </div>
-    <div>
-    
-      <div  class="row pd-15 mg-0">  
-          
-  
-        <div class="">
-          <table class="table table-hover table-striped" style="table-layout:fixed">
-            <thead>
-              <tr>
-                <th width="20%">header element</th>
-                <th width="20%">header element</th>
-                <th width="20%">header element</th>
-                <th width="20%">header element</th>
-                <th width="20%">header element</th>
+    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
 
-              </tr>
-            </thead>
-            <tbody>
 
-              <td class=""  width="20%"> td element</td>
-              <td class=""  width="20%"> td element</td>
-              <td class=""  width="20%"> td element</td>
-              <td class=""  width="20%"> td element</td>
-              <td class=""  width="20%"> td element</td>
-              
-  
-            </tbody>      
-          </table>
-  
-        
-  
-        </div>
+    </div>
+  </div>
+  <div>
+
+    <div class="row pd-15 mg-0">
+      <div class="">
+        <table class="table table-hover table-striped" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th width="">Feature</th>
+              <th width="">Description</th>
+              <th width="">Points</th>
+              <th width="5%">Action</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="" width=""> Sign up </td>
+              <td class="" width=""> When user signs up the system</td>
+              <td class="" width=""> 20 point to customer who signed up</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points" (click)="editPoints()"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> Sign up (with reference code – supplier, distributor or customer) </td>
+              <td class="" width=""> User who signed up User whose reference code is used for sign up</td>
+              <td class="" width=""> 20 points to customer who signed up 20 points to customer whose reference code is used (supplier, distributor
+                or another customer)</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> Customer Ordered</td>
+              <td class="" width=""> Every order with 1 bottle</td>
+              <td class="" width=""> 10 points to customer who raised the order</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Every order with 2 -5 bottles </td>
+              <td class="" width=""> 20 points to customer who raised the order</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""></td>
+              <td class="" width=""> Every order with more than 5 bottles </td>
+              <td class="" width=""> 30 points to customer who raised the order</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Order raised in less than 3 days</td>
+              <td class="" width=""> 10 points to customer who raised the order</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Order raised in a week </td>
+              <td class="" width=""> 5 points to customer who raised the order </td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width="">Distributors</td>
+              <td class="" width=""> Distributor who clicks on accept order </td>
+              <td class="" width=""> 5 points to distributor who clicks and accept the order</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Distributor who delivers in delivery slot time (or earlier than the delivery slot) </td>
+              <td class="" width=""> 20 points </td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Distributor who delivers in same day </td>
+              <td class="" width=""> 10 points </td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+              <td class="" width=""> </td>
+              <td class="" width=""> Distributor who added his customer </td>
+              <td class="" width=""> 20 points to distributor. 10 points to customer. </td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+            <tr>
+
+              <td class="" width=""> Users </td>
+              <td class="" width=""> Who uses market place in sharing the message to users </td>
+              <td class="" width=""> 5 points</td>
+              <td class="" width="">
+                <i class="fa fa-edit logo-color cursor" title="Edit Points"></i>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
+
       </div>
     </div>
   </div>
+</div>

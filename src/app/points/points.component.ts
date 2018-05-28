@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { EditPointsComponent } from '../edit-points/edit-points.component';
+import { MdDialog } from '@angular/material';
+
 
 @Component({
   selector: 'app-points',
@@ -7,7 +10,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PointsComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MdDialog,) { }
+
+  editPoints(){
+    let dialogRefAddProduct = this.dialog.open(EditPointsComponent, {
+
+      width: '700px',
+      data: ''
+    });
+    dialogRefAddProduct.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+
+
+      }
+
+    });
+  }
+
+
 
   ngOnInit() {
   }
