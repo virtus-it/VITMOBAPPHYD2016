@@ -1288,7 +1288,7 @@ this.orderLandingService.getOrdersByfilter(input)
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {
 
-        if(result == 'success'){
+        if(result == 'success' || result == 'Cancel' || result  == undefined){
           this.loaderService.display(false);
         }
         else{
@@ -1357,11 +1357,16 @@ this.orderLandingService.getOrdersByfilter(input)
                   this.getForwardOrderDetails(true);
                   this.getAllOrderDetails(true);
                   this.refresh();
+                  this.loaderService.display(false);
               
+                }
+                else if (result == 'Cancel' || result == undefined){
+                  this.loaderService.display(false);
                 }
     
             });
           }
+        
           }
           getMessage() {
             this.orderLandingService

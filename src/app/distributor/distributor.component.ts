@@ -13,6 +13,10 @@ import { ViewSupplierComponent } from '../view-supplier/view-supplier.component'
 import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
 import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
 
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
@@ -23,6 +27,11 @@ import { LoaderService } from '../login/loader.service';
     styleUrls: ['./distributor.component.css']
 })
 export class DistributorComponent implements OnInit {
+
+  CategoryCtrl: FormControl;
+  filteredcategories: Observable<any[]>;
+
+
     setPosition: any = "";
     ordersList = [];
     distributors: any = [];
@@ -30,11 +39,60 @@ export class DistributorComponent implements OnInit {
     searchDistributorTerm = "";
     searchDistributorNumber = "";
     filterType = "";
+
+    quickFilterInput :any  = { categoryid: ""};
     distributorClickMore = true;
+    LastfilterRecords = false;
     isActive:any= "";
+    categories: any = [];
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
-    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
+    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { 
+
+        this.CategoryCtrl = new FormControl();
+        this.filteredcategories = this.CategoryCtrl.valueChanges
+          .startWith(null)
+          .map(cat => cat ? this.findCategories(cat) : this.categories.slice());
+
+
+    }
+
+    findCategories(name: string) {
+          //console.log(name);
+     let finalCategories:any = [];
+     finalCategories = this.categories.filter(cat =>
+        cat.categoryname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      
+    if (finalCategories && finalCategories.length > 0) {
+      let findCategory: any = {};
+
+      findCategory = _.find(finalCategories, function (k, l) {
+        let catDetails: any = k;
+        return catDetails.categoryname == name;
+      });
+
+      if (findCategory) {
+        this.quickFilterInput.categoryid = findCategory.categoryid;
+      }
+
+
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        
+this.getAllCategories();
+      }
+
+
+    }
+    return finalCategories;
+
+    }
+
+
+    getAllCategories(){
+
+    }
 
     getDistributors(firstCall) {
         this.loaderService.display(true);
@@ -340,6 +398,10 @@ export class DistributorComponent implements OnInit {
              this.searchDistributorTerm= "";
             this.searchDistributorNumber = "";
             this.getDistributors(true);
+        }
+
+        quickFilter(){
+
         }
     
 

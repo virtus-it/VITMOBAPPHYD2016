@@ -44,6 +44,8 @@ salesInput = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  
 
 manufacturerInput =  { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"" };
 
+marketingInput =  { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"" };
+
 areaList = [];
 phone = false;
 supplierInput = { firstname: "", mobileno: "", altmobileno: "", address: "", emailid:""};
@@ -91,6 +93,9 @@ createOrUpdateUser(){
       else if(this.UserInput.usertype == 'Manufacturer'){
         this.UpdateManufacturer();
       }
+      else if(this.UserInput.usertype == 'Marketing'){
+        this.UpdateMarketingUser();
+      }
   }
   else{
     if(this.UserInput.usertype == 'Customer'){
@@ -108,6 +113,59 @@ createOrUpdateUser(){
       else if(this.UserInput.usertype == 'Manufacturer'){
         this.addManufacturer();
       }
+      else if(this.UserInput.usertype == 'Marketing'){
+        this.addMarketingUser();
+      }
+  }
+
+}
+
+
+
+
+addMarketingUser(){
+  let input = {"User": {
+    "pwd":this.marketingInput.phone,"user_type": "marketing", "TransType": "create","referCode": this.marketingInput.referCode ,"firstname": this.marketingInput.firstName,  "lastname": this.marketingInput.lastName, "companyname":this.marketingInput.companyname,"address":this.marketingInput.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.marketingInput.phone, "mobileno_one":this.marketingInput.mobile1, "mobileno_two":this.marketingInput.mobile2,  "emailid": this.marketingInput.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+ }
+};
+  this.distributorService.createDistributor(input)
+          .subscribe(
+          output => this.addMarketingUserResult(output),
+          error => {
+              //console.log("error in distrbutors");
+          });
+
+}
+addMarketingUserResult(result){
+  if(result.result == 'success'){
+    this.thisDialogRef.close('success');
+
+  }
+
+}
+
+
+
+
+
+
+UpdateMarketingUser(){
+
+  let input:any = {"User": {"pwd":this.marketingInput.phone,"user_type": "marketing", "TransType": "create","referCode": this.marketingInput.referCode ,"firstname": this.marketingInput.firstName,  "lastname": this.marketingInput.lastName, "companyname":this.marketingInput.companyname,"address":this.marketingInput.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.marketingInput.phone, "mobileno_one":this.marketingInput.mobile1, "mobileno_two":this.marketingInput.mobile2,  "emailid": this.marketingInput.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()}};
+    input.User.userid = this.Details.userid;
+    this.distributorService.updateDistributor(input)
+    .subscribe(
+    output => this.UpdateMarketingUserResult(output),
+    error => {
+        //console.log("error in distrbutors");
+    });
+}
+UpdateMarketingUserResult(result){
+  if(result.result == 'success'){
+    console.log('marketing user updated successfully');
+    this.thisDialogRef.close('success');
+    this.getUserDetails();
+
   }
 
 }
@@ -333,6 +391,19 @@ onSubmitResult(result) {
       this.manufacturerInput.emailid = this.Details.emailid;
       this.manufacturerInput.referCode = this.Details.reference_code;
     }
+    else if(this.Details.usertype == 'marketing'){
+
+      this.marketingInput.firstName = this.Details.firstname;
+      this.marketingInput.lastName = this.Details.lastname;
+      this.marketingInput.phone = this.Details.mobileno;
+      this.marketingInput.mobile1 = this.Details.mobileno_one;
+      this.marketingInput.mobile2 = this.Details.mobileno_two;
+      this.marketingInput.companyname = this.Details.companyname;
+      this.marketingInput.address = this.Details.address;
+      this.marketingInput.emailid = this.Details.emailid;
+      this.marketingInput.referCode = this.Details.reference_code;
+
+    }
 
   }   
 
@@ -487,6 +558,9 @@ if(result.result == 'success'){
       }
       else if(this.Details.usertype == 'manufacturer'){
         this.UserInput.usertype = 'Manufacturer';
+      }
+      else if(this.Details.usertype == 'marketing'){
+        this.UserInput.usertype = 'Marketing';
       }
 
      
