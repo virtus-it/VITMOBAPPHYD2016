@@ -93,6 +93,10 @@ this.getProductByCategory();
 
     // }
 
+    gototop(){
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    }
+
 
     getProductByCategory(){
         let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
