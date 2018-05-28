@@ -12,21 +12,21 @@ export class PointsComponent implements OnInit {
 
   constructor(public dialog: MdDialog,) { }
 
-  editPoints(){
-    let dialogRefAddProduct = this.dialog.open(EditPointsComponent, {
+  // editPoints(){
+  //   let dialogRefAddProduct = this.dialog.open(EditPointsComponent, {
 
-      width: '700px',
-      data: ''
-    });
-    dialogRefAddProduct.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
-      if (result == 'success') {
+  //     width: '700px',
+  //     data: ''
+  //   });
+  //   dialogRefAddProduct.afterClosed().subscribe(result => {
+  //     //console.log(`Dialog closed: ${result}`);
+  //     if (result == 'success') {
 
 
-      }
+  //     }
 
-    });
-  }
+  //   });
+  // }
 
 
 

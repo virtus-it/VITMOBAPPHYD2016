@@ -8,11 +8,13 @@ import { MdDialogRef } from '@angular/material';
 })
 export class EditPointsComponent implements OnInit {
 
-  constructor( public thisDialogRef: MdDialogRef<EditPointsComponent>) { }
+  constructor() { }
 
-  onCloseCancel() {
-    this.thisDialogRef.close('cancel');
-  }
+
+  
+  // onCloseCancel() {
+  //   this.thisDialogRef.close('cancel');
+  // }
 
   ngOnInit() {
   }
