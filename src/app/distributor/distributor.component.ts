@@ -16,6 +16,7 @@ import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.c
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
+import { ProductsService } from '../products/products.service';
 import 'rxjs/add/operator/map';
 
 import { MdDialog } from '@angular/material';
@@ -39,15 +40,16 @@ export class DistributorComponent implements OnInit {
     searchDistributorTerm = "";
     searchDistributorNumber = "";
     filterType = "";
+    categoryList:any = [];
 
-    quickFilterInput :any  = { categoryid: ""};
+    filterInput :any  = { categoryid: "" , categoryname: ""};
     distributorClickMore = true;
     LastfilterRecords = false;
     isActive:any= "";
     categories: any = [];
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
-    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { 
+    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
 
         this.CategoryCtrl = new FormControl();
         this.filteredcategories = this.CategoryCtrl.valueChanges
@@ -58,41 +60,61 @@ export class DistributorComponent implements OnInit {
     }
 
     findCategories(name: string) {
-          //console.log(name);
      let finalCategories:any = [];
-     finalCategories = this.categories.filter(cat =>
-        cat.categoryname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+     finalCategories = this.categoryList.filter(cat =>
+        cat.category.toLowerCase().indexOf(name.toLowerCase()) === 0);
       
     if (finalCategories && finalCategories.length > 0) {
       let findCategory: any = {};
 
       findCategory = _.find(finalCategories, function (k, l) {
         let catDetails: any = k;
-        return catDetails.categoryname == name;
+        return catDetails.category == name;
       });
 
       if (findCategory) {
-        this.quickFilterInput.categoryid = findCategory.categoryid;
+        this.filterInput.categoryid = findCategory.categoryid;
+        this.filterInput.categoryname = findCategory.category;
       }
-
-
     }
     else {
-      if (name.length >= 3 && !this.LastfilterRecords) {
-        
-this.getAllCategories();
+      if (name.length >= 3 && !this.LastfilterRecords) {       
+this.getProductByCategory();
       }
-
-
     }
     return finalCategories;
-
     }
 
+   
 
-    getAllCategories(){
 
-    }
+
+    // search(){
+
+    // }
+
+
+    getProductByCategory(){
+        let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    
+        this.productService.getProductsCategory(input)
+        .subscribe(
+        output => this.getProductsCategoryResult(output),
+        error => {
+          //console.log("error in products category list");
+        });
+      }
+      getProductsCategoryResult(result){
+        //console.log(result);
+        if (result.result == "success") {
+          this.categoryList = result.data;
+        }
+        else{
+            this.LastfilterRecords = true;
+        }
+      }
+    
+
 
     getDistributors(firstCall) {
         this.loaderService.display(true);
@@ -407,6 +429,7 @@ this.getAllCategories();
 
     ngOnInit() {
         this.getDistributors(true);
+        this.getProductByCategory();
         // if(window.navigator.geolocation){
         //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
         //     };

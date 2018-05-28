@@ -49,7 +49,11 @@ export class PreOrderComponent implements OnInit {
             //console.log(`Dialog closed: ${result}`); 
             if (result == 'success') {
                 this.getCustomerList(true);
+                this.loaderService.display(false);
 
+            }
+            else if(result == 'Cancel' || result == undefined){
+                this.loaderService.display(false);
             }
         });
     }

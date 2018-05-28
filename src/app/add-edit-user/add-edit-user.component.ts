@@ -36,7 +36,7 @@ paymentDate: any ="";
 paymentdueDate:any = "";
 UserInput = {"usertype":"Customer"};
 
-customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" , "promocode":"" } }
+customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" , "promocode":"" , "referencecode":"" } }
 
 dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"" };
 
@@ -341,6 +341,7 @@ onSubmitResult(result) {
       this.customerInput.User.locality = this.Details.locality;
       this.customerInput.User.buildingname = this.Details.buildingname;
       this.customerInput.User.promocode = this.Details.promocode;
+      this.customerInput.User.referencecode = this.Details.reference_code;
     }
     else if(this.Details.usertype == 'dealer'){
       this.phone = true;

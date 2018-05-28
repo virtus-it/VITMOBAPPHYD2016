@@ -87,7 +87,9 @@ export class LoginComponent implements OnInit {
                       polygon.supplier = data.suppliers;
                       polygon.mobileno = data.mobileno;
                       polygon.mobileno1 = data.mobileno1;
-                      polygon.mobileno2 = data.mobileno2;                      
+                      polygon.mobileno2 = data.mobileno2;
+                      polygon.latitude = data.latitude;
+                      polygon.longitude = data.longitude;                                           
                       polygonArray.push(polygon);
           
                     }
