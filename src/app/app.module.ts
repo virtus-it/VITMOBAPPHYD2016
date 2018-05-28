@@ -115,6 +115,7 @@ import { UsersComponent } from './users/users.component';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { ProductServiceAreaComponent } from './product-service-area/product-service-area.component';
 import { PointsComponent } from './points/points.component';
+import { EditPointsComponent } from './edit-points/edit-points.component';
 
 
 
@@ -210,6 +211,7 @@ import { PointsComponent } from './points/points.component';
         AddEditUserComponent,
         ProductServiceAreaComponent,
         PointsComponent,
+        EditPointsComponent,
 
      
         
@@ -351,7 +353,8 @@ import { PointsComponent } from './points/points.component';
          DeletePromocodeComponent,
          InboxComponent,
          AddEditUserComponent,
-         ProductServiceAreaComponent
+         ProductServiceAreaComponent,
+         EditPointsComponent
       
 
 
