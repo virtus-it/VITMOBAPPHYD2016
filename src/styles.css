@@ -12,6 +12,7 @@
   --danger:#d43f3a;
   --gray6:#666;
   --gray9:#999;
+  --grayb:#bbb;
   --grayd:#ddd;
   --white:#fff;
   --gray157:#f1f5f7;
@@ -570,6 +571,12 @@ ul li small{
 }
 .gray9{
   color: #999 !important;
+}
+.grayb{
+  color: #bbb !important;
+}
+.grayd{
+  color:#ddd !important;
 }
 .mgtop-5{
   margin-top: 5px;

@@ -42,7 +42,7 @@
 .add-btn-2{
 border: 1px solid darkgray;
 border-radius: 5px;
-background: #ffdbdb;
+background: #dbf0ff;
 margin: -7px;
 height: 112%;
 max-height: 200px;
@@ -51,7 +51,7 @@ overflow-y: auto;
 .add-btn-3{
     border: 1px solid darkgray;
     border-radius: 5px;
-    background: #dbffea;
+    background: #dbf0ff;
     margin: -7px;
     height: 112%;
     max-height: 200px;
@@ -64,7 +64,7 @@ overflow-y: auto;
     background: rgb(254, 250, 255);
     border-radius: 4px;
     border: 1px solid #000;
-    height: 178%;
+    height: auto;
     }
 
   
@@ -77,4 +77,44 @@ overflow-y: auto;
         margin-bottom: 4px;
         border-radius: 4px;
     }
+
+    .preview{
+        box-sizing: content-box;
+        margin-top: 8px;
+        width: 270px;
+        height: auto;
+        padding: 2px;
+        border: 2px solid;
+    }
     
+    .add-delete{
+        display: -webkit-inline-box;
+    }
+
+    .preview-header{
+        height: 46px;
+    line-height: 0;
+    width: 100%;
+    background-color: #555;
+    color: white;
+    padding-top: 7px;
+    }
+
+    .preview-btn{
+        height: 34px;
+    width: 100%;
+    line-height: 2;
+    background-color: #0f75bc;
+    color: white;
+    margin-top: 5px;
+    }
+    .icon-style{
+        position: absolute;
+        z-index: 21;
+        margin-left: 25px;
+        margin-top: 13px;
+        font-size: 34px;
+        color: white;
+    }
+
+  
