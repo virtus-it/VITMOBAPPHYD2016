@@ -612,10 +612,13 @@ this.smsInput.sliderurl.push(sliderObject);
 
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
+    if(this.tabPanelView == 'link2'){
+      window.scroll(0, 0);
+    }
       
   }
 
-
+ 
 
 
 
@@ -629,3 +632,5 @@ this.smsInput.sliderurl.push(sliderObject);
   }
 
 }
+
+

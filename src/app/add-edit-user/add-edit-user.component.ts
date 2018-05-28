@@ -36,7 +36,7 @@ paymentDate: any ="";
 paymentdueDate:any = "";
 UserInput = {"usertype":"Customer"};
 
-customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" , "promocode":"" , "orderaddress":"" , "orderid":"" } }
+customerInput: any = { "User": { "advamt": "0", "registertype":"residential" ,  "mobileno_one":"" , "mobileno_two":"", "paymenttype":"cod", "user_type": "customer", "lastname": "", "emailid": null, "aliasname": "", "mobileno": "", "loginid": this.authenticationService.loggedInUserId(), "firstname": "","address": "",  "apptype": this.authenticationService.appType(),"dealer_mobileno":this.authenticationService.dealerNo() , "locality":"" , "buildingname":"" , "promocode":"" } }
 
 dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"" };
 
@@ -51,26 +51,26 @@ supplierInput = { firstname: "", mobileno: "", altmobileno: "", address: "", ema
 headerValue:any  = "Add User";
 
 
-  submitUser(){
+//   submitUser(){
 
     
-   if(this.UserInput.usertype == 'Customer'){
-    this.addCustomer();
-    }
-    else if(this.UserInput.usertype == 'Distributor'){
-      this.addDistributor();
-    }
-    else if(this.UserInput.usertype == 'Supplier'){
-      this.addSupplier();
-    }
-    else if(this.UserInput.usertype == 'Sales'){
-      this.addSalesUser();
-    }
-    else if(this.UserInput.usertype == 'Manufacturer'){
-      this.addManufacturer();
-    }
+//    if(this.UserInput.usertype == 'Customer'){
+//     this.addCustomer();
+//     }
+//     else if(this.UserInput.usertype == 'Distributor'){
+//       this.addDistributor();
+//     }
+//     else if(this.UserInput.usertype == 'Supplier'){
+//       this.addSupplier();
+//     }
+//     else if(this.UserInput.usertype == 'Sales'){
+//       this.addSalesUser();
+//     }
+//     else if(this.UserInput.usertype == 'Manufacturer'){
+//       this.addManufacturer();
+//     }
 
-}
+// }
 
 
 createOrUpdateUser(){
@@ -92,6 +92,24 @@ createOrUpdateUser(){
         this.UpdateManufacturer();
       }
   }
+  else{
+    if(this.UserInput.usertype == 'Customer'){
+      this.addCustomer();
+      }
+      else if(this.UserInput.usertype == 'Distributor'){
+        this.addDistributor();
+      }
+      else if(this.UserInput.usertype == 'Supplier'){
+        this.addSupplier();
+      }
+      else if(this.UserInput.usertype == 'Sales'){
+        this.addSalesUser();
+      }
+      else if(this.UserInput.usertype == 'Manufacturer'){
+        this.addManufacturer();
+      }
+  }
+
 }
 
 
@@ -187,7 +205,7 @@ onSubmitResult(result) {
 
   addSupplier() {
 
-    let input: any = { "User": { "user_type": "supplier", "TransType": "create", "firstname": this.supplierInput.firstname, "gender": "Male", "pwd": this.supplierInput.mobileno, "address":this.supplierInput.address,  "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.supplierInput.mobileno,  "emailid":this.supplierInput.emailid, "altmobileno": this.supplierInput.altmobileno, "issuppersupplier": false, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType() } };
+    let input: any = { "User": { "user_type": "supplier", "TransType": "create", "firstname": this.supplierInput.firstname, "gender": "Male", "pwd": this.supplierInput.mobileno, "address":this.supplierInput.address,  "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.supplierInput.mobileno,  "emailid":this.supplierInput.emailid, "mobileno_one": this.supplierInput.altmobileno, "issuppersupplier": false, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType() } };
     //console.log(input);
     this.supplierservice.createSupplier(input)
       .subscribe(
@@ -326,6 +344,7 @@ onSubmitResult(result) {
     let input = this.customerInput;
     input.User.paymentday= this.paymentDate;
     input.User.billpaymentdueday= this.paymentdueDate;
+    input.User.userid = this.Details.userid;
     console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
@@ -417,7 +436,7 @@ if(result.result == 'success'){
 
 
     UpdateSupplier(){
-      let input: any = {"User":{"userid":this.Details.userid,"firstname":this.supplierInput.firstname,"mobileno":this.supplierInput.mobileno , "address":this.supplierInput.address, "emailid":this.supplierInput.emailid, "loginid":"289","user_type":"supplier","issuppersupplier":false,"apptype":this.authenticationService.appType() }}
+      let input: any = {"User":{"userid":this.Details.userid,"firstname":this.supplierInput.firstname,"mobileno":this.supplierInput.mobileno , "address":this.supplierInput.address, "emailid":this.supplierInput.emailid, "loginid":"289","user_type":"supplier","issuppersupplier":false,"apptype":this.authenticationService.appType() , "mobileno_one":this.supplierInput.altmobileno }};
       //console.log(input);
       this.supplierservice.updateSupplier(input)
       .subscribe(

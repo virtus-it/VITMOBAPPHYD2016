@@ -16,141 +16,112 @@
         <span></span>
       </b>
     </div> -->
-   
-    <div class="row mg-top-10" >
+
+    <div class="row mg-top-10">
       <div class="col-4">
-          
-      <md-select placeholder="Type" [(ngModel)]="createTemplateInput.temptype"  name="type" style="width: 180px">     
-      <md-option value="message">Message</md-option>
-      <md-option value="Remainder">Remainder</md-option>
-      <md-option value="status">Status</md-option>
-      <md-option value="sms">Sms</md-option>
-      <md-option value="sharemarket">Share Market</md-option>
-      <md-option value="followup">Follow up</md-option>
-      
-      
 
-</md-select>
-</div>
+        <md-select placeholder="Type" [(ngModel)]="createTemplateInput.temptype" name="type" style="width: 180px">
+          <md-option value="message">Message</md-option>
+          <md-option value="Remainder">Remainder</md-option>
+          <md-option value="status">Status</md-option>
+          <md-option value="sms">Sms</md-option>
+          <md-option value="sharemarket">Share Market</md-option>
+          <md-option value="followup">Follow up</md-option>
+        </md-select>
+      </div>
+      <div class="col-3">
+
+        <md-select placeholder="Order status" [(ngModel)]="createTemplateInput.orderstatus" name="status">
+          <md-option value="OrderCreated">Order Created</md-option>
+          <md-option value="OrderAssigned">Order Assigned</md-option>
+          <md-option value="OutForDelivery">Out for delivery</md-option>
+          <md-option value="Cancelled">Cancelled</md-option>
+          <md-option value="Rejected">Rejected</md-option>
+          <md-option value="Cantdeliver">Cant deliver</md-option>
+          <md-option value="PendingWithDistributor">Pending With Distributor</md-option>
+          <md-option value="Delivered">Delivered</md-option>
+          <md-option value="Accept">Accept</md-option>
+          <md-option value="Not reachable">Not reachable</md-option>
+          <md-option value="Backtodealer">Back to dealer</md-option>
+          <md-option value="Onhold">Onhold</md-option>
+          <md-option value="Door locked">Door locked</md-option>
+          <md-option value="OrderReceived">Order Received</md-option>
+          <md-option value="OrderConfirmed">Order Confirmed</md-option>
+          <md-option value="OrderInprocess">Order In-process</md-option>
+          <md-option value="Delivered">Delivered</md-option>
 
 
-<div class="col-3">
-
-    <md-select placeholder="Order status" [(ngModel)]="createTemplateInput.orderstatus" name="status">
-      <md-option value="OrderCreated">Order Created</md-option>
-      <md-option value="OrderAssigned">Order Assigned</md-option>      
-      <md-option value="OutForDelivery">Out for delivery</md-option>
-      <md-option value="Cancelled">Cancelled</md-option>
-      <md-option value="Rejected">Rejected</md-option>
-      <md-option value="Cantdeliver">Cant deliver</md-option>
-      <md-option value="PendingWithDistributor">Pending With Distributor</md-option>
-      <md-option value="Delivered">Delivered</md-option>
-      <md-option value="Accept">Accept</md-option>
-      <md-option value="Not reachable">Not reachable</md-option>
-      <md-option value="Backtodealer">Back to dealer</md-option>
-      <md-option value="Onhold">Onhold</md-option>
-      <md-option value="Door locked">Door locked</md-option>
-      <md-option value="OrderReceived">Order Received</md-option>
-      <md-option value="OrderConfirmed">Order Confirmed</md-option>
-      <md-option value="OrderInprocess">Order In-process</md-option>
-      <md-option value="Delivered">Delivered</md-option>
-      
-
-    </md-select>
-  </div>
-  <div class="col-3">
-      <md-form-field class="">
+        </md-select>
+      </div>
+      <div class="col-3">
+        <md-form-field class="">
           <input class="form-control" mdInput placeholder="Template Name" name="tempname" [(ngModel)]="createTemplateInput.tempname">
         </md-form-field>
 
         <!-- <i class="	fa fa-question-circle" title= " "<<ORDER_ID>>" for order id <<ORDER_QUANTITY>>" for order quantity"></i> -->
       </div>
-</div>
+    </div>
+    <div class="row  form-group ">
+      <div class="col-5">
 
+        <b class="">Audience </b>
+      </div>
+      <div class="col-6 mgleft-15">
+        <b class="">Message type</b>
+      </div>
+    </div>
+         <div class="row form-group">
 
-<div class="" >
-<div class="row  form-group ">
-<div class="col-5">
+        <div class="col-2 align-self-end">
 
-    <b class="col">Audience </b>
-  </div>  
-
-
-  <div class="col-7">
-
-      <b class="col">Message type</b>
-    </div>  
-
-</div>
-
-
-
-<div class="row form-group">
- 
-    <div class="col-2 align-self-end" >
-       
-        <div class="left capital">
+          <div class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio"  class="custom-control-input" name="customerType" value="Customer" [(ngModel)]= "createTemplateInput.type">
+              <input type="radio" class="custom-control-input" name="customerType" value="Customer" [(ngModel)]="createTemplateInput.type">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">Customer</span>
             </label>
           </div>
-          </div>
-          <div class="col-3 align-self-end">
+        </div>
+        <div class="col-3 align-self-end">
           <div class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" [(ngModel)]= "createTemplateInput.type" name="customerType" value="Distributor">
+              <input type="radio" class="custom-control-input" [(ngModel)]="createTemplateInput.type" name="customerType" value="Distributor">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">distributor </span>
             </label>
           </div>
-          </div>
+        </div>
+        <div class="col-2 align-self-end pd-left-30">
 
+          <span class="left capital">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" class="custom-control-input" name="state" value="static" [(ngModel)]="createTemplateInput.messagetype">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Static</span>
+            </label>
+          </span>
+        </div>
+        <div class="col-2 align-self-end marleft">
+          <span class="left capital">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" class="custom-control-input" name="state" value="dynamic" [(ngModel)]="createTemplateInput.messagetype">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">Dynamic</span>
+            </label>
+          </span>
+        </div>
 
+      </div>
 
-          
-          <div class="col-2 align-self-end pd-left-30">
-       
-              <span  class="left capital">
-                  <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio"  class="custom-control-input" name="state" value="static" [(ngModel)]= "createTemplateInput.messagetype">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Static</span>
-                  </label>
-                </span>
-                </div>
-                <div class="col-2 align-self-end marleft">
-                <span class="left capital">
-                  <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                    <input type="radio" class="custom-control-input" name="state" value="dynamic" [(ngModel)]= "createTemplateInput.messagetype">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">Dynamic</span>
-                  </label>
-                </span>
-                </div>
-
-</div>
-</div>
-<br>
-<div class="row">
-<div class="col">
-  <md-form-field class="wd-100pc" >
-      <textarea class="form-control" mdInput placeholder="Body"  [(ngModel)]="createTemplateInput.template_desc" style="height: 80px;" name="Address"></textarea>
-    </md-form-field>
-</div>
-</div>
-
-
-
-
-</div>
-
-
-
-
-
-
+    <div class="row">
+      <div class="col">
+        <md-form-field class="wd-100pc">
+          <textarea class="form-control" mdInput placeholder="Body" [(ngModel)]="createTemplateInput.template_desc" style="height: 80px;"
+            name="Address"></textarea>
+        </md-form-field>
+      </div>
+    </div>
+  </div>
 
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
@@ -159,5 +130,3 @@
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-
-

@@ -207,7 +207,7 @@ export class DistributorListDialogComponent implements OnInit {
     let data = {orderDetails:this.orderDetail,disributorId:this.distributorID , 'type':"customersPage"};
 
     let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
-       width: '90%',
+       width: '85%',
         data: data
     });
     dialogRef.afterClosed().subscribe(result => {

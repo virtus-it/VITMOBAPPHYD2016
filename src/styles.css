@@ -43,6 +43,10 @@
 .btn-link{
   color: var( --logo-color) !important;
 }
+.firstlettercap::first-letter{
+  text-transform:uppercase;
+
+}
 table thead {
     background: var( --logo-color) !important;
     color: var( --white) !important;

@@ -14,7 +14,7 @@
       
       <div class="row mgbottom-5">
         <div class="col-md-4 col-sm-6 form-group">
-          <md-select placeholder="UserType" class="wd-100pc" [(ngModel)]="UserInput.usertype" [disabled]="this.Details">
+          <md-select placeholder="UserType" class="wd-100pc" [(ngModel)]="UserInput.usertype" [disabled]="this.Details != ''">
             <md-option value="Customer">Customer</md-option>
             <md-option value="Distributor">Distributor</md-option>
             <md-option value="Supplier">Supplier</md-option>
@@ -394,7 +394,7 @@
             </md-form-field>
             <md-form-field class="">
                 <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno">
-                <md-error>
+                <md-error> 
                  Alternate  Phone Number is <strong>required</strong>
                 </md-error>
               </md-form-field>
@@ -588,7 +588,7 @@
         
                 <div class="col-md-4  col-sm-4  col-lg-4">
                     <md-form-field class="example-full-width wd-100pc">
-                        <input mdInput class="form-control" placeholder="Mobile number 1"    name="phone1" maxlength="10"  [(ngModel)]="manufacturerInput.mobileno1">
+                        <input mdInput class="form-control" placeholder="Mobile number 1"    name="phone1" maxlength="10"  [(ngModel)]="manufacturerInput.mobile1">
                     </md-form-field>
           
                 </div>
@@ -596,7 +596,7 @@
         
                 <div class="col-md-4  col-sm-4  col-lg-4" >
                     <md-form-field class="example-full-width wd-100pc">
-                        <input mdInput class="form-control" placeholder="Mobile Number 2"   name="phone2" maxlength="10"   [(ngModel)]="manufacturerInput.mobileno2">
+                        <input mdInput class="form-control" placeholder="Mobile Number 2"   name="phone2" maxlength="10"   [(ngModel)]="manufacturerInput.mobile2">
                     </md-form-field>
           
                 </div>
