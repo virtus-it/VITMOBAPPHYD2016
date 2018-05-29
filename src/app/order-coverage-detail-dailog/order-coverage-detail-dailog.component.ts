@@ -17,6 +17,15 @@ import * as _ from 'underscore';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { } from '@types/googlemaps';
 declare var google: any;
+
+interface marker {
+    lat: any;
+    lng: any;
+  label?: string;
+  icon?:string;
+    
+}
+
 @Component({
     selector: 'app-order-coverage-detail-dailog',
     templateUrl: './order-coverage-detail-dailog.component.html',
@@ -53,6 +62,20 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
             "searchtext": ""
         }
     };
+
+    stockpoint: any = [{
+        lat:"",
+        lng:"",
+        name:"",
+
+    }]
+
+    stockPointLocation:marker[] = [];
+
+
+
+
+    
     dropdownData = { selectedItems: [] };
     //orderDetails = "";
     @ViewChild("search")
@@ -96,6 +119,11 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     DistrbutorHover(distributor) {
         if (distributor.path) {
             this.displayPolygon = [];
+            // this.stockpoint[0].lat = parseFloat(distributor.latitude);
+            // this.stockpoint[0].lng = parseFloat(distributor.longitude);       
+            let DistributorData :any = {lat:"" , lng : "" , name:""  , icon:"" , label:""};   
+            DistributorData.lat = parseFloat(distributor.latitude);
+            DistributorData.lng = parseFloat(distributor.longitude);  
             var findDistributor = _.filter(this.polygonArray, function (k, l) {
                 let distDetails: any = k;
                 return distDetails.user_id == distributor.user_id;
@@ -104,9 +132,22 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
                 this.displayPolygon = findDistributor;
               }
+
            // this.displayPolygon.push(distributor);
         }
     }
+
+
+    pointers: marker[] = [
+        {
+            lat: "",
+            lng: "",
+            label: 'A',
+            icon: '../assets/images/green.png'
+        }
+    ]
+
+
     ShowAllPolygons() {
         this.listOfDistributors = [];
         this.displayPolygon = this.polygonArray;

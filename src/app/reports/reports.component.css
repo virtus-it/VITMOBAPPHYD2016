@@ -46,7 +46,12 @@ table thead {
   .btn-link{
     color: #0f75bc;
   }
-  
+  .mg-10x20{
+    margin: 10px 20px;
+  }
+  .mgleft-0{
+    margin-left: 0px !important;
+  }
   /* .mat-dialog-container{
     height: 90% !important;
   } */

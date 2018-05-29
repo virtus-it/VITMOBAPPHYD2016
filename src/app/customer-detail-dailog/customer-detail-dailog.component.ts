@@ -28,6 +28,8 @@ export class CustomerDetailDailogComponent implements OnInit {
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+
+     
    }
   customerOrderDetails = [];
   noDataError = "";
@@ -41,9 +43,11 @@ export class CustomerDetailDailogComponent implements OnInit {
 
   findDistributors(name: string) {
     //console.log(name);
-    let finalDistributors = this.distributors.filter(dist =>
+     let finalDistributors:any = [];
+     finalDistributors = this.distributors.filter(dist =>
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
     //console.log(finalDistributors);
+      
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
 
@@ -67,6 +71,8 @@ export class CustomerDetailDailogComponent implements OnInit {
 
     }
     return finalDistributors;
+    
+
   }
 
   getDistributors() {

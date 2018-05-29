@@ -4,6 +4,8 @@
     <div class="col-sm-2 col-md-2 col-lg-2 ">
       <h4>
         <i class="fa fa-sitemap"></i> Distributor</h4>
+        
+        <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
       <a class="cursor logo-color " title="Add Distributor">
@@ -18,6 +20,9 @@
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType">
                 <md-option value="name">First Name</md-option>
                 <md-option value="mobileno">Mobile Number</md-option>
+                <md-option value="category">Category</md-option>
+                
+
               </md-select>
             </div>
             <div *ngIf="filterType=='name'">
@@ -33,7 +38,21 @@
                   name="searchDistributorNumber" maxlength="10">
               </md-form-field>
             </div>
+
+            <div class="" *ngIf="filterType == 'category'">
+                <md-form-field class="example-full-width">
+                    <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
+                    <md-autocomplete #auto="mdAutocomplete">
+                      <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
+                      <span> {{cat.category}}</span>
+                      </md-option>
+                    </md-autocomplete>
+                  </md-form-field>
+
+            </div>
             <div class="input-group pd-10  ">
+
+              <button md-raised-button color="primary" >Search</button>
               <button md-raised-button color="primary" (click)="clearSearch()">
                 <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
               </button>
@@ -47,7 +66,6 @@
   <div>
   
     <div id="" class="row pd-15 mg-0">  
-        <button class="scrol-top" title="Go to top">Top</button>
 
       <div class="">
         <table class="table table-hover table-striped" style="table-layout:fixed">

@@ -193,15 +193,27 @@
 
     </div>
     <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'distributorsorders'">
+
       <div class="tab-pane active" id="a">
+          <div class="row mgleft-0" >
+              <md-form-field class="inline">
+                  <input mdInput [mdDatepicker]="picker" placeholder="Created Date" name="Createddate" >
+                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                  <md-datepicker #picker></md-datepicker>
+                </md-form-field>
+                <md-dialog-actions align="end" class="mg-10x20">
+                    <button type="submit" md-raised-button class="btn-primary">SUBMIT</button>
+                  </md-dialog-actions>
+            </div>
+
         <table class="table table-hover table-striped">
           <thead>
             <tr>
 
-              <th width="15%"> Distributors Name</th>
-              <th width="12%">Delivered Orders</th>
+              <th width="30%"> Distributors Name</th>
+              <th width="15%">Delivered Orders</th>
               <th width="15%">Cancelled Orders</th>
-              <th width="25%">Other Orders</th>
+              <th width="15%">Other Orders</th>
               <th width="15%">Pending Orders</th>
 
             </tr>
@@ -226,8 +238,6 @@
         </h4>
       </div>
       <div class="tab-pane" id="b">
-
-
       </div>
 
     </div>
@@ -256,7 +266,7 @@
               <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
               <md-autocomplete #auto="mdAutocomplete">
                 <md-option *ngFor="let cust of filteredcustomer | async" [value]="cust.fullName">
-                  <span>{{ cust.fullName }}</span>
+                  <span class="capitalize">{{ cust.fullName }}</span>
                 </md-option>
               </md-autocomplete>
             </md-form-field>
@@ -267,7 +277,7 @@
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
-                    <span>{{ dist.fullName }}</span>
+                    <span class="capitalize">{{ dist.fullName }}</span>
                   </md-option>
                 </md-autocomplete>
               </md-form-field>

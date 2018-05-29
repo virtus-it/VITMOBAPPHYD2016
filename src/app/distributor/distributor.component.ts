@@ -13,6 +13,11 @@ import { ViewSupplierComponent } from '../view-supplier/view-supplier.component'
 import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
 import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import { ProductsService } from '../products/products.service';
+import 'rxjs/add/operator/map';
 
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
@@ -23,18 +28,94 @@ import { LoaderService } from '../login/loader.service';
     styleUrls: ['./distributor.component.css']
 })
 export class DistributorComponent implements OnInit {
-    setPosition: any = "";
+
+  CategoryCtrl: FormControl;
+  filteredcategories: Observable<any[]>;
+
+
+
     ordersList = [];
     distributors: any = [];
     distributorsCopy: any = [];
     searchDistributorTerm = "";
     searchDistributorNumber = "";
     filterType = "";
+    categoryList:any = [];
+
+    filterInput :any  = { categoryid: "" , categoryname: ""};
     distributorClickMore = true;
+    LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
-    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService) { }
+    constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
+
+        this.CategoryCtrl = new FormControl();
+        this.filteredcategories = this.CategoryCtrl.valueChanges
+          .startWith(null)
+          .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
+
+
+    }
+
+    findCategories(name: string) {
+     let finalCategories:any = [];
+     finalCategories = this.categoryList.filter(cat =>
+        cat.category.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      
+    if (finalCategories && finalCategories.length > 0) {
+      let findCategory: any = {};
+
+      findCategory = _.find(finalCategories, function (k, l) {
+        let catDetails: any = k;
+        return catDetails.category == name;
+      });
+
+      if (findCategory) {
+        this.filterInput.categoryid = findCategory.categoryid;
+        this.filterInput.categoryname = findCategory.category;
+      }
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {       
+this.getProductByCategory();
+      }
+    }
+    return finalCategories;
+    }
+
+   
+
+
+
+    // search(){
+
+    // }
+
+
+
+
+    getProductByCategory(){
+        let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    
+        this.productService.getProductsCategory(input)
+        .subscribe(
+        output => this.getProductsCategoryResult(output),
+        error => {
+          //console.log("error in products category list");
+        });
+      }
+      getProductsCategoryResult(result){
+        //console.log(result);
+        if (result.result == "success") {
+          this.categoryList = result.data;
+        }
+        else{
+            this.LastfilterRecords = true;
+        }
+      }
+    
+
 
     getDistributors(firstCall) {
         this.loaderService.display(true);
@@ -341,10 +422,15 @@ export class DistributorComponent implements OnInit {
             this.searchDistributorNumber = "";
             this.getDistributors(true);
         }
+
+        quickFilter(){
+
+        }
     
 
     ngOnInit() {
         this.getDistributors(true);
+        this.getProductByCategory();
         // if(window.navigator.geolocation){
         //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
         //     };

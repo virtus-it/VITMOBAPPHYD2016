@@ -1291,9 +1291,7 @@ this.orderLandingService.getOrdersByfilter(input)
         if(result == 'success'){
           this.loaderService.display(false);
         }
-        else{
-          this.loaderService.display(false);
-        }
+        
        
           //console.log(`Dialog closed: ${result}`);
         
@@ -1357,11 +1355,16 @@ this.orderLandingService.getOrdersByfilter(input)
                   this.getForwardOrderDetails(true);
                   this.getAllOrderDetails(true);
                   this.refresh();
+                  this.loaderService.display(false);
               
+                }
+                else if (result == 'Cancel' || result == undefined){
+                  this.loaderService.display(false);
                 }
     
             });
           }
+        
           }
           getMessage() {
             this.orderLandingService

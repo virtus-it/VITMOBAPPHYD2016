@@ -114,6 +114,8 @@ import { InboxComponent } from './inbox/inbox.component';
 import { UsersComponent } from './users/users.component';
 import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { ProductServiceAreaComponent } from './product-service-area/product-service-area.component';
+import { PointsComponent } from './points/points.component';
+import { EditPointsComponent } from './edit-points/edit-points.component';
 
 
 
@@ -208,6 +210,8 @@ import { ProductServiceAreaComponent } from './product-service-area/product-serv
         UsersComponent,
         AddEditUserComponent,
         ProductServiceAreaComponent,
+        PointsComponent,
+        EditPointsComponent,
 
      
         
@@ -248,6 +252,7 @@ import { ProductServiceAreaComponent } from './product-service-area/product-serv
             {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
             {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
             {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
+            {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -348,7 +353,8 @@ import { ProductServiceAreaComponent } from './product-service-area/product-serv
          DeletePromocodeComponent,
          InboxComponent,
          AddEditUserComponent,
-         ProductServiceAreaComponent
+         ProductServiceAreaComponent,
+         EditPointsComponent
       
 
 

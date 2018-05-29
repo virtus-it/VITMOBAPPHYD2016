@@ -20,17 +20,23 @@
     <table class="table table-hover table-striped table-fixedheader mgtop-10">
       <thead>
         <tr>
+
+            
+
+
           <th width="22%">Product</th>
-          <th width="25%">Product Type </th>
+          <th class="" width="10%">Category</th>
+          <th width="20%">Product Type </th>
           <th width="10%">Count</th>
           <th width="12%">Price per unit</th>
           <th width="10%">Exp Del Chgs</th>
           <th width="10%">Serv Chgs</th>
-          <th width="8%">INR</th>
+          <th width="6%">INR</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let product of productList; let i = index" [attr.data-index]="i">
+         
           <td width="22%" class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
@@ -39,7 +45,9 @@
               <span class="custom-control-description onhovertooltip-250" title="{{product.brandname}}">{{product.brandname}} </span>
             </label>
           </td>
-          <td width="25%" class="left capital">
+          <td class="" width="10%" >{{product.category}}</td>
+
+          <td width="20%" class="left capital">
             <span class="onhovertooltip-250" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
 
           <td width="10%" class="left capital">
@@ -64,7 +72,7 @@
           <td width="10%" class="left capital"> {{product.servicecharge}} </td>
 
 
-          <td class="left capital" width="8%">
+          <td class="left capital" width="6%">
             <span *ngIf="product.quantity > 0"> {{product.pcost * product.quantity + product.servicecharge * product.quantity + amount}} </span>
             <span *ngIf="product.quantity == 0"> 0 </span>
           </td>
