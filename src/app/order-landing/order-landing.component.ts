@@ -1288,12 +1288,10 @@ this.orderLandingService.getOrdersByfilter(input)
       });
       dialogRefSupplierOrderList.afterClosed().subscribe(result => {
 
-        if(result == 'success' || result == 'Cancel' || result  == undefined){
+        if(result == 'success'){
           this.loaderService.display(false);
         }
-        else{
-          this.loaderService.display(false);
-        }
+        
        
           //console.log(`Dialog closed: ${result}`);
         

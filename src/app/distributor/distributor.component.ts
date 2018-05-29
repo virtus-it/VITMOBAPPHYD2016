@@ -33,7 +33,7 @@ export class DistributorComponent implements OnInit {
   filteredcategories: Observable<any[]>;
 
 
-    setPosition: any = "";
+
     ordersList = [];
     distributors: any = [];
     distributorsCopy: any = [];
@@ -46,7 +46,6 @@ export class DistributorComponent implements OnInit {
     distributorClickMore = true;
     LastfilterRecords = false;
     isActive:any= "";
-    categories: any = [];
     showFilterDailog = false;
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
@@ -54,7 +53,7 @@ export class DistributorComponent implements OnInit {
         this.CategoryCtrl = new FormControl();
         this.filteredcategories = this.CategoryCtrl.valueChanges
           .startWith(null)
-          .map(cat => cat ? this.findCategories(cat) : this.categories.slice());
+          .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
 
 
     }
@@ -93,9 +92,7 @@ this.getProductByCategory();
 
     // }
 
-    gototop(){
-        document.body.scrollTop = document.documentElement.scrollTop = 0;
-    }
+
 
 
     getProductByCategory(){
