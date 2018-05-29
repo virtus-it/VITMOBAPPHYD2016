@@ -102,16 +102,22 @@
         </div>
         <!-- third row finished -->
         <div class="row">
+            <div class="col-md-4 col-sm-4">
+                <md-form-field class="wd-100pc">
+                    <input class="form-control" mdInput placeholder="Reference Code" name="ReferenceCode">
+                  </md-form-field>
+            
+              </div>
            
 
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-4 col-sm-4">
                 <md-form-field class="wd-100pc">
                     <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
                   </md-form-field>
             
               </div>
 
-<div class="col-md-6 col-sm-6 align-self-end">
+<div class="col-md-4 col-sm-4 align-self-end">
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
         </md-form-field>
@@ -140,8 +146,16 @@
 </div>
 <!-- forth row finished -->
     <div class="row">
-      <div class="col-5">
-        <div class=" form-group  row">
+      <div class="col-4">
+          <div class="form-group">
+              <md-select placeholder="Payment Type" class="wd-100pc">
+                <md-option value="Customer">COD</md-option>
+                <md-option value="Distributor">CREDIT</md-option>
+                <md-option value="Supplier">PAYTM</md-option>
+                <md-option  value="Sales">ONLINE BANKING</md-option>
+              </md-select>
+            </div>
+        <!-- <div class=" form-group  row">
           <b class="label-style col">Payment Type</b>
         </div>
         <div class=" form-group  ">
@@ -160,7 +174,7 @@
                 <span class="custom-control-description">CREDIT</span>
               </label>
             </span>
-          </div>
+          </div> -->
 
         <div *ngIf="customerInput.User.paymenttype=='credit'" class="row justify-content-around">
             <div class="col-5 row">
@@ -235,13 +249,22 @@
         </div>
 
       </div>
-      <div class="col-7">
+      <div class="col-4">
+          <div class="form-group">
+              <md-select placeholder="Customer Type" class="wd-100pc">
+                <md-option value="Customer">Residential</md-option>
+                <md-option value="Distributor">Commercial</md-option>
+                <md-option value="Supplier">Corporate</md-option>  
+              </md-select>
+            </div>
+</div>
+      <!-- <div class="col-7">
         <div class=" form-group">
           <b class="label-style"> Customer Type</b>
-        </div>
+        </div> -->
 
 
-        <span width="30%" class="left capital">
+        <!-- <span width="30%" class="left capital">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" [(ngModel)]="customerInput.User.registertype" class="custom-control-input" name="customerType" value="residential">
             <span class="custom-control-indicator"></span>
@@ -263,7 +286,7 @@
             <span class="custom-control-description">Corporate</span>
           </label>
         </span>
-      </div>
+      </div> -->
     </div>
   </div>
 </md-dialog-content>
