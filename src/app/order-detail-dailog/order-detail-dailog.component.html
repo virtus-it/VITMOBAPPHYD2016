@@ -20,7 +20,11 @@
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
               <br>
-              <small class="black capital"> <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b> <br><span class="onhovertooltip-200" title="{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</span></small>
+              <small class="black capital">
+                <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b>
+                <br>
+                <span class="onhovertooltip-200" title="{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)">{{dailogOrderDetails.brandname}} {{dailogOrderDetails.prod_type}} {{dailogOrderDetails.quantity}}(Qty)</span>
+              </small>
             </div>
             <div class="col-md-7 right">
               <small class="gray">Delivery Date : {{dailogOrderDetails.delivery_exceptedtime}} </small>
@@ -28,11 +32,13 @@
               <small>
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
 
-                <small  *ngIf="dailogOrderDetails.dealerdetails">
-                  <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}} ({{dailogOrderDetails.dealerdetails.mobileno}})</small>
+              <small *ngIf="dailogOrderDetails.dealerdetails">
+                <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}
+                ({{dailogOrderDetails.dealerdetails.mobileno}})
+              </small>
 
-                  <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null ">
-                    <span class="gray" >Distributor Name : </span> - </small>
+              <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null ">
+                <span class="gray">Distributor Name : </span> - </small>
 
 
             </div>
@@ -161,11 +167,14 @@
                 </tr>
               </thead>
               <tbody class="tab-heigt center">
-                <h5 *ngIf="customerProductDetails.length == 0" class="warning"><span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
+                <h5 *ngIf="customerProductDetails.length == 0" class="warning">
+                  <span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="80%">
 
-                    <small><span class="onhovertooltip-350" title="{{canDetails.product.productname}} {{canDetails.product.product_type}}">{{canDetails.product.productname}} {{canDetails.product.product_type}}</span> </small>
+                    <small>
+                      <span class="onhovertooltip-350" title="{{canDetails.product.productname}} {{canDetails.product.product_type}}">{{canDetails.product.productname}} {{canDetails.product.product_type}}</span>
+                    </small>
                   </td>
                   <td width="20%">
                     <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small>
@@ -238,7 +247,7 @@
                   <div class="timeline-body">
                     <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
                       <li>
-                        <small class="capital ng-binding" >
+                        <small class="capital ng-binding">
                           <i class="fa fa-user" aria-hidden="true"></i>
                           {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
                       </li>
@@ -339,7 +348,7 @@
             <div class="p-1 pad-btn">
               <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Quick notification</button>
             </div>
-           
+
 
 
             <!-- <div class="row mgtop-10">

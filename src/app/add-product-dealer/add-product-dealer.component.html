@@ -1,52 +1,52 @@
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-gift"></i>
-      Add Products
-    </div>
-    <b *ngIf="this.Details.data && this.Details.data.userid">Dist Name: {{this.Details.data.firstname}} {{this.Details.data.lastname}}</b>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-      <strong>
-        <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
-      </strong>
-    </div>
+  <div class="col-md-4  col-sm-4  col-lg-4">
+    <i class="fa fa-gift"></i>
+    Add Products
   </div>
-  
-  <div  class="row pd-15 mg-0 brd-bottom ">
-      <table class="table table-hover table-fixedheader">
-        <thead>
-          <tr>
-            <th width="45%">Product Name</th>
-            <th width="30%">Product Type</th>
-            <th width="25%">Price</th>
-          </tr>
-        </thead>
-        <tbody>
-          
-          <tr *ngFor="let product of productsList">
-          
-           <td class="left" width="45%">  
-              <div class="form-check form-check-inline">
-                  <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" (change)="productDetails(product, $event.target.checked)">
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description">{{product.pname}}</span>
-                  </label>
-                </div>
-</td>
-            <td class="left" width="30%">{{product.ptype}}</td>
-            <td class="left" width="25%">{{product.pcost}}</td>
-           
-        </tbody>
-        
-     </table>
+  <b *ngIf="this.Details.data && this.Details.data.userid">Dist Name: {{this.Details.data.firstname}} {{this.Details.data.lastname}}</b>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" (click)='onCloseCancel()' aria-hidden="true"></i>
+    </strong>
   </div>
-  
+</div>
 
-  
-  <div class="row float-right pdright-30 mgbottom-20">
-    <md-dialog-actions align="end">
+<div class="row pd-15 mg-0 brd-bottom ">
+  <table class="table table-hover table-fixedheader">
+    <thead>
+      <tr>
+        <th width="45%">Product Name</th>
+        <th width="30%">Product Type</th>
+        <th width="25%">Price</th>
+      </tr>
+    </thead>
+    <tbody>
 
-      <button md-raised-button class="btn-primary" (click)="confirmProduct()">CONFIRM</button>
-      <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>
-    </md-dialog-actions>
-  </div>
+      <tr *ngFor="let product of productsList">
+
+        <td class="left" width="45%">
+          <div class="form-check form-check-inline">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" class="custom-control-input" (change)="productDetails(product, $event.target.checked)">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description">{{product.pname}}</span>
+            </label>
+          </div>
+        </td>
+        <td class="left" width="30%">{{product.ptype}}</td>
+        <td class="left" width="25%">{{product.pcost}}</td>
+
+    </tbody>
+
+  </table>
+</div>
+
+
+
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+
+    <button md-raised-button class="btn-primary" (click)="confirmProduct()">CONFIRM</button>
+    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>
+  </md-dialog-actions>
+</div>

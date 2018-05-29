@@ -1,215 +1,223 @@
 <div class="dist-style  minheight-500">
 
-    <div class=" row justify-content-between distIcon-style">
-      <div class="col-md-2  col-sm-2  col-lg-2 left">
-        <h4>
-          <i class="fa fa-credit-card" aria-hidden="true"></i> Payments</h4>
-      </div>
-      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-        <a class="cursor logo-color mgleft-10">
-          <i aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter"></i>
-  
-          <div class="filterView" *ngIf="showFilterDialog">
-            <div class="">
-              <b class="float-left">Filter By</b>
-              <br>
-              <div class=" ">
-                <md-form-field class="example-full-width">
-                  <input class="form-control" mdInput placeholder="search text" [(ngModel)]="searchPaymentTerm" (ngModelChange)="searchPayment()"
-                    name="searchPaymentTerm">
-                </md-form-field>
-              </div>
-            </div>
-          </div>
-        </a>
-  
-      </div>
-  
+  <div class=" row justify-content-between distIcon-style">
+    <div class="col-md-2  col-sm-2  col-lg-2 left">
+      <h4>
+        <i class="fa fa-credit-card" aria-hidden="true"></i> Payments</h4>
     </div>
-  
-  
-    <div class="container-fluid">
-  
-      <div class="tab tabs-left row">
-        <div class="col-2">
-  
-          <table class="nav nav-pills flex-column row">
-            <tr>
-              <td class="nav-item" (click)="viewTabpanel('cod')">
-                <a class="nav-link" [ngClass]="{'active': tabPanelView === 'cod'}" href="javascript:void(0)">
-                  <i class="fa fa-money" aria-hidden="true"></i>
-                  <br> Cash on Delivery </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="nav-item" (click)="viewTabpanel('credit')">
-                <a class="nav-link" [ngClass]="{'active': tabPanelView === 'credit'}" href="javascript:void(0)">
-                  <i class="fa fa-credit-card" aria-hidden="true"></i>
-                  <br> Credit </a>
-              </td>
-            </tr>
-            <tr>
-              <td class="nav-item" (click)="viewTabpanel('advamount')">
-                <a class="nav-link" [ngClass]="{'active': tabPanelView === 'advamount'}" href="javascript:void(0)">
-                  <i class="fa fa-inr" aria-hidden="true"></i>
-                  <br> Advance Amount </a>
-              </td>
-            </tr>
-            <tr>
-                <td class="nav-item" (click)="viewTabpanel('paytm')">
-                  <a class="nav-link" [ngClass]="{'active': tabPanelView === 'paytm'}" href="javascript:void(0)">
-                    <i class="fa fa-credit-card" aria-hidden="true"></i>
-                    <br> PayTM </a>
-                </td>
-              </tr>          <tr>
-                  <td class="nav-item" (click)="viewTabpanel('onlinebanking')">
-                    <a class="nav-link" [ngClass]="{'active': tabPanelView === 'onlinebanking'}" href="javascript:void(0)">
-                      <i class="fa fa-desktop" aria-hidden="true"></i>
-                      <br> Online Banking </a>
-                  </td>
-                </tr>
-          </table>
-        </div>
-  
-        <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'cod'">
-          <div class=" ">
-            <ul class="cbp_tmtimeline">
-              <li *ngFor="let payments of codPayments">
-                <time class="cbp_tmtime">
-                  <span>
-                    {{payments.modifieddate | utcDate}} </span>
-                  <span> #{{payments.orderid}}</span>
-                </time>
-                <div class="cbp_tmicon cbp_tmicon-check" *ngIf="payments.status=='confirm'">
-                  <i class="fa fa-check   fs-20" aria-hidden="true"></i>
-  
-                </div>
-                <div class="cbp_tmicon cbp_tmicon-times" *ngIf="payments.status=='rejected'">
-                  <i class="fa fa-times   fs-20" aria-hidden="true"></i>
-                </div>
-  
-                <div class="cbp_tmicon cbp_tmicon-favourite" *ngIf="payments.status=='received'">
-                  <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
-                </div>
-                <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
-  
-                <div class="cbp_tmlabel left">
-  
-                  <div class="mgbottom-10" *ngIf="payments.customer && payments.dealer">
-                    <b> Dealer/Super-Supplier have {{payments.status}} Payment</b>
-                    <br>
-                    <small > Customer: <span class="capitalize">{{payments.customer.firstname}} {{payments.customer.lastname}} </span> have paid the amount of INR {{payments.amount_received}}
-                      to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
-                    <div *ngIf="payments.status=='rejected'" class="">
-                      <small> Rejected By: <span class="capitalize">{{payments.dealer.firstname}} {{payments.dealer.lastname}} </span> </small>
-                    </div>
-                  </div>
-  
-                  <div *ngIf="payments.status=='received'">
-                    <md-dialog-actions >
-                      <button md-raised-button class="btn-primary btn-small" (click)="changeStatus('confirm',payments)">CONFIRM</button>
-                      <button md-raised-button class="btn-small bg-danger" (click)="changeStatus('rejected',payments)">REJECT</button>&nbsp;
-                    </md-dialog-actions>
-                  </div>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-  
-  
-        <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'credit'">
-  
-          <ul class="cbp_tmtimeline">
-            <li *ngFor="let credit of creditPayments">
-              <time class="cbp_tmtime">
-                <span>
-                  {{credit.modifieddate | utcDate }} </span>
-                <span> #{{credit.orderid}}</span>
-              </time>
-              <div class="cbp_tmicon cbp_tmicon-favourite">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </div>
-              <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
-  
-              <div class="cbp_tmlabel left">
-                <b> Customer has taken the credit</b>
-                <br>
-                <small *ngIf="credit.customer" > Customer: <span class="capitalize">{{credit.customer.firstname}} {{credit.customer.lastname}} </span> has taken the credit of amount INR {{credit.amount_received}}
-                  from Dealer/Supplier: <span class="capitalize">{{credit.dealer.firstname}}{{credit.dealer.lastname}}</span></small>
-              </div>
-            </li>
-          </ul>
-        </div>
-  
-        <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'advamount'">
-          <ul class="cbp_tmtimeline">
-            <li *ngFor="let advance of advAmount">
-              <time class="cbp_tmtime">
-                <span>
-                  {{advance.createddate | utcDate}}
-                </span>
-                <span># {{advance.orderid}}</span>
-              </time>
-              <div class="cbp_tmicon cbp_tmicon-favourite">
-                <i class="fa fa-check" aria-hidden="true"></i>
-              </div>
-              <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
-  
-              <div class="cbp_tmlabel left">
-                <b> Customer have paid the advance amount</b>
-                <br>
-                <small > Customer: <span class="capitalize">{{advance.fname}} {{advance.lname}} </span> have paid the advance amount of INR. {{advance.advance_amount}}
-                  to Dealer/Supplier:</small>
-              </div>
-            </li>
-          </ul>
-  
-        </div>
-        <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'paytm'">
-            <ul class="cbp_tmtimeline">
-              <li *ngFor="let advance of advAmount">
-                <time class="cbp_tmtime">
-                  <span>
-                  </span>
-                  <span></span>
-                </time>
-                <div class="cbp_tmicon cbp_tmicon-favourite">
-                  <i class="fa fa-check" aria-hidden="true"></i>
-                </div>
-                <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
-    
-                <div class="cbp_tmlabel left">
-                  <b> </b>
-                  <br>
-                  <small class="firstlettercap"></small>
-                </div>
-              </li>
-            </ul>
-          </div>
-  
-          <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'onlinebanking'">
-              <ul class="cbp_tmtimeline">
-                <li *ngFor="let advance of advAmount">
-                  <time class="cbp_tmtime">
-                    <span>
-                    </span>
-                    <span></span>
-                  </time>
-                  <div class="cbp_tmicon cbp_tmicon-favourite">
-                    <i class="fa fa-check" aria-hidden="true"></i>
-                  </div>
-                  <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
-      
-                  <div class="cbp_tmlabel left">
-                    <b> </b>
-                    <br>
-                    <small class="firstlettercap"> </small>
-                  </div>
-                </li>
-              </ul>
-      
+    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+      <a class="cursor logo-color mgleft-10">
+        <i aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter"></i>
+
+        <div class="filterView" *ngIf="showFilterDialog">
+          <div class="">
+            <b class="float-left">Filter By</b>
+            <br>
+            <div class=" ">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="search text" [(ngModel)]="searchPaymentTerm" (ngModelChange)="searchPayment()"
+                  name="searchPaymentTerm">
+              </md-form-field>
             </div>
+          </div>
+        </div>
+      </a>
+
+    </div>
+
+  </div>
+
+
+  <div class="container-fluid">
+
+    <div class="tab tabs-left row">
+      <div class="col-2">
+
+        <table class="nav nav-pills flex-column row">
+          <tr>
+            <td class="nav-item" (click)="viewTabpanel('cod')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'cod'}" href="javascript:void(0)">
+                <i class="fa fa-money" aria-hidden="true"></i>
+                <br> Cash on Delivery </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="nav-item" (click)="viewTabpanel('credit')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'credit'}" href="javascript:void(0)">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                <br> Credit </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="nav-item" (click)="viewTabpanel('advamount')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'advamount'}" href="javascript:void(0)">
+                <i class="fa fa-inr" aria-hidden="true"></i>
+                <br> Advance Amount </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="nav-item" (click)="viewTabpanel('paytm')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'paytm'}" href="javascript:void(0)">
+                <i class="fa fa-credit-card" aria-hidden="true"></i>
+                <br> PayTM </a>
+            </td>
+          </tr>
+          <tr>
+            <td class="nav-item" (click)="viewTabpanel('onlinebanking')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'onlinebanking'}" href="javascript:void(0)">
+                <i class="fa fa-desktop" aria-hidden="true"></i>
+                <br> Online Banking </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'cod'">
+        <div class=" ">
+          <ul class="cbp_tmtimeline">
+            <li *ngFor="let payments of codPayments">
+              <time class="cbp_tmtime">
+                <span>
+                  {{payments.modifieddate | utcDate}} </span>
+                <span> #{{payments.orderid}}</span>
+              </time>
+              <div class="cbp_tmicon cbp_tmicon-check" *ngIf="payments.status=='confirm'">
+                <i class="fa fa-check   fs-20" aria-hidden="true"></i>
+
+              </div>
+              <div class="cbp_tmicon cbp_tmicon-times" *ngIf="payments.status=='rejected'">
+                <i class="fa fa-times   fs-20" aria-hidden="true"></i>
+              </div>
+
+              <div class="cbp_tmicon cbp_tmicon-favourite" *ngIf="payments.status=='received'">
+                <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
+              </div>
+              <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+
+              <div class="cbp_tmlabel left">
+
+                <div class="mgbottom-10" *ngIf="payments.customer && payments.dealer">
+                  <b> Dealer/Super-Supplier have {{payments.status}} Payment</b>
+                  <br>
+                  <small> Customer:
+                    <span class="capitalize">{{payments.customer.firstname}} {{payments.customer.lastname}} </span> have paid the amount of INR {{payments.amount_received}}
+                    to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
+                  <div *ngIf="payments.status=='rejected'" class="">
+                    <small> Rejected By:
+                      <span class="capitalize">{{payments.dealer.firstname}} {{payments.dealer.lastname}} </span>
+                    </small>
+                  </div>
+                </div>
+
+                <div *ngIf="payments.status=='received'">
+                  <md-dialog-actions>
+                    <button md-raised-button class="btn-primary btn-small" (click)="changeStatus('confirm',payments)">CONFIRM</button>
+                    <button md-raised-button class="btn-small bg-danger" (click)="changeStatus('rejected',payments)">REJECT</button>&nbsp;
+                  </md-dialog-actions>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'credit'">
+
+        <ul class="cbp_tmtimeline">
+          <li *ngFor="let credit of creditPayments">
+            <time class="cbp_tmtime">
+              <span>
+                {{credit.modifieddate | utcDate }} </span>
+              <span> #{{credit.orderid}}</span>
+            </time>
+            <div class="cbp_tmicon cbp_tmicon-favourite">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+
+            <div class="cbp_tmlabel left">
+              <b> Customer has taken the credit</b>
+              <br>
+              <small *ngIf="credit.customer"> Customer:
+                <span class="capitalize">{{credit.customer.firstname}} {{credit.customer.lastname}} </span> has taken the credit of amount INR {{credit.amount_received}}
+                from Dealer/Supplier:
+                <span class="capitalize">{{credit.dealer.firstname}}{{credit.dealer.lastname}}</span>
+              </small>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'advamount'">
+        <ul class="cbp_tmtimeline">
+          <li *ngFor="let advance of advAmount">
+            <time class="cbp_tmtime">
+              <span>
+                {{advance.createddate | utcDate}}
+              </span>
+              <span># {{advance.orderid}}</span>
+            </time>
+            <div class="cbp_tmicon cbp_tmicon-favourite">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+
+            <div class="cbp_tmlabel left">
+              <b> Customer have paid the advance amount</b>
+              <br>
+              <small> Customer:
+                <span class="capitalize">{{advance.fname}} {{advance.lname}} </span> have paid the advance amount of INR. {{advance.advance_amount}}
+                to Dealer/Supplier:</small>
+            </div>
+          </li>
+        </ul>
+
+      </div>
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'paytm'">
+        <ul class="cbp_tmtimeline">
+          <li *ngFor="let advance of advAmount">
+            <time class="cbp_tmtime">
+              <span>
+              </span>
+              <span></span>
+            </time>
+            <div class="cbp_tmicon cbp_tmicon-favourite">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+
+            <div class="cbp_tmlabel left">
+              <b> </b>
+              <br>
+              <small class="firstlettercap"></small>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'onlinebanking'">
+        <ul class="cbp_tmtimeline">
+          <li *ngFor="let advance of advAmount">
+            <time class="cbp_tmtime">
+              <span>
+              </span>
+              <span></span>
+            </time>
+            <div class="cbp_tmicon cbp_tmicon-favourite">
+              <i class="fa fa-check" aria-hidden="true"></i>
+            </div>
+            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+
+            <div class="cbp_tmlabel left">
+              <b> </b>
+              <br>
+              <small class="firstlettercap"> </small>
+            </div>
+          </li>
+        </ul>
+
       </div>
     </div>
   </div>
+</div>

@@ -7,130 +7,127 @@ import { MdDialogRef } from '@angular/material';
 import { MD_DIALOG_DATA } from '@angular/material';
 import * as _ from 'underscore';
 
-
 @Component({
   selector: 'app-add-product-dealer',
   templateUrl: './add-product-dealer.component.html',
   styleUrls: ['./add-product-dealer.component.css']
 })
 export class AddProductDealerComponent implements OnInit {
+  constructor(
+    public thisDialogRef: MdDialogRef<AddProductDealerComponent>,
+    private authenticationService: AuthenticationService,
+    private productService: ProductsService,
+    @Inject(MD_DIALOG_DATA) public Details: any,
+    private loaderService: LoaderService
+  ) {}
+  productsList = [];
+  productsInput: any = [];
+  distributorId = '';
+  listOfProducts: any = [];
 
-  constructor(public thisDialogRef: MdDialogRef<AddProductDealerComponent>, private authenticationService: AuthenticationService,private productService: ProductsService,@Inject(MD_DIALOG_DATA) public Details: any, private loaderService: LoaderService, ) { }
-  productsList=[];
-  productsInput:any =[];
-  distributorId = "";
-  listOfProducts : any = [];
-  
-
-  dealerAddProduct(){
-    let input={"userId":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+  dealerAddProduct() {
+    let input = {
+      userId: this.authenticationService.loggedInUserId(),
+      appType: this.authenticationService.appType()
+    };
     console.log(input);
-    this.productService.getProducts(input)
-      .subscribe(
+    this.productService.getProducts(input).subscribe(
       output => this.dealerAddProductResult(output),
       error => {
         //console.log("error in dealer products");
         this.loaderService.display(false);
-      });
+      }
+    );
   }
 
   //  this.productsList = result.data;
-          // let removableProdID = detailData.productid;
-           // prodId = details.productid;
+  // let removableProdID = detailData.productid;
+  // prodId = details.productid;
 
-
-  dealerAddProductResult(result){
-    if (result.result = 'success') {
-      let prodId:any = [];
-      let prodName:any = [];
-      let finalProducts:any = [];
+  dealerAddProductResult(result) {
+    if ((result.result = 'success')) {
+      let prodId: any = [];
+      let prodName: any = [];
+      let finalProducts: any = [];
       let Details = this.Details.distProducts;
-      var removeProducts = _.each(result.data , function(i , j){
-        let details:any = i;
-       
+      var removeProducts = _.each(result.data, function(i, j) {
+        let details: any = i;
+
         prodName = details.pname;
-        let distProds = _.find(Details , function(k ,l){
-          let detailData:any = k;
-         return detailData.pname == prodName;
-         
-         
-
-      });
-      if(!distProds){
-
-        finalProducts.push(details);
-      }    
+        let distProds = _.find(Details, function(k, l) {
+          let detailData: any = k;
+          return detailData.pname == prodName;
+        });
+        if (!distProds) {
+          finalProducts.push(details);
+        }
       });
 
       this.productsList = finalProducts;
     }
   }
 
-  confirmProduct(){
-    let products=[];
+  confirmProduct() {
+    let products = [];
     let authenticationLogin = this.authenticationService.loggedInUserId();
     let distributorDetails = this.Details.data.userid;
     let authApptype = this.authenticationService.appType();
-    _.each(this.productsInput, function(i,j){
-      let input={"product":{"productid":"","productname":"","producttype":"","product_cost":"","stock":"0","distributerid":distributorDetails,"loginid":authenticationLogin,"apptype":authApptype}};
-      let details:any = i;
-      input.product.productid =details.productid;
-      input.product.productname= details.pname;
-      input.product.producttype =details.ptype;
-      input.product.product_cost =details.pcost;
+    _.each(this.productsInput, function(i, j) {
+      let input = {
+        product: {
+          productid: '',
+          productname: '',
+          producttype: '',
+          product_cost: '',
+          stock: '0',
+          distributerid: distributorDetails,
+          loginid: authenticationLogin,
+          apptype: authApptype
+        }
+      };
+      let details: any = i;
+      input.product.productid = details.productid;
+      input.product.productname = details.pname;
+      input.product.producttype = details.ptype;
+      input.product.product_cost = details.pcost;
       products.push(input);
     });
 
     //console.log(products);
 
-    this.productService.assignDealerProducts(products)
-      .subscribe(
+    this.productService.assignDealerProducts(products).subscribe(
       output => this.confirmProductResult(output),
       error => {
         //console.log("error in dealer products");
         this.loaderService.display(false);
-      });
+      }
+    );
   }
-  confirmProductResult(result){
+  confirmProductResult(result) {
     //console.log(result);
-    if(result.result == "success"){
-      this.thisDialogRef.close("success");
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
     }
   }
 
-  productDetails(product:any, isChecked:boolean){
-    if(isChecked){
-this.productsInput.push(product);
-    }
-    else{
-      this.productsInput= this.productsInput.filter(function(e) {
+  productDetails(product: any, isChecked: boolean) {
+    if (isChecked) {
+      this.productsInput.push(product);
+    } else {
+      this.productsInput = this.productsInput.filter(function(e) {
         return e.productid !== product.productid;
-
-    });
-    //console.log(this.productsInput);
-
-
-
+      });
+      //console.log(this.productsInput);
     }
-
   }
 
-
-
-
-
-
-  onCloseCancel(){
+  onCloseCancel() {
     this.thisDialogRef.close('Cancel');
-
   }
-
 
   ngOnInit() {
     this.dealerAddProduct();
-  
+
     console.log(this.Details);
-
   }
-
 }

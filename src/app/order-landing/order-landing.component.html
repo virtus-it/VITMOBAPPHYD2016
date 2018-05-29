@@ -42,7 +42,7 @@
                 <md-option value="distributor_id">Distributor</md-option>
                 <md-option value="deliveryslot">Delivery Slot</md-option>
                 <md-option value="category">Category</md-option>
-                
+
 
               </md-select>
             </div>
@@ -103,7 +103,7 @@
 
 
 
-             <div class="col-4" *ngIf="globalFilterInput.order.searchtype =='deliveryslot'">
+            <div class="col-4" *ngIf="globalFilterInput.order.searchtype =='deliveryslot'">
               <div class="row">
                 <div class="col-6">
                   <md-form-field class="inline">
@@ -115,10 +115,10 @@
                 <div class="col-6">
                   <md-select placeholder="Time Slot" class="wd-100pc left" name="timeSlot" [(ngModel)]="time">
                     <md-option>Select Slot</md-option>
-          <md-option value="8AM-11AM">8AM-11AM</md-option>
-          <md-option value="11AM-2PM" >11AM-2PM</md-option>
-          <md-option value="2PM-5PM">2PM-5PM</md-option>
-          <md-option value="5PM-8PM">5PM-8PM</md-option>
+                    <md-option value="8AM-11AM">8AM-11AM</md-option>
+                    <md-option value="11AM-2PM">11AM-2PM</md-option>
+                    <md-option value="2PM-5PM">2PM-5PM</md-option>
+                    <md-option value="5PM-8PM">5PM-8PM</md-option>
                   </md-select>
 
                 </div>
@@ -150,7 +150,7 @@
             </a>
             &nbsp;&nbsp;
             <a class="align-self-center">
-                <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()"></i>
+              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()"></i>
               <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()"></i>
               <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()"></i>
             </a>&nbsp;&nbsp;&nbsp;
@@ -170,7 +170,7 @@
                       <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
                       <md-option value="deliveryslot">Delivery Slot</md-option>
                       <md-option value="category">Category</md-option>
-                      
+
                     </md-select>
 
                   </div>
@@ -250,7 +250,7 @@
 
                     <md-select placeholder="Time Slot" class="wd-100pc left" name="timeSlot" [(ngModel)]="time">
                       <md-option value="8AM-11AM">8AM-11AM</md-option>
-                      <md-option value="11AM-2PM" >11AM-2PM</md-option>
+                      <md-option value="11AM-2PM">11AM-2PM</md-option>
                       <md-option value="2PM-5PM">2PM-5PM</md-option>
                       <md-option value="5PM-8PM">5PM-8PM</md-option>
                     </md-select>
@@ -332,9 +332,9 @@
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
-                      <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
-                      <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
-                    </div>
+                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
+                        <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
+                      </div>
                     </label>
 
 
@@ -351,7 +351,7 @@
                     <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"
                       title="Moya Customer"></i>
 
-                      <i class="fa fa-frown-o red" title="Revert" *ngIf="forward.status == 'backtodealer'"></i>
+                    <i class="fa fa-frown-o red" title="Revert" *ngIf="forward.status == 'backtodealer'"></i>
                     <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label>
                     <!-- assign button -->
                     <br>
@@ -367,17 +367,20 @@
 
 
 
-                <td width="10%" >
+              <td width="10%">
                 <div class="row ">
-                    <div class="col-sm-12  col-md-12  col-lg-12  left">
-                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                  <div class="col-sm-12  col-md-12  col-lg-12  left">
+                    <label class="td-label">
+                      <i class="fa  fa-codiepie "></i>
+                      <b> Timer</b>
                     </label>
                     <div class="">
-                    <i class="fa fa-minus logo-color fs-18 none "></i>
-                    <i class="fa fa-plus fs-18  logo-color none " aria-hidden="true"></i>
-                   </div>
+                      <i class="fa fa-minus logo-color fs-18 none "></i>
+                      <i class="fa fa-plus fs-18  logo-color none " aria-hidden="true"></i>
                     </div>
-                  </div></td>
+                  </div>
+                </div>
+              </td>
 
 
             </tr>
@@ -390,7 +393,8 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name</span>
                       <br>
-                      <b class="capitalize"><b>{{forward.productdetails.category}}</b> {{forward.brandname}} </b>
+                      <b class="capitalize">
+                        <b>{{forward.productdetails.category}}</b> {{forward.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -410,8 +414,8 @@
                       <span class="td-label">Product Cost </span>
                       <br>
                       <b class="pdright-5">{{forward.prod_cost}}</b>
-                    </div> 
-                 
+                    </div>
+
                   </div>
 
                   <div class="row form-group">
@@ -444,8 +448,8 @@
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
 
-                    <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
-                    <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                      <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
+                      <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(forward)'>
@@ -480,15 +484,15 @@
                     <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
                   </div>
                   <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                      <br>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                    </div>
-                    <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
-                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                      <br>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize"  title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                    </div>
+                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                  </div>
+                  <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                  </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-7 left">
@@ -499,30 +503,33 @@
 
                   </div>
                   <div class="col-5 right">
-                      <span class="td-label">
-                        Promo Code
-                      </span> <br>
-                      <b  *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
-                      <b class="" *ngIf="forward.user_reference_code === null"> - </b>
-                    </div>
+                    <span class="td-label">
+                      Promo Code
+                    </span>
+                    <br>
+                    <b *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
+                    <b class="" *ngIf="forward.user_reference_code === null"> - </b>
+                  </div>
                 </div>
 
                 <div class="row ">
                   <div class="col left">
-                   
-                   <div class="row">
-                     <div class="col-9">
+
+                    <div class="row">
+                      <div class="col-9">
                         <span class="td-label">
-                            Address</span>
-                            <br>
-                    <b> <span class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span></b>
-                    </div>
-                    <div class="col-3 right align-self-center"> 
+                          Address</span>
+                        <br>
+                        <b>
+                          <span class="capitalize onhovertooltip-300" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span>
+                        </b>
+                      </div>
+                      <div class="col-3 right align-self-center">
                         <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(forward.customer.address)">
-                        <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                          <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                      </div>
                     </div>
-                    </div>
-                
+
 
                   </div>
 
@@ -547,7 +554,8 @@
                       <span class="td-label">
                         Supplier</span>
                       <br>
-                      <b class="capitalize onhovertooltip" *ngIf="forward.supplierdetails" title="{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}"> {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
+                      <b class="capitalize onhovertooltip" *ngIf="forward.supplierdetails" title="{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}">
+                        {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                       <b class="capitalize" *ngIf="forward.supplierdetails === null"> - </b>
 
 
@@ -592,8 +600,7 @@
                     <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm"  *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
-
+                    <button class="btn red btn-link btn-sm" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
@@ -609,30 +616,22 @@
               <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
-                <td width="10%" >
-<span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
-                <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
-                [thresholds]="thresholdConfig"
-                [type]="gaugeType"
-                [value]= 'forward.timeRemaining'
-                [label]="gaugeLabel"
-                [append]="gaugeAppendText"
-                [min]= 'guageMinimum'
-                [max] = 'guageMaximum'
-                [size]='130'
-                [backgroundColor]="guageBackGround"
+              <td width="10%">
+                <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
+                  <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='forward.timeRemaining' [label]="gaugeLabel"
+                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
 
-                >
+                  </ngx-gauge>
 
-                </ngx-gauge>
+                  <b *ngIf="forward.timeRemaining < -24" class="red">{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "
+                    class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
 
-                <b *ngIf="forward.timeRemaining < -24" class="red" >{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "  class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
-
-                <!-- &&   -24 < forward.timeRemaining < 24
+                  <!-- &&   -24 < forward.timeRemaining < 24
 
                 -->
-              </span>
+                </span>
 
               </td>
 
@@ -640,14 +639,14 @@
             </tr>
           </tbody>
         </table>
-         <br>
-                <h5 class="warning  capitalize center">
-                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
-                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                    click for more data</a>
-                </h5>
-                <h4 *ngIf="!forwardClickMore" class="warning center">
-                  <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+        <br>
+        <h5 class="warning  capitalize center">
+          <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            click for more data</a>
+        </h5>
+        <h4 *ngIf="!forwardClickMore" class="warning center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
 
 
 
@@ -686,12 +685,12 @@
               </td>
               <td width="30%">
                 <div class=" row ">
-                    <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
-                        <label class="td-label">Customer :
-                          <b class="capitalize " title="{{allorder.orderby_firstname}}">{{allorder.orderby_firstname}}</b>
-                        </label>
-                        <br>
-                      </div>
+                  <div class="col-sm-8  col-md-8  col-lg-8 left onhovertooltip-150">
+                    <label class="td-label">Customer :
+                      <b class="capitalize " title="{{allorder.orderby_firstname}}">{{allorder.orderby_firstname}}</b>
+                    </label>
+                    <br>
+                  </div>
 
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
@@ -705,7 +704,8 @@
                 <div class="row">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">Supplier:
-                      <b class="capitalize" *ngIf="allorder.supplierdetails" title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}"> {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
+                      <b class="capitalize" *ngIf="allorder.supplierdetails" title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}">
+                        {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                       <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </label>
                     <br>
@@ -725,7 +725,7 @@
                       aria-hidden="true" [ngClass]="allorder.StatusColor" [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
                     <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"
                       title="Moya Customer"></i>
-                      <i class="fa fa-frown-o red" title="Revert" *ngIf="allorder.status == 'backtodealer'"></i>
+                    <i class="fa fa-frown-o red" title="Revert" *ngIf="allorder.status == 'backtodealer'"></i>
                     <label class="capitalize" [ngClass]="allorder.StatusColor" (click)="ViewDistributors(allorder)">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
@@ -734,13 +734,16 @@
 
               <td width="10%">
                 <div class="row">
-                    <div class="col-sm-12  col-md-12  col-lg-12  left">
-                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                  <div class="col-sm-12  col-md-12  col-lg-12  left">
+                    <label class="td-label">
+                      <i class="fa  fa-codiepie "></i>
+                      <b> Timer</b>
                     </label>
                     <i class="fa fa-minus logo-color fs-18 none"></i>
                     <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-                    </div>
-                  </div></td>
+                  </div>
+                </div>
+              </td>
 
 
               <!-- <td>
@@ -756,7 +759,8 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 left">
                       <span class="td-label">Brand Name </span>
                       <br>
-                      <b class="capitalize"><b>{{allorder.productdetails.category}}</b> {{allorder.brandname}} </b>
+                      <b class="capitalize">
+                        <b>{{allorder.productdetails.category}}</b> {{allorder.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -806,12 +810,12 @@
                     </div>
 
 
-                    <div class="col-sm-2  col-md-2  col-lg-2 align-self-center" >
-                        <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"title="Preorder" ></i>
-                        <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                    <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
+                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
+                      <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;"  (click)='showOrderDetails(allorder)'>
+                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(allorder)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
                     </div>
                   </div>
@@ -839,10 +843,10 @@
                       <b class="left danger">{{allorder.delivery_exceptedtime}}</b>
                     </div>
                     <div class="col-sm-5  col-md-5  col-lg-5  right">
-                        <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                        <br>
-                        <b class=" capitalize onhovertooltip-100" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
-                      </div>
+                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                      <br>
+                      <b class=" capitalize onhovertooltip-100" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
+                    </div>
                   </div>
                   <div class="row form-group">
                     <div class="col-sm-7  col-md-7  col-lg-7 left">
@@ -852,12 +856,13 @@
                       <b>{{allorder.orderby_mobileno}}</b>
                     </div>
                     <div class="col-5 right">
-                        <span class="td-label">
-                          Promo Code
-                        </span> <br>
-                        <b  *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
-                        <b class="" *ngIf="allorder.user_reference_code === null"> - </b>
-                      </div>
+                      <span class="td-label">
+                        Promo Code
+                      </span>
+                      <br>
+                      <b *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
+                      <b class="" *ngIf="allorder.user_reference_code === null"> - </b>
+                    </div>
 
                   </div>
                   <div class=" row ">
@@ -867,8 +872,8 @@
                       <br>
                       <b class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</b>
 
-                      <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button> 
-                      
+                      <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button>
+
 
                       <!-- <button class="btn" data-clipboard-target="#foo">
                               <img src="assets/clippy.svg" alt="Copy to clipboard">
@@ -921,12 +926,12 @@
 
                     <!-- <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
                       <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button> -->
-                    <div class="row" *ngIf != 'superDealer'>
-                          <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"  *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
-                              <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                            <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
-                                <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
-                        </div>
+                    <div class="row" *ngIf !='superDealer'>
+                      <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                        <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                      <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                        <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                    </div>
 
 
                   </div>
@@ -934,37 +939,29 @@
               </td>
 
 
-             <td width="10%"  >
-<span *ngIf= "((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept'))">
-                <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
-                [thresholds]="thresholdConfig"
-                [type]="gaugeType"
-                [value]= 'allorder.timeRemaining'
-                [label]="gaugeLabel"
-                [append]="gaugeAppendText"
-                [min]= 'guageMinimum'
-                [max] = 'guageMaximum'
-                [size]='130'
-                [backgroundColor]="guageBackGround"
-               >
-                </ngx-gauge>
+              <td width="10%">
+                <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept'))">
+                  <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining' [label]="gaugeLabel"
+                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
+                  </ngx-gauge>
 
-                <b *ngIf="allorder.timeRemaining < -24" class="red" >{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="allorder.timeRemaining > 24"  class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
+                  <b *ngIf="allorder.timeRemaining < -24" class="red">{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
 
-              </span>
+                </span>
               </td>
 
             </tr>
           </tbody>
         </table>
-     <br>
-                <h5 class="warning  center capitalize">
-                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
-                    <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
-                </h5>
-                <h4 *ngIf="!orderClickMore" class="warning center">
-                  <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+        <br>
+        <h5 class="warning  center capitalize">
+          <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
+            <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
+        </h5>
+        <h4 *ngIf="!orderClickMore" class="warning center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
 
 
       </div>
@@ -1023,10 +1020,10 @@
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
-                      <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
-                    <b class="col-10 rightbtn" class=" capitalize onhovertooltip-150" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
-                  </div>
-                  </label>
+                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
+                        <b class="col-10 rightbtn" class=" capitalize onhovertooltip-150" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
+                      </div>
+                    </label>
                     <br>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
@@ -1047,13 +1044,16 @@
 
               <td width="10%">
                 <div class="row">
-                    <div class="col-sm-12  col-md-12  col-lg-12  left">
-                    <label class="td-label"><i class="fa  fa-codiepie "></i><b>	Timer</b>
+                  <div class="col-sm-12  col-md-12  col-lg-12  left">
+                    <label class="td-label">
+                      <i class="fa  fa-codiepie "></i>
+                      <b> Timer</b>
                     </label>
                     <i class="fa fa-minus logo-color fs-18 none"></i>
                     <i class="fa fa-plus fs-18  logo-color none" aria-hidden="true"></i>
-                    </div>
-                  </div></td>
+                  </div>
+                </div>
+              </td>
 
 
               <!-- <td  width="24%">
@@ -1111,7 +1111,7 @@
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
                     </div>
-                    </div>
+                  </div>
                   <div class=" row ">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
@@ -1128,11 +1128,11 @@
 
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center ">
-                        <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder" ></i>
-                        <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                      <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
+                      <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn"  style=" margin-left: -15px;" (click)='showOrderDetails(complete)'>
+                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(complete)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
 
                     </div>
@@ -1163,15 +1163,15 @@
                     <b class="pdright-5 danger">{{complete.delivery_exceptedtime}}</b>
                   </div>
                   <div class="col-5 right" *ngIf="complete.customersource == 'DistributorCustomer'">
-                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                      <br>
-                      <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
-                    </div>
-                    <div class="col-5 right" *ngIf="complete.customersource == 'MoyaCustomer'">
-                      <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
-                      <br>
-                      <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
-                    </div>
+                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                  </div>
+                  <div class="col-5 right" *ngIf="complete.customersource == 'MoyaCustomer'">
+                    <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                  </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-7 left">
@@ -1182,12 +1182,13 @@
 
                   </div>
                   <div class="col-5 right">
-                      <span class="td-label">
-                        Promo Code
-                      </span> <br>
-                      <b  *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
-                      <b class="" *ngIf="complete.user_reference_code === null"> - </b>
-                    </div>
+                    <span class="td-label">
+                      Promo Code
+                    </span>
+                    <br>
+                    <b *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
+                    <b class="" *ngIf="complete.user_reference_code === null"> - </b>
+                  </div>
 
                 </div>
 
@@ -1197,7 +1198,7 @@
                       Address</span>
                     <br>
                     <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
-                    <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button> 
+                    <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button>
 
                   </div>
 
@@ -1222,7 +1223,8 @@
                       <span class="td-label">
                         Supplier</span>
                       <br>
-                      <b class="capitalize" *ngIf="complete.supplierdetails" class="onhovertooltip-100" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}"> {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
+                      <b class="capitalize" *ngIf="complete.supplierdetails" class="onhovertooltip-100" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}">
+                        {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
                     </div>
                     <div class="col-5  right">
                       <span class="td-label">
@@ -1260,7 +1262,8 @@
 
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm"  *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')"  (click)="rejectOrder(complete)">
+                    <button class="btn red btn-link btn-sm" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')"
+                      (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer">
@@ -1274,30 +1277,20 @@
                 </div>
               </td>
 
-              <td width="10%"  >
+              <td width="10%">
 
 
-<span *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
-                <ngx-gauge *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
-                [thresholds]="thresholdConfig"
-                [type]="gaugeType"
-                [value]= 'complete.timeRemaining'
-                [label]="gaugeLabel"
-                [append]="gaugeAppendText"
-                [min]= 'guageMinimum'
-                [max] = 'guageMaximum'
-                [size]='130'
-                [backgroundColor]="guageBackGround"
+                <span *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
+                  <ngx-gauge *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='complete.timeRemaining' [label]="gaugeLabel"
+                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
+                  </ngx-gauge>
+
+                  <b *ngIf="complete.timeRemaining < -24 " class="red">{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
 
 
-                >
-                </ngx-gauge>
-
-                <b *ngIf="complete.timeRemaining < -24 " class="red" >{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
-                <b *ngIf="complete.timeRemaining > 24"  class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
-
-
-              </span>
+                </span>
               </td>
 
 
@@ -1305,14 +1298,14 @@
           </tbody>
         </table>
         <br>
-                <h5 class="warning  capitalize center">
-                  <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
-                    <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-                    click for more data</a>
-                </h5>
+        <h5 class="warning  capitalize center">
+          <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+            click for more data</a>
+        </h5>
 
-                <h4 *ngIf="!completeClickMore" class="warning center">
-                  <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+        <h4 *ngIf="!completeClickMore" class="warning center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
 
 
 
@@ -1323,9 +1316,3 @@
 
 
 </div>
-
-
-
-
-
-
