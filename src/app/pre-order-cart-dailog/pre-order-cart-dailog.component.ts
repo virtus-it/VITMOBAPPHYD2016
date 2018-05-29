@@ -139,7 +139,7 @@ export class PreOrderCartDailogComponent implements OnInit {
 
     let dialogRefEditCustomer = this.dialog.open(DeliverpreorderComponent, {
 
-        width: '580px',
+        width: '80%',
         data: data
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
@@ -437,7 +437,7 @@ getProductsListResult(result) {
 
 ViewDistributors(data) {
   let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
-      width: '70%',
+      width: '80%',
       data: data
   });
   dialogRefDist.afterClosed().subscribe(result => {

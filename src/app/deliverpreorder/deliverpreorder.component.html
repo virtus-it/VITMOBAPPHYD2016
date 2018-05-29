@@ -13,8 +13,8 @@
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row">
-      <div class="  col-5">
-        <md-form-field class="">
+      <div class="  col-6">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Quantity" (ngModelChange)="amountChange($event)" [(ngModel)]="Detail.order.delivered_qty"  >
           <md-error>
             Quantity is
@@ -22,8 +22,8 @@
           </md-error>
         </md-form-field>
       </div>
-      <div class="  col-5">
-        <md-form-field class="">
+      <div class="  col-6">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" >
           <md-error>
             Returned Cans is
@@ -34,10 +34,10 @@
     </div>
 
     <div class="row form-group">
-      <div class="  col-3">
-        <b>Payment Type</b>
-      </div>
       <div class="  col-2">
+        <b>Payment Type: </b>
+      </div>
+      <div class="  col-1">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" class="custom-control-input" value="cash"  name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
@@ -46,7 +46,7 @@
           </label>
         </div>
       </div>
-      <div class="  col-7">
+      <div class="  col-1">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" class="custom-control-input" value="credit" name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
@@ -55,6 +55,27 @@
           </label>
         </div>
       </div>
+      <div class="  col-1">
+          <div class="form-radio form-radio-inline">
+            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" class="custom-control-input" value="credit" name="paymentType">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description"> PAYTM </span>
+            </label>
+          </div>
+        </div>
+        <div class="  col-3">
+            <div class="form-radio form-radio-inline">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" class="custom-control-input" value="credit" name="paymentType" >
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> ONLINE BANKING </span>
+              </label>
+            </div>
+          </div>
+
+
+
     </div>
     <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cash'">
       <!-- <div class="row">
@@ -65,18 +86,18 @@
     </div> -->
 
    
-        <div class="p-2">
-            <span>Exp del chgs<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+        <div class="p-4">
+            <span> <b>Express delivery charges<br>{{Detail.order.expressdeliverycharges}}</b></span>
             </div>
-            <div class= "p-2">
-            <span>Serv chgs<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
+            <div class= "p-4">
+            <span> <b>Service charges<br>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
           </div>
-          <div class= "p-2">
-            <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
+          <div class= "p-4">
+            <span> <b>price/Unit<br>{{Detail.order.product_cost}}</b></span>
           </div>
 
-      <div class="p-2">
-        <md-form-field class="wd-50">
+      <div class="col">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Amount" [(ngModel)]="Detail.order.total_amt">
           <md-error>
             Amount is
@@ -87,18 +108,18 @@
       </div>
 
       <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='credit'">
-          <div class="p-2">
-              <span>Exp del chgs<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
+          <div class="p-4">
+              <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
               </div>
-              <div class= "p-2">
-              <span>Serv chgs<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
+              <div class= "p-4">
+              <span>Service charges<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
               </div>
 
-              <div class= "p-2">
+              <div class= "p-4">
                 <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
               </div>
 
-              <div class= "p-2">
+              <div class= "p-4">
                   <span>Amount<br><b>{{Detail.order.total_amt}}</b></span>
                 </div>
 
@@ -116,13 +137,13 @@
       </div>
     </div><br>
     <div class="row">
-      <div class="col-5">
-        <md-form-field class="">
+      <div class="col-6">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount" disabled="disabled">
         </md-form-field>
-      </div> &nbsp; &nbsp;&nbsp;
-      <div class="col-5">
-          <md-form-field class="">
+      </div>
+      <div class="col-6">
+          <md-form-field class="wd-100pc">
             <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amt" >
           </md-form-field>
         </div>

@@ -394,7 +394,7 @@
                       <span class="td-label">Brand Name</span>
                       <br>
                       <b class="capitalize">
-                        <b>{{forward.productdetails.category}}</b> {{forward.brandname}} </b>
+                        {{forward.productdetails.category}} {{forward.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -511,10 +511,8 @@
                     <b class="" *ngIf="forward.user_reference_code === null"> - </b>
                   </div>
                 </div>
-
                 <div class="row ">
                   <div class="col left">
-
                     <div class="row">
                       <div class="col-9">
                         <span class="td-label">
@@ -532,10 +530,8 @@
 
 
                   </div>
-
                 </div>
               </td>
-
               <td width="30%" class="brd-right pd-top-0">
                 <div class="">
                   <div class="row form-group">
@@ -863,29 +859,26 @@
                       <b *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
                       <b class="" *ngIf="allorder.user_reference_code === null"> - </b>
                     </div>
-
                   </div>
-                  <div class=" row ">
+                  <div class="row ">
                     <div class="col left">
-                      <span class="td-label" id='foo'>
-                        Address</span>
-                      <br>
-                      <b class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</b>
-
-                      <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button>
-
-
-                      <!-- <button class="btn" data-clipboard-target="#foo">
-                              <img src="assets/clippy.svg" alt="Copy to clipboard">
-                          </button> -->
-
+                      <div class="row">
+                        <div class="col-9">
+                          <span class="td-label">
+                            Address</span>
+                          <br>
+                          <b>
+                            <span class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</span>
+                          </b>
+                        </div>
+                        <div class="col-3 right align-self-center">
+                          <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(allorder.orderby_address)">
+                            <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                        </div>
+                      </div>
                     </div>
-
-
-
                   </div>
                 </div>
-
               </td>
               <td width="30%" class="brd-right pd-top-0">
                 <div class="">
@@ -1195,16 +1188,15 @@
                 <div class="row">
                   <div class="col left">
                     <span class="td-label">
-                      Address</span>
+                      Promo Code
+                    </span>
                     <br>
                     <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
                     <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button>
 
                   </div>
-
                 </div>
               </td>
-
               <td width="30%" class="brd-right">
                 <div class="">
                   <div class="row form-group">

@@ -95,7 +95,7 @@ editStatus(orderData) {
 
 messageTemplate(data){
     let dialogRefeditStatus = this.dialog.open(MessageTemplateComponent, {
-        width: '900px',
+        width: '95%',
         data: data
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
