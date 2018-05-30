@@ -105,6 +105,8 @@ export class MapDialogComponent implements OnInit {
     this.getPolygonDistributors(this.map.data);
     this.bindDataLayerListeners(this.map.data);
     this.getAllStockPoints();
+    // this.showStockpoints();
+
 
     // this.showStockPoint(this.stockpointArray);
 
@@ -127,8 +129,12 @@ export class MapDialogComponent implements OnInit {
      //console.log(result);
      if(result.result == 'success'){
        this.stockpoints=result.data;
+       this.showStockPoint(this.stockpoints);
      }
   }
+
+
+
 
 
   // Add circle overlay and bind to marker
@@ -139,40 +145,35 @@ export class MapDialogComponent implements OnInit {
   //   });
   //   circle.bindTo('center', marker, 'position');
 
-//   showStockPoint(data) {
-//     let findDistributor: any = {};
-//     findDistributor = _.filter(data, function(e: any) {
-//       return e.user_id == this.userid;
-//     });
+  showStockPoint(data) {
+    if (data && data.length > 0) {
+      let stockpointsLocationArray = [];
+      _.each(data, function(i, j) {
+        let details: any = i;
+        if (details.latitude !== null && details.longitude !== null) {
+          let distData: any = {
+            lat: '',
+            lng: '',
+            icon: ''
+          };
+          if (details.latitude && details.longitude) {
+            distData.lat = parseFloat(details.latitude);
+            distData.lng = parseFloat(details.longitude);
+            distData.icon = '../assets/images/green.png';
 
-//     if (data.stockpoint && data.stockpoint.length > 0) {
-//       let stockpointsLocationArray = [];
-//       _.each(data.stockpoint, function(i, j) {
-//         let details: any = i;
-//         if (details.latitude !== null && details.longitude !== null) {
-//           let distData: any = {
-//             lat: '',
-//             lng: '',
-//             icon: ''
-//           };
-//           if (details.latitude && details.longitude) {
-//             distData.lat = parseFloat(details.latitude);
-//             distData.lng = parseFloat(details.longitude);
-//             distData.icon = '../assets/images/green.png';
+            if (distData.lat != '') {
+              stockpointsLocationArray.push(distData);
+            }
+          }
+        }
+      });
 
-//             if (distData.lat != '') {
-//               stockpointsLocationArray.push(distData);
-//             }
-//           }
-//         }
-//       });
-
-//       if (stockpointsLocationArray.length > 0) {
-//         this.stockPointLocationData = stockpointsLocationArray;
-//         console.log('lats and lngs', this.stockPointLocationData);
-//       }
-//     }
-//   }
+      if (stockpointsLocationArray.length > 0) {
+        this.stockPointLocationData = stockpointsLocationArray;
+        console.log('lats and lngs', this.stockPointLocationData);
+      }
+    }
+  }
 
   getPolygonDistributors(dataLayer) {
     this.loaderService.display(true);
