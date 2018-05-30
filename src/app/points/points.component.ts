@@ -28,6 +28,10 @@ export class PointsComponent implements OnInit {
     });
   }
 
+  // getAllPoints(){
+  //   let input = {"User":{"TransType":"getpointsdetails","userid":"2636","usertype":"customer"}}
+  // }
+
 
 
   ngOnInit() {

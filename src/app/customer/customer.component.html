@@ -215,7 +215,11 @@
                       <div class="col-md-6" *ngIf="superDealer" (click)="showFollowUp(customers)">
                                 <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
                               </div>
-                       <label class="col-md-6" >          </label>               
+
+                              <div class="col-md-6" *ngIf="superDealer" (click)="showPoints(customers)">
+                                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> Points
+                              </div>
+                                   
                     </div>
                 </div>
               </div>

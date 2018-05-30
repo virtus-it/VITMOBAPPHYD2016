@@ -85,6 +85,28 @@ export class MapDialogComponent implements OnInit {
       this.map.data.remove(event.feature);
     });
 
+    // var createMarker = function (stockPointLocationData){
+    //   var marker = new google.maps.Marker({
+    //       position: new google.maps.LatLng(stockPointLocationData.lat, stockPointLocationData.lng),
+    //       map: this.map,
+    //       animation: google.maps.Animation.DROP,
+          
+    //   });
+    // }
+
+    for (let location of this.stockPointLocationData) {
+
+      let latLng = {lat: parseFloat(location.lat), lng: parseFloat(location.lng)};
+  
+      // Set the position and title
+      let marker = new google.maps.Marker({
+        position: latLng,
+    })
+  
+      // place marker in map
+      marker.setMap(this.map)
+    }
+
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
         //get the place result
@@ -104,7 +126,7 @@ export class MapDialogComponent implements OnInit {
     });
     this.getPolygonDistributors(this.map.data);
     this.bindDataLayerListeners(this.map.data);
-    this.getAllStockPoints();
+    // this.getAllStockPoints();
     // this.showStockpoints();
 
 
@@ -130,6 +152,9 @@ export class MapDialogComponent implements OnInit {
      if(result.result == 'success'){
        this.stockpoints=result.data;
        this.showStockPoint(this.stockpoints);
+        this.loader.load().then(() => {
+      this.initMap();
+    });
      }
   }
 
@@ -170,6 +195,7 @@ export class MapDialogComponent implements OnInit {
 
       if (stockpointsLocationArray.length > 0) {
         this.stockPointLocationData = stockpointsLocationArray;
+        
         console.log('lats and lngs', this.stockPointLocationData);
       }
     }
@@ -282,11 +308,11 @@ export class MapDialogComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.stockpointArray = this.authenticationService.getPolygons();
+    this.getAllStockPoints();
     console.log(this.distributorDetails);
-    this.loader.load().then(() => {
-      this.initMap();
-    });
+    // this.loader.load().then(() => {
+    //   this.initMap();
+    // });
     this.searchControl = new FormControl();
   }
   onCloseConfirm() {

@@ -150,6 +150,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     }
 
     if (distributor.stockpoint && distributor.stockpoint.length > 0) {
+      this.stockPointLocationData = [];
       let stockpointsLocationArray = [];
       _.each(distributor.stockpoint, function(i, j) {
         let details: any = i;

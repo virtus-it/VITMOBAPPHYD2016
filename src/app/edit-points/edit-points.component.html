@@ -11,29 +11,108 @@
   
   <md-dialog-content layout="column">
   
-    <form class="example-form">
-      <div class="container-fluid pd-15x25 brd-bottom">
-        <div class="row form-group">
-          <div class="  col-sm-3  col-md-3  col-lg-3">  
-                  <md-select placeholder="Payment Type" class="wd-100pc">
-                    <md-option value="Customer">COD</md-option>
-                    <md-option value="Distributor">CREDIT</md-option>
-                    <md-option value="Supplier">PAYTM</md-option>
-                    <md-option  value="Sales">ONLINE BANKING</md-option>
-                  </md-select>
-          </div>
-       
-      
-        </div>
-        <div>
-        </div>
+    <div class="row" *ngIf="Detail.usertype !== 'dealer'">
+      <div class="col">
+        <p class="">{{Detail.firstname}} {{Detail.lastname}}</p>
       </div>
-    </form>
+      <div class="col">
+       <p class=""> {{Detail.mobileno}} </p>
+        
+        </div>
+        <div class="col">
+         
+          <p *ngIf="customerPoints && customerPoints.totalpoints"> {{customerPoints.totalpoints}}</p>
+          <p *ngIf="noPoints"> 0 </p>
+        
+          </div>
+          <!-- <div class="col">
+            <i class="" (click)="showDetails()"> Details </i>
+        
+            </div> -->
+    </div>
+
+
+    <div class="row" *ngIf="Detail.usertype !== 'dealer' && customerPoints && customerPoints.totalpoints">
+        <table class="table table-hover table-striped" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th width="">Date</th>
+              <th width="">Order id</th>
+              <th width="">Points</th>
+              <th width="">Rewarded for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detail of customerPointsDetails">
+              <td class="" width=""> {{detail.date | utcDate}}</td>
+              <td class="" width=""> {{detail.orderid}}</td>
+              <td class="" width=""> {{detail.points}}</td>
+              <td class="" width="">{{detail.status}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+
+
+      </div>
+
+
+
+      <div class="row" *ngIf="Detail.usertype == 'dealer'">
+          <div class="col">
+            <p class="">{{Detail.firstname}} {{Detail.lastname}} </p>
+          </div>
+          <div class="col">
+           <p class=""> {{Detail.mobileno}} </p>
+            
+            </div>
+            <div class="col">
+             
+              <p *ngIf="distributorPoints && distributorPoints.totalpoints"> {{distributorPoints.totalpoints}}</p>
+              <p *ngIf="noPoints"> 0 </p>
+              
+            
+              </div>
+              <!-- <div class="col">
+                <i class="" (click)="showDetails()"> Details </i>
+            
+                </div> -->
+        </div>
+
+
+
+
+      <div class="row" *ngIf="Detail.usertype == 'dealer' && distributorPoints &&  distributorPoints.totalpoints">
+          <table class="table table-hover table-striped" style="table-layout:fixed">
+            <thead>
+              <tr>
+                <th width="">Date</th>
+                <th width="">Order id</th>
+                <th width="">Points</th>
+                <th width="">Rewarded for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of distributorPointsDetails">
+                <td class="" width=""> {{detail.date | utcDate}}</td>
+                <td class="" width=""> {{detail.orderid}}</td>
+                <td class="" width=""> {{detail.points}}</td>
+                <td class="" width="">{{detail.status}}</td>
+              </tr>
+            </tbody>
+          </table>
+  
+  
+  
+        </div>
+
+
+
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20 ">
     <md-dialog-actions align="end">
   
-      <button type="submit" md-raised-button class="btn-primary"  >SUBMIT</button>
+      <!-- <button type="submit" md-raised-button class="btn-primary"  >SUBMIT</button> -->
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>

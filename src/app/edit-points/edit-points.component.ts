@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Inject } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
+import { MD_DIALOG_DATA } from '@angular/material';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-edit-points',
@@ -8,7 +11,140 @@ import { MdDialogRef } from '@angular/material';
 })
 export class EditPointsComponent implements OnInit {
 
-  constructor(public thisDialogRef: MdDialogRef<EditPointsComponent>) { }
+  constructor(public thisDialogRef: MdDialogRef<EditPointsComponent> ,  private distributorService: DistributorServiceService ,  @Inject(MD_DIALOG_DATA) public Detail: any) { }
+
+  customerPoints:any = [];
+  customerPointsDetails:any = [];
+  distributorPoints:any = [];
+  distributorPointsDetails:any = [];
+  noPoints:boolean = false;
+
+
+  getAllPointsCustomer(){
+    let input = {"User":{"TransType":"getpoints","userid": this.Detail.userid,"usertype":"customer"}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getAllPointsResult(output),
+    error => {
+        //console.log("error in customer");
+       
+    });
+  }
+  getAllPointsResult(result){
+    if(result.result == 'success'){
+      this.customerPoints = result.data;
+      this.getPointsDetails();
+
+    }
+    else{
+      this.noPoints = true;
+    }
+
+  }
+
+  getPointsDetails(){
+    let input = {"User":{"TransType":"getpointsdetails","userid":this.Detail.userid,"usertype":"customer"}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getPointsDetailsResult(output),
+    error => {
+        //console.log("error in customer");
+       
+    });
+  }
+  getPointsDetailsResult(result){
+    if(result.result == 'success'){
+      _.each(result.data , function(i , j){
+        let details:any = i;
+      if(details.status == 'delivered'){
+        details.status = 'Order Completed';
+      }
+      else if(details.status == 'signup'){
+        details.status = 'Signup';
+      }
+      else if(details.status == 'referalbonus'){
+        details.status = 'Referal Bonus';
+      }
+      
+
+    });
+      this.customerPointsDetails = result.data;
+
+    }
+
+  }
+
+  getAllPointsDistributor(){
+
+    let input = {"User":{"TransType":"getpoints","userid": this.Detail.userid,"usertype":"dealer"}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getAllPointsDistributorResult(output),
+    error => {
+        //console.log("error in customer");
+       
+    });
+  }
+  getAllPointsDistributorResult(result){
+    if(result.result == 'success'){
+      this.distributorPoints = result.data;
+      this.getPointsDistributorDetails();
+
+    }
+    else{
+      this.noPoints = true;
+    }
+    
+  }
+
+
+  getPointsDistributorDetails(){
+    let input = {"User":{"TransType":"getpointsdetails","userid":this.Detail.userid,"usertype":"customer"}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getPointsDistributorDetailsResult(output),
+    error => {
+        //console.log("error in customer");
+       
+    });
+  }
+  getPointsDistributorDetailsResult(result){
+    if(result.result == 'success'){
+      _.each(result.data , function(i , j){
+        let details:any = i;
+        if(details.status == 'accept'){
+          details.status = 'Order Accepted';
+        }
+        else if(details.status == 'ontime'){
+          details.status = 'On time Delivery';
+        }
+        else if(details.status == 'sameday'){
+          details.status = 'Same Day Delivery';
+        }
+    });
+      this.distributorPointsDetails = result.data;
+    }
+  }
+
+
+
+//   if (userType.equals(Constants.CUSTOMER)) {
+//     if (status.equals("delivered"))
+//         status = "Order Completed";
+//     else if (status.equals("signup"))
+//         status = "Signup";
+//     else if (status.equals("referalbonus"))
+//         status = "Referal Bonus";
+// } else if (userType.equals(Constants.DEALER)) {
+//     if (status.equals("accept"))
+//         status = "Order Accepted";
+//     else if (status.equals("ontime"))
+//         status = "On time Delivery";
+//     else if (status.equals("sameday"))
+//         status = "Same Day Delivery";
+// }
+
+
 
 
   
@@ -17,6 +153,13 @@ export class EditPointsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.Detail);
+    if(this.Detail.usertype == 'customer'){
+    this.getAllPointsCustomer();
+    }
+    else{
+      this.getAllPointsDistributor();
+    }
   }
 
 }
