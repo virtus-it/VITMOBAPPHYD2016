@@ -1,38 +1,77 @@
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-6  col-sm-6  col-lg-6">
-      <i class="fa fa-edit"></i> Edit Points
-    </div>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-      <strong (click)="onCloseCancel()">
-        <i class="fa fa-times fs-20" aria-hidden="true"></i>
-      </strong>
-    </div>
+  <div class="col-md-6  col-sm-6  col-lg-6">
+    <i class="fa fa-edit"></i> Edit Points
   </div>
-  
-  <md-dialog-content layout="column">
-  
-    <div class="row" *ngIf="Detail.usertype !== 'dealer'">
-      <div class="col">
-        <p class="">{{Detail.firstname}} {{Detail.lastname}}</p>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div *ngIf="Detail.usertype !== 'dealer'" class="points-style">
+        <div class="row">
+          <div class="col center">
+            <h1 *ngIf="customerPoints && customerPoints.totalpoints" class="fs-50 danger mgbottom-0"> {{customerPoints.totalpoints}}</h1>
+            <h1 *ngIf="noPoints" class="fs-50 danger mgbottom-0"> 0 </h1>
+            <span>POINTS</span>
+          </div>
+        </div>
+        <div class="row inner-style">
+          <div class="col">
+            <span class="capitalize">
+              <i class="fa fa-user"></i> {{Detail.firstname}} {{Detail.lastname}}</span>
+          </div>
+          <div class="col center">
+            <span class="">
+              <i class="fa fa-phone"></i> {{Detail.mobileno}} </span>
+          </div>
+          <div class="col right">
+              <button md-raised-button class="btn btn-primary btn-small fs-14" >Details</button>&nbsp;
+            </div>
+        </div>
       </div>
-      <div class="col">
-       <p class=""> {{Detail.mobileno}} </p>
-        
+
+      <div class="" *ngIf="Detail.usertype !== 'dealer' && customerPoints && customerPoints.totalpoints">
+        <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th width="29%">Date</th>
+              <th width="20%">Order id</th>
+              <th width="20%">Points</th>
+              <th width="29%">Rewarded for</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detail of customerPointsDetails">
+              <td  width="30%"> {{detail.date | utcDate}}</td>
+              <td  width="20%"> #{{detail.orderid}}</td>
+              <td  width="20%"> {{detail.points}}</td>
+              <td  width="30%">{{detail.status}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="row" *ngIf="Detail.usertype == 'dealer'">
+        <div class="col">
+          <p class="">{{Detail.firstname}} {{Detail.lastname}} </p>
         </div>
         <div class="col">
-         
-          <p *ngIf="customerPoints && customerPoints.totalpoints"> {{customerPoints.totalpoints}}</p>
+          <p class=""> {{Detail.mobileno}} </p>
+
+        </div>
+        <div class="col">
+
+          <p *ngIf="distributorPoints && distributorPoints.totalpoints"> {{distributorPoints.totalpoints}}</p>
           <p *ngIf="noPoints"> 0 </p>
-        
-          </div>
-          <!-- <div class="col">
-            <i class="" (click)="showDetails()"> Details </i>
-        
-            </div> -->
-    </div>
 
+        </div>
 
-    <div class="row" *ngIf="Detail.usertype !== 'dealer' && customerPoints && customerPoints.totalpoints">
+      </div>
+      <div class="row" *ngIf="Detail.usertype == 'dealer' && distributorPoints &&  distributorPoints.totalpoints">
         <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead>
             <tr>
@@ -43,7 +82,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let detail of customerPointsDetails">
+            <tr *ngFor="let detail of distributorPointsDetails">
               <td class="" width=""> {{detail.date | utcDate}}</td>
               <td class="" width=""> {{detail.orderid}}</td>
               <td class="" width=""> {{detail.points}}</td>
@@ -51,68 +90,15 @@
             </tr>
           </tbody>
         </table>
-
-
-
       </div>
 
+    </div>
+  </form>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20 ">
+  <md-dialog-actions align="end">
 
-
-      <div class="row" *ngIf="Detail.usertype == 'dealer'">
-          <div class="col">
-            <p class="">{{Detail.firstname}} {{Detail.lastname}} </p>
-          </div>
-          <div class="col">
-           <p class=""> {{Detail.mobileno}} </p>
-            
-            </div>
-            <div class="col">
-             
-              <p *ngIf="distributorPoints && distributorPoints.totalpoints"> {{distributorPoints.totalpoints}}</p>
-              <p *ngIf="noPoints"> 0 </p>
-              
-            
-              </div>
-              <!-- <div class="col">
-                <i class="" (click)="showDetails()"> Details </i>
-            
-                </div> -->
-        </div>
-
-
-
-
-      <div class="row" *ngIf="Detail.usertype == 'dealer' && distributorPoints &&  distributorPoints.totalpoints">
-          <table class="table table-hover table-striped" style="table-layout:fixed">
-            <thead>
-              <tr>
-                <th width="">Date</th>
-                <th width="">Order id</th>
-                <th width="">Points</th>
-                <th width="">Rewarded for</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let detail of distributorPointsDetails">
-                <td class="" width=""> {{detail.date | utcDate}}</td>
-                <td class="" width=""> {{detail.orderid}}</td>
-                <td class="" width=""> {{detail.points}}</td>
-                <td class="" width="">{{detail.status}}</td>
-              </tr>
-            </tbody>
-          </table>
-  
-  
-  
-        </div>
-
-
-
-  </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20 ">
-    <md-dialog-actions align="end">
-  
-      <!-- <button type="submit" md-raised-button class="btn-primary"  >SUBMIT</button> -->
-      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-    </md-dialog-actions>
-  </div>
+    <!-- <button type="submit" md-raised-button class="btn-primary"  >SUBMIT</button> -->
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

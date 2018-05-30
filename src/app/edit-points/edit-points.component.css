@@ -1,0 +1,24 @@
+.points-style{
+border: 1px solid #ddd;
+padding: 10px 20px 0px;
+margin-bottom: 10px;
+box-shadow: 0 2px 3px rgba(0,0,0,.3);
+}
+.inner-style{
+padding: 10px 0px;
+margin-top: 10px;
+border-top: 2px solid #eea236;
+}
+.mgbottom-0{
+    margin-bottom: 0px !important;
+}
+table.table-fixedheader>tbody{
+    overflow-y: auto;
+    max-height: 260px;
+}
+.table{
+    margin-bottom: 0px !important;
+}
+.fs-14{
+    font-size: 14px !important;
+}

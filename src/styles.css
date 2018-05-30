@@ -71,6 +71,9 @@ table thead {
     margin: 0px;
     border-bottom: 1px solid #c5d6de;
   }
+  .fs-50{
+    font-size: 50px !important;
+  }
   .pd-15x10{
     padding: 15px 10px;
   }
