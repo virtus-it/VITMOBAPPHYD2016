@@ -18,7 +18,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
 import { ProductsService } from '../products/products.service';
 import 'rxjs/add/operator/map';
-
+import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
@@ -423,8 +423,17 @@ this.getProductByCategory();
             this.getDistributors(true);
         }
 
-        quickFilter(){
+        viewPoints(data){
 
+            let dialogRefEditCustomer = this.dialog.open(EditPointsComponent, {
+                width: '700px',
+                data: data
+            });
+            dialogRefEditCustomer.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if(result == "success"){
+            }
+            });
         }
     
 

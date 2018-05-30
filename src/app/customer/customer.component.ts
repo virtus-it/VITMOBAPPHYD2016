@@ -20,6 +20,7 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
 import * as FileSaver from 'file-saver';
+import { EditPointsComponent } from '../edit-points/edit-points.component';
 @Component({
 
     templateUrl: './customer.component.html',
@@ -357,6 +358,21 @@ if(result == "success"){
 
     });
       }
+
+
+      showPoints(data){
+
+        let dialogRefEditCustomer = this.dialog.open(EditPointsComponent, {
+            width: '700px',
+            data: data
+        });
+        dialogRefEditCustomer.afterClosed().subscribe(result => {
+        //console.log(`Dialog closed: ${result}`);
+        if(result == "success"){
+        }
+
+        });
+    }
 
 
 

@@ -15,3 +15,10 @@
     margin-right: 0px; 
     margin-left: 0px;
 }
+
+agm-map {
+  height: 375px;
+}
+.mgtopleft-20{
+  margin: 20px 0px 0px 20px !important;
+}

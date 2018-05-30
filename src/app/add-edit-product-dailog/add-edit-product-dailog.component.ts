@@ -9,13 +9,18 @@ import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import * as _ from 'underscore';
 @Component({
-
   templateUrl: './add-edit-product-dailog.component.html',
   styleUrls: ['./add-edit-product-dailog.component.css']
 })
 export class AddEditProductDailogComponent implements OnInit {
-
-  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<AddEditProductDailogComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) { }
+  constructor(
+    private authenticationService: AuthenticationService,
+    public thisDialogRef: MdDialogRef<AddEditProductDailogComponent>,
+    @Inject(MD_DIALOG_DATA) public Details: any,
+    public dialog: MdDialog,
+    private loaderService: LoaderService,
+    private productService: ProductsService
+  ) {}
 
   // productPriorityFormControl = new FormControl ('' , [Validators.required]);
   // productNameFormControl = new FormControl('',[Validators.required]);
@@ -25,32 +30,46 @@ export class AddEditProductDailogComponent implements OnInit {
   // serviceChargeFormControl = new FormControl('',[Validators.required]);
   // expressDeliveryFormControl = new FormControl('',[Validators.required]);
 
-
-
-  p1FC = new FormControl ('' , [Validators.required]);
-  p2FC = new FormControl('',[Validators.required]);
-  p3FC = new FormControl('',[Validators.required]);
-  p4FC = new FormControl('',[Validators.required]);
-  p5FC = new FormControl('',[Validators.required]);
-  p6FC = new FormControl('',[Validators.required]);
-  p7FC = new FormControl('',[Validators.required]);
+  p1FC = new FormControl('', [Validators.required]);
+  p2FC = new FormControl('', [Validators.required]);
+  p3FC = new FormControl('', [Validators.required]);
+  p4FC = new FormControl('', [Validators.required]);
+  p5FC = new FormControl('', [Validators.required]);
+  p6FC = new FormControl('', [Validators.required]);
+  p7FC = new FormControl('', [Validators.required]);
   superDealer = true;
 
   productCategoryList = [];
   productTypeList = [];
-  headerValue = "Add Products";
-  message:any="";
-  
-  productDetails: any = { categoryDetails: "", productName: "", productType: "", currency: "", cost: "", iscanRetrunable:true, minQty: "", Priority: "", IsAuthorized: "", servicecharge:"", expressdeliverycharges:"" };
+  headerValue = 'Add Products';
+  message: any = '';
+
+  productDetails: any = {
+    categoryDetails: '',
+    productName: '',
+    productType: '',
+    currency: '',
+    cost: '',
+    iscanRetrunable: true,
+    minQty: '',
+    Priority: '',
+    IsAuthorized: '',
+    servicecharge: '',
+    expressdeliverycharges: ''
+  };
   getProductCategory() {
-    let input = { userId: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType(), userType: this.authenticationService.userType() };
-    this.productService.getProductsCategory(input)
-      .subscribe(
+    let input = {
+      userId: this.authenticationService.loggedInUserId(),
+      appType: this.authenticationService.appType(),
+      userType: this.authenticationService.userType()
+    };
+    this.productService.getProductsCategory(input).subscribe(
       output => this.getProductCategoryResult(output),
       error => {
         //console.log("error");
         this.loaderService.display(false);
-      });
+      }
+    );
   }
   getProductCategoryResult(result) {
     //console.log(result);
@@ -60,19 +79,25 @@ export class AddEditProductDailogComponent implements OnInit {
         this.getProductDetails();
       }
     }
-
   }
   getProductsByCategory() {
     if (this.Details) {
-      let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "category": this.Details.category, "categoryid": this.Details.categoryid, "apptype": this.authenticationService.appType() } };
-      this.productService.getProductsByCategory(input)
-        .subscribe(
+      let input = {
+        root: {
+          userid: this.authenticationService.loggedInUserId(),
+          usertype: this.authenticationService.userType(),
+          category: this.Details.category,
+          categoryid: this.Details.categoryid,
+          apptype: this.authenticationService.appType()
+        }
+      };
+      this.productService.getProductsByCategory(input).subscribe(
         output => this.getProductsByCategoryResult(output),
         error => {
           //console.log("error");
           this.loaderService.display(false);
-        });
-
+        }
+      );
     }
   }
   getProductsByCategoryResult(result) {
@@ -82,20 +107,37 @@ export class AddEditProductDailogComponent implements OnInit {
     }
   }
   createProduct() {
-    if(this.validate()){
-
-    
-    let input = { "product": { "category": this.productDetails.categoryDetails.category, "servicecharge":this.productDetails.servicecharge, "expressdeliverycharges":this.productDetails.expressdeliverycharges, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": this.productDetails.currency, "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
-    //console.log(input);
-    this.productService.createProduct(input)
-      .subscribe(
-      output => this.createProductResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+    if (this.validate()) {
+      let input = {
+        product: {
+          category: this.productDetails.categoryDetails.category,
+          servicecharge: this.productDetails.servicecharge,
+          expressdeliverycharges: this.productDetails.expressdeliverycharges,
+          categoryid: this.productDetails.categoryDetails.categoryid,
+          currency: this.productDetails.currency,
+          brandname: this.productDetails.productName,
+          pname: this.productDetails.productName,
+          ptype: this.productDetails.productType,
+          pcost: this.productDetails.cost,
+          areaid: '0',
+          minorderqty: this.productDetails.minQty,
+          priority: this.productDetails.Priority,
+          iscanreturnable: this.productDetails.iscanRetrunable,
+          isauthorized: this.productDetails.IsAuthorized,
+          loginid: this.authenticationService.loggedInUserId(),
+          apptype: this.authenticationService.appType()
+        }
+      };
+      //console.log(input);
+      this.productService.createProduct(input).subscribe(
+        output => this.createProductResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        }
+      );
+    }
   }
-}
   createProductResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -103,19 +145,38 @@ export class AddEditProductDailogComponent implements OnInit {
     }
   }
   updateProduct() {
-    if(this.validate()){
-
-    let input = { "product": { "pid": this.Details.productid, "category": this.productDetails.categoryDetails.category, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": "INR", "brandname": this.productDetails.productName, "servicecharge":this.productDetails.servicecharge ,"expressdeliverycharges": this.productDetails.expressdeliverycharges,"pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
-    console.log(input);
-    this.productService.updateProduct(input)
-      .subscribe(
-      output => this.updateProductResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+    if (this.validate()) {
+      let input = {
+        product: {
+          pid: this.Details.productid,
+          category: this.productDetails.categoryDetails.category,
+          categoryid: this.productDetails.categoryDetails.categoryid,
+          currency: 'INR',
+          brandname: this.productDetails.productName,
+          servicecharge: this.productDetails.servicecharge,
+          expressdeliverycharges: this.productDetails.expressdeliverycharges,
+          pname: this.productDetails.productName,
+          ptype: this.productDetails.productType,
+          pcost: this.productDetails.cost,
+          areaid: '0',
+          minorderqty: this.productDetails.minQty,
+          priority: this.productDetails.Priority,
+          iscanreturnable: this.productDetails.iscanRetrunable,
+          isauthorized: this.productDetails.IsAuthorized,
+          loginid: this.authenticationService.loggedInUserId(),
+          apptype: this.authenticationService.appType()
+        }
+      };
+      console.log(input);
+      this.productService.updateProduct(input).subscribe(
+        output => this.updateProductResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        }
+      );
+    }
   }
-}
   updateProductResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -123,57 +184,67 @@ export class AddEditProductDailogComponent implements OnInit {
     }
   }
   getProductDetails() {
-    if(!this.Details.userid){
-    
-    this.headerValue = "Edit Products";
-    let productDetails = this.Details
-    let category = _.find(this.productCategoryList, function (k, l) {
-      let Details: any = k;
-      return Details.categoryid == productDetails.categoryid;
-    });
-    if (category) {
-      this.productDetails.categoryDetails = category;
-    }
-    this.productDetails.productName = this.Details.pname;
-    this.productDetails.productType = this.Details.ptype;
-    this.productDetails.cost = this.Details.pcost;
-    this.productDetails.iscanRetrunable = this.Details.iscanreturnable;
-    this.productDetails.minQty = this.Details.minorderqty;
-    this.productDetails.Priority = this.Details.priority;
-    this.productDetails.IsAuthorized = JSON.parse(this.Details.isauthorized);
-    this.productDetails.expressdeliverycharges = this.Details.expressdeliverycharges;
-    this.productDetails.servicecharge = this.Details.servicecharge;
-
-  }
-
-  }
-
-  createDistributorProduct(){
-    if(this.validate()){
-
-    
-
-    let input = { "product": { "category": this.productDetails.categoryDetails.category, "servicecharge":this.productDetails.servicecharge, "expressdeliverycharges":this.productDetails.expressdeliverycharges, "categoryid": this.productDetails.categoryDetails.categoryid, "currency": this.productDetails.currency, "brandname": this.productDetails.productName, "pname": this.productDetails.productName, "ptype": this.productDetails.productType, "pcost": this.productDetails.cost, "areaid": "0", "minorderqty": this.productDetails.minQty, "priority": this.productDetails.Priority, "iscanreturnable": this.productDetails.iscanRetrunable, "isauthorized": this.productDetails.IsAuthorized, "loginid": this.Details.userid, "apptype": this.authenticationService.appType() } };
-    //console.log(input);
-    this.productService.createProduct(input)
-      .subscribe(
-      output => this.createProductResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
+    if (!this.Details.userid) {
+      this.headerValue = 'Edit Products';
+      let productDetails = this.Details;
+      let category = _.find(this.productCategoryList, function(k, l) {
+        let Details: any = k;
+        return Details.categoryid == productDetails.categoryid;
       });
-
+      if (category) {
+        this.productDetails.categoryDetails = category;
+      }
+      this.productDetails.productName = this.Details.pname;
+      this.productDetails.productType = this.Details.ptype;
+      this.productDetails.cost = this.Details.pcost;
+      this.productDetails.iscanRetrunable = this.Details.iscanreturnable;
+      this.productDetails.minQty = this.Details.minorderqty;
+      this.productDetails.Priority = this.Details.priority;
+      this.productDetails.IsAuthorized = JSON.parse(this.Details.isauthorized);
+      this.productDetails.expressdeliverycharges = this.Details.expressdeliverycharges;
+      this.productDetails.servicecharge = this.Details.servicecharge;
+    }
   }
-}
 
-  createDistributorProductResult(result){
+  createDistributorProduct() {
+    if (this.validate()) {
+      let input = {
+        product: {
+          category: this.productDetails.categoryDetails.category,
+          servicecharge: this.productDetails.servicecharge,
+          expressdeliverycharges: this.productDetails.expressdeliverycharges,
+          categoryid: this.productDetails.categoryDetails.categoryid,
+          currency: this.productDetails.currency,
+          brandname: this.productDetails.productName,
+          pname: this.productDetails.productName,
+          ptype: this.productDetails.productType,
+          pcost: this.productDetails.cost,
+          areaid: '0',
+          minorderqty: this.productDetails.minQty,
+          priority: this.productDetails.Priority,
+          iscanreturnable: this.productDetails.iscanRetrunable,
+          isauthorized: this.productDetails.IsAuthorized,
+          loginid: this.Details.userid,
+          apptype: this.authenticationService.appType()
+        }
+      };
+      //console.log(input);
+      this.productService.createProduct(input).subscribe(
+        output => this.createProductResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        }
+      );
+    }
+  }
+
+  createDistributorProductResult(result) {
     //console.log(result);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
-
   }
-
 
   onCloseModal() {
     this.thisDialogRef.close('cancel');
@@ -181,33 +252,28 @@ export class AddEditProductDailogComponent implements OnInit {
   onSubimtProducts() {
     if (this.Details && this.Details.productid) {
       this.updateProduct();
-    }
-    else if(this.Details && this.Details.userid){
+    } else if (this.Details && this.Details.userid) {
       this.createDistributorProduct();
-    }
-    else {
+    } else {
       this.createProduct();
     }
   }
 
-  validate(){
-    if(this.productDetails.categoryDetails && this.productDetails.categoryDetails.category ){
-      this.message="";
+  validate() {
+    if (
+      this.productDetails.categoryDetails &&
+      this.productDetails.categoryDetails.category
+    ) {
+      this.message = '';
       return true;
+    } else {
+      this.message = 'please select category';
+      return false;
     }
-    else{
-     this.message="please select category";
-     return false;
-   }
-   
- 
-   }
+  }
   ngOnInit() {
     console.log(this.Details);
     this.getProductCategory();
     this.superDealer = this.authenticationService.getSupperDelear();
-
-
   }
-
 }
