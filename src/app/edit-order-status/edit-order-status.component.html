@@ -103,7 +103,7 @@
         <div class="row" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div class="col-4 pleft">
               <small class="">Due Amount</small><br>
-              <b class="">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+              <b class="" *ngIf= "orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
            
           </div>
           <div class="col-4" >
@@ -121,7 +121,7 @@
           <div class="row" *ngIf="editStatusInput.order.orderstatus !== 'delivered'">
             <div class="col-4 pleft">
                 <small class="">Due Amount</small><br>
-                <b class="">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+                <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
              
             </div>
             <div class="col-4" >
