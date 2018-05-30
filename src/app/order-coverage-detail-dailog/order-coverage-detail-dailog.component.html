@@ -8,7 +8,8 @@
       <span>{{orderDetail.orders.prod_type}}</span> - 
       <span>{{orderDetail.orders.quantity}}(qty)</span>
       </div>
-  <div class="col-md-3  col-sm-3  col-lg-3 right">
+  <div class="col-md-2 right">
+    <span class="fa fa-search"></span>
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
     </strong>
@@ -17,8 +18,8 @@
 
 <md-dialog-content layout="column">
     <form class="example-form" >
-      <div class="row mg-20 form-group" >
-          <div class=" col-3 ">
+      <div class="row mg-10-5">
+          <div class=" col-3 offset-1">
               <md-form-field class="wd-100pc">
                   <input class="form-control" [(ngModel)]="reasonOnHold" autocorrect="off" autocapitalize="off" spellcheck="off" mdInput placeholder="search for location" name="Return Cans"  class="form-control" #search [formControl]="searchControl" [disabled]="smallLoader == true">
             </md-form-field>
@@ -37,7 +38,7 @@
               <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem" [disabled]="smallLoader == true" ></angular2-multiselect>
             </div>
-          <div class="col-3 ">
+          <div class="col-3">
           <button md-raised-button color="primary" (click)="filterPolygon()" [disabled]="smallLoader == true" > Filter </button> 
           <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail.distDetails)" [disabled]="smallLoader == true">Assign Area</button>
           
@@ -53,7 +54,7 @@
      
     <div class="row">
       <div class="col mgbottom-10">
-          <div *ngIf="gpsMessage"><h4 class="warning">{{gpsMessage}}</h4></div>        
+          <div *ngIf="gpsMessage"><h4 class="warning"><span class="fa fa-globe"></span> {{gpsMessage}}</h4></div>        
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
           <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
           <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path" [fillColor]="'#0073e6'" [geodesic]="true" [strokeWeight]="1"

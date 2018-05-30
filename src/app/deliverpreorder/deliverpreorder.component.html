@@ -34,10 +34,10 @@
     </div>
 
     <div class="row form-group">
-      <div class="  col-2">
+      <div class="  col-3">
         <b>Payment Type: </b>
       </div>
-      <div class="  col-1">
+      <div class="  col-2">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" class="custom-control-input" value="cash"  name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
@@ -46,7 +46,7 @@
           </label>
         </div>
       </div>
-      <div class="  col-1">
+      <div class="  col-2">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
             <input type="radio" class="custom-control-input" value="credit" name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
@@ -55,7 +55,7 @@
           </label>
         </div>
       </div>
-      <div class="  col-1">
+      <div class="  col-2">
           <div class="form-radio form-radio-inline">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" class="custom-control-input" value="credit" name="paymentType">
@@ -86,13 +86,13 @@
     </div> -->
 
    
-        <div class="p-4">
+        <div class="p-2">
             <span> <b>Express delivery charges<br>{{Detail.order.expressdeliverycharges}}</b></span>
             </div>
-            <div class= "p-4">
+            <div class= "p-2">
             <span> <b>Service charges<br>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
           </div>
-          <div class= "p-4">
+          <div class= "p-2">
             <span> <b>price/Unit<br>{{Detail.order.product_cost}}</b></span>
           </div>
 
@@ -108,14 +108,14 @@
       </div>
 
       <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='credit'">
-          <div class="p-4">
+          <div class="p-2">
               <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
               </div>
-              <div class= "p-4">
+              <div class= "p-2">
               <span>Service charges<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
               </div>
 
-              <div class= "p-4">
+              <div class= "p-2">
                 <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
               </div>
 
