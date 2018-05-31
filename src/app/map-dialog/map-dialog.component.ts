@@ -43,8 +43,8 @@ export class MapDialogComponent implements OnInit {
   polygonArray: any = {
     path: []
   };
-  stockPointLocationData: marker[] = [];
-
+  // stockPointLocationData: marker[] = [];
+  stockpointsLocationArray1:any = [];
   stockpointArray: any = [];
   polygonexists: boolean = false;
 
@@ -153,7 +153,7 @@ export class MapDialogComponent implements OnInit {
   }
 
   showMarkers() {
-    for (let location of this.stockPointLocationData) {
+    for (let location of this.stockpointsLocationArray1) {
       let latLng = {
         lat: parseFloat(location.lat),
         lng: parseFloat(location.lng)
@@ -201,9 +201,9 @@ export class MapDialogComponent implements OnInit {
       });
 
       if (stockpointsLocationArray.length > 0) {
-        this.stockPointLocationData = stockpointsLocationArray;
+        this.stockpointsLocationArray1 = stockpointsLocationArray;
 
-        console.log('lats and lngs', this.stockPointLocationData);
+        // console.log('lats and lngs', this.stockPointLocationData);
       }
     }
   }
@@ -233,7 +233,7 @@ export class MapDialogComponent implements OnInit {
     if (output.data && output.data.length > 0) {
       if (output.data[0].polygonvalue.length > 0) {
         this.polygonexists = true;
-        this.newFunction();
+        // this.newFunction();
       }
       for (let data of output.data) {
         //console.log(data.polygonvalue[0].path);
@@ -245,7 +245,8 @@ export class MapDialogComponent implements OnInit {
           }
         }
       }
-    } else {
+    } 
+    else {
       this.polygonexists = false;
       this.newFunction();
     }

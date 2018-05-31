@@ -54,30 +54,30 @@ export class EditOrderStatusComponent implements OnInit {
       this.editStatusInput.order.delivered_qty = 0;
     }
     if (this.editStatusInput.order.orderstatus == "delivered") {
-      this.editStatusInput.order.action = "delivered";
+      // this.editStatusInput.order.action = "delivered";
       this.editStatusInput.order.reason = "Delivered: " + this.orderDetail.brandname + " " + this.orderDetail.prod_type + "  water cans(" + this.orderDetail.quantity + " qty) with order id: " + this.orderDetail.order_id + " from Moya-The Waterman App, is delivered. Please allow us to serve you better, rate us on playstore: https://play.google.com/store/apps/details?id=com.moya"
     }
 
     if (this.editStatusInput.order.orderstatus == "rejected") {
-      this.editStatusInput.order.action = "rejected";
+      // this.editStatusInput.order.action = "rejected";
 
       this.editStatusInput.order.reason = "Rejected: " + this.orderDetail.brandname + " " + this.orderDetail.prod_type + "  water cans(" + this.orderDetail.quantity + " qty) with order id: " + this.orderDetail.order_id + " from Moya-The Waterman App, is not delivered as you have rejected the order . You might receive a call from our customer care centre from mobile: 9863636314/15 very soon."
     }
 
     if (this.editStatusInput.order.orderstatus == "doorlock") {
-      this.editStatusInput.order.action = "doorlock";
+      // this.editStatusInput.order.action = "doorlock";
       this.editStatusInput.order.reason = "Door Locked: " + this.orderDetail.brandname + " " + this.orderDetail.prod_type + "  water cans(" + this.orderDetail.quantity + " qty) with order id: " + this.orderDetail.order_id + " from Moya-The Waterman App, is still in process. Supplier found the door is locked.Please call our customer care centre at mobile: 9863636314/15 for any queries."
     }
 
     if (this.editStatusInput.order.orderstatus == "not_reachable") {
-      this.editStatusInput.order.action = "not_reachable";
+      // this.editStatusInput.order.action = "not_reachable";
       this.editStatusInput.order.reason = "Not reachable: " + this.orderDetail.brandname + " " + this.orderDetail.prod_type + "  water cans(" + this.orderDetail.quantity + " qty) with order id: " + this.orderDetail.order_id + " from Moya-The Waterman App, is still in process. Supplier tried to reach you on your mobile:" + this.orderDetail.orderby_mobileno + ", but there was no response. Please call our customer care centre at mobile: 9863636314/15 for any queries."
     }
 
-    if (this.editStatusInput.order.orderstatus == "cannot_deliver") {
-      this.editStatusInput.order.action = "cannot_deliver";
+    // if (this.editStatusInput.order.orderstatus == "cannot_deliver") {
+    //   // this.editStatusInput.order.action = "cannot_deliver";
       
-    }
+    // }
 
 
 
