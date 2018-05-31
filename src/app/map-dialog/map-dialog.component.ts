@@ -44,7 +44,7 @@ export class MapDialogComponent implements OnInit {
     path: []
   };
   // stockPointLocationData: marker[] = [];
-  private stockpointsLocationArray1 = [];
+  stockpointsLocationArray1 = [];
   stockpointArray: any = [];
   // polygonexists: boolean = false;
 
@@ -87,14 +87,7 @@ export class MapDialogComponent implements OnInit {
       this.map.data.remove(event.feature);
     });
 
-    // var createMarker = function (stockPointLocationData){
-    //   var marker = new google.maps.Marker({
-    //       position: new google.maps.LatLng(stockPointLocationData.lat, stockPointLocationData.lng),
-    //       map: this.map,
-    //       animation: google.maps.Animation.DROP,
 
-    //   });
-    // }
 
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
@@ -146,7 +139,7 @@ export class MapDialogComponent implements OnInit {
       // this.stockpoints = result.data;
       // this.showStockPoint(this.stockpoints);
 
-      if (result.data && result.data.length > 0) {
+      if (result.data && result.data[0].latitude && result.data.length > 0) {
          let stockpointsLocationArray = [];
         _.each(result.data, function(i, j) {
           let details: any = i;
@@ -176,6 +169,15 @@ export class MapDialogComponent implements OnInit {
         this.initMap();
       });
     }
+
+  //   else{
+
+  //   this.loader.load().then(() => { // calling this in else coz if there are no polygons or stockpoints search is not happening
+  //     this.initMap();
+  //   });
+
+  // }
+
   }
 
   showMarkers() {
