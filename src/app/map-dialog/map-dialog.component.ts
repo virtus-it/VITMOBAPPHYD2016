@@ -165,10 +165,14 @@ export class MapDialogComponent implements OnInit {
       }
 
 
-      this.loader.load().then(() => {
-        this.initMap();
-      });
+      // this.loader.load().then(() => {
+      //   this.initMap();
+      // });
     }
+
+    this.loader.load().then(() => {
+      this.initMap();
+    });
 
   //   else{
 

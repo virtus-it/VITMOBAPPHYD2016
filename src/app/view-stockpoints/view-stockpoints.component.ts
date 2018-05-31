@@ -67,6 +67,7 @@ addressLng:any = "";
  deleteStockPointResult(result){
   //console.log(result);
   if(result.result == 'success'){
+
     this.getAllStockPoints();
   }
  }
@@ -92,6 +93,7 @@ addressLng:any = "";
      }
      else{
       this.noDataError="No Stock Points for this distributor";
+      this.stockpoints = [];
      }
 
   }

@@ -21,8 +21,9 @@
                 <md-option value="name">First Name</md-option>
                 <md-option value="mobileno">Mobile Number</md-option>
                 <md-option value="category">Category</md-option>
-                
-
+                <md-option value="phonetype">Type of phone</md-option>
+                <md-option value="address">Area Name</md-option>
+                <md-option value="areaDefined">Is Area defined</md-option>
               </md-select>
             </div>
             <div *ngIf="filterType=='name'">
@@ -50,9 +51,36 @@
                   </md-form-field>
 
             </div>
+
+            <div class="" *ngIf="filterType == 'phonetype'">
+                <md-select placeholder="Type of phone" class="wd-100pc left" name="phonetype" [(ngModel)]="filterTypeModel.typeofphone">
+                    <md-option value="no_smartphone">No Smartphone</md-option>
+                    <md-option value="android">Android</md-option>
+                    <md-option value="iphone">Iphone</md-option>
+                  </md-select>
+
+            </div>
+
+            <div class="" *ngIf="filterType == 'address'">
+
+                <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
+                  </md-form-field>
+            </div>
+
+            <!-- <div class="" *ngIf="filterType == 'areaDefined'">
+
+                <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
+                  </md-form-field>
+            </div> -->
+
+
+
+
             <div class="input-group pd-10  ">
 
-              <button md-raised-button color="primary" >Search</button>
+              <button md-raised-button color="primary"  (click)="searchFilter()">Search</button>
               <button md-raised-button color="primary" (click)="clearSearch()">
                 <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
               </button>
