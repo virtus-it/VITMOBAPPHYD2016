@@ -74,6 +74,40 @@ getDistributorsResult(result) {
 }
 
 
+activateUser(data){
+  let input = {"User":{"TransType":"activate","userid":data.userid,"user_type": this.authenticationService.userType(),"devicetype":"","moyaversioncode":"","apptype":this.authenticationService.appType()}};
+  this.distributorService.createDistributor(input).subscribe(
+    output => this.activateUserResult(output),
+    error => {
+      //console.log("error in distrbutors");
+    });
+}
+activateUserResult(result){
+  if(result.result == 'success'){
+    this.getAllUsers();
+  }
+}
+
+
+deactivateUser(data){
+  let input = {"User":{"TransType":"deactivate","userid":data.userid,"user_type": this.authenticationService.userType(),"devicetype":"","moyaversioncode":"","apptype":this.authenticationService.appType()}};
+  this.distributorService.createDistributor(input).subscribe(
+    output => this.deactivateUserResult(output),
+    error => {
+      //console.log("error in distrbutors");
+    });
+}
+deactivateUserResult(result){
+  if(result.result == 'success'){
+    this.getAllUsers();
+    
+  }
+}
+
+
+
+
+
 
   ngOnInit() {
     this.getAllUsers();

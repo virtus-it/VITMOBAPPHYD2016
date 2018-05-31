@@ -197,12 +197,16 @@
       <div class="tab-pane active" id="a">
           <div class="row mgleft-0" >
               <md-form-field class="inline">
-                  <input mdInput [mdDatepicker]="picker" placeholder="Created Date" name="Createddate" >
+                  <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="Createddate"  >
+                  <!-- [(ngModel)]="distOrders.getDate" -->
                   <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                   <md-datepicker #picker></md-datepicker>
                 </md-form-field>
                 <md-dialog-actions align="end" class="mg-10x20">
-                    <button type="submit" md-raised-button class="btn-primary">SUBMIT</button>
+                    <button type="submit" md-raised-button class="btn-primary" >SUBMIT</button>
+
+                    <!-- (click)="filterReports()" -->
+
                   </md-dialog-actions>
             </div>
 

@@ -40,6 +40,7 @@ export class ReportsComponent implements OnInit {
     reportType: "", days: null, lastId: "0", pagesize: 100, appType: this.authenticationService.appType
       ()
   };
+  // distOrders = {getDate: null};
   downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" };
   reportsClickMore: boolean = false;
   reportsInput: any = {};
@@ -132,6 +133,11 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  // filterReports(){
+  //   let input = {"root":{"userid":this.authenticationService.loggedInUserId() ,"date":this.distOrders.getDate,"apptype":this.authenticationService.appType(),"transtype":"distributorsdetails","devicetype":"","moyaversioncode":""}};
+  //   console.log(input);
+
+  // }
 
 
   downloadOrders() {
