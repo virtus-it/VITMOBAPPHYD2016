@@ -44,11 +44,11 @@ export class MapDialogComponent implements OnInit {
     path: []
   };
   // stockPointLocationData: marker[] = [];
-  stockpointsLocationArray1:any = [];
+  private stockpointsLocationArray1 = [];
   stockpointArray: any = [];
-  polygonexists: boolean = false;
+  // polygonexists: boolean = false;
 
-  stockpoints: any = [];
+  // stockpoints: any = [];
   constructor(
     public thisDialogRef: MdDialogRef<MapDialogComponent>,
     @Inject(MD_DIALOG_DATA) public distributorDetails: any,
@@ -143,9 +143,35 @@ export class MapDialogComponent implements OnInit {
   getAllStockPointsResult(result) {
     //console.log(result);
     if (result.result == 'success') {
-      this.stockpoints = result.data;
+      // this.stockpoints = result.data;
+      // this.showStockPoint(this.stockpoints);
 
-      this.showStockPoint(this.stockpoints);
+      if (result.data && result.data.length > 0) {
+         let stockpointsLocationArray = [];
+        _.each(result.data, function(i, j) {
+          let details: any = i;
+          if (details.latitude !== null && details.longitude !== null) {
+            let distData = {
+              lat: 0,
+              lng: 0,
+              icon: ''
+            };
+            if (details.latitude && details.longitude) {
+              distData.lat = parseFloat(details.latitude);
+              distData.lng = parseFloat(details.longitude);
+              distData.icon = '../assets/images/green.png';
+  
+              if (distData.lat != 0) {
+                stockpointsLocationArray.push(distData);
+              }
+            }
+          }
+        });
+
+        this.stockpointsLocationArray1 = stockpointsLocationArray;
+      }
+
+
       this.loader.load().then(() => {
         this.initMap();
       });
@@ -177,36 +203,7 @@ export class MapDialogComponent implements OnInit {
     }
   }
 
-  showStockPoint(data) {
-    if (data && data.length > 0) {
-      let stockpointsLocationArray = [];
-      _.each(data, function(i, j) {
-        let details: any = i;
-        if (details.latitude !== null && details.longitude !== null) {
-          let distData: any = {
-            lat: '',
-            lng: '',
-            icon: ''
-          };
-          if (details.latitude && details.longitude) {
-            distData.lat = parseFloat(details.latitude);
-            distData.lng = parseFloat(details.longitude);
-            distData.icon = '../assets/images/green.png';
-
-            if (distData.lat != '') {
-              stockpointsLocationArray.push(distData);
-            }
-          }
-        }
-      });
-
-      if (stockpointsLocationArray.length > 0) {
-        this.stockpointsLocationArray1 = stockpointsLocationArray;
-
-        // console.log('lats and lngs', this.stockPointLocationData);
-      }
-    }
-  }
+  
 
   getPolygonDistributors(dataLayer) {
     this.loaderService.display(true);
@@ -232,7 +229,7 @@ export class MapDialogComponent implements OnInit {
     //paani
     if (output.data && output.data.length > 0) {
       if (output.data[0].polygonvalue.length > 0) {
-        this.polygonexists = true;
+        // this.polygonexists = true;
         // this.newFunction();
       }
       for (let data of output.data) {
@@ -247,8 +244,8 @@ export class MapDialogComponent implements OnInit {
       }
     } 
     else {
-      this.polygonexists = false;
-      this.newFunction();
+      // this.polygonexists = false;
+      this.showMarkers();
     }
   }
   bindDataLayerListeners(dataLayer) {
@@ -257,11 +254,11 @@ export class MapDialogComponent implements OnInit {
     dataLayer.addListener('setgeometry', this.savePolygon);
   }
 
-  newFunction() {
-    if (this.polygonexists == false) {
-      this.showMarkers();
-    }
-  }
+  // newFunction() {
+  //   if (this.polygonexists == false) {
+      
+  //   }
+  // }
 
   savePolygon() {
     this.map.data.toGeoJson(function(json) {
