@@ -38,7 +38,7 @@ export class CoverageComponent implements OnInit {
   listOfDistributors: any = [];
   dialogRef: any = '';
   order = { orderId: '' };
-  orderDetails = '';
+  orderDetails = [];
   markers: any = [
     {
       lat: '',
@@ -364,7 +364,7 @@ export class CoverageComponent implements OnInit {
   // }
 
   refresh() {
-    this.orderDetails = '';
+    this.orderDetails = [];
   }
 
   getOrdersOnMap() {
@@ -431,7 +431,7 @@ export class CoverageComponent implements OnInit {
   }
 
   clickedMarker(label: string, index: number) {
-    //console.log(`clicked the marker: ${label || index}`)
+    console.log(`clicked the marker: ${label || index}`)
   }
 
   pointers: marker[] = [

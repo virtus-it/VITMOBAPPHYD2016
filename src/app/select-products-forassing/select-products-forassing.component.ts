@@ -23,6 +23,7 @@ export class SelectProductsForassingComponent implements OnInit {
   assignCategoryId='';
   amount:any = 0;
   categoryName:any = "";
+  // emptycans:any = 0;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
@@ -177,6 +178,7 @@ else if(this.orderDetail.type == 'coveragePage'){
   
   setProducts() {
     let id = this.productID;
+    
 
     let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
 let orderId= '';
@@ -189,10 +191,11 @@ let orderId= '';
     else{
       orderId = this.orderDetail.orderDetails.order_id;
     }
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (productsDetails.servicecharge)*(productsDetails.quantity) }};
 
-    
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (productsDetails.servicecharge)*(productsDetails.quantity)} };
-
+    // if(this.emptycans){
+    //   input.order.product_cost = productsDetails.pcost + (this.emptycans * 150);  , "emptycans": this.emptycans
+    // }
 
 if(productsDetails.expressCheck == true){
   input.order.expressdeliverycharges = productsDetails.expressdeliverycharges;

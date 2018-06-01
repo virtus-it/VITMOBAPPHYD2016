@@ -52,7 +52,7 @@ export class DistributorComponent implements OnInit {
     LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
 
         this.CategoryCtrl = new FormControl();
@@ -470,7 +470,12 @@ this.getProductByCategory();
         }
         searchFilterResult(result){
             if(result.result == 'success'){
+                this.distributors = [];
                 this.distributors = result.data;
+            }
+            else{
+                this.distributors = [];
+                this.distributorClickMore = false;
             }
         }
         

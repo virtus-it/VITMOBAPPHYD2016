@@ -77,9 +77,11 @@ export class PreOrderCartDailogComponent implements OnInit {
     maxDate = new Date(2020, 0, 1);
     message:any="";
     todaysDate:any = "";
+    message2:any = "";
     message1:any="";
     filterType = {distributorid: ""};
     filterTypeSupplier = {supplierid: ""};
+    emptyCanMessage = "";
     
 
 
@@ -470,14 +472,26 @@ createPreOrder(){
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),
-  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}}]
+  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans}}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
   }
+  // if(this.createPreOrderInput.productDetails.emptycans){
+  //   input[0].order.total_amt = ( parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ) + (this.createPreOrderInput.productDetails.emptycans * 150 );
+  //   input[0].order.amt = input[0].order.total_amt;
+  // }
+
+  if(this.createPreOrderInput.productDetails.emptycans){
+    input[0].order.total_amt = ( parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ) + (parseInt(this.createPreOrderInput.productDetails.quantity) -  parseInt(this.createPreOrderInput.productDetails.emptycans)) * 150 
+    input[0].order.amt = input[0].order.total_amt;
+  }
+
+
+
+
+
   console.log(input);
-
-
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
 
@@ -584,6 +598,18 @@ expressDeliveryCharge(details,  isChecked: boolean){
 
 }
 
+emptyCansChange(event){
+  console.log(event);
+  if(this.createPreOrderInput.productDetails.quantity >= event){
+    this.emptyCanMessage= "";
+  }
+  else{
+    this.emptyCanMessage = "Empty cans must be less than quantity";
+  }
+
+
+}
+
 dateChanges(event){
   let eventChanges = moment(event).format('DD-MM-YYYY');
 
@@ -632,6 +658,7 @@ console.log(details);
     _.each(i.data, function(k,l){
       let detailData:any=k;
       detailData.quantity="";
+      detailData.emptycans = "";
       // detailData.expressdeliverycharges = "";
     })
   }
@@ -647,6 +674,8 @@ if(!this.createPreOrderInput.productDetails.default_qty){
     this.createPreOrderInput.productDetails.minorderqty = 1;
   }
     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
+    this.createPreOrderInput.productDetails.emptycans = 0 ;
+    
 }
 
 // if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.expressdeliverycharges){
@@ -680,6 +709,22 @@ if(!this.createPreOrderInput.productDetails.default_qty){
      return false;
    }
 
+  }
+
+  validate2(){
+    if(this.createPreOrderInput.productDetails.emptycans){
+      this.message="";
+      this.message1="";
+      this.message2 = "";
+      return true;
+   }
+   else{
+     this.message= "";
+     this.message1="";
+     this.message2 ="please enter the empty cans";
+     return false;
+
+    }
   }
 
 // available time slot for 1 hr
@@ -779,6 +824,7 @@ if(!this.createPreOrderInput.productDetails.default_qty){
     this.getDistributors();
     // this.getProducts();
     // this.expressDeliveryCharge(true);
+    // this.createPreOrderInput.productDetails.emptycans = 0;
     this.autoTimeSlotforHour();
     this.getProductsList();
     console.log(this.Details);

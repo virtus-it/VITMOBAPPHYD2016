@@ -9,6 +9,9 @@
 .warning{
   color:red;
 }
+.red{
+  color: red;
+}
 .form-control{
   border: none !important;
   border-bottom-left-radius: 0px !important;
