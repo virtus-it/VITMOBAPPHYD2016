@@ -113,7 +113,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     "received_amt":"","total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
     "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason"}
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason" , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":150 * this.createPreOrderInput.productDetails.emptycans }
     }
     console.log(data);
 
@@ -124,6 +124,11 @@ export class PreOrderCartDailogComponent implements OnInit {
     if(this.createPreOrderInput.productDetails.expressdelivery == true){
       data.order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
       }
+    if(this.createPreOrderInput.productDetails.emptycans){
+      data.order.total_amt = ( parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ) + (parseInt(this.createPreOrderInput.productDetails.quantity) -  parseInt(this.createPreOrderInput.productDetails.emptycans)) * 150 
+        data.order.amt = data.order.total_amt;
+      }
+
 
       let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
       data.order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
@@ -472,7 +477,7 @@ createPreOrder(){
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),
-  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans}}]
+  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":150 * this.createPreOrderInput.productDetails.emptycans }}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;

@@ -16,6 +16,7 @@ export class SelectProductsForassingComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<SelectProductsForassingComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private loaderService: LoaderService, private orderLandingService: OrderLandingService) { }
   productList = [];
+  productsDetails:any = [];
   productID = "";
   productMessage = false;
   noRecord = false;
@@ -23,6 +24,7 @@ export class SelectProductsForassingComponent implements OnInit {
   assignCategoryId='';
   amount:any = 0;
   categoryName:any = "";
+  emptyCanMessage = "";
   // emptycans:any = 0;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -180,7 +182,7 @@ else if(this.orderDetail.type == 'coveragePage'){
     let id = this.productID;
     
 
-    let productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
+    this.productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
 let orderId= '';
     if(this.orderDetail.type == "coveragePage"){
       orderId = this.orderDetail.data.orders.order_id;
@@ -191,15 +193,13 @@ let orderId= '';
     else{
       orderId = this.orderDetail.orderDetails.order_id;
     }
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": productsDetails.productid, "product_name": productsDetails.brandname, "quantity": productsDetails.quantity, "product_cost": productsDetails.pcost, "product_type": productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (productsDetails.servicecharge)*(productsDetails.quantity) }};
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":this.productsDetails.emptycans  , "advance_amt": 150 * this.productsDetails.emptycans }};
 
-    // if(this.emptycans){
-    //   input.order.product_cost = productsDetails.pcost + (this.emptycans * 150);  , "emptycans": this.emptycans
-    // }
 
-if(productsDetails.expressCheck == true){
-  input.order.expressdeliverycharges = productsDetails.expressdeliverycharges;
+if(this.productsDetails.expressCheck == true){
+  input.order.expressdeliverycharges = this.productsDetails.expressdeliverycharges;
 }
+
 
     console.log(input);
 
@@ -231,6 +231,16 @@ if(productsDetails.expressCheck == true){
     }
   
   }
+
+  emptyCansChange(event){
+    console.log(event);
+    if(this.productsDetails.quantity >= event){
+      this.emptyCanMessage= "";
+    }
+    else{
+      this.emptyCanMessage = "Empty cans must be less than quantity";
+    }
+  }
  
 
 
@@ -241,6 +251,7 @@ if(productsDetails.expressCheck == true){
       details.quantity = 0;
     });
     products.quantity = this.orderDetail.data.orders.quantity;
+    products.emptycans = 0;
   }
   else if (this.orderDetail.type == 'customersPage'){
   _.each(this.productList, function (i, j) {
@@ -248,6 +259,7 @@ if(productsDetails.expressCheck == true){
     details.quantity = 0;
   });
   products.quantity = this.orderDetail.orderDetails.quantity;
+  products.emptycans = 0;
 }
 else{
   _.each(this.productList, function (i, j) {
@@ -255,6 +267,7 @@ else{
     details.quantity = 0;
   });
   products.quantity = this.orderDetail.orderDetails.quantity;
+  products.emptycans = 0;
 }
 }
 

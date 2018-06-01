@@ -19,13 +19,17 @@
   <div>
     <table class="table table-hover">
       <tbody *ngFor="let products of productList">
-        <tr class="border-topbottom bgcolor-fade-blue">
+        <tr class="border-topbottom bgcolor-fade-blue" >
           <td class="">
             <b class="capital"><i class="fa fa-gift" aria-hidden="true"></i> 
                Product Name  : {{products.brandName}} <b class="capital"> &nbsp;&nbsp; |  &nbsp;&nbsp;
                 <span class=""><i class="fa fa-bars" aria-hidden="true"></i>
                    Category : {{products.category}}</span></b>
             </b>
+            <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
+            <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
+            <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i>
+
           </td>
         </tr>
 
@@ -98,9 +102,9 @@
                           <i class="fa fa-trash disable" aria-hidden="true"  *ngIf="superDealer && details.isactive == '0'" disabled ></i>&nbsp;
                           <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"  *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)"></i>&nbsp;
                     <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)"></i>&nbsp;
-                    <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
+                    <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
-                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i>
+                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->
                   </td>
                 </tr>
               </tbody>

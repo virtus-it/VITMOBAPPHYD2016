@@ -38,7 +38,7 @@
       <tbody>
         <tr *ngFor="let product of productList; let i = index" [attr.data-index]="i">
          
-          <td width="22%" class="left capital">
+          <td width="18%" class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
                 class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
@@ -48,7 +48,7 @@
           </td>
           <td class="" width="10%" >{{product.category}}</td>
 
-          <td width="20%" class="left capital">
+          <td width="16%" class="left capital">
             <span class="onhovertooltip-250" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
 
           <td width="10%" class="left capital">
@@ -80,7 +80,7 @@
 
           <td class="left capital" width="8%">
             <span>
-              <input class="" placeholder="cans">
+              <input class="" placeholder="cans" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
             </span>
           </td>
 
