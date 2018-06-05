@@ -131,7 +131,7 @@
     </div>
     <div class="row">
 
-      <div class="col-6" *ngIf="this.Details.order_id">
+      <div class="col-4" *ngIf="this.Details.order_id">
         <md-form-field class="wd-100pc">
           <textarea class="form-control" mdInput placeholder="Order Address" name="Address" [(ngModel)]="customerInput.User.orderaddress"></textarea>
         </md-form-field>
@@ -140,11 +140,16 @@
 
 
 
-      <div class="col-6">
+      <div class="col-4">
         <md-form-field class="wd-100pc">
           <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
         </md-form-field>
       </div>
+      <div class="col-4 align-self-end">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Reference Code" name="referencecode" [(ngModel)]='customerInput.User.referencecode'>
+          </md-form-field>
+    </div>
     </div>
 
     <!-- <div class="row">
@@ -266,7 +271,7 @@
           </div>
         </div>
 
-      </div>
+  
       <div class="col-4">
           <div class="form-group">
               <md-select placeholder="Customer Type" class="wd-100pc">
@@ -275,6 +280,7 @@
                 <md-option value="Supplier">Corporate</md-option>  
               </md-select>
             </div>
+</div>
 </div>
       <!-- <div class="col-7">
         <div class=" form-group">

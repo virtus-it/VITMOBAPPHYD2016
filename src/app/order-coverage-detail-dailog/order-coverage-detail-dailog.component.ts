@@ -208,7 +208,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   ViewProduct(distributor) {
     if (distributor) {
       let dialogRef = this.dialog.open(ProductListDialogComponent, {
-        width: '80%',
+        width: '95%',
         data: distributor
       });
       dialogRef.afterClosed().subscribe(result => {

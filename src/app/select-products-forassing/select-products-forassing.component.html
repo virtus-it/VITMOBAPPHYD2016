@@ -43,13 +43,13 @@
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
                 class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description onhovertooltip-250" title="{{product.brandname}}">{{product.brandname}} </span>
+              <span class="custom-control-description onhovertooltip-200" title="{{product.brandname}}">{{product.brandname}} </span>
             </label>
           </td>
-          <td class="" width="10%" >{{product.category}}</td>
+          <td class="" width="10%" ><span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span></td>
 
-          <td width="16%" class="left capital">
-            <span class="onhovertooltip-250" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
+          <td width="20%" class="left capital">
+            <span class="onhovertooltip-200" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
 
           <td width="10%" class="left capital">
             <md-form-field class="example-full-width inline ">
@@ -86,16 +86,16 @@
 
         </tr>
       </tbody>
-      <tfoot>
-        <tr *ngIf="noRecord">
-          <td colspan="4">
-            <h4 class="warning oneline center">
+  
+ 
+<br>
+            <h4 class="warning oneline center" *ngIf="noRecord">
               <i aria-hidden="true" class="fa fa-frown-o"></i>
-              Record Not Available</h4>
-          </td>
-        </tr>
+               Record Not Available</h4>
 
-      </tfoot>
+
+
+
     </table>
   </div>
 

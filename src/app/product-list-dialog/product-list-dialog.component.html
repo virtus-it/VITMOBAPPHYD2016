@@ -41,13 +41,13 @@
       </thead>
       <tbody>
         <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-            <td width="10%" class="left capital"><span class="onhovertooltip-200" title="{{prod.category}}">{{prod.category}}</span></td>          
-          <td width="14%" class="left capital"><span class="onhovertooltip-200" title="{{prod.brandname}}">{{prod.brandname}}</span></td>
-          <td width="14%" class="left capital"> <span class="onhovertooltip-200" title="{{prod.ptype}}">{{prod.ptype}}</span></td>
+            <td width="10%" class="left capital"><span class="onhovertooltip-100" title="{{prod.category}}">{{prod.category}}</span></td>          
+          <td width="14%" class="left capital"><span class="onhovertooltip-100" title="{{prod.brandname}}">{{prod.brandname}}</span></td>
+          <td width="14%" class="left capital"> <span class="onhovertooltip-100" title="{{prod.ptype}}">{{prod.ptype}}</span></td>
           <td width="6%" class="left capital gray9">{{prod.priority}}</td>
           <td width="7%" class="left capital danger">{{prod.minorderqty}}</td>          
           <td width="6%" class="left capital ">{{prod.pcost}}</td>      
-          <td width="6%" class="left capital">{{prod.expressdeliverycharges}}</td> 
+          <td width="5%" class="left capital">{{prod.expressdeliverycharges}}</td> 
           <td width="8%" class="left capital">{{prod.servicecharge}}</td>  
           <td class="" width="6%">
             <span class="success" *ngIf="prod.isauthorized == 'true'"> Yes </span>

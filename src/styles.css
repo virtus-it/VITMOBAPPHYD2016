@@ -77,6 +77,9 @@ table thead {
   .pd-15x10{
     padding: 15px 10px;
   }
+  .pd-5{
+    padding: 5px;
+  }
   .mg-0{
     margin: 0px !important;
   }
@@ -193,6 +196,9 @@ table thead {
   }
   .pdright-30{
     padding-right: 30px;
+  }
+  .pdright-0{
+    padding-right: 0px;
   }
   .wd-60{
     width: 60px !important;
