@@ -67,7 +67,8 @@ export class AddEditUserComponent implements OnInit {
     companyname: '',
     address: '',
     emailid: '',
-    referCode: ''
+    referCode: '',
+    phonetype : ""
   };
 
   salesInput = {
@@ -301,26 +302,11 @@ export class AddEditUserComponent implements OnInit {
   }
 
   addDistributor() {
-    var input: any = {
-      User: {
-        pwd: this.dist.phone,
-        user_type: 'dealer',
-        TransType: 'create',
-        referCode: this.dist.referCode,
-        firstname: this.dist.firstName,
-        lastname: this.dist.lastName,
-        companyname: this.dist.companyname,
-        address: this.dist.address,
-        loginid: this.authenticationService.loggedInUserId(),
-        mobileno: this.dist.phone,
-        mobileno_one: this.dist.mobile1,
-        mobileno_two: this.dist.mobile2,
-        emailid: this.dist.emailid,
-        dealer_mobileno: this.authenticationService.dealerNo(),
-        apptype: this.authenticationService.appType()
+    var input: any = {User: {pwd: this.dist.phone,user_type: 'dealer',TransType: 'create',phonetype: this.dist.phonetype ,referCode: this.dist.referCode,firstname: this.dist.firstName,lastname: this.dist.lastName,companyname: this.dist.companyname,address: this.dist.address,loginid: this.authenticationService.loggedInUserId(),mobileno: this.dist.phone,mobileno_one: this.dist.mobile1,mobileno_two: this.dist.mobile2,emailid: this.dist.emailid,dealer_mobileno: this.authenticationService.dealerNo(),apptype: this.authenticationService.appType()
       }
     };
-    this.distributorService.createDistributor(input).subscribe(
+    this.distributorService.createDistributor(input)
+    .subscribe(
       output => this.onSubmitResult(output),
       error => {
         //console.log("error in distrbutors");
@@ -461,6 +447,7 @@ export class AddEditUserComponent implements OnInit {
       this.dist.address = this.Details.address;
       this.dist.emailid = this.Details.emailid;
       this.dist.referCode = this.Details.reference_code;
+      this.dist.phonetype = this.Details.phonetype;
     } else if (this.Details.usertype == 'supplier') {
       this.supplierInput.firstname = this.Details.firstname;
       this.supplierInput.mobileno = this.Details.mobileno;
@@ -525,13 +512,8 @@ export class AddEditUserComponent implements OnInit {
   }
 
   UpdateDistributor() {
-    let input: any = {
-      User: {
-        pwd: this.dist.phone,
-        user_type: 'dealer',
-        referCode: this.dist.referCode,
-        firstname: this.dist.firstName,
-        lastname: this.dist.lastName,
+    let input: any = {User: {pwd: this.dist.phone,user_type: 'dealer',referCode: this.dist.referCode,firstname: this.dist.firstName,
+        lastname: this.dist.lastName, phonetype: this.dist.phonetype ,
         companyname: this.dist.companyname,
         address: this.dist.address,
         loginid: this.authenticationService.loggedInUserId(),
@@ -544,7 +526,8 @@ export class AddEditUserComponent implements OnInit {
       }
     };
     input.User.userid = this.Details.userid;
-    this.distributorService.updateDistributor(input).subscribe(
+    this.distributorService.updateDistributor(input)
+    .subscribe(
       output => this.updateDistributorResult(output),
       error => {
         //console.log("error in distrbutors");

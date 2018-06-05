@@ -18,6 +18,8 @@
 
       </div>
     </div>
+
+    <!-- <img class="" src="../assets/images/red" title="image"> -->
       
     <div class="container-fluid contbg">
         <div class="jumbotron boxsdw">
@@ -79,7 +81,7 @@
 
           <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode" >
+            <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode"  [disabled] = "authenticationService.isSuperDelear == false">
           </md-form-field>
           </div>
           </div>

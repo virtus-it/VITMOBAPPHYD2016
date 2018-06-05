@@ -1,4 +1,4 @@
-<!-- <div class="row justify-content-between modal-title ">
+<div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
     <i class="fa fa-barcode"></i> Promo code
   </div>
@@ -9,26 +9,16 @@
   </div>
 </div>
 <md-dialog-content layout="column">
-
   <div class="container-fluid pd-15x25 brd-bottom">
-    
-   
     <div class="row pd-top-0" >
-      <div class="col-4 ">
-          
-      <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype">
-        
+      <div class="col-4 ">       
+      <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype">       
 <md-option value="type1">type-1</md-option>
 <md-option value="type2">type-2</md-option>
 <md-option value="type3">type-3</md-option>
-
-
 </md-select>
 </div>
-
-
 <div class="col-4">
- 
   <md-form-field class="example-full-width">
     <input mdInput [mdDatepicker]="picker"  placeholder="Start Date" [(ngModel)]="promoCodeInput.startdate" >
     <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -38,10 +28,8 @@
       <strong>required</strong>
     </md-error>
   </md-form-field>
-  </div>
-
+</div>
   <div class="col-4">
- 
     <md-form-field class="example-full-width">
       <input mdInput [mdDatepicker]="pickers"  placeholder="End Date" [(ngModel)]="promoCodeInput.enddate" >
       <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
@@ -52,74 +40,54 @@
       </md-error>
     </md-form-field>
     </div>
-
 </div>
-
 <br>
 <br>
-
 <div class="row">
   <div class="col-4">
       <md-select placeholder="Criteria" [(ngModel)]="promoCodeInput.criteria">
-        
           <md-option value="totalcost">Total cost</md-option>
           <md-option value="Servicecharge">Service charge</md-option>
           <md-option value="DeliveryCharge">Delivery charge</md-option>
-          
-          
           </md-select>
   </div>
 <div class="col-4">
     <md-select placeholder="Promo Type" [(ngModel)]="promoCodeInput.promotype">
-        
         <md-option value="value">Value</md-option>
         <md-option value="percentage">Percentage</md-option>
-     
-        
-        </md-select>
+      
+      </md-select>
 </div>
-
 <div class="col-4 ">
-   
-
+  
   <md-form-field class="wd-100pc">
     <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent'>
   </md-form-field>
-
-
 </div>
 </div>
-  
-
 <br>
-
-
 <div class="row pd-top-0">
     <div class="col-4">
-        <md-select placeholder="Product Category" [(ngModel)]="promoCodeInput.category">
+        <!-- <md-select placeholder="Product Category" [(ngModel)]="promoCodeInput.category"> -->
             
-            <md-option value="value" >All</md-option>
-            <md-option value="value1">col-2</md-option>
-            <md-option value="value2">col-3</md-option>
-            <md-option value="value3" >col-4</md-option>
+            <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
+                  <span> {{cat.category}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+
             
-            </md-select>
+            <!-- </md-select> -->
     </div>
 <div class="col-4">
     <md-form-field class="mg-left-0">
         <input class="form-control" mdInput placeholder="Promo Code" name="code" [(ngModel)]="promoCodeInput.promocode">
       </md-form-field>
     </div>
-<div class="col-4 align-self-center">
-    <button type="submit" class="btn-primary" (click)="createPromoCode()" md-raised-button>Generate Promo Code</button>
 </div>
-
-
-
-
-</div>
-
-
 <div class="row pd-top-0">
 <div class="col">
   <md-form-field class="wd-100pc">
@@ -128,35 +96,11 @@
 </div>
 </div>
 
-
-
-
 </div>
-
-
-
-
-
-
-
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button >SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="createPromoCode()" >CREATE</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
-</div> -->
-
-
-
-
-
-
-
-<!-- <comment> -->
-<!-- <div class="row">
-      <b class="label-style col">Personal Details
-        <span></span>
-      </b>
-    </div> -->
-<!-- </comment> -->
+</div>

@@ -133,6 +133,7 @@ export class DistributorCreateDialogComponent implements OnInit {
              this.dist.address = this.distributorDetail.address;
              this.dist.emailid = this.distributorDetail.emailid;
              this.dist.referCode = this.distributorDetail.reference_code;
+             this.dist.phonetype = this.distributorDetail.phonetype;
              _.each(this.distributorDetail.areainfo, function (i, j) {
                  var area:any = i;
                  var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };

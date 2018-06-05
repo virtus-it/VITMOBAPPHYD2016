@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { AddPromocodeDialogComponent } from '../add-promocode-dialog/add-promocode-dialog.component';
 import { PromocodeServiceService } from '../promocode/promocode-service.service';
+import { FollowUpService } from '../follow-up/follow-up.service';
+import { AuthenticationService } from '../login/authentication.service';
 
 
 
@@ -13,7 +15,9 @@ import { PromocodeServiceService } from '../promocode/promocode-service.service'
 })
 export class PromocodeComponent implements OnInit {
 
-  constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ) { }
+  constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService,) { }
+
+  allPromoCodes:any = [];
 
 
   addPromoCode(){
@@ -22,6 +26,9 @@ export class PromocodeComponent implements OnInit {
       data: ''
   });
   dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+      this.getAllPromoCodes();
+    }
 
   });
   }
@@ -33,6 +40,7 @@ export class PromocodeComponent implements OnInit {
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
+      this.getAllPromoCodes();
 
     }
 
@@ -40,10 +48,45 @@ export class PromocodeComponent implements OnInit {
 
   }
 
+  getAllPromoCodes(){
+    let input = {"offer":{"transtype":"getall" , "apptype":this.authenticationService.appType()}};
+    console.log(input);
+    this.followupService.createpromocode(input)
+    .subscribe(
+    output => this.getAllPromoCodesResult(output),
+    error => {
+      //console.log("error in customer");
+    });
+  }
+  getAllPromoCodesResult(result){
+    if(result.result == 'success'){
+      this.allPromoCodes = result.data;
+      console.log(result.data);
+    }
+  }
+
+
+  deletePromoCode(data){
+    let input = {"offer":{"transtype":"delete","id": data.offerid}};
+    console.log(input);
+    this.followupService.createpromocode(input)
+    .subscribe(
+    output => this.deletePromoCodeResult(output),
+    error => {
+      //console.log("error in customer");
+    });
+  }
+  deletePromoCodeResult(result){
+    if(result.result == 'success'){
+      this.getAllPromoCodes();
+    }
+  }
 
 
 
   ngOnInit() {
+    this.getAllPromoCodes();
+  
   }
 
 }
