@@ -200,14 +200,14 @@
           </tr>
           <tr class="border-topbottom" style="background: #0f75bc;
           color: white;">
-            <th width="40%">Type</th>
+            <th width="30%">Type</th>
            
             <th width="15%">Quantity</th>  
             <th class="" width="10%">Empty cans</th> 
             <th width="12%">Price per Unit</th>
-            <th width="12%" title="Express Delivery">Exp Delv</th>
-            <th width="13%" title="Service Charge">Serv Charges</th>
-            <th width="10%">Cost</th>
+            <th width="11%" title="Express Delivery">Exp Delv</th>
+            <th width="11%" title="Service Charge">Serv Chgs</th>
+            <th width="11%">Cost</th>
     
           </tr>
           <tr *ngFor="let details of prod.data">
@@ -280,27 +280,27 @@
       </table>
     
     </div>
-  
-    <h5 class="center warning">{{message}}</h5>
-    <h5 class="center warning">{{message1}}</h5>
 
   </div>
 </md-dialog-content>
-
+<h5 class="center warning">{{message}}</h5>
+<h5 class="center warning">{{message1}}</h5>
+<h5 class="center warning">{{message2}}</h5>
+<h5 class="center danger">{{emptyCanMessage}}</h5> 
 
 <div class="row float-right pdright-30 mgbottom-20">
-  <p class="warning">{{message}}</p> &nbsp;&nbsp;
-  <p class="warning">{{message1}}</p> &nbsp;&nbsp;
-  <p class="warning">{{message2}}</p> &nbsp;&nbsp;  
-  <p class="red">{{emptyCanMessage}}</p> 
+  
+
+
   <span>
     <small>
-      Product cost: {{this.createPreOrderInput.productDetails.pcost}} <br>
-      Service charge : {{this.createPreOrderInput.productDetails.servicecharge}} <br>
-      Express delivery charges : {{this.amount}} <br> 
-      Empty cans Amount : {{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 }}  <br>
-      Total cost : {{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +
-         (( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 ) }} 
+     <span class="pd-right-20"> Product cost: <b>{{this.createPreOrderInput.productDetails.pcost}}</b></span>
+     <span class="pd-right-20"> Service charge : <b>{{this.createPreOrderInput.productDetails.servicecharge}}</b></span>
+      <span class="pd-right-20">Express delivery charges : <b>{{this.amount}}</b></span>
+      <span class="pd-right-40">Empty cans Amount : <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 }}</b></span> <br>
+      <span class="">Total cost : <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +
+         (( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
+         </span> 
     </small>
   </span>
  

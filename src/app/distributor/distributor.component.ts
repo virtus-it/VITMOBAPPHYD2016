@@ -384,7 +384,7 @@ this.getProductByCategory();
 
       viewStockPoints(data){
         let dialogRefCoverageDailog = this.dialog.open(ViewStockpointsComponent, {
-            width: '75%',
+            width: '95%',
             data: data
           });
           dialogRefCoverageDailog.afterClosed().subscribe(result => {
