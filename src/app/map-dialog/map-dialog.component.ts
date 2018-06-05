@@ -36,17 +36,19 @@ interface marker {
 })
 export class MapDialogComponent implements OnInit {
   map: any;
+  marker: any = [];
   public searchControl: FormControl;
   selectedShape: any;
   @ViewChild('search') public searchElementRef: ElementRef;
   polygonArray: any = {
     path: []
   };
-  stockPointLocationData: marker[] = [];
-
+  // stockPointLocationData: marker[] = [];
+  stockpointsLocationArray1 = [];
   stockpointArray: any = [];
+  // polygonexists: boolean = false;
 
-  stockpoints:any = [];
+  // stockpoints: any = [];
   constructor(
     public thisDialogRef: MdDialogRef<MapDialogComponent>,
     @Inject(MD_DIALOG_DATA) public distributorDetails: any,
@@ -60,7 +62,7 @@ export class MapDialogComponent implements OnInit {
   initMap() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 17.34932757, lng: 78.48117828 },
-      zoom: 11,
+      zoom: 12,
       disableDoubleClickZoom: false,
       // only show roadmap type of map, and disable ability to switch to other type
       // mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -85,27 +87,7 @@ export class MapDialogComponent implements OnInit {
       this.map.data.remove(event.feature);
     });
 
-    // var createMarker = function (stockPointLocationData){
-    //   var marker = new google.maps.Marker({
-    //       position: new google.maps.LatLng(stockPointLocationData.lat, stockPointLocationData.lng),
-    //       map: this.map,
-    //       animation: google.maps.Animation.DROP,
-          
-    //   });
-    // }
 
-    for (let location of this.stockPointLocationData) {
-
-      let latLng = {lat: parseFloat(location.lat), lng: parseFloat(location.lng)};
-  
-      // Set the position and title
-      let marker = new google.maps.Marker({
-        position: latLng,
-    })
-  
-      // place marker in map
-      marker.setMap(this.map)
-    }
 
     autocomplete.addListener('place_changed', () => {
       this.ngZone.run(() => {
@@ -129,77 +111,105 @@ export class MapDialogComponent implements OnInit {
     // this.getAllStockPoints();
     // this.showStockpoints();
 
-
     // this.showStockPoint(this.stockpointArray);
 
     //load saved data
     //loadPolygons(map);
   }
 
-
-  getAllStockPoints(){
-    let input={"User":{"userid":this.distributorDetails.userid,"transtype":"getall","apptype":this.authenticationService.appType()}};
+  getAllStockPoints() {
+    let input = {
+      User: {
+        userid: this.distributorDetails.userid,
+        transtype: 'getall',
+        apptype: this.authenticationService.appType()
+      }
+    };
     //console.log(input);
-    this.distributorService.StockPoint(input)
-    .subscribe(
-    output => this.getAllStockPointsResult(output),
-    error => {
+    this.distributorService.StockPoint(input).subscribe(
+      output => this.getAllStockPointsResult(output),
+      error => {
         //console.log("falied");
-    });
-   }
-   getAllStockPointsResult(result){
-     //console.log(result);
-     if(result.result == 'success'){
-       this.stockpoints=result.data;
-       this.showStockPoint(this.stockpoints);
-        this.loader.load().then(() => {
-      this.initMap();
-    });
-     }
+      }
+    );
   }
+  getAllStockPointsResult(result) {
+    //console.log(result);
+    if (result.result == 'success') {
+      // this.stockpoints = result.data;
+      // this.showStockPoint(this.stockpoints);
 
-
-
-
-
-  // Add circle overlay and bind to marker
-  // var circle = new google.maps.Circle({
-  //     map: map,
-  //     radius: 16093,    // 10 miles in metres
-  //     fillColor: '#AA0000'
-  //   });
-  //   circle.bindTo('center', marker, 'position');
-
-  showStockPoint(data) {
-    if (data && data.length > 0) {
-      let stockpointsLocationArray = [];
-      _.each(data, function(i, j) {
-        let details: any = i;
-        if (details.latitude !== null && details.longitude !== null) {
-          let distData: any = {
-            lat: '',
-            lng: '',
-            icon: ''
-          };
-          if (details.latitude && details.longitude) {
-            distData.lat = parseFloat(details.latitude);
-            distData.lng = parseFloat(details.longitude);
-            distData.icon = '../assets/images/green.png';
-
-            if (distData.lat != '') {
-              stockpointsLocationArray.push(distData);
+      if (result.data && result.data[0].latitude && result.data.length > 0) {
+         let stockpointsLocationArray = [];
+        _.each(result.data, function(i, j) {
+          let details: any = i;
+          if (details.latitude !== null && details.longitude !== null) {
+            let distData = {
+              lat: 0,
+              lng: 0,
+              icon: ''
+            };
+            if (details.latitude && details.longitude) {
+              distData.lat = parseFloat(details.latitude);
+              distData.lng = parseFloat(details.longitude);
+              distData.icon = '../assets/images/green.png';
+  
+              if (distData.lat != 0) {
+                stockpointsLocationArray.push(distData);
+              }
             }
           }
-        }
+        });
+
+        this.stockpointsLocationArray1 = stockpointsLocationArray;
+      }
+
+
+      // this.loader.load().then(() => {
+      //   this.initMap();
+      // });
+    }
+
+    this.loader.load().then(() => {
+      this.initMap();
+    });
+
+  //   else{
+
+  //   this.loader.load().then(() => { // calling this in else coz if there are no polygons or stockpoints search is not happening
+  //     this.initMap();
+  //   });
+
+  // }
+
+  }
+
+  showMarkers() {
+    for (let location of this.stockpointsLocationArray1) {
+      let latLng = {
+        lat: parseFloat(location.lat),
+        lng: parseFloat(location.lng)
+      };
+
+      // Set the position and title
+      this.marker = new google.maps.Marker({
+        position: latLng
       });
 
-      if (stockpointsLocationArray.length > 0) {
-        this.stockPointLocationData = stockpointsLocationArray;
-        
-        console.log('lats and lngs', this.stockPointLocationData);
-      }
+      // place marker in map
+      this.marker.setMap(this.map);
+
+      // Add circle overlay and bind to marker
+      var circle = new google.maps.Circle({
+        map: this.map,
+        radius: 500, // 10 miles in metres
+        fillColor: '#AA0000'
+      });
+      circle.bindTo('center', this.marker, 'position');
     }
   }
+
+  
 
   getPolygonDistributors(dataLayer) {
     this.loaderService.display(true);
@@ -214,7 +224,6 @@ export class MapDialogComponent implements OnInit {
     this.distributorService.getpolygonByDistributor(input).subscribe(
       output => this.getPolygonDataResult(output, dataLayer),
       error => {
-        //console.log("Logged in falied");
         this.loaderService.display(false);
       }
     );
@@ -225,6 +234,10 @@ export class MapDialogComponent implements OnInit {
     //9863636315
     //paani
     if (output.data && output.data.length > 0) {
+      if (output.data[0].polygonvalue.length > 0) {
+        // this.polygonexists = true;
+        // this.newFunction();
+      }
       for (let data of output.data) {
         //console.log(data.polygonvalue[0].path);
         if (data.polygonvalue && data.polygonvalue.length > 0) {
@@ -235,6 +248,10 @@ export class MapDialogComponent implements OnInit {
           }
         }
       }
+    } 
+    else {
+      // this.polygonexists = false;
+      this.showMarkers();
     }
   }
   bindDataLayerListeners(dataLayer) {
@@ -242,6 +259,12 @@ export class MapDialogComponent implements OnInit {
     dataLayer.addListener('removefeature', this.savePolygon);
     dataLayer.addListener('setgeometry', this.savePolygon);
   }
+
+  // newFunction() {
+  //   if (this.polygonexists == false) {
+      
+  //   }
+  // }
 
   savePolygon() {
     this.map.data.toGeoJson(function(json) {
@@ -299,13 +322,6 @@ export class MapDialogComponent implements OnInit {
       this.thisDialogRef.close('Ploygon created');
     }
   }
-
-  // assignFromOrders(){
-  //     if(){
-
-  //     }
-
-  // }
 
   ngOnInit() {
     this.getAllStockPoints();

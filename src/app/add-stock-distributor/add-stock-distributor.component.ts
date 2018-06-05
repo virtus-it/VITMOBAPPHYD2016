@@ -20,7 +20,7 @@ export class AddStockDistributorComponent implements OnInit {
   getProducts() {
     this.loaderService.display(true);
     
-    let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+    let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() ,  "usertype": this.authenticationService.userType() };
     this.orderLandingService.getProductsByDealrID(input)
       .subscribe(
       output => this.getProductsResult(output),

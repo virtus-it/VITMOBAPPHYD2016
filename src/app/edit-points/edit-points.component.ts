@@ -26,15 +26,11 @@ export class EditPointsComponent implements OnInit {
     .subscribe(
     output => this.getAllPointsResult(output),
     error => {
-        //console.log("error in customer");
-       
     });
   }
   getAllPointsResult(result){
     if(result.result == 'success'){
       this.customerPoints = result.data;
-      this.getPointsDetails();
-
     }
     else{
       this.noPoints = true;
@@ -47,9 +43,7 @@ export class EditPointsComponent implements OnInit {
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.getPointsDetailsResult(output),
-    error => {
-        //console.log("error in customer");
-       
+    error => {      
     });
   }
   getPointsDetailsResult(result){
@@ -88,8 +82,6 @@ export class EditPointsComponent implements OnInit {
   getAllPointsDistributorResult(result){
     if(result.result == 'success'){
       this.distributorPoints = result.data;
-      this.getPointsDistributorDetails();
-
     }
     else{
       this.noPoints = true;
@@ -126,28 +118,6 @@ export class EditPointsComponent implements OnInit {
     }
   }
 
-
-
-//   if (userType.equals(Constants.CUSTOMER)) {
-//     if (status.equals("delivered"))
-//         status = "Order Completed";
-//     else if (status.equals("signup"))
-//         status = "Signup";
-//     else if (status.equals("referalbonus"))
-//         status = "Referal Bonus";
-// } else if (userType.equals(Constants.DEALER)) {
-//     if (status.equals("accept"))
-//         status = "Order Accepted";
-//     else if (status.equals("ontime"))
-//         status = "On time Delivery";
-//     else if (status.equals("sameday"))
-//         status = "Same Day Delivery";
-// }
-
-
-
-
-  
   onCloseCancel() {
     this.thisDialogRef.close('cancel');
   }

@@ -202,7 +202,8 @@
           color: white;">
             <th width="40%">Type</th>
            
-            <th width="15%">Quantity</th>   
+            <th width="15%">Quantity</th>  
+            <th class="" width="10%">Empty cans</th> 
             <th width="12%">Price per Unit</th>
             <th width="12%" title="Express Delivery">Exp Delv</th>
             <th width="13%" title="Service Charge">Serv Charges</th>
@@ -231,7 +232,7 @@
                       <div class="col-2">
                           <a class="cursor logo-color ">
                             
-                            <b title="Add Slider"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>
+                            <b title="Add Slider"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" ></b>
                           </a>
                         </div>    
                     
@@ -240,13 +241,18 @@
                     </div>
                     <div class="col-2  row">
                         <a class="cursor logo-color">
-                            <b title="Add Slider"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="addSlider()"></b>
+                            <b title="Add Slider"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" ></b>
                         </a>
                       </div>    
 
             
               </div>
                
+            </td>
+
+            <td>
+              <input class="" placeholder="empty cans" type="number" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)">
+
             </td>
 
             <td>
@@ -283,10 +289,23 @@
 
 
 <div class="row float-right pdright-30 mgbottom-20">
-
+  <p class="warning">{{message}}</p> &nbsp;&nbsp;
+  <p class="warning">{{message1}}</p> &nbsp;&nbsp;
+  <p class="warning">{{message2}}</p> &nbsp;&nbsp;  
+  <p class="red">{{emptyCanMessage}}</p> 
+  <span>
+    <small>
+      Product cost: {{this.createPreOrderInput.productDetails.pcost}} <br>
+      Service charge : {{this.createPreOrderInput.productDetails.servicecharge}} <br>
+      Express delivery charges : {{this.amount}} <br> 
+      Empty cans : {{this.createPreOrderInput.productDetails.emptycans}} <br>
+      Total cost : {{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +
+         (( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 ) }} 
+    </small>
+  </span>
  
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="createPreOrder()" >PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="this.emptycanError == true && (this.createPreOrderInput.productDetails.emptycans === null || this.createPreOrderInput.productDetails.emptycans == '')">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class=" bg-warning" (click)="deliverPreOrder()" [disabled]="Details.isappdownloaded === null">DELIVERY AS A DISTRIBUTOR</button>&nbsp;
   </md-dialog-actions>
 </div>

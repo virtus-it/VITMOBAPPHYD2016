@@ -12,6 +12,10 @@
 <md-dialog-content layout="column">
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
+
+      <!-- Customer points-->
+
+
       <div *ngIf="Detail.usertype !== 'dealer'" class="points-style">
         <div class="row">
           <div class="col center">
@@ -30,15 +34,15 @@
               <i class="fa fa-phone"></i> {{Detail.mobileno}} </span>
           </div>
           <div class="col right">
-              <button md-raised-button class="btn btn-primary btn-small fs-14" >Details</button>&nbsp;
+              <button md-raised-button class="btn btn-primary btn-small fs-14" (click)="getPointsDetails()">Details</button>&nbsp;
             </div>
         </div>
       </div>
 
-      <div class="" *ngIf="Detail.usertype !== 'dealer' && customerPoints && customerPoints.totalpoints">
+      <div class="" *ngIf="Detail.usertype !== 'dealer' && customerPointsDetails ">
         <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
-          <thead>
-            <tr>
+          <thead >
+            <tr *ngIf="customerPointsDetails.length > 0">
               <th width="29%">Date</th>
               <th width="20%">Order id</th>
               <th width="20%">Points</th>
@@ -55,42 +59,59 @@
           </tbody>
         </table>
       </div>
-      <div class="row" *ngIf="Detail.usertype == 'dealer'">
-        <div class="col">
-          <p class="">{{Detail.firstname}} {{Detail.lastname}} </p>
+
+      <!-- Customer points-->
+
+
+
+<!-- Dealer points-->
+
+      <div *ngIf="Detail.usertype == 'dealer'" class="points-style">
+          <div class="row">
+            <div class="col center">
+              <h1 *ngIf="distributorPoints && distributorPoints.totalpoints"> {{distributorPoints.totalpoints}}</h1>
+              <h1 *ngIf="noPoints" class="fs-50 danger mgbottom-0"> 0 </h1>
+              <span>POINTS</span>
+            </div>
+          </div>
+          <div class="row inner-style">
+            <div class="col">
+              <span class="capitalize">
+                <i class="fa fa-user"></i> {{Detail.firstname}} {{Detail.lastname}}</span>
+            </div>
+            <div class="col center">
+              <span class="">
+                <i class="fa fa-phone"></i> {{Detail.mobileno}} </span>
+            </div>
+            <div class="col right">
+                <button md-raised-button class="btn btn-primary btn-small fs-14" (click)="getPointsDistributorDetails()"  >Details</button>&nbsp;
+              </div>
+          </div>
         </div>
-        <div class="col">
-          <p class=""> {{Detail.mobileno}} </p>
-
+  
+        <div class="" *ngIf="Detail.usertype == 'dealer' && distributorPointsDetails">
+          <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
+            <thead>
+              <tr *ngIf="distributorPointsDetails.length > 0" >
+                <th width="29%">Date</th>
+                <th width="20%">Order id</th>
+                <th width="20%">Points</th>
+                <th width="29%">Rewarded for</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let detail of distributorPointsDetails">
+                <td  width="30%"> {{detail.date | utcDate}}</td>
+                <td  width="20%"> #{{detail.orderid}}</td>
+                <td  width="20%"> {{detail.points}}</td>
+                <td  width="30%">{{detail.status}}</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="col">
 
-          <p *ngIf="distributorPoints && distributorPoints.totalpoints"> {{distributorPoints.totalpoints}}</p>
-          <p *ngIf="noPoints"> 0 </p>
 
-        </div>
-
-      </div>
-      <div class="row" *ngIf="Detail.usertype == 'dealer' && distributorPoints &&  distributorPoints.totalpoints">
-        <table class="table table-hover table-striped" style="table-layout:fixed">
-          <thead>
-            <tr>
-              <th width="">Date</th>
-              <th width="">Order id</th>
-              <th width="">Points</th>
-              <th width="">Rewarded for</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let detail of distributorPointsDetails">
-              <td class="" width=""> {{detail.date | utcDate}}</td>
-              <td class="" width=""> {{detail.orderid}}</td>
-              <td class="" width=""> {{detail.points}}</td>
-              <td class="" width="">{{detail.status}}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <!-- Dealer points-->
 
     </div>
   </form>
@@ -98,7 +119,6 @@
 <div class="row float-right pdright-30 mgbottom-20 ">
   <md-dialog-actions align="end">
 
-    <!-- <button type="submit" md-raised-button class="btn-primary"  >SUBMIT</button> -->
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

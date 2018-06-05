@@ -16,16 +16,23 @@
 
 <md-dialog-content layout="column" class="brd-bottom">
 
+    <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'mapview'}"
+     (click)="showTabPanel('mapview')">Map View</button>
+    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'gridview'}" 
+    (click)="showTabPanel('gridview')"> Grid View </button>
 
-      <ul class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10" role="tablist">
+
+
+
+      <!-- <ul class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10" role="tablist">
           <p class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></p>
       <li class="nav-item">
           <a class="nav-link active" data-toggle="pill">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="pill">Menu 1</a>
+          <a class="nav-link" data-toggle="pill" (click)="showStockpointsOnMap()">Map view</a>
         </li>
-      </ul>
+      </ul> -->
     
 
 
@@ -37,7 +44,7 @@
     <i class="fa fa-plus fa-2 plus-style navbar-right"></i>
   </div> -->
 
-  <div class="container-fluid">
+  <div class="container-fluid" *ngIf="tabPanelView == 'gridview'">
     <div class="row pd-15x10 mg-0">
 
       <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
@@ -80,6 +87,29 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+
+  <div class="" *ngIf="tabPanelView == 'mapview'">
+
+      <div class="row">
+          <div class="col">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+              <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" >
+
+                <agm-info-window>
+              Stock point
+      
+            </agm-info-window>
+
+
+              </agm-marker>
+            </agm-map>
+          </div>
+          
+        </div>
+
+
   </div>
 
 </md-dialog-content>

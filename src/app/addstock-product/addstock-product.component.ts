@@ -22,7 +22,7 @@ onCloseCancel() {
 }
 addStockDetails(){
   //console.log(this.StockInput);
-  let input = [{"product":{"pid":this.Detail.productid.toString(),
+  let input = [{"product":{"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid ,  
   "stock":this.StockInput.stock,returnemptycans:this.StockInput.returnemptycans,
   "loginid":this.authenticationService.loggedInUserId(),"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType()}}];
   if (this.StockInput.invoiceDate) {
@@ -44,7 +44,7 @@ if(result.result == 'success'){
 }
 }
   ngOnInit() {
-    //console.log(this.Detail);
+    console.log(this.Detail);
   }
 
 

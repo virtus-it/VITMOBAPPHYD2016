@@ -15,7 +15,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[] , typeOfPhone: ""};
+    dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[] , phonetype : ""};
     areaList = [];
     phone = false;
     
@@ -61,7 +61,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          this.loaderService.display(true);
          var input:any = {
              "User": {
-                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "mobileno_one":this.dist.mobile1, "mobileno_two":this.dist.mobile2,  "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType()
+                "pwd":this.dist.phone,"user_type": "dealer", "TransType": "create","referCode": this.dist.referCode ,"firstname": this.dist.firstName,  "lastname": this.dist.lastName, "companyname":this.dist.companyname,"address":this.dist.address, "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.dist.phone, "mobileno_one":this.dist.mobile1, "mobileno_two":this.dist.mobile2,  "emailid": this.dist.emailid,"dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType() , "phonetype": this.dist.phonetype
              }
          }
          //console.log(input);
@@ -77,6 +77,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          }
          if (this.distributorDetail) {
              input.User.userid = this.distributorDetail.userid;
+             input.User.TransType = "update";
              this.distributorService.updateDistributor(input)
                  .subscribe(
                  output => this.onSubmitResult(output),

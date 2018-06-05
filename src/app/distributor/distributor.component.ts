@@ -39,15 +39,20 @@ export class DistributorComponent implements OnInit {
     distributorsCopy: any = [];
     searchDistributorTerm = "";
     searchDistributorNumber = "";
-    filterType = "";
     categoryList:any = [];
+    filterType:any = "";
 
-    filterInput :any  = { categoryid: "" , categoryname: ""};
+    // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
+
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , areadefined: "" };
+    filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":500,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
+
+
     distributorClickMore = true;
     LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
 
         this.CategoryCtrl = new FormControl();
@@ -72,8 +77,8 @@ export class DistributorComponent implements OnInit {
       });
 
       if (findCategory) {
-        this.filterInput.categoryid = findCategory.categoryid;
-        this.filterInput.categoryname = findCategory.category;
+        // this.filterInput.categoryid = findCategory.categoryid;
+        this.filterTypeModel.categoryname = findCategory.category;
       }
     }
     else {
@@ -435,6 +440,45 @@ this.getProductByCategory();
             }
             });
         }
+
+        searchFilter(){
+            if(this.filterType == 'category'){
+                this.filterInput.root.searchtype = 'category';
+                this.filterInput.root.searchtext = this.filterTypeModel.categoryname;               
+            }
+            else if(this.filterType == 'phonetype'){
+                this.filterInput.root.searchtype = 'phonetype';
+                this.filterInput.root.searchtext = this.filterTypeModel.typeofphone;
+            }
+            else if(this.filterType == 'address'){
+                this.filterInput.root.searchtype = 'address';
+                this.filterInput.root.searchtext = this.filterTypeModel.address;
+            }
+            // else if(this.filterType == 'areadefined'){
+            //     this.filterInput.root.searchtype = 'areadefined';
+            //     this.filterInput.root.searchtext = this.filterTypeModel.areadefined;
+
+            // }
+            let input = this.filterInput;
+            this.distributorService.getAllDistributors(input)
+            .subscribe(
+            output => this.searchFilterResult(output),
+            error => {
+                //console.log("error in distrbutors");
+                this.loaderService.display(false);
+            });
+        }
+        searchFilterResult(result){
+            if(result.result == 'success'){
+                this.distributors = [];
+                this.distributors = result.data;
+            }
+            else{
+                this.distributors = [];
+                this.distributorClickMore = false;
+            }
+        }
+        
     
 
     ngOnInit() {

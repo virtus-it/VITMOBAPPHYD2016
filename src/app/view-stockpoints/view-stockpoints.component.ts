@@ -5,6 +5,9 @@ import { MdDialogRef } from '@angular/material';
 import { MdDialog } from '@angular/material';
 import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.component';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
+import { } from '@types/googlemaps';
+import * as _ from 'underscore';
 
 declare var google: any;
  
@@ -33,13 +36,15 @@ export class ViewStockpointsComponent implements OnInit {
     }
 ]
 ploymarkers: marker[] = [];
+showMarkers: marker[] = [];
 stockpoints:any = [];
 noDataError:any="";
 addressLat:any = "";
 addressLng:any = "";
+tabPanelView: string = "mapview";
 
 
-  constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>,   @Inject(MD_DIALOG_DATA) public Details: any, private authenticationService: AuthenticationService, public dialog: MdDialog,  private distributorService: DistributorServiceService,) { }
+  constructor(public thisDialogRef: MdDialogRef<MapStockpointComponent>, private mapsAPILoader: MapsAPILoader ,   @Inject(MD_DIALOG_DATA) public Details: any, private authenticationService: AuthenticationService, public dialog: MdDialog,  private distributorService: DistributorServiceService,) { }
 
   mapClicked($event: any , originalEventArgs , ok) { 
     this.ploymarkers =[];
@@ -67,6 +72,7 @@ addressLng:any = "";
  deleteStockPointResult(result){
   //console.log(result);
   if(result.result == 'success'){
+
     this.getAllStockPoints();
   }
  }
@@ -89,9 +95,25 @@ addressLng:any = "";
      if(result.result == 'success'){
        this.stockpoints=result.data;
        this.noDataError="";
+       let stockpointData = {lat:0 , lng:0 , icon:""};
+       let markersData = [];
+      //  let marker = [];
+       _.each(this.stockpoints , function(i, j){
+         let details:any = i;
+         stockpointData = {
+            lat: parseFloat(details.latitude),
+            lng: parseFloat(details.longitude),
+            icon:"../assets/images/green.png"
+         }
+         markersData.push(stockpointData);
+       });
+
+       this.showMarkers = markersData
+      
      }
      else{
       this.noDataError="No Stock Points for this distributor";
+      this.stockpoints = [];
      }
 
   }
@@ -128,6 +150,34 @@ addressLng:any = "";
 
   onCloseCancel(){
     this.thisDialogRef.close('success');
+
+  }
+
+  showTabPanel(panelName) {
+    // this.clearFilter();
+    this.tabPanelView = panelName;
+    // if(panelName== "mapview"){
+    //   // this.showStockpointsOnMap();
+    //   this.getAllStockPoints();
+    // }
+    // else if(panelName== "gridview"){
+     
+    //   this.getAllStockPoints();
+    // } 
+  }
+
+
+  // getMarker(){
+  //   this.ploymarkers =[];
+  //   this.ploymarkers.push({
+  //     lat: parseFloat(this.Details.latitude),
+  //     lng: parseFloat(this.Details.longitude)        
+  // });   
+  
+  
+  // }
+
+  showStockpointsOnMap(){
 
   }
   
