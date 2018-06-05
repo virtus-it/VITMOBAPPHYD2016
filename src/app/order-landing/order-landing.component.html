@@ -419,13 +419,22 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <span class="td-label">
                         Express Delivery charges </span>
                       <br>
                       <b>Rs.{{forward.expressdeliverycharges}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                        <span class="td-label">
+                          Empty Cans Amount </span>
+                        <br>
+                        <b>Rs.{{(forward.quantity -  forward.empty_cans) * 150 }}</b>
+                      </div>
+
+
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Service charges </span>
                       <br>
                       <b class="pdright-5">Rs.{{forward.servicecharges}}</b>
@@ -779,13 +788,22 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <span class="td-label">
                         Express Delivery charges </span>
                       <br>
                       <b>Rs.{{allorder.expressdeliverycharges}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                        <span class="td-label">
+                          Empty Cans Amount </span>
+                        <br>
+                        <b>Rs.{{(allorder.quantity -  allorder.empty_cans) * 150 }}</b>
+                      </div>
+
+
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Service charges </span>
                       <br>
                       <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
@@ -1092,14 +1110,23 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <span class="td-label">
                         Express Delivery charges </span>
                       <br>
                       <b>Rs.{{complete.expressdeliverycharges}}</b>
                     </div>
 
-                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                        <span class="td-label">
+                          Empty Cans Amount </span>
+                        <br>
+                        <b>Rs.{{(complete.quantity -  complete.empty_cans) * 150 }}</b>
+                      </div>
+
+
+
+                    <div class="col-sm-4  col-md-4  col-lg-4 right">
                       <span class="td-label">Service charges </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>

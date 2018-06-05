@@ -23,7 +23,7 @@
                 <md-option value="category">Category</md-option>
                 <md-option value="phonetype">Type of phone</md-option>
                 <md-option value="address">Area Name</md-option>
-                <md-option value="areaDefined">Is Area defined</md-option>
+                <md-option value="areadefined">Is Area defined</md-option>
               </md-select>
             </div>
             <div *ngIf="filterType=='name'">
@@ -68,12 +68,15 @@
                   </md-form-field>
             </div>
 
-            <!-- <div class="" *ngIf="filterType == 'areaDefined'">
+            <div class="" *ngIf="filterType == 'areadefined'">
 
-                <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
-                  </md-form-field>
-            </div> -->
+          <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isAreaDefined">
+            <md-option value="yes">YES</md-option>
+            <md-option value="no" >NO</md-option>
+            
+
+          </md-select>
+            </div>
 
 
 

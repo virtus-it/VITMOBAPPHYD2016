@@ -37,6 +37,10 @@ margin-left: 65px;
     padding: 4px;
 }
 
+.error{
+    color: red;
+}
+
 /* .bg-imglogo{
     background-image:url(../assets/images/bg_virtus.png);
    } */

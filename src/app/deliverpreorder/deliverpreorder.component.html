@@ -24,7 +24,7 @@
       </div>
       <div class="  col-6">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" >
+          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" (ngModelChange)="emptyCansValidation($event)" >
           <md-error>
             Returned Cans is
             <strong>required</strong>
@@ -160,8 +160,22 @@
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
+    <p class="red">{{emptyCanMessage}}</p> 
+    <span>
+        <small>
+          Product cost: {{Detail.order.product_cost}} <br>
+          Service charge : {{Detail.order.prodServiceCharge}} <br>
+          Express delivery charges : {{Detail.order.expressdeliverycharges}} <br> 
+          Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.return_cans) * 150 }}  <br>
+          Total cost : {{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)  +  (Detail.order.expressdeliverycharges) +
+             (( Detail.order.delivered_qty - Detail.order.return_cans) * 150 ) }} 
+        </small>
+      </span>
+
+
+
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()">CONFIRM</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()" [disabled]="(this.Detail.order.return_cans != ' ') &&  (emptyCansKeyUp == true)">CONFIRM</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

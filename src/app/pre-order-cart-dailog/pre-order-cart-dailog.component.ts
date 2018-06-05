@@ -82,6 +82,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     filterType = {distributorid: ""};
     filterTypeSupplier = {supplierid: ""};
     emptyCanMessage = "";
+    emptyCansKeyUp:boolean = false;
     
 
 
@@ -112,8 +113,8 @@ export class PreOrderCartDailogComponent implements OnInit {
     "return_cans": this.createPreOrderInput.productDetails.quantity ,"paymentmode":"",
     "received_amt":"","total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
-    "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason" , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":150 * this.createPreOrderInput.productDetails.emptycans }
+    "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)),"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)) ,"cart_style":"new",
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason" , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt": (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans)) }
     }
     console.log(data);
 
@@ -473,11 +474,11 @@ createPreOrder(){
   "ispreorder":true,"orderto":this.Details.dealers.user_id,
   "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid, "categoryId":this.createPreOrderInput.productDetails.categoryid, 
   "product_quantity":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname, 
-  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount,
-  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount ,
+  "product_type":this.createPreOrderInput.productDetails.ptype,  "brandName":this.createPreOrderInput.productDetails.brandname,  "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)) ,
+  "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)) ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),
-  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":150 * this.createPreOrderInput.productDetails.emptycans }}]
+  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":  (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans))  }}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
@@ -603,17 +604,54 @@ expressDeliveryCharge(details,  isChecked: boolean){
 
 }
 
+// emptyCansChange(event){
+//   console.log(event);
+//   if(this.createPreOrderInput.productDetails.quantity >= event){
+//     this.emptyCanMessage= "";
+//   }
+//   else if (this.createPreOrderInput.productDetails.quantity > event){
+//     this.emptyCanMessage = "Empty cans must be less than quantity";
+//     this.emptyCansKeyUp = true;
+//   }
+//   else if(this.createPreOrderInput.productDetails.quantity < event){
+//     this.emptyCansKeyUp = false;
+//     this.emptyCanMessage= "";
+//   }
+
+
+
+
 emptyCansChange(event){
-  console.log(event);
-  if(this.createPreOrderInput.productDetails.quantity >= event){
-    this.emptyCanMessage= "";
+let cases: string = "1";
+switch(cases){
+  case '1': {
+    if(this.createPreOrderInput.productDetails.quantity >= event){
+         this.emptyCanMessage= "";
+         this.emptyCansKeyUp = false;
+        }
   }
-  else{
-    this.emptyCanMessage = "Empty cans must be less than quantity";
+  case '2' : {
+    if(this.createPreOrderInput.productDetails.quantity < event) {
+      this.emptyCanMessage= "Empty cans must be less than quantity";
+      this.emptyCansKeyUp = true;
+    }
   }
+  case '3' :{
+    if(this.createPreOrderInput.productDetails.quantity > event){
+      this.emptyCanMessage= "";
+      this.emptyCansKeyUp = false;
+    }
+  }
+  default : {
+    if(this.createPreOrderInput.productDetails.quantity >= event){
+      this.emptyCanMessage= "";
+      this.emptyCansKeyUp = false;
+     }
 
-
+  }
 }
+}
+
 
 dateChanges(event){
   let eventChanges = moment(event).format('DD-MM-YYYY');

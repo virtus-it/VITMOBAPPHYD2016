@@ -17,6 +17,8 @@ export class ProfileComponent implements OnInit {
   profileUpdate: any = {"firstname":"","lastname":"","emailid":"","address":"","city":"","state":"","pincode":"","mobileno":"", "companyname":"", "referCode":"" };
   updateStatus= false;
   base64textString:any = "";
+  imageUpdateError:boolean = false;
+  imageUplaodSuccess:boolean = false;
 
 
   updateProfile(){
@@ -102,8 +104,10 @@ updateUser(){
 updateUserResult(result){
   if(result.result == 'success'){
     this.getProfileDetails();
-    console.log('update user called');
+    // console.log('Image uploaded successfully');
+   
   }
+
 }
 
 
@@ -142,15 +146,18 @@ uploadImage(){
 output => this.uploadImageResult(output),
 error => {
   //console.log("error in distrbutors");
+  this.imageUpdateError = true;
 });
 }
 uploadImageResult(result){
  if(result.result == 'success'){
    console.log('image uploaded successfully');
+   this.imageUplaodSuccess = true;
    this.updateUser();
-
-
  }
+ else{
+  this.imageUpdateError = true;
+}
 }
 
 

@@ -92,6 +92,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     //console.log(result);
     this.loaderService.display(false);
     if ((result.result = 'success')) {
+      this.loaderService.display(false);
       this.customerInput = {
         User: {
           advamt: '0',
@@ -128,6 +129,9 @@ export class AddEditCustomerDailogComponent implements OnInit {
       if (result.data.user.payment && result.data.user.payment.paymenttype) {
         this.customerInput.User.paymenttype =
           result.data.user.payment.paymenttype;
+      }
+      else{
+        this.loaderService.display(false);
       }
     }
   }

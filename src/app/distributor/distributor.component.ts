@@ -44,7 +44,7 @@ export class DistributorComponent implements OnInit {
 
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
-    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , areadefined: "" };
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" };
     filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":500,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
 
 
@@ -454,11 +454,12 @@ this.getProductByCategory();
                 this.filterInput.root.searchtype = 'address';
                 this.filterInput.root.searchtext = this.filterTypeModel.address;
             }
-            // else if(this.filterType == 'areadefined'){
-            //     this.filterInput.root.searchtype = 'areadefined';
-            //     this.filterInput.root.searchtext = this.filterTypeModel.areadefined;
+            else if(this.filterType == 'areadefined'){
+                this.filterInput.root.searchtype = 'areadefined';
+                this.filterInput.root.searchtext = this.filterTypeModel.isAreaDefined;
 
-            // }
+            }
+       
             let input = this.filterInput;
             this.distributorService.getAllDistributors(input)
             .subscribe(

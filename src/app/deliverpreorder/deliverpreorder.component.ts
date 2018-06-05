@@ -21,6 +21,8 @@ export class DeliverpreorderComponent implements OnInit {
   supplierList = [];
   SupplierListCopy = [];
   paymentCod: boolean= true;
+  emptyCanMessage = "";
+  emptyCansKeyUp:boolean = false;
 
 
 
@@ -126,6 +128,47 @@ export class DeliverpreorderComponent implements OnInit {
   }
 
 
+  // emptyCansValidation(event){
+  //   if(this.Detail.order.return_cans > event){
+  //     this.emptyCansMessage = "";
+  //   }
+  //   else {
+  //     this.emptyCansMessage = "Return cans must be less than delivered quantity";
+  //   }
+  // }
+
+
+
+  emptyCansValidation(event){
+    let cases: string = "1";
+    switch(cases){
+      case '1': {
+        if(this.Detail.order.delivered_qty >= event){
+             this.emptyCanMessage= "";
+             this.emptyCansKeyUp = false;
+            }
+      }
+      case '2' : {
+        if(this.Detail.order.delivered_qty < event) {
+          this.emptyCanMessage= "Empty cans must be less than quantity";
+          this.emptyCansKeyUp = true;
+        }
+      }
+      case '3' :{
+        if(this.Detail.order.delivered_qty > event){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+        }
+      }
+      default : {
+        if(this.Detail.order.delivered_qty >= event){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+         }
+    
+      }
+    }
+    }
 
   ngOnInit() {
     if(this.Detail.order.adv_amt > 0){

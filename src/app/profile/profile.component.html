@@ -100,6 +100,12 @@
               <div *ngIf="updateStatus">
                   <span >Profile Updated successfully</span>
                 </div> 
+                <div class="success" *ngIf="imageUplaodSuccess == true">
+                  <small>Image Uploaded successfully</small>
+                </div>
+                <div class="error" *ngIf="imageUpdateError == true">
+                  <small>Please select image size less than 35kb</small>
+                </div>
             </div>
 
           </div>

@@ -104,22 +104,22 @@
         </div>
         <!-- third row finished -->
         <div class="row">
-            <div class="col-md-4 col-sm-4">
+            <!-- <div class="col-md-4 col-sm-4">
                 <md-form-field class="wd-100pc">
                     <input class="form-control" mdInput placeholder="Reference Code" name="ReferenceCode">
                   </md-form-field>
             
-              </div>
+              </div> -->
            
 
-            <div class="col-md-4 col-sm-4">
+            <div class="col-md-6 col-sm-6">
                 <md-form-field class="wd-100pc">
                     <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
                   </md-form-field>
             
               </div>
 
-<div class="col-md-4 col-sm-4 align-self-end">
+<div class="col-md-6 col-sm-6 align-self-end">
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
         </md-form-field>
@@ -147,21 +147,21 @@
       </div>
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <md-form-field class="wd-100pc">
         <input class="form-control" mdInput placeholder="Reference Code" name="referencecode" [(ngModel)]='customerInput.User.referencecode'>
       </md-form-field>
 
-    </div>
+    </div> -->
     <!-- forth row finished -->
     <div class="row">
       <div class="col-4">
           <div class="form-group">
               <md-select placeholder="Payment Type" class="wd-100pc">
-                <md-option value="Customer">COD</md-option>
-                <md-option value="Distributor">CREDIT</md-option>
-                <md-option value="Supplier">PAYTM</md-option>
-                <md-option  value="Sales">ONLINE BANKING</md-option>
+                <md-option value="cod">COD</md-option>
+                <md-option value="credit">CREDIT</md-option>
+                <md-option value="paytm">PAYTM</md-option>
+                <md-option  value="online">ONLINE BANKING</md-option>
               </md-select>
             </div>
         <!-- <div class=" form-group  row">

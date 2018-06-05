@@ -21,6 +21,7 @@
               <th width="">Feature</th>
               <th width="">Description</th>
               <th width="">Points</th>
+              <th width="">Type</th>
               <th width="5%">Action</th>
 
 
@@ -31,10 +32,104 @@
               <td class="" width=""> Sign up </td>
               <td class="" width=""> When user signs up the system</td>
               <td class="" width=""> 20 point to customer who signed up</td>
+              <td class="" width="">Customer</td>
               <td class="" width="">
-                <i class="fa fa-edit logo-color cursor" title="Edit Points" (click)="editpoints()" ></i>
+                <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('signup')" ></i>
+                <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('signup')" ></i>
               </td>
             </tr>
+
+            <tr>
+                <td class="" width="">Referral Bonus </td>
+                <td class="" width="">User whose reference code is used for sign up</td>
+                <td class="" width=""> 
+                  <span> 20 points to customer who signed up</span> <br>
+                  <span>20 points to customer whose reference code is used (supplier, distributor or another customer)</span></td>
+                <td class="" width="">Customer</td>
+                <td class="" width="">
+                    <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('referalbonus')" ></i>
+                    <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('referalbonus')" ></i>
+                </td>
+              </tr>
+
+
+
+            <tr>
+                <td class="" width=""> Delivered </td>
+                <td class="" width="">
+                  <span> Every order with 1 bottle </span> <br>
+                  <span>Every order with 2 -5 bottles</span> <br>
+                  <span>Every order with 2 -5 bottles</span> <br>
+                  <span>Every order with more than 5 bottles</span> <br>
+                  <span>Order raised in less than 3 days</span>
+                  </td>
+
+                <td class="" width=""> 
+                  <span>10 points to customer who raised the order</span> <br>
+                  <span>20 points to customer who raised the order</span> <br>
+                  <span>30 points to customer who raised the order</span> <br>
+                  <span>10 points to customer who raised the order</span> <br>
+                  <span>5 points to customer who raised the order</span>
+                  </td>
+                <td class="" width="">Customer</td>
+                <td class="" width="">
+                    <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('delivered')" ></i>
+                    <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('delivered')" ></i>
+                </td>
+              </tr>
+
+              <tr> 
+                  <td class="" width=""> Accept </td>
+                  <td class="" width=""> Distributor who clicks on accept order </td>
+                  <td class="" width=""> 5 points to distributor who clicks and accept the order</td>
+                  <td class="" width="">Distributor</td>
+                  <td class="" width="">
+                      <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('accept')" ></i>
+                      <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('accept')" ></i>
+                  </td>
+                </tr>
+
+                <tr>
+                    <td class="" width="">On Time</td>
+                    <td class="" width=""> Distributor who delivers in delivery slot time (or earlier than the delivery slot) </td>
+                    <td class="" width=""> 20 point to Distributor</td>
+                    <td class="" width="">Distributor</td>
+                    <td class="" width="">
+                        <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('ontime')" ></i>
+                        <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('ontime')" ></i>
+                    </td>
+                  </tr>
+
+                  <tr>
+                      <td class="" width=""> Same Day </td>
+                      <td class="" width=""> Distributor who delivers in same day</td>
+                      <td class="" width="">10 point to Distributor</td>
+                      <td class="" width="">Distributor</td>
+                      <td class="" width="">
+                          <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('sameday')" ></i>
+                          <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('sameday')" ></i>
+                      </td>
+                    </tr>
+
+                    <tr>
+                        <td class="" width=""> Distributors Customer </td>
+                        <td class="" width=""> Distributor who added his customer</td>
+                        <td class="" width=""> 
+                          <span>20 point to Distributor</span>
+                          <span>10 point to Customer</span>
+                        </td>
+                        <td class="" width="">Distributor</td>
+                        <td class="" width="">
+                            <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('D-customer')" ></i>
+                            <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('D-customer')" ></i>
+                        </td>
+                      </tr>
+
+
+                    
+
+
+
           </tbody>
         </table>
 

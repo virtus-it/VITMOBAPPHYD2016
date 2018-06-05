@@ -251,7 +251,7 @@
             </td>
 
             <td>
-              <input class="" placeholder="empty cans" type="number" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)">
+              <input class="" placeholder="empty cans" type="number" min="0" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)" >
 
             </td>
 
@@ -294,14 +294,14 @@
       Product cost: {{this.createPreOrderInput.productDetails.pcost}} <br>
       Service charge : {{this.createPreOrderInput.productDetails.servicecharge}} <br>
       Express delivery charges : {{this.amount}} <br> 
-      Empty cans : {{this.createPreOrderInput.productDetails.emptycans}} <br>
+      Empty cans Amount : {{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 }}  <br>
       Total cost : {{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +
          (( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 ) }} 
     </small>
   </span>
  
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="this.emptycanError == true && (this.createPreOrderInput.productDetails.emptycans === null || this.createPreOrderInput.productDetails.emptycans == '')">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="(this.createPreOrderInput.productDetails.emptycans != ' ') &&  (emptyCansKeyUp == true)">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class=" bg-warning" (click)="deliverPreOrder()" [disabled]="Details.isappdownloaded === null">DELIVERY AS A DISTRIBUTOR</button>&nbsp;
   </md-dialog-actions>
 </div>
