@@ -16,8 +16,8 @@
     <div class="row pd-15 mg-0">
       <div class="">
         <table class="table table-hover table-striped" style="table-layout:fixed">
-          <thead>
-            <tr>
+          <thead >
+            <tr >
               <th width="">Feature</th>
               <th width="">Description</th>
               <th width="">Points</th>
@@ -34,8 +34,8 @@
               <td class="" width=""> 20 point to customer who signed up</td>
               <td class="" width="">Customer</td>
               <td class="" width="">
-                <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('signup')" ></i>
-                <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('signup')" ></i>
+                <i *ngIf="signupStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('signup')" ></i>
+                <i *ngIf="signupStatus1 == 0"class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('signup')" ></i>
               </td>
             </tr>
 
@@ -47,8 +47,8 @@
                   <span>20 points to customer whose reference code is used (supplier, distributor or another customer)</span></td>
                 <td class="" width="">Customer</td>
                 <td class="" width="">
-                    <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('referalbonus')" ></i>
-                    <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('referalbonus')" ></i>
+                    <i  *ngIf="referalbonusState1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('referalbonus')" ></i>
+                    <i *ngIf="referalbonusState1 == 0"  class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('referalbonus')" ></i>
                 </td>
               </tr>
 
@@ -73,8 +73,8 @@
                   </td>
                 <td class="" width="">Customer</td>
                 <td class="" width="">
-                    <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('delivered')" ></i>
-                    <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('delivered')" ></i>
+                    <i *ngIf="deliveredStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('delivered')" ></i>
+                    <i  *ngIf="deliveredStatus1 == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('delivered')" ></i>
                 </td>
               </tr>
 
@@ -84,8 +84,8 @@
                   <td class="" width=""> 5 points to distributor who clicks and accept the order</td>
                   <td class="" width="">Distributor</td>
                   <td class="" width="">
-                      <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('accept')" ></i>
-                      <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('accept')" ></i>
+                      <i  *ngIf="acceptStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('accept')" ></i>
+                      <i  *ngIf="acceptStatus1 == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('accept')" ></i>
                   </td>
                 </tr>
 
@@ -95,8 +95,8 @@
                     <td class="" width=""> 20 point to Distributor</td>
                     <td class="" width="">Distributor</td>
                     <td class="" width="">
-                        <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('ontime')" ></i>
-                        <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('ontime')" ></i>
+                        <i  *ngIf="ontimeStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('ontime')" ></i>
+                        <i  *ngIf="ontimeStatus1 == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('ontime')" ></i>
                     </td>
                   </tr>
 
@@ -106,8 +106,8 @@
                       <td class="" width="">10 point to Distributor</td>
                       <td class="" width="">Distributor</td>
                       <td class="" width="">
-                          <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('sameday')" ></i>
-                          <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('sameday')" ></i>
+                          <i  *ngIf="sameDayStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('sameday')" ></i>
+                          <i  *ngIf="sameDayStatus1 == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('sameday')" ></i>
                       </td>
                     </tr>
 
@@ -120,8 +120,8 @@
                         </td>
                         <td class="" width="">Distributor</td>
                         <td class="" width="">
-                            <i class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('D-customer')" ></i>
-                            <i class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('D-customer')" ></i>
+                            <i *ngIf="distCustomerStatus1 == 1" class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints('D-customer')" ></i>
+                            <i *ngIf="distCustomerStatus1 == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints('D-customer')" ></i>
                         </td>
                       </tr>
 
