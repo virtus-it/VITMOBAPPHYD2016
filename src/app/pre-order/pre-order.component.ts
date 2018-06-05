@@ -42,7 +42,7 @@ export class PreOrderComponent implements OnInit {
 
     addPreorder(data) {
         let dialogRefAddPreOrder = this.dialog.open(PreOrderCartDailogComponent, {
-            width: '80%',
+            width: '90%',
             data: data
         });
         dialogRefAddPreOrder.afterClosed().subscribe(result => {

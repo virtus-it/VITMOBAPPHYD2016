@@ -689,6 +689,10 @@ border:2px solid var( --logo-color);
           overflow-y: auto;
           padding: 6px;
         }
+        .scrollheight-400px{
+          max-height: 400px;
+          overflow-y: auto;
+        }
         table.table-fixedheader, table.table-fixedheader>thead, table.table-fixedheader>tbody, table.table-fixedheader>thead>tr, table.table-fixedheader>tbody>tr, table.table-fixedheader>thead>tr>th, table.table-fixedheader>tbody>td {
           display: block;
         }

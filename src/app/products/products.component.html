@@ -56,8 +56,8 @@
                 <tr *ngFor="let details of products.data">
                   <td>
                     <b class="">   <span class="onhovertooltip-200" title="{{details.ptype}}">
-                      <span class="fa fa-thumbs-up green" *ngIf="details.isactive == '1'" ></span>
-                      <span class="fa fa-thumbs-down warn" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
+                      <span class="fa fa-thumbs-up success" *ngIf="details.isactive == '1'" ></span>
+                      <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
 
 
 
