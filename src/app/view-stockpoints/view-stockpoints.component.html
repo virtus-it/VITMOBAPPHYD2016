@@ -2,7 +2,7 @@
   <div class="col-md-5  col-sm-5  col-lg-5 oneline">
     <i class="fa fa-gift"></i> Stock Points
   </div>
-  <button md-raised-button class="btn-default btn-small fs-14" (click)="createStockPoint(Details)"> <i class="fa fa-plus"></i> Add stock point</button>
+
 
   <div class="col-md-5  col-sm-5  col-lg-5 right">
     <!-- <strong class="fa fa-plus fa-2 plus-style" (click)="createStockPoint(Details)"></strong> -->
@@ -31,7 +31,7 @@
 
   
         
-  <h4 class="noData">{{noDataError}}</h4>
+  <h5 class="center text-warning">{{noDataError}}</h5>
   <!-- <div class="col-md-12 text-right" >
     <span><b>Add stock point</b></span>
     <i class="fa fa-plus fa-2 plus-style navbar-right"></i>
@@ -91,6 +91,8 @@
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      <button md-raised-button class="btn-primary" (click)="createStockPoint(Details)"><i class="fa fa-plus"></i> Add Stock Point</button>&nbsp;
+    <button md-raised-button class="btn-default" (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+    
   </md-dialog-actions>
 </div>

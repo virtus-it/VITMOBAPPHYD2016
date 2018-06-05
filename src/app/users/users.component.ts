@@ -23,7 +23,7 @@ export class UsersComponent implements OnInit {
 addUser() {
   let dialogRefEditCustomer = this.dialog.open(AddEditUserComponent, {
 
-      width: '700px',
+      width: '80%',
       data: ''
   });
   dialogRefEditCustomer.afterClosed().subscribe(result => {
@@ -40,7 +40,7 @@ editUser(data){
 
   let dialogRefEditCustomer = this.dialog.open(AddEditUserComponent, {
 
-    width: '700px',
+    width: '80%',
     data: data
 });
 dialogRefEditCustomer.afterClosed().subscribe(result => {

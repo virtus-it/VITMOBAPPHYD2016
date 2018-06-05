@@ -68,7 +68,7 @@ export class ProductsComponent implements OnInit {
   UpdateStatus(data) {
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
 
-      width: '400px',
+      width: '35%',
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
@@ -187,7 +187,7 @@ export class ProductsComponent implements OnInit {
   productArea(data){
 
     let dialogRef = this.dialog.open(ProductServiceAreaComponent, {
-      width: '75%', 
+      width: '95%', 
       data: data
   });
   dialogRef.afterClosed().subscribe(result => {

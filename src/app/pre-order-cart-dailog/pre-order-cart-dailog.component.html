@@ -236,7 +236,7 @@
                         </div>    
                     
                 <div class="col-7">
-                    <input class="brd-bottom form-control btn-sm"  type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
+                    <input class="brd-bottom form-control btn-sm nobg"  type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
                     </div>
                     <div class="col-2  row">
                         <a class="cursor logo-color">
@@ -272,15 +272,18 @@
           </tr>
         </tbody>
       </table>
+    
     </div>
   
-
+    <h5 class="center warning">{{message}}</h5>
+    <h5 class="center warning">{{message1}}</h5>
 
   </div>
 </md-dialog-content>
+
+
 <div class="row float-right pdright-30 mgbottom-20">
-  <p class="warning">{{message}}</p> &nbsp;&nbsp;
-  <p class="warning">{{message1}}</p> &nbsp;&nbsp;
+
  
   <md-dialog-actions align="end">
     <button md-raised-button class="btn-primary" (click)="createPreOrder()" >PROCEED TO ORDER ASSIGNMENT</button>&nbsp;

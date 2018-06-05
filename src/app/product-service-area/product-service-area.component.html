@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
     <div class="col-md-4  col-sm-4  col-lg-4">
-          <span ><i class="fa fa-sitemap"></i>Products Area</span>
+          <span ><i class="fa fa-sitemap"></i> Products Area</span>
     </div>
     <div class="col-md-1  col-sm-1  col-lg-1 right">
           <strong   (click)="onCloseConfirm()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -8,21 +8,35 @@
     </div>
   </div>
 
-  <hr>
-  <div class="container-fluid">
+ 
+  
   <md-dialog-content>
-      <div class="form-group">
-          <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
-        </div>
-    <div id="map"></div>
-  </md-dialog-content>
+      <div class="row">
+
+          <div class="col-10 pd-5">
+      
+            <div id="map" class="wd-100pc">
+    </div>
+    </div>
+
+    <div class="col-2 pd-leftright-0">
+        <div class="row height-91pc pd-5">
+  
+          <div class="">
+      <input placeholder="search for location" autocorrect="off" autocapitalize="off" spellcheck="off" type="text" class="form-control" #search [formControl]="searchControl">
+    </div>
+
   </div>
-  <hr>
-  <div class="row float-right pdright-30 mgbottom-20">
-  <md-dialog-actions align="end">
-      <button class="btn-primary" md-raised-button (click)="createServiceArea()">ASSIGN AREA</button>&nbsp;
-    <button md-raised-button (click)="onCloseConfirm()" >CANCEL</button>&nbsp;
-    
-  </md-dialog-actions>
+
+  <div class="row pd-5 d-flex justify-content-around">
+      <button class="btn-primary btn-sm" md-raised-button (click)="createServiceArea()">ASSIGN</button>
+      <button class="btn-default btn-sm" md-raised-button (click)="onCloseConfirm()" >CANCEL</button>
+    </div>
+    </div>
 </div>
+
+
+ 
+
+ 
 

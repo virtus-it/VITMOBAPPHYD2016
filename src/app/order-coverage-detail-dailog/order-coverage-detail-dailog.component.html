@@ -83,40 +83,37 @@
               <thead>
             <tr>
               <!-- <th width="3%">S.No</th> -->
-              <th width="22%"><small> Distributor</small></th>
-              <th width="21%"><small>Mobile</small></th>
-              <th width="16%"><small>Products</small></th>
-              <th width="15%" class="center"> <small>Areas</small></th>
-              <th width="13%" class=""><small>orders</small></th>
-              <th width="13%" class=""  *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" ><small>Assign</small></th>
+              <th width="40%"><small> Distributor</small></th>
+              <th width="25%"><small>Mobile</small></th>
+              <th width="35%"> <small>Action</small></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
               <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-              <td width="22%" class="left capital"><small>{{dist.distributorName}}</small></td>
-              <td width="21%" class="left capital"><small>{{dist.mobileno}}</small>
+              <td width="40%" class="left capital"><small><span class="onhovertooltip-199" title="{{dist.distributorName}}">{{dist.distributorName}}</span></small></td>
+              <td width="25%" class="left capital"><small>{{dist.mobileno}}</small>
               <small *ngIf="dist.mobileno1">{{dist.mobileno1}}</small>
               <small *ngIf="dist.mobileno2">{{dist.mobileno2}}</small>              
               </td>
-              <td width="16%" class=" capital center">
+              <td width="35%">
                 <label (click)="ViewProduct(dist)" class="logo-color"><i class="fa fa-gift fs-20" aria-hidden="true"></i>
                    </label>
-              </td>
-              <td width="15%" class=" capital center">
+              
+             
                   <label (click)="DistrbutorHover(dist)" class="logo-color"><i class="fa fa-map" aria-hidden="true"></i>
                      </label>
-              </td>
-              <td width="13%" class="">
+          
+            
                 <label class="logo-color" title="Orders"  (click)="distributorsOrders(dist)"><i class="fa fa-file-text-o" ></i> 
                 </label>
-              </td>
+        
 
-              <td width="13%" class="">
+             
                 <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="openProductAssingDialog(dist)" > <i class="fa fa-check-circle-o"></i>
                 </label>
-              </td>
-
+          
+</td>
             </tr>
           </tbody>
         </table>
