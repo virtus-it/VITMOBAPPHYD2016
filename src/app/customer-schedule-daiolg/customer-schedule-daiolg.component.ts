@@ -105,6 +105,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         weekdays = weekdays.join(',');
         input = {
           order: {
+            userid: this.Detail.customerId, 
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -141,6 +142,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
+            userid : this.Detail.customerId, 
             orderto: this.Detail.data.dealerid,
             orderfrom: this.Detail.customerId,
             paymentmode: 'cash',
@@ -171,7 +173,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       }
       this.loaderService.display(true);
       //this.scheduleInput.productQuantity =    this.Detail.data.discountproducts.quantity;
-      //console.log(input);
+      console.log(input);
       this.customerservice.createSchedule(input).subscribe(
         output => this.createScheduledaysResult(output),
         error => {
@@ -201,6 +203,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         input = {
           order: {
             schdid: this.Detail.data.id,
+            userid : this.Detail.userid, 
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -235,6 +238,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         input = {
           order: {
             schdid: this.Detail.data.id,
+            userid : this.Detail.userid,
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -347,7 +351,8 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
         if (customerProduct) {
           productListCopy.push(customerProduct);
-        } else {
+        }
+         else {
           productListCopy.push(details);
         }
 
@@ -364,7 +369,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
       // this.productList = filteredArray;
 
-      this.productList = _.filter(result.data.products, function(e: any) {
+      this.productList = _.filter(this.productList, function(e: any) {
         return e.stockstatus !== 'Soldout';
       });
     }
@@ -468,7 +473,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   createOrUpdate() {
     if (this.Detail.type == 'create') {
       this.scheduleInput.CustomerName = this.Detail.customerName;
-    } else {
+      this.scheduleInput.productName = this.Detail.productName;
+    } 
+    else {
       this.product = true;
       this.ProductFormControl = new FormControl({ valid: true }, [
         Validators.required
@@ -484,6 +491,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       });
       if (productItem) {
         this.scheduleInput.productName = productItem;
+      }
+      else{
+        this.scheduleInput.productName = this.Detail.productName;
       }
     }
   }
@@ -547,13 +557,15 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     }
   }
 
-  minQuantity(product, event) {
-    if (event.value.minorderqty) {
+  minQuantity(product , event){
+    if(event.value.default_qty){
+      this.eventQuantity = event.value.default_qty;
+     this.scheduleInput.productQuantity = this.eventQuantity;
+    }
+    else{
       this.eventQuantity = event.value.minorderqty;
       this.scheduleInput.productQuantity = this.eventQuantity;
-    } else {
-      this.eventQuantity = event.order.default_qty;
-      this.scheduleInput.productQuantity = this.eventQuantity;
+
     }
   }
 

@@ -126,14 +126,18 @@ export class CustomerComponent implements OnInit {
         });
     }
     showSchedule(data) {
-        let formatteddata:any = {"type":"create", "data":data, customerId:data.userid, customerName:data.firstname }
+        let formatteddata:any = {"type":"create", "data":data, 'productName': data.product_type ,  customerId:data.userid, customerName:data.firstname }
         let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
             width: '700px',
             data: formatteddata
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            //console.log(`Dialog closed: ${result}`);
-            //this.dialogResult = result;
+            if(result == 'success'){
+                this.loaderService.display(false);
+            }
+            else{
+                this.loaderService.display(false);
+            }
         });
     }
 

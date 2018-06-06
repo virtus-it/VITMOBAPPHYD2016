@@ -123,7 +123,8 @@
     <table class="table table-hover table-striped" style="table-layout:fixed">
         <thead>
           <tr>
-            <th width="15%">Customer</th>         
+            <th width="15%">Customer</th>    
+            <th class="" width ="10%">Created Date</th>     
             <th width="15%">Distributor</th>
             <th width="12%">Mobile</th>
             <!-- <th width="10%">Email</th> -->
@@ -146,6 +147,8 @@
                 {{customers.firstname}} {{customers.lastname}} 
             </span>
             </td>
+
+            <td class="">{{customers.timestamp | utcDate}}</td>
             <td class="left"  *ngIf="customers.dealers" width="15%">
                 <span class="onhovertooltip-150" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
               {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
