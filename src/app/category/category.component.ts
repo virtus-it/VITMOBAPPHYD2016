@@ -38,7 +38,7 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  createCustomer(){
+  createCategory(){
     let dialogRefSetting = this.dialog.open(CreateupdatecategoryComponent, {
       width: '500px',
       data: ''

@@ -6,18 +6,10 @@
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
         <a class="cursor logo-color " title="Add Distributor">
-          <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i>
+          <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"  title="Add promo code" (click)="addPromoCode()"></i>
         </a>
    
       </div>
-
-
-    
-      
-  
-  
-  
-  
     </div>
     <div id="" class="row  mg-0">
       <div class="pd-15">
@@ -26,42 +18,32 @@
             <tr>
               <th width="6%">Type</th>
               <th width="10%">Promo Code</th>
-              <th width="7%">Cust count</th>
+              <!-- <th width="7%">Cust count</th> -->
+              <th class="" width="10%">Description</th>
               <th width="10%">Start date</th>
+
               <th width="10%">End date</th>
+              <th width="7%">Offer Type</th>
               <th width="10%" >Action</th>
-              
-           
             </tr>
           </thead>
-          <tbody>
-      
-            <tr>
-              <td class="left capitalize" width="6%">Message
-                  
-                  
-              </td>
-             
-              <td class="left capitalize" width="10%">C7T3RV009
-                 </td>
-
-               
-              
-             <td class="left numbers" width="7%">20098
-             
-              </td>
-              
-              <td class="left capitalize" width="10%" >19-03-18</td>   
-              <td class="left capitalize" width="10%" >19-03-19</td>       
-              <td class="left capitalize" width="10%" ><span class="fa fa-trash danger pad-fa"></span></td>       
+          <tbody> 
+            <tr *ngFor="let promo of allPromoCodes">
+            <td class="left capitalize" width="6%" *ngIf="promo.offertype">{{promo.offertype}}</td> 
+            <td class="left capitalize" width="10%" *ngIf="promo.promocode">{{promo.promocode}}</td>
+            <td class="left capitalize" width="10%" *ngIf="promo.description">{{promo.description}}</td> 
+            <!-- <td class="left numbers" width="7%">20098</td> -->
+            <td class="left capitalize" width="10%" *ngIf="promo.startdate">{{promo.startdate | utcDate}}</td>   
+            <td class="left capitalize" width="10%" *ngIf="promo.enddate">{{promo.enddate | utcDate}}</td>   
+            <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>               
+            <td class="left capitalize" width="10%" >
+            <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
+            <span class="fa fa-edit" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
+            <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCode(promo)"></span>
+              </td>       
           
-              <!-- <td class="left" width="10%">
-                  <i class="fa fa-edit logo-color pad-fa" aria-hidden="true" title="Edit" (click)="editPromoCode()"></i>&nbsp;
-                   <i class="fa fa-trash danger pad-fa" aria-hidden="true" title="Delete promo code"></i>&nbsp;
-           
-                 
-              </td> -->
-              
+<!-- 
+              *ngFor="let promo of allPromoCodes" -->
              
               
              

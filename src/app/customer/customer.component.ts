@@ -159,8 +159,12 @@ export class CustomerComponent implements OnInit {
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
             if(result == "success"){
+                this.loaderService.display(false);
                 this.getCustomerList(true);
-
+            }
+            else{
+                this.loaderService.display(false);
+                
             }
 
         });
@@ -174,12 +178,14 @@ export class CustomerComponent implements OnInit {
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-if(result == "success"){
+    if(result == "success"){
     this.getCustomerList(true);
-
-}
-
-        });
+    this.loaderService.display(false);
+    }
+    else{
+    this.loaderService.display(false);
+    }
+    });
 
     }
     showFollowUp(details) {

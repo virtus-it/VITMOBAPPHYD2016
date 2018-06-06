@@ -13,7 +13,7 @@ import { FormControl, Validators } from '@angular/forms';
 export class CreateupdatecategoryComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CreateupdatecategoryComponent>,  private productService: ProductsService, @Inject(MD_DIALOG_DATA) public details: any) { }
-  categoryInput = {cname:"",cdesc:"",categoryid: "" };
+  categoryInput = {cname:"",cdesc:"",categoryid: "" , priority: "" };
   cnameFormControl = new FormControl('', [
     Validators.required]);
     cdescFormControl = new FormControl('', [
