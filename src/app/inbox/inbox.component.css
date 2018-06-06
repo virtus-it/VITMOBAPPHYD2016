@@ -30,4 +30,8 @@ p{
     font-size: 14px;
   }
 
-  
+  .scroll{
+    max-height: 290px;
+    overflow-y: auto;
+    padding: 6px;
+  }
