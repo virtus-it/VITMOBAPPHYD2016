@@ -6,8 +6,10 @@
   <div class="col-7">
     <span *ngIf="Detail.type=='distributorOrder'" class="capitalize"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</span>
     <span *ngIf="Detail.type=='distributorOrder'"> - {{Detail.data.distributor.mobileno}}</span>
+    <span *ngIf="Detail.type == 'distributorOrder'">&nbsp;&nbsp;&nbsp;&nbsp; Created Date:  {{Detail.data.distributor.createddate | utcDate}}</span>
     <span *ngIf="Detail.type=='distributorOrdersfromCoverage'" class="capitalize"> Dist Name : {{Detail.distributorName}} </span>
     <span *ngIf="Detail.type=='distributorOrdersfromCoverage'"> - {{Detail.distributorNumber}}</span>
+    <span *ngIf="Detail.type == 'distributorOrdersfromCoverage'">&nbsp;&nbsp;&nbsp;  Created Date : {{Detail.data.distDetails.createddate | utcDate}}</span>
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
