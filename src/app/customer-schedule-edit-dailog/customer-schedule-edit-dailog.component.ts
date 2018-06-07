@@ -56,7 +56,7 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
   // Edit schedule dialog box
   editSchedule(data) {
     //console.log(data);
-    let formatteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname }
+    let formatteddata:any = {"type":"update", "data":data, customerId:this.Detail.userid, customerName:this.Detail.firstname , productName : data.product_type  }
     let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
         width: '700px',
         data: formatteddata

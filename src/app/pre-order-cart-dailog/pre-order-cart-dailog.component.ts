@@ -83,6 +83,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     filterTypeSupplier = {supplierid: ""};
     emptyCanMessage = "";
     emptyCansKeyUp:boolean = false;
+
     
 
 
@@ -865,6 +866,8 @@ if(!this.createPreOrderInput.productDetails.default_qty){
   ngOnInit() {
     
     this.getDistributors();
+
+  
     // this.getProducts();
     // this.expressDeliveryCharge(true);
     // this.createPreOrderInput.productDetails.emptycans = 0;

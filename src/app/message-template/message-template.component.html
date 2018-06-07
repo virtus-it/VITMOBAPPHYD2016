@@ -15,20 +15,17 @@
         <table class="table table-hover table-striped  table-fixedheader">
           <thead>
       <tr>
-        <th width="20%"> Name </th>
-        <th width="70%">Description</th>
-        <th width="10%">Action</th>
+        <th width="85%">Description</th>
+        <th width="15%">Action</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let message of dynamicMessages">
-        <td class="left" width="20%">
-          name 1
-        </td>
-        <td class="left" width="70%">
+        
+        <td class="left" width="85%">
           {{message.template_desc}}
         </td>
-        <td class="left" width="10%">
+        <td class="left" width="15%">
           <button class="btn btn-link btn-sm" (click)="selectTemplate(message.template_desc)">select</button>
         </td>
       </tr>

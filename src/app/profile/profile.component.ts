@@ -19,6 +19,7 @@ export class ProfileComponent implements OnInit {
   base64textString:any = "";
   imageUpdateError:boolean = false;
   imageUplaodSuccess:boolean = false;
+  isSuperDealer:boolean = false;
 
 
   updateProfile(){
@@ -168,7 +169,13 @@ uploadImageResult(result){
 
   ngOnInit() {
     
-    this.getProfileDetails();
+    this.getProfileDetails(); 
+    if(this.authenticationService.isSuperDelear){
+      this.isSuperDealer = true;
+    }
+    else{
+      this.isSuperDealer = false;
+    }
   }
 
 }

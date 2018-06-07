@@ -46,6 +46,7 @@
                   <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
                   <th width="6%">Stock</th>
                   <th width="8%" title="Return cans">Ret cans</th>
+                  <th class="" width="7%" title="Is Authorized">Is Authorized</th>
                  
                   <th width="7%">Status</th>
                   <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
@@ -84,7 +85,11 @@
                   <td>
                     <b class="">{{details.avaliable_emptycans}}</b>
                   </td>
-                 
+
+                  <td>
+                    <span class="" *ngIf="details.isauthorized == 'true' || details.isauthorized == true"> Yes </span>
+                    <span class="" *ngIf="details.isauthorized == 'false' || details.isauthorized == false || details.isauthorized == '' || details.isauthorized === null"> No </span>
+                  </td>
 
                   <td>
                     <span class="info capital" [ngClass]="details.stockColor">{{details.stockstatus}} </span>

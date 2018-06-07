@@ -17,7 +17,8 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
 export class DistributorCreateDialogComponent implements OnInit {
     dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[] , phonetype : ""};
     areaList = [];
-    phone = false;
+    phone = false; 
+    isSuperDealer:boolean = false;
     
 
     dropdownSettings = {};
@@ -163,6 +164,13 @@ export class DistributorCreateDialogComponent implements OnInit {
     }
      ngOnInit() {
          console.log(this.distributorDetail);
+
+         if(this.authenticationService.isSuperDelear){
+            this.isSuperDealer = true;
+          }
+          else{
+            this.isSuperDealer = false;
+          }
          this.getAreasName();
          this.getDetails();
          this.dropdownSettings = {
