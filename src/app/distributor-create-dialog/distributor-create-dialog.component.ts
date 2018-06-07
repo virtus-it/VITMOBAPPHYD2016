@@ -22,7 +22,7 @@ export class DistributorCreateDialogComponent implements OnInit {
     
 
     dropdownSettings = {};
-    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService,public dialog: MdDialog) { }
+    constructor(public thisDialogRef: MdDialogRef<DistributorCreateDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetail: any,  private distributorService: DistributorServiceService, public authenticationService: AuthenticationService,private loaderService: LoaderService,public dialog: MdDialog) { }
      firstFormControl = new FormControl('', [
          Validators.required]);
          lastFormControl = new FormControl('', [
