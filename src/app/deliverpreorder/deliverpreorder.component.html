@@ -160,17 +160,15 @@
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-    <p class="red">{{emptyCanMessage}}</p> 
-    <span>
+    <p class="red">{{emptyCanMessage}}</p>
         <small>
-          Product cost: {{Detail.order.product_cost}} x  {{Detail.order.delivered_qty}}<br>
-          Service charge : {{Detail.order.prodServiceCharge}} x {{Detail.order.delivered_qty}}<br>
-          Express delivery charges : {{Detail.order.expressdeliverycharges}} <br> 
-          Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.return_cans) * 150 }}  <br>
-          Total cost : {{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)  +  (Detail.order.expressdeliverycharges) +
-             (( Detail.order.delivered_qty - Detail.order.return_cans) * 150 ) }} 
+         <span class="pd-right-20"> Product cost: {{Detail.order.product_cost}} x  {{Detail.order.delivered_qty}} </span> 
+         <span class="pd-right-20"> Service charge : {{Detail.order.prodServiceCharge}} x {{Detail.order.delivered_qty}} </span>
+         <span class="pd-right-20"> Express delivery charges : {{Detail.order.expressdeliverycharges}} </span> <br>
+         <span class="pd-right-20"> Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.return_cans) * 150 }} </span>  
+         <span class="pd-right-20">   Total cost : {{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)  +  (Detail.order.expressdeliverycharges) +
+             (( Detail.order.delivered_qty - Detail.order.return_cans) * 150 ) }} </span>
         </small>
-      </span>
 
 
 

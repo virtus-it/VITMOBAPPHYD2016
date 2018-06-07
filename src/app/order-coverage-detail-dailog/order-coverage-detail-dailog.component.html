@@ -18,7 +18,7 @@
 <md-dialog-content layout="column">
     <form class="example-form" >
       <div class="row mg-10-5">
-          <div class=" col-3 offset-1">
+          <div class="col-2">
               <md-form-field class="wd-100pc">
                   <input class="form-control" [(ngModel)]="reasonOnHold" autocorrect="off" autocapitalize="off" spellcheck="off" mdInput placeholder="search for location" name="Return Cans"  class="form-control" #search [formControl]="searchControl" [disabled]="smallLoader == true">
             </md-form-field>
@@ -33,21 +33,24 @@
             </md-select>
 
           </div>
-          <div class=" col-3">
+          <div class=" col-2">
               <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem" [disabled]="smallLoader == true" ></angular2-multiselect>
             </div>
-          <div class="col-3">
+          <div class="p-2">
           <button md-raised-button color="primary" (click)="filterPolygon()" [disabled]="smallLoader == true" > Filter </button> 
           <button *ngIf="orderDetail.distId" md-raised-button color="primary" (click)="openMapDialog(orderDetail.distDetails)" [disabled]="smallLoader == true">Assign Area</button>
           
         </div>
-
         <div class=" col-sm-1  col-md-1  col-lg-1 align-self-center" *ngIf="smallLoader">
-          <img src="assets/images/loader.gif" class="wd-60">
-        </div>
+            <img src="assets/images/loader.gif" class="wd-60">
+          </div>
 
-        
+        <div class="col right">
+        <button md-raised-button color="primary" (click)="ClearAllPolygons()"> CLEAR ALL</button> &nbsp;
+        <button md-raised-button color="primary" (click)="ShowAllPolygons()"> SHOW ALL</button> &nbsp;
+        <button md-raised-button color="primary" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="ViewDistributors()">ASSIGN</button>
+        </div>
       </div>
   <div class="container-fluid brd-bottom">
      
@@ -123,14 +126,3 @@
   </div>
   </form>
 </md-dialog-content>
-
-<div class="row float-right pdright-30  mgbottom-20">
-
-  
-  <md-dialog-actions align="end">
-     
-      <button md-raised-button color="primary" (click)="ClearAllPolygons()"> CLEAR ALL</button> &nbsp;
-    <button md-raised-button color="primary" (click)="ShowAllPolygons()"> SHOW ALL</button> &nbsp;
-    <button md-raised-button color="primary" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="ViewDistributors()">ASSIGN</button>
-  </md-dialog-actions>
-</div>

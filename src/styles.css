@@ -903,6 +903,9 @@ background-color: var( --white);
 .fs-30{
   font-size: 30px;
 }
+.fs-35{
+  font-size: 35px;
+}
 .wd-85pc{
   width: 85%;
 }

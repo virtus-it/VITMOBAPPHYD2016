@@ -16,7 +16,6 @@
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
 
-    <div class="">
       <div class="row">
         <div class="col-4">
           <md-form-field class="inline">
@@ -38,7 +37,7 @@
 
         </div>
       </div>
-      <div class="container scrollheight">
+      <div class="container scroll">
       <div class="row box-style" *ngFor="let msg of AllMessages">
         <div class="col-4 col-1-style">
           <div class="row">
@@ -46,8 +45,8 @@
               <b>Id: #{{msg.orderid}} </b>
               <br>
               <b>Type: </b>
-              <span class="danger" *ngIf="msg.ispublic == 2">Complaint</span>
-              <span class="success" *ngIf="msg.ispublic == 0">Message</span>
+              <span class="" *ngIf="msg.ispublic == 2">Complaint</span>
+              <span class="" *ngIf="msg.ispublic == 0">Message</span>
               <br>
               <span class="left grayd">
                 <span class="fa fa-clock-o"></span> {{msg.createddate | utcDate}}</span>
@@ -67,18 +66,11 @@
 
       </div>
       </div>
- 
 
-
-      <!-- <h5 class="fa fa-frown-o orange" *ngIf="noMessages">No messages yet!!</h5> -->
-      <br>
-      <h4 *ngIf="noMessages" class="warning center">
+      <h4 *ngIf="noMessages" class="warning center mgtop-10">
         <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>
 
 
-
-
-    </div>
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
@@ -86,4 +78,3 @@
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-<br>
