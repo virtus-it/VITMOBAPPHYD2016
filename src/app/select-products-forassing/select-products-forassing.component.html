@@ -41,7 +41,7 @@
           <td width="18%" class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
-                class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
+                class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product , $event)">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description onhovertooltip-200" title="{{product.brandname}}">{{product.brandname}} </span>
             </label>
@@ -53,7 +53,7 @@
 
           <td width="10%" class="left capital">
             <md-form-field class="example-full-width inline ">
-              <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'" [(ngModel)]="product.quantity">
+              <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'" [(ngModel)]="product.quantity" (ngModelChange)="changeOfQuantity($event)">
               <!-- (ngModelChange)="searchMobileNo()"-->
             </md-form-field>
           </td>
@@ -80,7 +80,7 @@
 
           <td class="left capital" width="8%">
             <span>
-              <input class="" placeholder="cans" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
+              <input class="" placeholder="cans" type="number" min= "0" step= "1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
             </span>
           </td>
 
@@ -99,12 +99,30 @@
     </table>
   </div>
 
+  
+
 
 </md-dialog-content>
+
+
+ <span>
+  <small>
+   <span class="pd-right-20"> Product cost: <b>{{this.productCost}} x {{this.quantity}} </b></span>
+   <!-- <span class="pd-right-20">Quantity: <b>{{this.quantity}}</b></span> -->
+   <span class="pd-right-20"> Service charge : <b>{{this.serviceCharges}} x {{this.quantity}}</b></span>
+    <span class="pd-right-20">Express delivery charges : <b>{{this.amount}}</b></span>
+    <span class="pd-right-40">Empty cans Amount : <b>{{((this.quantity - this.emptyCans) * 150) }}</b></span> <br>
+    <span class="">Total cost : <b>{{this.totalcost}}</b>
+       </span> 
+  </small>
+</span> 
+<span class="red">{{emptyCanMessage}}</span>
+
+
 <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
 
-    <button type="submit" md-raised-button class="btn-primary" (click)="setProducts()">SET</button>&nbsp;
+    <button type="submit" md-raised-button class="btn-primary" (click)="setProducts()" [disabled]="(emptyCansKeyUp == true) && (this.emptyCans != '')">SET</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
 
   </md-dialog-actions>

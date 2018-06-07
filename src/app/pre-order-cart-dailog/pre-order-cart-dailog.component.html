@@ -232,16 +232,18 @@
                       <div class="col-2">
                           <a class="cursor logo-color ">
                             
-                            <b title="Add Slider"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" ></b>
+                            <b title="Decrease value"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="decreaseQuantity(details)"></b>
                           </a>
                         </div>    
                     
                 <div class="col-7">
                     <input class="brd-bottom form-control btn-sm nobg"  type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
                     </div>
+
+
                     <div class="col-2  row">
                         <a class="cursor logo-color">
-                            <b title="Add Slider"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" ></b>
+                            <b title="Increase value"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseQuantity(details)"></b>
                         </a>
                       </div>    
 
@@ -251,7 +253,30 @@
             </td>
 
             <td>
-              <input class="" placeholder="empty cans" type="number" min="0" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)" >
+
+
+                <div class="row">  
+                
+                    <div class="col-2">
+                        <a class="cursor logo-color ">
+                          
+                          <b title="Decrease value"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="deacreaseEmptyCans(details)"></b>
+                        </a>
+                      </div>    
+                  
+              <div class="col-7">
+
+                  <input class="brd-bottom form-control btn-sm nobg" type="number" min="0"  step = '1' [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)" >
+                  </div>
+
+
+                  <div class="col-2  row">
+                      <a class="cursor logo-color">
+                          <b title="Increase value"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseEmptyCans(details)"></b>
+                      </a>
+                    </div>    
+                    </div>
+              <!-- <input class="" placeholder="empty cans" type="number" min="0" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)" > -->
 
             </td>
 
@@ -294,8 +319,8 @@
 
   <span>
     <small>
-     <span class="pd-right-20"> Product cost: <b>{{this.createPreOrderInput.productDetails.pcost}}</b></span>
-     <span class="pd-right-20"> Service charge : <b>{{this.createPreOrderInput.productDetails.servicecharge}}</b></span>
+     <span class="pd-right-20"> Product cost: <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b></span>
+     <span class="pd-right-20"> Service charge : <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}} </b></span>
       <span class="pd-right-20">Express delivery charges : <b>{{this.amount}}</b></span>
       <span class="pd-right-40">Empty cans Amount : <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 }}</b></span> <br>
       <span class="">Total cost : <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +

@@ -255,7 +255,7 @@
 
                   </md-form-field>
                   <small class="top-post">Characters Remanining :
-                    <span class="danger"> {{500 - smsInput.body.length}}</span>
+                    <span class="danger" *ngIf="smsInput.body"> {{500 - smsInput.body.length}}</span>
                   </small>
                 </div>
                 <div class="col-sm-4  col-md-4  col-lg-4 align-self-end" *ngIf="smsInput.type == 'website' || smsInput.type == '' ">

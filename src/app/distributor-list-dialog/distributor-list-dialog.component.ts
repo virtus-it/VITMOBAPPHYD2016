@@ -64,7 +64,7 @@ export class DistributorListDialogComponent implements OnInit {
   }
   getSuppliers() {
     this.loaderService.display(true);
-    let input = { "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() };
+    let input = { "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
     console.log(input);
     this.distributorService.getAllSuppliers(input)
       .subscribe(

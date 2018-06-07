@@ -199,6 +199,33 @@ getDistributorsResult(data) {
   }
 }
 
+decreaseQuantity(data){
+  
+  if(data.quantity > 0){
+    data.quantity = data.quantity - 1;
+
+  }
+}
+
+increaseQuantity(data){
+  data.quantity = data.quantity + 1;
+
+}
+
+increaseEmptyCans(data){
+  if(this.emptyCansKeyUp == false){
+  data.emptycans = data.emptycans + 1;
+  this.emptyCansChange(data);
+}
+}
+
+
+deacreaseEmptyCans(data){
+  if(data.emptycans > 0){
+    data.emptycans = data.emptycans - 1;
+    this.emptyCansChange(data);
+  }
+}
 
 
 
@@ -605,46 +632,31 @@ expressDeliveryCharge(details,  isChecked: boolean){
 
 }
 
-// emptyCansChange(event){
-//   console.log(event);
-//   if(this.createPreOrderInput.productDetails.quantity >= event){
-//     this.emptyCanMessage= "";
-//   }
-//   else if (this.createPreOrderInput.productDetails.quantity > event){
-//     this.emptyCanMessage = "Empty cans must be less than quantity";
-//     this.emptyCansKeyUp = true;
-//   }
-//   else if(this.createPreOrderInput.productDetails.quantity < event){
-//     this.emptyCansKeyUp = false;
-//     this.emptyCanMessage= "";
-//   }
 
-
-
-
-emptyCansChange(event){
+emptyCansChange(data){
+  console.log(data);
 let cases: string = "1";
 switch(cases){
   case '1': {
-    if(this.createPreOrderInput.productDetails.quantity >= event){
+    if(this.createPreOrderInput.productDetails.quantity >= data.emptycans){
          this.emptyCanMessage= "";
          this.emptyCansKeyUp = false;
         }
   }
   case '2' : {
-    if(this.createPreOrderInput.productDetails.quantity < event) {
+    if(this.createPreOrderInput.productDetails.quantity < data.emptycans) {
       this.emptyCanMessage= "Empty cans must be less than quantity";
       this.emptyCansKeyUp = true;
     }
   }
   case '3' :{
-    if(this.createPreOrderInput.productDetails.quantity > event){
+    if(this.createPreOrderInput.productDetails.quantity > data.emptycans){
       this.emptyCanMessage= "";
       this.emptyCansKeyUp = false;
     }
   }
   default : {
-    if(this.createPreOrderInput.productDetails.quantity >= event){
+    if(this.createPreOrderInput.productDetails.quantity >= data.emptycans){
       this.emptyCanMessage= "";
       this.emptyCansKeyUp = false;
      }

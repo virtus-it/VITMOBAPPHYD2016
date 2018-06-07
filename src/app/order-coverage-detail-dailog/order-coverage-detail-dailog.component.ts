@@ -177,6 +177,9 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         console.log('lats and lngs', this.stockPointLocationData);
       }
     }
+    else{
+      this.stockPointLocationData = [];
+    }
   }
 
   pointers: marker[] = [

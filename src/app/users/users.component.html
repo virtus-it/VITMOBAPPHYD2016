@@ -67,6 +67,20 @@
   
  
           </tbody>
+
+          <tfoot>
+              <tr>
+                <td colspan="8">
+                  <h4 class="warning  capitalize center">
+                    <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore">
+                      <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                    <span *ngIf="!UserClickMore">Record Not Available</span>
+                  </h4>
+                </td>
+              </tr>
+            </tfoot>
+
+
           
         </table>
     </div>

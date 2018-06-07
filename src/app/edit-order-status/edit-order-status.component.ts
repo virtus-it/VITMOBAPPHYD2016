@@ -17,6 +17,11 @@ export class EditOrderStatusComponent implements OnInit {
 
   }
 
+  emptyCans = 0;
+  advanceAmount = 0;
+  emptyCansError = false;
+  emptyCansValidate = false;
+
 
   editStatusInput: any = {
     "order": {
@@ -86,6 +91,13 @@ export class EditOrderStatusComponent implements OnInit {
 
     }
 
+    if(this.emptyCans){
+      this.editStatusInput.order.return_cans = this.emptyCans;
+    }
+    else{
+      this.editStatusInput.order.return_cans = this.orderDetail.return_cans;
+    }
+
 
     if (this.editStatusInput.order.orderstatus == "delivered") {
       this.editStatusInput.order.paymentype = this.orderDetail.paymenttype
@@ -125,8 +137,15 @@ export class EditOrderStatusComponent implements OnInit {
   // onInit(){
   //   this.editStatusInput.order.return_cans = this.editStatusInput.order.delivered_qty;
   // }
-  changeAmount() {
-    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges;
+  changeAmount(data) {
+
+
+    this.orderDetail.delivered_quantity = data;
+    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.editStatusInput.order.adv_amt = this.advanceAmount;
+
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
+
   }
 
   onCloseCancel() {
@@ -137,9 +156,39 @@ export class EditOrderStatusComponent implements OnInit {
     this.thisDialogRef.close(this.message)
   }
 
+  amountCalculate(){
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (((this.orderDetail.delivered_quantity - this.emptyCans) * 150 ));
+    this.emptyCans = this.orderDetail.return_cans;
+    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.editStatusInput.order.adv_amt = this.advanceAmount;
+
+
+  }
+
+  emptyCansChanged(data){
+    this.emptyCans = data;
+    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.editStatusInput.order.adv_amt = this.advanceAmount;
+
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
+    if(this.emptyCans > this.editStatusInput.order.delivered_qty){
+      this.emptyCansError = true;
+      this.emptyCansValidate = true;
+    }
+    else{
+      this.emptyCansError = false;
+      this.emptyCansValidate = false;
+      
+    }
+
+
+  }
+
   ngOnInit() {
     //console.log(this.editStatusInput);
     this.editStatusInput.order.paymentype = 'cash';
+
+    this.amountCalculate();
     this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;
 
     console.log(this.orderDetail);

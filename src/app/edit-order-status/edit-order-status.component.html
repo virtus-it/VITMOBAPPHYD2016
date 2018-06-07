@@ -52,13 +52,13 @@
         <div class="col-3 pleft">
 
               <md-form-field class="wd-60pc">
-                <input class="form-control" mdInput placeholder="Quantity" name="Quantity"  [(ngModel)]="editStatusInput.order.delivered_qty" (ngModelChange)="changeAmount()">
+                <input class="form-control" mdInput placeholder="Quantity" name="Quantity"  [(ngModel)]="editStatusInput.order.delivered_qty" (ngModelChange)="changeAmount($event)">
 
               </md-form-field>
         </div>
         <div class="col-3">
                 <md-form-field class="wd-60pc">
-                    <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans">
+                    <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans" (ngModelChange)="emptyCansChanged($event)">
               </md-form-field>
           </div>
           <div class="col align-self-center" *ngIf="editStatusInput.order.paymentype == 'cash'">
@@ -180,9 +180,15 @@
     
   </form>
 </md-dialog-content>
+
+<span  class="red" *ngIf="emptyCansError">
+  <small>
+    Empty cans must be less than quantity
+  </small>
+</span>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="updateOrderStatus()">UPDATE</button>      
+      <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true"(click)="updateOrderStatus()">UPDATE</button>      
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

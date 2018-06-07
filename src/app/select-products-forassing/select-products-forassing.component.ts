@@ -25,6 +25,15 @@ export class SelectProductsForassingComponent implements OnInit {
   amount:any = 0;
   categoryName:any = "";
   emptyCanMessage = "";
+  emptyCans = 0;
+  totalcost = 0;
+  serviceCharges = 0;
+  expressDeliveryCharges = 0;
+  productCost = 0;
+  quantity = 0;
+  productQuantity = 0;
+  emptyCansKeyUp:boolean = false;
+  expressDeliveryCheck:boolean = false;
   // emptycans:any = 0;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -229,28 +238,25 @@ if(this.productsDetails.expressCheck == true){
     else{
       this.amount = 0;
     }
+
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+
   
   }
 
-  emptyCansChange(event){
-    console.log(event);
-    if(this.productsDetails.quantity >= event){
-      this.emptyCanMessage= "";
-    }
-    else{
-      this.emptyCanMessage = "Empty cans must be less than quantity";
-    }
-  }
+
  
 
 
-  changeQuantity(products){
+  changeQuantity(products , data){
+    console.log(data , products);
+    
     if(this.orderDetail.type == 'coveragePage'){
     _.each(this.productList, function (i, j) {
       let details: any = i;
       details.quantity = 0;
     });
-    products.quantity = this.orderDetail.data.orders.quantity;
+    // products.quantity = this.orderDetail.data.orders.quantity;
     products.emptycans = 0;
   }
   else if (this.orderDetail.type == 'customersPage'){
@@ -269,6 +275,37 @@ else{
   products.quantity = this.orderDetail.orderDetails.quantity;
   products.emptycans = 0;
 }
+
+    this.productCost = products.pcost;
+    this.serviceCharges = products.servicecharge;
+    this.quantity = products.quantity;
+    // if(this.expressDeliveryCheck == true){
+    //   this.expressDeliveryCharges = this.productsDetails.expressdeliverycharges;
+    // }
+    // else{
+    //   this.expressDeliveryCharges = 0;
+    // }
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+
+
+}
+
+
+
+changeOfQuantity(data){
+  if(data){
+  this.quantity = data;
+  // if(this.expressDeliveryCheck == true){
+  //   this.expressDeliveryCharges = this.productsDetails.expressdeliverycharges;
+  // }
+  // else{
+  //   this.expressDeliveryCharges = 0;
+  // }
+  this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+}
+// else{
+//   this.quantity = this.productQuantity;
+// }
 }
 
   onCloseCancel() {
@@ -277,6 +314,44 @@ else{
   Closedailog() {
     this.thisDialogRef.close('success');
   }
+
+
+
+
+  emptyCansChange(data){
+    console.log(data);
+    this.emptyCans = data;
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+    let cases: string = "1";
+    switch(cases){
+      case '1': {
+        if(this.quantity >= data){
+             this.emptyCanMessage= "";
+             this.emptyCansKeyUp = false;
+            }
+      }
+      case '2' : {
+        if(this.quantity < data) {
+          this.emptyCanMessage= "Empty cans must be less than quantity";
+          this.emptyCansKeyUp = true;
+        }
+      }
+      case '3' :{
+        if(this.quantity > data){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+        }
+      }
+      default : {
+        if(this.quantity >= data){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+         }
+    
+      }
+    }
+  }
+
   ngOnInit() {
     console.log(this.orderDetail);
     this.getProductsList();

@@ -3,6 +3,7 @@ import { MdDialog } from '@angular/material';
 import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-users',
@@ -14,6 +15,7 @@ export class UsersComponent implements OnInit {
   constructor(public dialog: MdDialog , private authenticationService: AuthenticationService , private distributorService: DistributorServiceService, ) { }
 
   allUsers:any = [];
+  UserClickMore = true;
 
 
 
@@ -29,7 +31,7 @@ addUser() {
   dialogRefEditCustomer.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
       if(result == "success"){
-        this.getAllUsers();
+        this.getAllUsers(true);
       }
 
   });
@@ -46,7 +48,7 @@ editUser(data){
 dialogRefEditCustomer.afterClosed().subscribe(result => {
     //console.log(`Dialog closed: ${result}`);
     if(result == "success"){
-      this.getAllUsers();
+      this.getAllUsers(true);
     }
 
 });
@@ -54,8 +56,20 @@ dialogRefEditCustomer.afterClosed().subscribe(result => {
 }
 
 
-getAllUsers(){
-  let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getall",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
+getAllUsers(firstcall){
+  let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getall",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
+
+  if (this.allUsers && this.allUsers.length && !firstcall) {
+    let lastUSer: any = _.last(this.allUsers);
+    if (lastUSer) {
+        input.root.lastuserid = lastUSer.userid;
+    }
+
+}
+else {
+    this.allUsers = [];
+    input.root.lastuserid = 0;
+}
   this.distributorService.getAllDistributors(input)
             .subscribe(
             output => this.getDistributorsResult(output),
@@ -67,10 +81,15 @@ getAllUsers(){
 getDistributorsResult(result) {
   //console.log(data);
   if (result.result == 'success') {
-    this.allUsers = result.data;
-
-
+    this.allUsers =_.union(this.allUsers , result.data);
 }
+else{
+  this.UserClickMore = false;
+}
+}
+
+getUsersByPaging(){
+  this.getAllUsers(false);
 }
 
 
@@ -84,7 +103,7 @@ activateUser(data){
 }
 activateUserResult(result){
   if(result.result == 'success'){
-    this.getAllUsers();
+    this.getAllUsers(true);
   }
 }
 
@@ -99,7 +118,7 @@ deactivateUser(data){
 }
 deactivateUserResult(result){
   if(result.result == 'success'){
-    this.getAllUsers();
+    this.getAllUsers(true);
     
   }
 }
@@ -110,7 +129,7 @@ deactivateUserResult(result){
 
 
   ngOnInit() {
-    this.getAllUsers();
+    this.getAllUsers(true);
 
   }
 
