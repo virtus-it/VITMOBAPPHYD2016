@@ -70,12 +70,12 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span class="gray9">Order Address</span>
                 <br>
-                <b>Landmark:
+                <b>
                   <span> {{dailogOrderDetails.locality}} </span>
                   <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
 
                 </b>
-                <b>Flat Number:
+                <b>
                   <span> {{dailogOrderDetails.buildingname}}
                   </span>
                   <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
@@ -94,14 +94,14 @@
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
                 <span class="gray9">Profile Address</span>
                 <br>
-                <b>Landmark:
+                <b>
                   <span>{{dailogOrderDetails.locality}} </span>
 
                   <span *ngIf="dailogOrderDetails.locality == '' || dailogOrderDetails.locality === null"> - </span>
 
 
                 </b>
-                <b>Flat Number:
+                <b>
                   <span>{{dailogOrderDetails.buildingname}} </span>
 
                   <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
@@ -427,7 +427,10 @@
                 <span class="custom-control-description"> Distributor</span>
               </label>
               <label class="">
-                <i class="fa fa-commenting-o temp-style	logo-color" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i>
+                <i class="fa fa-commenting-o temp-style	logo-color" style=" font-size: 35px;" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i>
+              </label>
+              <label class="" (click)="sendMessage()">
+                <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
               </label>
             </div>
             <div class="row">
@@ -436,9 +439,7 @@
                   [(ngModel)]="messageInput.order.reason"> </textarea>
               </div>
 
-              <div class="col-lg-1 col-md-1 col-sm-1 col-xl-1 right" (click)="sendMessage()">
-                <i class="fa fa-send fa-send-style" aria-hidden="true"></i>
-              </div>
+           
               <br>
               <div class="mgleft-20">
                 <small class="">Characters Remaining :

@@ -24,32 +24,32 @@
             
 
 
-          <th width="18%">Product</th>
-          <th class="" width="10%">Category</th>
-          <th width="16%">Product Type </th>
+          <th width="16%">Product</th>
+          <th class="" width="12%">Category</th>
+          <th width="15%">Product Type </th>
           <th width="10%">Count</th>
           <th width="12%">Price per unit</th>
           <th width="10%">Exp Del Chgs</th>
-          <th width="10%">Serv Chgs</th>
+          <th width="9%">Serv Chgs</th>
           <th width="6%">INR</th>
-          <th class="" width="8%">Empty cans</th>
+          <th class="" width="10%">Empty cans</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let product of productList; let i = index" [attr.data-index]="i">
          
-          <td width="18%" class="left capital">
+          <td width="16%" class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
                 class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product)">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description onhovertooltip-200" title="{{product.brandname}}">{{product.brandname}} </span>
+              <span class="custom-control-description onhovertooltip-150" title="{{product.brandname}}">{{product.brandname}} </span>
             </label>
           </td>
-          <td class="" width="10%" ><span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span></td>
+          <td class="" width="12%" ><span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span></td>
 
-          <td width="20%" class="left capital">
-            <span class="onhovertooltip-200" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
+          <td width="15%" class="left capital">
+            <span class="onhovertooltip-150" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
 
           <td width="10%" class="left capital">
             <md-form-field class="example-full-width inline ">
@@ -70,7 +70,7 @@
               [disabled]="product.stockstatus== 'Soldout'"> -->
             <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
           </td>
-          <td width="10%" class="left capital"> {{product.servicecharge}} </td>
+          <td width="9%" class="left capital"> {{product.servicecharge}} </td>
 
 
           <td class="left capital" width="6%">
@@ -78,9 +78,9 @@
             <span *ngIf="product.quantity == 0"> 0 </span>
           </td>
 
-          <td class="left capital" width="8%">
+          <td class="left capital" width="10%">
             <span>
-              <input class="" placeholder="cans" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
+              <input class="wd-100pc" placeholder="cans" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
             </span>
           </td>
 
