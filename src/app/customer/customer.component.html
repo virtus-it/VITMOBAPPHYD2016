@@ -124,6 +124,7 @@
         <thead>
           <tr>
             <th width="12%">Customer</th>    
+            <th width="10%">Created by</th>    
             <th class="" width ="10%">Created Date</th>     
             <th width="12%">Distributor</th>
             <th width="12%">Mobile</th>
@@ -148,11 +149,19 @@
             </span>
             </td>
 
+            <td class="" width="10%" >
+              <span *ngIf="customers.customercreatedby"> {{customers.customercreatedby[0].firstname}} {{customers.customercreatedby[0].lastname}} </span>
+              <span  *ngIf="customers.customercreatedby === null || customers.customercreatedby == ''"> - </span>
+              </td>
+
             <td class="" width="10%"><span class="onhovertooltip-100" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span></td>
             <td class="left"  *ngIf="customers.dealers" width="12%">
                 <span class="onhovertooltip-100" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
               {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
             </span>
+            <span *ngIf="customers.dealers === null"> - </span>
+
+            
             </td>
 
             <td class="left numbers" width="12%">

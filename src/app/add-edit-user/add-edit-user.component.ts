@@ -33,6 +33,7 @@ export class AddEditUserComponent implements OnInit {
   paymentDate: any = '';
   paymentdueDate: any = '';
   UserInput = { usertype: 'Customer' };
+  UserType = '';
 
   customerInput: any = {
     User: {
@@ -666,9 +667,15 @@ export class AddEditUserComponent implements OnInit {
       } else if (this.Details.usertype == 'marketing') {
         this.UserInput.usertype = 'Marketing';
       }
+      
+
 
       this.headerValue = 'Update User';
       this.getUserDetails();
     }
+
+
+    this.UserType = this.authenticationService.userType();
+      console.log(this.UserType);
   }
 }

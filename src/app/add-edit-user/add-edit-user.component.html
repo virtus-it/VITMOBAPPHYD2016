@@ -17,10 +17,10 @@
         <md-select placeholder="UserType" class="wd-100pc" [(ngModel)]="UserInput.usertype" [disabled]="this.Details != ''">
           <md-option value="Customer">Customer</md-option>
           <md-option value="Distributor">Distributor</md-option>
-          <md-option value="Supplier">Supplier</md-option>
-          <md-option value="Sales">Sales</md-option>
-          <md-option value="Manufacturer">Manufacturer</md-option>
-          <md-option value="Marketing">Marketing</md-option>
+          <md-option value="Supplier" *ngIf="UserType == 'dealer'">Supplier</md-option>
+          <md-option value="Sales" *ngIf="UserType == 'dealer' || UserType == 'manufacturer'">Sales</md-option>
+          <md-option value="Manufacturer" *ngIf="UserType == 'dealer'">Manufacturer</md-option>
+          <md-option value="Marketing" *ngIf="UserType == 'dealer'">Marketing</md-option>
         </md-select>
       </div>
     </div>
