@@ -208,11 +208,17 @@ decreaseQuantity(data){
 }
 
 increaseQuantity(data){
+  if(data.quantity == ''){
+    data.quantity= 0 ;
+  }
   data.quantity = data.quantity + 1;
 
 }
 
 increaseEmptyCans(data){
+  if(data.emptycans == ''){
+    data.emptycans = 0;
+  }
   if(this.emptyCansKeyUp == false){
   data.emptycans = data.emptycans + 1;
   this.emptyCansChange(data);

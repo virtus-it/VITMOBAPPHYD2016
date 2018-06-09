@@ -157,9 +157,9 @@ export class EditOrderStatusComponent implements OnInit {
   }
 
   amountCalculate(){
-    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (((this.orderDetail.delivered_quantity - this.emptyCans) * 150 ));
-    this.emptyCans = this.orderDetail.return_cans;
-    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 ));
+    // this.emptyCans = this.orderDetail.return_cans;
+    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 );
     this.editStatusInput.order.adv_amt = this.advanceAmount;
 
 

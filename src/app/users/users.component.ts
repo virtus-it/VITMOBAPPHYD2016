@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   allUsers:any = [];
   UserClickMore = true;
   filterType = {"type":"type"};
-  filterInput = {'userType':"" , "mobileno":"" , "name":"" };
+  filterInput = {'userType':"" , "mobileno":"" , "address":"" };
   showFilterDailog = false;
 
 
@@ -59,11 +59,35 @@ dialogRefEditCustomer.afterClosed().subscribe(result => {
 }
 
 search(){
-
+  let input = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId(),"lastuserid":0,
+  "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
+  "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"",
+  "moyaversioncode":""}};
+  if(this.filterType.type='type'){
+    input.root.searchtext  = this.filterInput.userType;
+  }
+  else if(this.filterType.type='mobile'){
+    input.root.searchtext  = this.filterInput.mobileno;
+  }
+  else if(this.filterType.type='address'){
+    input.root.searchtext  = this.filterInput.address;
+  }
+  console.log(input);
+  // this.distributorService.getAllDistributors(input)
+  //           .subscribe(
+  //           output => this.searchResult(output),
+  //           error => {
+  //               //console.log("error in distrbutors");
+  //           });
+}
+searchResult(result){
+  if(result.result == 'success'){
+    this.allUsers = result.data;
+  }
 }
 
 clearFilter(){
-  this.filterInput = {'userType':"" , "mobileno":"" , "name":"" };
+  this.filterInput = {'userType':"" , "mobileno":"" , "address":"" };
   this.showFilterDailog = false;
   this.getAllUsers(true);
 }

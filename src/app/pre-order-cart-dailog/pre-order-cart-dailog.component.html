@@ -237,7 +237,7 @@
                         </div>    
                     
                 <div class="col-7">
-                    <input class="brd-bottom form-control btn-sm nobg"  type="number" min="0" step="1"   [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
+                    <input class="brd-bottom form-control btn-sm nobg"    [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
                     </div>
 
 
@@ -266,7 +266,7 @@
                   
               <div class="col-7">
 
-                  <input class="brd-bottom form-control btn-sm nobg" type="number" min="0"  step = '1' [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)" >
+                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)" >
                   </div>
 
 

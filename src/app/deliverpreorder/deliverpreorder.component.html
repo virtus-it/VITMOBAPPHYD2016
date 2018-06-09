@@ -24,7 +24,7 @@
       </div>
       <div class="  col-6">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" (ngModelChange)="emptyCansValidation($event)" >
+          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.emptycans" (ngModelChange)="emptyCansValidation($event)" >
           <md-error>
             Returned Cans is
             <strong>required</strong>
@@ -165,15 +165,15 @@
          <span class="pd-right-20"> Product cost: {{Detail.order.product_cost}} x  {{Detail.order.delivered_qty}} </span> 
          <span class="pd-right-20"> Service charge : {{Detail.order.prodServiceCharge}} x {{Detail.order.delivered_qty}} </span>
          <span class="pd-right-20"> Express delivery charges : {{Detail.order.expressdeliverycharges}} </span> <br>
-         <span class="pd-right-20"> Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.return_cans) * 150 }} </span>  
+         <span class="pd-right-20"> Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.emptycans) * 150 }} </span>  
          <span class="pd-right-20">   Total cost : {{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)  +  (Detail.order.expressdeliverycharges) +
-             (( Detail.order.delivered_qty - Detail.order.return_cans) * 150 ) }} </span>
+             (( Detail.order.delivered_qty - Detail.order.emptycans) * 150 ) }} </span>
         </small>
 
 
 
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()" [disabled]="(this.Detail.order.return_cans != ' ') &&  (emptyCansKeyUp == true)">CONFIRM</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()" [disabled]="(this.Detail.order.emptycans != ' ') &&  (emptyCansKeyUp == true)">CONFIRM</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
