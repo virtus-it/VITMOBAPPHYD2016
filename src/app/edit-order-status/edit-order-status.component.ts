@@ -91,12 +91,12 @@ export class EditOrderStatusComponent implements OnInit {
 
     }
 
-    if(this.emptyCans){
-      this.editStatusInput.order.return_cans = this.emptyCans;
-    }
-    else{
-      this.editStatusInput.order.return_cans = this.orderDetail.return_cans;
-    }
+    // if(this.emptyCans){
+    //   this.editStatusInput.order.return_cans = this.orderDetail.emptyCans;
+    // }
+    // else{
+    //   this.editStatusInput.order.return_cans = this.orderDetail.return_cans;
+    // }
 
 
     if (this.editStatusInput.order.orderstatus == "delivered") {
@@ -187,6 +187,7 @@ export class EditOrderStatusComponent implements OnInit {
   ngOnInit() {
     //console.log(this.editStatusInput);
     this.editStatusInput.order.paymentype = 'cash';
+    this.editStatusInput.order.return_cans = this.orderDetail.empty_cans;
 
     this.amountCalculate();
     this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;

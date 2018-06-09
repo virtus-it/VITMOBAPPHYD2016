@@ -78,9 +78,9 @@
             <span *ngIf="product.quantity == 0"> 0 </span>
           </td>
 
-          <td class="left capital" width="10%">
+          <td class="left capital" width="10%" >
             <span>
-              <input class="wd-100pc" placeholder="cans" type="number" min= "0" step= "1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)">
+              <input class="wd-100pc" placeholder="cans" type="number" min= "0" step= "1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)" disabled>
             </span>
           </td>
 

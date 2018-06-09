@@ -16,6 +16,9 @@ export class UsersComponent implements OnInit {
 
   allUsers:any = [];
   UserClickMore = true;
+  filterType = {"type":"type"};
+  filterInput = {'userType':"" , "mobileno":"" , "name":"" };
+  showFilterDailog = false;
 
 
 
@@ -53,6 +56,16 @@ dialogRefEditCustomer.afterClosed().subscribe(result => {
 
 });
 
+}
+
+search(){
+
+}
+
+clearFilter(){
+  this.filterInput = {'userType':"" , "mobileno":"" , "name":"" };
+  this.showFilterDailog = false;
+  this.getAllUsers(true);
 }
 
 
@@ -123,6 +136,9 @@ deactivateUserResult(result){
   }
 }
 
+filterDailogToggle(){
+  this.showFilterDailog = !this.showFilterDailog;
+}
 
 
 

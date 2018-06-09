@@ -202,7 +202,9 @@ let orderId= '';
     else{
       orderId = this.orderDetail.orderDetails.order_id;
     }
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":this.productsDetails.emptycans  , "advance_amt": 150 * this.productsDetails.emptycans }};
+
+    this.productsDetails.emptycans = this.orderDetail.orderDetails.empty_cans;
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":this.productsDetails.emptycans  , "advance_amt": 150 * (this.productsDetails.quantity - this.productsDetails.emptycans) }};
 
 
 if(this.productsDetails.expressCheck == true){

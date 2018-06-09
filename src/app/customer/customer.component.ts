@@ -35,6 +35,7 @@ export class CustomerComponent implements OnInit {
     followUpdate = null;
     filterRecords = false;
     replacetext = "test";
+    loginId:any = 0;
     superDealer = true;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
@@ -390,6 +391,7 @@ export class CustomerComponent implements OnInit {
     ngOnInit() {
         this.getCustomerList(true);
         this.superDealer = this.authenticationService.getSupperDelear();
+        this.loginId= this.authenticationService.loggedInUserId();
     }
 
 }

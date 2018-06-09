@@ -57,7 +57,7 @@ public getMessagesfromWebsite = () => {
 
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/getorderbyid/' + input.appType + '/' + input.orderId + '/' + input.userId, options)
+    return this.http.get(this.apiUrl + '/getorderbyid/' + input.root.apptype + '/' + input.root.orderid + '/' + input.root.userid, options)
       .map((res: Response) => res.json())
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

@@ -150,8 +150,8 @@
             </td>
 
             <td class="" width="10%" >
-              <span *ngIf="customers.customercreatedby"> {{customers.customercreatedby[0].firstname}} {{customers.customercreatedby[0].lastname}} </span>
-              <span  *ngIf="customers.customercreatedby === null || customers.customercreatedby == ''"> - </span>
+              <span *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
+              <span  *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
               </td>
 
             <td class="" width="10%"><span class="onhovertooltip-100" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span></td>
@@ -189,7 +189,7 @@
 
             <td class="left" width="10%">
               <div class="dropdown">
-                <button class="dropbtn">View More</button>
+                <button class="dropbtn" [disabled]="customers.usercreatedby.userid != 'loginId'">View More</button>
                 <div class="dropdown-content" style="right:0;">
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showCustomerAllOrders(customers)'>

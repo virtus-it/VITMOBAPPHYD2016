@@ -5,6 +5,58 @@
         <h4>
           <i class="fa fa-users"></i> Users</h4>
       </div>
+
+      <a class="align-self-center">
+      <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+      <div class="filterView" *ngIf="showFilterDailog">
+          <div class="">
+            <div class="form-group">
+              <md-select placeholder="Filter By" [(ngModel)]="filterType.type" name="type" class="full-width left">
+                <md-option value="type">User Type</md-option>
+                <md-option value="mobile"> Mobile</md-option>
+                <md-option value='name'>Name</md-option>
+              </md-select>
+
+            </div>
+
+            <div class="" *ngIf="filterType.type == 'type'">
+              <md-select placeholder="User Type" [(ngModel)]='filterInput.userType' class="full-width left"> 
+                <md-option value='customer'>Customer</md-option>
+                <md-option value='dealer'>Distrtibutor</md-option>
+                <md-option value='supplier'>Supplier</md-option>
+                <md-option value='sales'>Sales</md-option>
+                <md-option value='manufacturer'>Manufacturer</md-option>
+              </md-select>
+            </div>
+
+            <div class="" *ngIf="filterType.type == 'mobile'">
+              <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Mobile Number" [(ngModel)]="filterInput.mobileno">
+                </md-form-field> 
+            </div>
+            
+            <div class="" *ngIf="filterType.type == 'name'">
+                <md-form-field class="example-full-width">
+                    <input class="form-control" mdInput placeholder="Enter Name" [(ngModel)]="filterInput.name">
+                  </md-form-field> 
+            </div>
+
+            <div class="input-group pd-10 ">
+                <button md-raised-button color="primary" class="mgright-5" (click)="search()">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </button>
+                <button md-raised-button color="primary" (click)="clearFilter()">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                </button>
+              </div>
+            </div>
+            </div>
+
+           
+
+
+          </a>
+
       <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
           <a class="cursor logo-color " title="Add User">
               <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true" (click)="addUser()"></i>

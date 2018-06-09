@@ -123,9 +123,9 @@
                   {{dist.firstname}} {{dist.lastname}}</span>
               </td>
               <td class="" width="10%">
-                <span *ngIf="dist.distributorcreatedby" > {{dist.distributorcreatedby[0].firstname}} {{dist.distributorcreatedby[0].lastname}} </span>
+                <span *ngIf="dist.usercreatedby" > {{dist.usercreatedby.name}}</span>
 
-                <span *ngIf="dist.distributorcreatedby === null || dist.distributorcreatedby == ''"> - </span> </td>
+                <span *ngIf="dist.usercreatedby === null || dist.usercreatedby == ''"> - </span> </td>
 
 
               
@@ -145,7 +145,7 @@
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
               <td class="left" width="12%">
                 <div class="dropdown">
-                  <button class="dropbtn">View More</button>
+                  <button class="dropbtn" [disabled]="dist.usercreatedby.userid != 'loginId'" >View More</button>
                   <div class="dropdown-content" style="right:0;">
                     <div class="row pdbottom-5">
                       <label class="col-md-6" (click)="openUpdateDialog(dist)">
