@@ -428,9 +428,9 @@
 
                     <div class="col-sm-4  col-md-4  col-lg-4">
                         <span class="td-label" title="Empty Cans Amount">
-                        Emty Cans Amt</span>
+                        Empty Cans Amt</span>
                         <br>
-                        <b>Rs.{{(forward.quantity -  forward.empty_cans) * 150 }}</b>
+                        <b>Rs.{{forward.advance_amount}}</b>
                       </div>
 
 
@@ -799,7 +799,7 @@
                         <span class="td-label">
                           Emty Cans Amt</span>
                         <br>
-                        <b>Rs.{{(allorder.quantity -  allorder.empty_cans) * 150 }}</b>
+                        <b>Rs.{{allorder.advance_amount}}</b>
                       </div>
 
 
@@ -1121,7 +1121,7 @@
                         <span class="td-label">
                           Emty Cans Amt</span>
                         <br>
-                        <b>Rs.{{(complete.quantity -  complete.empty_cans) * 150 }}</b>
+                        <b>Rs.{{complete.advance_amount}}</b>
                       </div>
 
 
