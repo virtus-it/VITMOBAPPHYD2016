@@ -1,59 +1,108 @@
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
-      <h4>
-        <i class="fa fa-barcode"></i> Promo code</h4>
+      <h4><i class="fa fa-barcode"></i> Promo code</h4>
+    </div>
+    <div class="col-sm-4 col-md-4 col-lg-4">
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'promoCode'}" (click)="showTabPanel('promoCode')">
+      Promo Code </button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemSetting'}" (click)="showTabPanel('redeemSetting')">Redeem Settings</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-        <a class="cursor logo-color " title="Add Distributor">
-          <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"  title="Add promo code" (click)="addPromoCode()"></i>
-        </a>
-   
-      </div>
+      <a class="cursor logo-color " title="Add Distributor">
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" title="Add promo code" (click)="addPromoCode()"></i>
+      </a>
     </div>
-    <div id="" class="row  mg-0">
-      <div class="pd-15">
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-              <th width="6%">Type</th>
-              <th width="10%">Promo Code</th>
-              <!-- <th width="7%">Cust count</th> -->
-              <th class="" width="10%">Description</th>
-              <th width="10%">Start date</th>
+  </div>
+  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'promoCode'">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="10%">Type</th>
+          <th width="10%">Promo Code</th>
+          <!-- <th width="7%">Cust count</th> -->
+          <th class="" width="40%">Description</th>
+          <th width="10%">Start date</th>
 
-              <th width="10%">End date</th>
-              <th width="7%">Offer Type</th>
-              <th width="10%" >Action</th>
-            </tr>
-          </thead>
-          <tbody> 
-            <tr *ngFor="let promo of allPromoCodes">
-            <td class="left capitalize" width="6%" *ngIf="promo.offertype">{{promo.offertype}}</td> 
-            <td class="left capitalize" width="10%" *ngIf="promo.promocode">{{promo.promocode}}</td>
-            <td class="left capitalize" width="10%" *ngIf="promo.description">{{promo.description}}</td> 
-            <!-- <td class="left numbers" width="7%">20098</td> -->
-            <td class="left capitalize" width="10%" *ngIf="promo.startdate">{{promo.startdate | utcDate}}</td>   
-            <td class="left capitalize" width="10%" *ngIf="promo.enddate">{{promo.enddate | utcDate}}</td>   
-            <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>               
-            <td class="left capitalize" width="10%" >
+          <th width="10%">End date</th>
+          <th width="10%">Offer Type</th>
+          <th width="10%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let promo of allPromoCodes">
+          <td class="left capitalize" width="10%" *ngIf="promo.offertype">{{promo.offertype}}</td>
+          <td class="left capitalize" width="10%" *ngIf="promo.promocode">{{promo.promocode}}</td>
+          <td class="left capitalize" width="40%" *ngIf="promo.description">{{promo.description}}</td>
+          <!-- <td class="left numbers" width="7%">20098</td> -->
+          <td class="left" width="10%" *ngIf="promo.startdate">
+            <span class="onhovertooltip-100" title="{{promo.startdate | utcDate}}">{{promo.startdate | utcDate}}</span>
+          </td>
+          <td class="left" width="10%" *ngIf="promo.enddate">
+            <span class="onhovertooltip-100" title="{{promo.enddate | utcDate}}">{{promo.enddate | utcDate}}</span>
+          </td>
+          <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
+          <td class="left capitalize" width="10%">
             <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
-            <span class="fa fa-edit" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
+            <span class="fa fa-pencil-square-o btn-link" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
             <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCode(promo)"></span>
-              </td>       
-          
-<!-- 
-              *ngFor="let promo of allPromoCodes" -->
-             
-              
-             
-            </tr>
-         
-          </tbody>
-        </table>
-       
-      
-      </div>
-    </div>
-
-   </div>
+          </td>
+          <!-- *ngFor="let promo of allPromoCodes" -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemSetting'">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="20%">Points</th>
+          <th width="20%">Type</th>
+          <th width="20%">Amount</th>
+          <th width="20%">Created date</th>
+          <th width="20%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left capitalize" width="20%">2 lucky winners</td>
+          <td class="left capitalize" width="20%">Cash</td>
+          <td class="left" width="20%">200</td>
+          <td class="left" width="20%">20-12-17</td>
+          <td class="left" width="20%">
+            <span class="fa fa-pencil-square-o btn-link"></span>&nbsp;&nbsp;
+            <span class="fa fa-trash danger pad-fa"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- ends second table -->
+  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemDetails'">
+    <table class="table table-hover table-striped">
+      <thead>
+        <tr>
+          <th width="20%">Points</th>
+          <th width="20%">Type</th>
+          <th width="20%">Amount</th>
+          <th width="20%">Created date</th>
+          <th width="20%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="left capitalize" width="20%">2 lucky winners</td>
+          <td class="left capitalize" width="20%">Cash</td>
+          <td class="left" width="20%">200</td>
+          <td class="left" width="20%">20-12-17</td>
+          <td class="left" width="20%">
+            <span class="fa fa-pencil-square-o btn-link"></span>&nbsp;&nbsp;
+            <span class="fa fa-trash danger pad-fa"></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <!-- ends third table  -->
+</div>

@@ -11,15 +11,11 @@
   </div>
 
     <md-dialog-content layout="column">
-        <nav class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10">
-            <p class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></p>
-            <a class="flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
+        <nav class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10 center">
+            <a class="offset-md-4 flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
               (click)="showTabPanel('suppliers')">Suppliers</a>
             <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'distributors'}" href="javascript:void(0)"
               (click)="showTabPanel('distributors')" *ngIf="superDealer">Distributors</a>
-
-
-
             <!-- <a class="left" type=checkbox value=autoassign>Auto-assign</a> -->
           </nav>
         <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'suppliers'">

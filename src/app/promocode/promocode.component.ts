@@ -18,7 +18,7 @@ export class PromocodeComponent implements OnInit {
   constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService,) { }
 
   allPromoCodes:any = [];
-
+tabPanelView:string="promoCode";
 
   addPromoCode(){
     let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
@@ -81,7 +81,11 @@ export class PromocodeComponent implements OnInit {
       this.getAllPromoCodes();
     }
   }
+  //function to show panel
+  showTabPanel(panelName) {
+this.tabPanelView=panelName;
 
+  }
 
 
   ngOnInit() {

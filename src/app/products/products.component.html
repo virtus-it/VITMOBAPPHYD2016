@@ -38,7 +38,7 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th width="18%">Type</th>
+                  <th width="15%">Type</th>
                   <th width="7%">Priority </th>
                   <th width="7%">Min Qty </th>
                   <th width="6%">Cost </th>
@@ -46,11 +46,10 @@
                   <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
                   <th width="6%">Stock</th>
                   <th width="8%" title="Return cans">Ret cans</th>
-                  <th class="" width="7%" title="Is Authorized">Is Authorized</th>
-                 
+                  <th width="9%" title="Is Authorized">Is Authorized</th>   
                   <th width="7%">Status</th>
                   <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
-                  <th width="17%" class="no-th-arrow">Action</th>
+                  <th width="11%" class="no-th-arrow">Action</th>
                 </tr>
               </thead>
               <tbody>
@@ -102,11 +101,11 @@
 
                     <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image" ></label>
                     <input class="" id="files"  style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
-                    <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)"></i>&nbsp;
-                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"  *ngIf="superDealer" (click)="productArea(details)"></i>&nbsp;
-                          <i class="fa fa-trash disable" aria-hidden="true"  *ngIf="superDealer && details.isactive == '0'" disabled ></i>&nbsp;
-                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"  *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)"></i>&nbsp;
-                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)"></i>&nbsp;
+                    <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i> 
+                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"  *ngIf="superDealer" (click)="productArea(details)">&nbsp;</i>
+                          <i class="fa fa-trash disable" aria-hidden="true"  *ngIf="superDealer && details.isactive == '0'" disabled >&nbsp;</i>
+                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"  *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)">&nbsp;</i> 
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)">&nbsp;</i> 
                     <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
                     <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->

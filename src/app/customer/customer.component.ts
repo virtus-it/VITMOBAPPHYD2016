@@ -74,7 +74,7 @@ export class CustomerComponent implements OnInit {
 
     showPlaceOrder(data) {
         let dialogRefPlaceorder = this.dialog.open(PreOrderCartDailogComponent, {
-            width: '80%',
+            width: '90%',
             data: data
         });
         dialogRefPlaceorder.afterClosed().subscribe(result => {
