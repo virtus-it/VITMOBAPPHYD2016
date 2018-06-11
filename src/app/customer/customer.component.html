@@ -155,18 +155,22 @@
               </td>
 
             <td class="" width="10%"><span class="onhovertooltip-100" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span></td>
-            <td class="left"  *ngIf="customers.dealers" width="12%">
-                <span class="onhovertooltip-100" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
+            <td class="left"  width="12%">
+                <span class="onhovertooltip-100"  *ngIf="customers.dealers" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
               {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
             </span>
-            <span *ngIf="customers.dealers === null"> - </span>
+
+
+            <span *ngIf="customers.dealers === null || customers.dealers == ''"> - </span>
 
             
             </td>
 
             <td class="left numbers" width="12%">
               <span class="onhovertooltip-100" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}} 
-              <span *ngIf="customers.mobileno_one || customers.mobileno_two" >{{customers.mobileno_one}} {{customers.mobileno_two}}</span></span>  </td>
+              <span *ngIf="customers.mobileno_one || customers.mobileno_two" >{{customers.mobileno_one}} {{customers.mobileno_two}}</span></span> 
+            <span *ngIf="customers.mobileno === null || customers.mobileno == ''"> - </span>
+            </td>
             <!-- <td class="left"> {{customers.mobileno_one}}  </td>
             <td class="left">  {{customers.mobileno_two}}</td> -->
             <!-- <td class="left"  width="10%">
@@ -174,12 +178,21 @@
               {{customers.emailid}}
             </span>
             </td> -->
-            <td class="left" width="16%"><span class="onhovertooltip-200" title="{{customers.address}}">{{customers.address}}</span></td>
+            <td class="left" width="16%">
+              <span class="onhovertooltip-200" title="{{customers.address}}">{{customers.address}}</span>
+            <span *ngIf="customers.address === null || customers.address == ''"> - </span>
+            </td>
            
               <td class="left"  width="6%">
                   <span *ngIf="customers.payments">{{customers.paymenttype}}</span>
+                  <span *ngIf="customers.payments === null || customers.payments == ''"> - </span>
+                  
               </td>
-              <td class="left" width="8%">{{customers.registertype}}</td>
+              <td class="left" width="8%">
+                <span *ngIf="customers.registertype"> {{customers.registertype}} </span> 
+                <span *ngIf="!customers.registertype">  -  </span> 
+              
+              </td>
             <td class="left" width="7%">
               <span *ngIf="customers.payments">{{customers.payments.advance_amount}}</span>
             </td>
@@ -189,7 +202,7 @@
 
             <td class="left" width="10%">
               <div class="dropdown">
-                <button class="dropbtn" [disabled]="customers.usercreatedby.userid != 'loginId'">View More</button>
+                <button class="dropbtn" [disabled]="customers.usercreatedby && customers.usercreatedby.userid != 'loginId'">View More</button>
                 <div class="dropdown-content" style="right:0;">
                   <div class="row pdbottom-5">
                     <label class="col-md-6" (click)='showCustomerAllOrders(customers)'>

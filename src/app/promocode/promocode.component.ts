@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MdDialog } from '@angular/material';
 import { AddPromocodeDialogComponent } from '../add-promocode-dialog/add-promocode-dialog.component';
+import { RedeemSettingsDialogComponent } from '../redeem-settings-dialog/redeem-settings-dialog.component';
 import { PromocodeServiceService } from '../promocode/promocode-service.service';
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { AuthenticationService } from '../login/authentication.service';
@@ -84,8 +85,23 @@ tabPanelView:string="promoCode";
   //function to show panel
   showTabPanel(panelName) {
 this.tabPanelView=panelName;
-
+if(this.tabPanelView == 'redeemSetting'){
+  this.redeemSettingsDialog();
+}
   }
+
+  redeemSettingsDialog(){
+    let dialogRef = this.dialog.open(RedeemSettingsDialogComponent , {
+      width: '50%',
+      data: ''
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+    }
+  });
+  }
+
+
 
 
   ngOnInit() {

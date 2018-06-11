@@ -19,7 +19,7 @@ noRecord=false;
     if(this.Detail.type == 'distributorspage'){
       input = {
         "root": {
-          "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid  ,  "areaid": "", "last_historyid": 100000, "pagesize": "1000",
+          "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "category":this.Detail.data.category, "categoryid": this.Detail.data.categoryid  ,  "areaid": "", "last_historyid": 100000, "pagesize": "1000",
           "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
         }
       };

@@ -116,6 +116,8 @@ import { AddEditUserComponent } from './add-edit-user/add-edit-user.component';
 import { ProductServiceAreaComponent } from './product-service-area/product-service-area.component';
 import { PointsComponent } from './points/points.component';
 import { EditPointsComponent } from './edit-points/edit-points.component';
+import { AddEditPointsComponent } from './add-edit-points/add-edit-points.component';
+import { RedeemSettingsDialogComponent } from './redeem-settings-dialog/redeem-settings-dialog.component';
 
 
 
@@ -212,6 +214,8 @@ import { EditPointsComponent } from './edit-points/edit-points.component';
         ProductServiceAreaComponent,
         PointsComponent,
         EditPointsComponent,
+        AddEditPointsComponent,
+        RedeemSettingsDialogComponent,
 
      
         
@@ -354,7 +358,9 @@ import { EditPointsComponent } from './edit-points/edit-points.component';
          InboxComponent,
          AddEditUserComponent,
          ProductServiceAreaComponent,
-         EditPointsComponent
+         EditPointsComponent,
+         AddEditPointsComponent,
+         RedeemSettingsDialogComponent
       
 
 

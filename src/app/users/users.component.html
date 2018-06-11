@@ -12,14 +12,14 @@
           <div class="">
             <div class="form-group">
               <md-select placeholder="Filter By" [(ngModel)]="filterType.type" name="type" class="full-width left">
-                <md-option value="type">User Type</md-option>
+                <md-option value="usertype">User Type</md-option>
                 <md-option value="mobile"> Mobile</md-option>
                 <md-option value='address'>Address</md-option>
               </md-select>
 
             </div>
 
-            <div class="" *ngIf="filterType.type == 'type'">
+            <div class="" *ngIf="filterType.type == 'usertype'">
               <md-select placeholder="User Type" [(ngModel)]='filterInput.userType' class="full-width left"> 
                 <md-option value='customer'>Customer</md-option>
                 <md-option value='dealer'>Distrtibutor</md-option>

@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
 
   allUsers:any = [];
   UserClickMore = true;
-  filterType = {"type":"type"};
+  filterType = {"type":"usertype"};
   filterInput = {'userType':"" , "mobileno":"" , "address":"" };
   showFilterDailog = false;
 
@@ -63,22 +63,22 @@ search(){
   "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
   "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"",
   "moyaversioncode":""}};
-  if(this.filterType.type='type'){
+  if(this.filterType.type =='usertype'){
     input.root.searchtext  = this.filterInput.userType;
   }
-  else if(this.filterType.type='mobile'){
+  else if(this.filterType.type =='mobile'){
     input.root.searchtext  = this.filterInput.mobileno;
   }
-  else if(this.filterType.type='address'){
+  else if(this.filterType.type == 'address'){
     input.root.searchtext  = this.filterInput.address;
   }
   console.log(input);
-  // this.distributorService.getAllDistributors(input)
-  //           .subscribe(
-  //           output => this.searchResult(output),
-  //           error => {
-  //               //console.log("error in distrbutors");
-  //           });
+  this.distributorService.getAllDistributors(input)
+            .subscribe(
+            output => this.searchResult(output),
+            error => {
+                //console.log("error in distrbutors");
+            });
 }
 searchResult(result){
   if(result.result == 'success'){

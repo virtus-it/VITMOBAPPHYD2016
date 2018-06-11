@@ -7,6 +7,9 @@
 
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+        <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
+            <i class="fa fa-plus-circle fs-20" aria-hidden="true"></i>
+          </a>
 
 
     </div>
@@ -35,6 +38,8 @@
               <td class="" width="">
                 <i  *ngIf="points.isactive == 1 "class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints(points.type)" ></i>
                 <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints(points.type)" ></i>
+
+                <i class="fa fa-edit logo-color" title="Edit points" (click)="editPoints(points)"></i> 
               </td>
             </tr>
           </tbody>

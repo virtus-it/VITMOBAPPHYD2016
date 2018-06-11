@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
+import { AddEditPointsComponent } from '../add-edit-points/add-edit-points.component';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
@@ -63,72 +64,6 @@ export class PointsComponent implements OnInit {
   }
 
 
-  // getPointsDetails(){
-  //       console.log('abc');
-  //   let input = {"User":{"TransType":"getallpoints"}};
-  //   this.distributorService.getPoints(input)
-  //   .subscribe(
-  //   output => this.getPointsDetailsResult(output),
-  //   error => {    
-  //     console.log('Error in getting all points Details');  
-  //   });
-  // }
-
-  
-  // getPointsDetailsResult(result){
-  //   if(result.result == 'success'){
-  //     this.pointsStatus = result.data;
-  //     console.log(result.data);
-  //     let referalbonusState:any = '';
-  //     let acceptStatus:any = '';
-  //     let deliveredStatus:any = '';
-  //     let signupStatus:any = '';
-  //     let sameDayStatus:any = '';
-  //     let ontimeStatus:any = ''; 
-  //     let distCustomerStatus:any = '';
-
-  //     _.each(this.pointsStatus , function(i , j){
-  //       let details:any = i;
-  //       if(details.status == 'referalbonus'){
-  //         referalbonusState = details.isactive; 
-  //       }
-  //       else if(details.status == 'accept'){ 
-  //         acceptStatus = details.isactive;
-  //       }
-  //       else if(details.status == 'delivered'){
-  //         deliveredStatus = details.isactive;
-  //       }
-  //       else if(details.status == 'signup'){
-  //         signupStatus = details.isactive;
-  //       }
-  //       else if(details.status == 'sameday'){
-  //         sameDayStatus = details.isactive;
-  //       }
-  //       else if(details.status == 'ontime'){
-  //         ontimeStatus = details.isactive;
-  //       }
-  //       else if(details.status == 'D-customer'){
-  //         distCustomerStatus = details.isactive;
-  //       }
-       
-  //     });
-
-  //     this.referalbonusState1 = referalbonusState;
-  //     this.acceptStatus1 = acceptStatus;
-  //     this.deliveredStatus1 =  deliveredStatus;
-  //     this.signupStatus1 = signupStatus;
-  //     this.sameDayStatus1 = sameDayStatus;
-  //     this.ontimeStatus1 = ontimeStatus;
-  //     this.distCustomerStatus1 =  distCustomerStatus;
-
-
-
-
-  //   }
-
-  // }
-
-
   getAllPoints(){
     let input = {"User":{"TransType":"getpointsmst"}};
     this.distributorService.getPoints(input)
@@ -144,6 +79,36 @@ export class PointsComponent implements OnInit {
       this.allPoints = result.data;
     }
   }
+
+
+  addpoints(){
+    let dialogRefEditCustomer = this.dialog.open(AddEditPointsComponent, {
+      width: '700px',
+      data: ''
+  });
+  dialogRefEditCustomer.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+if(result == "success"){
+  this.getAllPoints();
+}
+
+});
+}
+
+editPoints(data){
+  let dialogRefEditCustomer = this.dialog.open(AddEditPointsComponent, {
+    width: '700px',
+    data: data
+});
+dialogRefEditCustomer.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+if(result == "success"){
+this.getAllPoints();
+}
+
+});
+
+}
 
 
 
