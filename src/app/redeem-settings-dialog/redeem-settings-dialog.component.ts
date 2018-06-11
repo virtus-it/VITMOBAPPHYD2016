@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MdDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-redeem-settings-dialog',
@@ -7,7 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RedeemSettingsDialogComponent implements OnInit {
 
-  constructor() { }
+  constructor( public thisDialogRef: MdDialogRef<RedeemSettingsDialogComponent>) { }
+
+  redeemPointsInput = {"type":"" , "points":"" , "amount":"" };
+
+
+  submitSettings(){
+
+  }
+
+  onCloseModal(){
+    this.thisDialogRef.close('Cancel');
+  }
+
 
   ngOnInit() {
   }

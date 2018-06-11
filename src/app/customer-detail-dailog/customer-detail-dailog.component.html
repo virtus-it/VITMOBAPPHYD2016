@@ -73,9 +73,9 @@
       <table class="table table-hover table-striped table-fixedheader">
         <thead>
           <tr class="wd-99pc">
-            <th width="6%">Id</th>
-            <th class="" width="10%">Category</th>
-            <th width="13%">Product Name</th>
+            <th width="5%">Id</th>
+            <th class="" width="9%">Category</th>
+            <th width="12%">Product Name</th>
             <!-- <th width="7%">Cart Id</th> -->
             <th width="5%" title="Order Quantity">Qty</th>
             <th width="6%" title="Return Quantity">Ret Qty</th>
@@ -84,17 +84,18 @@
             <th width="6%" title="Order Amount">Amt</th>
             <th width="7%" title="Received Amount">Rec Amt</th>
             <th width="8%">Status</th>
-            <th width="13%" title="Delivery Date">Delv Date</th>
-            <th width="13%" title="Delivered By Last Handled Distributor">Last Handled..</th>
+            <th width="12%" title="Delivery Date">Delv Date</th>
+            <th width="12%" title="Delivered By Last Handled Distributor">Last Handled..</th>
+            <th class="" width="5%" >Action</th>
 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let customer of customerOrderDetails">
-            <td width="6%" class="left" scope="row">#{{customer.order_id}}</td>
-            <td width="10%" class="left" scope="row"><span class="onhovertooltip-100" title="{{customer.category}}">{{customer.category}}</span></td>
+            <td width="5%" class="left" scope="row">#{{customer.order_id}}</td>
+            <td width="9%" class="left" scope="row"><span class="onhovertooltip-100" title="{{customer.category}}">{{customer.category}}</span></td>
             
-            <td width="13%" class=" capital"><span class="onhovertooltip-150" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span></td>
+            <td width="12%" class=" capital"><span class="onhovertooltip-150" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span></td>
             <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
             <td width="5%" class=" capital">{{customer.quantity}}</td>
             <td width="6%" class=" capital">{{customer.return_cans}}</td>
@@ -106,11 +107,13 @@
             <td width="7%" class=" capital">{{customer.receivedamount}}</td>
             <td width="8%" class=" capital">{{customer.status}}</td>
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
-            <td width="13%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
-            <td width="13%" class=" capital">
+            <td width="12%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
+            <td width="12%" class=" capital">
               <span *ngIf="customer.status !== 'ordered'"><span class="onhovertooltip-150" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span></span>
             <span *ngIf="customer.status == 'ordered'"> - </span>
             </td>
+
+            <td class="logo-color" width="5%" (click)="viewOrderDetails(customer)">Select</td>
           </tr>
         </tbody>
       <br>

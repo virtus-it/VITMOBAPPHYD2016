@@ -16,37 +16,40 @@
       <div class="row">
         <div class="col-md-6 col-sm-6 ">
           <md-form-field class="">
-            <input class="form-control"  mdInput placeholder="Customer" name="Customer" >
-           
-          </md-form-field>
-        </div>
-      
-        <div class="col-md-6 col-sm-6 ">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Points" name="points" >
+            <input class="form-control" mdInput placeholder="Points" name="points" [(ngModel)]="redeemPointsInput.points" >
             
           </md-form-field>
   
         </div>
+
+        <div class="form-group col-md-4 col-sm-6">
+          <md-select placeholder="Redeem Type" class="wd-100pc" [(ngModel)]="redeemPointsInput.type">
+            <md-option value="paytm">Paytm</md-option>
+            <md-option value="discount">Discount</md-option>
+            <md-option value="voucher">Voucher</md-option>                  
+          </md-select>
+        </div>
+
+
+
       </div>
       
       <div class="row">
 
           <div class="col-md-6 col-sm-6 ">
               <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Description" name="description" [(ngModel)]="addpointsInput.description">
-               
+                <input class="form-control" mdInput placeholder="Amount" name="amount" [(ngModel)]="redeemPointsInput.amount">
+                
               </md-form-field>
       
             </div>
 
 
-            <div class="form-group col-md-4 col-sm-6">
-                <md-select placeholder="Redeem Type" class="wd-100pc">
-                  <md-option value="paytm">Paytm</md-option>
-                  <md-option value="discount">Discount</md-option>
-                </md-select>
-              </div>
+
+          
+
+
+           
 
 
       </div>
@@ -61,7 +64,7 @@
   </md-dialog-content>
   <div class="row float-right pdright-30">
     <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="addandUpdatePoints()">SUBMIT</button>
+      <button type="submit" class="btn-primary" md-raised-button (click)="submitSettings()">SUBMIT</button>
       <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>

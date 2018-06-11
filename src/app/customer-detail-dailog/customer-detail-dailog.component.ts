@@ -13,6 +13,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
+import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-dailog.component';
 
 @Component({
   selector: 'app-customer-detail-dailog',
@@ -72,6 +73,24 @@ export class CustomerDetailDailogComponent implements OnInit {
     }
     return finalDistributors;
     
+
+  }
+
+  viewOrderDetails(data){
+    let formattedData = {order_id: data.order_id , order_by:data.order_by}
+    let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+
+      width: '95%',
+      data: formattedData
+    });
+    dialogRefShowOrder.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if(result == 'success'){
+       
+      }
+
+
+    });
 
   }
 
