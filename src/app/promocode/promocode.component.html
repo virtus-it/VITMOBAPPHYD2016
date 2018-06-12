@@ -83,23 +83,22 @@
     <table class="table table-hover table-striped">
       <thead>
         <tr>
+          <th width="20%">Name</th>
           <th width="20%">Points</th>
           <th width="20%">Type</th>
           <th width="20%">Amount</th>
           <th width="20%">Created date</th>
-          <th width="20%">Action</th>
+          
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="left capitalize" width="20%">2 lucky winners</td>
-          <td class="left capitalize" width="20%">Cash</td>
-          <td class="left" width="20%">200</td>
-          <td class="left" width="20%">20-12-17</td>
-          <td class="left" width="20%">
-            <span class="fa fa-pencil-square-o btn-link"></span>&nbsp;&nbsp;
-            <span class="fa fa-trash danger pad-fa"></span>
-          </td>
+        <tr *ngFor="let redeem of redeemDetails">
+            <td class="left" width="20%">Name</td>
+          <td class="left capitalize" width="20%">{{redeem.points}}</td>
+          <td class="left capitalize" width="20%">{{redeem.type}}</td>
+          <td class="left" width="20%">{{redeem.amount}}</td>
+          <td class="left" width="20%">{{redeem.createddate | utcDate}}</td>
+      
         </tr>
       </tbody>
     </table>

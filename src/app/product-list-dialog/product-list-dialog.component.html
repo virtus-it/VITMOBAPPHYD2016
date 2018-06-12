@@ -22,7 +22,32 @@
   <md-dialog-content layout="column">
       <div class="pd-15x25 brd-bottom">
        
-          <table class="table table-hover table-striped table-fixedheader">
+          <table class="table table-hover table-striped table-fixedheader scroll">
+          <tbody *ngFor="let products of listOfProducts">
+
+              <tr class="border-topbottom bgcolor-fade-blue" >
+                  <td class="">
+                    <b class="capital"><i class="fa fa-gift" aria-hidden="true"></i> 
+                       Product Name  : {{products.brandName}} <b class="capital"> &nbsp;&nbsp; |  &nbsp;&nbsp;
+                        <span class=""><i class="fa fa-bars" aria-hidden="true"></i>
+                           Category : {{products.category}}</span></b>
+                    </b>
+
+             <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(products)"></i>&nbsp;
+             <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(products)"></i>&nbsp;
+          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products , distributorDetails)"></i>
+
+
+
+                    <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
+                    <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
+                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i> -->
+        
+                  </td>
+                </tr>
+
+
+
       <thead>
         <tr>
             <th width="10%">Category</th>
@@ -39,10 +64,10 @@
           <th width="10%">Action</th>
            </tr>
       </thead>
-      <tbody>
-        <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
+      
+        <tr  *ngFor="let prod of products.data; let i = index" [attr.data-index]="i" >
             <td width="10%" class="left capital"><span class="onhovertooltip-100" title="{{prod.category}}">{{prod.category}}</span></td>          
-          <td width="14%" class="left capital"><span class="onhovertooltip-100" title="{{prod.brandname}}">{{prod.brandname}}</span></td>
+          <td width="14%" class="left capital"><span class="onhovertooltip-100" title="{{prod.brandName}}">{{prod.brandName}}</span></td>
           <td width="14%" class="left capital"> <span class="onhovertooltip-100" title="{{prod.ptype}}">{{prod.ptype}}</span></td>
           <td width="6%" class="left capital gray9">{{prod.priority}}</td>
           <td width="7%" class="left capital danger">{{prod.minorderqty}}</td>          
@@ -56,10 +81,12 @@
           <td width="6%" class="left capital warning">{{prod.avaliable_stock}}</td>
           <td width="7%" class="left capital" [ngClass]="{'red':prod.stockstatus == 'Soldout' , 'success':prod.stockstatus == 'Avaliable'||'avaliable', 'warning':prod.stockstatus == 'Lowstock'}">{{prod.stockstatus}}</td>
           <td width="10%">
-             <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
+
+              <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>
+             <!-- <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
              <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(prod)"></i>&nbsp;
-          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod, distributorDetails)"></i>
+          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod , distributorDetails)"></i> -->
           </td>
           
          </tr>
