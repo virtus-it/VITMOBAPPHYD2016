@@ -41,6 +41,10 @@ margin-left: 65px;
     color: red;
 }
 
+.circle{
+    border-radius: 50%;
+}
+
 /* .bg-imglogo{
     background-image:url(../assets/images/bg_virtus.png);
    } */

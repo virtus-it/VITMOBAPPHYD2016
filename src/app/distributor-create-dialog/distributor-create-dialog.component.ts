@@ -19,6 +19,7 @@ export class DistributorCreateDialogComponent implements OnInit {
     areaList = [];
     phone = false; 
     isSuperDealer:boolean = false;
+    validateMessage:string = '';
     
 
     dropdownSettings = {};
@@ -59,6 +60,9 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      onSubmit() {
          //console.log(this.dist);
+
+        
+
          this.loaderService.display(true);
          var input:any = {
              "User": {
@@ -79,6 +83,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          if (this.distributorDetail) {
              input.User.userid = this.distributorDetail.userid;
              input.User.TransType = "update";
+             if(this.validateCreateDistributor()){
              this.distributorService.updateDistributor(input)
                  .subscribe(
                  output => this.onSubmitResult(output),
@@ -86,8 +91,11 @@ export class DistributorCreateDialogComponent implements OnInit {
                      //console.log("error in distrbutors");
                      this.loaderService.display(false);
                  });
+
+                }
          }
          else {
+            if(this.validateCreateDistributor()){
              this.distributorService.createDistributor(input)
                  .subscribe(
                  output => this.onSubmitResult(output),
@@ -95,6 +103,7 @@ export class DistributorCreateDialogComponent implements OnInit {
                      //console.log("error in distrbutors");
                      this.loaderService.display(false);
                  });
+                }
          }
      }
      onSubmitResult(result) {
@@ -162,6 +171,40 @@ export class DistributorCreateDialogComponent implements OnInit {
      onCloseCancel() {
         this.thisDialogRef.close('Cancel');
     }
+
+    validateCreateDistributor(){
+        var validate : string = '1';
+        switch(validate){
+            case "1" : {
+                if(this.dist.address == ''){
+                    this.validateMessage = 'Enter Distributors Address';
+                }
+        }
+            case '2' : {
+                if(this.dist.phone == ''){
+                    this.validateMessage = 'Enter Phone Number';
+                }     
+        }
+            case '3' : {
+                if(this.dist.lastName == ''){
+                    this.validateMessage = "Enter Last name";
+                }
+        }
+            case '4' : {
+                if(this.dist.firstName == ''){
+                    this.validateMessage = "Enter First name";
+                }
+        }
+            case '5' : {
+            if(this.dist.firstName && this.dist.lastName && this.dist.phone && this.dist.address){
+                this.validateMessage = "";
+                return true;
+            }
+        }
+    }
+    }
+
+
      ngOnInit() {
          console.log(this.distributorDetail);
 

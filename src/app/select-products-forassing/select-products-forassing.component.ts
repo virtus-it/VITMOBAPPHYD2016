@@ -267,7 +267,7 @@ if(this.productsDetails.expressCheck == true){
     details.quantity = 0;
   });
   products.quantity = this.orderDetail.orderDetails.quantity;
-  products.emptycans = 0;
+  products.emptycans = this.orderDetail.orderDetails.empty_cans;
 }
 else{
   _.each(this.productList, function (i, j) {
@@ -355,8 +355,13 @@ changeOfQuantity(data){
   }
 
   ngOnInit() {
+   
     console.log(this.orderDetail);
     this.getProductsList();
+    this.emptyCans = this.orderDetail.orderDetails.empty_cans;
+    if(this.orderDetail.orderDetails.empty_cans === null || this.orderDetail.orderDetails.empty_cans == ''){
+      this.emptyCans = 0;
+    }
   }
 
 }

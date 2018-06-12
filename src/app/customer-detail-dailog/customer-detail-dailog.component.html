@@ -109,8 +109,8 @@
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
             <td width="12%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
             <td width="12%" class=" capital">
-              <span *ngIf="customer.status !== 'ordered'"><span class="onhovertooltip-150" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span></span>
-            <span *ngIf="customer.status == 'ordered'"> - </span>
+              <span *ngIf="customer.status !== 'ordered' && customer.dealerdetails "><span class="onhovertooltip-150" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span></span>
+            <span *ngIf="customer.status == 'ordered' || !customer.dealerdetails"> - </span>
             </td>
 
             <!-- <td class="logo-color" width="5%" (click)="viewOrderDetails(customer)">Select</td> -->

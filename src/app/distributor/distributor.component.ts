@@ -182,6 +182,10 @@ this.getProductByCategory();
             //this.dialogResult = result;
             if (result == 'success') {
                 this.getDistributors(true);
+                this.loaderService.display(false);
+            }
+            else{
+                this.loaderService.display(false);
             }
         });
     }
