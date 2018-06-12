@@ -300,29 +300,29 @@
 
 <div class="row cost-style">
   <div class="col">
-      <h5 > Product cost:
+      <h5 > Product Cost:
           <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
         </h5>
   </div>
   <div class="col">
-      <h5> Service charge :
+      <h5> Service Charge :
           <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
             </b>
           </h5>
   </div>
   <div class="col">
-      <h5>Exp delv charges   :
+      <h5>Exp Delv Charges   :
           <b>{{this.amount}}</b>
         </h5>
   </div>
   <div class="col">
-      <h5 >Empty cans Amt :
+      <h5 >Empty Cans Amt :
           <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
             }}</b>
         </h5>
   </div>
   <div class="col">
-      <h5 class="right">Total cost :
+      <h5 class="right">Total Cost :
           <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
             * this.createPreOrderInput.productDetails.quantity) + (this.amount) + (( this.createPreOrderInput.productDetails.quantity
             - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>

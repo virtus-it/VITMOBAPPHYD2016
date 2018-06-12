@@ -1,141 +1,73 @@
 <div class="dist-style  minheight-500">
-
     <div class=" row justify-content-between distIcon-style left">
       <div class="col-sm-2 col-md-2 col-lg-2 ">
         <h4>
           <i class="fa fa-users"></i> Users</h4>
       </div>
-
-      <a class="align-self-center">
-      <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
-      <div class="filterView" *ngIf="showFilterDailog">
-          <div class="">
-            <div class="form-group">
-              <md-select placeholder="Filter By" [(ngModel)]="filterType.type" name="type" class="full-width left">
-                <md-option value="usertype">User Type</md-option>
-                <md-option value="mobile"> Mobile</md-option>
-                <md-option value='address'>Address</md-option>
-              </md-select>
-
-            </div>
-
-            <div class="" *ngIf="filterType.type == 'usertype'">
-              <md-select placeholder="User Type" [(ngModel)]='filterInput.userType' class="full-width left"> 
-                <md-option value='customer'>Customer</md-option>
-                <md-option value='dealer'>Distrtibutor</md-option>
-                <md-option value='supplier'>Supplier</md-option>
-                <md-option value='sales'>Sales</md-option>
-                <md-option value='manufacturer'>Manufacturer</md-option>
-              </md-select>
-            </div>
-
-            <div class="" *ngIf="filterType.type == 'mobile'">
-              <md-form-field class="example-full-width">
-                  <input class="form-control" mdInput placeholder="Mobile Number" [(ngModel)]="filterInput.mobileno">
-                </md-form-field> 
-            </div>
-            
-            <div class="" *ngIf="filterType.type == 'address'">
-                <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Address" [(ngModel)]="filterInput.address">
-                  </md-form-field> 
-            </div>
-
-            <div class="input-group pd-10 ">
-                <button md-raised-button color="primary" class="mgright-5" (click)="search()">
-                  <i class="fa fa-search" aria-hidden="true"></i> Search
-                </button>
-                <button md-raised-button color="primary" (click)="clearFilter()">
-                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                </button>
-              </div>
-            </div>
-            </div>
-
-           
-
-
-          </a>
-
       <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-          <a class="cursor logo-color " title="Add User">
-              <i class="fa fa-plus fa-2 plus-style"  aria-hidden="true" (click)="addUser()"></i>
+        <a class="cursor logo-color " title="Add User">
+          <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" (click)="addUser()"></i>
         </a>
-
       </div>
     </div>
-    <div  class="row pd-15x10 mg-0">
-     
+    <div class="row pd-15x10 mg-0">
       <table class="table table-hover table-striped" style="table-layout:fixed">
-          <thead>
-            <tr>
-              <th width="35%">Name</th>         
-              <th width="10%">User Type</th>
-              <th width="10%">Mobile</th>
-              <th width="35%">Address</th>
-              <th class="" width= "10%">Action</th>
-              <!-- <th width="10%"></th>
-              <th width="10%">Type</th>
-              <th width="10%" >Dep Amt</th>
-              <th width="10%" >Due Amt</th>
-              <th width="10%" >Action</th> -->
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let user of allUsers">
-              <td class="left" width="35%" >
-                <span>
-                  <i *ngIf="user.isactive == 1" class="success	fa fa-thumbs-up" title="click to de-activate user" (click)="deactivateUser(user)"></i>
-                  <i class="danger	fa fa-thumbs-down" *ngIf="user.isactive == 0" title="click to activate user" (click)="activateUser(user)"></i>                  
-                </span>
-                <span  *ngIf="user.firstname"> {{user.firstname}} </span>
+        <thead>
+          <tr>
+            <th width="20%">Name</th>
+            <th width="10%">User Type</th>
+            <th width="10%">Mobile</th>
+            <th width="50%">Address</th>
+            <th class="" width="10%">Action</th>
+            <!-- <th width="10%"></th>
+                <th width="10%">Type</th>
+                <th width="10%" >Dep Amt</th>
+                <th width="10%" >Due Amt</th>
+                <th width="10%" >Action</th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUsers">
+            <td class="left" width="20%">
+              <span>
+                <i *ngIf="user.isactive == 1" class="success	fa fa-thumbs-up" title="click to de-activate user" (click)="deactivateUser(user)"></i>
+                <i class="danger	fa fa-thumbs-down" *ngIf="user.isactive == 0" title="click to activate user" (click)="activateUser(user)"></i>
+              </span>
+              <span *ngIf="user.firstname" class="capitalize"> {{user.firstname}} </span>
               <span *ngIf="user.firstname == '' || user.firstname === null"> - </span>
-              </td>
-              <td class="left" width="10%" >
-                  <span  *ngIf="user.usertype"> {{user.usertype}} </span>
-                <span *ngIf="user.usertype == '' || user.usertype === null"> - </span>
-                </td>
-                <td class="left" width="10%" >
-                    <span  *ngIf="user.mobileno"> {{user.mobileno}} </span>
-                  <span *ngIf="user.mobileno == '' || user.mobileno === null"> - </span>
-                  </td>
-                  <td class="left" width="35%" >
-                      <span  *ngIf="user.address"> {{user.address}} </span>
-                    <span *ngIf="user.address == '' || user.address === null"> - </span>
-                    </td>
-
-                    <td class="left" width="10%">
-                      <i class="fa fa-edit logo-color " title="Edit User"  (click)="editUser(user)"></i>
-                    </td>
-
-            
-              <!-- <td class="left" width="15%">5</td>
-              <td class="left" width="15%">6</td>
-              <td class="left" width="15%">7</td>
-              <td class="left" width="15%">8</td>
-              <td class="left" width="15%">9</td> -->
-  
-              
-  
- 
-          </tbody>
-
-          <tfoot>
-              <tr>
-                <td colspan="8">
-                  <h4 class="warning  capitalize center">
-                    <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore">
-                      <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-                    <span *ngIf="!UserClickMore">Record Not Available</span>
-                  </h4>
-                </td>
-              </tr>
-            </tfoot>
-
-
-          
-        </table>
+            </td>
+            <td class="left" width="10%">
+              <span *ngIf="user.usertype" class="capitalize"> {{user.usertype}} </span>
+              <span *ngIf="user.usertype == '' || user.usertype === null"> - </span>
+            </td>
+            <td class="left" width="10%">
+              <span *ngIf="user.mobileno"> {{user.mobileno}} </span>
+              <span *ngIf="user.mobileno == '' || user.mobileno === null"> - </span>
+            </td>
+            <td class="left" width="50%">
+              <span *ngIf="user.address" class="onhovertooltip-600 capitalize" title="{{user.address}}"> {{user.address}} </span>
+              <span *ngIf="user.address == '' || user.address === null"> - </span>
+            </td>
+            <td class="left" width="10%">
+              <i class="fa fa-edit logo-color " title="Edit User" (click)="editUser(user)"></i>
+            </td>
+            <!-- <td class="left" width="15%">5</td>
+                <td class="left" width="15%">6</td>
+                <td class="left" width="15%">7</td>
+                <td class="left" width="15%">8</td>
+                <td class="left" width="15%">9</td> -->
+        </tbody>
+        <tfoot>
+          <tr>
+            <td colspan="8">
+              <h4 class="warning  capitalize center">
+                <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore">
+                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+                <span *ngIf="!UserClickMore">Record Not Available</span>
+              </h4>
+            </td>
+          </tr>
+        </tfoot>
+      </table>
     </div>
   </div>
-  
-    

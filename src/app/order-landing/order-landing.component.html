@@ -394,7 +394,7 @@
                       <span class="td-label">Brand Name</span>
                       <br>
                       <b class="capitalize">
-                    {{forward.brandname}} </b>
+                        {{forward.brandname}} </b>
                     </div>
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Quantity </span>
@@ -419,23 +419,21 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                    <div class="col-4 left">
                       <span class="td-label" title="Express Delivery charges">
-                        Exp Del chgs</span>
+                        Exp Del Chgs</span>
                       <br>
                       <b>Rs.{{forward.expressdeliverycharges}}</b>
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
-                        <span class="td-label" title="Empty Cans Amount">
+                      <div class="col-5 center">
+                      <span class="td-label" title="Empty Cans Amount">
                         Empty Cans Amt</span>
-                        <br>
-                        <b>Rs.{{forward.advance_amount}}</b>
-                      </div>
-
-
-                    <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <span class="td-label">Service charges </span>
+                      <br>
+                      <b>Rs.{{forward.advance_amount}}</b>
+                    </div>
+                    <div class="col-3 right">
+                      <span class="td-label" title="Service Charges">Serv Chgs </span>
                       <br>
                       <b class="pdright-5">Rs.{{forward.servicecharges}}</b>
                     </div>
@@ -448,7 +446,7 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
+                     <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
                       <b class="pdright-5">{{forward.paymenttype}}</b>
@@ -621,26 +619,25 @@
               <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
-              <td width="10%">
-                <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
+                <td width="10%" class="center">
+                    <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
                   <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='forward.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
 
                   </ngx-gauge>
-
-                  <b *ngIf="forward.timeRemaining < -24" class="red">{{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="forward.timeRemaining < -24" class="red">
+                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
+                    {{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "
                     class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
-
-                  <!-- &&   -24 < forward.timeRemaining < 24
-
-                -->
                 </span>
-
+                <b *ngIf="((forward.status == 'delivered') || (forward.status == 'Delivered'))" class="success">
+                    <i class="fa fa-check-square-o fs-20"></i><br>
+                  Delivered
+                </b>
+                    
               </td>
-
-
             </tr>
           </tbody>
         </table>
@@ -788,24 +785,22 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-4  col-md-4  col-lg-4 left">
-                      <span class="td-label">
+                    <div class="col-4 left">
+                      <span class="td-label" title="express Delivery Charges">
                         Exp Del Chgs</span>
                       <br>
                       <b>Rs.{{allorder.expressdeliverycharges}}</b>
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
-                        <span class="td-label">
-                          Emty Cans Amt</span>
-                        <br>
-                        <b>Rs.{{allorder.advance_amount}}</b>
-                      </div>
-
-
-                    <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <span class="td-label">Service charges </span>
+                      <div class="col-5 center">
+                      <span class="td-label">
+                        Empty Cans Amt</span>
                       <br>
+                      <b>Rs.{{allorder.advance_amount}}</b>
+                    </div>
+                    <div class="col-3 right">
+                        <span class="td-label" title="Service Charges">Serv Chgs </span>
+                        <br>
                       <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
                     </div>
                   </div>
@@ -817,7 +812,7 @@
                       <!-- <b class="pdright-5" *ngIf="allorder.receivedamt > 0">Rs.{{allorder.receivedamt}}</b>  -->
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
+                     <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
                       <b class="pdright-5">{{allorder.paymenttype}}</b>
@@ -950,17 +945,21 @@
               </td>
 
 
-              <td width="10%">
+              <td width="10%" class="center">
                 <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept'))">
                   <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
-
-                  <b *ngIf="allorder.timeRemaining < -24" class="red">{{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="allorder.timeRemaining < -24" class="red">
+                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
+                    {{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
-
                 </span>
+                <b *ngIf="((allorder.status == 'delivered') || (allorder.status == 'Delivered'))" class="success">
+                    <i class="fa fa-check-square-o fs-20"></i><br>
+                  Delivered
+                </b>
               </td>
 
             </tr>
@@ -1110,24 +1109,21 @@
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                    <div class="col-4 left">
                       <span class="td-label">
                         Exp Del Chgs</span>
                       <br>
                       <b>Rs.{{complete.expressdeliverycharges}}</b>
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
-                        <span class="td-label">
-                          Emty Cans Amt</span>
-                        <br>
-                        <b>Rs.{{complete.advance_amount}}</b>
-                      </div>
-
-
-
-                    <div class="col-sm-4  col-md-4  col-lg-4 right">
-                      <span class="td-label">Service charges </span>
+                      <div class="col-5 center">
+                      <span class="td-label" title="Empty Cans Amount">
+                        Empty Cans Amt</span>
+                      <br>
+                      <b>Rs.{{complete.advance_amount}}</b>
+                    </div>
+                    <div class="col-3 right">
+                        <span class="td-label" title="Service Charges">Serv Chgs </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
                     </div>
@@ -1140,7 +1136,7 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4">
+                     <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
                       <b class="pdright-5">{{complete.paymenttype}}</b>
@@ -1296,20 +1292,22 @@
                 </div>
               </td>
 
-              <td width="10%">
-
-
+              <td width="10%" class="center">
                 <span *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
                   <ngx-gauge *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='complete.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
 
-                  <b *ngIf="complete.timeRemaining < -24 " class="red">{{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
+                  <b *ngIf="complete.timeRemaining < -24 " class="red">
+                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
+                    {{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
-
-
                 </span>
+                <b *ngIf="((complete.status == 'delivered') || (complete.status == 'Delivered'))" class="success">
+                    <i class="fa fa-check-square-o fs-20"></i><br>
+                  Delivered
+                </b>
               </td>
 
 

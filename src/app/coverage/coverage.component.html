@@ -120,22 +120,19 @@
             <thead>
               <tr>
                 <!-- <th width="3%">S.No</th> -->
-                <th width="40%">Distributor</th>
+                <th width="50%">Distributor</th>
                 <th width="25%">Mobile</th>
-                <th width="35%">Action</th>         
+                <th width="25%" class="center">Action</th>         
                  </tr>
             </thead>
             <tbody>
               <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" >
                 <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-                <td width="40%" class="left capital">{{dist.distributorName}}</td>
+                <td width="50%" class="left capital">{{dist.distributorName}}</td>
                 <td width="25%" class="left capital">{{dist.mobileno}}</td>
-                <td width="35%" class="left capital">
-                    <label class="btn btn-link"  title="Products" (click)="ViewProduct(dist)"><i class="fa fa-gift fs-20" ></i> 
-                    </label>
-                 
-               <label class="btn btn-link"  (click)="DistrbutorHover(dist)"><i class="fa fa-map"></i>
-             </label>
+                <td width="25%" class="center capital">
+                  <i class="fa fa-gift fs-20 logo-color" title="Products" (click)="ViewProduct(dist)" ></i> &nbsp;&nbsp;  
+                 <i class="fa fa-map logo-color"     (click)="DistrbutorHover(dist)" title="Map"></i>
                </td>
 
                </tr>
