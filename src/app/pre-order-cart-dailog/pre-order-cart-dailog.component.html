@@ -29,7 +29,8 @@
       </div> -->
       <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-form-field class="example-full-width">
-          <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date" (ngModelChange)="dateChanges($event)">
+          <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date"
+            (ngModelChange)="dateChanges($event)">
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
           <md-error>
@@ -40,7 +41,7 @@
       </div>
 
 
- 
+
 
 
       <!-- <div class="  col-sm-4  col-md-4  col-lg-4">
@@ -63,20 +64,20 @@
         </md-select>
       </div> -->
 
-        <div class="  col-sm-4  col-md-4  col-lg-4">
+      <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot</md-option>
-          <md-option value="8AM-11AM" [disabled]= '7 <= hours'>8AM-11AM</md-option>
-          <md-option value="11AM-2PM" [disabled]= '10 <= hours'>11AM-2PM</md-option>
-          <md-option value="2PM-5PM" [disabled]= '13 <= hours'>2PM-5PM</md-option>
-          <md-option value="5PM-8PM" [disabled]= '16 <= hours'>5PM-8PM</md-option>
+          <md-option value="8AM-11AM" [disabled]='7 <= hours'>8AM-11AM</md-option>
+          <md-option value="11AM-2PM" [disabled]='10 <= hours'>11AM-2PM</md-option>
+          <md-option value="2PM-5PM" [disabled]='13 <= hours'>2PM-5PM</md-option>
+          <md-option value="5PM-8PM" [disabled]='16 <= hours'>5PM-8PM</md-option>
         </md-select>
       </div>
 
 
 
 
-      
+
 
 
       <!-- <div class="col-2 ">
@@ -90,7 +91,7 @@
         </md-form-field>
       </div> -->
 
-    
+
 
       <!-- <div class="col-2 ">
         <md-form-field class="example-full-width">
@@ -141,15 +142,15 @@
             </td>
             <td> -->
 
-<!-- old code ends here -->
+    <!-- old code ends here -->
 
-                  <!-- <span class="custom-control-description">{{}}</span> -->
-              
-              <!-- <span>Price per Unit : </span> -->
-              <!-- {{Details.discountproducts.product_cost}} -->
+    <!-- <span class="custom-control-description">{{}}</span> -->
+
+    <!-- <span>Price per Unit : </span> -->
+    <!-- {{Details.discountproducts.product_cost}} -->
 
 
-              <!-- old code
+    <!-- old code
               <b class="">{{details.pcost}}</b>
             </td>
             <td>
@@ -163,13 +164,13 @@
 
 
 
-                  <!-- <md-error *ngIf="FormControl.hasError('required')">
+    <!-- <md-error *ngIf="FormControl.hasError('required')">
                       Quantity is <strong>required</strong>
                     </md-error> -->
 
 
 
-                <!-- old code</md-form-field>
+    <!-- old code</md-form-field>
               </div>
                 </div>
             </td>
@@ -201,134 +202,138 @@
           <tr class="border-topbottom" style="background: #0f75bc;
           color: white;">
             <th width="30%">Type</th>
-           
-            <th width="15%">Quantity</th>  
-            <th class="" width="10%">Empty cans</th> 
-            <th width="12%">Price per Unit</th>
+
+            <th class="center" width="13%">Quantity</th>
+            <th class="center" width="12%">Empty cans</th>
+            <th class="center" width="12%">Price per Unit</th>
             <th width="11%" title="Express Delivery">Exp Delv</th>
             <th width="11%" title="Service Charge">Serv Chgs</th>
-            <th width="11%">Cost</th>
-    
+            <th width="9%">Cost</th>
+
           </tr>
           <tr *ngFor="let details of prod.data">
             <td>
-              <div class="form-radio form-radio-inline"  >
+              <div class="form-radio form-radio-inline">
 
-                  <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
-                <b *ngIf="details.stockstatus == 'Soldout'"> <i class="fa fa-close danger" title="sold out"></i></b>
+                <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
+                <b *ngIf="details.stockstatus == 'Soldout'">
+                  <i class="fa fa-close danger" title="sold out"></i>
+                </b>
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails" (change)="minOrderChanged($event)" [disabled]="details.stockstatus == 'Soldout'">
+                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails"
+                    (change)="minOrderChanged($event)" [disabled]="details.stockstatus == 'Soldout'">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description"><b>{{details.category}}</b> {{details.ptype}}</span>
-                  </label>
+                  <span class="custom-control-description onhovertooltip-275" title="{{details.category}} {{details.ptype}}">
+                    <b>{{details.category}}</b> {{details.ptype}}</span>
+                </label>
               </div>
             </td>
-            
-          
-
-           
-              <td>
-                  <div class="row">  
-                      <div class="col-2">
-                          <a class="cursor logo-color ">
-                            
-                            <b title="Decrease value"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="decreaseQuantity(details)"></b>
-                          </a>
-                        </div>    
-                    
-                <div class="col-7">
-                    <input class="brd-bottom form-control btn-sm nobg"    [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'"  >
-                    </div>
-
-
-                    <div class="col-2  row">
-                        <a class="cursor logo-color">
-                            <b title="Increase value"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseQuantity(details)"></b>
-                        </a>
-                      </div>    
-
-            
-              </div>
-               
-            </td>
-
             <td>
+              <div class="row">
+                <div class="col-2">
+                  <a class="cursor logo-color ">
+                    <b title="Decrease value" class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="decreaseQuantity(details)"></b>
+                  </a>
+                </div>
 
+                <div class="col-7">
+                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"
+                    [disabled]="details.stockstatus == 'Soldout'">
+                </div>
+                <div class="col-2  row">
+                  <a class="cursor logo-color">
+                    <b title="Increase value" class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseQuantity(details)"></b>
+                  </a>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div class="row">
+                <div class="col-2">
+                  <a class="cursor logo-color ">
+                    <b title="Decrease value" class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="deacreaseEmptyCans(details)"></b>
+                  </a>
+                </div>
 
-                <div class="row">  
-                
-                    <div class="col-2">
-                        <a class="cursor logo-color ">
-                          
-                          <b title="Decrease value"  class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="deacreaseEmptyCans(details)"></b>
-                        </a>
-                      </div>    
-                  
-              <div class="col-7">
-
-                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)" >
-                  </div>
-
-
-                  <div class="col-2  row">
-                      <a class="cursor logo-color">
-                          <b title="Increase value"  class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseEmptyCans(details)"></b>
-                      </a>
-                    </div>    
-                    </div>
+                <div class="col-7">
+                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)">
+                </div>
+                <div class="col-2  row">
+                  <a class="cursor logo-color">
+                    <b title="Increase value" class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseEmptyCans(details)"></b>
+                  </a>
+                </div>
+              </div>
               <!-- <input class="" placeholder="empty cans" type="number" min="0" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)" > -->
 
             </td>
 
-            <td>
+            <td class=" center">
               <b class="text-danger">{{details.pcost}} </b>
             </td>
-            
-            
+
+
             <td class="">
-                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)" >
-                    <span class="custom-control-indicator"></span>
-                    <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
-                </label>
-               </td>
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
+              </label>
+            </td>
             <td class="text-warning">{{details.servicecharge}} </td>
-            <td >
+            <td>
               <b class="text-success" *ngIf="createPreOrderInput.productDetails && details.quantity">{{details.pcost*details.quantity + amount + details.servicecharge*details.quantity }} </b>
               <b class="text-success" *ngIf="details.quantity == 0 || detailsquantity == ''"> 0 </b>
               <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
               <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
             </td>
-   
+
           </tr>
         </tbody>
       </table>
-    
+
     </div>
+    <h5 class="center warning capital">{{message}}</h5>
+    <h5 class="center warning capital">{{message1}}</h5>
+    <h5 class="center warning capital">{{message2}}</h5>
+    <h5 class="center warning capital">{{emptyCanMessage}}</h5>
+
+<div class="row cost-style">
+  <div class="col">
+      <h5 > Product Cost:
+          <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
+        </h5>
+  </div>
+  <div class="col">
+      <h5> Service Charge :
+          <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
+            </b>
+          </h5>
+  </div>
+  <div class="col">
+      <h5>Exp Delv Charges   :
+          <b>{{this.amount}}</b>
+        </h5>
+  </div>
+  <div class="col">
+      <h5 >Empty Cans Amt :
+          <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
+            }}</b>
+        </h5>
+  </div>
+  <div class="col">
+      <h5 class="right">Total Cost :
+          <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
+            * this.createPreOrderInput.productDetails.quantity) + (this.amount) + (( this.createPreOrderInput.productDetails.quantity
+            - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
+        </h5>
+  </div>
+</div>
 
   </div>
 </md-dialog-content>
-<h5 class="center warning">{{message}}</h5>
-<h5 class="center warning">{{message1}}</h5>
-<h5 class="center warning">{{message2}}</h5>
-<h5 class="center danger">{{emptyCanMessage}}</h5> 
 
 <div class="row float-right pdright-30 mgbottom-20">
-  
-
-
-  <span>
-    <small>
-     <span class="pd-right-20"> Product cost: <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b></span>
-     <span class="pd-right-20"> Service charge : <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}} </b></span>
-      <span class="pd-right-20">Express delivery charges : <b>{{this.amount}}</b></span>
-      <span class="pd-right-40">Empty cans Amount : <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 }}</b></span> <br>
-      <span class="">Total cost : <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge * this.createPreOrderInput.productDetails.quantity)  +  (this.amount) +
-         (( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
-         </span> 
-    </small>
-  </span>
- 
   <md-dialog-actions align="end">
     <button md-raised-button class="btn-primary" (click)="createPreOrder()" [disabled]="(this.createPreOrderInput.productDetails.emptycans != ' ') &&  (emptyCansKeyUp == true)">PROCEED TO ORDER ASSIGNMENT</button>&nbsp;
     <button md-raised-button class=" bg-warning" (click)="deliverPreOrder()" [disabled]="Details.isappdownloaded === null">DELIVERY AS A DISTRIBUTOR</button>&nbsp;

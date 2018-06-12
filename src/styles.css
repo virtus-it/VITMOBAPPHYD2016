@@ -121,8 +121,29 @@ table thead {
     color: var( --logo-color);
     cursor: pointer;
   }
+  .onhovertooltip-50{
+    width:50px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .onhovertooltip-100{
     width:100px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-275{
+    width:275px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-500{
+    width:500px;
    text-overflow: ellipsis;
     white-space: nowrap;
   overflow: hidden;

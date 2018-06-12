@@ -33,13 +33,12 @@
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
 
               <small *ngIf="dailogOrderDetails.dealerdetails">
-                <span class="gray">Distributor Name : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}
+                <span class="gray">Distributor : </span>{{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}
                 ({{dailogOrderDetails.dealerdetails.mobileno}})
               </small>
 
               <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null ">
-                <span class="gray">Distributor Name : </span> - </small>
-
+                <span class="gray">Distributor : </span> - </small>
 
             </div>
 
@@ -167,7 +166,7 @@
                 </tr>
               </thead>
               <tbody class="tab-heigt center">
-                <h5 *ngIf="customerProductDetails.length == 0" class="warning">
+                <h5 *ngIf="customerProductDetails.length == 0" class="warning mgtop-10">
                   <span class="fa fa-frown-o"></span> There are no available cans for this customer</h5>
                 <tr *ngFor="let canDetails of customerProductDetails; let i = index" [attr.data-index]="i">
                   <td width="80%">
