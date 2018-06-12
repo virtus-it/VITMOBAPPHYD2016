@@ -128,6 +128,13 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
+  .onhovertooltip-275{
+    width:275px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button {
     font-weight: 400 !important;
 }

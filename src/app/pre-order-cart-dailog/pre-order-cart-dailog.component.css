@@ -54,3 +54,13 @@
 .pd-right-40{
   padding-right: 40px;
 }
+.cost-style{
+border-top: 1px solid #999;
+padding-top: 10px;
+}
+.cost-style h5{
+  margin-bottom: 0px !important;
+}
+.bg-warning {
+  color: #333 !important;
+}
