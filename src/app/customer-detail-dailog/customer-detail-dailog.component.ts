@@ -76,23 +76,24 @@ export class CustomerDetailDailogComponent implements OnInit {
 
   }
 
-  // viewOrderDetails(data){
-  //   let formattedData = {order_id: data.order_id , order_by:data.order_by}
-  //   let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+  viewOrderDetails(data){
+    let formattedData = {order_id: data.order_id , order_by:data.order_by}
+    this.onCloseCancel();
+    let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
-  //     width: '95%',
-  //     data: formattedData
-  //   });
-  //   dialogRefShowOrder.afterClosed().subscribe(result => {
-  //     //console.log(`Dialog closed: ${result}`);
-  //     if(result == 'success'){
-       
-  //     }
+      width: '95%',
+      data: formattedData
+    });
+    dialogRefShowOrder.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if(result == 'success'){
+      }
+    });
+
+  }
 
 
-  //   });
 
-  // }
 
   getDistributors() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }

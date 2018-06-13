@@ -395,12 +395,16 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   onChangeCheckWeek(week: string, isChecked: boolean) {
     if (isChecked) {
       this.checkAll = false;
+      
       if (this.scheduleInput.weekdays) {
         this.scheduleInput.weekdays = this.scheduleInput.weekdays + ',' + week;
-      } else {
+      } 
+      else {
         this.scheduleInput.weekdays = this.scheduleInput.weekdays + week;
       }
-    } else {
+    }
+    
+    else {
       this.checkAll = false;
       this.selectAllWeekDays = false;
 
@@ -412,7 +416,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         new RegExp(week, 'g'),
         ''
       );
-      this.scheduleInput.weekdays = replaceValue;
+      this.scheduleInput.weekdays = replaceValue.replace(/^,/, '');
     }
   }
 
@@ -570,6 +574,13 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   }
 
   validateScheduleDays() {
+
+    if(this.Detail.data.weekdays){
+      this.scheduleInput.weekdays = this.Detail.data.weekdays;
+    }
+    else if(this.Detail.data.days){
+      this.scheduleInput.days = this.Detail.data.days;
+    }
     if (this.Detail.data.scheduletype) {
       if (this.Detail.data.scheduletype.toLowerCase() == 'weekdays') {
         if (this.Detail.data.weekdays) {
