@@ -253,7 +253,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         this.lat = parseFloat(result.data[0].customer_latitude);
         this.lng = parseFloat(result.data[0].customer_longitude);
       } else {
-        this.gpsMessage = 'No GPS for this customer';
+        this.gpsMessage = 'No GPS for this Customer';
         this.markers[0].lat = '';
         this.markers[0].lng = '';
       }

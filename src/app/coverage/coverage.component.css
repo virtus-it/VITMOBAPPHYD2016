@@ -49,3 +49,6 @@ b, strong {
 .container-fluid{
   font-size: 14px;
 }
+.btn-default{
+  border-radius: 2px !important;
+}
