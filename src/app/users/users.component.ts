@@ -165,9 +165,6 @@ filterDailogToggle(){
 }
 
 
-
-
-
   ngOnInit() {
     this.getAllUsers(true);
 

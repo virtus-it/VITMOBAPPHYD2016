@@ -1,4 +1,4 @@
-<div class=" dist-style minheight-500">
+<!-- <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
       <h4>
@@ -8,46 +8,84 @@
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
         <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
-            <i class="fa fa-plus-circle fs-20" aria-hidden="true"></i>
+            <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
           </a>
 
 
     </div>
   </div>
-  <div>
 
+   <div>
     <div class="row pd-15 mg-0">
         <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead >
             <tr >
-              <th width="20%">Feature</th>
-              <th width="20%">Description</th>
-              <th width="20%">Points</th>
-              <th width="20%">Type</th>
-              <th width="20%%">Action</th>
+              <th width="10%">Feature</th>
+              <th width="35%">Description</th>
+              <th width="8%">Points</th>
+              <th width="15%">Type</th>
+              <th width="8%%">Action</th>
 
 
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let points of allPoints">
-              <td class="" width="">{{points.type}}</td>
+              <td class="capitalize" width="">{{points.type}}</td>
               <td class="" width="">{{points.description}}</td>
               <td class="" width="">{{points.points}}</td>
-              <td class="" width="">{{points.subtype}}</td>
+              <td class="capitalize" width="">{{points.subtype}}</td>
               <td class="" width="">
                 <i  *ngIf="points.isactive == 1 "class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints(points.type)" ></i>
-                <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints(points.type)" ></i>
-
+                <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints(points.type)" ></i> &nbsp;
                 <i class="fa fa-edit logo-color" title="Edit points" (click)="editPoints(points)"></i> 
               </td>
             </tr>
           </tbody>
-        </table>
-
-
-
-   
+        </table>   
     </div>
   </div>
-</div>
+</div> -->
+
+<div class=" dist-style minheight-500">
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-file-powerpoint-o"></i> Points</h4>
+    </div>
+    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+        <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
+            <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
+          </a>
+    </div>
+  </div>  
+    <div class='pd-15'>
+      <div class="row brd-box-box" *ngFor="let points of allPoints">
+        <div class="col-5 left bg-color-bg">
+          <div class="row">
+                 <div class="col">
+                <b class="capital">Feature:  </b> <span class="capitalize">{{points.type}}</span>
+                <br>
+                <b> Type: </b> <span class="capitalize">{{points.subtype}}</span>
+            </div>
+            <div class="col-4 align-self-center center">
+                <span class="point-style">{{points.points}} Points </span>
+            </div>        
+          </div> 
+        </div>
+  
+        <div class="col-6  pd-10">  
+          <div class="left">
+            <b>Details:</b> <br>
+            <span class="gray6">{{points.description}}</span>
+          </div>
+        </div>
+
+        <div class="col-1 align-self-center">
+            <i  *ngIf="points.isactive == 1 "class="fa fa-thumbs-up green fs-18" title="Active State" (click)="DeactivatePoints(points.type)" ></i>
+            <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red fs-18" title="In-active State" (click)="ActivatePoints(points.type)" ></i> &nbsp;
+            <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)"></i> 
+          </div>
+        </div>
+      </div>
+    </div>

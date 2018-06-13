@@ -1,69 +1,49 @@
 <div class="row justify-content-between modal-title ">
-    <div class="col-md-4 col-sm-4">
-      <i class="fa fa-edit"></i> Add Points
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-edit"></i> Add Points
+  </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+
+  <div class="container-fluid pd-15x25 brd-bottom">
+
+    <div class="row">
+        <div class="col-4">
+            <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Feature" name="feature" [(ngModel)]="addpointsInput.feature">
+        </md-form-field>
+      </div>
+      <div class="col-4">
+          <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Points" name="points" [(ngModel)]="addpointsInput.points">
+        </md-form-field>
+      </div>
+      <div class="col-4">
+          <md-select placeholder="Type" class="wd-100pc" [(ngModel)]="addpointsInput.type">
+            <md-option value="customer">Customer</md-option>
+            <md-option value="distributor">Distributor</md-option>
+          </md-select>
+        </div>
     </div>
-    <div class="col-md-1 col-sm-1 right">
-      <strong>
-        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
-      </strong>
+
+    <div class="row">
+      <div class="col">
+          <md-form-field class="wd-100pc">
+              <textarea class="form-control" mdInput placeholder="Description" name="description" [(ngModel)]="addpointsInput.description"></textarea>
+            </md-form-field>
+      </div>
     </div>
   </div>
-  <md-dialog-content layout="column">
-  
-    <div class="container-fluid pd-15x25 brd-bottom">
-      
-    
-      <div class="row">
-        <div class="col-md-6 col-sm-6 ">
-          <md-form-field class="">
-            <input class="form-control"  mdInput placeholder="Feature" name="feature" [(ngModel)]="addpointsInput.feature">
-           
-          </md-form-field>
-        </div>
-      
-        <div class="col-md-6 col-sm-6 ">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Points" name="points" [(ngModel)]="addpointsInput.points">
-            
-          </md-form-field>
-  
-        </div>
-      </div>
-      
-      <div class="row">
 
-          <div class="col-md-6 col-sm-6 ">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Description" name="description" [(ngModel)]="addpointsInput.description">
-               
-              </md-form-field>
-      
-            </div>
-
-
-            <div class="form-group col-md-4 col-sm-6">
-                <md-select placeholder="Type" class="wd-100pc" [(ngModel)]="addpointsInput.type">
-                  <md-option value="customer">Customer</md-option>
-                  <md-option value="distributor">Distributor</md-option>
-                </md-select>
-              </div>
-
-
-      </div>
-
-   
-    
-  
-
-       
-      </div>
-  
-  </md-dialog-content>
-  <div class="row float-right pdright-30">
-    <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="addandUpdatePoints()">SUBMIT</button>
-      <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
-    </md-dialog-actions>
-  </div>
-  
-  
+</md-dialog-content>
+<div class="row float-right pdright-30">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
+    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

@@ -113,18 +113,15 @@
           <td width="10%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
         </tr>
       </tbody>
-      <br>
-      <h4 class="warning  capitalize center">
-        <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="ordersClickMore">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-        <span *ngIf="!ordersClickMore">Record Not Available</span>
-      </h4>
-
-
     </table>
+    <br>
+    <h4 class="warning  capitalize center">
+      <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="ordersClickMore">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+      <span *ngIf="!ordersClickMore">Record Not Available</span>
+    </h4>
   </div>
 </md-dialog-content>
-
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
