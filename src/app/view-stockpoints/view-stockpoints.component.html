@@ -1,30 +1,22 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-md-5  col-sm-5  col-lg-5 oneline">
+  <div class="col-md-3  col-sm-3  col-lg-3 oneline">
     <i class="fa fa-gift"></i> Stock Points
   </div>
-
-
-  <div class="col-md-5  col-sm-5  col-lg-5 right">
+  <div class="col-8 center">
+      <button type="submit" md-raised-button class=""  style="color:rgb(7, 53, 94);" [ngClass]="{'btn-warning': tabPanelView === 'mapview'}" (click)="showTabPanel('mapview')">Map View</button>
+      <button type="submit" md-raised-button class="" style="color:rgb(7, 53, 94);" [ngClass]="{'btn-warning': tabPanelView === 'gridview'}" (click)="showTabPanel('gridview')">
+      Grid View </button>
+      </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
     <!-- <strong class="fa fa-plus fa-2 plus-style" (click)="createStockPoint(Details)"></strong> -->
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
     </strong>
   </div>
 </div>
-
-
-
 <md-dialog-content layout="column" class="brd-bottom center mg-0">
-
-    <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'mapview'}"
-     (click)="showTabPanel('mapview')">Map View</button>
-    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'gridview'}" 
-    (click)="showTabPanel('gridview')"> Grid View </button>
-
-
-
-
-      <!-- <ul class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10" role="tablist">
+ 
+  <!-- <ul class="nav nav-pills flex-column flex-sm-row  mgtopbottom-10" role="tablist">
           <p class="col-xs-5 col-sm-5 col-md-5 col-lg-5"></p>
       <li class="nav-item">
           <a class="nav-link active" data-toggle="pill">Home</a>
@@ -33,20 +25,13 @@
           <a class="nav-link" data-toggle="pill" (click)="showStockpointsOnMap()">Map view</a>
         </li>
       </ul> -->
-    
-
-
-  
-        
-  <h5 class="center text-warning">{{noDataError}}</h5>
+  <h5 class="center text-warning mgtop-10">{{noDataError}}</h5>
   <!-- <div class="col-md-12 text-right" >
     <span><b>Add stock point</b></span>
     <i class="fa fa-plus fa-2 plus-style navbar-right"></i>
   </div> -->
-
   <div class="container-fluid" *ngIf="tabPanelView == 'gridview'">
     <div class="row pd-15x10 mg-0">
-
       <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
         <thead>
           <tr>
@@ -57,28 +42,22 @@
             <th width="10%">Action</th>
           </tr>
         </thead>
-
         <tbody>
           <tr class="" *ngFor="let stock of stockpoints; let i= index">
-
             <td class="left" width="10%">
               <span>{{i+1}}</span>
             </td>
-
             <td class="left" width="20%">
               <span>{{stock.latitude}}</span>
             </td>
             <td class="left" width="20%">
               <span>{{stock.longitude}}</span>
             </td>
-
             <td class="left" width="42%">
               <span *ngIf="stock.address == '' || stock.address === null"> - </span>
               <span class="onhovertooltip-350" title="{{stock.address}}">{{stock.address}}</span>
-
             </td>
             <td class="left" width="8%">
-
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier" (click)="updateStockPoint(stock)"></i>
               &nbsp;&nbsp;
               <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)="deleteStockPoint(stock)"></i>
@@ -88,41 +67,29 @@
       </table>
     </div>
   </div>
-
-
   <div class="" *ngIf="tabPanelView == 'mapview'">
-
-      <div class="row">
-          <div class="col">
-            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
-              <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" >
-
-                <agm-info-window>
+    <div class="row">
+      <div class="col">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+          <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
+            <agm-info-window>
               Stock point
-      
             </agm-info-window>
-
-
-              </agm-marker>
-            </agm-map>
-          </div>
-          
-        </div>
-
-
+          </agm-marker>
+        </agm-map>
+      </div>
+    </div>
   </div>
-
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions>
     <!-- <button class="fa fa-plus fa-2 plus-style" (click)="createStockPoint()"></button> -->
   </md-dialog-actions>
 </div>
-
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button md-raised-button class="btn-primary" (click)="createStockPoint(Details)"><i class="fa fa-plus"></i> Add Stock Point</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="createStockPoint(Details)">
+      <i class="fa fa-plus"></i> Add Stock Point</button>&nbsp;
     <button md-raised-button class="btn-default" (click)='onCloseCancel()'>CANCEL</button>&nbsp;
-    
   </md-dialog-actions>
 </div>

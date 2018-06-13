@@ -1,211 +1,173 @@
 ﻿<div class="dist-style  minheight-500">
-    <div class=" row  distIcon-style">
+  <div class=" row  distIcon-style">
     <div class="col-md-8  col-sm-8 col-lg-8">
-        <h4 class="left"><i class="fa fa-globe"></i> Covered Area</h4>
+      <h4 class="left">
+        <i class="fa fa-globe"></i> Covered Area</h4>
     </div>
-   
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-    
       <form class="example-form" (ngSubmit)="getOrderDetail()">
-        
-      <div class="input-group">
-          <input type="text" class="form-control" placeholder="Order Id"  name="orderid" [(ngModel)]="order.orderId">
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Order Id" name="orderid" [(ngModel)]="order.orderId">
           <span class="input-group-btn">
-            <button type="submit" class="btn btn-primary" type="button"(click)="getOrderDetail()">Go!</button>
+            <button type="submit" class="btn btn-primary" type="button" (click)="getOrderDetail()">Go!</button>
           </span>
-        </div>   
-        </form>
-      
-  </div>
-    
-  <div class="col-md-1  col-sm-1  col-lg-1">
-      <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
-      
-    </div>
-      <!-- filter code starts here -->
-
-      <div class="col-md-1  col-sm-1  col-lg-1 align-self-center">
-          <a class="">
-            <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
-            <div class="filterView" *ngIf="showFilterDailog">
-              <div class="height-500">
-                <div class="form-group">
-                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.area.searchtype"  name="type" class="full-width left">
-                    <md-option value="categoryname">Category</md-option>
-                    
-                   
-                  </md-select>
-    
-                </div>
-    
-                    <div class="left mgtop-20" *ngIf="filterInput.area.searchtype == 'categoryname'">
-                  <angular2-multiselect class="" [data]="categoryList"  [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                    name="selectedItem"></angular2-multiselect>
-                </div>
-               
-                <br>
-                <div class="input-group pd-10  ">
-                  <button md-raised-button color="primary" class="mgright-5" (click)="searchPolygon()">
-                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                  </button>
-                  <button md-raised-button color="primary" (click)="clearFilter()">
-                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                  </button>
-                </div>
-    
-              </div>
-            </div>
-          </a>
         </div>
-        <!-- filter ends here -->
-
-
-   
-     
+      </form>
     </div>
-    <div id="" class="row pd-15x10 mg-0">
-      <div class="col">
-        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
-            <agm-marker  *ngFor="let m of markers; let i = index"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            ></agm-marker>
-
-            
-
-            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
-            [iconUrl]="m.icon">
-            <!-- <agm-info-window>
+    <div class="col-md-1  col-sm-1  col-lg-1">
+      <button md-raised-button color="primary" (click)="ShowAllPolygons()"> Show All</button>
+    </div>
+    <!-- filter code starts here -->
+    <div class="col-md-1  col-sm-1  col-lg-1 align-self-center">
+      <a class="">
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="height-500">
+            <div class="form-group">
+              <md-select placeholder="Filter By" [(ngModel)]="filterInput.area.searchtype" name="type" class="full-width left">
+                <md-option value="categoryname">Category</md-option>
+              </md-select>
+            </div>
+            <div class="left mgtop-20" *ngIf="filterInput.area.searchtype == 'categoryname'">
+              <angular2-multiselect class="" [data]="categoryList" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+                name="selectedItem"></angular2-multiselect>
+            </div>
+            <br>
+            <div class="input-group pd-10  ">
+              <button md-raised-button color="primary" class="mgright-5" (click)="searchPolygon()">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <!-- filter ends here -->
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
+        <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+          [longitude]="m.lng" [iconUrl]="m.icon">
+          <!-- <agm-info-window>
               Hi, this is the 1  <strong>info window</strong>
       
             </agm-info-window> -->
-          </agm-marker>
-
-
-
-
-          <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
-            [iconUrl]="m.icon">
-            <agm-info-window>
-            <strong>{{m.name}} , {{m.productType}}( {{m.quantity}} Qty)
-              # {{m.orderid}} 
-
+        </agm-marker>
+        <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat"
+          [longitude]="m.lng" [iconUrl]="m.icon">
+          <agm-info-window>
+            <strong>{{m.name}} , {{m.productType}}( {{m.quantity}} Qty) # {{m.orderid}}
             </strong>
-      
-            </agm-info-window>
-          </agm-marker>
+          </agm-info-window>
+        </agm-marker>
+        <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path" [fillColor]="'#0073e6'" [geodesic]="true" [strokeWeight]="1"
+          [clickable]="true" (polyClick)="click($event,p)" [editable]="false" [polyDraggable]="false">
+        </agm-polygon>
+      </agm-map>
+    </div>
+    <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="listOfDistributors.length || orderDetails.length">
+      <div class="container-fluid" *ngIf="listOfDistributors.length">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <!-- <th width="3%">S.No</th> -->
+              <th width="40%">Distributor</th>
+              <th width="25%">Mobile</th>
+              <th width="35%">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i">
+              <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
+              <td width="40%" class="left capital">{{dist.distributorName}}</td>
+              <td width="25%" class="left capital">{{dist.mobileno}}</td>
+              <td width="35%" class="left capital">
+                <label class="btn btn-link" title="Orders" (click)="ViewProduct(dist)">
+                  <i class="fa fa-file-text-o"></i>
+                </label>
 
-
-
-
-
-
-          <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
-                      
-                       [fillColor]="'#0073e6'"
-                         [geodesic]="true" 
-                         [strokeWeight]="1"   
-                       [clickable] = "true"
-                      (polyClick)="click($event,p)" 
-                       [editable]="false"
-                       [polyDraggable]="false">
-            
-          </agm-polygon>
-        
-        </agm-map>
+                <label class="btn btn-link" (click)="DistrbutorHover(dist)">
+                  <i class="fa fa-map"></i>
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="container-fluid brd-logo" *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i">
+        <div class=" form-group  row pdleftright-15">
+          <div class="col left details-style ">
+            <b class="">Order Details </b> &nbsp;&nbsp;&nbsp;
+          </div>
+          <div class="p-2 right logo-bg pdtop-5 ">
+            <button class="btn btn-default btn-sm" (click)="refresh()">Clear</button>
+          </div>
+          <div class="p-2 right logo-bg pdtop-5 ">
+            <button class="btn btn-default btn-sm" (click)="ViewDistributors(order)">Assign</button>
+          </div>
         </div>
-        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="listOfDistributors.length || orderDetails.length">
-        <div class="container-fluid" *ngIf="listOfDistributors.length">
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-                <!-- <th width="3%">S.No</th> -->
-                <th width="40%">Distributor</th>
-                <th width="25%">Mobile</th>
-                <th width="35%">Action</th>         
-                 </tr>
-            </thead>
-            <tbody>
-              <tr  *ngFor="let dist of listOfDistributors; let i = index" [attr.data-index]="i" >
-                <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
-                <td width="40%" class="left capital">{{dist.distributorName}}</td>
-                <td width="25%" class="left capital">{{dist.mobileno}}</td>
-                <td width="35%" class="left capital">
-                    <label class="btn btn-link"  title="Orders" (click)="ViewProduct(dist)"><i class="fa fa-file-text-o" ></i> 
-                    </label>
-                 
-               <label class="btn btn-link"  (click)="DistrbutorHover(dist)"><i class="fa fa-map"></i>
-             </label>
-               </td>
-
-               </tr>
-            </tbody>
-          </table>
+        <div class="form-group row pdleftright-15">
+          <div class="col-md-3  col-sm-3  col-lg-3 left">
+            <label class="label-gray">Order Id</label>
+            <br>
+            <b>#{{order.order_id}}</b>
+          </div>
+          <div class="col-md-9  col-sm-9 col-lg-9 right">
+            <label class="label-gray">Customer Name </label>
+            <br>
+            <b class="capitalize"> {{order.orderby_firstname}} {{order.orderby_lastname}}</b>
+          </div>
         </div>
-        <div class="container-fluid brd-logo"  *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i">
-            <div class=" form-group  row pdleftright-15">
-                <div class="col-md-6 col-sm-6 col-lg-6 left details-style ">
-                    <b class="">Order Details </b>  &nbsp;&nbsp;&nbsp;
-                  </div>
-                    <div class="col-md-3  col-sm-3  col-lg-3 right logo-bg pdtop-5 ">
-                        <button class="btn btn-default btn-sm" (click)="refresh()" >Clear</button>                    
-                    </div> 
-                <div class="col-md-3  col-sm-3  col-lg-3 right logo-bg pdtop-5 ">
-                    <button class="btn btn-default btn-sm" (click)="ViewDistributors(order)" >Assign</button>                    
-                </div> 
-                </div>
-            
-            <div class="form-group row pdleftright-15">
-              <div class="col-md-3  col-sm-3  col-lg-3 left">
-                <label class="label-gray">Order Id</label><br>
-                <b>#{{order.order_id}}</b>
-              </div>
-              <div class="col-md-9  col-sm-9 col-lg-9 right">
-                  <label  class="label-gray">Customer Name </label><br>
-                  <b class="capitalize"> {{order.orderby_firstname}} {{order.orderby_lastname}}</b>
-                </div>
-              </div>
-              <div class="form-group row pdleftright-15">
-                  <div class="col-md-6  col-sm-6  col-lg-6 left">
-                    <label  class="label-gray">Date Placed</label><br>
-                    <b>{{order.ordered_date}}</b>
-                  </div>
-                  <div class="col-md-6  col-sm-6  col-lg-6 right">
-                      <label  class="label-gray">Customer Mobile</label><br>
-                      <b>{{order.orderby_mobileno}}</b>
-                    </div>
-                  </div>
-          
-                  <div class="form-group row pdleftright-15">
-                      <div class="col-md-6  col-sm-6  col-lg-6 left">
-                          <label  class="label-gray">Brand Name</label><br>
-                          <b class="capitalize">{{order.brandname}} {{order.prod_type}} ({{order.quantity}} Qty)</b>
-                        </div>
-                      <div class="col-md-6  col-sm-6  col-lg-6 right">
-                          <label  class="label-gray">Amount</label><br>
-                          <b>Rs. {{order.bill_amount}}</b>
-                        </div>
-                      </div>
-                      <div class="form-group row pdleftright-15">
-                          <div class="col-md-6  col-sm-6  col-lg-6 left">
-                              <label  class="label-gray">Forwarded To</label><br>
-                              <b class="capitalize">{{order.dealerdetails.firstname}}</b>
-                            </div>
-                          <div class="col-md-6  col-sm-6  col-lg-6 right">
-                              <label  class="label-gray">Payment Type</label><br>
-                              <b>{{order.paymenttype}}</b>
-                            </div>
-                          </div>
-                  <div class="form-group row pdleftright-15">
-            
-                      <div class="col center">
-                          <label  class="label-gray">Delivery Time</label><br>
-                          <label class="warning">{{order.delivery_exceptedtime}}</label>
-                        </div>
-                      </div>
-           
+        <div class="form-group row pdleftright-15">
+          <div class="col-md-6  col-sm-6  col-lg-6 left">
+            <label class="label-gray">Date Placed</label>
+            <br>
+            <b>{{order.ordered_date}}</b>
+          </div>
+          <div class="col-md-6  col-sm-6  col-lg-6 right">
+            <label class="label-gray">Customer Mobile</label>
+            <br>
+            <b>{{order.orderby_mobileno}}</b>
+          </div>
         </div>
-            <!-- <table  class="table table-borderless">
+        <div class="form-group row pdleftright-15">
+          <div class="col-md-6  col-sm-6  col-lg-6 left">
+            <label class="label-gray">Brand Name</label>
+            <br>
+            <b class="capitalize">{{order.brandname}} {{order.prod_type}} ({{order.quantity}} Qty)</b>
+          </div>
+          <div class="col-md-6  col-sm-6  col-lg-6 right">
+            <label class="label-gray">Amount</label>
+            <br>
+            <b>Rs. {{order.bill_amount}}</b>
+          </div>
+        </div>
+        <div class="form-group row pdleftright-15">
+          <div class="col-md-6  col-sm-6  col-lg-6 left">
+            <label class="label-gray">Forwarded To</label>
+            <br>
+            <b class="capitalize">{{order.dealerdetails.firstname}}</b>
+          </div>
+          <div class="col-md-6  col-sm-6  col-lg-6 right">
+            <label class="label-gray">Payment Type</label>
+            <br>
+            <b>{{order.paymenttype}}</b>
+          </div>
+        </div>
+        <div class="form-group row pdleftright-15">
+          <div class="col center">
+            <label class="label-gray">Delivery Time</label>
+            <br>
+            <label class="warning">{{order.delivery_exceptedtime}}</label>
+          </div>
+        </div>
+      </div>
+      <!-- <table  class="table table-borderless">
               <tbody *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i"><tr >
                 <td> <span class="td-label11">Order Id</span></td>
                 <td> <span class="td-label11 right">Customer Name </span></td>
@@ -232,7 +194,6 @@
               </tr>
             </tbody>
           </table> -->
-          </div>
-      
+    </div>
   </div>
-  </div>
+</div>
