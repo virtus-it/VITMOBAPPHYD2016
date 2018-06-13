@@ -154,6 +154,7 @@ uploadImageResult(result){
  if(result.result == 'success'){
    console.log('image uploaded successfully');
    this.imageUplaodSuccess = true;
+   this.imageUpdateError = false;
    this.updateUser();
  }
  else{

@@ -68,12 +68,24 @@
     </div>
   </div>
   <div class="" *ngIf="tabPanelView == 'mapview'">
+<<<<<<< HEAD
     <div class="row">
       <div class="col">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
           <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
             <agm-info-window>
               Stock point
+=======
+
+      <div class="row">
+          <div class="col">
+            <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+              <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" >
+
+                <agm-info-window>
+              Stock point {{m.index}}
+      
+>>>>>>> 83914453dd9dbfb2b77182808c98be72e17567ab
             </agm-info-window>
           </agm-marker>
         </agm-map>

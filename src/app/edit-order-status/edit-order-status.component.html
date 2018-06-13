@@ -3,73 +3,76 @@
     <i class="fa fa-edit"></i> Edit Status
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
-    <strong >
+    <strong>
       <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
     </strong>
   </div>
 </div>
 <md-dialog-content layout="column">
-  <form class="example-form" >
+  <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row form-group">
-          <div class="col-4 form-group">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="delivered">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Delivered</span>
-            </label>
-          </div>
-          <div class="col-4 form-group">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="doorlock">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"> Door Locked</span>
-            </label>
-          </div>
-          <div class="col-4 form-group">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input "  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="rejected">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"> Rejected</span>
-            </label>
-          </div>
-          <div class="col-4 form-group">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="not_reachable">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"> Not Reachable</span>
-            </label>
-          </div>
-          <div class="col-4 form-group">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input"  [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="cannot_deliver">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Can't Deliver</span>
-            </label>
-          </div>
+        <div class="col-4 form-group">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="delivered">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Delivered</span>
+          </label>
+        </div>
+        <div class="col-4 form-group">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="doorlock">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Door Locked</span>
+          </label>
+        </div>
+        <div class="col-4 form-group">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input " [(ngModel)]="editStatusInput.order.orderstatus" name="status"
+              value="rejected">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Rejected</span>
+          </label>
+        </div>
+        <div class="col-4 form-group">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="not_reachable">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Not Reachable</span>
+          </label>
+        </div>
+        <div class="col-4 form-group">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="editStatusInput.order.orderstatus" name="status" value="cannot_deliver">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Can't Deliver</span>
+          </label>
+        </div>
       </div>
       <div class="row pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
         <div class="col-3 pleft">
 
-              <md-form-field class="wd-60pc">
-                <input class="form-control" mdInput placeholder="Quantity" name="Quantity"  [(ngModel)]="editStatusInput.order.delivered_qty" (ngModelChange)="changeAmount($event)">
+          <md-form-field class="wd-60pc">
+            <input class="form-control" mdInput placeholder="Quantity" name="Quantity" [(ngModel)]="editStatusInput.order.delivered_qty"
+              (ngModelChange)="changeAmount($event)">
 
-              </md-form-field>
+          </md-form-field>
         </div>
         <div class="col-3">
-                <md-form-field class="wd-60pc">
-                    <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans" (ngModelChange)="emptyCansChanged($event)">
-              </md-form-field>
-          </div>
-          <div class="col align-self-center" *ngIf="editStatusInput.order.paymentype == 'cash'">
-            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-              <input type="checkbox" id="rem"  class="custom-control-input" name="isConfirmed" [(ngModel)]="isConfirmed">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Confirm Payment</span>
-            </label>
-          </div>
+          <md-form-field class="wd-60pc">
+            <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans"
+              (ngModelChange)="emptyCansChanged($event)">
+          </md-form-field>
+        </div>
+        <div class="col align-self-center" *ngIf="editStatusInput.order.paymentype == 'cash'">
+          <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+            <input type="checkbox" id="rem" class="custom-control-input" name="isConfirmed" [(ngModel)]="isConfirmed">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description">Confirm Payment</span>
+          </label>
+        </div>
       </div>
-      <div class="border-top pdtop-10" >
+      <div class="border-top pdtop-10">
         <div class="row form-group" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div class="col-2">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
@@ -87,108 +90,108 @@
           </div>
           <div class="col-2">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input" name="type">
+              <input type="radio" id="rem" class="custom-control-input" value="paytm" name="type">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">PAYTM</span>
             </label>
           </div>
           <div class="col">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input" name="type">
+              <input type="radio" id="rem" class="custom-control-input" value="online" name="type">
               <span class="custom-control-indicator"></span>
               <span class="custom-control-description">ONLINE BANKING</span>
             </label>
           </div>
         </div>
-        <div class="row" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+        <div class="row mgtop-20" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div class="col-4 pleft">
-              <small class="">Due Amount</small><br>
-              <b class="" *ngIf= "orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
-           
+            <small class="">Due Amount</small>
+            <br>
+            <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+
           </div>
-          <div class="col-4" >
+          <div class="col-4">
             <md-form-field class="wd-60pc">
-            <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" > 
-          </md-form-field>
+              <input class="" mdInput placeholder="Advance Amount" name='advamt' [(ngModel)]="editStatusInput.order.adv_amt">
+            </md-form-field>
           </div>
           <div class="col-4" *ngIf="editStatusInput.order.paymentype == 'cash'">
-          <md-form-field class="wd-60pc">
-              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.bill_amount">
+            <md-form-field class="wd-60pc">
+              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)]="editStatusInput.order.bill_amount">
             </md-form-field>
-            </div>
           </div>
+        </div>
 
-          <div class="row" *ngIf="editStatusInput.order.orderstatus !== 'delivered'">
-            <div class="col-4 pleft">
-                <small class="">Due Amount</small><br>
-                <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
-             
-            </div>
-            <div class="col-4" >
-       
-
-                  <small class="">Advance Amount </small><br>
-                  <b class="">Rs.{{editStatusInput.order.adv_amt}}</b>
-
-
-              <!-- <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" >  -->
-         
-            </div>
-            <div class="col-4">
-      
-
-                <small class="">Bill Amount</small><br>
-                <b class="">Rs.{{orderDetail.bill_amount}}</b>
-
-
-                <!-- <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  > -->
-         
-              </div>
-            </div>
-
-
-
-
-
-          
-          <div class="row" >
-            <div class="col-4 pleft">
-              <small class="">Ordered Amount</small><br>
-              <b class="" >Rs.{{orderDetail.prod_cost}} * {{orderDetail.quantity}}</b>
-            </div>
-            <div class="col-4">
-              <small class="">Service Charge</small><br>
-              <b class=""> Rs. {{orderDetail.servicecharges}} </b>
-            </div>
-
-            <div class="col-4">
-              <small class="">Exp delv chgs</small><br>
-              <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b> 
-            </div>
-
+        <div class="row mgtop-20" *ngIf="editStatusInput.order.orderstatus !== 'delivered'">
+          <div class="col-4 pleft">
+            <small class="">Due Amount</small>
+            <br>
+            <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
 
           </div>
-          <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
-          <div  *ngIf="editStatusInput.order.paymentype == 'cash'">
-              <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->
-               
-            </div>
+          <div class="col-4">
+
+
+            <small class="">Advance Amount </small>
+            <br>
+            <b class="">Rs.{{editStatusInput.order.adv_amt}}</b>
+
+
+            <!-- <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" >  -->
+
           </div>
-    
+          <div class="col-4">
+
+
+            <small class="">Bill Amount</small>
+            <br>
+            <b class="">Rs.{{orderDetail.bill_amount}}</b>
+
+
+            <!-- <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  > -->
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 pleft">
+            <small class="">Ordered Amount</small>
+            <br>
+            <b class="">Rs.{{orderDetail.prod_cost}} * {{orderDetail.quantity}}</b>
+          </div>
+          <div class="col-4">
+            <small class="">Service Charges</small>
+            <br>
+            <b class=""> Rs. {{orderDetail.servicecharges}} </b>
+          </div>
+
+          <div class="col-4">
+            <small class="">Express Delivery Charges</small>
+            <br>
+            <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b>
+          </div>
+
+
+        </div>
+        <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+          <div *ngIf="editStatusInput.order.paymentype == 'cash'">
+            <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->
+
+          </div>
+        </div>
+
+      </div>
     </div>
-     </div>
-    
   </form>
 </md-dialog-content>
 
-<span  class="red" *ngIf="emptyCansError">
+<span class="red" *ngIf="emptyCansError">
   <small>
     Empty cans must be less than quantity
   </small>
 </span>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true"(click)="updateOrderStatus()">UPDATE</button>      
+    <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true" (click)="updateOrderStatus()">UPDATE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

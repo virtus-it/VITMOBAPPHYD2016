@@ -16,6 +16,14 @@ export class UsersComponent implements OnInit {
 
   allUsers:any = [];
   UserClickMore = true;
+  filterType = {"type":"usertype"};
+  filterInput = {'userType':"" , "mobileno":"" , "address":"" };
+  showFilterDailog = false;
+  filterRecords = false;
+  input  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId(),"lastuserid":0,
+  "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
+  "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"", 
+  "moyaversioncode":""}};
 
 
 
@@ -55,6 +63,50 @@ dialogRefEditCustomer.afterClosed().subscribe(result => {
 
 }
 
+search(firstcall){
+  let input = this.input;
+  if (this.allUsers && this.allUsers.length && !firstcall) {
+    let lastCustomer: any = _.last(this.allUsers);
+    if (lastCustomer) {
+        input.root.lastuserid = lastCustomer.userid;
+    }
+
+}
+else {
+    this.allUsers = [];
+    input.root.lastuserid = 0;
+}
+
+  if(this.filterType.type =='usertype'){
+    input.root.searchtext  = this.filterInput.userType;
+  }
+  else if(this.filterType.type =='mobileno'){
+    input.root.searchtext  = this.filterInput.mobileno;
+  }
+  else if(this.filterType.type == 'address'){
+    input.root.searchtext  = this.filterInput.address;
+  }
+  console.log(input);
+  this.distributorService.getAllDistributors(input)
+            .subscribe(
+            output => this.searchResult(output),
+            error => {
+                //console.log("error in distrbutors");
+            });
+}
+searchResult(result){
+  if(result.result == 'success'){
+    this.filterRecords = true;
+    this.allUsers = _.union(this.allUsers, result.data);
+  }
+}
+
+clearFilter(){
+  this.filterInput = {'userType':"" , "mobileno":"" , "address":"" };
+  this.showFilterDailog = false;
+  this.getAllUsers(true);
+}
+
 
 getAllUsers(firstcall){
   let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getall",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
@@ -89,7 +141,17 @@ else{
 }
 
 getUsersByPaging(){
+
+
+  if (this.filterRecords) {
+    this.search(false);
+}
+else {
   this.getAllUsers(false);
+}
+
+
+  
 }
 
 
@@ -123,6 +185,9 @@ deactivateUserResult(result){
   }
 }
 
+filterDailogToggle(){
+  this.showFilterDailog = !this.showFilterDailog;
+}
 
 
 

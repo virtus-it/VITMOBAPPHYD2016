@@ -123,7 +123,7 @@ messageTemplate(data){
 getOrderDetailsById() {
     ////console.log(this.orderDetail);
     this.loaderService.display(true);
-    let input = { orderId: this.orderDetail.order_id, appType: this.authenticationService.appType(), userId: this.authenticationService.loggedInUserId() };
+    let input = {"root":{ orderid: this.orderDetail.order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
     this.orderLandingService.getOrderById(input)
         .subscribe(
         output => this.getOrderDetailsByIdResult(output),

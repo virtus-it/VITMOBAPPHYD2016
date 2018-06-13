@@ -41,6 +41,7 @@ export class DistributorComponent implements OnInit {
     searchDistributorNumber = "";
     categoryList:any = [];
     filterType:any = "";
+    loginId:any = 0;
 
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
@@ -181,6 +182,10 @@ this.getProductByCategory();
             //this.dialogResult = result;
             if (result == 'success') {
                 this.getDistributors(true);
+                this.loaderService.display(false);
+            }
+            else{
+                this.loaderService.display(false);
             }
         });
     }
@@ -485,6 +490,7 @@ this.getProductByCategory();
     ngOnInit() {
         this.getDistributors(true);
         this.getProductByCategory();
+        this.loginId = this.authenticationService.loggedInUserId();
         // if(window.navigator.geolocation){
         //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));
         //     };

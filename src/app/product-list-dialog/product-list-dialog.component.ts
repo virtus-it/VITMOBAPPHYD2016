@@ -9,6 +9,7 @@ import { AddstockProductComponent } from '../addstock-product/addstock-product.c
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import { MdDialog } from '@angular/material';
+import * as _ from 'underscore';
 @Component({
   selector: 'app-product-list-dialog',
   templateUrl: './product-list-dialog.component.html',
@@ -64,9 +65,36 @@ let input = {userId: this.distributorId, appType: this.authenticationService.app
 
 getProductsResult(output) {
   this.loaderService.display(false);
+  this.listOfProducts = [];
   if(output.result == 'success'){
 
-    this.listOfProducts = output.data;
+
+    
+        // this.listOfProducts = output.data;
+        
+  
+    for (let details of output.data) {
+      let findproduct = _.find(this.listOfProducts, function (k, l) {
+        let productDetails: any = k;
+        return productDetails.brandName == details.brandname;
+        
+      });
+
+      if (findproduct) {
+        findproduct.data.push(details);
+      }
+      else {
+        let value = { brandName: details.brandname, category: details.category, data: [] };
+        value.data.push(details);
+        this.listOfProducts.push(value);
+        
+      }
+
+     
+
+    }
+
+    console.log(this.listOfProducts , 'list');
     
     
   }
@@ -99,6 +127,9 @@ getProductsResult(output) {
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
+      if(result.result == 'success'){
+        this.getProducts(this.distributorDetails);
+      }
 
 
     });
@@ -115,6 +146,7 @@ getProductsResult(output) {
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
       if (result == 'success') {
+        this.getProducts(this.distributorDetails);
       }
 
     });
@@ -130,6 +162,7 @@ getProductsResult(output) {
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
       if (result == 'success') {
+        this.getProducts(this.distributorDetails);
       }
 
     });

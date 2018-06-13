@@ -95,7 +95,7 @@ tabPanelView: string = "mapview";
      if(result.result == 'success'){
        this.stockpoints=result.data;
        this.noDataError="";
-       let stockpointData = {lat:0 , lng:0 , icon:""};
+       let stockpointData = {lat:0 , lng:0 , icon:"" , index: 1 };
        let markersData = [];
       //  let marker = [];
        _.each(this.stockpoints , function(i, j){
@@ -103,7 +103,8 @@ tabPanelView: string = "mapview";
          stockpointData = {
             lat: parseFloat(details.latitude),
             lng: parseFloat(details.longitude),
-            icon:"../assets/images/green.png"
+            icon:"../assets/images/green.png",
+            index : j + 1 
          }
          markersData.push(stockpointData);
        });
@@ -177,9 +178,6 @@ tabPanelView: string = "mapview";
   
   // }
 
-  showStockpointsOnMap(){
-
-  }
   
   ngOnInit() {
     this.getAllStockPoints();

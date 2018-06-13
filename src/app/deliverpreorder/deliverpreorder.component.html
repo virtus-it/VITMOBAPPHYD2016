@@ -15,7 +15,7 @@
     <div class="row">
       <div class="  col-6">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Quantity" (ngModelChange)="amountChange($event)" [(ngModel)]="Detail.order.delivered_qty"  >
+          <input class="form-control" mdInput placeholder="Quantity" (ngModelChange)="amountChange($event)" [(ngModel)]="Detail.order.delivered_qty">
           <md-error>
             Quantity is
             <strong>required</strong>
@@ -24,7 +24,7 @@
       </div>
       <div class="  col-6">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.return_cans" (ngModelChange)="emptyCansValidation($event)" >
+          <input class="form-control" mdInput placeholder="Returned Cans" [(ngModel)]="Detail.order.emptycans" (ngModelChange)="emptyCansValidation($event)">
           <md-error>
             Returned Cans is
             <strong>required</strong>
@@ -40,7 +40,7 @@
       <div class="  col-2">
         <div class="form-radio form-radio-inline">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" class="custom-control-input" value="cash"  name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
+            <input type="radio" class="custom-control-input" value="cash" name="paymentType" [(ngModel)]="deliverPreOrderInput.paymentType">
             <span class="custom-control-indicator"></span>
             <span class="custom-control-description"> COD </span>
           </label>
@@ -56,28 +56,28 @@
         </div>
       </div>
       <div class="  col-2">
-          <div class="form-radio form-radio-inline">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" value="credit" name="paymentType">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"> PAYTM </span>
-            </label>
-          </div>
+        <div class="form-radio form-radio-inline">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" class="custom-control-input" value="credit" name="paymentType">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> PAYTM </span>
+          </label>
         </div>
-        <div class="  col-3">
-            <div class="form-radio form-radio-inline">
-              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                <input type="radio" class="custom-control-input" value="credit" name="paymentType" >
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description"> ONLINE BANKING </span>
-              </label>
-            </div>
-          </div>
+      </div>
+      <div class="  col-3">
+        <div class="form-radio form-radio-inline">
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" class="custom-control-input" value="credit" name="paymentType">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> ONLINE BANKING </span>
+          </label>
+        </div>
+      </div>
 
 
 
     </div>
-    <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='cash'">
+    <div class="row mgtop-15" *ngIf="deliverPreOrderInput.paymentType=='cash'">
       <!-- <div class="row">
         <div class="">
         <small>Express delivery charges: {{Detail.order.expressdeliverycharges}}</small>
@@ -85,16 +85,25 @@
       </div>
     </div> -->
 
-   
-        <div class="p-2">
-            <span> <b>Express delivery charges<br>{{Detail.order.expressdeliverycharges}}</b></span>
-            </div>
-            <div class= "p-2">
-            <span> <b>Service charges<br>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
-          </div>
-          <div class= "p-2">
-            <span> <b>price/Unit<br>{{Detail.order.product_cost}}</b></span>
-          </div>
+
+      <div class="col">
+        <span>
+          Exp Delv Charges
+            <br><b>{{Detail.order.expressdeliverycharges}}</b>
+        </span>
+      </div>
+      <div class="col">
+        <span>
+         Service Charges
+            <br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b>
+        </span>
+      </div>
+      <div class="col">
+        <span>
+         Price/Unit
+            <br><b>{{Detail.order.product_cost}}</b>
+        </span>
+      </div>
 
       <div class="col">
         <md-form-field class="wd-100pc">
@@ -105,27 +114,36 @@
           </md-error>
         </md-form-field>
       </div>
+    </div>
+
+    <div class="row mgtop-15 " *ngIf="deliverPreOrderInput.paymentType=='credit'">
+      <div class="col">
+        Exp Delv Charges
+        <br>
+        <b>{{Detail.order.expressdeliverycharges}}</b>
+      </div>
+      <div class="col">
+        Service Charges
+        <br>
+        <b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b>
       </div>
 
-      <div class="row form-group" *ngIf="deliverPreOrderInput.paymentType=='credit'">
-          <div class="p-2">
-              <span>Express delivery charges<br> <b>{{Detail.order.expressdeliverycharges}}</b></span>
-              </div>
-              <div class= "p-2">
-              <span>Service charges<br><b>{{Detail.order.prodServiceCharge * Detail.order.delivered_qty}}</b></span>
-              </div>
+      <div class="col">
+        Price/Unit
+        <br>
+        <b>{{Detail.order.product_cost}}</b>
+      </div>
 
-              <div class= "p-2">
-                <span>price/Unit<br><b>{{Detail.order.product_cost}}</b></span>
-              </div>
+      <div class="col">
+        <span>Amount
+          <br>
+          <b>{{Detail.order.total_amt}}</b>
+        </span>
+      </div>
 
-              <div class= "p-4">
-                  <span>Amount<br><b>{{Detail.order.total_amt}}</b></span>
-                </div>
+    </div>
 
-        </div>
-    
-      <div class="row">
+    <div class="row">
       <div class="  col-8 align-self-center" *ngIf="deliverPreOrderInput.paymentType=='cash'">
         <div class="form-checkbox form-checkbox-inline">
           <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
@@ -135,45 +153,58 @@
           </label>
         </div>
       </div>
-    </div><br>
+    </div>
+    <br>
     <div class="row">
       <div class="col-6">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Due Amount"  [(ngModel)]="Detail.order.pending_amount" disabled="disabled">
+          <input class="form-control" mdInput placeholder="Due Amount" [(ngModel)]="Detail.order.pending_amount" disabled="disabled">
         </md-form-field>
       </div>
       <div class="col-6">
-          <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amt" >
-          </md-form-field>
-        </div>
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Advance Amount" [(ngModel)]="Detail.order.adv_amt">
+        </md-form-field>
+      </div>
     </div>
 
     <div class="row form-group">
       <div class="col">
         <md-select placeholder="Select Supplier" name="type" class="full-width left" [(ngModel)]="deliverPreOrderInput.suppliersid">
-          <md-option  *ngFor="let supplier of supplierList"  [value]="supplier.userid">{{supplier.firstname}} {{supplier.lastname}}</md-option>
+          <md-option *ngFor="let supplier of supplierList" [value]="supplier.userid">{{supplier.firstname}} {{supplier.lastname}}</md-option>
         </md-select>
+      </div>
+    </div>
+    <p class="red">{{emptyCanMessage}}</p>
+    <div class="row cost-style">
+      <div class="col"> Product Cost
+        <br>
+        <b>{{Detail.order.product_cost}} x {{Detail.order.delivered_qty}} </b>
+      </div>
+      <div class="col"> Service Charges
+        <br>
+        <b>{{Detail.order.prodServiceCharge}} x {{Detail.order.delivered_qty}}</b>
+      </div>
+      <div class="col"> Exp Delv Charges
+        <br>
+        <b>{{Detail.order.expressdeliverycharges}} </b>
+      </div>
+      <div class="col"> Empty Cans Amt
+        <br>
+        <b>{{ (Detail.order.delivered_qty - Detail.order.emptycans) * 150 }} </b>
+      </div>
+      <div class="col"> Total Cost
+        <br>
+        <b>{{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)
+          + (Detail.order.expressdeliverycharges) + (( Detail.order.delivered_qty - Detail.order.emptycans) * 150 ) }} </b>
       </div>
     </div>
 
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-    <p class="red">{{emptyCanMessage}}</p>
-        <small>
-         <span class="pd-right-20"> Product cost: {{Detail.order.product_cost}} x  {{Detail.order.delivered_qty}} </span> 
-         <span class="pd-right-20"> Service charge : {{Detail.order.prodServiceCharge}} x {{Detail.order.delivered_qty}} </span>
-         <span class="pd-right-20"> Express delivery charges : {{Detail.order.expressdeliverycharges}} </span> <br>
-         <span class="pd-right-20"> Empty cans Amount : {{ (Detail.order.delivered_qty - Detail.order.return_cans) * 150 }} </span>  
-         <span class="pd-right-20">   Total cost : {{(Detail.order.product_cost * Detail.order.delivered_qty) + (Detail.order.prodServiceCharge * Detail.order.delivered_qty)  +  (Detail.order.expressdeliverycharges) +
-             (( Detail.order.delivered_qty - Detail.order.return_cans) * 150 ) }} </span>
-        </small>
-
-
-
   <md-dialog-actions align="end">
-    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()" [disabled]="(this.Detail.order.return_cans != ' ') &&  (emptyCansKeyUp == true)">CONFIRM</button>&nbsp;
+    <button md-raised-button class="btn-primary" (click)="confirmDeliverOrder()" [disabled]="(this.Detail.order.emptycans != ' ') &&  (emptyCansKeyUp == true)">CONFIRM</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

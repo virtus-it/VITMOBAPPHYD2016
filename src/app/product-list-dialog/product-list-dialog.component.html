@@ -4,73 +4,119 @@
 </div> -->
 <div class="row justify-content-between modal-title ">
   <div class="col-md-2  col-sm-2  col-lg-2 align-self-center">
-      <i class="fa fa-gift"></i>  Product List
+    <i class="fa fa-gift"></i> Product List
   </div>
-  <div class="col-md-9  col-sm-9  col-lg-9 align-self-center">
-    <h5 align="center" class="form-group"><i class="fa fa-sitemap"></i> 
-<!-- <span>Distributor Name :</span>  --> Distrirbutor  : 
-<span *ngIf="distributorDetails.distributorName" class="capitalize">{{distributorDetails.distributorName}}</span>
-<span *ngIf="!distributorDetails.distributorName" class="capitalize">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span>
-<span class="grayd"> - {{distributorDetails.mobileno}} </span></h5>
-</div>
+  <div class="col-md-9  col-sm-9  col-lg-9 center">
+    <span>
+      <i class="fa fa-sitemap"></i>
+      <!-- <span>Distributor Name :</span>  -->Distrirbutor :
+      <span *ngIf="distributorDetails.distributorName" class="capitalize">{{distributorDetails.distributorName}}</span>
+      <span *ngIf="!distributorDetails.distributorName" class="capitalize">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span>
+      <span class="grayd"> - {{distributorDetails.mobileno}} </span>
+    </span>
+  </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right align-self-center">
-        <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-        </strong>         
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
-  <md-dialog-content layout="column">
-      <div class="pd-15x25 brd-bottom">
+<md-dialog-content layout="column">
+  <div class="pd-15x25 brd-bottom">
+
+    <table class="table table-hover table-striped ">
+      <tbody *ngFor="let products of listOfProducts">
+
+        <tr class="border-topbottom bgcolor-fade-blue">
+          <td class="">
+            <div class="row">
+              <div class="col">        
+            <b class="capital">
+              <i class="fa fa-gift" aria-hidden="true"></i>
+              Product Name : {{products.brandName}}
+            &nbsp;&nbsp; | &nbsp;&nbsp;
+                <span class="">
+                  <i class="fa fa-bars" aria-hidden="true"></i>
+                  Category : {{products.category}}</span>
+            </b>              
+          </div>
+            <div class="col-1">
        
-          <table class="table table-hover table-striped table-fixedheader">
-      <thead>
+            <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
+                    <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
+                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i> -->
+              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(products)"></i>&nbsp;
+              <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(products)"></i>&nbsp;
+              <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products , distributorDetails)"></i>
+            </div>
+          </div>
+          </td>
+        </tr>
         <tr>
+            <td class="">
+              <table class="table table-hover ">
+                <thead>
+          <tr>                      
             <th width="10%">Category</th>
-          <th width="14%">Product Name</th>
-          <th width="14%">Product Type</th>
-          <th width="6%">Priority</th>
-          <th width="7%" title="Minimum Quantity">Min Qty</th>          
-          <th width="6%">Cost</th>   
-          <th width="6%" title="Expres Delivery">Exp Del</th>
-          <th width="8%" title="Service Charge">Serv Chgs</th>   
-          <th width="6%" title="Is Authorised ?">Is Aut</th>   
-          <th width="6%">Stock</th>
-          <th width="7%">Status</th>
-          <th width="10%">Action</th>
-           </tr>
-      </thead>
-      <tbody>
-        <tr  *ngFor="let prod of listOfProducts; let i = index" [attr.data-index]="i" >
-            <td width="10%" class="left capital"><span class="onhovertooltip-100" title="{{prod.category}}">{{prod.category}}</span></td>          
-          <td width="14%" class="left capital"><span class="onhovertooltip-100" title="{{prod.brandname}}">{{prod.brandname}}</span></td>
-          <td width="14%" class="left capital"> <span class="onhovertooltip-100" title="{{prod.ptype}}">{{prod.ptype}}</span></td>
+            <th width="14%">Product Name</th>
+            <th width="16%">Product Type</th>
+            <th width="6%">Priority</th>
+            <th width="7%" title="Minimum Quantity">Min Qty</th>
+            <th width="6%">Cost</th>
+            <th width="6%" title="Expres Delivery">Exp Del</th>
+            <th width="8%" title="Service Charge">Serv Chgs</th>
+            <th width="6%" title="Is Authorised ?">Is Aut</th>
+            <th width="6%">Stock</th>
+            <th width="7%">Status</th>
+            <th width="8%">Action</th>
+          </tr>
+            
+        </thead>
+        <tbody>
+        <tr *ngFor="let prod of products.data; let i = index" [attr.data-index]="i">
+          <td width="10%" class="left capital">
+            <span class="onhovertooltip-100" title="{{prod.category}}">{{prod.category}}</span>
+          </td>
+          <td width="14%" class="left capital">
+            <span class="onhovertooltip-100" title="{{prod.brandName}}">{{prod.brandName}}</span>
+          </td>
+          <td width="16%" class="left capital">
+            <span class="onhovertooltip-150" title="{{prod.ptype}}">{{prod.ptype}}</span>
+          </td>
           <td width="6%" class="left capital gray9">{{prod.priority}}</td>
-          <td width="7%" class="left capital danger">{{prod.minorderqty}}</td>          
-          <td width="6%" class="left capital ">{{prod.pcost}}</td>      
-          <td width="5%" class="left capital">{{prod.expressdeliverycharges}}</td> 
-          <td width="8%" class="left capital">{{prod.servicecharge}}</td>  
+          <td width="7%" class="left capital danger">{{prod.minorderqty}}</td>
+          <td width="6%" class="left capital ">{{prod.pcost}}</td>
+          <td width="5%" class="left capital">{{prod.expressdeliverycharges}}</td>
+          <td width="8%" class="left capital">{{prod.servicecharge}}</td>
           <td class="" width="6%">
             <span class="success" *ngIf="prod.isauthorized == 'true'"> Yes </span>
             <span class="warn" *ngIf="prod.isauthorized != 'true'">No</span>
-          </td>  
+          </td>
           <td width="6%" class="left capital warning">{{prod.avaliable_stock}}</td>
           <td width="7%" class="left capital" [ngClass]="{'red':prod.stockstatus == 'Soldout' , 'success':prod.stockstatus == 'Avaliable'||'avaliable', 'warning':prod.stockstatus == 'Lowstock'}">{{prod.stockstatus}}</td>
-          <td width="10%">
-             <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
+          <td width="8%">
+
+            <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>
+            <!-- <i class="fa fa-edit logo-color cursor" (click)="editProduct(prod)"></i>&nbsp;
              <i class="fa fa-plus logo-color cursor" title="Add stock" (click)="addStock(prod)"></i>&nbsp;
              <i class="fa fa-dot-circle-o logo-color cursor" title="Stock status" (click)="changeStockStatus(prod)"></i>&nbsp;
-          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod, distributorDetails)"></i>
+          <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(prod , distributorDetails)"></i> -->
           </td>
-          
-         </tr>
+
+        </tr>
+        </tbody>
+        </table>
+
+        </td>
+        </tr>
+
       </tbody>
     </table>
   </div>
-  </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20">
-      <md-dialog-actions align="end">
-        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-      </md-dialog-actions>
-    </div>
-
-
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>
