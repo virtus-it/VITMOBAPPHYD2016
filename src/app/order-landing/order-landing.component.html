@@ -434,7 +434,7 @@
                       <b>Rs.{{forward.expressdeliverycharges}}</b>
                     </div>
 
-                      <div class="col-5 center">
+                    <div class="col-5 center">
                       <span class="td-label" title="Empty Cans Amount">
                         Empty Cans Amt</span>
                       <br>
@@ -454,24 +454,19 @@
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
-                     <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
-                      <b class="pdright-5">{{forward.paymenttype}}</b>
+                      <b class="capitalize">{{forward.paymenttype}}</b>
                     </div>
-
-
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
-
                       <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                       <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
                     <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
                       <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(forward)'>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
-
                     </div>
-
                   </div>
                 </div>
               </td>
@@ -616,10 +611,10 @@
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer">
-                      <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                      <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
 
                     <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
-                      <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Orders </button>
+                      <i class="fa fa-sitemap" aria-hidden="true"></i> Orders </button>
 
                   </div>
                 </div>
@@ -627,29 +622,28 @@
               <!-- <td width="24%" >
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
-                <td width="10%" class="center">
-                    <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
+              <td width="10%" class="center">
+                <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
                   <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='forward.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
 
                   </ngx-gauge>
                   <b *ngIf="forward.timeRemaining < -24" class="red">
-                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
-                    {{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
+                    <i class="fa fa-exclamation-triangle fs-20"></i>
+                    <br> {{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "
                     class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
                 </span>
                 <b *ngIf="((forward.status == 'delivered') || (forward.status == 'Delivered'))" class="success">
-                    <i class="fa fa-check-square-o fs-20"></i><br>
-                  Delivered
+                  <i class="fa fa-check-square-o fs-20"></i>
+                  <br> Delivered
                 </b>
-                    
+
               </td>
             </tr>
           </tbody>
         </table>
-        <br>
         <h5 class="warning  capitalize center">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
@@ -657,9 +651,6 @@
         </h5>
         <h4 *ngIf="!forwardClickMore" class="warning center">
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-
-
-
       </div>
       <div *ngIf="tabPanelView === 'allorder'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -810,15 +801,15 @@
                       <b>Rs.{{allorder.expressdeliverycharges}}</b>
                     </div>
 
-                      <div class="col-5 center">
+                    <div class="col-5 center">
                       <span class="td-label">
                         Empty Cans Amt</span>
                       <br>
                       <b>Rs.{{allorder.advance_amount}}</b>
                     </div>
                     <div class="col-3 right">
-                        <span class="td-label" title="Service Charges">Serv Chgs </span>
-                        <br>
+                      <span class="td-label" title="Service Charges">Serv Chgs </span>
+                      <br>
                       <b class="pdright-5">Rs.{{allorder.servicecharges}}</b>
                     </div>
                   </div>
@@ -826,14 +817,14 @@
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                      <b>Rs.{{allorder.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="allorder.receivedamt > 0">Rs.{{allorder.receivedamt}}</b>  -->
                     </div>
 
-                     <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
-                      <b class="pdright-5">{{allorder.paymenttype}}</b>
+                      <b class="capitalize">{{allorder.paymenttype}}</b>
                     </div>
 
 
@@ -970,20 +961,19 @@
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
                   <b *ngIf="allorder.timeRemaining < -24" class="red">
-                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
-                    {{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
+                    <i class="fa fa-exclamation-triangle fs-20"></i>
+                    <br> {{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
                 </span>
                 <b *ngIf="((allorder.status == 'delivered') || (allorder.status == 'Delivered'))" class="success">
-                    <i class="fa fa-check-square-o fs-20"></i><br>
-                  Delivered
+                  <i class="fa fa-check-square-o fs-20"></i>
+                  <br> Delivered
                 </b>
               </td>
 
             </tr>
           </tbody>
         </table>
-        <br>
         <h5 class="warning  center capitalize">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
             <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
@@ -1144,14 +1134,14 @@
                       <b>Rs.{{complete.expressdeliverycharges}}</b>
                     </div>
 
-                      <div class="col-5 center">
+                    <div class="col-5 center">
                       <span class="td-label" title="Empty Cans Amount">
                         Empty Cans Amt</span>
                       <br>
                       <b>Rs.{{complete.advance_amount}}</b>
                     </div>
                     <div class="col-3 right">
-                        <span class="td-label" title="Service Charges">Serv Chgs </span>
+                      <span class="td-label" title="Service Charges">Serv Chgs </span>
                       <br>
                       <b class="pdright-5">Rs.{{complete.servicecharges}}</b>
                     </div>
@@ -1160,14 +1150,14 @@
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <span class="td-label">Amount </span>
                       <br>
-                      <b class="pdright-5">Rs.{{complete.bill_amount}}</b>
+                      <b class="">Rs.{{complete.bill_amount}}</b>
                       <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
-                     <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 center">
                       <span class="td-label">Payment Type </span>
                       <br>
-                      <b class="pdright-5">{{complete.paymenttype}}</b>
+                      <b class="capitalize">{{complete.paymenttype}}</b>
                     </div>
 
 
@@ -1328,36 +1318,26 @@
                   </ngx-gauge>
 
                   <b *ngIf="complete.timeRemaining < -24 " class="red">
-                      <i class="fa fa-exclamation-triangle fs-20"></i><br>
-                    {{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
+                    <i class="fa fa-exclamation-triangle fs-20"></i>
+                    <br> {{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
                 </span>
                 <b *ngIf="((complete.status == 'delivered') || (complete.status == 'Delivered'))" class="success">
-                    <i class="fa fa-check-square-o fs-20"></i><br>
-                  Delivered
+                  <i class="fa fa-check-square-o fs-20"></i>
+                  <br> Delivered
                 </b>
               </td>
-
-
             </tr>
           </tbody>
         </table>
-        <br>
         <h5 class="warning  capitalize center">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
             click for more data</a>
         </h5>
-
         <h4 *ngIf="!completeClickMore" class="warning center">
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-
-
-
       </div>
     </div>
-
   </div>
-
-
 </div>

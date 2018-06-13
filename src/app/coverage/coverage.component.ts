@@ -225,7 +225,7 @@ export class CoverageComponent implements OnInit {
   }
   ViewDistributors(order) {
     let dialogRef = this.dialog.open(DistributorListDialogComponent, {
-      width: '700px',
+      width: '800px',
       data: order
     });
     dialogRef.afterClosed().subscribe(result => {
