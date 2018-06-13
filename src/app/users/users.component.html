@@ -4,6 +4,59 @@
         <h4>
           <i class="fa fa-users"></i> Users</h4>
       </div>
+
+      <a class="cursor logo-color">
+          <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+          <div class="filterView" *ngIf="showFilterDailog">
+            <div class="">
+              <br>
+              <div class="form-group">
+                <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType.type">
+                  <md-option value="usertype">User Type</md-option>
+                  <md-option value="mobileno">Mobile no</md-option>
+                  <md-option value="address" >Address</md-option>
+                </md-select>
+                </div>
+            
+              <div class="form-group" *ngIf="filterType.type == 'usertype'">
+                  <md-select placeholder="User Type" name="type" class="full-width left" [(ngModel)]="filterInput.userType">
+                      <md-option value="customer">Customer</md-option>
+                      <md-option value="dealer">Distributor</md-option>
+                      <md-option value="supplier" >Supplier</md-option>
+                      <md-option value="sales" >Sales</md-option>
+                      <md-option value="marketing" >Marketing</md-option>
+                      </md-select>
+              </div>
+              <div class="form-group" *ngIf="filterType.type == 'mobileno'">
+                  <md-form-field class="example-full-width">
+                      <input class="form-control" mdInput placeholder="mobileno" [(ngModel)]="filterInput.mobileno">
+                    </md-form-field>
+              </div>
+              <div class="form-group" *ngIf="filterType.type == 'address'">
+                  <md-form-field class="example-full-width">
+                      <input class="form-control" mdInput placeholder="address" [(ngModel)]="filterInput.address">
+                    </md-form-field>
+              </div>
+              <div class=" form-group">
+                <button md-raised-button color="primary" (click)="search('true')">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </button>
+                <button md-raised-button color="primary" (click)="clearFilter()">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                </button>
+              </div>
+              </div>
+              </div>
+              </a>
+
+
+
+
+
+          
+          
+
+
       <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
         <a class="cursor logo-color " title="Add User">
           <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" (click)="addUser()"></i>
@@ -71,3 +124,56 @@
       </table>
     </div>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+  <!-- <a class="cursor logo-color">
+      <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+      <div class="filterView" *ngIf="showFilterDailog">
+        <div class="">
+          <br>
+          <div class="form-group">
+            <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filterType.type">
+              <md-option value="usertype">User Type</md-option>
+              <md-option value="mobileno">Mobile no</md-option>
+              <md-option value="address" >Address</md-option>
+            </md-select>
+            </div>
+        
+          <div class="form-group" *ngIf="filterType.type == 'usertype'">
+              <md-select placeholder="User Type" name="type" class="full-width left" [(ngModel)]="filterInput.userType">
+                  <md-option value="customer">Customer</md-option>
+                  <md-option value="dealer">Distributor</md-option>
+                  <md-option value="supplier" >Supplier</md-option>
+                  <md-option value="sales" >Sales</md-option>
+                  <md-option value="marketing" >Marketing</md-option>
+          </div>
+          <div class="form-group" *ngIf="filterType.type == 'mobileno'">
+              <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="mobileno" [(ngModel)]="filterInput.mobileno">
+                </md-form-field>
+          </div>
+          <div class="form-group" *ngIf="filterType.type == 'address'">
+              <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="address" [(ngModel)]="filterInput.address">
+                </md-form-field>
+          </div>
+          <div class=" form-group">
+            <button md-raised-button color="primary" (click)="search('true')">
+              <i class="fa fa-search" aria-hidden="true"></i> Search
+            </button>
+            <button md-raised-button color="primary" (click)="clearFilter()">
+              <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+            </button>
+          </div>
+          </div>
+          </div>
+          </a> -->

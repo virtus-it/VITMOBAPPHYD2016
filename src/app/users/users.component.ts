@@ -19,6 +19,11 @@ export class UsersComponent implements OnInit {
   filterType = {"type":"usertype"};
   filterInput = {'userType':"" , "mobileno":"" , "address":"" };
   showFilterDailog = false;
+  filterRecords = false;
+  input  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId(),"lastuserid":0,
+  "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
+  "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"", 
+  "moyaversioncode":""}};
 
 
 
@@ -58,15 +63,24 @@ dialogRefEditCustomer.afterClosed().subscribe(result => {
 
 }
 
-search(){
-  let input = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId(),"lastuserid":0,
-  "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
-  "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"",
-  "moyaversioncode":""}};
+search(firstcall){
+  let input = this.input;
+  if (this.allUsers && this.allUsers.length && !firstcall) {
+    let lastCustomer: any = _.last(this.allUsers);
+    if (lastCustomer) {
+        input.root.lastuserid = lastCustomer.userid;
+    }
+
+}
+else {
+    this.allUsers = [];
+    input.root.lastuserid = 0;
+}
+
   if(this.filterType.type =='usertype'){
     input.root.searchtext  = this.filterInput.userType;
   }
-  else if(this.filterType.type =='mobile'){
+  else if(this.filterType.type =='mobileno'){
     input.root.searchtext  = this.filterInput.mobileno;
   }
   else if(this.filterType.type == 'address'){
@@ -82,7 +96,8 @@ search(){
 }
 searchResult(result){
   if(result.result == 'success'){
-    this.allUsers = result.data;
+    this.filterRecords = true;
+    this.allUsers = _.union(this.allUsers, result.data);
   }
 }
 
@@ -126,7 +141,17 @@ else{
 }
 
 getUsersByPaging(){
+
+
+  if (this.filterRecords) {
+    this.search(false);
+}
+else {
   this.getAllUsers(false);
+}
+
+
+  
 }
 
 
