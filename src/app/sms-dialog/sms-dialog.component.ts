@@ -460,7 +460,7 @@ trackByFn(index, item) {
 
   saveTemplate(data){
     let input = Object.assign({}, data)
-   input.User.transtype = "add";
+   input.User.transtype = "notification";
    input.User.type = "notification";
 
     console.log(input);
