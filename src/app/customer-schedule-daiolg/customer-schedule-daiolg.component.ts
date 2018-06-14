@@ -610,103 +610,108 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         }
       } else if (this.Detail.data.scheduletype.toLowerCase() == 'days') {
         if (this.Detail.data.days) {
+          let daysArray = [];
           let days = this.Detail.data.days;
-          AuthenticationService.showLog(days);
-          if (days.indexOf('1') != -1) {
+          daysArray = days.split(',');
+          if(daysArray.length > 0){
+          for(let i=0; i < daysArray.length; i++){
+          if (daysArray[i] == '1') {
             this.cb1 = true;
           }
-          if (days.indexOf('2') != -1) {
+          if (daysArray[i] == '2') {
             this.cb2 = true;
           }
-          if (days.indexOf('3') != -1) {
+          if (daysArray[i] == '3') {
             this.cb3 = true;
           }
-          if (days.indexOf('4') != -1) {
+          if (daysArray[i] == '4') {
             this.cb4 = true;
           }
-          if (days.indexOf('5') != -1) {
+          if (daysArray[i] == '5') {
             this.cb5 = true;
           }
-          if (days.indexOf('6') != -1) {
+          if (daysArray[i] == '6') {
             this.cb6 = true;
           }
-          if (days.indexOf('7') != -1) {
+          if (daysArray[i] == '7') {
             this.cb7 = true;
           }
-          if (days.indexOf('8') != -1) {
+          if (daysArray[i] == '8') {
             this.cb8 = true;
           }
-          if (days.indexOf('9') != -1) {
+          if (daysArray[i] == '9') {
             this.cb9 = true;
           }
-          if (days.indexOf('10') != -1) {
+          if (daysArray[i] == '10') {
             this.cb10 = true;
           }
-          if (days.indexOf('11') != -1) {
+          if (daysArray[i] == '11') {
             this.cb11 = true;
           }
-          if (days.indexOf('12') != -1) {
+          if (daysArray[i] == '12') {
             this.cb12 = true;
           }
-          if (days.indexOf('13') != -1) {
+          if (daysArray[i] == '13') {
             this.cb13 = true;
           }
-          if (days.indexOf('14') != -1) {
+          if (daysArray[i] == '14') {
             this.cb14 = true;
           }
-          if (days.indexOf('15') != -1) {
+          if (daysArray[i] == '15') {
             this.cb15 = true;
           }
-          if (days.indexOf('16') != -1) {
+          if (daysArray[i] == '16') {
             this.cb16 = true;
           }
-          if (days.indexOf('17') != -1) {
+          if (daysArray[i] == '17') {
             this.cb17 = true;
           }
-          if (days.indexOf('18') != -1) {
+          if (daysArray[i] == '18') {
             this.cb18 = true;
           }
-          if (days.indexOf('19') != -1) {
+          if (daysArray[i] == '19') {
             this.cb19 = true;
           }
-          if (days.indexOf('20') != -1) {
+          if (daysArray[i] == '20') {
             this.cb20 = true;
           }
-          if (days.indexOf('21') != -1) {
+          if (daysArray[i] == '21') {
             this.cb21 = true;
           }
-          if (days.indexOf('22') != -1) {
+          if (daysArray[i] == '22') {
             this.cb22 = true;
           }
-          if (days.indexOf('23') != -1) {
+          if (daysArray[i] == '23') {
             this.cb23 = true;
           }
-          if (days.indexOf('24') != -1) {
+          if (daysArray[i] == '24') {
             this.cb24 = true;
           }
-          if (days.indexOf('25') != -1) {
+          if (daysArray[i] == '25') {
             this.cb25 = true;
           }
-          if (days.indexOf('26') != -1) {
+          if (daysArray[i] == '26') {
             this.cb26 = true;
           }
-          if (days.indexOf('27') != -1) {
+          if (daysArray[i] == '27') {
             this.cb27 = true;
           }
-          if (days.indexOf('28') != -1) {
+          if (daysArray[i] == '28') {
             this.cb28 = true;
           }
-          if (days.indexOf('29') != -1) {
+          if (daysArray[i] == '29') {
             this.cb29 = true;
           }
-          if (days.indexOf('30') != -1) {
+          if (daysArray[i] == '30') {
             this.cb30 = true;
           }
-          if (days.indexOf('31') != -1) {
+          if (daysArray[i] == '31') {
             this.cb31 = true;
           }
         }
       }
+    }
+  }
       AuthenticationService.showLog(this.scheduleInput.weekdays);
     }
   }

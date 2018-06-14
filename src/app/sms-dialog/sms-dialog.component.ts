@@ -44,7 +44,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null , date: null , timeSlot:"" };
-  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radiosave : false , radioDontsave: false , radioOverWrite : false , tempname: "" };
+  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radio : '' , tempname: "" };
   mobileDetails: any = [];
   mobileDetailsCopy:any = [];
   distributors: any = [];
@@ -443,10 +443,10 @@ trackByFn(index, item) {
       output => this.saveMobileSmsResult(output),
       error => {
       });
-      if(this.smsInput.radiosave == "save"){
+      if(this.smsInput.radio == "save"){
         this.saveTemplate(createSmsInput);
       }
-      else if(this.smsInput.radioOverWrite == "overWrite"){
+      else if(this.smsInput.radio == "overWrite"){
          this.templateOverwrite(createSmsInput);
       }
       

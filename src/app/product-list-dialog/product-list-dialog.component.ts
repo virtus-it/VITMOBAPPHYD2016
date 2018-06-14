@@ -127,9 +127,10 @@ getProductsResult(output) {
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
-      if(result.result == 'success'){
+      if(result == 'success'){
         this.getProducts(this.distributorDetails);
       }
+      
 
 
     });
@@ -138,11 +139,12 @@ getProductsResult(output) {
 
 
 
-  addStock(data){
+  addStock(data , distributorDetails){
+    let formattedInput = { data:data , distributorId: distributorDetails.userid}
     let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
 
       width: '600px',
-      data: data
+      data: formattedInput
     });
     dialogRefAddInvoice.afterClosed().subscribe(result => {
       if (result == 'success') {
