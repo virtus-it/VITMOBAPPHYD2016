@@ -36,8 +36,8 @@ table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
 .table {
   margin-bottom: 0rem !important;
 }
-
 .scroll{
-  overflow: auto;
-    height: 275px !important;
+  overflow-x: hidden;
+  height: 275px !important;
+  overflow-y: auto;
 }

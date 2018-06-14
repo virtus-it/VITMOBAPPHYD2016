@@ -7,3 +7,10 @@
 .red{
     color: red;
 }
+table{
+    margin-bottom: 0px !important;
+}
+.cost-style{
+    border-top: 1px solid #999;
+    padding: 10px;
+    }
