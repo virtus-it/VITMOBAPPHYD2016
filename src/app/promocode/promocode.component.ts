@@ -104,6 +104,9 @@ redeemSettingsDetails:any = [];
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
+      this.getRedeemSettingsDetails();
+      this.getRedeemDetails();
+      this.getAllPromoCodes();
     }
   });
   }
@@ -142,6 +145,7 @@ redeemSettingsDetails:any = [];
       });
       dialogRef.afterClosed().subscribe(result => {
         if(result == 'success'){
+          this.getRedeemSettingsDetails();
         }
       });
 

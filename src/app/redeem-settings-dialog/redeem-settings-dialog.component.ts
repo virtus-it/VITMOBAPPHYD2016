@@ -28,7 +28,7 @@ export class RedeemSettingsDialogComponent implements OnInit {
   submitSettingsResult(result){
     if(result.result == 'success'){
       console.log('settings saved');
-      this.thisDialogRef.close('Cancel');
+      this.thisDialogRef.close('success');
       this.getAllRedeemSettingsDetails();
     }
   }
@@ -58,9 +58,7 @@ export class RedeemSettingsDialogComponent implements OnInit {
   }
   updateSettingsDetailsResult(result){
     if(result.result == 'success'){
-      this.thisDialogRef.close('Cancel');
-      this.getAllRedeemSettingsDetails();
-
+      this.thisDialogRef.close('success');
     }
   }
 

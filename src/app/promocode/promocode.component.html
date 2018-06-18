@@ -10,11 +10,11 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-      <a class="cursor logo-color " title="Add Distributor">
+      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" title="Add promo code" (click)="addPromoCode()"></i>
       </a>
 
-      <a class="cursor logo-color " title="Redeem Settings">
+      <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
           <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
         </a>
 
@@ -45,8 +45,9 @@
           <td class="left" width="10%" *ngIf="promo.startdate">
             <span class="onhovertooltip-100" title="{{promo.startdate | utcDate}}">{{promo.startdate | utcDate}}</span>
           </td>
-          <td class="left" width="10%" *ngIf="promo.enddate">
+          <td class="left" width="10%">
             <span class="onhovertooltip-100" title="{{promo.enddate | utcDate}}">{{promo.enddate | utcDate}}</span>
+            <span *ngIf="promo.enddate === null || promo.enddate == ''" > - </span>            
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
           <td class="left capitalize" width="10%">
@@ -95,7 +96,7 @@
 
           <td class="" width = "20%">
             <span> 
-              <i class="fa fa-gears logo-color" title="Change settings" (click)="changeSettings(settings)"></i>
+              <i class="fa fa-gears logo-color" title="Change redeem settings" (click)="changeSettings(settings)"></i>
             </span>
           </td>
         </tr>
