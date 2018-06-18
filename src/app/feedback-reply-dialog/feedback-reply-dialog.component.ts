@@ -21,7 +21,7 @@ export class FeedbackReplyDialogComponent implements OnInit {
   errorMessage = false;
 
   constructor(private feedbackService: FeedbackService,public thisDialogRef: MdDialogRef<FeedbackReplyDialogComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
-  feedbackInput = {"root":{"issueid":this.Detail.issueid,"issuetype":"feedback","loginid":this.authenticationService.loggedInUserId(),"userid":this.Detail.createdby.userid,"message":""
+  feedbackInput = {"root":{"issueid":this.Detail.issueid,"issuetype":"feedback","loginid":this.authenticationService.loggedInUserId(),"userid":this.Detail.createdby.userid,"message":"", apptype: this.authenticationService.appType()
 }}
 
   emailFormControl = new FormControl('', [
