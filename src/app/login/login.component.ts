@@ -68,7 +68,8 @@ export class LoginComponent implements OnInit {
       }
     };
 
-    this.distributorService.getpolygonByDistributor(input).subscribe(
+    this.distributorService.getpolygonByDistributor(input)
+    .subscribe(
       output => this.getPolygonDataResult(output),
       error => {
         //console.log("falied");
