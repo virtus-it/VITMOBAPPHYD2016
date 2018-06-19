@@ -38,6 +38,6 @@ table.table-fixedheader>thead tr th, table.table-fixedheader>tbody tr td {
 }
 .scroll{
   overflow-x: hidden;
-  height: 275px !important;
+  height: 400px !important;
   overflow-y: auto;
 }
