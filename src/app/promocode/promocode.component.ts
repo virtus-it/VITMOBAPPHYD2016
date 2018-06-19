@@ -22,6 +22,7 @@ export class PromocodeComponent implements OnInit {
   allPromoCodes:any = [];
 tabPanelView:string="promoCode";
 redeemDetails:any = [];
+redeemSettingsDetails:any = [];
 
   addPromoCode(){
     let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
@@ -84,16 +85,17 @@ redeemDetails:any = [];
       this.getAllPromoCodes();
     }
   }
-  //function to show panel
-  showTabPanel(panelName) {
-this.tabPanelView=panelName;
-if(this.tabPanelView == 'redeemSetting'){
-  this.redeemSettingsDialog();
-}
-else if(this.tabPanelView == 'redeemDetails'){
-  this.getRedeemDetails();
-}
-  }
+
+
+//   showTabPanel(panelName) {
+// this.tabPanelView=panelName;
+// if(this.tabPanelView == 'redeemSetting'){
+//   this.redeemSettingsDialog();
+// }
+// else if(this.tabPanelView == 'redeemDetails'){
+//   this.getRedeemDetails();
+// }
+//   }
 
   redeemSettingsDialog(){
     let dialogRef = this.dialog.open(RedeemSettingsDialogComponent , {
@@ -102,9 +104,56 @@ else if(this.tabPanelView == 'redeemDetails'){
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
+      this.getRedeemSettingsDetails();
+      this.getRedeemDetails();
+      this.getAllPromoCodes();
     }
   });
   }
+
+
+  showTabPanel(panelName) {
+    this.tabPanelView=panelName;
+    if(this.tabPanelView == 'redeemSetting'){
+      this.getRedeemSettingsDetails();
+    }
+    else if(this.tabPanelView == 'redeemDetails'){
+      this.getRedeemDetails();
+    }
+      }
+
+
+      getRedeemSettingsDetails(){
+        let input = {"User": {"TransType":"getredeemsettings" , apptype: this.authenticationService.appType() , "loginid":  this.authenticationService.loggedInUserId() }};
+        this.distributorService.getPoints(input)
+        .subscribe(
+        output => this.getRedeemSettingsDetailsResult(output),
+        error => {      
+        });
+      }
+      getRedeemSettingsDetailsResult(result){
+        if(result.result == 'success'){
+          this.redeemSettingsDetails = result.data;
+        }
+      }
+
+      changeSettings(data){
+
+        let dialogRef = this.dialog.open(RedeemSettingsDialogComponent , {
+          width: '50%',
+          data: data
+      });
+      dialogRef.afterClosed().subscribe(result => {
+        if(result == 'success'){
+          this.getRedeemSettingsDetails();
+        }
+      });
+
+      }
+
+
+
+
 
   getRedeemDetails(){
     let input = {"User":{"TransType":"getredeemdetails" , appType: this.authenticationService.appType()}};

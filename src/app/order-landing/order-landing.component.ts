@@ -15,6 +15,7 @@ import { DistributorListDialogComponent } from '../distributor-list-dialog/distr
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import { SupplierOrderListComponent } from '../supplier-order-list/supplier-order-list.component';
+import { OrderHistoryComponent } from '../order-history/order-history.component';
 import { SocketmessagesComponent } from '../socketmessages/socketmessages.component';
 import { InboxComponent } from '../inbox/inbox.component';
 import { ProductsService } from '../products/products.service';
@@ -43,6 +44,7 @@ export class OrderLandingComponent implements OnInit {
   ordersClickMore = true;
   followUpResultStatus:any = "";
   categoryList:any = [];
+  
 
 
   //for guage
@@ -1411,6 +1413,20 @@ this.orderLandingService.getOrdersByfilter(input)
                 });
 
         }
+
+
+        orderHistoryDialog(data){
+          let dialogRef= this.dialog.open(OrderHistoryComponent, {
+                  width: '750px',
+                  data: data
+                });
+                dialogRef.afterClosed().subscribe(result => {       
+                  if (result == 'success') {
+                  }
+                });
+
+              }
+
 
         inbox(){
           let dialogRef= this.dialog.open(InboxComponent, {

@@ -9,3 +9,6 @@ table.table-fixedheader>tbody {
   text-align: center;
   padding-top: 12px;
 }
+table{
+  margin-bottom: 0px !important;
+}

@@ -31,7 +31,8 @@ export class AddPromocodeDialogComponent implements OnInit {
 
 
 
-  promoCodeInput:any = {discountinpercent:"",   description:"",  offertype:"", startdate:null ,enddate: null, criteria:"", promotype:"", category:"", promocode:"", }
+
+  promoCodeInput:any = {discountinpercent:"",   description:"",  offertype:"", startdate:null ,enddate: null, criteria:"", promotype:"", category:"", promocode:"", id: "" }
 
   // filterTypeModel = {categoryname: "" , categoryid: ''};
 
@@ -93,11 +94,18 @@ this.getProductByCategory();
 
   createPromoCode(){
   let input = {"offer":{"discountinpercent":this.promoCodeInput.discountinpercent,"description":this.promoCodeInput.description,"apptype":this.authenticationService.appType(), "offertype":this.promoCodeInput.offertype,"startdate":this.promoCodeInput.startdate,"enddate":this.promoCodeInput.enddate,"criteria":this.promoCodeInput.criteria,"promotype":this.promoCodeInput.promotype,"category":this.promoCodeInput.category,"promocode":this.promoCodeInput.promocode,"transtype":"create"}};
-
+  if(input.offer.startdate){
   input.offer.startdate = moment(this.promoCodeInput.startdate).format('YYYY-MM-DD 02:00:00');
-  input.offer.enddate = moment(this.promoCodeInput.enddate).format('YYYY-MM-DD 02:00:00');
-  console.log(this.promoCodeInput.enddate.toDateString());
-
+  }
+  else{
+    input.offer.startdate = null;
+  }
+  if(input.offer.enddate){
+    input.offer.enddate = moment(this.promoCodeInput.enddate).format('YYYY-MM-DD 02:00:00');
+  }
+  else{
+    input.offer.enddate = null;
+  }
   console.log(input);
   this.followupService.createpromocode(input)
   .subscribe(
@@ -107,7 +115,8 @@ this.getProductByCategory();
   }
   createPromoCodeResult(result){
     if (result.result == 'success'){
-      this.thisDialogRef.close('Cancel');
+      this.thisDialogRef.close('success');
+
     }
   }
 
@@ -118,18 +127,24 @@ this.getProductByCategory();
       this.promoCodeInput.description = this.Details.description;
       this.promoCodeInput.category = this.Details.category;
       this.promoCodeInput.criteria = this.Details.criteria;
+      if(this.Details.enddate){
       this.promoCodeInput.enddate = moment.utc(this.Details.enddate).toDate();
+      }
+      else{
+        this.promoCodeInput.enddate = null;
+      }
       this.promoCodeInput.offertype = this.Details.offertype;
       this.promoCodeInput.promocode = this.Details.promocode;
       this.promoCodeInput.promotype = this.Details.promotype;
       this.promoCodeInput.startdate = moment.utc(this.Details.startdate).toDate();
+      this.promoCodeInput.id = this.Details.offerid;
     }
 
   }
 
   updatePromoCode(){
     if(this.Details.offerid){
-    let input = {"offer":{"discountinpercent":this.promoCodeInput.discountinpercent,"description":this.promoCodeInput.description,"apptype":this.authenticationService.appType(), "offertype":this.promoCodeInput.offertype,"startdate":this.promoCodeInput.startdate,"enddate":this.promoCodeInput.enddate,"criteria":this.promoCodeInput.criteria,"promotype":this.promoCodeInput.promotype,"category":this.promoCodeInput.category,"promocode":this.promoCodeInput.promocode,"transtype":"update"}};
+    let input = {"offer":{"discountinpercent":this.promoCodeInput.discountinpercent,"description":this.promoCodeInput.description,"apptype":this.authenticationService.appType(), "offertype":this.promoCodeInput.offertype,"startdate":this.promoCodeInput.startdate,"enddate":this.promoCodeInput.enddate,"criteria":this.promoCodeInput.criteria,"promotype":this.promoCodeInput.promotype,"category":this.promoCodeInput.category,"promocode":this.promoCodeInput.promocode,"transtype":"update" , "id": this.promoCodeInput.id  }};
 
     console.log(input);
     this.followupService.createpromocode(input)
@@ -141,12 +156,21 @@ this.getProductByCategory();
   }
   updatePromoCodeResult(result){
     if(result.result =='success'){
-      this.thisDialogRef.close('Cancel');
+      this.thisDialogRef.close('success');
     }
   }
 
     onCloseModal(){
       this.thisDialogRef.close('Cancel');
+    }
+
+    submitPromoCode(){
+      if(this.Details){
+        this.updatePromoCode();
+      }
+      else{
+        this.createPromoCode();
+      }
     }
 
   ngOnInit() {

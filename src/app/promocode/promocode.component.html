@@ -10,9 +10,15 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-      <a class="cursor logo-color " title="Add Distributor">
+      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" title="Add promo code" (click)="addPromoCode()"></i>
       </a>
+
+      <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
+          <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
+        </a>
+
+
     </div>
   </div>
   <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'promoCode'">
@@ -39,8 +45,9 @@
           <td class="left" width="10%" *ngIf="promo.startdate">
             <span class="onhovertooltip-100" title="{{promo.startdate | utcDate}}">{{promo.startdate | utcDate}}</span>
           </td>
-          <td class="left" width="10%" *ngIf="promo.enddate">
+          <td class="left" width="10%">
             <span class="onhovertooltip-100" title="{{promo.enddate | utcDate}}">{{promo.enddate | utcDate}}</span>
+            <span *ngIf="promo.enddate === null || promo.enddate == ''" > - </span>            
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
           <td class="left capitalize" width="10%">
@@ -65,14 +72,32 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td class="left capitalize" width="20%">2 lucky winners</td>
-          <td class="left capitalize" width="20%">Cash</td>
-          <td class="left" width="20%">200</td>
-          <td class="left" width="20%">20-12-17</td>
+        <tr  *ngFor="let settings of redeemSettingsDetails">
+
+          <td class="left capitalize" width="20%">
+          <span *ngIf="settings.points"> {{settings.points}}  </span> 
+          <span *ngIf = "settings.points === null || settings.points == '' "> - </span>
+          </td>
+
+          <td class="left capitalize" width="20%">
+          <span *ngIf="settings.type"> {{settings.type}}  </span> 
+          <span *ngIf = "settings.type === null || settings.type == '' "> - </span>
+        </td>
+
           <td class="left" width="20%">
-            <span class="fa fa-pencil-square-o btn-link"></span>&nbsp;&nbsp;
-            <span class="fa fa-trash danger pad-fa"></span>
+              <span *ngIf="settings.amount"> {{settings.amount}}  </span> 
+              <span *ngIf = "settings.amount === null || settings.amount == '' "> - </span>
+          </td>
+
+          <td class="" width="20%">
+            <span *ngIf="settings.createddate"> {{settings.createddate | utcDate}}</span>
+            <span *ngIf="settings.createddate === null || settings.createddate == ''"> - </span>
+          </td>
+
+          <td class="" width = "20%">
+            <span> 
+              <i class="fa fa-gears logo-color" title="Change redeem settings" (click)="changeSettings(settings)"></i>
+            </span>
           </td>
         </tr>
       </tbody>

@@ -1,11 +1,10 @@
-﻿
-<div class=" dist-style minheight-500">
+﻿<div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
       <h4>
         <i class="fa fa-sitemap"></i> Distributor</h4>
-        
-        <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
+
+      <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
       <a class="cursor logo-color " title="Add Distributor">
@@ -41,41 +40,41 @@
             </div>
 
             <div class="" *ngIf="filterType == 'category'">
-                <md-form-field class="example-full-width">
-                    <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
-                    <md-autocomplete #auto="mdAutocomplete">
-                      <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
-                      <span> {{cat.category}}</span>
-                      </md-option>
-                    </md-autocomplete>
-                  </md-form-field>
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
+                    <span> {{cat.category}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
 
             </div>
 
             <div class="" *ngIf="filterType == 'phonetype'">
-                <md-select placeholder="Type of phone" class="wd-100pc left" name="phonetype" [(ngModel)]="filterTypeModel.typeofphone">
-                    <md-option value="no_smartphone">No Smartphone</md-option>
-                    <md-option value="android">Android</md-option>
-                    <md-option value="iphone">Iphone</md-option>
-                  </md-select>
+              <md-select placeholder="Type of phone" class="wd-100pc left" name="phonetype" [(ngModel)]="filterTypeModel.typeofphone">
+                <md-option value="no_smartphone">No Smartphone</md-option>
+                <md-option value="android">Android</md-option>
+                <md-option value="iphone">Iphone</md-option>
+              </md-select>
 
             </div>
 
             <div class="" *ngIf="filterType == 'address'">
 
-                <md-form-field class="example-full-width">
-                    <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
-                  </md-form-field>
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
+              </md-form-field>
             </div>
 
             <div class="" *ngIf="filterType == 'areadefined'">
 
-          <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isAreaDefined">
-            <md-option value="yes">YES</md-option>
-            <md-option value="no" >NO</md-option>
-            
+              <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isAreaDefined">
+                <md-option value="yes">YES</md-option>
+                <md-option value="no">NO</md-option>
 
-          </md-select>
+
+              </md-select>
             </div>
 
 
@@ -83,7 +82,7 @@
 
             <div class="input-group pd-10  ">
 
-              <button md-raised-button color="primary"  (click)="searchFilter()">Search</button>
+              <button md-raised-button color="primary" (click)="searchFilter()">Search</button>
               <button md-raised-button color="primary" (click)="clearSearch()">
                 <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
               </button>
@@ -95,44 +94,42 @@
     </div>
   </div>
   <div>
-  
-    <div id="" class="row pd-15 mg-0">  
+
+    <div id="" class="row pd-15 mg-0">
 
       <div class="">
         <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead>
             <tr>
-              <th width="17%">Name</th>
-              <th width="10%">Created By</th>              
+              <th width="15%">Name</th>
+              <th width="14%">Created By</th>
               <th width="10%">Created Date</th>
               <th width="9%" title="Customer Count">Cust Count</th>
-              <th width="10%">Mobile</th>
+              <th width="12%">Mobile</th>
               <!-- <th width="10%">Email Id</th> -->
               <th width="10%">Refer Code</th>
               <th width="17%">Address</th>
               <th width="15%">Company </th>
-              <th width="12%" class="no-th-arrow">Views </th>
+              <th width="10%" class="no-th-arrow">Views </th>
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
-              <td class="left capitalize" width="17%">
-                <span class="onhovertooltip-200" title="{{dist.firstname}} {{dist.lastname}}">
+              <td class="left capitalize" width="15%">
+                <span class="onhovertooltip-150 capitalize" title="{{dist.firstname}} {{dist.lastname}}">
                   <i class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></i>
                   <i class="fa fa-thumbs-down danger" *ngIf="dist.isactive == '0'" (click)="activateDeactivateDist(dist)" title="click to activate"></i>
                   {{dist.firstname}} {{dist.lastname}}</span>
               </td>
-              <td width="10%">
-                <span class="onhovertooltip-100" title="{{dist.usercreatedby.name}}" *ngIf="dist.usercreatedby" > {{dist.usercreatedby.name}}</span>
-
-                <span *ngIf="dist.usercreatedby === null || dist.usercreatedby == ''"> - </span> </td>
-
-
-              
-
-              <td class="" width="10%"><span class="onhovertooltip-100" title="{{dist.timestamp | utcDate}}">{{dist.timestamp | utcDate}}</span></td>
+              <td class="" width="14%">
+                <span *ngIf="dist.usercreatedby" class="onhovertooltip-150 capitalize"> {{dist.usercreatedby.name}}</span>
+                <span *ngIf="dist.usercreatedby === null || dist.usercreatedby == ''"> - </span>
+              </td>
+              <td class="" width="10%">
+                <span class="onhovertooltip-100" title="{{dist.timestamp | utcDate}}">{{dist.timestamp | utcDate}}</span>
+              </td>
               <td class="left" width="9%">{{dist.customercount}} </td>
-              <td class="left numbers" width="10%">
+              <td class="left numbers" width="12%">
                 <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
                   <span *ngIf="dist.mobileno_one || dist.mobileno_two"> {{dist.mobileno_one}} {{dist.mobileno_two}}</span>
                 </span>
@@ -143,9 +140,9 @@
                 <span class="onhovertooltip" title="{{dist.address}}">{{dist.address}}</span>
               </td>
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
-              <td class="left" width="12%">
+              <td class="left" width="10%">
                 <div class="dropdown">
-                  <button class="dropbtn" [disabled]="dist.usercreatedby.userid != 'loginId'" >View More</button>
+                  <button class="dropbtn" [disabled]="dist.usercreatedby.userid != 'loginId'">View More</button>
                   <div class="dropdown-content" style="right:0;">
                     <div class="row pdbottom-5">
                       <label class="col-md-6" (click)="openUpdateDialog(dist)">
@@ -186,12 +183,9 @@
                       <label class="col-md-6" (click)="viewStockPoints(dist)">
                         <i class="fa fa-vimeo"></i> Stock Points</label>
 
-                        <label class="col-md-6" (click)="viewPoints(dist)">
-                            <i class="fa fa-vimeo"></i> Points</label>
-
-
+                      <label class="col-md-6" (click)="viewPoints(dist)">
+                        <i class="fa fa-file-powerpoint-o"></i> Points</label>
                     </div>
-
                   </div>
                 </div>
 
@@ -220,7 +214,7 @@
             <button class="btn btn-link" (click)="ViewProduct(dist)" >Products</button> -->
               </td>
 
-          </tbody>      
+          </tbody>
         </table>
 
         <h4 class="warning  capitalize">

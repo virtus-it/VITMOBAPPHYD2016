@@ -13,7 +13,8 @@
 <md-dialog-content layout="column">
   <div class="container-fluid brd-bottom">
     <div *ngIf="productMessage && this.orderDetail.type !== 'coveragePage'">
-      <p class="orderStyle"><i class="fa fa-exclamation-triangle"></i> Customer Ordered:
+      <p class="orderStyle">
+        <i class="fa fa-exclamation-triangle"></i> Customer Ordered:
         <span class="capitalize">{{orderDetail.orderDetails.brandname}}</span> with Order id : {{orderDetail.orderDetails.order_id}} Selected Distributor
         does'nt have same product. Select any one of below</p>
     </div>
@@ -21,7 +22,7 @@
       <thead>
         <tr>
 
-            
+
 
 
           <th width="16%">Product</th>
@@ -37,7 +38,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productList; let i = index" [attr.data-index]="i">
-         
+
           <td width="16%" class="left capital">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
@@ -46,25 +47,29 @@
               <span class="custom-control-description onhovertooltip-150" title="{{product.brandname}}">{{product.brandname}} </span>
             </label>
           </td>
-          <td class="" width="12%" ><span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span></td>
+          <td class="" width="12%">
+            <span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span>
+          </td>
 
           <td width="15%" class="left capital">
-            <span class="onhovertooltip-150" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span></td>
+            <span class="onhovertooltip-150" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span>
+          </td>
 
           <td width="10%" class="left capital">
             <md-form-field class="example-full-width inline ">
-              <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'" [(ngModel)]="product.quantity" (ngModelChange)="changeOfQuantity($event)">
+              <input class="form-control" mdInput placeholder="Count" name="count" [disabled]="product.stockstatus== 'Soldout'" [(ngModel)]="product.quantity"
+                (ngModelChange)="changeOfQuantity($event)">
               <!-- (ngModelChange)="searchMobileNo()"-->
             </md-form-field>
           </td>
 
           <td width="12%" class="left capital">{{product.pcost}}</td>
-          <td class="left capital" width="10%">           
-             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                <input type="checkbox" class="custom-control-input" name="expressdelivery" [(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"
-                [disabled]="product.stockstatus== 'Soldout'" >
-                <span class="custom-control-indicator"></span>
-                <span class="custom-control-description"></span>  {{product.expressdeliverycharges}}
+          <td class="left capital" width="10%">
+            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+              <input type="checkbox" class="custom-control-input" name="expressdelivery" [(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"
+                [disabled]="product.stockstatus== 'Soldout'">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description"></span> {{product.expressdeliverycharges}}
             </label>
             <!-- <input type="checkbox" name="expressdelivery" [(ngModel)]="product.expressCheck" (change)="expressDeliveryCharge(product ,$event.target.checked)"
               [disabled]="product.stockstatus== 'Soldout'"> -->
@@ -78,45 +83,76 @@
             <span *ngIf="product.quantity == 0"> 0 </span>
           </td>
 
-          <td class="left capital" width="10%" >
+          <td class="left capital" width="10%">
             <span>
-              <input class="wd-100pc" placeholder="cans" type="number" min= "0" step= "1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)" disabled>
+              <input class="wd-100pc" placeholder="cans" type="number" min="0" step="1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)"
+                disabled>
             </span>
           </td>
 
         </tr>
       </tbody>
-  
- 
-<br>
-            <h4 class="warning oneline center" *ngIf="noRecord">
-              <i aria-hidden="true" class="fa fa-frown-o"></i>
-               Record Not Available</h4>
-
-
-
-
+      <br>
+      <h4 class="warning oneline center" *ngIf="noRecord">
+        <i aria-hidden="true" class="fa fa-frown-o"></i>
+        Record Not Available</h4>
     </table>
-  </div>
+    <h5 class="center warning capital">{{emptyCanMessage}}</h5>
+    <div class="row cost-style">
+      <div class="col">
+        <h5> Product Cost<br>
+          <b>{{this.productCost}} x {{this.quantity}} </b>
+        </h5>
+      </div>
+      <div class="col">
+        <h5> Service Charge <br>
+          <b>{{this.serviceCharges}} x {{this.quantity}}</b>
+        </h5>
+      </div>
+      <div class="col">
+        <h5>Exp Delv Charges <br>
+          <b>{{this.amount}}</b>
+        </h5>
+      </div>
+      <div class="col">
+        <h5>Empty Cans Amt <br>
+          <b>{{((this.quantity - this.emptyCans) * 150) }}</b>
 
-  
+        </h5>
+      </div>
+      <div class="col">
+        <h5>Total Cost <br>
+          <b>{{this.totalcost}}</b>
+        </h5>
+      </div>
+      <!-- <span>
+      <small>
+        <span class="pd-right-20"> Product cost:
+          <b>{{this.productCost}} x {{this.quantity}} </b>
+        </span>
+        <span class="pd-right-20"> Service charge :
+          <b>{{this.serviceCharges}} x {{this.quantity}}</b>
+        </span>
+        <span class="pd-right-20">Express delivery charges :
+          <b>{{this.amount}}</b>
+        </span>
+        <span class="pd-right-40">Empty cans Amount :
+          <b>{{((this.quantity - this.emptyCans) * 150) }}</b>
+        </span>
+        <br>
+        <span class="">Total cost :
+          <b>{{this.totalcost}}</b>
+        </span>
+      </small>
+    </span> -->
+    </div>
+</div>
+
 
 
 </md-dialog-content>
 
 
- <span>
-  <small>
-   <span class="pd-right-20"> Product cost: <b>{{this.productCost}} x {{this.quantity}} </b></span>
-   <!-- <span class="pd-right-20">Quantity: <b>{{this.quantity}}</b></span> -->
-   <span class="pd-right-20"> Service charge : <b>{{this.serviceCharges}} x {{this.quantity}}</b></span>
-    <span class="pd-right-20">Express delivery charges : <b>{{this.amount}}</b></span>
-    <span class="pd-right-40">Empty cans Amount : <b>{{((this.quantity - this.emptyCans) * 150) }}</b></span> <br>
-    <span class="">Total cost : <b>{{this.totalcost}}</b>
-       </span> 
-  </small>
-</span> 
-<span class="red">{{emptyCanMessage}}</span>
 
 
 <div class="row float-right pdright-30  mgbottom-20">

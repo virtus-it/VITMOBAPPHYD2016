@@ -36,6 +36,7 @@ export class OrderDetailDailogComponent implements OnInit {
     // notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""], "buttonactions":[{}], "option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
 
 showCustomerDetails(orderData) {
+    this.onCloseCancel();
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
         width: '95%',
         data: orderData
@@ -252,6 +253,8 @@ deliveryStatus(){
 onCloseModel(){
     this.thisDialogRef.close(this.message);
 }
+
+
 
 //test function
 // getUserDetails(){

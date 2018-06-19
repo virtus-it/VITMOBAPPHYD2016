@@ -303,6 +303,14 @@
 
                     </label>
                   </div>
+
+                  <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="forward.status == 'backtodealer'">
+                    <label *ngIf="superDealer">
+                      <span>
+                        <i class="fa fa-book logo-color" (click)="orderHistoryDialog(forward)" >  </i>
+                      </span>
+                    </label>
+                  </div>
                   <div *ngIf="forward.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
@@ -671,6 +679,16 @@
                       </span>
                     </label>
                   </div>
+
+                  <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="allorder.status == 'backtodealer'">
+                      <label *ngIf="superDealer">
+                        <span>
+                          <i class="fa fa-book logo-color" (click)="orderHistoryDialog(allorder)" >  </i>
+                        </span>
+                      </label>
+                    </div>
+
+
                   <div *ngIf="allorder.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
@@ -994,6 +1012,16 @@
                     </label>
                   </div>
 
+                  <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="complete.status == 'backtodealer'">
+                      <label *ngIf="superDealer">
+                        <span>
+                          <i class="fa fa-book logo-color" (click)="orderHistoryDialog(complete)" >  </i>
+                        </span>
+                      </label>
+                    </div>
+
+
+
                   <div class="col-sm-2  col-md-2  col-lg-2 right" *ngIf="complete.status != 'delivered'" (click)='editQuanity(complete)'>
                     <i class="fa fa-edit logo-color "></i>
                   </div>
@@ -1205,7 +1233,7 @@
                     </span>
                     <br>
                     <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
-                    <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(forward.customer.address)">copy</button>
+                    <button class="btn -btn-link btn-sm fa fa-copy" (click)="copyElement(complete.orderby_address)">copy</button>
 
                   </div>
                 </div>

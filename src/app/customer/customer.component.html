@@ -121,6 +121,7 @@
         <thead>
           <tr>
             <th width="12%">Customer</th>
+            <th width="12%">Created by</th>
             <th class="" width="10%">Created Date</th>
             <th width="12%">Distributor</th>
             <th width="11%">Mobile</th>
@@ -146,6 +147,12 @@
                 </span>
                 {{customers.firstname}} {{customers.lastname}}
               </span>
+            </td>
+
+            <td class="" width="">
+              <span class="" *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
+              <span class="" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''">  - </span>
+              
             </td>
             <td class="" width="10%">
               <span class="onhovertooltip-100" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>

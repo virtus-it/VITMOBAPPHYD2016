@@ -1,0 +1,45 @@
+<div class="row justify-content-between modal-title">
+    <div class="col-sm-4 col-md-4 col-lg-4 ">
+      <i class="fa fa-book"></i> View Order History
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  <div>
+    <div id="" class="container-fluid pd-15x25 brd-bottom">
+      <md-dialog-content layout="column">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr >
+              <th width="20%">Order ID</th>
+              <th width="6%" title="Quantity">Quantity</th>
+              <th width="18%">Bill Amount</th>
+              <th width="12%">Distributor</th>
+              <th width="8%">Dist Number</th>
+              <th width="10%">Product</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let history of orderHistoryDetails">
+                <td class="left">{{history.order_id}}</td>
+                <td class="left">{{history.quantity}}</td>
+                <td class="left">{{history.bill_amount}}</td>
+                <td class="left">{{history.dealeretails.firstname}} {{history.dealeretails.lastname}}</td>
+              <td class="left">{{history.dealeretails.mobileno}}</td>
+              <td class="left">{{history.brandname}} {{history.prod_type}}</td>
+              </tr>
+              
+          </tbody>
+        </table>
+  <br>
+      </md-dialog-content>
+    </div>
+    <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>
