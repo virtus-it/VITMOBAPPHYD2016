@@ -13,14 +13,14 @@ import { FormControl, Validators } from '@angular/forms';
 export class CreateupdatecategoryComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CreateupdatecategoryComponent>,  private productService: ProductsService, @Inject(MD_DIALOG_DATA) public details: any) { }
-  categoryInput = {cname:"",cdesc:"",categoryid: "" , priority: "" };
+  categoryInput = {cname:"", cdesc:"", categoryid: "" , priority: 0 };
   cnameFormControl = new FormControl('', [
     Validators.required]);
     cdescFormControl = new FormControl('', [
        Validators.required]);
 
   createCategory(){
-    let input = {"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
+    let input = {"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc, "priority": this.categoryInput.priority , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
     //console.log(input);
     this.productService.createCategory(input)
     .subscribe(
@@ -39,7 +39,7 @@ export class CreateupdatecategoryComponent implements OnInit {
 
 
 updateCategory(){ 
-let input ={"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"categoryid":this.categoryInput.categoryid,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
+let input ={"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"categoryid":this.categoryInput.categoryid,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "priority": this.categoryInput.priority }};
 
 //console.log(input);
     this.productService.updateCategory(input)
@@ -71,7 +71,13 @@ openDailog() {
     this.categoryInput.cname = this.details.category;
     this.categoryInput.cdesc = this.details.category_desc;
     this.categoryInput.categoryid = this.details.categoryid;
+    if(this.details.priority === null){
+      this.categoryInput.priority = 0;
+    }
+    else{
+    this.categoryInput.priority = this.details.priority;
   }
+}
 }
 
 

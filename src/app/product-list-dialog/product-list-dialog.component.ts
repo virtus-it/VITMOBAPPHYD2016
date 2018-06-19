@@ -10,6 +10,8 @@ import { ProductUpdateComponent } from '../product-update/product-update.compone
 import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
+import { ProductsService } from '../products/products.service';
+
 @Component({
   selector: 'app-product-list-dialog',
   templateUrl: './product-list-dialog.component.html',
@@ -19,7 +21,7 @@ export class ProductListDialogComponent implements OnInit {
   listOfProducts:any[];
   distributorId:any = "";
 
-  constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, public dialog: MdDialog, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
+  constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, public dialog: MdDialog, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private productService: ProductsService,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
 
 //   getProducts(distributorDetails){
 //   this.loaderService.display(true);
@@ -153,6 +155,23 @@ getProductsResult(output) {
 
     });
 
+  }
+
+
+  deleteDistributorProduct(data){
+    let input = {"product": {"transtype":"delete","pid": data.productid ,  userid: this.distributorDetails.userid , apptype: this.authenticationService.appType() , "isactive": 0 } };
+    console.log(input);
+    this.productService.createProduct(input)
+    .subscribe(
+    output => this.deleteProductResult(output),
+    error => {
+      //console.log("error in distrbutors");
+    });
+  }
+  deleteProductResult(result){
+if(result.result == 'success'){
+  this.getProducts(this.distributorDetails);
+}
   }
 
 
