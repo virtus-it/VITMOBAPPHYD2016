@@ -14,7 +14,7 @@
       <div class="row">
       <div class="col-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="form-control" mdInput placeholder="Category Name" [formControl]="cnameFormControl" [(ngModel)]="categoryInput.cname"  name="categoryName" >
+            <input class="form-control" mdInput placeholder="Category Name" [formControl]="cnameFormControl" [(ngModel)]="categoryInput.cname"  name="categoryName" required >
             <md-error *ngIf="cnameFormControl.hasError('required')">
               Category Name is <strong>required</strong>
             </md-error>
@@ -23,16 +23,13 @@
 
       <div class="col-4">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Category Details" name="categoryDetails" [formControl]="cdescFormControl"  [(ngModel)]="categoryInput.cdesc">
-              <md-error *ngIf="cdescFormControl.hasError('required')">
-                Category Details are <strong>required</strong>
-              </md-error>
+              <input mdInput  placeholder="Category Details" name="categoryDetails" [(ngModel)]="categoryInput.cdesc" required>
             </md-form-field>
           </div> 
 
           <div class="col-4">
               <md-form-field class="example-full-width wd-100pc">
-                  <input mdInput class="form-control" placeholder="Priority" name="priority"  [formControl]="cdescFormControl" [(ngModel)]="categoryInput.priority">
+                  <input mdInput class="form-control" placeholder="Priority" name="priority"  [formControl]="cdescFormControl" [(ngModel)]="categoryInput.priority" required>
                   <md-error *ngIf="cdescFormControl.hasError('required')">
                       Priority is <strong>required</strong>
                     </md-error>
