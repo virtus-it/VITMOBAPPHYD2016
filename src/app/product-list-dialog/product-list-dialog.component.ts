@@ -20,6 +20,8 @@ import { ProductsService } from '../products/products.service';
 export class ProductListDialogComponent implements OnInit {
   listOfProducts:any[];
   distributorId:any = "";
+  isSuperDealer = false;
+  noProductsError = false;
 
   constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, public dialog: MdDialog, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private productService: ProductsService,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
 
@@ -100,6 +102,9 @@ getProductsResult(output) {
     
     
   }
+  else{
+    this.noProductsError = true;
+  }
 
 }
 
@@ -174,6 +179,15 @@ if(result.result == 'success'){
 }
   }
 
+  getSuperDealer(){
+    if(this.authenticationService.isSuperDelear){
+      this.isSuperDealer = true;
+    }
+    else{
+      this.isSuperDealer = false;
+    }
+  }
+
 
   changeStockStatus(data){
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
@@ -196,6 +210,7 @@ if(result.result == 'success'){
 }
   ngOnInit() {
     this.getProducts(this.distributorDetails);
+    this.getSuperDealer();
     console.log(this.distributorDetails);
   }
 

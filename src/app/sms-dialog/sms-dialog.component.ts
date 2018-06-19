@@ -10,6 +10,7 @@ import { FollowUpService } from '../follow-up/follow-up.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
+import { SliderModule } from 'angular-image-slider';
 import * as moment from 'moment';
 @Component({
 
