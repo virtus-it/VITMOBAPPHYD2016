@@ -250,6 +250,9 @@
                         </div>
                         <div class="col-10">
                           <table>
+
+
+
                             <tr *ngFor="let option of smsInput.option ;let i = index">
                               <td>
                                 <div class="row align-items-center">
@@ -261,13 +264,15 @@
                                   </div>
                                   <div class="col-sm-1  col-md-1  col-lg-1">
                                     <i title="Remove Option" class="fa fa-trash danger fs-22 cursor" (click)="removeoption(option)" aria-hidden="true"></i>
-                                    <!-- <a class="cursor logo-color " (click)="addOption()"> 
-            <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
-         </a> -->
                                   </div>
                                 </div>
                               </td>
                             </tr>
+
+
+                      
+
+
                           </table>
                         </div>
                       </div>
@@ -394,23 +399,24 @@
 
                       <div class="row">
                         <h6 class="fs-12 pdtop-5" *ngIf="smsInput.redirecturl " >Redirect URL : {{smsInput.redirecturl}}</h6>                     </div>
-                        <div class="row" *ngIf="smsInput.buttons && smsInput.type != 'slide'">
+
+
+
+                        <div class="row" *ngIf="smsInput.buttons && smsInput.buttons.length > 0 && smsInput.type != 'slide'">
                         <h5 class="btn-style center" *ngFor="let button of smsInput.buttons">
                           {{button.name}}
                         </h5>
                       </div>
 
-                      <div class="row" *ngIf="smsInput.option && smsInput.type != 'slide' && smsInput.type != 'website'">
+                      <div class="row" *ngIf="smsInput.option && smsInput.option.length > 0 && smsInput.type != 'slide' && smsInput.type != 'website'">
                         <h5 class="btn-style center" *ngFor="let option of smsInput.option" >
                           {{option.name}}</h5>
                         </div>
 
-                        <div class="row" *ngIf="smsInput.sliderurl && smsInput.type == 'slide'"  >
+                        <div class="row" *ngIf="smsInput.sliderurl && smsInput.sliderurl.length > 0 && smsInput.type == 'slide'"  >
 
                           <div class=""  *ngFor="let slide of smsInput.sliderurl" >
-                          <!-- <img class="img-style" src="{{slide.image}}" alt="slider image" > -->
-
-                          <angular-image-slider [images]="slide.image"></angular-image-slider>
+                          <img class="img-style" src="{{slide.image}}" alt="slider image" >
 
                         </div>
 

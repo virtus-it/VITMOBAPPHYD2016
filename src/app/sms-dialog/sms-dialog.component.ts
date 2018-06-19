@@ -10,7 +10,6 @@ import { FollowUpService } from '../follow-up/follow-up.service';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
-import { SliderModule } from 'angular-image-slider';
 import * as moment from 'moment';
 @Component({
 
@@ -143,7 +142,8 @@ export class SmsDialogComponent implements OnInit {
         this.smsInput.redirecturl = JsonObj.redirecturl;
         this.smsInput.showcomment = JsonObj.showcomment;
         this.smsInput.title = JsonObj.title;
-        this.smsInput.type = JsonObj.type;
+        // this.smsInput.type = JsonObj.type;
+        this.smsInput.type = JsonObj.notificationType;
         this.smsInput.url = JsonObj.url;
         this.smsInput.tempname = JsonObj.tempname;                
         if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
@@ -161,6 +161,7 @@ export class SmsDialogComponent implements OnInit {
 
         if(JsonObj.option && JsonObj.option.length > 0){
           let options =[];
+          this.smsInput.option = [];
           _.each(JsonObj.option , function(i, j){
             let optionDetails:any = i;
             if(optionDetails && optionDetails.length > 0){
@@ -175,18 +176,28 @@ export class SmsDialogComponent implements OnInit {
           this.smsInput.option = options;
         }
 
+
+        // if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
+        //   let buttons= [];
+        //   this.smsInput.buttons= [];
+        //   _.each(JsonObj.buttonactions, function(i,j){
+        //     let buttonDetails:any = i;
+        //     let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
+        //     buttons.push(buttonObject)
+        //   });
+        //   this.smsInput.buttons = buttons;
+        // }
+
         if(JsonObj.sliderurl && JsonObj.sliderurl.length > 0){
           let slider = [];
+          this.smsInput.sliderurl= [];
           _.each(JsonObj.sliderurl , function(i , j){
             let sliderDetails:any = i;
-        if(sliderDetails.image){
-            let sliderObject = {image: sliderDetails.image ,count:j+1}
+      
+            let sliderObject = {image: sliderDetails.image ,count:j+1};
             slider.push(sliderObject);
-        }
-        else{
-          let sliderObject = {}
-          slider.push(sliderObject);          
-        }
+        
+     
           });
           this.smsInput.sliderurl = slider;
           
@@ -462,7 +473,9 @@ trackByFn(index, item) {
   saveTemplate(data){
     let input = Object.assign({}, data)
    input.User.transtype = "notification";
+   input.User.notificationType = data.User.type;
    input.User.type = "notification";
+   
 
     console.log(input);
     this.followupService.followUpTemplate(input)

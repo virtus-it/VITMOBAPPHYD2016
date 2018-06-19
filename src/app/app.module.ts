@@ -119,7 +119,6 @@ import { EditPointsComponent } from './edit-points/edit-points.component';
 import { AddEditPointsComponent } from './add-edit-points/add-edit-points.component';
 import { RedeemSettingsDialogComponent } from './redeem-settings-dialog/redeem-settings-dialog.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
-import { SliderModule } from 'angular-image-slider';
 
 
 
