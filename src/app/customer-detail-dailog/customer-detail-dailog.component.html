@@ -17,15 +17,15 @@
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="details-style">
       <div class="d-flex flex-row">
-        <div class="p-4 mg-left-38">
+        <div class="p-2 align-self-center">
           <h6>
             <small>Name</small>
             <br>
-            <b class="capital pdleft-5" title="{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}">{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}</b>
-            <b class="capital pdleft-5" *ngIf="this.orderDetail.type == 'customersPage'" title="{{orderDetail.data.firstname}}">{{orderDetail.data.firstname}}</b>
+            <b class="capital" title="{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}">{{this.orderDetail.orderby_firstname}} {{this.orderDetail.orderby_lastname}}</b>
+            <b class="capital" *ngIf="this.orderDetail.type == 'customersPage'" title="{{orderDetail.data.firstname}}">{{orderDetail.data.firstname}}</b>
           </h6>
         </div>
-        <div class="p-3 align-self-center">
+        <div class="p-2 align-self-center">
           <h6>
             <small>Mobile</small>
             <br>
@@ -38,7 +38,7 @@
             <label class="ng-binding">{{this.orderDetail.orderby_areaname}}</label>
             </div> -->
 
-        <div class="p-6 align-self-center">
+        <div class="p-2 align-self-center">
           <h6>
             <small>Address</small>
             <br>
@@ -58,7 +58,7 @@
           </md-form-field>
         </div>
 
-        <div class="p-3 align-self-center">
+        <div class="p-2 align-self-center">
           <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
           <button type="submit" md-raised-button  (click)="editCustomer(orderDetail)" class="btn-primary">EDIT</button>
 
