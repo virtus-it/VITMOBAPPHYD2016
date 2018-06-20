@@ -224,7 +224,7 @@ export class CustomerComponent implements OnInit {
     }
     getCustomerList(firstcall) {
         this.loaderService.display(true);
-        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype":"getallcustomers" };
+        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype":"getallcustomers" , pagesize : 100 };
         //console.log(input);
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
@@ -384,8 +384,6 @@ export class CustomerComponent implements OnInit {
 
         });
     }
-
-
 
 
     ngOnInit() {

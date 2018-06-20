@@ -206,6 +206,10 @@ export class CustomerDetailDailogComponent implements OnInit {
 
       if(result == 'success'){
         this.forWardOrder();
+        this.loaderService.display(false);
+      }
+      else{
+        this.loaderService.display(false);
       }
     });
 

@@ -6,7 +6,8 @@ import { PromocodeServiceService } from '../promocode/promocode-service.service'
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
-
+import { ProcessPaymentDialogComponent } from '../process-payment-dialog/process-payment-dialog.component';
+import { ProcessedPaymentsDetailsComponent } from '../processed-payments-details/processed-payments-details.component';
 
 
 
@@ -66,6 +67,9 @@ redeemSettingsDetails:any = [];
     if(result.result == 'success'){
       this.allPromoCodes = result.data;
       console.log(result.data);
+    }
+    else{
+      this.allPromoCodes = [];
     }
   }
 
@@ -170,6 +174,32 @@ redeemSettingsDetails:any = [];
     }
   }
 
+  processPaymentDialog(data){
+
+    let dialogRef = this.dialog.open(ProcessPaymentDialogComponent , {
+      width: '75%',
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+     
+    }
+  });
+
+  }
+
+  viewProcessedDetails(){
+    let dialogRef = this.dialog.open(ProcessedPaymentsDetailsComponent , {
+      width: '75%',
+      data: ''
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+     
+    }
+  });
+
+  }
 
 
 

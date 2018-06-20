@@ -1,0 +1,70 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4 col-sm-4">
+      <i class="fa fa-barcode"></i> Process Payment
+    </div>
+    <div class="col-md-1 col-sm-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+      </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+
+      <div class="row">
+
+      <div class="col-4">
+      <md-select placeholder="Type" [(ngModel)]="processPaymentInput.type" required>
+      <md-option value="paytm">Paytm</md-option>
+      </md-select>
+      </div>
+
+      <div class="col-4">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Name" name="name" [(ngModel)]='processPaymentInput.name' disabled>
+          </md-form-field>
+        </div>
+    </div>    
+
+
+        <div class="row ">
+
+          
+          
+
+          <div class="col-4">
+
+              <md-form-field class="wd-100pc">
+                  <input class="form-control" mdInput placeholder="Enter paytm number" name="mobileno" max="10" [(ngModel)]='processPaymentInput.paytmNumber'>
+                </md-form-field>
+
+          </div>
+
+
+          <div class="col-4">
+            <md-form-field class="wd-100pc">
+                <input class="form-control" mdInput placeholder="Amount" name="name" [(ngModel)]='processPaymentInput.amount'>
+              </md-form-field>
+              </div>
+
+              <div class="col-4">
+                  <md-form-field class="wd-100pc">
+                      <input class="form-control" mdInput placeholder="Acknowledgement ID" name="ack" [(ngModel)]='processPaymentInput.ackId'>
+                    </md-form-field>
+              </div>
+
+          </div>
+  
+     
+   
+    
+      
+  
+    </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button type="submit" class="btn-primary" md-raised-button (click)="processPayment()">SUBMIT</button>
+      <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
