@@ -1276,6 +1276,12 @@ this.orderLandingService.getOrdersByfilter(input)
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
         //console.log(`Dialog closed: ${result}`);
+        if(result == 'success'){
+          this.loaderService.display(false);
+        }
+        else{
+          this.loaderService.display(false);
+        }
 
 
     });

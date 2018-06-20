@@ -115,6 +115,7 @@ tabPanelView: string = "mapview";
      else{
       this.noDataError="No Stock Points for this distributor";
       this.stockpoints = [];
+      this.showMarkers = [];
      }
 
   }
@@ -157,14 +158,14 @@ tabPanelView: string = "mapview";
   showTabPanel(panelName) {
     // this.clearFilter();
     this.tabPanelView = panelName;
-    // if(panelName== "mapview"){
-    //   // this.showStockpointsOnMap();
-    //   this.getAllStockPoints();
-    // }
-    // else if(panelName== "gridview"){
+    if(panelName== "mapview"){
+      // this.showStockpointsOnMap();
+      this.getAllStockPoints();
+    }
+    else if(panelName== "gridview"){
      
-    //   this.getAllStockPoints();
-    // } 
+      this.getAllStockPoints();
+    } 
   }
 
 

@@ -241,6 +241,9 @@ this.getProductByCategory();
             });
             dialogRef.afterClosed().subscribe(result => {
                 //console.log(`Dialog closed: ${result}`);
+                if(result == 'success'){
+                    this.getDistributors(true);
+                }
 
 
             });

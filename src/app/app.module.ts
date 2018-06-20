@@ -119,8 +119,8 @@ import { EditPointsComponent } from './edit-points/edit-points.component';
 import { AddEditPointsComponent } from './add-edit-points/add-edit-points.component';
 import { RedeemSettingsDialogComponent } from './redeem-settings-dialog/redeem-settings-dialog.component';
 import { OrderHistoryComponent } from './order-history/order-history.component';
-
-
+import { ProcessPaymentDialogComponent } from './process-payment-dialog/process-payment-dialog.component';
+import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/processed-payments-details.component';
 
 
 
@@ -218,6 +218,8 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
         AddEditPointsComponent,
         RedeemSettingsDialogComponent,
         OrderHistoryComponent,
+        ProcessPaymentDialogComponent,
+        ProcessedPaymentsDetailsComponent,
 
      
         
@@ -363,7 +365,9 @@ import { OrderHistoryComponent } from './order-history/order-history.component';
          EditPointsComponent,
          AddEditPointsComponent,
          OrderHistoryComponent,
-         RedeemSettingsDialogComponent
+         RedeemSettingsDialogComponent,
+         ProcessPaymentDialogComponent,
+         ProcessedPaymentsDetailsComponent
       
 
 

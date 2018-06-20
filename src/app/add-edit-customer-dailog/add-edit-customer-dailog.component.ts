@@ -79,7 +79,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
           appType: this.authenticationService.appType()
         };
       }
-      this.customerService.getCustomerById(input).subscribe(
+      this.customerService.getCustomerById(input)
+      .subscribe(
         output => this.getCustomerDetailsResult(output),
         error => {
           //console.log("error in distrbutors");

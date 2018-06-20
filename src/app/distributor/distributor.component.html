@@ -55,7 +55,7 @@
               <md-select placeholder="Type of phone" class="wd-100pc left" name="phonetype" [(ngModel)]="filterTypeModel.typeofphone">
                 <md-option value="no_smartphone">No Smartphone</md-option>
                 <md-option value="android">Android</md-option>
-                <md-option value="iphone">Iphone</md-option>
+                <md-option value="ios">Iphone</md-option>
               </md-select>
 
             </div>
@@ -142,7 +142,7 @@
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
               <td class="left" width="10%">
                 <div class="dropdown">
-                  <button class="dropbtn" [disabled]="dist.usercreatedby.userid != 'loginId'">View More</button>
+                  <button class="dropbtn" [disabled]="dist.usercreatedby && dist.usercreatedby.userid != 'loginId'">View More</button>
                   <div class="dropdown-content" style="right:0;">
                     <div class="row pdbottom-5">
                       <label class="col-md-6" (click)="openUpdateDialog(dist)">

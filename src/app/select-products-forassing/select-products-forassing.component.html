@@ -21,10 +21,6 @@
     <table class="table table-hover table-striped table-fixedheader mgtop-10">
       <thead>
         <tr>
-
-
-
-
           <th width="16%">Product</th>
           <th class="" width="12%">Category</th>
           <th width="15%">Product Type </th>
@@ -76,8 +72,6 @@
             <!-- <input type="checkbox" class="custom-control-input" [(ngModel)]="product.expressCheck" name="expressdelivery"> -->
           </td>
           <td width="9%" class="left capital"> {{product.servicecharge}} </td>
-
-
           <td class="left capital" width="6%">
             <span *ngIf="product.quantity > 0"> {{product.pcost * product.quantity + product.servicecharge * product.quantity + amount}} </span>
             <span *ngIf="product.quantity == 0"> 0 </span>
@@ -86,10 +80,9 @@
           <td class="left capital" width="10%">
             <span>
               <input class="wd-100pc" placeholder="cans" type="number" min="0" step="1" [(ngModel)]="product.emptycans" (ngModelChange)="emptyCansChange($event)"
-                disabled>
+                >
             </span>
           </td>
-
         </tr>
       </tbody>
       <br>
@@ -99,28 +92,28 @@
     </table>
     <h5 class="center warning capital">{{emptyCanMessage}}</h5>
     <div class="row cost-style">
-      <div class="col">
+      <div class="col center">
         <h5> Product Cost<br>
           <b>{{this.productCost}} x {{this.quantity}} </b>
         </h5>
       </div>
-      <div class="col">
+      <div class="col center">
         <h5> Service Charge <br>
           <b>{{this.serviceCharges}} x {{this.quantity}}</b>
         </h5>
       </div>
-      <div class="col">
+      <div class="col center">
         <h5>Exp Delv Charges <br>
           <b>{{this.amount}}</b>
         </h5>
       </div>
-      <div class="col">
+      <div class="col center">
         <h5>Empty Cans Amt <br>
           <b>{{((this.quantity - this.emptyCans) * 150) }}</b>
 
         </h5>
       </div>
-      <div class="col">
+      <div class="col center">
         <h5>Total Cost <br>
           <b>{{this.totalcost}}</b>
         </h5>
@@ -147,19 +140,12 @@
     </span> -->
     </div>
 </div>
-
-
-
 </md-dialog-content>
-
-
 
 
 <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
-
     <button type="submit" md-raised-button class="btn-primary" (click)="setProducts()" [disabled]="(emptyCansKeyUp == true)">SET</button>&nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
-
   </md-dialog-actions>
 </div>

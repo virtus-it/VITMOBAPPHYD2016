@@ -1,0 +1,8 @@
+.disabled{
+    color: grey;
+}
+
+.active{
+    color:forestgreen;
+    /* background-color: forestgreen; */
+}
