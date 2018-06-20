@@ -133,7 +133,7 @@
           <td class="" width="10%">
             <span *ngIf="redeem.status == 'inprocess'" class="fa fa-money active" title="Process payment" (click)="processPaymentDialog(redeem)"></span>
             <span *ngIf="redeem.status != 'inprocess'" class="fa fa-money disabled" title="Process payment"></span>  &nbsp; &nbsp;
-            <span class="	fa fa-file-text-o active" title="paymentDetails" (click)="viewProcessedDetails()"></span>    
+            <span class="	fa fa-file-text-o active" title="paymentDetails" (click)="viewProcessedDetails(redeem)"></span>    
           </td>
       
         </tr>

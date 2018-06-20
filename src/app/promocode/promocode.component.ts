@@ -182,16 +182,16 @@ redeemSettingsDetails:any = [];
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
-     
+      this.getRedeemDetails();
     }
   });
 
   }
 
-  viewProcessedDetails(){
+  viewProcessedDetails(data){
     let dialogRef = this.dialog.open(ProcessedPaymentsDetailsComponent , {
       width: '75%',
-      data: ''
+      data: data
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){

@@ -17,7 +17,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
   processPaymentInput = {name:"" , type:"paytm", ackId:"" , paytmNumber:"" , amount: 0 }
 
   processPayment(){
-    let input = {loginid: this.authenticationService.loggedInUserId() , apptype:this.authenticationService.appType() , userid: this.Details.user_id , type : this.processPaymentInput.type , TransType:"updateprocess" ,  redeemmobileno : this.processPaymentInput.paytmNumber , acknowledgeid :  this.processPaymentInput.ackId , amount: this.processPaymentInput.amount }
+    let input = {"User" : {"id": this.Details.id, loginid: this.authenticationService.loggedInUserId() , apptype:this.authenticationService.appType() , userid: this.Details.user_id , type : this.processPaymentInput.type , TransType:"updateprocess" ,  redeemmobileno : this.processPaymentInput.paytmNumber , acknowledgeid :  this.processPaymentInput.ackId , amount: this.processPaymentInput.amount }};
     console.log(input);
     this.distributorService.getPoints(input)
     .subscribe(
@@ -27,7 +27,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
   }
   processPaymentResult(result){
     if(result.result == 'success'){
-
+      this.thisDialogRef.close('success');
     }
   }
 

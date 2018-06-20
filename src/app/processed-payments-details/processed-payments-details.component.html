@@ -11,12 +11,49 @@
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
 
+        <table class="table table-hover table-striped table-fixedheader">
+            <thead>
+              <tr class="wd-99pc">
+                <th class="" width="20%">Name</th>
+                <th class="" width="20%">Amount</th>
+                <th class="" width="20%">Paytm Number</th>
+                <th class="" width="40%">Acknowledgement ID</th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="" *ngFor="let details of processedDetails">
+                <td class="" width="20%">Name</td>
+                <td class="" width="20%">
+                  <span *ngIf="details.amount">{{details.amount}} </span>
+                  <span *ngIf="details.amount === null || details.amount == ''"> -  </span>
+                </td>
+                <td class="" width="20%">
+                  <span class="" *ngIf="details.typedetails"> {{details.typedetails}} </span>
+                  <span *ngIf="details.typedetails === null || details.typedetails == ''"> -  </span>
+                </td>
+
+                <td class="" width="20%">
+                  <span class="" *ngIf="details.acknowledgementnumber">{{details.acknowledgementnumber}}</span>
+                  <span *ngIf="details.acknowledgementnumber === null || details.acknowledgementnumber == ''"> -  </span>                
+                </td>
+
+              </tr>
+              
+            </tbody>
+          
+                 
+            
+          </table>
+
+
+
   
     </div>
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button>
+      <!-- <button type="submit" class="btn-primary" md-raised-button>SUBMIT</button> -->
       <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>
