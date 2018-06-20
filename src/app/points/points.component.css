@@ -122,6 +122,7 @@ box-shadow: 0 0 8px #bbb;
     padding: 10px;
   background: #0f75bc !important;
   color: white;
+  border-left: 5px solid #f79123;
 }
 
 .pd-top-btm-7{

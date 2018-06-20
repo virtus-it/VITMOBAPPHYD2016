@@ -102,6 +102,9 @@ table thead {
   .left{
     text-align: left;
   }
+  .mgbottom-0{
+    margin-bottom: 0px;
+  }
   .mgbottom-5{
     margin-bottom: 5px;
   }
@@ -971,4 +974,13 @@ vertical-align: middle;
 }
 .gray6{
   color:var( --gray6) !important; 
+}
+.float-right{
+  float: right;
+}
+.float-left{
+  float: left;
+}
+.bg-fade-blue{
+  box-shadow: 0px 0px 50px #0f75bc inset !important;
 }

@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-6 col-sm-6 ">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Name" name="firstName" [formControl]="emailFormControl"  [(ngModel)]="supplierInput.firstname">
+              <input class="form-control" mdInput placeholder="Name" name="firstName" [formControl]="emailFormControl"  [(ngModel)]="supplierInput.firstname" required>
               <md-error *ngIf="emailFormControl.hasError('required')">
                 First Name is <strong>required</strong>
               </md-error>
@@ -27,14 +27,14 @@
           </div>
           <div class="col-md-6 col-sm-6">
               <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno" required>
                   <md-error>
                     Mobile Number is <strong>required</strong>
                   </md-error>
                 </md-form-field>
 
                 <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="supplierInput.address">
+                    <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="supplierInput.address" required>
                     <md-error>
                       Address is <strong>required</strong>
                     </md-error>
