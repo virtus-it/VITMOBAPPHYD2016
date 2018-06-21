@@ -108,6 +108,18 @@ export class AddEditUserComponent implements OnInit {
     referCode: ''
   };
 
+  customerCareInput = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    mobile1: '',
+    mobile2: '',
+    address: '',
+    emailid: '',
+  };
+
+
+
   areaList = [];
   phone = false;
   
@@ -168,11 +180,50 @@ export class AddEditUserComponent implements OnInit {
         this.addSalesUser();
       } else if (this.UserInput.usertype == 'Manufacturer') {
         this.addManufacturer();
-      } else if (this.UserInput.usertype == 'Marketing') {
+      }
+       else if (this.UserInput.usertype == 'Marketing') {
         this.addMarketingUser();
+      }
+      else if(this.UserInput.usertype == 'customercare'){
+        this.addCustomerCare();
       }
     }
   }
+
+
+  addCustomerCare() {
+    let input = {
+      User: {
+        pwd: this.customerCareInput.phone,
+        user_type: 'customercare',
+        TransType: 'create',
+        firstname: this.marketingInput.firstName,
+        lastname: this.marketingInput.lastName,
+        address: this.marketingInput.address,
+        loginid: this.authenticationService.loggedInUserId(),
+        mobileno: this.marketingInput.phone,
+        mobileno_one: this.marketingInput.mobile1,
+        mobileno_two: this.marketingInput.mobile2,
+        emailid: this.marketingInput.emailid,
+        apptype: this.authenticationService.appType()
+      }
+    };
+    this.distributorService.createDistributor(input)
+    .subscribe(
+      output => this.addCustomerCareResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      }
+    );
+  }
+  addCustomerCareResult(result) {
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
+    }
+  }
+
+
+
 
   addMarketingUser() {
     let input = {

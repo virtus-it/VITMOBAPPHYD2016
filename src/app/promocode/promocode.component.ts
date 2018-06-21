@@ -20,7 +20,7 @@ export class PromocodeComponent implements OnInit {
 
   constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService,  private distributorService: DistributorServiceService) { }
 
-  allPromoCodes:any = [];
+allPromoCodes:any = [];
 tabPanelView:string="promoCode";
 redeemDetails:any = [];
 redeemSettingsDetails:any = [];

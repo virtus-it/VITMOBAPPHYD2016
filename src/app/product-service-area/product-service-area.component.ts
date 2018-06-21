@@ -34,7 +34,7 @@ export class ProductServiceAreaComponent implements OnInit {
     this.map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 17.34932757, lng: 78.48117828 },
         zoom: 11,
-        disableDoubleClickZoom: true,
+        disableDoubleClickZoom: false,
         // only show roadmap type of map, and disable ability to switch to other type
         // mapTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
