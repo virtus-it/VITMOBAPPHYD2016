@@ -37,7 +37,7 @@ export class AddEditUserComponent implements OnInit {
 
   customerInput: any = {
     User: {
-      advamt: '0',
+      advamt: '',
       registertype: 'residential',
       mobileno_one: '',
       mobileno_two: '',
@@ -490,7 +490,9 @@ export class AddEditUserComponent implements OnInit {
       this.customerInput.User.buildingname = this.Details.buildingname;
       this.customerInput.User.promocode = this.Details.promocode;
       this.customerInput.User.referencecode = this.Details.reference_code;
-    } else if (this.Details.usertype == 'dealer') {
+      // this.customerInput.User.advamt = this.Details.reference_code;
+    } 
+    else if (this.Details.usertype == 'dealer') {
       this.phone = true;
       this.dist.firstName = this.Details.firstname;
       this.dist.lastName = this.Details.lastname;
@@ -541,12 +543,24 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+
+//   let input ={};
+//   if(this.customerInput.advamt){
+//  input["advamt"] = this.customerInput.advamt; 
+//  };
+ 
+
   UpdateCustomer() {
     if (this.validation1() && this.validation2() && this.validation3()) {
-      let input = this.customerInput;
+    
+      let input =  this.customerInput;
+      if(input.User.advamt === null || input.User.advamt == ''){
+        delete input.User.advamt;
+      }
       input.User.paymentday = this.paymentDate;
       input.User.billpaymentdueday = this.paymentdueDate;
       input.User.userid = this.Details.userid;
+
       console.log(input);
       this.customerService.updateCustomer(input).subscribe(
         output => this.updateCustomerResult(output),

@@ -123,11 +123,11 @@ export class AddEditCustomerDailogComponent implements OnInit {
         this.paymentDate = result.data.user.payment.days;
         this.paymentdueDate = result.data.user.payment.billpaymentdueday;
       }
-      if (result.data.user.payment && result.data.user.payment.advance_amount) {
-        this.customerInput.User.advamt =
-          result.data.user.payment.advance_amount;
+      else if (result.data.user.payment && result.data.user.payment.advance_amount) {
+
+        this.customerInput.User.advamt = result.data.user.payment.advance_amount;
       }
-      if (result.data.user.payment && result.data.user.payment.paymenttype) {
+      else if (result.data.user.payment && result.data.user.payment.paymenttype) {
         this.customerInput.User.paymenttype =
           result.data.user.payment.paymenttype;
       }
@@ -182,7 +182,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
       input.User.billpaymentdueday = this.paymentdueDate;
       input.User.orderid = this.Details.order_id;
       console.log(input);
-      this.customerService.updateCustomer(input).subscribe(
+      this.customerService.updateCustomer(input)
+      .subscribe(
         output => this.updateCustomerResult(output),
         error => {
           //console.log("error in distrbutors");
