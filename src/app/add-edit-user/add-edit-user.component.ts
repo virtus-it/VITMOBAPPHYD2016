@@ -110,12 +110,14 @@ export class AddEditUserComponent implements OnInit {
 
   areaList = [];
   phone = false;
+  
   supplierInput = {
     firstname: '',
     mobileno: '',
     altmobileno: '',
     address: '',
-    emailid: ''
+    emailid: '',
+    lastname: ''
   };
 
   headerValue: any = 'Add User';

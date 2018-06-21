@@ -428,12 +428,25 @@
       <div class="row">
         <div class="col-md-4 col-sm-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Name" name="firstName" [formControl]="emailFormControl" [(ngModel)]="supplierInput.firstname">
+            <input class="form-control" mdInput placeholder="First name" name="firstName" [formControl]="emailFormControl" [(ngModel)]="supplierInput.firstname">
             <md-error *ngIf="emailFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
             </md-error>
           </md-form-field>
+
+          <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="supplierInput.lastname" [formControl]="emailFormControl" >
+
+              <md-error *ngIf="emailFormControl.hasError('required')">
+                  Last Name is
+                  <strong>required</strong>
+                </md-error>
+
+
+            </md-form-field>
+
+
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno">
             <md-error>

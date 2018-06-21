@@ -31,6 +31,13 @@ export class ProcessPaymentDialogComponent implements OnInit {
     }
   }
 
+  getDetails(){
+    if(this.Details){
+      this.processPaymentInput.paytmNumber = this.Details.typedetails;
+      this.processPaymentInput.amount = this.Details.amount;
+    }
+
+  }
 
   onCloseModal(){
     this.thisDialogRef.close('Cancel');
@@ -38,6 +45,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.Details);
+    this.getDetails();
   }
 
 }

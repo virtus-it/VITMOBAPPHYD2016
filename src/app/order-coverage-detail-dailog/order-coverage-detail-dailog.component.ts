@@ -79,6 +79,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   };
 
   stockPointLocationData: marker[] = [];
+  stockpoints :any = [];
+  showMarkers: marker[] = [];
 
   dropdownData = { selectedItems: [] };
   //orderDetails = "";
@@ -127,6 +129,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     }
   }
   DistrbutorHover(distributor) {
+    this.getAllStockpoints(distributor); /* This is for getting stockpoints without logout */
+
     if (distributor.path) {
       this.displayPolygon = [];
       let DistributorData: any = {
@@ -219,6 +223,46 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       });
     }
   }
+
+  getAllStockpoints(data){
+    let input={"User":{"userid":data.user_id ,"transtype":"getall","apptype":this.authenticationService.appType()}};
+    //console.log(input);
+    this.distributorService.StockPoint(input)
+    .subscribe(
+    output => this.getAllStockPointsResult(output),
+    error => {
+        //console.log("falied");
+    });
+   }
+   getAllStockPointsResult(result){
+     //console.log(result);
+     if(result.result == 'success'){
+       this.stockpoints=result.data;
+       let stockpointData = {lat:0 , lng:0 , icon:"" , index: 1 };
+       let markersData = [];
+      //  let marker = [];
+       _.each(this.stockpoints , function(i, j){
+         let details:any = i;
+         stockpointData = {
+            lat: parseFloat(details.latitude),
+            lng: parseFloat(details.longitude),
+            icon:"../assets/images/green.png",
+            index : j + 1 
+         }
+         markersData.push(stockpointData);
+       });
+
+        this.stockPointLocationData = markersData;;
+     }
+     else{
+      this.stockpoints = [];
+      this.showMarkers = [];
+      this.stockPointLocationData = [];
+     }
+
+  }
+
+
   getOrderDetail() {
     this.loaderService.display(true);
     let input = {
