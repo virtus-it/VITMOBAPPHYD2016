@@ -141,13 +141,13 @@
         </div>
         <div class="container-fluid brd-logo"  *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i">
             <div class=" form-group  row pdleftright-15">
-                <div class="col-md-6 col-sm-6 col-lg-6 left details-style ">
+                <div class="col left details-style ">
                     <b class="">Order Details </b>  &nbsp;&nbsp;&nbsp;
                   </div>
-                    <div class="col-md-3  col-sm-3  col-lg-3 right logo-bg pdtop-5 ">
+                    <div class="p-2 right logo-bg pdtop-5 ">
                         <button class="btn btn-default btn-sm" (click)="refresh()" >Clear</button>                    
                     </div> 
-                <div class="col-md-3  col-sm-3  col-lg-3 right logo-bg pdtop-5 ">
+                <div class="p-2 right logo-bg pdtop-5 ">
                     <button class="btn btn-default btn-sm" (click)="ViewDistributors(order)" >Assign</button>                    
                 </div> 
                 </div>
