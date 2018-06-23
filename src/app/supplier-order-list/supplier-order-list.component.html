@@ -7,7 +7,7 @@
         <i class="fa fa-file-text-o"></i>  
         Order List
     </div> 
-    <div class="col-md-7  col-sm-7  col-lg-7  capitalize">
+    <div class="col-md-7  col-sm-7  col-lg-7  capitalize" *ngIf="Detail.data">
         <i class="fa fa-sitemap"></i>  
         Dist Name: {{Detail.data.firstname}} {{Detail.data.lastname}}
     </div> 
@@ -58,11 +58,11 @@
             <td width="12%" class="left" class="cellpadding" scope="row">{{supplierOrder.customer.mobileno}}</td> -->
             <td width="15%" class="left cellpadding text-capitalize" scope="row">
               <span *ngIf="Detail.type=='distributorOrder'"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.orderby_firstname}}">{{supplierOrder.orderby_firstname}}</span></span>
-              <span *ngIf="Detail.type=='supplierOrder'"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.customer.firstname}}">{{supplierOrder.customer.firstname}}</span></span>
+              <span *ngIf="Detail.type=='supplierOrder' && supplierOrder.customer"><span class="onhovertooltip-100 text-capitalize" title="{{supplierOrder.customer.firstname}}">{{supplierOrder.customer.firstname}}</span></span>
             </td>
             <td width="11%" class="left cellpadding" scope="row">
 <span *ngIf="Detail.type == 'distributorOrder'">{{supplierOrder.orderby_mobileno}}</span>     
-<span *ngIf="Detail.type=='supplierOrder'">{{supplierOrder.customer.mobileno}}</span>
+<span *ngIf="Detail.type=='supplierOrder' && supplierOrder.customer">{{supplierOrder.customer.mobileno}}</span>
       </td>
            </tr>
         </tbody>

@@ -996,6 +996,19 @@
 
 
       </div>
+
+      <div class="" *ngIf="newView == 'mapview'">
+        <div class="col">
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+
+              <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(allOrdersDetails)" [latitude]="m.lat" [longitude]="m.lng"
+            [iconUrl]="m.icon">
+          </agm-marker>
+
+        
+          </agm-map>
+          </div>
+      </div>
       <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i">

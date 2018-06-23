@@ -1,3 +1,6 @@
+agm-map {
+  height: 650px;
+}
 
 table thead {
     background: var( --logo-color);
