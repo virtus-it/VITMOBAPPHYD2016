@@ -13,7 +13,7 @@ export class RulesComponent implements OnInit {
 
   addRule(){
     let dialogRef = this.dialog.open(AddEditRuleComponent , {
-      width: '75%',
+      width: '60%',
       data: ''
   });
   dialogRef.afterClosed().subscribe(result => {

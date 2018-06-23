@@ -11,15 +11,15 @@
   <md-dialog-content layout="column">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row pd-top-0">
-        <div class="col-4 wd-100pc">
-          <md-select placeholder="Type" [(ngModel)]="ruleInput.type">
+        <div class="col-4">
+          <md-select placeholder="Type" [(ngModel)]="ruleInput.type" class=" wd-100pc">
             <md-option value="promocode">Promo Code</md-option>
             <md-option value="points">Points </md-option>
           </md-select>
         </div>
+        
         <div class="col-4" *ngIf="ruleInput.type == 'promocode'"> <!-- for promocode give condition -->
-
-            <md-form-field class="example-full-width">
+            <md-form-field class="example-full-width wd-100pc">
                 <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option *ngFor="let promo of filteredPromoCodes | async" [value]="promo.promocode">
@@ -29,11 +29,9 @@
               </md-form-field>
         </div>
 
-
         <div class="col-4" *ngIf="ruleInput.type == 'points'"> <!-- For points give condition -->
-
-          <md-form-field class="example-full-width">
-              <input mdInput placeholder="Enter points Description" aria-label="State" [mdAutocomplete]="auto" [formControl]="pointsCtrl" >
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput placeholder="Enter points Description" aria-label="State" [mdAutocomplete]="auto" [formControl]="pointsCtrl" >
               <md-autocomplete #auto="mdAutocomplete">
                 <md-option *ngFor="let points of filteredPoints | async" [value]="points.description">
                   <span>{{points.description}} </span>
