@@ -156,10 +156,10 @@
             <tr>
 
               <th width="15%"> Customer Name</th>
-              <th width="12%">Mobile No</th>
+              <th width="10%">Mobile No</th>
               <th width="15%">Created Date</th>
-              <th width="25%">Address</th>
-              <th width="15%">Customer Ordered</th>
+              <th width="50%">Address</th>
+              <th width="10%">Cust Ordered</th>
 
             </tr>
           </thead>
@@ -170,7 +170,7 @@
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate}}</td>
 
-              <td class="left"><span class="onhovertooltip-300" title="{{reports.address}}">{{reports.address}}</span></td>
+              <td class="left"><span class="onhovertooltip-600" title="{{reports.address}}">{{reports.address}}</span></td>
               <td class="left">
                 <span  *ngIf="reports.orderedstatus=='true'"> <i class="fa fa-check-circle-o check"> </i> </span>
                 <span *ngIf="reports.orderedstatus=='false'"><i class="fa fa-times-circle-o cross"></i> </span>
@@ -202,7 +202,7 @@
                   <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                   <md-datepicker #picker></md-datepicker>
                 </md-form-field>
-                <md-dialog-actions align="end" class="mg-10x20 mgbottom-0">
+                <md-dialog-actions align="end" class="mg-10x20">
                     <button type="submit" md-raised-button class="btn-primary" (click)="filterReports()">SUBMIT</button>
 
                     

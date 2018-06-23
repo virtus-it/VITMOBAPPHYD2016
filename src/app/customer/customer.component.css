@@ -92,6 +92,8 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+    visibility: visible;
+    transition-delay: 1s;
 }
 @media only screen and (max-width : 640px) {
   

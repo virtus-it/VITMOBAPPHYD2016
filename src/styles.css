@@ -206,6 +206,13 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
+  .onhovertooltip-600{
+    width:600px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
 
   .pageTitle-style{
     text-align: left;
