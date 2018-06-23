@@ -113,7 +113,8 @@ export class CoverageComponent implements OnInit {
       }
     };
     this.loaderService.display(true);
-    this.distributorService.getpolygonByDistributor(input).subscribe(
+    this.distributorService.getpolygonByDistributor(input)
+      .subscribe(
       output => this.getPolygonDataResult(output),
       error => {
         //console.log("falied");

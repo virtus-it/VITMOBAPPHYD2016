@@ -123,6 +123,7 @@ import { ProcessPaymentDialogComponent } from './process-payment-dialog/process-
 import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/processed-payments-details.component';
 import { RulesComponent } from './rules/rules.component';
 import { AddEditRuleComponent } from './add-edit-rule/add-edit-rule.component';
+import { DistributorsAvailabilityComponent } from './distributors-availability/distributors-availability.component';
 
 
 
@@ -224,6 +225,7 @@ import { AddEditRuleComponent } from './add-edit-rule/add-edit-rule.component';
         ProcessedPaymentsDetailsComponent,
         RulesComponent,
         AddEditRuleComponent,
+        DistributorsAvailabilityComponent,
 
      
         
@@ -373,7 +375,8 @@ import { AddEditRuleComponent } from './add-edit-rule/add-edit-rule.component';
          RedeemSettingsDialogComponent,
          ProcessPaymentDialogComponent,
          ProcessedPaymentsDetailsComponent,
-         AddEditRuleComponent
+         AddEditRuleComponent,
+         DistributorsAvailabilityComponent
       
 
 

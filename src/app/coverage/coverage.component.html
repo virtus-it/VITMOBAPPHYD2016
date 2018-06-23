@@ -249,7 +249,7 @@
 
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
   
-            <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
+            <agm-polygon 
                         
                          [fillColor]="'#eaefea'"
                            [geodesic]="true" 
