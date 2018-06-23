@@ -13,6 +13,7 @@ import { ViewSupplierComponent } from '../view-supplier/view-supplier.component'
 import { AddproductconfirmComponent } from '../addproductconfirm/addproductconfirm.component';
 import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.component';
 import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
+import { DistributorsAvailabilityComponent } from '../distributors-availability/distributors-availability.component';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/startWith';
@@ -89,16 +90,6 @@ this.getProductByCategory();
     }
     return finalCategories;
     }
-
-   
-
-
-
-    // search(){
-
-    // }
-
-
 
 
     getProductByCategory(){
@@ -250,6 +241,23 @@ this.getProductByCategory();
 
 
         }
+    }
+
+    distributorsAvailability(data){
+
+        let dialogRef = this.dialog.open(DistributorsAvailabilityComponent, {
+
+            width: '75%',
+            data: data
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if(result == 'success'){
+                this.getDistributors(true);
+            }
+
+
+        });
     }
 
     //Search distributor with name

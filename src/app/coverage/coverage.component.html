@@ -1,9 +1,19 @@
 ﻿<div class="dist-style  minheight-500">
     <div class=" row  distIcon-style">
-    <div class="col-md-8  col-sm-8 col-lg-8">
-        <h4 class="left"><i class="fa fa-globe"></i> Covered Area</h4>
+    <div class="col-md-4  col-sm-4 col-lg-4">
+        <h4 class="left"><i class="fa fa-globe"></i> Moya Coverage</h4>
     </div>
-   
+
+    <div class="col-md-4  col-sm-4 col-lg-4">
+
+    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'distributors'}" href="javascript:void(0)"
+            (click)="showTabPanel('distributors')">DISTRIBUTORS</button>
+          <button type="submit" md-raised-button class=" "  [ngClass]="{'btn-primary': tabPanelView === 'products'}"
+            href="javascript:void(0)" (click)="showTabPanel('products')"> PRODUCTS </button>
+
+    </div>
+
+
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
     
       <form class="example-form" (ngSubmit)="getOrderDetail()">
@@ -63,7 +73,8 @@
    
      
     </div>
-    <div id="" class="row pd-15x10 mg-0">
+
+    <div id="" class="row pd-15x10 mg-0" *ngIf="tabPanelView == 'distributors'">
       <div class="col">
         <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
             <agm-marker  *ngFor="let m of markers; let i = index"
@@ -94,11 +105,6 @@
       
             </agm-info-window>
           </agm-marker>
-
-
-
-
-
 
           <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
                       
@@ -231,5 +237,34 @@
           </table> -->
           </div>
       
+  </div>
+
+
+
+
+
+  <div id="" class="row pd-15x10 mg-0"  *ngIf="tabPanelView == 'products'">
+
+      <div class="col">
+
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+  
+            <agm-polygon 
+                        
+                         [fillColor]="'#eaefea'"
+                           [geodesic]="true" 
+                           [strokeWeight]="1"   
+                         [clickable] = "true"
+                        (polyClick)="click($event,p)" 
+                         [editable]="false"
+                         [polyDraggable]="false">
+              
+            </agm-polygon>
+          
+          </agm-map>
+
+
+        </div>
+
   </div>
   </div>

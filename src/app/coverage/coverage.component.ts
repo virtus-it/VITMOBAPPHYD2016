@@ -54,6 +54,8 @@ export class CoverageComponent implements OnInit {
     }
   ];
 
+  tabPanelView:any = 'distributors';
+
   orderslocationData: marker[] = [];
   showFilterDailog = false;
   constructor(
@@ -111,7 +113,8 @@ export class CoverageComponent implements OnInit {
       }
     };
     this.loaderService.display(true);
-    this.distributorService.getpolygonByDistributor(input).subscribe(
+    this.distributorService.getpolygonByDistributor(input)
+      .subscribe(
       output => this.getPolygonDataResult(output),
       error => {
         //console.log("falied");
@@ -434,6 +437,16 @@ export class CoverageComponent implements OnInit {
     console.log(`clicked the marker: ${label || index}`)
   }
 
+
+  showTabPanel(panelName) {
+    this.tabPanelView = panelName;
+    if(panelName== "distributors"){
+     
+    }
+    else if(panelName== "products"){
+     
+    }
+  }
   pointers: marker[] = [
     {
       lat: '17.407073254851742',

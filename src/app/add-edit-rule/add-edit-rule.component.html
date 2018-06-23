@@ -1,0 +1,60 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4 col-sm-4">
+      <i class="fa fa-registered"></i> Add Rule
+    </div>
+    <div class="col-md-1 col-sm-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+      </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row pd-top-0">
+        <div class="col-4 wd-100pc">
+          <md-select placeholder="Type" [(ngModel)]="ruleInput.type">
+            <md-option value="promocode">Promo Code</md-option>
+            <md-option value="points">Points </md-option>
+          </md-select>
+        </div>
+        <div class="col-4" *ngIf="ruleInput.type == 'promocode'"> <!-- for promocode give condition -->
+
+            <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let promo of filteredPromoCodes | async" [value]="promo.promocode">
+                    <span>{{promo.promocode}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+        </div>
+
+
+        <div class="col-4" *ngIf="ruleInput.type == 'points'"> <!-- For points give condition -->
+
+          <md-form-field class="example-full-width">
+              <input mdInput placeholder="Enter points Description" aria-label="State" [mdAutocomplete]="auto" [formControl]="pointsCtrl" >
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let points of filteredPoints | async" [value]="points.description">
+                  <span>{{points.description}} </span>
+                </md-option>
+              </md-autocomplete>
+            </md-form-field>
+        </div>
+
+
+        <div class="col-4">
+
+            <md-form-field class="wd-100pc">
+                <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value">
+              </md-form-field>
+        </div>
+      </div>
+    </div>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button type="submit" class="btn-primary" md-raised-button (click)="submitRule()">CREATE</button>
+      <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

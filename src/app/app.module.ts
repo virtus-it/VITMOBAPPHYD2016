@@ -121,6 +121,9 @@ import { RedeemSettingsDialogComponent } from './redeem-settings-dialog/redeem-s
 import { OrderHistoryComponent } from './order-history/order-history.component';
 import { ProcessPaymentDialogComponent } from './process-payment-dialog/process-payment-dialog.component';
 import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/processed-payments-details.component';
+import { RulesComponent } from './rules/rules.component';
+import { AddEditRuleComponent } from './add-edit-rule/add-edit-rule.component';
+import { DistributorsAvailabilityComponent } from './distributors-availability/distributors-availability.component';
 
 
 
@@ -220,6 +223,9 @@ import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/
         OrderHistoryComponent,
         ProcessPaymentDialogComponent,
         ProcessedPaymentsDetailsComponent,
+        RulesComponent,
+        AddEditRuleComponent,
+        DistributorsAvailabilityComponent,
 
      
         
@@ -261,6 +267,7 @@ import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/
             {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
             {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
             {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
+            {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -367,7 +374,9 @@ import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/
          OrderHistoryComponent,
          RedeemSettingsDialogComponent,
          ProcessPaymentDialogComponent,
-         ProcessedPaymentsDetailsComponent
+         ProcessedPaymentsDetailsComponent,
+         AddEditRuleComponent,
+         DistributorsAvailabilityComponent
       
 
 

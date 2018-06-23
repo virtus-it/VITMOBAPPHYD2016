@@ -4,6 +4,7 @@ import { AddEditUserComponent } from '../add-edit-user/add-edit-user.component';
 import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import * as _ from 'underscore';
+import { LoaderService } from '../login/loader.service';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ import * as _ from 'underscore';
 })
 export class UsersComponent implements OnInit {
 
-  constructor(public dialog: MdDialog , private authenticationService: AuthenticationService , private distributorService: DistributorServiceService, ) { }
+  constructor(public dialog: MdDialog , private authenticationService: AuthenticationService , private distributorService: DistributorServiceService, private loaderService: LoaderService ) { }
 
   allUsers:any = [];
   UserClickMore = true;
@@ -122,10 +123,12 @@ else {
     this.allUsers = [];
     input.root.lastuserid = 0;
 }
+this.loaderService.display(true);
   this.distributorService.getAllDistributors(input)
             .subscribe(
             output => this.getDistributorsResult(output),
             error => {
+              this.loaderService.display(false);
                 //console.log("error in distrbutors");
             });
 }
@@ -134,9 +137,12 @@ getDistributorsResult(result) {
   //console.log(data);
   if (result.result == 'success') {
     this.allUsers =_.union(this.allUsers , result.data);
+    this.loaderService.display(false);    
 }
 else{
   this.UserClickMore = false;
+  this.loaderService.display(false);
+  
 }
 }
 

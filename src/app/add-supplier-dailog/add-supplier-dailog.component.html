@@ -26,6 +26,13 @@
   
           </div>
           <div class="col-md-6 col-sm-6">
+
+              <md-form-field class="">
+                  <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="supplierInput.lastname" required>
+                </md-form-field>
+
+
+
               <md-form-field class="">
                   <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno" required>
                   <md-error>

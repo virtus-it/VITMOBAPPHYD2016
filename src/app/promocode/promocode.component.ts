@@ -20,7 +20,7 @@ export class PromocodeComponent implements OnInit {
 
   constructor( public dialog: MdDialog, private promocodeservice: PromocodeServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService,  private distributorService: DistributorServiceService) { }
 
-  allPromoCodes:any = [];
+allPromoCodes:any = [];
 tabPanelView:string="promoCode";
 redeemDetails:any = [];
 redeemSettingsDetails:any = [];
@@ -199,6 +199,21 @@ redeemSettingsDetails:any = [];
     }
   });
 
+  }
+
+  deleteRedeemSetting(data){
+    console.log('data ', data);
+    let input = {"User":{loginid : this.authenticationService.loggedInUserId() , apptype: this.authenticationService.appType() , id: data.id , TransType:'delete'}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.deleteRedeemSettingResult(output),
+    error => {      
+    });
+  }
+  deleteRedeemSettingResult(result){
+    if(result.result == 'success'){
+      this.getRedeemSettingsDetails();
+    }
   }
 
 

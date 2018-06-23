@@ -37,7 +37,7 @@ export class AddEditUserComponent implements OnInit {
 
   customerInput: any = {
     User: {
-      advamt: '0',
+      advamt: '',
       registertype: 'residential',
       mobileno_one: '',
       mobileno_two: '',
@@ -108,14 +108,28 @@ export class AddEditUserComponent implements OnInit {
     referCode: ''
   };
 
+  customerCareInput = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    mobile1: '',
+    mobile2: '',
+    address: '',
+    emailid: '',
+  };
+
+
+
   areaList = [];
   phone = false;
+  
   supplierInput = {
     firstname: '',
     mobileno: '',
     altmobileno: '',
     address: '',
-    emailid: ''
+    emailid: '',
+    lastname: ''
   };
 
   headerValue: any = 'Add User';
@@ -166,11 +180,50 @@ export class AddEditUserComponent implements OnInit {
         this.addSalesUser();
       } else if (this.UserInput.usertype == 'Manufacturer') {
         this.addManufacturer();
-      } else if (this.UserInput.usertype == 'Marketing') {
+      }
+       else if (this.UserInput.usertype == 'Marketing') {
         this.addMarketingUser();
+      }
+      else if(this.UserInput.usertype == 'customercare'){
+        this.addCustomerCare();
       }
     }
   }
+
+
+  addCustomerCare() {
+    let input = {
+      User: {
+        pwd: this.customerCareInput.phone,
+        user_type: 'customercare',
+        TransType: 'create',
+        firstname: this.marketingInput.firstName,
+        lastname: this.marketingInput.lastName,
+        address: this.marketingInput.address,
+        loginid: this.authenticationService.loggedInUserId(),
+        mobileno: this.marketingInput.phone,
+        mobileno_one: this.marketingInput.mobile1,
+        mobileno_two: this.marketingInput.mobile2,
+        emailid: this.marketingInput.emailid,
+        apptype: this.authenticationService.appType()
+      }
+    };
+    this.distributorService.createDistributor(input)
+    .subscribe(
+      output => this.addCustomerCareResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      }
+    );
+  }
+  addCustomerCareResult(result) {
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
+    }
+  }
+
+
+
 
   addMarketingUser() {
     let input = {
@@ -437,7 +490,9 @@ export class AddEditUserComponent implements OnInit {
       this.customerInput.User.buildingname = this.Details.buildingname;
       this.customerInput.User.promocode = this.Details.promocode;
       this.customerInput.User.referencecode = this.Details.reference_code;
-    } else if (this.Details.usertype == 'dealer') {
+      // this.customerInput.User.advamt = this.Details.reference_code;
+    } 
+    else if (this.Details.usertype == 'dealer') {
       this.phone = true;
       this.dist.firstName = this.Details.firstname;
       this.dist.lastName = this.Details.lastname;
@@ -488,12 +543,24 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+
+//   let input ={};
+//   if(this.customerInput.advamt){
+//  input["advamt"] = this.customerInput.advamt; 
+//  };
+ 
+
   UpdateCustomer() {
     if (this.validation1() && this.validation2() && this.validation3()) {
-      let input = this.customerInput;
+    
+      let input =  this.customerInput;
+      if(input.User.advamt === null || input.User.advamt == ''){
+        delete input.User.advamt;
+      }
       input.User.paymentday = this.paymentDate;
       input.User.billpaymentdueday = this.paymentdueDate;
       input.User.userid = this.Details.userid;
+
       console.log(input);
       this.customerService.updateCustomer(input).subscribe(
         output => this.updateCustomerResult(output),
