@@ -23,8 +23,7 @@
           (click)="showTabPanel('forward')">FORWARD ORDERS</a> -->
           <!-- <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a> -->
-        </div>
-
+        </div> 
 
         <!-- for complete tab filter -->
 
@@ -275,7 +274,21 @@
           </div>
         </div>
       </div>
-      <div *ngIf="tabPanelView === 'forward'" class="panelview-style">
+
+
+
+      <div class="row">
+        <div class="col">
+          <button type="submit" md-raised-button class="  " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'gridview'}" href="javascript:void(0)"
+          (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
+        <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'mapview'}"
+          href="javascript:void(0)" (click)="showNewPanel('mapview')">Map View</button>
+        </div>
+      </div> <br>
+
+
+
+      <div *ngIf="tabPanelView === 'forward' && newView == 'gridview'" class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let forward of forwardOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
@@ -652,7 +665,7 @@
         <h4 *ngIf="!forwardClickMore" class="warning center">
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
       </div>
-      <div *ngIf="tabPanelView === 'allorder'" class="panelview-style">
+      <div *ngIf="tabPanelView === 'allorder' && newView === 'gridview'" class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let allorder of allOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">

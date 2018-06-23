@@ -104,6 +104,7 @@ export class OrderLandingComponent implements OnInit {
   selectedDistForFilter: any = "";
   orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
   tabPanelView: string = "forward";
+  newView:string = 'gridview';
   quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
@@ -262,6 +263,10 @@ export class OrderLandingComponent implements OnInit {
     
     
     
+  }
+
+  showNewPanel(panelName){
+    this.newView = panelName;
   }
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
