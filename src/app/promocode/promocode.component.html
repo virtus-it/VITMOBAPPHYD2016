@@ -124,7 +124,10 @@
       </thead>
       <tbody>
         <tr *ngFor="let redeem of redeemDetails">
-            <td class="left" width="10%">{{redeem.fullname}}</td>
+            <td class="left" width="10%">
+              <span *ngIf="redeem.fullname">{{redeem.fullname}}</span>
+              <span *ngIf="redeem.fullname == '' || redeem.fullname === null"> - </span>              
+              </td>
           <td class="left capitalize" width="10%">{{redeem.points}}</td>
           <td class="left capitalize" width="10%">{{redeem.type}}</td>
           <td class="left" width="10%">{{redeem.amount}}</td>

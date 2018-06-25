@@ -23,7 +23,10 @@
             <tbody>
 
               <tr class="" *ngFor="let details of processedDetails">
-                <td class="" width="20%">Name</td>
+                <td class="" width="20%">
+                  <span *ngIf="details.fullname">{{details.fullname}}</span>
+                  <span *ngIf="details.fullname === null || details.fullname == ''"> - </span>
+                  </td>
                 <td class="" width="20%">
                   <span *ngIf="details.amount">{{details.amount}} </span>
                   <span *ngIf="details.amount === null || details.amount == ''"> -  </span>

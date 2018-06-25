@@ -39,6 +39,17 @@
             </md-error>
           </md-form-field>
         </div>
+
+
+        <div class="col-md-4 col-sm-4 col-lg-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Brand Name" [(ngModel)]="productDetails.brandname"  name="brandname"
+                required [disabled]="this.Details">
+             
+            </md-form-field>
+          </div>
+
+
         <!-- <div class="col-1 ">
           <b>OR</b>
         </div>
@@ -57,7 +68,7 @@
 
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Product Name" [formControl]="p2FC" [(ngModel)]="productDetails.productName"
-              name="productName" required>
+              name="productName" required (ngModelChange)="changeProdName($event)">
             <md-error *ngIf="p2FC.hasError('required')">
               Product Name is
               <strong>required</strong>

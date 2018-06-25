@@ -1532,7 +1532,7 @@ this.orderLandingService.getOrdersByfilter(input)
               UserData.status = details.orderstatus;
               UserData.productType = details.product_type;
               UserData.quantity = details.quantity;
-              // UserData.userid = details
+              UserData.userid = details.user_id;
 
               if (UserData.status == 'delivered') {
                 UserData.icon = '../assets/images/green.png';
@@ -1551,7 +1551,7 @@ this.orderLandingService.getOrdersByfilter(input)
         }
 
         clickedMarker(data){
-          let formattedData = {orderid : data[0].order_id , data: data , 'type': 'mapviewAllOrders' }
+          let formattedData = {customerid  : data[0].user_id , data: data , 'type': 'mapviewAllOrders' }
           let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
             width: '95%',

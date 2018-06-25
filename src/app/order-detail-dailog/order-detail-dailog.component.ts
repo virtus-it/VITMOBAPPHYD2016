@@ -124,7 +124,14 @@ messageTemplate(data){
 getOrderDetailsById() {
     ////console.log(this.orderDetail);
     this.loaderService.display(true);
-    let input = {"root":{ orderid: this.orderDetail.order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
+    let input = {};
+    if(this.orderDetail.type == 'mapviewAllOrders'){
+        input = {"root":{ orderid: this.orderDetail.data[0].order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
+    }
+    else{
+        input = {"root":{ orderid: this.orderDetail.order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
+
+    }
     this.orderLandingService.getOrderById(input)
         .subscribe(
         output => this.getOrderDetailsByIdResult(output),
@@ -186,20 +193,20 @@ getProductsListByCustomerId() {
     this.loaderService.display(true);
     let input = {};
     if(this.orderDetail.type == 'mapviewAllOrders'){
-        input = {customerID: this.orderDetail.orderid , appType: this.authenticationService.appType()}
+        input = {customerID: this.orderDetail.data[0].user_id , appType: this.authenticationService.appType()}
     }
     else{
     input = { customerID: this.orderDetail.order_by, appType: this.authenticationService.appType() };
     }
     console.log(input);
-    // this.orderLandingService.getProductsByCustomerID(input)
+    this.orderLandingService.getProductsByCustomerID(input)
     
-    //     .subscribe(
-    //     output => this.getProductsListByCustomerIdResult(output),
-    //     error => {
-    //         ////console.log("error in order details");
-    //         this.loaderService.display(false);
-    //     });
+        .subscribe(
+        output => this.getProductsListByCustomerIdResult(output),
+        error => {
+            ////console.log("error in order details");
+            this.loaderService.display(false);
+        });
 
 }
 getProductsListByCustomerIdResult(result) {
@@ -353,7 +360,14 @@ getTemplates(data){
 
 
 getfollowUpdetails() {
-    let input = { "User": { "type": "order" , "typeid": this.orderDetail.order_id, "transtype": "getall" } }
+    let input = {};
+    if(this.orderDetail.type == 'mapviewAllOrders'){
+        input = { "User": { "type": "order" , "typeid":this.orderDetail.data[0].order_id, "transtype": "getall" } }
+    }
+    else{
+        input = { "User": { "type": "order" , "typeid": this.orderDetail.order_id, "transtype": "getall" } }
+    }
+    
     this.followupService.getFollowUp(input)
       .subscribe(
       output => this.getfollowUpdetailsResult(output),
