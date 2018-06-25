@@ -84,17 +84,13 @@
 
             
 
-            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
+            <!-- <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
             [iconUrl]="m.icon">
-            <!-- <agm-info-window>
-              Hi, this is the 1  <strong>info window</strong>
-      
-            </agm-info-window> -->
-          </agm-marker>
+          </agm-marker> -->
 
 
 
-
+<!-- 
           <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m.label, i)" [latitude]="m.lat" [longitude]="m.lng"
             [iconUrl]="m.icon">
             <agm-info-window>
@@ -104,7 +100,7 @@
             </strong>
       
             </agm-info-window>
-          </agm-marker>
+          </agm-marker> -->
 
           <agm-polygon *ngFor="let p of displayPolygon; let i = index" [paths]="p.path"
                       

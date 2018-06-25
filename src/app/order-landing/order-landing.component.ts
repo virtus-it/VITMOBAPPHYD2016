@@ -27,6 +27,15 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
+import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+declare var google: any;
+
+interface marker {
+  lat: any;
+  lng: any;
+  label?: string;
+  icon?: string;
+}
 
 @Component({
   
@@ -44,6 +53,29 @@ export class OrderLandingComponent implements OnInit {
   ordersClickMore = true;
   followUpResultStatus:any = "";
   categoryList:any = [];
+
+  lat: number = 17.385;
+  lng: number = 78.4867;
+  zoom: number = 12;
+
+  orderDetails = [];
+
+  // markers: any = [
+  //   {
+  //     lat: '',
+  //     lng: ''
+  //   }
+  // ];
+
+  ordersMap: any = [
+    {
+      lat: '',
+      lng: '',
+      name: ''
+    }
+  ];
+
+  orderslocationData: marker[] = [];
   
 
 
@@ -81,7 +113,7 @@ export class OrderLandingComponent implements OnInit {
 
     
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router ,   private productService: ProductsService) {
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router ,   private productService: ProductsService, public gMaps: GoogleMapsAPIWrapper,) {
 
     
     this.DistributorCtrl = new FormControl();
@@ -122,6 +154,9 @@ export class OrderLandingComponent implements OnInit {
   // allAddress:any = this.allOrders.orderby_address;
   completeClickMore = false;
   polygonArray = [];
+  // order = { orderId: '' };
+  allOrdersDetails: any = [];
+
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
 
   globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
@@ -1472,6 +1507,66 @@ this.orderLandingService.getOrdersByfilter(input)
           document.body.removeChild(selectedElement);
         }
 
+       
+        getOrdersOnMap() {
+          let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: null,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
+          console.log(input);
+          this.orderLandingService.getOrderList(input).subscribe(
+            output => this.getOrderDetailsResult(output),
+            error => {
+              this.loaderService.display(false);
+            }
+          );
+        }
+        getOrderDetailsResult(result) {
+          if (result.result == 'success') {
+            this.allOrdersDetails = result.data;
+            let orderLocationArray = [];
+            let data = _.each(this.allOrdersDetails, function(i, j) {
+              let details: any = i;
+              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
+              UserData.lat = parseFloat(details.orderby_latitude);
+              UserData.lng = parseFloat(details.orderby_longitude);
+              UserData.name = details.firstname;
+              UserData.orderid = details.order_id;
+              UserData.status = details.orderstatus;
+              UserData.productType = details.product_type;
+              UserData.quantity = details.quantity;
+              // UserData.userid = details
+
+              if (UserData.status == 'delivered') {
+                UserData.icon = '../assets/images/green.png';
+              }
+               else {
+                UserData.icon = '../assets/images/red.png';
+              }
+              if (UserData.lat && UserData.lng) {
+                orderLocationArray.push(UserData);
+              }
+            });
+      
+            this.orderslocationData = orderLocationArray;
+            console.log('lats and lngs', this.orderslocationData);
+          }
+        }
+
+        clickedMarker(data){
+          let formattedData = {orderid : data[0].order_id , data: data , 'type': 'mapviewAllOrders' }
+          let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+
+            width: '95%',
+            data: formattedData
+          });
+          dialogRefShowOrder.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if(result == 'success'){
+              this.refresh();
+            }
+          });
+        }
+
+
+
 
 
 
@@ -1486,6 +1581,10 @@ this.orderLandingService.getOrdersByfilter(input)
     else if(this.tabPanelView == 'allorder'){
     this.getAllOrderDetails(true);
     }
+
+    
+      this.getOrdersOnMap();
+    
     // this.getDistributors();
     // this.getSupplier();
 

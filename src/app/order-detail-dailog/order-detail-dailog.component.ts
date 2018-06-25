@@ -184,14 +184,22 @@ getOrderDetailsByIdResult(result) {
 }
 getProductsListByCustomerId() {
     this.loaderService.display(true);
-    let input = { customerID: this.orderDetail.order_by, appType: this.authenticationService.appType() };
-    this.orderLandingService.getProductsByCustomerID(input)
-        .subscribe(
-        output => this.getProductsListByCustomerIdResult(output),
-        error => {
-            ////console.log("error in order details");
-            this.loaderService.display(false);
-        });
+    let input = {};
+    if(this.orderDetail.type == 'mapviewAllOrders'){
+        input = {customerID: this.orderDetail.orderid , appType: this.authenticationService.appType()}
+    }
+    else{
+    input = { customerID: this.orderDetail.order_by, appType: this.authenticationService.appType() };
+    }
+    console.log(input);
+    // this.orderLandingService.getProductsByCustomerID(input)
+    
+    //     .subscribe(
+    //     output => this.getProductsListByCustomerIdResult(output),
+    //     error => {
+    //         ////console.log("error in order details");
+    //         this.loaderService.display(false);
+    //     });
 
 }
 getProductsListByCustomerIdResult(result) {

@@ -1,33 +1,15 @@
-﻿import {
-  Component,
-  OnInit,
-  Inject,
-  ElementRef,
-  NgModule,
-  NgZone,
-  ViewChild
-} from '@angular/core';
+﻿import {Component,OnInit,Inject,ElementRef,NgModule,NgZone,ViewChild} from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
-import {
-  AgmCoreModule,
-  GoogleMapsAPIWrapper,
-  LatLngLiteral,
-  MapsAPILoader
-} from '@agm/core';
+import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
 declare var google: any;
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
-interface marker {
-  lat: any;
-  lng: any;
-  label?: string;
-  icon?: string;
-}
+interface marker {lat: any;lng: any;label?: string;icon?: string;}
 
 @Component({
   selector: 'app-map-dialog',
@@ -49,16 +31,7 @@ export class MapDialogComponent implements OnInit {
   // polygonexists: boolean = false;
 
   // stockpoints: any = [];
-  constructor(
-    public thisDialogRef: MdDialogRef<MapDialogComponent>,
-    @Inject(MD_DIALOG_DATA) public distributorDetails: any,
-    public gMaps: GoogleMapsAPIWrapper,
-    private loader: MapsAPILoader,
-    private distributorService: DistributorServiceService,
-    private authenticationService: AuthenticationService,
-    private loaderService: LoaderService,
-    private ngZone: NgZone
-  ) {}
+  constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>,@Inject(MD_DIALOG_DATA) public distributorDetails: any,public gMaps: GoogleMapsAPIWrapper,private loader: MapsAPILoader,private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,private loaderService: LoaderService,private ngZone: NgZone) {}
   initMap() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 17.34932757, lng: 78.48117828 },
@@ -118,20 +91,13 @@ export class MapDialogComponent implements OnInit {
   }
 
   getAllStockPoints() {
-    let input = {
-      User: {
-        userid: this.distributorDetails.userid,
-        transtype: 'getall',
-        apptype: this.authenticationService.appType()
-      }
-    };
-    //console.log(input);
-    this.distributorService.StockPoint(input).subscribe(
+    let input = {User: {userid: this.distributorDetails.userid,transtype: 'getall',apptype: this.authenticationService.appType()}};
+    this.distributorService.StockPoint(input)
+    .subscribe(
       output => this.getAllStockPointsResult(output),
       error => {
         //console.log("falied");
-      }
-    );
+      });
   }
   getAllStockPointsResult(result) {
     //console.log(result);
@@ -144,16 +110,11 @@ export class MapDialogComponent implements OnInit {
         _.each(result.data, function(i, j) {
           let details: any = i;
           if (details.latitude !== null && details.longitude !== null) {
-            let distData = {
-              lat: 0,
-              lng: 0,
-              icon: ''
-            };
+            let distData = {lat: 0,lng: 0,icon: ''};
             if (details.latitude && details.longitude) {
               distData.lat = parseFloat(details.latitude);
               distData.lng = parseFloat(details.longitude);
               distData.icon = '../assets/images/green.png';
-  
               if (distData.lat != 0) {
                 stockpointsLocationArray.push(distData);
               }
@@ -206,8 +167,35 @@ export class MapDialogComponent implements OnInit {
         fillColor: '#AA0000'
       });
       circle.bindTo('center', this.marker, 'position');
+      // this.generateGeoJSONCircle(latLng , true, true);
     }
   }
+
+
+  // generateGeoJSONCircle(latLng, radius, numSides){
+
+  //   var points = [],
+  //       degreeStep = 360 / 10;
+  
+  //   for(var i = 0; i < 10; i++){
+  //     var gpos = google.maps.geometry.spherical.computeOffset( latLng , 3000 , degreeStep * i);
+  //     points.push([gpos.lng(), gpos.lat()]);
+  //   };
+  
+  //   // Duplicate the last point to close the geojson ring
+  //   points.push(points[0]);
+  
+  //   return {
+  //     type: 'Polygon',
+  //     coordinates: [ points ]
+  //   };
+  // }
+
+  // getCircularPolygon(){
+
+  // }
+
+
 
   
 
