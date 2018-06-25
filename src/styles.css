@@ -169,6 +169,13 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
+    .onhovertooltip-260{
+    width:260px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .onhovertooltip-300{
     width:300px;
    text-overflow: ellipsis;
@@ -241,7 +248,12 @@ table thead {
     color: var( --logo-color) !important;
     cursor: pointer;
   }
-
+  .p-2-align{
+padding: 0px 0px 0px 15px;
+  }
+  .mgtop-ng5{
+    margin-top: -5px;
+  }
   .logo-color:hover{
     color: var( --warning) !important;
     cursor: pointer;
@@ -1008,4 +1020,23 @@ vertical-align: middle;
 }
 .bg-fade-blue{
   box-shadow: 0px 0px 50px #0f75bc inset !important;
+}
+@media (min-width: 1000px) {
+  .example { font-size: 12px; }
+}
+
+@media (min-width: 1100px) {
+  .example { font-size: 13px; }
+}
+
+@media (min-width: 1200px) {
+  .example { font-size: 14px; }
+}
+
+@media (min-width: 1300px) {
+  .example { font-size: 15px; }
+}
+
+@media (min-width: 1400px) {
+  .example { font-size: 16px; }
 }

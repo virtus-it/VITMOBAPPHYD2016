@@ -275,8 +275,6 @@
         </div>
       </div>
 
-
-
       <div class="row">
         <div class="col">
           <button type="submit" md-raised-button class="  " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'gridview'}"
@@ -286,8 +284,6 @@
         </div>
       </div>
       <br>
-
-
 
       <div *ngIf="tabPanelView === 'forward' && newView == 'gridview'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -343,14 +339,12 @@
                     <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  > -->
                     <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(forward)'></i>
                     <!-- </button> -->
-
                   </div>
-
                 </div>
               </td>
 
               <td width="30%">
-                <div class="row pd-top-0">
+                <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
@@ -358,8 +352,6 @@
                         <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
                       </div>
                     </label>
-
-
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
@@ -382,13 +374,6 @@
               </td>
 
 
-
-
-
-
-
-
-
               <td width="10%">
                 <div class="row ">
                   <div class="col-sm-12  col-md-12  col-lg-12  left">
@@ -403,28 +388,22 @@
                   </div>
                 </div>
               </td>
-
-
             </tr>
 
             <tr>
-              <td width="30%" class="brd-right pd-top-0">
-                <div class="">
-
+              <td width="30%" class="brd-right ">
+                <div class="mgtop-ng5">
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
                       <b class="capitalize onhovertooltip-100" title="{{forward.productdetails.category}}">
                         {{forward.productdetails.category}} </b>
                     </div>
-
-
                     <div class="col-sm-4  col-md-4  col-lg-4">
                       <p class="td-label mgbottom-0">Product Name </p>
-                      <b class="capitalize onhovertooltip-135"  title="{{forward.brandname}}">
+                      <b class="capitalize onhovertooltip-135" title="{{forward.brandname}}">
                         {{forward.brandname}} </b>
                     </div>
-
                     <div class="col-sm-4  col-md-4 col-lg-4 right">
                       <p class="td-label mgbottom-0">Product Type </p>
                       <b class="capitalize onhovertooltip-90">
@@ -432,45 +411,39 @@
                     </div>
                   </div>
 
-                  <div class="row form-group">
+                  <div class="row form-group mgtop-ng5">
                     <div class="col-sm-6  col-md-6  col-lg-6">
                       <p class="td-label mgbottom-0">Quantity </p>
-                      <b class="pdright-5">{{forward.quantity}}</b>
+                      <b class="">{{forward.quantity}}</b>
                     </div>
 
-
-
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Empty cans</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
-                      <b class="pdright-5" *ngIf="forward.empty_cans === null || forward.empty_cans == ''"> - </b>
+                      <p class="td-label mgbottom-0">Empty cans</p>
+                      <b class="" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
+                      <b class="" *ngIf="forward.empty_cans === null || forward.empty_cans == ''"> - </b>
                     </div>
 
                   </div>
 
                   <div class="row form-group">
-                    <div class="col-2">
-                      <span class="td-label" >Cost</span>
-                      <br>
-                      <b class="pdright-5">{{forward.prod_cost}}</b>
+                    <div class="col-sm-2   col-md-2  col-lg-2">
+                      <p class="td-label mgbottom-0">Cost</p>
+                      <b class="">{{forward.prod_cost}}</b>
                     </div>
 
                     <div class="col-3">
-                      <span class="td-label" title="Service Charges">Serv Chgs</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="forward.servicecharges">{{forward.servicecharges}}</b>
-                      <b class="pdright-5" *ngIf="forward.servicecharges === null"> - </b>
+                      <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
+                      <b class="" *ngIf="forward.servicecharges">{{forward.servicecharges}}</b>
+                      <b class="" *ngIf="forward.servicecharges === null"> - </b>
                     </div>
 
                     <div class="col-3">
-                      <span class="td-label" title="Express Delivery Charges">Exp Chgs</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="forward.expressdeliverycharges">{{forward.expressdeliverycharges}}</b>
-                      <b class="pdright-5" *ngIf="forward.expressdeliverycharges === null"> - </b>
+                      <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
+                      <b class="" *ngIf="forward.expressdeliverycharges">{{forward.expressdeliverycharges}}</b>
+                      <b class="" *ngIf="forward.expressdeliverycharges === null"> - </b>
                     </div>
 
-                    <div class="col-4 right">
+                    <div class="col-4 right pdright-20">
                       <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
                       <b class="" *ngIf="forward.advance_amount">{{forward.advance_amount}}</b>
                       <b class="" *ngIf="forward.advance_amount === null || forward.advance_amount == ''"> - </b>
@@ -478,106 +451,97 @@
                   </div>
                   <div class=" row ">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
-                      <span class="td-label">Total Amt </span>
-                      <br>
-                      <b class="pdright-5 success">Rs.{{forward.bill_amount}}</b>
+                      <p class="td-label mgbottom-0">Total Amt </p>
+                      <b class=" success">Rs.{{forward.bill_amount}}</b>
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 center">
-                      <span class="td-label">Payment Type </span>
-                      <br>
+                      <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{forward.paymenttype}}</b>
                     </div>
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
                       <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                       <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="p-2 align-self-center">
-                      <span class="logo-color cursor"  (click)='showOrderDetails(forward)'>
+                    <div class="p-2-align align-self-center">
+                      <span class="logo-color cursor" (click)='showOrderDetails(forward)'>
                         <!-- <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> -->
                         View More</span>
                     </div>
                   </div>
                 </div>
               </td>
+
               <td width="30%" class="brd-right">
-                <div class="row form-group">
-                  <div class="col-7 left">
-                    <span class="td-label">
-                      Date Placed </span>
-                    <br>
-                    <b>{{forward.ordered_date | utcDate }}</b>
-                  </div>
-                  <div class="col-sm-5  col-md-5  col-lg-5 right">
-                    <span class="td-label">
-                      Supplier Code</span>
-                    <br>
-                    <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</b>
-                    <b class="" *ngIf="forward.customer.suppliercode === null"> - </b>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-7 left">
-                    <span class="td-label">
-                      Mobile</span>
-                    <br>
-                    <b>{{forward.orderby_mobileno}}</b>
-                  </div>
-                  <div class="col-5 right">
-                    <span class="td-label">
-                      Promo Code
-                    </span>
-                    <br>
-                    <b *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
-                    <b class="" *ngIf="forward.user_reference_code === null"> - </b>
-                  </div>
-                </div>
-                <div class="row form-group">
-                  <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Delivery Time</span>
-                    <br>
-                    <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
-                  </div>
-                  <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
-                  <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
-                </div>
-
-                <div class="row ">
-                  <div class="col left">
-                    <div class="row">
-                      <div class="col-9">
-                        <span class="td-label">
-                          Address</span>
-                        <br>
-                        <b>
-                          <span class="capitalize onhovertooltip-250" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span>
-                        </b>
-                      </div>
-                      <div class="col-3 right align-self-center">
-                        <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(forward.customer.address)">
-                          <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
-                      </div>
+                <div class="">
+                  <div class="row form-group">
+                    <div class="col-7 left">
+                      <p class="td-label mgbottom-0"> Date Placed </p>
+                      <b>{{forward.ordered_date | utcDate }}</b>
                     </div>
+                    <div class="col-sm-5  col-md-5  col-lg-5 right">
+                      <p class="td-label mgbottom-0">
+                        Supplier Code</p>
+                      <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</b>
+                      <b class="" *ngIf="forward.customer.suppliercode === null"> - </b>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-7 left">
+                      <p class="td-label mgbottom-0">
+                        Mobile</p>
+                      <b>{{forward.orderby_mobileno}}</b>
+                    </div>
+                    <div class="col-5 right">
+                      <p class="td-label mgbottom-0">
+                        Promo Code
+                      </p>
+                      <b *ngIf="forward.user_reference_code !== null" class="">{{forward.user_reference_code}}</b>
+                      <b class="" *ngIf="forward.user_reference_code === null"> - </b>
+                    </div>
+                  </div>
+                  <div class="row form-group">
+                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                      <p class="td-label mgbottom-0">Delivery Time</p>
+                      <b class=" danger">{{forward.delivery_exceptedtime}}</b>
+                    </div>
+                    <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    </div>
+                    <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                    </div>
+                  </div>
+
+                  <div class="row ">
+                    <div class="col left">
+                      <div class="row">
+                        <div class="col-9">
+                          <p class="td-label mgbottom-0">
+                            Address</p>
+                          <b>
+                            <span class="capitalize onhovertooltip-260" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span>
+                          </b>
+                        </div>
+                        <div class="col-3 right align-self-center">
+                          <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(forward.customer.address)">
+                            <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                        </div>
+                      </div>
 
 
+                    </div>
                   </div>
                 </div>
               </td>
-              <td width="30%" class="brd-right pd-top-0">
+              <td width="30%" class="brd-right ">
                 <div class="">
                   <div class="row form-group">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <span class="td-label">
-                        Mobile</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Mobile </p>
                       <b *ngIf="forward.distributor">{{forward.distributor.mobileno}}</b>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 right">
@@ -586,9 +550,7 @@
                   </div>
                   <div class="row form-group">
                     <div class="col-7 left">
-                      <span class="td-label">
-                        Supplier</span>
-                      <br>
+                      <p class="td-label mgbottom-0"> Supplier</p>
                       <b class="capitalize onhovertooltip" *ngIf="forward.supplierdetails" title="{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}">
                         {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                       <b class="capitalize" *ngIf="forward.supplierdetails === null"> - </b>
@@ -596,9 +558,8 @@
 
                     </div>
                     <div class="col-5 right">
-                      <span class="td-label">
-                        Supplier Mobile</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Supplier Mobile</p>
                       <b *ngIf="forward.supplierdetails">{{forward.supplierdetails.mobileno}}</b>
                       <b class="capitalize" *ngIf="forward.supplierdetails === null"> - </b>
 
@@ -608,26 +569,20 @@
                   <div class="row form-group">
 
                     <div class="col">
-                      <span class="td-label">
-                        Assigned On</span>
-                      <br>
-                      <span class="">
-                        <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
-                      </span>
-
+                      <p class="td-label mgbottom-0">
+                        Assigned On</p>
+                      <span class="warning">{{forward.order_assigneddate | utcDate }}</span>
                     </div>
 
                     <div class="col right">
-                      <span class="td-label">
-                        Delivered On </span>
-                      <br>
+                      <p class="td-label mgbottom-0"> Delivered On </p>
                       <span class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered'">{{forward.order_delivereddate | utcDate }}</span>
                       <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                     </div>
                   </div>
 
 
-                  <div class="float-right">
+                  <div class="float-right pdtopbottom-12">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
@@ -792,22 +747,16 @@
               </td> -->
             </tr>
             <tr>
-              <td width="30%" class="brd-right pd-top-0">
-                <div class="">
-
+              <td width="30%" class="brd-right ">
+                  <div class="mgtop-ng5">
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
                       <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails">
                         {{allorder.productdetails.category}} </b>
-
-
                       <b class="capitalize" *ngIf="allorder.productdetails === null">
                         - </b>
-
-
                     </div>
-
 
                     <div class="col-sm-4  col-md-4  col-lg-4">
                       <p class="td-label mgbottom-0">Product Name </p>
@@ -822,20 +771,15 @@
                     </div>
                   </div>
 
-                  <div class="row form-group">
+                  <div class="row form-group mgtop-ng5">
                     <div class="col-sm-6  col-md-6  col-lg-6">
-                      <span class="td-label">Quantity </span>
-                      <br>
-                      <b class="pdright-5">{{allorder.quantity}}</b>
+                      <p class="td-label mgbottom-0">Quantity </p>
+                      <b class="">{{allorder.quantity}}</b>
                     </div>
-
-
-
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Empty cans</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="allorder.empty_cans">{{allorder.empty_cans}}</b>
-                      <b class="pdright-5" *ngIf="allorder.empty_cans === null || allorder.empty_cans == ''"> - </b>
+                      <p class="td-label mgbottom-0">Empty Cans</p>
+                      <b class="" *ngIf="allorder.empty_cans">{{allorder.empty_cans}}</b>
+                      <b class="" *ngIf="allorder.empty_cans === null || allorder.empty_cans == ''"> - </b>
                     </div>
 
                   </div>
@@ -843,50 +787,39 @@
                   <div class="row form-group">
 
 
-                    <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Cost</span>
-                      <br>
-                      <b class="pdright-5">{{allorder.prod_cost}}</b>
+                    <div class="col-sm-2  col-md-2  col-lg-2">
+                      <p class="td-label mgbottom-0">Cost</p>
+                      <b class="">{{allorder.prod_cost}}</b>
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Serv charges</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="allorder.servicecharges">{{allorder.servicecharges}}</b>
-                      <b class="pdright-5" *ngIf="allorder.servicecharges === null"> - </b>
-
+                      <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
+                      <b class="" *ngIf="allorder.servicecharges">{{allorder.servicecharges}}</b>
+                      <b class="" *ngIf="allorder.servicecharges === null"> - </b>
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Exp Delv charges</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="allorder.expressdeliverycharges">{{allorder.expressdeliverycharges}}</b>
-                      <b class="pdright-5" *ngIf="allorder.expressdeliverycharges === null || allorder.expressdeliverycharges == ''"> - </b>
-
+                      <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
+                      <b class="" *ngIf="allorder.expressdeliverycharges">{{allorder.expressdeliverycharges}}</b>
+                      <b class="" *ngIf="allorder.expressdeliverycharges === null || allorder.expressdeliverycharges == ''"> - </b>
                     </div>
 
-                    <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Empty Cans Amt</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="allorder.advance_amount">{{allorder.advance_amount}}</b>
-                      <b class="pdright-5" *ngIf="allorder.advance_amount === null || allorder.advance_amount == ''"> - </b>
+                    <div class="col-4 right pdright-20">
+                      <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
+                      <b class="" *ngIf="allorder.advance_amount">{{allorder.advance_amount}}</b>
+                      <b class="" *ngIf="allorder.advance_amount === null || allorder.advance_amount == ''"> - </b>
                     </div>
-
                   </div>
 
 
                   <div class="row ">
-
-
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
-                      <span class="td-label">Total Amount </span>
-                      <br>
-                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                      <p class="td-label mgbottom-0">Total Amt </p>
+                      <b class="success">Rs.{{allorder.bill_amount}}</b>
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 center">
-                      <span class="td-label">Payment Type </span>
-                      <br>
+                      <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{allorder.paymenttype}}</b>
                     </div>
 
@@ -894,9 +827,10 @@
                       <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                       <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(allorder)'>
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                    <div class="p-2-align align-self-center">
+                      <span class="logo-color cursor" (click)='showOrderDetails(allorder)'>
+                        <!-- <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>  -->
+                        View More</span>
                     </div>
                   </div>
                 </div>
@@ -905,41 +839,36 @@
                 <div class="">
                   <div class="form-group row ">
                     <div class="col">
-                      <span class="td-label">
-                        Date Placed </span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Date Placed </p>
                       <b>{{allorder.ordered_date | utcDate}}</b>
                     </div>
                     <div class="col-sm-5  col-md-5  col-lg-5 right">
-                      <span class="td-label">Supplier Code</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Supplier Code</p>
                       <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b>
                     </div>
                   </div>
                   <div class=" row form-group">
                     <div class="col-sm-7  col-md-7  col-lg-7 ">
-                      <span class="td-label">Delivery Time</span>
-                      <br>
+                      <p class="td-label mgbottom-0">Delivery Time</p>
                       <b class="left danger">{{allorder.delivery_exceptedtime}}</b>
                     </div>
                     <div class="col-sm-5  col-md-5  col-lg-5  right">
-                      <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                      <br>
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
                       <b class=" capitalize onhovertooltip-100" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
                   <div class="row form-group">
                     <div class="col-sm-7  col-md-7  col-lg-7 left">
-                      <span class="td-label">
-                        Mobile</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Mobile</p>
                       <b>{{allorder.orderby_mobileno}}</b>
                     </div>
                     <div class="col-5 right">
-                      <span class="td-label">
+                      <p class="td-label mgbottom-0">
                         Promo Code
-                      </span>
-                      <br>
+                      </p>
                       <b *ngIf="allorder.user_reference_code !== null" class="">{{allorder.user_reference_code}}</b>
                       <b class="" *ngIf="allorder.user_reference_code === null"> - </b>
                     </div>
@@ -948,11 +877,10 @@
                     <div class="col left">
                       <div class="row">
                         <div class="col-9">
-                          <span class="td-label">
-                            Address</span>
-                          <br>
+                          <p class="td-label mgbottom-0">
+                            Address</p>
                           <b>
-                            <span class="capitalize onhovertooltip-300" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</span>
+                            <span class="capitalize onhovertooltip-260" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</span>
                           </b>
                         </div>
                         <div class="col-3 right align-self-center">
@@ -964,20 +892,20 @@
                   </div>
                 </div>
               </td>
-              <td width="30%" class="brd-right pd-top-0">
+              <td width="30%" class="brd-right ">
                 <div class="">
                   <div class="form-group row ">
                     <div class="col left">
-                      <span class="td-label">Mobile </span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Mobile </p>
                       <b *ngIf="allorder.supplierdetails">{{allorder.supplierdetails.mobileno}}</b>
                       <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </div>
                   </div>
                   <div class="form-group row ">
                     <div class="col left">
-                      <span class="td-label"> Assigned On </span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Assigned On</p>
                       <span class="warning" *ngIf="allorder.OrderModifiedStatus !== 'Assign'">
                         {{allorder.order_assigneddate | utcDate }}</span>
                       <b *ngIf="allorder.OrderModifiedStatus == 'Assign'"> - </b>
@@ -986,14 +914,13 @@
                   </div>
                   <div class="row form-group">
                     <div class="col left">
-                      <span class="td-label"> Delivered On </span>
-                      <br>
+                      <p class="td-label mgbottom-0"> Delivered On </p>
                       <span class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered'">{{allorder.order_delivereddate | utcDate }}</span>
                       <b *ngIf="allorder.OrderModifiedStatus !== 'Delivered'"> - </b>
 
                     </div>
                   </div>
-                  <div class=" float-right">
+                  <div class="float-right pdtopbottom-12">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
@@ -1119,7 +1046,7 @@
                 </div>
               </td>
               <td width="30%">
-                <div class="row pd-top-0">
+                <div class="row ">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
@@ -1170,9 +1097,9 @@
             </tr>
 
             <tr>
-              <td width="30%" class="brd-right pd-top-0">
-                <div class="">
-                  <div class="form-group row ">
+              <td width="30%" class="brd-right ">
+                  <div class="mgtop-ng5">
+                      <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
                       <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails">
@@ -1194,137 +1121,108 @@
                     </div>
                   </div>
 
-
-
-
-                  <div class="row form-group">
+                  <div class="row form-group mgtop-ng5">
                     <div class="col-sm-6  col-md-6  col-lg-6">
-                      <span class="td-label">Quantity </span>
-                      <br>
-                      <b class="pdright-5">{{complete.quantity}}</b>
+                      <p class="td-label mgbottom-0">Quantity </p>
+                      <b class="">{{complete.quantity}}</b>
                     </div>
-
-
-
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <span class="td-label">Empty cans</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="complete.empty_cans">{{complete.empty_cans}}</b>
-                      <b class="pdright-5" *ngIf="complete.empty_cans === null || complete.empty_cans == ''"> - </b>
+                      <p class="td-label mgbottom-0">Empty Cans</p>
+                      <b class="" *ngIf="complete.empty_cans">{{complete.empty_cans}}</b>
+                      <b class="" *ngIf="complete.empty_cans === null || complete.empty_cans == ''"> - </b>
                     </div>
-
                   </div>
 
-
                   <div class="row form-group">
-
-
-                    <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Cost</span>
-                      <br>
-                      <b class="pdright-5">{{complete.prod_cost}}</b>
+                    <div class="col-sm-2  col-md-2  col-lg-2">
+                      <p class="td-label mgbottom-0">Cost</p>
+                      <b class="">{{complete.prod_cost}}</b>
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Service charges</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="complete.servicecharges">{{complete.servicecharges}}</b>
-                      <b class="pdright-5" *ngIf="complete.servicecharges === null"> - </b>
-
+                      <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
+                      <b class="" *ngIf="complete.servicecharges">{{complete.servicecharges}}</b>
+                      <b class="" *ngIf="complete.servicecharges === null"> - </b>
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Express Delivery charges</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="complete.expressdeliverycharges">{{complete.expressdeliverycharges}}</b>
-                      <b class="pdright-5" *ngIf="complete.expressdeliverycharges === null || complete.expressdeliverycharges == ''"> - </b>
-
+                      <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
+                      <b class="" *ngIf="complete.expressdeliverycharges">{{complete.expressdeliverycharges}}</b>
+                      <b class="" *ngIf="complete.expressdeliverycharges === null || complete.expressdeliverycharges == ''"> - </b>
                     </div>
 
-                    <div class="col-sm-3  col-md-3  col-lg-3">
-                      <span class="td-label">Empty Cans Amount</span>
-                      <br>
-                      <b class="pdright-5" *ngIf="complete.advance_amount">{{complete.advance_amount}}</b>
-                      <b class="pdright-5" *ngIf="complete.advance_amount === null || complete.advance_amount == ''"> - </b>
+                    <div class="col-4 right pdright-20">
+                      <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
+                      <b class="" *ngIf="complete.advance_amount">{{complete.advance_amount}}</b>
+                      <b class="" *ngIf="complete.advance_amount === null || complete.advance_amount == ''"> - </b>
                     </div>
-
                   </div>
 
 
                   <div class=" row ">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
-                      <span class="td-label">Total Amount </span>
-                      <br>
-                      <b class="">Rs.{{complete.bill_amount}}</b>
-                      <!-- <b class="pdright-5" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
+                      <p class="td-label mgbottom-0">Total Amt </p>
+                      <b class="success">Rs.{{complete.bill_amount}}</b>
+                      <!-- <b class="" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 center">
-                      <span class="td-label">Payment Type </span>
-                      <br>
+                      <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{complete.paymenttype}}</b>
                     </div>
-
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center ">
                       <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                       <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(complete)'>
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
-
+                    <div class="p-2-align align-self-center">
+                      <span class="logo-color cursor" (click)='showOrderDetails(complete)'>
+                        <!-- <i class="fa fa-chevron-circle-down" aria-hidden="true"></i>  -->
+                        View More</span>
                     </div>
-
                   </div>
                 </div>
               </td>
               <td width="30%" class="brd-right">
                 <div class="row form-group">
                   <div class="col left">
-                    <span class="td-label">
-                      Date Placed </span>
-                    <br>
+                    <p class="td-label mgbottom-0">
+                      Date Placed </p>
                     <b>{{complete.ordered_date | utcDate }}</b>
                   </div>
                   <div class="col-sm-5  col-md-5  col-lg-5 right">
-                    <span class="td-label">
-                      Supplier Code</span>
-                    <br>
+                    <p class="td-label mgbottom-0">
+                      Supplier Code</p>
                     <b class="capitalize" *ngIf="complete.customersource == 'DistributorCustomer'">{{complete.customer.suppliercode}}</b>
                   </div>
                 </div>
                 <div class="row form-group">
 
                   <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Delivery Time</span>
-                    <br>
-                    <b class="pdright-5 danger">{{complete.delivery_exceptedtime}}</b>
+                    <p class="td-label mgbottom-0">Delivery Time</p>
+                    <b class=" danger">{{complete.delivery_exceptedtime}}</b>
                   </div>
                   <div class="col-5 right" *ngIf="complete.customersource == 'DistributorCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
+                    <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>
                   <div class="col-5 right" *ngIf="complete.customersource == 'MoyaCustomer'">
-                    <span class="td-label" title="Associate Distributor ">Ass Distributor</span>
-                    <br>
+                    <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>
                 </div>
                 <div class="row form-group">
                   <div class="col-7 left">
-                    <span class="td-label">
-                      Mobile</span>
-                    <br>
+                    <p class="td-label mgbottom-0">
+                      Mobile</p>
                     <b>{{complete.orderby_mobileno}}</b>
 
                   </div>
                   <div class="col-5 right">
-                    <span class="td-label">
+                    <p class="td-label mgbottom-0">
                       Promo Code
-                    </span>
-                    <br>
+                    </p>
                     <b *ngIf="complete.user_reference_code !== null" class="">{{complete.user_reference_code}}</b>
                     <b class="" *ngIf="complete.user_reference_code === null"> - </b>
                   </div>
@@ -1333,11 +1231,10 @@
 
                 <div class="row">
                   <div class="col left">
-                    <span class="td-label">
-                      Promo Code
-                    </span>
-                    <br>
-                    <b class="capitalize onhovertooltip-300" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
+                    <p class="td-label mgbottom-0">
+                      Address
+                    </p>
+                    <b class="capitalize onhovertooltip-260" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
                     <button class="btn btn-link btn-sm copy-btn fa fa-copy" (click)="copyElement(complete.orderby_address)">copy</button>
 
                   </div>
@@ -1347,9 +1244,8 @@
                 <div class="">
                   <div class="row form-group">
                     <div class="col-sm-5  col-md-5  col-lg-5 left">
-                      <span class="td-label">
-                        Mobile</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Mobile </p>
                       <b *ngIf="complete.distributor">{{complete.distributor.mobileno}}</b>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 right">
@@ -1358,40 +1254,35 @@
                   </div>
                   <div class="row form-group">
                     <div class="col-7 left">
-                      <span class="td-label">
-                        Supplier</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Supplier</p>
                       <b class="capitalize" *ngIf="complete.supplierdetails" class="onhovertooltip-100" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}">
                         {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
                     </div>
                     <div class="col-5  right">
-                      <span class="td-label">
-                        Supplier Mobile</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Supplier Mobile</p>
                       <b *ngIf="complete.supplierdetails">{{complete.supplierdetails.mobileno}}</b>
                     </div>
                   </div>
                   <div class="row form-group">
 
                     <div class="col">
-                      <span class="td-label">
-                        Assigned On</span>
-                      <br>
+                      <p class="td-label mgbottom-0">
+                        Assigned On</p>
                       <span class="" *ngIf="complete.OrderModifiedStatus !== 'Assign'">
                         <span class="warning">{{complete.order_assigneddate | utcDate }}</span>
                       </span>
                     </div>
 
                     <div class="col right">
-                      <span class="td-label">
-                        Delivered On </span>
-                      <br>
+                      <p class="td-label mgbottom-0"> Delivered On </p>
                       <span class="success" *ngIf="complete.OrderModifiedStatus == 'Delivered' || complete.OrderModifiedStatus == 'Rejected'">{{complete.order_delivereddate | utcDate }}</span>
                     </div>
                   </div>
 
 
-                  <div class="float-right">
+                  <div class="float-right pdtopbottom-12">
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                             <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
