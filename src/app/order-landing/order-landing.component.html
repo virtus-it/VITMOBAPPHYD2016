@@ -418,7 +418,7 @@
                     </div>
 
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
-                      <p class="td-label mgbottom-0">Empty cans</p>
+                      <p class="td-label mgbottom-0">Empty Cans</p>
                       <b class="" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
                       <b class="" *ngIf="forward.empty_cans === null || forward.empty_cans == ''"> - </b>
                     </div>
@@ -449,13 +449,13 @@
                       <b class="" *ngIf="forward.advance_amount === null || forward.advance_amount == ''"> - </b>
                     </div>
                   </div>
-                  <div class=" row ">
+                  <div class=" row mgtop-15">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
                       <b class=" success">Rs.{{forward.bill_amount}}</b>
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 ">
                       <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{forward.paymenttype}}</b>
                     </div>
@@ -812,13 +812,13 @@
                   </div>
 
 
-                  <div class="row ">
-                    <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
+                  <div class=" row mgtop-15">
+                      <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
                       <b class="success">Rs.{{allorder.bill_amount}}</b>
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 ">
                       <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{allorder.paymenttype}}</b>
                     </div>
@@ -1158,15 +1158,14 @@
                     </div>
                   </div>
 
-
-                  <div class=" row ">
+                  <div class=" row mgtop-15">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
                       <b class="success">Rs.{{complete.bill_amount}}</b>
                       <!-- <b class="" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
-                    <div class="col-sm-4  col-md-4  col-lg-4 center">
+                    <div class="col-sm-4  col-md-4  col-lg-4 ">
                       <p class="td-label mgbottom-0">Payment Type </p>
                       <b class="capitalize">{{complete.paymenttype}}</b>
                     </div>
