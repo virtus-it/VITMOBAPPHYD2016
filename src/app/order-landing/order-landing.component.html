@@ -23,7 +23,7 @@
           (click)="showTabPanel('forward')">FORWARD ORDERS</a> -->
           <!-- <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
           (click)="showTabPanel('allorder')">ALL ORDERS</a> -->
-        </div> 
+        </div>
 
         <!-- for complete tab filter -->
 
@@ -279,12 +279,13 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" md-raised-button class="  " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'gridview'}" href="javascript:void(0)"
-          (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
-        <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'mapview'}"
-          href="javascript:void(0)" (click)="showNewPanel('mapview')">Map View</button>
+          <button type="submit" md-raised-button class="  " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'gridview'}"
+            href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
+          <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'mapview'}" href="javascript:void(0)"
+            (click)="showNewPanel('mapview')">Map View</button>
         </div>
-      </div> <br>
+      </div>
+      <br>
 
 
 
@@ -320,7 +321,7 @@
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="forward.status == 'backtodealer'">
                     <label *ngIf="superDealer">
                       <span>
-                        <i class="fa fa-book logo-color" (click)="orderHistoryDialog(forward)" >  </i>
+                        <i class="fa fa-book logo-color" (click)="orderHistoryDialog(forward)"> </i>
                       </span>
                     </label>
                   </div>
@@ -500,30 +501,11 @@
                   </div>
                 </div>
                 <div class="row form-group">
-
-                  <div class="col-sm-7  col-md-7  col-lg-7 left">
-                    <span class="td-label">Delivery Time</span>
-                    <br>
-                    <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
-                  </div>
-                  <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
-                  <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
-                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
-                    <br>
-                    <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div>
-                </div>
-                <div class="row form-group">
                   <div class="col-7 left">
                     <span class="td-label">
                       Mobile</span>
                     <br>
                     <b>{{forward.orderby_mobileno}}</b>
-
                   </div>
                   <div class="col-5 right">
                     <span class="td-label">
@@ -534,6 +516,24 @@
                     <b class="" *ngIf="forward.user_reference_code === null"> - </b>
                   </div>
                 </div>
+                <div class="row form-group">
+                  <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <span class="td-label">Delivery Time</span>
+                    <br>
+                    <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
+                  </div>
+                  <!-- <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                  </div> -->
+                  <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                    <span class="td-label" title="Associate Distributor">Ass Distributor</span>
+                    <br>
+                    <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                  </div>
+                </div>
+
                 <div class="row ">
                   <div class="col left">
                     <div class="row">
@@ -694,12 +694,12 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="allorder.status == 'backtodealer'">
-                      <label *ngIf="superDealer">
-                        <span>
-                          <i class="fa fa-book logo-color" (click)="orderHistoryDialog(allorder)" >  </i>
-                        </span>
-                      </label>
-                    </div>
+                    <label *ngIf="superDealer">
+                      <span>
+                        <i class="fa fa-book logo-color" (click)="orderHistoryDialog(allorder)"> </i>
+                      </span>
+                    </label>
+                  </div>
 
 
                   <div *ngIf="allorder.status != 'delivered'" class="col-sm-2  col-md-2  col-lg-2 right" (click)='editQuanity(allorder)'>
@@ -1026,12 +1026,12 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="complete.status == 'backtodealer'">
-                      <label *ngIf="superDealer">
-                        <span>
-                          <i class="fa fa-book logo-color" (click)="orderHistoryDialog(complete)" >  </i>
-                        </span>
-                      </label>
-                    </div>
+                    <label *ngIf="superDealer">
+                      <span>
+                        <i class="fa fa-book logo-color" (click)="orderHistoryDialog(complete)"> </i>
+                      </span>
+                    </label>
+                  </div>
 
 
 

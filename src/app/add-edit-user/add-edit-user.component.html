@@ -427,7 +427,7 @@
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row">
-        <div class="col-md-4 col-sm-6 ">
+        <div class="col-md-3 col-sm-3">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="First name" name="firstName" [formControl]="emailFormControl" [(ngModel)]="supplierInput.firstname">
             <md-error *ngIf="emailFormControl.hasError('required')">
@@ -435,7 +435,8 @@
               <strong>required</strong>
             </md-error>
           </md-form-field>
-
+</div>
+<div class="col-md-3 col-sm-3">
           <md-form-field class="">
               <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="supplierInput.lastname" [formControl]="emailFormControl" >
 
@@ -443,11 +444,18 @@
                   Last Name is
                   <strong>required</strong>
                 </md-error>
-
-
             </md-form-field>
-
-
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <md-form-field class="">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno">
+                  <md-error>
+                    Mobile Number is
+                    <strong>required</strong>
+                  </md-error>
+                </md-form-field>
+                </div>
+            <div class="col-md-3 col-sm-3">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno">
             <md-error>
@@ -455,32 +463,26 @@
               <strong>required</strong>
             </md-error>
           </md-form-field>
-
         </div>
-        <div class="col-md-6 col-sm-6">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno">
-            <md-error>
-              Mobile Number is
-              <strong>required</strong>
-            </md-error>
-          </md-form-field>
-
-          <md-form-field class="">
+        </div>
+  <div class="row">
+        <div class="col-md-3 col-sm-3 ">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="supplierInput.emailid">
+            </md-form-field>
+          </div>
+          <div class="col-md-9 col-sm-9 ">
+          <md-form-field class="wd-95pc">
             <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="supplierInput.address">
             <md-error>
               Address is
               <strong>required</strong>
             </md-error>
           </md-form-field>
-        </div>
-        <div class="col-md-6 col-sm-6 ">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="supplierInput.emailid">
-          </md-form-field>
-        </div>
-
       </div>
+ </div>
+
+     
 
     </div>
   </form>
