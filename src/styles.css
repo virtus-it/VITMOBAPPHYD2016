@@ -835,8 +835,23 @@ display: inline-block;
 overflow: hidden;
 display: inline-block;
 }
+
 .onhovertooltip-150{
   width:150px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
+.onhovertooltip-135{
+  width:135px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+overflow: hidden;
+display: inline-block;
+}
+.onhovertooltip-120{
+  width:120px;
  text-overflow: ellipsis;
   white-space: nowrap;
 overflow: hidden;

@@ -413,84 +413,74 @@
 
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
-                      <span class="td-label">Category </span>
-                      <br>
-                      <b class="capitalize">
+                      <p class="td-label mgbottom-0">Category </p>
+                      <b class="capitalize onhovertooltip-100" title="{{forward.productdetails.category}}">
                         {{forward.productdetails.category}} </b>
                     </div>
 
 
                     <div class="col-sm-4  col-md-4  col-lg-4">
-                      <span class="td-label">Product Name </span>
-                      <br>
-                      <b class="capitalize">
+                      <p class="td-label mgbottom-0">Product Name </p>
+                      <b class="capitalize onhovertooltip-135"  title="{{forward.brandname}}">
                         {{forward.brandname}} </b>
                     </div>
 
-                    <div class="col-sm-4  col-md-46 col-lg-4 ">
-                      <span class="td-label">Product Type </span>
-                      <br>
-                      <b class="capitalize">
+                    <div class="col-sm-4  col-md-4 col-lg-4 right">
+                      <p class="td-label mgbottom-0">Product Type </p>
+                      <b class="capitalize onhovertooltip-90">
                         {{forward.prod_type}} </b>
                     </div>
                   </div>
 
                   <div class="row form-group">
                     <div class="col-sm-6  col-md-6  col-lg-6">
-                      <span class="td-label">Quantity </span>
-                      <br>
+                      <p class="td-label mgbottom-0">Quantity </p>
                       <b class="pdright-5">{{forward.quantity}}</b>
                     </div>
 
-                    
+
 
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Empty cans</span>
                       <br>
                       <b class="pdright-5" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
-                      <b class="pdright-5" *ngIf="forward.empty_cans === null || forward.empty_cans == ''" > - </b>
+                      <b class="pdright-5" *ngIf="forward.empty_cans === null || forward.empty_cans == ''"> - </b>
                     </div>
 
                   </div>
 
                   <div class="row form-group">
+                    <div class="col-2">
+                      <span class="td-label" >Cost</span>
+                      <br>
+                      <b class="pdright-5">{{forward.prod_cost}}</b>
+                    </div>
 
+                    <div class="col-3">
+                      <span class="td-label" title="Service Charges">Serv Chgs</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="forward.servicecharges">{{forward.servicecharges}}</b>
+                      <b class="pdright-5" *ngIf="forward.servicecharges === null"> - </b>
+                    </div>
 
-                      <div class="col-sm-3  col-md-3  col-lg-3">
-                          <span class="td-label">Cost</span>
-                          <br>
-                          <b class="pdright-5">{{forward.prod_cost}}</b>
-                        </div>
+                    <div class="col-3">
+                      <span class="td-label" title="Express Delivery Charges">Exp Chgs</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="forward.expressdeliverycharges">{{forward.expressdeliverycharges}}</b>
+                      <b class="pdright-5" *ngIf="forward.expressdeliverycharges === null"> - </b>
+                    </div>
 
-                        <div class="col-sm-3  col-md-3  col-lg-3">
-                            <span class="td-label">Service charges</span>
-                            <br>
-                            <b class="pdright-5" *ngIf="forward.servicecharges">{{forward.servicecharges}}</b>
-                            <b class="pdright-5" *ngIf="forward.servicecharges === null"> - </b>
-
-                          </div>
-
-                          <div class="col-sm-3  col-md-3  col-lg-3">
-                              <span class="td-label">Express Delivery charges</span>
-                              <br>
-                              <b class="pdright-5" *ngIf="forward.expressdeliverycharges" >{{forward.expressdeliverycharges}}</b>
-                              <b class="pdright-5" *ngIf="forward.expressdeliverycharges === null"> - </b>
-  
-                            </div>
-
-                            <div class="col-sm-3  col-md-3  col-lg-3">
-                                <span class="td-label">Empty Cans Amount</span>
-                                <br>
-                                <b class="pdright-5" *ngIf="forward.advance_amount" >{{forward.advance_amount}}</b>
-                                <b class="pdright-5" *ngIf="forward.advance_amount === null || forward.advance_amount == ''" > - </b>
-                              </div>
-
+                    <div class="col-4 right">
+                      <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
+                      <b class="" *ngIf="forward.advance_amount">{{forward.advance_amount}}</b>
+                      <b class="" *ngIf="forward.advance_amount === null || forward.advance_amount == ''"> - </b>
+                    </div>
                   </div>
                   <div class=" row ">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
-                      <span class="td-label">Total Amount </span>
+                      <span class="td-label">Total Amt </span>
                       <br>
-                      <b class="pdright-5">Rs.{{forward.bill_amount}}</b>
+                      <b class="pdright-5 success">Rs.{{forward.bill_amount}}</b>
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 center">
@@ -502,9 +492,10 @@
                       <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
                       <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
                     </div>
-                    <div class="col-sm-3  col-md-3  col-lg-3 align-self-center">
-                      <button class="btn btn-link btn-sm rightbtn" style=" margin-left: -15px;" (click)='showOrderDetails(forward)'>
-                        <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> View More</button>
+                    <div class="p-2 align-self-center">
+                      <span class="logo-color cursor"  (click)='showOrderDetails(forward)'>
+                        <!-- <i class="fa fa-chevron-circle-down" aria-hidden="true"></i> -->
+                        View More</span>
                     </div>
                   </div>
                 </div>
@@ -547,11 +538,11 @@
                     <br>
                     <b class="pdright-5 danger">{{forward.delivery_exceptedtime}}</b>
                   </div>
-                  <!-- <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                  <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
                     <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                     <br>
                     <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
-                  </div> -->
+                  </div>
                   <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
                     <span class="td-label" title="Associate Distributor">Ass Distributor</span>
                     <br>
@@ -804,108 +795,100 @@
               <td width="30%" class="brd-right pd-top-0">
                 <div class="">
 
-                    <div class="form-group row ">
-                        <div class="col-sm-4  col-md-4  col-lg-4 left">
-                          <span class="td-label">Category </span>
-                          <br>
-                          <b class="capitalize" *ngIf="allorder.productdetails">
-                            {{allorder.productdetails.category}} </b>
-
-                          
-                            <b class="capitalize" *ngIf="allorder.productdetails === null">
-                                 -  </b>
-
-                                
-                        </div>
-    
-    
-                        <div class="col-sm-4  col-md-4  col-lg-4">
-                          <span class="td-label">Product Name </span>
-                          <br>
-                          <b class="capitalize">
-                            {{allorder.brandname}} </b>
-                        </div>
-    
-                        <div class="col-sm-4  col-md-46 col-lg-4 ">
-                          <span class="td-label">Product Type </span>
-                          <br>
-                          <b class="capitalize">
-                            {{allorder.prod_type}} </b>
-                        </div>
-                      </div>
-
-                      <div class="row form-group">
-                          <div class="col-sm-6  col-md-6  col-lg-6">
-                            <span class="td-label">Quantity </span>
-                            <br>
-                            <b class="pdright-5">{{allorder.quantity}}</b>
-                          </div>
-      
-                          
-      
-                          <div class="col-sm-6  col-md-6  col-lg-6 right">
-                            <span class="td-label">Empty cans</span>
-                            <br>
-                            <b class="pdright-5" *ngIf="allorder.empty_cans">{{allorder.empty_cans}}</b>
-                            <b class="pdright-5" *ngIf="allorder.empty_cans === null || allorder.empty_cans == ''" > - </b>
-                          </div>
-      
-                        </div>
-
-                        <div class="row form-group">
+                  <div class="form-group row ">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <p class="td-label mgbottom-0">Category </p>
+                      <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails">
+                        {{allorder.productdetails.category}} </b>
 
 
-                            <div class="col-sm-3  col-md-3  col-lg-3">
-                                <span class="td-label">Cost</span>
-                                <br>
-                                <b class="pdright-5">{{allorder.prod_cost}}</b>
-                              </div>
-      
-                              <div class="col-sm-3  col-md-3  col-lg-3">
-                                  <span class="td-label">Service charges</span>
-                                  <br>
-                                  <b class="pdright-5" *ngIf="allorder.servicecharges">{{allorder.servicecharges}}</b>
-                                  <b class="pdright-5" *ngIf="allorder.servicecharges === null"> - </b>
-      
-                                </div>
-      
-                                <div class="col-sm-3  col-md-3  col-lg-3">
-                                    <span class="td-label">Express Delivery charges</span>
-                                    <br>
-                                    <b class="pdright-5" *ngIf="allorder.expressdeliverycharges">{{allorder.expressdeliverycharges}}</b>
-                                    <b class="pdright-5" *ngIf="allorder.expressdeliverycharges === null || allorder.expressdeliverycharges == ''"> - </b>
-        
-                                  </div>
-      
-                                  <div class="col-sm-3  col-md-3  col-lg-3">
-                                      <span class="td-label">Empty Cans Amount</span>
-                                      <br>
-                                      <b class="pdright-5" *ngIf="allorder.advance_amount" >{{allorder.advance_amount}}</b>
-                                      <b class="pdright-5" *ngIf="allorder.advance_amount === null || allorder.advance_amount == ''" > - </b>
-                                    </div>
-      
-                        </div>
+                      <b class="capitalize" *ngIf="allorder.productdetails === null">
+                        - </b>
+
+
+                    </div>
+
+
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <p class="td-label mgbottom-0">Product Name </p>
+                      <b class="capitalize onhovertooltip-135">
+                        {{allorder.brandname}} </b>
+                    </div>
+
+                    <div class="col-sm-4  col-md-4 col-lg-4 right">
+                      <p class="td-label mgbottom-0">Product Type </p>
+                      <b class="capitalize onhovertooltip-90">
+                        {{allorder.prod_type}} </b>
+                    </div>
+                  </div>
+
+                  <div class="row form-group">
+                    <div class="col-sm-6  col-md-6  col-lg-6">
+                      <span class="td-label">Quantity </span>
+                      <br>
+                      <b class="pdright-5">{{allorder.quantity}}</b>
+                    </div>
+
+
+
+                    <div class="col-sm-6  col-md-6  col-lg-6 right">
+                      <span class="td-label">Empty cans</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="allorder.empty_cans">{{allorder.empty_cans}}</b>
+                      <b class="pdright-5" *ngIf="allorder.empty_cans === null || allorder.empty_cans == ''"> - </b>
+                    </div>
+
+                  </div>
+
+                  <div class="row form-group">
+
+
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Cost</span>
+                      <br>
+                      <b class="pdright-5">{{allorder.prod_cost}}</b>
+                    </div>
+
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Serv charges</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="allorder.servicecharges">{{allorder.servicecharges}}</b>
+                      <b class="pdright-5" *ngIf="allorder.servicecharges === null"> - </b>
+
+                    </div>
+
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Exp Delv charges</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="allorder.expressdeliverycharges">{{allorder.expressdeliverycharges}}</b>
+                      <b class="pdright-5" *ngIf="allorder.expressdeliverycharges === null || allorder.expressdeliverycharges == ''"> - </b>
+
+                    </div>
+
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Empty Cans Amt</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="allorder.advance_amount">{{allorder.advance_amount}}</b>
+                      <b class="pdright-5" *ngIf="allorder.advance_amount === null || allorder.advance_amount == ''"> - </b>
+                    </div>
+
+                  </div>
 
 
                   <div class="row ">
 
 
-                      <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
-                          <span class="td-label">Total Amount </span>
-                          <br>
-                          <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
-                        </div>
-    
-                        <div class="col-sm-4  col-md-4  col-lg-4 center">
-                          <span class="td-label">Payment Type </span>
-                          <br>
-                          <b class="capitalize">{{allorder.paymenttype}}</b>
-                        </div>
+                    <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
+                      <span class="td-label">Total Amount </span>
+                      <br>
+                      <b class="pdright-5">Rs.{{allorder.bill_amount}}</b>
+                    </div>
 
-
-
-                  
-
+                    <div class="col-sm-4  col-md-4  col-lg-4 center">
+                      <span class="td-label">Payment Type </span>
+                      <br>
+                      <b class="capitalize">{{allorder.paymenttype}}</b>
+                    </div>
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
                       <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
@@ -1067,13 +1050,13 @@
         <div class="col">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
 
-              <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(allOrdersDetails)" [latitude]="m.lat" [longitude]="m.lng"
-            [iconUrl]="m.icon">
-          </agm-marker>
+            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(allOrdersDetails)" [latitude]="m.lat"
+              [longitude]="m.lng" [iconUrl]="m.icon">
+            </agm-marker>
 
-        
+
           </agm-map>
-          </div>
+        </div>
       </div>
       <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -1189,55 +1172,45 @@
             <tr>
               <td width="30%" class="brd-right pd-top-0">
                 <div class="">
+                  <div class="form-group row ">
+                    <div class="col-sm-4  col-md-4  col-lg-4 left">
+                      <p class="td-label mgbottom-0">Category </p>
+                      <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails">
+                        {{complete.productdetails.category}} </b>
+                      <b class="capitalize" *ngIf="complete.productdetails === null ">
+                        - </b>
+                    </div>
 
-                    <div class="form-group row ">
-                        <div class="col-sm-4  col-md-4  col-lg-4 left">
-                          <span class="td-label">Category</span>
-                          <br>
-                          <b class="capitalize" *ngIf="complete.productdetails">
-                            {{complete.productdetails.category}} </b>
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <p class="td-label mgbottom-0">Product Name </p>
+                      <b class="capitalize onhovertooltip-135">
+                        {{complete.brandname}} </b>
+                    </div>
 
-                            <b class="capitalize" *ngIf="complete.productdetails === null ">
-                               - </b>
-
-
-                        </div>
-    
-    
-                        <div class="col-sm-4  col-md-4  col-lg-4">
-                          <span class="td-label">Product Name </span>
-                          <br>
-                          <b class="capitalize">
-                            {{complete.brandname}} </b>
-                        </div>
-    
-                        <div class="col-sm-4  col-md-46 col-lg-4 ">
-                          <span class="td-label">Product Type </span>
-                          <br>
-                          <b class="capitalize">
-                            {{complete.prod_type}} </b>
-                        </div>
-                      </div>
+                    <div class="col-sm-4  col-md-4 col-lg-4 right">
+                      <p class="td-label mgbottom-0">Product Type </p>
+                      <b class="capitalize onhovertooltip-90">
+                        {{complete.prod_type}} </b>
+                    </div>
+                  </div>
 
 
 
 
-                 
-
-                    <div class="row form-group">
+                  <div class="row form-group">
                     <div class="col-sm-6  col-md-6  col-lg-6">
                       <span class="td-label">Quantity </span>
                       <br>
                       <b class="pdright-5">{{complete.quantity}}</b>
                     </div>
 
-                    
+
 
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <span class="td-label">Empty cans</span>
                       <br>
                       <b class="pdright-5" *ngIf="complete.empty_cans">{{complete.empty_cans}}</b>
-                      <b class="pdright-5" *ngIf="complete.empty_cans === null || complete.empty_cans == ''" > - </b>
+                      <b class="pdright-5" *ngIf="complete.empty_cans === null || complete.empty_cans == ''"> - </b>
                     </div>
 
                   </div>
@@ -1246,34 +1219,34 @@
                   <div class="row form-group">
 
 
-                      <div class="col-sm-3  col-md-3  col-lg-3">
-                          <span class="td-label">Cost</span>
-                          <br>
-                          <b class="pdright-5">{{complete.prod_cost}}</b>
-                        </div>
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Cost</span>
+                      <br>
+                      <b class="pdright-5">{{complete.prod_cost}}</b>
+                    </div>
 
-                        <div class="col-sm-3  col-md-3  col-lg-3">
-                            <span class="td-label">Service charges</span>
-                            <br>
-                            <b class="pdright-5" *ngIf="complete.servicecharges">{{complete.servicecharges}}</b>
-                            <b class="pdright-5" *ngIf="complete.servicecharges === null"> - </b>
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Service charges</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="complete.servicecharges">{{complete.servicecharges}}</b>
+                      <b class="pdright-5" *ngIf="complete.servicecharges === null"> - </b>
 
-                          </div>
+                    </div>
 
-                          <div class="col-sm-3  col-md-3  col-lg-3">
-                              <span class="td-label">Express Delivery charges</span>
-                              <br>
-                              <b class="pdright-5" *ngIf="complete.expressdeliverycharges" >{{complete.expressdeliverycharges}}</b>
-                              <b class="pdright-5" *ngIf="complete.expressdeliverycharges === null || complete.expressdeliverycharges == ''" > - </b>
-  
-                            </div>
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Express Delivery charges</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="complete.expressdeliverycharges">{{complete.expressdeliverycharges}}</b>
+                      <b class="pdright-5" *ngIf="complete.expressdeliverycharges === null || complete.expressdeliverycharges == ''"> - </b>
 
-                            <div class="col-sm-3  col-md-3  col-lg-3">
-                                <span class="td-label">Empty Cans Amount</span>
-                                <br>
-                                <b class="pdright-5" *ngIf="complete.advance_amount" >{{complete.advance_amount}}</b>
-                                <b class="pdright-5" *ngIf="complete.advance_amount === null || complete.advance_amount == ''" > - </b>
-                              </div>
+                    </div>
+
+                    <div class="col-sm-3  col-md-3  col-lg-3">
+                      <span class="td-label">Empty Cans Amount</span>
+                      <br>
+                      <b class="pdright-5" *ngIf="complete.advance_amount">{{complete.advance_amount}}</b>
+                      <b class="pdright-5" *ngIf="complete.advance_amount === null || complete.advance_amount == ''"> - </b>
+                    </div>
 
                   </div>
 
