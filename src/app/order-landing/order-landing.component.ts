@@ -1551,18 +1551,18 @@ this.orderLandingService.getOrdersByfilter(input)
         }
 
         clickedMarker(data){
-          // let formattedData = {orderid : data[0].order_id , data: data , 'type': 'mapviewAllOrders' }
-          // let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+          let formattedData = {orderid : data[0].order_id , data: data , 'type': 'mapviewAllOrders' }
+          let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
-          //   width: '95%',
-          //   data: formattedData
-          // });
-          // dialogRefShowOrder.afterClosed().subscribe(result => {
-          //   //console.log(`Dialog closed: ${result}`);
-          //   if(result == 'success'){
-          //     this.refresh();
-          //   }
-          // });
+            width: '95%',
+            data: formattedData
+          });
+          dialogRefShowOrder.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if(result == 'success'){
+              this.refresh();
+            }
+          });
         }
 
 
