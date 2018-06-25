@@ -36,7 +36,7 @@
       </div>
 
       <div class="row pd-5 d-flex justify-content-around">
-
+      <b *ngIf="message">{{message}}</b>
 
         <button class="btn-primary btn-sm" md-raised-button (click)="saveData(distributorDetails)">ASSIGN</button>
         <button class="btn-default btn-sm" md-raised-button (click)="onCloseConfirm()">CANCEL</button>
