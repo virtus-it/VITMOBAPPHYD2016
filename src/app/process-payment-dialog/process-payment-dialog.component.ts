@@ -35,6 +35,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
     if(this.Details){
       this.processPaymentInput.paytmNumber = this.Details.typedetails;
       this.processPaymentInput.amount = this.Details.amount;
+      this.processPaymentInput.name = this.Details.fullname;
     }
 
   }

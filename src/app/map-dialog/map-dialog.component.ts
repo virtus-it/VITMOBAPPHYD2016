@@ -1,15 +1,15 @@
-﻿import {Component,OnInit,Inject,ElementRef,NgModule,NgZone,ViewChild} from '@angular/core';
+﻿import { Component, OnInit, Inject, ElementRef, NgModule, NgZone, ViewChild } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
-import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 declare var google: any;
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
-interface marker {lat: any;lng: any;label?: string;icon?: string;}
+interface marker { lat: any; lng: any; label?: string; icon?: string; }
 
 @Component({
   selector: 'app-map-dialog',
@@ -28,10 +28,12 @@ export class MapDialogComponent implements OnInit {
   // stockPointLocationData: marker[] = [];
   stockpointsLocationArray1 = [];
   stockpointArray: any = [];
+  message:string = '';
+  circularPolygon = [];
   // polygonexists: boolean = false;
 
   // stockpoints: any = [];
-  constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>,@Inject(MD_DIALOG_DATA) public distributorDetails: any,public gMaps: GoogleMapsAPIWrapper,private loader: MapsAPILoader,private distributorService: DistributorServiceService,private authenticationService: AuthenticationService,private loaderService: LoaderService,private ngZone: NgZone) {}
+  constructor(public thisDialogRef: MdDialogRef<MapDialogComponent>, @Inject(MD_DIALOG_DATA) public distributorDetails: any, public gMaps: GoogleMapsAPIWrapper, private loader: MapsAPILoader, private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private loaderService: LoaderService, private ngZone: NgZone) { }
   initMap() {
     this.map = new google.maps.Map(document.getElementById('map'), {
       center: { lat: 17.34932757, lng: 78.48117828 },
@@ -54,7 +56,7 @@ export class MapDialogComponent implements OnInit {
     });
     //this.map.data.add({ geometry: new google.maps.Data.Polygon([triangleCoords]) })
 
-    google.maps.event.addListener(this.map.data, 'dblclick', function(event) {
+    google.maps.event.addListener(this.map.data, 'dblclick', function (event) {
       //console.log("dblclick");
       // event.setMap(null);
       this.map.data.remove(event.feature);
@@ -91,13 +93,13 @@ export class MapDialogComponent implements OnInit {
   }
 
   getAllStockPoints() {
-    let input = {User: {userid: this.distributorDetails.userid,transtype: 'getall',apptype: this.authenticationService.appType()}};
+    let input = { User: { userid: this.distributorDetails.userid, transtype: 'getall', apptype: this.authenticationService.appType() } };
     this.distributorService.StockPoint(input)
-    .subscribe(
-      output => this.getAllStockPointsResult(output),
-      error => {
-        //console.log("falied");
-      });
+      .subscribe(
+        output => this.getAllStockPointsResult(output),
+        error => {
+          //console.log("falied");
+        });
   }
   getAllStockPointsResult(result) {
     //console.log(result);
@@ -106,11 +108,11 @@ export class MapDialogComponent implements OnInit {
       // this.showStockPoint(this.stockpoints);
 
       if (result.data && result.data[0].latitude && result.data.length > 0) {
-         let stockpointsLocationArray = [];
-        _.each(result.data, function(i, j) {
+        let stockpointsLocationArray = [];
+        _.each(result.data, function (i, j) {
           let details: any = i;
           if (details.latitude !== null && details.longitude !== null) {
-            let distData = {lat: 0,lng: 0,icon: ''};
+            let distData = { lat: 0, lng: 0, icon: '' };
             if (details.latitude && details.longitude) {
               distData.lat = parseFloat(details.latitude);
               distData.lng = parseFloat(details.longitude);
@@ -135,13 +137,13 @@ export class MapDialogComponent implements OnInit {
       this.initMap();
     });
 
-  //   else{
+    //   else{
 
-  //   this.loader.load().then(() => { // calling this in else coz if there are no polygons or stockpoints search is not happening
-  //     this.initMap();
-  //   });
+    //   this.loader.load().then(() => { // calling this in else coz if there are no polygons or stockpoints search is not happening
+    //     this.initMap();
+    //   });
 
-  // }
+    // }
 
   }
 
@@ -163,41 +165,102 @@ export class MapDialogComponent implements OnInit {
       // Add circle overlay and bind to marker
       var circle = new google.maps.Circle({
         map: this.map,
-        radius: 500, // 10 miles in metres
+        radius: 3000, // 10 miles in metres
         fillColor: '#AA0000'
       });
       circle.bindTo('center', this.marker, 'position');
+      
+      this.generateCirclepolygon();
       // this.generateGeoJSONCircle(latLng , true, true);
     }
   }
 
+  generateCirclepolygon() {
 
-  // generateGeoJSONCircle(latLng, radius, numSides){
+    for (let location of this.stockpointsLocationArray1) {
+      let LatLng: any = {
+        lat: parseFloat(location.lat),
+        lng: parseFloat(location.lng)
+      };
 
-  //   var points = [],
-  //       degreeStep = 360 / 10;
-  
-  //   for(var i = 0; i < 10; i++){
-  //     var gpos = google.maps.geometry.spherical.computeOffset( latLng , 3000 , degreeStep * i);
-  //     points.push([gpos.lng(), gpos.lat()]);
-  //   };
-  
-  //   // Duplicate the last point to close the geojson ring
-  //   points.push(points[0]);
-  
-  //   return {
-  //     type: 'Polygon',
-  //     coordinates: [ points ]
-  //   };
-  // }
+      let myLatLng = new google.maps.LatLng({ lat: location.lat, lng: location.lng });
+      let newpoints = [];
+      let i = 10;
+      for (i = 10; i < 360; i++) {
+        var polypoint = google.maps.geometry.spherical.computeOffset(myLatLng, 3000, i);
+        let calculatedPoints = { lat: polypoint.lat(), lng: polypoint.lng() };
+        newpoints.push(calculatedPoints);
+        i = i + 29;
+      }
+      newpoints.push(newpoints[0]);
 
-  // getCircularPolygon(){
-
-  // }
-
+      console.log(newpoints, 'total array');
+      this.circularPolygon = newpoints;
+    }
 
 
-  
+
+    this.savePolygonCircle();
+  }
+
+
+
+
+
+  savePolygonCircle() {
+
+    let input: any = { area: { user_type: 'dealer', user_id: this.distributorDetails.userid, polygonvalue: [] } };
+
+    let dummt = {features: [
+        {
+          geometry: {
+            coordinates: []
+          }
+        }
+      ]
+    }
+    dummt.features[0].geometry.coordinates = this.circularPolygon;
+    for (let feature of dummt.features) {
+      var coordinates = feature.geometry.coordinates;
+      for (let coord of coordinates) {
+
+        var path1 = {lat : '' , lng : ''};
+        path1.lat =  coord.lat; 
+        path1.lng = coord.lng;        
+        this.polygonArray.path.push(path1);
+      }
+      let polygon = Object.assign({}, this.polygonArray);
+      input.area.polygonvalue.push(polygon);
+      //console.log(input);
+      this.polygonArray.path = [];
+    }
+    localStorage.setItem('geoData', '');
+    this.distributorService.createPolygonDistributors(input)
+      .subscribe(
+        output => this.savePolygonCircleResult(output),
+        error => {
+          //console.log("Logged in falied");
+          this.loaderService.display(false);
+        }
+      );
+  }
+  savePolygonCircleResult(data) {
+    this.loaderService.display(false);
+    if (data.result == 'success') {
+      this.message = 'Polygon Created Successfully'
+      // this.thisDialogRef.close('Polygon created');
+    }
+    else{
+      this.message = 'Unable to create polygon around stockpoint';
+    }
+  }
+
+
+
+
+
+
+
 
   getPolygonDistributors(dataLayer) {
     this.loaderService.display(true);
@@ -236,10 +299,12 @@ export class MapDialogComponent implements OnInit {
           }
         }
       }
-    } 
+    }
     else {
       // this.polygonexists = false;
       this.showMarkers();
+
+
     }
   }
   bindDataLayerListeners(dataLayer) {
@@ -250,16 +315,24 @@ export class MapDialogComponent implements OnInit {
 
   // newFunction() {
   //   if (this.polygonexists == false) {
-      
+
   //   }
   // }
 
   savePolygon() {
-    this.map.data.toGeoJson(function(json) {
+    this.map.data.toGeoJson(function (json) {
       //console.log(json.features);
       localStorage.setItem('geoData', JSON.stringify(json));
     });
   }
+
+  // saveCirclePolygon(){
+  //   this.map.data.toGeoJson(function(json){
+  //     localStorage.setItem('circularPolygon' , JSON.stringify(json));
+  //   })
+  // }
+
+
   saveData(distributorDetails) {
     if (distributorDetails.type == 'assignFromOrders') {
       var input: any = {
@@ -269,7 +342,9 @@ export class MapDialogComponent implements OnInit {
           polygonvalue: []
         }
       };
-    } else {
+    }
+
+    else {
       var input: any = {
         area: {
           user_type: 'dealer',
@@ -296,13 +371,14 @@ export class MapDialogComponent implements OnInit {
       this.polygonArray.path = [];
     }
     localStorage.setItem('geoData', '');
-    this.distributorService.createPolygonDistributors(input).subscribe(
-      output => this.saveDataResult(output),
-      error => {
-        //console.log("Logged in falied");
-        this.loaderService.display(false);
-      }
-    );
+    this.distributorService.createPolygonDistributors(input)
+      .subscribe(
+        output => this.saveDataResult(output),
+        error => {
+          //console.log("Logged in falied");
+          this.loaderService.display(false);
+        }
+      );
   }
   saveDataResult(data) {
     this.loaderService.display(false);

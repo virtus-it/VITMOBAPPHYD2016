@@ -55,7 +55,8 @@ export class AddEditProductDailogComponent implements OnInit {
     Priority: '',
     IsAuthorized: '',
     servicecharge: '',
-    expressdeliverycharges: ''
+    expressdeliverycharges: '',
+    brandname: ''
   };
   getProductCategory() {
     let input = {
@@ -108,27 +109,7 @@ export class AddEditProductDailogComponent implements OnInit {
   }
   createProduct() {
     if (this.validate()) {
-      let input = {
-        product: {
-          category: this.productDetails.categoryDetails.category,
-          servicecharge: this.productDetails.servicecharge,
-          expressdeliverycharges: this.productDetails.expressdeliverycharges,
-          categoryid: this.productDetails.categoryDetails.categoryid,
-          currency: this.productDetails.currency,
-          brandname: this.productDetails.productName,
-          pname: this.productDetails.productName,
-          ptype: this.productDetails.productType,
-          pcost: this.productDetails.cost,
-          areaid: '0',
-          minorderqty: this.productDetails.minQty,
-          priority: this.productDetails.Priority,
-          iscanreturnable: this.productDetails.iscanRetrunable,
-          isauthorized: this.productDetails.IsAuthorized,
-          loginid: this.authenticationService.loggedInUserId(),
-          apptype: this.authenticationService.appType()
-        }
-      };
-      //console.log(input);
+      let input = {product: {category: this.productDetails.categoryDetails.category,servicecharge: this.productDetails.servicecharge,expressdeliverycharges: this.productDetails.expressdeliverycharges,categoryid: this.productDetails.categoryDetails.categoryid,currency: this.productDetails.currency, brandname: this.productDetails.brandname, pname: this.productDetails.productName, ptype: this.productDetails.productType,pcost: this.productDetails.cost,areaid: '0',minorderqty: this.productDetails.minQty,priority: this.productDetails.Priority,iscanreturnable: this.productDetails.iscanRetrunable,isauthorized: this.productDetails.IsAuthorized,loginid: this.authenticationService.loggedInUserId(),apptype: this.authenticationService.appType()}};
       this.productService.createProduct(input).subscribe(
         output => this.createProductResult(output),
         error => {
@@ -146,27 +127,7 @@ export class AddEditProductDailogComponent implements OnInit {
   }
   updateProduct() {
     if (this.validate()) {
-      let input = {
-        product: {
-          pid: this.Details.productid,
-          category: this.productDetails.categoryDetails.category,
-          categoryid: this.productDetails.categoryDetails.categoryid,
-          currency: 'INR',
-          brandname: this.productDetails.productName,
-          servicecharge: this.productDetails.servicecharge,
-          expressdeliverycharges: this.productDetails.expressdeliverycharges,
-          pname: this.productDetails.productName,
-          ptype: this.productDetails.productType,
-          pcost: this.productDetails.cost,
-          areaid: '0',
-          minorderqty: this.productDetails.minQty,
-          priority: this.productDetails.Priority,
-          iscanreturnable: this.productDetails.iscanRetrunable,
-          isauthorized: this.productDetails.IsAuthorized,
-          loginid: this.authenticationService.loggedInUserId(),
-          apptype: this.authenticationService.appType()
-        }
-      };
+      let input = {product: {pid: this.Details.productid,category: this.productDetails.categoryDetails.category,categoryid: this.productDetails.categoryDetails.categoryid,currency: 'INR', brandname: this.productDetails.brandname , servicecharge: this.productDetails.servicecharge,expressdeliverycharges: this.productDetails.expressdeliverycharges , pname: this.productDetails.productName, ptype: this.productDetails.productType,pcost: this.productDetails.cost,areaid: '0',minorderqty: this.productDetails.minQty,priority: this.productDetails.Priority,iscanreturnable: this.productDetails.iscanRetrunable,isauthorized: this.productDetails.IsAuthorized,loginid: this.authenticationService.loggedInUserId(),apptype: this.authenticationService.appType()}};
       console.log(input);
       this.productService.updateProduct(input).subscribe(
         output => this.updateProductResult(output),
@@ -203,33 +164,15 @@ export class AddEditProductDailogComponent implements OnInit {
       this.productDetails.IsAuthorized = JSON.parse(this.Details.isauthorized);
       this.productDetails.expressdeliverycharges = this.Details.expressdeliverycharges;
       this.productDetails.servicecharge = this.Details.servicecharge;
+      this.productDetails.brandname = this.Details.brandname;
     }
   }
 
   createDistributorProduct() {
     if (this.validate()) {
-      let input = {
-        product: {
-          category: this.productDetails.categoryDetails.category,
-          servicecharge: this.productDetails.servicecharge,
-          expressdeliverycharges: this.productDetails.expressdeliverycharges,
-          categoryid: this.productDetails.categoryDetails.categoryid,
-          currency: this.productDetails.currency,
-          brandname: this.productDetails.productName,
-          pname: this.productDetails.productName,
-          ptype: this.productDetails.productType,
-          pcost: this.productDetails.cost,
-          areaid: '0',
-          minorderqty: this.productDetails.minQty,
-          priority: this.productDetails.Priority,
-          iscanreturnable: this.productDetails.iscanRetrunable,
-          isauthorized: this.productDetails.IsAuthorized,
-          loginid: this.Details.userid,
-          apptype: this.authenticationService.appType()
-        }
-      };
-      //console.log(input);
-      this.productService.createProduct(input).subscribe(
+      let input = {product: {category: this.productDetails.categoryDetails.category,servicecharge: this.productDetails.servicecharge,expressdeliverycharges: this.productDetails.expressdeliverycharges,categoryid: this.productDetails.categoryDetails.categoryid,currency: this.productDetails.currency,brandname: this.productDetails.productName,pname: this.productDetails.productName,ptype: this.productDetails.productType,pcost: this.productDetails.cost,areaid: '0',minorderqty: this.productDetails.minQty,priority: this.productDetails.Priority,iscanreturnable: this.productDetails.iscanRetrunable,isauthorized: this.productDetails.IsAuthorized,loginid: this.Details.userid,apptype: this.authenticationService.appType()}};
+      this.productService.createProduct(input)
+      .subscribe(
         output => this.createProductResult(output),
         error => {
           //console.log("error");
@@ -260,16 +203,19 @@ export class AddEditProductDailogComponent implements OnInit {
   }
 
   validate() {
-    if (
-      this.productDetails.categoryDetails &&
-      this.productDetails.categoryDetails.category
-    ) {
+    if (this.productDetails.categoryDetails &&this.productDetails.categoryDetails.category) {
       this.message = '';
       return true;
-    } else {
+    }
+     else {
       this.message = 'please select category';
       return false;
     }
+  }
+
+  changeProdName(e){
+    console.log(e);
+    this.productDetails.brandname = e;
   }
   ngOnInit() {
     console.log(this.Details);
