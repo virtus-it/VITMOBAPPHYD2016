@@ -58,7 +58,8 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: var( --logo-color);
+    margin-top: 10px;
+    margin-left: 5px;
 }
 
 .dropdown {
@@ -95,8 +96,29 @@
     visibility: visible;
     transition-delay: 1s;
 }
-@media only screen and (max-width : 640px) {
-  
+.distIcon-style{
+  padding: 15px;
+  margin: 0px;
+  border-bottom: 1px solid #c5d6de;
+}
+.brd-box-box {
+  padding: 0px;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  margin: 0px;
+  margin-bottom: 15px; 
+  box-shadow: 0 4px 20px -6px #777;
+  border-radius: 0px;
+}
+.joined-style{
+  background: #fff;
+  padding: 8px 12px;
+  border-radius: 50%;
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+@media only screen and (max-width : 640px) {  
 .dropdown-content {
   display: none;
   position: absolute;

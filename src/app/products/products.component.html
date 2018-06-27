@@ -19,17 +19,22 @@
   <div>
     <table class="table table-hover">
       <tbody *ngFor="let products of productList">
-        <tr class="border-topbottom bg-fade-blue" >
+        <tr class="border-topbottom bg-fade-blue">
           <td class="">
-            <b class="capital"><i class="fa fa-gift" aria-hidden="true"></i> 
-               Product Name  : {{products.brandName}} <b class="capital"> &nbsp;&nbsp; |  &nbsp;&nbsp;
-                <span class=""><i class="fa fa-bars" aria-hidden="true"></i>
-                   Category : {{products.category}}</span></b>
+            <b class="capital">
+              <i class="fa fa-gift" aria-hidden="true"></i>
+              Product Name : {{products.brandName}}
+              <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                <span class="">
+                  <i class="fa fa-bars" aria-hidden="true"></i>
+                  Category : {{products.category}}</span>
+              </b>
             </b>
-            <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
-            <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
-            <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i>
-
+            <span class="float-right mgright-10">
+              <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
+              <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
+              <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i>
+            </span>
           </td>
         </tr>
 
@@ -42,11 +47,11 @@
                   <th width="7%">Priority </th>
                   <th width="7%">Min Qty </th>
                   <th width="6%">Cost </th>
-                  <th width="8%" title="Service Charge">Serv charge</th>
+                  <th width="8%" title="Service Charge">Serv chg</th>
                   <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
                   <th width="6%">Stock</th>
-                  <th width="8%" title="Return cans">Ret cans</th>
-                  <th width="9%" title="Is Authorized">Is Authorized</th>   
+                  <th width="8%" title="Return cans">Ret Cans</th>
+                  <th width="9%" title="Is Authorized">Is Authorized</th>
                   <th width="7%">Status</th>
                   <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
                   <th width="11%" class="no-th-arrow">Action</th>
@@ -55,13 +60,12 @@
               <tbody>
                 <tr *ngFor="let details of products.data">
                   <td>
-                    <b class="">   <span class="onhovertooltip-200" title="{{details.ptype}}">
-                      <span class="fa fa-thumbs-up success" *ngIf="details.isactive == '1'" ></span>
-                      <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
-
-
-
-                      {{details.ptype}}</span></b>
+                    <b class="">
+                      <span class="onhovertooltip-200" title="{{details.ptype}}">
+                        <span class="fa fa-thumbs-up success" *ngIf="details.isactive == '1'"></span>
+                        <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
+                        {{details.ptype}}</span>
+                    </b>
                   </td>
                   <td>
                     <b class="gray9">{{details.priority}}</b>
@@ -87,7 +91,8 @@
 
                   <td>
                     <span class="" *ngIf="details.isauthorized == 'true' || details.isauthorized == true"> Yes </span>
-                    <span class="" *ngIf="details.isauthorized == 'false' || details.isauthorized == false || details.isauthorized == '' || details.isauthorized === null"> No </span>
+                    <span class="" *ngIf="details.isauthorized == 'false' || details.isauthorized == false || details.isauthorized == '' || details.isauthorized === null">
+                      No </span>
                   </td>
 
                   <td>
@@ -99,13 +104,13 @@
                   </td>
                   <td>
 
-                    <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image" ></label>
-                    <input class="" id="files"  style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
-                    <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i> 
-                          <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area"  *ngIf="superDealer" (click)="productArea(details)">&nbsp;</i>
-                          <i class="fa fa-trash disable" aria-hidden="true"  *ngIf="superDealer && details.isactive == '0'" disabled >&nbsp;</i>
-                          <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product"  *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)">&nbsp;</i> 
-                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)">&nbsp;</i> 
+                    <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
+                    <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
+                    <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
+                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer" (click)="productArea(details)">&nbsp;</i>
+                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="superDealer && details.isactive == '0'" disabled>&nbsp;</i>
+                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="superDealer && details.isactive == '1'" (click)="deleteProduct(details)">&nbsp;</i>
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="superDealer" (click)="editProduct(details)">&nbsp;</i>
                     <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
                     <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->
