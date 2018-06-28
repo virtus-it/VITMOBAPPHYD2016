@@ -245,17 +245,17 @@
 
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
   
-            <agm-polygon 
-                        
-                         [fillColor]="'#eaefea'"
-                           [geodesic]="true" 
-                           [strokeWeight]="1"   
-                         [clickable] = "true"
-                        (polyClick)="click($event,p)" 
-                         [editable]="false"
-                         [polyDraggable]="false">
-              
-            </agm-polygon>
+            <agm-polygon *ngFor="let p of displayProductPolygon; let i = index" [paths]="p.path"
+                      
+            [fillColor]="'#0073e6'"
+              [geodesic]="true" 
+              [strokeWeight]="1"   
+            [clickable] = "true"
+           (polyClick)="clickOnProductPolygon($event,p)" 
+            [editable]="false"
+            [polyDraggable]="false">
+ 
+</agm-polygon>
           
           </agm-map>
 

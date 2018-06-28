@@ -482,7 +482,7 @@
                     <div class="col-sm-5  col-md-5  col-lg-5 right">
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
-                      <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer'">{{forward.customer.suppliercode}}</b>
+                      <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer' && forward.customer ">{{forward.customer.suppliercode}}</b>
                       <b class="" *ngIf="forward.customer.suppliercode === null"> - </b>
                     </div>
                   </div>

@@ -1,12 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
-import {
-  AgmCoreModule,
-  GoogleMapsAPIWrapper,
-  LatLngLiteral,
-  MapsAPILoader
-} from '@agm/core';
+import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
@@ -35,6 +30,9 @@ export class CoverageComponent implements OnInit {
   zoom: number = 12;
   polygonArray: any = [];
   displayPolygon: any = [];
+  productPolygonArray:any = [];
+  displayProductPolygon:any = [];
+  distributorProdDetails:any = [];
   listOfDistributors: any = [];
   dialogRef: any = '';
   order = { orderId: '' };
@@ -46,13 +44,13 @@ export class CoverageComponent implements OnInit {
     }
   ];
 
-  ordersMap: any = [
-    {
-      lat: '',
-      lng: '',
-      name: ''
-    }
-  ];
+  // ordersMap: any = [
+  //   {
+  //     lat: '',
+  //     lng: '',
+  //     name: ''
+  //   }
+  // ];
 
   tabPanelView:any = 'distributors';
 
@@ -138,6 +136,7 @@ export class CoverageComponent implements OnInit {
             polygon.mobileno = data.mobileno;
             this.polygonArray.push(polygon);
             this.displayPolygon.push(polygon);
+            console.log(polygon, 'result');
           }
         }
       }
@@ -159,6 +158,44 @@ export class CoverageComponent implements OnInit {
         this.listOfDistributors.push(dist);
       }
     }
+  }
+
+
+  clickOnProductPolygon(event , polygon){
+
+    this.listOfDistributors = [];
+    let myLatLng = event.latLng;
+    this.lat = myLatLng.lat();
+    this.lng = myLatLng.lng();
+    for (let dist of this.distributorProdDetails) {
+      var latlong = event.latLng;
+      // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
+      // if (this.gMaps.containsLocation(latlong, polygonPath)) {
+      //   this.listOfDistributors.push(dist);
+      // }
+      if(dist.dealerpolygons){
+      for(let dealerpolygon of dist.dealerpolygons){
+
+        for(let path of dealerpolygon.polygonvalue){
+          var latiandlong = event.latLng;
+          var polygonPath = new google.maps.Polygon({
+            paths: dist.path
+          });
+
+        }
+ 
+
+      }
+
+
+    
+
+    }
+
+    }
+
+
+
   }
   DistrbutorHover(distributor) {
     if (distributor.path) {
@@ -210,13 +247,16 @@ export class CoverageComponent implements OnInit {
       if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
         this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
         this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
-      } else if (
+      } 
+      else if (
         result.data[0].customer_latitude &&
         result.data[0].customer_longitude
-      ) {
+      )
+       {
         this.markers[0].lat = parseFloat(result.data[0].customer_latitude);
         this.markers[0].lng = parseFloat(result.data[0].customer_longitude);
-      } else {
+      } 
+      else {
         this.markers[0].lat = '';
         this.markers[0].lng = '';
       }
@@ -308,6 +348,52 @@ export class CoverageComponent implements OnInit {
   //     };
   // }
 
+  getProductsPolygon(){
+    let input = {"area": {"user_type": this.authenticationService.userType() ,"user_id":0,"apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":"","transtype":"getproductspolygons"}};
+    this.loaderService.display(true);
+    console.log(input);
+    this.distributorService.getpolygonByDistributor(input)
+      .subscribe(
+      output => this.getProductsPolygonResult(output),
+      error => {
+        //console.log("falied");
+        this.loaderService.display(false);
+      });
+  }
+  getProductsPolygonResult(result){
+    if(result.result == 'success'){
+      this.loaderService.display(false);
+          this.displayProductPolygon = [];
+          this.distributorProdDetails = []
+        for (let data of result.data) {
+          if (data.serviceareas && data.serviceareas.length > 0) {
+            for (let polygon of data.serviceareas) {
+              polygon.color = '';
+              polygon.category_id = data.categoryid;
+              polygon.product_name = data.product_name;
+              polygon.product_type = data.product_type;
+              this.productPolygonArray.push(polygon);
+              this.displayProductPolygon.push(polygon);
+              this.distributorProdDetails.push(data);
+              console.log(polygon, 'result');
+            }
+          }
+          // if(data.distributorproductdetails && data.distributorproductdetails.length > 0){
+          //   for(let dist of data.distributorproductdetails){
+          //     // dist.userid = data.userid;
+          //     // dist.address = data.address;
+          //     // dist.brandname = data.brandname;
+          //     // dist.mobileno = data.mobileno;
+          //     // dist.product_type = data.product_type;
+          //     // this.distributorProdDetails.push(dist , data);
+
+          //   }
+          // }
+        }
+      
+    }
+  }
+
   getProductByCategory() {
     let input = {
       userId: this.authenticationService.loggedInUserId(),
@@ -367,58 +453,7 @@ export class CoverageComponent implements OnInit {
     this.orderDetails = [];
   }
 
-  // getOrdersOnMap() {
-  //   let input = {
-  //     order: {
-  //       userid: this.authenticationService.loggedInUserId(),
-  //       priority: 289,
-  //       usertype: 'dealer',
-  //       status: null,
-  //       pagesize: 100,
-  //       last_orderid: null,
-  //       apptype: this.authenticationService.appType(),
-  //       createdthru: 'website',
-  //       transtype: 'getordersonmap'
-  //     }
-  //   };
-  //   console.log(input);
-  //   this.orderLandingService.getOrderList(input).subscribe(
-  //     output => this.getOrderDetailsResult(output),
-  //     error => {
-  //       this.loaderService.display(false);
-  //     }
-  //   );
-  // }
-  // getOrderDetailsResult(result) {
-  //   if (result.result == 'success') {
-  //     this.allOrdersDetails = result.data;
-
-  //     let orderLocationArray = [];
-  //     let data = _.each(this.allOrdersDetails, function(i, j) {
-  //       let details: any = i;
-  //       let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: ''};
-  //       UserData.lat = parseFloat(details.latitude);
-  //       UserData.lng = parseFloat(details.longitude);
-  //       UserData.name = details.firstname;
-  //       UserData.orderid = details.order_id;
-  //       UserData.status = details.orderstatus;
-  //       UserData.productType = details.product_type;
-  //       UserData.quantity = details.quantity;
-  //       if (UserData.status == 'delivered') {
-  //         UserData.icon = '../assets/images/green.png';
-  //       } else {
-  //         UserData.icon = '../assets/images/red.png';
-  //       }
-  //       if (UserData.lat && UserData.lng) {
-  //         orderLocationArray.push(UserData);
-  //       }
-  //     });
-
-  //     this.orderslocationData = orderLocationArray;
-  //     console.log('lats and lngs', this.orderslocationData);
-  //   }
-  // }
-
+  
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
@@ -430,19 +465,19 @@ export class CoverageComponent implements OnInit {
      
     }
     else if(panelName== "products"){
-     
+     this.getProductsPolygon();
     }
   }
   pointers: marker[] = [
     {
-      lat: '17.407073254851742',
-      lng: '78.40179428458215',
+      lat: 17.407073254851742,
+      lng: 78.40179428458215,
       label: 'A',
       icon: '../assets/images/green.png'
     },
     {
-      lat: '17.70732548',
-      lng: '78.179428458215',
+      lat: 17.70732548,
+      lng: 78.179428458215,
       label: 'B',
       icon: '../assets/images/red.png'
     }
@@ -451,6 +486,9 @@ export class CoverageComponent implements OnInit {
   ngOnInit() {
     this.getPolygonDistributors();
     this.getProductByCategory();
+    // if(this.tabPanelView == 'products'){
+
+    // }
     // this.getOrdersOnMap();
   }
 }

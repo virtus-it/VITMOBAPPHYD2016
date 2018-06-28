@@ -587,6 +587,9 @@ export class OrderLandingComponent implements OnInit {
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
     }
+    if(this.newView == 'mapview'){
+      this.mapFilters(type)
+    }
     console.log(this.filterInput);
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(this.filterInput)
@@ -1511,7 +1514,8 @@ this.orderLandingService.getOrdersByfilter(input)
         getOrdersOnMap() {
           let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: null,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
           console.log(input);
-          this.orderLandingService.getOrderList(input).subscribe(
+          this.orderLandingService.getOrderList(input)
+          .subscribe(
             output => this.getOrderDetailsResult(output),
             error => {
               this.loaderService.display(false);
@@ -1549,6 +1553,52 @@ this.orderLandingService.getOrdersByfilter(input)
             console.log('lats and lngs', this.orderslocationData);
           }
         }
+
+
+        
+    mapFilters(type){
+
+            let orderLocationArray = [];
+            let data = _.each(this.allOrdersDetails, function(i, j) {
+              let details: any = i;
+              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
+              UserData.lat = parseFloat(details.orderby_latitude);
+              UserData.lng = parseFloat(details.orderby_longitude);
+              UserData.name = details.firstname;
+              UserData.orderid = details.order_id;
+              UserData.status = details.orderstatus;
+              UserData.productType = details.product_type;
+              UserData.quantity = details.quantity;
+              UserData.userid = details.user_id;
+
+
+              if (UserData.status == 'delivered') {
+                UserData.icon = '../assets/images/green.png';
+              }
+               else {
+                UserData.icon = '../assets/images/red.png';
+              }
+
+
+              if(type == 'ordered' && UserData.lat && UserData.lng ){
+                if(details.orderstatus == 'ordered'){
+                orderLocationArray.push(UserData);
+                }
+              }
+              else if(type == 'delivered' && UserData.lat && UserData.lng){
+
+                if(details.orderstatus == 'delivered'){     
+                orderLocationArray.push(UserData);
+              }
+            }
+            else if( (type != 'ordered') && (type != 'delivered') && UserData.lat && UserData.lng){
+              orderLocationArray.push(UserData);
+            }
+            });
+      
+            this.orderslocationData = orderLocationArray;
+            console.log('lats and lngs', this.orderslocationData);
+    }
 
         clickedMarker(data){
           let formattedData = {customerid  : data[0].user_id , data: data , 'type': 'mapviewAllOrders' }

@@ -132,6 +132,19 @@ export class AddEditUserComponent implements OnInit {
     lastname: ''
   };
 
+
+  superSupplierInput = {
+    firstname: '',
+    mobileno: '',
+    altmobileno: '',
+    address: '',
+    emailid: '',
+    lastname: ''
+  };
+
+
+
+
   headerValue: any = 'Add User';
 
   //   submitUser(){
@@ -169,7 +182,14 @@ export class AddEditUserComponent implements OnInit {
       } else if (this.UserInput.usertype == 'Marketing') {
         this.UpdateMarketingUser();
       }
-    } else {
+      else if(this.UserInput.usertype == 'Supersupplier'){
+        this.UpdateSuperSupplier();
+      }
+      else if(this.UserInput.usertype == 'Customercare'){
+        this.UpdateCustomerCare();
+      }
+    }
+     else {
       if (this.UserInput.usertype == 'Customer') {
         this.addCustomer();
       } else if (this.UserInput.usertype == 'Distributor') {
@@ -184,8 +204,11 @@ export class AddEditUserComponent implements OnInit {
        else if (this.UserInput.usertype == 'Marketing') {
         this.addMarketingUser();
       }
-      else if(this.UserInput.usertype == 'customercare'){
+      else if(this.UserInput.usertype == 'Customercare'){
         this.addCustomerCare();
+      }
+      else if(this.UserInput.usertype == 'Supersupplier'){
+        this.addSuperSupplier();
       }
     }
   }
@@ -197,14 +220,14 @@ export class AddEditUserComponent implements OnInit {
         pwd: this.customerCareInput.phone,
         user_type: 'customercare',
         TransType: 'create',
-        firstname: this.marketingInput.firstName,
-        lastname: this.marketingInput.lastName,
-        address: this.marketingInput.address,
+        firstname: this.customerCareInput.firstName,
+        lastname: this.customerCareInput.lastName,
+        address: this.customerCareInput.address,
         loginid: this.authenticationService.loggedInUserId(),
-        mobileno: this.marketingInput.phone,
-        mobileno_one: this.marketingInput.mobile1,
-        mobileno_two: this.marketingInput.mobile2,
-        emailid: this.marketingInput.emailid,
+        mobileno: this.customerCareInput.phone,
+        mobileno_one: this.customerCareInput.mobile1,
+        mobileno_two: this.customerCareInput.mobile2,
+        emailid: this.customerCareInput.emailid,
         apptype: this.authenticationService.appType()
       }
     };
@@ -221,6 +244,25 @@ export class AddEditUserComponent implements OnInit {
       this.thisDialogRef.close('success');
     }
   }
+
+
+
+  addSuperSupplier(){
+    let input: any = {
+      User: {user_type: 'supersupplier',TransType: 'create', firstname: this.superSupplierInput.firstname , gender: 'Male', pwd: this.superSupplierInput.mobileno, address: this.superSupplierInput.address,  loginid: this.authenticationService.loggedInUserId(),mobileno: this.superSupplierInput.mobileno, emailid: this.superSupplierInput.emailid, lastname : this.superSupplierInput.lastname  , mobileno_one: this.superSupplierInput.altmobileno,issuppersupplier: true, dealer_mobileno: this.authenticationService.dealerNo(), apptype: this.authenticationService.appType()}};
+    this.supplierservice.createSupplier(input)
+    .subscribe(
+      output => this.addSuperSupplierResult(output),
+      error => {
+        //console.log("error in supplier");
+      });
+  }
+  addSuperSupplierResult(result){
+    if(result.result == 'success'){
+      this.thisDialogRef.close('success');
+    }
+  }
+
 
 
 
@@ -541,6 +583,24 @@ export class AddEditUserComponent implements OnInit {
       this.marketingInput.emailid = this.Details.emailid;
       this.marketingInput.referCode = this.Details.reference_code;
     }
+    else if(this.Details.usertype == 'customercare'){
+
+      this.customerCareInput.firstName = this.Details.firstname;
+      this.customerCareInput.lastName = this.Details.lastname;
+      this.customerCareInput.phone = this.Details.mobileno;
+      this.customerCareInput.mobile1 = this.Details.mobileno_one;
+      this.customerCareInput.mobile2 = this.Details.mobileno_two;
+      this.customerCareInput.address = this.Details.address;
+      this.customerCareInput.emailid = this.Details.emailid;
+    }
+    else if(this.Details.usertype == 'supersupplier'){
+      this.superSupplierInput.firstname = this.Details.firstname;
+      this.superSupplierInput.mobileno = this.Details.mobileno;
+      this.superSupplierInput.altmobileno = this.Details.mobileno_one;
+      this.superSupplierInput.address = this.Details.address;
+      this.superSupplierInput.emailid = this.Details.emailid;
+      this.superSupplierInput.lastname = this.Details.lastname;
+    }
   }
 
 
@@ -562,7 +622,8 @@ export class AddEditUserComponent implements OnInit {
       input.User.userid = this.Details.userid;
 
       console.log(input);
-      this.customerService.updateCustomer(input).subscribe(
+      this.customerService.updateCustomer(input)
+      .subscribe(
         output => this.updateCustomerResult(output),
         error => {
           //console.log("error in distrbutors");
@@ -667,7 +728,8 @@ export class AddEditUserComponent implements OnInit {
       }
     };
     input.User.userid = this.Details.userid;
-    this.distributorService.updateDistributor(input).subscribe(
+    this.distributorService.updateDistributor(input)
+    .subscribe(
       output => this.UpdateManufacturerResult(output),
       error => {
         //console.log("error in distrbutors");
@@ -681,6 +743,28 @@ export class AddEditUserComponent implements OnInit {
       this.getUserDetails();
     }
   }
+
+
+  UpdateCustomerCare(){
+
+    let input: any = {
+      User: {userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname : this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1 , mobileno_two : this.customerCareInput.mobile2}};
+      console.log(input);
+      this.distributorService.updateDistributor(input)
+      .subscribe(
+        output => this.UpdateCustomerCareResult(output),
+        error => {
+          //console.log("error in distrbutors");
+        });
+     }
+     UpdateCustomerCareResult(result){
+       if(result.result == 'success'){
+        console.log('customer care updated successfully');
+        this.thisDialogRef.close('success');
+        this.getUserDetails();
+       }
+     }
+
 
   UpdateSupplier() {
     let input: any = {
@@ -714,6 +798,27 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+  UpdateSuperSupplier(){
+
+    let input: any = {User: { userid: this.Details.userid , firstname : this.superSupplierInput.firstname, mobileno: this.superSupplierInput.mobileno, address: this.superSupplierInput.address, emailid: this.superSupplierInput.emailid, loginid:  this.authenticationService.loggedInUserId() ,user_type: 'supersupplier',issuppersupplier: true , apptype: this.authenticationService.appType(),mobileno_one: this.superSupplierInput.altmobileno , lastname : this.superSupplierInput.lastname }};
+    this.supplierservice.updateSupplier(input)
+    .subscribe(
+      output => this.UpdateSuperSupplierResult(output),
+      error => {
+        //console.log("error in updation of suppliers");
+      }
+    );
+  }
+  UpdateSuperSupplierResult(result) {
+    //console.log(result);
+    if (result.result == 'success') {
+      console.log('super supplier updated successfully');
+      this.thisDialogRef.close('success');
+      this.getUserDetails();
+    }
+  }
+
+
   onCloseModal() {
     this.thisDialogRef.close('cancel');
   }
@@ -733,6 +838,12 @@ export class AddEditUserComponent implements OnInit {
         this.UserInput.usertype = 'Manufacturer';
       } else if (this.Details.usertype == 'marketing') {
         this.UserInput.usertype = 'Marketing';
+      }
+      else if(this.Details.usertype == 'customercare'){
+        this.UserInput.usertype = 'Customercare';
+      }
+      else if(this.Details.usertype == 'supersupplier'){
+        this.UserInput.usertype = 'Supersupplier';
       }
       
 
