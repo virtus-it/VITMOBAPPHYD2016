@@ -4,3 +4,29 @@
   table{
     margin-bottom: 0px !important;
   }
+
+  .mat-dialog-content{
+    height: 78vh;
+    border-bottom: 1px solid #ddd; 
+  }
+  
+  table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 70vh !important;
+  }
+  /* @media (min-width: 1101px) and (max-width : 1400px) {
+    .mat-dialog-container {
+    height: 95vh !important;
+  }
+  }
+  @media (min-width: 901px) and (max-width : 1100px) {
+    .mat-dialog-container {
+      height: 95vh !important;
+  
+  }
+  }
+  @media (min-width: 700px) and (max-width : 900px) {
+    .mat-dialog-container {
+      height: 95vh !important;
+  }
+  } */

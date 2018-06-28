@@ -1,10 +1,14 @@
 agm-map {
-    height: 450px;
+    height: 68vh;
   }
+
   .mgtopleft-20{
     margin: 20px 0px 0px 20px !important;
   }
 
   .mg-10-5{
     margin: 10px 0px -5px 0px !important;
+  }
+  .mat-dialog-content{
+    height:80vh;
   }

@@ -263,7 +263,8 @@ padding: 0px 0px 0px 15px;
   }
   .mat-dialog-container{
     padding: 0px !important;
-    max-height: 620px;
+    max-height: 100vh;
+    /* height: 95vh !important; */
     max-width: 100% !important;
     overflow: hidden !important;
   }
@@ -1035,23 +1036,69 @@ background: #8bc6ef !important;
 color: #333;
 border-left: 5px solid #f79123;
 }
+@media (min-width: 1200px){
+  .orderList-height{
+    height: 75vh !important;
+  }
+  .orderList-height .table{
+    max-height: 65vh !important;
+  }
+  .orderList-height  table.table-fixedheader>tbody{
+    height: 60vh !important;
+overflow-x: auto;
+  }
+  }
 
-@media (min-width: 1000px) {
-  .example { font-size: 12px; }
+@media (min-width: 992px){
+  .orderList-height{
+    height: 75vh !important;
+ 
+  }
+  .orderList-height .table{
+    max-height: 65vh !important;
+  }
+  .orderList-height  table.table-fixedheader>tbody{
+    height: 60vh !important;
+overflow-x: auto;
+  }
+  }
+@media (min-width: 768px){
+  .orderList-height{
+    height: 75vh !important;
+  }
+  .orderList-height .table{
+    max-height: 65vh !important;
+    }
+  .orderList-height  table.table-fixedheader>tbody{
+    height: 60vh !important;
+overflow-x: auto;
+  }
+  }
+/* @media (min-width: 576px){
+.orderList-height{
+  max-height: 640px !important;
 }
+.orderList-height .table{
+  max-height: 550px !important;
+}
+.orderList-height  table.table-fixedheader>tbody{
+  max-height: 520px !important;
+overflow-x: auto;
+}
+} */
+/* @media (min-width: 1101px) and (max-width : 1400px) {
+  .orderList-height{
+  height: 640px !important;
+}
+}
+@media (min-width: 901px) and (max-width : 1100px) {
+  .orderList-height{
+    height: 640px !important;
 
-@media (min-width: 1100px) {
-  .example { font-size: 13px; }
 }
-
-@media (min-width: 1200px) {
-  .example { font-size: 14px; }
 }
-
-@media (min-width: 1300px) {
-  .example { font-size: 15px; }
-}
-
-@media (min-width: 1400px) {
-  .example { font-size: 16px; }
-}
+@media (min-width: 700px) and (max-width : 900px) {
+  .orderList-height{
+    height: 640px !important;
+  }
+} */
