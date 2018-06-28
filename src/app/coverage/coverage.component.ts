@@ -310,7 +310,8 @@ export class CoverageComponent implements OnInit {
   filteredList() {
     let input = this.filterInput;
     //console.log(input);
-    this.distributorService.getFilteredPolygon(input).subscribe(
+    this.distributorService.getFilteredPolygon(input)
+    .subscribe(
       output => this.getFilteredPolygonResult(output),
       error => {
         //console.log("error in products category list");
@@ -333,6 +334,7 @@ export class CoverageComponent implements OnInit {
               polygon.mobileno = data.mobileno;
               // this.polygonArray.push(polygon);
               this.displayPolygon.push(polygon);
+              
             }
           }
         }
@@ -381,6 +383,7 @@ export class CoverageComponent implements OnInit {
               polygon.category_id = data.categoryid;
               polygon.product_name = data.product_name;
               polygon.product_type = data.product_type;
+              polygon.categoryname = data.category;
               this.productPolygonArray.push(polygon);
               this.displayProductPolygon.push(polygon);
               this.distributorProdDetails.push(data);

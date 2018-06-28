@@ -18,7 +18,7 @@
     
       <form class="example-form" (ngSubmit)="getOrderDetail()">
         
-      <div class="input-group">
+      <div class="input-group" *ngIf="tabPanelView == 'distributors'">
           <input type="text" class="form-control" placeholder="Order Id"  name="orderid" [(ngModel)]="order.orderId">
           <span class="input-group-btn">
             <button type="submit" class="btn btn-primary" type="button"(click)="getOrderDetail()">Go!</button>
@@ -28,7 +28,7 @@
       
   </div>
     
-  <div class="col-md-1  col-sm-1  col-lg-1">
+  <div class="col-md-1  col-sm-1  col-lg-1" *ngIf="tabPanelView == 'distributors'">
       <button md-raised-button color="primary" (click)="ShowAllPolygons()" > Show All</button>
       
     </div>
@@ -269,7 +269,9 @@
               <thead>
                 <tr>
                   <th width="50%">Distributor</th>
+
                   <th width="25%">Mobile</th>
+                  <th width="25%">Category</th>
                   <th width="25%" class="center">Product</th>         
                    </tr>
               </thead>
@@ -280,10 +282,15 @@
                     <span *ngIf="dist.dealername" >{{dist.dealername}} </span>
                     <span *ngIf="dist.dealername === null || dist.dealername == '' " > - </span>                  
                   </td>
+
                   <td width="25%" class="left capital">
                     <span *ngIf="dist.mobileno"> {{dist.mobileno}} </span>
                     <span *ngIf="dist.mobileno === null || dist.mobileno == ''"> -  </span>                  
                   </td>
+                  <td width="25%" class="left capital">
+                      <span *ngIf="dist.category" >{{dist.category}} </span>
+                      <span *ngIf="dist.category === null || dist.category == '' " > - </span>                  
+                    </td>
                   <td width="25%" class="center capital">
                     <span *ngIf="dist.brandname">{{dist.brandname}}</span>
                     <span *ngIf="dist.brandname === null || dist.brandname == ''"> - </span>
