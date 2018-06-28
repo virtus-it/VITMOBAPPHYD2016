@@ -209,7 +209,7 @@ export class MapDialogComponent implements OnInit {
 
     let input: any = { area: { user_type: 'dealer', user_id: this.distributorDetails.userid, polygonvalue: [] } };
 
-    let dummt = {features: [
+    let poly = {features: [
         {
           geometry: {
             coordinates: []
@@ -217,8 +217,8 @@ export class MapDialogComponent implements OnInit {
         }
       ]
     }
-    dummt.features[0].geometry.coordinates = this.circularPolygon;
-    for (let feature of dummt.features) {
+    poly.features[0].geometry.coordinates = this.circularPolygon;
+    for (let feature of poly.features) {
       var coordinates = feature.geometry.coordinates;
       for (let coord of coordinates) {
 
@@ -369,7 +369,7 @@ export class MapDialogComponent implements OnInit {
       //console.log(input);
       this.polygonArray.path = [];
     }
-    if(input.area.polygonvalue = [] ) {
+    if(input.area.polygonvalue.length == 0 ) {
         // input.area.polygonvalue = null;
         delete input.area.polygonvalue;
     }

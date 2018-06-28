@@ -17,8 +17,11 @@ export class MessageTemplateComponent implements OnInit {
   constructor(public thisDialogRef: MdDialogRef<MessageTemplateComponent> ,  @Inject(MD_DIALOG_DATA) public Details: any , private followupService : FollowUpService , private loaderService: LoaderService,  private authenticationService: AuthenticationService) { }
 
   dynamicMessages:any = [];
+  customerMessages1 = [];
+  distributorMessages1 = [];
   message:any = [];
   DetailData:any = [];
+  type = 'customer';
   // divText:any = "";
 //  messageDetails= [{ message : "Order Received: Thank you for placing an order with Moya-The Waterman App. We will process your request shortly."},
 
@@ -70,23 +73,53 @@ getDynamicMessagesResult(result){
   if(result.result == 'success'){
     this.dynamicMessages = result.data;
     let replace = this.Details;
+    let customerMessages = [];
+     let distributorMessages = [];
     let temp_desc = _.each(this.dynamicMessages , function(i, j){
       let details:any = i;
-
-    
+      if(details.type == 'Customer'){
      details.template_desc = details.template_desc.replace("<<CUSTOMER_NAME>>" , replace.orderby_firstname);
      details.template_desc = details.template_desc.replace("<<ORDER_ID>>" , replace.order_id);
      details.template_desc = details.template_desc.replace("<<ORDER_QUANTITY>>" , replace.quantity);
      details.template_desc = details.template_desc.replace("<<PRODUCT_NAME>>" , replace.brandname);
      details.template_desc = details.template_desc.replace("<<PRODUCT_TYPE>>" , replace.prod_type);
      details.template_desc = details.template_desc.replace("<<CUSTOMER_PHNO>>" , replace.orderby_mobileno);
+     customerMessages.push(details);
+      }
+      else if(details.type == 'Distributor'){
+        details.template_desc = details.template_desc.replace("<<CUSTOMER_NAME>>" , replace.orderby_firstname);
+        details.template_desc = details.template_desc.replace("<<ORDER_ID>>" , replace.order_id);
+        details.template_desc = details.template_desc.replace("<<ORDER_QUANTITY>>" , replace.quantity);
+        details.template_desc = details.template_desc.replace("<<PRODUCT_NAME>>" , replace.brandname);
+        details.template_desc = details.template_desc.replace("<<PRODUCT_TYPE>>" , replace.prod_type);
+        details.template_desc = details.template_desc.replace("<<CUSTOMER_PHNO>>" , replace.orderby_mobileno);
+        distributorMessages.push(details);
+      }
      
 
     });
 
     console.log(result);
+    this.customerMessages1 = customerMessages;
+    this.distributorMessages1 = distributorMessages;
+    // if(this.type == 'customer'){
+    //   this.dynamicMessages =  customerMessages;
+    // }
+    // else{
+    //   this.dynamicMessages =  distributorMessages;
+    // }
 
 
+  }
+}
+
+changeType(e){
+  if(e == 'distributor'){
+    this.dynamicMessages =  this.distributorMessages1;
+  }
+  else{
+    this.dynamicMessages =  this.customerMessages1;
+    
   }
 }
 

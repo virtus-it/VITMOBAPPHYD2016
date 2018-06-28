@@ -35,7 +35,9 @@ export class EditOrderStatusComponent implements OnInit {
       "usertype": this.authenticationService.userType(),
       "apptype": this.authenticationService.appType(),
       "return_cans": this.orderDetail.return_cans,
-      "adv_amt": 0
+      "adv_amt": 0,
+      "servicecharges" : this.orderDetail.servicecharges
+
     }
   };
   isConfirmed = true;

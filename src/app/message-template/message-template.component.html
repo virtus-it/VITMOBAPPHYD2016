@@ -9,7 +9,18 @@
   </div>
 </div>
 <div class="pd-15x25 brd-bottom">
-        
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="customer" (ngModelChange)="changeType($event)">
+            <span class="custom-control-indicator"></span>
+            <span class="custom-control-description"> Customer</span>
+          </label>
+
+          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+              <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="distributor" (ngModelChange)="changeType($event)">
+              <span class="custom-control-indicator"></span>
+              <span class="custom-control-description"> Distributor</span>
+            </label>
+
         
     <div class="scroll">    
         <table class="table table-hover table-striped  table-fixedheader">

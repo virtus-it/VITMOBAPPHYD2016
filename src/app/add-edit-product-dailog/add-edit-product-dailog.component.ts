@@ -171,7 +171,7 @@ export class AddEditProductDailogComponent implements OnInit {
 
   createDistributorProduct() {
     if (this.validate()) {
-      let input = {product: {category: this.productDetails.categoryDetails.category,servicecharge: this.productDetails.servicecharge,expressdeliverycharges: this.productDetails.expressdeliverycharges,categoryid: this.productDetails.categoryDetails.categoryid,currency: this.productDetails.currency,brandname: this.productDetails.productName,pname: this.productDetails.productName,ptype: this.productDetails.productType,pcost: this.productDetails.cost,areaid: '0',minorderqty: this.productDetails.minQty,priority: this.productDetails.Priority,iscanreturnable: this.productDetails.iscanRetrunable,isauthorized: this.productDetails.IsAuthorized,loginid: this.Details.userid,apptype: this.authenticationService.appType()}};
+      let input = {product: {category: this.productDetails.categoryDetails.category, servicecharge: this.productDetails.servicecharge,expressdeliverycharges: this.productDetails.expressdeliverycharges, categoryid: this.productDetails.categoryDetails.categoryid, currency: this.productDetails.currency,brandname: this.productDetails.productName,pname: this.productDetails.productName,ptype:  this.productDetails.productType,pcost: this.productDetails.cost,areaid: '0',minorderqty: this.productDetails.minQty,priority: this.productDetails.Priority,iscanreturnable: this.productDetails.iscanRetrunable,isauthorized: this.productDetails.IsAuthorized,loginid: this.Details.userid,apptype: this.authenticationService.appType()}};
       this.productService.createProduct(input)
       .subscribe(
         output => this.createProductResult(output),

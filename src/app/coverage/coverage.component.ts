@@ -34,6 +34,7 @@ export class CoverageComponent implements OnInit {
   displayProductPolygon:any = [];
   distributorProdDetails:any = [];
   listOfDistributors: any = [];
+  distributors:any = [];
   dialogRef: any = '';
   order = { orderId: '' };
   orderDetails = [];
@@ -164,33 +165,41 @@ export class CoverageComponent implements OnInit {
   clickOnProductPolygon(event , polygon){
 
     this.listOfDistributors = [];
+    let polygonCategory = polygon.category_id;
     let myLatLng = event.latLng;
     this.lat = myLatLng.lat();
     this.lng = myLatLng.lng();
+    this.distributors = [];
     for (let dist of this.distributorProdDetails) {
-      var latlong = event.latLng;
+      if(dist.categoryid == polygonCategory){
+      if(dist.distributorproductdetails){
+        for(let distDetails of dist.distributorproductdetails){
+          this.distributors.push(distDetails);
+        }
+      }
+    }
       // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
       // if (this.gMaps.containsLocation(latlong, polygonPath)) {
       //   this.listOfDistributors.push(dist);
       // }
-      if(dist.dealerpolygons){
-      for(let dealerpolygon of dist.dealerpolygons){
+    //   if(dist.dealerpolygons){
+    //   for(let dealerpolygon of dist.dealerpolygons){
 
-        for(let path of dealerpolygon.polygonvalue){
-          var latiandlong = event.latLng;
-          var polygonPath = new google.maps.Polygon({
-            paths: dist.path
-          });
+    //     for(let path of dealerpolygon.polygonvalue){
+    //       var latiandlong = event.latLng;
+    //       var polygonPath = new google.maps.Polygon({
+    //         paths: dist.path
+    //       });
 
-        }
+    //     }
  
 
-      }
+    //   }
 
 
     
 
-    }
+    // }
 
     }
 
@@ -466,6 +475,7 @@ export class CoverageComponent implements OnInit {
     }
     else if(panelName== "products"){
      this.getProductsPolygon();
+     this.distributors = [];
     }
   }
   pointers: marker[] = [

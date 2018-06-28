@@ -11,7 +11,9 @@ import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import { InvoicedetailsComponent } from '../invoicedetails/invoicedetails.component';
+import { SupplierService} from '../supplier/supplier.service';
 import { InvoiceHistoryComponent } from '../invoice-history/invoice-history.component';
+
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 @Component({
@@ -24,7 +26,10 @@ export class ReportsComponent implements OnInit {
   filteredcustomer: Observable<any[]>;
   DistributorCtrl: FormControl;
   filteredDistributors: Observable<any[]>;
-  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private customerService: CustomerService) {
+  SupplierCtrl: FormControl;
+  filteredSupplier: Observable<any[]>;
+
+  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService,private supplierservice :SupplierService,  private customerService: CustomerService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -33,6 +38,11 @@ export class ReportsComponent implements OnInit {
     this.filteredcustomer = this.customerCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findCustomers(dist) : this.customerList.slice());
+      this.SupplierCtrl = new FormControl();
+      this.filteredSupplier = this.SupplierCtrl.valueChanges
+        .startWith(null)
+        .map(supplier =>supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+
 
 
   }
@@ -41,11 +51,12 @@ export class ReportsComponent implements OnInit {
       ()
   };
   distOrders = {getDate: null};
-  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" };
+  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" , supplierId :"" , supplierEmail: '' };
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
   customerList = [];
+  supplierList = [];
   distributors: any = [];
   tabPanelView = 'newlydownloaded';
   superDealer = true;
@@ -112,6 +123,49 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  findSupplier(name: string) {
+    //console.log(name);
+    let finalsupplier = this.supplierList.filter(supp =>
+      supp.firstname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    //console.log(finalsupplier);
+    if (finalsupplier && finalsupplier.length > 0) {
+      let findSupplier: any = {};
+
+      findSupplier = _.find(finalsupplier, function (k, l) {
+        let supplierDetails: any = k;
+        return supplierDetails.firstname == name;
+      });
+
+      if (findSupplier) {
+        this.downloadInput.supplierId = findSupplier.userid;
+        this.downloadInput.supplierEmail = findSupplier.emailid;
+      }
+
+
+    }
+  
+    return finalsupplier;
+  }
+
+  getSupplierList(){
+    let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
+    this.supplierservice.supplierList(input)
+    .subscribe(
+    output => this.getSupplierListResult(output),
+    error => {
+      this.loaderService.display(false);
+    });
+  }
+  getSupplierListResult(result) {
+    //console.log(result);
+    if (result.result == "success") {
+      this.supplierList = result.data;
+     
+    }
+  }
+
+
+
   searchDistributorsOrders(){
     this.tabPanelView = 'distributorsorders';
     let input = {
@@ -173,6 +227,9 @@ export class ReportsComponent implements OnInit {
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
+    }
+    if (this.downloadInput.filterBy == 'supplier') {
+      input.order.filterid = this.downloadInput.supplierId;
     }
     //console.log(input);
     this.reportservice.downloadReports(input)
@@ -309,6 +366,10 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
     }
+    if (this.downloadInput.filterBy == 'supplier') {
+      input.order.filterid = this.downloadInput.supplierId;
+      input.order.emailid = this.downloadInput.supplierEmail;
+    }
     //console.log(input);
     this.showInvoice(input);
     // this.reportservice.raiseInvoice(input)
@@ -420,6 +481,10 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
     }
+    if (this.downloadInput.filterBy == 'supplier') {
+      input.order.filterid = this.downloadInput.supplierId;
+      input.order.emailid = this.downloadInput.supplierEmail;
+    }
     //console.log(input);
     this.reportservice.printInvoice(input)
       .subscribe(
@@ -460,6 +525,7 @@ export class ReportsComponent implements OnInit {
     this.searchReports(true, 'newlydownloaded');
     this.getCustomer();
     this.getDistributors();
+    this.getSupplierList();
     this.superDealer = this.authenticationService.getSupperDelear();
     if (!this.superDealer) {
       this.tabPanelView = 'orderdownload';
