@@ -165,7 +165,7 @@ export class ProductsComponent implements OnInit {
 
         let findproduct = _.find(this.productList, function (k, l) {
           let productDetails: any = k;
-          return productDetails.brandName == details.brandname;
+          return ((productDetails.brandName == details.brandname) && (productDetails.categoryid == details.categoryid));
           
         });
 
@@ -173,7 +173,7 @@ export class ProductsComponent implements OnInit {
           findproduct.data.push(details);
         }
         else {
-          let value = { brandName: details.brandname, category: details.category, data: [] };
+          let value = { brandName: details.brandname, category: details.category, data: [] , categoryid: details.categoryid };
           value.data.push(details);
           this.productList.push(value);
         }

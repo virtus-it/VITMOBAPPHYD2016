@@ -245,22 +245,123 @@
 
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
   
-            <agm-polygon 
-                        
-                         [fillColor]="'#eaefea'"
-                           [geodesic]="true" 
-                           [strokeWeight]="1"   
-                         [clickable] = "true"
-                        (polyClick)="click($event,p)" 
-                         [editable]="false"
-                         [polyDraggable]="false">
-              
-            </agm-polygon>
+            <agm-polygon *ngFor="let p of displayProductPolygon; let i = index" [paths]="p.path"
+                      
+            [fillColor]="'#fffc7c'"
+              [geodesic]="true" 
+              [strokeWeight]="1"   
+            [clickable] = "true"
+           (polyClick)="clickOnProductPolygon($event,p)" 
+            [editable]="false"
+            [polyDraggable]="false">
+ 
+</agm-polygon>
           
           </agm-map>
 
 
         </div>
+
+
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="distributors.length">
+          <div class="container-fluid">
+            <table class="table table-hover table-striped">
+              <thead>
+                <tr>
+                  <th width="50%">Distributor</th>
+                  <th width="25%">Mobile</th>
+                  <th width="25%" class="center">Product</th>         
+                   </tr>
+              </thead>
+              <tbody>
+                <tr  *ngFor="let dist of distributors; let i = index" [attr.data-index]="i" >
+                  <!-- <td width="3%" class="left" scope="row">{{i+1}}</td> -->
+                  <td width="50%" class="left capital">
+                    <span *ngIf="dist.dealername" >{{dist.dealername}} </span>
+                    <span *ngIf="dist.dealername === null || dist.dealername == '' " > - </span>                  
+                  </td>
+                  <td width="25%" class="left capital">
+                    <span *ngIf="dist.mobileno"> {{dist.mobileno}} </span>
+                    <span *ngIf="dist.mobileno === null || dist.mobileno == ''"> -  </span>                  
+                  </td>
+                  <td width="25%" class="center capital">
+                    <span *ngIf="dist.brandname">{{dist.brandname}}</span>
+                    <span *ngIf="dist.brandname === null || dist.brandname == ''"> - </span>
+                  </td>
+  
+                 </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- <div class="container-fluid brd-logo"  *ngFor="let order of orderDetails; let i = index" [attr.data-index]="i">
+              <div class=" form-group  row pdleftright-15">
+                  <div class="col left details-style ">
+                      <b class="">Order Details </b>  &nbsp;&nbsp;&nbsp;
+                    </div>
+                      <div class="p-2 right logo-bg pdtop-5 ">
+                          <button class="btn btn-default btn-sm" (click)="refresh()" >Clear</button>                    
+                      </div> 
+                  <div class="p-2 right logo-bg pdtop-5 ">
+                      <button class="btn btn-default btn-sm" (click)="ViewDistributors(order)" >Assign</button>                    
+                  </div> 
+                  </div>
+              
+              <div class="form-group row pdleftright-15">
+                <div class="col-md-3  col-sm-3  col-lg-3 left">
+                  <label class="label-gray">Order Id</label><br>
+                  <b>#{{order.order_id}}</b>
+                </div>
+                <div class="col-md-9  col-sm-9 col-lg-9 right">
+                    <label  class="label-gray">Customer Name </label><br>
+                    <b class="capitalize"> {{order.orderby_firstname}} {{order.orderby_lastname}}</b>
+                  </div>
+                </div>
+                <div class="form-group row pdleftright-15">
+                    <div class="col-md-6  col-sm-6  col-lg-6 left">
+                      <label  class="label-gray">Date Placed</label><br>
+                      <b>{{order.ordered_date}}</b>
+                    </div>
+                    <div class="col-md-6  col-sm-6  col-lg-6 right">
+                        <label  class="label-gray">Customer Mobile</label><br>
+                        <b>{{order.orderby_mobileno}}</b>
+                      </div>
+                    </div>
+            
+                    <div class="form-group row pdleftright-15">
+                        <div class="col-md-6  col-sm-6  col-lg-6 left">
+                            <label  class="label-gray">Brand Name</label><br>
+                            <b class="capitalize">{{order.brandname}} {{order.prod_type}} ({{order.quantity}} Qty)</b>
+                          </div>
+                        <div class="col-md-6  col-sm-6  col-lg-6 right">
+                            <label  class="label-gray">Amount</label><br>
+                            <b>Rs. {{order.bill_amount}}</b>
+                          </div>
+                        </div>
+                        <div class="form-group row pdleftright-15">
+                            <div class="col-md-6  col-sm-6  col-lg-6 left">
+                                <label  class="label-gray">Forwarded To</label><br>
+                                <b class="capitalize">{{order.dealerdetails.firstname}}</b>
+                              </div>
+                            <div class="col-md-6  col-sm-6  col-lg-6 right">
+                                <label  class="label-gray">Payment Type</label><br>
+                                <b>{{order.paymenttype}}</b>
+                              </div>
+                            </div>
+                    <div class="form-group row pdleftright-15">
+              
+                        <div class="col center">
+                            <label  class="label-gray">Delivery Time</label><br>
+                            <label class="warning">{{order.delivery_exceptedtime}}</label>
+                          </div>
+                        </div>
+             
+          </div> -->
+
+            </div>
+
+
+
+
 
   </div>
   </div>

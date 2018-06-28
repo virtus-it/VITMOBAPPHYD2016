@@ -257,6 +257,7 @@
               <md-option value="all">Date</md-option>
               <md-option value="customer">Customers</md-option>
               <md-option value="distributor">Distributors</md-option>
+              <md-option value="supplier">Suppliers</md-option>
             </md-select>
 
           </div>
@@ -286,6 +287,22 @@
                 </md-autocomplete>
               </md-form-field>
             </div>
+
+
+            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'supplier'">
+             
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Supplier" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                  <md-autocomplete #auto="mdAutocomplete">
+                    <md-option *ngFor="let supp of filteredSupplier | async" [value]="supp.firstname">
+                      <span class="capitalize">{{supp.firstname}}</span>
+                    </md-option>
+                  </md-autocomplete>
+                </md-form-field>
+              </div>
+
+
+
         </div>
         <div class="row form-group">
           <div class="col-sm-6  col-md-6  col-lg-6">

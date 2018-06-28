@@ -21,7 +21,8 @@
           <md-option value="Sales" *ngIf="UserType == 'dealer' || UserType == 'manufacturer'">Sales</md-option>
           <md-option value="Manufacturer" *ngIf="UserType == 'dealer'">Manufacturer</md-option>
           <md-option value="Marketing" *ngIf="UserType == 'dealer'">Marketing</md-option>
-          <md-option value="customercare" *ngIf="UserType == 'dealer'">Customer care</md-option>
+          <md-option value="Customercare" *ngIf="UserType == 'dealer'">Customer care</md-option>
+          <md-option value="Supersupplier" *ngIf="UserType == 'dealer'">Super Supplier</md-option>
         </md-select>
       </div>
     </div>
@@ -835,7 +836,7 @@
 
 
 
-<md-dialog-content layout="column" *ngIf="UserInput.usertype == 'customercare'">
+<md-dialog-content layout="column" *ngIf="UserInput.usertype == 'Customercare'">
     <form class="example-form">
       <div class="container-fluid pd-15x25 brd-bottom">
         <div class="row mg-btm-14">
@@ -931,6 +932,78 @@
 
   <!-- ccEnds here -->
 
+
+  <!-- Super supplier starts -->
+
+
+  
+<md-dialog-content layout="column" *ngIf="UserInput.usertype == 'Supersupplier'">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="First name" name="firstName" [(ngModel)]="superSupplierInput.firstname">
+            <md-error >
+              First Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+</div>
+<div class="col-md-3 col-sm-3">
+          <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="superSupplierInput.lastname" >
+
+              <md-error>
+                  Last Name is
+                  <strong>required</strong>
+                </md-error>
+            </md-form-field>
+            </div>
+            <div class="col-md-3 col-sm-3">
+                <md-form-field class="">
+                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="superSupplierInput.mobileno">
+                  <md-error>
+                    Mobile Number is
+                    <strong>required</strong>
+                  </md-error>
+                </md-form-field>
+                </div>
+            <div class="col-md-3 col-sm-3">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="superSupplierInput.altmobileno">
+            <md-error>
+              Alternate Phone Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        </div>
+  <div class="row">
+        <div class="col-md-3 col-sm-3 ">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="superSupplierInput.emailid">
+            </md-form-field>
+          </div>
+          <div class="col-md-9 col-sm-9 ">
+          <md-form-field class="wd-95pc">
+            <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="superSupplierInput.address">
+            <md-error>
+              Address is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+      </div>
+ </div>
+
+     
+
+    </div>
+  </form>
+</md-dialog-content>
+
+
+<!-- super supplier ends -->
 
 
 
