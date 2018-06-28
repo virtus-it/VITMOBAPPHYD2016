@@ -119,9 +119,13 @@ box-shadow: 0 0 8px #bbb;
 }
 
 .bg-color-bg{
-    padding: 10px;
+    /* padding: 10px;
   background: #0f75bc !important;
   color: white;
+  border-left: 5px solid #f79123; */
+  padding: 10px;
+  background: #8bc6ef !important;
+  color: #333;
   border-left: 5px solid #f79123;
 }
 
@@ -152,6 +156,6 @@ p{
 }
 .point-style{
 background: #f79123;
-padding: 15px;
+padding: 12px;
 border-radius: 15%;
 }

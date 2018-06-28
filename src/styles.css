@@ -453,6 +453,9 @@ background: transparent;
 .mgtop-15{
   margin-top: 15px;
 }
+.mgright-10{
+  margin-right: 10px;
+}
 .mgtop-20{
   margin-top: 20px;
 }
@@ -847,7 +850,12 @@ display: inline-block;
 overflow: hidden;
 display: inline-block;
 }
-
+.onhovertooltip-140{
+  width:140px;
+ text-overflow: ellipsis;
+  white-space: nowrap;
+display: inline-block;
+}
 .onhovertooltip-150{
   width:150px;
  text-overflow: ellipsis;
@@ -1021,6 +1029,13 @@ vertical-align: middle;
 .bg-fade-blue{
   box-shadow: 0px 0px 50px #0f75bc inset !important;
 }
+.bg-color-bg{
+padding: 10px;
+background: #8bc6ef !important;
+color: #333;
+border-left: 5px solid #f79123;
+}
+
 @media (min-width: 1000px) {
   .example { font-size: 12px; }
 }
