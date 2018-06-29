@@ -13,12 +13,11 @@ export class AddVehicleComponent implements OnInit {
   constructor(private authenticationService: AuthenticationService ,  public thisDialogRef: MdDialogRef<AddVehicleComponent>, private supplierservice: SupplierService,) { }
 
 
-  vehicleInput = {"vehhicleno":"" , "transtype":"createvehicle" , "make":"" , "model":"" , "vehicletype":"" , "fueltype":"" ,  "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() , "capacity":"20" };
+  vehicleInput = { "User" : { "vehhicleno":"" , "transtype":"createvehicle" , "make":"" , "model":"" , "vehicletype":"" , "fueltype":"" ,  "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() , "capacity":"20" }};
 
 
   addVehicle(){
     let input =  this.vehicleInput;
-    console.log(input);
     this.supplierservice.trackSupplier(input)
     .subscribe(
     output => this.addVehicleResult(output),

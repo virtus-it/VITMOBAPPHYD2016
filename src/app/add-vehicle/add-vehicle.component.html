@@ -13,19 +13,19 @@
         <div class="row">
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Vehicle Number" name="number" [(ngModel)]="vehicleInput.vehhicleno"
+              <input class="form-control" mdInput placeholder="Vehicle Number" name="number" [(ngModel)]="vehicleInput.User.vehhicleno"
                 required>
             </md-form-field>
           </div>
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Make"  name="make" [(ngModel)]="vehicleInput.make" required>
+              <input class="form-control" mdInput placeholder="Make"  name="make" [(ngModel)]="vehicleInput.User.make" required>
             </md-form-field>
   
           </div>
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Model" name="model" maxlength="10" [(ngModel)]="vehicleInput.model"
+              <input class="form-control" mdInput placeholder="Model" name="model" maxlength="10" [(ngModel)]="vehicleInput.User.model"
                 required>
             </md-form-field>
           </div>
@@ -33,12 +33,12 @@
         <div class="row">
           <div class="col-4 pdtop-20">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Type" name="type" [(ngModel)]="vehicleInput.vehicletype">
+              <input class="form-control" mdInput placeholder="Type" name="type" [(ngModel)]="vehicleInput.User.vehicletype">
             </md-form-field>
           </div>
           <div class="col-8">
               <div class="form-group">
-              <md-select class="form-control" mdInput placeholder="Fuel Type" name="fueltype" [(ngModel)]="vehicleInput.fueltype">
+              <md-select class="form-control" mdInput placeholder="Fuel Type" name="fueltype" [(ngModel)]="vehicleInput.User.fueltype">
                 <md-option value="petrol">Petrol</md-option>
                 <md-option value="diesel">Diesel</md-option>
               </md-select>

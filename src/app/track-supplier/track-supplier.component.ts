@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { MdDialogRef } from '@angular/material';
 import { SupplierService } from '../supplier/supplier.service';
 import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
@@ -17,7 +18,7 @@ export class TrackSupplierComponent implements OnInit {
   lng: number = 78.4867;
   zoom: number = 12;
 
-  constructor( public gMaps: GoogleMapsAPIWrapper, private mapsAPILoader: MapsAPILoader ,  private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
+  constructor( public gMaps: GoogleMapsAPIWrapper, public thisDialogRef: MdDialogRef<TrackSupplierComponent> , private mapsAPILoader: MapsAPILoader ,  private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
 
   latlng:any = [];
 
@@ -35,6 +36,11 @@ export class TrackSupplierComponent implements OnInit {
     if(result.result == 'success'){
       console.log(result.data, 'Result');
     }
+  }
+
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+    
   }
 
   ngOnInit() {

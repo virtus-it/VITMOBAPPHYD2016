@@ -2,7 +2,7 @@
         <div class="col-md-4 col-sm-4">
           <i class="fa fa-automobile"></i> Assign Vehicle </div>
         <div class="col-md-1 col-sm-1 right">
-          <strong (click)="onCloseCancel()">
+          <strong (click)="onCloseModal()">
             <i class="fa fa-times fs-20" aria-hidden="true"></i>
           </strong>
         </div>
@@ -108,6 +108,26 @@
               
               
             </div>
+
+            <div class="row"  *ngIf="this.Details.type">
+                <div class="col-4">
+                    <md-form-field class="">
+                        <input class="form-control" mdInput placeholder="Arrived Time" type="time" name="arrivealtime" [(ngModel)]="assignVehicleInput.User.arrivedtime">
+                      </md-form-field>
+  
+                </div>
+  
+                <div class="col-4">
+                    <md-form-field class="">
+                        <input class="form-control" mdInput placeholder="Empty cans" name="empty cans" [(ngModel)]="assignVehicleInput.User.emptycans">
+                      </md-form-field>
+  
+                </div>
+                
+                
+              </div>
+
+
           </div>
     
                 
@@ -119,6 +139,6 @@
           <button type="submit" class="btn-primary"  md-raised-button (click)="updateVehicle()" *ngIf="this.Details.type">UPDATE</button>
 
           
-          <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+          <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
         </md-dialog-actions>
       </div>

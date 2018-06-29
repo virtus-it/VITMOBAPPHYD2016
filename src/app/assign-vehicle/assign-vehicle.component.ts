@@ -79,6 +79,16 @@ updateVehicle(){
   else{
     this.assignVehicleInput.User.expectedtime = null;
   }
+
+  if(this.assignVehicleInput.User.arrivedtime){
+    let formatDate = moment(new Date()).format('YYYY-MM-DD') + " " + this.assignVehicleInput.User.expectedtime + ':00';
+    this.assignVehicleInput.User.arrivedtime = formatDate;
+  }
+  else{
+    this.assignVehicleInput.User.arrivedtime = null;
+  }
+
+  this.assignVehicleInput.User.supplierid = this.Details.userid;
   console.log(input);
     this.supplierservice.trackSupplier(input)
     .subscribe(
@@ -120,6 +130,10 @@ getVehicleDetailsResult(result){
     this.assignVehicleInput.User.tracking_status = result.data[0].istracking;
     this.assignVehicleInput.User.tracking_interval = result.data[0].trackingtime;
   }
+}
+
+onCloseModal(){
+  this.thisDialogRef.close('Cancel');
 }
 
   ngOnInit() {
