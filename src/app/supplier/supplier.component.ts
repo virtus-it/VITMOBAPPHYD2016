@@ -5,6 +5,8 @@ import {SupplierOrderListComponent} from '../supplier-order-list/supplier-order-
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { AuthenticationService } from '../login/authentication.service';
 import {DeletesupplierComponent } from '../deletesupplier/deletesupplier.component'
+import { AssignVehicleComponent } from '../assign-vehicle/assign-vehicle.component';
+import { TrackSupplierComponent } from '../track-supplier/track-supplier.component';
 import { LoaderService } from '../login/loader.service';
 import { SupplierService} from './supplier.service';
 import * as _ from 'underscore';
@@ -137,6 +139,51 @@ searchSupplier() {
   else {
     this.supplierList = this.SupplierListCopy;
   }
+}
+
+assignVehicle(data){
+  let dialogRefdeleteSupplier=this.dialog.open(AssignVehicleComponent, {
+    width: '700px',
+    data: data
+
+});
+dialogRefdeleteSupplier.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+    if(result == 'success'){
+    }
+});
+
+}
+
+editVehicle(data){
+  let formattedData = {data: data , "type":"edit"}
+  let dialogRefdeleteSupplier=this.dialog.open(AssignVehicleComponent, {
+    width: '700px',
+    data: formattedData
+
+});
+dialogRefdeleteSupplier.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+    if(result == 'success'){
+    }
+});
+
+
+}
+
+trackSupplier(data){
+
+  let dialogRefdeleteSupplier=this.dialog.open(TrackSupplierComponent, {
+    width: '90%',
+    data: data
+
+});
+dialogRefdeleteSupplier.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+    if(result == 'success'){
+    }
+});
+
 }
 
   filterToggle(){

@@ -1,0 +1,59 @@
+<div class="row justify-content-between modal-title ">
+    <div class="col-md-4 col-sm-4">
+      <i class="fa fa-truck"></i> Add Vehicle </div>
+    <div class="col-md-1 col-sm-1 right">
+      <strong (click)="onCloseCancel()">
+        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <form class="example-form">
+      <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row">
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Vehicle Number" name="number" [(ngModel)]="vehicleInput.vehhicleno"
+                required>
+            </md-form-field>
+          </div>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Make"  name="make" [(ngModel)]="vehicleInput.make" required>
+            </md-form-field>
+  
+          </div>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Model" name="model" maxlength="10" [(ngModel)]="vehicleInput.model"
+                required>
+            </md-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 pdtop-20">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Type" name="type" [(ngModel)]="vehicleInput.vehicletype">
+            </md-form-field>
+          </div>
+          <div class="col-8">
+              <div class="form-group">
+              <md-select class="form-control" mdInput placeholder="Fuel Type" name="fueltype" [(ngModel)]="vehicleInput.fueltype">
+                <md-option value="petrol">Petrol</md-option>
+                <md-option value="diesel">Diesel</md-option>
+              </md-select>
+              </div>
+  
+          </div>
+        </div>
+      </div>
+
+            
+    </form>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button type="submit" class="btn-primary"  md-raised-button (click)="addVehicle()">SUBMIT</button>
+      <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

@@ -5,6 +5,7 @@ import { MdDialog } from '@angular/material';
 import { PasswordupdateComponent } from '../passwordupdate/passwordupdate.component';
 import { ProfileupdateComponent } from '../profileupdate/profileupdate.component';
 import { ProductsService } from '../products/products.service';
+import { AddVehicleComponent } from '../add-vehicle/add-vehicle.component';
 
 @Component({
   selector: 'app-profile',
@@ -162,6 +163,19 @@ uploadImageResult(result){
 }
 }
 
+addVehicle(){
+  let dialogRef = this.dialog.open(AddVehicleComponent , {
+    width: '700px',
+    data: ''
+});
+dialogRef.afterClosed().subscribe(result => {
+    //console.log(`Dialog closed: ${result}`);
+    if (result == 'success') {
+
+    }
+});
+
+}
 
 
 

@@ -137,6 +137,10 @@ export class CoverageComponent implements OnInit {
             polygon.mobileno = data.mobileno;
             this.polygonArray.push(polygon);
             this.displayPolygon.push(polygon);
+            for(let latsandlng of polygon.path){
+              latsandlng.lat = parseFloat(latsandlng.lat);
+              latsandlng.lng = parseFloat(latsandlng.lng);
+            }
             console.log(polygon, 'result');
           }
         }

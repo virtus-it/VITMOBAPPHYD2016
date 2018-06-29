@@ -42,9 +42,16 @@
             <td class="left capital"  width="30%"> {{supplier.address}}</td>
             <td class="left" width="12%" >
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier" (click)='editSupplier(supplier)'></i>
-               &nbsp; &nbsp;&nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)='deleteSupplier(supplier)'></i>
-               &nbsp; &nbsp;&nbsp;<i class="fa fa-file-text-o btn-link" aria-hidden="true" title="Orders" (click)='supplierOrdersList(supplier)' ></i>
-               &nbsp; &nbsp;&nbsp; <i class="fa fa-globe btn-link" aria-hidden="true" title="Assign Area" (click)="openMapDialog(supplier)"></i>
+               &nbsp; &nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)='deleteSupplier(supplier)'></i>
+               &nbsp; &nbsp;<i class="fa fa-file-text-o btn-link" aria-hidden="true" title="Orders" (click)='supplierOrdersList(supplier)' ></i>
+               &nbsp; &nbsp; 
+               <i class="fa fa-globe btn-link" aria-hidden="true" title="Assign Area" (click)="openMapDialog(supplier)"></i>&nbsp;&nbsp;
+               <i class="fa fa-automobile btn-link" aria-hidden="true" title="Assign Vehicle" (click)="assignVehicle(supplier)"></i> &nbsp;&nbsp;
+
+               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit vehicle" (click)="editVehicle(supplier)"></i> &nbsp;&nbsp;
+
+
+               <i class="fa fa-tumblr-square btn-link" aria-hidden="true" title="Track supplier" (click)="trackSupplier(supplier)"></i>
               </td>      
         </tbody>
       </table>

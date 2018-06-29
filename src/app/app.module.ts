@@ -124,6 +124,9 @@ import { ProcessedPaymentsDetailsComponent } from './processed-payments-details/
 import { RulesComponent } from './rules/rules.component';
 import { AddEditRuleComponent } from './add-edit-rule/add-edit-rule.component';
 import { DistributorsAvailabilityComponent } from './distributors-availability/distributors-availability.component';
+import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
+import { AssignVehicleComponent } from './assign-vehicle/assign-vehicle.component';
+import { TrackSupplierComponent } from './track-supplier/track-supplier.component';
 
 
 
@@ -226,6 +229,9 @@ import { DistributorsAvailabilityComponent } from './distributors-availability/d
         RulesComponent,
         AddEditRuleComponent,
         DistributorsAvailabilityComponent,
+        AddVehicleComponent,
+        AssignVehicleComponent,
+        TrackSupplierComponent,
 
      
         
@@ -376,7 +382,10 @@ import { DistributorsAvailabilityComponent } from './distributors-availability/d
          ProcessPaymentDialogComponent,
          ProcessedPaymentsDetailsComponent,
          AddEditRuleComponent,
-         DistributorsAvailabilityComponent
+         DistributorsAvailabilityComponent,
+         AddVehicleComponent,
+         AssignVehicleComponent,
+         TrackSupplierComponent
       
 
 
