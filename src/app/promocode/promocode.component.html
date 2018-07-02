@@ -28,7 +28,8 @@
           <th width="10%">Type</th>
           <th width="10%">Promo Code</th>
           <!-- <th width="7%">Cust count</th> -->
-          <th class="" width="40%">Description</th>
+          <th class="" width="30%">Description</th>
+          <th class="" width="10%">Value</th>
           <th width="10%">Start date</th>
 
           <th width="10%">End date</th>
@@ -40,20 +41,26 @@
         <tr *ngFor="let promo of allPromoCodes">
           <td class="left capitalize" width="10%" *ngIf="promo.offertype">{{promo.offertype}}</td>
           <td class="left capitalize" width="10%" *ngIf="promo.promocode">{{promo.promocode}}</td>
-          <td class="left capitalize" width="40%" *ngIf="promo.description">{{promo.description}}</td>
-          <!-- <td class="left numbers" width="7%">20098</td> -->
+          <td class="left capitalize" width="30%">
+            <span  *ngIf="promo.description"> {{promo.description}} </span>
+            <span  *ngIf="promo.description === null || promo.description == ''"> - </span>          
+          </td>
+          <td class="left" width="10%">
+            <span *ngIf="promo.discountinpercent">{{promo.discountinpercent}} </span>
+            <span *ngIf="promo.discountinpercent == '' || promo.discountinpercent === null"> - </span>
+          </td>
           <td class="left" width="10%" *ngIf="promo.startdate">
             <span class="onhovertooltip-100" title="{{promo.startdate | utcDate}}">{{promo.startdate | utcDate}}</span>
           </td>
           <td class="left" width="10%">
-            <span class="onhovertooltip-100" title="{{promo.enddate | utcDate}}">{{promo.enddate | utcDate}}</span>
+            <span class="onhovertooltip-100" *ngIf="promo.enddate">{{promo.enddate | utcDate}}</span>
             <span *ngIf="promo.enddate === null || promo.enddate == ''" > - </span>            
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
           <td class="left capitalize" width="10%">
             <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
             <span class="fa fa-pencil-square-o btn-link" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
-            <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCode(promo)"></span>
+            <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>
           </td>
           <!-- *ngFor="let promo of allPromoCodes" -->
         </tr>

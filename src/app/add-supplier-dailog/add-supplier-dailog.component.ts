@@ -19,12 +19,14 @@ export class AddSupplierDailogComponent implements OnInit {
   constructor(private supplierservice: SupplierService, public thisDialogRef: MdDialogRef<AddSupplierDailogComponent>, @Inject(MD_DIALOG_DATA) public supplierDetails: any, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   emailFormControl = new FormControl('', [
     Validators.required]);
+    validateMessage:string = '';
 
   supplierInput = { firstname: "", mobileno: "", altmobileno: "", address: "", emailid:"" , lastname: ""};
   submitSupplier() {
     this.loaderService.display(false);
     let input: any = { "User": { "user_type": "supplier", "TransType": "create", "firstname": this.supplierInput.firstname, "gender": "Male", "pwd": this.supplierInput.mobileno, "address":this.supplierInput.address, "lastname": this.supplierInput.lastname,  "loginid": this.authenticationService.loggedInUserId(), "mobileno": this.supplierInput.mobileno,  "emailid":this.supplierInput.emailid, "altmobileno": this.supplierInput.altmobileno, "issuppersupplier": false, "dealer_mobileno": this.authenticationService.dealerNo(), "apptype": this.authenticationService.appType() } };
     //console.log(input);
+    if(this.validateSupplier()){
     this.supplierservice.createSupplier(input)
       .subscribe(
       output => this.submitSupplierResult(output),
@@ -32,6 +34,7 @@ export class AddSupplierDailogComponent implements OnInit {
         //console.log("error in supplier");
         this.loaderService.display(false);
       });
+    }
   }
   submitSupplierResult(result) {
     //console.log(result);
@@ -46,6 +49,7 @@ export class AddSupplierDailogComponent implements OnInit {
   this.loaderService.display(false);
   let input: any = {"User":{"userid":this.supplierDetails.userid,"firstname":this.supplierInput.firstname,"mobileno":this.supplierInput.mobileno , "lastname": this.supplierInput.lastname , "address":this.supplierInput.address, "emailid":this.supplierInput.emailid, "loginid":"289","user_type":"supplier","issuppersupplier":false,"apptype":this.authenticationService.appType() }}
   //console.log(input);
+  if(this.validateSupplier()){
   this.supplierservice.updateSupplier(input)
   .subscribe(
     output => this.updateSupplierResult(output),
@@ -54,6 +58,7 @@ export class AddSupplierDailogComponent implements OnInit {
       this.loaderService.display(false);
     });
   }
+}
   updateSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -89,6 +94,40 @@ export class AddSupplierDailogComponent implements OnInit {
        this.submitSupplier()
 
      }
+   }
+
+
+   validateSupplier(){
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(this.supplierInput.address == ''){
+            this.validateMessage = 'Enter Address';
+          }
+    }
+        case '2' : {
+          if(this.supplierInput.mobileno == ''){
+            this.validateMessage = 'Enter Mobile number';
+          }   
+    }
+        case '3' : {
+          if(this.supplierInput.lastname == ''){
+            this.validateMessage = "Enter Last name";
+        }  
+    }
+        case '4' : {
+          if(this.supplierInput.firstname == ''){
+            this.validateMessage = "Enter First name";
+        }
+    }
+
+      case '7' : {
+        if(this.supplierInput.firstname && this.supplierInput.lastname && this.supplierInput.mobileno && this.supplierInput.address){
+          this.validateMessage = '';
+          return true;
+        }
+      }
+}
    }
 
 

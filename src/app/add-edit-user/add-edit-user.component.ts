@@ -34,6 +34,7 @@ export class AddEditUserComponent implements OnInit {
   paymentdueDate: any = '';
   UserInput = { usertype: 'Customer' };
   UserType = '';
+  validateMessage:string = '';
 
   customerInput: any = {
     User: {
@@ -343,6 +344,7 @@ export class AddEditUserComponent implements OnInit {
       input.User.TransType = 'create';
       input.User.paymentday = this.paymentDate;
       input.User.billpaymentdueday = this.paymentdueDate;
+      input.User.advamt = 0;
       //console.log(input);
       this.dup = true;
       if (this.dup == true) {
@@ -434,14 +436,16 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    //console.log(input);
-    this.supplierservice.createSupplier(input).subscribe(
+    if(this.supplierValidation()){
+    this.supplierservice.createSupplier(input)
+    .subscribe(
       output => this.submitSupplierResult(output),
       error => {
         //console.log("error in supplier");
       }
     );
   }
+}
   submitSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -782,6 +786,7 @@ export class AddEditUserComponent implements OnInit {
       }
     };
     //console.log(input);
+    if(this.supplierValidation()){
     this.supplierservice.updateSupplier(input).subscribe(
       output => this.updateSupplierResult(output),
       error => {
@@ -789,6 +794,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   updateSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -816,6 +822,41 @@ export class AddEditUserComponent implements OnInit {
       this.thisDialogRef.close('success');
       this.getUserDetails();
     }
+  }
+
+
+
+  supplierValidation(){
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.supplierInput.address){
+            this.validateMessage = 'Enter Address';
+          }
+    }
+        case '2' : {
+          if(!this.supplierInput.mobileno){
+            this.validateMessage = 'Enter Mobile number';
+          }   
+    }
+        case '3' : {
+          if(this.supplierInput.lastname == ''){
+            this.validateMessage = "Enter lastname";
+        }  
+    }
+        case '4' : {
+          if(!this.supplierInput.firstname){
+            this.validateMessage = "Enter first name";
+        }
+    }
+     
+      case '5' : {
+        if(this.supplierInput.firstname && this.supplierInput.lastname && this.supplierInput.mobileno && this.supplierInput.address ){
+          this.validateMessage = '';
+          return true;
+        }
+      }
+}
   }
 
 

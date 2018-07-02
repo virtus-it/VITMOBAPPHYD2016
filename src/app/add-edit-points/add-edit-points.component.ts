@@ -12,19 +12,21 @@ export class AddEditPointsComponent implements OnInit {
 
   constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<AddEditPointsComponent> , @Inject(MD_DIALOG_DATA) public Details: any, ) { }
 
-  addpointsInput = {"points":"" , "description":"" , "type":"" , "feature":"" }
+  addpointsInput = {"points":"" , "description":"" , "type":"" , "feature":"" };
+  validateMessage:string = '';
 
   addPoints(){
     let input = {"User":{"points":this.addpointsInput.points , "TransType":"addpoints",
     "type":this.addpointsInput.feature , subtype: this.addpointsInput.type ,"description": this.addpointsInput.description }};
     console.log(input);
+    if(this.validatePoints()){
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.addPointsResult(output),
     error => {      
     });
   }
-
+}
   addPointsResult(result){
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -39,12 +41,14 @@ export class AddEditPointsComponent implements OnInit {
     let input = {"User":{"points":this.addpointsInput.points , "TransType":"editpoints",
     "type":this.addpointsInput.feature , subtype: this.addpointsInput.type ,"description": this.addpointsInput.description }};
     console.log(input);
+    if(this.validatePoints()){
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.updatePointsResult(output),
     error => {      
     });
   }
+}
 
   updatePointsResult(result){
     if(result.result == 'success'){
@@ -76,6 +80,40 @@ export class AddEditPointsComponent implements OnInit {
 
   onCloseModal(){
     this.thisDialogRef.close('cancel');
+  }
+
+
+  validatePoints(){
+    var validate : string = '1';
+      switch(validate){
+          case "1" : {
+            if(!this.addpointsInput.description){
+              this.validateMessage = 'Enter Description';
+            }
+      }
+          case '2' : {
+            if(!this.addpointsInput.type){
+              this.validateMessage = 'Enter Type';
+            }   
+      }
+          case '3' : {
+            if(!this.addpointsInput.points){
+              this.validateMessage = "Enter points";
+          }  
+      }
+
+      case '4' : {
+        if(!this.addpointsInput.feature){
+          this.validateMessage = "Enter feature";
+      }  
+  }
+        case '5' : {
+          if(this.addpointsInput.points && this.addpointsInput.type && this.addpointsInput.feature){
+            this.validateMessage = '';
+            return true;
+          }
+        }
+  }
   }
 
   ngOnInit() {

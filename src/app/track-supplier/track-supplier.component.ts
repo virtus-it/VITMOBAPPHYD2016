@@ -46,7 +46,7 @@ export class TrackSupplierComponent implements OnInit {
   ngOnInit() {
     console.log(this.Details);
     this.trackSuppliersLocation();
-    this.latlng = [{latitude: 17.385044,longitude: 78.486671},{latitude: 17.383542,longitude: 78.471527}, {latitude: 17.372975 ,longitude: 78.460584 }];
+    // this.latlng = [{latitude: 17.385044,longitude: 78.486671},{latitude: 17.383542,longitude: 78.471527}, {latitude: 17.372975 ,longitude: 78.460584 }];
   }
 
 }

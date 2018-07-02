@@ -12,7 +12,7 @@
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row pd-top-0">
       <div class="col-4 ">
-        <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype" required>
+        <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype">
           <md-option value="type1">type-1</md-option>
           <md-option value="type2">type-2</md-option>
           <md-option value="type3">type-3</md-option>
@@ -20,24 +20,16 @@
       </div>
       <div class="col-4">
         <md-form-field class="example-full-width">
-          <input mdInput [mdDatepicker]="picker" placeholder="Start Date" [(ngModel)]="promoCodeInput.startdate" required>
+          <input mdInput [mdDatepicker]="picker" placeholder="Start Date"  [(ngModel)]="promoCodeInput.startdate" required>
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
-          <md-error>
-            Date is
-            <strong>required</strong>
-          </md-error>
         </md-form-field>
       </div>
       <div class="col-4">
         <md-form-field class="example-full-width">
-          <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="promoCodeInput.enddate" required>
+          <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="promoCodeInput.enddate">
           <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
           <md-datepicker #pickers></md-datepicker>
-          <md-error>
-            Date is
-            <strong>required</strong>
-          </md-error>
         </md-form-field>
       </div>
     </div>
@@ -55,19 +47,22 @@
           <md-option value="1stOffer">1st Order</md-option>
           <md-option value="WeekDayOffer">Week day offer</md-option>
         </md-select>
+        
+
       </div>
       <div class="col-4">
-        <md-select placeholder="Promo Type" [(ngModel)]="promoCodeInput.promotype" required>
+        <md-select placeholder="Promo Type" [(ngModel)]="promoCodeInput.promotype"  required>
           <md-option value="value">Value</md-option>
           <md-option value="percentage">Percentage</md-option>
           <md-option value="Points">Points</md-option>
-
         </md-select>
+        
       </div>
       <div class="col-4 ">
 
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required>
+          
         </md-form-field>
       </div>
     </div>
@@ -77,7 +72,7 @@
         <!-- <md-select placeholder="Product Category" [(ngModel)]="promoCodeInput.category"> -->
 
         <md-form-field class="example-full-width">
-          <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl" required>
+          <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl" required [(ngModel)]="this.promoCodeInput.category">
           <md-autocomplete #auto="mdAutocomplete">
             <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
               <span> {{cat.category}}</span>
@@ -97,14 +92,17 @@
     <div class="row pd-top-0">
       <div class="col">
         <md-form-field class="wd-100pc">
-          <textarea class="form-control" mdInput placeholder="Description" name="desc" [(ngModel)]="promoCodeInput.description" required></textarea>
+          <textarea class="form-control" mdInput placeholder="Description" name="desc" [(ngModel)]="promoCodeInput.description" ></textarea>
         </md-form-field>
       </div>
     </div>
 
   </div>
 </md-dialog-content>
+
+<small>{{errorMessage}}</small>
 <div class="row float-right pdright-30 mgbottom-20">
+    <small class="red">{{validateMessage}}</small>
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="submitPromoCode()">CREATE</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;

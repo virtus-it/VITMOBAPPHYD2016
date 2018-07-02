@@ -23,6 +23,20 @@ export class RulesComponent implements OnInit {
   });
   }
 
+  editRule(){
+
+    let dialogRef = this.dialog.open(AddEditRuleComponent , {
+      width: '60%',
+      data: ''
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+     
+    }
+  });
+
+  }
+
   
 
   ngOnInit() {

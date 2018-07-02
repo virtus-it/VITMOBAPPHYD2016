@@ -35,7 +35,9 @@
     </div>
   </div>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
+    <small class="red">{{validateMessage}}</small>
   <md-dialog-actions align="end" class="mgbottom-0">
     <button type="submit" class="btn-primary" md-raised-button (click)="submitOrUpdateSettings()">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;

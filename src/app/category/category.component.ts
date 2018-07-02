@@ -4,6 +4,7 @@ import { ProductsService } from '../products/products.service';
 import { CreateupdatecategoryComponent } from '../createupdatecategory/createupdatecategory.component';
 import {CategoryproductsComponent} from '../categoryproducts/categoryproducts.component';
 import { MdDialog } from '@angular/material';
+import { LoaderService } from '../login/loader.service';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { MdDialog } from '@angular/material';
 })
 export class CategoryComponent implements OnInit {
 
-  constructor(public dialog: MdDialog,private authenticationService: AuthenticationService,  private productService: ProductsService) { }
+  constructor(public dialog: MdDialog,private authenticationService: AuthenticationService,  private productService: ProductsService , private loaderService: LoaderService) { }
 
   categoryList :any =[];
 
@@ -23,11 +24,12 @@ export class CategoryComponent implements OnInit {
   getProductByCategory(){
     let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
     //console.log(input);
-
+this.loaderService.display(true);
     this.productService.getProductsCategory(input)
     .subscribe(
     output => this.getProductsCategoryResult(output),
     error => {
+      this.loaderService.display(false);
       //console.log("error in products category list");
     });
   }
@@ -35,6 +37,10 @@ export class CategoryComponent implements OnInit {
     //console.log(result);
     if (result.result == "success") {
       this.categoryList = result.data;
+      this.loaderService.display(false);
+    }
+    else{
+      this.loaderService.display(false);
     }
   }
 
