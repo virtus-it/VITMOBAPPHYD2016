@@ -162,7 +162,10 @@ export class AddEditProductDailogComponent implements OnInit {
       this.productDetails.iscanRetrunable = this.Details.iscanreturnable;
       this.productDetails.minQty = this.Details.minorderqty;
       this.productDetails.Priority = this.Details.priority;
-      this.productDetails.IsAuthorized = JSON.parse(this.Details.isauthorized);
+      if(this.Details.isauthorized == 'true'){
+        this.productDetails.IsAuthorized = true;
+      }
+      //  = JSON.parse(this.Details.isauthorized);
       this.productDetails.expressdeliverycharges = this.Details.expressdeliverycharges;
       this.productDetails.servicecharge = this.Details.servicecharge;
       this.productDetails.brandname = this.Details.brandname;
