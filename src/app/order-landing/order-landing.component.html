@@ -396,8 +396,9 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" title="{{forward.productdetails.category}}">
+                      <b class="capitalize onhovertooltip-100" *ngIf="forward.productdetails">
                         {{forward.productdetails.category}} </b>
+                        <b class="" *ngIf="forward.productdetails === null || forward.productdetails == ''"> - </b>
                     </div>
                     <div class="col-sm-4  col-md-4  col-lg-4">
                       <p class="td-label mgbottom-0">Product Name </p>
