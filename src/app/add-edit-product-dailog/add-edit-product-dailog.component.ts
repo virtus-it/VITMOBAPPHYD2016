@@ -165,6 +165,9 @@ export class AddEditProductDailogComponent implements OnInit {
       if(this.Details.isauthorized == 'true'){
         this.productDetails.IsAuthorized = true;
       }
+      else{
+        this.productDetails.IsAuthorized = false;
+      }
       //  = JSON.parse(this.Details.isauthorized);
       this.productDetails.expressdeliverycharges = this.Details.expressdeliverycharges;
       this.productDetails.servicecharge = this.Details.servicecharge;
