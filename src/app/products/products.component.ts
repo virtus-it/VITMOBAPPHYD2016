@@ -138,8 +138,10 @@ export class ProductsComponent implements OnInit {
     });
 
   }
+  
   getProducts() {
     let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+    this.loaderService.display(true);
     this.productService.createProduct(input)
       .subscribe(
       output => this.getProductsResult(output),
@@ -153,8 +155,7 @@ export class ProductsComponent implements OnInit {
     console.log(result);
     this.productList = [];
     if (result.result == 'success') {
-
-
+    this.loaderService.display(false);
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
@@ -181,6 +182,9 @@ export class ProductsComponent implements OnInit {
       }
       //console.log("products list ", this.productList)
 
+    }
+    else{
+      this.loaderService.display(false);
     }
   }
 

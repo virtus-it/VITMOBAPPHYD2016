@@ -15,7 +15,8 @@ import { ProductsService } from '../products/products.service';
 export class AddstockProductComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<AddstockProductComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private productsService:ProductsService) { }
-StockInput = { invoiceDate:new Date(),stock:"",itemCost:this.Detail.pcost,returnemptycans:"0"};
+StockInput = { invoiceDate:new Date(), stock:"", itemCost:this.Detail.pcost, returnemptycans:"0"};
+validateMessage = '';
 
 onCloseCancel() {
   this.thisDialogRef.close('Cancel');
@@ -30,6 +31,7 @@ addStockDetails(){
     input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
   }
   //console.log(input);
+  if(this.addstockValidation()){
   this.productsService.addStockDetails(input)
   .subscribe(
   output => this.addStockDetailsResult(output),
@@ -37,12 +39,42 @@ addStockDetails(){
     //console.log("error in distrbutors");
   });
 }
+}
 addStockDetailsResult(result){
 
 //console.log(result);
 if(result.result == 'success'){
   this.thisDialogRef.close('success');
 }
+}
+
+
+
+addstockValidation(){
+
+  var validate : string = '1';
+  switch(validate){
+      case "1" : {
+        if(!this.StockInput.stock){
+          this.validateMessage = 'Enter stock';
+        }
+  }
+      case '2' : {
+        if(!this.StockInput.itemCost){
+          this.validateMessage = 'Enter item cost';
+        }   
+  }
+    case '3' : {
+      if(this.StockInput.stock && this.StockInput.itemCost ){
+        this.validateMessage = '';
+        return true;
+      }
+    }
+}
+
+
+
+
 }
   ngOnInit() {
     console.log(this.Detail);

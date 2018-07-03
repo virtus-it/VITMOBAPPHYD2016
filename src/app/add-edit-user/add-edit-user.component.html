@@ -107,12 +107,12 @@
   
 
 
-      <div class="col-md-3 col-sm-3">
+      <!-- <div class="col-md-3 col-sm-3">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Promo Code" name="promocode" [(ngModel)]="customerInput.User.promocode">
         </md-form-field>
 
-      </div>
+      </div> -->
       <div class="col-md-3 col-sm-3 align-items-end">
           <md-form-field class="wd-100pc">
             <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]="customerInput.User.buildingname">
@@ -125,7 +125,7 @@
             </md-form-field>
           </div>
          
-          <div class="col-md-3 col-sm-3 align-items-end">
+          <div class="col-md-3 col-sm-3 align-items-end" *ngIf="this.Details">
               <md-form-field class="wd-100pc">
                 <input class="form-control" mdInput placeholder="Reference Code" name="referencecode" [(ngModel)]="customerInput.User.referencecode">
               </md-form-field>
@@ -376,7 +376,7 @@
 
 
       <div class="row">
-        <div class="col-md-4  col-sm-4  col-lg-4">
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="dist.referCode">
           </md-form-field>
@@ -573,7 +573,7 @@
 
 
       <div class="row">
-        <div class="col-md-4  col-sm-4  col-lg-4">
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="salesInput.referCode">
           </md-form-field>
@@ -684,7 +684,7 @@
 
 
       <div class="row">
-        <div class="col-md-4  col-sm-4  col-lg-4">
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="manufacturerInput.referCode">
           </md-form-field>
@@ -797,7 +797,7 @@
 
 
       <div class="row">
-        <div class="col-md-4  col-sm-4  col-lg-4">
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="marketingInput.referCode">
           </md-form-field>

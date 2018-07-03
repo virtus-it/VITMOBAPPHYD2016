@@ -130,9 +130,9 @@ export class AddEditRuleComponent implements OnInit {
 
 
   submitRule(){
-    let input = {"User":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"addrule" }} ;
+    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"addrule" }} ;
     console.log(input);
-    this.distributorService.getPoints(input)
+    this.followupService.createpromocode(input)
     .subscribe(
     output => this.submitRuleResult(output),
     error => {      
@@ -146,8 +146,8 @@ export class AddEditRuleComponent implements OnInit {
 
 
   updateRule(){
-    let input = {"User":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"updaterule" , "id":"123" }};
-    this.distributorService.getPoints(input)
+    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"updaterule" , "id":"123" }};
+    this.followupService.createpromocode(input)
     .subscribe(
     output => this.updateRuleResult(output),
     error => {      

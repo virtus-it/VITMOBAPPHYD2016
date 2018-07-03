@@ -153,7 +153,8 @@ export class CoverageComponent implements OnInit {
     let myLatLng = event.latLng;
     this.lat = myLatLng.lat();
     this.lng = myLatLng.lng();
-    for (let dist of this.polygonArray) {
+    // for (let dist of this.polygonArray) {  this was before and it is changed because after filtering we are getting wrong dist details
+      for(let dist of this.displayPolygon){
       var latlong = event.latLng;
       var polygonPath = new google.maps.Polygon({
         paths: dist.path
@@ -194,22 +195,12 @@ export class CoverageComponent implements OnInit {
     //       var polygonPath = new google.maps.Polygon({
     //         paths: dist.path
     //       });
-
     //     }
- 
-
     //   }
-
-
-    
-
     // }
-
-    }
-
-
-
   }
+  }
+  
   DistrbutorHover(distributor) {
     if (distributor.path) {
       let allAreas = _.filter(this.polygonArray, function(e: any) {
