@@ -17,15 +17,18 @@ export class ProductUpdateComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<ProductUpdateComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) { }
   stockStatusValue = "";
+  validationMessage= '';
+
   updateStatus() {
     let input = { "product": { "category":this.Details.data[0].category, "categoryid": this.Details.data[0].categoryid , "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } }
+    if(this.validation()){
     this.productService.setProductStatus(input)
       .subscribe(
       output => this.updateStatusResult(output),
       error => {
         //console.log("error in distrbutors");
       });
-
+    }
   }
   updateStatusResult(result) {
 //console.log(result);
@@ -33,6 +36,17 @@ if (result.result == 'success') {
   this.thisDialogRef.close('success');
 }
 
+  }
+
+
+  validation(){
+    if(!this.stockStatusValue){
+      this.validationMessage = 'Select stock status';
+      return false;
+    }
+    else{
+      return true;
+    }
   }
   onCloseModal() {
     this.thisDialogRef.close('cancel');

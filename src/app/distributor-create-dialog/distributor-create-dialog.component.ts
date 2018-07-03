@@ -110,6 +110,7 @@ export class DistributorCreateDialogComponent implements OnInit {
          //console.log(result);
          this.loaderService.display(false);
          if (result.result == 'success') {
+         this.loaderService.display(false);             
             if (this.distributorDetail) {
                 this.thisDialogRef.close('success');
                
@@ -122,6 +123,9 @@ export class DistributorCreateDialogComponent implements OnInit {
 
             }
             
+         }
+         else{
+             
          }
      }
 

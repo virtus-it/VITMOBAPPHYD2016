@@ -33,6 +33,9 @@ export class DistributorComponent implements OnInit {
   CategoryCtrl: FormControl;
   filteredcategories: Observable<any[]>;
 
+  productsCtrl: FormControl;
+  filteredProducts: Observable<any[]>;
+
 
 
     ordersList = [];
@@ -44,9 +47,10 @@ export class DistributorComponent implements OnInit {
     filterType:any = "";
     loginId:any = 0;
 
+    productList= [];
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
-    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" };
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:''};
     filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":500,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
 
 
@@ -61,6 +65,11 @@ export class DistributorComponent implements OnInit {
         this.filteredcategories = this.CategoryCtrl.valueChanges
           .startWith(null)
           .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
+
+          this.productsCtrl = new FormControl();
+          this.filteredProducts = this.productsCtrl.valueChanges
+            .startWith(null)
+            .map(prod => prod ? this.findProducts(prod) : this.productList.slice());
 
 
     }
@@ -90,6 +99,53 @@ this.getProductByCategory();
     }
     return finalCategories;
     }
+
+
+
+    findProducts(name: string) {
+        let finalProducts:any = [];
+        finalProducts = this.productList.filter(prod =>
+           prod.pname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+         
+       if (finalProducts && finalProducts.length > 0) {
+         let findProduct: any = {};
+   
+         findProduct = _.find(finalProducts, function (k, l) {
+           let prodDetails: any = k;
+           return prodDetails.pname == name;
+         });
+   
+         if (findProduct) {
+           // this.filterInput.categoryid = findCategory.categoryid;
+           this.filterTypeModel.productId = findProduct.productid;
+         }
+       }
+       else {
+         if (name.length >= 3 && !this.LastfilterRecords) {       
+   this.getProductByCategory();
+         }
+       }
+       return finalProducts;
+       }
+
+
+       getProducts() {
+        let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+        this.productService.createProduct(input)
+          .subscribe(
+          output => this.getProductsResult(output),
+          error => {
+          });
+    
+      }
+      getProductsResult(result) {
+        console.log(result);
+
+        if (result.result == 'success') {
+            this.productList = result.data;
+      }
+    }
+
 
 
     getProductByCategory(){
@@ -475,6 +531,10 @@ this.getProductByCategory();
                 this.filterInput.root.searchtext = this.filterTypeModel.isAreaDefined;
 
             }
+            else if(this.filterType == 'products'){
+                this.filterInput.root.searchtype = 'products';
+                this.filterInput.root.searchtext = this.filterTypeModel.productId;
+            }
        
             let input = this.filterInput;
             this.distributorService.getAllDistributors(input)
@@ -501,6 +561,7 @@ this.getProductByCategory();
     ngOnInit() {
         this.getDistributors(true);
         this.getProductByCategory();
+        this.getProducts();
         this.loginId = this.authenticationService.loggedInUserId();
         // if(window.navigator.geolocation){
         //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));

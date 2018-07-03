@@ -4,6 +4,7 @@ import { ProductsService } from '../products/products.service';
 import { LoaderService } from '../login/loader.service';
 import { MdDialogRef } from '@angular/material';
 import { MD_DIALOG_DATA } from '@angular/material';
+import * as _ from 'underscore';
 @Component({
   selector: 'app-add-stock-history',
   templateUrl: './add-stock-history.component.html',
@@ -13,6 +14,7 @@ export class AddStockHistoryComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, private productService: ProductsService, public thisDialogRef: MdDialogRef<AddStockHistoryComponent>,@Inject(MD_DIALOG_DATA) public Detail: any) { }
 StockList=[];
+sum = 0;
 noRecord=false;
   getStockHistroy() {
     let input = {};
@@ -46,6 +48,13 @@ noRecord=false;
     if(result.result == 'success'){
       this.noRecord=false;
       this.StockList = result.data;
+      let stockCount = [];
+      _.each(this.StockList , function(i , j){
+        let details:any = i;
+        stockCount.push(details.stock);         
+      });
+      console.log(stockCount);
+      this.sum = stockCount.reduce((a, b) => a + b, 0);
     }
     else{
       this.StockList=[];

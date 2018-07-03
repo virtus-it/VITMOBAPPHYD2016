@@ -232,6 +232,7 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
+    if(this.customerCareValidation()){
     this.distributorService.createDistributor(input)
     .subscribe(
       output => this.addCustomerCareResult(output),
@@ -240,6 +241,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   addCustomerCareResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -251,6 +253,7 @@ export class AddEditUserComponent implements OnInit {
   addSuperSupplier(){
     let input: any = {
       User: {user_type: 'supersupplier',TransType: 'create', firstname: this.superSupplierInput.firstname , gender: 'Male', pwd: this.superSupplierInput.mobileno, address: this.superSupplierInput.address,  loginid: this.authenticationService.loggedInUserId(),mobileno: this.superSupplierInput.mobileno, emailid: this.superSupplierInput.emailid, lastname : this.superSupplierInput.lastname  , mobileno_one: this.superSupplierInput.altmobileno,issuppersupplier: true, dealer_mobileno: this.authenticationService.dealerNo(), apptype: this.authenticationService.appType()}};
+      if(this.supersupplierValidation()){
     this.supplierservice.createSupplier(input)
     .subscribe(
       output => this.addSuperSupplierResult(output),
@@ -258,6 +261,7 @@ export class AddEditUserComponent implements OnInit {
         //console.log("error in supplier");
       });
   }
+}
   addSuperSupplierResult(result){
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -403,6 +407,7 @@ export class AddEditUserComponent implements OnInit {
     var input: any = {User: {pwd: this.dist.phone,user_type: 'dealer',TransType: 'create',phonetype: this.dist.phonetype ,referCode: this.dist.referCode,firstname: this.dist.firstName,lastname: this.dist.lastName,companyname: this.dist.companyname,address: this.dist.address,loginid: this.authenticationService.loggedInUserId(),mobileno: this.dist.phone,mobileno_one: this.dist.mobile1,mobileno_two: this.dist.mobile2,emailid: this.dist.emailid,dealer_mobileno: this.authenticationService.dealerNo(),apptype: this.authenticationService.appType()
       }
     };
+    if(this.distributorValidation()){
     this.distributorService.createDistributor(input)
     .subscribe(
       output => this.onSubmitResult(output),
@@ -411,6 +416,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   onSubmitResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -473,13 +479,16 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    this.distributorService.createDistributor(input).subscribe(
+    if(this.salesValidation()){
+    this.distributorService.createDistributor(input)
+    .subscribe(
       output => this.addSalesUserResult(output),
       error => {
         //console.log("error in distrbutors");
       }
     );
   }
+}
   addSalesUserResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -506,13 +515,16 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    this.distributorService.createDistributor(input).subscribe(
+    if(this.manufacturerValidation()){
+    this.distributorService.createDistributor(input)
+    .subscribe(
       output => this.addManufacturerResult(output),
       error => {
         //console.log("error in distrbutors");
       }
     );
   }
+}
   addManufacturerResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -659,6 +671,7 @@ export class AddEditUserComponent implements OnInit {
       }
     };
     input.User.userid = this.Details.userid;
+    if(this.distributorValidation()){
     this.distributorService.updateDistributor(input)
     .subscribe(
       output => this.updateDistributorResult(output),
@@ -667,6 +680,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   updateDistributorResult(result) {
     if (result.result == 'success') {
       console.log('dist updated successfully');
@@ -675,33 +689,37 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+
   UpdateSalesUser() {
     let input: any = {
       User: {
         pwd: this.dist.phone,
         user_type: 'sales',
-        referCode: this.dist.referCode,
-        firstname: this.dist.firstName,
-        lastname: this.dist.lastName,
-        companyname: this.dist.companyname,
-        address: this.dist.address,
+        referCode: this.salesInput.referCode,
+        firstname: this.salesInput.firstName,
+        lastname: this.salesInput.lastName,
+        companyname: this.salesInput.companyname,
+        address: this.salesInput.address,
         loginid: this.authenticationService.loggedInUserId(),
-        mobileno: this.dist.phone,
-        mobileno_one: this.dist.mobile1,
-        mobileno_two: this.dist.mobile2,
-        emailid: this.dist.emailid,
+        mobileno: this.salesInput.phone,
+        mobileno_one: this.salesInput.mobile1,
+        mobileno_two: this.salesInput.mobile2,
+        emailid: this.salesInput.emailid,
         dealer_mobileno: this.authenticationService.dealerNo(),
         apptype: this.authenticationService.appType()
       }
     };
     input.User.userid = this.Details.userid;
-    this.distributorService.updateDistributor(input).subscribe(
+    if(this.salesValidation()){
+    this.distributorService.updateDistributor(input)
+    .subscribe(
       output => this.UpdateSalesUserResult(output),
       error => {
         //console.log("error in distrbutors");
       }
     );
   }
+}
   UpdateSalesUserResult(result) {
     if (result.result == 'success') {
       console.log('salesuser updated successfully');
@@ -711,27 +729,29 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+
   UpdateManufacturer() {
     let input: any = {
       User: {
-        pwd: this.dist.phone,
+        pwd: this.manufacturerInput.phone,
         user_type: 'manufacturer',
-        TransType: 'create',
-        referCode: this.dist.referCode,
-        firstname: this.dist.firstName,
-        lastname: this.dist.lastName,
-        companyname: this.dist.companyname,
-        address: this.dist.address,
+        TransType: 'update',
+        referCode: this.manufacturerInput.referCode,
+        firstname: this.manufacturerInput.firstName,
+        lastname: this.manufacturerInput.lastName,
+        companyname: this.manufacturerInput.companyname,
+        address: this.manufacturerInput.address,
         loginid: this.authenticationService.loggedInUserId(),
-        mobileno: this.dist.phone,
-        mobileno_one: this.dist.mobile1,
-        mobileno_two: this.dist.mobile2,
-        emailid: this.dist.emailid,
+        mobileno: this.manufacturerInput.phone,
+        mobileno_one: this.manufacturerInput.mobile1,
+        mobileno_two: this.manufacturerInput.mobile2,
+        emailid: this.manufacturerInput.emailid,
         dealer_mobileno: this.authenticationService.dealerNo(),
         apptype: this.authenticationService.appType()
       }
     };
     input.User.userid = this.Details.userid;
+    if(this.manufacturerValidation()){
     this.distributorService.updateDistributor(input)
     .subscribe(
       output => this.UpdateManufacturerResult(output),
@@ -740,6 +760,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   UpdateManufacturerResult(result) {
     if (result.result == 'success') {
       console.log('manufacturer updated successfully');
@@ -754,6 +775,7 @@ export class AddEditUserComponent implements OnInit {
     let input: any = {
       User: {userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname : this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1 , mobileno_two : this.customerCareInput.mobile2}};
       console.log(input);
+      if(this.customerCareValidation()){
       this.distributorService.updateDistributor(input)
       .subscribe(
         output => this.UpdateCustomerCareResult(output),
@@ -761,6 +783,7 @@ export class AddEditUserComponent implements OnInit {
           //console.log("error in distrbutors");
         });
      }
+    }
      UpdateCustomerCareResult(result){
        if(result.result == 'success'){
         console.log('customer care updated successfully');
@@ -787,7 +810,8 @@ export class AddEditUserComponent implements OnInit {
     };
     //console.log(input);
     if(this.supplierValidation()){
-    this.supplierservice.updateSupplier(input).subscribe(
+    this.supplierservice.updateSupplier(input)
+    .subscribe(
       output => this.updateSupplierResult(output),
       error => {
         //console.log("error in updation of suppliers");
@@ -807,6 +831,7 @@ export class AddEditUserComponent implements OnInit {
   UpdateSuperSupplier(){
 
     let input: any = {User: { userid: this.Details.userid , firstname : this.superSupplierInput.firstname, mobileno: this.superSupplierInput.mobileno, address: this.superSupplierInput.address, emailid: this.superSupplierInput.emailid, loginid:  this.authenticationService.loggedInUserId() ,user_type: 'supersupplier',issuppersupplier: true , apptype: this.authenticationService.appType(),mobileno_one: this.superSupplierInput.altmobileno , lastname : this.superSupplierInput.lastname }};
+    if(this.supersupplierValidation()){
     this.supplierservice.updateSupplier(input)
     .subscribe(
       output => this.UpdateSuperSupplierResult(output),
@@ -815,6 +840,7 @@ export class AddEditUserComponent implements OnInit {
       }
     );
   }
+}
   UpdateSuperSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -858,6 +884,224 @@ export class AddEditUserComponent implements OnInit {
       }
 }
   }
+
+
+  distributorValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.dist.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.dist.phone){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.dist.lastName){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.dist.firstName){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.dist.firstName && this.dist.lastName && this.dist.phone && this.dist.address ){
+          this.validateMessage = '';
+          this.messageError = '';
+          return true;
+        }
+      }
+}
+
+  }
+
+
+
+  salesValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.salesInput.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.salesInput.phone){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.salesInput.lastName){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.salesInput.firstName){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.salesInput.firstName && this.salesInput.lastName && this.salesInput.phone && this.salesInput.address ){
+          this.validateMessage = '';
+          this.messageError = '';
+          return true;
+        }
+      }
+}
+
+  }
+
+
+
+  manufacturerValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.manufacturerInput.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.manufacturerInput.phone){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.manufacturerInput.lastName){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.manufacturerInput.firstName){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.manufacturerInput.firstName && this.manufacturerInput.lastName && this.manufacturerInput.phone && this.manufacturerInput.address ){
+          this.validateMessage = '';
+          this.messageError = '';
+          return true;
+        }
+      }
+}
+
+  }
+
+
+
+  customerCareValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.customerCareInput.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.customerCareInput.phone){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.customerCareInput.lastName){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.customerCareInput.firstName){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.customerCareInput.firstName && this.customerCareInput.lastName && this.customerCareInput.phone && this.customerCareInput.address ){
+          this.validateMessage = '';
+          return true;
+        }
+      }
+}
+
+  }
+
+
+
+
+
+  supersupplierValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.superSupplierInput.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.superSupplierInput.mobileno){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.superSupplierInput.lastname){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.superSupplierInput.firstname){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.superSupplierInput.firstname && this.superSupplierInput.lastname && this.superSupplierInput.mobileno && this.superSupplierInput.address ){
+          this.validateMessage = '';
+          this.messageError = '';
+          return true;
+        }
+      }
+}
+
+
+  }
+
+
+
+
+
+
+
 
 
   onCloseModal() {
