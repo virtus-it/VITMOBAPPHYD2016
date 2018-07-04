@@ -9,8 +9,6 @@ import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
-
-
 import { DeleteTemplateComponent } from '../delete-template/delete-template.component';
 import { ProductServiceAreaComponent } from '../product-service-area/product-service-area.component';
 

@@ -52,6 +52,9 @@ export class ReportsComponent implements OnInit {
   };
   distOrders = {getDate: null};
   downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" , supplierId :"" , supplierEmail: '' };
+
+  stockreportsInput = {filterBy: 'distributor' , fromDate: null, toDate: null, distributorId: '' , filterId: "0" , distributorEmail:""};
+
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
@@ -209,6 +212,7 @@ export class ReportsComponent implements OnInit {
   }
 
   downloadOrders() {
+    
     let input = {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
@@ -258,6 +262,106 @@ export class ReportsComponent implements OnInit {
   }
   getFileResult(result) {
     FileSaver.saveAs(result, "orders" + moment().format() + ".xlsx");
+
+  }
+
+
+
+  downloadStockReports(){
+    let input = {order: {userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0,customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy , "transtype":"stockreports"}};
+
+    if (this.stockreportsInput.fromDate) {
+      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.stockreportsInput.toDate) {
+      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.stockreportsInput.filterBy == 'distributor') {
+      input.order.filterid = this.stockreportsInput.distributorId;
+    }
+    this.reportservice.downloadReports(input)
+      .subscribe(
+      output => this.downloadStockReportsResult(output),
+      error => {
+        //console.log("error");
+        this.loaderService.display(false);
+      });
+
+  }
+  downloadStockReportsResult(result) {
+    //console.log("downloaded result", result);
+    if (result.result == 'success') {
+      let path = result.data.filename;
+      this.customerService.getFile(path)
+        .subscribe(
+        output => this.getstockReportFileResult(output),
+        error => {
+          //console.log("error in customer");
+          this.loaderService.display(false);
+        });
+
+    }
+
+  }
+  getstockReportFileResult(result) {
+    FileSaver.saveAs(result, "orders" + moment().format() + ".xlsx");
+  }
+
+
+
+  printStockReports(){
+
+    let input = {order: {userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0,customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy , "transtype":"stockreports" , emailid :""}};
+
+
+    if (this.stockreportsInput.fromDate) {
+      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.stockreportsInput.toDate) {
+      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+
+    if (this.stockreportsInput.filterBy == 'distributor') {
+      input.order.filterid = this.stockreportsInput.distributorId;
+      input.order.emailid = this.stockreportsInput.distributorEmail;
+    }
+
+    //console.log(input);
+    this.reportservice.printInvoice(input)
+      .subscribe(
+      output => this.printStockReportsResult(output),
+      error => {
+        //console.log("error");
+        this.loaderService.display(false);
+      });
+    // 
+
+
+  }
+  printStockReportsResult(result) {
+    
+    if(result.result == 'success'){
+      let path = result.data.filename;
+     
+      this.customerService.getPrintFile(path)
+        .subscribe(
+        output => this.printStockReportsResultResult(output),
+        error => {
+          //console.log("error in customer");
+          this.loaderService.display(false);
+        });
+    }
+  }
+  printStockReportsResultResult(result){
+    //console.log(result);
+    const iframe = document.createElement('iframe');
+    iframe.style.display = 'none';
+    iframe.src = URL.createObjectURL(result);
+
+    document.body.appendChild(iframe);
+    iframe.contentWindow.print();
+
+    
 
   }
   getCustomer() {
@@ -446,6 +550,8 @@ export class ReportsComponent implements OnInit {
       if (findDistributor) {
         this.downloadInput.distributorId = findDistributor.userid;
         this.downloadInput.distributorEmail = findDistributor.emailid;
+        this.stockreportsInput.distributorId = findDistributor.userid;
+        this.stockreportsInput.distributorEmail = findDistributor.emailid;
       }
 
 

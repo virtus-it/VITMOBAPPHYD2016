@@ -204,8 +204,17 @@
                         <i class="fa fa-thumbs-o-up"></i> Availability </label>  (click)="addstockDistributor(dist)"-->
 
 
-                        <label class="col-md-6" >
-                            <i class="fa fa-thumbs-o-up"></i> Add Stock </label>
+                        <label class="col-md-6" (click)="addstockDialog(dist)">
+                            <i class="fa fa-cart-arrow-down" ></i> Add Stock </label>
+
+                        <label class="col-md-6" (click)="stockHistory(dist)">
+                          <i class="fa fa-file-text"> </i> Stock History </label>
+                    </div>
+
+
+                    <div class="row">
+                      <label class="col-md-6" (click)="distributorstockStatus(dist)">
+                        <i class="fa fa-strikethrough"></i> Stock Status </label>
                     </div>
                   </div>
                 </div>

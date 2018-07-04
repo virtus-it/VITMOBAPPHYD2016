@@ -4,7 +4,18 @@
 </div> -->
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
-    <i class="fa fa-line-chart"></i> Stock History 1
+    <i class="fa fa-line-chart"></i> Stock History
+  </div>
+
+  <div class="">
+    <md-form-field class="example-full-width">
+      <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+      <md-autocomplete #auto="mdAutocomplete">
+        <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
+          <span class="capitalize">{{prod.fullname}}</span>
+        </md-option>
+      </md-autocomplete>
+    </md-form-field>
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>

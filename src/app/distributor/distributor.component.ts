@@ -15,13 +15,16 @@ import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.compone
 import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
 import { DistributorsAvailabilityComponent } from '../distributors-availability/distributors-availability.component';
 import { FormControl, Validators } from '@angular/forms';
+import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
 import { Observable } from 'rxjs/Observable';
+import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import 'rxjs/add/operator/startWith';
 import { ProductsService } from '../products/products.service';
 import 'rxjs/add/operator/map';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { LoaderService } from '../login/loader.service';
 @Component({
 
@@ -555,7 +558,57 @@ this.getProductByCategory();
                 this.distributorClickMore = false;
             }
         }
+
+
+        addstockDialog(data){
+            let formattedData = {data: data , "type":"distributorsStock"}
+            let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
+
+                width: '600px',
+                data: formattedData
+              });
+              dialogRefAddInvoice.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+                if (result == 'success') {
+                    this.getDistributors(true);
+
+                }
+          
+              });
+        }
+
+        stockHistory(data){
+            let formattedData = {data: data , "type":"distributorsStockHistory"}
+            let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
+
+                width: '60%',
+                data: formattedData
+              });
+              dialogRefStrockHitory.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+          
+                this.getDistributors(true);
+              });
+
+        }
         
+
+        distributorstockStatus(data){
+            let formattedData = {data: data  , "type":"distributorstockStatus"}
+            let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
+
+                width: '45%',
+                data: formattedData
+              });
+              dialogRefAddProduct.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+                if (result == 'success') {
+                    this.getDistributors(true);
+                }
+          
+              });
+
+        }
     
 
     ngOnInit() {
