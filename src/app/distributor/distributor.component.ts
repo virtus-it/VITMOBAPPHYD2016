@@ -49,6 +49,7 @@ export class DistributorComponent implements OnInit {
     categoryList:any = [];
     filterType:any = "";
     loginId:any = 0;
+    tabPanelView = '';
 
     productList= [];
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
@@ -101,6 +102,12 @@ this.getProductByCategory();
       }
     }
     return finalCategories;
+    }
+
+    showTabPanel(panelName){
+        if(panelName == 'bystock'){
+            this.tabPanelView = 'bystock';
+        }
     }
 
 
@@ -300,6 +307,10 @@ this.getProductByCategory();
 
 
         }
+    }
+
+    reset(){
+        this.tabPanelView = '';
     }
 
     distributorsAvailability(data){
@@ -586,8 +597,9 @@ this.getProductByCategory();
               });
               dialogRefStrockHitory.afterClosed().subscribe(result => {
                 //console.log(`Dialog closed: ${result}`);
-          
+                if(result == 'success'){
                 this.getDistributors(true);
+                }
               });
 
         }

@@ -6,6 +6,12 @@
 
       <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
+
+    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
+            (click)="showTabPanel('bystock')">By Stock </button>
+
+            <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>
+
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
       <a class="cursor logo-color " title="Add Distributor">
         <i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
@@ -106,7 +112,7 @@
       </a>
     </div>
   </div>
-  <div>
+  <div *ngIf="tabPanelView !== 'bystock'">
 
     <div id="" class="row pd-15 mg-0">
 
@@ -200,11 +206,12 @@
                         <i class="fa fa-file-powerpoint-o"></i> Points</label>
                     </div> 
                     <div class="row">
-                      <!-- <label class="col-md-6" (click)="distributorsAvailability(dist)">
-                        <i class="fa fa-thumbs-o-up"></i> Availability </label>  (click)="addstockDistributor(dist)"-->
+                      <label class="col-md-6" (click)="distributorsAvailability(dist)">
+                        <i class="fa fa-thumbs-o-up"></i> Availability </label>
+                        </div>
 
 
-                        <label class="col-md-6" (click)="addstockDialog(dist)">
+                        <!-- <label class="col-md-6" (click)="addstockDialog(dist)">
                             <i class="fa fa-cart-arrow-down" ></i> Add Stock </label>
 
                         <label class="col-md-6" (click)="stockHistory(dist)">
@@ -215,7 +222,7 @@
                     <div class="row">
                       <label class="col-md-6" (click)="distributorstockStatus(dist)">
                         <i class="fa fa-strikethrough"></i> Stock Status </label>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
 
@@ -252,6 +259,72 @@
             <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
         </h4>
         <h4 *ngIf="!distributorClickMore" class="warning">Record Not Available</h4>
+
+      </div>
+    </div>
+  </div>
+
+
+
+
+  <div class="" *ngIf="tabPanelView === 'bystock'">
+
+  <div id="" class="row pd-15 mg-0">
+
+      <div class="">
+        <table class="table table-hover table-striped" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th width="30%">Name</th>
+              <th width="30%">Stock Count</th>
+              <th width="40%" class="no-th-arrow">Views </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
+
+              <td class="left capitalize" width="30%">
+                <span class="onhovertooltip-150 capitalize" >{{dist.firstname}} {{dist.lastname}}</span>
+              </td>
+              <td class="" width="30%">
+                count
+              </td>
+
+              <td class="left" width="10%">
+                  <div class="dropdown">
+                    <button class="dropbtn" [disabled]="dist.usercreatedby && dist.usercreatedby.userid != 'loginId'">View More</button>
+                    <div class="dropdown-content" style="right:0;">
+
+                        <div class="row">
+
+                              <label class="col-md-6" (click)="addstockDialog(dist)">
+                                  <i class="fa fa-cart-arrow-down" ></i> Add Stock </label>
+      
+                              <label class="col-md-6" (click)="stockHistory(dist)">
+                                <i class="fa fa-file-text"> </i> Stock History </label>
+                          </div>
+      
+      
+                          <div class="row">
+                            <label class="col-md-6" (click)="distributorstockStatus(dist)">
+                              <i class="fa fa-strikethrough"></i> Stock Status </label>
+
+                              <label class="col-md-6" (click)="ViewProduct(dist)">
+                                  <i class="fa fa-gift logo-color cursor" title="Products"></i>View Products</label>
+                          </div>
+
+
+                    </div>
+                  </div>
+  
+                </td>
+
+
+
+          </tbody>
+        </table>
+
+
 
       </div>
     </div>

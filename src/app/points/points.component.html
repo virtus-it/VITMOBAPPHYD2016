@@ -53,13 +53,19 @@
       <h4>
         <i class="fa fa-file-powerpoint-o"></i> Points</h4>
     </div>
+
+    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
+            (click)="showTabPanel('pointsDetails')">Points Details </button> 
+
+            <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>
+
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
         <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
             <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
           </a>
     </div>
   </div>  
-    <div class='pd-15'>
+    <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
       <div class="row brd-box-box" *ngFor="let points of allPoints">
         <div class="col-5 left bg-color-bg">
           <div class="row">
@@ -87,5 +93,11 @@
             <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)"></i> 
           </div>
         </div>
+      </div>
+
+
+
+      <div class="" *ngIf="tabPanelView == 'pointsDetails'">
+        <p> new view </p>
       </div>
     </div>

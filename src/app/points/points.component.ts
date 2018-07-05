@@ -25,6 +25,7 @@ export class PointsComponent implements OnInit {
   sameDayStatus1:any = '';
   ontimeStatus1:any = ''; 
   distCustomerStatus1:any = '';
+  tabPanelView:any = '';
 
   DeactivatePoints(status){
     console.log('de activate called');
@@ -110,6 +111,15 @@ this.getAllPoints();
 
 }
 
+showTabPanel(panelName){
+  if(panelName == 'pointsDetails'){
+    this.tabPanelView = 'pointsDetails';
+  }
+}
+
+reset(){
+  this.tabPanelView = '';
+}
 
 
 

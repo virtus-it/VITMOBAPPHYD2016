@@ -7,6 +7,7 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { ProductsService } from '../products/products.service';
 import { Observable } from 'rxjs/Observable';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
 
 @Component({
   selector: 'app-addstock-product',
@@ -18,7 +19,7 @@ export class AddstockProductComponent implements OnInit {
   productsCtrl: FormControl;
   filteredProducts: Observable<any[]>;
 
-  constructor(public thisDialogRef: MdDialogRef<AddstockProductComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private productsService:ProductsService) { 
+  constructor(public thisDialogRef: MdDialogRef<AddstockProductComponent>, @Inject(MD_DIALOG_DATA) public Detail: any,  private authenticationService: AuthenticationService,private productsService:ProductsService , private distributorService: DistributorServiceService) { 
 
     this.productsCtrl = new FormControl();
     this.filteredProducts = this.productsCtrl.valueChanges
@@ -96,27 +97,7 @@ addStock(){
   }
 }
 
-getProducts(){
-  let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
-  this.productsService.createProduct(input)
-    .subscribe(
-    output => this.getProductsResult(output),
-    error => {
-    });
 
-}
-getProductsResult(result) {
-  console.log(result);
-  let fullName = "";
-  if (result.result == 'success') {
-    _.each(result.data , function(i,j){
-      let details:any = i;
-      fullName = details.brandname + ' ' + details.category;
-      details.fullname = fullName;
-    });
-    this.productList = result.data;
-  }
-}
 
 findProducts(name: string){
       //console.log(name);
@@ -144,12 +125,37 @@ findProducts(name: string){
       }
       else {
         if (name.length >= 3 && !this.LastfilterRecords) {
-          this.getProducts();
+          this.getDistributorProducts();
         }
   
   
       }
       return finalProducts;
+}
+
+
+
+// to only get distributors products
+getDistributorProducts(){
+  let input = {userId: this.Detail.data.userid, appType: this.authenticationService.appType() };
+  console.log(input);
+  this.distributorService.getDistbutorsProducts(input)
+  .subscribe(
+  output => this.getDistributorProductsResult(output),
+  error => {
+      //console.log("Logged in falied");
+  });
+}
+getDistributorProductsResult(result){
+  if(result.result == 'success'){
+    let fullName = "";
+    _.each(result.data , function(i,j){
+      let details:any = i;
+      fullName = details.brandname + ' ' + details.category;
+      details.fullname = fullName;
+    });
+    this.productList = result.data;
+  }
 }
 
 
@@ -183,7 +189,8 @@ addstockValidation(){
   ngOnInit() {
     console.log(this.Detail);
     if(this.Detail.type == 'distributorsStock'){
-      this.getProducts();
+      // this.getProducts();
+      this.getDistributorProducts();
     }
   }
 

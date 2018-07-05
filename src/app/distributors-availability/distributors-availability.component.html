@@ -5,4 +5,51 @@
 -->
 
 
-<p> It works !!</p>
+<!-- <p> It works !!</p> -->
+
+
+<div class="row justify-content-between modal-title ">
+		<div class="col-md-6  col-sm-6  col-lg-6">
+		  <i class="fa fa-edit"></i> Distributor Availability
+		</div>
+		<div class="col-md-1  col-sm-1  col-lg-1 right">
+		  <strong (click)="onCloseCancel()">
+			<i class="fa fa-times fs-20" aria-hidden="true"></i>
+		  </strong>
+		</div>
+	  </div>
+	  
+	  <md-dialog-content layout="column">
+		<form class="example-form">
+		  <div class="container-fluid pd-15x25 brd-bottom">
+				<div class="form-group">
+						<b class="">Select Availability : &nbsp;</b>
+						<label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+						  <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="distributorAvailabilityInput.status" name="status" value="1">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description"> ON </span>
+						</label>
+						<label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+						  <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="distributorAvailabilityInput.status" name="status" value="0">
+						  <span class="custom-control-indicator"></span>
+						  <span class="custom-control-description"> OFF </span>
+						</label>
+					  </div>
+	  
+
+	  
+			</div>
+			
+
+			<div>
+					
+			</div>
+		</form>
+	  </md-dialog-content>
+	  <div class="row float-right pdright-30 mgbottom-20 ">
+		<md-dialog-actions align="end">
+			
+		  <button md-raised-button (click)="setAvailability()" >SET</button>
+		  <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+		</md-dialog-actions>
+	  </div>

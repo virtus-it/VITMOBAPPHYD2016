@@ -9,6 +9,8 @@ import { ProductsService } from '../products/products.service';
 import * as _ from 'underscore';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+
 
 @Component({
   selector: 'app-product-update',
@@ -23,7 +25,7 @@ export class ProductUpdateComponent implements OnInit {
 productsCtrl: FormControl;
 filteredProducts: Observable<any[]>;
 
-  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<ProductUpdateComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService) {
+  constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<ProductUpdateComponent>, @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog, private loaderService: LoaderService,  private distributorService: DistributorServiceService ,  private productService: ProductsService) {
 
     this.productsCtrl = new FormControl();
     this.filteredProducts = this.productsCtrl.valueChanges
@@ -70,19 +72,42 @@ if (result.result == 'success') {
     this.thisDialogRef.close('cancel');
   }
 
-  getProducts(){
-    let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
-    this.productService.createProduct(input)
-      .subscribe(
-      output => this.getProductsResult(output),
-      error => {
-      });
+  // getProducts(){
+  //   let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+  //   this.productService.createProduct(input)
+  //     .subscribe(
+  //     output => this.getProductsResult(output),
+  //     error => {
+  //     });
   
+  // }
+  // getProductsResult(result) {
+  //   console.log(result);
+  //   let fullName = "";
+  //   if (result.result == 'success') {
+  //     _.each(result.data , function(i,j){
+  //       let details:any = i;
+  //       fullName = details.brandname + ' ' + details.category;
+  //       details.fullname = fullName;
+  //     });
+  //     this.productList = result.data;
+  //   }
+  // }
+
+
+  getDistributorsProducts(){
+    let input = {userId: this.Details.data.userid, appType: this.authenticationService.appType() };
+    console.log(input);
+    this.distributorService.getDistbutorsProducts(input)
+    .subscribe(
+    output => this.getDistributorProductsResult(output),
+    error => {
+        //console.log("Logged in falied");
+    });
   }
-  getProductsResult(result) {
-    console.log(result);
-    let fullName = "";
-    if (result.result == 'success') {
+  getDistributorProductsResult(result){
+    if(result.result == 'success'){
+      let fullName = "";
       _.each(result.data , function(i,j){
         let details:any = i;
         fullName = details.brandname + ' ' + details.category;
@@ -91,6 +116,8 @@ if (result.result == 'success') {
       this.productList = result.data;
     }
   }
+
+
 
   findProducts(name: string){
     //console.log(name);
@@ -116,7 +143,8 @@ if (result.result == 'success') {
     }
     else {
       if (name.length >= 3 && !this.LastfilterRecords) {
-        this.getProducts();
+        // this.getProducts();
+        this.getDistributorsProducts();
       }
     }
     return finalProducts;
@@ -155,7 +183,8 @@ updateDistributorsStockStatusResult(result){
   ngOnInit() {
     console.log(this.Details);
     if(this.Details.type == 'distributorstockStatus'){
-      this.getProducts();
+      // this.getProducts();
+      this.getDistributorsProducts();
     }
     else{
       this.stockStatusValue = this.Details.stockstatus;

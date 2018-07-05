@@ -80,7 +80,7 @@ getProductsResult(output) {
     for (let details of output.data) {
       let findproduct = _.find(this.listOfProducts, function (k, l) {
         let productDetails: any = k;
-        return productDetails.brandName == details.brandname;
+        return ((productDetails.brandName == details.brandname) && (productDetails.categoryid == details.categoryid));
         
       });
 

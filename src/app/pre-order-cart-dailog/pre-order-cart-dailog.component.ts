@@ -451,7 +451,7 @@ getProductsListResult(result) {
             
             let findproduct = _.find(this.productList, function (k, l) {
               let productDetails: any = k;
-              return ((productDetails.brandName == details.brandname) && (productDetails.categoryid == details.categoryid));
+              return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category));
 
               
             });
