@@ -1,7 +1,7 @@
 
 table.table-fixedheader>tbody {
     overflow-y: auto !important;
-    max-height: 250px;
+    max-height: 45vh;
     overflow-x: hidden;
 }
   .assign-style{
@@ -10,5 +10,10 @@ table.table-fixedheader>tbody {
   padding-top: 12px;
 }
 table{
-  margin-bottom: 0px !important;
+  margin-bottom: 10px !important;
+}
+.DistList-height table.table-fixedheader>tbody {
+  overflow-y: auto !important;
+  max-height: 50vh;
+  overflow-x: hidden;
 }

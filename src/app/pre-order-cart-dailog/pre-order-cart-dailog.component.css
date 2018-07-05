@@ -1,9 +1,9 @@
 .width-100pc .mat-form-field{
     width: 100% !important;
   }
-  .scroll{
+   .preorder-scroll{
+    max-height: 60vh;
     overflow-x: hidden;
-    height: 300px;
     overflow-y: auto;
 }
 .warning{

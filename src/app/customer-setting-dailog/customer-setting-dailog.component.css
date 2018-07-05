@@ -10,3 +10,7 @@
     margin-bottom: 15px;
     margin-top: 10px;
 }
+.table-fixedheader{
+max-height: 55vh;
+overflow-x: auto;
+}

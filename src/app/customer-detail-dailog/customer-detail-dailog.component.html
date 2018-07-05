@@ -47,7 +47,7 @@
             <b class="pdleft-5 onhovertooltip-550" title="{{this.orderDetail.data.address}}" *ngIf="this.orderDetail.type == 'customersPage'">{{this.orderDetail.data.address}}</b>
           </h6>
         </div>
-        <div class="p-2" style="margin-left: 16px;">
+        <div class="p-2" style="margin-left: 5px;">
           <md-form-field class="example-full-width">
             <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
             <md-autocomplete #auto="mdAutocomplete">
@@ -60,7 +60,7 @@
 
         <div class="p-2 align-self-center">
           <button type="submit" md-raised-button (click)="openProductAssingDialog()" class="btn-primary">ASSIGN</button>
-          <button type="submit" md-raised-button  (click)="editCustomer(orderDetail)" class="btn-primary">EDIT</button>
+          <button type="submit" md-raised-button (click)="editCustomer(orderDetail)" class="btn-primary">EDIT</button>
 
         </div>
       </div>
@@ -68,7 +68,7 @@
 
 
     </div>
-    <div class="">
+    <div class="customerList-height">
 
       <table class="table table-hover table-striped table-fixedheader">
         <thead>
@@ -80,28 +80,33 @@
             <th width="4%" title="Order Quantity">Qty</th>
             <th width="6%" title="Return Quantity">Ret Qty</th>
             <th width="6%" title="service charge">S Chgs</th>
-            <th width="7%" title="Exp Del Chgs">Exp Chgs</th>            
+            <th width="7%" title="Exp Del Chgs">Exp Chgs</th>
             <th width="6%" title="Order Amount">Amt</th>
             <th width="7%" title="Received Amount">Rec Amt</th>
             <th width="8%">Status</th>
             <th width="14%" title="Delivery Date">Delv Date</th>
             <th width="10%" title="Delivered By Last Handled Distributor">Last Handled..</th>
-            <th class="" width="6%" >Action</th>
+            <th class="" width="6%">Action</th>
 
           </tr>
         </thead>
+
         <tbody>
           <tr *ngFor="let customer of customerOrderDetails">
             <td width="6%" class="left" scope="row">#{{customer.order_id}}</td>
-            <td width="9%" class="left" scope="row"><span class="onhovertooltip-100" title="{{customer.category}}">{{customer.category}}</span></td>
-            
-            <td width="10%" class=" capital"><span class="onhovertooltip-100" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span></td>
+            <td width="9%" class="left" scope="row">
+              <span class="onhovertooltip-100" title="{{customer.category}}">{{customer.category}}</span>
+            </td>
+
+            <td width="10%" class=" capital">
+              <span class="onhovertooltip-100" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span>
+            </td>
             <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
             <td width="4%" class=" capital">{{customer.quantity}}</td>
             <td width="6%" class=" capital">{{customer.return_cans}}</td>
 
             <td width="6%" class=" capital">{{customer.servicecharges}}</td>
-            <td width="7%" class=" capital">{{customer.expressdeliverycharges}}</td> 
+            <td width="7%" class=" capital">{{customer.expressdeliverycharges}}</td>
 
             <td width="6%" class=" capital">{{customer.bill_amount}}</td>
             <td width="7%" class=" capital">{{customer.receivedamount}}</td>
@@ -109,21 +114,24 @@
             <!-- <td width="10%" class=" capital">{{customer.paymenttype}}</td> -->
             <td width="14%" class=" capital">{{customer.order_delivereddate | utcDate}}</td>
             <td width="10%" class=" capital">
-              <span *ngIf="customer.status !== 'ordered' && customer.dealerdetails "><span class="onhovertooltip-100" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span></span>
-            <span *ngIf="customer.status == 'ordered' || !customer.dealerdetails"> - </span>
+              <span *ngIf="customer.status !== 'ordered' && customer.dealerdetails ">
+                <span class="onhovertooltip-100" title="{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}">{{customer.dealerdetails.firstname}} {{customer.dealerdetails.lastname}}</span>
+              </span>
+              <span *ngIf="customer.status == 'ordered' || !customer.dealerdetails"> - </span>
             </td>
 
             <td class="logo-color" width="6%" (click)="viewOrderDetails(customer)">Select</td>
           </tr>
         </tbody>
-      <br>
-              <h4 class="warning  capitalize center">
-                <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="OrdersClickMore">
-                  <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a></h4>
-               <h4 class="warning center" *ngIf="!OrdersClickMore" ><span class="fa fa-frown-o"></span> Record Not Available
-              </h4>
-        
       </table>
+
+      <h4 class="warning  capitalize center">
+        <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="OrdersClickMore">
+          <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+      </h4>
+      <h4 class="warning center" *ngIf="!OrdersClickMore">
+        <span class="fa fa-frown-o"></span> Record Not Available
+      </h4>
       <!-- <h4 class="warning  capitalize center" *ngIf="noDataError">
         {{noDataError}}
       </h4> -->

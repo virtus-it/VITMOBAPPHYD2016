@@ -74,12 +74,6 @@
         </md-select>
       </div>
 
-
-
-
-
-
-
       <!-- <div class="col-2 ">
         <md-form-field class="example-full-width">
           <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
@@ -162,13 +156,9 @@
 
                 ends here-->
 
-
-
     <!-- <md-error *ngIf="FormControl.hasError('required')">
                       Quantity is <strong>required</strong>
                     </md-error> -->
-
-
 
     <!-- old code</md-form-field>
               </div>
@@ -183,7 +173,7 @@
     </div> ends here -->
 
 
-    <div class="table-scroll scroll">
+    <div class="table-scroll  preorder-scroll">
       <table class="table table-hover ">
         <tbody *ngFor="let prod of productList">
           <tr class="border-topbottom bg-fade-blue">
@@ -298,37 +288,38 @@
     <h5 class="center warning capital">{{message2}}</h5>
     <h5 class="center warning capital">{{emptyCanMessage}}</h5>
 
-<div class="row cost-style">
-  <div class="col">
-      <h5 > Product Cost:
+    <div class="row cost-style">
+      <div class="col">
+        <h5> Product Cost:
           <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
         </h5>
-  </div>
-  <div class="col">
-      <h5> Service Charge :
+      </div>
+      <div class="col">
+        <h5> Service Charge :
           <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
-            </b>
-          </h5>
-  </div>
-  <div class="col">
-      <h5>Exp Delv Charges   :
+          </b>
+        </h5>
+      </div>
+      <div class="col">
+        <h5>Exp Delv Charges :
           <b>{{this.amount}}</b>
         </h5>
-  </div>
-  <div class="col">
-      <h5 >Empty Cans Amt :
+      </div>
+      <div class="col">
+        <h5>Empty Cans Amt :
           <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
-            }}</b>
+            }}
+          </b>
         </h5>
-  </div>
-  <div class="col">
-      <h5 class="right">Total Cost :
+      </div>
+      <div class="col">
+        <h5 class="right">Total Cost :
           <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
             * this.createPreOrderInput.productDetails.quantity) + (this.amount) + (( this.createPreOrderInput.productDetails.quantity
             - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
         </h5>
-  </div>
-</div>
+      </div>
+    </div>
 
   </div>
 </md-dialog-content>

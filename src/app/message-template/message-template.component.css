@@ -3,5 +3,5 @@
 }
 
 table.table-fixedheader>tbody {
-    max-height: 450px !important;
+    max-height:60vh !important;
 }
