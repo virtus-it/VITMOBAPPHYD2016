@@ -9,53 +9,50 @@
   </div>
 </div>
 <div class="pd-15x25 brd-bottom">
-          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-            <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="customer" (ngModelChange)="changeType($event)">
-            <span class="custom-control-indicator"></span>
-            <span class="custom-control-description"> Customer</span>
-          </label>
+  <div class="">
+    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+      <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="customer" (ngModelChange)="changeType($event)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description"> Customer</span>
+    </label>
 
-          <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="distributor" (ngModelChange)="changeType($event)">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description"> Distributor</span>
-            </label>
-
-        
-    <div class="scroll">    
-        <table class="table table-hover table-striped  table-fixedheader">
-          <thead>
-      <tr>
-        <th class="" width="20%">Name</th>
-        <th width="70%">Description</th>
-        <th width="10%">Action</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let message of dynamicMessages">
-
-
-        <td class="" width="20%">{{message.template_name}}</td>
-        
-        <td class="left" width="70%">
-          {{message.template_desc}}
-        </td>
-        <td class="left" width="10%">
-          <button class="btn btn-link btn-sm" (click)="selectTemplate(message.template_desc)">Select</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+      <input type="radio" id="rem" class="custom-control-input" [(ngModel)]="type" name="type" value="distributor" (ngModelChange)="changeType($event)">
+      <span class="custom-control-indicator"></span>
+      <span class="custom-control-description"> Distributor</span>
+    </label>
+  </div>
+  <div class="scroll mgtop-10">
+    <table class="table table-hover table-striped  table-fixedheader">
+      <thead>
+        <tr>
+          <th class="" width="20%">Name</th>
+          <th width="72%">Description</th>
+          <th width="7%">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let message of dynamicMessages">
+          <td class="" width="20%">{{message.template_name}}</td>
+          <td class="left" width="73%">
+            {{message.template_desc}}
+          </td>
+          <td class="left" width="7%">
+            <button class="btn btn-link btn-sm" (click)="selectTemplate(message.template_desc)">Select</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 <!-- <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <ul class="scrollheight"> -->
-      <!-- <li class="nolist-style messages-style" *ngFor= "let messageText of messageDetails">
+<!-- <li class="nolist-style messages-style" *ngFor= "let messageText of messageDetails">
       <div class=""  (click)="getMessage(messageText.message)">
           <i class="fa fa-reply" aria-hidden="true" ></i> {{messageText.message}}  </div>
     </li> -->
-      <!-- <li class="nolist-style messages-style" *ngFor="let message of dynamicMessages">
+<!-- <li class="nolist-style messages-style" *ngFor="let message of dynamicMessages">
         <div class="">
           <i class="fa fa-reply" aria-hidden="true">{{message.template_desc}}</i>
           <button class="btn btn-link btn-sm" (click)="selectTemplate(message.template_desc)">select</button>

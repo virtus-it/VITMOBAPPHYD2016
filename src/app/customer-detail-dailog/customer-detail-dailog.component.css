@@ -7,9 +7,7 @@ table thead {
     vertical-align:unset;
     border-top: none;
   }
-  .table{
-    margin-bottom: 0px !important;
-  }
+
   .mg20-fs20{
     margin: 20px;
     font-size: 20px;
@@ -71,5 +69,5 @@ table thead {
 
   table.table-fixedheader>tbody {
     overflow-y: auto;
-    max-height: 260px !important;
+    max-height: 45vh !important;
 }

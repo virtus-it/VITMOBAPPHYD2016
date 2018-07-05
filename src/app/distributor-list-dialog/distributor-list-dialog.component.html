@@ -26,10 +26,6 @@
         name="searchSupplierTerm">
     </md-form-field>
     <table class="table table-hover table-fixedheader table-striped">
-
-
-
-
       <thead>
         <tr>
           <th width="30%">Name</th>
@@ -74,6 +70,7 @@
 
     <!-- <span *ngIf="this.orderDetail.supplierdetails.userid">This customer is already auto assigned to supplier</span> -->
   </div>
+  
   <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'distributors'">
     <span class="fa fa-search"></span>
     <md-form-field class="example-full-width wd-96pc">
@@ -81,8 +78,8 @@
         name="searchSupplierTerm">
     </md-form-field>
 
+    <div class="DistList-height">
     <table class="table table-hover table-fixedheader table-striped">
-
       <thead>
         <tr>
           <th width="30%">Name</th>
@@ -111,6 +108,7 @@
         </tr>
       </tbody>
     </table>
+    </div>
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30  mgbottom-20">

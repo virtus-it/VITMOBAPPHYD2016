@@ -62,7 +62,7 @@
     <!-- search ends here -->
   </div>
   <div id="" class="row  mg-0">
-    <div class="pd-15">
+    <div class="pd-15 ">
       <table class="table table-hover table-striped" style="table-layout:fixed">
         <thead>
           <tr>
@@ -138,10 +138,11 @@
           </tr>
         </tbody>
       </table>
+    </div>
+  </div>
       <h4 class="warning  capitalize">
         <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="preOrderClickMore">
           <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
       </h4>
       <h4 *ngIf="!preOrderClickMore" class="warning">Record Not Available</h4>
-    </div>
-  </div>
+

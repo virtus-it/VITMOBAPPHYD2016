@@ -531,8 +531,6 @@ createPreOrder(){
 
 
 
-
-
   console.log(input);
   let formattedDate =  moment(this.createPreOrderInput.date).format('DD-MM-YYYY');
   input[0].order.excepted_time = formattedDate + " " + this.createPreOrderInput.timeslot;
