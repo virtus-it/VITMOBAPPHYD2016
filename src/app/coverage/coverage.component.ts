@@ -137,6 +137,10 @@ export class CoverageComponent implements OnInit {
             polygon.mobileno = data.mobileno;
             this.polygonArray.push(polygon);
             this.displayPolygon.push(polygon);
+            for(let latsandlng of polygon.path){
+              latsandlng.lat = parseFloat(latsandlng.lat);
+              latsandlng.lng = parseFloat(latsandlng.lng);
+            }
             console.log(polygon, 'result');
           }
         }
@@ -149,7 +153,8 @@ export class CoverageComponent implements OnInit {
     let myLatLng = event.latLng;
     this.lat = myLatLng.lat();
     this.lng = myLatLng.lng();
-    for (let dist of this.polygonArray) {
+    // for (let dist of this.polygonArray) {  this was before and it is changed because after filtering we are getting wrong dist details
+      for(let dist of this.displayPolygon){
       var latlong = event.latLng;
       var polygonPath = new google.maps.Polygon({
         paths: dist.path
@@ -190,22 +195,12 @@ export class CoverageComponent implements OnInit {
     //       var polygonPath = new google.maps.Polygon({
     //         paths: dist.path
     //       });
-
     //     }
- 
-
     //   }
-
-
-    
-
     // }
-
-    }
-
-
-
   }
+  }
+  
   DistrbutorHover(distributor) {
     if (distributor.path) {
       let allAreas = _.filter(this.polygonArray, function(e: any) {
@@ -310,7 +305,8 @@ export class CoverageComponent implements OnInit {
   filteredList() {
     let input = this.filterInput;
     //console.log(input);
-    this.distributorService.getFilteredPolygon(input).subscribe(
+    this.distributorService.getFilteredPolygon(input)
+    .subscribe(
       output => this.getFilteredPolygonResult(output),
       error => {
         //console.log("error in products category list");
@@ -333,6 +329,7 @@ export class CoverageComponent implements OnInit {
               polygon.mobileno = data.mobileno;
               // this.polygonArray.push(polygon);
               this.displayPolygon.push(polygon);
+              
             }
           }
         }
@@ -381,6 +378,7 @@ export class CoverageComponent implements OnInit {
               polygon.category_id = data.categoryid;
               polygon.product_name = data.product_name;
               polygon.product_type = data.product_type;
+              polygon.categoryname = data.category;
               this.productPolygonArray.push(polygon);
               this.displayProductPolygon.push(polygon);
               this.distributorProdDetails.push(data);

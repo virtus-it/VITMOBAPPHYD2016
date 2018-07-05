@@ -88,6 +88,9 @@ export class AddEditCustomerDailogComponent implements OnInit {
         }
       );
     }
+    else{
+      this.loaderService.display(false);
+    }
   }
   getCustomerDetailsResult(result) {
     //console.log(result);
@@ -160,6 +163,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
           output => this.createCustomerResult(output),
           error => {
             //console.log("error in distrbutors");
+            this.loaderService.display(false);
           }
         );
       }
@@ -170,6 +174,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
+      this.loaderService.display(false);
       this.refresh = 'success';
       this.dup = false;
     }

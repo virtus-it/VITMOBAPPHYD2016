@@ -8,6 +8,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { ProcessPaymentDialogComponent } from '../process-payment-dialog/process-payment-dialog.component';
 import { ProcessedPaymentsDetailsComponent } from '../processed-payments-details/processed-payments-details.component';
+import { DeletePromocodeComponent } from '../delete-promocode/delete-promocode.component';
 
 
 
@@ -53,6 +54,20 @@ redeemSettingsDetails:any = [];
 
   }
 
+
+  deletePromoCodeDialog(data){
+
+    let dialogRef = this.dialog.open(DeletePromocodeComponent, {
+      width: '50%',
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+      this.getAllPromoCodes();
+    }
+  });
+  }
+
   getAllPromoCodes(){
     let input = {"offer":{"transtype":"getall" , "apptype":this.authenticationService.appType()}};
     console.log(input);
@@ -73,24 +88,7 @@ redeemSettingsDetails:any = [];
     }
   }
 
-
-  deletePromoCode(data){
-    let input = {"offer":{"transtype":"delete","id": data.offerid}};
-    console.log(input);
-    this.followupService.createpromocode(input)
-    .subscribe(
-    output => this.deletePromoCodeResult(output),
-    error => {
-      //console.log("error in customer");
-    });
-  }
-  deletePromoCodeResult(result){
-    if(result.result == 'success'){
-      this.getAllPromoCodes();
-    }
-  }
-
-
+  
 //   showTabPanel(panelName) {
 // this.tabPanelView=panelName;
 // if(this.tabPanelView == 'redeemSetting'){

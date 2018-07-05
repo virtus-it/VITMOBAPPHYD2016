@@ -14,21 +14,23 @@ export class CreateupdatecategoryComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<CreateupdatecategoryComponent>,  private productService: ProductsService, @Inject(MD_DIALOG_DATA) public details: any) { }
   categoryInput = {cname:"", cdesc:"", categoryid: "" , priority: 0 };
-  cnameFormControl = new FormControl('', [
-    Validators.required]);
-    cdescFormControl = new FormControl('', [
-       Validators.required]);
+  // cnameFormControl = new FormControl('', [
+  //   Validators.required]);
+  //   cdescFormControl = new FormControl('', [
+  //      Validators.required]);
+  validateMessage:any = '';
 
   createCategory(){
     let input = {"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc, "priority": this.categoryInput.priority , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType()}};
     //console.log(input);
+    if(this.categoryValidation()){
     this.productService.createCategory(input)
     .subscribe(
     output => this.createCategoryResult(output),
     error => {
         //console.log("error in distrbutors");
     });
-
+  }
   }
   createCategoryResult(result){
     //console.log(result);
@@ -42,12 +44,14 @@ updateCategory(){
 let input ={"product":{"cname":this.categoryInput.cname,"cdesc":this.categoryInput.cdesc,"categoryid":this.categoryInput.categoryid,"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "priority": this.categoryInput.priority }};
 
 //console.log(input);
+if(this.categoryValidation()){
     this.productService.updateCategory(input)
     .subscribe(
     output => this.updateCategoryResult(output),
     error => {
         //console.log("error in distrbutors");
     });
+  }
 }
 updateCategoryResult(result){
   //console.log(result);
@@ -80,6 +84,29 @@ openDailog() {
 }
 }
 
+
+categoryValidation(){
+  var validate : string = '1';
+  switch(validate){
+      case "1" : {
+        if(!this.categoryInput.cdesc){
+          this.validateMessage = 'Enter Description';
+        }
+  }
+      case '2' : {
+        if(!this.categoryInput.cname){
+          this.validateMessage = 'Enter category name';
+        }   
+  }
+      
+    case '3' : {
+      if(this.categoryInput.cdesc && this.categoryInput.cname ){
+        this.validateMessage = '';
+        return true;
+      }
+    }
+}
+}
 
 
 onCloseCancel(){

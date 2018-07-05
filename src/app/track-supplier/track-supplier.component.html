@@ -1,0 +1,38 @@
+<div class="row  modal-title ">
+    <div class="col-md-4  col-sm-4  col-lg-4">
+      <i class="fa fa-file-text-o"></i> Track Supplier
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong (click)="onCloseCancel()">
+        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+
+
+<md-dialog-content layout="column">
+<div class="container-fluid ">
+
+    <div class="row">
+      <div class="col mgbottom-10">
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+
+            <agm-polyline 
+             [strokeColor]="'#f70000'"
+             [strokeWeight]="5"
+             >
+                <ng-container *ngFor="let i of latlng">
+                    <agm-polyline-point [latitude]="i.latitude" [longitude]="i.longitude">
+                      </agm-polyline-point>
+                  </ng-container>
+                  </agm-polyline>
+
+
+        </agm-map>
+
+      </div>
+     
+    </div>
+
+  </div>
+</md-dialog-content>

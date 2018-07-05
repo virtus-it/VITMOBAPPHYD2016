@@ -43,12 +43,24 @@
           </div>
 
       </div>
+
+
+      <div class="row" *ngIf="Detail.type == 'distributorsStock'">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
+              <span class="capitalize">{{prod.fullname}}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div>
     </div>
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="addStockDetails()">SUBMIT</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="addStock()">SUBMIT</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

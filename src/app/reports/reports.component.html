@@ -134,6 +134,12 @@
                 <br>Distributors Orders </a>
             </td>
 
+            <td class="nav-item" (click)="searchReports(true,'stockreports')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'stockreports'}" href="javascript:void(0)" *ngIf="superDealer">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <br> Stock Reports </a>
+            </td>
+
 
           </tr>
         </table>
@@ -332,6 +338,66 @@
       </div>
     </div>
     </div>
+
+
+
+    <div class="tab-content col  pdtop-15" *ngIf="tabPanelView == 'stockreports'">
+      <div class="jumbotron">
+        <div class="jumbotron-style">
+        <div class="row form-group col">
+          <h3>Order Report</h3>
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-6  col-md-6  col-lg-6">
+            <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">
+              <md-option value="distributor">Distributors</md-option>
+            </md-select>
+
+          </div>
+
+          <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="stockreportsInput.filterBy == 'distributor'">
+             
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                    <span class="capitalize">{{ dist.fullName }}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
+
+
+        </div>
+        <div class="row form-group">
+          <div class="col-sm-6  col-md-6  col-lg-6">
+            <md-form-field class="inline">
+              <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="stockreportsInput.fromDate">
+              <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+              <md-datepicker #picker></md-datepicker>
+            </md-form-field>
+          </div>
+          <div class=" col-sm-6  col-md-6  col-lg-6">
+
+            <md-form-field class="inline">
+              <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="stockreportsInput.toDate">
+              <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+              <md-datepicker #pickers></md-datepicker>
+            </md-form-field>
+          </div>
+        </div>
+        <div class=" row col">
+          <md-dialog-actions align="center">
+            <button md-raised-button class="btn-primary" (click)="downloadStockReports()">Download</button>&nbsp;&nbsp;
+             <button md-raised-button class="btn-primary" (click)="printStockReports()">Print</button>&nbsp;&nbsp;        
+          </md-dialog-actions>
+        </div>
+      </div>
+    </div>
+    </div>
+
+
+    
   </div>
   <!-- /row -->
 

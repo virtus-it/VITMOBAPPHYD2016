@@ -94,17 +94,17 @@
         </md-form-field>
       </div>
 
-      <div class="col-md-4 col-sm-6">
+      <!-- <div class="col-md-4 col-sm-6">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Promo Code" name="promocode" [(ngModel)]='customerInput.User.promocode'>
         </md-form-field>
 
-      </div>
+      </div> -->
 
     </div>
     <!-- third row finished -->
     <div class="row">
-      <div class="col-4">
+      <div class="col-4" *ngIf="this.Details" >
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Reference Code" name="ReferenceCode">
         </md-form-field>

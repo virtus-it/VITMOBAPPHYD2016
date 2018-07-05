@@ -15,13 +15,16 @@ import { MapStockpointComponent } from '../map-stockpoint/map-stockpoint.compone
 import { ViewStockpointsComponent } from '../view-stockpoints/view-stockpoints.component';
 import { DistributorsAvailabilityComponent } from '../distributors-availability/distributors-availability.component';
 import { FormControl, Validators } from '@angular/forms';
+import { AddstockProductComponent } from '../addstock-product/addstock-product.component';
 import { Observable } from 'rxjs/Observable';
+import { AddStockHistoryComponent } from '../add-stock-history/add-stock-history.component';
 import 'rxjs/add/operator/startWith';
 import { ProductsService } from '../products/products.service';
 import 'rxjs/add/operator/map';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
+import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { LoaderService } from '../login/loader.service';
 @Component({
 
@@ -32,6 +35,9 @@ export class DistributorComponent implements OnInit {
 
   CategoryCtrl: FormControl;
   filteredcategories: Observable<any[]>;
+
+  productsCtrl: FormControl;
+  filteredProducts: Observable<any[]>;
 
 
 
@@ -44,9 +50,10 @@ export class DistributorComponent implements OnInit {
     filterType:any = "";
     loginId:any = 0;
 
+    productList= [];
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
-    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" };
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:''};
     filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":500,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
 
 
@@ -61,6 +68,11 @@ export class DistributorComponent implements OnInit {
         this.filteredcategories = this.CategoryCtrl.valueChanges
           .startWith(null)
           .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
+
+          this.productsCtrl = new FormControl();
+          this.filteredProducts = this.productsCtrl.valueChanges
+            .startWith(null)
+            .map(prod => prod ? this.findProducts(prod) : this.productList.slice());
 
 
     }
@@ -90,6 +102,53 @@ this.getProductByCategory();
     }
     return finalCategories;
     }
+
+
+
+    findProducts(name: string) {
+        let finalProducts:any = [];
+        finalProducts = this.productList.filter(prod =>
+           prod.pname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+         
+       if (finalProducts && finalProducts.length > 0) {
+         let findProduct: any = {};
+   
+         findProduct = _.find(finalProducts, function (k, l) {
+           let prodDetails: any = k;
+           return prodDetails.pname == name;
+         });
+   
+         if (findProduct) {
+           // this.filterInput.categoryid = findCategory.categoryid;
+           this.filterTypeModel.productId = findProduct.productid;
+         }
+       }
+       else {
+         if (name.length >= 3 && !this.LastfilterRecords) {       
+   this.getProductByCategory();
+         }
+       }
+       return finalProducts;
+       }
+
+
+       getProducts() {
+        let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+        this.productService.createProduct(input)
+          .subscribe(
+          output => this.getProductsResult(output),
+          error => {
+          });
+    
+      }
+      getProductsResult(result) {
+        console.log(result);
+
+        if (result.result == 'success') {
+            this.productList = result.data;
+      }
+    }
+
 
 
     getProductByCategory(){
@@ -475,6 +534,10 @@ this.getProductByCategory();
                 this.filterInput.root.searchtext = this.filterTypeModel.isAreaDefined;
 
             }
+            else if(this.filterType == 'products'){
+                this.filterInput.root.searchtype = 'products';
+                this.filterInput.root.searchtext = this.filterTypeModel.productId;
+            }
        
             let input = this.filterInput;
             this.distributorService.getAllDistributors(input)
@@ -495,12 +558,63 @@ this.getProductByCategory();
                 this.distributorClickMore = false;
             }
         }
+
+
+        addstockDialog(data){
+            let formattedData = {data: data , "type":"distributorsStock"}
+            let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
+
+                width: '600px',
+                data: formattedData
+              });
+              dialogRefAddInvoice.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+                if (result == 'success') {
+                    this.getDistributors(true);
+
+                }
+          
+              });
+        }
+
+        stockHistory(data){
+            let formattedData = {data: data , "type":"distributorsStockHistory"}
+            let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
+
+                width: '60%',
+                data: formattedData
+              });
+              dialogRefStrockHitory.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+          
+                this.getDistributors(true);
+              });
+
+        }
         
+
+        distributorstockStatus(data){
+            let formattedData = {data: data  , "type":"distributorstockStatus"}
+            let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
+
+                width: '45%',
+                data: formattedData
+              });
+              dialogRefAddProduct.afterClosed().subscribe(result => {
+                //console.log(`Dialog closed: ${result}`);
+                if (result == 'success') {
+                    this.getDistributors(true);
+                }
+          
+              });
+
+        }
     
 
     ngOnInit() {
         this.getDistributors(true);
         this.getProductByCategory();
+        this.getProducts();
         this.loginId = this.authenticationService.loggedInUserId();
         // if(window.navigator.geolocation){
         //     window.navigator.geolocation.getCurrentPosition(this.setPosition.bind(this));

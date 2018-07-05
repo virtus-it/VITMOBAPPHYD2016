@@ -15,16 +15,19 @@ export class RedeemSettingsDialogComponent implements OnInit {
 
   redeemPointsInput = {"type":"" , "points":"" , "amount":"" };
   redeemDetails:any = [];
+  validateMessage:string = '';
 
 
   submitSettings(){
     let input  ={"User":{"TransType":"redeemsettings","type": this.redeemPointsInput.type ,"amount": this.redeemPointsInput.amount , "points": this.redeemPointsInput.points ,"loginid": this.authenticationService.loggedInUserId() }};
+    if(this.redeemValidate()){
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.submitSettingsResult(output),
     error => {      
     });
   }
+}
   submitSettingsResult(result){
     if(result.result == 'success'){
       console.log('settings saved');
@@ -50,12 +53,15 @@ export class RedeemSettingsDialogComponent implements OnInit {
 
   updateSettingsDetails(){
     let input ={"User": { "TransType":"updateredeemsettings","type": this.redeemPointsInput.type  ,"amount":this.redeemPointsInput.amount ,"points": this.redeemPointsInput.points ,"loginid": this.authenticationService.loggedInUserId() ,"id": this.Details.id}};
+    if(this.redeemValidate()){
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.updateSettingsDetailsResult(output),
     error => {      
     });
-  }
+
+    } 
+   }
   updateSettingsDetailsResult(result){
     if(result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -81,6 +87,38 @@ export class RedeemSettingsDialogComponent implements OnInit {
   onCloseModal(){
     this.thisDialogRef.close('Cancel');
   }
+
+
+
+  redeemValidate(){
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.redeemPointsInput.amount){
+            this.validateMessage = 'Enter amount';
+          }
+    }
+        case '2' : {
+          if(!this.redeemPointsInput.type){
+            this.validateMessage = 'Enter type';
+          }   
+    }
+        case '3' : {
+          if(!this.redeemPointsInput.points){
+            this.validateMessage = "Enter points";
+        }  
+    }
+      case '4' : {
+        if(this.redeemPointsInput.amount && this.redeemPointsInput.type && this.redeemPointsInput.points ){
+          this.validateMessage = '';
+          return true;
+        }
+      }
+}
+}
+
+
+
 
 
   ngOnInit() {

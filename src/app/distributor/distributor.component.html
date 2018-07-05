@@ -23,6 +23,7 @@
                 <md-option value="phonetype">Type of phone</md-option>
                 <md-option value="address">Area Name</md-option>
                 <md-option value="areadefined">Is Area defined</md-option>
+                <md-option value="products">Products</md-option>
               </md-select>
             </div>
             <div *ngIf="filterType=='name'">
@@ -76,6 +77,18 @@
 
               </md-select>
             </div>
+
+            <div class="" *ngIf="filterType == 'products'">
+                <md-form-field class="example-full-width">
+                  <input mdInput placeholder="Enter product" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+                  <md-autocomplete #auto="mdAutocomplete">
+                    <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.pname">
+                      <span>{{prod.pname}} </span>
+                    </md-option>
+                  </md-autocomplete>
+                </md-form-field>
+  
+              </div>
 
 
 
@@ -185,11 +198,24 @@
 
                       <label class="col-md-6" (click)="viewPoints(dist)">
                         <i class="fa fa-file-powerpoint-o"></i> Points</label>
+                    </div> 
+                    <div class="row">
+                      <!-- <label class="col-md-6" (click)="distributorsAvailability(dist)">
+                        <i class="fa fa-thumbs-o-up"></i> Availability </label>  (click)="addstockDistributor(dist)"-->
+
+
+                        <label class="col-md-6" (click)="addstockDialog(dist)">
+                            <i class="fa fa-cart-arrow-down" ></i> Add Stock </label>
+
+                        <label class="col-md-6" (click)="stockHistory(dist)">
+                          <i class="fa fa-file-text"> </i> Stock History </label>
                     </div>
-                    <!-- <div class="row">
-                      <label class="col-md-6" (click)="distributorsAvailability(dist)">
-                        <i class="fa fa-thumbs-o-up"></i> Availability </label>
-                    </div> -->
+
+
+                    <div class="row">
+                      <label class="col-md-6" (click)="distributorstockStatus(dist)">
+                        <i class="fa fa-strikethrough"></i> Stock Status </label>
+                    </div>
                   </div>
                 </div>
 

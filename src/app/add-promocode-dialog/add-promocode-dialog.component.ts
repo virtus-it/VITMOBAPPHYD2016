@@ -37,7 +37,7 @@ export class AddPromocodeDialogComponent implements OnInit {
   // filterTypeModel = {categoryname: "" , categoryid: ''};
 
   LastfilterRecords = false;
-
+  validateMessage:string = '';
   categoryList:any = [];
 
   findCategories(name: string) {
@@ -107,12 +107,14 @@ this.getProductByCategory();
     input.offer.enddate = null;
   }
   console.log(input);
+  if(this.validateCreatePromocode()){
   this.followupService.createpromocode(input)
   .subscribe(
   output => this.createPromoCodeResult(output),
   error => {
   });
   }
+}
   createPromoCodeResult(result){
     if (result.result == 'success'){
       this.thisDialogRef.close('success');
@@ -145,8 +147,8 @@ this.getProductByCategory();
   updatePromoCode(){
     if(this.Details.offerid){
     let input = {"offer":{"discountinpercent":this.promoCodeInput.discountinpercent,"description":this.promoCodeInput.description,"apptype":this.authenticationService.appType(), "offertype":this.promoCodeInput.offertype,"startdate":this.promoCodeInput.startdate,"enddate":this.promoCodeInput.enddate,"criteria":this.promoCodeInput.criteria,"promotype":this.promoCodeInput.promotype,"category":this.promoCodeInput.category,"promocode":this.promoCodeInput.promocode,"transtype":"update" , "id": this.promoCodeInput.id  }};
-
     console.log(input);
+    if(this.validateCreatePromocode()){
     this.followupService.createpromocode(input)
     .subscribe(
     output => this.updatePromoCodeResult(output),
@@ -154,6 +156,7 @@ this.getProductByCategory();
     });
     }
   }
+}
   updatePromoCodeResult(result){
     if(result.result =='success'){
       this.thisDialogRef.close('success');
@@ -172,6 +175,51 @@ this.getProductByCategory();
         this.createPromoCode();
       }
     }
+
+
+    validateCreatePromocode(){
+      var validate : string = '1';
+      switch(validate){
+          case "1" : {
+            if(this.promoCodeInput.promocode == ''){
+              this.validateMessage = 'Enter Promocode';
+            }
+      }
+          case '2' : {
+            if(this.promoCodeInput.category == ''){
+              this.validateMessage = 'Enter category';
+            }   
+      }
+          case '3' : {
+            if(this.promoCodeInput.discountinpercent == ''){
+              this.validateMessage = "Enter Value";
+          }  
+      }
+          case '4' : {
+            if(this.promoCodeInput.promotype == ''){
+              this.validateMessage = "Enter Promo Type";
+          }
+      }
+        case '5' : {
+          if(this.promoCodeInput.criteria == ''){
+            this.validateMessage = 'Enter Criteria';
+        }  
+        }
+        case '6' : {
+          if(this.promoCodeInput.startdate == '' || this.promoCodeInput.startdate === null ){
+            this.validateMessage = 'Enter Start Date';
+        }
+        }
+        case '7' : {
+          if(this.promoCodeInput.promocode && this.promoCodeInput.category && this.promoCodeInput.discountinpercent && this.promoCodeInput.promotype && this.promoCodeInput.criteria && this.promoCodeInput.startdate){
+            this.validateMessage = '';
+            return true;
+          }
+        }
+  }
+  }
+
+
 
   ngOnInit() {
     this.getProductByCategory();
