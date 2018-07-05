@@ -4,6 +4,7 @@ import { AddEditPointsComponent } from '../add-edit-points/add-edit-points.compo
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { MdDialog } from '@angular/material';
 import * as _ from 'underscore';
+import { AuthenticationService } from '../login/authentication.service';
 
 
 @Component({
@@ -13,11 +14,11 @@ import * as _ from 'underscore';
 })
 export class PointsComponent implements OnInit {
 
-  constructor(public dialog: MdDialog, private distributorService: DistributorServiceService) { }
+  constructor(public dialog: MdDialog, private distributorService: DistributorServiceService , private authenticationService: AuthenticationService) { }
 
   pointsStatus:any = [];
   allPoints = [];
-
+  showFilterDialog = false;
   referalbonusState1:any = '';
   acceptStatus1:any = '';
   deliveredStatus1:any = '';
@@ -26,6 +27,8 @@ export class PointsComponent implements OnInit {
   ontimeStatus1:any = ''; 
   distCustomerStatus1:any = '';
   tabPanelView:any = '';
+  customerAllPointsDetails:any = [];
+  filterInput = {type:''}
 
   DeactivatePoints(status){
     console.log('de activate called');
@@ -114,11 +117,31 @@ this.getAllPoints();
 showTabPanel(panelName){
   if(panelName == 'pointsDetails'){
     this.tabPanelView = 'pointsDetails';
+    this.getCustomersPoints();
   }
 }
 
 reset(){
   this.tabPanelView = '';
+}
+
+filterToggle(){
+  this.showFilterDialog = !this.showFilterDialog;
+}
+
+getCustomersPoints(){
+  let input = {"User":{"TransType":"getallpoints" , "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()}};
+  this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getCustomersPointsResult(output),
+    error => {    
+      console.log('Error in getting all points Details');  
+    });
+}
+getCustomersPointsResult(result){
+  if(result.result == 'success'){
+    this.customerAllPointsDetails = result.data;
+  }
 }
 
 
