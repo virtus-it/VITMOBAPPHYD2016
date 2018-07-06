@@ -12,7 +12,7 @@
 
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ALL ORDERS </button>
-          <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
+          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
             href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
 
           <!-- <button type="submit" md-raised-button class=" " *ngIf="superDealer && tabPanelView != 'complete'" [ngClass]="{'btn-primary': tabPanelView === 'complete'}"
@@ -277,9 +277,9 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" md-raised-button class="  " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'gridview'}"
+          <button type="submit" md-raised-button class="  " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': newView === 'gridview'}"
             href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
-          <button type="submit" md-raised-button class=" " *ngIf="superDealer" [ngClass]="{'btn-primary': newView === 'mapview'}" href="javascript:void(0)"
+          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': newView === 'mapview'}" href="javascript:void(0)"
             (click)="showNewPanel('mapview')">Map View</button>
         </div>
       </div>
@@ -298,7 +298,7 @@
                     </label>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 ">
-                    <label *ngIf="superDealer">Follow Up :
+                    <label *ngIf="superDealer || customerCare">Follow Up :
                       <span (click)='showFollowUp(forward)'>
                         <a>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
@@ -315,7 +315,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="forward.status == 'backtodealer'">
-                    <label *ngIf="superDealer">
+                    <label *ngIf="superDealer || customerCare">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(forward)"> </i>
                       </span>
@@ -595,7 +595,7 @@
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
 
                     <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
@@ -651,7 +651,7 @@
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label *ngIf="superDealer">Follow Up :
+                    <label *ngIf="superDealer || customerCare">Follow Up :
                       <!-- <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(allorder)'>
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
@@ -666,7 +666,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="allorder.status == 'backtodealer'">
-                    <label *ngIf="superDealer">
+                    <label *ngIf="superDealer || customerCare">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(allorder)"> </i>
                       </span>
@@ -926,12 +926,12 @@
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
                     <!-- <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
                       <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button> -->
-                    <div class="row" *ngIf !='superDealer'>
+                    <div class="row" *ngIf !='superDealer || customerCare'>
                       <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
                         <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
                       <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
@@ -999,7 +999,7 @@
                     </label>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 ">
-                    <label *ngIf="superDealer">Follow Up :
+                    <label *ngIf="superDealer || customerCare">Follow Up :
                       <span (click)='showFollowUp(complete)'>
                         <a>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
@@ -1016,7 +1016,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="complete.status == 'backtodealer'">
-                    <label *ngIf="superDealer">
+                    <label *ngIf="superDealer || customerCare">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(complete)"> </i>
                       </span>
@@ -1295,7 +1295,7 @@
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
 

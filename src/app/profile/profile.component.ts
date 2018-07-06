@@ -21,6 +21,7 @@ export class ProfileComponent implements OnInit {
   imageUpdateError:boolean = false;
   imageUplaodSuccess:boolean = false;
   isSuperDealer:boolean = false;
+  customerCare = true;
 
 
   updateProfile(){
@@ -185,12 +186,14 @@ dialogRef.afterClosed().subscribe(result => {
   ngOnInit() {
     
     this.getProfileDetails(); 
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
     if(this.authenticationService.isSuperDelear){
       this.isSuperDealer = true;
     }
     else{
       this.isSuperDealer = false;
     }
+    
   }
 
 }

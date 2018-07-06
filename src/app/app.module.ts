@@ -127,6 +127,7 @@ import { DistributorsAvailabilityComponent } from './distributors-availability/d
 import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { AssignVehicleComponent } from './assign-vehicle/assign-vehicle.component';
 import { TrackSupplierComponent } from './track-supplier/track-supplier.component';
+import { SortingPipe } from './pipes/sorting.pipe';
 
 
 
@@ -232,6 +233,7 @@ import { TrackSupplierComponent } from './track-supplier/track-supplier.componen
         AddVehicleComponent,
         AssignVehicleComponent,
         TrackSupplierComponent,
+        SortingPipe,
 
      
         

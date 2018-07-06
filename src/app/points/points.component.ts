@@ -28,7 +28,8 @@ export class PointsComponent implements OnInit {
   distCustomerStatus1:any = '';
   tabPanelView:any = '';
   customerAllPointsDetails:any = [];
-  filterInput = {type:''}
+  filterInput = {type:''};
+  pointsClickMore = true;
 
   DeactivatePoints(status){
     console.log('de activate called');
@@ -117,7 +118,7 @@ this.getAllPoints();
 showTabPanel(panelName){
   if(panelName == 'pointsDetails'){
     this.tabPanelView = 'pointsDetails';
-    this.getCustomersPoints();
+    this.getAllPointsDetails(true);
   }
 }
 
@@ -129,21 +130,92 @@ filterToggle(){
   this.showFilterDialog = !this.showFilterDialog;
 }
 
-getCustomersPoints(){
-  let input = {"User":{"TransType":"getallpoints" , "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()}};
+getAllPointsDetails(firstcall){
+  let input = {"User":{"TransType":"getallpoints" , "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId() , "type":"all" , "lastId":0 }};
+  if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
+    let lastCustomer: any = _.last(this.customerAllPointsDetails);
+    if (lastCustomer) {
+        input.User.lastId = lastCustomer.userid;
+    }
+}
+else {
+    this.customerAllPointsDetails = [];
+    input.User.lastId = 0;
+}
   this.distributorService.getPoints(input)
     .subscribe(
-    output => this.getCustomersPointsResult(output),
+    output => this.getAllPointsDetailsResult(output),
     error => {    
       console.log('Error in getting all points Details');  
     });
 }
-getCustomersPointsResult(result){
-  if(result.result == 'success'){
-    this.customerAllPointsDetails = result.data;
+getAllPointsDetailsResult(result){
+  if (result.result == 'success') {
+    this.customerAllPointsDetails = _.union(this.customerAllPointsDetails, result.data);
+  }
+  else {
+    this.pointsClickMore = false;
   }
 }
 
+showCustomerPoints(firstcall){
+  let input = {"User":{"TransType":"getallpoints" , "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId() , "type":"customer" , "lastId": 0 }};
+  if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
+    let lastCustomer: any = _.last(this.customerAllPointsDetails);
+    if (lastCustomer) {
+        input.User.lastId = lastCustomer.userid;
+    }
+}
+else {
+    this.customerAllPointsDetails = [];
+    input.User.lastId = 0;
+}
+  this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.showCustomerPointsResult(output),
+    error => {    
+      console.log('Error ');  
+    });
+}
+showCustomerPointsResult(result){
+  if (result.result == 'success') {
+    this.customerAllPointsDetails = _.union(this.customerAllPointsDetails, result.data);
+  }
+  else {
+    this.pointsClickMore = false;
+  }
+}
+
+showDistributorPoints(firstcall){
+  let input = {"User":{"TransType":"getallpoints" , "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId() , "type":"dealer" , "lastId":0 }};
+  if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
+    let lastCustomer: any = _.last(this.customerAllPointsDetails);
+    if (lastCustomer) {
+        input.User.lastId = lastCustomer.userid;
+    }
+}
+else {
+    this.customerAllPointsDetails = [];
+    input.User.lastId = 0;
+}
+  this.distributorService.getPoints(input)
+  .subscribe(
+  output => this.showDistributorPointsResult(output),
+  error => {    
+    console.log('Error ');  
+  });
+}
+
+showDistributorPointsResult(result){
+if (result.result == 'success') {
+  this.customerAllPointsDetails = _.union(this.customerAllPointsDetails, result.data);
+}
+else {
+  this.pointsClickMore = false;
+}
+
+
+}
 
 
 

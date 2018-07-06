@@ -11,16 +11,17 @@ import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { FollowUpComponent } from '../follow-up/follow-up.component';
-import{PreOrderCartDailogComponent}from '../pre-order-cart-dailog/pre-order-cart-dailog.component';
+import { PreOrderCartDailogComponent } from '../pre-order-cart-dailog/pre-order-cart-dailog.component';
 import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details.component';
 import { SetpricecustomerComponent } from '../setpricecustomer/setpricecustomer.component';
-import {CustomerScheduleEditDailogComponent} from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
+import { CustomerScheduleEditDailogComponent } from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
 import * as FileSaver from 'file-saver';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
+import { SortingPipe } from '../pipes/sorting.pipe';
 @Component({
 
     templateUrl: './customer.component.html',
@@ -35,19 +36,31 @@ export class CustomerComponent implements OnInit {
     followUpdate = null;
     filterRecords = false;
     replacetext = "test";
-    loginId:any = 0;
+    loginId: any = 0;
     superDealer = true;
+    customerCare = true;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
         { value: 'name', viewValue: 'Name' },
         { value: 'mobile', viewValue: 'Mobile' },
-        { value: 'address' , viewValue: 'Address'},
-        { value:'paymenttype', viewValue:'Payment Mode'},
-        {value: 'customertype' , viewValue:'Customer Type'},
+        { value: 'address', viewValue: 'Address' },
+        { value: 'paymenttype', viewValue: 'Payment Mode' },
+        { value: 'customertype', viewValue: 'Customer Type' },
         { value: 'followupdate', viewValue: 'Followup Date' }
 
     ];
+
+    sortCustomer = {
+        name: '',
+        sorting: null
+    };
+
+    // customersSort : customers[];
+    // path: string[] = ['customers'];
+    // order: number = 1; // 1 asc, -1 desc;
+
+
     // showOrderList(data) {
     //     let dialogRefOrderList = this.dialog.open(CustomerOrderListComponent, {
     //         width: '90%',
@@ -61,8 +74,8 @@ export class CustomerComponent implements OnInit {
 
 
     showCustomerAllOrders(orderData) {
-        let formatteddata:any = {"type":"customersPage", "data":orderData }
-        let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent,{
+        let formatteddata: any = { "type": "customersPage", "data": orderData }
+        let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
             width: '95%',
             data: formatteddata
         });
@@ -71,6 +84,22 @@ export class CustomerComponent implements OnInit {
         });
 
     }
+
+    // sort() {  
+    //     // this.customerList
+    //     //   .sort((a: any, b: any) => {
+    //     //     return a.firtname - b.firstname;
+    //     //   })
+    //     let names :any = [];
+    //     _.each(this.customerList , function(i,j){
+    //         let details:any = i;
+    //         names.push(details.firstname);
+    //     });
+    //     let newNames = names.sort();
+    //     console.log(newNames , 'ascend')
+    //     // let descnames = names.reverse();
+    //     // console.log(descnames , 'descend');
+    //   }
 
 
     showPlaceOrder(data) {
@@ -99,8 +128,8 @@ export class CustomerComponent implements OnInit {
             data: data
         });
         dialogRefInactive.afterClosed().subscribe(result => {
-            if(result == 'success'){
-           this.getCustomerList(true);
+            if (result == 'success') {
+                this.getCustomerList(true);
             }
             //console.log(`Dialog closed: ${result}`);
             //this.dialogResult = result;
@@ -127,16 +156,16 @@ export class CustomerComponent implements OnInit {
         });
     }
     showSchedule(data) {
-        let formatteddata:any = {"type":"create", "data":data, 'productName': data.product_type ,  customerId:data.userid, customerName:data.firstname }
+        let formatteddata: any = { "type": "create", "data": data, 'productName': data.product_type, customerId: data.userid, customerName: data.firstname }
         let dialogRefSetting = this.dialog.open(CustomerScheduleDaiolgComponent, {
             width: '700px',
             data: formatteddata
         });
         dialogRefSetting.afterClosed().subscribe(result => {
-            if(result == 'success'){
+            if (result == 'success') {
                 this.loaderService.display(false);
             }
-            else{
+            else {
                 this.loaderService.display(false);
             }
         });
@@ -144,8 +173,8 @@ export class CustomerComponent implements OnInit {
 
 
     //Edit scheduled orders
-    editScheduleOrder(data){
-        let dialogRefSetting = this.dialog.open(CustomerScheduleEditDailogComponent , {
+    editScheduleOrder(data) {
+        let dialogRefSetting = this.dialog.open(CustomerScheduleEditDailogComponent, {
             width: "65%",
             data: data
         });
@@ -163,13 +192,13 @@ export class CustomerComponent implements OnInit {
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-            if(result == "success"){
+            if (result == "success") {
                 this.loaderService.display(false);
                 this.getCustomerList(true);
             }
-            else{
+            else {
                 this.loaderService.display(false);
-                
+
             }
 
         });
@@ -183,14 +212,14 @@ export class CustomerComponent implements OnInit {
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-    if(result == "success"){
-    this.getCustomerList(true);
-    this.loaderService.display(false);
-    }
-    else{
-    this.loaderService.display(false);
-    }
-    });
+            if (result == "success") {
+                this.getCustomerList(true);
+                this.loaderService.display(false);
+            }
+            else {
+                this.loaderService.display(false);
+            }
+        });
 
     }
     showFollowUp(details) {
@@ -224,7 +253,7 @@ export class CustomerComponent implements OnInit {
     }
     getCustomerList(firstcall) {
         this.loaderService.display(true);
-        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype":"getallcustomers" , pagesize : 100 };
+        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype": "getallcustomers", pagesize: 100 };
         //console.log(input);
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
@@ -240,11 +269,11 @@ export class CustomerComponent implements OnInit {
         console.log(input);
         this.customerService.getCustomerList(input)
             .subscribe(
-            output => this.getCustomerListResult(output),
-            error => {
-                //console.log("error in customer");
-                this.loaderService.display(false);
-            });
+                output => this.getCustomerListResult(output),
+                error => {
+                    //console.log("error in customer");
+                    this.loaderService.display(false);
+                });
     }
     getCustomerListResult(result) {
         //console.log(result);
@@ -287,17 +316,18 @@ export class CustomerComponent implements OnInit {
         }
         this.customerService.searchCustomer(input)
             .subscribe(
-            output => this.getCustomerByFilterResult(output),
-            error => {
-                //console.log("error in customer");
-                this.loaderService.display(false);
-            });
+                output => this.getCustomerByFilterResult(output),
+                error => {
+                    //console.log("error in customer");
+                    this.loaderService.display(false);
+                });
     }
     getCustomerByFilterResult(result) {
         //console.log(result);
         if (result.result == 'success') {
             this.filterRecords = true;
             this.customerList = _.union(this.customerList, result.data);
+            // this.customersSort = this.customerList;
         }
         else {
             this.customerClickMore = false;
@@ -313,74 +343,74 @@ export class CustomerComponent implements OnInit {
         }
 
     }
-    downloadCustomer(){
+    downloadCustomer() {
         let inputjson = {
             "root": {
                 "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": this.authenticationService.userType(), "status": "assigned",
                 "lastrecordtimestamp": "15",
                 "pagesize": "5", "loginid": this.authenticationService.loggedInUserId(),
-                "searchtext": "", "searchtype": "name","apptype":this.authenticationService.appType()
+                "searchtext": "", "searchtype": "name", "apptype": this.authenticationService.appType()
             }
         };
         this.customerService.getDownloadedFile(inputjson)
-        .subscribe(
-        output => this.downloadCustomerResult(output),
-        error => {
-            //console.log("error in customer");
-            this.loaderService.display(false);
-        });
+            .subscribe(
+                output => this.downloadCustomerResult(output),
+                error => {
+                    //console.log("error in customer");
+                    this.loaderService.display(false);
+                });
 
     }
-    downloadCustomerResult(result){
+    downloadCustomerResult(result) {
         let path = result.data.filename;
         this.customerService.getFile(path)
-        .subscribe(
-        output => this.getFileResult(output),
-        error => {
-            //console.log("error in customer");
-            this.loaderService.display(false);
-        });
+            .subscribe(
+                output => this.getFileResult(output),
+                error => {
+                    //console.log("error in customer");
+                    this.loaderService.display(false);
+                });
     }
-    getFileResult(result){
+    getFileResult(result) {
         FileSaver.saveAs(result, "excel.xlsx");
 
     }
     clearFilter() {
-        this.showFilterDailog =false;
+        this.showFilterDailog = false;
         this.filterRecords = false;
         this.followUpdate = null;
         this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
         this.getCustomerList(true);
 
-      }
+    }
 
-      setPrice(details){
+    setPrice(details) {
         let dialogRefEditCustomer = this.dialog.open(SetpricecustomerComponent, {
             width: '700px',
             data: details
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
-        //console.log(`Dialog closed: ${result}`);
-        if(result == "success"){
-            this.getCustomerList(true);
+            //console.log(`Dialog closed: ${result}`);
+            if (result == "success") {
+                this.getCustomerList(true);
 
 
-        }
+            }
 
-    });
-      }
+        });
+    }
 
 
-      showPoints(data){
+    showPoints(data) {
 
         let dialogRefEditCustomer = this.dialog.open(EditPointsComponent, {
             width: '700px',
             data: data
         });
         dialogRefEditCustomer.afterClosed().subscribe(result => {
-        //console.log(`Dialog closed: ${result}`);
-        if(result == "success"){
-        }
+            //console.log(`Dialog closed: ${result}`);
+            if (result == "success") {
+            }
 
         });
     }
@@ -389,7 +419,8 @@ export class CustomerComponent implements OnInit {
     ngOnInit() {
         this.getCustomerList(true);
         this.superDealer = this.authenticationService.getSupperDelear();
-        this.loginId= this.authenticationService.loggedInUserId();
+        this.customerCare = this.authenticationService.customerCareLoginFunction();
+        this.loginId = this.authenticationService.loggedInUserId();
     }
 
 }

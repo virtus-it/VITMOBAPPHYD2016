@@ -129,11 +129,11 @@
 
           <div class="col"> 
             
-              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'customer'}" href="javascript:void(0)"
+              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'customer'}" (click)="showCustomerPoints()" href="javascript:void(0)"
               >Customer</button> 
 
 
-              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'pointsDetails'}" href="javascript:void(0)">Distributor</button> 
+              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'pointsDetails'}" (click)="showDistributorPoints()" href="javascript:void(0)">Distributor</button> 
 
             
               <table class="table table-hover table-striped">
@@ -143,15 +143,38 @@
                     <th width="10%">Mobile </th>
                     <th width="12%">Points</th>
                     <th width="25%">Date</th>
+                    <th width="25%">Status</th>
+                    
                   </tr>
                 </thead>
                 <tbody>
-                  <tr >
-                    <td class="left capital" width="13%">Name</td>
-                    <td class="left" width="10%">Mobile</td>
-                    <td class="left"  width="12%">Points</td>
-                    <td class="left capital"  width="25%">Date</td>
-     
+                  <tr  *ngFor="let details of customerAllPointsDetails">
+
+                    <td class="left capital" width="13%">
+                      <span *ngIf="details.name">{{details.name}} </span>
+                      <span *ngIf="!details.name"> - </span>
+                    </td>
+
+                    <td class="left" width="10%">
+                      <span *ngIf="details.mobileno">{{details.mobileno}}</span>
+                      <span *ngIf="!details.mobileno"> - </span>
+                    </td>
+
+                    <td class="left"  width="12%">
+                        <span *ngIf="details.points">{{details.points}}</span>
+                        <span *ngIf="!details.points"> - </span>
+                    </td>
+
+                    <td class="left capital"  width="25%">
+                        <span *ngIf="details.date">{{details.date | utcDate}} </span>
+                        <span *ngIf="!details.date"> - </span>
+                    </td>
+
+                    <td class="left"  width="12%">
+                        <span *ngIf="details.status">{{details.status}}</span>
+                        <span *ngIf="!details.status"> - </span>
+                    </td>
+                  
                 </tbody>
               </table>
               

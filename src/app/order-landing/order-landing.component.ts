@@ -49,6 +49,7 @@ export class OrderLandingComponent implements OnInit {
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
   superDealer = true;
+  customerCare = true;
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
@@ -1649,9 +1650,16 @@ this.orderLandingService.getOrdersByfilter(input)
     // this.timeSimultor();
    
     this.superDealer = this.authenticationService.getSupperDelear();
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
     if(!this.superDealer){
 this.tabPanelView = 'allorder';
+this.getAllOrderDetails(true);
     }
+    else if(this.superDealer || this.customerCare){
+      this.tabPanelView == 'forward';
+      this.getForwardOrderDetails(true);
+    }
+
   }
 
 }

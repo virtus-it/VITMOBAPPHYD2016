@@ -63,6 +63,7 @@ export class ReportsComponent implements OnInit {
   distributors: any = [];
   tabPanelView = 'newlydownloaded';
   superDealer = true;
+  customerCare = true;
   LastfilterRecords = false;
   distributorsorderData = [];
   reportsType = [
@@ -632,8 +633,9 @@ export class ReportsComponent implements OnInit {
     this.getCustomer();
     this.getDistributors();
     this.getSupplierList();
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
-    if (!this.superDealer) {
+    if (!this.superDealer || !this.customerCare) {
       this.tabPanelView = 'orderdownload';
     }
   }

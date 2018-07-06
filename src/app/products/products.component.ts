@@ -26,6 +26,7 @@ export class ProductsComponent implements OnInit {
   showFilterDialog = false;
   productList = [];
   selectedFile = null;
+  customerCare = true;
   base64textString:any = "";
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
@@ -297,6 +298,7 @@ if(result.result == 'success'){
   ngOnInit() {
     this.getProducts();
     this.superDealer = this.authenticationService.getSupperDelear();
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
   }
 
 }

@@ -13,7 +13,8 @@ export class AuthenticationService {
   loggedIn = false;
   isSuperDelear = true;
   salesLogin = true;
-  manufacturerLogin = true;
+  // manufacturerLogin = true;
+  customerCareLogin = true;
   CurrentSession: any = {};
   dashBoardDetails: any = {};
   polygons: any = {};
@@ -42,6 +43,7 @@ export class AuthenticationService {
     //  this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     this.salesLogin = this.newSalesFunction();
+    this.customerCareLogin = this.customerCareLoginFunction()
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({
@@ -78,6 +80,20 @@ export class AuthenticationService {
       return false;
     }
   };
+
+  customerCareLoginFunction = function() {
+    try {
+      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'customercare')){
+      return true;
+    }
+    else{
+      return false;
+    }
+    }
+    catch(ex){
+      return false;
+    }
+  }
 
   getDashboardDetails(input) {
     let bodyString = JSON.stringify(input); // Stringify payload

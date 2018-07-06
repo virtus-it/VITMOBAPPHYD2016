@@ -25,7 +25,7 @@
             <span class="pdtoprght-3x10"> Customers</span>
           </a>
 
-          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin">
+          <a md-list-item routerLink="/distributor" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin || authenticationService.customerCareLogin">
             <i class="fa fa-sitemap"></i>
             <span class="pdtoprght-3x10">Distributors</span>
           </a>
@@ -36,44 +36,44 @@
           </a>
          
          
-          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
+          <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin">
             <i class="fa fa-globe" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Coverage</span>
           </a>
          
-          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
+          <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin">
             <i class="fa fa-commenting-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Notifications</span>
           </a>
-          <a md-list-item routerLink="/payments" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin">
+          <a md-list-item routerLink="/payments" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin">
             <i class="fa fa-credit-card" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Payments</span>
           </a>
-          <a md-list-item routerLink="/schedule" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin">
+          <a md-list-item routerLink="/schedule" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin">
             <i class="fa  fa-calendar" aria-hidden="true"></i>
             <span class="pdtoprght-3x10 "> Schedule</span>
           </a>
-          <a md-list-item routerLink="/supplier" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin">
+          <a md-list-item routerLink="/supplier" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin">
             <i class="fa fa-truck" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Suppliers</span>
           </a>
           
           
-          <a md-list-item routerLink="/feedback" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin">
+          <a md-list-item routerLink="/feedback" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin">
             <i class="fa fa-comment" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Feedback</span>
           </a>
-          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
+          <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin">
             <i class="fa fa-file-text" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Reports</span>
           </a>
 
-          <a md-list-item routerLink="/templates" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear" >
+          <a md-list-item routerLink="/templates" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin" >
             <i class="fa fa-send" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Templates</span>
           </a>
 
-          <a md-list-item routerLink="/users" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin" >
+          <a md-list-item routerLink="/users" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin " >
             <i class="fa fa-users" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Users</span>
           </a>
@@ -81,7 +81,7 @@
 
           
          
-          <a md-list-item routerLink="/category" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear" >
+          <a md-list-item routerLink="/category" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin" >
             <i class="fa  fa fa-th" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Category</span>
           </a>
@@ -97,7 +97,7 @@
           </a>
 
 
-          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin" >
+          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin" >
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Profile</span>
           </a>

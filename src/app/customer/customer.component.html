@@ -134,6 +134,8 @@
       <a class="cursor logo-color  mgleft-10" title="Add Customer" (click)='showAddCustomer()'>
         <i class="fa fa-plus-circle fs-20" aria-hidden="true"></i>
       </a>
+<!-- 
+      <button (click)="sort()">Sort</button> -->
       <a class="cursor logo-color mgleft-10">
         <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
 
@@ -195,7 +197,9 @@
     </div>
   </div>
   <div class='pd-15'>
-    <div class="row brd-box-box" *ngFor="let customers of customerList">
+
+      <!-- | sorting : 'firstname' -->
+    <div class="row brd-box-box" *ngFor="let customers of customerList ">
       <div class="col-4 left bg-color-bg">
         <div class="row align-items-center">
           <div class="col-2  pd-10 " align-self-center>
@@ -314,10 +318,10 @@
                 <i class="fa fa-money"></i> Set price</label>
             </div>
             <div class="row pdbottom-5">
-              <div class="col-md-6" *ngIf="superDealer" (click)="showFollowUp(customers)">
+              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showFollowUp(customers)">
                 <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
               </div>
-              <div class="col-md-6" *ngIf="superDealer" (click)="showPoints(customers)">
+              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showPoints(customers)">
                 <i class="fa fa-file-powerpoint-o"></i> Points
               </div>
             </div>
