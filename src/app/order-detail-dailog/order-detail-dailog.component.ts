@@ -126,7 +126,7 @@ getOrderDetailsById() {
     this.loaderService.display(true);
     let input = {};
     if(this.orderDetail.type == 'mapviewAllOrders'){
-        input = {"root":{ orderid: this.orderDetail.data[0].order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
+        input = {"root":{ orderid: this.orderDetail.data.orderid, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
     }
     else{
         input = {"root":{ orderid: this.orderDetail.order_id, apptype: this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId() }};
@@ -193,7 +193,7 @@ getProductsListByCustomerId() {
     this.loaderService.display(true);
     let input = {};
     if(this.orderDetail.type == 'mapviewAllOrders'){
-        input = {customerID: this.orderDetail.data[0].user_id , appType: this.authenticationService.appType()}
+        input = {customerID: this.orderDetail.customerid , appType: this.authenticationService.appType()}
     }
     else{
     input = { customerID: this.orderDetail.order_by, appType: this.authenticationService.appType() };
@@ -214,7 +214,9 @@ getProductsListByCustomerIdResult(result) {
     AuthenticationService.showLog("stock data");
 
     this.loaderService.display(false);
+    if(result.data){
     this.customerAddressDetails =result.data.user.address;
+    }
     if (result.data.user.stock && result.data.user.stock.length > 0) {
         ////console.log(result.data.user.stock);
         this.customerProductDetails = _.filter(result.data.user.stock, function (e: any) { return e.avaliablecans !== 0; });
@@ -362,7 +364,7 @@ getTemplates(data){
 getfollowUpdetails() {
     let input = {};
     if(this.orderDetail.type == 'mapviewAllOrders'){
-        input = { "User": { "type": "order" , "typeid":this.orderDetail.data[0].order_id, "transtype": "getall" } }
+        input = { "User": { "type": "order" , "typeid":this.orderDetail.data.orderid, "transtype": "getall" } }
     }
     else{
         input = { "User": { "type": "order" , "typeid": this.orderDetail.order_id, "transtype": "getall" } }

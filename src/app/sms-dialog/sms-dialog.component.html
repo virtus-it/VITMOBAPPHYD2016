@@ -313,14 +313,29 @@
                       <!-- <md-form-field>
                 <input class="form-control" mdInput placeholder="Template name" name="name" [(ngModel)]="smsInput.tempname">
               </md-form-field> -->
-                      <md-form-field class="example-full-width wd-100pc">
+                      
+              
+              <!--  Important to show suggestions
+                        
+                        
+                        <md-form-field class="example-full-width wd-100pc">
                         <input mdInput placeholder="Template" aria-label="State" [mdAutocomplete]="auto" [formControl]="templateCtrl" [(ngModel)]="smsInput.tempname">
                         <md-autocomplete #auto="mdAutocomplete">
                           <md-option *ngFor="let temp of filteredTemplates | async" [value]="temp.template_name">
                             <span>{{ temp.template_name }}</span>
                           </md-option>
                         </md-autocomplete>
-                      </md-form-field>
+                      </md-form-field> 
+                    
+                     Important to show suggestions Ends here   
+                    
+                    
+                    -->
+
+
+                    <input class="" placeholder= 'Enter template name' name="templatename" [(ngModel)]="smsInput.tempname">
+
+
                       <!-- <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
               <input type="radio" name="template" class=""  value="overWrite" [(ngModel)]="smsInput.radioOverWrite" >Overwrite
               <input type="radio" name="template" class=""  value="dontsave" [(ngModel)]="smsInput.radioDontsave" >Dont save -->
@@ -428,6 +443,19 @@
                     </div>
                 </div>
               </div>
+            </div>
+
+
+            <div class="">
+              <!-- <p>new div </p> -->
+              <tr>
+                <th>Template name</th>
+              </tr>
+              <tr *ngFor="let temp of getAllTemplates">
+                <td>
+                  <button md-raised-button class="" (click)="fillTemplateData(temp)">{{temp.template_name}}</button> 
+                </td>
+              </tr>
             </div>
             <div class="row align-items-center  brd-top-gray9 mgtop-15">
               <div class="col-md-2 col-sm-2 col-xs-2 align-items-start ">

@@ -68,15 +68,19 @@
               <br>
               <div class=" ">
                   <md-select placeholder="Filter By" name="type" [(ngModel)]="filterInput.type"class="full-width left">
-                      <md-option value="mostpoints">Most Points</md-option>
-                      <md-option value="leastpoints">Least Points</md-option>
+                      <md-option value="top10">Top 10 points</md-option>
+                      <md-option value="top50">Top 50 points</md-option>
+                      <md-option value="top100">Top 100 points</md-option>
+                      <md-option value="least10">Least 10 points</md-option>
+                      <md-option value="least50">Least 50 points</md-option>
+                      <md-option value="least100">Least 100 points</md-option>
                     </md-select>
 
                     <div class="input-group pd-10 ">
-                        <button md-raised-button color="primary" class="mgright-5">
+                        <button md-raised-button color="primary" class="mgright-5" (click)="search()">
                           <i class="fa fa-search" aria-hidden="true"></i> Search
                         </button>
-                        <button md-raised-button color="primary" >
+                        <button md-raised-button color="primary"  (click)="clearFilter()">
                           <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
                         </button>
                       </div>

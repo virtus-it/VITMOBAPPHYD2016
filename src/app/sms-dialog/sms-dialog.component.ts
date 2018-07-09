@@ -25,9 +25,9 @@ export class SmsDialogComponent implements OnInit {
   filteredStates: Observable<any[]>;
 
 
-  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService,  private authenticationService: AuthenticationService) {
+  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService, private authenticationService: AuthenticationService) {
 
-    
+
 
     this.stateCtrl = new FormControl();
     this.filteredStates = this.stateCtrl.valueChanges
@@ -35,33 +35,33 @@ export class SmsDialogComponent implements OnInit {
       .map(dist => dist ? this.filterDistributors(dist) : this.distributors.slice());
 
 
-      this.templateCtrl = new FormControl();
-      this.filteredTemplates = this.templateCtrl.valueChanges
-        .startWith(null)
-        .map(temp => temp ? this.findTemplate(temp) : this.getAllTemplates.slice());
+    // this.templateCtrl = new FormControl();
+    // this.filteredTemplates = this.templateCtrl.valueChanges
+    //   .startWith(null)
+    //   .map(temp => temp ? this.findTemplate(temp) : this.getAllTemplates.slice());
 
 
   }
 
-  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null , date: null , timeSlot:"" };
-  smsInput:any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"", count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}], radio : '' , tempname: "" };
+  orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null, date: null, timeSlot: "" };
+  smsInput: any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }], radio: '', tempname: "" };
   mobileDetails: any = [];
-  mobileDetailsCopy:any = [];
+  mobileDetailsCopy: any = [];
   distributors: any = [];
-  searchMobileNumber:string = "";
+  searchMobileNumber: string = "";
   checkAll: boolean = false;
-  getAllTemplates:any = [];
+  getAllTemplates: any = [];
   checkAllMobile: boolean = false;
-  tempName:any = "";
-  filterType:any = {template_name:"", template_desc: "", id: ""};
+  tempName: any = "";
+  filterType: any = { template_name: "", template_desc: "", id: "" };
   LastfilterRecords = false;
   smallLoader: boolean = false;
-  buttonCount:number = 0;
-  buttonActionCount:number = 0;
-  optionCount:number = 0;
-  silderCount:number = 0;
-  template:any = "";
-  tabPanelView:string="panel1";
+  buttonCount: number = 0;
+  buttonActionCount: number = 0;
+  optionCount: number = 0;
+  silderCount: number = 0;
+  template: any = "";
+  tabPanelView: string = "panel1";
   OrderTypeDetails = [
     { value: 'all', viewValue: 'All Orders' },
     { value: 'ordered', viewValue: 'Unassign Orders' },
@@ -77,14 +77,14 @@ export class SmsDialogComponent implements OnInit {
     { value: 'allsuppliers', viewValue: 'All Suppliers' },
     { value: 'alldistributors', viewValue: 'All Distributors' },
     { value: 'sms', viewValue: 'SMS' },
-    {value: 'notregistered' , viewValue:'Not registered'},
-    {value: 'distributorsdeliveredcustomer' , viewValue:'Distributors Delivered Customers'},
-    {value: 'distributorsdeliveredorders' , viewValue:'Distributors Delivered Orders'},
-    {value: 'distributorspendingorders' , viewValue:'Distributors Pending Orders '},
-    {value: 'customerspendingorders' , viewValue:'Customers Pending Orders '},
-    {value: 'distributorsdeliveryslot' , viewValue:'Distributors Delivery-Slot '},
-    {value: 'deliveryslotcustomers' , viewValue:'Delivery-Slot Customers '}
-    
+    { value: 'notregistered', viewValue: 'Not registered' },
+    { value: 'distributorsdeliveredcustomer', viewValue: 'Distributors Delivered Customers' },
+    { value: 'distributorsdeliveredorders', viewValue: 'Distributors Delivered Orders' },
+    { value: 'distributorspendingorders', viewValue: 'Distributors Pending Orders ' },
+    { value: 'customerspendingorders', viewValue: 'Customers Pending Orders ' },
+    { value: 'distributorsdeliveryslot', viewValue: 'Distributors Delivery-Slot ' },
+    { value: 'deliveryslotcustomers', viewValue: 'Delivery-Slot Customers ' }
+
 
     // { value: 'customersbyarea', viewValue: 'customer By Area' },
   ];
@@ -93,9 +93,9 @@ export class SmsDialogComponent implements OnInit {
   filterDistributors(name: string) {
     //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
-      
+
       dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
-    
+
     //console.log(finalDistributors);
     if (finalDistributors && finalDistributors.length > 0) {
       let findDistributor: any = {};
@@ -113,136 +113,145 @@ export class SmsDialogComponent implements OnInit {
     return finalDistributors;
   }
 
-  findTemplate(name:string){
-    // console.log(name);
-    if(this.getAllTemplates){
-    let finalTemplates = this.getAllTemplates.filter(temp =>  
-      temp.template_name.toLowerCase().indexOf(temp.template_name.toLowerCase()) === 0);
-    console.log(finalTemplates);
-    if (finalTemplates && finalTemplates.length > 0) {
-      let findTemplate: any = {};
-
-      findTemplate = _.find(finalTemplates, function (k, l) {
-        let tempDetails: any = k;
-        return tempDetails.template_name == name;
-      });
-
-      if (findTemplate) {
-        this.filterType.template_name = findTemplate.template_name;
-        this.filterType.template_desc = findTemplate.template_desc;
-        this.filterType.id = findTemplate.id;
-
-        let  JsonObj:any = {};
-        if( this.filterType.template_desc){
-          JsonObj = JSON.parse(this.filterType.template_desc);
-        console.log("json parsed successfully" , JsonObj  );
-        }
-        this.smsInput.body = JsonObj.body;
-        this.smsInput.name = JsonObj.name;    
-        this.smsInput.redirecturl = JsonObj.redirecturl;
-        this.smsInput.showcomment = JsonObj.showcomment;
-        this.smsInput.title = JsonObj.title;
-        // this.smsInput.type = JsonObj.type;
-        this.smsInput.type = JsonObj.notificationType;
-        this.smsInput.url = JsonObj.url;
-        this.smsInput.tempname = JsonObj.tempname;                
-        if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
-          let buttons= [];
-          this.smsInput.buttons= [];
-          _.each(JsonObj.buttonactions, function(i,j){
-            let buttonDetails:any = i;
-            let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
-            buttons.push(buttonObject)
-          });
-          this.smsInput.buttons = buttons;
-        }
-        console.log(this.smsInput.buttons);
 
 
-        if(JsonObj.option && JsonObj.option.length > 0){
-          let options =[];
-          this.smsInput.option = [];
-          _.each(JsonObj.option , function(i, j){
-            let optionDetails:any = i;
-            if(optionDetails && optionDetails.length > 0){
-            let optionObject = {name: optionDetails ,count:j+1}
-            options.push(optionObject);
-            }
-            else{
-              let optionObject = {}
-              options.push(optionObject);
-            }
-          });
-          this.smsInput.option = options;
-        }
+  // very important commented just not to show suggestions
+
+  //   findTemplate(name:string){
+  //     // console.log(name);
+  //     if(this.getAllTemplates){
+  //     let finalTemplates = this.getAllTemplates.filter(temp =>  
+  //       temp.template_name.toLowerCase().indexOf(temp.template_name.toLowerCase()) === 0);
+  //     console.log(finalTemplates);
+  //     if (finalTemplates && finalTemplates.length > 0) {
+  //       let findTemplate: any = {};
+
+  //       findTemplate = _.find(finalTemplates, function (k, l) {
+  //         let tempDetails: any = k;
+  //         return tempDetails.template_name == name;
+  //       });
+
+  //       if (findTemplate) {
+  //         this.filterType.template_name = findTemplate.template_name;
+  //         this.filterType.template_desc = findTemplate.template_desc;
+  //         this.filterType.id = findTemplate.id;
+
+  //         let  JsonObj:any = {};
+  //         if( this.filterType.template_desc){
+  //           JsonObj = JSON.parse(this.filterType.template_desc);
+  //         console.log("json parsed successfully" , JsonObj  );
+  //         }
+  //         this.smsInput.body = JsonObj.body;
+  //         this.smsInput.name = JsonObj.name;    
+  //         this.smsInput.redirecturl = JsonObj.redirecturl;
+  //         this.smsInput.showcomment = JsonObj.showcomment;
+  //         this.smsInput.title = JsonObj.title;
+  //         // this.smsInput.type = JsonObj.type;
+  //         this.smsInput.type = JsonObj.notificationType;
+  //         this.smsInput.url = JsonObj.url;
+  //         this.smsInput.tempname = JsonObj.tempname;                
+  //         if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
+  //           let buttons= [];
+  //           this.smsInput.buttons= [];
+  //           _.each(JsonObj.buttonactions, function(i,j){
+  //             let buttonDetails:any = i;
+  //             let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
+  //             buttons.push(buttonObject)
+  //           });
+  //           this.smsInput.buttons = buttons;
+  //         }
+  //         console.log(this.smsInput.buttons);
 
 
-        // if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
-        //   let buttons= [];
-        //   this.smsInput.buttons= [];
-        //   _.each(JsonObj.buttonactions, function(i,j){
-        //     let buttonDetails:any = i;
-        //     let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
-        //     buttons.push(buttonObject)
-        //   });
-        //   this.smsInput.buttons = buttons;
-        // }
+  //         if(JsonObj.option && JsonObj.option.length > 0){
+  //           let options =[];
+  //           this.smsInput.option = [];
+  //           _.each(JsonObj.option , function(i, j){
+  //             let optionDetails:any = i;
+  //             if(optionDetails && optionDetails.length > 0){
+  //             let optionObject = {name: optionDetails ,count:j+1}
+  //             options.push(optionObject);
+  //             }
+  //             else{
+  //               let optionObject = {}
+  //               options.push(optionObject);
+  //             }
+  //           });
+  //           this.smsInput.option = options;
+  //         }
 
-        if(JsonObj.sliderurl && JsonObj.sliderurl.length > 0){
-          let slider = [];
-          this.smsInput.sliderurl= [];
-          _.each(JsonObj.sliderurl , function(i , j){
-            let sliderDetails:any = i;
-      
-            let sliderObject = {image: sliderDetails.image ,count:j+1};
-            slider.push(sliderObject);
-        
-     
-          });
-          this.smsInput.sliderurl = slider;
-          
-        }
-        console.log(this.smsInput); 
-       
-      }
 
-    }
+  //         // if(JsonObj.buttonactions && JsonObj.buttonactions.length > 0){
+  //         //   let buttons= [];
+  //         //   this.smsInput.buttons= [];
+  //         //   _.each(JsonObj.buttonactions, function(i,j){
+  //         //     let buttonDetails:any = i;
+  //         //     let buttonObject = {name: buttonDetails.text, actiontype:buttonDetails.actiontype, count:j+1};
+  //         //     buttons.push(buttonObject)
+  //         //   });
+  //         //   this.smsInput.buttons = buttons;
+  //         // }
 
-    else {
-      if (name.length >= 3 && !this.LastfilterRecords) {
-        
-        this.getTemplates();
-      }
-    }
-    return finalTemplates;
+  //         if(JsonObj.sliderurl && JsonObj.sliderurl.length > 0){
+  //           let slider = [];
+  //           this.smsInput.sliderurl= [];
+  //           _.each(JsonObj.sliderurl , function(i , j){
+  //             let sliderDetails:any = i;
+
+  //             let sliderObject = {image: sliderDetails.image ,count:j+1};
+  //             slider.push(sliderObject);
+
+
+  //           });
+  //           this.smsInput.sliderurl = slider;
+
+  //         }
+  //         console.log(this.smsInput); 
+
+  //       }
+
+  //     }
+
+  //     else {
+  //       if (name.length >= 3 && !this.LastfilterRecords) {
+
+  //         this.getTemplates();
+  //       }
+  //     }
+  //     return finalTemplates;
+  //   }
+  //   // 
+  // }
+
+  // very important commented just not to show suggestions ends here
+
+
+
+
+  trackByFn(index, item) {
+    return index; // or item.id
   }
-  // 
-}
-
-trackByFn(index, item) {
-  return index; // or item.id
-}
 
 
 
   onChangeType() {
     this.orderinput.fromDate = null;
     this.orderinput.toDate = null;
-    this.orderinput.date = null;    
+    this.orderinput.date = null;
     this.orderinput.days = null;
     this.orderinput.distributorid = null;
 
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType , customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"", actiontype:"",count:0}], option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+    this.smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }] };
   }
-  onChangeSmsType(type){
-    this. smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "",title:"",type:"",redirecturl:"",showcomment:false,url:"",buttons:[{name:"",  actiontype:"",count:0}],option:[{name:"",count:0}],sliderurl:[{image:"",count:0}] };
+  onChangeSmsType(type) {
+    this.smsInput = { name: "", mobilenumber: [], body: "", smsType: this.smsInput.smsType, customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }] };
   }
   getMobileNumber() {
     this.smallLoader = true;
     let input = {
       User: {
-        "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType,"smstype":"",
-        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid , date:null , timeSlot: ""
+        "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType, "smstype": "",
+        "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid, date: null, timeSlot: ""
       }
     };
     if (this.orderinput.fromDate) {
@@ -251,21 +260,21 @@ trackByFn(index, item) {
     if (this.orderinput.toDate) {
       input.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
     }
-    if(this.orderinput.date){
+    if (this.orderinput.date) {
       input.User.date = moment(this.orderinput.date).format('YYYY-MM-DD 00:00:00');
     }
-    if(this.orderinput.timeSlot){
+    if (this.orderinput.timeSlot) {
 
       let selectedTime = this.orderinput.timeSlot;
       let endTime = selectedTime.split('-');
       let endTime2 = endTime[1];
-  let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
-  console.log("time24" , time24);
+      let time24 = moment(endTime2, ["hA"]).format("HH:mm:ss");
+      console.log("time24", time24);
 
-  input.User.date = moment(this.orderinput.date).format("YYYY-MM-DD");
-  var slotDate = input.User.date + " " + time24; 
-  
-  input.User.date = slotDate;
+      input.User.date = moment(this.orderinput.date).format("YYYY-MM-DD");
+      var slotDate = input.User.date + " " + time24;
+
+      input.User.date = slotDate;
 
       // input.User.timeSlot = time24;
     }
@@ -273,20 +282,20 @@ trackByFn(index, item) {
 
 
     // }
-    if(this.smsInput.smsType == 'sms'){
+    if (this.smsInput.smsType == 'sms') {
       input.User.smstype = this.smsInput.smsType
     }
-    else{
+    else {
       input.User.smstype = this.smsInput.smsType
     }
     console.log(input);
     this.smsService.getMobileNumbers(input)
       .subscribe(
-      output => this.getMobileNumberResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.smallLoader = false;
-      });
+        output => this.getMobileNumberResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.smallLoader = false;
+        });
   }
   getMobileNumberResult(result) {
     console.log(result);
@@ -295,20 +304,20 @@ trackByFn(index, item) {
     if (result && result.data && result.data.length) {
       _.each(result.data, function (i, j) {
         let details: any = i;
-        if(details.mobileno){
-        let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, fullName: details.fullname, referal_code: details.referal_code };
-        mobile.push(mobiles);
-      }
+        if (details.mobileno) {
+          let mobiles = { mobileno: details.mobileno, gcm_regid: details.gcm_regid, fullName: details.fullname, referal_code: details.referal_code };
+          mobile.push(mobiles);
+        }
 
       });
 
       this.mobileDetails = mobile;
       this.mobileDetailsCopy = mobile;
-    
+
     }
-    else{
-     this.mobileDetails= [];
-     this.mobileDetailsCopy = [];
+    else {
+      this.mobileDetails = [];
+      this.mobileDetailsCopy = [];
     }
   }
   searchMobileNo() {
@@ -346,7 +355,7 @@ trackByFn(index, item) {
     }
   }
 
-  
+
   saveMobileSms() {
     //console.log(this.smsInput);
     let createSmsInput = {
@@ -358,29 +367,29 @@ trackByFn(index, item) {
         "user_type": this.authenticationService.userType(),
         "transtype": "createsms",
         "type": this.smsInput.type,
-        "showcomment":this.smsInput.showcomment,
+        "showcomment": this.smsInput.showcomment,
         "loginid": this.authenticationService.loggedInUserId(),
         "apptype": this.authenticationService.appType(),
         "body": this.smsInput.body,
         "title": this.smsInput.title,
         "redirecturl": this.smsInput.redirecturl,
         "url": this.smsInput.url,
-        "buttons":[],
-        "buttonactions":[],
+        "buttons": [],
+        "buttonactions": [],
         "option": [],
-        "sliderurl":this.smsInput.sliderurl,
+        "sliderurl": this.smsInput.sliderurl,
         "tempname": this.smsInput.tempname
       }
     }
-   
+
 
     _.each(this.smsInput.buttons, function (i, j) {
       let details: any = i;
-      
+
       createSmsInput.User.buttons.push(details.name);
-      var action =  {text:details.name, actiontype: details.actiontype};
-      if(action.text.length > 0 && action.actiontype.length > 0 ){
-      createSmsInput.User.buttonactions.push(action);
+      var action = { text: details.name, actiontype: details.actiontype };
+      if (action.text.length > 0 && action.actiontype.length > 0) {
+        createSmsInput.User.buttonactions.push(action);
       }
 
     });
@@ -391,23 +400,23 @@ trackByFn(index, item) {
 
     _.each(this.smsInput.buttonactions, function (i, j) {
       let details: any = i;
-      
-      createSmsInput.User.buttonactions.push(details.text,details.actiontype);
+
+      createSmsInput.User.buttonactions.push(details.text, details.actiontype);
 
     });
 
 
-    if(this.orderinput.orderType == 'sms'){
+    if (this.orderinput.orderType == 'sms') {
       let mobileArray = this.smsInput.customMobilenumber.split(';');
       let modifiedNumbers = [];
       _.each(mobileArray, function (i, j) {
         let details: any = i;
-        var mobile = {mobileno:""};
-      if(details){
-        mobile.mobileno = details;
+        var mobile = { mobileno: "" };
+        if (details) {
+          mobile.mobileno = details;
 
-      }
-      modifiedNumbers.push(mobile);
+        }
+        modifiedNumbers.push(mobile);
 
       });
       createSmsInput.User.mobilenumber = modifiedNumbers;
@@ -416,53 +425,53 @@ trackByFn(index, item) {
 
     }
 
-    let formattedInput:any = {}
-      if( this.checkAll = true && createSmsInput.User.count > 400){
-        createSmsInput.User.mobilenumber = [];
-         formattedInput = {
-          type:'checkall',
-          getAllMobileInput : {User: {"user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(),type: this.orderinput.orderType,"smstype":"","apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid }},
-          sendSmsInput : createSmsInput,
-        }
-        if (this.orderinput.fromDate) {
-          formattedInput.getAllMobileInput.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
-        }
-        if (this.orderinput.toDate) {
-          formattedInput.getAllMobileInput.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
-        }
-        if(this.smsInput.smsType == 'sms'){
-          formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
-        }
-        else{
-          formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
-        }
-        console.log(formattedInput);
+    let formattedInput: any = {}
+    if (this.checkAll = true && createSmsInput.User.count > 400) {
+      createSmsInput.User.mobilenumber = [];
+      formattedInput = {
+        type: 'checkall',
+        getAllMobileInput: { User: { "user_type": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), type: this.orderinput.orderType, "smstype": "", "apptype": this.authenticationService.appType(), fromdate: null, todate: null, days: this.orderinput.days, distributorid: this.orderinput.distributorid } },
+        sendSmsInput: createSmsInput,
       }
-      else{
-         formattedInput = {
-          type:'',
-          getAllMobileInput : {},
-          sendSmsInput : createSmsInput,
-        }
-        console.log(formattedInput);
+      if (this.orderinput.fromDate) {
+        formattedInput.getAllMobileInput.User.fromdate = moment(this.orderinput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
       }
+      if (this.orderinput.toDate) {
+        formattedInput.getAllMobileInput.User.todate = moment(this.orderinput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      }
+      if (this.smsInput.smsType == 'sms') {
+        formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
+      }
+      else {
+        formattedInput.getAllMobileInput.User.smstype = this.smsInput.smsType
+      }
+      console.log(formattedInput);
+    }
+    else {
+      formattedInput = {
+        type: '',
+        getAllMobileInput: {},
+        sendSmsInput: createSmsInput,
+      }
+      console.log(formattedInput);
+    }
 
-      
-    console.log("input",formattedInput);
-   
+
+    console.log("input", formattedInput);
+
     this.smsService.CreateSms(formattedInput)
       .subscribe(
-      output => this.saveMobileSmsResult(output),
-      error => {
-      });
-      if(this.smsInput.radio == "save"){
-        this.saveTemplate(createSmsInput);
-      }
-      else if(this.smsInput.radio == "overWrite"){
-         this.templateOverwrite(createSmsInput);
-      }
-      
-      
+        output => this.saveMobileSmsResult(output),
+        error => {
+        });
+    if (this.smsInput.radio == "save") {
+      this.saveTemplate(createSmsInput);
+    }
+    else if (this.smsInput.radio == "overWrite") {
+      this.templateOverwrite(createSmsInput);
+    }
+
+
   }
   saveMobileSmsResult(result) {
     console.log(result);
@@ -470,40 +479,40 @@ trackByFn(index, item) {
   }
 
 
-  saveTemplate(data){
+  saveTemplate(data) {
     let input = Object.assign({}, data)
-   input.User.transtype = "notification";
-   input.User.notificationType = data.User.type;
-   input.User.type = "notification";
-   
+    input.User.transtype = "notification";
+    input.User.notificationType = data.User.type;
+    input.User.type = this.smsInput.type; // Wajahat ka ghapla need to  give type as radio/ website but it should still be saved.
+
 
     console.log(input);
     this.followupService.followUpTemplate(input)
-    .subscribe(
-      output => this.saveTemplateResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.saveTemplateResult(output),
+        error => {
+        });
   }
-  saveTemplateResult(result){
-    if(result.result == 'success'){
+  saveTemplateResult(result) {
+    if (result.result == 'success') {
 
     }
   }
 
-  templateOverwrite(data){
+  templateOverwrite(data) {
     let input = Object.assign({}, data)
     console.log(data);
     input.User.transtype = "updatenotification";
     input.User.id = this.filterType.id;
     console.log(input);
     this.followupService.followUpTemplate(input)
-    .subscribe(
-      output => this.updateTemplateResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.updateTemplateResult(output),
+        error => {
+        });
   }
-  updateTemplateResult(result){
-    if(result == 'success'){
+  updateTemplateResult(result) {
+    if (result == 'success') {
 
     }
 
@@ -517,10 +526,10 @@ trackByFn(index, item) {
     //console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(
-      output => this.getDistributorsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      });
+        output => this.getDistributorsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+        });
   }
   getDistributorsResult(data) {
     //console.log(data);
@@ -544,92 +553,169 @@ trackByFn(index, item) {
     this.thisDialogRef.close('Cancel');
   }
 
-  addButton(){
+  addButton() {
     this.buttonCount = this.buttonCount + 1;
-    let buttonObject = {name:"",count:this.buttonCount};
-this.smsInput.buttons.push(buttonObject);
-// this.buttonActionCount = this.buttonActionCount + 1;
-// let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
-// this.smsInput.buttonactions.push(buttonActionObject);
+    let buttonObject = { name: "", count: this.buttonCount };
+    this.smsInput.buttons.push(buttonObject);
+    // this.buttonActionCount = this.buttonActionCount + 1;
+    // let buttonActionObject = {text: "", actiontype: "" , count:this.buttonActionCount};
+    // this.smsInput.buttonactions.push(buttonActionObject);
 
   }
-  removeButton(item){
-    let filteredButton = _.filter(this.smsInput.buttons, function(e:any) {
-      return e.count !== item.count;  
-  });
-  let filteredActionButton = _.filter(this.smsInput.buttonactions, function(e:any) {
-    return e.count !== item.count;
-  });
-  this.smsInput.buttonactions = filteredActionButton;
-  this.smsInput.buttons = filteredButton;
+  removeButton(item) {
+    let filteredButton = _.filter(this.smsInput.buttons, function (e: any) {
+      return e.count !== item.count;
+    });
+    let filteredActionButton = _.filter(this.smsInput.buttonactions, function (e: any) {
+      return e.count !== item.count;
+    });
+    this.smsInput.buttonactions = filteredActionButton;
+    this.smsInput.buttons = filteredButton;
   }
-  addOption(){
+  addOption() {
     this.optionCount = this.optionCount + 1;
-    let optionObject = {name:"",count:this.optionCount};
-this.smsInput.option.push(optionObject);
+    let optionObject = { name: "", count: this.optionCount };
+    this.smsInput.option.push(optionObject);
 
   }
-  removeoption(item){
-    let filteredOption = _.filter(this.smsInput.option, function(e:any) {
+  removeoption(item) {
+    let filteredOption = _.filter(this.smsInput.option, function (e: any) {
       return e.count !== item.count;
-  });
-  this.smsInput.option = filteredOption;
-  
+    });
+    this.smsInput.option = filteredOption;
+
   }
-  addSlider(){
+  addSlider() {
     this.silderCount = this.silderCount + 1;
-    let sliderObject = {image:"",count:this.silderCount};
-this.smsInput.sliderurl.push(sliderObject);
+    let sliderObject = { image: "", count: this.silderCount };
+    this.smsInput.sliderurl.push(sliderObject);
 
   }
-  removeSilder(item){
-    let filteredOption = _.filter(this.smsInput.sliderurl, function(e:any) {
+  removeSilder(item) {
+    let filteredOption = _.filter(this.smsInput.sliderurl, function (e: any) {
       return e.count !== item.count;
-  });
-  this.smsInput.sliderurl = filteredOption;
-  
+    });
+    this.smsInput.sliderurl = filteredOption;
+
   }
 
 
-  getTemplates(){
-    let input = {"User":{"user_type":"dealer","transtype":"getnotification","loginid":this.authenticationService.loggedInUserId()}};
+  getTemplates() {
+    let input = { "User": { "user_type": "dealer", "transtype": "getnotification", "loginid": this.authenticationService.loggedInUserId() } };
     console.log(input);
     this.followupService.followUpTemplate(input)
-    .subscribe(
-    output => this.getTemplatesResult(output),
-    error => {
-    });
+      .subscribe(
+        output => this.getTemplatesResult(output),
+        error => {
+        });
   }
-  getTemplatesResult(result){
+  getTemplatesResult(result) {
     console.log(result);
-    if(result.result == 'success'){
+    if (result.result == 'success') {
       let allTemplates = [];
-      if(result.data && result.data.length >0){
-      _.each(result.data, function(i,j){
-        let details:any = i;
-        if(details.template_name !== null){ 
-          allTemplates.push(details);
-          console.log(allTemplates);
-        }
-      });
-    
-    }
-    this.getAllTemplates = allTemplates; 
-    console.log("check" ,  this.getAllTemplates);
+      if (result.data && result.data.length > 0) {
+        _.each(result.data, function (i, j) {
+          let details: any = i;
+          if (details.template_name !== null) {
+            allTemplates.push(details);
+            console.log(allTemplates);
+          }
+        });
+
+      }
+      this.getAllTemplates = allTemplates;
+      console.log("check", this.getAllTemplates);
     }
   }
 
-    //function to show panel
-    showTabPanel(panelName) {
-      this.tabPanelView=panelName;
-      
-        }
+  //function to show panel
+  showTabPanel(panelName) {
+    this.tabPanelView = panelName;
+
+  }
 
 
   // addTemplateInput(){
   //   let bodyObject = this.getAllTemplates.template_desc;
   //   this.smsInput.body.push(bodyObject);
   // }
+
+
+
+  fillTemplateData(data) {
+    console.log(data);
+    this.filterType.template_name = data.template_name;
+    this.filterType.template_desc = data.template_desc;
+    let JsonObj: any = {};
+    if (this.filterType.template_desc) {
+      JsonObj = JSON.parse(this.filterType.template_desc);
+      console.log("json parsed successfully", JsonObj);
+    }
+    this.smsInput.body = JsonObj.body;
+    this.smsInput.name = JsonObj.name;
+    this.smsInput.redirecturl = JsonObj.redirecturl;
+    this.smsInput.showcomment = JsonObj.showcomment;
+    this.smsInput.title = JsonObj.title;
+    this.smsInput.type = JsonObj.type;
+    // this.smsInput.type = JsonObj.notificationType;
+    this.smsInput.url = JsonObj.url;
+    this.smsInput.tempname = JsonObj.tempname;
+    if (JsonObj.buttonactions && JsonObj.buttonactions.length > 0) {
+      let buttons = [];
+      this.smsInput.buttons = [];
+      _.each(JsonObj.buttonactions, function (i, j) {
+        let buttonDetails: any = i;
+        let buttonObject = { name: buttonDetails.text, actiontype: buttonDetails.actiontype, count: j + 1 };
+        buttons.push(buttonObject)
+      });
+      this.smsInput.buttons = buttons;
+    }
+    console.log(this.smsInput.buttons);
+    if (JsonObj.option && JsonObj.option.length > 0) {
+      let options = [];
+      this.smsInput.option = [];
+      _.each(JsonObj.option, function (i, j) {
+        let optionDetails: any = i;
+        if (optionDetails && optionDetails.length > 0) {
+          let optionObject = { name: optionDetails, count: j + 1 }
+          options.push(optionObject);
+        }
+        else {
+          let optionObject = {}
+          options.push(optionObject);
+        }
+      });
+      this.smsInput.option = options;
+    }
+
+    if (JsonObj.buttonactions && JsonObj.buttonactions.length > 0) {
+      let buttons = [];
+      this.smsInput.buttons = [];
+      _.each(JsonObj.buttonactions, function (i, j) {
+        let buttonDetails: any = i;
+        let buttonObject = { name: buttonDetails.text, actiontype: buttonDetails.actiontype, count: j + 1 };
+        buttons.push(buttonObject)
+      });
+      this.smsInput.buttons = buttons;
+    }
+
+    if (JsonObj.sliderurl && JsonObj.sliderurl.length > 0) {
+      let slider = [];
+      this.smsInput.sliderurl = [];
+      _.each(JsonObj.sliderurl, function (i, j) {
+        let sliderDetails: any = i;
+
+        let sliderObject = { image: sliderDetails.image, count: j + 1 };
+        slider.push(sliderObject);
+
+
+      });
+      this.smsInput.sliderurl = slider;
+
+    }
+    console.log(this.smsInput);
+
+  }
 
 
 

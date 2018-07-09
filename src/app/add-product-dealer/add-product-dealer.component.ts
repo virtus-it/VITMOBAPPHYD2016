@@ -31,7 +31,8 @@ export class AddProductDealerComponent implements OnInit {
       appType: this.authenticationService.appType()
     };
     console.log(input);
-    this.productService.getProducts(input).subscribe(
+    this.productService.getProducts(input)
+    .subscribe(
       output => this.dealerAddProductResult(output),
       error => {
         //console.log("error in dealer products");
@@ -46,17 +47,30 @@ export class AddProductDealerComponent implements OnInit {
 
   dealerAddProductResult(result) {
     if ((result.result = 'success')) {
-      let prodId: any = [];
-      let prodName: any = [];
+      console.log(result.data , 'result.data');
+      // let prodId: any = [];
+      let category: any = [];
       let finalProducts: any = [];
+      let brandName :any = [];
       let Details = this.Details.distProducts;
+      console.log(Details , 'Details ie dist products');
       var removeProducts = _.each(result.data, function(i, j) {
         let details: any = i;
 
-        prodName = details.pname;
+        // prodName = details.pname;
+        // prodId = details.productid;
+        brandName = details.brandname;
+        category = details.category;
         let distProds = _.find(Details, function(k, l) {
           let detailData: any = k;
-          return detailData.pname == prodName;
+          // if((detailData.brandname == brandName) && (detailData.category == category)){
+          //   console.log('true');
+          // }
+          // else{
+          //   console.log('false');
+          // }
+          return ((detailData.brandname == brandName) && (detailData.category == category) );
+          
         });
         if (!distProds) {
           finalProducts.push(details);

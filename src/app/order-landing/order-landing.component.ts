@@ -1603,7 +1603,7 @@ this.orderLandingService.getOrdersByfilter(input)
     }
 
         clickedMarker(data){
-          let formattedData = {customerid  : data[0].user_id , data: data , 'type': 'mapviewAllOrders' }
+          let formattedData = {customerid  : data.userid , data: data , 'type': 'mapviewAllOrders' }
           let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
 
             width: '95%',

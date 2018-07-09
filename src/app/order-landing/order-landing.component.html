@@ -978,7 +978,7 @@
         <div class="col">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
 
-            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(allOrdersDetails)" [latitude]="m.lat"
+            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m)" [latitude]="m.lat"
               [longitude]="m.lng" [iconUrl]="m.icon">
             </agm-marker>
 
