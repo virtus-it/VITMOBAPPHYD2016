@@ -332,8 +332,11 @@
                     
                     -->
 
-
-                    <input class="" placeholder= 'Enter template name' name="templatename" [(ngModel)]="smsInput.tempname">
+                    <div class="col">
+                    <md-form-field class="example-full-width wd-100pc">
+                      <input class="form-control" mdInput placeholder='Enter template name' name="templatename" [(ngModel)]="smsInput.tempname">
+                    </md-form-field>
+                  </div>
 
 
                       <!-- <input type="radio" name="template" class="" value="save" [(ngModel)]="smsInput.radiosave"> save
