@@ -18,18 +18,20 @@
             <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th width="12%">S.No</th>
-            <th width="40%">Product Name</th>
-            <th width="25%">Type</th>
-            <th width="22%">Add Stock</th>
+            <th width="10%">S.No</th>
+            <th width="30%">Product Name</th>
+            <th width="30%">Category</th>
+            <th width="20%">Type</th>
+            <th width="10%">Add Stock</th>
              </tr>
         </thead>
         <tbody>
           <tr  *ngFor="let stock of ProductsList let i = index" [attr.data-index]="i">
-            <td width="12%" class="left" scope="row">{{i + 1}}</td>
-            <td width="40%" class="left capital">{{stock.product.productname}}</td>
-            <td width="25%" class="left capital">{{stock.product.producttype}}</td>
-            <td width="22%" class="left capital"> 
+            <td width="10%" class="left" scope="row">{{i + 1}}</td>
+            <td width="30%" class="left capital">{{stock.product.productname}}</td>
+            <td width="30%" class="left capital">{{stock.product.category}}</td>
+            <td width="20%" class="left capital">{{stock.product.producttype}}</td>
+            <td width="10%" class="left capital"> 
               <input class="form-control center brd-bottom" mdInput [(ngModel)]="stock.product.stock"/>
                    </td>
            </tr>

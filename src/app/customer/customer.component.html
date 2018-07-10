@@ -128,6 +128,8 @@
         <i class="fa fa-users"></i> Customers</h4>
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+      <i class="fa fa-arrow-circle-up logo-color" title="Descending order" (click)="sortDescending()"></i>
+      <i class="fa fa-arrow-circle-down logo-color" title="Ascending order" (click)="sortAscending()"></i>
       <a class="cursor logo-color " title="Download" (click)='downloadCustomer()'>
         <i class="fa fa-download fs-20" aria-hidden="true"></i>
       </a>
@@ -199,7 +201,7 @@
   <div class='pd-15'>
 
       <!-- | sorting : 'firstname' -->
-    <div class="row brd-box-box" *ngFor="let customers of customerList ">
+    <div class="row brd-box-box" *ngFor="let customers of customerList">
       <div class="col-4 left bg-color-bg">
         <div class="row align-items-center">
           <div class="col-2  pd-10 " align-self-center>
@@ -325,6 +327,14 @@
                 <i class="fa fa-file-powerpoint-o"></i> Points
               </div>
             </div>
+
+            <div class="row pdbottom-5">
+              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showAllNotifications(customers)">
+                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> Notification
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>

@@ -44,6 +44,7 @@ export class AddStockDistributorComponent implements OnInit {
         inputFormatcopy.product.producttype = detail.ptype;
         inputFormatcopy.product.product_cost = detail.pcost;
         inputFormatcopy.product.productname = detail.brandname;
+        inputFormatcopy.product.category = detail.category;
         inputData.push(inputFormatcopy);
 
       });

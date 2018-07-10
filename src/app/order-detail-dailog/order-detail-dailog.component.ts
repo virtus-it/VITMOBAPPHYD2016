@@ -12,6 +12,7 @@ import { QuickNotificationComponent } from '../quick-notification/quick-notifica
 import { SmsServiceService } from '../sms/sms-service.service';
 import { MessageTemplateComponent } from '../message-template/message-template.component';
 import { FollowUpService } from '../follow-up/follow-up.service';
+import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { LoaderService } from '../login/loader.service';
 import * as _ from 'underscore';
 
@@ -32,6 +33,8 @@ export class OrderDetailDailogComponent implements OnInit {
     followUpList:any = [];
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
+
+    notificationDetails = {"templatename": "" , "status":"sent" };
 
     // notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""], "buttonactions":[{}], "option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
 
@@ -338,11 +341,11 @@ onCloseModel(){
     // error => {
     // });
 // }
-saveMobileSmsResult(result) {
-  if(result.result == 'success'){
+// saveMobileSmsResult(result) {
+//   if(result.result == 'success'){
 
-  }
-}
+//   }
+// }
     
 
 getTemplates(data){
@@ -352,8 +355,8 @@ getTemplates(data){
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
-        if (result =='success') {
-
+        if (result) {
+            this.notificationDetails.templatename = result.User.tempname;
         }
 
     });
@@ -386,6 +389,21 @@ getfollowUpdetails() {
   }
   }
 
+
+  editQuantity(data){
+    let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
+
+        width: '500px',
+        data: data
+      });
+      
+      dialogRefEditQun.afterClosed().subscribe(result => {
+        //console.log(`Dialog closed: ${result}`);
+        if (result == 'success') {
+            this.getOrderDetailsById();
+        }
+  });
+  }
 
 
 

@@ -16,6 +16,8 @@
         <div class="container-fluid">
           <b>
             <i class="fa fa-file-text-o"></i> Order Details</b>
+
+            <i class="fa fa-edit logo-color" title="Edit Quantity" (click)="editQuantity(dailogOrderDetails)"></i>
           <div class="row form-group mgtop-5">
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
@@ -347,6 +349,9 @@
             <div class="p-1 pad-btn">
               <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
             </div>
+
+            <small class="" *ngIf="this.notificationDetails.templatename">{{this.notificationDetails.templatename}}</small> &nbsp; &nbsp; &nbsp; 
+            <small *ngIf="this.notificationDetails.templatename"> {{this.notificationDetails.status}}</small>
 
 
 

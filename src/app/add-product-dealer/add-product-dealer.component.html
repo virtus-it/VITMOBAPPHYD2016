@@ -15,18 +15,19 @@
   <table class="table table-hover table-fixedheader">
     <thead>
       <tr>
-        <th width="20%">Product Name</th>
-        <th width="20%">Product Type</th>
-        <th width="20%">Price</th>
-        <th width="20%">Service charges</th>
-        <th width="20%">Exp Delivery Charges</th>
+        <th width="16%">Product Name</th>
+        <th width="16%">Product Type</th>
+        <th width="16%">Category</th>
+        <th width="16%">Price</th>
+        <th width="16%">Service charges</th>
+        <th width="16%">Exp Delivery Charges</th>
       </tr>
     </thead>
     <tbody>
 
       <tr *ngFor="let product of productsList">
 
-        <td class="left" width="20%">
+        <td class="left" width="16%">
           <div class="form-check form-check-inline">
             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
               <input type="checkbox" class="custom-control-input" (change)="productDetails(product, $event.target.checked)">
@@ -35,10 +36,11 @@
             </label>
           </div>
         </td>
-        <td class="left" width="20%">{{product.ptype}}</td>
-        <td class="left" width="20%">{{product.pcost}}</td>
-        <td class="left" width="20%">{{product.servicecharge}}</td>
-        <td class="left" width="20%">{{product.expressdeliverycharges}}</td>
+        <td class="left" width="16%">{{product.ptype}}</td>
+        <td class="left" width="16%">{{product.category}}</td>
+        <td class="left" width="16%">{{product.pcost}}</td>
+        <td class="left" width="16%">{{product.servicecharge}}</td>
+        <td class="left" width="16%">{{product.expressdeliverycharges}}</td>
 
     </tbody>
 

@@ -16,6 +16,7 @@ import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details
 import { SetpricecustomerComponent } from '../setpricecustomer/setpricecustomer.component';
 import { CustomerScheduleEditDailogComponent } from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
+import {NotificationDetailsComponent } from '../notification-details/notification-details.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
@@ -413,6 +414,50 @@ export class CustomerComponent implements OnInit {
             }
 
         });
+    }
+
+    // sendQuickNotification(data){
+    //     let formattedData = {data: data , "type":"notificationFromCustomers"}
+    //     let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
+    //         width: '600px',
+    //         data: formattedData
+    //     });
+    //     dialogRefeditStatus.afterClosed().subscribe(result => {
+    //         ////console.log(`Dialog closed: ${result}`);
+    //         if (result =='success') {
+    
+    //         }
+    
+    //     });
+    // }
+
+    sortDescending(){
+        var sortablearray = this.customerList;
+        var sortedList = _.sortBy(sortablearray, 'firstname').reverse();
+        console.log(sortedList);
+        this.customerList = sortedList;
+    }
+
+    sortAscending(){
+        var sortablearray = this.customerList;
+        var sortedList = _.sortBy(sortablearray, 'firstname');
+        console.log(sortedList);
+        this.customerList = sortedList;
+    }
+
+    showAllNotifications(data){
+        let dialogRefeditStatus = this.dialog.open(NotificationDetailsComponent, {
+            width: '85%',
+            data: data
+        });
+        dialogRefeditStatus.afterClosed().subscribe(result => {
+            ////console.log(`Dialog closed: ${result}`);
+            if (result =='success') {
+    
+            }
+    
+        });
+
     }
 
 

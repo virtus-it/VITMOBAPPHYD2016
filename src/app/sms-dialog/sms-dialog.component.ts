@@ -426,7 +426,7 @@ export class SmsDialogComponent implements OnInit {
     }
 
     let formattedInput: any = {}
-    if (this.checkAll = true && createSmsInput.User.count > 400) {
+    if (this.checkAll = true && createSmsInput.User.count > 10) {
       createSmsInput.User.mobilenumber = [];
       formattedInput = {
         type: 'checkall',

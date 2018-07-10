@@ -64,16 +64,20 @@ export class QuickNotificationComponent implements OnInit {
           this.filterType.template_desc = this.filterType.template_desc.replace("<<CUSTOMER_PHNO>>" , replace.orderby_mobileno);
 
         
-          let mobileObject = [{"mobileno":this.Details.orderby_mobileno,"gcm_regid":this.Details.gcm_regid,"fullName":this.Details.orderby_firstname}];
-          JsonObj.mobilenumber =mobileObject;
+          let mobileObject = [{}];
+          if(this.Details.type == 'notificationFromCustomers'){
+            mobileObject =  [{"mobileno":this.Details.data.mobileno,"gcm_regid":this.Details.data.gcm_regid,"fullName":this.Details.firstname}];
+          }
+          else{
+            mobileObject = [{"mobileno":this.Details.orderby_mobileno,"gcm_regid":this.Details.gcm_regid,"fullName":this.Details.orderby_firstname}];
+          }
+
+          JsonObj.mobilenumber = mobileObject;
           JsonObj.transtype = "createsms";
           var key = 'id';
           delete JsonObj[key];
           this.smsInput = {"User": JsonObj};
-        
-
-         
-
+      
     }
 
     
@@ -92,12 +96,6 @@ export class QuickNotificationComponent implements OnInit {
    }
 
 
-
-  saveMobileSmsResult(result){
-    if(result == 'success'){
-
-    }
-  }
 
 
 getTemplates(){
@@ -118,13 +116,13 @@ getTemplatesResult(result){
       let details:any = i;
       if(details.template_name !== null){ 
         allTemplates.push(details);
-        console.log(allTemplates);
+        // console.log(allTemplates);
       }
     });
   
   }
   this.getAllTemplates = allTemplates; 
-  console.log("check" ,  this.getAllTemplates);
+  // console.log("check" ,  this.getAllTemplates);
   }
 }
 
@@ -143,7 +141,8 @@ sendNotification(){
 }
 sendNotificationResult(result){
   if(result.result == 'success'){
-    this.thisDialogRef.close('Cancel');
+    let sendbackData = this.smsInput
+    this.thisDialogRef.close(sendbackData);
 
   }
 }

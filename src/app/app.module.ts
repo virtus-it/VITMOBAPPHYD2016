@@ -128,6 +128,7 @@ import { AddVehicleComponent } from './add-vehicle/add-vehicle.component';
 import { AssignVehicleComponent } from './assign-vehicle/assign-vehicle.component';
 import { TrackSupplierComponent } from './track-supplier/track-supplier.component';
 import { SortingPipe } from './pipes/sorting.pipe';
+import { NotificationDetailsComponent } from './notification-details/notification-details.component';
 
 
 
@@ -234,6 +235,7 @@ import { SortingPipe } from './pipes/sorting.pipe';
         AssignVehicleComponent,
         TrackSupplierComponent,
         SortingPipe,
+        NotificationDetailsComponent,
 
      
         
@@ -387,7 +389,8 @@ import { SortingPipe } from './pipes/sorting.pipe';
          DistributorsAvailabilityComponent,
          AddVehicleComponent,
          AssignVehicleComponent,
-         TrackSupplierComponent
+         TrackSupplierComponent,
+         NotificationDetailsComponent
       
 
 

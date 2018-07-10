@@ -161,7 +161,7 @@ export class DistributorCreateDialogComponent implements OnInit {
      }
      openStockDialog(data) {
         let dialogRef = this.dialog.open(AddStockDistributorComponent, {
-            width: '700px',
+            width: '70%',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
