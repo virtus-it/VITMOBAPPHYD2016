@@ -3,10 +3,35 @@
     <i class="fa fa-file-text-o"></i> Order Coverage
   </div>
   <div class="col">
-    <span>Customer : {{orderDetail.orders.customer.firstname}}</span>
+    <!-- <span>Customer : {{orderDetail.orders.customer.firstname}}</span>
     <span class="mgleft-10">Brand : {{orderDetail.orders.brandname}}</span>
     <span>{{orderDetail.orders.prod_type}}</span> -
-    <span>{{orderDetail.orders.quantity}}(qty)</span>
+    <span>{{orderDetail.orders.quantity}}(qty)</span> -->
+
+    <span>Customer :
+       <span *ngIf="orderDetail.orders && orderDetail.orders.orderby_firstname"> {{orderDetail.orders.orderby_firstname}}</span>
+       <span *ngIf = '!orderDetail.orders.orderby_firstname'> - </span>
+    </span>
+
+    <span>|  Category : 
+      <span *ngIf="orderDetail.orders && orderDetail.orders.category">
+        {{orderDetail.orders.category}}</span>
+      <span *ngIf = "!orderDetail.orders.category"> - </span>
+    </span>
+
+    <span> | Product type : 
+      <span *ngIf="orderDetail.orders && orderDetail.orders.prod_type">
+        {{orderDetail.orders.prod_type}}</span>
+      <span *ngIf="!orderDetail.orders.prod_type"> - </span>
+    </span>
+
+    <span> | Quantity : 
+      <span *ngIf="orderDetail.orders && orderDetail.orders.quantity">
+        {{orderDetail.orders.quantity}}</span>
+      <span *ngIf="!orderDetail.orders.quantity">
+             - </span>
+    </span>
+
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong (click)="onCloseCancel()">

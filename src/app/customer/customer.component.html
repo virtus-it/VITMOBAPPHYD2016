@@ -127,6 +127,64 @@
       <h4>
         <i class="fa fa-users"></i> Customers</h4>
     </div>
+
+    <div class="">
+
+        <div class="form-group">
+            <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
+              <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
+                {{type.viewValue}}
+              </md-option>
+            </md-select>
+          </div>
+
+
+          <div class="form-group" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+              <!-- ng-if="key == 'City' || key == 'County'"> -->
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
+              </md-form-field>
+            </div>
+            <!-- <div class="form-group" *ngIf="filterInput.root.searchtype == 'address'">
+              <md-form-field class="example-full-width">
+                  <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">  
+              </md-form-field>
+            </div> -->
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'paymenttype'">
+              <md-select placeholder="Filter By" name="paymenttype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
+                <md-option value="cod">COD</md-option>
+                <md-option value="credit">CREDIT</md-option>
+                <md-option value="codwithpending">Cod with Pending</md-option>
+                <md-option value="advlesscans">Advance Amt
+                  < Available Cans</md-option>
+              </md-select>
+            </div>
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
+              <md-select placeholder="Filter By" name="customertype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
+                <md-option value="residential">Residential</md-option>
+                <md-option value="corperate">Corporate</md-option>
+                <md-option value="commercial">Commercial</md-option>
+              </md-select>
+            </div>
+            <div class="form-group" *ngIf="filterInput.root.searchtype == 'followupdate'">
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followUpdate">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker></md-datepicker>
+              </md-form-field>
+            </div>
+
+                <i class="fa fa-search logo-color cursor" aria-hidden="true" (click)="getCustomerByFilter('true')"></i> 
+
+                <i class="fa fa-filter logo-color cursor" aria-hidden="true" (click)="clearFilter()"></i> 
+
+      
+    </div>
+
+    
+
+
+
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
       <i class="fa fa-arrow-circle-up logo-color" title="Descending order" (click)="sortDescending()"></i>
       <i class="fa fa-arrow-circle-down logo-color" title="Ascending order" (click)="sortAscending()"></i>
@@ -139,7 +197,7 @@
 <!-- 
       <button (click)="sort()">Sort</button> -->
       <a class="cursor logo-color mgleft-10">
-        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+        <!-- <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i> -->
 
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
@@ -218,7 +276,7 @@
           <div class="col">
             <div class="row">
               <b class="capital col-4 left">Customer: </b>
-              <div class="left capitalize col left" *ngIf="customers.firstname">
+              <div class="left capitalize col left" *ngIf="customers && customers.firstname">
                 <span class="onhovertooltip-140" title=" {{customers.firstname}} {{customers.lastname}} ">
                   <!-- <span class="success"></span> -->
                   <!-- <span *ngIf="customers.isappdownloaded" class="">
@@ -241,6 +299,14 @@
               <b class="capital col-4 left">Address: </b>
               <span class="onhovertooltip-150 col left" title="{{customers.address}}">{{customers.address}}</span>
             </div>
+            <div class="row">
+              <b class="">Referral Code:</b>
+              <span class="">Ref code</span>
+            </div>
+            <div class="row">
+              <b class="">Reference Code: </b>
+              <span class="">Reference Code</span>
+            </div>
           </div>
         </div>
       </div>
@@ -257,7 +323,7 @@
         </div>
         <div class="row">
           <b class="capital col-4 left">Distributor: </b>
-          <span class="onhovertooltip-150 capitalize col left" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer">
+          <span class="onhovertooltip-150 capitalize col left" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer" *ngIf="customers.dealers && customers.dealers.firstname">
             {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
           </span>
         </div>

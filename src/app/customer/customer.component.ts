@@ -40,7 +40,7 @@ export class CustomerComponent implements OnInit {
     loginId: any = 0;
     superDealer = true;
     customerCare = true;
-    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
         { value: 'name', viewValue: 'Name' },
@@ -380,7 +380,7 @@ export class CustomerComponent implements OnInit {
         this.showFilterDailog = false;
         this.filterRecords = false;
         this.followUpdate = null;
-        this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+        this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
         this.getCustomerList(true);
 
     }

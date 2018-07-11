@@ -192,7 +192,7 @@ else if(this.orderDetail.type == 'coveragePage'){
     
 
     this.productsDetails = _.find(this.productList, function (e: any) { return e.productid == id; });
-let orderId= '';
+    let orderId= '';
     if(this.orderDetail.type == "coveragePage"){
       orderId = this.orderDetail.data.orders.order_id;
     }
@@ -203,7 +203,17 @@ let orderId= '';
       orderId = this.orderDetail.orderDetails.order_id;
     }
 
+    if(this.orderDetail.orderDetails && this.orderDetail.orderDetails.empty_cans){
     this.productsDetails.emptycans = this.orderDetail.orderDetails.empty_cans;
+    }
+    else{
+      this.productsDetails.emptycans = 0;
+    }
+    if(this.emptyCans){
+      this.productsDetails.emptycans = this.emptyCans;
+    }
+
+
     let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":this.productsDetails.emptycans  , "advance_amt": 150 * (this.productsDetails.quantity - this.productsDetails.emptycans) }};
 
 
@@ -358,7 +368,12 @@ changeOfQuantity(data){
    
     console.log(this.orderDetail);
     this.getProductsList();
+    if(this.orderDetail.orderDetails && this.orderDetail.orderDetails.empty_cans){
     this.emptyCans = this.orderDetail.orderDetails.empty_cans;
+    }
+    else{
+      this.emptyCans = 0;
+    }
     if(this.orderDetail.orderDetails.empty_cans === null || this.orderDetail.orderDetails.empty_cans == ''){
       this.emptyCans = 0;
     }

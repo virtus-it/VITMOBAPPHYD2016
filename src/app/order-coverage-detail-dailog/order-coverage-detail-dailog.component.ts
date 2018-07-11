@@ -50,6 +50,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   public searchControl: FormControl;
   polygonArray: any = [];
   displayPolygon: any = [];
+  floatPolygon:any = [];
   listOfDistributors: any = [];
   dialogRef: any = '';
   order = { orderId: '' };
@@ -110,7 +111,17 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     //this.displayPolygon = this.orderDetail.polygons;
 
     this.polygonArray = this.authenticationService.getPolygons();
-    this.displayPolygon = this.authenticationService.getPolygons();
+    this.floatPolygon = this.authenticationService.getPolygons();
+    _.each( this.floatPolygon , function(i , j){
+      let details: any = i;
+      _.each(details.path , function(k , l){
+        let detailData:any = k;
+        detailData.lat = parseFloat(detailData.lat);
+        detailData.lng = parseFloat(detailData.lng);
+      });
+    });
+
+    this.displayPolygon = this.floatPolygon
   }
   click(event, polygon) {
     this.listOfDistributors = [];

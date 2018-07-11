@@ -1194,6 +1194,8 @@
                     <p class="td-label mgbottom-0">
                       Supplier Code</p>
                     <b class="capitalize" *ngIf="complete.customersource == 'DistributorCustomer'">{{complete.customer.suppliercode}}</b>
+
+                    <b class="capitalize" *ngIf="!complete.customer.suppliercode"> - </b>
                   </div>
                 </div>
                 <div class="row form-group">
