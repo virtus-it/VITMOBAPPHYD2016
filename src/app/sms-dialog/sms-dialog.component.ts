@@ -44,7 +44,7 @@ export class SmsDialogComponent implements OnInit {
   }
 
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null, date: null, timeSlot: "" };
-  smsInput: any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }], radio: '', tempname: "" };
+  smsInput: any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }], radio: '', tempname: "" , navigateto : '' };
   mobileDetails: any = [];
   mobileDetailsCopy: any = [];
   distributors: any = [];
@@ -378,7 +378,8 @@ export class SmsDialogComponent implements OnInit {
         "buttonactions": [],
         "option": [],
         "sliderurl": this.smsInput.sliderurl,
-        "tempname": this.smsInput.tempname
+        "tempname": this.smsInput.tempname,
+        "navigateto": this.smsInput.navigateto
       }
     }
 
