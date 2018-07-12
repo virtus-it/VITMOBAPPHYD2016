@@ -407,7 +407,7 @@
                     </div>
                     <div class="col-sm-4  col-md-4 col-lg-4 right">
                       <p class="td-label mgbottom-0">Product Type </p>
-                      <b class="capitalize onhovertooltip-90">
+                      <b class="capitalize onhovertooltip-90" title="{{forward.prod_type}}">
                         {{forward.prod_type}} </b>
                     </div>
                   </div>
@@ -502,17 +502,17 @@
                     </div>
                   </div>
                   <div class="row form-group">
-                    <div class="col-sm-7  col-md-7  col-lg-7 left">
+                    <div class="col-sm-12  col-md-6  col-lg-6 left">
                       <p class="td-label mgbottom-0">Delivery Time</p>
                       <b class=" danger">{{forward.delivery_exceptedtime}}</b>
                     </div>
-                    <div class="col-5 right" *ngIf="forward.customersource == 'DistributorCustomer'">
+                    <div class="col-6 right" *ngIf="forward.customersource == 'DistributorCustomer'">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-100  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                     </div>
-                    <div class="col-5 right" *ngIf="forward.customersource == 'MoyaCustomer'">
+                    <div class="col-6 right" *ngIf="forward.customersource == 'MoyaCustomer'">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-100 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
                     </div>
                   </div>
 
@@ -767,7 +767,7 @@
 
                     <div class="col-sm-4  col-md-4 col-lg-4 right">
                       <p class="td-label mgbottom-0">Product Type </p>
-                      <b class="capitalize onhovertooltip-90">
+                      <b class="capitalize onhovertooltip-90" title="{{allorder.prod_type}}">
                         {{allorder.prod_type}} </b>
                     </div>
                   </div>
@@ -851,13 +851,13 @@
                     </div>
                   </div>
                   <div class=" row form-group">
-                    <div class="col-sm-7  col-md-7  col-lg-7 ">
+                    <div class="col-sm-6  col-md-6  col-lg-6">
                       <p class="td-label mgbottom-0">Delivery Time</p>
                       <b class="left danger">{{allorder.delivery_exceptedtime}}</b>
                     </div>
-                    <div class="col-sm-5  col-md-5  col-lg-5  right">
+                    <div class="col-sm-6  col-md-6 col-lg-6  right">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b class=" capitalize onhovertooltip-100" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
+                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
                   <div class="row form-group">
@@ -1117,7 +1117,7 @@
 
                     <div class="col-sm-4  col-md-4 col-lg-4 right">
                       <p class="td-label mgbottom-0">Product Type </p>
-                      <b class="capitalize onhovertooltip-90">
+                      <b class="capitalize onhovertooltip-90" title="{{complete.prod_type}}">
                         {{complete.prod_type}} </b>
                     </div>
                   </div>
@@ -1200,16 +1200,16 @@
                 </div>
                 <div class="row form-group">
 
-                  <div class="col-sm-7  col-md-7  col-lg-7 left">
+                  <div class="col-sm-12  col-md-6  col-lg-6 left">
                     <p class="td-label mgbottom-0">Delivery Time</p>
                     <b class=" danger">{{complete.delivery_exceptedtime}}</b>
                   </div>
-                  <div class="col-5 right" *ngIf="complete.customersource == 'DistributorCustomer'">
+                  <div class="col-6 right" *ngIf="complete.customersource == 'DistributorCustomer'">
                     <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
 
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>
-                  <div class="col-5 right" *ngIf="complete.customersource == 'MoyaCustomer'">
+                  <div class="col-6 right" *ngIf="complete.customersource == 'MoyaCustomer'">
                     <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
                   </div>

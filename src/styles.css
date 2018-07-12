@@ -169,6 +169,13 @@ table thead {
   overflow: hidden;
   display: inline-block;
   }
+  .onhovertooltip-90{
+    width:90px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .onhovertooltip-200{
     width:200px;
    text-overflow: ellipsis;
@@ -1089,40 +1096,40 @@ overflow-x: auto;
 overflow-x: auto;
   }
   }
-/* 
-  @media (min-width: 1200px){
-    .customerList-height{
+
+  /* @media (min-width: 1200px){
+    .customerSchList-height{
       height: 60vh !important;
     }
-    .customerList-height .table{
+    .customerSchList-height .table{
       max-height: 50vh !important;
     }
-    .customerList-height  table.table-fixedheader>tbody{
+    .customerSchList-height  table.table-fixedheader>tbody{
       height: 45vh !important;
   overflow-x: auto;
     }
     }
   
   @media (min-width: 992px){
-    .customerList-height{
+    .customerSchList-height{
       height: 60vh !important;
     }
-    .customerList-height .table{
+    .customerSchList-height .table{
       max-height: 50vh !important;
     }
-    .customerList-height  table.table-fixedheader>tbody{
+    .customerSchList-height  table.table-fixedheader>tbody{
       height: 45vh !important;
   overflow-x: auto;
     }
     }
   @media (min-width: 768px){
-    .customerList-height{
+    .customerSchList-height{
       height: 60vh !important;
     }
-    .customerList-height .table{
+    .customerSchList-height .table{
       max-height: 50vh !important;
     }
-    .customerList-height  table.table-fixedheader>tbody{
+    .customerSchList-height  table.table-fixedheader>tbody{
       height: 45vh !important;
   overflow-x: auto;
     }

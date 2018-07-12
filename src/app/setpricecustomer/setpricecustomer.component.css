@@ -1,6 +1,6 @@
 .table-scroll{
     overflow-x: hidden;
-    height: 300px;
+    height:65vh;
     overflow-y: auto;
 }
 .bg-ddd{

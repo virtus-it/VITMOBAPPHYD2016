@@ -11,39 +11,40 @@
 <div>
   <div id="" class="container-fluid pd-15x25 brd-bottom">
     <md-dialog-content layout="column">
-      <table class="table table-hover table-striped">
+      <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th width="20%">Product Type</th>
+            <th width="29%">Product Type</th>
             <th width="6%" title="Quantity">Qty</th>
-            <th width="18%">Schedule</th>
+            <th width="35%">Schedule</th>
             <!-- <th width="">Created By</th> -->
-            <th width="12%">Expected Time</th>
+            <th width="15%">Expected Time</th>
             <th width="8%" class="no-th-arrow">Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let schedule of scheduleOrdersList">
-            <td class="left"><span class="onhovertooltip-200" title="{{schedule.product_type}} {{schedule.product_quantity}}">{{schedule.product_type}} {{schedule.product_quantity}}</span></td>
-            <td class="left">{{schedule.quantity}} </td>
-            <td class="left"><span class="onhovertooltip-250" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span></td>
+            <td class="left"  width="30%">
+              <span class="onhovertooltip-200" title="{{schedule.product_type}} {{schedule.product_quantity}}">{{schedule.product_type}} {{schedule.product_quantity}}</span>
+            </td>
+            <td class="left" width="6%">{{schedule.quantity}} </td>
+            <td class="left" width="35%">
+              <span class="onhovertooltip-250" title="{{schedule.weekdays}} {{schedule.days}}">{{schedule.weekdays}} {{schedule.days}}</span>
+            </td>
             <!-- <td class="left" *ngIf="schedule">{{}}</td> -->
-            <td class="left">{{schedule.delivery_exceptedtime}}</td>
-            <td class="left">
+            <td class="left" width="15%">{{schedule.delivery_exceptedtime}}</td>
+            <td class="left" width="8%" >
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" (click)="editSchedule(schedule)"> </i> &nbsp;
               <i class="fa fa-trash danger" aria-hidden="true" (click)="deleteSchedule(schedule)"></i>
             </td>
         </tbody>
       </table>
-<br>
-      
-          <h4 class="warning oneline center">
-              <a *ngIf="noRecord">
-            <i aria-hidden="true" class="fa fa-frown-o"></i>
-
-                      Record Not Available</a> </h4>
-    
-
+      <br>
+      <h4 class="warning oneline center">
+        <a *ngIf="noRecord">
+          <i aria-hidden="true" class="fa fa-frown-o"></i>
+          Record Not Available</a>
+      </h4>
     </md-dialog-content>
   </div>
   <div class="row float-right pdright-30 mgbottom-20">
