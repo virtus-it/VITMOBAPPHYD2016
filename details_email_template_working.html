@@ -1,0 +1,157 @@
+<html>
+<head>
+	<title>Moya - Transaction Details </title>
+
+	<style type="">
+	body {
+		font-family: acumin-pro,sans-serif;
+	}
+
+	table {
+		border-spacing: 10px;
+	}
+
+
+	b {
+		color: #444;
+	}
+</style>
+
+</head>
+<body>
+	<div class="container60" id="wrap" style="width:80%;
+	margin-left:auto;
+	margin-right:auto;">
+	<div class="row">
+		<!-- style="border: 2px solid #1074c0;" -->
+		<table style="margin-top: 30px;">
+			<tr>
+				<td style="width:80%">
+					<img src="{#mainlogo#}" alt="MOYA" style="width: 130px;
+					height: 50px;">
+				</td>
+				<td>
+					<img src="http://moya.online/Resources/images/virtusit_logo.png" alt="Virtus-it" style="width: 130px;
+					height: 50px;margin-right: 10px">
+
+				</td>
+			</tr>
+		</table>
+
+
+		<div class="transaction_details col-md-12 mgtop-20" style="">
+			<div class="col-md-12" style="">
+
+				<!-- <p style="margin-left: 50px"> Dear <a>Dealer</a>,</p> -->
+				<!-- <p style="margin-left: 50px">This email contains the information about your order for today ie <a>{#date#}. </a></p> -->
+
+				<h4 style="background: #1074c0;
+				padding-top: 10px;
+				color: #fff;
+/*				margin-left: 50px;
+*/				padding-left: 10px;
+				width: 25%;
+				padding-bottom: 10px;">
+				Transaction Details
+			</h4>
+		</div>
+
+		<div class="col-md-12 " style="margin-top: -10px;">
+			<table>
+				<tr>
+					<td style="width: 50%">
+						<label class="control-label " for="">Dealer name </label><br>
+						<b class="bstyle">{#name#}</b>
+					</td>
+
+
+					<td style="width: 48%">
+						<label class="control-label " for="dealerid">Dealer Organisation </label><br>
+						<b class="bstyle">{#orgname#}</b>
+					</td>
+				</tr>
+				<tr>
+
+					<td style="width: 47%">
+						<div style="margin-top: 10px;margin-bottom: 10px">
+							<label class="control-label " for="dealerid">Dealer Address </label><br>
+							<b class="bstyle">{#address#}</b>
+						</div>
+					</td>
+
+					<td style="width: 47%">
+						<label class="control-label " for="dealerid">Total sales</label><br>
+
+						<b class="bstyle">{#totalsales#}</b>
+					</td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+
+
+	<div class="transaction_details col-md-12 mgtop-20" style="">
+		<div  >
+			<table border="1" style="border-spacing: 0">
+				<tbody>
+					<tr>                           
+					<td>Invoice</td>                            
+					<td>Subject</td>							
+					<td>Quantity </td>
+					<td>Total Amount</td>
+
+				</tr>
+				{#products#}
+			</tbody>
+		</table>
+		</div>
+
+	</div>
+	<div class="col-md-12">
+		<!-- <p> -->
+			<!-- Please find the attachement as pdf file which contians more information about your transaction details. -->
+			<!-- </p> -->
+			<p style="color:#1074c0 ">Thank you for doing business with <b style="color:#1074c0 "> Virtus-IT India Private Limited</b> </p>
+			<p>Have a great day!</p>
+		</div>
+		<hr width="100%" style="background: #1074c0">
+		<div class="contact col-md-12" style="margin-top: 15px;">
+			<b>Contact our customer support team for any clarification</b><br>
+			<p>Best Regards</p>
+			<table style="margin-top: 10px;margin-bottom: 10px">
+				<tr>
+					<td>
+						<img src="http://moya.online/Resources/images/team.png" alt="Suport Team" width="20px" height="20px">
+					</td>
+					<td><i>Support Team</i></td>
+				</tr>
+				<tr>
+					<td>
+						<img src="http://moya.online/Resources/images/v_logo.png" alt="Virtus-it" width="20px" height="20px">
+					</td>
+					<td><i>Virtus-IT India Private Limited</i></td>
+				</tr>
+				<tr>
+					<td>
+						<img src="http://moya.online/Resources/images/img_phone.png" alt="Mobile" width="20px" height="20px">
+					</td>
+					<td><i>Mobile: +44 (0)771 113 0879</i></td>
+				</tr>
+				<tr>
+					<td>
+						<img src="http://moya.online/Resources/images/email.png" alt="Email" width="20px" height="20px">
+					</td>
+					<td><i>Email: support@virtus-it.com</i></td>
+				</tr>
+			</table>
+
+		</div>
+
+	</div>
+</div>
+
+
+</body>
+</html>

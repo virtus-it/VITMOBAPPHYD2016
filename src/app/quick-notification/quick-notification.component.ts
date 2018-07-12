@@ -74,6 +74,7 @@ export class QuickNotificationComponent implements OnInit {
 
           JsonObj.mobilenumber = mobileObject;
           JsonObj.transtype = "createsms";
+          JsonObj.type = JsonObj.notificationType;
           var key = 'id';
           delete JsonObj[key];
           this.smsInput = {"User": JsonObj};
