@@ -22,3 +22,7 @@ agm-map {
 .mgtopleft-20{
   margin: 20px 0px 0px 20px !important;
 }
+table.table-fixedheader>tbody {
+  overflow-y: auto;
+  max-height: 55vh !important;
+}

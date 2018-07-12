@@ -15,3 +15,7 @@
   .cap{
     text-transform: capitalize;
   }
+  table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 55vh !important;
+}

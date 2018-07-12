@@ -1,156 +1,124 @@
-
-
 <div class="dist-style minheight-500">
-    <div class=" row justify-content-between distIcon-style">
-      <div class="col-md-4  col-sm-4  col-lg-4 left">
-        <h4>
-          <i class="fa fa-address-card-o"></i> Profile Update</h4>
-
-         
-      </div>
-
-      <!-- <div class="col-md-4  col-sm-4  col-lg-4">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" width="200" height="80" alt="user" class="circle">
-      </div> -->
-      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-
-          <a class="cursor logo-color " title="Add Vehicle" (click)='addVehicle()'>
-              <i class="fa fa-truck" aria-hidden="true"></i><small>Add Vehicle</small>
-          </a>
-
-          <a class="cursor logo-color " title="Change Password" (click)='changePassword()'>
-              <i class="fa fa-key" aria-hidden="true"></i><small>Change Password</small>
-          </a>
-
-          <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image" ></label>
-          <input class="" id="files"  style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">
-          <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage()"></i>
+  <div class=" row justify-content-between distIcon-style">
+    <div class="col-md-4  col-sm-4  col-lg-4 left">
+      <h4>
+        <i class="fa fa-address-card-o"></i> Profile Update</h4>
 
 
-      </div>
     </div>
 
-    <!-- <img class="" src="../assets/images/red" title="image"> -->
-      
-    <div class="container-fluid contbg">
-        <div class="jumbotron boxsdw bg-fade">
-          <div class="row">
-            <div class="col-6 ">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname" >
-                <md-error>
-                  First Name is
-                  <strong>required</strong>
-                </md-error>
-              </md-form-field>
+    <!-- <div class="col-md-4  col-sm-4  col-lg-4">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Wikipedia_User-ICON_byNightsight.png" width="200" height="80" alt="user" class="circle">
+      </div> -->
+    <div class="col-sm-6 col-md-4 col-lg-4 align-self-center right">
 
-      
-            </div>
-            <div class="col-6">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname">
-                <md-error>
-                  Last Name is
-                  <strong>required</strong>
-                </md-error>
-              </md-form-field>
+      <a class="cursor logo-color " title="Add Vehicle" (click)='addVehicle()'>
+        <i class="fa fa-truck" aria-hidden="true"></i>
+        <small>Add Vehicle</small>
+      </a>
 
-              
+      <a class="cursor logo-color " title="Change Password" (click)='changePassword()'>
+        <i class="fa fa-key" aria-hidden="true"></i>
+        <small>Change Password</small>
+      </a>
 
-              
-     
-            
-            </div>
-          </div>
-          <div class="row">
-              <div class="col-6 ">
-            <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno" >
-              <md-error>
-                Phone Number is
-                <strong>required</strong>
-              </md-error>
-            </md-form-field>
-            </div>
-            <div class="col-6 ">
-                <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="Email id" name="emailid"   [(ngModel)]="profileUpdate.emailid">
-                    <md-error>
-                        Email id is
-                        <strong>required</strong>
-                      </md-error>
-                  </md-form-field>
-              </div>
-          </div>
+      <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
+      <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">
+      <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage()"></i>
+    </div>
+  </div>
 
-          <div class="row">
-          <div class="col-6 ">
+  <!-- <img class="" src="../assets/images/red" title="image"> -->
+
+  <div class="container-fluid contbg">
+    <div class="jumbotron boxsdw bg-fade">
+      <div class="row">
+        <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname"  >
+            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname">
+            <md-error>
+              First Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-6">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname">
+            <md-error>
+              Last Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno">
+            <md-error>
+              Phone Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Email id" name="emailid" [(ngModel)]="profileUpdate.emailid">
+            <md-error>
+              Email id is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-6 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname">
           </md-form-field>
         </div>
 
-          <div class="col-6 ">
+        <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode"  [disabled] = "(isSuperDealer == false) || (customerCare == false)">
+            <input class="form-control" mdInput placeholder="Reference Code" name="referenceCode" [(ngModel)]="profileUpdate.referCode"
+              [disabled]="(isSuperDealer == false) || (customerCare == false)">
           </md-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col">
+          <div class="">
+            <md-form-field class="wd-80pc">
+              <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="profileUpdate.address"></textarea>
+            </md-form-field>
           </div>
+          <div class="smalltxt-style">
+            <small class="">Characters Remaining :
+              <span class="danger"> {{500 - profileUpdate.address.length}}</span>
+            </small>
           </div>
-
-
-          <div class="row">
-            <div class="col">
-              <div class="">
-              <md-form-field class="wd-80pc">
-                <textarea class="form-control" mdInput placeholder="Address" name="Address"  [(ngModel)]="profileUpdate.address"  ></textarea>
-              </md-form-field>
-            </div>
-            <div class="smalltxt-style">
-              <small class="">Characters Remaining :
-                <span class="danger"> {{500 - profileUpdate.address.length}}</span>
-              </small>
-              </div>
-              <div *ngIf="updateStatus">
-                  <span >Profile Updated successfully</span>
-                </div> 
-                <div class="success" *ngIf="imageUplaodSuccess == true">
-                  <small>Image Uploaded successfully</small>
-                </div>
-                <div class="error" *ngIf="imageUpdateError == true">
-                  <small>Please select image size less than 35kb</small>
-                </div>
-            </div>
-
+          <div *ngIf="updateStatus">
+            <span>Profile Updated successfully</span>
           </div>
+          <div class="success" *ngIf="imageUplaodSuccess == true">
+            <h3>Image Uploaded successfully</h3>
+          </div>
+          <div class="error" *ngIf="imageUpdateError == true">
+            <h3>Please select image size less than 35kb</h3>
+          </div>
+        </div>
 
-          <div class="row">
-              <div class="col align-self-center">
- <button md-raised-button class="btn-primary" (click)="updateProfile()">UPDATE</button>&nbsp;
-</div>
-</div>
-</div>
-</div>
-</div>
+      </div>
 
-          <!-- <div class="row">
-            <div class="col-md-4 col-sm-6">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="city" name="city" [(ngModel)]="profileUpdate.city">
-              </md-form-field>
-                <md-form-field class="">
-                    <input class="form-control" mdInput placeholder="State" name="state"   [(ngModel)]="profileUpdate.state">
-                  </md-form-field>
-
-            </div>
-            
-            
-            <div class="col-md-4 col-sm-6">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Pin Code" name="pincode"   [(ngModel)]="profileUpdate.pincode">
-                </md-form-field>
-              
-              </div>
-            </div> -->
-
-
-  
+      <div class="row">
+        <div class="col align-self-center">
+          <button md-raised-button class="btn-primary" (click)="updateProfile()">UPDATE</button>&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

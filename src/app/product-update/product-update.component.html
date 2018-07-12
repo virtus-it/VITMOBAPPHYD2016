@@ -3,16 +3,6 @@
       <i class="fa fa-dot-circle-o"></i> Update Status </div>
 
 
-      <div class="">
-        <md-form-field class="example-full-width">
-          <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
-          <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
-              <span class="capitalize">{{prod.fullname}}</span>
-            </md-option>
-          </md-autocomplete>
-        </md-form-field>
-      </div>
 
 
 
@@ -30,6 +20,16 @@
           </div>
           <div class="row">
             
+      <div class="col">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
+                <span class="capitalize">{{prod.fullname}}</span>
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
+        </div>
               
               <div class="col">
                   <md-select placeholder="Filter By" [(ngModel)]="stockStatusValue" name="type" class="full-width left" >

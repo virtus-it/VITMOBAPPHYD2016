@@ -15,8 +15,10 @@ agm-map {
     color:orangered;
     text-align: center;
 }
-.table{
-    margin-bottom: 0px !important;
+
+  table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 55vh !important;
 }
 .fs-14{
     font-size: 14px !important;

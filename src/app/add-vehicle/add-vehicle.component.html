@@ -31,25 +31,21 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-4 pdtop-20">
+          <div class="col-4">
             <md-form-field class="">
               <input class="form-control" mdInput placeholder="Type" name="type" [(ngModel)]="vehicleInput.User.vehicletype">
             </md-form-field>
           </div>
           <div class="col-8">
-              <div class="form-group">
-              <md-select class="form-control" mdInput placeholder="Fuel Type" name="fueltype" [(ngModel)]="vehicleInput.User.fueltype">
+              <md-select class="wd-100pc" mdInput placeholder="Fuel Type" name="fueltype" [(ngModel)]="vehicleInput.User.fueltype">
                 <md-option value="petrol">Petrol</md-option>
                 <md-option value="diesel">Diesel</md-option>
               </md-select>
-              </div>
-  
           </div>
         </div>
-      </div>
-
-            
+      </div>         
     </form>
+
   </md-dialog-content>
   <div class="row float-right pdright-30 mgbottom-20">
     <md-dialog-actions align="end">

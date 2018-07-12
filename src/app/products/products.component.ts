@@ -89,7 +89,7 @@ export class ProductsComponent implements OnInit {
   UpdateStatus(data) {
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
 
-      width: '35%',
+      width: '45%',
       data: data
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
@@ -120,7 +120,6 @@ export class ProductsComponent implements OnInit {
   }
   addStock(data) {
     let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
-
       width: '600px',
       data: data
     });

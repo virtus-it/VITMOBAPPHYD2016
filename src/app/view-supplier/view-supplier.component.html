@@ -10,70 +10,35 @@
   </div>
 </div>
 
-<div  class="row pd-15 mg-0 brd-bottom">
-    <table class="table table-hover table-fixedheader">
-        <thead>
-        <tr>
-          <th width="20%">Name</th>
-          <th width="12%">Mobile</th>
-          <th width="25%">Address</th>
-          <th width="15%" class="no-th-arrow">View Orders</th>
-          <th width="15%" class="no-th-arrow">Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        
-        <tr *ngFor="let supplier of supplierList;  let i = index" [attr.data-index]="i">
-          <td  width="20%" class="left">{{supplier.firstname}}</td>
-          <td width="12%" class="left">{{supplier.mobileno}}</td>
-          <td  width="25%" class="left">{{supplier.address}}</td>
-          <td  width="15%" class="left" class="btn btn-link" (click)="supplierOrdersList(supplier)">Orders</td>
-          <td class="left"  width="15%">
-            <i class="fa fa-pencil-square-o btn-link" (click)="editSupplier(supplier)" aria-hidden="true"></i> &nbsp;
-            <i class="fa fa-trash danger" (click)="deleteSupplier(supplier)" aria-hidden="true"></i>
-          </td>
-      </tbody>
-     
-        <br>
- 
-              <h4 *ngIf="noRecords" class="warning oneline center"><i class="fa fa-frown-o" aria-hidden="true"></i>
-                 Record Not Available</h4>
-     
-   </table>
-</div>
-
-<!-- <md-dialog-content layout="column">
-  <div class="row pd-15x25 brd-bottom">
-      <div id="" class="row pd-15x10 mg-0">
-          <div class="col">    
-              <table class="table table-hover table-striped">
-                <thead>
-                <tr>
-                  <th width="">S.No</th>
-                  <th width="">User</th>
-                  <th width="">Mobile no</th>
-                  <th width="">Address</th>
-                  <th width="">View Orders</th>
-                  <th width="">Edit</th>
-                  <th width="">Delete</th>
-                </tr>
-              </thead>
-    <tbody>
+<div class="row pd-15 mg-0 brd-bottom">
+  <table class="table table-hover table-fixedheader">
+    <thead>
       <tr>
-          <td width="" class="left" class="cellpadding" scope="row">  </td>
-          <td width="" class="left" class="cellpadding" scope="row"> </td>
-          <td width="" class="left" class="cellpadding" scope="row"> </td>
-          <td width="" class="left" class="cellpadding" scope="row"></td>
-          <td width="" class="left" class="cellpadding" scope="row"></td>
-          <td width="" class="left" class="cellpadding" scope="row"></td>
-          <td width="" class="left" class="cellpadding" scope="row"></td>
+        <th width="24%">Name</th>
+        <th width="15%">Mobile</th>
+        <th width="34%">Address</th>
+        <th width="15%" class="no-th-arrow">View Orders</th>
+        <th width="10%" class="no-th-arrow">Action</th>
       </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let supplier of supplierList;  let i = index" [attr.data-index]="i">
+        <td width="25%" class="left capitalize">{{supplier.firstname}}</td>
+        <td width="15%" class="left">{{supplier.mobileno}}</td>
+        <td width="35%" class="left capitalize">{{supplier.address}}</td>
+        <td width="15%" class="left " class="btn btn-link" (click)="supplierOrdersList(supplier)">Orders</td>
+        <td class="left" width="10%">
+          <i class="fa fa-pencil-square-o btn-link" (click)="editSupplier(supplier)" aria-hidden="true"></i> &nbsp;
+          <i class="fa fa-trash danger" (click)="deleteSupplier(supplier)" aria-hidden="true"></i>
+        </td>
     </tbody>
-    </table>
-    </div>
-    </div>
-    </div>
-    </md-dialog-content> -->
+  </table>
+  <br>
+
+  <h4 *ngIf="noRecords" class="warning oneline center">
+    <i class="fa fa-frown-o" aria-hidden="true"></i>
+    Record Not Available</h4>
+</div>
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">

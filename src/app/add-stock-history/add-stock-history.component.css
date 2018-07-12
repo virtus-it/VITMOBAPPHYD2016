@@ -3,3 +3,7 @@ padding:10px 15px;
 border: 1px solid #f1f1f2;
 background: #fafafa;
 }
+table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 50vh !important;
+}

@@ -1,3 +1,10 @@
 .oneline{
     white-space: nowrap;
  }
+ .table{
+    margin-bottom: 0px !important;
+  }
+  table.table-fixedheader>tbody {
+    overflow-y: auto;
+    max-height: 55vh !important;
+}

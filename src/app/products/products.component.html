@@ -4,7 +4,7 @@
       <h4>
         <i class="fa fa-gift"></i> Products</h4>
     </div>
-    <div class="col-md-4  col-sm-4  col-lg-4 right">
+    <div class="col-md-6 col-sm-12  col-lg-7 right">
       <!-- <button md-raised-button color="primary" (click)='addInvoice()'>
         <i class="fa fa-plus-circle" aria-hidden="true"></i> Add Invoice
       </button>-->
@@ -20,16 +20,14 @@
 
       <button class="" md-raised-button (click)="getProducts()" *ngIf="distributorView == false" >All Products</button>
 
+      <i aria-hidden="true" class="fa fa-history logo-color fs-20 mgleft-10" title="Reset" *ngIf="distributorView == true" (click)="reset()"></i>
 
-
-      <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" *ngIf="distributorView == true" (click)="reset()"></i>
-
-      <a class="cursor logo-color " title="Add Product" (click)='addEditProduct()' *ngIf="(superDealer || customerCare) && distributorView == false">
+      <a class="cursor logo-color  mgleft-10" title="Add Product" (click)='addEditProduct()' *ngIf="(superDealer || customerCare) && distributorView == false">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
       </a>
     </div>
   </div>
-  <div *ngIf="distributorView == false">
+  <div *ngIf="distributorView == false" class="pd-15">
     <table class="table table-hover">
       <tbody *ngFor="let products of productList">
         <tr class="border-topbottom bg-fade-blue">
@@ -155,7 +153,7 @@
 
 
 
-  <div class="" *ngIf="distributorView == true">
+  <div class="pd-15" *ngIf="distributorView == true">
 
     <div class="col">
         <md-form-field class="example-full-width">
@@ -166,7 +164,6 @@
               </md-option>
             </md-autocomplete>
           </md-form-field>
-
     </div>
 <h3 *ngIf="noProductsError == true">No Products Available</h3>
       <table class="table table-hover" *ngIf="noProductsError == false">

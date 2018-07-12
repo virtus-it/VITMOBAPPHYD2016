@@ -7,16 +7,7 @@
     <i class="fa fa-line-chart"></i> Stock History
   </div>
 
-  <div class="">
-    <md-form-field class="example-full-width">
-      <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
-      <md-autocomplete #auto="mdAutocomplete">
-        <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
-          <span class="capitalize">{{prod.fullname}}</span>
-        </md-option>
-      </md-autocomplete>
-    </md-form-field>
-  </div>
+
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
       <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
@@ -72,12 +63,34 @@
         </div>
       </div> -->
       <div class="col">
-          <h5 class="left capital" *ngIf= "Detail.type != 'distributorspage'"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Detail.pname}}</span> - <span class="gray8">{{Detail.ptype}}</span></h5>
-          <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'"><i class="fa fa-gift fs-20"></i>
-          <span class="gray6">{{Detail.data.pname}}</span> - <span class="gray8">{{Detail.data.ptype}}</span>
+        <h5 class="left capital" *ngIf="Detail.type != 'distributorspage'">
+          <i class="fa fa-gift fs-20" aria-hidden="true"></i>
+          <span class="gray6">{{Detail.pname}}</span> -
+          <span class="gray8">{{Detail.ptype}}</span>
         </h5>
+        <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'">
+          <i class="fa fa-gift fs-20"></i>
+          <span class="gray6">{{Detail.data.pname}}</span> -
+          <span class="gray8">{{Detail.data.ptype}}</span>
+        </h5>
+        <div class="row">
+          <div class="col">
+            <md-form-field class="example-full-width">
+              <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+              <md-autocomplete #auto="mdAutocomplete">
+                <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname">
+                  <span class="capitalize">{{prod.fullname}}</span>
+                </md-option>
+              </md-autocomplete>
+            </md-form-field>
+          </div>
+          <div class="col align-self-center">
+            <h5>
+              <span>Count : {{sum}} </span>
+            </h5>
+          </div>
+        </div>
 
-        <h5><span>Count : {{sum}} </span></h5>
         <table class="table table-hover table-striped table-fixedheader">
           <thead>
             <tr>
@@ -91,22 +104,22 @@
             <tr *ngFor="let stock of StockList">
 
               <td width="15%">{{stock.pcost}}</td>
-              <td width="15%" >{{stock.stock}}</td>
+              <td width="15%">{{stock.stock}}</td>
               <td width="30%">{{stock.returnemptycans}}</td>
               <td width="40%">{{stock.modifieddate | utcDate}}</td>
-            </tr>     
-               </tbody>
-</table>
-              <div *ngIf="noRecord">
-       
-                  <h4 class="warning oneline center">
-                    <i aria-hidden="true" class="fa fa-frown-o"></i>
-                    Record Not Available</h4>
-             
-              </div>
+            </tr>
+          </tbody>
+        </table>
+        <div *ngIf="noRecord">
 
-       
-      
+          <h4 class="warning oneline center">
+            <i aria-hidden="true" class="fa fa-frown-o"></i>
+            Record Not Available</h4>
+
+        </div>
+
+
+
       </div>
     </div>
   </div>
