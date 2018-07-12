@@ -36,8 +36,10 @@ export class CoverageComponent implements OnInit {
   listOfDistributors: any = [];
   distributors:any = [];
   dialogRef: any = '';
+  stockpoints:any = [];
   order = { orderId: '' };
   orderDetails = [];
+  showMarkers: marker[] = [];
   markers: any = [
     {
       lat: '',
@@ -54,6 +56,7 @@ export class CoverageComponent implements OnInit {
   // ];
 
   tabPanelView:any = 'distributors';
+  changeButton : boolean  = false;
 
   orderslocationData: marker[] = [];
   showFilterDailog = false;
@@ -490,6 +493,56 @@ export class CoverageComponent implements OnInit {
       icon: '../assets/images/red.png'
     }
   ];
+
+
+
+
+  showStockPoints(){
+    let input={"User":{"userid":this.authenticationService.loggedInUserId() ,"transtype":"getall","apptype":this.authenticationService.appType()}};
+    //console.log(input);
+    this.distributorService.StockPoint(input)
+    .subscribe(
+    output => this.showStockPointsResult(output),
+    error => {
+        //console.log("falied");
+    });
+   }
+   showStockPointsResult(result){
+     //console.log(result);
+     if(result.result == 'success'){
+       this.stockpoints=result.data;
+       let stockpointData = {lat:0 , lng:0 , icon:"" , index: 1 };
+       let markersData = [];
+      //  let marker = [];
+       _.each(this.stockpoints , function(i, j){
+         let details:any = i;
+         stockpointData = {
+            lat: parseFloat(details.latitude),
+            lng: parseFloat(details.longitude),
+            icon:"../assets/images/red.png",
+            index : j + 1 
+         }
+         markersData.push(stockpointData);
+       });
+
+       this.showMarkers = markersData;
+       this.changeButton = true;
+      
+     }
+     else{
+      // this.noDataError="No Stock Points for this distributor";
+      this.stockpoints = [];
+      this.showMarkers = [];
+      this.changeButton = false;
+     }
+
+  }
+
+  hideStockPoints(){
+    this.stockpoints = [];
+    this.showMarkers = [];
+    this.changeButton = false;
+  }
 
   ngOnInit() {
     this.getPolygonDistributors();
