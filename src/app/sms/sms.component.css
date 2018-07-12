@@ -65,8 +65,8 @@ table thead {
 .bg-color-bg{
   padding-top: 7px;
   padding-bottom: 7px;
-  background: #0f75bc !important;
-  color: white;
+  background: #8bc6ef !important;
+  color: #333;
 }
 
 p::first-letter {
@@ -75,7 +75,9 @@ p::first-letter {
 p.mgbottom-5{
   margin-bottom: 5px !important;
 }
-
+p{
+  line-height: 1.5 !important;
+}
 
 .mgtop-5{
   margin-top: 0px !important;

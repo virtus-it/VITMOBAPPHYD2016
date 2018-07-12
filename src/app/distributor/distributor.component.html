@@ -1,24 +1,23 @@
 ﻿<div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-2 col-md-2 col-lg-2 ">
+    <div class="col-sm-6 col-md-2 col-lg-2 ">
       <h4>
         <i class="fa fa-sitemap"></i> Distributor</h4>
 
       <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
 
-    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
-            (click)="showTabPanel('bystock')">By Stock </button>
 
-            <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>
 
-    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
+    <div class="col-sm-6 col-md-3 col-lg-3 align-self-center right">
+        <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
+        (click)="showTabPanel('bystock')">By Stock </button>&nbsp;&nbsp;
+        <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
       <a class="cursor logo-color " title="Add Distributor">
-        <i class="fa fa-plus fa-2 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
+        <i class="fa fa-plus fs-25 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
       </a>
       <a class="cursor logo-color mgleft-10">
         <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
-
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
             <div class="form-group">
@@ -108,7 +107,6 @@
             </div>
           </div>
         </div>
-
       </a>
     </div>
   </div>
@@ -156,7 +154,7 @@
               <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{dist.emailid}}">{{dist.emailid}}</span> </td> -->
               <td class="left" width="10%">{{dist.reference_code}}</td>
               <td class="left capitalize" width="17%">
-                <span class="onhovertooltip" title="{{dist.address}}">{{dist.address}}</span>
+                <span class="onhovertooltip-180" title="{{dist.address}}">{{dist.address}}</span>
               </td>
               <td class="left capitalize" width="15%"> {{dist.companyname}}</td>
               <td class="left" width="10%">

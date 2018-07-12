@@ -193,20 +193,16 @@ margin-bottom: 5px;
 line-height: 26px;
 }
 
-
-
-
 .orderlastbot{
 margin-bottom: 3px;
 }
 
-
-
 .mat-raised-button.mat-primary {
   background: var( --logo-color);
   color: var( --white);
-  padding-left: 70px;
-  padding-right: 73px;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin: 0px 15px;
 }
 
 .tab-heigt{

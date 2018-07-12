@@ -58,10 +58,11 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    margin-top: 10px;
     margin-left: 5px;
 }
-
+.pd-12{
+  padding: 12px;
+}
 .dropdown {
     position: relative;
     display: inline-block;
