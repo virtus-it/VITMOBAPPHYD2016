@@ -155,6 +155,20 @@ table thead {
   .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button {
     font-weight: 400 !important;
 }
+  .onhovertooltip-230{
+    width:230px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
+  .onhovertooltip-180{
+    width:180px;
+   text-overflow: ellipsis;
+    white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  }
   .onhovertooltip-200{
     width:200px;
    text-overflow: ellipsis;

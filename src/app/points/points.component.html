@@ -1,188 +1,135 @@
-<!-- <div class=" dist-style minheight-500">
-  <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-2 col-md-2 col-lg-2 ">
-      <h4>
-        <i class="fa fa-file-powerpoint-o"></i> Points</h4>
-
-
-    </div>
-    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-        <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
-            <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
-          </a>
-
-
-    </div>
-  </div>
-
-   <div>
-    <div class="row pd-15 mg-0">
-        <table class="table table-hover table-striped" style="table-layout:fixed">
-          <thead >
-            <tr >
-              <th width="10%">Feature</th>
-              <th width="35%">Description</th>
-              <th width="8%">Points</th>
-              <th width="15%">Type</th>
-              <th width="8%%">Action</th>
-
-
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let points of allPoints">
-              <td class="capitalize" width="">{{points.type}}</td>
-              <td class="" width="">{{points.description}}</td>
-              <td class="" width="">{{points.points}}</td>
-              <td class="capitalize" width="">{{points.subtype}}</td>
-              <td class="" width="">
-                <i  *ngIf="points.isactive == 1 "class="fa fa-thumbs-up green" title="Active State" (click)="DeactivatePoints(points.type)" ></i>
-                <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red" title="In-active State" (click)="ActivatePoints(points.type)" ></i> &nbsp;
-                <i class="fa fa-edit logo-color" title="Edit points" (click)="editPoints(points)"></i> 
-              </td>
-            </tr>
-          </tbody>
-        </table>   
-    </div>
-  </div>
-</div> -->
-
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-2 col-md-2 col-lg-2 ">
+    <div class="col-sm-6 col-md-2 col-lg-2  align-self-center">
       <h4>
         <i class="fa fa-file-powerpoint-o"></i> Points</h4>
     </div>
 
-    <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
-            (click)="showTabPanel('pointsDetails')">Points Details </button> 
 
-            <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>
-
-
-            <a class="cursor logo-color mgleft-10" ><i  aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'" ></i>
-    
-              <div class="filterView" *ngIf="showFilterDialog">
+    <div class="col-sm-6 col-md-3 col-lg-3 align-self-center right">
+      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
+        (click)="showTabPanel('pointsDetails')">Points Details </button>&nbsp;&nbsp;
+      <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
+      <i class="fa fa-plus-circle fs-25 logo-color cursor " title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp;
+      <a class="cursor logo-color">
+        <i aria-hidden="true" class="fa fa-sliders logo-color cursor" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'"></i>
+        <div class="filterView" *ngIf="showFilterDialog">
           <div class="">
-              <b class="float-left">Filter By</b>
-              <br>
-              <div class=" ">
-                  <md-select placeholder="Filter By" name="type" [(ngModel)]="filterInput.type"class="full-width left">
-                      <md-option value="top10">Top 10 points</md-option>
-                      <md-option value="top50">Top 50 points</md-option>
-                      <md-option value="top100">Top 100 points</md-option>
-                      <md-option value="least10">Least 10 points</md-option>
-                      <md-option value="least50">Least 50 points</md-option>
-                      <md-option value="least100">Least 100 points</md-option>
-                    </md-select>
+            <b class="float-left">Filter By</b>
+            <br>
+            <div class=" ">
+              <md-select placeholder="Filter By" name="type" [(ngModel)]="filterInput.type" class="full-width left">
+                <md-option value="top10">Top 10 points</md-option>
+                <md-option value="top50">Top 50 points</md-option>
+                <md-option value="top100">Top 100 points</md-option>
+                <md-option value="least10">Least 10 points</md-option>
+                <md-option value="least50">Least 50 points</md-option>
+                <md-option value="least100">Least 100 points</md-option>
+              </md-select>
 
-                    <div class="input-group pd-10 ">
-                        <button md-raised-button color="primary" class="mgright-5" (click)="search()">
-                          <i class="fa fa-search" aria-hidden="true"></i> Search
-                        </button>
-                        <button md-raised-button color="primary"  (click)="clearFilter()">
-                          <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                        </button>
-                      </div>
-                
+              <div class="input-group pd-10 ">
+                <button md-raised-button color="primary" class="mgright-5" (click)="search()">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </button>
+                <button md-raised-button color="primary" (click)="clearFilter()">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+                </button>
               </div>
-              </div>
-       </div>  
-</a>
 
-
-    <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-        <a class="cursor logo-color  mgleft-10" title="Add Points" (click)='addpoints()'>
-            <i class="fa fa-plus-circle fs-30" aria-hidden="true"></i>
-          </a>
-    </div>
-  </div>  
-    <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
-      <div class="row brd-box-box" *ngFor="let points of allPoints">
-        <div class="col-5 left bg-color-bg">
-          <div class="row">
-                 <div class="col">
-                <b class="capital">Feature:  </b> <span class="capitalize">{{points.type}}</span>
-                <br>
-                <b> Type: </b> <span class="capitalize">{{points.subtype}}</span>
             </div>
-            <div class="col-4 align-self-center center">
-                <span class="point-style">{{points.points}} Points </span>
-            </div>        
-          </div> 
-        </div>
-  
-        <div class="col-6  pd-10">  
-          <div class="left">
-            <b>Details:</b> <br>
-            <span class="gray6">{{points.description}}</span>
           </div>
         </div>
+      </a>
 
-        <div class="col-1 align-self-center">
-            <i  *ngIf="points.isactive == 1 "class="fa fa-thumbs-up green fs-18" title="Active State" (click)="DeactivatePoints(points.type)" ></i>
-            <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down red fs-18" title="In-active State" (click)="ActivatePoints(points.type)" ></i> &nbsp;
-            <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)"></i> 
+    </div>
+  </div>
+  <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
+    <div class="row brd-box-box" *ngFor="let points of allPoints">
+      <div class="col-5 left bg-color-bg">
+        <div class="row">
+          <div class="col">
+            <b class="capital">Feature: </b>
+            <span class="capitalize">{{points.type}}</span>
+            <br>
+            <b> Type: </b>
+            <span class="capitalize">{{points.subtype}}</span>
+          </div>
+          <div class="col-4 align-self-center center">
+            <span class="point-style">{{points.points}} Points </span>
           </div>
         </div>
       </div>
 
+      <div class="col-6  pd-10">
+        <div class="left">
+          <b>Details:</b>
+          <br>
+          <span class="gray6">{{points.description}}</span>
+        </div>
+      </div>
+
+      <div class="col-1 align-self-center">
+        <i *ngIf="points.isactive == 1 " class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
+        <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
+        <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)"></i>
+      </div>
+    </div>
+  </div>
+
+  <div class="" *ngIf="tabPanelView == 'pointsDetails'">
+    <div class="col">
+      <div class=" mgtop-10">
+        <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'customer'}" (click)="showCustomerPoints()"
+          href="javascript:void(0)">Customer</button>
 
 
-      <div class="" *ngIf="tabPanelView == 'pointsDetails'">
+        <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'pointsDetails'}" (click)="showDistributorPoints()"
+          href="javascript:void(0)">Distributor</button>
 
-          <div class="col"> 
-            
-              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'customer'}" (click)="showCustomerPoints()" href="javascript:void(0)"
-              >Customer</button> 
+        <div>
+          <table class="table table-hover table-striped mgtop-10">
+            <thead>
+              <tr>
+                <th width="13%">Name</th>
+                <th width="10%">Mobile </th>
+                <th width="12%">Points</th>
+                <th width="25%">Date</th>
+                <th width="25%">Status</th>
 
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let details of customerAllPointsDetails">
 
-              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': newView === 'pointsDetails'}" (click)="showDistributorPoints()" href="javascript:void(0)">Distributor</button> 
+                <td class="left capital" width="13%">
+                  <span *ngIf="details.name" class="capitalize">{{details.name}} </span>
+                  <span *ngIf="!details.name"> - </span>
+                </td>
 
-            
-              <table class="table table-hover table-striped">
-                <thead>
-                  <tr>
-                    <th width="13%">Name</th>
-                    <th width="10%">Mobile </th>
-                    <th width="12%">Points</th>
-                    <th width="25%">Date</th>
-                    <th width="25%">Status</th>
-                    
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr  *ngFor="let details of customerAllPointsDetails">
+                <td class="left" width="10%">
+                  <span *ngIf="details.mobileno">{{details.mobileno}}</span>
+                  <span *ngIf="!details.mobileno"> - </span>
+                </td>
 
-                    <td class="left capital" width="13%">
-                      <span *ngIf="details.name">{{details.name}} </span>
-                      <span *ngIf="!details.name"> - </span>
-                    </td>
+                <td class="left" width="12%">
+                  <span *ngIf="details.points">{{details.points}}</span>
+                  <span *ngIf="!details.points"> - </span>
+                </td>
 
-                    <td class="left" width="10%">
-                      <span *ngIf="details.mobileno">{{details.mobileno}}</span>
-                      <span *ngIf="!details.mobileno"> - </span>
-                    </td>
+                <td class="left capital" width="25%">
+                  <span *ngIf="details.date">{{details.date | utcDate}} </span>
+                  <span *ngIf="!details.date"> - </span>
+                </td>
 
-                    <td class="left"  width="12%">
-                        <span *ngIf="details.points">{{details.points}}</span>
-                        <span *ngIf="!details.points"> - </span>
-                    </td>
+                <td class="left" width="12%">
+                  <span *ngIf="details.status" class="capitalize">{{details.status}}</span>
+                  <span *ngIf="!details.status"> - </span>
+                </td>
 
-                    <td class="left capital"  width="25%">
-                        <span *ngIf="details.date">{{details.date | utcDate}} </span>
-                        <span *ngIf="!details.date"> - </span>
-                    </td>
+            </tbody>
+          </table>
 
-                    <td class="left"  width="12%">
-                        <span *ngIf="details.status">{{details.status}}</span>
-                        <span *ngIf="!details.status"> - </span>
-                    </td>
-                  
-                </tbody>
-              </table>
-              
-          </div>
+        </div>
 
 
       </div>
