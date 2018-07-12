@@ -17,7 +17,7 @@
           <b>
             <i class="fa fa-file-text-o"></i> Order Details</b>
 
-            <i class="fa fa-edit logo-color" title="Edit Quantity" (click)="editQuantity(dailogOrderDetails)"></i>
+            <i class="fa fa-edit logo-color" title="Edit Quantity" *ngIf="this.orderDetail.status !== 'delivered'" (click)="editQuantity(dailogOrderDetails)"></i>
           <div class="row form-group mgtop-5">
             <div class="col-md-5 col-5 col-sm-5">
               <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>

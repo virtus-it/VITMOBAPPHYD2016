@@ -6,6 +6,10 @@
 
     <div class="col-md-4  col-sm-4 col-lg-4">
 
+      <button class="" md-raised-button (click)='showStockPoints()' *ngIf="changeButton == false">Show StockPoints</button>
+      <button class="" md-raised-button (click)='hideStockPoints()' *ngIf="changeButton == true">Hide StockPoints</button>
+      
+
     <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'distributors'}" href="javascript:void(0)"
             (click)="showTabPanel('distributors')">DISTRIBUTORS</button>
           <button type="submit" md-raised-button class=" "  [ngClass]="{'btn-primary': tabPanelView === 'products'}"
@@ -81,6 +85,16 @@
             [latitude]="m.lat"
             [longitude]="m.lng"
             ></agm-marker>
+
+
+            <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng" >
+
+                <agm-info-window>
+              Stock point {{m.index}}
+      
+            </agm-info-window>
+          </agm-marker>
+
 
             
 

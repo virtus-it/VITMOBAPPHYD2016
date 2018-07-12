@@ -13,6 +13,8 @@ import { Observable } from 'rxjs/Observable';
 import { InvoicedetailsComponent } from '../invoicedetails/invoicedetails.component';
 import { SupplierService} from '../supplier/supplier.service';
 import { InvoiceHistoryComponent } from '../invoice-history/invoice-history.component';
+import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
+
 
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -628,6 +630,22 @@ export class ReportsComponent implements OnInit {
     iframe.contentWindow.print();
 
   }
+
+  sendNotification(data){
+    let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
+      width: '60%',
+      data: data
+  });
+  dialogRefeditStatus.afterClosed().subscribe(result => {
+      ////console.log(`Dialog closed: ${result}`);
+      if (result) {
+          // this.notificationDetails.templatename = result.User.tempname;
+      }
+
+  });
+  }
+
+
   ngOnInit() {
     this.searchReports(true, 'newlydownloaded');
     this.getCustomer();

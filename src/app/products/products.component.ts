@@ -11,6 +11,12 @@ import { AddstockProductComponent } from '../addstock-product/addstock-product.c
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { DeleteTemplateComponent } from '../delete-template/delete-template.component';
 import { ProductServiceAreaComponent } from '../product-service-area/product-service-area.component';
+import { FormControl, Validators } from '@angular/forms';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
+import { DistributorServiceService } from '../distributor/distributor-service.service';
+
 
 
 import * as _ from 'underscore';
@@ -21,13 +27,29 @@ import * as _ from 'underscore';
 })
 export class ProductsComponent implements OnInit {
 
-  constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService,  private productService: ProductsService) { }
+  DistributorCtrl: FormControl;
+  filteredDistributors: Observable<any[]>;
+  
+
+  constructor(public dialog: MdDialog, private loaderService: LoaderService, private authenticationService: AuthenticationService,  private productService: ProductsService ,  private distributorService: DistributorServiceService ) {
+    this.DistributorCtrl = new FormControl();
+    this.filteredDistributors = this.DistributorCtrl.valueChanges
+      .startWith(null)
+      .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+   }
   superDealer = true;
   showFilterDialog = false;
   productList = [];
   selectedFile = null;
   customerCare = true;
+  distributors: any = [];
   base64textString:any = "";
+  distributorView:boolean = false;
+  LastfilterRecords = false;
+  distributorId:any = 0;
+  listOfProducts = [];
+  noProductsError = false;
+  
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
   }
@@ -286,14 +308,251 @@ if(result.result == 'success'){
    }
 
 
+   distributorProductsView(){
+    this.distributorView = true;
+    this.productList = [];
+    this.getDistributors();
+   }
+
+   reset(){
+    this.distributorView = false;
+    this.getProducts();
+    
+   }
+
+
+   getDistributors() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
+    if (this.distributors && this.distributors.length) {
+      let lastDistributor: any = _.last(this.distributors);
+      if (lastDistributor) {
+        input.root.lastuserid = lastDistributor.userid;
+      }
+
+
+    }
+    else {
+      this.distributors = [];
+      input.root.lastuserid = null;
+    }
+
+    //console.log(input);
+    this.loaderService.display(true);
+    this.distributorService.getAllDistributors(input)
+      .subscribe(
+      output => this.getDistributorsResult(output),
+      error => {
+        //console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
+  }
+  getDistributorsResult(data) {
+    //console.log(data);
+    this.loaderService.display(false);
+    if (data.result == 'success') {
+      let distributorCopy = [];
+
+      if (data.data && data.data.length) {
+        _.each(data.data, function (i, j) {
+          let details: any = i;
+          details.fullName = details.firstname + " " + details.lastname
+          distributorCopy.push(details);
+
+        });
+
+        this.distributors = _.union(this.distributors, distributorCopy);
+        //  this.distributors = distributorCopy;
+      }
+    }
+    else {
+      this.LastfilterRecords = true;
+    }
+  }
+  findDistributors(name: string) {
+    //console.log(name);
+    let finalDistributors = this.distributors.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    //console.log(finalDistributors);
+    if (finalDistributors && finalDistributors.length > 0) {
+      let findDistributor: any = {};
+
+      findDistributor = _.find(finalDistributors, function (k, l) {
+        let distDetails: any = k;
+        return distDetails.fullName == name;
+      });
+
+      if (findDistributor) {
+        this.distributorId = findDistributor.userid;
+      }
+      if(this.distributorId){
+        this.getProductsByDistributor();
+      }
+
+
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        this.getDistributors();
+      }
+
+
+    }
+    return finalDistributors;
+  }
 
 
 
-
-
+  getProductsByDistributor(){
+    this.loaderService.display(true);
+  let input = {userId: this.distributorId, appType: this.authenticationService.appType() };
+    console.log(input);
+    this.distributorService.getDistbutorsProducts(input)
+    .subscribe(
+    output => this.getProductsByDistributorResult(output),
+    error => {
+        //console.log("Logged in falied");
+        this.loaderService.display(false);
+    });
   
+  }
+  
+  getProductsByDistributorResult(output) {
+    this.loaderService.display(false);
+    this.listOfProducts = [];
+    if(output.result == 'success'){
+  
+      this.noProductsError = false;
+      
+          // this.listOfProducts = output.data;
+          
+    
+      for (let details of output.data) {
+        let findproduct = _.find(this.listOfProducts, function (k, l) {
+          let productDetails: any = k;
+          return ((productDetails.brandName == details.brandname) && (productDetails.data[0].categoryid == details.categoryid));
+          
+        });
+  
+        if (findproduct) {
+          findproduct.data.push(details);
+        }
+        else {
+          let value = { brandName: details.brandname, category: details.category, data: [] };
+          value.data.push(details);
+          this.listOfProducts.push(value);
+          this.productList = this.listOfProducts;
+          
+        }
+  
+       
+  
+      }
+  
+      console.log(this.listOfProducts , 'list');
+      
+      
+    }
+    else{
+      this.noProductsError = true;
+    }
+  
+  }
+
+  showActiveProducts(){
+    let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"activeproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+    this.loaderService.display(true);
+    this.productService.createProduct(input)
+      .subscribe(
+      output => this.showActiveProductsResult(output),
+      error => {
+        //console.log("error");
+        this.loaderService.display(false);
+      });
+  }
+  showActiveProductsResult(result){
+    this.productList = [];
+    if (result.result == 'success') {
+    this.loaderService.display(false);
+      // let productCopy = [];
+      for (let details of result.data) {
+        if(details.stockstatus == 'Soldout'){
+          details.stockColor = 'warn';
+          }
+
+        //let details: any = i;
+
+        let findproduct = _.find(this.productList, function (k, l) {
+          let productDetails: any = k;
+          return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category));
+          
+        });
+
+        if (findproduct) {
+          findproduct.data.push(details);
+        }
+        else {
+          let value = { brandName: details.brandname, category: details.category, data: [] , categoryid: details.categoryid };
+          value.data.push(details);
+          this.productList.push(value);
+        }
+
+      }
+      //console.log("products list ", this.productList)
+
+    }
+    else{
+      this.loaderService.display(false);
+    }
+  }
 
 
+
+  showInactiveProducts(){
+    let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"inactiveproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
+    this.loaderService.display(true);
+    this.productService.createProduct(input)
+      .subscribe(
+      output => this.showInactiveProductsResult(output),
+      error => {
+        //console.log("error");
+        this.loaderService.display(false);
+      });
+  }
+  showInactiveProductsResult(result){
+    this.productList = [];
+    if (result.result == 'success') {
+    this.loaderService.display(false);
+      // let productCopy = [];
+      for (let details of result.data) {
+        if(details.stockstatus == 'Soldout'){
+          details.stockColor = 'warn';
+          }
+
+        //let details: any = i;
+
+        let findproduct = _.find(this.productList, function (k, l) {
+          let productDetails: any = k;
+          return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category));
+          
+        });
+
+        if (findproduct) {
+          findproduct.data.push(details);
+        }
+        else {
+          let value = { brandName: details.brandname, category: details.category, data: [] , categoryid: details.categoryid };
+          value.data.push(details);
+          this.productList.push(value);
+        }
+
+      }
+      //console.log("products list ", this.productList)
+
+    }
+    else{
+      this.loaderService.display(false);
+    }
+  }
 
   ngOnInit() {
     this.getProducts();
