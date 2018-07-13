@@ -363,15 +363,16 @@
                   </div>
 
                   <div class="row">
-                      <md-select placeholder="Navigate To" name="navigate" class="wd-100pc" [(ngModel)]="smsInput.navigateto">
-                          <md-option value="InviteFriends">Invite Friends</md-option>
-                          <md-option  value="Feedback">Feedback </md-option>
-                          <md-option  value="PointsPage">Points Page </md-option>
-                          <md-option  value="MyPaymentPage">My Payments Page</md-option>
-                          <md-option  value="ScheduleOrderPage">Schedule Orders page</md-option>
-                        </md-select>
+                    <div class="col">
+                    <md-select placeholder="Navigate To" name="navigate" class="wd-100pc" [(ngModel)]="smsInput.navigateto">
+                      <md-option value="InviteFriends">Invite Friends</md-option>
+                      <md-option value="Feedback">Feedback </md-option>
+                      <md-option value="PointsPage">Points Page </md-option>
+                      <md-option value="MyPaymentPage">My Payments Page</md-option>
+                      <md-option value="ScheduleOrderPage">Schedule Orders page</md-option>
+                    </md-select>
                   </div>
-
+                </div>
                 </div>
                 <div class="col-7" style="border-left: 1px solid lightgray;" *ngIf="tabPanelView === 'panel2'">
                   <div class="row form-group">

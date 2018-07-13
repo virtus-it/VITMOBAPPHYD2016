@@ -1,50 +1,49 @@
-
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-      <div class="col-sm-2 col-md-2 col-lg-2 ">
-          <h4><i class="fa fa-registered"></i> Rules</h4>
-      </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-        <a class="cursor logo-color " title="Add rules" (click)='addRule()' ><i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i></a>
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-registered"></i> Rules</h4>
     </div>
-      </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+      <a class="cursor logo-color " title="Add rules" (click)='addRule()'>
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+    </div>
+  </div>
+
   <div id="" class="row pd-15x10 mg-0">
-<div class="col">    
-    <table class="table table-hover table-striped">
-      <thead>
-        <tr>
-          <th width="15%">Created By</th>
-          <th width="12%">Rule Name </th>
-          <th width="12%">Type</th>
-          <th width="30%">Type Details</th>
-          <th width="10%">Value</th>
-          <th width="10%" class="no-th-row">Action</th>
-        </tr>
-      </thead>
-      <tbody>
+    <div class="col">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="15%">Created By</th>
+            <th width="12%">Rule Name </th>
+            <th width="12%">Type</th>
+            <th width="30%">Type Details</th>
+            <th width="10%">Value</th>
+            <th width="10%" class="no-th-row">Action</th>
+          </tr>
+        </thead>
 
-        <tr class="">
-          <td class="" width="15%">Dev super dealer</td>
-          <td class="" width="12%">Points rule</td>
-          <td class="" width="12%">Points</td>
-          <td class="" width="30%">Description</td>
-          <td class="" width="10%">5</td>
-          <td class="" width="10%">
-            <span class="">
-              <i class="fa fa-trash danger" title="Delete"></i>
-            </span> &nbsp; &nbsp;
-            <span>
-              <i  class="fa fa-edit logo-color" title="Edit" (click)="editRule()"></i>
-            </span>
-          </td>
-        </tr>
-        
-              
-      </tbody>
-    </table>
-    
+        <tbody>
+          <tr class="">
+            <td class="" width="15%">Dev super dealer</td>
+            <td class="" width="12%">Points rule</td>
+            <td class="" width="12%">Points</td>
+            <td class="" width="30%">Description</td>
+            <td class="" width="10%">5</td>
+            <td class="" width="10%">
+              <span class="">
+                <i class="fa fa-trash danger fs-20" title="Delete"></i>
+              </span> &nbsp;
+              <span>
+                <i class="fa fa-edit logo-color fs-20" title="Edit" (click)="editRule()"></i>
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <!-- <h4 *ngIf="!NoRecords"  class="warning" > <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4> -->
 </div>
-</div>
-<!-- <h4 *ngIf="!NoRecords"  class="warning" > <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4> -->
-</div>  
-

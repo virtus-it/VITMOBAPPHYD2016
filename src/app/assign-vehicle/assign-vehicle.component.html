@@ -1,144 +1,134 @@
 <div class="row justify-content-between modal-title ">
-        <div class="col-md-4 col-sm-4">
-          <i class="fa fa-automobile"></i> Assign Vehicle </div>
-        <div class="col-md-1 col-sm-1 right">
-          <strong (click)="onCloseModal()">
-            <i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>
-        </div>
-      </div>
-      <md-dialog-content layout="column">
-        <form class="example-form">
-          <div class="container-fluid pd-15x25 brd-bottom">
-            <div class="row">
-              <div class="col-4">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Vehicle Number" name="number" [(ngModel)]="assignVehicleInput.User.vehhicleno"
-                    required>
-                </md-form-field>
-              </div>
-              <div class="col-4">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Start Time"  name="time" type="time" [(ngModel)]="assignVehicleInput.User.starttime" required>
-                </md-form-field>
-      
-              </div>
-              <div class="col-4">
-                <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Expected End Time"  name="time" type="time" [(ngModel)]="assignVehicleInput.User.expectedtime" required>
-                </md-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-4 pdtop-20">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Cans" name="cans" [(ngModel)]="assignVehicleInput.User.canscount">
-                </md-form-field>
-              </div>
-              <div class="col-4 pdtop-20">
-                    <md-form-field class="">
-                      <input class="form-control" mdInput placeholder="Fuel" name="fuel" [(ngModel)]="assignVehicleInput.User.fuel" [disabled]="this.Details.type == 'edit'">
-                    </md-form-field>
-                  </div>
-                  <div class="col-4 pdtop-20">
-                        <md-form-field class="">
-                          <input class="form-control" mdInput placeholder="Reading" name="meter" [(ngModel)]="assignVehicleInput.User.meter" [disabled]="this.Details.type == 'edit'">
-                        </md-form-field>
-                      </div>
-            </div>
-
-            <div class="row">
-                <div class="col-4">
-              <md-select placeholder="Tracking Interval" name="interval" [(ngModel)]="assignVehicleInput.User.tracking_interval" class="wd-100pc">
-                <md-option value= "60*1000" >1 Minute</md-option>
-                <md-option value="60*2000">2 Minutes</md-option>
-                <md-option value="60*3000">3 Minutes</md-option>
-                <md-option value="60*4000">4 Minutes</md-option>
-                <md-option value="60*5000">5 Minutes</md-option>
-                <md-option value="60*6000">6 Minutes</md-option>
-                <md-option value="60*7000">7 Minutes</md-option>
-                <md-option value="60*8000">8 Minutes</md-option>
-                <md-option value="60*9000">9 Minutes</md-option>
-                <md-option value="60*10000">10 Minutes</md-option>
-                <md-option value="60*11000">11 Minutes</md-option>
-                <md-option value="60*12000">12 Minutes</md-option>
-                <md-option value="60*13000">13 Minutes</md-option>
-                <md-option value="60*14000">14 Minutes</md-option>
-                <md-option value="60*15000">15 Minutes</md-option>
-                <md-option value="60*16000">16 Minutes</md-option>
-                <md-option value="60*17000">17 Minutes</md-option>
-                <md-option value="60*18000">18 Minutes</md-option>
-                <md-option value="60*19000">19 Minutes</md-option>
-                <md-option value="60*20000">20 Minutes</md-option>
-                <md-option value="60*21000">21 Minutes</md-option>
-                <md-option value="60*22000">22 Minutes</md-option>
-                <md-option value="60*23000">23 Minutes</md-option>
-                <md-option value="60*24000">24 Minutes</md-option>
-                <md-option value="60*25000">25 Minutes</md-option>
-                <md-option value="60*26000">26 Minutes</md-option>
-                <md-option value="60*27000">27 Minutes</md-option>
-                <md-option value="60*28000">28 Minutes</md-option>
-                <md-option value="60*29000">29 Minutes</md-option>
-                <md-option value="60*30000">30 Minutes</md-option>            
-              </md-select>
-              </div>
-
-              <div class="col-4">
-                  <md-select placeholder="Tracking Vehicle" class="wd-100pc" name="trackingstatus" [(ngModel)]="assignVehicleInput.User.tracking_status">
-                      <md-option value="true">Yes</md-option>
-                      <md-option value= "false">No</md-option>
-                      </md-select>
-              </div>
-            </div>
-
-            <div class="row"  *ngIf="this.Details.type">
-              <div class="col-4">
-                  <md-form-field class="">
-                      <input class="form-control" mdInput placeholder="Updated Fuel" name="updatedfuel" [(ngModel)]="assignVehicleInput.User.fuelend">
-                    </md-form-field>
-
-              </div>
-
-              <div class="col-4">
-                  <md-form-field class="">
-                      <input class="form-control" mdInput placeholder="Updated Reading" name="Updatedreading" [(ngModel)]="assignVehicleInput.User.meterend">
-                    </md-form-field>
-
-              </div>
-              
-              
-            </div>
-
-            <div class="row"  *ngIf="this.Details.type">
-                <div class="col-4">
-                    <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Arrived Time" type="time" name="arrivealtime" [(ngModel)]="assignVehicleInput.User.arrivedtime">
-                      </md-form-field>
-  
-                </div>
-  
-                <div class="col-4">
-                    <md-form-field class="">
-                        <input class="form-control" mdInput placeholder="Empty cans" name="empty cans" [(ngModel)]="assignVehicleInput.User.emptycans">
-                      </md-form-field>
-  
-                </div>
-                
-                
-              </div>
-
-
+    <div class="col-md-4 col-sm-4">
+      <i class="fa fa-automobile"></i> Assign Vehicle </div>
+    <div class="col-md-1 col-sm-1 right">
+      <strong (click)="onCloseModal()">
+        <i class="fa fa-times fs-20" aria-hidden="true"></i>
+      </strong>
+    </div>
+  </div>
+  <md-dialog-content layout="column">
+    <form class="example-form">
+      <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row">
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Vehicle Number" name="number" [(ngModel)]="assignVehicleInput.User.vehhicleno"
+                required>
+            </md-form-field>
           </div>
-    
-                
-        </form>
-      </md-dialog-content>
-      <div class="row float-right pdright-30 mgbottom-20">
-        <md-dialog-actions align="end">
-          <button type="submit" class="btn-primary"  md-raised-button (click)="assignVehicle()">SUBMIT</button>
-          <button type="submit" class="btn-primary"  md-raised-button (click)="updateVehicle()" *ngIf="this.Details.type">UPDATE</button>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Start Time" name="time" type="time" [(ngModel)]="assignVehicleInput.User.starttime"
+                required>
+            </md-form-field>
+            </div>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Expected End Time" name="time" type="time" [(ngModel)]="assignVehicleInput.User.expectedtime"
+                required>
+            </md-form-field>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 ">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Cans" name="cans" [(ngModel)]="assignVehicleInput.User.canscount">
+            </md-form-field>
+          </div>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Fuel" name="fuel" [(ngModel)]="assignVehicleInput.User.fuel" [disabled]="this.Details.type == 'edit'">
+            </md-form-field>
+          </div>
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Reading" name="meter" [(ngModel)]="assignVehicleInput.User.meter" [disabled]="this.Details.type == 'edit'">
+            </md-form-field>
+          </div>
+        </div>
 
-          
-          <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
-        </md-dialog-actions>
-      </div>
+        <div class="row">
+          <div class="col-4 pdtop-8">
+            <md-select placeholder="Tracking Interval" name="interval" [(ngModel)]="assignVehicleInput.User.tracking_interval" class="wd-100pc">
+              <md-option value="60*1000">1 Minute</md-option>
+              <md-option value="60*2000">2 Minutes</md-option>
+              <md-option value="60*3000">3 Minutes</md-option>
+              <md-option value="60*4000">4 Minutes</md-option>
+              <md-option value="60*5000">5 Minutes</md-option>
+              <md-option value="60*6000">6 Minutes</md-option>
+              <md-option value="60*7000">7 Minutes</md-option>
+              <md-option value="60*8000">8 Minutes</md-option>
+              <md-option value="60*9000">9 Minutes</md-option>
+              <md-option value="60*10000">10 Minutes</md-option>
+              <md-option value="60*11000">11 Minutes</md-option>
+              <md-option value="60*12000">12 Minutes</md-option>
+              <md-option value="60*13000">13 Minutes</md-option>
+              <md-option value="60*14000">14 Minutes</md-option>
+              <md-option value="60*15000">15 Minutes</md-option>
+              <md-option value="60*16000">16 Minutes</md-option>
+              <md-option value="60*17000">17 Minutes</md-option>
+              <md-option value="60*18000">18 Minutes</md-option>
+              <md-option value="60*19000">19 Minutes</md-option>
+              <md-option value="60*20000">20 Minutes</md-option>
+              <md-option value="60*21000">21 Minutes</md-option>
+              <md-option value="60*22000">22 Minutes</md-option>
+              <md-option value="60*23000">23 Minutes</md-option>
+              <md-option value="60*24000">24 Minutes</md-option>
+              <md-option value="60*25000">25 Minutes</md-option>
+              <md-option value="60*26000">26 Minutes</md-option>
+              <md-option value="60*27000">27 Minutes</md-option>
+              <md-option value="60*28000">28 Minutes</md-option>
+              <md-option value="60*29000">29 Minutes</md-option>
+              <md-option value="60*30000">30 Minutes</md-option>
+            </md-select>
+          </div>
+  
+          <div class="col-4 pdtop-8">
+            <md-select placeholder="Tracking Vehicle" class="wd-100pc" name="trackingstatus" [(ngModel)]="assignVehicleInput.User.tracking_status">
+              <md-option value="true">Yes</md-option>
+              <md-option value="false">No</md-option>
+            </md-select>
+          </div>
+          <div class="col-4" *ngIf="this.Details.type">
+   
+            <md-form-field class="">
+                <input class="form-control" mdInput placeholder="Arrived Time" type="time" name="arrivealtime" [(ngModel)]="assignVehicleInput.User.arrivedtime">
+              </md-form-field>
+    
+          </div>
+        </div>
+  
+        <div class="row" *ngIf="this.Details.type">
+  
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Updated Reading" name="Updatedreading" [(ngModel)]="assignVehicleInput.User.meterend">
+            </md-form-field>
+  
+          </div>
+          <div class="col-4">
+              <md-form-field class="">
+                  <input class="form-control" mdInput placeholder="Updated Fuel" name="updatedfuel" [(ngModel)]="assignVehicleInput.User.fuelend">
+                </md-form-field>
+          </div>
+  
+          <div class="col-4">
+            <md-form-field class="">
+              <input class="form-control" mdInput placeholder="Empty cans" name="empty cans" [(ngModel)]="assignVehicleInput.User.emptycans">
+            </md-form-field>  
+          </div>   
+        </div>   
+      </div>  
+  
+    </form>
+  </md-dialog-content>
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button type="submit" class="btn-primary" md-raised-button (click)="assignVehicle()">SUBMIT</button>
+      <button type="submit" class="btn-primary" md-raised-button (click)="updateVehicle()" *ngIf="this.Details.type">UPDATE</button>
+  
+  
+      <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>

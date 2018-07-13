@@ -115,9 +115,9 @@ box-shadow: 0 0 8px #bbb;
 .bg-color-bg{
   padding-top: 7px;
   padding-bottom: 7px;
-  background: #0f75bc !important;
+  background: #8bc6ef !important;
   border-left: 5px solid #f79123;
-  color: white;
+  color: #333;
 }
 
 .pd-top-btm-7{

@@ -1,5 +1,5 @@
 agm-map {
-    height: 68vh;
+    max-height: 68vh;
   }
 
   .mgtopleft-20{
@@ -10,5 +10,5 @@ agm-map {
     margin: 10px 0px -5px 0px !important;
   }
   .mat-dialog-content{
-    height:80vh;
+    max-height:80vh;
   }

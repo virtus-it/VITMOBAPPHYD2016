@@ -1,3 +1,8 @@
 .table{
     margin-bottom: 0rem !important;
 }
+.table-fixedheader tbody{
+    overflow-x: hidden;
+    max-height:55vh;
+    overflow-y: auto;
+}
