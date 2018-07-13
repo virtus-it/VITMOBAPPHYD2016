@@ -10,7 +10,7 @@
 </div>
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
-    <div class="row pd-top-0">
+    <div class="row ">
       <div class="col-4 ">
         <md-select placeholder="Type" [(ngModel)]="promoCodeInput.offertype">
           <md-option value="type1">type-1</md-option>
@@ -19,14 +19,14 @@
         </md-select>
       </div>
       <div class="col-4">
-        <md-form-field class="example-full-width">
+        <md-form-field >
           <input mdInput [mdDatepicker]="picker" placeholder="Start Date"  [(ngModel)]="promoCodeInput.startdate" required>
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
           <md-datepicker #picker></md-datepicker>
         </md-form-field>
       </div>
-      <div class="col-4">
-        <md-form-field class="example-full-width">
+      <div class="col-4">        
+        <md-form-field>
           <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="promoCodeInput.enddate">
           <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
           <md-datepicker #pickers></md-datepicker>
@@ -59,19 +59,15 @@
         
       </div>
       <div class="col-4 ">
-
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required>
-          
+          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required>          
         </md-form-field>
       </div>
     </div>
  
-    <div class="row pd-top-0">
+    <div class="row ">
       <div class="col-4">
-        <!-- <md-select placeholder="Product Category" [(ngModel)]="promoCodeInput.category"> -->
-
-        <md-form-field class="example-full-width">
+        <md-form-field>
           <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl" required [(ngModel)]="this.promoCodeInput.category">
           <md-autocomplete #auto="mdAutocomplete">
             <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
@@ -79,24 +75,21 @@
             </md-option>
           </md-autocomplete>
         </md-form-field>
-
-
-        <!-- </md-select> -->
       </div>
+
       <div class="col-4">
-        <md-form-field class="mg-left-0">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Promo Code" name="code" [(ngModel)]="promoCodeInput.promocode" required>
         </md-form-field>
       </div>
     </div>
-    <div class="row pd-top-0">
+    <div class="row ">
       <div class="col">
         <md-form-field class="wd-100pc">
           <textarea class="form-control" mdInput placeholder="Description" name="desc" [(ngModel)]="promoCodeInput.description" ></textarea>
         </md-form-field>
       </div>
     </div>
-
   </div>
 </md-dialog-content>
 

@@ -6,7 +6,7 @@
   }
 
   .mat-dialog-content{
-    height: 78vh;
+    max-height: 78vh;
     border-bottom: 1px solid #ddd; 
   }
   

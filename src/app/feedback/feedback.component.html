@@ -1,13 +1,4 @@
 <div class="dist-style  minheight-500">
-  <!-- <div class=" row justify-content-between distIcon-style">
-    <div class="col-md-2  col-sm-2  col-lg-2">
-        <h4><i class="fa fa-comment"></i> Feedback</h4>
-    </div>
-  <div class="col-md-2  col-sm-2  col-lg-2">
-      <button md-raised-button color="primary" ><i class="fa fa-plus fa-2" aria-hidden="true"></i></button>
-
-  </div>
-    </div> -->
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
       <h4>
@@ -41,30 +32,30 @@
   <div class='pd-15'>
     <div class="row brd-box-box" id="FeedbackList" *ngFor="let feed of feedbackList;">
       <div class="col-3 left bg-color-bg">
+        <p class="mgbottom-7">
+          <span class="fa fa-user"></span>
+          <b *ngIf="feed.createdby" class="capital"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b>
+        </p>
 
-        <span class="fa fa-user"></span> 
-        <b *ngIf="feed.createdby" class="capital"> {{feed.createdby.firstname}} {{feed.createdby.lastname}} </b>
-        <br>
-        <span class="fa fa-tasks"></span>
+        <p class="mgbottom-7">
+          <span class="fa fa-tasks"></span>
+          <b> Subject: </b>
+          <span>{{feed.subject}} </span>
+        </p>
 
-        <b> Subject: </b>
-        <span>{{feed.subject}} </span>
-        <br>
-        <p class="left grayd mgtop-5">
-          <span class=" fa fa-clock-o"></span> 
+        <p class="left">
+          <span class=" fa fa-clock-o"></span>
           {{feed.createddate |utcDate }} </p>
-
       </div>
 
       <div class="col-8 brd-box-mg pd-top-btm-7">
-
         <div class="left">
-          <b>Details:</b> 
+          <b>Details:</b>
           <p class="gray6">{{feed.details}} </p>
 
           <div *ngIf="feed.reply" class="left">
             <span>
-              <strong> Replies: </strong> 
+              <strong> Replies: </strong>
             </span>
 
             <div *ngFor="let replies of feed.reply">
@@ -73,8 +64,9 @@
               <p class="gray6 mgbottom-5"> {{replies.message}} </p>
 
               <!-- <span>Date:</span>  -->
-              <p class="gray9 small">          <span class=" fa fa-clock-o"></span> 
-                 {{replies.createddate |utcDate }} </p>
+              <p class="gray9 small">
+                <span class=" fa fa-clock-o"></span>
+                {{replies.createddate |utcDate }} </p>
             </div>
           </div>
         </div>
@@ -84,16 +76,16 @@
         <a class="btn btn-open fs-25" *ngIf="feed.status == 'open' || feed.status =='created'" (click)="openStatus(feed)">
           <i class="fa fa-times-circle openicon cursor fs-25 danger" aria-hidden="true" title="closed"></i>
         </a>
-         <a class="btn btn-reply cursor fs-25 mgtop-5" *ngIf="feed.status == 'open' || feed.status == 'created'" (click)="openReplyModel(feed)">
+        <a class="btn btn-reply cursor fs-25 mgtop-5" *ngIf="feed.status == 'open' || feed.status == 'created'" (click)="openReplyModel(feed)">
           <i class="fa fa-reply replyicon cursor fs-25" aria-hidden="true" title="reply"></i>
         </a>
 
-        <div  *ngIf="feed.status == 'close'" >
+        <div *ngIf="feed.status == 'close'">
           <a class="btn btn-close">
-          <i class="fa fa-ban red cursor fs-25" title="closed" aria-hidden="true"> </i>
+            <i class="fa fa-ban red cursor fs-25" title="closed" aria-hidden="true"> </i>
           </a>
           <a class="btn btn-close mgtop-5" (click)="closeStatus(feed)">
-          <i class="fa fa-check-circle success cursor fs-25" aria-hidden="true" title="open"></i>
+            <i class="fa fa-check-circle success cursor fs-25" aria-hidden="true" title="open"></i>
           </a>
         </div>
       </div>

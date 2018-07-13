@@ -1,11 +1,12 @@
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
-      <h4><i class="fa fa-barcode"></i> Promo code</h4>
+      <h4>
+        <i class="fa fa-barcode"></i> Promo code</h4>
     </div>
-    <div class="col-sm-4 col-md-4 col-lg-4">
+    <div class="col-sm-5 col-md-5 col-lg-5">
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'promoCode'}" (click)="showTabPanel('promoCode')">
-      Promo Code </button>
+        Promo Code </button>
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemSetting'}" (click)="showTabPanel('redeemSetting')">Redeem Settings</button>
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
@@ -15,10 +16,8 @@
       </a>
 
       <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
-          <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
-        </a>
-
-
+        <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
+      </a>
     </div>
   </div>
   <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'promoCode'">
@@ -42,8 +41,8 @@
           <td class="left capitalize" width="10%" *ngIf="promo.offertype">{{promo.offertype}}</td>
           <td class="left capitalize" width="10%" *ngIf="promo.promocode">{{promo.promocode}}</td>
           <td class="left capitalize" width="30%">
-            <span  *ngIf="promo.description"> {{promo.description}} </span>
-            <span  *ngIf="promo.description === null || promo.description == ''"> - </span>          
+            <span *ngIf="promo.description"> {{promo.description}} </span>
+            <span *ngIf="promo.description === null || promo.description == ''"> - </span>
           </td>
           <td class="left" width="10%">
             <span *ngIf="promo.discountinpercent">{{promo.discountinpercent}} </span>
@@ -54,7 +53,7 @@
           </td>
           <td class="left" width="10%">
             <span class="onhovertooltip-100" *ngIf="promo.enddate">{{promo.enddate | utcDate}}</span>
-            <span *ngIf="promo.enddate === null || promo.enddate == ''" > - </span>            
+            <span *ngIf="promo.enddate === null || promo.enddate == ''"> - </span>
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
           <td class="left capitalize" width="10%">
@@ -79,21 +78,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr  *ngFor="let settings of redeemSettingsDetails">
+        <tr *ngFor="let settings of redeemSettingsDetails">
 
           <td class="left capitalize" width="20%">
-          <span *ngIf="settings.points"> {{settings.points}}  </span> 
-          <span *ngIf = "settings.points === null || settings.points == '' "> - </span>
+            <span *ngIf="settings.points"> {{settings.points}} </span>
+            <span *ngIf="settings.points === null || settings.points == '' "> - </span>
           </td>
 
           <td class="left capitalize" width="20%">
-          <span *ngIf="settings.type"> {{settings.type}}  </span> 
-          <span *ngIf = "settings.type === null || settings.type == '' "> - </span>
-        </td>
+            <span *ngIf="settings.type"> {{settings.type}} </span>
+            <span *ngIf="settings.type === null || settings.type == '' "> - </span>
+          </td>
 
           <td class="left" width="20%">
-              <span *ngIf="settings.amount"> {{settings.amount}}  </span> 
-              <span *ngIf = "settings.amount === null || settings.amount == '' "> - </span>
+            <span *ngIf="settings.amount"> {{settings.amount}} </span>
+            <span *ngIf="settings.amount === null || settings.amount == '' "> - </span>
           </td>
 
           <td class="" width="20%">
@@ -101,8 +100,8 @@
             <span *ngIf="settings.createddate === null || settings.createddate == ''"> - </span>
           </td>
 
-          <td class="" width = "20%">
-            <span> 
+          <td class="" width="20%">
+            <span>
               <i class="fa fa-pencil-square-o btn-link" title="Change redeem settings" (click)="changeSettings(settings)"></i>
             </span>
             &nbsp;&nbsp;
@@ -126,30 +125,30 @@
           <th width="10%">Created date</th>
           <th class="" width="10%">Status</th>
           <th class="" width="10%">Action</th>
-          
+
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let redeem of redeemDetails">
-            <td class="left" width="10%">
-              <span *ngIf="redeem.fullname">{{redeem.fullname}}</span>
-              <span *ngIf="redeem.fullname == '' || redeem.fullname === null"> - </span>              
-              </td>
+          <td class="left" width="10%">
+            <span *ngIf="redeem.fullname">{{redeem.fullname}}</span>
+            <span *ngIf="redeem.fullname == '' || redeem.fullname === null"> - </span>
+          </td>
           <td class="left capitalize" width="10%">{{redeem.points}}</td>
           <td class="left capitalize" width="10%">{{redeem.type}}</td>
           <td class="left" width="10%">{{redeem.amount}}</td>
           <td class="left" width="10%">{{redeem.createddate | utcDate}}</td>
           <td class="left" width="10%">
             <span *ngIf="redeem.status">{{redeem.status}} </span>
-            <span *ngIf="redeem.status === null || redeem.status == ''"> -  </span>
+            <span *ngIf="redeem.status === null || redeem.status == ''"> - </span>
           </td>
 
           <td class="" width="10%">
             <span *ngIf="redeem.status == 'inprocess'" class="fa fa-money active" title="Process payment" (click)="processPaymentDialog(redeem)"></span>
-            <span *ngIf="redeem.status != 'inprocess'" class="fa fa-money disabled" title="Process payment"></span>  &nbsp; &nbsp;
-            <span class="	fa fa-file-text-o active" title="paymentDetails" (click)="viewProcessedDetails(redeem)"></span>    
+            <span *ngIf="redeem.status != 'inprocess'" class="fa fa-money disabled" title="Process payment"></span> &nbsp; &nbsp;
+            <span class="	fa fa-file-text-o active" title="paymentDetails" (click)="viewProcessedDetails(redeem)"></span>
           </td>
-      
+
         </tr>
       </tbody>
     </table>

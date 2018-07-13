@@ -3,8 +3,7 @@
       <i class="fa fa-gift"></i>  Products
   </div>
   <div class="col-md-9  col-sm-9  col-lg-9" >
-      <h5 align="center" class="form-group"> Category: 
-  <span class="white">{{details.category}}</span> </h5>
+      <span align="center white"> Category: {{details.category}} </span>
 </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
         <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -12,8 +11,7 @@
   </div>
 </div>
   <md-dialog-content layout="column">
-      <div class="pd-15x25 brd-bottom">
-         
+      <div class="pd-15x25 brd-bottom">         
           <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
@@ -27,7 +25,7 @@
       </thead>
       <tbody>
         <tr *ngFor="let product of productCategory">
-          <td width="46%" class="left capital"><span class="onhovertooltip-300" title="{{product.category}} {{product.ptype}}">{{product.category}} {{product.ptype}}</span></td>
+          <td width="46%" class="left capital"><span class="onhovertooltip-300 capitalize" title="{{product.category}} {{product.ptype}}">{{product.category}} {{product.ptype}}</span></td>
           <td width="10%" class="left capital">{{product.pcost}}</td>
           <td width="12%" class="left capital">{{product.iscanreturnable}}</td>
           <td width="10%" class="left capital">{{product.avaliable_stock}}</td>
