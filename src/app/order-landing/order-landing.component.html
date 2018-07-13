@@ -1067,6 +1067,7 @@
                       aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
                     <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
                       title="Moya Customer"></i>
+                      <i class="fa fa-frown-o red" title="Revert" *ngIf="complete.status == 'backtodealer'"></i>
                     <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
                     <br>
                   </div>

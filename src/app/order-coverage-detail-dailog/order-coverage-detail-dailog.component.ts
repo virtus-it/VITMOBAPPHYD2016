@@ -643,25 +643,4 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 }
 
 
-
-// getPathsinFloat(){
-//   this.polyArray = [];
-//   let path = [];
-//   this.polyArray = this.authenticationService.getPolygons();
-//   _.each(this.polyArray , function(i, j){
-//     let details:any = i;
-//     path = details.path;
-  
-//   _.each(path , function(k ,l){
-//     let pathData:any = k;
-//     for(let latandlong of pathData){
-//       pathData.lat = parseFloat(pathData.lat);
-//       pathData.lng = parseFloat(pathData.lng);
-//     }
-//     path.push(pathData);
-//   });
-//   });
-//   this.polyArray.push(path);
-//   this.polygonArray = this.polyArray;
-//   }
   
