@@ -50,6 +50,7 @@ export class AddProductDealerComponent implements OnInit {
       console.log(result.data , 'result.data');
       // let prodId: any = [];
       let category: any = [];
+      let productType = [];
       let finalProducts: any = [];
       let brandName :any = [];
       let Details = this.Details.distProducts;
@@ -61,6 +62,7 @@ export class AddProductDealerComponent implements OnInit {
         // prodId = details.productid;
         brandName = details.brandname;
         category = details.category;
+        productType = details.ptype;
         let distProds = _.find(Details, function(k, l) {
           let detailData: any = k;
           // if((detailData.brandname == brandName) && (detailData.category == category)){
@@ -69,7 +71,10 @@ export class AddProductDealerComponent implements OnInit {
           // else{
           //   console.log('false');
           // }
-          return ((detailData.brandname == brandName) && (detailData.category == category) );
+          return ((detailData.brandname == brandName) && (detailData.category == category) && (detailData.ptype = productType) );
+
+          // if the above 1 doestnot filter use this it only filters cat and ptype
+          // return ((detailData.category == category) && (detailData.ptype = productType) );
           
         });
         if (!distProds) {

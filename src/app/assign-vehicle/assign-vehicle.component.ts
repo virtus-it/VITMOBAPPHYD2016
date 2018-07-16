@@ -16,6 +16,9 @@ export class AssignVehicleComponent implements OnInit {
 
   assignVehicleInput = { "User": { "vehhicleno": "", "starttime": "", "supplierid": "", "transtype": "create", "expectedtime": "", "meter": "", "fuel": "", "canscount": "", "arrivedtime": "", "emptycans": "", "tracking_status": "", "tracking_interval": "", "fuelend": "", "meterend": "" } };
 
+  endTime = '';
+  startTime = '';
+
 
 
 
@@ -81,7 +84,7 @@ export class AssignVehicleComponent implements OnInit {
     }
 
     if (this.assignVehicleInput.User.arrivedtime) {
-      let formatDate = moment(new Date()).format('YYYY-MM-DD') + " " + this.assignVehicleInput.User.expectedtime + ':00';
+      let formatDate = moment(new Date()).format('YYYY-MM-DD') + " " + this.assignVehicleInput.User.arrivedtime + ':00';
       this.assignVehicleInput.User.arrivedtime = formatDate;
     }
     else {
@@ -99,7 +102,7 @@ export class AssignVehicleComponent implements OnInit {
   }
   updateVehicleResult(result) {
     if (result.result == 'success') {
-
+      this.thisDialogRef.close('success');
     }
   }
 
@@ -123,8 +126,19 @@ export class AssignVehicleComponent implements OnInit {
       // this.assignVehicleInput.User.vehhicleno = result.data;
       this.assignVehicleInput.User.vehhicleno = result.data[0].vehicleno;
       this.assignVehicleInput.User.canscount = result.data[0].cans_count;
-      this.assignVehicleInput.User.expectedtime = result.data[0].expected_endtime;
-      this.assignVehicleInput.User.starttime = result.data[0].start_time;
+      if(result.data[0].expected_endtime){
+        var timestamp = (result.data[0].expected_endtime).split('T');
+        var tS1 = timestamp[1];
+        this.endTime = tS1.substring(0,5);
+        this.assignVehicleInput.User.expectedtime = this.endTime;
+      }
+      if(result.data[0].start_time){
+        var timestamp1 = (result.data[0].start_time).split('T');
+        var tS2 = timestamp1[1];
+        this.startTime = tS2.substring(0,5);
+        this.assignVehicleInput.User.starttime = this.startTime;
+      }
+     
       this.assignVehicleInput.User.fuel = result.data[0].fuel_in_litre;
       this.assignVehicleInput.User.meter = result.data[0].meter_reading;
       this.assignVehicleInput.User.tracking_status = result.data[0].istracking;

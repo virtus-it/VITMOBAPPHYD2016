@@ -21,7 +21,7 @@
       <div class="col-4 pdtop-8" *ngIf="ruleInput.type == 'promocode'">
         <!-- for promocode give condition -->
         <md-form-field class="example-full-width wd-100pc">
-          <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl">
+          <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl" [(ngModel)]="ruleInput.code">
           <md-autocomplete #auto="mdAutocomplete">
             <md-option *ngFor="let promo of filteredPromoCodes | async" [value]="promo.promocode">
               <span>{{promo.promocode}}</span>
@@ -53,7 +53,7 @@
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button (click)="submitRule()">CREATE</button>
+    <button type="submit" class="btn-primary" md-raised-button (click)="submit()">CREATE</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

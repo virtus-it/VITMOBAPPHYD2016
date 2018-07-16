@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , Inject } from '@angular/core';
 import { MdDialogRef } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { MD_DIALOG_DATA } from '@angular/material';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -22,7 +23,7 @@ export class AddEditRuleComponent implements OnInit {
   pointsCtrl: FormControl;
   filteredPoints: Observable<any[]>;
 
-  constructor( public thisDialogRef: MdDialogRef<AddEditRuleComponent> , private distributorService: DistributorServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService, ) {
+  constructor( public thisDialogRef: MdDialogRef<AddEditRuleComponent> , private distributorService: DistributorServiceService ,  private authenticationService: AuthenticationService, private followupService: FollowUpService, @Inject(MD_DIALOG_DATA)  public Details: any ) {
 
     this.promocodeCtrl = new FormControl();
     this.filteredPromoCodes = this.promocodeCtrl.valueChanges
@@ -130,7 +131,7 @@ export class AddEditRuleComponent implements OnInit {
 
 
   submitRule(){
-    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"addrule" }} ;
+    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "desc": this.ruleInput.code , "value": this.ruleInput.value , 'transtype' :"createrule" , 'loginid': this.authenticationService.loggedInUserId() }} ;
     console.log(input);
     this.followupService.createpromocode(input)
     .subscribe(
@@ -146,7 +147,7 @@ export class AddEditRuleComponent implements OnInit {
 
 
   updateRule(){
-    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "code": this.ruleInput.code , "value": this.ruleInput.value , TransType:"updaterule" , "id":"123" }};
+    let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() , "type": this.ruleInput.type  , "desc": this.ruleInput.code , "value": this.ruleInput.value , 'transtype' :"updaterule" , "id": this.Details.id  , 'loginid': this.authenticationService.loggedInUserId() }};
     this.followupService.createpromocode(input)
     .subscribe(
     output => this.updateRuleResult(output),
@@ -161,7 +162,7 @@ export class AddEditRuleComponent implements OnInit {
 
 
   deleteRule(){
-    let input = {"User":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() ,  TransType:"deleterule" , "id":"123" }};
+    let input = {"User":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() ,  TransType:"deleterule" , "id": this.Details.id }};
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.deleteRuleResult(output),
@@ -174,7 +175,26 @@ export class AddEditRuleComponent implements OnInit {
     }
   }
 
+  getRulesDetails(){
 
+  // ruleInput = {"type":"promocode" , "code":"" , "value":""};
+    
+    if(this.Details){
+this.ruleInput.type =  this.Details.type;
+this.ruleInput.code =  this.Details.code_description;
+this.ruleInput.value =  this.Details.value;
+// this.ruleInput.type =  this.Details.type;
+    }
+  }
+
+  submit(){
+    if(this.Details.id){
+      this.updateRule();
+    }
+    else{
+      this.submitRule();
+    }
+  }
 
 
 
@@ -185,6 +205,8 @@ export class AddEditRuleComponent implements OnInit {
   ngOnInit() {
     this.getAllPromoCodes();
     this.getAllPoints();
+    this.getRulesDetails();
+    console.log(this.Details);
   }
 
 }

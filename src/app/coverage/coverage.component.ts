@@ -40,6 +40,7 @@ export class CoverageComponent implements OnInit {
   order = { orderId: '' };
   orderDetails = [];
   showMarkers: marker[] = [];
+  bindablePoints = [];
   markers: any = [
     {
       lat: '',
@@ -57,7 +58,7 @@ export class CoverageComponent implements OnInit {
 
   tabPanelView:any = 'distributors';
   changeButton : boolean  = false;
-
+  allStockpointsArray = [];
   orderslocationData: marker[] = [];
   showFilterDailog = false;
   constructor(
@@ -107,13 +108,7 @@ export class CoverageComponent implements OnInit {
   // categoryName = [{"itemName":"details.categoryname"}];
 
   getPolygonDistributors() {
-    var input = {
-      area: {
-        user_type: 'dealer',
-        user_id: 0,
-        apptype: this.authenticationService.appType()
-      }
-    };
+    var input = {area: {user_type: 'dealer',user_id: 0,apptype: this.authenticationService.appType()}};
     this.loaderService.display(true);
     this.distributorService.getpolygonByDistributor(input)
       .subscribe(
@@ -498,9 +493,9 @@ export class CoverageComponent implements OnInit {
 
 
   showStockPoints(){
-    let input={"User":{"userid":this.authenticationService.loggedInUserId() ,"transtype":"getall","apptype":this.authenticationService.appType()}};
-    //console.log(input);
-    this.distributorService.StockPoint(input)
+    var input = {area: {user_type: 'dealer',user_id: 0,apptype: this.authenticationService.appType()}};
+    this.loaderService.display(true);
+    this.distributorService.getpolygonByDistributor(input)
     .subscribe(
     output => this.showStockPointsResult(output),
     error => {
@@ -511,29 +506,44 @@ export class CoverageComponent implements OnInit {
      //console.log(result);
      if(result.result == 'success'){
        this.stockpoints=result.data;
-       let stockpointData = {lat:0 , lng:0 , icon:"" , index: 1 };
-       let markersData = [];
-      //  let marker = [];
-       _.each(this.stockpoints , function(i, j){
-         let details:any = i;
-         stockpointData = {
-            lat: parseFloat(details.latitude),
-            lng: parseFloat(details.longitude),
-            icon:"../assets/images/red.png",
-            index : j + 1 
-         }
-         markersData.push(stockpointData);
-       });
+    //    let latlngsArray = [];
+    //    _.each(this.stockpoints , function (i , j){
+    //      let details:any = i;
+    //      latlngsArray.push(details.latlngs);
+    //    });
+    //    this.allStockpointsArray = latlngsArray;
+    //    console.log(latlngsArray);
+    //    let stockpointData = {lat:0 , lng:0 , icon:"" , userid: 0 };
+    //    let markersData = [];
+    //   //  let marker = [];
+    //   let validspArray = [];
+    //    _.each(this.allStockpointsArray , function(i, j){
+    //      let details:any = i;
+    //      _.each(details , function (k ,l){
+    //        let detailsData:any = k;
+    //        if(detailsData.latitude && detailsData.longitude){
+    //         validspArray.push(detailsData);
+    //        }
+    //      });
+    //      this.bindablePoints = validspArray;
+    //      stockpointData = {
+    //         lat: parseFloat(this.bindablePoints.latitude),
+    //         lng: parseFloat(this.bindablePoints.longitude),
+    //         icon:"../assets/images/red.png",
+    //         userid : this.bindablePoints.user_id
+    //     }
+    //      markersData.push(stockpointData);
+    //    });
 
-       this.showMarkers = markersData;
-       this.changeButton = true;
+    //    this.showMarkers = markersData;
+    //    this.changeButton = true;
       
-     }
-     else{
-      // this.noDataError="No Stock Points for this distributor";
-      this.stockpoints = [];
-      this.showMarkers = [];
-      this.changeButton = false;
+    //  }
+    //  else{
+    //   // this.noDataError="No Stock Points for this distributor";
+    //   this.stockpoints = [];
+    //   this.showMarkers = [];
+    //   this.changeButton = false;
      }
 
   }

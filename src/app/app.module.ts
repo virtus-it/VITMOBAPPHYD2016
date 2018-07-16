@@ -129,6 +129,7 @@ import { AssignVehicleComponent } from './assign-vehicle/assign-vehicle.componen
 import { TrackSupplierComponent } from './track-supplier/track-supplier.component';
 import { SortingPipe } from './pipes/sorting.pipe';
 import { NotificationDetailsComponent } from './notification-details/notification-details.component';
+import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
 
 
 
@@ -236,6 +237,7 @@ import { NotificationDetailsComponent } from './notification-details/notificatio
         TrackSupplierComponent,
         SortingPipe,
         NotificationDetailsComponent,
+        DeleteRuleComponent,
 
      
         
@@ -390,7 +392,8 @@ import { NotificationDetailsComponent } from './notification-details/notificatio
          AddVehicleComponent,
          AssignVehicleComponent,
          TrackSupplierComponent,
-         NotificationDetailsComponent
+         NotificationDetailsComponent,
+         DeleteRuleComponent
       
 
 
