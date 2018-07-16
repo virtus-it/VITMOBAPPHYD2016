@@ -346,7 +346,11 @@ export class OrderLandingComponent implements OnInit {
       if (result == 'success') {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
+        this.loaderService.display(false);
         
+      }
+      else{
+        this.loaderService.display(false);        
       }
 
     });
