@@ -49,9 +49,20 @@ export class InboxComponent implements OnInit {
   }
 
   filterMessages(){
-    let fromDate = moment(this.filterInput.fromDate).format('YYYY-MM-DD 00:00:00');
-    let toDate = moment(this.filterInput.toDate).format('YYYY-MM-DD 00:00:00');
-    
+    let fromDate = null;
+    let toDate = null; 
+    if(this.filterInput.fromDate){
+    fromDate = moment(this.filterInput.fromDate).format('YYYY-MM-DD 00:00:00');
+    }
+    else{
+      fromDate = null;
+    }
+    if(this.filterInput.toDate){
+      toDate = moment(this.filterInput.toDate).format('YYYY-MM-DD 00:00:00');
+    }
+    else{
+      toDate = null;
+    }
     let input = {"root":{"loginid":this.authenticationService.loggedInUserId(),"fromdate":fromDate,"todate": toDate, "apptype" :this.authenticationService.appType()}};
     this.followupService.getAllMessages(input)
       .subscribe(

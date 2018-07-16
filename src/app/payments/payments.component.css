@@ -18,7 +18,8 @@
     border-bottom: 1px solid #ddd;
   }
   .nav-link{
-    padding: 20px 48px!important;
+		padding: 20px 52px!important;
+    font-size: 18px;
   }
   .nav-pills .nav-link{
     border-radius: 0px;

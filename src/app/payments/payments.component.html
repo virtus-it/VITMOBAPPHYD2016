@@ -7,7 +7,7 @@
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
       <a class="cursor logo-color mgleft-10">
-        <i aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter"></i>
+        <i aria-hidden="true" class="fa fa-sliders logo-color  fs-20" (click)="filterToggle()" title="Filter"></i>
 
         <div class="filterView" *ngIf="showFilterDialog">
           <div class="">
@@ -131,10 +131,17 @@
                 {{credit.modifieddate | utcDate }} </span>
               <span> #{{credit.orderid}}</span>
             </time>
-            <div class="cbp_tmicon cbp_tmicon-favourite">
-              <i class="fa fa-check" aria-hidden="true"></i>
+            <!-- <div class="cbp_tmicon cbp_tmicon-check" *ngIf="payments.status=='confirm'">
+              <i class="fa fa-check   fs-20" aria-hidden="true"></i>
+
             </div>
-            <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
+            <div class="cbp_tmicon cbp_tmicon-times" *ngIf="payments.status=='rejected'">
+              <i class="fa fa-times   fs-20" aria-hidden="true"></i>
+            </div> -->
+
+            <div class="cbp_tmicon cbp_tmicon-favourite">
+              <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
+            </div>
 
             <div class="cbp_tmlabel left">
               <b> Customer has taken the credit</b>
@@ -149,7 +156,7 @@
         </ul>
       </div>
 
-      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'advamount'">
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'advamount'" style="background: linear-gradient(to right, #ffffff , #0f75bc);">
         <ul class="cbp_tmtimeline">
           <li *ngFor="let advance of advAmount">
             <time class="cbp_tmtime">
@@ -159,7 +166,7 @@
               <span># {{advance.orderid}}</span>
             </time>
             <div class="cbp_tmicon cbp_tmicon-favourite">
-              <i class="fa fa-check" aria-hidden="true"></i>
+              <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
             </div>
             <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
 
@@ -174,16 +181,24 @@
         </ul>
 
       </div>
-      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'paytm'">
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'paytm'" style="background: linear-gradient(to right, #ffffff , #0f75bc);">
         <ul class="cbp_tmtimeline">
-          <li *ngFor="let advance of advAmount">
+          <li>
             <time class="cbp_tmtime">
               <span>
               </span>
               <span></span>
             </time>
+                 <!-- <div class="cbp_tmicon cbp_tmicon-check" *ngIf="payments.status=='confirm'">
+              <i class="fa fa-check   fs-20" aria-hidden="true"></i>
+
+            </div>
+            <div class="cbp_tmicon cbp_tmicon-times" *ngIf="payments.status=='rejected'">
+              <i class="fa fa-times   fs-20" aria-hidden="true"></i>
+            </div> -->
+
             <div class="cbp_tmicon cbp_tmicon-favourite">
-              <i class="fa fa-check" aria-hidden="true"></i>
+              <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
             </div>
             <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
 
@@ -196,16 +211,24 @@
         </ul>
       </div>
 
-      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'onlinebanking'">
+      <div class="tab-content col pdtop-15" *ngIf="tabPanelView == 'onlinebanking'" style="background: linear-gradient(to right, #ffffff , #0f75bc);">
         <ul class="cbp_tmtimeline">
-          <li *ngFor="let advance of advAmount">
+          <li >
             <time class="cbp_tmtime">
               <span>
               </span>
               <span></span>
             </time>
+              <!-- <div class="cbp_tmicon cbp_tmicon-check" *ngIf="payments.status=='confirm'">
+              <i class="fa fa-check   fs-20" aria-hidden="true"></i>
+
+            </div>
+            <div class="cbp_tmicon cbp_tmicon-times" *ngIf="payments.status=='rejected'">
+              <i class="fa fa-times   fs-20" aria-hidden="true"></i>
+            </div> -->
+
             <div class="cbp_tmicon cbp_tmicon-favourite">
-              <i class="fa fa-check" aria-hidden="true"></i>
+              <i class="fa fa-heart  fs-20" aria-hidden="true"></i>
             </div>
             <!-- <div class="cbp_tmicon cbp_tmicon-favourite">  <i class="fa fa-heart" aria-hidden="true"></i></div> -->
 
