@@ -35,6 +35,9 @@
   .left{
     text-align: left;
   }
+  label.col-md-6:hover{
+    color: #f79123 !important;
+  }
   a{
     color: var( --logo-color);
   }

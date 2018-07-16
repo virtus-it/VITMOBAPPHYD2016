@@ -4,6 +4,9 @@
   vertical-align:unset;
   border-top: none;
 }
+label.col-md-6:hover{
+  color: #f79123 !important;
+}
 .dist-style{
   border: 1px solid #ddd;
   margin: 20px;
