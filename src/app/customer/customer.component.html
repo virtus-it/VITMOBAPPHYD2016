@@ -13,7 +13,7 @@
             </md-option>
           </md-select>
         </div>
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+        <div class=" col pdtop-8" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
           <!-- ng-if="key == 'City' || key == 'County'"> -->
           <md-form-field class="example-full-width">
             <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
@@ -181,23 +181,23 @@
 
       <div class="col-4 pd-10">
         <div class="row">
-          <b class="capital col-5 left">Created By: </b>
+          <b class="capital col-4 left">Created By: </b>
           <span class="onhovertooltip-150 col left" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
           <span class="col" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
         </div>
         <div class="row">
-          <b class="capital col-5 left">Created Date: </b>
+          <b class="capital col-4 left">Created Date: </b>
           <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>
         </div>
         <div class="row">
-          <b class="capital col-5 left">Distributor: </b>
+          <b class="capital col-4 left">Distributor: </b>
           <span class="onhovertooltip-150 capitalize col left" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer"
             *ngIf="customers.dealers && customers.dealers.firstname">
             {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
           </span>
         </div>
         <div class="row">
-          <b class="capital col-5 left">Reference Code: </b>
+          <b class="capital col-4 left">Reference Code: </b>
           <span class="col left" title="">Reference Code</span>
         </div>
       </div>

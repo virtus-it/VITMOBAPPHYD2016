@@ -49,6 +49,22 @@ table thead {
   .numbers:hover .hovernumbers {
     display:block
   }
+  .joined-style{
+    background: #fff;
+    padding: 8px 12px;
+    border-radius: 50%;
+    font-size: 20px;
+    margin-left: 10px;
+  }
+  .brd-box-box {
+    padding: 0px;
+    border: 1px solid #ddd;
+    border-radius: 1px;
+    margin: 0px;
+    margin-bottom: 15px; 
+    box-shadow: 0 4px 20px -6px #777;
+    border-radius: 0px;
+  }
   /* .mat-dialog-container{
     height: 90% !important;
   } */

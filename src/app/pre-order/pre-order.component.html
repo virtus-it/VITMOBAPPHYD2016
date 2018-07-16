@@ -30,7 +30,8 @@
                 <md-option value="cod">COD</md-option>
                 <md-option value="credit">CREDIT</md-option>
                 <md-option value="codwithpending">Cod with Pending</md-option>
-                <md-option value="advlesscans">Advance Amt < Available Cans</md-option>
+                <md-option value="advlesscans">Advance Amt
+                  < Available Cans</md-option>
               </md-select>
             </div>
             <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
@@ -61,88 +62,88 @@
     </div>
     <!-- search ends here -->
   </div>
-  <div id="" class="row  mg-0">
-    <div class="pd-15 ">
-      <table class="table table-hover table-striped" style="table-layout:fixed">
-        <thead>
-          <tr>
-            <th width="14%">Customer</th>
-            <!-- <th width="10%">Status</th> -->
-            <th width="14%">Distributor</th>
-            <th width="14%">Supplier</th>
-            <th width="8%">Mobile</th>
-            <!-- <th width="8%">Mobile 1</th>
-            <th width="8%">Mobile 2</th> -->
-            <th width="10%">Email</th>
-            <th width="14%">Address</th>
-            <th width="6%">Mode</th>
-            <th width="7%" title="Advance Amount">Adv Amt</th>
-            <th width="7%" title="Due Amount">Due Amt</th>
-            <th width="6%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- <tr id="Preordrlist" (click)="addPreorder()"> -->
-          <tr *ngFor="let preorder of customerList">
-            <td class="left capitalize" width="14%">
-              <span class="onhovertooltip-150" title="{{preorder.firstname}} {{preorder.lastname}}">
-                <span *ngIf="preorder.isappdownloaded" class="">
-                  <i class="fa fa-thumbs-up success" title="Joined"></i>
-                </span>
-                <span *ngIf="!preorder.isappdownloaded" class="text-align-start">
-                  <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
-                </span>
-                {{preorder.firstname}} {{preorder.lastname}} </span>
-            </td>
-            <!-- <td class="left">
-              <span *ngIf="preorder.isappdownloaded">Joined</span>
-              <span *ngIf="!preorder.isappdownloaded">Not Joined</span>
-            </td> -->
-            <td class="left capitalize" width="14%">
-              <span class="onhovertooltip-150" *ngIf="preorder.dealers" title="{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer </span>
-            </td>
-            <!-- <td class="left">{{preorder.mobileno}}</td>  -->
-            <td class="left capitalize" width="14%">
-              <span class="onhovertooltip-150" *ngIf="preorder.enable_autoassign=='true' && preorder.supplier" title="{{preorder.supplier.suppliername}}">{{preorder.supplier.suppliername}}</span>
-            </td>
-            <td class="left numbers" width="8%">
-              <span class="onhovertooltip-100" title="{{preorder.mobileno}} {{preorder.mobileno_one}} {{preorder.mobileno_two}}">{{preorder.mobileno}}
+
+  <div class="pd-15 ">
+    <div class="row brd-box-box" *ngFor="let preorder of customerList">
+      <div class="col-4 left bg-color-bg">
+        <div class="row align-items-center">
+          <div class="col-2  pd-10 " align-self-center>
+            <span *ngIf="preorder.isappdownloaded" class="joined-style">
+              <i class="fa fa-thumbs-up success" title="Joined"></i>
+            </span>
+            <span *ngIf="!preorder.isappdownloaded" class="joined-style">
+              <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
+            </span>
+          </div>
+
+          <div class="col">
+            <div class="row">
+              <b class="capital col-5 left">Customer: </b>
+              <span class="onhovertooltip-150 left col capital" title=" {{preorder.firstname}} {{preorder.lastname}}"> {{preorder.firstname}} {{preorder.lastname}}</span>
+            </div>
+            <div class="row">
+              <b class="capital col-5 left">Mobile: </b>
+              <span class="onhovertooltip-100 col left capital" title="{{preorder.mobileno}} {{preorder.mobileno_one}} {{preorder.mobileno_two}}">{{preorder.mobileno}}
                 <span *ngIf="preorder.mobileno_one || preorder.mobileno_two">{{preorder.mobileno_one}} {{preorder.mobileno_two}}</span>
               </span>
-            </td>
-            <!-- <td class="left">{{preorder.mobileno_one}}</td>
-            <td class="left">{{preorder.mobileno_two}}</td> -->
-            <td class="left" width="10%">
-              <span class="onhovertooltip-100" title="{{preorder.emailid}}">{{preorder.emailid}}</span>
-            </td>
-            <td class="left" width="14%">
-              <span class="onhovertooltip-150  capitalize" title="{{preorder.address}}">{{preorder.address}}</span>
-            </td>
-            <td class="left" width="6%">
-              <div *ngIf="preorder.payments">
-                <span class="onhovertooltip-50" title="{{preorder.payments.paymenttype}} {{preorder.payments.days}}" *ngIf="preorder.payments.paymenttype=='credit'">
-                {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
-                <span *ngIf="preorder.payments.paymenttype=='cod'">{{preorder.payments.paymenttype}}</span>
-              </div>
-            </td>
-            <td class="left" width="7%">
-              <span class="success" *ngIf="preorder.payments">{{preorder.payments.advance_amount}} </span>
-            </td>
-            <td class="left" width="7%">
-              <span class="danger" *ngIf="preorder.payments">{{preorder.payments.amount_pending}} </span>
-            </td>
-            <td class="left" width="6%">
-              <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit" (click)="showEditCustomer(preorder)"></i>&nbsp;&nbsp;&nbsp;
-              <i class="fa fa-cart-plus btn-link" aria-hidden="true" (click)="addPreorder(preorder)" title="Create Pre-Order"></i>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </div>
+            <div class="row">
+              <b class="capital col-5 left">Email id: </b>
+              <span class="onhovertooltip-100 left" title="{{preorder.emailid}}">{{preorder.emailid}}</span>
+            </div>
+            <div class="row">
+              <b class="capital col-5 left">Address: </b>
+              <span class="onhovertooltip-150 col capitalize left" title="{{preorder.address}}">{{preorder.address}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-4 align-self-center">
+        <div class="row">
+          <b class="capital col-4 left">Distributor: </b>
+          <span class="onhovertooltip-150 left col capital" *ngIf="preorder.dealers" title="{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer </span>
+        </div>
+        <div class="row">
+          <b class="capital col-4 left">Supplier: </b>
+          <span class="onhovertooltip-150 col left" *ngIf="preorder.enable_autoassign=='true' && preorder.supplier" title="{{preorder.supplier.suppliername}}">{{preorder.supplier.suppliername}}</span>
+        </div>
+        <div class="row">
+          <b class="capital col-4 left">Mode: </b>
+          <div *ngIf="preorder.payments left" class="col left">
+            <span class="onhovertooltip-50" title="{{preorder.payments.paymenttype}} {{preorder.payments.days}}" *ngIf="preorder.payments.paymenttype=='credit'">
+              {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
+            <span *ngIf="preorder.payments.paymenttype=='cod'">{{preorder.payments.paymenttype}}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-2  align-self-center">
+        <div class="row">
+          <b class="capital col left">Deposit Amt: </b>
+          <span class="success col-5 left" *ngIf="preorder.payments">{{preorder.payments.advance_amount}} </span>
+        </div>
+        <div class="row">
+          <b class="capital col  left">Due Amt: </b>
+          <span class="danger col-5 left" *ngIf="preorder.payments">{{preorder.payments.amount_pending}} </span>
+        </div>
+        <div class="row">
+          <b class="capital col left">Type: </b>
+          <span class="left capital col-5">{{preorder.registertype}}</span>
+        </div>
+      </div>
+      <div class="col-2  align-self-center">
+        <div class="">
+          <i class="fa fa-pencil-square-o btn-link fs-20" aria-hidden="true" title="Edit" (click)="showEditCustomer(preorder)"></i>&nbsp;&nbsp;&nbsp;
+          <i class="fa fa-cart-plus btn-link fs-20" aria-hidden="true" (click)="addPreorder(preorder)" title="Create Pre-Order"></i>
+        </div>
+      </div>
     </div>
   </div>
-      <h4 class="warning  capitalize">
-        <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="preOrderClickMore">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-      </h4>
-      <h4 *ngIf="!preOrderClickMore" class="warning">Record Not Available</h4>
 
+  <h4 class="warning  capitalize">
+    <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="preOrderClickMore">
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+  </h4>
+  <h4 *ngIf="!preOrderClickMore" class="warning">Record Not Available</h4>
+</div>
