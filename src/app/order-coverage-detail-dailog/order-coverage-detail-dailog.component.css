@@ -1,4 +1,4 @@
-agm-map {
+/* agm-map {
     max-height: 68vh;
   }
 
@@ -8,7 +8,14 @@ agm-map {
 
   .mg-10-5{
     margin: 10px 0px -5px 0px !important;
-  }
-  .mat-dialog-content{
-    max-height:80vh;
-  }
+  } */
+
+agm-map { 
+height: 450px;
+}
+.mgtopleft-20{
+margin: 20px 0px 0px 20px !important;
+}
+.mg-10-5{ 
+margin: 10px 0px -5px 0px !important;
+}

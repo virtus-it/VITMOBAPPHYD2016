@@ -368,15 +368,20 @@ changeOfQuantity(data){
    
     console.log(this.orderDetail);
     this.getProductsList();
-    if(this.orderDetail.orderDetails && this.orderDetail.orderDetails.empty_cans){
-    this.emptyCans = this.orderDetail.orderDetails.empty_cans;
+
+    if((this.orderDetail.type == 'customersPage')  && (this.orderDetail.orderDetails)  &&(this.orderDetail.orderDetails.empty_cans) ){
+       this.emptyCans = this.orderDetail.orderDetails.empty_cans;
+    }
+     else{
+       this.emptyCans = 0;
+     }
+    if((this.orderDetail.type == 'coveragePage') && (this.orderDetail.data.orders) && (this.orderDetail.data.orders.empty_cans)){
+    this.emptyCans = this.orderDetail.data.orders.empty_cans;
     }
     else{
       this.emptyCans = 0;
     }
-    if(this.orderDetail.orderDetails.empty_cans === null || this.orderDetail.orderDetails.empty_cans == ''){
-      this.emptyCans = 0;
-    }
+    
   }
 
 }

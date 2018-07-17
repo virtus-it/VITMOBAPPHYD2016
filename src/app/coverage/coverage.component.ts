@@ -551,7 +551,7 @@ export class CoverageComponent implements OnInit {
        });
        this.bindableArray = array1;
        console.log(this.bindableArray , 'sakgfajfgka');
-
+       this.changeButton = true;
 
 
      }
@@ -559,15 +559,16 @@ export class CoverageComponent implements OnInit {
         // this.noDataError="No Stock Points for this distributor";
         this.loaderService.display(false);
         this.bindableArray = [];
-        this.changeButton = false;
+        // this.changeButton = false;
      }
 
   }
 
   hideStockPoints(){
-    this.stockpoints = [];
-    this.showMarkers = [];
+    this.bindableArray = [];
+    // this.showMarkers = [];
     this.changeButton = false;
+    
   }
 
   ngOnInit() {

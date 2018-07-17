@@ -347,9 +347,30 @@
               <div class="p-1 pad-btn">
                 <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
               </div>
+
+
+              <!-- <div class="">
+                <table>
+                  <tr>
+                  <th>S.No</th>
+                  <th>Template Name</th>
+                  <th>Date</th>
+                </tr>
+                <tr *ngFor="let history of notificationHistory">
+                  <td>{{i +1}}</td>
+
+                  <td>
+                    <span *ngIf="history.message">{{history.message}}</span>
+                    <span *ngIf="!history.message"> - </span>
+                  </td>
+                  
+                  <td>{{history.createddate | utcDate}}</td>                  
+                </tr>
+                </table>
+              </div> -->
   
-              <small class="" *ngIf="this.notificationDetails.templatename">{{this.notificationDetails.templatename}}</small> &nbsp; &nbsp; &nbsp;
-              <small *ngIf="this.notificationDetails.templatename"> {{this.notificationDetails.status}}</small>
+              <!-- <small class="" *ngIf="this.notificationDetails.templatename">{{this.notificationDetails.templatename}}</small> &nbsp; &nbsp; &nbsp;
+              <small *ngIf="this.notificationDetails.templatename"> {{this.notificationDetails.status}}</small> -->
   
               <!-- <div class="row mgtop-10">
       <div class="col">
