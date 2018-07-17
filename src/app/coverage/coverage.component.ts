@@ -47,6 +47,7 @@ export class CoverageComponent implements OnInit {
       lng: ''
     }
   ];
+  stockPointsArray:any = [];
 
   // ordersMap: any = [
   //   {
@@ -506,6 +507,17 @@ export class CoverageComponent implements OnInit {
      //console.log(result);
      if(result.result == 'success'){
        this.stockpoints=result.data;
+       let latlngsArray = [];
+       _.each(this.stockpoints , function (i , j){
+         let details:any = i;
+         latlngsArray.push(details.latlngs);
+       });
+       this.stockPointsArray = latlngsArray;
+       _.each( this.stockPointsArray , function ( k ,l){
+         let detailData:any = k;
+         detailData.latitude = parseFloat(detailData.latitude);
+         detailData.longitude = parseFloat(detailData.longitude);
+       });
     //    let latlngsArray = [];
     //    _.each(this.stockpoints , function (i , j){
     //      let details:any = i;
