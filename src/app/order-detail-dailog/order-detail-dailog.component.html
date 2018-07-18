@@ -347,27 +347,30 @@
               <div class="p-1 pad-btn" *ngIf="superDealer || customerCare">
                 <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
               </div>
-
-
-              <!-- <div class="">
-                <table>
+            </div>
+              <div class="">
+                <table class="table table-hover table-fixedheader ">
+                  <thead>
                   <tr>
-                  <th>S.No</th>
-                  <th>Template Name</th>
-                  <th>Date</th>
+                  <th width="20%"><small>S.No</small></th>
+                  <th width="40%"><small>Template Name</small></th>
+                  <th width="40%"><small>Date</small></th>
                 </tr>
-                <tr *ngFor="let history of notificationHistory">
-                  <td>{{i +1}}</td>
+                </thead>
+                <tbody>
+                <tr *ngFor="let history of notificationHistory; let i = index" [attr.data-index]="i">
+                  <td width="20%"><small>{{i+1}}</small></td>
 
-                  <td>
-                    <span *ngIf="history.message">{{history.message}}</span>
-                    <span *ngIf="!history.message"> - </span>
+                  <td width="40%">
+                    <small *ngIf="history.message">{{history.message}}</small>
+                    <small *ngIf="!history.message"> - </small>
                   </td>
                   
-                  <td>{{history.createddate | utcDate}}</td>                  
+                  <td width="40%"><small>{{history.createddate | utcDate}}</small></td>                  
                 </tr>
+              </tbody>
                 </table>
-              </div> -->
+              </div>
   
               <!-- <small class="" *ngIf="this.notificationDetails.templatename">{{this.notificationDetails.templatename}}</small> &nbsp; &nbsp; &nbsp;
               <small *ngIf="this.notificationDetails.templatename"> {{this.notificationDetails.status}}</small> -->
@@ -394,7 +397,7 @@
   -->
   
   
-            </div>
+          
           </div>
         </div>
   

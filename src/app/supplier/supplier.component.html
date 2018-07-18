@@ -46,9 +46,15 @@
                &nbsp; &nbsp;<i class="fa fa-file-text-o btn-link" aria-hidden="true" title="Orders" (click)='supplierOrdersList(supplier)' ></i>
                &nbsp; &nbsp; 
                <i class="fa fa-globe btn-link" aria-hidden="true" title="Assign Area" (click)="openMapDialog(supplier)"></i>&nbsp;&nbsp;
-               <i class="fa fa-automobile btn-link" aria-hidden="true" title="Assign Vehicle" (click)="assignVehicle(supplier)"></i> &nbsp;&nbsp;
 
-               <i class="fa fa-truck btn-link" aria-hidden="true" title="Edit vehicle" (click)="editVehicle(supplier)"></i> &nbsp;&nbsp;
+               <i class="fa fa-automobile disabled" aria-hidden="true" title="disabled Assign Vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1"></i>
+
+               <i class="fa fa-automobile btn-link" aria-hidden="true" title="Assign vehicle" (click)="assignVehicle(supplier)"  *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)"></i>
+                &nbsp;&nbsp;
+
+                <i class="fa fa-truck disabled" aria-hidden="true" title="Edit vehicle"  *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)" ></i>
+
+               <i class="fa fa-truck btn-link" aria-hidden="true" title="Edit vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1" (click)="editVehicle(supplier)"></i> &nbsp;&nbsp;
 
 
                <i class="fa fa fa-compass	

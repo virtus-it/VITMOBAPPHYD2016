@@ -135,7 +135,7 @@ export class OrderLandingComponent implements OnInit {
   LastfilterRecords = false;
   showFilterDailog = false;
   selectedDistForFilter: any = "";
-  orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" } };
+  orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" , 'loginid': this.authenticationService.loggedInUserId() } };
   tabPanelView: string = "forward";
   newView:string = 'gridview';
   quickFilterView: any = "";
@@ -171,6 +171,7 @@ export class OrderLandingComponent implements OnInit {
   globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
 
   dropdownData = { selectedItems: [] };
+  superDealerId:number = 0;
 
   categoryProduct = { selectedItems : []};
   filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
@@ -441,6 +442,9 @@ export class OrderLandingComponent implements OnInit {
     let forwardInput = this.orderListInput;
     //console.log(forwardInput);
     this.loaderService.display(true);
+    if(this.authenticationService.userType() == 'customercare'){
+      forwardInput.order.userid = this.superDealerId;
+    }
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(
       output => this.getForwardOrderDetailsResult(output),
@@ -482,6 +486,9 @@ export class OrderLandingComponent implements OnInit {
     }
     let orderInput = this.orderListInput;
     this.loaderService.display(true);
+    if(this.authenticationService.userType() == 'customercare'){
+      orderInput.order.userid = this.superDealerId;
+    }
     this.orderLandingService.getOrderList(orderInput)
       .subscribe(
       output => this.getAllOrderDetailsResult(output),
@@ -960,6 +967,9 @@ export class OrderLandingComponent implements OnInit {
     }
   this.showFilterDailog =false;
 let input = this.globalFilterInput;
+if(this.authenticationService.userType() == 'customercare'){
+  input.order.userid = this.superDealerId;
+}
 AuthenticationService.showLog("Search Input");
 AuthenticationService.showLog(JSON.stringify(input));
 this.orderLandingService.getOrdersByfilter(input)
@@ -1589,7 +1599,6 @@ this.orderLandingService.getOrdersByfilter(input)
                 UserData.icon = '../assets/images/red.png';
               }
 
-
               if(type == 'ordered' && UserData.lat && UserData.lng ){
                 if(details.orderstatus == 'ordered'){
                 orderLocationArray.push(UserData);
@@ -1645,6 +1654,7 @@ this.orderLandingService.getOrdersByfilter(input)
   ngOnInit() {
     // this.getDistributorsOrders();
     // this.getPolygonDistributors();
+    this.superDealerId = this.authenticationService.superDelearId();
 
     if(this.tabPanelView == 'forward'){
     this.getForwardOrderDetails(true);
