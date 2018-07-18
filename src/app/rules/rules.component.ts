@@ -37,6 +37,7 @@ export class RulesComponent implements OnInit {
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
+    this.getAllRules();
      
     }
   });

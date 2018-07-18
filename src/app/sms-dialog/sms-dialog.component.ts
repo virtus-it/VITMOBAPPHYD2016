@@ -647,6 +647,7 @@ export class SmsDialogComponent implements OnInit {
     console.log(data);
     this.filterType.template_name = data.template_name;
     this.filterType.template_desc = data.template_desc;
+    this.filterType.id = data.id;
     let JsonObj: any = {};
     if (this.filterType.template_desc) {
       JsonObj = JSON.parse(this.filterType.template_desc);

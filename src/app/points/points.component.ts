@@ -158,18 +158,18 @@ export class PointsComponent implements OnInit {
     }
   }
 
-  showCustomerPoints(firstcall) {
+  showCustomerPoints() {
     let input = { "User": { "TransType": "getallpoints", "apptype": this.authenticationService.appType(), "loginid": this.authenticationService.loggedInUserId(), "type": "customer", "lastId": 0 } };
-    if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
-      let lastCustomer: any = _.last(this.customerAllPointsDetails);
-      if (lastCustomer) {
-        input.User.lastId = lastCustomer.userid;
-      }
-    }
-    else {
-      this.customerAllPointsDetails = [];
-      input.User.lastId = 0;
-    }
+    // if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
+    //   let lastCustomer: any = _.last(this.customerAllPointsDetails);
+    //   if (lastCustomer) {
+    //     input.User.lastId = lastCustomer.userid;
+    //   }
+    // }
+    // else {
+    //   this.customerAllPointsDetails = [];
+    //   input.User.lastId = 0;
+    // }
     this.distributorService.getPoints(input)
       .subscribe(
         output => this.showCustomerPointsResult(output),
@@ -179,7 +179,8 @@ export class PointsComponent implements OnInit {
   }
   showCustomerPointsResult(result) {
     if (result.result == 'success') {
-      this.customerAllPointsDetails = _.union(this.customerAllPointsDetails, result.data);
+      this.customerAllPointsDetails = result.data;
+      // _.union(this.customerAllPointsDetails, result.data);
     }
     else {
       this.pointsClickMore = false;
@@ -188,16 +189,16 @@ export class PointsComponent implements OnInit {
 
   showDistributorPoints(firstcall) {
     let input = { "User": { "TransType": "getallpoints", "apptype": this.authenticationService.appType(), "loginid": this.authenticationService.loggedInUserId(), "type": "dealer", "lastId": 0 } };
-    if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
-      let lastCustomer: any = _.last(this.customerAllPointsDetails);
-      if (lastCustomer) {
-        input.User.lastId = lastCustomer.userid;
-      }
-    }
-    else {
-      this.customerAllPointsDetails = [];
-      input.User.lastId = 0;
-    }
+    // if (this.customerAllPointsDetails && this.customerAllPointsDetails.length && !firstcall) {
+    //   let lastCustomer: any = _.last(this.customerAllPointsDetails);
+    //   if (lastCustomer) {
+    //     input.User.lastId = lastCustomer.userid;
+    //   }
+    // }
+    // else {
+    //   this.customerAllPointsDetails = [];
+    //   input.User.lastId = 0;
+    // }
     this.distributorService.getPoints(input)
       .subscribe(
         output => this.showDistributorPointsResult(output),
@@ -208,7 +209,8 @@ export class PointsComponent implements OnInit {
 
   showDistributorPointsResult(result) {
     if (result.result == 'success') {
-      this.customerAllPointsDetails = _.union(this.customerAllPointsDetails, result.data);
+      this.customerAllPointsDetails = result.data;
+      // _.union(this.customerAllPointsDetails, result.data);
     }
     else {
       this.pointsClickMore = false;

@@ -35,6 +35,7 @@ export class OrderDetailDailogComponent implements OnInit {
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
     notificationDetails = {"templatename": "" , "status":"sent" };
+    notificationHistory = [];
 
     // notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""], "buttonactions":[{}], "option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
 
@@ -190,6 +191,7 @@ getOrderDetailsByIdResult(result) {
             this.dailogOrderDetails .StatusColor = "logo-color";
           }
         console.log(this.dailogOrderDetails);
+        this.notificationHistory = result.data[0].notification;
     }
 }
 getProductsListByCustomerId() {
@@ -356,7 +358,7 @@ getTemplates(data){
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
         if (result) {
-            this.notificationDetails.templatename = result.User.tempname;
+            // this.notificationDetails.templatename = result.User.tempname;
         }
 
     });

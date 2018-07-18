@@ -632,9 +632,10 @@ export class ReportsComponent implements OnInit {
   }
 
   sendNotification(data){
+    let formattedInput = {"type":"notificationfromReports" , data: data};
     let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
       width: '60%',
-      data: data
+      data: formattedInput
   });
   dialogRefeditStatus.afterClosed().subscribe(result => {
       ////console.log(`Dialog closed: ${result}`);

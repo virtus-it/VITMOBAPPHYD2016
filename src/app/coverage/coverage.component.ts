@@ -48,6 +48,9 @@ export class CoverageComponent implements OnInit {
     }
   ];
   stockPointsArray:any = [];
+  bindableArray = [];
+  // stockPointsArrayDummy = [];
+
 
   // ordersMap: any = [
   //   {
@@ -506,6 +509,7 @@ export class CoverageComponent implements OnInit {
    showStockPointsResult(result){
      //console.log(result);
      if(result.result == 'success'){
+       this.loaderService.display(false);
        this.stockpoints=result.data;
        let latlngsArray = [];
        _.each(this.stockpoints , function (i , j){
@@ -513,57 +517,58 @@ export class CoverageComponent implements OnInit {
          latlngsArray.push(details.latlngs);
        });
        this.stockPointsArray = latlngsArray;
+       let stockPointsArrayDummy = [];
        _.each( this.stockPointsArray , function ( k ,l){
          let detailData:any = k;
-         detailData.latitude = parseFloat(detailData.latitude);
-         detailData.longitude = parseFloat(detailData.longitude);
+         let dum1 = [];
+         _.each(detailData , function (a,b){
+           let detail:any = a;
+           if(detail.latitude && detail.longitude){
+           detail.latitude = parseFloat(detail.latitude);
+           detail.longitude = parseFloat(detail.longitude);
+           dum1.push(detail);
+           }
+          //  this.stockPointsArray = dum1;
+         });
+         stockPointsArrayDummy.push(dum1);
        });
-    //    let latlngsArray = [];
-    //    _.each(this.stockpoints , function (i , j){
-    //      let details:any = i;
-    //      latlngsArray.push(details.latlngs);
-    //    });
-    //    this.allStockpointsArray = latlngsArray;
-    //    console.log(latlngsArray);
-    //    let stockpointData = {lat:0 , lng:0 , icon:"" , userid: 0 };
-    //    let markersData = [];
-    //   //  let marker = [];
-    //   let validspArray = [];
-    //    _.each(this.allStockpointsArray , function(i, j){
-    //      let details:any = i;
-    //      _.each(details , function (k ,l){
-    //        let detailsData:any = k;
-    //        if(detailsData.latitude && detailsData.longitude){
-    //         validspArray.push(detailsData);
-    //        }
-    //      });
-    //      this.bindablePoints = validspArray;
-    //      stockpointData = {
-    //         lat: parseFloat(this.bindablePoints.latitude),
-    //         lng: parseFloat(this.bindablePoints.longitude),
-    //         icon:"../assets/images/red.png",
-    //         userid : this.bindablePoints.user_id
-    //     }
-    //      markersData.push(stockpointData);
-    //    });
+       this.stockPointsArray = stockPointsArrayDummy;
+       let array1 = [];
+      //  let lats = [];
+      //  let lngs = [];
+      //  let  userids = [];
+       _.each(this.stockPointsArray , function (m ,n){
+         let markers:any = m;
+         _.each(markers , function(c,d){
+           let innerDetail:any = c;
+           let stockpointsMarkers = {lat: 0 , lng: 0 , icon: '' , userid: 0}
+         stockpointsMarkers.lat = innerDetail.latitude;
+         stockpointsMarkers.lng = innerDetail.longitude;
+         stockpointsMarkers.icon = '';
+         stockpointsMarkers.userid = innerDetail.user_id;
+         array1.push(stockpointsMarkers);   
+         });   
+       });
+       this.bindableArray = array1;
+       console.log(this.bindableArray , 'sakgfajfgka');
+       this.changeButton = true;
 
-    //    this.showMarkers = markersData;
-    //    this.changeButton = true;
-      
-    //  }
-    //  else{
-    //   // this.noDataError="No Stock Points for this distributor";
-    //   this.stockpoints = [];
-    //   this.showMarkers = [];
-    //   this.changeButton = false;
+
+     }
+     else{
+        // this.noDataError="No Stock Points for this distributor";
+        this.loaderService.display(false);
+        this.bindableArray = [];
+        // this.changeButton = false;
      }
 
   }
 
   hideStockPoints(){
-    this.stockpoints = [];
-    this.showMarkers = [];
+    this.bindableArray = [];
+    // this.showMarkers = [];
     this.changeButton = false;
+    
   }
 
   ngOnInit() {

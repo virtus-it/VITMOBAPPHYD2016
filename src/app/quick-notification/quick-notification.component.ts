@@ -30,7 +30,7 @@ export class QuickNotificationComponent implements OnInit {
    }
 
    getAllTemplates:any = [];
-   filterType:any = { template_desc: ""};
+   filterType:any = { template_desc: "" , tempname:""};
    smsInput :any = {};
    NewJsonObj:any = {};
    
@@ -51,6 +51,7 @@ export class QuickNotificationComponent implements OnInit {
       });
       if(findTemplate){
         this.filterType.template_desc = findTemplate.template_desc;
+        this.filterType.tempname = findTemplate.template_name;
         let replace = this.Details;
        
         if( this.filterType.template_desc){
@@ -66,7 +67,10 @@ export class QuickNotificationComponent implements OnInit {
         
           let mobileObject = [{}];
           if(this.Details.type == 'notificationFromCustomers'){
-            mobileObject =  [{"mobileno":this.Details.data.mobileno,"gcm_regid":this.Details.data.gcm_regid,"fullName":this.Details.firstname}];
+            mobileObject =  [{"mobileno":this.Details.data.mobileno,"gcm_regid":this.Details.data.gcm_regid,"fullName":this.Details.data.firstname}];
+          }
+          else if(this.Details.type == 'notificationfromReports'){
+            mobileObject =  [{"mobileno":this.Details.data.mobileno,"gcm_regid":this.Details.data.gcm_regid,"fullName":this.Details.data.firstname}];
           }
           else{
             mobileObject = [{"mobileno":this.Details.orderby_mobileno,"gcm_regid":this.Details.gcm_regid,"fullName":this.Details.orderby_firstname}];
@@ -132,6 +136,11 @@ sendNotification(){
   let input = this.smsInput;
   this.smsInput.User.body = this.filterType.template_desc;
   let formattedInput:any = {type:'',getAllMobileInput : {}, sendSmsInput : input}
+  if(this.Details){
+    formattedInput.sendSmsInput.User.mobile = this.Details.orderby_mobileno;
+    formattedInput.sendSmsInput.User.message = this.filterType.tempname;   
+
+  }
   console.log(formattedInput)
   this.smsService.CreateSms(formattedInput)
       .subscribe(
