@@ -132,12 +132,14 @@ export class AssignVehicleComponent implements OnInit {
         this.endTime = tS1.substring(0,5);
         this.assignVehicleInput.User.expectedtime = this.endTime;
       }
+      console.log(this.assignVehicleInput.User.expectedtime);
       if(result.data[0].start_time){
         var timestamp1 = (result.data[0].start_time).split('T');
         var tS2 = timestamp1[1];
         this.startTime = tS2.substring(0,5);
         this.assignVehicleInput.User.starttime = this.startTime;
       }
+      console.log(this.assignVehicleInput.User.starttime);
      
       this.assignVehicleInput.User.fuel = result.data[0].fuel_in_litre;
       this.assignVehicleInput.User.meter = result.data[0].meter_reading;

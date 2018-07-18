@@ -19,13 +19,13 @@
           </div>
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Start Time" name="time" type="time" [(ngModel)]="assignVehicleInput.User.starttime"
+              <input class="form-control" mdInput placeholder="Start Time" name="time1" type="time" [(ngModel)]="assignVehicleInput.User.starttime"
                 required>
             </md-form-field>
             </div>
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Expected End Time" name="time" type="time" [(ngModel)]="assignVehicleInput.User.expectedtime"
+              <input class="form-control" mdInput placeholder="Expected End Time" name="time2" type="time" [(ngModel)]="assignVehicleInput.User.expectedtime"
                 required>
             </md-form-field>
           </div>
@@ -93,7 +93,7 @@
           <div class="col-4" *ngIf="this.Details.type">
    
             <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Arrived Time" type="time" name="arrivealtime" [(ngModel)]="assignVehicleInput.User.arrivedtime">
+                <input class="form-control" mdInput placeholder="Arrived Time" type="time3" name="arrivealtime" [(ngModel)]="assignVehicleInput.User.arrivedtime">
               </md-form-field>
     
           </div>
