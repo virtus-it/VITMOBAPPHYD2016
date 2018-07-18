@@ -27,7 +27,7 @@
         <md-select placeholder="Product Name" class="wd-100pc left" [(ngModel)]="scheduleInput.productName"
                    name="product" >
           <md-option *ngFor="let prod of productList" [value]="prod">
-            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
+            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs | {{prod.category}}
           </md-option>
         </md-select>
         <!-- <md-error *ngIf="ProductFormControl.hasError('required')">
@@ -40,7 +40,7 @@
                    [formControl]="ProductFormControl" name="product" (change)="minQuantity(product, $event)">
           <md-option *ngFor="let prod of productList" [value]="prod" >
 
-            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs
+            {{prod.pname}} ({{prod.ptype}}) : {{prod.pcost}} Rs | {{prod.category}}
           </md-option>
         </md-select>
         <md-error *ngIf="ProductFormControl.hasError('required')">
@@ -118,6 +118,7 @@
 
 
       <div class="col-sm-4">
+        
       </div>
     </div>
     <div class="Schedule schedule-style" *ngIf="scheduleInput.schedulefor == 'weekdays'">

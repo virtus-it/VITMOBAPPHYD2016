@@ -344,7 +344,7 @@
               <!-- <div class="col">
   <button class="mat-raised-button mat-primary"   (click)="getTemplates(dailogOrderDetails)"  > Read notification</button> 
   </div> -->
-              <div class="p-1 pad-btn">
+              <div class="p-1 pad-btn" *ngIf="superDealer || customerCare">
                 <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
               </div>
 

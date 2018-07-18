@@ -160,7 +160,7 @@ export class OrderLandingComponent implements OnInit {
 
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
 
-  globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+  globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" , "loginid": this.authenticationService.loggedInUserId() }};
 
 
 //   {"order":{"userid":"289","usertype":"dealer","status":"ordered","last_orderid":"0",
@@ -938,6 +938,10 @@ export class OrderLandingComponent implements OnInit {
     else{
       this.globalFilterInput.order.status = 'complete';
     }
+
+    if(this.superDealer == false && this.customerCare == false){
+    this.globalFilterInput.order.status = 'all';
+    }
     console.log(this.globalFilterInput);
 
     if(!firstcall){
@@ -1001,7 +1005,7 @@ this.orderLandingService.getOrdersByfilter(input)
     // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
-    this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
+    this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
     this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
@@ -1619,6 +1623,17 @@ this.orderLandingService.getOrdersByfilter(input)
               this.refresh();
             }
           });
+        }
+
+        resetDistributorsView(){
+          this.showFilterDailog =false;
+          this.quickFilterView = "";
+          this.cantFilterMessage = "";
+          this.tabPanelView = 'allorder';
+          this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
+          this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+            this.getAllOrderDetails(true);
+          
         }
 
 
