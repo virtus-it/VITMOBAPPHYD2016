@@ -14,15 +14,30 @@
     <div class="row">
       <div class=" col-md-5 col-5 col-sm-5 brd-right">
         <div class="container-fluid">
-          <div class="row">
-            <b class="col">
+            <div class="d-flex">
+            <b class="p-0">
               <i class="fa fa-file-text-o"></i> Order Details</b>
-            <i class="fa fa-edit logo-color col right align-self-center" title="Edit Quantity" (click)="editQuantity(dailogOrderDetails)"></i>
+              <span class="ml-auto p-0 mgright-5">
+                  <i class="fa fa-edit logo-color" title="Edit Quantity" (click)="editQuantity(dailogOrderDetails)"></i></span>
+            <span class="mgright-5" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
+              <i class="fa fa-hand-paper-o logo-color" aria-hidden="true" (click)='onHoldStatus(dailogOrderDetails)' *ngIf="dailogOrderDetails.OrderModifiedStatus !='On Hold'"
+                title="Onhold"></i>
+            </span>
+            <span >
+                <i class="fa fa-dot-circle-o  mgright-5 logo-color" (click)='editStatus(dailogOrderDetails)' aria-hidden="true" title="Edit Status"></i>
+              </span>
+       
           </div>
-          <div class="row form-group mgtop-5">
+          <div class="d-flex justify-content-between mgtop-5">
+            <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
+            <small class=" capitalize gray6" [ngClass]="dailogOrderDetails.StatusColor">Status :
+              <span class="warning"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
+            </small>
+            <small class="gray">Delivery Date : {{dailogOrderDetails.delivery_exceptedtime}} </small>
+          </div>
+
+          <div class="row form-group">
             <div class="col-md-6 col-6 col-sm-12">
-              <small class="gray" id="name"> Id: #{{dailogOrderDetails.order_id}}</small>
-              <br>
               <small class="black capital">
                 <b *ngIf="dailogOrderDetails.productdetails && dailogOrderDetails.productdetails.category">{{dailogOrderDetails.productdetails.category}}</b>
                 <br>
@@ -32,8 +47,7 @@
               </small>
             </div>
             <div class="col-md-6 col-6 col-sm-12 right">
-              <small class="gray">Delivery Date : {{dailogOrderDetails.delivery_exceptedtime}} </small>
-              <br>
+
               <small>
                 <span class="gray">Modified Date : </span>{{dailogOrderDetails.modifieddate | utcDate}}</small>
               <br>
@@ -199,10 +213,6 @@
 
       <div class="col-md-3">
         <div class="container-fluid">
-          <b class="">
-            <i class="fa fa-check-square-o" aria-hidden="true"></i> Order Status :
-            <label class=" capitalize" [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </label>
-          </b>
 
           <div class="row  mgtop-10">
             <ul class="timeline">
@@ -294,9 +304,9 @@
                       <li>
                         <div class="d-flex">
                           <div class="p-0">
-                              <small class="capital ng-binding">
-                            <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
-                            {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
+                            <small class="capital ng-binding">
+                              <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                              {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
                           </div>
 
                           <div class="ml-auto p-0">
@@ -306,7 +316,7 @@
                           </div>
                         </div>
                       </li>
-                           <li>
+                      <li>
                         <small class="ng-binding">
                           <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
 
@@ -317,21 +327,21 @@
 
                     <ul class="pdleft-15" *ngIf="!dailogOrderDetails.supplierdetails">
                       <li>
-                          <div class="d-flex">
-                              <div class="p-0">
-                                  <small class="capital ng-binding" *ngIf="dailogOrderDetails.dealerdetails">
-                                      <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
-                                      {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
+                        <div class="d-flex">
+                          <div class="p-0">
+                            <small class="capital ng-binding" *ngIf="dailogOrderDetails.dealerdetails">
+                              <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                              {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
                           </div>
-                              
-                              <div class="ml-auto p-0">
-                                  <small class="ng-binding gray9">
-                                      <i class="fa fa-calendar" aria-hidden="true"></i>
-                                      {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
-                                     </div>
-                            </div>
-                                 </li>
-             
+
+                          <div class="ml-auto p-0">
+                            <small class="ng-binding gray9">
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
+                              {{dailogOrderDetails.order_delivereddate | utcDate}}</small>
+                          </div>
+                        </div>
+                      </li>
+
                       <li>
                         <small class="ng-binding">
                           <i class="fa fa-arrow-right" aria-hidden="true"></i> {{dailogOrderDetails.delivered_quantity}}(Qty)</small>
@@ -346,23 +356,6 @@
             </ul>
           </div>
 
-          <div class="row mgtop-15pc">
-            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
-              <button class="control-label btn btn-link btn-sm" (click)='onHoldStatus(dailogOrderDetails)' *ngIf="dailogOrderDetails.OrderModifiedStatus !='On Hold'">
-                <b>
-                  <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
-                  On-hold Order</b>
-              </button>
-            </div>
-            <div class="col-lg-6 col-md-6 col-xl-6 col-sm-6 right">
-              <button class="control-label btn btn-link btn-sm" (click)='editStatus(dailogOrderDetails)'>
-                <b>
-                  <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                  Edit Status</b>
-              </button>
-            </div>
-          </div>
-
           <!-- notification buttons -->
           <div class="row mgtop-10">
             <!-- <div class="col">
@@ -373,28 +366,40 @@
             </div>
 
 
-            <!-- <div class="">
-                <table>
+            <div class="">
+              <table class="table table-hover table-fixedheader ">
+                <thead>
                   <tr>
-                  <th width="20%"><small>S.No</small></th>
-                  <th width="40%"><small>Template Name</small></th>
-                  <th width="40%"><small>Date</small></th>
-                </tr>
+                    <th width="20%">
+                      <small>S.No</small>
+                    </th>
+                    <th width="40%">
+                      <small>Template Name</small>
+                    </th>
+                    <th width="40%">
+                      <small>Date</small>
+                    </th>
+                  </tr>
                 </thead>
                 <tbody>
-                <tr *ngFor="let history of notificationHistory; let i = index" [attr.data-index]="i">
-                  <td width="20%"><small>{{i+1}}</small></td>
+                  <tr *ngFor="let history of notificationHistory; let i = index" [attr.data-index]="i">
+                    <td width="20%">
+                      <small>{{i+1}}</small>
+                    </td>
 
-                  <td width="40%">
-                    <small *ngIf="history.message">{{history.message}}</small>
-                    <small *ngIf="!history.message"> - </small>
-                  </td>
-                  
-                  <td width="40%"><small>{{history.createddate | utcDate}}</small></td>                  
-                </tr>
-              </tbody>
-                </table>
-              </div> -->
+                    <td width="40%">
+                      <small *ngIf="history.message">{{history.message}}</small>
+                      <small *ngIf="!history.message"> - </small>
+                    </td>
+
+                    <td width="40%">
+                      <small>{{history.createddate | utcDate}}</small>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
 
             <!-- <small class="" *ngIf="this.notificationDetails.templatename">{{this.notificationDetails.templatename}}</small> &nbsp; &nbsp; &nbsp;
               <small *ngIf="this.notificationDetails.templatename"> {{this.notificationDetails.status}}</small> -->
@@ -475,12 +480,12 @@
                 <span class="custom-control-description"> Distributor</span>
               </label>
               <label class="float-right">
-                <i class="fa fa-commenting-o 	logo-color fs-30" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i> &nbsp;
-                <i class="fa  fa-share-square-o logo-color  fs-24" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
+                <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i> &nbsp;
+                <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
               </label>
             </div>
             <div class=" ">
-              <textarea rows="4" cols="50" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here"
+              <textarea rows="4" cols="20" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here"
                 [(ngModel)]="messageInput.order.reason"> </textarea>
             </div>
 
