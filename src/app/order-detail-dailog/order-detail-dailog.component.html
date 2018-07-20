@@ -406,13 +406,13 @@
           <div class=" form-group border-left pdleft-10">
             <b class="">
               <i class="fa fa-comments-o" aria-hidden="true"></i> Messages</b>
-            <ul class="scrollheight">
+            <!-- <ul class="scrollheight">
               <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2 , 'dist-msg' : msg.ispublic == 1}" *ngFor="let msg of dailogOrderDetails.messages">
                 <div class="row" *ngIf="msg.user">
                   <div class="col">
-                    <i class="fa fa-reply" aria-hidden="true"></i>
+                    <i class="fa fa-reply" aria-hidden="true"></i> -->
                     <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
-                    <small *ngIf="msg.user">&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+                    <!-- <small *ngIf="msg.user">&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
                   </div>
                   <div class="col right">
                     <small class="gray9">{{ msg.createddate | utcDate}} </small>
@@ -436,7 +436,46 @@
               </li>
   
   
+            </ul> -->
+            <ul class="scrollheight">
+              <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2 , 'dist-msg' : msg.ispublic == 1 , 'followupmessage':msg.typeid }" *ngFor="let msg of orderbyallMessages">
+
+                <div class="row" *ngIf="msg.user">
+                
+                  <div class="col">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                    <!-- <span *ngIf="msg.ispublic == 2"> <i class="  red fa fa-asterisk"  title="Complaint has been raised"></i></span> -->
+                    <small *ngIf="msg.user">&nbsp; {{msg.user.firstname}} {{msg.user.lastname}} </small>
+                  </div>
+                  <div class="col right">
+                    <small class="gray9">{{ msg.createddate | utcDate}} </small>
+                  </div>
+                </div>
+                <small>{{ msg.message}} </small>
+              
+
+
+                <div class="row" *ngIf="msg.typeid">
+                  
+                  <div class="col">
+                    <i class="fa fa-reply" aria-hidden="true"></i>
+                    <small *ngIf="msg.typeid">&nbsp; Follow Up message </small>
+                  </div>
+                  <div class="col right">
+                    <small class="">{{ msg.createddate | utcDate}} </small>
+                  </div>
+                </div>
+                <small>{{ msg.remarks}} </small>
+              
+
+              </li>
+              <!-- <li class="nolist-style  messages-style" [ngClass]="{'followupmessage':msg.typeid}" *ngFor="let msg of orderbyallMessages">
+                
+              </li> -->
             </ul>
+
+
+
             <div class=" border-top pdtop-10">
               <div class="form-group">
                 <b class="">Select : &nbsp;</b>

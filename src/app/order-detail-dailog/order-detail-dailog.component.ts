@@ -38,6 +38,8 @@ export class OrderDetailDailogComponent implements OnInit {
 
     notificationDetails = {"templatename": "" , "status":"sent" };
     notificationHistory = [];
+    orderbyallMessages:any = [];
+
 
     // notificationsInput={"User":{"mobilenumber":[{"mobileno":this.orderDetail.customer.mobileno,"gcm_regid":this.customerProductDetails.gcm_regid,"fullName":this.orderDetail.customer.firstname}],"count":1,"name":"","smstype":"notification","user_type":"dealer","TransType":"createsms","type":"","showcomment":false,"loginid":289,"apptype":this.authenticationService.appType(),"body":"","title":"","redirecturl":"","url":"","buttons":[""], "buttonactions":[{}], "option":[""],"sliderurl":[{"image":"","count":0}],"devicetype":"","moyaversioncode":""}};
 
@@ -194,6 +196,10 @@ getOrderDetailsByIdResult(result) {
           }
         console.log(this.dailogOrderDetails);
         this.notificationHistory = result.data[0].notification;
+        this.getfollowUpdetails();
+    }
+    else{
+        this.getfollowUpdetails();
     }
 }
 getProductsListByCustomerId() {
@@ -391,7 +397,12 @@ getfollowUpdetails() {
     //console.log(result);
     if (result.result == 'success') {
       this.followUpList = result.data.output;
- 
+      this.orderbyallMessages = _.union(this.dailogOrderDetails.messages , this.followUpList);
+      
+       var sortablearray = this.orderbyallMessages;
+        var sortedList = _.sortBy(sortablearray, 'createddate');
+        console.log(sortedList , 'sortedList');
+        this.orderbyallMessages = sortedList;
   }
   }
 
@@ -418,7 +429,7 @@ ngOnInit() {
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
     this.deliveryStatus();
-    this.getfollowUpdetails();
+    // this.getfollowUpdetails();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     console.log(this.orderDetail);
