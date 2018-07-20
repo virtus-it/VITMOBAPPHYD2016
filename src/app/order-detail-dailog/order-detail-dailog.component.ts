@@ -399,10 +399,10 @@ getfollowUpdetails() {
       this.followUpList = result.data.output;
       this.orderbyallMessages = _.union(this.dailogOrderDetails.messages , this.followUpList);
       
-       var sortablearray = this.orderbyallMessages;
-        var sortedList = _.sortBy(sortablearray, 'createddate');
-        console.log(sortedList , 'sortedList');
-        this.orderbyallMessages = sortedList;
+    //    var sortablearray = this.orderbyallMessages;
+    //     var sortedList = _.sortBy(sortablearray, 'createddate');
+    //     console.log(sortedList , 'sortedList');
+    //     this.orderbyallMessages = sortedList;
   }
   }
 

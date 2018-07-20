@@ -438,7 +438,7 @@
   
             </ul> -->
             <ul class="scrollheight">
-              <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2 , 'dist-msg' : msg.ispublic == 1 , 'followupmessage':msg.typeid }" *ngFor="let msg of orderbyallMessages">
+              <li class="nolist-style  messages-style" [ngClass]="{'highlight':msg.ispublic == 2 , 'dist-msg' : msg.ispublic == 1 , 'followupmessage':msg.typeid }" *ngFor="let msg of orderbyallMessages | sorting : 'createddate'">
 
                 <div class="row" *ngIf="msg.user">
                 

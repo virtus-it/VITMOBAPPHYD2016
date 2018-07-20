@@ -8,11 +8,25 @@ import * as _ from 'underscore';
 })
 export class SortingPipe implements PipeTransform {
 
-    transform(array: Array<string>, args: string): Array<string> {
+    // transform(array: Array<string>, args: string): Array<string> {
+    //   array.sort((a: any, b: any) => {
+    //     if (a.createddate < b.createddate) {
+    //       return -1;
+    //     } else if (a.createddate > b.createddate) {
+    //       return 1;
+    //     } else {
+    //       return 0;
+    //     }
+    //   });
+    //   return array;
+    // }
+
+
+    transform(array: any[], field: string): any[] {
       array.sort((a: any, b: any) => {
-        if (a.createddate < b.createddate) {
+        if (a[field] < b[field]) {
           return -1;
-        } else if (a.createddate > b.createddate) {
+        } else if (a[field] > b[field]) {
           return 1;
         } else {
           return 0;
