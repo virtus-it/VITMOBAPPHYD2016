@@ -213,3 +213,7 @@ fixedheader>tbody {
   overflow-y: auto;
   max-height: 95px !important;
 }
+.badge{
+   color: #333 !important;
+font-size: 9px;
+}
