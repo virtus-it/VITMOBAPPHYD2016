@@ -74,7 +74,7 @@
           <span class="gray8">{{Detail.data.ptype}}</span>
         </h5>
         <div class="row">
-          <div class="col">
+          <div class="col"  *ngIf="this.Detail.type == 'distributorsStockHistory'">
             <md-form-field class="example-full-width">
               <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
               <md-autocomplete #auto="mdAutocomplete">

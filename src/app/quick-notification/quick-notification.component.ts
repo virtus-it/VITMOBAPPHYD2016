@@ -151,8 +151,8 @@ sendNotification(){
 }
 sendNotificationResult(result){
   if(result.result == 'success'){
-    let sendbackData = this.smsInput
-    this.thisDialogRef.close(sendbackData);
+    // let sendbackData = this.smsInput
+    this.thisDialogRef.close('success');
 
   }
 }

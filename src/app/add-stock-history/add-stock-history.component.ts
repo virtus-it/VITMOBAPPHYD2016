@@ -44,7 +44,7 @@ distributorStockHistoryInput = {productID:"" , categoryID:"" , brandname:"" , ca
     if(this.Detail.type == 'distributorspage'){
       input = {
         "root": {
-          "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "category":this.Detail.data.category, "categoryid": this.Detail.data.data[0].categoryid  ,  "areaid": "", "last_historyid": 100000, "pagesize": "1000",
+          "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "category":this.Detail.data.category, "categoryid": this.Detail.data.data[0].categoryid  , "pid": this.Detail.data.data[0].productid ,   "areaid": "", "last_historyid": 100000, "pagesize": "1000",
           "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
         }
       };
@@ -52,7 +52,7 @@ distributorStockHistoryInput = {productID:"" , categoryID:"" , brandname:"" , ca
     else{
     input = {
       "root": {
-        "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(),"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid  , "areaid": "", "last_historyid": 100000, "pagesize": "1000",
+        "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(),"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid  , "pid": this.Detail.data[0].productid , "areaid": "", "last_historyid": 100000, "pagesize": "1000",
         "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
       }
     };

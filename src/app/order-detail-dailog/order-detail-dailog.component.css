@@ -27,6 +27,10 @@ top:3px !important;
   content: " ";
   display: table;
 }
+table.table-fixedheader>tbody {
+  overflow-y: auto;
+  max-height: 150px;
+}
 .timeline > li:after {
   clear: both;
 }

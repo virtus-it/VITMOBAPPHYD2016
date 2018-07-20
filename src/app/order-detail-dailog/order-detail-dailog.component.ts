@@ -359,7 +359,9 @@ getTemplates(data){
     });
     dialogRefeditStatus.afterClosed().subscribe(result => {
         ////console.log(`Dialog closed: ${result}`);
-        if (result) {
+        if (result == 'success') {
+    this.getOrderDetailsById();
+            
             // this.notificationDetails.templatename = result.User.tempname;
         }
 

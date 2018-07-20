@@ -34,6 +34,7 @@ export class SelectProductsForassingComponent implements OnInit {
   productQuantity = 0;
   emptyCansKeyUp:boolean = false;
   expressDeliveryCheck:boolean = false;
+  emptyCanAmount1 = 0;
   // emptycans:any = 0;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -382,6 +383,7 @@ changeOfQuantity(data){
       this.emptyCans = 0;
     }
     
+    this.emptyCanAmount1  = ((this.quantity - this.emptyCans)  * 150)
   }
 
 }

@@ -26,7 +26,9 @@ export class RulesComponent implements OnInit {
   getAllRulesResult(result){
     if(result.result  == 'success'){
       this.allRules = result.data;
-      console.log(this.allRules , 'data binding ') ;
+    }
+    else{
+      this.allRules = [];
     }
   }
 

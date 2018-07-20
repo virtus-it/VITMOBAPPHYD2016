@@ -150,6 +150,7 @@ assignVehicle(data){
 dialogRefdeleteSupplier.afterClosed().subscribe(result => {
     //console.log(`Dialog closed: ${result}`);
     if(result == 'success'){
+    this.getSupplierList();      
     }
 });
 
@@ -165,6 +166,7 @@ editVehicle(data){
 dialogRefdeleteSupplier.afterClosed().subscribe(result => {
     //console.log(`Dialog closed: ${result}`);
     if(result == 'success'){
+    this.getSupplierList();      
     }
 });
 

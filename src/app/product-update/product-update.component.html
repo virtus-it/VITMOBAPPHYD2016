@@ -20,7 +20,7 @@
           </div>
           <div class="row">
             
-      <div class="col">
+      <div class="col" *ngIf="this.Details.type == 'distributorstockStatus' ">
           <md-form-field class="example-full-width">
             <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
             <md-autocomplete #auto="mdAutocomplete">

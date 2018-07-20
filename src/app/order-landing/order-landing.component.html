@@ -421,8 +421,8 @@
 
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <p class="td-label mgbottom-0">Empty Cans</p>
-                      <b class="" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
-                      <b class="" *ngIf="forward.empty_cans === null || forward.empty_cans == ''"> - </b>
+                      <b class="" *ngIf="forward.empty_cans || forward.empty_cans == 0">{{forward.empty_cans}}</b>
+                      <b class="" *ngIf="forward.empty_cans == null || (forward.empty_cans == '' && forward.empty_cans == null)"> - </b>
                     </div>
 
                   </div>

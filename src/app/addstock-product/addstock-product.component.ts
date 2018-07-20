@@ -42,7 +42,7 @@ onCloseCancel() {
 addStockDetails(){
   let input = [{"product":{"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid , "brandname": this.Detail.data[0].brandname , "producttype": this.Detail.data[0].ptype ,   
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
-  "loginid": this.Detail.distributorId ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() , }}];
+  "loginid": this.authenticationService.loggedInUserId() ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"invoicedate":"","itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
   if (this.StockInput.invoiceDate) {
     input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
   }
