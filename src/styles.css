@@ -438,6 +438,9 @@ background: transparent;
 .pdtop-5{
   padding-top: 5px;
 }
+.float-right{
+  float:right;
+}
 .pdtop-15{
   padding-top: 15px;
 }
