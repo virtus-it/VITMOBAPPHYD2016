@@ -287,7 +287,7 @@
                 <div class="timeline-panel">
                   <div class="timeline-heading">
                     <small class="timeline-title warning">
-                      <b> Order Assigned</b>
+                      <b> Order Forwarded</b>
                     </small>
                   </div>
                   <div class="timeline-body">
@@ -396,7 +396,7 @@
                 <thead>
                   <tr>
                     <th width="14%">
-                      <small>S.No</small>
+                      <small>Sent by</small>
                     </th>
                     <th width="38.5%">
                       <small>Template Name</small>
@@ -407,9 +407,10 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let history of notificationHistory; let i = index" [attr.data-index]="i">
+                  <tr *ngFor="let history of notificationHistory">
                     <td width="14%">
-                      <small>{{i+1}}</small>
+                      <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname" >{{history.notificationsendedby.fullname}}</small>
+                      <small *ngIf="!history.notificationsendedby.fullname" > - </small>
                     </td>
 
                     <td width="40%">
@@ -480,7 +481,7 @@
 
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
-                  <small *ngIf="msg.typeid">&nbsp; Follow Up message </small>
+                  <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small>
                 </div>
                 <div class="col right">
                   <small class="">{{ msg.createddate | utcDate}} </small>

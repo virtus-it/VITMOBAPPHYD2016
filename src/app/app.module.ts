@@ -130,6 +130,7 @@ import { TrackSupplierComponent } from './track-supplier/track-supplier.componen
 import { SortingPipe } from './pipes/sorting.pipe';
 import { NotificationDetailsComponent } from './notification-details/notification-details.component';
 import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
+import { InboxPageComponent } from './inbox-page/inbox-page.component';
 
 
 
@@ -238,6 +239,7 @@ import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
         SortingPipe,
         NotificationDetailsComponent,
         DeleteRuleComponent,
+        InboxPageComponent,
 
      
         
@@ -280,6 +282,7 @@ import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
             {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
             {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
             {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
+            {path: 'inbox', component: InboxPageComponent , canActivate: [LoggedInGuard] },            
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),

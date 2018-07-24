@@ -17,7 +17,21 @@
         <div class="row">
           <div class="col-6">
 
-            <b class="left">Name: <span class="">{{smslist.name}}</span></b>
+            <b class="left" *ngIf="smslist.smstype == 'sms'">Sms Name: <span class="">{{smslist.name}}</span></b> <br>
+            <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount == 1">
+              <span *ngFor="let name of smslist.mobileno">
+                Customer Name : {{name.fullName}}
+              </span>
+            </b>
+
+            <b class="left" *ngIf="smslist.smstype == 'notification'">Template Name: <span class="">Template name</span></b> <br>
+            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount == 1 ">
+              <span *ngFor="let name of smslist.mobileno">
+               Customer Name : {{name.fullName}}
+              </span>
+            </b>
+            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount > 1 "> - </b>
+
             <br>
             <b>Status:</b> 
             <span class="left capital ">

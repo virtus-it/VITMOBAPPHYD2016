@@ -401,6 +401,10 @@ export class CoverageComponent implements OnInit {
         }
       
     }
+    else{
+      this.loaderService.display(false);
+
+    }
   }
 
   getProductByCategory() {

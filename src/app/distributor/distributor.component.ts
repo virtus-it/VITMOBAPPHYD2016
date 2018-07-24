@@ -55,14 +55,14 @@ export class DistributorComponent implements OnInit {
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
     filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:''};
-    filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":500,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
+    filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":100,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
 
 
     distributorClickMore = true;
     LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 500 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
 
         this.CategoryCtrl = new FormControl();
