@@ -221,6 +221,10 @@ fixedheader>tbody {
    color: #333 !important;
 font-size: 9px;
 }
-.templ>table.table-fixedheader > tbody{
-max-height: 190px !important;
+.templ{
+  width: 100%
 }
+.templ>table.table-fixedheader > tbody{
+max-height: 225px !important;
+}
+

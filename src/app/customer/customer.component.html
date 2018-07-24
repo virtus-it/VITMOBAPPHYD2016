@@ -13,7 +13,7 @@
             </md-option>
           </md-select>
         </div>
-        <div class=" col pdtop-8" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+        <div class=" col" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
           <!-- ng-if="key == 'City' || key == 'County'"> -->
           <md-form-field class="example-full-width">
             <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
