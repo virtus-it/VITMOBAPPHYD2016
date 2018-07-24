@@ -365,7 +365,7 @@
               <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
             </div>
 
-            <div class="templ">
+            <div class="templ" *ngIf="notificationHistory">
               <table class="table table-hover table-fixedheader ">
                 <thead>
                   <tr>
