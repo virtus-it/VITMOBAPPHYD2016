@@ -771,7 +771,7 @@ border:2px solid var( --logo-color);
           overflow-y: auto;
           padding: 6px;
         }
-        .scrollheight-400px{
+        .scrollheight-400{
           max-height: 400px;
           overflow-y: auto;
         }
@@ -924,7 +924,9 @@ display: inline-block;
 overflow: hidden;
 display: inline-block;
 }
-
+.pdleft-40{
+  padding-left: 40px;
+}
 .onhovertext150:hover {
   padding: 0px 5px 0px;
   overflow: visible;
@@ -1107,7 +1109,18 @@ overflow-x: auto;
 overflow-x: auto;
   }
   }
-
+  @media (orientation: portrait) {
+    .m-body{
+      max-height: 80vh !important;
+      overflow-x: scroll !important;
+    }
+  }
+  .mat-select {
+    padding-top: 10px !important;
+}
+.mgright-15{
+margin-right: 15px;
+}
   /* @media (min-width: 1200px){
     .customerSchList-height{
       height: 60vh !important;

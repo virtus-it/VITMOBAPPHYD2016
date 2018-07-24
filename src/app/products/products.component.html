@@ -16,9 +16,9 @@
 
       <button class="" md-raised-button (click)="showActiveProducts()" *ngIf="distributorView == false">Active Products</button>
 
-      <button class="" md-raised-button (click)="showInactiveProducts()" *ngIf="distributorView == false" >In-active Products</button>
+      <button class="" md-raised-button (click)="showInactiveProducts()" *ngIf="distributorView == false">In-active Products</button>
 
-      <button class="" md-raised-button (click)="getProducts()" *ngIf="distributorView == false" >All Products</button>
+      <button class="" md-raised-button (click)="getProducts()" *ngIf="distributorView == false">All Products</button>
 
       <i aria-hidden="true" class="fa fa-history logo-color fs-20 mgleft-10" title="Reset" *ngIf="distributorView == true" (click)="reset()"></i>
 
@@ -42,9 +42,149 @@
               </b>
             </b>
             <span class="float-right mgright-10">
-              <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
-              <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
-              <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock History" (click)="stockHistory(products)"></i>
+              <span class="logo-color cursor">
+                <i class="fa fa-cart-plus " aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i> Add Stock</span> &nbsp; &nbsp;
+              <span class="logo-color cursor">
+                <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i> Update Status </span>&nbsp;&nbsp;
+              <span class="logo-color cursor">
+                <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i> Stock Histroy</span>
+            </span>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="3">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th width="15%">Type</th>
+                  <th width="7%">Priority </th>
+                  <th width="7%">Min Qty </th>
+                  <th width="6%">Cost </th>
+                  <th width="8%" title="Service Charge">Serv Chg</th>
+                  <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
+                  <th width="6%">Stock</th>
+                  <th width="8%" title="Return cans">Ret Cans</th>
+                  <th width="9%" title="Is Authorized">Is Authorized</th>
+                  <th width="7%">Status</th>
+                  <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
+                  <th width="11%" class="no-th-arrow">Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let details of products.data">
+                  <td>
+                    <b class="">
+                      <span class="onhovertooltip-200" title="{{details.ptype}}">
+                        <span class="fa fa-thumbs-up success" *ngIf="details.isactive == '1'"></span>
+                        <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
+                        {{details.ptype}}</span>
+                    </b>
+                  </td>
+                  <td>
+                    <b class="gray9">{{details.priority}}</b>
+                  </td>
+                  <td>
+                    <b class="danger">{{details.minorderqty}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.pcost}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.servicecharge}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.expressdeliverycharges}}</b>
+                  </td>
+                  <td>
+                    <b class="warning">{{details.avaliable_stock}}</b>
+                  </td>
+                  <td>
+                    <b class="">{{details.avaliable_emptycans}}</b>
+                  </td>
+
+                  <td>
+                    <span class="" *ngIf="details.isauthorized == 'true' || details.isauthorized == true"> Yes </span>
+                    <span class="" *ngIf="details.isauthorized == 'false' || details.isauthorized == false || details.isauthorized == '' || details.isauthorized === null">
+                      No </span>
+                  </td>
+
+                  <td>
+                    <span class="info capital" [ngClass]="details.stockColor">{{details.stockstatus}} </span>
+                  </td>
+                  <td>
+                    <span class="success " *ngIf="details.iscanreturnable == 'true'">Yes </span>
+                    <span class="danger " *ngIf="details.iscanreturnable != 'true'">No </span>
+                  </td>
+                  <td>
+
+                    <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
+                    <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
+                    <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
+                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare" (click)="productArea(details)">&nbsp;</i>
+                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare) && details.isactive == '0'" disabled>&nbsp;</i>
+                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'"
+                      (click)="deleteProduct(details)">&nbsp;</i>
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare)" (click)="editProduct(details)">&nbsp;</i>
+                    <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
+                    <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
+                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+          </td>
+        </tr>
+      </tbody>
+      <!-- <tfoot>
+        <tr>
+          <td></td>
+          <td>
+            <h5 class="warning  capitalize">
+              <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView);>
+                <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
+            </h5>
+            <h4 class="warning">
+              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
+          </td>
+        </tr>
+      </tfoot> -->
+    </table>
+  </div>
+
+  <div class="pd-15" *ngIf="distributorView == true">
+    <div class="col">
+      <md-form-field class="example-full-width">
+        <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+        <md-autocomplete #auto="mdAutocomplete">
+          <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+            <span class="capitalize">{{ dist.fullName }}</span>
+          </md-option>
+        </md-autocomplete>
+      </md-form-field>
+    </div>
+    <h3 *ngIf="noProductsError == true">No Products Available</h3>
+    <table class="table table-hover" *ngIf="noProductsError == false">
+      <tbody *ngFor="let products of productList">
+        <tr class="border-topbottom bg-fade-blue">
+          <td class="">
+            <b class="capital">
+              <i class="fa fa-gift" aria-hidden="true"></i>
+              Product Name : {{products.brandName}}
+              <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                <span class="">
+                  <i class="fa fa-bars" aria-hidden="true"></i>
+                  Category : {{products.category}}</span>
+              </b>
+            </b>
+            <span class="float-right mgright-10">
+              <span class="logo-color cursor">
+                <i class="fa fa-cart-plus " aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i> Add Stock</span> &nbsp; &nbsp;
+              <span class="logo-color cursor">
+                <i class="fa fa-dot-circle-o " aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i> Update Status </span>&nbsp;&nbsp;
+              <span class="logo-color cursor">
+                <i class="fa fa-line-chart " aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i> Stock Histroy</span>
             </span>
           </td>
         </tr>
@@ -114,17 +254,14 @@
                     <span class="danger " *ngIf="details.iscanreturnable != 'true'">No </span>
                   </td>
                   <td>
-
                     <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
                     <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
                     <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
                     <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare" (click)="productArea(details)">&nbsp;</i>
                     <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare) && details.isactive == '0'" disabled>&nbsp;</i>
-                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'" (click)="deleteProduct(details)">&nbsp;</i>
+                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'"
+                      (click)="deleteProduct(details)">&nbsp;</i>
                     <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare)" (click)="editProduct(details)">&nbsp;</i>
-                    <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
-                    <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
-                    <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->
                   </td>
                 </tr>
               </tbody>
@@ -133,141 +270,5 @@
           </td>
         </tr>
       </tbody>
-      <!-- <tfoot>
-        <tr>
-          <td></td>
-          <td>
-            <h5 class="warning  capitalize">
-              <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView);>
-                <i class="fa fa-upload" aria-hidden="true"></i> click for more data</a>
-            </h5>
-            <h4 class="warning">
-              <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4>
-
-
-          </td>
-        </tr>
-      </tfoot> -->
     </table>
-  </div>
-
-
-
-  <div class="pd-15" *ngIf="distributorView == true">
-
-    <div class="col">
-        <md-form-field class="example-full-width">
-            <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
-            <md-autocomplete #auto="mdAutocomplete">
-              <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
-                <span class="capitalize">{{ dist.fullName }}</span>
-              </md-option>
-            </md-autocomplete>
-          </md-form-field>
-    </div>
-<h3 *ngIf="noProductsError == true">No Products Available</h3>
-      <table class="table table-hover" *ngIf="noProductsError == false">
-          <tbody *ngFor="let products of productList">
-            <tr class="border-topbottom bg-fade-blue">
-              <td class="">
-                <b class="capital">
-                  <i class="fa fa-gift" aria-hidden="true"></i>
-                  Product Name : {{products.brandName}}
-                  <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
-                    <span class="">
-                      <i class="fa fa-bars" aria-hidden="true"></i>
-                      Category : {{products.category}}</span>
-                  </b>
-                </b>
-                <span class="float-right mgright-10">
-                  <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(products)"></i>&nbsp;
-                  <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(products)"></i>&nbsp;
-                  <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(products)"></i>
-                </span>
-              </td>
-            </tr>
-    
-            <tr>
-              <td colspan="3">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th width="15%">Type</th>
-                      <th width="7%">Priority </th>
-                      <th width="7%">Min Qty </th>
-                      <th width="6%">Cost </th>
-                      <th width="8%" title="Service Charge">Serv chg</th>
-                      <th width="8%" class="oneline" title="Express Delivery Charge">Exp Del</th>
-                      <th width="6%">Stock</th>
-                      <th width="8%" title="Return cans">Ret Cans</th>
-                      <th width="9%" title="Is Authorized">Is Authorized</th>
-                      <th width="7%">Status</th>
-                      <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
-                      <th width="11%" class="no-th-arrow">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let details of products.data">
-                      <td>
-                        <b class="">
-                          <span class="onhovertooltip-200" title="{{details.ptype}}">
-                            <span class="fa fa-thumbs-up success" *ngIf="details.isactive == '1'"></span>
-                            <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
-                            {{details.ptype}}</span>
-                        </b>
-                      </td>
-                      <td>
-                        <b class="gray9">{{details.priority}}</b>
-                      </td>
-                      <td>
-                        <b class="danger">{{details.minorderqty}}</b>
-                      </td>
-                      <td>
-                        <b class="">{{details.pcost}}</b>
-                      </td>
-                      <td>
-                        <b class="">{{details.servicecharge}}</b>
-                      </td>
-                      <td>
-                        <b class="">{{details.expressdeliverycharges}}</b>
-                      </td>
-                      <td>
-                        <b class="warning">{{details.avaliable_stock}}</b>
-                      </td>
-                      <td>
-                        <b class="">{{details.avaliable_emptycans}}</b>
-                      </td>
-    
-                      <td>
-                        <span class="" *ngIf="details.isauthorized == 'true' || details.isauthorized == true"> Yes </span>
-                        <span class="" *ngIf="details.isauthorized == 'false' || details.isauthorized == false || details.isauthorized == '' || details.isauthorized === null">
-                          No </span>
-                      </td>
-    
-                      <td>
-                        <span class="info capital" [ngClass]="details.stockColor">{{details.stockstatus}} </span>
-                      </td>
-                      <td>
-                        <span class="success " *ngIf="details.iscanreturnable == 'true'">Yes </span>
-                        <span class="danger " *ngIf="details.iscanreturnable != 'true'">No </span>
-                      </td>
-                      <td>
-    
-                        <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
-                        <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
-                        <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
-                        <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare" (click)="productArea(details)">&nbsp;</i>
-                        <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare) && details.isactive == '0'" disabled>&nbsp;</i>
-                        <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'" (click)="deleteProduct(details)">&nbsp;</i>
-                        <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare)" (click)="editProduct(details)">&nbsp;</i>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-    
-              </td>
-            </tr>
-          </tbody>
-        </table>
-
   </div>

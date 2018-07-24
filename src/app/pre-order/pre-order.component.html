@@ -78,39 +78,39 @@
 
           <div class="col">
             <div class="row">
-              <b class="capital col-5 left">Customer: </b>
+              <b class="capital col-3 left">Customer: </b>
               <span class="onhovertooltip-150 left col capital" title=" {{preorder.firstname}} {{preorder.lastname}}"> {{preorder.firstname}} {{preorder.lastname}}</span>
             </div>
             <div class="row">
-              <b class="capital col-5 left">Mobile: </b>
+              <b class="capital col-3 left">Mobile: </b>
               <span class="onhovertooltip-100 col left capital" title="{{preorder.mobileno}} {{preorder.mobileno_one}} {{preorder.mobileno_two}}">{{preorder.mobileno}}
                 <span *ngIf="preorder.mobileno_one || preorder.mobileno_two">{{preorder.mobileno_one}} {{preorder.mobileno_two}}</span>
               </span>
             </div>
             <div class="row">
-              <b class="capital col-5 left">Email id: </b>
+              <b class="capital col-3 left">Email id: </b>
               <span class="onhovertooltip-100 left" title="{{preorder.emailid}}">{{preorder.emailid}}</span>
             </div>
             <div class="row">
-              <b class="capital col-5 left">Address: </b>
+              <b class="capital col-3 left">Address: </b>
               <span class="onhovertooltip-150 col capitalize left" title="{{preorder.address}}">{{preorder.address}}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-4 align-self-center">
+      <div class="col-4 align-self-center pdleft-40">
         <div class="row">
-          <b class="capital col-4 left">Distributor: </b>
+          <b class="capital col-3 left">Distributor: </b>
           <span class="onhovertooltip-150 left col capital" *ngIf="preorder.dealers" title="{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer">{{preorder.dealers.firstname}}{{preorder.dealers.lastname}}'s customer </span>
         </div>
         <div class="row">
-          <b class="capital col-4 left">Supplier: </b>
+          <b class="capital col-3 left">Supplier: </b>
           <span class="onhovertooltip-150 col left" *ngIf="preorder.enable_autoassign=='true' && preorder.supplier" title="{{preorder.supplier.suppliername}}">{{preorder.supplier.suppliername}}</span>
         </div>
         <div class="row">
-          <b class="capital col-4 left">Mode: </b>
-          <div *ngIf="preorder.payments left" class="col left">
+          <b class="capital col-3 left">Mode: </b>
+          <div *ngIf="preorder.payments left" class="col left capitalize" >
             <span class="onhovertooltip-50" title="{{preorder.payments.paymenttype}} {{preorder.payments.days}}" *ngIf="preorder.payments.paymenttype=='credit'">
               {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
             <span *ngIf="preorder.payments.paymenttype=='cod'">{{preorder.payments.paymenttype}}</span>

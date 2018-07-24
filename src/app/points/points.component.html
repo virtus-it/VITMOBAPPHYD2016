@@ -48,11 +48,14 @@
       <div class="col-5 left bg-color-bg">
         <div class="row">
           <div class="col">
-            <b class="capital">Feature: </b>
-            <span class="capitalize">{{points.type}}</span>
-            <br>
-            <b> Type: </b>
-            <span class="capitalize">{{points.subtype}}</span>
+            <div class="row">
+              <b class="capital col-3">Feature: </b>
+              <span class="capitalize col">{{points.type}}</span>
+            </div>
+            <div class="row">
+              <b class="capital col-3">Type: </b>
+              <span class="capitalize col">{{points.subtype}}</span>
+            </div>
           </div>
           <div class="col-4 align-self-center center">
             <span class="point-style">{{points.points}} Points </span>
@@ -125,12 +128,8 @@
                   <span *ngIf="details.status" class="capitalize">{{details.status}}</span>
                   <span *ngIf="!details.status"> - </span>
                 </td>
-
             </tbody>
           </table>
-
         </div>
-
-
       </div>
     </div>

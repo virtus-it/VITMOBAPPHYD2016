@@ -194,8 +194,8 @@
             <th width="30%">Type</th>
 
             <th class="center" width="13%">Quantity</th>
-            <th class="center" width="12%">Empty cans</th>
-            <th class="center" width="12%">Price per Unit</th>
+            <th class="center" width="12%">Empty Cans</th>
+            <th class="center" width="12%">Price Per Unit</th>
             <th width="11%" title="Express Delivery">Exp Delv</th>
             <th width="11%" title="Service Charge">Serv Chgs</th>
             <th width="9%">Cost</th>
@@ -204,16 +204,15 @@
           <tr *ngFor="let details of prod.data">
             <td>
               <div class="form-radio form-radio-inline">
-
                 <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
                 <b *ngIf="details.stockstatus == 'Soldout'">
                   <i class="fa fa-close danger" title="sold out"></i>
                 </b>
                 <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-                  <input type="radio" class="custom-control-input" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails"
+                  <input type="radio" class="custom-control-input center" name="productDetails" [value]="details" [(ngModel)]="createPreOrderInput.productDetails"
                     (change)="minOrderChanged($event)" [disabled]="details.stockstatus == 'Soldout'">
                   <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description onhovertooltip-275" title="{{details.category}} {{details.ptype}}">
+                  <span class="custom-control-description onhovertooltip-275 capital" title="{{details.category}} {{details.ptype}}">
                     <b>{{details.category}}</b> {{details.ptype}}</span>
                 </label>
               </div>
@@ -227,7 +226,7 @@
                 </div>
 
                 <div class="col-7">
-                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"
+                  <input class="brd-bottom form-control btn-sm nobg center" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"
                     [disabled]="details.stockstatus == 'Soldout'">
                 </div>
                 <div class="col-2  row">
@@ -246,7 +245,7 @@
                 </div>
 
                 <div class="col-7">
-                  <input class="brd-bottom form-control btn-sm nobg" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)">
+                  <input class="brd-bottom form-control btn-sm nobg center" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)">
                 </div>
                 <div class="col-2  row">
                   <a class="cursor logo-color">

@@ -27,17 +27,17 @@
 
         <tbody>
           <tr class="" *ngFor="let rule of allRules">
-            <td class="" width="15%">{{rule.createdby}}</td>
-            <td class="" width="12%">rule name</td>
-            <td class="" width="12%">{{rule.type}}</td>
-            <td class="" width="30%">{{rule.code_description}}</td>
-            <td class="" width="10%">{{rule.value}}</td>
+            <td class="capital" width="15%">{{rule.createdby}}</td>
+            <td class="capital" width="12%">rule name</td>
+            <td class="capital" width="12%">{{rule.type}}</td>
+            <td class="capital" width="30%">{{rule.code_description}}</td>
+            <td class="capital" width="10%">{{rule.value}}</td>
             <td class="" width="10%">
               <span class="">
-                <i class="fa fa-trash danger fs-20" title="Delete" (click)="deleteRule(rule)"></i>
+                <i class="fa fa-trash danger fs-16" title="Delete" (click)="deleteRule(rule)"></i>
               </span> &nbsp;
               <span>
-                <i class="fa fa-edit logo-color fs-20" title="Edit" (click)="editRule(rule)"></i>
+                <i class="fa fa-edit logo-color fs-16" title="Edit" (click)="editRule(rule)"></i>
               </span>
             </td>
           </tr>
