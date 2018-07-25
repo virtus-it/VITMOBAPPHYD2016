@@ -10,7 +10,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { Observable } from 'rxjs/Observable';
-import { OrderLandingComponent} from '../order-landing/order-landing.component';
+// import { OrderLandingComponent} from '../order-landing/order-landing.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
@@ -115,7 +115,7 @@ export class PreOrderCartDailogComponent implements OnInit {
     "received_amt":"","total_items":this.createPreOrderInput.productDetails.quantity,"ispreorder":true, "adv_amt":this.Details.payments.advance_amount, "pending_amount":this.Details.payments.amount_pending,
     "orderto":this.Details.dealers.user_id , "orderfrom":this.Details.userid,"productid":this.createPreOrderInput.productDetails.productid,"product_quantity":this.createPreOrderInput.productDetails.ptype, "categoryId":this.createPreOrderInput.productDetails.categoryid,
     "product_type":this.createPreOrderInput.productDetails.ptype, "product_name":this.createPreOrderInput.productDetails.pname,  "brandName":this.createPreOrderInput.productDetails.brandname, "product_cost":this.createPreOrderInput.productDetails.pcost,"amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)),"total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)) ,"cart_style":"new",
-    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason" , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt": (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans)) }
+    "delivery_address":this.Details.address, "excepted_time":"" , "slotdate":"", "delivered_qty": this.createPreOrderInput.productDetails.quantity ,  "ispreorderby":"dealer","expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),"loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(), "prodServiceCharge": this.createPreOrderInput.productDetails.servicecharge , "reason":"reason" , "emptycans":(this.createPreOrderInput.productDetails.quantity - - this.createPreOrderInput.productDetails.emptycans)  , "advance_amt": (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans)) }
     }
     console.log(data);
 
@@ -514,7 +514,7 @@ createPreOrder(){
   "total_amt":parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.pcost) + parseInt(this.createPreOrderInput.productDetails.quantity)*parseInt(this.createPreOrderInput.productDetails.servicecharge) + this.amount + ( 150 * (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans)) ,
   "cart_style":"new",
   "delivery_address":this.Details.address, "delivery_locality":this.Details.locality,  "slotdate":"" ,  "delivery_buildingname":this.Details.buildingname,  "expressdeliverycharges":0, "servicecharge": parseInt(this.createPreOrderInput.productDetails.servicecharge) * parseInt(this.createPreOrderInput.productDetails.quantity),
-  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans":this.createPreOrderInput.productDetails.emptycans , "advance_amt":  (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans))  }}]
+  "excepted_time":"","ispreorderby":"distributor" ,  "reason":"reason" , "loginid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType() , "emptycans": ( this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) , "advance_amt":  (150) * (parseInt(this.createPreOrderInput.productDetails.quantity) - parseInt(this.createPreOrderInput.productDetails.emptycans))  }}]
 
   if(this.createPreOrderInput.productDetails.expressdelivery == true){
   input[0].order.expressdeliverycharges = this.createPreOrderInput.productDetails.expressdeliverycharges;
@@ -572,7 +572,7 @@ createPreOrderResult(result,input) {
     if(input[0].order.categoryId){
       categoryId = input[0].order.categoryId;
     }
-    let data ={prod_id:productid, ordersfrom:input[0].order.orderfrom, order_id:result.data.orderid, brandName:input[0].order.brandName , quantity:input[0].order.quantity , categoryid: categoryId ,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:""}};
+    let data ={prod_id:productid, ordersfrom:input[0].order.orderfrom, order_id:result.data.orderid, brandName:input[0].order.brandName , quantity:input[0].order.quantity , categoryid: categoryId , enteredEmptyCans: this.createPreOrderInput.productDetails.emptycans ,supplierdetails:{userid:"", supplierID:"", supplierMno:"", supplierName:"" }};
     if(this.Details.supplier){
       data.supplierdetails.userid =this.Details.supplier.supplierid;
       data.supplierdetails.supplierID = this.Details.supplier.supplierid;

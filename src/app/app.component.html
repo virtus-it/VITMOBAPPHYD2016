@@ -86,6 +86,11 @@
             <span class="pdtoprght-3x10"> Category</span>
           </a>
 
+          <a md-list-item routerLink="/inbox" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin">
+            <i class="fa fa-envelope logo-color cursor env-size" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Inbox</span>
+          </a>
+
           <a md-list-item routerLink="/points" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear" >
             <i class="fa fa-trophy" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Points</span>

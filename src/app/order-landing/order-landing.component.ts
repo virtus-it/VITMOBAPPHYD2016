@@ -289,9 +289,11 @@ export class OrderLandingComponent implements OnInit {
     this.filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
     if(panelName== "forward"){
       this.getForwardOrderDetails(true);
+      this.forwardOrdersonMap();
     }
     else if(panelName== "allorder"){
       this.getAllOrderDetails(true);
+      this.getOrdersOnMap();
     }
     // else if(panelName == 'complete'){
     //   this.getAllOrderDetails(true);
@@ -304,6 +306,12 @@ export class OrderLandingComponent implements OnInit {
 
   showNewPanel(panelName){
     this.newView = panelName;
+    if(this.tabPanelView == 'forward'){
+      this.forwardOrdersonMap();
+    }
+    else if(this.tabPanelView == 'allorder'){
+      this.getOrdersOnMap();
+    }
   }
   showEditCustomer(orderDetails) {
     let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
@@ -1533,7 +1541,7 @@ this.orderLandingService.getOrdersByfilter(input)
        
         getOrdersOnMap() {
           let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: null,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
-          console.log(input);
+          console.log(input , 'all tab called');
           this.orderLandingService.getOrderList(input)
           .subscribe(
             output => this.getOrderDetailsResult(output),
@@ -1573,6 +1581,53 @@ this.orderLandingService.getOrdersByfilter(input)
             console.log('lats and lngs', this.orderslocationData);
           }
         }
+
+
+
+
+        forwardOrdersonMap() {
+          let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: 'forwardedorders' ,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
+          console.log(input , 'forward tab called');
+          this.orderLandingService.getOrderList(input)
+          .subscribe(
+            output => this.forwardOrdersonMapResult(output),
+            error => {
+              this.loaderService.display(false);
+            }
+          );
+        }
+        forwardOrdersonMapResult(result) {
+          if (result.result == 'success') {
+            this.allOrdersDetails = result.data;
+            let orderLocationArray = [];
+            let data = _.each(this.allOrdersDetails, function(i, j) {
+              let details: any = i;
+              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
+              UserData.lat = parseFloat(details.orderby_latitude);
+              UserData.lng = parseFloat(details.orderby_longitude);
+              UserData.name = details.firstname;
+              UserData.orderid = details.order_id;
+              UserData.status = details.orderstatus;
+              UserData.productType = details.product_type;
+              UserData.quantity = details.quantity;
+              UserData.userid = details.user_id;
+
+              if (UserData.status == 'delivered') {
+                UserData.icon = '../assets/images/green.png';
+              }
+               else {
+                UserData.icon = '../assets/images/red.png';
+              }
+              if (UserData.lat && UserData.lng) {
+                orderLocationArray.push(UserData);
+              }
+            });
+      
+            this.orderslocationData = orderLocationArray;
+            console.log('lats and lngs', this.orderslocationData);
+          }
+        }
+
 
 
         
@@ -1664,7 +1719,7 @@ this.orderLandingService.getOrdersByfilter(input)
     }
 
     
-      this.getOrdersOnMap();
+      // this.getOrdersOnMap();
     
     // this.getDistributors();
     // this.getSupplier();

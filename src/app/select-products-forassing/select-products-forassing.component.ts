@@ -215,7 +215,7 @@ else if(this.orderDetail.type == 'coveragePage'){
     }
 
 
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":this.productsDetails.emptycans  , "advance_amt": 150 * (this.productsDetails.quantity - this.productsDetails.emptycans) }};
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":(this.productsDetails.quantity - this.emptyCans) , "advance_amt": 150 * (this.productsDetails.quantity - this.productsDetails.emptycans) }};
 
 
 if(this.productsDetails.expressCheck == true){
@@ -278,7 +278,7 @@ if(this.productsDetails.expressCheck == true){
     details.quantity = 0;
   });
   products.quantity = this.orderDetail.orderDetails.quantity;
-  products.emptycans = this.orderDetail.orderDetails.empty_cans;
+  products.emptycans = this.emptyCans;
 }
 else{
   _.each(this.productList, function (i, j) {
@@ -370,14 +370,11 @@ changeOfQuantity(data){
     console.log(this.orderDetail);
     this.getProductsList();
 
-    if((this.orderDetail.type == 'customersPage')  && (this.orderDetail.orderDetails)  &&(this.orderDetail.orderDetails.empty_cans) ){
-       this.emptyCans = this.orderDetail.orderDetails.empty_cans;
+    if(this.orderDetail.type == 'customersPage'){
+       this.emptyCans = this.orderDetail.orderDetails.enteredEmptyCans ;
     }
-     else{
-       this.emptyCans = 0;
-     }
-    if((this.orderDetail.type == 'coveragePage') && (this.orderDetail.data.orders) && (this.orderDetail.data.orders.empty_cans)){
-    this.emptyCans = this.orderDetail.data.orders.empty_cans;
+    else if((this.orderDetail.type == 'coveragePage') && (this.orderDetail.data.orders) && (this.orderDetail.data.orders.empty_cans)){
+    this.emptyCans = (this.orderDetail.data.orders.quantity - this.orderDetail.data.orders.empty_cans);
     }
     else{
       this.emptyCans = 0;
