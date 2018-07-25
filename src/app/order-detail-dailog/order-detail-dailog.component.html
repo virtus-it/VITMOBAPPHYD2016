@@ -410,7 +410,7 @@
                   <tr *ngFor="let history of notificationHistory">
                     <td width="14%">
                       <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname" >{{history.notificationsendedby.fullname}}</small>
-                      <small *ngIf="!history.notificationsendedby.fullname" > - </small>
+                      <small *ngIf="!history.notificationsendedby" > - </small>
                     </td>
 
                     <td width="40%">

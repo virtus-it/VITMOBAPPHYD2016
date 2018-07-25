@@ -16,21 +16,21 @@
       <div class="col-5 left bg-color-bg brd-left-5">
         <div class="row">
           <div class="col-6">
+            <b class="left" *ngIf="smslist.notificationsendedby"> Sent by: {{smslist.notificationsendedby.fullname}}</b>
+            <b class="left" *ngIf="!smslist.notificationsendedby"> Sent by: - </b> <br>
 
-            <b class="left" *ngIf="smslist.smstype == 'sms'">Sms Name: <span class="">{{smslist.name}}</span></b> <br>
+            <b class="left" *ngIf="smslist.smstype == 'sms'">Sms Name: <span class="">{{smslist.name}}</span></b>
+            <b class="left" *ngIf="smslist.smstype == 'notification'">Template Name: <span class="">{{smslist.tempname}}</span></b>
+            <br>
+
             <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount == 1">
-              <span *ngFor="let name of smslist.mobileno">
-                Customer Name : {{name.fullName}}
-              </span>
+              <span *ngFor="let name of smslist.mobileno">Customer Name : {{name.fullName}}</span> </b>
+            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount == 1 ">
+              <span *ngFor="let name of smslist.mobileno">Customer Name : {{name.fullName}}</span>
             </b>
 
-            <b class="left" *ngIf="smslist.smstype == 'notification'">Template Name: <span class="">Template name</span></b> <br>
-            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount == 1 ">
-              <span *ngFor="let name of smslist.mobileno">
-               Customer Name : {{name.fullName}}
-              </span>
-            </b>
             <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount > 1 "> - </b>
+            <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount > 1 "> - </b>
 
             <br>
             <b>Status:</b> 
@@ -57,6 +57,9 @@
             <span class="fa fa-clock-o"></span>
             <span class="">{{smslist.createddate | utcDate}}</span>
             <br>
+            <span class="" *ngIf="smslist.orderid">Order Id: {{smslist.orderid}}</span>
+            <br>
+            <span class="" *ngIf="smslist.type">Type : {{smslist.type[0].user_type}}</span>
           </div>
         </div>
       </div>

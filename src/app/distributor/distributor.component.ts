@@ -52,10 +52,14 @@ export class DistributorComponent implements OnInit {
     tabPanelView = '';
 
     productList= [];
+
+    producttype: '';
+    pname: '';
+    category: '';
     // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
-    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:''};
-    filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":100,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":""}};
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:'' , isstockpointDefined: ''};
+    filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":100,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":"" , "category": '' , "producttype":'' ,  'productname': ""}};
 
 
     distributorClickMore = true;
@@ -115,19 +119,21 @@ this.getProductByCategory();
     findProducts(name: string) {
         let finalProducts:any = [];
         finalProducts = this.productList.filter(prod =>
-           prod.pname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+           prod.fullname.toLowerCase().indexOf(name.toLowerCase()) === 0);
          
        if (finalProducts && finalProducts.length > 0) {
          let findProduct: any = {};
    
          findProduct = _.find(finalProducts, function (k, l) {
            let prodDetails: any = k;
-           return prodDetails.pname == name;
+           return prodDetails.fullname == name;
          });
    
          if (findProduct) {
-           // this.filterInput.categoryid = findCategory.categoryid;
-           this.filterTypeModel.productId = findProduct.productid;
+        //    this.filterTypeModel.productId = findProduct.productid;
+        this.pname = findProduct.pname;
+        this.category = findProduct.category;
+        this.producttype = findProduct.ptype;
          }
        }
        else {
@@ -152,6 +158,12 @@ this.getProductByCategory();
         console.log(result);
 
         if (result.result == 'success') {
+        let fullName = "";
+        _.each(result.data , function(i,j){
+        let details:any = i;
+        fullName = details.pname + ' ' + details.category + ' ' + details.ptype;
+        details.fullname = fullName;
+    });
             this.productList = result.data;
       }
     }
@@ -547,7 +559,14 @@ this.getProductByCategory();
             }
             else if(this.filterType == 'products'){
                 this.filterInput.root.searchtype = 'products';
-                this.filterInput.root.searchtext = this.filterTypeModel.productId;
+                this.filterInput.root.productname  = this.pname;
+                this.filterInput.root.producttype  = this.producttype;
+                this.filterInput.root.category  = this.category;
+                // this.filterInput.root.productSearch = this.filterProductObject;
+            }
+            else if(this.filterType == 'stockpoints'){
+                this.filterInput.root.searchtype = 'stockpoints';
+                this.filterInput.root.searchtext = this.filterTypeModel.isstockpointDefined;
             }
        
             let input = this.filterInput;

@@ -57,6 +57,7 @@ export class AddProductDealerComponent implements OnInit {
       let distributorProdList = this.Details.distProducts;
       console.log(distributorProdList, 'Details ie dist products');
       let midfiedList = [];
+      if(distributorProdList.length > 0){
       for (var j = 0; j < result.data.length; j++) {
         for (var i = 0; i < distributorProdList.length; i++) {
           if (distributorProdList[i].ptype == result.data[j].ptype && distributorProdList[i].brandname == result.data[j].brandname && distributorProdList[i].category == result.data[j].category) {
@@ -66,6 +67,10 @@ export class AddProductDealerComponent implements OnInit {
           }
         }
       }
+    }
+    else{
+      midfiedList = result.data;
+    }
       console.log("Product which are not in distributor list", midfiedList);
 
       // var removeProducts = _.each(result.data, function (i, j) {
