@@ -75,6 +75,9 @@ export class SelectProductsForassingComponent implements OnInit {
 else if(this.orderDetail.type == 'coveragePage'){
       this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.customer.userid
      }
+     else if(this.orderDetail.type == 'assignfromOrderDetails'){
+    this.orderDetail.orderDetails.order_by = this.orderDetail.disributorId;
+     }
      else{
        this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
         }
@@ -84,6 +87,9 @@ else if(this.orderDetail.type == 'coveragePage'){
      UserId = this.orderDetail.data.orders.order_by;
     }
     else if(this.orderDetail.type == "customersPage"){
+      UserId = this.orderDetail.orderDetails.order_by;
+    }
+    else if(this.orderDetail.type == 'assignfromOrderDetails'){
       UserId = this.orderDetail.orderDetails.order_by;
     }
     else{
@@ -200,6 +206,9 @@ else if(this.orderDetail.type == 'coveragePage'){
     else if(this.orderDetail.type == 'customersPage'){
       orderId = this.orderDetail.orderDetails.order_id;
     }
+    else if(this.orderDetail.type == 'assignfromOrderDetails'){
+      orderId = this.orderDetail.orderDetails.order_id;
+    }
     else{
       orderId = this.orderDetail.orderDetails.order_id;
     }
@@ -215,7 +224,7 @@ else if(this.orderDetail.type == 'coveragePage'){
     }
 
 
-    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":(this.productsDetails.quantity - this.emptyCans) , "advance_amt": 150 * (this.productsDetails.quantity - this.productsDetails.emptycans) }};
+    let input = { "order": { "orderid": orderId, "loginid": this.authenticationService.loggedInUserId(), "productid": this.productsDetails.productid, "product_name": this.productsDetails.brandname, "quantity": this.productsDetails.quantity, "product_cost": this.productsDetails.pcost, "product_type": this.productsDetails.ptype, "apptype": this.authenticationService.appType() , "expressdeliverycharges": 0,"servicecharges": (this.productsDetails.servicecharge)*(this.productsDetails.quantity) , "emptycans":(this.emptyCans) , "advance_amt": 150 * this.emptyCans }};
 
 
 if(this.productsDetails.expressCheck == true){
@@ -252,7 +261,7 @@ if(this.productsDetails.expressCheck == true){
       this.amount = 0;
     }
 
-    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.emptyCans) * 150)
 
   
   }
@@ -280,6 +289,14 @@ if(this.productsDetails.expressCheck == true){
   products.quantity = this.orderDetail.orderDetails.quantity;
   products.emptycans = this.emptyCans;
 }
+else if (this.orderDetail.type == 'assignfromOrderDetails'){
+  _.each(this.productList, function (i, j) {
+    let details: any = i;
+    details.quantity = 0;
+  });
+  products.quantity = this.orderDetail.orderDetails.quantity;
+  products.emptycans = this.emptyCans;
+}
 else{
   _.each(this.productList, function (i, j) {
     let details: any = i;
@@ -298,7 +315,7 @@ else{
     // else{
     //   this.expressDeliveryCharges = 0;
     // }
-    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.emptyCans) * 150)
 
 
 }
@@ -314,7 +331,7 @@ changeOfQuantity(data){
   // else{
   //   this.expressDeliveryCharges = 0;
   // }
-  this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+  this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + (( this.emptyCans) * 150)
 }
 // else{
 //   this.quantity = this.productQuantity;
@@ -334,7 +351,7 @@ changeOfQuantity(data){
   emptyCansChange(data){
     console.log(data);
     this.emptyCans = data;
-    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.quantity - this.emptyCans) * 150)
+    this.totalcost = (this.quantity * this.productCost) + (this.amount) + (this.serviceCharges * this.quantity) + ((this.emptyCans) * 150)
     let cases: string = "1";
     switch(cases){
       case '1': {
@@ -370,11 +387,17 @@ changeOfQuantity(data){
     console.log(this.orderDetail);
     this.getProductsList();
 
-    if(this.orderDetail.type == 'customersPage'){
+    if(this.orderDetail.type == 'customersPage' && this.orderDetail.orderDetails.enteredEmptyCans){
        this.emptyCans = this.orderDetail.orderDetails.enteredEmptyCans ;
     }
-    else if((this.orderDetail.type == 'coveragePage') && (this.orderDetail.data.orders) && (this.orderDetail.data.orders.empty_cans)){
-    this.emptyCans = (this.orderDetail.data.orders.quantity - this.orderDetail.data.orders.empty_cans);
+    else if (this.orderDetail.type == 'customersPage'){
+      this.emptyCans = (this.orderDetail.orderDetails.empty_cans)
+    }
+    else if (this.orderDetail.type == 'coveragePage') {
+    this.emptyCans = (this.orderDetail.data.orders.empty_cans);
+    }
+    else if (this.orderDetail.type == 'assignfromOrderDetails'){
+      this.emptyCans =(this.orderDetail.orderDetails.empty_cans);
     }
     else{
       this.emptyCans = 0;

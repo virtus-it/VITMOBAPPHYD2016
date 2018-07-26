@@ -69,13 +69,16 @@ export class InboxPageComponent implements OnInit {
   getFilteredMessages(result){
     if(result.result == 'success'){
       this.AllMessages= result.data;
+      this.noMessages = false;
     }
     else{
       this.AllMessages = [];
+      this.noMessages = true;
     }
   }
   
   clearFilter(){
+    this.AllMessages = [];
     this.getAllMessages();
     this.filterInput ={"fromDate":null , "toDate":null};
   }

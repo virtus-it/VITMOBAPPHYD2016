@@ -115,20 +115,32 @@ export class DistributorListDialogComponent implements OnInit {
   }
   forWardOrder() {
     this.loaderService.display(true);
-    let input = {
-      "order": {
-        "apptype": this.authenticationService.appType(), "createdthru": "website",
-        "from": this.authenticationService.loggedInUserId(),
-        "loginid": this.authenticationService.loggedInUserId(),
-        "orderid": this.orderDetail.order_id, "orderstatus": "ordered", "product_type": "cans",
-         "to": this.distributorID,
-        "usertype": this.authenticationService.userType() , "orderto":this.authenticationService.loggedInUserId() , "reason":"reason"
+    let input = {};
+    if(this.orderDetail.type == 'assignfromOrderDetails'){
+      input = {
+        "order": {
+          "apptype": this.authenticationService.appType(), "createdthru": "website",
+          "from": this.authenticationService.loggedInUserId(),
+          "loginid": this.authenticationService.loggedInUserId(),
+          "orderid": this.orderDetail.data.order_id, "orderstatus": "ordered", "product_type": "cans",
+           "to": this.distributorID,
+          "usertype": this.authenticationService.userType() , "orderto":this.authenticationService.loggedInUserId() , "reason":"reason"
+        }
       }
     }
+    else{
+      input = {
+        "order": {
+          "apptype": this.authenticationService.appType(), "createdthru": "website",
+          "from": this.authenticationService.loggedInUserId(),
+          "loginid": this.authenticationService.loggedInUserId(),
+          "orderid": this.orderDetail.order_id, "orderstatus": "ordered", "product_type": "cans",
+           "to": this.distributorID,
+          "usertype": this.authenticationService.userType() , "orderto":this.authenticationService.loggedInUserId() , "reason":"reason"
+        }
+      }
 
-
-
-
+    }
 
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
     this.distributorService.forwardOrder(input)
@@ -149,24 +161,18 @@ export class DistributorListDialogComponent implements OnInit {
   }
   assignOrder() {
     this.loaderService.display(true);
-    let input = {
-      "order": {
-        "apptype": this.authenticationService.appType(), "createdthru": "website",
-        "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
-        "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.brandName,
-        "reason":"Order Confirmed: "+ this.orderDetail.brandName +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.",
-        
-        "orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,
-        "quantity": this.orderDetail.quantity, "to": this.supplierID,
-        "usertype": this.authenticationService.userType()
-      }
+    let input = {};
+    if(this.orderDetail.type == 'assignfromOrderDetails'){
+      input = {"order": {"apptype": this.authenticationService.appType(), "createdthru": "website","from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,"loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.data.brandName,"reason":"Order Confirmed: "+ this.orderDetail.data.brandName +"  "+ this.orderDetail.data.prod_type+"  water cans " + (this.orderDetail.data.quantity) + " with order id: "+this.orderDetail.data.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.","orderid": this.orderDetail.data.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,"quantity": this.orderDetail.data.quantity,"to": this.supplierID,"usertype": this.authenticationService.userType()}}
     }
-
-
-
-
-
-
+    else{
+      input = {
+        "order": {
+          "apptype": this.authenticationService.appType(), "createdthru": "website",
+          "from": this.authenticationService.loggedInUserId(), "autoassign":this.autoAssign,
+          "loginid": this.authenticationService.loggedInUserId(), "orderfrom":this.orderDetail.ordersfrom, "product_name":this.orderDetail.brandName,
+          "reason":"Order Confirmed: "+ this.orderDetail.brandName +"  "+ this.orderDetail.prod_type+"  water cans " + (this.orderDetail.quantity) + " with order id: " +this.orderDetail.order_id + " from Moya-The Waterman App, is confimed by the supplier. Please call our customer care centre at mobile: 9863636314/15 for any queries.","orderid": this.orderDetail.order_id, "orderstatus": "assigned", "product_type": "cans", "supplierID":this.supplierID, "supplierMno":this.supplierNumber, "supplierName":this.supplierName,"quantity": this.orderDetail.quantity, "to": this.supplierID,"usertype": this.authenticationService.userType()}}
+        }
     //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
     console.log(input);
     this.distributorService.assingOrder(input)
@@ -201,8 +207,13 @@ export class DistributorListDialogComponent implements OnInit {
   }
   openProductAssingDialog() {
 
-    let data = {orderDetails:this.orderDetail , disributorId:this.distributorID , 'type':"customersPage"};
-
+    let data = {};
+    if(this.orderDetail.type == "assignfromOrderDetails"){
+      data = {orderDetails:this.orderDetail.data , disributorId:this.distributorID , 'type':"assignfromOrderDetails"}
+    }
+    else{
+      data = {orderDetails:this.orderDetail , disributorId:this.distributorID , 'type':"customersPage"};
+    }
     let dialogRef = this.dialog.open(SelectProductsForassingComponent, {
        width: '85%',
         data: data
@@ -212,6 +223,7 @@ export class DistributorListDialogComponent implements OnInit {
 
       if(result == 'success'){
         this.forWardOrder();
+        // this.thisDialogRef.close('success');
       }
     });
 }

@@ -56,8 +56,14 @@
               <span *ngIf="!message.message"> - </span>
             </td>
           </tr>
+
+          
+
         </tbody>
       </table>
+
+      <h4 *ngIf="noMessages" class="warning center mgtop-10">
+        <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>
 
     </div>
   </div>

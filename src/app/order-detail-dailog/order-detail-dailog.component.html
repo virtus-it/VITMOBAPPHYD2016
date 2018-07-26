@@ -17,6 +17,8 @@
           <div class="d-flex">
             <b class="p-0">
               <i class="fa fa-file-text-o"></i> Order Details</b>
+            <b class="logo-color" (click)="assignOrder(this.orderDetail)" *ngIf="dailogOrderDetails.status == 'not_broadcasted' || dailogOrderDetails.status == 'backtodealer' || dailogOrderDetails.status == 'assigned'" >
+              <i class="fa fa-reply-all logo-color"></i> Assign Order</b>
             <span class="ml-auto p-0 mgright-15  logo-color">
               <b class="float-right fs-12" (click)="editQuantity(dailogOrderDetails)">
                 <i class="fa fa-edit" aria-hidden="true"> </i> Edit Quantity</b>

@@ -158,8 +158,12 @@ export class EditOrderStatusComponent implements OnInit {
     this.thisDialogRef.close(this.message)
   }
 
+
+
+  // this.editStatusInput.order.delivered_qty * Removed this in below calculation bcz we are getting net serv charges in srvchgs
+
   amountCalculate(){
-    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 ));
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 ));
     // this.emptyCans = this.orderDetail.return_cans;
     this.advanceAmount = ((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 );
     this.editStatusInput.order.adv_amt = this.advanceAmount;
@@ -194,7 +198,7 @@ export class EditOrderStatusComponent implements OnInit {
     }
     this.editStatusInput.order.return_cans = this.orderDetail.quantity - this.orderDetail.empty_cans;
     this.amountCalculate();
-    this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;
+    // this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;
 
     console.log(this.orderDetail);
   }

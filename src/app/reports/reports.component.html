@@ -125,7 +125,7 @@
             <td class="nav-item" (click)="searchReports(true,'orderdownload')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'orderdownload'}" href="javascript:void(0)">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
-                <br> Order Downloads</a>
+                <br> Order Reports</a>
             </td>
 
             <td class="nav-item" (click)="searchDistributorsOrders()">
@@ -178,7 +178,7 @@
                 <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
-              <td class="left">{{reports.createddate | utcDate}}</td>
+              <td class="left">{{reports.createddate | utcDate24}}</td>
 
               <td class="left">
                 <span class="onhovertooltip-600" title="{{reports.address}}">{{reports.address}}</span>
@@ -231,7 +231,7 @@
                   </td>
 
                   <td>
-                      <span *ngIf="reports" > {{reports.createddate | utcDate }}</span>
+                      <span *ngIf="reports" > {{reports.createddate | utcDate24 }}</span>
                       <span *ngIf="!reports"> - </span>
                     </td>
 
@@ -261,22 +261,47 @@
           <thead>
             <tr>
 
-              <th width="15%"> Dealer Name</th>
+              <!-- <th width="15%"> Dealer Name</th>
               <th width="10%">Mobile No</th>
               <th width="15%">Created Date</th>
               <th width="50%">Address</th>
-              <th width="10%">Cust Ordered</th>
+              <th width="10%">Cust Ordered</th> -->
 
+              <th width="10%"> Customer Name</th>
+              <th width="8%">Mobile No</th>
+              <th width="14%">Address</th>
+              <th width="14%">Order Created Date</th>
+              <th width="14%">Delivery Date</th>
+              <th width="14%">Product Type</th>
+              <th width="5%">Quantity</th>
+              <th width="8%">Distributor</th>
+              <th width="8%">Dist.Mobileno</th>
+
+
+
+
+
+              
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
+              <td class="" width="10%"> - </td>
 
-              <td class="left">
+
+              <!-- <td class="left">
                 <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
-              <td class="left">{{reports.createddate | utcDate}}</td>
+              <td class="left">{{reports.createddate | utcDate24}}</td>
 
               <td class="left">
                 <span class="onhovertooltip-600" title="{{reports.address}}">{{reports.address}}</span>
@@ -284,7 +309,7 @@
               <td class="left">
 
                 <span class="">Not coming</span>
-              </td>
+              </td> -->
             </tr>
           </tbody>
         </table>
@@ -458,7 +483,7 @@
               <th width="14%">Product Type</th>
               <th width="5%">Quantity</th>
               <th width="8%">Distributor</th>
-              <th width="8%">Dist Mobile</th>
+              <th width="8%">Dist.Mobileno</th>
 
             </tr>
           </thead>
@@ -482,12 +507,12 @@
               </td>
 
               <td class="left" width="14%">
-                <span *ngIf="reports && reports.createddate">{{reports.createddate | utcDate}} </span>
+                <span *ngIf="reports && reports.createddate">{{reports.createddate | utcDate24}} </span>
                 <span *ngIf="!reports.createddate"> - </span>
               </td>
 
               <td class="left" width="14%">
-                <span *ngIf="reports && reports.deliverydate">{{reports.deliverydate | utcDate}} </span>
+                <span *ngIf="reports && reports.deliverydate">{{reports.deliverydate | utcDate24}} </span>
                 <span *ngIf="!reports.deliverydate"> - </span>
               </td>
 
@@ -559,7 +584,7 @@
               </td>
 
               <td class="left">
-                <span *ngIf="reports && reports.lastorderdetails">{{reports.lastorderdetails[0].createddate | utcDate}} </span>
+                <span *ngIf="reports && reports.lastorderdetails">{{reports.lastorderdetails[0].createddate | utcDate24}} </span>
                 <span class="left" *ngIf="!reports.lastorderdetails"> - </span>
               </td>
 
@@ -588,7 +613,7 @@
       <div class="jumbotron">
         <div class="jumbotron-style">
           <div class="row form-group col">
-            <h3>Order Report</h3>
+            <h3>Stock Report</h3>
           </div>
           <div class="row form-group">
             <div class="col-sm-6  col-md-6  col-lg-6">
