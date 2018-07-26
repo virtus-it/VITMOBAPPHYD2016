@@ -284,22 +284,22 @@
         <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead>
             <tr>
-              <th width="30%">Name</th>
-              <th width="30%">Stock Count</th>
-              <th width="40%" class="no-th-arrow">Views </th>
+              <th width="50%">Name</th>
+              <!-- <th width="30%">Stock Count</th> -->
+              <th width="50%" class="no-th-arrow">Views </th>
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
 
-              <td class="left capitalize" width="30%">
+              <td class="left capitalize" width="50%">
                 <span class="onhovertooltip-150 capitalize" >{{dist.firstname}} {{dist.lastname}}</span>
               </td>
-              <td class="" width="30%">
+              <!-- <td class="" width="30%">
                 count
-              </td>
+              </td> -->
 
-              <td class="left" width="10%">
+              <td class="left" width="50%">
                   <div class="dropdown">
                     <button class="dropbtn" [disabled]="dist.usercreatedby && dist.usercreatedby.userid != 'loginId'">View More</button>
                     <div class="dropdown-content" style="right:0;">

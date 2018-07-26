@@ -102,7 +102,7 @@ export class InboxComponent implements OnInit {
 
   clearFilter(){
     this.getAllMessages();
-
+    this.filterInput ={"fromDate":null , "toDate":null};
   }
 
 
