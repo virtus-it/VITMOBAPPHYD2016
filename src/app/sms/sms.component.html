@@ -4,7 +4,7 @@
       <h4 class="left">
         <i class="fa fa-commenting-o" aria-hidden="true"></i> Notification</h4>
     </div>
-    <div class="col-sm-2 col-md-2 col-lg-2 right">
+    <div class="col-sm-2 col-md-2 col-lg-2 right align-self-center">
       <!-- <button md-raised-button color="primary"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->
       <a class="cursor logo-color " title=" Notification Scheduler" (click)="openSmsDialog()">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
@@ -16,31 +16,37 @@
       <div class="col-5 left bg-color-bg brd-left-5">
         <div class="row">
           <div class="col-6">
-            <b class="left" *ngIf="smslist.notificationsendedby"> Sent by: {{smslist.notificationsendedby.fullname}}</b>
-            <b class="left" *ngIf="!smslist.notificationsendedby"> Sent by: - </b> <br>
-
-            <b class="left" *ngIf="smslist.smstype == 'sms'">Sms Name: <span class="">{{smslist.name}}</span></b>
-            <b class="left" *ngIf="smslist.smstype == 'notification'">Template Name: <span class="">{{smslist.tempname}}</span></b>
+            <span class="left" *ngIf="smslist.notificationsendedby" class="capital">
+              <b>Sent by: </b>{{smslist.notificationsendedby.fullname}}</span>
+            <b class="left" *ngIf="!smslist.notificationsendedby"> Sent by: - </b>
             <br>
 
-            <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount == 1">
-              <span *ngFor="let name of smslist.mobileno">Customer Name : {{name.fullName}}</span> </b>
-            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount == 1 ">
-              <span *ngFor="let name of smslist.mobileno">Customer Name : {{name.fullName}}</span>
-            </b>
+            <span class="left" *ngIf="smslist.smstype == 'sms'" class="capital">
+              <b class="">Sms Name: </b>{{smslist.name}}</span>
+            <span class="left" *ngIf="smslist.smstype == 'notification'" class="capital">
+              <b class="">Template Name: </b>{{smslist.tempname}}</span>
+            <br>
 
-            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount > 1 "> - </b>
-            <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount > 1 "> - </b>
+            <span class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount == 1">
+              <span *ngFor="let name of smslist.mobileno" class="capital">
+                <b>Customer Name:</b> {{name.fullName}}</span>
+            </span>
+            <span class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount == 1 ">
+              <span *ngFor="let name of smslist.mobileno" class="capital">
+                <b>Customer Name: </b>{{name.fullName}}</span>
+            </span>
+
+            <b class="left" *ngIf="smslist.smstype == 'notification' && smslist.mcount > 1 ">Customer Name: - </b>
+            <b class="left" *ngIf="smslist.smstype == 'sms' && smslist.mcount > 1 ">Customer Name: - </b>
 
             <br>
-            <b>Status:</b> 
-            <span class="left capital ">
+            <span *ngIf="smslist.status" class="left capital ">
+            <b>Status: </b>
               {{smslist.status}}</span>
+              <span *ngIf="!smslist.status" class="left capital ">
+                  <b>Status: -</b></span>
             <br>
-            <b>Type:</b>
-            <span class="left capital ">
-              {{smslist.smstype}}</span>
-            <br>
+
           </div>
           <div class="col-6">
             <span class="left">
@@ -50,26 +56,38 @@
               <span *ngIf="smslist.mobileno === null "> - </span>
             </span>
             <br>
-            <b>Mobile Count:</b>
+            <b>Mobile Count: </b>
             <span class="left ">
-               {{smslist.mcount}}</span>
+              {{smslist.mcount}}</span>
             <br>
-            <span class="fa fa-clock-o"></span>
-            <span class="">{{smslist.createddate | utcDate}}</span>
+            <span class="capital" *ngIf="smslist.type"> <b>User Type: </b>{{smslist.type[0].user_type}}</span>
+            <b class="capital" *ngIf="!smslist.type"> User Type: -</b>
+
             <br>
-            <span class="" *ngIf="smslist.orderid">Order Id: {{smslist.orderid}}</span>
-            <br>
-            <span class="" *ngIf="smslist.type">Type : {{smslist.type[0].user_type}}</span>
+            <b>Sms Type: </b>
+            <span class="left capital ">
+              {{smslist.smstype}}</span>
           </div>
         </div>
       </div>
+
       <div class="col-7 mg-top">
+        <div class="left row mgbottom-5">
+          <div class="col">
+            <span class="" *ngIf="smslist.orderid"><b>Order Id: </b> {{smslist.orderid}}</span>
+            <b class="" *ngIf="!smslist.orderid">Order Id: - </b>
+
+          </div>
+          <div class="col-4 right">
+            <span class="gray9"> <span class="fa fa-clock-o"></span> {{smslist.createddate | utcDate}}</span>
+          </div>
+        </div>
         <div class="left">
-          <span class="body-bg">Body:</span>
-          <br>
-          <p class="left">{{smslist.body_desc}}</p>
+        <span class="body-bg">Body:</span>
+        <p class="left">{{smslist.body_desc}}</p>
         </div>
       </div>
+
     </div>
   </div>
   <h4 class="warning  capitalize center">
