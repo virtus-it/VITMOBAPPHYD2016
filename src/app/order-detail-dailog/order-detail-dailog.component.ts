@@ -14,6 +14,7 @@ import { MessageTemplateComponent } from '../message-template/message-template.c
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { LoaderService } from '../login/loader.service';
+import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import * as _ from 'underscore';
 
 
@@ -420,6 +421,24 @@ getfollowUpdetails() {
             this.getOrderDetailsById();
         }
   });
+  }
+
+  assignOrder(data){
+      let formattedData = {type: 'assignfromOrderDetails' , data: data}
+    //   console.log(data, 'sdgsdgsd');
+      let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
+    
+        width: '70%',
+        data: formattedData
+    });
+    dialogRefDist.afterClosed().subscribe(result => {
+        //console.log(`Dialog closed: ${result}`);
+        if(result == 'success'){
+        this.getOrderDetailsById();  
+        this.thisDialogRef.close('success');
+        }
+
+    });
   }
 
 

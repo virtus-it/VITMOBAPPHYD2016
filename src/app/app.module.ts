@@ -131,6 +131,7 @@ import { SortingPipe } from './pipes/sorting.pipe';
 import { NotificationDetailsComponent } from './notification-details/notification-details.component';
 import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
 import { InboxPageComponent } from './inbox-page/inbox-page.component';
+import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
 
 
 
@@ -240,6 +241,7 @@ import { InboxPageComponent } from './inbox-page/inbox-page.component';
         NotificationDetailsComponent,
         DeleteRuleComponent,
         InboxPageComponent,
+        UtcDate24Pipe,
 
      
         

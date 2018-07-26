@@ -1439,6 +1439,7 @@ this.orderLandingService.getOrdersByfilter(input)
                 }
                 else if (result == 'Cancel' || result == undefined){
                   this.loaderService.display(false);
+                  this.refresh();
                 }
     
             });

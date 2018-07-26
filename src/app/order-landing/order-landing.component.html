@@ -421,8 +421,9 @@
 
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <p class="td-label mgbottom-0">Empty Cans</p>
-                      <b class="" *ngIf="forward.empty_cans || forward.empty_cans == 0">{{forward.empty_cans}}</b>
-                      <b class="" *ngIf="forward.empty_cans == null || (forward.empty_cans == '' && forward.empty_cans == null)"> - </b>
+                      <b class="" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
+                      <b class="" *ngIf="forward.empty_cans == null"> - </b>
+                      <b class="" *ngIf="forward.empty_cans == 0"> 0 </b>
                     </div>
 
                   </div>
@@ -437,18 +438,23 @@
                       <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
                       <b class="" *ngIf="forward.servicecharges">{{forward.servicecharges}}</b>
                       <b class="" *ngIf="forward.servicecharges === null"> - </b>
+                      <b class="" *ngIf="forward.servicecharges == 0"> 0 </b>
+
                     </div>
 
                     <div class="col-3">
                       <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
                       <b class="" *ngIf="forward.expressdeliverycharges">{{forward.expressdeliverycharges}}</b>
                       <b class="" *ngIf="forward.expressdeliverycharges === null"> - </b>
+                      <b class="" *ngIf="forward.expressdeliverycharges == 0"> 0 </b>
                     </div>
 
                     <div class="col-4 right pdright-20">
                       <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
                       <b class="" *ngIf="forward.advance_amount">{{forward.advance_amount}}</b>
-                      <b class="" *ngIf="forward.advance_amount === null || forward.advance_amount == ''"> - </b>
+                      <b class="" *ngIf="forward.advance_amount === null"> - </b>
+                      <b class="" *ngIf="forward.advance_amount == 0"> 0 </b>
+
                     </div>
                   </div>
                   <div class=" row mgtop-15">
@@ -781,7 +787,9 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <p class="td-label mgbottom-0">Empty Cans</p>
                       <b class="" *ngIf="allorder.empty_cans">{{allorder.empty_cans}}</b>
-                      <b class="" *ngIf="allorder.empty_cans === null || allorder.empty_cans == ''"> - </b>
+                      <b class="" *ngIf="allorder.empty_cans === null"> - </b>
+                      <b class="" *ngIf="allorder.empty_cans == 0"> 0 </b>
+
                     </div>
 
                   </div>
@@ -798,18 +806,22 @@
                       <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
                       <b class="" *ngIf="allorder.servicecharges">{{allorder.servicecharges}}</b>
                       <b class="" *ngIf="allorder.servicecharges === null"> - </b>
+                      <b class="" *ngIf="allorder.servicecharges == 0"> 0 </b>
+
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
                       <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
                       <b class="" *ngIf="allorder.expressdeliverycharges">{{allorder.expressdeliverycharges}}</b>
-                      <b class="" *ngIf="allorder.expressdeliverycharges === null || allorder.expressdeliverycharges == ''"> - </b>
+                      <b class="" *ngIf="allorder.expressdeliverycharges === null"> - </b>
+                      <b class="" *ngIf="allorder.expressdeliverycharges == 0"> 0 </b>
                     </div>
 
                     <div class="col-4 right pdright-20">
                       <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
                       <b class="" *ngIf="allorder.advance_amount">{{allorder.advance_amount}}</b>
-                      <b class="" *ngIf="allorder.advance_amount === null || allorder.advance_amount == ''"> - </b>
+                      <b class="" *ngIf="allorder.advance_amount === null"> - </b>
+                      <b class="" *ngIf="allorder.advance_amount == 0"> 0 </b>
                     </div>
                   </div>
 
@@ -1132,7 +1144,9 @@
                     <div class="col-sm-6  col-md-6  col-lg-6 right">
                       <p class="td-label mgbottom-0">Empty Cans</p>
                       <b class="" *ngIf="complete.empty_cans">{{complete.empty_cans}}</b>
-                      <b class="" *ngIf="complete.empty_cans === null || complete.empty_cans == ''"> - </b>
+                      <b class="" *ngIf="complete.empty_cans === null"> - </b>
+                      <b class="" *ngIf="complete.empty_cans == 0"> 0 </b>
+
                     </div>
                   </div>
 
@@ -1146,18 +1160,23 @@
                       <p class="td-label mgbottom-0" title="Service Charges">Serv Chgs</p>
                       <b class="" *ngIf="complete.servicecharges">{{complete.servicecharges}}</b>
                       <b class="" *ngIf="complete.servicecharges === null"> - </b>
+                      <b class="" *ngIf="complete.servicecharges == 0"> 0 </b>
                     </div>
 
                     <div class="col-sm-3  col-md-3  col-lg-3">
                       <p class="td-label mgbottom-0" title="Express Delivery Charges">Exp Chgs</p>
                       <b class="" *ngIf="complete.expressdeliverycharges">{{complete.expressdeliverycharges}}</b>
-                      <b class="" *ngIf="complete.expressdeliverycharges === null || complete.expressdeliverycharges == ''"> - </b>
+                      <b class="" *ngIf="complete.expressdeliverycharges === null"> - </b>
+                      <b class="" *ngIf="complete.expressdeliverycharges == 0"> 0 </b>
+
                     </div>
 
                     <div class="col-4 right pdright-20">
                       <p class="td-label mgbottom-0" title="Empty Cans Amount">Emp Cans Amt</p>
                       <b class="" *ngIf="complete.advance_amount">{{complete.advance_amount}}</b>
-                      <b class="" *ngIf="complete.advance_amount === null || complete.advance_amount == ''"> - </b>
+                      <b class="" *ngIf="complete.advance_amount === null"> - </b>
+                      <b class="" *ngIf="complete.advance_amount == 0"> 0 </b>
+
                     </div>
                   </div>
 
