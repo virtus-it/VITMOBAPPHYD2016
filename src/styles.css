@@ -109,7 +109,7 @@ table thead {
     margin-bottom: 0px;
   }
   .mgbottom-5{
-    margin-bottom: 5px;
+    margin-bottom: 5px !important;
   }
   a{
     color: var( --logo-color);
@@ -1120,6 +1120,9 @@ overflow-x: auto;
 }
 .mgright-15{
 margin-right: 15px;
+}
+.firstLetterCap::first-letter{
+  text-transform: uppercase;
 }
   /* @media (min-width: 1200px){
     .customerSchList-height{

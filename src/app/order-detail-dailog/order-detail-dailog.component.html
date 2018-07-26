@@ -40,9 +40,9 @@
           <div class="d-flex justify-content-between mgtop-5">
             <small class="gray" id="name">
               <b>Id: </b> #{{dailogOrderDetails.order_id}}</small>
-            <small class=" capitalize gray6" [ngClass]="dailogOrderDetails.StatusColor">
+            <small class=" capitalize">
               <b>Status: </b>
-              <span class="warning"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
+              <span  [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
             </small>
             <small class="gray">
               <b>Delivery Date: </b> {{dailogOrderDetails.delivery_exceptedtime}} </small>
@@ -242,7 +242,7 @@
       <div class="col-lg-3 col-md-3 col-sm-6 col-xs-6">
         <div class="container-fluid">
 
-          <div class="row  mgtop-10">
+          <div class="row  ">
             <ul class="timeline">
               <li>
                 <div class="timeline-badge">
@@ -392,7 +392,23 @@
             </div>
 
             <div class="templ" *ngIf="notificationHistory">
-              <table class="table table-hover table-fixedheader ">
+              <div class="container-fluid messages-style"  *ngFor="let history of notificationHistory">
+                <div class="row">
+                      <div class="col"> 
+                        <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname" ><i aria-hidden="true" class="fa fa-reply rotate-180"></i> {{history.notificationsendedby.fullname}}</small>
+                        <small *ngIf="!history.notificationsendedby" > - </small>
+                      </div>
+  
+                      <div class="col"> 
+                          <small class="gray9">{{history.createddate | utcDate}}</small>
+                      </div>
+                    </div>
+                      <div class=""> 
+                          <small *ngIf="history.message" class="firstLetterCap" title="{{history.message}}">{{history.message}}</small>
+                        <small *ngIf="!history.message"> - </small>
+                      </div>
+              </div>
+              <!-- <table class="table table-hover table-fixedheader ">
                 <thead>
                   <tr>
                     <th width="14%">
@@ -423,7 +439,7 @@
                     </td>
                   </tr>
                 </tbody>
-              </table>
+              </table> -->
             </div>
 
 
