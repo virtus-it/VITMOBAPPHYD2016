@@ -189,9 +189,16 @@
     Empty cans must be less than quantity
   </small>
 </span>
+
+<span class="red" *ngIf="quantityError">
+  <small>
+    Quantity must be greater than empty cans
+  </small>
+</span>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true" (click)="updateOrderStatus()">UPDATE</button>
+    <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true && quantityError == true" (click)="updateOrderStatus()">UPDATE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

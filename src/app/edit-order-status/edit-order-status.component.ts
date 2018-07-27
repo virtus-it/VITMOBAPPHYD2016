@@ -21,6 +21,7 @@ export class EditOrderStatusComponent implements OnInit {
   advanceAmount = 0;
   emptyCansError = false;
   emptyCansValidate = false;
+  quantityError = false;
 
 
   editStatusInput: any = {
@@ -143,10 +144,21 @@ export class EditOrderStatusComponent implements OnInit {
 
 
     this.orderDetail.delivered_quantity = data;
-    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.advanceAmount = ((this.orderDetail.delivered_quantity - this.editStatusInput.order.return_cans) * 150 );
     this.editStatusInput.order.adv_amt = this.advanceAmount;
 
-    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
+    // this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
+    this.editStatusInput.order.adv_amt = this.advanceAmount;
+
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
+    if(this.orderDetail.delivered_quantity < this.editStatusInput.order.return_cans){
+      this.quantityError = true;
+      this.emptyCansError = false;
+      // this.emptyCansValidate = false;
+    }
+    else{
+      this.quantityError = false;
+    }
 
   }
 
@@ -176,14 +188,17 @@ export class EditOrderStatusComponent implements OnInit {
     this.advanceAmount = ((this.orderDetail.delivered_quantity - this.emptyCans) * 150 );
     this.editStatusInput.order.adv_amt = this.advanceAmount;
 
-    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.editStatusInput.order.delivered_qty * this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
+    this.editStatusInput.order.bill_amount = (this.editStatusInput.order.delivered_qty * this.orderDetail.prod_cost) + (this.orderDetail.servicecharges) + this.orderDetail.expressdeliverycharges + (this.advanceAmount);
     if(this.emptyCans > this.editStatusInput.order.delivered_qty){
       this.emptyCansError = true;
       this.emptyCansValidate = true;
+      this.quantityError = false;
+
     }
     else{
       this.emptyCansError = false;
       this.emptyCansValidate = false;
+      
       
     }
 

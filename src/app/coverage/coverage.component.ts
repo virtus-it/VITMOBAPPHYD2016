@@ -35,6 +35,7 @@ export class CoverageComponent implements OnInit {
   distributorProdDetails:any = [];
   listOfDistributors: any = [];
   distributors:any = [];
+  allDistributors:any = [];
   dialogRef: any = '';
   stockpoints:any = [];
   order = { orderId: '' };
@@ -575,9 +576,49 @@ export class CoverageComponent implements OnInit {
     
   }
 
+
+  getDistributors() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 1000 }};
+    this.distributorService.getAllDistributors(input)
+    .subscribe(
+        output => this.getDistributorsResult(output),
+        error => {
+            //console.log("error in distrbutors");
+            this.loaderService.display(false);
+        });
+}
+getDistributorsResult(data) {
+    if (data.result == 'success') {
+        this.allDistributors = data.data;
+    }
+}
+
+clickonMarker(data, event){
+  console.log(data);
+  let distributorUserId = '';
+       distributorUserId = data.userid;
+       this.listOfDistributors = [];
+       let findDistributor = _.find(this.allDistributors , function( i , j){
+         let details:any = i;
+         return details.userid == distributorUserId
+       });
+       let distDetails:any = [];
+       let distObject = {"distributorName" :"" , "mobileno":"" , "user_id":"" , "type":"stockpoints"};
+       if(findDistributor){
+         distDetails = findDistributor;
+         distObject.distributorName = distDetails.firstname;
+         distObject.mobileno = distDetails.mobileno;
+         distObject.user_id = distDetails.userid;
+         this.listOfDistributors.push(distObject);
+       }
+      
+    }
+
   ngOnInit() {
     this.getPolygonDistributors();
     this.getProductByCategory();
+    this.getDistributors();
+
     // if(this.tabPanelView == 'products'){
 
     // }

@@ -118,9 +118,10 @@ export class LoginComponent implements OnInit {
     let input = {
       root: {
         userid: this.authenticationService.loggedInUserId(),
-        usertype: 'dealer',
+        usertype: this.authenticationService.userType(),
         loginid: this.authenticationService.loggedInUserId(),
         lastuserid: null,
+        "transtype":"getalldistributors" , 
         apptype: this.authenticationService.appType(),
         pagesize: 1000
       }
@@ -128,7 +129,8 @@ export class LoginComponent implements OnInit {
 
     this.distributors = [];
 
-    this.distributorService.getAllDistributors(input).subscribe(
+    this.distributorService.getAllDistributors(input)
+    .subscribe(
       output => this.getDistributorsResult(output),
       error => {
         //console.log("error in distrbutors");
