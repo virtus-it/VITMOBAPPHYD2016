@@ -119,6 +119,15 @@ export class AddEditUserComponent implements OnInit {
     emailid: '',
   };
 
+  salesteamInput = {
+    firstName: '',
+    lastName: '',
+    phone: '',
+    mobile1: '',
+    mobile2: '',
+    address: '',
+    emailid: '',
+  };
 
 
   areaList = [];
@@ -189,6 +198,9 @@ export class AddEditUserComponent implements OnInit {
       else if(this.UserInput.usertype == 'Customercare'){
         this.UpdateCustomerCare();
       }
+      else if(this.UserInput.usertype == 'salesteam'){
+        this.updateSalesTeam();
+      }
     }
      else {
       if (this.UserInput.usertype == 'Customer') {
@@ -210,6 +222,9 @@ export class AddEditUserComponent implements OnInit {
       }
       else if(this.UserInput.usertype == 'Supersupplier'){
         this.addSuperSupplier();
+      }
+      else if(this.UserInput.usertype == 'salesteam'){
+        this.addSalesteam();
       }
     }
   }
@@ -248,6 +263,38 @@ export class AddEditUserComponent implements OnInit {
     }
   }
 
+  addSalesteam() {
+    let input = {
+      User: {
+        pwd: this.salesteamInput.phone,
+        user_type: 'salesteam',
+        TransType: 'create',
+        firstname: this.salesteamInput.firstName,
+        lastname: this.salesteamInput.lastName,
+        address: this.salesteamInput.address,
+        loginid: this.authenticationService.loggedInUserId(),
+        mobileno: this.salesteamInput.phone,
+        mobileno_one: this.salesteamInput.mobile1,
+        mobileno_two: this.salesteamInput.mobile2,
+        emailid: this.salesteamInput.emailid,
+        apptype: this.authenticationService.appType()
+      }
+    };
+    if(this.customerCareValidation()){
+    this.distributorService.createDistributor(input)
+    .subscribe(
+      output => this.addSalesteamResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      }
+    );
+  }
+}
+addSalesteamResult(result) {
+    if (result.result == 'success') {
+      this.thisDialogRef.close('success');
+    }
+  }
 
 
   addSuperSupplier(){
@@ -600,7 +647,6 @@ export class AddEditUserComponent implements OnInit {
       this.marketingInput.referCode = this.Details.reference_code;
     }
     else if(this.Details.usertype == 'customercare'){
-
       this.customerCareInput.firstName = this.Details.firstname;
       this.customerCareInput.lastName = this.Details.lastname;
       this.customerCareInput.phone = this.Details.mobileno;
@@ -616,6 +662,15 @@ export class AddEditUserComponent implements OnInit {
       this.superSupplierInput.address = this.Details.address;
       this.superSupplierInput.emailid = this.Details.emailid;
       this.superSupplierInput.lastname = this.Details.lastname;
+    }
+    else if(this.Details.usertype == 'salesteam'){
+      this.salesteamInput.firstName = this.Details.firstname;
+      this.salesteamInput.lastName = this.Details.lastname;
+      this.salesteamInput.phone = this.Details.mobileno;
+      this.salesteamInput.mobile1 = this.Details.mobileno_one;
+      this.salesteamInput.mobile2 = this.Details.mobileno_two;
+      this.salesteamInput.address = this.Details.address;
+      this.salesteamInput.emailid = this.Details.emailid;
     }
   }
 
@@ -770,27 +825,54 @@ export class AddEditUserComponent implements OnInit {
   }
 
 
-  UpdateCustomerCare(){
+  updateSalesTeam(){
 
     let input: any = {
-      User: {userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname : this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1 , mobileno_two : this.customerCareInput.mobile2}};
+      User: {userid: this.Details.userid, firstname: this.salesteamInput.firstName, lastname : this.salesteamInput.lastName, mobileno: this.salesteamInput.phone, address: this.salesteamInput.address, emailid: this.salesteamInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.salesteamInput.mobile1 , mobileno_two : this.salesteamInput.mobile2}};
       console.log(input);
       if(this.customerCareValidation()){
       this.distributorService.updateDistributor(input)
       .subscribe(
-        output => this.UpdateCustomerCareResult(output),
+        output => this.updateSalesTeamResult(output),
         error => {
           //console.log("error in distrbutors");
         });
      }
     }
-     UpdateCustomerCareResult(result){
+    updateSalesTeamResult(result){
        if(result.result == 'success'){
-        console.log('customer care updated successfully');
+        console.log('salesteam updated successfully');
         this.thisDialogRef.close('success');
         this.getUserDetails();
        }
      }
+
+
+     UpdateCustomerCare(){
+
+      let input: any = {
+        User: {userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname : this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1 , mobileno_two : this.customerCareInput.mobile2}};
+        console.log(input);
+        if(this.customerCareValidation()){
+        this.distributorService.updateDistributor(input)
+        .subscribe(
+          output => this.UpdateCustomerCareResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          });
+       }
+      }
+       UpdateCustomerCareResult(result){
+         if(result.result == 'success'){
+          console.log('customer care updated successfully');
+          this.thisDialogRef.close('success');
+          this.getUserDetails();
+         }
+       }
+
+
+
+     
 
 
   UpdateSupplier() {
@@ -1053,6 +1135,47 @@ export class AddEditUserComponent implements OnInit {
 
 
 
+  salesTeamValidation(){
+
+    var validate : string = '1';
+    switch(validate){
+        case "1" : {
+          if(!this.salesteamInput.address){
+            this.validateMessage = 'Enter Address';
+            this.messageError = '';
+          }
+    }
+        case '2' : {
+          if(!this.salesteamInput.phone){
+            this.validateMessage = 'Enter Mobile number';
+            this.messageError = '';
+          }   
+    }
+        case '3' : {
+          if(!this.salesteamInput.lastName){
+            this.validateMessage = "Enter lastname";
+            this.messageError = '';
+        }  
+    }
+        case '4' : {
+          if(!this.salesteamInput.firstName){
+            this.validateMessage = "Enter first name";
+            this.messageError = '';
+        }
+    }
+     
+      case '5' : {
+        if(this.salesteamInput.firstName && this.salesteamInput.lastName && this.salesteamInput.phone && this.salesteamInput.address ){
+          this.validateMessage = '';
+          return true;
+        }
+      }
+}
+
+  }
+
+
+
 
 
   supersupplierValidation(){
@@ -1129,6 +1252,9 @@ export class AddEditUserComponent implements OnInit {
       }
       else if(this.Details.usertype == 'supersupplier'){
         this.UserInput.usertype = 'Supersupplier';
+      }
+      else if(this.Details.usertype == 'salesteam'){
+        this.UserInput.usertype = 'salesteam';
       }
       
 

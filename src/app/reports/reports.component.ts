@@ -11,8 +11,9 @@ import { CustomerService } from '../customer/customer.service';
 import { LoaderService } from '../login/loader.service';
 import { Observable } from 'rxjs/Observable';
 import { InvoicedetailsComponent } from '../invoicedetails/invoicedetails.component';
-import { SupplierService} from '../supplier/supplier.service';
+import { SupplierService } from '../supplier/supplier.service';
 import { InvoiceHistoryComponent } from '../invoice-history/invoice-history.component';
+import { ProductsService } from '../products/products.service';
 import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
 
 
@@ -30,8 +31,11 @@ export class ReportsComponent implements OnInit {
   filteredDistributors: Observable<any[]>;
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
+  CategoryCtrl: FormControl;
+  filteredcategories: Observable<any[]>;
 
-  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService,private supplierservice :SupplierService,  private customerService: CustomerService) {
+
+  constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private productService: ProductsService, private supplierservice: SupplierService, private customerService: CustomerService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
@@ -40,10 +44,14 @@ export class ReportsComponent implements OnInit {
     this.filteredcustomer = this.customerCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findCustomers(dist) : this.customerList.slice());
-      this.SupplierCtrl = new FormControl();
-      this.filteredSupplier = this.SupplierCtrl.valueChanges
-        .startWith(null)
-        .map(supplier =>supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+    this.SupplierCtrl = new FormControl();
+    this.filteredSupplier = this.SupplierCtrl.valueChanges
+      .startWith(null)
+      .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+    this.CategoryCtrl = new FormControl();
+    this.filteredcategories = this.CategoryCtrl.valueChanges
+      .startWith(null)
+      .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
 
 
 
@@ -52,10 +60,10 @@ export class ReportsComponent implements OnInit {
     reportType: "", days: null, lastId: "0", pagesize: 100, appType: this.authenticationService.appType
       ()
   };
-  distOrders = {getDate: null};
-  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "" , supplierId :"" , supplierEmail: '' };
+  distOrders = { getDate: null };
+  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' };
 
-  stockreportsInput = {filterBy: 'distributor' , fromDate: null, toDate: null, distributorId: '' , filterId: "0" , distributorEmail:""};
+  stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "" };
 
   reportsClickMore: boolean = false;
   reportsInput: any = {};
@@ -63,6 +71,8 @@ export class ReportsComponent implements OnInit {
   customerList = [];
   supplierList = [];
   distributors: any = [];
+  categoryList:any = [];
+  categoryid:any = '';
   tabPanelView = 'newlydownloaded';
   superDealer = true;
   customerCare = true;
@@ -75,7 +85,7 @@ export class ReportsComponent implements OnInit {
     { value: 'rejectedorders', viewValue: 'Rejected Orders', issuperDelear: this.superDealer },
     { value: 'notregistered', viewValue: 'Customers not Registered', issuperDelear: this.superDealer },
     { value: 'orderdownload', viewValue: 'Order Downloads', issuperDelear: true },
-    { value:"distributorsorders" ,  viewValue:"Distributors Orders" , issuperDelear : this.superDealer}
+    { value: "distributorsorders", viewValue: "Distributors Orders", issuperDelear: this.superDealer }
   ];
 
   searchReports(firstCall, Rtype) {
@@ -110,11 +120,11 @@ export class ReportsComponent implements OnInit {
     }
     this.reportservice.searchReports(input)
       .subscribe(
-      output => this.searchReportsResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.searchReportsResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
   }
   searchReportsResult(result) {
     this.loaderService.display(false);
@@ -149,73 +159,74 @@ export class ReportsComponent implements OnInit {
 
 
     }
-  
+
     return finalsupplier;
   }
 
-  getSupplierList(){
-    let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
+  getSupplierList() {
+    let input = { "userId": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
     this.supplierservice.supplierList(input)
-    .subscribe(
-    output => this.getSupplierListResult(output),
-    error => {
-      this.loaderService.display(false);
-    });
+      .subscribe(
+        output => this.getSupplierListResult(output),
+        error => {
+          this.loaderService.display(false);
+        });
   }
   getSupplierListResult(result) {
     //console.log(result);
     if (result.result == "success") {
       this.supplierList = result.data;
-     
+
     }
   }
 
 
 
-  searchDistributorsOrders(){
+  searchDistributorsOrders() {
     this.tabPanelView = 'distributorsorders';
     let input = {
-      root:{"userid":this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(),"transtype":'distributorsdetails'}};
-      console.log(input);
-      this.reportservice.searchReports(input)
-        .subscribe(
+      root: { "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "transtype": 'distributorsdetails' }
+    };
+    console.log(input);
+    this.reportservice.searchReports(input)
+      .subscribe(
         output => this.searchDistributorOrdersResult(output),
         error => {
           //console.log("error");
           this.loaderService.display(false);
         });
   }
-  searchDistributorOrdersResult(result){
-    if(result.result == 'success'){
+  searchDistributorOrdersResult(result) {
+    if (result.result == 'success') {
       this.distributorsorderData = result.data;
     }
 
 
   }
 
-  filterReports(){
-    let input = {"root":{"userid":this.authenticationService.loggedInUserId() ,"date":this.distOrders.getDate,"apptype":this.authenticationService.appType(),"transtype":"distributorsdetails","devicetype":"","moyaversioncode":""}};
+  filterReports() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "date": this.distOrders.getDate, "apptype": this.authenticationService.appType(), "transtype": "distributorsdetails", "devicetype": "", "moyaversioncode": "" } };
     console.log(input);
     input.root.date = moment(this.distOrders.getDate).format('YYYY-MM-DD 00:00:00');
     this.reportservice.searchReports(input)
-    .subscribe( 
-    output => this.filterReportsResult(output),
-    error => {
-      //console.log("error");
-      this.loaderService.display(false);
-    });
+      .subscribe(
+        output => this.filterReportsResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
   }
-  filterReportsResult(result){
-    if(result.result == 'success'){
+  filterReportsResult(result) {
+    if (result.result == 'success') {
       this.distributorsorderData = result.data;
     }
-    else{
+    else {
       this.distributorsorderData = [];
     }
   }
 
   downloadOrders() {
-    
+
     let input = {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
@@ -241,11 +252,11 @@ export class ReportsComponent implements OnInit {
     //console.log(input);
     this.reportservice.downloadReports(input)
       .subscribe(
-      output => this.downloadOrdersResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.downloadOrdersResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
 
   }
   downloadOrdersResult(result) {
@@ -254,11 +265,11 @@ export class ReportsComponent implements OnInit {
       let path = result.data.filename;
       this.customerService.getFile(path)
         .subscribe(
-        output => this.getFileResult(output),
-        error => {
-          //console.log("error in customer");
-          this.loaderService.display(false);
-        });
+          output => this.getFileResult(output),
+          error => {
+            //console.log("error in customer");
+            this.loaderService.display(false);
+          });
 
     }
 
@@ -270,8 +281,8 @@ export class ReportsComponent implements OnInit {
 
 
 
-  downloadStockReports(){
-    let input = {order: {userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0,customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy , "transtype":"stockreports"}};
+  downloadStockReports() {
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports" } };
 
     if (this.stockreportsInput.fromDate) {
       input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
@@ -282,13 +293,17 @@ export class ReportsComponent implements OnInit {
     if (this.stockreportsInput.filterBy == 'distributor') {
       input.order.filterid = this.stockreportsInput.distributorId;
     }
+    if(this.stockreportsInput.filterBy == 'category'){
+  input.order.filterid = this.categoryid;
+    }
+    console.log(input , 'download input');
     this.reportservice.downloadReports(input)
       .subscribe(
-      output => this.downloadStockReportsResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.downloadStockReportsResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
 
   }
   downloadStockReportsResult(result) {
@@ -297,11 +312,11 @@ export class ReportsComponent implements OnInit {
       let path = result.data.filename;
       this.customerService.getFile(path)
         .subscribe(
-        output => this.getstockReportFileResult(output),
-        error => {
-          //console.log("error in customer");
-          this.loaderService.display(false);
-        });
+          output => this.getstockReportFileResult(output),
+          error => {
+            //console.log("error in customer");
+            this.loaderService.display(false);
+          });
 
     }
 
@@ -312,9 +327,9 @@ export class ReportsComponent implements OnInit {
 
 
 
-  printStockReports(){
+  printStockReports() {
 
-    let input = {order: {userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0,customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy , "transtype":"stockreports" , emailid :""}};
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports", emailid: "" } };
 
 
     if (this.stockreportsInput.fromDate) {
@@ -328,54 +343,58 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.stockreportsInput.distributorId;
       input.order.emailid = this.stockreportsInput.distributorEmail;
     }
+    if(this.stockreportsInput.filterBy == 'category'){
+      input.order.filterid = this.categoryid;
+    }
 
-    //console.log(input);
+    this.loaderService.display(true);
+    console.log(input , 'print input');
     this.reportservice.printInvoice(input)
       .subscribe(
-      output => this.printStockReportsResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.printStockReportsResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
     // 
 
 
   }
   printStockReportsResult(result) {
-    
-    if(result.result == 'success'){
+
+    if (result.result == 'success') {
       let path = result.data.filename;
-     
+
       this.customerService.getPrintFile(path)
         .subscribe(
-        output => this.printStockReportsResultResult(output),
-        error => {
-          //console.log("error in customer");
-          this.loaderService.display(false);
-        });
+          output => this.printStockReportsResultResult(output),
+          error => {
+            //console.log("error in customer");
+            this.loaderService.display(false);
+          });
     }
   }
-  printStockReportsResultResult(result){
+  printStockReportsResultResult(result) {
     //console.log(result);
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
     iframe.src = URL.createObjectURL(result);
-
     document.body.appendChild(iframe);
     iframe.contentWindow.print();
+    this.loaderService.display(false);
 
-    
+
 
   }
   getCustomer() {
     let input = { root: { "apptype": this.authenticationService.appType(), userid: this.authenticationService.loggedInUserId(), usertype: this.authenticationService.userType(), loginid: this.authenticationService.loggedInUserId(), transtype: "getcustomer" } };
     this.reportservice.getCustomer(input)
       .subscribe(
-      output => this.getCusotmerResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.getCusotmerResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
 
   }
   getCusotmerResult(result) {
@@ -423,7 +442,7 @@ export class ReportsComponent implements OnInit {
   //InVoice Dialog box
 
   showInvoice(data) {
-    
+
     let dialogRefdeleteSupplier = this.dialog.open(InvoicedetailsComponent, {
       width: '700px',
       data: data
@@ -436,7 +455,7 @@ export class ReportsComponent implements OnInit {
       }
     });
   }
-  
+
   invoiceHistory() {
     let details = this.downloadInput;
     let dialogRefdeleteSupplier = this.dialog.open(InvoiceHistoryComponent, {
@@ -509,11 +528,11 @@ export class ReportsComponent implements OnInit {
     this.loaderService.display(true);
     this.distributorService.getAllDistributors(input)
       .subscribe(
-      output => this.getDistributorsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      });
+        output => this.getDistributorsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
   }
   getDistributorsResult(data) {
     //console.log(data);
@@ -597,30 +616,30 @@ export class ReportsComponent implements OnInit {
     //console.log(input);
     this.reportservice.printInvoice(input)
       .subscribe(
-      output => this.printFileResult(output),
-      error => {
-        //console.log("error");
-        this.loaderService.display(false);
-      });
+        output => this.printFileResult(output),
+        error => {
+          //console.log("error");
+          this.loaderService.display(false);
+        });
     // 
 
 
   }
   printFileResult(result) {
-    
-    if(result.result == 'success'){
+
+    if (result.result == 'success') {
       let path = result.data.filename;
-     
+
       this.customerService.getPrintFile(path)
         .subscribe(
-        output => this.printgetFileResult(output),
-        error => {
-          //console.log("error in customer");
-          this.loaderService.display(false);
-        });
+          output => this.printgetFileResult(output),
+          error => {
+            //console.log("error in customer");
+            this.loaderService.display(false);
+          });
     }
   }
-  printgetFileResult(result){
+  printgetFileResult(result) {
     //console.log(result);
     const iframe = document.createElement('iframe');
     iframe.style.display = 'none';
@@ -631,19 +650,64 @@ export class ReportsComponent implements OnInit {
 
   }
 
-  sendNotification(data){
-    let formattedInput = {"type":"notificationfromReports" , data: data};
+  sendNotification(data) {
+    let formattedInput = { "type": "notificationfromReports", data: data };
     let dialogRefeditStatus = this.dialog.open(QuickNotificationComponent, {
       width: '60%',
       data: formattedInput
-  });
-  dialogRefeditStatus.afterClosed().subscribe(result => {
+    });
+    dialogRefeditStatus.afterClosed().subscribe(result => {
       ////console.log(`Dialog closed: ${result}`);
       if (result) {
-          // this.notificationDetails.templatename = result.User.tempname;
+        // this.notificationDetails.templatename = result.User.tempname;
       }
 
-  });
+    });
+  }
+
+  findCategories(name: string) {
+    let finalCategories:any = [];
+    finalCategories = this.categoryList.filter(cat =>
+       cat.category.toLowerCase().indexOf(name.toLowerCase()) === 0);
+     
+   if (finalCategories && finalCategories.length > 0) {
+     let findCategory: any = {};
+
+     findCategory = _.find(finalCategories, function (k, l) {
+       let catDetails: any = k;
+       return catDetails.category == name;
+     });
+
+     if (findCategory) {
+       this.categoryid = findCategory.categoryid;
+      //  this.filterTypeModel.categoryname = findCategory.category;
+     }
+   }
+   else {
+     if (name.length >= 3 && !this.LastfilterRecords) {       
+this.getProductByCategory();
+     }
+   }
+   return finalCategories;
+   }
+
+   getProductByCategory(){
+    let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+    this.productService.getProductsCategory(input)
+    .subscribe(
+    output => this.getProductsCategoryResult(output),
+    error => {
+      //console.log("error in products category list");
+    });
+  }
+  getProductsCategoryResult(result){
+    //console.log(result);
+    if (result.result == "success") {
+      this.categoryList = result.data;
+    }
+    else{
+        this.LastfilterRecords = true;
+    }
   }
 
 
@@ -652,6 +716,7 @@ export class ReportsComponent implements OnInit {
     this.getCustomer();
     this.getDistributors();
     this.getSupplierList();
+    this.getProductByCategory();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
     if (!this.superDealer || !this.customerCare) {

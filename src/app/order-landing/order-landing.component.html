@@ -491,7 +491,7 @@
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
                       <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer' && forward.customer ">{{forward.customer.suppliercode}}</b>
-                      <b class="" *ngIf="forward.customer.suppliercode === null"> - </b>
+                      <b class="" *ngIf="!forward.customer.suppliercode"> - </b>
                     </div>
                   </div>
                   <div class="row form-group">
@@ -601,6 +601,8 @@
                     <button class="btn red btn-link btn-sm" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
@@ -860,7 +862,9 @@
                     <div class="col-sm-5  col-md-5  col-lg-5 right">
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
-                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer'">{{allorder.customer.suppliercode}}</b>
+                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer' && allorder.customer">{{allorder.customer.suppliercode}}</b>
+                    <b class="capitalize" *ngIf="!allorder.customer.suppliercode"> - </b>
+
                     </div>
                   </div>
                   <div class=" row form-group">
@@ -939,6 +943,9 @@
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
+
+                                <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b> 
+
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
@@ -1317,6 +1324,8 @@
                     <button class="btn red btn-link btn-sm" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept') && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0) "
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>

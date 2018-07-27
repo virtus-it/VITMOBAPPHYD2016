@@ -450,9 +450,9 @@ export class OrderLandingComponent implements OnInit {
     let forwardInput = this.orderListInput;
     //console.log(forwardInput);
     this.loaderService.display(true);
-    if(this.authenticationService.userType() == 'customercare'){
-      forwardInput.order.userid = this.superDealerId;
-    }
+    // if(this.authenticationService.userType() == 'customercare'){
+    //   forwardInput.order.userid = this.superDealerId;
+    // }
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(
       output => this.getForwardOrderDetailsResult(output),
@@ -494,9 +494,9 @@ export class OrderLandingComponent implements OnInit {
     }
     let orderInput = this.orderListInput;
     this.loaderService.display(true);
-    if(this.authenticationService.userType() == 'customercare'){
-      orderInput.order.userid = this.superDealerId;
-    }
+    // if(this.authenticationService.userType() == 'customercare'){
+    //   orderInput.order.userid = this.superDealerId;
+    // }
     this.orderLandingService.getOrderList(orderInput)
       .subscribe(
       output => this.getAllOrderDetailsResult(output),
@@ -975,9 +975,9 @@ export class OrderLandingComponent implements OnInit {
     }
   this.showFilterDailog =false;
 let input = this.globalFilterInput;
-if(this.authenticationService.userType() == 'customercare'){
-  input.order.userid = this.superDealerId;
-}
+// if(this.authenticationService.userType() == 'customercare'){
+//   input.order.userid = this.superDealerId;
+// }
 AuthenticationService.showLog("Search Input");
 AuthenticationService.showLog(JSON.stringify(input));
 this.orderLandingService.getOrdersByfilter(input)

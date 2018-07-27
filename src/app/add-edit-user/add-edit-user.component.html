@@ -23,6 +23,7 @@
           <md-option value="Marketing" *ngIf="UserType == 'dealer'">Marketing</md-option>
           <md-option value="Customercare" *ngIf="UserType == 'dealer'">Customer care</md-option>
           <md-option value="Supersupplier" *ngIf="UserType == 'dealer'">Super Supplier</md-option>
+          <md-option value="salesteam" *ngIf="UserType == 'dealer'">Sales Team</md-option>
         </md-select>
       </div>
     </div>
@@ -931,6 +932,104 @@
 
 
   <!-- ccEnds here -->
+
+
+  <!-- sales team starts here -->
+
+  <md-dialog-content layout="column" *ngIf="UserInput.usertype == 'salesteam'">
+    <form class="example-form">
+      <div class="container-fluid pd-15x25 brd-bottom">
+        <div class="row mg-btm-14">
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <md-form-field class="example-full-width wd-100pc">
+              <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="salesteamInput.firstName">
+              <md-error *ngIf="firstFormControl.hasError('required')">
+                First Name is
+                <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <div class=" form-group pdright-20">
+              <md-form-field class="example-full-width wd-100pc">
+                <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="salesteamInput.lastName">
+                <md-error *ngIf="lastFormControl.hasError('required')">
+                  Last Name is
+                  <strong>required</strong>
+                </md-error>
+              </md-form-field>
+            </div>
+          </div>
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="salesteamInput.phone">
+  
+              <md-error *ngIf="phoneFormControl.hasError('required')">
+                Phone Number is
+                <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+          <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="salesteamInput.phone">
+            </md-form-field>
+  
+          </div>
+        </div>
+  
+        <div class="row">
+  
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="salesteamInput.mobile1">
+            </md-form-field>
+  
+          </div>
+  
+  
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="salesteamInput.mobile2">
+            </md-form-field>
+  
+          </div>
+  
+  
+  
+          <div class="col-md-4  col-sm-4  col-lg-4">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="salesteamInput.emailid">
+            </md-form-field>
+          </div>
+  
+  
+  
+  
+  
+        </div>
+  
+  
+       
+        <div class="row mg-btm-21">
+          <div class="col-md-12  col-sm-12  col-lg-12">
+            <md-form-field class="example-full-width wd-100pc">
+              <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="salesteamInput.address">
+              <md-error *ngIf="addressFormControl.hasError('required')">
+                Address is
+                <strong>required</strong>
+              </md-error>
+            </md-form-field>
+          </div>
+  
+  
+        </div>
+      </div>
+      
+    </form>
+  </md-dialog-content>
+
+  <!-- sales team ends here-->
 
 
   <!-- Super supplier starts -->

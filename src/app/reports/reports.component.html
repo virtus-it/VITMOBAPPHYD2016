@@ -617,14 +617,15 @@
             <h3>Stock Report</h3>
           </div>
           <div class="row form-group">
-            <div class="col-sm-6  col-md-6  col-lg-6">
+            <div class="col-sm-4  col-md-4  col-lg-4">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">
                 <md-option value="distributor">Distributors</md-option>
+                <md-option value="category">Category</md-option>
               </md-select>
 
             </div>
 
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="stockreportsInput.filterBy == 'distributor'">
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'distributor'">
 
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
@@ -634,6 +635,19 @@
                   </md-option>
                 </md-autocomplete>
               </md-form-field>
+            </div>
+
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category'">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
+                    <span> {{cat.category}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+
             </div>
 
 
