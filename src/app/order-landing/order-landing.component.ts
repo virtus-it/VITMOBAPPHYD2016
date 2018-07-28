@@ -50,6 +50,7 @@ export class OrderLandingComponent implements OnInit {
   filteredSupplier: Observable<any[]>;
   superDealer = true;
   customerCare = true;
+  salesTeamLogin = true;
   SupplierOrderList=[];
   ordersClickMore = true;
   followUpResultStatus:any = "";
@@ -1736,6 +1737,7 @@ this.orderLandingService.getOrdersByfilter(input)
    
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     if(!this.superDealer){
 this.tabPanelView = 'allorder';
 this.getAllOrderDetails(true);

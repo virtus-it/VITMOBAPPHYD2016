@@ -15,6 +15,7 @@ export class AuthenticationService {
   salesLogin = true;
   // manufacturerLogin = true;
   customerCareLogin = true;
+  salesTeamLogin:any = true;
   CurrentSession: any = {};
   dashBoardDetails: any = {};
   polygons: any = {};
@@ -44,6 +45,7 @@ export class AuthenticationService {
     //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     this.salesLogin = this.newSalesFunction();
     this.customerCareLogin = this.customerCareLoginFunction()
+    this.salesTeamLogin = this.salesTeamLoginFunction();
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({
@@ -84,6 +86,20 @@ export class AuthenticationService {
   customerCareLoginFunction = function() {
     try {
       if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'customercare')){
+      return true;
+    }
+    else{
+      return false;
+    }
+    }
+    catch(ex){
+      return false;
+    }
+  }
+
+  salesTeamLoginFunction = function() {
+    try {
+      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'salesteam')){
       return true;
     }
     else{

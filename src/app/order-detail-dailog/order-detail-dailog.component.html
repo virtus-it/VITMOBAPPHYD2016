@@ -19,10 +19,9 @@
               <i class="fa fa-file-text-o"></i> Order Details</b>
             <b class="logo-color" (click)="assignOrder(this.orderDetail)" *ngIf="dailogOrderDetails.status == 'not_broadcasted' || dailogOrderDetails.status == 'backtodealer' || dailogOrderDetails.status == 'assigned'" >
               <i class="fa fa-reply-all logo-color"></i> Assign Order</b>
-            <span class="ml-auto p-0 mgright-15  logo-color">
+            <span class="ml-auto p-0 mgright-15  logo-color" *ngIf="dailogOrderDetails.status != 'delivered'">
               <b class="float-right fs-12" (click)="editQuantity(dailogOrderDetails)">
                 <i class="fa fa-edit" aria-hidden="true"> </i> Edit Quantity</b>
-              <!--  -->
             </span>
             <span class="mgright-15 logo-color" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
               <!-- <i class="fa fa-hand-paper-o logo-color" aria-hidden="true"
@@ -389,7 +388,7 @@
             <!-- <div class="col">
   <button class="mat-raised-button mat-primary"   (click)="getTemplates(dailogOrderDetails)"  > Read notification</button> 
   </div> -->
-            <div class="pad-11 pad-btn row" *ngIf="superDealer || customerCare">
+            <div class="pad-11 pad-btn row" *ngIf="superDealer || customerCare || salesTeamLogin">
               <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
             </div>
 

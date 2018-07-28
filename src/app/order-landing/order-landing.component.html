@@ -12,7 +12,7 @@
 
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ALL ORDERS </button>
-          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
+          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
             href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
 
           <!-- <button type="submit" md-raised-button class=" " *ngIf="superDealer && tabPanelView != 'complete'" [ngClass]="{'btn-primary': tabPanelView === 'complete'}"
@@ -36,9 +36,9 @@
                 <md-option value="mobile">Customer Mobile</md-option>
                 <md-option value="orderid">Order Id</md-option>
                 <md-option value="status">Status</md-option>
-                <md-option value="followupdate" *ngIf="superDealer || customerCare">FollowUp Date</md-option>
+                <md-option value="followupdate" *ngIf="superDealer || customerCare || salesTeamLogin">FollowUp Date</md-option>
                 <md-option value="supplierid">Supplier</md-option>
-                <md-option value="distributor_id" *ngIf="superDealer || customerCare" >Distributor</md-option>
+                <md-option value="distributor_id" *ngIf="superDealer || customerCare || salesTeamLogin" >Distributor</md-option>
                 <md-option value="deliveryslot">Delivery Slot</md-option>
                 <md-option value="category">Category</md-option>
 
@@ -145,18 +145,18 @@
             </a>
             &nbsp;&nbsp;
             <a class="align-self-center">
-              <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}" *ngIf= 'superDealer || customerCare' >Todays FollowUp</button>
+              <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}" *ngIf= 'superDealer || customerCare || salesTeamLogin' >Todays FollowUp</button>
             </a>
             &nbsp;&nbsp;
             <a class="align-self-center">
-              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare"></i>
-              <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()" *ngIf="superDealer || customerCare" ></i>
-              <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()" *ngIf="superDealer || customerCare"></i>
-              <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare)" (click)="resetDistributorsView()" title="restore"></i>
+              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
+              <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()" *ngIf="superDealer || customerCare || salesTeamLogin" ></i>
+              <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+              <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare || salesTeamLogin)" (click)="resetDistributorsView()" title="restore"></i>
             </a>&nbsp;&nbsp;&nbsp;
 
             <a class="align-self-center">
-              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare"></i>
+              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <div class="filterView" *ngIf="showFilterDailog">
                 <div class="height-500">
                   <div class="form-group">
@@ -278,9 +278,9 @@
 
       <div class="row">
         <div class="col">
-          <button type="submit" md-raised-button class="  " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': newView === 'gridview'}"
+          <button type="submit" md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'gridview'}"
             href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
-          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare" [ngClass]="{'btn-primary': newView === 'mapview'}" href="javascript:void(0)"
+          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'mapview'}" href="javascript:void(0)"
             (click)="showNewPanel('mapview')">Map View</button>
         </div>
       </div>
@@ -299,7 +299,7 @@
                     </label>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 ">
-                    <label *ngIf="superDealer || customerCare">Follow Up :
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">Follow Up :
                       <span (click)='showFollowUp(forward)'>
                         <a>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
@@ -316,7 +316,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="forward.status == 'backtodealer'">
-                    <label *ngIf="superDealer || customerCare">
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(forward)"> </i>
                       </span>
@@ -491,7 +491,7 @@
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
                       <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer' && forward.customer ">{{forward.customer.suppliercode}}</b>
-                      <b class="" *ngIf="!forward.customer.suppliercode"> - </b>
+                      <b class="" *ngIf="!forward.customer"> - </b>
                     </div>
                   </div>
                   <div class="row form-group">
@@ -602,9 +602,9 @@
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b>
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b>
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
 
                     <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
@@ -660,7 +660,7 @@
                     <br>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 left">
-                    <label *ngIf="superDealer || customerCare">Follow Up :
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">Follow Up :
                       <!-- <span (click)='showFollowUpDetails(allorder)'><i class="fa fa-phone-square fa-2 logo-color" title="FollowUp Details"></i></span> -->
                       <span (click)='showFollowUp(allorder)'>
                         <i class="fa fa-volume-control-phone fa-2 logo-color" title="FollowUp"></i>
@@ -675,7 +675,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="allorder.status == 'backtodealer'">
-                    <label *ngIf="superDealer || customerCare">
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(allorder)"> </i>
                       </span>
@@ -863,7 +863,7 @@
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
                       <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer' && allorder.customer">{{allorder.customer.suppliercode}}</b>
-                    <b class="capitalize" *ngIf="!allorder.customer.suppliercode"> - </b>
+                    <b class="capitalize" *ngIf="!allorder.customer"> - </b>
 
                     </div>
                   </div>
@@ -944,14 +944,14 @@
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
 
-                                <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b> 
+                                <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b> 
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
                     <!-- <button class="btn btn-link btn-sm "  (click)='showCustomerAllOrders(allorder)' >
                       <i class="fa fa-user " aria-hidden="true"  ></i> Orders</button> -->
-                    <div class="row" *ngIf !='superDealer || customerCare'>
+                    <div class="row" *ngIf !='superDealer || customerCare || salesTeamLogin'>
                       <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
                         <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
                       <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
@@ -1019,7 +1019,7 @@
                     </label>
                   </div>
                   <div class="col-sm-6  col-md-6  col-lg-6 ">
-                    <label *ngIf="superDealer || customerCare">Follow Up :
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">Follow Up :
                       <span (click)='showFollowUp(complete)'>
                         <a>
                           <i class="fa fa-volume-control-phone fa-2 logo-color" title="Create FollowUp"></i>
@@ -1036,7 +1036,7 @@
                   </div>
 
                   <div class="col-sm-2  col-md-2  col-lg-2" *ngIf="complete.status == 'backtodealer'">
-                    <label *ngIf="superDealer || customerCare">
+                    <label *ngIf="superDealer || customerCare || salesTeamLogin">
                       <span>
                         <i class="fa fa-book logo-color" (click)="orderHistoryDialog(complete)"> </i>
                       </span>
@@ -1223,7 +1223,7 @@
                       Supplier Code</p>
                     <b class="capitalize" *ngIf="(complete.customer) && (complete.customersource == 'DistributorCustomer')">{{complete.customer.suppliercode}}</b>
 
-                    <b class="capitalize" *ngIf="!complete.customer.suppliercode"> - </b>
+                    <b class="capitalize" *ngIf="!complete.customer"> - </b>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -1325,9 +1325,9 @@
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer"> ActionBy: </b>
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b>
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
 

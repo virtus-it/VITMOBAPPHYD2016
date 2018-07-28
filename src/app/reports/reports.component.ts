@@ -76,6 +76,7 @@ export class ReportsComponent implements OnInit {
   tabPanelView = 'newlydownloaded';
   superDealer = true;
   customerCare = true;
+  salesTeamLogin : boolean = true;
   LastfilterRecords = false;
   distributorsorderData = [];
   reportsType = [
@@ -719,6 +720,7 @@ this.getProductByCategory();
     this.getProductByCategory();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     if (!this.superDealer || !this.customerCare) {
       this.tabPanelView = 'orderdownload';
     }

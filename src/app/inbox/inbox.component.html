@@ -1,7 +1,3 @@
-<!-- <div class="row">
-<h2 md-dialog-title>Distributors</h2><br>
-
-</div> -->
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4  col-sm-4  col-lg-4">
     <i class="fa fa-envelope-o"></i> Inbox
@@ -38,21 +34,21 @@
         </div>
       </div>
       <div class="scroll">
-      <div class="row box-style" *ngFor="let msg of AllMessages">
+      <div class="row box-style" *ngFor="let message of allMessages">
         <div class="col-4 col-1-style">
           <div class="row">
             <div class="col-8">
-              <b>Id: #{{msg.orderid}} </b>
+              <b>Id: #{{message.orderid}} </b>
               <br>
               <b>Type: </b>
-              <span class="" *ngIf="msg.ispublic == 2">Complaint</span>
-              <span class="" *ngIf="msg.ispublic == 0">Message</span>
+              <span class="" *ngIf="message.ispublic == 2">Complaint</span>
+              <span class="" *ngIf="message.ispublic == 0">Message</span>
               <br>
               <span class="left grayd">
-                <span class="fa fa-clock-o"></span> {{msg.createddate | utcDate}}</span>
+                <span class="fa fa-clock-o"></span> {{message.createddate | utcDate}}</span>
             </div>
             <div class="col-4">
-              <button  class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(msg)">SELECT</button>
+              <button  class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(message)">SELECT</button>
             </div>
           </div>
         </div>
@@ -61,7 +57,7 @@
         <div class="col-8">
 
           <span class="bold logo-color">Message:</span>
-          <p>{{msg.message}}</p>
+          <p>{{message.message}}</p>
         </div>
 
       </div>

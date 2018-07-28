@@ -50,6 +50,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
       this.authenticationService.salesLogin = this.authenticationService.newSalesFunction();
       this.authenticationService.customerCareLogin = this.authenticationService.customerCareLoginFunction();
+      this.authenticationService.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
       //  this.getDashboardDetails();
       this.getPolygonDistributors();
       this.getDistributors();

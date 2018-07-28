@@ -34,6 +34,7 @@ export class OrderDetailDailogComponent implements OnInit {
     followUpList:any = [];
     superDealer = true;
     customerCare = true;
+    salesTeamLogin = true;
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
@@ -451,6 +452,7 @@ ngOnInit() {
     // this.getfollowUpdetails();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     console.log(this.orderDetail);
     // this.getUserDetails();
 }

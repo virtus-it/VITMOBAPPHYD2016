@@ -17,18 +17,12 @@ export class InboxComponent implements OnInit {
 
   constructor(private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<InboxComponent>,public dialog: MdDialog, private followupService: FollowUpService, private loaderService: LoaderService,private authenticationService: AuthenticationService) { }
 
-  AllMessages:any = [];
+  allMessages:any = [];
   dailogOrderDetails: any = {};
   filteredData:any = [];
-
   filterInput ={"fromDate":null , "toDate":null};
   noMessages = false;
   
-
-
-
-
-
   getAllMessages(){
     let input = {"root":{"loginid":this.authenticationService.loggedInUserId(),"fromdate":null,"todate": null,"transtype":"getallmessages" , "apptype" :this.authenticationService.appType()}};
     this.followupService.getAllMessages(input)
@@ -41,13 +35,14 @@ export class InboxComponent implements OnInit {
   }
   getAllMessagesResult(result){
     if(result.result == 'success'){
-      this.AllMessages= result.data;
+      this.allMessages= result.data;
+      this.noMessages = false;
     }
     else{
       this.noMessages = true;
+      this.allMessages = [];
     }
   }
-
   filterMessages(){
     let fromDate = null;
     let toDate = null; 
@@ -74,14 +69,14 @@ export class InboxComponent implements OnInit {
   }
   getFilteredMessages(result){
     if(result.result == 'success'){
-      this.AllMessages= result.data;
+      this.allMessages= result.data;
+      this.noMessages = false;
     }
     else{
-      this.AllMessages = [];
+      this.allMessages = [];
+      this.noMessages = true;
     }
   }
-
-
   showOrderDetails(data) {
     let formattedData = {order_id: data.orderid , order_by:data.userid}
     let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
@@ -92,27 +87,18 @@ export class InboxComponent implements OnInit {
     dialogRefShowOrder.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
       if(result == 'success'){
-       
       }
-
-
     });
-
   }
-
   clearFilter(){
     this.getAllMessages();
     this.filterInput ={"fromDate":null , "toDate":null};
   }
-
-
-
   onCloseCancel(){
     this.thisDialogRef.close('cancel');
   }
   ngOnInit() {
     this.getAllMessages();
-    // this.orderDetail.order_id = 
   }
 
 }

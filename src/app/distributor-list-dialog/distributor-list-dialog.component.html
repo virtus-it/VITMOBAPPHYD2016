@@ -15,7 +15,7 @@
     <a class="offset-md-4 flex-sm-fill text-sm-center nav-link " [ngClass]="{'active': tabPanelView === 'suppliers'}" href="javascript:void(0)"
       (click)="showTabPanel('suppliers')">Suppliers</a>
     <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'distributors'}" href="javascript:void(0)"
-      (click)="showTabPanel('distributors')" *ngIf="superDealer">Distributors</a>
+      (click)="showTabPanel('distributors')" *ngIf="superDealer || customerCare || salesTeamLogin">Distributors</a>
     <!-- <a class="left" type=checkbox value=autoassign>Auto-assign</a> -->
   </nav>
   <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'suppliers'">

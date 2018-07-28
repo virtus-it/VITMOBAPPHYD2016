@@ -22,6 +22,7 @@ export class ProfileComponent implements OnInit {
   imageUplaodSuccess:boolean = false;
   isSuperDealer:boolean = false;
   customerCare = true;
+  salesTeamLogin : boolean = true;
 
 
   updateProfile(){
@@ -187,6 +188,7 @@ dialogRef.afterClosed().subscribe(result => {
     
     this.getProfileDetails(); 
     this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     if(this.authenticationService.isSuperDelear){
       this.isSuperDealer = true;
     }

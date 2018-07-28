@@ -97,28 +97,28 @@
 
 
             <td class="nav-item" (click)="searchReports(true,'newlydownloaded')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'newlydownloaded'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'newlydownloaded'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-download" aria-hidden="true"></i>
                 <br> Newly Downloaded Customers </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'lastdays')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'lastdays'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'lastdays'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <br> Customers not Ordered in Last 10 Days </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'pendingorders')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'pendingorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'pendingorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
                 <br> Pending Orders </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'rejectedorders')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'rejectedorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'rejectedorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-ban" aria-hidden="true"></i>
                 <br> Rejected Orders
               </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'notregistered')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'notregistered'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'notregistered'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                 <br> Customers not Registered </a>
             </td>
@@ -129,13 +129,13 @@
             </td>
 
             <td class="nav-item" (click)="searchDistributorsOrders()">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'distributorsorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'distributorsorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-users" aria-hidden="true"></i>
                 <br>Distributors Orders </a>
             </td>
 
             <td class="nav-item" (click)="searchReports(true,'stockreports')">
-              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'stockreports'}" href="javascript:void(0)" *ngIf="superDealer || customerCare">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'stockreports'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
                 <i class="fa fa-file-text-o" aria-hidden="true"></i>
                 <br> Stock Reports </a>
             </td>

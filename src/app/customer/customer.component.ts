@@ -40,6 +40,7 @@ export class CustomerComponent implements OnInit {
     loginId: any = 0;
     superDealer = true;
     customerCare = true;
+    salesTeamLogin = true;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
@@ -465,6 +466,7 @@ export class CustomerComponent implements OnInit {
         this.getCustomerList(true);
         this.superDealer = this.authenticationService.getSupperDelear();
         this.customerCare = this.authenticationService.customerCareLoginFunction();
+        this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
         this.loginId = this.authenticationService.loggedInUserId();
     }
 

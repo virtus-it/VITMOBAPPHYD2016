@@ -259,15 +259,15 @@
                 <i class="fa fa-money"></i> Set price</label>
             </div>
             <div class="row pdbottom-5">
-              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showFollowUp(customers)">
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showFollowUp(customers)">
                 <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
               </div>
-              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showPoints(customers)">
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showPoints(customers)">
                 <i class="fa fa-trophy"></i> Points
               </div>
             </div>
             <div class="row pdbottom-5">
-              <div class="col-md-6" *ngIf="superDealer || customerCare" (click)="showAllNotifications(customers)">
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showAllNotifications(customers)">
                 <i class="fa fa-commenting-o" aria-hidden="true"></i> Notification
               </div>
             </div>

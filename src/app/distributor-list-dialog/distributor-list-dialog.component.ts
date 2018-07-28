@@ -25,6 +25,8 @@ export class DistributorListDialogComponent implements OnInit {
   supplierNumber:"";
   searchDistTerm = "";
   searchSupplierTerm = "";
+  customerCare:boolean = true;
+  salesTeamLogin : boolean = true;
   message:any="";
   autoAssignedSuppliername:any = '';
   superDealer =true;
@@ -259,6 +261,8 @@ export class DistributorListDialogComponent implements OnInit {
     this.getDistributors();
     this.getSuppliers();
     this.superDealer = this.authenticationService.getSupperDelear();
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     console.log(this.orderDetail);
   }
 

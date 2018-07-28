@@ -49,6 +49,7 @@ export class ProductsComponent implements OnInit {
   distributorId:any = 0;
   listOfProducts = [];
   noProductsError = false;
+  salesTeamLogin :boolean = true;
   
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
@@ -557,6 +558,7 @@ if(result.result == 'success'){
     this.getProducts();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
   }
 
 }

@@ -22,7 +22,7 @@
 
       <i aria-hidden="true" class="fa fa-history logo-color fs-20 mgleft-10" title="Reset" *ngIf="distributorView == true" (click)="reset()"></i>
 
-      <a class="cursor logo-color  mgleft-10" title="Add Product" (click)='addEditProduct()' *ngIf="(superDealer || customerCare) && distributorView == false">
+      <a class="cursor logo-color  mgleft-10" title="Add Product" (click)='addEditProduct()' *ngIf="(superDealer || customerCare || salesTeamLogin) && distributorView == false">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
       </a>
     </div>
@@ -121,11 +121,11 @@
                     <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
                     <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
                     <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
-                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare" (click)="productArea(details)">&nbsp;</i>
-                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare) && details.isactive == '0'" disabled>&nbsp;</i>
-                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'"
+                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="productArea(details)">&nbsp;</i>
+                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare || salesTeamLogin) && details.isactive == '0'" disabled>&nbsp;</i>
+                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare || salesTeamLogin)  && details.isactive == '1'"
                       (click)="deleteProduct(details)">&nbsp;</i>
-                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare)" (click)="editProduct(details)">&nbsp;</i>
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare || salesTeamLogin)" (click)="editProduct(details)">&nbsp;</i>
                     <!-- <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add Stock" (click)="addStock(details)"></i>&nbsp;
                     <i class="fa fa-dot-circle-o logo-color cursor" aria-hidden="true" title="Update Status" (click)="UpdateStatus(details)"></i>&nbsp;
                     <i class="fa fa-line-chart logo-color cursor" aria-hidden="true" title="Stock Histroy" (click)="stockHistory(details)"></i> -->
@@ -257,11 +257,11 @@
                     <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
                     <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">&nbsp;
                     <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage(details)">&nbsp;</i>
-                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare" (click)="productArea(details)">&nbsp;</i>
-                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare) && details.isactive == '0'" disabled>&nbsp;</i>
-                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare)  && details.isactive == '1'"
+                    <i class="fa fa-globe logo-color cursor" aria-hidden="true" title="Service Area" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="productArea(details)">&nbsp;</i>
+                    <i class="fa fa-trash disable" aria-hidden="true" *ngIf="(superDealer || customerCare || salesTeamLogin) && details.isactive == '0'" disabled>&nbsp;</i>
+                    <i class="fa fa-trash danger" aria-hidden="true" title="Delete Product" *ngIf="(superDealer || customerCare || salesTeamLogin)  && details.isactive == '1'"
                       (click)="deleteProduct(details)">&nbsp;</i>
-                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare)" (click)="editProduct(details)">&nbsp;</i>
+                    <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Edit Product" *ngIf="(superDealer || customerCare || salesTeamLogin)" (click)="editProduct(details)">&nbsp;</i>
                   </td>
                 </tr>
               </tbody>
