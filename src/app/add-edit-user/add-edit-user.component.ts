@@ -280,7 +280,7 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    if(this.customerCareValidation()){
+    if(this.salesTeamValidation()){
     this.distributorService.createDistributor(input)
     .subscribe(
       output => this.addSalesteamResult(output),
@@ -830,7 +830,7 @@ addSalesteamResult(result) {
     let input: any = {
       User: {userid: this.Details.userid, firstname: this.salesteamInput.firstName, lastname : this.salesteamInput.lastName, mobileno: this.salesteamInput.phone, address: this.salesteamInput.address, emailid: this.salesteamInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.salesteamInput.mobile1 , mobileno_two : this.salesteamInput.mobile2}};
       console.log(input);
-      if(this.customerCareValidation()){
+      if(this.salesTeamValidation()){
       this.distributorService.updateDistributor(input)
       .subscribe(
         output => this.updateSalesTeamResult(output),

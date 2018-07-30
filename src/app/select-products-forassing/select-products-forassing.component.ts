@@ -278,7 +278,7 @@ if(this.productsDetails.expressCheck == true){
       let details: any = i;
       details.quantity = 0;
     });
-    // products.quantity = this.orderDetail.data.orders.quantity;
+    products.quantity = this.orderDetail.data.orders.quantity;
     products.emptycans = 0;
   }
   else if (this.orderDetail.type == 'customersPage'){

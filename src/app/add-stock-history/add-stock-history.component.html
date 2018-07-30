@@ -96,8 +96,9 @@
             <tr>
               <th width="15%">Cost</th>
               <th width="15%">Stock</th>
-              <th width="30%">Empty Cans</th>
-              <th width="40%">Date</th>
+              <th width="25%">Category</th>
+              <th width="20%">Empty Cans</th>
+              <th width="25%">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -105,8 +106,9 @@
 
               <td width="15%">{{stock.pcost}}</td>
               <td width="15%">{{stock.stock}}</td>
-              <td width="30%">{{stock.returnemptycans}}</td>
-              <td width="40%">{{stock.modifieddate | utcDate}}</td>
+              <td width="25%">{{this.Detail.category}}</td>
+              <td width="20%">{{stock.returnemptycans}}</td>
+              <td width="25%">{{stock.modifieddate | utcDate24}}</td>
             </tr>
           </tbody>
         </table>

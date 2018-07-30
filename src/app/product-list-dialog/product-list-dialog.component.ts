@@ -147,7 +147,7 @@ getProductsResult(output) {
 
 
   addStock(data , distributorDetails){
-    let formattedInput = { data:data , distributorId: distributorDetails.userid}
+    let formattedInput = { data:data , distributorId: distributorDetails.userid , type: "distproductsaddstock"}
     let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
 
       width: '600px',

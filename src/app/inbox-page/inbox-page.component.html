@@ -31,6 +31,7 @@
           <tr>
             <th width="13%">Order id</th>
             <th width="10%">Type</th>
+            <th width="10%">Senders Name</th>
             <th width="12%">Created Date</th>
             <th width="25%">Mesage</th>
             <!-- <th width="19%" class="no-th-row">Action</th> -->
@@ -46,6 +47,11 @@
             <td class="" width="10%">
               <span *ngIf="message.ispublic == 2">Compliant</span>
               <span *ngIf="message.ispublic == 0">Message</span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="message.userdetails && message.userdetails.fullname">{{message.userdetails.fullname}}</span>
+              <span *ngIf="!message.userdetails"> - </span>
+
             </td>
             <td class="" width="10%">
               <span *ngIf="message.createddate">{{message.createddate | utcDate}}</span>
