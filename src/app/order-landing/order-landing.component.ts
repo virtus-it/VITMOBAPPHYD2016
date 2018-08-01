@@ -323,12 +323,18 @@ export class OrderLandingComponent implements OnInit {
     dialogRefEditCustomer.afterClosed().subscribe(result => {
       if(result == 'success'){
       //console.log(`Dialog closed: ${result}`);
-      this.clearFilter();
+      if(this.tabPanelView == 'forward'){
+        this.getForwardOrderDetails(true);
       }
+        else{
+          this.getAllOrderDetails(true);
+        }
+        
+      }
+      // this.clearFilter();
 
-    });
-
-  }
+  });
+}
 
   filterValidation(){
     if(this.filterInput.order.searchtype == ""){
@@ -1351,6 +1357,12 @@ this.orderLandingService.getOrdersByfilter(input)
         //console.log(`Dialog closed: ${result}`);
         if(result == 'success'){
           this.loaderService.display(false);
+          if(this.tabPanelView == 'forward'){
+            this.getForwardOrderDetails(true);
+          }
+          else{
+          this.getAllOrderDetails(true);
+          }
         }
         else{
           this.loaderService.display(false);

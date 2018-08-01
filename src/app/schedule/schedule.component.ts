@@ -48,7 +48,7 @@ export class ScheduleComponent implements OnInit {
 
   scheduleOrderList() {
     this.loaderService.display(false);
-    let input: any = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "apptype": this.authenticationService.appType(), "searchtype": "0", "searchtext": "0" } }
+    let input: any = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType() , "apptype": this.authenticationService.appType(), "searchtype": "0", "searchtext": "0" } }
     //console.log(input);
     this.customerservice.ScheduleList(input)
       .subscribe(
@@ -287,7 +287,7 @@ export class ScheduleComponent implements OnInit {
 
 
   getDistributors() {
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType() , "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 100 } }
     //console.log(input);
     this.distributorService.getAllDistributors(input)
       .subscribe(

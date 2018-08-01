@@ -211,7 +211,7 @@ this.tabPanelView = type;
 }
 
 getAdvAmount(){
-  let input= {"User":{"userid":this.authenticationService.loggedInUserId(),"dealerid":this.authenticationService.loggedInUserId(),"usertype":"dealer"}};
+  let input= {"User":{"userid":this.authenticationService.loggedInUserId(),"dealerid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType()}};
   this.paymentservice.getAdvanceAmount(input)
       .subscribe(
       output => this.getAdvanceAmountResult(output),

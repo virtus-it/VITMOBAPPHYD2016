@@ -40,33 +40,6 @@ export class SelectProductsForassingComponent implements OnInit {
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
   getProductsList() {
     this.loaderService.display(true);
-    // if(this.orderDetail.orderDetails.type = "customersPage"){
-    //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.data.userid;
-    // }
-  //   if(this.orderDetail.orderDetails){
-  //   if( this.orderDetail.type == "customersPage"){
-  //     this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.userid;
-  //   }
-  // }
-  //   else if(this.orderDetail.type == 'coveragePage'){
-  //     this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.customer.userid
-  //   }
-  //   else{
-  //   this.orderDetail.orderDetails.order_by = this.orderDetail.orderDetails.ordersfrom;
-  //   }
-  //   let UserId:any = '';
-  //   if(this.orderDetail.type='coveragePage'){
-  //    UserId = this.orderDetail.data.orders.order_by;
-  //   }
-  //   else if(this.orderDetail.type == "customersPage"){
-  //     UserId = this.orderDetail.orderDetails.order_by;
-  //   }
-  //   else{
-  //     UserId = this.orderDetail.orderDetails.order_by;
-  //   }
-   
-
-
   if(this.orderDetail.orderDetails){
     if(this.orderDetail.type == 'customersPage'){
     this.orderDetail.orderDetails.order_by = this.orderDetail.disributorId;
@@ -153,6 +126,8 @@ else if(this.orderDetail.type == 'coveragePage'){
       if(this.productID){
         if(this.productID  == productid){
           this.productMessage = false;
+          this.productList[0].quantity = this.orderDetail.orderDetails.quantity;
+          this.productList[0].emptycans = this.orderDetail.orderDetails.enteredEmptyCans;
         }
         else{
                this.productMessage = true;
@@ -385,9 +360,8 @@ changeOfQuantity(data){
   ngOnInit() {
    
     console.log(this.orderDetail);
-    this.getProductsList();
 
-    if(this.orderDetail.type == 'customersPage' && this.orderDetail.orderDetails.enteredEmptyCans){
+    if(this.orderDetail.type == 'customersPage' && ( this.orderDetail.orderDetails.enteredEmptyCans || this.orderDetail.orderDetails.enteredEmptyCans == 0 )){
        this.emptyCans = this.orderDetail.orderDetails.enteredEmptyCans ;
     }
     else if (this.orderDetail.type == 'customersPage'){
@@ -399,11 +373,16 @@ changeOfQuantity(data){
     else if (this.orderDetail.type == 'assignfromOrderDetails'){
       this.emptyCans =(this.orderDetail.orderDetails.empty_cans);
     }
+    // else if (this.orderDetail.type == 'customersPage'){
+    //   this.emptyCans =(this.orderDetail.orderDetails.enteredEmptyCans);
+    // }
     else{
       this.emptyCans = 0;
     }
     
-    this.emptyCanAmount1  = ((this.quantity - this.emptyCans)  * 150)
+    this.emptyCanAmount1  = ((this.quantity - this.emptyCans)  * 150);
+    this.getProductsList();
+
   }
 
 }
