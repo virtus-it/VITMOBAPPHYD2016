@@ -28,7 +28,7 @@ export class DeliverpreorderComponent implements OnInit {
 
   //Get supplier list 
   getSupplierList(){
-    let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
+    let input = {  "userId":this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() , "usertype": this.authenticationService.userType()  };
     this.supplierservice.supplierList(input)
     .subscribe(
     output => this.getSupplierListResult(output),

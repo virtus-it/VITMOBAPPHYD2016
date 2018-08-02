@@ -38,6 +38,8 @@ export class AddEditProductDailogComponent implements OnInit {
   p6FC = new FormControl('', [Validators.required]);
   p7FC = new FormControl('', [Validators.required]);
   superDealer = true;
+  customerCare = true;
+  salesteam = true;
 
   productCategoryList = [];
   productTypeList = [];
@@ -228,5 +230,7 @@ export class AddEditProductDailogComponent implements OnInit {
     console.log(this.Details);
     this.getProductCategory();
     this.superDealer = this.authenticationService.getSupperDelear();
+    this.customerCare = this.authenticationService.customerCareLoginFunction();
+    this.salesteam = this.authenticationService.salesTeamLoginFunction();
   }
 }

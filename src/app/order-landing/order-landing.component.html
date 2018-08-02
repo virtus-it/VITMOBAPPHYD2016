@@ -602,7 +602,10 @@
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b>
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> 
+                      <span *ngIf="forward.senderdetails && forward.senderdetails.fullname">Action By : {{forward.senderdetails.fullname}} </span>
+                      <span *ngIf="!forward.senderdetails">Action By : - </span>
+                      </b>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
@@ -944,7 +947,10 @@
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
 
-                                <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b> 
+                                <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
+                                    <span *ngIf="allorder.senderdetails && allorder.senderdetails.fullname">Action By : {{allorder.senderdetails.fullname}} </span>
+                                    <span *ngIf="!allorder.senderdetails">Action By : - </span>  
+                                </b> 
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
@@ -1325,7 +1331,10 @@
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin"> ActionBy: </b>
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
+                          <span *ngIf="complete.senderdetails && complete.senderdetails.fullname">Action By : {{complete.senderdetails.fullname}} </span>
+                          <span *ngIf="!complete.senderdetails">Action By : - </span>  
+                      </b>
 
                     <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>

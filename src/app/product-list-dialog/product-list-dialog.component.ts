@@ -55,7 +55,7 @@ getProducts(distributorDetails){
    else if(distributorDetails.userid){
    this.distributorId = distributorDetails.userid;
    }
-let input = {userId: this.distributorId, appType: this.authenticationService.appType() };
+let input = {userId: this.distributorId, appType: this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()  };
   console.log(input);
   this.distributorService.getDistbutorsProducts(input)
   .subscribe(
@@ -147,7 +147,7 @@ getProductsResult(output) {
 
 
   addStock(data , distributorDetails){
-    let formattedInput = { data:data , distributorId: distributorDetails.userid}
+    let formattedInput = { data:data , distributorId: distributorDetails.userid , type: "distproductsaddstock"}
     let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
 
       width: '600px',

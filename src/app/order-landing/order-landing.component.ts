@@ -323,12 +323,18 @@ export class OrderLandingComponent implements OnInit {
     dialogRefEditCustomer.afterClosed().subscribe(result => {
       if(result == 'success'){
       //console.log(`Dialog closed: ${result}`);
-      this.clearFilter();
+      if(this.tabPanelView == 'forward'){
+        this.getForwardOrderDetails(true);
       }
+        else{
+          this.getAllOrderDetails(true);
+        }
+        
+      }
+      // this.clearFilter();
 
-    });
-
-  }
+  });
+}
 
   filterValidation(){
     if(this.filterInput.order.searchtype == ""){
@@ -463,6 +469,8 @@ export class OrderLandingComponent implements OnInit {
       });
   }
   getForwardOrderDetailsResult(result) {
+    this.orderslocationData = [];
+    this.forwardOrdersonMap();
     // this.forwardOrders = result.data;
     this.loaderService.display(false);
     console.log(this.forwardOrders);
@@ -471,8 +479,6 @@ export class OrderLandingComponent implements OnInit {
       this.forwardClickMore = true;
       this.forwardOrders = _.union(this.forwardOrders, data);
       // this.oneFuncForAll();
-
-
     }
     else {
       this.forwardClickMore = false;
@@ -508,6 +514,8 @@ export class OrderLandingComponent implements OnInit {
 
   }
   getAllOrderDetailsResult(result) {
+    this.orderslocationData = [];
+    this.getOrdersOnMap();
     //  this.allOrders = result.data;
     this.loaderService.display(false);
     //console.log(this.allOrders);
@@ -1349,6 +1357,12 @@ this.orderLandingService.getOrdersByfilter(input)
         //console.log(`Dialog closed: ${result}`);
         if(result == 'success'){
           this.loaderService.display(false);
+          if(this.tabPanelView == 'forward'){
+            this.getForwardOrderDetails(true);
+          }
+          else{
+          this.getAllOrderDetails(true);
+          }
         }
         else{
           this.loaderService.display(false);
@@ -1698,7 +1712,7 @@ this.orderLandingService.getOrdersByfilter(input)
           this.tabPanelView = 'allorder';
           this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
           this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
-            this.getAllOrderDetails(true);
+          this.getAllOrderDetails(true);
           
         }
 

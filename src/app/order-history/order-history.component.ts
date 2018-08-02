@@ -28,6 +28,7 @@ export class OrderHistoryComponent implements OnInit {
   orderHistoryResult(result){
     if(result.result == 'success'){
       this.orderHistoryDetails = result.data;
+      console.log(this.orderHistoryDetails , 'data');
     }
   }
 

@@ -25,7 +25,7 @@ export class ViewSupplierComponent implements OnInit {
 
   //Getting suppliers list
   SupplierList(){
-    let input={"userId":this.Detail.userid,"appType":this.authenticationService.appType()};
+    let input={"userId":this.Detail.userid,"appType":this.authenticationService.appType(), "usertype": this.authenticationService.userType() , "loginid":  this.authenticationService.loggedInUserId()};
     this.supplierservice.supplierList(input)
     .subscribe(
     output => this.getSupplierListResult(output),

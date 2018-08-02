@@ -162,9 +162,11 @@ export class LoginComponent implements OnInit {
       loginid: this.authenticationService.loggedInUserId(),
       appType: this.authenticationService.appType(),
       userid: this.authenticationService.loggedInUserId(),
+      usertype : this.authenticationService.userType() , 
       transtype: 'website'
     };
-    this.distributorService.getAllSuppliers(input).subscribe(
+    this.distributorService.getAllSuppliers(input)
+     .subscribe(
       output => this.getSupplierResult(output),
       error => {
         this.loaderService.display(false);

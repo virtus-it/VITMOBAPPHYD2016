@@ -13,7 +13,7 @@
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row ">
-        <div class="col-md-4 col-sm-4 col-lg-4 " *ngIf="superDealer">
+        <div class="col-md-4 col-sm-4 col-lg-4 " *ngIf="superDealer || customerCare || salesteam">
 
           <md-select placeholder="Select Category" name="type" class="full-width left" [(ngModel)]="productDetails.categoryDetails">
             <md-option *ngFor="let type of productCategoryList" [value]="type">

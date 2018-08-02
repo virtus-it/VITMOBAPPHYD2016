@@ -96,7 +96,7 @@ export class CustomerDetailDailogComponent implements OnInit {
 
 
   getDistributors() {
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType() , "loginid": this.authenticationService.loggedInUserId(),"transtype":"getalldistributors" ,  "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 200 } }
     if (this.distributors && this.distributors.length) {
       let lastDistributor: any = _.last(this.distributors);
       if (lastDistributor) {
