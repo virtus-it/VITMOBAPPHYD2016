@@ -216,7 +216,8 @@
       
         <div class="row">
           <b class="capital col-4 left">Points: </b>
-          <span class="col left" title="" >n/a</span> 
+          <span class="col left" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}}</span> 
+          <span class="col left" *ngIf="!customers.customerpoints"> - </span> 
         </div>
       </div>
 

@@ -79,6 +79,7 @@ export class QuickNotificationComponent implements OnInit {
           JsonObj.mobilenumber = mobileObject;
           JsonObj.transtype = "createsms";
           JsonObj.type = JsonObj.notificationType;
+          JsonObj.count = 1;
           JsonObj.loginid = this.authenticationService.loggedInUserId();
           if(this.Details.type != 'notificationfromReports' && this.Details.type != 'notificationFromCustomers'){
             JsonObj.orderid = this.Details.order_id;

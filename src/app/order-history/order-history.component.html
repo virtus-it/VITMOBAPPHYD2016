@@ -36,8 +36,14 @@
 
               <tr *ngFor="let history of allDetails.dealeretails">
                 <td class="left">{{this.orderId}}</td>
-                <td class="left">{{history.quantity}}</td>
-                <td class="left">{{history.bill_amount}}</td>
+                <td class="left">
+                  <span class="" *ngIf="history.quantity">{{history.quantity}}</span>
+                  <span class="" *ngIf="!history.quantity"> - </span>
+                </td>
+                <td class="left">
+                  <span *ngIf="history.bill_amount">{{history.bill_amount}}</span>
+                  <span *ngIf="!history.bill_amount"> - </span>
+                </td>
                 <td class="left">{{history.firstname}} {{history.lastname}}</td>
               <td class="left">{{history.mobileno}}</td>
               <td class="left">
