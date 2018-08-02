@@ -170,7 +170,7 @@ getOrderDetailsByIdResult(result) {
           }
           else if (this.dailogOrderDetails .status == "assigned") {
             this.dailogOrderDetails.OrderModifiedStatus = "Re-Assign";
-            this.dailogOrderDetails.StatusColor = "logo-color";
+            this.dailogOrderDetails.StatusColor = "info";
           }
           else if (this.dailogOrderDetails .status.toLowerCase() == "delivered") {
             this.dailogOrderDetails.OrderModifiedStatus = "Delivered";

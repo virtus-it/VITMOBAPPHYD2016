@@ -17,11 +17,14 @@
           <div class="d-flex">
             <b class="p-0">
               <i class="fa fa-file-text-o"></i> Order Details</b>
-            <b class="logo-color" (click)="assignOrder(this.orderDetail)" *ngIf="dailogOrderDetails.status == 'not_broadcasted' || dailogOrderDetails.status == 'backtodealer' || dailogOrderDetails.status == 'assigned'" >
-              <i class="fa fa-reply-all logo-color"></i> Assign Order</b>
+
             <span class="ml-auto p-0 mgright-15  logo-color" *ngIf="dailogOrderDetails.status != 'delivered'">
               <b class="float-right fs-12" (click)="editQuantity(dailogOrderDetails)">
                 <i class="fa fa-edit" aria-hidden="true"> </i> Edit Quantity</b>
+            </span>
+            <span class="logo-color mgright-15" (click)="assignOrder(this.orderDetail)" *ngIf="dailogOrderDetails.status == 'not_broadcasted' || dailogOrderDetails.status == 'backtodealer' || dailogOrderDetails.status == 'assigned'">
+              <b class="float-right fs-12" (click)='editStatus(dailogOrderDetails)'>
+                <i class="fa fa-reply-all logo-color"></i> Assign Order</b>
             </span>
             <span class="mgright-15 logo-color" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
               <!-- <i class="fa fa-hand-paper-o logo-color" aria-hidden="true"
@@ -43,7 +46,7 @@
               <b>Id: </b> #{{dailogOrderDetails.order_id}}</small>
             <small class=" capitalize">
               <b>Status: </b>
-              <span  [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
+              <span [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
             </small>
             <small class="gray">
               <b>Delivery Date: </b> {{dailogOrderDetails.delivery_exceptedtime}} </small>
@@ -430,21 +433,22 @@
             </div>
 
             <div class="templ" *ngIf="notificationHistory">
-              <div class="container-fluid messages-style"  *ngFor="let history of notificationHistory">
+              <div class="container-fluid messages-style" *ngFor="let history of notificationHistory">
                 <div class="row">
-                      <div class="col"> 
-                        <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname" ><i aria-hidden="true" class="fa fa-reply rotate-180"></i> {{history.notificationsendedby.fullname}}</small>
-                        <small *ngIf="!history.notificationsendedby" > - </small>
-                      </div>
-  
-                      <div class="col"> 
-                          <small class="gray9">{{history.createddate | utcDate}}</small>
-                      </div>
-                    </div>
-                      <div class=""> 
-                          <small *ngIf="history.message" class="firstLetterCap" title="{{history.message}}">{{history.message}}</small>
-                        <small *ngIf="!history.message"> - </small>
-                      </div>
+                  <div class="col">
+                    <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname">
+                      <i aria-hidden="true" class="fa fa-reply rotate-180"></i> {{history.notificationsendedby.fullname}}</small>
+                    <small *ngIf="!history.notificationsendedby"> - </small>
+                  </div>
+
+                  <div class="col">
+                    <small class="gray9">{{history.createddate | utcDate}}</small>
+                  </div>
+                </div>
+                <div class="">
+                  <small *ngIf="history.message" class="firstLetterCap" title="{{history.message}}">{{history.message}}</small>
+                  <small *ngIf="!history.message"> - </small>
+                </div>
               </div>
               <!-- <table class="table table-hover table-fixedheader ">
                 <thead>

@@ -376,9 +376,7 @@ background: transparent;
 .fs-20{
     font-size:20px;
 }
-.capitalize{
-  text-transform: capitalize;
-}
+
 .padding-0{
   padding: 0px;
 }
@@ -1109,12 +1107,7 @@ overflow-x: auto;
 overflow-x: auto;
   }
   }
-  @media (orientation: portrait) {
-    .m-body{
-      max-height: 80vh !important;
-      overflow-x: scroll !important;
-    }
-  }
+
   .mat-select {
     padding-top: 10px !important;
 }
