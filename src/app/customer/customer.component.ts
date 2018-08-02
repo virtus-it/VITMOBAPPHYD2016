@@ -49,7 +49,9 @@ export class CustomerComponent implements OnInit {
         { value: 'address', viewValue: 'Address' },
         { value: 'paymenttype', viewValue: 'Payment Mode' },
         { value: 'customertype', viewValue: 'Customer Type' },
-        { value: 'followupdate', viewValue: 'Followup Date' }
+        { value: 'followupdate', viewValue: 'Followup Date' },
+        { value: 'points', viewValue: 'Points' },
+
 
     ];
 

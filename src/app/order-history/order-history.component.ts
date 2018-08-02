@@ -13,6 +13,8 @@ export class OrderHistoryComponent implements OnInit {
 
   constructor(@Inject(MD_DIALOG_DATA) public Details: any,  public thisDialogRef: MdDialogRef<OrderHistoryComponent> ,  private orderLandingService: OrderLandingService, private authenticationService: AuthenticationService, ) { }
   orderHistoryDetails:any = [];
+  allDetails :any = [];
+  orderId = "";
 
 
 
@@ -28,6 +30,9 @@ export class OrderHistoryComponent implements OnInit {
   orderHistoryResult(result){
     if(result.result == 'success'){
       this.orderHistoryDetails = result.data;
+      this.allDetails = result.data[0];
+      this.orderId = result.data[0].order_id;
+
       console.log(this.orderHistoryDetails , 'data');
     }
   }

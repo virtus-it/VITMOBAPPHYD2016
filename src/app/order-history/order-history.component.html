@@ -19,18 +19,33 @@
               <th width="18%">Bill Amount</th>
               <th width="12%">Distributor</th>
               <th width="8%">Dist Number</th>
-              <th width="10%">Product</th>
+              <th width="10%">Product Details</th>
 
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let history of orderHistoryDetails">
+            <!-- <tr *ngFor="let history of orderHistoryDetails.dealeretails">
                 <td class="left">{{history.order_id}}</td>
                 <td class="left">{{history.quantity}}</td>
                 <td class="left">{{history.bill_amount}}</td>
                 <td class="left">{{history.dealeretails.firstname}} {{history.dealeretails.lastname}}</td>
               <td class="left">{{history.dealeretails.mobileno}}</td>
               <td class="left">{{history.brandname}} {{history.prod_type}}</td>
+              </tr> -->
+
+
+              <tr *ngFor="let history of allDetails.dealeretails">
+                <td class="left">{{this.orderId}}</td>
+                <td class="left">{{history.quantity}}</td>
+                <td class="left">{{history.bill_amount}}</td>
+                <td class="left">{{history.firstname}} {{history.lastname}}</td>
+              <td class="left">{{history.mobileno}}</td>
+              <td class="left">
+                <span *ngIf="history.category">{{history.category}}</span>
+                <span *ngIf="!history.category"> - </span>
+                <span *ngIf="history.product_type">{{history.product_type}}  </span>
+                <span *ngIf="!history.product_type"> - </span>
+              </td>
               </tr>
               
           </tbody>
