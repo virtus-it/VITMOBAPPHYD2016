@@ -598,7 +598,7 @@ export class OrderLandingComponent implements OnInit {
     }
     if(type=='ordered'){
       this.filterInput.order.searchtype = 'status';
-      this.filterInput.order.searchtext = "ordered";
+      this.filterInput.order.searchtext = "ordered,backtodealer";
     }
     if(type=='delivered'){
       this.filterInput.order.searchtype = 'status';
@@ -614,7 +614,7 @@ export class OrderLandingComponent implements OnInit {
     // }
     if(type=='notDelivered'){
       this.filterInput.order.searchtype = 'status';
-      this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,ordered,backtodealer,doorlock,notreachable,cantdeliver"
+      this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,doorlock,notreachable,cantdeliver"
     }
     if(this.newView == 'mapview'){
       this.mapFilters(type)

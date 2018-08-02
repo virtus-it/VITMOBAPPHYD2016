@@ -327,6 +327,32 @@
                           <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.supplierdetails.mobileno}}</small>
                       </li>
                     </ul>
+
+
+                    <ul class="pdleft-15" *ngIf="!dailogOrderDetails.supplierdetails && dailogOrderDetails.forwardeddetails">
+                      <li>
+                        <div class="d-flex">
+                          <div class="p-0">
+
+                            <small class="capital ng-binding">
+                              <i class="fa fa-user" aria-hidden="true"></i>
+                              {{dailogOrderDetails.forwardeddetails.fullname}}</small>
+                          </div>
+                          <!-- <div class="ml-auto p-0">
+                            <small class="ng-binding gray9">
+                              <i class="fa fa-calendar" aria-hidden="true"></i>
+                              {{dailogOrderDetails.order_assigneddate | utcDate}}</small>
+                          </div> -->
+                        </div>
+                      </li>
+                      <li>
+                        <small class="ng-binding">
+                          <i class="fa fa-phone" aria-hidden="true"></i> {{dailogOrderDetails.forwardeddetails.mobileno}}</small>
+                      </li>
+                    </ul>
+
+
+
                   </div>
                 </div>
               </li>
