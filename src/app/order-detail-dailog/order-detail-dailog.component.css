@@ -262,3 +262,8 @@ background: #ddd;
 .templ .messages-style{
 background: #f1f5f7 !important;
 }
+.mat-dialog-container{
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden
+}
