@@ -9,6 +9,8 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 import { ProcessPaymentDialogComponent } from '../process-payment-dialog/process-payment-dialog.component';
 import { ProcessedPaymentsDetailsComponent } from '../processed-payments-details/processed-payments-details.component';
 import { DeletePromocodeComponent } from '../delete-promocode/delete-promocode.component';
+import * as moment from 'moment';
+
 
 
 
@@ -25,6 +27,12 @@ allPromoCodes:any = [];
 tabPanelView:string="promoCode";
 redeemDetails:any = [];
 redeemSettingsDetails:any = [];
+showFilterDailog = false;
+filterInput = {"searchtype":""};
+filterType = {"startdate": null , "enddate": null};
+startDate = '';
+endDate = '';
+
 
   addPromoCode(){
     let dialogRef = this.dialog.open(AddPromocodeDialogComponent, {
@@ -214,6 +222,49 @@ redeemSettingsDetails:any = [];
     }
   }
 
+  filterDailogToggle(){
+    this.showFilterDailog = !this.showFilterDailog;
+  }
+
+  searchByDate(){
+    let input = {};
+    if(this.filterType.startdate && this.filterType.enddate === null){
+      this.startDate = moment(this.filterType.startdate).format('DD-MM-YYYY');
+      input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","startdate": this.startDate ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
+    }
+    else if(this.filterType.enddate && this.filterType.startdate === null ){
+      this.endDate = moment(this.filterType.enddate).format('DD-MM-YYYY');
+      input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","enddate": this.endDate ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
+    }
+    else if(this.filterType.startdate && this.filterType.enddate){
+      this.startDate = moment(this.filterType.startdate).format('DD-MM-YYYY');
+      this.endDate = moment(this.filterType.enddate).format('DD-MM-YYYY');
+      input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","enddate": this.endDate ,"startdate": this.startDate,  "loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
+    }
+    console.log(input);
+    this.followupService.createpromocode(input)
+    .subscribe(
+    output => this.searchByDateResult(output),
+    error => {
+      //console.log("error in customer");
+    });
+  }
+  searchByDateResult(result){
+    if(result.result == 'success'){
+      this.allPromoCodes = result.data;
+    }
+    else{
+      this.allPromoCodes = [];
+    }
+  }
+
+
+  clearFilter(){
+    this.showFilterDailog = false;
+    this.filterInput = {"searchtype":""};
+    this.filterType = {"startdate": null , "enddate": null};
+    this.getAllPromoCodes();
+  }
 
 
   ngOnInit() {
