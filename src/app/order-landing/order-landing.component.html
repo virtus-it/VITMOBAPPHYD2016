@@ -11,7 +11,7 @@
         <div class="col-3">
 
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
-            (click)="showTabPanel('allorder')">ALL ORDERS </button>
+            (click)="showTabPanel('allorder')">ORDERED</button>
           <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
             href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
 
@@ -132,17 +132,29 @@
             </a>
 
             &nbsp;&nbsp;
-            <a class="align-self-center">
+            <!-- <a class="align-self-center">
               <button *ngIf="tabPanelView === 'allorder'" md-raised-button (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
-            </a>
-            &nbsp;&nbsp;
+            </a> -->
+
             <a class="align-self-center">
+              <button  md-raised-button (click)="showMiscOrders()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">MISCELLANEOUS</button>
+            </a>
+
+            &nbsp;&nbsp;
+            <!-- <a class="align-self-center">
               <button *ngIf="tabPanelView === 'forward'" md-raised-button (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
-            </a>
+            </a> -->
             &nbsp;&nbsp;
+            <!-- <a class="align-self-center">
+              <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
+            </a> -->
+
+
             <a class="align-self-center">
-              <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+              <button md-raised-button class=" " (click)="showDeliveredOrders()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
             </a>
+
+
             &nbsp;&nbsp;
             <a class="align-self-center">
               <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
@@ -1009,7 +1021,7 @@
           </agm-map>
         </div>
       </div>
-      <div *ngIf="tabPanelView === 'complete'" class="panelview-style">
+      <div *ngIf="tabPanelView === 'complete' || quickFilterView == 'misc' || quickFilterView == 'delivered'" class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">

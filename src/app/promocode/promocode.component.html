@@ -18,6 +18,63 @@
       <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
         <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
       </a>
+
+      <a class="align-self-center">
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
+        <div class="filterView" *ngIf="showFilterDailog">
+          <div class="height-500">
+            <div class="form-group">
+              <md-select placeholder="Filter By" [(ngModel)]="filterInput.searchtype" name="type" class="full-width left">
+                <md-option value="date">DATE</md-option>
+              </md-select>
+            </div>
+            <div class=" " *ngIf="filterInput.searchtype == 'date'">
+
+                <div class="col-4">
+                    <md-form-field >
+                      <input mdInput [mdDatepicker]="picker" placeholder="Start Date"  [(ngModel)]="filterType.startdate" required>
+                      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                      <md-datepicker #picker></md-datepicker>
+                    </md-form-field>
+                  </div>
+
+                  <div class="col-4">        
+                    <md-form-field>
+                      <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="filterType.enddate">
+                      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                      <md-datepicker #pickers></md-datepicker>
+                    </md-form-field>
+                  </div>
+
+
+                <!-- <md-form-field class="inline">
+                    <input mdInput [mdDatepicker]="picker" placeholder="Start Date" name="fromdate" [(ngModel)]="filterType.startdate">
+                    <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                    <md-datepicker #picker></md-datepicker>
+                  </md-form-field>
+
+                  <md-form-field class="inline">
+                      <input mdInput [mdDatepicker]="pickers" placeholder="End Date" name="todate" [(ngModel)]="filterType.enddate">
+                      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                      <md-datepicker #pickers></md-datepicker>
+                    </md-form-field> -->
+            </div>
+
+            <div class="input-group pd-10 ">
+              <button md-raised-button color="primary" class="mgright-5" (click)="searchByDate()">
+                <i class="fa fa-search" aria-hidden="true"></i> Search
+              </button>
+              <button md-raised-button color="primary" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </a>&nbsp;
+
+
+
     </div>
   </div>
   <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'promoCode'">

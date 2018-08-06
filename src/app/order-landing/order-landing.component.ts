@@ -590,12 +590,13 @@ export class OrderLandingComponent implements OnInit {
 
   quickFilter(type){
     this.quickFilterView = type;
-    if(this.tabPanelView=='forward'){
-      this.filterInput.order.status = 'forwardedorders';
-    }
-    else{
-      this.filterInput.order.status = 'all';
-    }
+    // if(this.tabPanelView=='forward'){
+    //   this.filterInput.order.status = 'forwardedorders';
+    // }
+    // else{
+    //   this.filterInput.order.status = 'all';
+    // }
+    this.filterInput.order.status = 'complete';
     if(type=='ordered'){
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "ordered,backtodealer";
@@ -633,14 +634,16 @@ export class OrderLandingComponent implements OnInit {
     console.log(result);
     if (result.result == 'success') {
       let data = this.ModifyOrderList(result.data);
-      if(this.tabPanelView=='forward'){
-        this.forwardOrders= data;
-        this.forwardClickMore = true;
-      }
-      else{
-        this.allOrders = data;
-        this.orderClickMore = true;
-      }
+      // if(this.tabPanelView=='forward'){
+      //   this.forwardOrders= data;
+      //   this.forwardClickMore = true;
+      // }
+      // else{
+      //   this.allOrders = data;
+      //   this.orderClickMore = true;
+      // }
+      this.completeOrders = data;
+      this.completeClickMore = true;
     }
     else{  
       this.allOrders = [];
@@ -671,6 +674,12 @@ export class OrderLandingComponent implements OnInit {
           this.filterInput.order.last_orderid = lastallOrder.order_id;
         }
       }
+      else if(this.tabPanelView == 'complete'){
+        let lastCompleteOrder: any = _.last(this.completeOrders);
+        if (lastCompleteOrder) {
+          this.filterInput.order.last_orderid = lastCompleteOrder.order_id;
+        }
+      }
     }
     else {
       if (this.tabPanelView == 'forward') {
@@ -679,6 +688,10 @@ export class OrderLandingComponent implements OnInit {
       }
       else if (this.tabPanelView == 'allorder') {
         this.allOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if(this.tabPanelView == 'complete'){
+        this.completeOrders = [];
         this.filterInput.order.last_orderid = "0";
       }
     }
@@ -708,6 +721,12 @@ export class OrderLandingComponent implements OnInit {
         let data = this.ModifyOrderList(result.data);
         this.orderClickMore = true;
         this.allOrders = _.union(this.allOrders, data);
+      }
+      else if(this.tabPanelView == 'complete'){
+        let data = this.ModifyOrderList(result.data);
+        this.orderClickMore = true;
+        this.completeOrders = _.union(this.completeOrders, data);
+        
       }
     }
     else {
@@ -1041,10 +1060,8 @@ this.orderLandingService.getOrdersByfilter(input)
 
   refresh(){
     this.showFilterDailog =false;
-    this.quickFilterView = "";
+    // this.quickFilterView = "";
     this.cantFilterMessage = "";
-    // this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
-    // this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
     if(this.tabPanelView == 'forward'){
       this.getForwardOrderDetails(true);
     }
@@ -1053,7 +1070,13 @@ this.orderLandingService.getOrdersByfilter(input)
     }
     else if(this.tabPanelView == 'complete'){
       this.globalSearch(true);
-    }    
+    }
+    else if(this.quickFilterView == 'misc'){
+      this.showMiscOrders();
+    } 
+    else if(this.quickFilterView == 'delivered'){
+      this.showDeliveredOrders();
+    }  
   }
   ModifyOrderList(result) {
    
@@ -1454,7 +1477,7 @@ this.orderLandingService.getOrdersByfilter(input)
                 }
                 else if (result == 'Cancel' || result == undefined){
                   this.loaderService.display(false);
-                  this.refresh();
+                  // this.refresh();
                 }
     
             });
@@ -1714,6 +1737,59 @@ this.orderLandingService.getOrdersByfilter(input)
           this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
           this.getAllOrderDetails(true);
           
+        }
+
+        showMiscOrders(){
+          this.quickFilterView = 'misc';
+          this.tabPanelView = '';
+          let input = {"order":{"userid":this.authenticationService.loggedInUserId() ,"priority":"","usertype": this.authenticationService.userType() ,"status":"misc","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+          this.loaderService.display(true);
+          this.orderLandingService.getOrderList(input)
+          .subscribe(
+          output => this.showMiscOrdersResult(output),
+          error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
+        }
+        showMiscOrdersResult(result){
+          if(result.result == 'success'){
+          let data = this.ModifyOrderList(result.data);
+          this.completeOrders = result.data;
+          this.loaderService.display(false);
+          console.log(result.data  , 'misc');
+          }
+          else{
+            this.loaderService.display(false);
+          }
+        }
+
+
+        showDeliveredOrders(){
+          this.quickFilterView = 'delivered';
+          this.tabPanelView = '';
+          let input = {"order":{"userid": this.authenticationService.loggedInUserId()  ,"usertype": this.authenticationService.userType() ,"status":"delivered","lastrecordtimestamp":"15","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+          this.loaderService.display(true);
+          this.orderLandingService.getOrderList(input)
+          .subscribe(
+          output => this.showDeliveredOrdersResult(output),
+          error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
+        }
+        showDeliveredOrdersResult(result){
+          if(result.result == 'success'){
+            let data = this.ModifyOrderList(result.data);
+            // this.allOrders = [];
+            // this.forwardOrders = [];
+            this.completeOrders = result.data;
+            this.loaderService.display(false);
+            console.log(result.data  , 'delivered');
+          }
+          else{
+            this.loaderService.display(false);
+          }
         }
 
 
