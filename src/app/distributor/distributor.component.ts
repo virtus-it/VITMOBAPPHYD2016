@@ -640,6 +640,46 @@ this.getProductByCategory();
               });
 
         }
+
+        activeDistributors(){
+            let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"activedistributors",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
+            this.distributorService.getAllDistributors(input)
+            .subscribe(
+            output => this.activeDistributorsResult(output),
+            error => {
+                //console.log("error in distrbutors");
+                this.loaderService.display(false);
+            });
+        }
+        activeDistributorsResult(result){
+            if(result.result == 'success'){
+                this.distributors = result.data;
+            }
+            else{
+                this.distributors = [];
+            }
+        }
+
+
+        inactiveDistributors(){
+            let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"inactivedistributors",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
+            this.distributorService.getAllDistributors(input)
+            .subscribe(
+            output => this.inactiveDistributorsResult(output),
+            error => {
+                //console.log("error in distrbutors");
+                this.loaderService.display(false);
+            });
+        }
+        inactiveDistributorsResult(result){
+            if(result.result == 'success'){
+                this.distributors = result.data;
+            }
+            else{
+                this.distributors = [];
+            }
+        }
+        
     
 
     ngOnInit() {

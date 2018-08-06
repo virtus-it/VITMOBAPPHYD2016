@@ -11,12 +11,12 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'">
-        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" title="Add promo code" (click)="addPromoCode()"></i>
+      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'" >
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" *ngIf="superDealer" title="Add promo code" (click)="addPromoCode()"></i>
       </a>
 
       <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
-        <i class="fa fa-gears" aria-hidden="true" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
+        <i class="fa fa-gears" aria-hidden="true"   *ngIf="superDealer"   title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
       </a>
 
       <a class="align-self-center">
@@ -90,7 +90,7 @@
 
           <th width="10%">End date</th>
           <th width="10%">Offer Type</th>
-          <th width="10%">Action</th>
+          <th width="10%" *ngIf="superDealer">Action</th>
         </tr>
       </thead>
       <tbody>
@@ -113,7 +113,7 @@
             <span *ngIf="promo.enddate === null || promo.enddate == ''"> - </span>
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
-          <td class="left capitalize" width="10%">
+          <td class="left capitalize" width="10%" *ngIf="superDealer">
             <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
             <span class="fa fa-pencil-square-o btn-link" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
             <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>

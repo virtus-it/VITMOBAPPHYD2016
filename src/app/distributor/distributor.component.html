@@ -10,6 +10,12 @@
 
 
     <div class="col-sm-6 col-md-3 col-lg-3 align-self-center right">
+
+        <button type="submit" md-raised-button class=""  href="javascript:void(0)"
+        (click)="activeDistributors()">Active Distributors</button> &nbsp;&nbsp;
+        <button type="submit" md-raised-button class=""  href="javascript:void(0)"
+        (click)="inactiveDistributors()">In-Active Distributors</button>
+
         <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
         (click)="showTabPanel('bystock')">By Stock </button>&nbsp;&nbsp;
         <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;

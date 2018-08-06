@@ -32,6 +32,7 @@ filterInput = {"searchtype":""};
 filterType = {"startdate": null , "enddate": null};
 startDate = '';
 endDate = '';
+superDealer = false;
 
 
   addPromoCode(){
@@ -269,7 +270,7 @@ endDate = '';
 
   ngOnInit() {
     this.getAllPromoCodes();
-  
+    this.superDealer = this.authenticationService.getSupperDelear();
   }
 
 }

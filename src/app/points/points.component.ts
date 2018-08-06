@@ -30,6 +30,7 @@ export class PointsComponent implements OnInit {
   customerAllPointsDetails: any = [];
   filterInput = { type: '' };
   pointsClickMore = true;
+  superDealer = false;
 
   DeactivatePoints(status) {
     console.log('de activate called');
@@ -267,6 +268,7 @@ export class PointsComponent implements OnInit {
 
   ngOnInit() {
     // this.getPointsDetails();
+    this.superDealer = this.authenticationService.getSupperDelear();
     this.getAllPoints();
   }
 

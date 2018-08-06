@@ -10,7 +10,7 @@
       <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
         (click)="showTabPanel('pointsDetails')">Points Details </button>&nbsp;&nbsp;
       <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
-      <i class="fa fa-plus-circle fs-25 logo-color cursor " title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp;
+      <i class="fa fa-plus-circle fs-25 logo-color cursor " *ngIf="superDealer" title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp;
       <a class="cursor logo-color">
         <i aria-hidden="true" class="fa fa-sliders logo-color cursor" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'"></i>
         <div class="filterView" *ngIf="showFilterDialog">
@@ -56,6 +56,11 @@
               <b class="capital col-3">Type: </b>
               <span class="capitalize col">{{points.subtype}}</span>
             </div>
+            <div class="row">
+              <b class="capita col-3">Created Date: </b>
+              <span class="capitalize col" *ngIf="points.createddate">{{points.createddate}}</span>
+              <span class="capitalize col" *ngIf="!points.createddate"> - </span>
+            </div>
           </div>
           <div class="col-4 align-self-center center">
             <span class="point-style">{{points.points}} Points </span>
@@ -72,9 +77,20 @@
       </div>
 
       <div class="col-1 align-self-center">
-        <i *ngIf="points.isactive == 1 " class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
-        <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
-        <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)"></i>
+
+        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
+
+        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"  ></i> &nbsp;
+
+
+        <i *ngIf="points.isactive == 1 " class="fa fa-thumbs-up success fs-18" title="Active State" ></i>
+
+        <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
+
+
+
+
+        <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)" *ngIf="superDealer" ></i>
       </div>
     </div>
   </div>
