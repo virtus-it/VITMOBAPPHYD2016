@@ -40,7 +40,7 @@ filteredProducts: Observable<any[]>;
   LastfilterRecords = false;
 
   updateStatus() {
-    let input = { "product": { "category":this.Details.data[0].category, "categoryid": this.Details.data[0].categoryid , "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } }
+    let input = { "product": { "category":this.Details.data[0].category, "categoryid": this.Details.data[0].categoryid , "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() , "userid": this.authenticationService.loggedInUserId() } }
     if(this.validation()){
     this.productService.setProductStatus(input)
       .subscribe(
@@ -155,9 +155,33 @@ update(){
   if(this.Details.type == 'distributorstockStatus'){
     this.updateDistributorsStockStatus();
   }
+  else if(this.Details.type == 'stockStatusOfDistributorsProduct'){
+    this.updateDistStockStatusFromProductsView();
+  }
   else{
     this.updateStatus();
   }
+}
+
+
+updateDistStockStatusFromProductsView(){
+
+  let input = { "product": { "category":this.Details.data.data[0].category, "categoryid": this.Details.data.data[0].categoryid , "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() , "userid": this.Details.distributorId } }
+  console.log(input);
+  if(this.validation()){
+    this.productService.setProductStatus(input)
+      .subscribe(
+      output => this.updateDistStockStatusFromProductsViewResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      });
+    }
+}
+updateDistStockStatusFromProductsViewResult(result){
+  if(result.result == 'success'){
+    this.thisDialogRef.close('success');
+  }
+
 }
 
 updateDistributorsStockStatus(){
@@ -183,11 +207,13 @@ updateDistributorsStockStatusResult(result){
   ngOnInit() {
     console.log(this.Details);
     if(this.Details.type == 'distributorstockStatus'){
-      // this.getProducts();
       this.getDistributorsProducts();
     }
+    else if(this.Details.type == 'stockStatusOfDistributorsProduct'){
+      this.stockStatusValue = this.Details.data.data[0].stockstatus;
+    }
     else{
-      this.stockStatusValue = this.Details.stockstatus;
+      this.stockStatusValue = this.Details.data[0].stockstatus;
     }
   }
 

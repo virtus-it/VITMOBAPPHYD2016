@@ -34,7 +34,7 @@
       </div>
       <div class="col-md-4  col-sm-4  col-lg-4"  *ngIf="!phone && authenticationService.isSuperDelear == false">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10"  >
+              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10" (keypress)="numberEvent($event)"  >
             
               <md-error *ngIf="phoneFormControl.hasError('required')" >
                   Phone Number is <strong>required</strong>

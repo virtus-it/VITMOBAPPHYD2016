@@ -49,11 +49,11 @@ export class ProductListDialogComponent implements OnInit {
 
 getProducts(distributorDetails){
   this.loaderService.display(true);
-  if(distributorDetails.user_id){
-    this.distributorId = distributorDetails.user_id;
+  if(distributorDetails.data.user_id){
+    this.distributorId = distributorDetails.data.user_id;
    }
-   else if(distributorDetails.userid){
-   this.distributorId = distributorDetails.userid;
+   else if(distributorDetails.data.userid){
+   this.distributorId = distributorDetails.data.userid;
    }
 let input = {userId: this.distributorId, appType: this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()  };
   console.log(input);
@@ -126,7 +126,7 @@ getProductsResult(output) {
   }
 
   stockHistory(data , distributorDetails) {
-    let formattedData = {"type":"distributorspage", data:data , distributorId: distributorDetails.userid}
+    let formattedData = {"type":"distributorspage", data:data , distributorId: distributorDetails.data.userid}
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
 
       width: '40%',
@@ -147,7 +147,7 @@ getProductsResult(output) {
 
 
   addStock(data , distributorDetails){
-    let formattedInput = { data:data , distributorId: distributorDetails.userid , type: "distproductsaddstock"}
+    let formattedInput = { data:data , distributorId: distributorDetails.data.userid , type: "distproductsaddstock"}
     let dialogRefAddInvoice = this.dialog.open(AddstockProductComponent, {
 
       width: '600px',
@@ -164,7 +164,7 @@ getProductsResult(output) {
 
 
   deleteDistributorProduct(data){
-    let input = {"product": {"transtype":"delete","pid": data.productid ,  userid: this.distributorDetails.userid , apptype: this.authenticationService.appType() , "isactive": 0 } };
+    let input = {"product": {"transtype":"delete","pid": data.productid ,  userid: this.distributorDetails.data.userid , apptype: this.authenticationService.appType() , "isactive": 0 } };
     console.log(input);
     this.productService.createProduct(input)
     .subscribe(
@@ -190,10 +190,11 @@ if(result.result == 'success'){
 
 
   changeStockStatus(data){
+    let formattedData = {'type':'stockStatusOfDistributorsProduct' , data: data , distributorId : this.distributorDetails.data.userid}
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
 
       width: '400px',
-      data: data
+      data: formattedData
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
       if (result == 'success') {

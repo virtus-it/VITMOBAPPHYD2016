@@ -53,6 +53,7 @@ export class OrderLandingComponent implements OnInit {
   salesTeamLogin = true;
   SupplierOrderList=[];
   ordersClickMore = true;
+  miscOrdersClickMore = true;
   followUpResultStatus:any = "";
   categoryList:any = [];
 
@@ -486,7 +487,7 @@ export class OrderLandingComponent implements OnInit {
   }
   getAllOrderDetails(firstcall) {
 
-    this.orderListInput.order.status = 'all';
+    this.orderListInput.order.status = 'ordered';
     if (this.allOrders && this.allOrders.length && !firstcall) {
       let lastAllOrder: any = _.last(this.allOrders);
       if (lastAllOrder) {
@@ -1072,10 +1073,10 @@ this.orderLandingService.getOrdersByfilter(input)
       this.globalSearch(true);
     }
     else if(this.quickFilterView == 'misc'){
-      this.showMiscOrders();
+      this.showMiscOrders(true);
     } 
     else if(this.quickFilterView == 'delivered'){
-      this.showDeliveredOrders();
+      this.showDeliveredOrders(true);
     }  
   }
   ModifyOrderList(result) {
@@ -1167,7 +1168,7 @@ this.orderLandingService.getOrdersByfilter(input)
         details.StatusColor = "logo-color";
      
       }
-      else if (details.status && (details.status == "ordered" || details.status == "backtodealer")) {
+      else if (details.status && (details.status == "ordered" || details.status == "backtodealer" || details.status == 'not_broadcasted')) {
         details.OrderModifiedStatus = "Assign";
         details.StatusColor = "logo-color";
  
@@ -1199,6 +1200,12 @@ this.orderLandingService.getOrdersByfilter(input)
       }
       else if(tab == 'complete'){
        this.globalSearch(firstcall);
+      }
+      else if(this.quickFilterView == 'misc'){
+        this.showMiscOrders(firstcall);
+      }
+      else if(this.quickFilterView == 'delivered'){
+        this.showDeliveredOrders(firstcall);
       }
     }
 
@@ -1739,10 +1746,23 @@ this.orderLandingService.getOrdersByfilter(input)
           
         }
 
-        showMiscOrders(){
+        showMiscOrders(firstcall){
           this.quickFilterView = 'misc';
           this.tabPanelView = '';
-          let input = {"order":{"userid":this.authenticationService.loggedInUserId() ,"priority":"","usertype": this.authenticationService.userType() ,"status":"misc","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+          if (this.completeOrders && this.completeOrders.length && !firstcall) {
+            let lastMiscOrder: any = _.last(this.completeOrders);
+            if (lastMiscOrder) {
+              this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
+            }
+      
+          }
+          else {
+            this.completeOrders = [];
+            this.orderListInput.order.last_orderid = null;
+          }
+          // let input = {"order":{"userid":this.authenticationService.loggedInUserId() ,"priority":"","usertype": this.authenticationService.userType() ,"status":"misc","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+          this.orderListInput.order.status = 'misc';
+          let input = this.orderListInput;
           this.loaderService.display(true);
           this.orderLandingService.getOrderList(input)
           .subscribe(
@@ -1755,20 +1775,35 @@ this.orderLandingService.getOrdersByfilter(input)
         showMiscOrdersResult(result){
           if(result.result == 'success'){
           let data = this.ModifyOrderList(result.data);
-          this.completeOrders = result.data;
+          this.completeOrders = _.union(this.completeOrders , data);
+          this.completeClickMore = true;
           this.loaderService.display(false);
           console.log(result.data  , 'misc');
           }
           else{
+            this.completeClickMore = false;
             this.loaderService.display(false);
           }
         }
 
 
-        showDeliveredOrders(){
+        showDeliveredOrders(firstcall){
           this.quickFilterView = 'delivered';
           this.tabPanelView = '';
-          let input = {"order":{"userid": this.authenticationService.loggedInUserId()  ,"usertype": this.authenticationService.userType() ,"status":"delivered","lastrecordtimestamp":"15","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+
+          if (this.completeOrders && this.completeOrders.length && !firstcall) {
+            let lastMiscOrder: any = _.last(this.completeOrders);
+            if (lastMiscOrder) {
+              this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
+            }
+      
+          }
+          else {
+            this.completeOrders = [];
+            this.orderListInput.order.last_orderid = null;
+          }
+          this.orderListInput.order.status = 'delivered';
+          let input = this.orderListInput;
           this.loaderService.display(true);
           this.orderLandingService.getOrderList(input)
           .subscribe(
@@ -1781,21 +1816,24 @@ this.orderLandingService.getOrdersByfilter(input)
         showDeliveredOrdersResult(result){
           if(result.result == 'success'){
             let data = this.ModifyOrderList(result.data);
-            // this.allOrders = [];
-            // this.forwardOrders = [];
-            this.completeOrders = result.data;
+            this.completeOrders = _.union(this.completeOrders , data);
+            this.completeClickMore = true;
             this.loaderService.display(false);
-            console.log(result.data  , 'delivered');
+            console.log(result.data  , 'misc');
+            }
+            else{
+              this.completeClickMore = false;
+              this.loaderService.display(false);
+            }
           }
-          else{
-            this.loaderService.display(false);
+
+          miscOrdersView(){
+              this.showMiscOrders(true);
           }
-        }
 
-
-
-
-
+          deliveredOrdersView(){
+            this.showDeliveredOrders(true);
+          }
 
 
   ngOnInit() {

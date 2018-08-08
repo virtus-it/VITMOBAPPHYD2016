@@ -1,12 +1,4 @@
-import {
-  Component,
-  OnInit,
-  Inject,
-  ElementRef,
-  NgModule,
-  NgZone,
-  ViewChild
-} from '@angular/core';
+import {  Component,  OnInit,  Inject,  ElementRef,  NgModule,  NgZone,  ViewChild} from '@angular/core';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
@@ -14,12 +6,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
-import {
-  AgmCoreModule,
-  GoogleMapsAPIWrapper,
-  LatLngLiteral,
-  MapsAPILoader
-} from '@agm/core';
+import {  AgmCoreModule,  GoogleMapsAPIWrapper,  LatLngLiteral,  MapsAPILoader} from '@agm/core';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
 import * as moment from 'moment';
 import { MdDialog } from '@angular/material';
@@ -92,23 +79,10 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       lng: ''
     }
   ];
-  constructor(
-    public gMaps: GoogleMapsAPIWrapper,
-    private distributorService: DistributorServiceService,
-    private authenticationService: AuthenticationService,
-    public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>,
-    @Inject(MD_DIALOG_DATA) public orderDetail: any,
-    public dialog: MdDialog,
-    private loaderService: LoaderService,
-    private mapsAPILoader: MapsAPILoader,
-    private ngZone: NgZone,
-    private productService: ProductsService
-  ) {}
+  constructor(    public gMaps: GoogleMapsAPIWrapper,    private distributorService: DistributorServiceService,    private authenticationService: AuthenticationService,    public thisDialogRef: MdDialogRef<OrderCoverageDetailDailogComponent>,    @Inject(MD_DIALOG_DATA) public orderDetail: any,    public dialog: MdDialog,    private loaderService: LoaderService,    private mapsAPILoader: MapsAPILoader,    private ngZone: NgZone,    private productService: ProductsService  ) {}
   dailogCloseResult = 'cancel';
 
   assignPolygon() {
-    // this.polygonArray = this.orderDetail.polygons;
-    //this.displayPolygon = this.orderDetail.polygons;
 
     this.polygonArray = this.authenticationService.getPolygons();
     this.floatPolygon = this.authenticationService.getPolygons();
@@ -123,7 +97,7 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
 
     this.displayPolygon = this.floatPolygon
   }
-  click(event, polygon) {
+  click(event, polygon) { // Normal click anywhere
     this.listOfDistributors = [];
     let myLatLng = event.latLng;
     this.lat = myLatLng.lat();
@@ -133,7 +107,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       var polygonPath = new google.maps.Polygon({
         paths: dist.path
       });
-      // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
       if (this.gMaps.containsLocation(latlong, polygonPath)) {
         this.listOfDistributors.push(dist);
       }
@@ -212,9 +185,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       icon: '../assets/images/red.png'
     }
   ];
-  clickedMarker(label: string, index: number) {
-    //console.log(`clicked the marker: ${label || index}`)
-  }
 
   ShowAllPolygons() {
     this.listOfDistributors = [];
@@ -231,28 +201,23 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
         data: distributor
       });
       dialogRef.afterClosed().subscribe(result => {
-        //console.log(`Dialog closed: ${result}`);
       });
     }
   }
 
   getAllStockpoints(data){
     let input={"User":{"userid":data.user_id ,"transtype":"getall","apptype":this.authenticationService.appType()}};
-    //console.log(input);
     this.distributorService.StockPoint(input)
     .subscribe(
     output => this.getAllStockPointsResult(output),
     error => {
-        //console.log("falied");
     });
    }
    getAllStockPointsResult(result){
-     //console.log(result);
      if(result.result == 'success'){
        this.stockpoints=result.data;
        let stockpointData = {lat:0 , lng:0 , icon:"" , index: 1 };
        let markersData = [];
-      //  let marker = [];
        _.each(this.stockpoints , function(i, j){
          let details:any = i;
          stockpointData = {
@@ -285,7 +250,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     this.distributorService.getOrderById(input).subscribe(
       output => this.getOrderDetailResult(output),
       error => {
-        //console.log("falied");
         this.loaderService.display(false);
       }
     );
@@ -321,7 +285,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       data: this.orderDetail.orders
     });
     dialogRefDist.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
         this.dailogCloseResult = 'success';
         this.getOrderDetail();
@@ -437,7 +400,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   filteredList() {
     let input = this.filterInput;
     //console.log(input);
-    this.distributorService.getFilteredPolygon(input).subscribe(
+    this.distributorService.getFilteredPolygon(input)
+    .subscribe(
       output => this.getFilteredPolygonResult(output),
       error => {
         this.smallLoader = false;
@@ -498,14 +462,11 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   }
 
   openMapDialog(data) {
-    //console.log(data);
-    // let modelData={data:data.distDetails}
     let dialogRef = this.dialog.open(MapDialogComponent, {
       width: '90%',
       data: data
     });
     dialogRef.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
     });
   }
 
@@ -525,7 +486,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       }
     );
     dialogRefSupplierOrderList.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
     });
   }
 
@@ -543,28 +503,13 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result == 'success') {
         this.forWardOrder(data);
-        // this.thisDialogRef.close('success');
       }
     });
   }
 
   forWardOrder(data) {
-    let input = {
-      order: {
-        apptype: this.authenticationService.appType(),
-        createdthru: 'website',
-        from: this.authenticationService.loggedInUserId(),
-        loginid: this.authenticationService.loggedInUserId(),
-        orderid: this.orderDetail.orders.order_id,
-        orderstatus: 'ordered',
-        product_type: 'cans',
-        quantity: this.orderDetail.orders.quantity,
-        to: data.user_id,
-        usertype: this.authenticationService.userType()
-      }
-    };
+    let input = {order: {apptype: this.authenticationService.appType(),createdthru: 'website',from: this.authenticationService.loggedInUserId(),loginid: this.authenticationService.loggedInUserId(),orderid: this.orderDetail.orders.order_id,orderstatus: 'ordered',product_type: 'cans',quantity: this.orderDetail.orders.quantity,to: data.user_id,usertype: this.authenticationService.userType()}};
     console.log(input);
-    //let input ={"apptype":"moya","createdthru":"website","from":"289","loginid":"289","orderid":"17193","orderstatus":"ordered","product_type":"cans","quantity":"3","to":"1650","usertype":"dealer"}
     this.distributorService.forwardOrder(input).subscribe(
       output => this.forWordOrderResult(output),
       error => {
@@ -575,7 +520,6 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
   }
   forWordOrderResult(result) {
     this.loaderService.display(false);
-
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
@@ -592,9 +536,26 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       this.filterDistancePolygon();
     }
   }
+
+  clickAfterFilter(event, polygon){
+    this.listOfDistributors = [];
+    let myLatLng = event.latLng;
+    this.lat = myLatLng.lat();
+    this.lng = myLatLng.lng();
+    for (let dist of this.displayPolygon) {
+      var latlong = event.latLng;
+      var polygonPath = new google.maps.Polygon({
+        paths: dist.path
+      });
+      if (this.gMaps.containsLocation(latlong, polygonPath)) {
+        this.listOfDistributors.push(dist);
+      }
+    }
+
+  }
+
   ngOnInit() {
     //this.getPolygonDistributors(); [this.orderDetail.orders.productdetails.category]
-
     this.polygonArray = this.authenticationService.getPolygons();
     this.assignPolygon();
     this.dropdownData.selectedItems = [

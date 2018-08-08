@@ -58,7 +58,7 @@
             </div>
             <div class="row">
               <b class="capita col-3">Created Date: </b>
-              <span class="capitalize col" *ngIf="points.createddate">{{points.createddate}}</span>
+              <span class="capitalize col" *ngIf="points.createddate">{{points.createddate | utcDate24}}</span>
               <span class="capitalize col" *ngIf="!points.createddate"> - </span>
             </div>
           </div>

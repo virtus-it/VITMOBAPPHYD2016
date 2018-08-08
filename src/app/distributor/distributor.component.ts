@@ -303,10 +303,11 @@ this.getProductByCategory();
     ViewProduct(distributor) {
         //console.log(distributor);
         if (distributor) {
+            let formattedData = {'type':'productListFromDistributors' , data: distributor }
             let dialogRef = this.dialog.open(ProductListDialogComponent, {
 
                 width: '95%',
-                data: distributor
+                data: formattedData
             });
             dialogRef.afterClosed().subscribe(result => {
                 //console.log(`Dialog closed: ${result}`);
@@ -323,6 +324,7 @@ this.getProductByCategory();
 
     reset(){
         this.tabPanelView = '';
+        this.getDistributors(true);
     }
 
     distributorsAvailability(data){

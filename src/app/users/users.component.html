@@ -82,7 +82,7 @@
               <i *ngIf="user.isactive == 1" class="success	fa fa-thumbs-up" title="click to de-activate user" (click)="deactivateUser(user)"></i>
               <i class="danger	fa fa-thumbs-down" *ngIf="user.isactive == 0" title="click to activate user" (click)="activateUser(user)"></i>
             </span>
-            <span *ngIf="user.firstname" class="capitalize"> {{user.firstname}} </span>
+            <span *ngIf="user.firstname" class="capitalize"> {{user.firstname}} {{user.lastname}}</span>
             <span *ngIf="user.firstname == '' || user.firstname === null"> - </span>
           </td>
           <td class="left" width="10%">

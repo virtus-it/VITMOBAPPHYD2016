@@ -137,7 +137,7 @@
             </a> -->
 
             <a class="align-self-center">
-              <button  md-raised-button (click)="showMiscOrders()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">MISCELLANEOUS</button>
+              <button  md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">MISCELLANEOUS</button>
             </a>
 
             &nbsp;&nbsp;
@@ -151,7 +151,7 @@
 
 
             <a class="align-self-center">
-              <button md-raised-button class=" " (click)="showDeliveredOrders()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
+              <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
             </a>
 
 
@@ -884,7 +884,7 @@
                     </div>
                     <div class="col-sm-6  col-md-6 col-lg-6  right">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
+                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
                   <div class="row form-group">
@@ -980,7 +980,7 @@
 
 
               <td width="10%" class="center">
-                <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept'))">
+                <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept') || ((allorder.status == 'not_broadcasted')) )">
                   <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
@@ -1382,6 +1382,18 @@
         </h5>
         <h4 *ngIf="!completeClickMore" class="warning center">
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+
+
+          <!-- <h5 class="warning  capitalize center">
+            <a href="javascript:void(0);" (click)=getPagingMiscOrders(false,tabPanelView); *ngIf="miscOrdersClickMore">
+              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
+              click for more data</a>
+          </h5>
+          <h4 *ngIf="!miscOrdersClickMore" class="warning center">
+            <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4> -->
+
+
+
       </div>
     </div>
   </div>

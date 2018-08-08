@@ -41,12 +41,12 @@ onCloseCancel() {
 
 addStockDetails(){
   let input = [{"product":{"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid , "brandname": this.Detail.data[0].brandname , "producttype": this.Detail.data[0].ptype ,   
-  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
+  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,"invoicedate":"", "userid": this.authenticationService.loggedInUserId() , 
   "loginid": this.authenticationService.loggedInUserId() ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
-  // if (this.StockInput.invoiceDate) {
-  //   input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
-  // } "invoicedate":"", needed to remove invoice tag from ip as it was not getting executed from database end
-  //console.log(input);
+  if (this.StockInput.invoiceDate) {
+    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+  } 
+  console.log(input);
   if(this.addstockValidation()){
   this.productsService.addStockDetails(input)
   .subscribe(
@@ -65,13 +65,13 @@ if(result.result == 'success'){
 }
 
 addDistributorsStock(){
-  let input = [{"product":{"category":this.distributorStockInput.categoryname , "categoryid": this.distributorStockInput.categoryID  , "brandname": this.distributorStockInput.brandname , "producttype": this.distributorStockInput.producttype ,   "userid":this.Detail.data.userid, 
+  let input = [{"product":{"category":this.distributorStockInput.categoryname , "categoryid": this.distributorStockInput.categoryID  , "brandname": this.distributorStockInput.brandname , "producttype": this.distributorStockInput.producttype ,   "userid":this.Detail.data.userid, "invoicedate":"" , 
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
   "loginid": this.authenticationService.loggedInUserId()  ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() , }}];
-  // if (this.StockInput.invoiceDate) {
-  //   input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
-  // } "invoicedate":""
-  //console.log(input);
+  if (this.StockInput.invoiceDate) {
+    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+  } 
+  console.log(input);
   if(this.addstockValidation()){
   this.productsService.addStockDetails(input)
   .subscribe(
@@ -89,12 +89,12 @@ addDistributorsStockResult(result){
 
 addstockFromDistProducts(){
   let input = [{"product":{"category":this.Detail.data.data[0].category, "categoryid": this.Detail.data.data[0].categoryid , "brandname": this.Detail.data.data[0].brandname , "producttype": this.Detail.data.data[0].ptype ,   
-  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
-  "loginid": this.authenticationService.loggedInUserId() ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
-  // if (this.StockInput.invoiceDate) {
-  //   input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
-  // }
-  //console.log(input);
+  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans, "invoicedate":"" , 
+  "loginid": this.authenticationService.loggedInUserId(), "userid": this.Detail.distributorId , "invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
+  if (this.StockInput.invoiceDate) {
+    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+  }
+  console.log(input);
   if(this.addstockValidation()){
   this.productsService.addStockDetails(input)
   .subscribe(

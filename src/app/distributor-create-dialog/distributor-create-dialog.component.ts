@@ -15,7 +15,7 @@ import { AddStockDistributorComponent } from '../add-stock-distributor/add-stock
   styleUrls: ['./distributor-create-dialog.component.css']
 })
 export class DistributorCreateDialogComponent implements OnInit {
-    dist = { firstName: "", lastName: "", phone: "", mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[] , phonetype : ""};
+    dist = { firstName: "", lastName: "", phone: '', mobile1:"", mobile2:"",  companyname:"",address:"", emailid:"", referCode:"", selectedItems:[] , phonetype : ""};
     areaList = [];
     phone = false; 
     isSuperDealer:boolean = false;
@@ -198,14 +198,22 @@ export class DistributorCreateDialogComponent implements OnInit {
                 if(this.dist.firstName == ''){
                     this.validateMessage = "Enter First name";
                 }
-        }
-            case '5' : {
+            
+        }                
+            case '6' : {
             if(this.dist.firstName && this.dist.lastName && this.dist.phone && this.dist.address){
                 this.validateMessage = "";
                 return true;
             }
         }
     }
+    }
+
+    numberEvent(e:any){
+        console.log(e);
+            if(isNaN(e.key) || e.key == ''){
+                e.preventDefault();
+            }
     }
 
 
