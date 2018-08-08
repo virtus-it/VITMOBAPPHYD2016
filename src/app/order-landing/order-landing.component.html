@@ -32,7 +32,7 @@
                 href="javascript:void(0)" (click)="showTabPanel('forward')">Forward</button> &nbsp;&nbsp;&nbsp;
               </div>
               <a>
-                  <button  md-raised-button (click)="showMiscOrders()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
+                  <button  md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
               </a>&nbsp;&nbsp;
               <!-- <a class="align-self-center">
                 <button *ngIf="tabPanelView === 'forward'" md-raised-button (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
@@ -43,7 +43,7 @@
               </a> -->
   
               <a>
-                  <button md-raised-button class=" " (click)="showDeliveredOrders()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+                  <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
               </a>
   
               &nbsp;&nbsp;
