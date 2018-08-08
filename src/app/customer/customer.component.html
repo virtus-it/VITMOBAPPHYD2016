@@ -4,7 +4,7 @@
       <h4>
         <i class="fa fa-users"></i> Customers</h4>
     </div>
-    <div class="col-6 align-self-center right">
+    <div class="col-5 align-self-center right">
       <div class="row">
         <div class=" col">
           <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
@@ -41,15 +41,12 @@
           </md-select>
         </div>
 
-
         <div class=" col" *ngIf="filterInput.root.searchtype == 'points'">
             <md-select placeholder="Filter By" name="points" [(ngModel)]="filterInput.root.searchtext">
               <md-option value="top10">Highest Points</md-option>
               <md-option value="bottom10">Lowest Points</md-option>
             </md-select>
           </div>
-
-
 
         <div class=" col" *ngIf="filterInput.root.searchtype == 'followupdate'">
           <md-form-field class="inline">
@@ -58,8 +55,9 @@
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-        <div class="col-5 align-self-center">
-          <i class="fa fa-search logo-color cursor fs-20" aria-hidden="true" (click)="getCustomerByFilter('true')"></i>
+
+        <div class="col-5 pdbottomtlr-5 left align-self-center">
+          <i class="fa fa-search cursor fs-18 search-style" aria-hidden="true" (click)="getCustomerByFilter('true')"></i>
           &nbsp;
           <i class="fa fa-history logo-color fs-20" aria-hidden="true" (click)="clearFilter()"></i>
           &nbsp;

@@ -116,7 +116,15 @@
   font-size: 20px;
   margin-left: 10px;
 }
-
+.pdbottomtlr-5{
+  padding:0px 0px 5px;
+}
+.search-style{  
+  background: #0f75bc;
+padding: 5px;
+color: #fff;
+border-radius: 3px;
+}
 @media only screen and (max-width : 640px) {  
 .dropdown-content {
   display: none;
