@@ -1,15 +1,14 @@
 <div class="dist-style minheight-500">
-
   <div id="" class="row mg-0 ">
     <div class="col padding-0">
-      <div class="row pdtopbottom-12 align-items-center">
+      <div class="row pdtopbottom-25x10">
         <div class="col-1">
           <a class="flex-sm-fill  nav-link pageTitle-style" href="javascript:void(0)">
             <!-- <i class="fa fa-file-text-o"></i>  -->
             Orders</a>
         </div>
-        <div class="col-3">
 
+        <div class="col-3 none">
           <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
             (click)="showTabPanel('allorder')">ORDERED</button>
           <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
@@ -17,8 +16,6 @@
 
           <!-- <button type="submit" md-raised-button class=" " *ngIf="superDealer && tabPanelView != 'complete'" [ngClass]="{'btn-primary': tabPanelView === 'complete'}"
             href="javascript:void(0)" (click)="showTabPanel('complete')">Complete ORDERS</button> -->
-
-
           <!-- <a class="flex-sm-fill text-sm-center nav-link " *ngIf="superDealer" [ngClass]="{'active': tabPanelView === 'forward'}" href="javascript:void(0)"
           (click)="showTabPanel('forward')">FORWARD ORDERS</a> -->
           <!-- <a class="flex-sm-fill text-sm-center nav-link  " [ngClass]="{'active': tabPanelView === 'allorder'}" href="javascript:void(0)"
@@ -26,11 +23,43 @@
         </div>
 
         <!-- for complete tab filter -->
-
-
-        <div class="col right">
+        <div class="col">
           <div class="row">
             <div class="">
+                <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
+                (click)="showTabPanel('allorder')">Ordered</button>
+              <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
+                href="javascript:void(0)" (click)="showTabPanel('forward')">Forward</button> &nbsp;&nbsp;&nbsp;
+              </div>
+              <a>
+                  <button  md-raised-button (click)="showMiscOrders()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
+              </a>&nbsp;&nbsp;
+              <!-- <a class="align-self-center">
+                <button *ngIf="tabPanelView === 'forward'" md-raised-button (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
+              </a> -->
+              
+              <!-- <a class="align-self-center">
+                <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
+              </a> -->
+  
+              <a>
+                  <button md-raised-button class=" " (click)="showDeliveredOrders()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+              </a>
+  
+              &nbsp;&nbsp;
+              <a>
+                  <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
+                  *ngIf='superDealer || customerCare || salesTeamLogin'>Todays FollowUp</button>
+              </a>
+              &nbsp;&nbsp;
+              <a>
+                  <button  md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'gridview'}"
+                  href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid </button> 
+                  <button  md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'mapview'}"
+                  href="javascript:void(0)" (click)="showNewPanel('mapview')">Map </button></a>
+                  &nbsp;&nbsp;
+
+              <div class="">
               <md-select placeholder="Global Search" [(ngModel)]="globalFilterInput.order.searchtype" name="type" class="full-width left">
                 <md-option value="name">Customer</md-option>
                 <md-option value="mobile">Customer Mobile</md-option>
@@ -41,28 +70,28 @@
                 <md-option value="distributor_id" *ngIf="superDealer || customerCare || salesTeamLogin">Distributor</md-option>
                 <md-option value="deliveryslot">Delivery Slot</md-option>
                 <md-option value="category">Category</md-option>
-
-
               </md-select>
             </div>
-            <div class="col-3" *ngIf="globalFilterInput.order.searchtype == 'name'">
+
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'name'">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="globalfilterType.customerName">
               </md-form-field>
             </div>
-            <div class="col-3" *ngIf="globalFilterInput.order.searchtype == 'mobile'">
+
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'mobile'">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10">
               </md-form-field>
             </div>
-            <div class="col-3" *ngIf="globalFilterInput.order.searchtype == 'orderid'">
 
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'orderid'">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid">
               </md-form-field>
             </div>
 
-            <div class="col-4" *ngIf="globalFilterInput.order.searchtype == 'supplierid'">
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'supplierid'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -72,8 +101,8 @@
                 </md-autocomplete>
               </md-form-field>
             </div>
-            <div class="col-4" *ngIf="globalFilterInput.order.searchtype == 'distributor_id'">
 
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'distributor_id'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -83,26 +112,26 @@
                 </md-autocomplete>
               </md-form-field>
             </div>
-            <div class="col-4" *ngIf="globalFilterInput.order.searchtype == 'followupdate'">
+
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'followupdate'">
               <md-form-field class="inline">
                 <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="globalfilterType.followUpdate">
                 <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                 <md-datepicker #picker></md-datepicker>
               </md-form-field>
             </div>
-            <div class="col-3" *ngIf="globalFilterInput.order.searchtype == 'status'">
-              <angular2-multiselect class="mgright" [data]="statusListComplete" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
+
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'status'">
+              <angular2-multiselect class="mgright left" [data]="statusListComplete" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem"></angular2-multiselect>
             </div>
 
-            <div class="col-3" *ngIf="globalFilterInput.order.searchtype == 'category'">
-              <angular2-multiselect class="mgright" [data]="categories" [(ngModel)]="categoryProduct.selectedItems" [settings]="dropdownSettings"
+            <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'category'">
+              <angular2-multiselect class="mgright left" [data]="categories" [(ngModel)]="categoryProduct.selectedItems" [settings]="dropdownSettings"
                 name="selectedItem"></angular2-multiselect>
             </div>
 
-
-
-            <div class="col-4" *ngIf="globalFilterInput.order.searchtype =='deliveryslot'">
+            <div class="col-3" *ngIf="globalFilterInput.order.searchtype =='deliveryslot'">
               <div class="row">
                 <div class="col-6">
                   <md-form-field class="inline">
@@ -111,6 +140,7 @@
                     <md-datepicker #picker></md-datepicker>
                   </md-form-field>
                 </div>
+
                 <div class="col-6">
                   <md-select placeholder="Time Slot" class="wd-100pc left" name="timeSlot" [(ngModel)]="time">
                     <md-option>Select Slot</md-option>
@@ -119,58 +149,32 @@
                     <md-option value="2PM-5PM">2PM-5PM</md-option>
                     <md-option value="5PM-8PM">5PM-8PM</md-option>
                   </md-select>
-
                 </div>
               </div>
             </div>
 
             <!--  complete page  filter ends here -->
-
-            &nbsp;
-            <a class="align-self-center">
-              <i class="fa fa-search logo-color cursor" aria-hidden="true" (click)="globalSearch('true')"></i>
-            </a>
-
-            &nbsp;&nbsp;
+       
+            <a class="mgtop-10">
+                <i class="fa fa-search cursor search-style" aria-hidden="true" (click)="globalSearch('true')"></i>
+            </a>  &nbsp;&nbsp;
+            
             <!-- <a class="align-self-center">
               <button *ngIf="tabPanelView === 'allorder'" md-raised-button (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
             </a> -->
 
-            <a class="align-self-center">
-              <button  md-raised-button (click)="showMiscOrders()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">MISCELLANEOUS</button>
-            </a>
+         
 
-            &nbsp;&nbsp;
-            <!-- <a class="align-self-center">
-              <button *ngIf="tabPanelView === 'forward'" md-raised-button (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
-            </a> -->
-            &nbsp;&nbsp;
-            <!-- <a class="align-self-center">
-              <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
-            </a> -->
-
-
-            <a class="align-self-center">
-              <button md-raised-button class=" " (click)="showDeliveredOrders()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
-            </a>
-
-
-            &nbsp;&nbsp;
-            <a class="align-self-center">
-              <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
-                *ngIf='superDealer || customerCare || salesTeamLogin'>Todays FollowUp</button>
-            </a>
-            &nbsp;&nbsp;
-            <a class="align-self-center">
-              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
+                <a class="mgtop-10">
+                    <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
               <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare || salesTeamLogin)" (click)="resetDistributorsView()"
                 title="restore"></i>
-            </a>&nbsp;&nbsp;&nbsp;
-
-            <a class="align-self-center">
-              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <a class="mgtop-10">
+                <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <div class="filterView" *ngIf="showFilterDailog">
                 <div class="height-500">
                   <div class="form-group">
@@ -184,13 +188,10 @@
                       <md-option value="distributor_id" *ngIf="tabPanelView === 'forward'">Distributor</md-option>
                       <md-option value="deliveryslot">Delivery Slot</md-option>
                       <md-option value="category">Category</md-option>
-
                     </md-select>
-
                   </div>
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
-
                     <md-form-field class="example-full-width">
                       <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
                     </md-form-field>
@@ -200,17 +201,14 @@
                       <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10">
                     </md-form-field>
                   </div>
-                  <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
 
+                  <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
                     <md-form-field class="example-full-width">
                       <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
-
-
                     </md-form-field>
                   </div>
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
-
                     <md-form-field class="example-full-width">
                       <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
                       <md-autocomplete #auto="mdAutocomplete">
@@ -220,8 +218,8 @@
                       </md-autocomplete>
                     </md-form-field>
                   </div>
-                  <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
 
+                  <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
                     <md-form-field class="example-full-width">
                       <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                       <md-autocomplete #auto="mdAutocomplete">
@@ -253,8 +251,6 @@
                       name="selectedItem"></angular2-multiselect>
                   </div>
 
-
-
                   <div class="" *ngIf="filterInput.order.searchtype =='deliveryslot'">
                     <md-form-field class="inline">
                       <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date" [(ngModel)]="filterType.date">
@@ -268,9 +264,6 @@
                       <md-option value="2PM-5PM">2PM-5PM</md-option>
                       <md-option value="5PM-8PM">5PM-8PM</md-option>
                     </md-select>
-
-
-
                   </div>
                   <br>
                   <small>{{this.cantFilterMessage}}</small>
@@ -286,19 +279,10 @@
                 </div>
               </div>
             </a>&nbsp;
+        
           </div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="col">
-          <button type="submit" md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'gridview'}"
-            href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid View</button> &nbsp;&nbsp;
-          <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'mapview'}"
-            href="javascript:void(0)" (click)="showNewPanel('mapview')">Map View</button>
-        </div>
-      </div>
-      <br>
 
       <div *ngIf="tabPanelView === 'forward' && newView == 'gridview'" class="panelview-style">
         <table class="table table-hover table-striped">
