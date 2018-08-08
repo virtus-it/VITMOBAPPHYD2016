@@ -1,28 +1,25 @@
 ﻿<div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-6 col-md-2 col-lg-2 ">
+    <div class="col-2 ">
       <h4>
         <i class="fa fa-sitemap"></i> Distributor</h4>
-
       <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
 
-
-
-    <div class="col-sm-6 col-md-3 col-lg-3 align-self-center right">
-
+    <div class="col right">
         <button type="submit" md-raised-button class=""  href="javascript:void(0)"
-        (click)="activeDistributors()">Active Distributors</button> &nbsp;&nbsp;
+        (click)="activeDistributors()">Active Distributors</button> &nbsp;
         <button type="submit" md-raised-button class=""  href="javascript:void(0)"
-        (click)="inactiveDistributors()">In-Active Distributors</button>
-
+        (click)="inactiveDistributors()">In-Active Distributors</button>&nbsp;
         <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
-        (click)="showTabPanel('bystock')">By Stock </button>&nbsp;&nbsp;
+        (click)="showTabPanel('bystock')">By Stock </button>&nbsp;
         <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
+
       <a class="cursor logo-color " title="Add Distributor">
         <i class="fa fa-plus fs-25 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
-      </a>
-      <a class="cursor logo-color mgleft-10">
+      </a>&nbsp;
+
+      <a class="cursor logo-color">
         <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter" (click)="filterDailogToggle()"></i>
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
@@ -74,29 +71,22 @@
             </div>
 
             <div class="" *ngIf="filterType == 'address'">
-
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Enter Area Name" [(ngModel)]="filterTypeModel.address" name="searchArea">
               </md-form-field>
             </div>
 
             <div class="" *ngIf="filterType == 'areadefined'">
-
               <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isAreaDefined">
                 <md-option value="yes">YES</md-option>
                 <md-option value="no">NO</md-option>
-
-
               </md-select>
             </div>
 
             <div class="" *ngIf="filterType == 'stockpoints'">
-
                 <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isstockpointDefined">
                   <md-option value="yes">YES</md-option>
                   <md-option value="no">NO</md-option>
-  
-  
                 </md-select>
               </div>
 
@@ -109,14 +99,9 @@
                     </md-option>
                   </md-autocomplete>
                 </md-form-field>
-  
-              </div>
-
-
-
+                </div>
 
             <div class="input-group pd-10  ">
-
               <button md-raised-button color="primary" (click)="searchFilter()">Search</button>
               <button md-raised-button color="primary" (click)="clearSearch()">
                 <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
@@ -127,10 +112,9 @@
       </a>
     </div>
   </div>
+
   <div *ngIf="tabPanelView !== 'bystock'">
-
     <div id="" class="row pd-15 mg-0">
-
       <div class="">
         <table class="table table-hover table-striped" style="table-layout:fixed">
           <thead>
