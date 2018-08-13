@@ -48,11 +48,7 @@ export class AuthenticationService {
     this.salesTeamLogin = this.salesTeamLoginFunction();
   }
   login(username: string, password: string) {
-    let bodyString = JSON.stringify({
-      userName: username,
-      userPwd: password,
-      apptype: 'moya'
-    }); // Stringify payload
+    let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
     return this.http

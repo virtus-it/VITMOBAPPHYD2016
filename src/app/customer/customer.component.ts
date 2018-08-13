@@ -41,6 +41,7 @@ export class CustomerComponent implements OnInit {
     superDealer = true;
     customerCare = true;
     salesTeamLogin = true;
+    customersCount :number = 0;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
@@ -285,6 +286,7 @@ export class CustomerComponent implements OnInit {
         this.loaderService.display(false);
         if (result.result == 'success') {
             this.customerList = _.union(this.customerList, result.data);
+            this.customersCount = this.customerList.length;
         }
         else {
             this.customerClickMore = false;

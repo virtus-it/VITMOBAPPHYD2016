@@ -46,8 +46,13 @@ export class SelectProductsForassingComponent implements OnInit {
   }
 }
 else if(this.orderDetail.type == 'coveragePage'){
+      if(this.orderDetail.data.orders && this.orderDetail.data.orders.customer){
       this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.customer.userid
      }
+     else{
+      this.orderDetail.data.orders.order_by = this.orderDetail.data.orders.order_by;
+     }
+    }
      else if(this.orderDetail.type == 'assignfromOrderDetails'){
     this.orderDetail.orderDetails.order_by = this.orderDetail.disributorId;
      }

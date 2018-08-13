@@ -28,7 +28,7 @@ export class AddstockProductComponent implements OnInit {
 
   }
 
-StockInput = { invoiceDate:new Date(), stock:"", itemCost:this.Detail.pcost, returnemptycans:"0"};
+StockInput = { invoiceDate:new Date(), stock:"", itemCost:this.Detail.pcost, returnemptycans:"0" , distributorpaidamount: ''};
 validateMessage = '';
 productList = [];
 distributorStockInput = {"productID":"" , "categoryID":"" , "categoryname":"", "brandname":"", "producttype":""};
@@ -41,7 +41,7 @@ onCloseCancel() {
 
 addStockDetails(){
   let input = [{"product":{"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid , "brandname": this.Detail.data[0].brandname , "producttype": this.Detail.data[0].ptype ,   
-  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,"invoicedate":"", "userid": this.authenticationService.loggedInUserId() , 
+  "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,"invoicedate":"", "userid": this.authenticationService.loggedInUserId() ,  "paidamt":this.StockInput.distributorpaidamount , 
   "loginid": this.authenticationService.loggedInUserId() ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
   if (this.StockInput.invoiceDate) {
     input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
@@ -65,7 +65,7 @@ if(result.result == 'success'){
 }
 
 addDistributorsStock(){
-  let input = [{"product":{"category":this.distributorStockInput.categoryname , "categoryid": this.distributorStockInput.categoryID  , "brandname": this.distributorStockInput.brandname , "producttype": this.distributorStockInput.producttype ,   "userid":this.Detail.data.userid, "invoicedate":"" , 
+  let input = [{"product":{"category":this.distributorStockInput.categoryname , "categoryid": this.distributorStockInput.categoryID  , "brandname": this.distributorStockInput.brandname , "producttype": this.distributorStockInput.producttype ,   "userid":this.Detail.data.userid, "invoicedate":"" ,  "paidamt":this.StockInput.distributorpaidamount , 
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
   "loginid": this.authenticationService.loggedInUserId()  ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() , }}];
   if (this.StockInput.invoiceDate) {
@@ -88,7 +88,7 @@ addDistributorsStockResult(result){
 }
 
 addstockFromDistProducts(){
-  let input = [{"product":{"category":this.Detail.data.data[0].category, "categoryid": this.Detail.data.data[0].categoryid , "brandname": this.Detail.data.data[0].brandname , "producttype": this.Detail.data.data[0].ptype ,   
+  let input = [{"product":{"category":this.Detail.data.data[0].category, "categoryid": this.Detail.data.data[0].categoryid , "brandname": this.Detail.data.data[0].brandname , "producttype": this.Detail.data.data[0].ptype ,   "paidamt":this.StockInput.distributorpaidamount ,  
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans, "invoicedate":"" , 
   "loginid": this.authenticationService.loggedInUserId(), "userid": this.Detail.distributorId , "invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
   if (this.StockInput.invoiceDate) {

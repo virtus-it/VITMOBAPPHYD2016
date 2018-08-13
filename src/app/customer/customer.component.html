@@ -4,6 +4,11 @@
       <h4>
         <i class="fa fa-users"></i> Customers</h4>
     </div>
+    <div class="col-2">
+        <b cass="" *ngIf="customersCount != 0">Count : {{this.customersCount}}</b>
+        <b cass="" *ngIf="customersCount == 0 || customersCount == ''"> </b>
+      </div>
+
     <div class="col-5 align-self-center right">
       <div class="row">
         <div class=" col">

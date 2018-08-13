@@ -481,7 +481,24 @@
                 </b>
               </div>
             </div>
-            <div class="row">
+
+            <div class="row" *ngIf="mobileNumbersHundred">
+              <div class="col-12">
+              <b> There are more than 100 mobile numbers, but you can search and send notification or sms messages</b>
+
+              <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of searchedNumber; let i = index"
+                [attr.data-index]="i">
+                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                  <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{mobile.mobileno}}</span>
+                </label>
+              </div>
+
+
+            </div>
+          </div>
+            <div class="row" *ngIf="!mobileNumbersHundred">
               <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
                 [attr.data-index]="i">
                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">

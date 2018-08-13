@@ -46,7 +46,9 @@ export class SmsDialogComponent implements OnInit {
   orderinput = { orderType: "", fromDate: null, toDate: null, days: null, distributorid: null, date: null, timeSlot: "" };
   smsInput: any = { name: "", mobilenumber: [], body: "", smsType: "sms", customBody: "", customMobilenumber: "", title: "", type: "", redirecturl: "", showcomment: false, url: "", buttons: [{ name: "", actiontype: "", count: 0 }], option: [{ name: "", count: 0 }], sliderurl: [{ image: "", count: 0 }], radio: '', tempname: "" , navigateto : '' };
   mobileDetails: any = [];
+  searchedNumber:any = [];
   mobileDetailsCopy: any = [];
+  mobileNumbersHundred : boolean = false;
   distributors: any = [];
   searchMobileNumber: string = "";
   checkAll: boolean = false;
@@ -313,11 +315,20 @@ export class SmsDialogComponent implements OnInit {
 
       this.mobileDetails = mobile;
       this.mobileDetailsCopy = mobile;
+      if(this.mobileDetails.length > 100){
+        this.mobileNumbersHundred = true;
+        // console.log( this.mobileNumbersHundred   , 'if mobileNumbersHundred');
+      }
+      else{
+      this.mobileNumbersHundred = false;
+      }
 
     }
     else {
       this.mobileDetails = [];
       this.mobileDetailsCopy = [];
+      this.mobileNumbersHundred = false;
+      // console.log( this.mobileNumbersHundred   , 'else mobileNumbersHundred');
     }
   }
   searchMobileNo() {
@@ -326,6 +337,10 @@ export class SmsDialogComponent implements OnInit {
     this.mobileDetails = this.mobileDetailsCopy.filter(function (e) {
       return e.mobileno.toLowerCase().indexOf(term.toLowerCase()) >= 0;
     });
+    this.searchedNumber = this.mobileDetails;
+    if(this.searchMobileNumber == ''){
+      this.searchedNumber  = [];
+    }
   }
   onChangeCheck(number: any, isChecked: boolean) {
 
@@ -427,7 +442,7 @@ export class SmsDialogComponent implements OnInit {
     }
 
     let formattedInput: any = {}
-    if (this.checkAll = true && createSmsInput.User.count > 10) {
+    if (this.checkAll == true && createSmsInput.User.count > 10) {
       createSmsInput.User.mobilenumber = [];
       formattedInput = {
         type: 'checkall',

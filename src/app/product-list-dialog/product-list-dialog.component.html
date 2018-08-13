@@ -7,13 +7,24 @@
     <i class="fa fa-gift"></i> Product List
   </div>
   <div class="col-md-9  col-sm-9  col-lg-9 center">
+
+
     <span>
       <i class="fa fa-sitemap"></i>
-      <!-- <span>Distributor Name :</span>  -->Distrirbutor :
-      <span *ngIf="distributorDetails.distributorName" class="capitalize">{{distributorDetails.distributorName}}</span>
-      <span *ngIf="!distributorDetails.distributorName" class="capitalize">{{distributorDetails.firstname}} {{distributorDetails.lastname}}</span>
-      <span class="grayd"> - {{distributorDetails.mobileno}} </span>
+      Distrirbutor :
+      <span *ngIf="distributorDetails && distributorDetails.type == 'productListFromDistributors'" class="capitalize">{{distributorDetails.data.firstname}} {{distributorDetails.data.lastname}}</span>
+
+      <span *ngIf="distributorDetails && distributorDetails.type != 'productListFromDistributors'" class="capitalize">{{distributorDetails.distributorName}} </span>
+
+      <span class="grayd" *ngIf="distributorDetails && distributorDetails.type == 'productListFromDistributors'"  > - {{distributorDetails.data.mobileno}} </span>
+
+      <span class="grayd" *ngIf="distributorDetails && distributorDetails.type != 'productListFromDistributors'"  > - {{distributorDetails.mobileno}} </span>
+
+
     </span>
+
+
+
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right align-self-center">
     <strong (click)="onCloseCancel()">
@@ -78,7 +89,7 @@
                       <span class="onhovertooltip-100" title="{{prod.category}}">{{prod.category}}</span>
                     </td>
                     <td width="14%" class="left capital">
-                      <span class="onhovertooltip-100" title="{{prod.brandName}}">{{prod.brandName}}</span>
+                      <span class="onhovertooltip-100" title="{{prod.brandname}}">{{prod.brandname}}</span>
                     </td>
                     <td width="16%" class="left capital">
                       <span class="onhovertooltip-150" title="{{prod.ptype}}">{{prod.ptype}}</span>

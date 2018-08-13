@@ -65,13 +65,13 @@
       <div class="col">
         <h5 class="left capital" *ngIf="Detail.type != 'distributorspage'">
           <i class="fa fa-gift fs-20" aria-hidden="true"></i>
-          <span class="gray6">{{Detail.pname}}</span> -
-          <span class="gray8">{{Detail.ptype}}</span>
+          <span class="gray6">{{Detail.brandName}}</span> -
+          <span class="gray8">{{Detail.category}}</span>
         </h5>
         <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'">
           <i class="fa fa-gift fs-20"></i>
-          <span class="gray6">{{Detail.data.pname}}</span> -
-          <span class="gray8">{{Detail.data.ptype}}</span>
+          <span class="gray6">{{Detail.data.data[0].pname}}</span> -
+          <span class="gray8">{{Detail.data.data[0].category}}</span>
         </h5>
         <div class="row">
           <div class="col"  *ngIf="this.Detail.type == 'distributorsStockHistory'">
@@ -96,9 +96,12 @@
             <tr>
               <th width="15%">Cost</th>
               <th width="15%">Stock</th>
-              <th width="25%">Category</th>
-              <th width="20%">Empty Cans</th>
-              <th width="25%">Date</th>
+              <th width="10%">Dist Paid amt</th>
+              <th width="10%">Total amt</th>
+              <th width="15%">Category</th>
+              <th width="10%">Empty Cans</th>
+              <th width="15%">Date</th>
+              <th width="10%">Action By</th>
             </tr>
           </thead>
           <tbody>
@@ -106,9 +109,22 @@
 
               <td width="15%">{{stock.pcost}}</td>
               <td width="15%">{{stock.stock}}</td>
-              <td width="25%">{{this.Detail.category}}</td>
-              <td width="20%">{{stock.returnemptycans}}</td>
-              <td width="25%">{{stock.modifieddate | utcDate24}}</td>
+              <td width="10%">
+                <span *ngIf="stock.paidamt">{{stock.paidamt}} </span>
+                <span *ngIf="!stock.paidamt">-</span>
+              </td>
+              <td width="10%">
+                <span *ngIf="stock.billamt">{{stock.billamt}} </span>
+                <span *ngIf="!stock.billamt"> - </span>
+              
+              </td>
+              <td width="15%">{{stock.category}}</td>
+              <td width="10%">{{stock.returnemptycans}}</td>
+              <td width="15%">{{stock.modifieddate | utcDate24}}</td>
+              <td width="10%">
+                <span *ngIf="stock.actionby && stock.actionby.fullname">{{stock.actionby.fullname}}</span>
+                <span *ngIf="!stock.actionby"> - </span>
+              </td>
             </tr>
           </tbody>
         </table>

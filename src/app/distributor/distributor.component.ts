@@ -66,7 +66,15 @@ export class DistributorComponent implements OnInit {
     LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
+    distributorsCount :number = 0;
+
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
+
+
+    // let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 1000 } }
+
+
+    
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog,private loaderService: LoaderService , private productService: ProductsService) { 
 
         this.CategoryCtrl = new FormControl();
@@ -222,6 +230,8 @@ this.getProductByCategory();
 
             this.distributorClickMore = true;
             let finalDistributor = _.union(this.distributors, data.data);
+            this.distributorsCount = finalDistributor.length;
+            console.log(this.distributorsCount , 'sdggsdgsdg=====');
             this.distributors = finalDistributor;
             this.distributorsCopy = finalDistributor;
 

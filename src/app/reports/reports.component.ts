@@ -208,6 +208,7 @@ export class ReportsComponent implements OnInit {
   filterReports() {
     let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "date": this.distOrders.getDate, "apptype": this.authenticationService.appType(), "transtype": "distributorsdetails", "devicetype": "", "moyaversioncode": "" } };
     console.log(input);
+    this.loaderService.display(true);
     input.root.date = moment(this.distOrders.getDate).format('YYYY-MM-DD 00:00:00');
     this.reportservice.searchReports(input)
       .subscribe(
@@ -219,11 +220,14 @@ export class ReportsComponent implements OnInit {
   }
   filterReportsResult(result) {
     if (result.result == 'success') {
+      this.loaderService.display(false);
       this.distributorsorderData = result.data;
     }
-    else {
+    else {     
       this.distributorsorderData = [];
+      this.loaderService.display(false);
     }
+
   }
 
   downloadOrders() {
@@ -283,7 +287,7 @@ export class ReportsComponent implements OnInit {
 
 
   downloadStockReports() {
-    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports" } };
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports" , "categoryid":"" , "distributorid":""} };
 
     if (this.stockreportsInput.fromDate) {
       input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
@@ -297,6 +301,13 @@ export class ReportsComponent implements OnInit {
     if(this.stockreportsInput.filterBy == 'category'){
   input.order.filterid = this.categoryid;
     }
+    
+    if(this.stockreportsInput.filterBy == 'distributorcategory'){
+      input.order.categoryid = this.categoryid;
+      input.order.distributorid =  this.stockreportsInput.distributorId;
+    }
+
+
     console.log(input , 'download input');
     this.reportservice.downloadReports(input)
       .subscribe(

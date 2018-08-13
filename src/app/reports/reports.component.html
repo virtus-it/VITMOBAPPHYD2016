@@ -621,11 +621,12 @@
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="category">Category</md-option>
+                <md-option value="distributorcategory">Distributor + Category</md-option>
               </md-select>
 
             </div>
 
-            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'distributor'">
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'distributor' || stockreportsInput.filterBy == 'distributorcategory'">
 
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
@@ -638,7 +639,7 @@
             </div>
 
 
-            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category'">
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category' || stockreportsInput.filterBy == 'distributorcategory' ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
                 <md-autocomplete #auto="mdAutocomplete">

@@ -49,8 +49,11 @@ export class ProductListDialogComponent implements OnInit {
 
 getProducts(distributorDetails){
   this.loaderService.display(true);
-  if(distributorDetails.data.user_id){
+  if(distributorDetails.type == 'productListFromDistributors' && distributorDetails.data.user_id){
     this.distributorId = distributorDetails.data.user_id;
+   }
+   else if(distributorDetails.user_id){
+    this.distributorId = distributorDetails.user_id;
    }
    else if(distributorDetails.data.userid){
    this.distributorId = distributorDetails.data.userid;
@@ -129,7 +132,7 @@ getProductsResult(output) {
     let formattedData = {"type":"distributorspage", data:data , distributorId: distributorDetails.data.userid}
     let dialogRefStrockHitory = this.dialog.open(AddStockHistoryComponent, {
 
-      width: '40%',
+      width: '75%',
       data: formattedData
     });
     dialogRefStrockHitory.afterClosed().subscribe(result => {

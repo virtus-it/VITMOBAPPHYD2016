@@ -83,9 +83,9 @@
         <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"  ></i> &nbsp;
 
 
-        <i *ngIf="points.isactive == 1 " class="fa fa-thumbs-up success fs-18" title="Active State" ></i>
+        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" ></i>
 
-        <i *ngIf="points.isactive == 0" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
+        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
 
 
 

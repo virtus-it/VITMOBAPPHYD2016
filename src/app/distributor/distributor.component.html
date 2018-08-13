@@ -6,6 +6,12 @@
       <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
 
+    <div class="col-2">
+      <b cass="" *ngIf="distributorsCount != 0">Count : {{this.distributorsCount}}</b>
+      <b cass="" *ngIf="distributorsCount == 0 || distributorsCount == ''"> </b>
+    </div>
+
+
     <div class="col right">
         <button type="submit" md-raised-button class=""  href="javascript:void(0)"
         (click)="activeDistributors()">Active Distributors</button> &nbsp;
