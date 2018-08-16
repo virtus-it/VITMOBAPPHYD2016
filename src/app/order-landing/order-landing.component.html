@@ -25,12 +25,14 @@
         <!-- for complete tab filter -->
         <div class="col">
           <div class="row">
-            <div class="">
+              <a>
                 <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
                 (click)="showTabPanel('allorder')">Ordered</button>
+              </a>&nbsp;&nbsp;
+              <a>
               <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
-                href="javascript:void(0)" (click)="showTabPanel('forward')">Forward</button> &nbsp;&nbsp;&nbsp;
-              </div>
+                href="javascript:void(0)" (click)="showTabPanel('forward')">Forward</button> 
+            </a>&nbsp;&nbsp;
               <a>
                   <button  md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
               </a>&nbsp;&nbsp;
@@ -412,7 +414,7 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="forward.productdetails">
+                      <b class="capitalize onhovertooltip-100" *ngIf="forward.productdetails" title="{{forward.productdetails.category}}">
                         {{forward.productdetails.category}} </b>
                       <b class="" *ngIf="forward.productdetails === null || forward.productdetails == ''"> - </b>
                     </div>
@@ -771,7 +773,7 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails">
+                      <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails" title="allorder.productdetails.category">
                         {{allorder.productdetails.category}} </b>
                       <b class="capitalize" *ngIf="allorder.productdetails === null">
                         - </b>
@@ -1135,7 +1137,7 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails">
+                      <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails" title="complete.productdetails.category">
                         {{complete.productdetails.category}} </b>
                       <b class="capitalize" *ngIf="complete.productdetails === null ">
                         - </b>
