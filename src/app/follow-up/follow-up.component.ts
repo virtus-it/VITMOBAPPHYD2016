@@ -15,6 +15,7 @@ export class FollowUpComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<FollowUpComponent>, @Inject(MD_DIALOG_DATA) public details: any, public dialog: MdDialog, private loaderService: LoaderService, private followupService: FollowUpService) { }
   numbers = 250;
+  saveSuccess : boolean = false;
   followUpList = [];
   followUpStatus="";
   followupDate  = null;
@@ -46,6 +47,7 @@ export class FollowUpComponent implements OnInit {
     //console.log(result);
     if (result.result = 'success') {
       //this.thisDialogRef.close('success');
+      this.saveSuccess = true;
       this.getfollowUpdetails();
       this.followUpInput.User.remarks = "";
       this.followUpInput.User.followupdate = null;
@@ -73,7 +75,12 @@ export class FollowUpComponent implements OnInit {
   }
   }
   onCloseCancel() {
-    this.thisDialogRef.close('Cancel');
+    if(this.saveSuccess == true){
+      this.thisDialogRef.close('Success');
+    }
+    else{
+      this.thisDialogRef.close('Cancel');
+    }
   }
 
   followUpCompleted(){
