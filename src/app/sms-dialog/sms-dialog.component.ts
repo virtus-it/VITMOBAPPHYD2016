@@ -7,6 +7,8 @@ import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { Observable } from 'rxjs/Observable';
 import { FollowUpService } from '../follow-up/follow-up.service';
+import { MdDialog } from '@angular/material';
+import {DeleteTemplateComponent} from '../delete-template/delete-template.component';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
@@ -25,7 +27,7 @@ export class SmsDialogComponent implements OnInit {
   filteredStates: Observable<any[]>;
 
 
-  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService, private authenticationService: AuthenticationService) {
+  constructor(private distributorService: DistributorServiceService, public thisDialogRef: MdDialogRef<SmsDialogComponent>, @Inject(MD_DIALOG_DATA) public smsDetail: any, private smsService: SmsServiceService, private followupService: FollowUpService, private authenticationService: AuthenticationService ,  public dialog: MdDialog,) {
 
 
 
@@ -735,6 +737,19 @@ export class SmsDialogComponent implements OnInit {
   }
 
 
+  deleteNotificationTemplate(data){
+    let formattedData = {type: 'deleteNotificationTemplate' , data: data}
+    let dialogRefAddSupplier = this.dialog.open( DeleteTemplateComponent , {
+      width: '700px',
+      data: formattedData
+
+  });
+  dialogRefAddSupplier.afterClosed().subscribe(result => {
+      if(result == 'success'){
+        this.getTemplates();
+      }
+  });
+  }
 
 
 

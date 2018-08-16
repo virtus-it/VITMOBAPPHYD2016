@@ -450,6 +450,10 @@
               <div class="row mgtop-20">
                 <div *ngFor="let temp of getAllTemplates" class="col mgbottom-10">
                   <button md-raised-button class="btn-primary capital" (click)="fillTemplateData(temp)">{{temp.template_name}}</button>
+                  <!-- this button is for deleting notification -->
+                  <i md-raised-button class="fa fa-trash danger" (click)="deleteNotificationTemplate(temp)"></i>
+
+
                 </div>
               </div>
             </div>

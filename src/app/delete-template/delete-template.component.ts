@@ -55,10 +55,30 @@ if(result.result == 'success'){
     if(this.Detail.productid){
       this.deleteProduct();
     }
+    else if(this.Detail.type == 'deleteNotificationTemplate'){
+      this.deleteNotificationTemplate();
+    }
     else{
       this.deleteTemplate();
 
     }
+  }
+
+  deleteNotificationTemplate(){
+    let input = {"User":{"transtype":"delete" , "id":this.Detail.data.id}};
+    console.log(input);
+    this.followupService.followUpTemplate(input)
+    .subscribe(
+    output => this.deleteNotificationTemplateResult(output),
+    error => {
+      //console.log("error in distrbutors");
+      this.loaderService.display(false);
+    });
+  }
+  deleteNotificationTemplateResult(result){
+if(result.result == 'success'){
+  this.thisDialogRef.close('success');
+}
   }
 
 
