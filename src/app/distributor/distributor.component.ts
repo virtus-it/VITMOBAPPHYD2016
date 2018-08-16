@@ -66,7 +66,7 @@ export class DistributorComponent implements OnInit {
     LastfilterRecords = false;
     isActive:any= "";
     showFilterDailog = false;
-    distributorsCount :number = 0;
+    distributorsCount :any = 0;
 
     distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
 

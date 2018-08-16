@@ -185,3 +185,9 @@ border-radius: 3px;
 .left{
   text-align: left !important;
 }
+/* This should work for Normal desktops(15 to 18 inch) only. */
+@media (min-width: 1550px) and (max-width : 2000px){
+.mat-raised-button{
+  padding: 2px 35px !important;
+}
+}
