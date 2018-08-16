@@ -29,12 +29,18 @@
 
 .brd-top-graya{
     border-top: 1px solid #aaa !important;
+    padding-top: 10px;
 }
 
 .pd-5x25x10{
     padding: 5px 25px 10px;
 }
-
+.info-style{
+    border: 1px solid #449;
+    padding: 1px 7px;
+    border-radius: 50%;
+    background: red;
+}
 .add-btn-1{
         border: 1px solid darkgray;
         border-radius: 5px;
