@@ -63,9 +63,10 @@ export class SmsComponent implements OnInit {
             // let phoneNumbersCopy:any = [];
             let mobNumbers = _.each(this.smsListDetails , function(i , j){
                 let details:any = i;
-                if(details.mobileno){
-              
+                if(details && details.mobileno ){
+              if(typeof(details.mobileno) == 'string'){
                 details.mobileno = JSON.parse(details.mobileno);
+              }
                 }
                 // else{
                 //     details = "";

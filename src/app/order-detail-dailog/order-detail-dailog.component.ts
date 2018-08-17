@@ -11,6 +11,7 @@ import { OrderLandingService } from '../order-landing/order-landing.service';
 import { QuickNotificationComponent } from '../quick-notification/quick-notification.component';
 import { SmsServiceService } from '../sms/sms-service.service';
 import { MessageTemplateComponent } from '../message-template/message-template.component';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { LoaderService } from '../login/loader.service';
@@ -34,7 +35,9 @@ export class OrderDetailDailogComponent implements OnInit {
     followUpList:any = [];
     superDealer = true;
     customerCare = true;
+    dataSucceed=true;
     salesTeamLogin = true;
+   quickFilterView = "";
     customerAddressDetails="";
     messageInput = {"order":{ "orderstatus":"Message", "usertype":this.authenticationService.userType(), "loginid":this.authenticationService.loggedInUserId(), "orderid":this.orderDetail.order_id, "ispublic":"0", "customerid":this.orderDetail.order_by, "reason":"" } };
 
@@ -442,7 +445,21 @@ getfollowUpdetails() {
     });
   }
 
+  internalMessage(orderDetails){
+    console.log(orderDetails);
+    let data = {"id":orderDetails.order_id,"firstname" :orderDetails.orderby_firstname,"lastName" :orderDetails.orderby_lastname,"type":"order","mobileno":orderDetails.orderby_mobileno, "followupstatus":orderDetails.followupstatus };
+    let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
+      width: '70%',
+      data: data
+    });
+    dialogRefFollow.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if(result == 'Success'){
+        this.getOrderDetailsById();
+      }
+    });
+  }
 
 
 ngOnInit() {

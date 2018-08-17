@@ -113,7 +113,7 @@
                 </span> -->
             </div>
           </div>
-          <div >
+          <div>
             <div class="row form-group " *ngIf="smsInput.smsType == 'sms'">
               <div class="col-sm-3  col-md-3  col-lg-3 align-self-end">
                 <md-form-field class="example-full-width inline ">
@@ -450,6 +450,10 @@
               <div class="row mgtop-20">
                 <div *ngFor="let temp of getAllTemplates" class="col mgbottom-10">
                   <button md-raised-button class="btn-primary capital" (click)="fillTemplateData(temp)">{{temp.template_name}}</button>
+                  <!-- this button is for deleting notification -->
+                  <i md-raised-button class="fa fa-trash danger" (click)="deleteNotificationTemplate(temp)"></i>
+
+
                 </div>
               </div>
             </div>
@@ -483,21 +487,20 @@
             </div>
 
             <div class="row" *ngIf="mobileNumbersHundred">
+
               <div class="col-12">
-              <b> There are more than 100 mobile numbers, but you can search and send notification or sms messages</b>
+                  <h5 class="warning"><i class="fa fa-info info-style" aria-hidden="true"></i>  There are more than 100 mobile numbers, but you can search and send notification or sms messages</h5>
+                <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of searchedNumber; let i = index"
+                  [attr.data-index]="i">
+                  <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description">{{mobile.mobileno}}</span>
+                  </label>
+                </div>
 
-              <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of searchedNumber; let i = index"
-                [attr.data-index]="i">
-                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
-                  <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllMobile" (change)="onChangeCheck(mobile, $event.target.checked)">
-                  <span class="custom-control-indicator"></span>
-                  <span class="custom-control-description">{{mobile.mobileno}}</span>
-                </label>
               </div>
-
-
             </div>
-          </div>
             <div class="row" *ngIf="!mobileNumbersHundred">
               <div class="col-md-2 col-sm-2 col-xs-2 align-items-start form-group" *ngFor="let mobile of mobileDetails; let i = index"
                 [attr.data-index]="i">
