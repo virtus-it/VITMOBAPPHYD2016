@@ -45,7 +45,7 @@ distributorStockHistoryInput = {productID:"" , categoryID:"" , brandname:"" , ca
       input = {
         "root": {
           "userid": this.Detail.distributorId, "usertype": this.authenticationService.userType(), "category":this.Detail.data.category, "categoryid": this.Detail.data.data[0].categoryid  , "pid": this.Detail.data.data[0].productid ,   "areaid": "", "last_historyid": 100000, "pagesize": "1000",
-          "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
+          "fromdate": null, "todate": null, "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()
         }
       };
     }
@@ -53,7 +53,7 @@ distributorStockHistoryInput = {productID:"" , categoryID:"" , brandname:"" , ca
     input = {
       "root": {
         "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(),"category":this.Detail.data[0].category, "categoryid": this.Detail.data[0].categoryid  , "pid": this.Detail.data[0].productid , "areaid": "", "last_historyid": 100000, "pagesize": "1000",
-        "fromdate": null, "todate": null, "apptype": this.authenticationService.appType()
+        "fromdate": null, "todate": null, "apptype": this.authenticationService.appType() , "loginid": this.authenticationService.loggedInUserId()
       }
     };
   }
