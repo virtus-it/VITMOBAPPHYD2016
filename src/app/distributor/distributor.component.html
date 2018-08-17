@@ -43,15 +43,15 @@
             </div>
             <div *ngIf="filterType=='name'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="searchDistributorTerm" (ngModelChange)="searchDistributorByName()"
-                  name="searchDistributorTerm">
+                <input class="form-control" mdInput placeholder="Enter First Name" [(ngModel)]="filterTypeModel.firstname"
+                  name="firstname">
               </md-form-field>
             </div>
 
             <div *ngIf="filterType=='mobileno'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="searchDistributorNumber" (ngModelChange)="searchDistributorbyNumber()"
-                  name="searchDistributorNumber" maxlength="10">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="filterTypeModel.mobileno"
+                  name="mobileno" maxlength="10">
               </md-form-field>
             </div>
 

@@ -56,9 +56,8 @@ export class DistributorComponent implements OnInit {
     producttype: '';
     pname: '';
     category: '';
-    // filterInput :any  = { categoryid: "" , categoryname: "" , typeofphone:"" , searchtype:"" , searchtext : "" , } ;
 
-    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:'' , isstockpointDefined: ''};
+    filterTypeModel = {categoryname: "" , typeofphone:"" , address:"" , isAreaDefined: "" ,  productId:'' , isstockpointDefined: '' , mobileno: '' , firstname : ''};
     filterInput  = {"root":{"userid":this.authenticationService.loggedInUserId(),"usertype": this.authenticationService.userType(),"loginid":this.authenticationService.loggedInUserId() ,"lastuserid":0,"transtype":"search","apptype": this.authenticationService.appType(),"pagesize":100,"searchtype": "" ,"searchtext": "" ,"devicetype":"","moyaversioncode":"" , "category": '' , "producttype":'' ,  'productname': ""}};
 
 
@@ -391,7 +390,7 @@ this.getProductByCategory();
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-
+        this.loaderService.display(false);
         });
     }
 
@@ -403,6 +402,8 @@ this.getProductByCategory();
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
+        this.loaderService.display(false);
+
 
         });
     }
@@ -415,6 +416,8 @@ this.getProductByCategory();
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
+        this.loaderService.display(false);
+
 
         });
     }
@@ -428,10 +431,9 @@ this.getProductByCategory();
         });
         dialogRefSupplierOrderList.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);
-            if(result == 'success'){
+        this.loaderService.display(false);
                 
-            }
-
+            
         })
 
 
@@ -555,6 +557,14 @@ this.getProductByCategory();
             if(this.filterType == 'category'){
                 this.filterInput.root.searchtype = 'category';
                 this.filterInput.root.searchtext = this.filterTypeModel.categoryname;               
+            }
+            else if(this.filterType == 'mobileno'){
+                this.filterInput.root.searchtype = 'mobileno';
+                this.filterInput.root.searchtext = this.filterTypeModel.mobileno;     
+            }
+            else if(this.filterType == 'name'){
+                this.filterInput.root.searchtype = 'firstname';
+                this.filterInput.root.searchtext = this.filterTypeModel.firstname;     
             }
             else if(this.filterType == 'phonetype'){
                 this.filterInput.root.searchtype = 'phonetype';

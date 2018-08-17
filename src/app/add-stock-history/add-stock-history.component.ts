@@ -109,7 +109,7 @@ distributorStockHistoryInput = {productID:"" , categoryID:"" , brandname:"" , ca
 
 
   getDistributorsProducts(){
-    let input = {userId: this.Detail.data.userid, appType: this.authenticationService.appType() };
+    let input = {userId: this.Detail.data.userid, appType: this.authenticationService.appType() , loginid: this.authenticationService.loggedInUserId()};
     console.log(input);
     this.distributorService.getDistbutorsProducts(input)
     .subscribe(
