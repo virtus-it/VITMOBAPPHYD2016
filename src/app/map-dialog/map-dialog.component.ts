@@ -253,13 +253,7 @@ export class MapDialogComponent implements OnInit {
     }
   }
 
-
-
-
-
-
-
-
+  
   getPolygonDistributors(dataLayer) {
     this.loaderService.display(true);
     let distDetails = this.distributorDetails;
@@ -275,8 +269,7 @@ export class MapDialogComponent implements OnInit {
       output => this.getPolygonDataResult(output, dataLayer),
       error => {
         this.loaderService.display(false);
-      }
-    );
+      });
   }
   getPolygonDataResult(output, dataLayer) {
     this.loaderService.display(false);

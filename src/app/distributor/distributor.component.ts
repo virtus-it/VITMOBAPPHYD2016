@@ -230,7 +230,7 @@ this.getProductByCategory();
             this.distributorClickMore = true;
             let finalDistributor = _.union(this.distributors, data.data);
             this.distributorsCount = finalDistributor.length;
-            console.log(this.distributorsCount , 'sdggsdgsdg=====');
+            console.log(this.distributorsCount);
             this.distributors = finalDistributor;
             this.distributorsCopy = finalDistributor;
 

@@ -1,0 +1,63 @@
+<div class="row  modal-title ">
+  <div class="col-md-4  col-sm-4  col-lg-4">
+    <i class="fa fa-map"></i> Distributor Map
+  </div>
+  <div class="col" *ngIf="Details && Details.distributorName && Details.mobileno">
+    Distributor name : {{Details.distributorName}} | mobile no : {{Details.mobileno}}
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <form class="example-form">
+    <div class="col">
+      <div class="row">
+      <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'assigned'}" href="javascript:void(0)"
+      (click)="showTabPanel('assigned')">Assigned</button> &nbsp;&nbsp;&nbsp; 
+      <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'lastTenOrders'}" href="javascript:void(0)"
+      (click)="showTabPanel('lastTenOrders')">Last Ten Orders</button>
+    </div>
+  </div>
+    <div class="container-fluid ">
+      <div class="row">
+        <div class="col mgbottom-10">
+          
+          <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+
+              <agm-marker *ngFor="let m of showMarkers; let i = index" [latitude]="m.lat" [longitude]="m.lng">
+
+                  <agm-info-window>
+                    Stock point {{m.index}}
+      
+                  </agm-info-window>
+                </agm-marker>
+
+              <agm-marker *ngFor="let orderMarker of ordersMarkers; let i = index" [latitude]="orderMarker.lat" [longitude]="orderMarker.lng">
+
+                  <agm-info-window>
+                      # {{orderMarker.orderid}} <br>
+                      {{orderMarker.mobileno}} <br>
+                      {{orderMarker.customerName}}
+        
+                    </agm-info-window>
+
+              </agm-marker>
+
+                <agm-polygon *ngFor="let p of polygons; let i = index" [paths]="p.path" [fillColor]="'#0073e6'" [geodesic]="true" [strokeWeight]="1"
+                  [clickable]="false" [editable]="false" [polyDraggable]="false">
+            </agm-polygon>
+
+
+          </agm-map>
+
+        </div>
+        
+      </div>
+
+    </div>
+  </form>
+</md-dialog-content>

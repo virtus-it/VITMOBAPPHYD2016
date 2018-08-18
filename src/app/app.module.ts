@@ -132,6 +132,7 @@ import { NotificationDetailsComponent } from './notification-details/notificatio
 import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
 import { InboxPageComponent } from './inbox-page/inbox-page.component';
 import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
+import { DistributorMapDetailsComponent } from './distributor-map-details/distributor-map-details.component';
 
 
 
@@ -242,6 +243,7 @@ import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
         DeleteRuleComponent,
         InboxPageComponent,
         UtcDate24Pipe,
+        DistributorMapDetailsComponent,
 
      
         
@@ -398,7 +400,8 @@ import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
          AssignVehicleComponent,
          TrackSupplierComponent,
          NotificationDetailsComponent,
-         DeleteRuleComponent
+         DeleteRuleComponent,
+         DistributorMapDetailsComponent
       
 
 

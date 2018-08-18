@@ -13,6 +13,7 @@ import { MdDialog } from '@angular/material';
 import { LoaderService } from '../login/loader.service';
 import { ProductsService } from '../products/products.service';
 import { SelectProductsForassingComponent } from '../select-products-forassing/select-products-forassing.component';
+import {DistributorMapDetailsComponent } from '../distributor-map-details/distributor-map-details.component';
 import * as _ from 'underscore';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
 import {} from '@types/googlemaps';
@@ -552,6 +553,17 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       }
     }
 
+  }
+
+  openDistributorsMap(data){
+    let dialogRef = this.dialog.open(DistributorMapDetailsComponent, {
+      width: '90%',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'success') {
+      }
+    });
   }
 
   ngOnInit() {

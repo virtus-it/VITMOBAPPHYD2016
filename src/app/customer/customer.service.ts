@@ -39,10 +39,7 @@ export class CustomerService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
   getCustomerList(input) {
-    // let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    // headers.append('authentication', `hello`);
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json(
     let options = new RequestOptions({ headers: headers });
     return this.http.get(this.apiUrl + '/customers/' + input.userId + '/' + input.lastId + '/' + input.appType + '/' + input.userType + '/' + input.transtype, options)
       .map((res: Response) => res.json())

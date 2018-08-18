@@ -154,6 +154,10 @@
                   <label class="logo-color" title="Assign" *ngIf="orderDetail.orders.OrderModifiedStatus != 'Delivered'" (click)="openProductAssingDialog(dist)">
                     <i class="fa fa-check-circle-o"></i>
                   </label>
+
+                  <label class="logo-color" title="Distributors map" (click)="openDistributorsMap(dist)">
+                    <i class="fa fa-map-pin"></i>
+                  </label>
                 </td>
               </tr>
             </tbody>
