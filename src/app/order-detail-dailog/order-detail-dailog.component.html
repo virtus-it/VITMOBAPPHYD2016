@@ -539,7 +539,8 @@
 
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
-                  <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small>
+                  <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small> <br>
+                  <small *ngIf="msg.typeid">&nbsp; Next FollowUp Date {{msg.followupdate | utcDate24}}</small>
                 </div>
                 <div class="col right">
                   <small class="">{{ msg.createddate | utcDate}} </small>
@@ -567,7 +568,7 @@
                 <span class="custom-control-description"> Distributor</span>
               </label>
               <label class="float-right">
-                  <i class="fa fa-envelope 	logo-color fs-20" aria-hidden="true" title="Internal Message"  (click)="internalMessage(orderDetail)"></i> &nbsp;
+                  <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message"  (click)="internalMessage(orderDetail)"></i> &nbsp;
                 <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i> &nbsp;
                 <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
               </label>
