@@ -365,11 +365,15 @@ export class ReportsComponent implements OnInit {
     if (this.stockreportsInput.filterBy == 'distributor') {
       input.order.filterid = this.stockreportsInput.distributorId;
       input.order.emailid = this.stockreportsInput.distributorEmail;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
-    if (this.stockreportsInput.filterBy == 'category') {
+    else if (this.stockreportsInput.filterBy == 'category') {
       input.order.filterid = this.categoryid;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
-    if (this.stockreportsInput.filterBy == 'distributorcategory') {
+    else if (this.stockreportsInput.filterBy == 'distributorcategory') {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
@@ -390,7 +394,7 @@ export class ReportsComponent implements OnInit {
 
     if (result.result == 'success') {
       let path = result.data.filename;
-
+      this.loaderService.display(false);
       this.customerService.getPrintFile(path)
         .subscribe(
           output => this.printStockReportsResultResult(output),
@@ -398,6 +402,9 @@ export class ReportsComponent implements OnInit {
             //console.log("error in customer");
             this.loaderService.display(false);
           });
+    }
+    else{
+      this.loaderService.display(false);
     }
   }
   printStockReportsResultResult(result) {
@@ -408,8 +415,6 @@ export class ReportsComponent implements OnInit {
     document.body.appendChild(iframe);
     iframe.contentWindow.print();
     this.loaderService.display(false);
-
-
 
   }
   getCustomer() {
@@ -753,9 +758,13 @@ export class ReportsComponent implements OnInit {
     if (this.stockreportsInput.filterBy == 'distributor') {
       input.order.filterid = this.stockreportsInput.distributorId;
       input.order.emailid = this.stockreportsInput.distributorEmail;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
     if (this.stockreportsInput.filterBy == 'category') {
       input.order.filterid = this.categoryid;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
     if (this.stockreportsInput.filterBy == 'distributorcategory') {
       input.order.categoryid = this.categoryid;
@@ -763,6 +772,7 @@ export class ReportsComponent implements OnInit {
     }
     if (input.order.filtertype == 'distributor') {
       this.distributorStockReport = true;
+
     }
     else if (input.order.filtertype == 'category') {
       this.categoryStockReport = true;

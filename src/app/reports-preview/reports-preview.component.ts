@@ -14,9 +14,21 @@ export class ReportsPreviewComponent implements OnInit {
 
   constructor( @Inject(MD_DIALOG_DATA) public Details: any ,  public thisDialogRef: MdDialogRef<ReportsPreviewComponent>) { }
 
-
 customersOrdersReports :any = [];
 
+
+showPreview(){
+  if(this.Details.type == 'customerOrderReports'){
+
+
+  }
+  else if(this.Details.type == 'distributorOrderReports'){
+
+  }
+  else if(this.Details.type == ''){
+    
+  }
+}
 
 
 
@@ -26,6 +38,7 @@ customersOrdersReports :any = [];
 
   ngOnInit() {
     console.log(this.Details);
+    this.showPreview();
   }
 
 }
