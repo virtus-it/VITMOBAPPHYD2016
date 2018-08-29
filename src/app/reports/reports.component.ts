@@ -616,6 +616,7 @@ export class ReportsComponent implements OnInit {
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
       input.order.emailid = this.downloadInput.customerEmail;
+      input.order.status = 'delivered';
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
