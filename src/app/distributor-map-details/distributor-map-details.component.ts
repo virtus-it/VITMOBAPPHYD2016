@@ -2,6 +2,7 @@ import { Component, OnInit , Inject} from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import {  AgmCoreModule,  GoogleMapsAPIWrapper,  LatLngLiteral,  MapsAPILoader} from '@agm/core';
 import {} from '@types/googlemaps';
+import { MdDialogRef } from '@angular/material';
 import { SupplierService } from '../supplier/supplier.service';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
@@ -25,7 +26,7 @@ interface marker {
 })
 export class DistributorMapDetailsComponent implements OnInit {
 
-  constructor(public gMaps: GoogleMapsAPIWrapper,  private authenticationService: AuthenticationService,private mapsAPILoader: MapsAPILoader, private distributorService: DistributorServiceService , private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
+  constructor(public gMaps: GoogleMapsAPIWrapper, public thisDialogRef: MdDialogRef<DistributorMapDetailsComponent> ,  private authenticationService: AuthenticationService,private mapsAPILoader: MapsAPILoader, private distributorService: DistributorServiceService , private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
 
   lat: number = 17.385;
   lng: number = 78.4867;
@@ -162,6 +163,9 @@ export class DistributorMapDetailsComponent implements OnInit {
 
   }
 
+  onCloseCancel(){
+    this.thisDialogRef.close('Cancel');
+  }
 
 
   ngOnInit() {

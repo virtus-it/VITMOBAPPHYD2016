@@ -230,16 +230,16 @@ superDealer = false;
   searchByDate(){
     let input = {};
     if(this.filterType.startdate && this.filterType.enddate === null){
-      this.startDate = moment(this.filterType.startdate).format('DD-MM-YYYY');
+      this.startDate = moment(this.filterType.startdate).format('YYYY-MM-DD');
       input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","startdate": this.startDate ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
     }
     else if(this.filterType.enddate && this.filterType.startdate === null ){
-      this.endDate = moment(this.filterType.enddate).format('DD-MM-YYYY');
+      this.endDate = moment(this.filterType.enddate).format('YYYY-MM-DD');
       input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","enddate": this.endDate ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
     }
     else if(this.filterType.startdate && this.filterType.enddate){
-      this.startDate = moment(this.filterType.startdate).format('DD-MM-YYYY');
-      this.endDate = moment(this.filterType.enddate).format('DD-MM-YYYY');
+      this.startDate = moment(this.filterType.startdate).format('YYYY-MM-DD');
+      this.endDate = moment(this.filterType.enddate).format('YYYY-MM-DD');
       input = {"offer":{"transtype":"filters","apptype": this.authenticationService.appType() ,"pagesize":"100","enddate": this.endDate ,"startdate": this.startDate,  "loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() }}
     }
     console.log(input);
