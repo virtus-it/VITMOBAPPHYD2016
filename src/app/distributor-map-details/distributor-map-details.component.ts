@@ -26,7 +26,7 @@ interface marker {
 })
 export class DistributorMapDetailsComponent implements OnInit {
 
-  constructor(public gMaps: GoogleMapsAPIWrapper,  public thisDialogRef: MdDialogRef<DistributorMapDetailsComponent>, private authenticationService: AuthenticationService,private mapsAPILoader: MapsAPILoader, private distributorService: DistributorServiceService , private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
+  constructor(public gMaps: GoogleMapsAPIWrapper, public thisDialogRef: MdDialogRef<DistributorMapDetailsComponent> ,  private authenticationService: AuthenticationService,private mapsAPILoader: MapsAPILoader, private distributorService: DistributorServiceService , private loaderService: LoaderService,  @Inject(MD_DIALOG_DATA) public Details: any , private supplierservice: SupplierService) { }
 
   lat: number = 17.385;
   lng: number = 78.4867;
@@ -164,9 +164,8 @@ export class DistributorMapDetailsComponent implements OnInit {
   }
 
   onCloseCancel(){
-    this.thisDialogRef.close('Cancel');    
+    this.thisDialogRef.close('Cancel');
   }
-
 
 
   ngOnInit() {

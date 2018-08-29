@@ -155,7 +155,7 @@
       </div>
     </div>
 
-    
+
 
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'newlydownloaded'">
       <div class="tab-pane active" id="a">
@@ -175,7 +175,8 @@
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
+                  {{reports.lastname}}</span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate24}}</td>
@@ -212,45 +213,45 @@
 
 
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'notregistered'">
-        <div class="tab-pane active" id="a">
-          <table class="table table-hover table-striped">
-            <thead>
-              <tr>
-  
-                <th width="50%">GCM ID</th>
-                <th width="50%">Downloaded Date</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="Preordrlist" *ngFor="let reports of reportsData">
+      <div class="tab-pane active" id="a">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+
+              <th width="50%">GCM ID</th>
+              <th width="50%">Downloaded Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
 
-                <td>
-                    <span *ngIf="reports">{{reports.mobileno}}</span>
-                    <span *ngIf="!reports"> - </span>
-                  </td>
+              <td>
+                <span *ngIf="reports">{{reports.mobileno}}</span>
+                <span *ngIf="!reports"> - </span>
+              </td>
 
-                  <td>
-                      <span *ngIf="reports" > {{reports.createddate | utcDate24 }}</span>
-                      <span *ngIf="!reports"> - </span>
-                    </td>
+              <td>
+                <span *ngIf="reports"> {{reports.createddate | utcDate24 }}</span>
+                <span *ngIf="!reports"> - </span>
+              </td>
 
 
-              </tr>
-            </tbody>
-          </table>
-          <h4 class="warning  capitalize">
-            <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
-              <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-            <span *ngIf="!reportsClickMore">
-              <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
-          </h4>
-        </div>
-        <div class="tab-pane" id="b">
-  
-        </div>
-  
+            </tr>
+          </tbody>
+        </table>
+        <h4 class="warning  capitalize">
+          <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
+            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+          <span *ngIf="!reportsClickMore">
+            <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
+        </h4>
       </div>
+      <div class="tab-pane" id="b">
+
+      </div>
+
+    </div>
 
 
 
@@ -281,7 +282,7 @@
 
 
 
-              
+
             </tr>
           </thead>
           <tbody>
@@ -298,7 +299,8 @@
 
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
+                  {{reports.lastname}}</span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate24}}</td>
@@ -310,7 +312,7 @@
 
                 <span class="">Not coming</span>
               </td>
-              
+
             </tr>
           </tbody>
         </table>
@@ -465,7 +467,11 @@
               <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrder()">Raise An Invoice</button>
               <button md-raised-button class="btn-primary" (click)="invoiceHistory()">Invoice History</button>
+              <button md-raised-button class="btn-primary" (click)="viewOrdersReports()">View </button>
             </md-dialog-actions>
+
+            <br>
+            <small class="danger" *ngIf="noData">No Records found</small>
           </div>
         </div>
       </div>
@@ -493,7 +499,7 @@
 
               <td class="left" width="10%">
                 <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.customername" title="{{reports.customername}} ">{{reports.customername}}</span>
-                <span  *ngIf="!reports.customername"> - </span>
+                <span *ngIf="!reports.customername"> - </span>
               </td>
 
               <td class="left" width="8%">
@@ -518,7 +524,8 @@
               </td>
 
               <td class="left" width="14%">
-                <span *ngIf="reports && reports.product_type" class="onhovertooltip-180" title="{{reports.product_type}}">{{reports.product_type}} </span>
+                <span *ngIf="reports && reports.product_type" class="onhovertooltip-180" title="{{reports.product_type}}">{{reports.product_type}}
+                  </span>
                 <span *ngIf="!reports.product_type"> - </span>
               </td>
 
@@ -533,7 +540,7 @@
               </td>
 
               <td class="left" width="8%">
-                <span *ngIf="reports.mobileno"  >{{reports.mobileno}}</span>
+                <span *ngIf="reports.mobileno">{{reports.mobileno}}</span>
                 <span *ngIf="!reports.mobileno"> - </span>
               </td>
 
@@ -570,7 +577,8 @@
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.firstname" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.firstname" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
+                  {{reports.lastname}}</span>
                 <span class="" *ngIf="!reports.firstname"> - </span>
               </td>
 
@@ -585,7 +593,8 @@
               </td>
 
               <td class="left">
-                <span *ngIf="reports && reports.lastorderdetails">{{reports.lastorderdetails[0].createddate | utcDate24}} </span>
+                <span *ngIf="reports && reports.lastorderdetails">{{reports.lastorderdetails[0].createddate | utcDate24}}
+                  </span>
                 <span class="left" *ngIf="!reports.lastorderdetails"> - </span>
               </td>
 
@@ -674,6 +683,7 @@
             <md-dialog-actions align="center">
               <button md-raised-button class="btn-primary" (click)="downloadStockReports()">Download</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="printStockReports()">Print</button>&nbsp;&nbsp;
+              <button md-raised-button class="btn-primary" (click)="viewStockReports()">View</button>&nbsp;&nbsp;
             </md-dialog-actions>
           </div>
         </div>
@@ -683,6 +693,5 @@
 
 
   </div>
-  <!-- /row -->
 
 </div>

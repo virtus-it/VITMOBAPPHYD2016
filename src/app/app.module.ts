@@ -133,6 +133,7 @@ import { DeleteRuleComponent } from './delete-rule/delete-rule.component';
 import { InboxPageComponent } from './inbox-page/inbox-page.component';
 import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
 import { DistributorMapDetailsComponent } from './distributor-map-details/distributor-map-details.component';
+import { ReportsPreviewComponent } from './reports-preview/reports-preview.component';
 
 
 
@@ -244,6 +245,7 @@ import { DistributorMapDetailsComponent } from './distributor-map-details/distri
         InboxPageComponent,
         UtcDate24Pipe,
         DistributorMapDetailsComponent,
+        ReportsPreviewComponent,
 
      
         
@@ -401,7 +403,8 @@ import { DistributorMapDetailsComponent } from './distributor-map-details/distri
          TrackSupplierComponent,
          NotificationDetailsComponent,
          DeleteRuleComponent,
-         DistributorMapDetailsComponent
+         DistributorMapDetailsComponent,
+         ReportsPreviewComponent
       
 
 

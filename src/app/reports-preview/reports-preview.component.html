@@ -1,0 +1,39 @@
+<div class="row justify-content-between modal-title">
+    <div class="col-sm-4 col-md-4 col-lg-4 ">
+      <i class="fa fa-calendar-plus-o"></i> Reports Preview
+    </div>
+    <div class="col-md-1  col-sm-1  col-lg-1 right">
+      <strong>
+        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+      </strong>
+    </div>
+  </div>
+  <div>
+    <div id="" class="container-fluid pd-15x25 brd-bottom">
+      <md-dialog-content layout="column">
+        <table class="table table-hover table-fixedheader">
+          <thead>
+            <tr>
+              <th width="29%">Product Type</th>
+              <th width="6%" title="Quantity">Qty</th>
+              <th width="35%">Schedule</th>
+              <th width="15%">Expected Time</th>
+              <th width="8%" class="no-th-arrow">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+             <td class="">af</td>
+             <td class="">af</td>
+             <td class="">af</td>
+             <td class="">af</td>
+             <td class="">af</td>
+          </tbody>
+        </table>
+      </md-dialog-content>
+    </div>
+    <div class="row float-right pdright-30 mgbottom-20">
+      <md-dialog-actions align="end">
+        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>
