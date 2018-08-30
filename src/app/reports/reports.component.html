@@ -684,7 +684,9 @@
               <button md-raised-button class="btn-primary" (click)="downloadStockReports()">Download</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="printStockReports()">Print</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="viewStockReports()">View</button>&nbsp;&nbsp;
-            </md-dialog-actions>
+            </md-dialog-actions> <br>
+            <small class="danger" *ngIf="noData">No Records found</small>
+
           </div>
         </div>
       </div>

@@ -23,7 +23,7 @@
                 <i class="fa fa-edit" aria-hidden="true"> </i> Edit Quantity</b>
             </span>
             <span class="logo-color mgright-15" (click)="assignOrder(this.orderDetail)" *ngIf="dailogOrderDetails.status == 'not_broadcasted' || dailogOrderDetails.status == 'backtodealer' || dailogOrderDetails.status == 'assigned'">
-              <b class="float-right fs-12" (click)='editStatus(dailogOrderDetails)'>
+              <b class="float-right fs-12" (click)='assignOrder(dailogOrderDetails)'>
                 <i class="fa fa-reply-all logo-color"></i> Assign Order</b>
             </span>
             <span class="mgright-15 logo-color" *ngIf="!dailogOrderDetails.isforwarded || orderDetail.OrderModifiedStatus == 'Re-Assign' || orderDetail.OrderModifiedStatus == 'Door Locked' || orderDetail.OrderModifiedStatus == 'Not Reachable'|| orderDetail.OrderModifiedStatus == 'Cant Deliver' || orderDetail.OrderModifiedStatus == 'Cancelled' || orderDetail.OrderModifiedStatus == 'Assign' ">
@@ -569,7 +569,7 @@
               </label>
               <label class="float-right">
                   <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message"  (click)="internalMessage(orderDetail)"></i> &nbsp;
-                <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" (click)="messageTemplate(orderDetail)"></i> &nbsp;
+                <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="messageTemplate(orderDetail)"></i> &nbsp;
                 <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
               </label>
             </div>

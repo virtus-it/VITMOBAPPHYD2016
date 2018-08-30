@@ -357,19 +357,23 @@ export class ReportsComponent implements OnInit {
   printStockReports() {
     let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports", emailid: "", "categoryid": "", "distributorid": "" } };
     if (this.stockreportsInput.fromDate) {
-      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
     if (this.stockreportsInput.toDate) {
-      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD 23:59:59');
     }
     if (this.stockreportsInput.filterBy == 'distributor') {
       input.order.filterid = this.stockreportsInput.distributorId;
       input.order.emailid = this.stockreportsInput.distributorEmail;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
-    if (this.stockreportsInput.filterBy == 'category') {
+    else if (this.stockreportsInput.filterBy == 'category') {
       input.order.filterid = this.categoryid;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
-    if (this.stockreportsInput.filterBy == 'distributorcategory') {
+    else if (this.stockreportsInput.filterBy == 'distributorcategory') {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
@@ -390,7 +394,8 @@ export class ReportsComponent implements OnInit {
 
     if (result.result == 'success') {
       let path = result.data.filename;
-
+      this.noData = false;
+      this.loaderService.display(false);
       this.customerService.getPrintFile(path)
         .subscribe(
           output => this.printStockReportsResultResult(output),
@@ -398,6 +403,10 @@ export class ReportsComponent implements OnInit {
             //console.log("error in customer");
             this.loaderService.display(false);
           });
+    }
+    else{
+      this.loaderService.display(false);
+      this.noData = true;
     }
   }
   printStockReportsResultResult(result) {
@@ -408,8 +417,6 @@ export class ReportsComponent implements OnInit {
     document.body.appendChild(iframe);
     iframe.contentWindow.print();
     this.loaderService.display(false);
-
-
 
   }
   getCustomer() {
@@ -622,10 +629,10 @@ export class ReportsComponent implements OnInit {
       }
     };
     if (this.downloadInput.fromDate) {
-      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
     if (this.downloadInput.toDate) {
-      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD 23:59:59');
     }
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
@@ -746,17 +753,21 @@ export class ReportsComponent implements OnInit {
   viewStockReports() {
     let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.stockreportsInput.fromDate, todate: this.stockreportsInput.toDate, supplierid: 0, customerid: 0, filterid: this.stockreportsInput.filterId, filtertype: this.stockreportsInput.filterBy, "transtype": "stockreports", emailid: "", "categoryid": "", "distributorid": "", type: "viewstockreports" } };
     if (this.stockreportsInput.fromDate) {
-      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
     if (this.stockreportsInput.toDate) {
-      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.todate = moment(this.stockreportsInput.toDate).format('YYYY-MM-DD 23:59:59');
     }
     if (this.stockreportsInput.filterBy == 'distributor') {
       input.order.filterid = this.stockreportsInput.distributorId;
       input.order.emailid = this.stockreportsInput.distributorEmail;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
     if (this.stockreportsInput.filterBy == 'category') {
       input.order.filterid = this.categoryid;
+      delete input.order.categoryid;
+      delete input.order.distributorid;
     }
     if (this.stockreportsInput.filterBy == 'distributorcategory') {
       input.order.categoryid = this.categoryid;
@@ -764,6 +775,7 @@ export class ReportsComponent implements OnInit {
     }
     if (input.order.filtertype == 'distributor') {
       this.distributorStockReport = true;
+
     }
     else if (input.order.filtertype == 'category') {
       this.categoryStockReport = true;
@@ -788,6 +800,7 @@ export class ReportsComponent implements OnInit {
     if (result.result == 'success') {
       this.loaderService.display(false);
       this.viewStockReportsData = result.data;
+      this.noData = false;
       if(this.distributorCategoryStockReport == true){
         this.typeOfReport = 'distributorCategoryStockReport';
       }
@@ -802,6 +815,7 @@ export class ReportsComponent implements OnInit {
     else {
       this.viewStockReportsData = [];
       this.loaderService.display(false);
+      this.noData = true;
 
     }
   }
@@ -809,10 +823,10 @@ export class ReportsComponent implements OnInit {
   viewOrdersReports() {
     let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' } };
     if (this.downloadInput.fromDate) {
-      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
     if (this.downloadInput.toDate) {
-      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD 23:59:59');
     }
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
@@ -834,6 +848,7 @@ export class ReportsComponent implements OnInit {
       else if (input.order.filtertype == 'distributor') {
         this.distributorOrderReports = true;
       }
+      console.log(input , 'sdgsdgdsgdhhddhdhdhdh');
       this.reportservice.printInvoice(input)
         .subscribe(
           output => this.viewOrdersReportsResult(output),
@@ -846,6 +861,7 @@ export class ReportsComponent implements OnInit {
   viewOrdersReportsResult(result) {
     if (result.result == 'success') {
       this.viewOrdersReportsData = result.data;
+      this.noData = false;
       this.loaderService.display(false);
       if(this.customerOrderReports == true){
         this.typeOfReport = 'customerOrderReports';
@@ -858,6 +874,7 @@ export class ReportsComponent implements OnInit {
     else {
       this.viewOrdersReportsData = [];
       this.loaderService.display(false);
+      this.noData = true;
     }
   }
 
