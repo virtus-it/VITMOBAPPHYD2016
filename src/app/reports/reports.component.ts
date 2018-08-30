@@ -637,6 +637,7 @@ export class ReportsComponent implements OnInit {
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
       input.order.emailid = this.downloadInput.customerEmail;
+      input.order.status = 'delivered';
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
@@ -820,7 +821,7 @@ export class ReportsComponent implements OnInit {
   }
 
   viewOrdersReports() {
-    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' } };
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' }};
     if (this.downloadInput.fromDate) {
       input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
@@ -830,6 +831,7 @@ export class ReportsComponent implements OnInit {
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
       input.order.emailid = this.downloadInput.customerEmail;
+      input.order.status = 'delivered';
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;

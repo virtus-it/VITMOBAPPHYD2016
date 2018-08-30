@@ -80,6 +80,9 @@ export class ReportsPreviewComponent implements OnInit {
       if (details.quantity) {
         quantityCount.push(details.quantity);
       }
+      if(details.status == 'not_broadcasted'){
+        details.status = 'Assigned';
+      }
     });
     this.totalQuantity = quantityCount.reduce((a, b) => a + b, 0);
   }
