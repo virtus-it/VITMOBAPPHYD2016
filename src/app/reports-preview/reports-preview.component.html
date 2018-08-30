@@ -1,39 +1,319 @@
 <div class="row justify-content-between modal-title">
-    <div class="col-sm-4 col-md-4 col-lg-4 ">
-      <i class="fa fa-calendar-plus-o"></i> Reports Preview
-    </div>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-      <strong>
-        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
-      </strong>
-    </div>
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-calendar-plus-o"></i> Reports Preview
   </div>
-  <div>
-    <div id="" class="container-fluid pd-15x25 brd-bottom">
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+<div>
+
+  <!-- this is the table for customer order reports -->
+  <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'customerOrderReports'">
+
+    <div class="row">
+
+      <small>Invoice number : {{invoiceNumber}}</small> <br>
+      <small>Subject : Customers Orders Invoice </small> <br>
+      <small>Total Quantity : {{totalQuantity}}</small> <br>
+      <small>Total Amount : {{totalAmount}}</small>
+    </div>
+
+    <div class="row">
+      <small>
+        <span *ngIf="Details.data[0].orderby_firstname">Name : {{Details.data[0].orderby_firstname}} </span>
+        <span *ngIf="!Details.data[0].orderby_firstname">Name : - </span>
+      </small> <br>
+      <small>
+        <span *ngIf="Details.data[0].orderby_address">Address : {{Details.data[0].orderby_address}} </span>
+        <span *ngIf="!Details.data[0].orderby_address">Address : - </span>
+      </small> <br>
+      <small>
+        <span *ngIf="Details.data[0].orderby_mobileno">Mobile number : {{Details.data[0].orderby_mobileno}} </span>
+        <span *ngIf="!Details.data[0].orderby_mobileno">Mobile number : - </span>
+      </small> <br>
+    </div>
+
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th class="" width="20%">Order Id</th>
+            <th class="" width="20%">Category</th>
+            <th class="" width="10%">Qty (F)</th>
+            <th class="" width="10%">Qty (E)</th>
+            <th class="" width="20%">Amount</th>
+            <th class="" width="20%">Paid</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let customerOrders of customersOrdersReports">
+            <td class="" width="20%">
+              <span *ngIf="customerOrders.order_id">{{customerOrders.order_id}}</span>
+              <span *ngIf="!customerOrders.order_id"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="customerOrders.brandname || customerOrders.prod_type">{{customerOrders.brandname}} {{customerOrders.prod_type}}</span>
+              <span *ngIf="!customerOrders.brandname"> - </span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="customerOrders.quantity">{{customerOrders.quantity}}</span>
+              <span *ngIf="!customerOrders.quantity"> - </span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="customerOrders.return_cans">{{customerOrders.return_cans}}</span>
+              <span *ngIf="!customerOrders.return_cans"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="customerOrders.bill_amount">{{customerOrders.bill_amount}}</span>
+              <span *ngIf="!customerOrders.bill_amount"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="customerOrders.orderby_paymenttype">{{customerOrders.orderby_paymenttype}}</span>
+              <span *ngIf="!customerOrders.orderby_paymenttype"> - </span>
+            </td>
+
+        </tbody>
+      </table>
+    </md-dialog-content>
+  </div>
+
+  <!-- this is the table for customer order reports ends here -->
+
+  <!-- this is the table for distributors order reports  -->
+
+
+  <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorOrderReports'">
+
+    <div class="row">
+      <small>Invoice number : {{invoiceNumber}}</small> <br>
+      <small>Subject : Distributor Orders Invoice </small> <br>
+      <small> Total Quantity : {{totalQuantity}}</small> <br>
+      <!-- here we take qty as amt bc amount is only 1 rs per bottle and same goes for gst amount -->
+      <small>Total Amount : {{totalQuantity}} x 1 Rs</small> <br>
+      <small>Total Invoiced Amount : {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</small> <br>
+
+    </div>
+
+    <div class="row">
+      <small>
+        <span *ngIf="Details.data[0].distributorname">Distributors Name : {{Details.data[0].distributorname}} </span>
+        <span *ngIf="!Details.data[0].distributorname">Distributors Name : - </span>
+      </small> <br>
+      <small>
+        <span *ngIf="Details.data[0].companyname"> Enterprise Name : {{Details.data[0].companyname}} </span>
+        <span *ngIf="!Details.data[0].companyname"> Enterprise Name : - </span>
+      </small> <br>
+      <small>
+        <span *ngIf="Details.data[0].distributoraddress">Address : {{Details.data[0].distributoraddress}} </span>
+        <span *ngIf="!Details.data[0].distributoraddress">Address : - </span>
+      </small> <br>
+      <small>
+        <span *ngIf="Details.data[0].distributormobile">Mobile number : {{Details.data[0].distributormobile}} </span>
+        <span *ngIf="!Details.data[0].distributormobile">Mobile number : - </span>
+      </small> <br>
+    </div>
+
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th class="" width="15%">Order Id</th>
+            <th class="" width="15%">Date</th>
+            <th class="" width="15%">Customer Name</th>
+            <th class="" width="20%">Category</th>
+            <th class="" width="10%">Qty</th>
+            <th class="" width="25%">Delivery Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let distributorOrders of distributorsOrdersReports">
+            <td class="" width="15%">
+              <span *ngIf="distributorOrders.order_id">{{distributorOrders.order_id}}</span>
+              <span *ngIf="!distributorOrders.order_id"> - </span>
+            </td>
+            <td class="" width="15%">
+              <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
+              <span *ngIf="!distributorOrders.ordered_date"> - </span>
+            </td>
+            <td class="" width="15%">
+              <span *ngIf="distributorOrders.orderby_firstname">{{distributorOrders.orderby_firstname}}</span>
+              <span *ngIf="!distributorOrders.orderby_firstname"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorOrders.brandname || distributorOrders.product_type">{{distributorOrders.brandname}}
+                {{distributorOrders.product_type}}
+              </span>
+              <span *ngIf="!distributorOrders.brandname"> - </span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="distributorOrders.quantity">{{distributorOrders.quantity}}</span>
+              <span *ngIf="!distributorOrders.quantity"> - </span>
+            </td>
+            <td class="" width="25%">
+              <span *ngIf="distributorOrders.status">{{distributorOrders.status}}</span>
+              <span *ngIf="!distributorOrders.status"> - </span>
+            </td>
+
+        </tbody>
+      </table>
+    </md-dialog-content>
+  </div>
+
+  <!-- this is the table for distributor order reports ends here -->
+
+
+
+  <!-- this is the table for distributor stock reports -->
+
+  <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorStockReport'">
+
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th class="" width="20%">Stock Requested Date</th>
+            <th class="" width="20%">Stock Processed Date</th>
+            <th class="" width="20%">Category</th>
+            <th class="" width="20%">Stock Arrived</th>
+            <th class="" width="20%">Total Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let distributorStock of distributorsStockReports">
+            <td class="" width="20%">
+              <span *ngIf="distributorStock.stockcreateddate">{{distributorStock.stockcreateddate | utcDate}}</span>
+              <span *ngIf="!distributorStock.stockcreateddate"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorStock.stockmodifieddate">{{distributorStock.stockmodifieddate | utcDate}} </span>
+              <span *ngIf="!distributorStock.stockmodifieddate"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorStock.category">{{distributorStock.category}} {{distributorStock.product_type}}</span>
+              <span *ngIf="!distributorStock.category"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorStock.arrivedstock">{{distributorStock.arrivedstock}}
+              </span>
+              <span *ngIf="!distributorStock.arrivedstock"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorStock.avaliable_stock">{{distributorStock.avaliable_stock}}
+              </span>
+              <span *ngIf="!distributorStock.avaliable_stock"> - </span>
+            </td>
+
+        </tbody>
+      </table>
+    </md-dialog-content>
+  </div>
+
+  <!-- this is the table for distributor stock reports ends here -->
+
+
+  <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'categoryStockReport'">
+
       <md-dialog-content layout="column">
         <table class="table table-hover table-fixedheader">
           <thead>
             <tr>
-              <th width="29%">Product Type</th>
-              <th width="6%" title="Quantity">Qty</th>
-              <th width="35%">Schedule</th>
-              <th width="15%">Expected Time</th>
-              <th width="8%" class="no-th-arrow">Action</th>
+              <th class="" width="20%">Date</th>
+              <th class="" width="20%">Distributors Name</th>
+              <th class="" width="10%">Stock (F)</th>
+              <th class="" width="10%">Stock (E)</th>
+              <th class="" width="20%">Total Stock</th>
+              <th class="" width="20%">Paid Amount</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-             <td class="">af</td>
-             <td class="">af</td>
-             <td class="">af</td>
-             <td class="">af</td>
-             <td class="">af</td>
+            <tr *ngFor="let categoryStock of categoryStockReports">
+              <td class="" width="20%">
+                <span *ngIf="categoryStock.createddate">{{categoryStock.createddate | utcDate}}</span>
+                <span *ngIf="!categoryStock.createddate"> - </span>
+              </td>
+              <td class="" width="20%">
+                <span *ngIf="categoryStock.distributorname">{{categoryStock.distributorname}} </span>
+                <span *ngIf="!categoryStock.distributorname"> - </span>
+              </td>
+              <td class="" width="10%">
+                <span *ngIf="categoryStock.stock">{{categoryStock.stock}}</span>
+                <span *ngIf="!categoryStock.stock"> - </span>
+              </td>
+              <td class="" width="10%">
+                  <span *ngIf="categoryStock.returnemptycans">{{categoryStock.returnemptycans}}</span>
+                  <span *ngIf="!categoryStock.returnemptycans"> - </span>
+                </td>
+              <td class="" width="20%">
+                <span *ngIf="categoryStock.avaliable_stock">{{categoryStock.avaliable_stock}}
+                </span>
+                <span *ngIf="!categoryStock.avaliable_stock"> - </span>
+              </td>
+              <td class="" width="20%">
+                <span *ngIf="categoryStock.userpaidamt">{{categoryStock.userpaidamt}}
+                </span>
+                <span *ngIf="!categoryStock.userpaidamt"> - </span>
+              </td>
+  
           </tbody>
         </table>
       </md-dialog-content>
     </div>
-    <div class="row float-right pdright-30 mgbottom-20">
-      <md-dialog-actions align="end">
-        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
-      </md-dialog-actions>
-    </div>
+
+
+
+    <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorCategoryStockReport'">
+
+        <md-dialog-content layout="column">
+          <table class="table table-hover table-fixedheader">
+            <thead>
+              <tr>
+                <th class="" width="20%">Stock Requested Date</th>
+                <th class="" width="20%">Stock Processed Date</th>
+                <th class="" width="20%">Category</th>
+                <th class="" width="20%">Stock Arrived</th>
+                <th class="" width="20%">Total Stock</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let distributorCategoryStock of distributorsCategoryStockReports">
+                <td class="" width="20%">
+                  <span *ngIf="distributorCategoryStock.stockcreateddate">{{distributorCategoryStock.stockcreateddate | utcDate}}</span>
+                  <span *ngIf="!distributorCategoryStock.stockcreateddate"> - </span>
+                </td>
+                <td class="" width="20%">
+                  <span *ngIf="distributorCategoryStock.stockmodifieddate">{{distributorCategoryStock.stockmodifieddate | utcDate}} </span>
+                  <span *ngIf="!distributorCategoryStock.stockmodifieddate"> - </span>
+                </td>
+                <td class="" width="20%">
+                  <span *ngIf="distributorCategoryStock.category">{{distributorCategoryStock.category}} {{distributorCategoryStock.product_type}}</span>
+                  <span *ngIf="!distributorCategoryStock.category"> - </span>
+                </td>
+                <td class="" width="20%">
+                  <span *ngIf="distributorCategoryStock.arrivedstock">{{distributorCategoryStock.arrivedstock}}
+                  </span>
+                  <span *ngIf="!distributorCategoryStock.arrivedstock"> - </span>
+                </td>
+                <td class="" width="20%">
+                  <span *ngIf="distributorCategoryStock.avaliable_stock">{{distributorCategoryStock.avaliable_stock}}
+                  </span>
+                  <span *ngIf="!distributorCategoryStock.avaliable_stock"> - </span>
+                </td>
+    
+            </tbody>
+          </table>
+        </md-dialog-content>
+      </div>
+
+
+
+
+
+
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+      <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
