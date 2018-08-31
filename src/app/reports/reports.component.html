@@ -175,8 +175,8 @@
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
-                  {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}
+                </span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate24}}</td>
@@ -299,8 +299,8 @@
 
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
-                  {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}
+                </span>
               </td>
               <td class="left">{{reports.mobileno}}</td>
               <td class="left">{{reports.createddate | utcDate24}}</td>
@@ -461,17 +461,18 @@
               </md-form-field>
             </div>
           </div>
-          <div class=" row col">
+          <div class=" col">
             <md-dialog-actions align="center">
-              <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>&nbsp;&nbsp;
-              <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>&nbsp;&nbsp;
+              <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>&nbsp;
+              <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>&nbsp;
               <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrder()">Raise An Invoice</button>
               <button md-raised-button class="btn-primary" (click)="invoiceHistory()">Invoice History</button>
               <button md-raised-button class="btn-primary" (click)="viewOrdersReports()">View </button>
             </md-dialog-actions>
 
             <br>
-            <small class="danger" *ngIf="noData">No Records found</small>
+            <h3 class="danger mgtop-20" *ngIf="noData">
+              <span class="fa fa-frown-o"></span> No Records found</h3>
           </div>
         </div>
       </div>
@@ -525,7 +526,7 @@
 
               <td class="left" width="14%">
                 <span *ngIf="reports && reports.product_type" class="onhovertooltip-180" title="{{reports.product_type}}">{{reports.product_type}}
-                  </span>
+                </span>
                 <span *ngIf="!reports.product_type"> - </span>
               </td>
 
@@ -559,8 +560,6 @@
     </div>
 
 
-
-
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'lastdays'">
       <div class="tab-pane active" id="a">
         <table class="table table-hover table-striped">
@@ -577,8 +576,8 @@
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
 
               <td class="left">
-                <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.firstname" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}}
-                  {{reports.lastname}}</span>
+                <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.firstname" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}
+                </span>
                 <span class="" *ngIf="!reports.firstname"> - </span>
               </td>
 
@@ -594,7 +593,7 @@
 
               <td class="left">
                 <span *ngIf="reports && reports.lastorderdetails">{{reports.lastorderdetails[0].createddate | utcDate24}}
-                  </span>
+                </span>
                 <span class="left" *ngIf="!reports.lastorderdetails"> - </span>
               </td>
 
@@ -626,7 +625,7 @@
             <h3>Stock Report</h3>
           </div>
           <div class="row form-group">
-            <div class="col-sm-4  col-md-4  col-lg-4">
+            <div class="col-6">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="category">Category</md-option>
@@ -635,7 +634,7 @@
 
             </div>
 
-            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'distributor' || stockreportsInput.filterBy == 'distributorcategory'">
+            <div class="col-6" *ngIf="stockreportsInput.filterBy == 'distributor' || stockreportsInput.filterBy == 'distributorcategory'">
 
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
@@ -684,10 +683,11 @@
               <button md-raised-button class="btn-primary" (click)="downloadStockReports()">Download</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="printStockReports()">Print</button>&nbsp;&nbsp;
               <button md-raised-button class="btn-primary" (click)="viewStockReports()">View</button>&nbsp;&nbsp;
-            </md-dialog-actions> <br>
-            <small class="danger" *ngIf="noData">No Records found</small>
-
+            </md-dialog-actions>
           </div>
+          <h3 class="danger mgtop-20" *ngIf="noData">
+            <span class="fa fa-frown-o"></span> No Records found</h3>
+
         </div>
       </div>
     </div>
