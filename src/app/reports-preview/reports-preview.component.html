@@ -75,8 +75,8 @@
               <span *ngIf="!customerOrders.order_id"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="customerOrders.brandname || customerOrders.prod_type">{{customerOrders.brandname}} {{customerOrders.prod_type}}</span>
-              <span *ngIf="!customerOrders.brandname"> - </span>
+              <span *ngIf="customerOrders.category || customerOrders.brandname">{{customerOrders.category}} {{customerOrders.brandname}}</span>
+              <span *ngIf="!customerOrders.category"> - </span>
             </td>
             <td class="" width="10%">
               <span *ngIf="customerOrders.quantity">{{customerOrders.quantity}}</span>
@@ -84,7 +84,8 @@
             </td>
             <td class="" width="10%">
               <span *ngIf="customerOrders.return_cans">{{customerOrders.return_cans}}</span>
-              <span *ngIf="!customerOrders.return_cans"> - </span>
+              <span *ngIf="customerOrders.return_cans === null"> - </span>
+              <span *ngIf="customerOrders.return_cans == 0"> 0 </span>
             </td>
             <td class="" width="20%">
               <span *ngIf="customerOrders.bill_amount">{{customerOrders.bill_amount}}</span>
@@ -203,10 +204,10 @@
               <span *ngIf="!distributorOrders.orderby_firstname"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="distributorOrders.brandname || distributorOrders.product_type">{{distributorOrders.brandname}}
-                {{distributorOrders.product_type}}
+              <span *ngIf="distributorOrders.category || distributorOrders.brandname">{{distributorOrders.category}}
+                {{distributorOrders.brandname}}
               </span>
-              <span *ngIf="!distributorOrders.brandname"> - </span>
+              <span *ngIf="!distributorOrders.category"> - </span>
             </td>
             <td class="" width="10%">
               <span *ngIf="distributorOrders.quantity">{{distributorOrders.quantity}}</span>
@@ -252,7 +253,7 @@
               <span *ngIf="!distributorStock.stockmodifieddate"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="distributorStock.category">{{distributorStock.category}} {{distributorStock.product_type}}</span>
+              <span *ngIf="distributorStock.category || distributorStock.brandname">{{distributorStock.category}} {{distributorStock.brandname}}</span>
               <span *ngIf="!distributorStock.category"> - </span>
             </td>
             <td class="" width="20%">
@@ -324,6 +325,8 @@
 
 
 
+    <!-- this table is prod + distributors -->
+
     <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorCategoryStockReport'">
 
         <md-dialog-content layout="column">
@@ -348,7 +351,7 @@
                   <span *ngIf="!distributorCategoryStock.stockmodifieddate"> - </span>
                 </td>
                 <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.category">{{distributorCategoryStock.category}} {{distributorCategoryStock.product_type}}</span>
+                  <span *ngIf="distributorCategoryStock.category || distributorCategoryStock.brandname">{{distributorCategoryStock.category}} {{distributorCategoryStock.brandname}}</span>
                   <span *ngIf="!distributorCategoryStock.category"> - </span>
                 </td>
                 <td class="" width="20%">
