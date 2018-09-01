@@ -73,7 +73,7 @@
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl"
-            [(ngModel)]="customerInput.User.mobileno" required>
+            [(ngModel)]="customerInput.User.mobileno" required (keypress)="numberEvent($event)">
           <md-error *ngIf="mobileFormControl.hasError('required')">
             Mobile Number is
             <strong>required</strong>
@@ -85,12 +85,12 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1" maxlength="10" [(ngModel)]="customerInput.User.mobileno_one">
+          <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1" maxlength="10" [(ngModel)]="customerInput.User.mobileno_one" (keypress)="numberEvent($event)">
         </md-form-field>
       </div>
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile 2" maxlength="10" [(ngModel)]="customerInput.User.mobileno_two">
+          <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile 2" maxlength="10" [(ngModel)]="customerInput.User.mobileno_two" (keypress)="numberEvent($event)">
         </md-form-field>
       </div>
       <div class="col-4" *ngIf="this.Details" >

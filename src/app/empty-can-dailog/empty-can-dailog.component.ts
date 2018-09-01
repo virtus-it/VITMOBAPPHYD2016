@@ -15,10 +15,11 @@ export class EmptyCanDailogComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<EmptyCanDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   ProductsCans = [];
+
   getProducts() {
     this.loaderService.display(true);
     
-    let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() };
+    let input = { dealerID: this.authenticationService.loggedInUserId(), appType: this.authenticationService.appType() , usertype: this.authenticationService.userType() };
     this.orderLandingService.getProductsByDealrID(input)
       .subscribe(
       output => this.getProductsResult(output),
@@ -44,12 +45,14 @@ export class EmptyCanDailogComponent implements OnInit {
         });
         if(OrderListCan){
           canFormatcopy.root.avaliablecans = OrderListCan.avaliablecans;
+          canFormatcopy.root.productid = details.productid;
+          cansData.push(canFormatcopy);
         }
-        else{
-        canFormatcopy.root.avaliablecans = details.avaliable_emptycans;
-        }
-        canFormatcopy.root.productid = details.productid;
-        cansData.push(canFormatcopy);
+        // else{
+        // canFormatcopy.root.avaliablecans = details.avaliable_emptycans;
+        // }
+        // canFormatcopy.root.productid = details.productid;
+        
 
       });
       this.ProductsCans = cansData;
@@ -81,7 +84,7 @@ export class EmptyCanDailogComponent implements OnInit {
   ngOnInit() {
 
     this.getProducts();
-    //console.log(this.orderDetail);
+    console.log(this.orderDetail);
   }
 
 }

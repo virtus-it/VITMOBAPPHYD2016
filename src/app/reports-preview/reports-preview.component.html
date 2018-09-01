@@ -179,7 +179,7 @@
             <th class="" width="20%">Stock Processed Date</th>
             <th class="" width="20%">Category</th>
             <th class="" width="20%">Stock Arrived</th>
-            <th class="" width="20%">Total Stock</th>
+            <th class="" width="20%">Available Stock</th>
           </tr>
         </thead>
         <tbody>
@@ -197,9 +197,9 @@
               <span *ngIf="!distributorStock.category"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="distributorStock.arrivedstock">{{distributorStock.arrivedstock}}
+              <span *ngIf="distributorStock.stock">{{distributorStock.stock}}
               </span>
-              <span *ngIf="!distributorStock.arrivedstock"> - </span>
+              <span *ngIf="!distributorStock.stock"> - </span>
             </td>
             <td class="" width="20%">
               <span *ngIf="distributorStock.avaliable_stock">{{distributorStock.avaliable_stock}}
@@ -277,7 +277,7 @@
                 <th class="" width="20%">Stock Processed Date</th>
                 <th class="" width="20%">Category</th>
                 <th class="" width="20%">Stock Arrived</th>
-                <th class="" width="20%">Total Stock</th>
+                <th class="" width="20%">Available Stock</th>
               </tr>
             </thead>
             <tbody>
@@ -295,9 +295,9 @@
                   <span *ngIf="!distributorCategoryStock.category"> - </span>
                 </td>
                 <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.arrivedstock">{{distributorCategoryStock.arrivedstock}}
+                  <span *ngIf="distributorCategoryStock.stock">{{distributorCategoryStock.stock}}
                   </span>
-                  <span *ngIf="!distributorCategoryStock.arrivedstock"> - </span>
+                  <span *ngIf="!distributorCategoryStock.stock"> - </span>
                 </td>
                 <td class="" width="20%">
                   <span *ngIf="distributorCategoryStock.avaliable_stock">{{distributorCategoryStock.avaliable_stock}}

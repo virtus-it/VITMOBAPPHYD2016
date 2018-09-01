@@ -74,15 +74,170 @@
               <md-option value="5PM-8PM" [disabled]= '17 <= hours'>5PM-8PM</md-option>
             </md-select>
           </div>
-          </div>    
+          </div>   
+          
+          
 
+          <div class="row">
+
+              <div class="col-md-4 ">
+        
+                  <md-form-field class="wd-100pc">
+                    <input  mdInput placeholder="Empty cans" [(ngModel)]="editOrderInput.emptyCans" name="emptyCans" required>
+                    <md-error>
+                        Empty Cans is <strong>required</strong>
+                    </md-error>
+                  </md-form-field>
+                </div>
+
+                <div class="col-md-4">
+                  <span>
+                    <b>Empty Cans Amount to be charged : {{editOrderInput.emptyCans * 150}}</b>
+                  </span>
+                </div>
+
+              <div class="col-md-4">
+                  <button class="btn btn-link btn-sm" (click)="showProducts()">Products</button>
+              </div>
+            
+          </div>
       </div>
     </form>
   </md-dialog-content>
+
+
+  <div *ngIf="showProductsList">
+
+      <div class="table-scroll  preorder-scroll">
+          <table class="table table-hover ">
+            <tbody *ngFor="let prod of productList">
+              <tr class="border-topbottom bg-fade-blue">
+                <td class="" colspan="6">
+                  <b class="capital">
+                    <i class="fa fa-gift" aria-hidden="true"></i>
+                    Product Name : {{prod.brandName}}
+                    <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                      <span class="">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                        Category : {{prod.category}}</span>
+                    </b>
+                  </b>
+                </td>
+              </tr>
+              <tr class="border-topbottom" style="background: #0f75bc;
+              color: white;">
+                <th width="30%">Type</th>
+    
+                <th class="center" width="13%">Quantity</th>
+                <th class="center" width="12%">Empty Cans</th>
+                <th class="center" width="12%">Price Per Unit</th>
+                <th width="11%" title="Express Delivery">Exp Delv</th>
+                <th width="11%" title="Service Charge">Serv Chgs</th>
+                <th width="9%">Cost</th>
+    
+              </tr>
+              <tr *ngFor="let details of prod.data">
+                <td>
+                  <div class="form-radio form-radio-inline">
+                    <!-- add this line in above div later (change)="minOrderChanged(details,$event)" -->
+                    <b *ngIf="details.stockstatus == 'Soldout'">
+                      <i class="fa fa-close danger" title="sold out"></i>
+                    </b>
+                    <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                      <input type="radio" class="custom-control-input center" name="radiobtn" [value]="details" [(ngModel)]="createPreOrderInput.productDetails"
+                        (change)="minOrderChanged($event , createPreOrderInput.productDetails )" [disabled]="details.stockstatus == 'Soldout'">
+                      <span class="custom-control-indicator"></span>
+                      <span class="custom-control-description onhovertooltip-275 capital" title="{{details.category}} {{details.ptype}}">
+                        <b>{{details.category}}</b> {{details.ptype}}</span>
+                    </label>
+                  </div>
+                </td>
+                <td>
+                  <div class="row">
+                    <div class="col-2">
+                      <a class="cursor logo-color ">
+                        <b title="Decrease value" class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="decreaseQuantity(details)"></b>
+                      </a>
+                    </div>
+    
+                    <div class="col-7">
+                      <input class="brd-bottom form-control btn-sm nobg center" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"
+                        [disabled]="details.stockstatus == 'Soldout'">
+                    </div>
+                    <div class="col-2  row">
+                      <a class="cursor logo-color">
+                        <b title="Increase value" class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseQuantity(details)"></b>
+                      </a>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="row">
+                    <div class="col-2">
+                      <a class="cursor logo-color ">
+                        <b title="Decrease value" class="fa fa-minus-circle danger fs-22 cursor" aria-hidden="true" (click)="deacreaseEmptyCans(details)"></b>
+                      </a>
+                    </div>
+    
+                    <div class="col-7">
+                      <input class="brd-bottom form-control btn-sm nobg center" name="cvb" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)">
+                    </div>
+                    <div class="col-2  row">
+                      <a class="cursor logo-color">
+                        <b title="Increase value" class="fa fa-plus-circle success fs-22 cursor" aria-hidden="true" (click)="increaseEmptyCans(details)"></b>
+                      </a>
+                    </div>
+                  </div>
+                  <!-- <input class="" placeholder="empty cans" type="number" min="0" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange($event)" > -->
+    
+                </td>
+    
+                <td class=" center">
+                  <b class="text-danger">{{details.pcost}} </b>
+                </td>
+    
+    
+                <td class="">
+                  <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                    <input type="checkbox" class="custom-control-input" [(ngModel)]="details.expressdelivery" (change)="expressDeliveryCharge(details ,$event.target.checked)">
+                    <span class="custom-control-indicator"></span>
+                    <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
+                  </label>
+                </td>
+                <td class="text-warning">{{details.servicecharge}} </td>
+                <td>
+                  <b class="text-success" *ngIf="createPreOrderInput.productDetails && details.quantity">{{details.pcost*details.quantity + amount + details.servicecharge*details.quantity }} </b>
+                  <b class="text-success" *ngIf="details.quantity == 0 || detailsquantity == ''"> 0 </b>
+                  <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
+                  <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
+                </td>
+    
+              </tr>
+            </tbody>
+          </table>
+    
+          
+        </div>
+
+  </div>
   <div class="row float-right pdright-30 mgbottom-20">
+      <h5 class="center warning capital">{{emptyCanMessage}}</h5>
     <md-dialog-actions align="end">
-      <button type="submit" class="btn-primary" md-raised-button (click)="updateQuantity()">UPDATE</button>&nbsp;
+      <button type="submit" class="btn-primary" md-raised-button (click)="updateQuantity()" [disabled]="emptyCansKeyUp == true">UPDATE</button>&nbsp;
       <button md-raised-button (click)='onCloseModal("cancel")'>CANCEL</button>
-      
     </md-dialog-actions>
   </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

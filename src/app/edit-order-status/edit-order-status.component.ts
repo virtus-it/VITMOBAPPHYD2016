@@ -205,6 +205,13 @@ export class EditOrderStatusComponent implements OnInit {
 
   }
 
+  numberEvent(e:any){
+    // console.log(e);
+        if(isNaN(e.key) || e.key == ''){
+            e.preventDefault();
+        }
+}
+
   ngOnInit() {
     //console.log(this.editStatusInput);
     this.editStatusInput.order.paymentype = 'cash';

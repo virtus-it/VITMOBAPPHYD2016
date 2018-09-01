@@ -54,14 +54,14 @@
 
           <md-form-field class="wd-60pc">
             <input class="form-control" mdInput placeholder="Quantity" name="Quantity" [(ngModel)]="editStatusInput.order.delivered_qty"
-              (ngModelChange)="changeAmount($event)">
+              (ngModelChange)="changeAmount($event)" (keypress)="numberEvent($event)">
 
           </md-form-field>
         </div>
         <div class="col-3">
           <md-form-field class="wd-60pc">
             <input class="form-control" mdInput placeholder="Return Cans" name="Return Cans" [(ngModel)]="editStatusInput.order.return_cans"
-              (ngModelChange)="emptyCansChanged($event)">
+              (ngModelChange)="emptyCansChanged($event)" (keypress)="numberEvent($event)">
           </md-form-field>
         </div>
         <div class="col align-self-center" *ngIf="editStatusInput.order.paymentype == 'cash'">
@@ -112,12 +112,12 @@
           </div>
           <div class="col-4">
             <md-form-field class="wd-60pc">
-              <input class="" mdInput placeholder="Advance Amount" name='advamt' [(ngModel)]="editStatusInput.order.adv_amt">
+              <input class="" mdInput placeholder="Advance Amount" name='advamt' [(ngModel)]="editStatusInput.order.adv_amt" (keypress)="numberEvent($event)">
             </md-form-field>
           </div>
           <div class="col-4" *ngIf="editStatusInput.order.paymentype == 'cash'">
             <md-form-field class="wd-60pc">
-              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)]="editStatusInput.order.bill_amount">
+              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)]="editStatusInput.order.bill_amount" (keypress)="numberEvent($event)">
             </md-form-field>
           </div>
         </div>

@@ -209,6 +209,16 @@ export class AddEditCustomerDailogComponent implements OnInit {
   onCloseModal() {
     this.thisDialogRef.close('cancel');
   }
+
+  numberEvent(e:any){
+    // console.log(e);
+        if(isNaN(e.key) || e.key == ''){
+            e.preventDefault();
+        }
+}
+
+
+
   ngOnInit() {
     // "userid":"1768"
     console.log(this.Details);
