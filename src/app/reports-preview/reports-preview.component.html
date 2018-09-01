@@ -12,32 +12,52 @@
 
   <!-- this is the table for customer order reports -->
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'customerOrderReports'">
-
+    <div class="well">
     <div class="row">
+<div class="col center">
+  <b>Invoice number</b> <br> <label>{{invoiceNumber}} </label>
+  </div>
+  <div class="col center">
+  <b>Subject  </b>  <br><label>Customers Orders Invoice </label> 
+</div>
+<div class="col center">
+  <b>Total Quantity  </b> <br><label>{{totalQuantity}}</label>
+</div>
+<div class="col center">
+  <b>Total Amount  </b> <br><label> {{totalAmount}}</label>
+</div>
+</div>
+<br>
+<div class="row">
+  <div class="col center">
+    <span>
+      <span *ngIf="Details.data[0].orderby_firstname" class="capitalize"><b>Name</b> <br>{{Details.data[0].orderby_firstname}} </span>
+      <span *ngIf="!Details.data[0].orderby_firstname"><b>Name</b><br> - </span>
+    </span>
+    </div>
+    <div class="col center">
+      <span *ngIf="Details.data[0].orderby_mobileno"><b>Mobile number</b> <br>{{Details.data[0].orderby_mobileno}} </span>
+          <span *ngIf="!Details.data[0].orderby_mobileno"><b>Mobile number</b><br> - </span>
+    </div>
+    <div class="col-6 pdleft-8pc">
+      <span *ngIf="Details.data[0].orderby_address" class="capitalize"><b>Address </b> <br> {{Details.data[0].orderby_address}} </span>
+      <span *ngIf="!Details.data[0].orderby_address"><b>Address  </b><br>- </span>
+  </div>
 
-      <small>Invoice number : {{invoiceNumber}}</small> <br>
+
+  </div>
+
+      <!-- <div class="row">
+      <small>Invoice number: {{invoiceNumber}}</small> <br>
       <small>Subject : Customers Orders Invoice </small> <br>
       <small>Total Quantity : {{totalQuantity}}</small> <br>
       <small>Total Amount : {{totalAmount}}</small>
-    </div>
+    </div> -->
 
-    <div class="row">
-      <small>
-        <span *ngIf="Details.data[0].orderby_firstname">Name : {{Details.data[0].orderby_firstname}} </span>
-        <span *ngIf="!Details.data[0].orderby_firstname">Name : - </span>
-      </small> <br>
-      <small>
-        <span *ngIf="Details.data[0].orderby_address">Address : {{Details.data[0].orderby_address}} </span>
-        <span *ngIf="!Details.data[0].orderby_address">Address : - </span>
-      </small> <br>
-      <small>
-        <span *ngIf="Details.data[0].orderby_mobileno">Mobile number : {{Details.data[0].orderby_mobileno}} </span>
-        <span *ngIf="!Details.data[0].orderby_mobileno">Mobile number : - </span>
-      </small> <br>
-    </div>
+  </div>
 
     <md-dialog-content layout="column">
-      <table class="table table-hover table-fixedheader">
+      <table class="table table-hover table-fixedheader table-striped">
         <thead>
           <tr>
             <th class="" width="20%">Order Id</th>
@@ -51,7 +71,7 @@
         <tbody>
           <tr *ngFor="let customerOrders of customersOrdersReports">
             <td class="" width="20%">
-              <span *ngIf="customerOrders.order_id">{{customerOrders.order_id}}</span>
+              <span *ngIf="customerOrders.order_id">#{{customerOrders.order_id}}</span>
               <span *ngIf="!customerOrders.order_id"> - </span>
             </td>
             <td class="" width="20%">
@@ -87,12 +107,52 @@
 
 
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorOrderReports'">
+    <div class="well">
+      <div class="row">
+  <div class="col center">
+    <b>Invoice number</b> <br> <label>{{invoiceNumber}} </label>
+    </div>
+    <div class="col center">
+    <b>Subject  </b>  <br><label>Distributor Orders Invoice </label> 
+  </div>
+  <div class="col center">
+    <b>Total Quantity  </b> <br><label>{{totalQuantity}} x 1 Rs</label>
+  </div>
+  <div class="col center">
+    <b>Total Amount  </b> <br><label> {{totalAmount}}</label>
+  </div>
+  <div class="col center">
+      <b>Total Invoiced Amount  </b> <br><label> {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col center">
+          <span *ngIf="Details.data[0].distributorname" class="capitalize"><b>Distributors Name</b> <br> {{Details.data[0].distributorname}} </span>
+          <span *ngIf="!Details.data[0].distributorname"><b>Distributors Name</b><br> - </span>
+       </div>
+      <div class="col center">
 
-    <div class="row">
+            <span *ngIf="Details.data[0].companyname" class="capitalize"><b> Enterprise Name</b> <br> {{Details.data[0].companyname}} </span>
+        <span *ngIf="!Details.data[0].companyname"><b>Enterprise Name </b><br> - </span>
+      </div>
+      <div class="col center">
+          <span *ngIf="Details.data[0].distributormobile" class="capitalize"><b>Mobile number </b> <br> {{Details.data[0].distributormobile}} </span>
+          <span *ngIf="!Details.data[0].distributormobile"><b>Mobile number </b><br> - </span>
+        </div>
+      <div class="col-5 pdleft-8pc">
+
+        <span *ngIf="Details.data[0].distributoraddress" class="capitalize"><b>Address </b> <br> {{Details.data[0].distributoraddress}} </span>
+        <span *ngIf="!Details.data[0].distributoraddress"><b>Address </b><br> - </span>
+    </div>
+  
+  
+    </div>
+    </div>
+    <!-- <div class="row">
       <small>Invoice number : {{invoiceNumber}}</small> <br>
       <small>Subject : Distributor Orders Invoice </small> <br>
       <small> Total Quantity : {{totalQuantity}}</small> <br>
-      <!-- here we take qty as amt bc amount is only 1 rs per bottle and same goes for gst amount -->
       <small>Total Amount : {{totalQuantity}} x 1 Rs</small> <br>
       <small>Total Invoiced Amount : {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</small> <br>
 
@@ -115,7 +175,7 @@
         <span *ngIf="Details.data[0].distributormobile">Mobile number : {{Details.data[0].distributormobile}} </span>
         <span *ngIf="!Details.data[0].distributormobile">Mobile number : - </span>
       </small> <br>
-    </div>
+    </div> -->
 
     <md-dialog-content layout="column">
       <table class="table table-hover table-fixedheader">
@@ -132,7 +192,7 @@
         <tbody>
           <tr *ngFor="let distributorOrders of distributorsOrdersReports">
             <td class="" width="15%">
-              <span *ngIf="distributorOrders.order_id">{{distributorOrders.order_id}}</span>
+              <span *ngIf="distributorOrders.order_id">#{{distributorOrders.order_id}}</span>
               <span *ngIf="!distributorOrders.order_id"> - </span>
             </td>
             <td class="" width="15%">

@@ -883,7 +883,7 @@ export class ReportsComponent implements OnInit {
   reportsPreview(data) {
     let formattedData = {data: data , type : this.typeOfReport }
     let dialogRef = this.dialog.open(ReportsPreviewComponent, {
-      width: '95%',
+      width: '80%',
       data: formattedData
     });
     dialogRef.afterClosed().subscribe(result => {
