@@ -392,7 +392,7 @@ export class OrderLandingComponent implements OnInit {
   editQuanity(orderDetails) {
     let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
 
-      width: '500px',
+      width: '80%',
       data: orderDetails
     });
     dialogRefEditQun.afterClosed().subscribe(result => {
@@ -1834,6 +1834,13 @@ this.orderLandingService.getOrdersByfilter(input)
           deliveredOrdersView(){
             this.showDeliveredOrders(true);
           }
+
+          numberEvent(e:any){
+            // console.log(e);
+                if(isNaN(e.key) || e.key == ''){
+                    e.preventDefault();
+                }
+        }
 
 
   ngOnInit() {

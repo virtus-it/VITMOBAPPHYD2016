@@ -7,6 +7,7 @@ import { OrderLandingService } from '../order-landing/order-landing.service';
 import { MdDialog } from '@angular/material';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
+import * as _ from 'underscore';
 @Component({
   selector: 'app-edit-quantity-dailog',
   templateUrl: './edit-quantity-dailog.component.html',
@@ -25,27 +26,68 @@ export class EditQuantityDailogComponent implements OnInit {
     hideTimeSlot= false;
     hours:any = "";
     expressAmount:any = "";
-  constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<EditQuantityDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog,private loaderService: LoaderService) { }
-  updateQuantity() {
 
-    if(this.orderDetails.expressdelivery == "true"){
-      this.expressAmount = this.orderDetails.expressdeliverycharges;
-    }
-    else{
-      this.expressAmount = 0;
-    }
+  editOrderInput = {emptyCans: 0};
+  showProductsList:boolean = false;
+  productList = [];
+  duplicate: boolean = false;
+  createPreOrderInput: any = {"timeslot":"" , date:null ,productDetails:{}, };
+  emptyCansKeyUp:boolean = false;
+  emptyCanMessage : string = '';
+  amount:any = 0;
+  changedProductDetails = {'servicecharges' : 0 , 'productcost': 0 , expressdelivery: false , expressdeliverycharges : 0 , 'productid':'' , totalAmount : 0 ,  productname : '' , producttype : ''};
+  expressCheck : boolean  = false;
+
+
+
+
+  constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, private orderLandingService: OrderLandingService, public thisDialogRef: MdDialogRef<EditQuantityDailogComponent>, @Inject(MD_DIALOG_DATA) public orderDetails: any, public dialog: MdDialog,private loaderService: LoaderService) { }
+
+  updateQuantity() {
 
     let date= moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
     let datetime = date + " " + this.changeTimeSlot.timeslot;
     this.loaderService.display(true);
-    if(this.orderDetails.productdetails.servicecharge === null){
-      this.orderDetails.productdetails.servicecharge = 0;
+    // if(this.orderDetails.productdetails.servicecharge === null){
+    //   this.orderDetails.productdetails.servicecharge = 0;
+    // }
+
+    // let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.servicecharges) , "expressdeliverycharges": this.expressAmount } };
+
+    let input = {"order":{"amt": 0 ,"total_amt": 0 ,"orderid": '' ,"loginid": this.authenticationService.loggedInUserId(),"dealerid": this.authenticationService.loggedInUserId() ,"apptype": this.authenticationService.appType() ,"delivery_address":'' ,"quantity" : 0  ,"excepted_time": '' ,"productid": '' ,"product_name": '' ,"product_type": '' , "product_cost": 0 ,"expressdelivery": false ,"servicecharges": 0 , "slotdate": '' ,"delivery_locality": '',"delivery_buildingname":'',"emptycans": 0 ,"advance_amt":0}}
+
+
+    // this.editOrderInput.emptyCans
+    // (this.editOrderInput.emptyCans * 150)
+
+
+    if(this.orderDetails.expressdelivery && this.orderDetails.expressdelivery == true ){
+      this.expressAmount = this.orderDetails.expressdeliverycharges;
     }
-    
-    let input = { "order": { "excepted_time":  datetime ,  "product_type": this.orderDetails.prod_type, "quantity": this.quantity.value, "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetails.order_id, "product_name": this.orderDetails.brandname, "apptype": this.authenticationService.appType(), "createdthru": "website" , "product_cost":this.orderDetails.prod_cost ,"servicecharges":parseInt(this.quantity.value) * (this.orderDetails.productdetails.servicecharge) , "expressdeliverycharges": this.expressAmount } };
-    
+    if(this.orderDetails.expressdelivery === null){
+      this.expressCheck = false;
+    }
+    // if(this.orderDetails.slotdate){
+    //   this.orderDetails.slotdate = moment(this.orderDetails.slotdate).format('')
+    // }
+    if(this.showProductsList == false){
+      input = {"order":{"amt": this.orderDetails.bill_amount ,"total_amt": this.orderDetails.bill_amount  ,"orderid": this.orderDetails.order_id ,"loginid": this.authenticationService.loggedInUserId(),"dealerid": this.authenticationService.loggedInUserId() ,"apptype": this.authenticationService.appType() ,"delivery_address":this.orderDetails.orderby_address ,"quantity": this.quantity.value ,"excepted_time": datetime ,"productid": this.orderDetails.prod_id ,"product_name": this.orderDetails.brandname ,"product_type": this.orderDetails.prod_type  , "product_cost": this.orderDetails.prod_cost ,"expressdelivery": this.expressCheck ,"servicecharges": (this.orderDetails.servicecharges  * this.quantity.value) , "slotdate": datetime ,"delivery_locality": this.orderDetails.locality,"delivery_buildingname": this.orderDetails.buildingname,"emptycans": this.editOrderInput.emptyCans ,"advance_amt": (this.editOrderInput.emptyCans * 150)}}
+    }
+    else{
+    // no cans input
+   input = {"order":{"amt": this.changedProductDetails.totalAmount ,"total_amt": this.changedProductDetails.totalAmount ,"orderid": this.orderDetails.order_id ,"loginid": this.authenticationService.loggedInUserId(),"dealerid": this.authenticationService.loggedInUserId() ,"apptype": this.authenticationService.appType() ,"delivery_address":this.orderDetails.orderby_address ,"quantity": this.createPreOrderInput.productDetails.quantity ,"excepted_time": datetime ,"productid": this.changedProductDetails.productid ,"product_name": this.changedProductDetails.productname ,"product_type": this.changedProductDetails.producttype  , "product_cost": this.changedProductDetails.productcost ,"expressdelivery": this.changedProductDetails.expressdelivery ,"servicecharges": this.changedProductDetails.servicecharges , "slotdate":this.changeTimeSlot.timeslot ,"delivery_locality": this.orderDetails.locality,"delivery_buildingname": this.orderDetails.buildingname,"emptycans": this.createPreOrderInput.productDetails.emptycans ,"advance_amt":(this.createPreOrderInput.productDetails.emptycans * 150 )}}
+    }
+
+    if(this.createPreOrderInput.productDetails.emptycans == 0 ){ // cust orders with empty cans so we dont charge him with anything
+
+      delete input.order.emptycans;
+      delete input.order.advance_amt;
+    }
+
+
     AuthenticationService.showLog("Edit order input");
     AuthenticationService.showLog(JSON.stringify(input));
+    console.log(input , 'cans input');
     this.orderLandingService.updateQuantity(input)
       .subscribe(
       output => this.updateQuantityResult(output),
@@ -152,10 +194,252 @@ export class EditQuantityDailogComponent implements OnInit {
 
   }
 
+  showProducts(){
+    if(this.showProductsList){
+    this.showProductsList = false;
+    }
+    else{
+    this.showProductsList = true;
+    }
+    if(this.duplicate == false){
+    this.getProductsList();
+    }
+  }
+
+
+
+  getProductsList() {
+    this.loaderService.display(true);
+    let input = { apptype: this.authenticationService.appType(), userid: this.orderDetails.order_by , delearId: this.orderDetails.orderto  };
+    if(this.orderDetails.orderto === null){
+      input.delearId = this.authenticationService.loggedInUserId();
+    }
+    this.distributorService.getProductsList(input)
+      .subscribe(
+      output => this.getProductsListResult(output),
+      error => {
+        //console.log("error in distrbutors");
+        this.loaderService.display(false);
+      });
+  
+  }
+  getProductsListResult(result) {
+    this.loaderService.display(false);
+    //console.log("distributor products list", result);
+    if (result.result == 'success') {
+      this.duplicate = true;
+      this.loaderService.display(false);
+      let productListCopy = [];
+      _.each(result.data.products, function (i, j) {
+        let details: any = i;
+        let customerProduct = _.find(result.data.customerproducts, function (e: any) { return e.productid == details.productid; });
+        if (customerProduct) {
+          productListCopy.push(customerProduct);
+        }
+        else {
+          productListCopy.push(details);
+        }
+      });
+      for (let details of productListCopy) {
+             
+              //console.log(result.data);
+              
+              let findproduct = _.find(this.productList, function (k, l) {
+                let productDetails: any = k;
+                return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category));
+  
+                
+              });
+        
+              if (findproduct) {
+                details.quantity ="";
+                details.expressdelivery=false;
+                findproduct.data.push(details);
+              }
+              else{
+                let value = {brandName:details.brandname,category:details.category,data:[]};
+                details.quantity = "";
+                details.expressdelivery=false;
+                value.data.push(details);
+                this.productList.push(value);
+              }
+            }
+  }
+  
+  }
+
+  // minOrderChanged(event){
+  //   _.each(this.productList , function(i,j){
+  //     let details: any = i;
+  //     _.each(details.data , function(k , l){
+  //       let detailData : any = k;
+  //       detailData.quantity = '';
+  //       detailData.emptycans = '';
+  //     });
+  //   });
+
+  //   if(this.createPreOrderInput.productDetails.default_qty){
+  //     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
+  //   }
+  //   else{
+  //     this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
+  //   }
+  //   this.createPreOrderInput.productDetails.emptycans = 0;
+  // }
+
+
+  minOrderChanged( event , data){
+    //console.log(event);
+    _.each(this.productList, function(i,j){
+      let details:any =i;
+      _.each(i.data, function(k,l){
+        let detailData:any=k;
+        detailData.quantity="";
+        detailData.emptycans = "";
+        // detailData.expressdeliverycharges = "";
+      })
+    })
+  
+  if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.default_qty){
+    this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;
+  
+  }
+  
+  if(!this.createPreOrderInput.productDetails.default_qty){
+    if(this.createPreOrderInput.productDetails.minorderqty == 0){
+      this.createPreOrderInput.productDetails.minorderqty = 1;
+    }
+      this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.minorderqty;
+      this.createPreOrderInput.productDetails.emptycans = 0 ;
+  }
+  this.changeQuantity(data);
+  }
+
+
+    changeQuantity(data){
+      this.quantity.value = this.createPreOrderInput.productDetails.quantity;
+      this.editOrderInput.emptyCans = this.createPreOrderInput.productDetails.emptycans;
+      console.log(data , 'prod details');
+      this.changedProductDetails.servicecharges = (data.servicecharge * this.createPreOrderInput.productDetails.quantity);
+      this.changedProductDetails.productcost = data.pcost;
+      this.changedProductDetails.productid = data.productid;
+      this.changedProductDetails.totalAmount = (this.changedProductDetails.servicecharges + (this.changedProductDetails.productcost * this.createPreOrderInput.productDetails.quantity) + this.amount );
+      this.changedProductDetails.productname = data.pname;
+      this.changedProductDetails.producttype = data.ptype;
+      if(this.expressCheck == true){
+      this.changedProductDetails.expressdelivery = true;
+      this.changedProductDetails.expressdeliverycharges = this.amount;
+      }
+      else{
+      this.changedProductDetails.expressdelivery = false;
+      this.changedProductDetails.expressdeliverycharges = 0;
+      }
+
+      console.log(this.changedProductDetails , 'change quantity function' );
+  }
+
+    decreaseQuantity(data){
+  
+      if(data.quantity > 0){
+        data.quantity = data.quantity - 1;
+      }
+  this.changeQuantity(data);
+
+    }
+    
+    increaseQuantity(data){
+      if(data.quantity == ''){
+        data.quantity= 0 ;
+      }
+      data.quantity = data.quantity + 1;
+  this.changeQuantity(data);
+
+    
+    }
+
+    increaseEmptyCans(data){
+      if(data.emptycans == ''){
+        data.emptycans = 0;
+      }
+      if(this.emptyCansKeyUp == false){
+      data.emptycans = data.emptycans + 1;
+      this.emptyCansChange(data);
+    }
+  this.changeQuantity(data);
+
+    }
+    
+    
+    deacreaseEmptyCans(data){
+      if(data.emptycans > 0){
+        data.emptycans = data.emptycans - 1;
+        this.emptyCansChange(data);
+      }
+  this.changeQuantity(data);
+
+    }
+
+    emptyCansChange(data){
+      console.log(data);
+    let cases: string = "1";
+    switch(cases){
+      case '1': {
+        if(this.createPreOrderInput.productDetails.quantity >= data.emptycans){
+             this.emptyCanMessage= "";
+             this.emptyCansKeyUp = false;
+            }
+            
+      }
+      case '2' : {
+        if(this.createPreOrderInput.productDetails.quantity < data.emptycans) {
+          this.emptyCanMessage= "Empty cans must be less than quantity";
+          this.emptyCansKeyUp = true;
+        }
+      }
+      case '3' :{
+        if(this.createPreOrderInput.productDetails.quantity > data.emptycans){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+        }
+      }
+      default : {
+        if(this.createPreOrderInput.productDetails.quantity >= data.emptycans){
+          this.emptyCanMessage= "";
+          this.emptyCansKeyUp = false;
+         }
+    
+      }
+    }
+
+  this.changeQuantity(data);
+
+    }
+
+    expressDeliveryCharge(details,  isChecked: boolean){
+ 
+      if(isChecked == true){
+        this.amount = details.expressdeliverycharges;
+        this.expressCheck = true;
+      }
+      else{
+        this.amount = 0;
+        this.expressCheck = false;
+      }
+    
+    }
+
+    // customTrackBy(index: number, obj: any): any {
+    //   return index;
+    // }
+
 
   ngOnInit() {
 
     this.quantity.value = this.orderDetails.quantity;
+    this.editOrderInput.emptyCans = this.orderDetails.empty_cans;
+    
+
+
     this.autoTimeSlotforHour();
     this.availableTimeSlot();
     console.log(this.orderDetails);

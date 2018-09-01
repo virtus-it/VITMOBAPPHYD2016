@@ -724,8 +724,7 @@ console.log(details);
       detailData.emptycans = "";
       // detailData.expressdeliverycharges = "";
     })
-  }
-)
+  })
 
 if(this.createPreOrderInput.productDetails && this.createPreOrderInput.productDetails.default_qty){
   this.createPreOrderInput.productDetails.quantity = this.createPreOrderInput.productDetails.default_qty;

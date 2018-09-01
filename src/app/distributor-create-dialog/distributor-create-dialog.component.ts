@@ -210,7 +210,7 @@ export class DistributorCreateDialogComponent implements OnInit {
     }
 
     numberEvent(e:any){
-        console.log(e);
+        // console.log(e);
             if(isNaN(e.key) || e.key == ''){
                 e.preventDefault();
             }

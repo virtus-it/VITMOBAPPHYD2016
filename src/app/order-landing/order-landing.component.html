@@ -83,13 +83,13 @@
 
             <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'mobile'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
               </md-form-field>
             </div>
 
             <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'orderid'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid">
+                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid" (keypress)="numberEvent($event)" >
               </md-form-field>
             </div>
 
@@ -215,13 +215,13 @@
                   </div>
                   <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10">
+                      <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
                     </md-form-field>
                   </div>
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid">
+                      <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid" (keypress)="numberEvent($event)">
                     </md-form-field>
                   </div>
 
