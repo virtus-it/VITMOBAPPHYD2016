@@ -1024,7 +1024,7 @@ this.orderLandingService.getOrdersByfilter(input)
       if(this.tabPanelView == 'complete'){
         let data = this.ModifyOrderList(result.data);
         this.completeClickMore = true;
-        this.completeOrders = _.union(data);
+        this.completeOrders = _.union(this.completeOrders , data);
       }
     }
     else {
