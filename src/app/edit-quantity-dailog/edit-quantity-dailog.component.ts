@@ -27,7 +27,7 @@ export class EditQuantityDailogComponent implements OnInit {
   hours: any = "";
   expressAmount: any = "";
 
-  editOrderInput = { emptyCans: 0 };
+  editOrderInput = { emptyCans:  0 };
   showProductsList: boolean = false;
   productList = [];
   duplicate: boolean = false;
@@ -66,6 +66,10 @@ export class EditQuantityDailogComponent implements OnInit {
     if (this.showProductsList == false && this.orderDetails.expressdelivery && this.orderDetails.expressdelivery == "true") {
       this.expressAmount = this.orderDetails.expressdeliverycharges;
     }
+    else{
+      this.expressAmount = 0;
+    }
+
     if (this.orderDetails.expressdelivery === null) {
       this.expressCheck = false;
     }
@@ -77,7 +81,7 @@ export class EditQuantityDailogComponent implements OnInit {
     //   this.orderDetails.slotdate = moment(this.orderDetails.slotdate).format('')
     // }
     if (this.showProductsList == false) {
-      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ( (this.orderDetails.servicecharges / this.orderDetails.quantity ) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, "emptycans": this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150) , expressdeliverycharges :  this.expressAmount }}
+      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ( (this.orderDetails.servicecharges / this.orderDetails.quantity ) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, emptycans : this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150) , expressdeliverycharges :  this.expressAmount }}
     }
     else {
       // no cans input

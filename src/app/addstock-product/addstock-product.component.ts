@@ -44,7 +44,12 @@ addStockDetails(){
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,"invoicedate":"", "userid": this.authenticationService.loggedInUserId() ,  "paidamt":this.StockInput.distributorpaidamount , 
   "loginid": this.authenticationService.loggedInUserId() ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
   if (this.StockInput.invoiceDate) {
-    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+    var date = moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
+    var time = moment(new Date()).format('hh:mm:ss');
+    var dateTime = date + ' ' + time;
+    console.log(dateTime  , 'date time');
+    input[0].product.invoicedate = dateTime;
+    // input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
   } 
   console.log(input);
   if(this.addstockValidation()){
@@ -68,9 +73,20 @@ addDistributorsStock(){
   let input = [{"product":{"category":this.distributorStockInput.categoryname , "categoryid": this.distributorStockInput.categoryID  , "brandname": this.distributorStockInput.brandname , "producttype": this.distributorStockInput.producttype ,   "userid":this.Detail.data.userid, "invoicedate":"" ,  "paidamt":this.StockInput.distributorpaidamount , 
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans,
   "loginid": this.authenticationService.loggedInUserId()  ,"invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() , }}];
+  // if (this.StockInput.invoiceDate) {
+  //   input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+  // } 
+
   if (this.StockInput.invoiceDate) {
-    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+    var date = moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
+    var time = moment(new Date()).format('hh:mm:ss');
+    var dateTime = date + ' ' + time;
+    console.log(dateTime  , 'date time');
+    input[0].product.invoicedate = dateTime;
+    // input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
   } 
+
+
   console.log(input);
   if(this.addstockValidation()){
   this.productsService.addStockDetails(input)
@@ -91,9 +107,20 @@ addstockFromDistProducts(){
   let input = [{"product":{"category":this.Detail.data.data[0].category, "categoryid": this.Detail.data.data[0].categoryid , "brandname": this.Detail.data.data[0].brandname , "producttype": this.Detail.data.data[0].ptype ,   "paidamt":this.StockInput.distributorpaidamount ,  
   "stock":this.StockInput.stock, "returnemptycans":this.StockInput.returnemptycans, "invoicedate":"" , 
   "loginid": this.authenticationService.loggedInUserId(), "userid": this.Detail.distributorId , "invoicenumber":Math.floor(1000 + Math.random() * 9000).toString(),"itemcost":this.StockInput.itemCost,"apptype":this.authenticationService.appType() ,  }}];
+  // if (this.StockInput.invoiceDate) {
+  //   input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+  // }
+
   if (this.StockInput.invoiceDate) {
-    input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
+    var date = moment(this.StockInput.invoiceDate).format('YYYY-MM-DD');
+    var time = moment(new Date()).format('hh:mm:ss');
+    var dateTime = date + ' ' + time;
+    console.log(dateTime  , 'date time');
+    input[0].product.invoicedate = dateTime;
+    // input[0].product.invoicedate= moment(this.StockInput.invoiceDate).format('YYYY-MM-DD 00:00:00');
   }
+
+
   console.log(input);
   if(this.addstockValidation()){
   this.productsService.addStockDetails(input)

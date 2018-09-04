@@ -245,7 +245,7 @@
         <tbody>
           <tr *ngFor="let distributorStock of distributorsStockReports">
             <td class="" width="20%">
-              <span *ngIf="distributorStock.stockcreateddate">{{distributorStock.stockcreateddate | utcDate}}</span>
+              <span *ngIf="distributorStock.stockcreateddate">{{distributorStock.stockcreateddate | localtimezone}}</span>
               <span *ngIf="!distributorStock.stockcreateddate"> - </span>
             </td>
             <td class="" width="20%">
@@ -292,7 +292,7 @@
           <tbody>
             <tr *ngFor="let categoryStock of categoryStockReports">
               <td class="" width="20%">
-                <span *ngIf="categoryStock.createddate">{{categoryStock.createddate | utcDate}}</span>
+                <span *ngIf="categoryStock.createddate">{{categoryStock.createddate | localtimezone}}</span>
                 <span *ngIf="!categoryStock.createddate"> - </span>
               </td>
               <td class="" width="20%">
@@ -343,7 +343,7 @@
             <tbody>
               <tr *ngFor="let distributorCategoryStock of distributorsCategoryStockReports">
                 <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.stockcreateddate">{{distributorCategoryStock.stockcreateddate | utcDate}}</span>
+                  <span *ngIf="distributorCategoryStock.stockcreateddate">{{distributorCategoryStock.stockcreateddate | localtimezone}}</span>
                   <span *ngIf="!distributorCategoryStock.stockcreateddate"> - </span>
                 </td>
                 <td class="" width="20%">
