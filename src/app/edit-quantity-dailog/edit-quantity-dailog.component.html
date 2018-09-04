@@ -103,10 +103,7 @@
           </div>
       </div>
     </form>
-  </md-dialog-content>
-
-
-  <div *ngIf="showProductsList">
+    <div *ngIf="showProductsList">
 
       <div class="table-scroll  preorder-scroll">
           <table class="table table-hover ">
@@ -220,6 +217,10 @@
         </div>
 
   </div>
+  </md-dialog-content>
+
+
+ 
   <div class="row float-right pdright-30 mgbottom-20">
       <h5 class="center warning capital">{{emptyCanMessage}}</h5> <br>
       <b *ngIf="!showProductsList">Total Amount : {{totalAmountBeforeProducts}}</b>
