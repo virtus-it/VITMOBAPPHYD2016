@@ -52,13 +52,16 @@ export class EditQuantityDailogComponent implements OnInit {
 
     let date = moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
     let datetime = date + " " + this.changeTimeSlot.timeslot;
-    this.loaderService.display(true);
+    // this.loaderService.display(true);
     // if(this.orderDetails.productdetails.servicecharge === null){
     //   this.orderDetails.productdetails.servicecharge = 0;
     // }
 
     if (this.quantity.value < this.editOrderInput.emptyCans) {
       this.emptyCansError = true;
+    }
+    else{
+      this.emptyCansError = false;
     }
 
     let input = { "order": { "amt": 0, "total_amt": 0, "orderid": '', "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": '', "quantity": 0, "excepted_time": '', "productid": '', "product_name": '', "product_type": '', "product_cost": 0, "expressdelivery": false, "servicecharges": 0, "slotdate": '', "delivery_locality": '', "delivery_buildingname": '', "emptycans": 0, "advance_amt": 0 , expressdeliverycharges: 0 } }
@@ -104,7 +107,7 @@ export class EditQuantityDailogComponent implements OnInit {
           output => this.updateQuantityResult(output),
           error => {
             //console.log("error in distrbutors");
-            this.loaderService.display(false);
+            // this.loaderService.display(false);
           });
 
     }
@@ -112,7 +115,7 @@ export class EditQuantityDailogComponent implements OnInit {
   updateQuantityResult(result) {
     AuthenticationService.showLog("Edit order output");
     AuthenticationService.showLog(result);
-    this.loaderService.display(false);
+    // this.loaderService.display(false);
     if (result.result == 'success') {
       this.onCloseModal('success')
 
