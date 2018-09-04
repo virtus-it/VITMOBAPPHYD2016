@@ -25,6 +25,7 @@ export class AuthenticationService {
   hideData: boolean = false;
   sales: any = {};
   manufacturer: any = {};
+  tokenSession:any = {};
 
   constructor(
     private router: Router,
@@ -41,6 +42,7 @@ export class AuthenticationService {
     this.stockpoints = JSON.parse(localStorage.getItem('stockpoints'));
     this.distributors = JSON.parse(localStorage.getItem('distributors'));
     this.suppliers = JSON.parse(localStorage.getItem('suppliers'));
+    this.tokenSession = JSON.parse(localStorage.getItem('token'));
     //  this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     this.salesLogin = this.newSalesFunction();

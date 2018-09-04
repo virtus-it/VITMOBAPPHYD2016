@@ -14,7 +14,7 @@
               <div class="col-md-4 ">
         
                 <md-form-field class="wd-100pc">
-                  <input  mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy" required>
+                  <input  mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy" required (ngModelChange)="changeQuantityEvent($event)">
                   <md-error>
                       Quantity is <strong>required</strong>
                   </md-error>
@@ -83,7 +83,7 @@
               <div class="col-md-4 ">
         
                   <md-form-field class="wd-100pc">
-                    <input  mdInput placeholder="Empty cans" [(ngModel)]="editOrderInput.emptyCans" name="emptyCans" required>
+                    <input  mdInput placeholder="Empty cans" [(ngModel)]="editOrderInput.emptyCans" name="emptyCans" (ngModelChange) = "onEmptyCansChange($event)" required>
                     <md-error>
                         Empty Cans is <strong>required</strong>
                     </md-error>
@@ -221,7 +221,9 @@
 
   </div>
   <div class="row float-right pdright-30 mgbottom-20">
-      <h5 class="center warning capital">{{emptyCanMessage}}</h5>
+      <h5 class="center warning capital">{{emptyCanMessage}}</h5> <br>
+      <b *ngIf="!showProductsList">Total Amount : {{totalAmountBeforeProducts}}</b>
+      <b *ngIf="showProductsList">Total Amount : {{amountAfterProductsView}}</b>
     <md-dialog-actions align="end">
       <button type="submit" class="btn-primary" md-raised-button (click)="updateQuantity()" [disabled]="emptyCansKeyUp == true">UPDATE</button>&nbsp;
       <button md-raised-button (click)='onCloseModal("cancel")'>CANCEL</button>

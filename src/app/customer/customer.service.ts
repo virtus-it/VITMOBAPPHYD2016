@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions, ResponseContentType } from '@angular/http';
 import { Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { AuthenticationService } from '../login/authentication.service';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
@@ -10,7 +11,7 @@ import 'rxjs/Rx';
 @Injectable()
 export class CustomerService {
 
-  constructor(private http: Http, @Inject('API_URL') private apiUrl: string) { }
+  constructor(private http: Http, @Inject('API_URL') private apiUrl: string , private authenticationService : AuthenticationService) { }
   getCustomerById(input) {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     let options = new RequestOptions({ headers: headers });
@@ -18,6 +19,31 @@ export class CustomerService {
       .map((res: Response) => res.json())
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  
+  tokenGenerate(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post('http://localhost:5000/api/login', bodyString ,  options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  verifyTokenDetails(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+    // let Token = this.authenticationService.tokenSession;
+    let Token = JSON.parse(localStorage.getItem('token'));
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + Token);
+    let options = new RequestOptions({ headers: headers  });
+    return this.http.post('http://localhost:5000/api/posts', bodyString, options)
+      .map((res: Response) => res.json())
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+
   }
 
   createCustomer(input) {
