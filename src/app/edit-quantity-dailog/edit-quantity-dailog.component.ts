@@ -27,7 +27,7 @@ export class EditQuantityDailogComponent implements OnInit {
   hours: any = "";
   expressAmount: any = "";
 
-  editOrderInput = { emptyCans: 0 };
+  editOrderInput = { emptyCans:  0 };
   showProductsList: boolean = false;
   productList = [];
   duplicate: boolean = false;
@@ -52,7 +52,7 @@ export class EditQuantityDailogComponent implements OnInit {
 
     let date = moment(this.changeTimeSlot.date).format('DD-MM-YYYY');
     let datetime = date + " " + this.changeTimeSlot.timeslot;
-    this.loaderService.display(true);
+    // this.loaderService.display(true);
     // if(this.orderDetails.productdetails.servicecharge === null){
     //   this.orderDetails.productdetails.servicecharge = 0;
     // }
@@ -60,12 +60,19 @@ export class EditQuantityDailogComponent implements OnInit {
     if (this.quantity.value < this.editOrderInput.emptyCans) {
       this.emptyCansError = true;
     }
+    else{
+      this.emptyCansError = false;
+    }
 
     let input = { "order": { "amt": 0, "total_amt": 0, "orderid": '', "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": '', "quantity": 0, "excepted_time": '', "productid": '', "product_name": '', "product_type": '', "product_cost": 0, "expressdelivery": false, "servicecharges": 0, "slotdate": '', "delivery_locality": '', "delivery_buildingname": '', "emptycans": 0, "advance_amt": 0 , expressdeliverycharges: 0 } }
 
     if (this.showProductsList == false && this.orderDetails.expressdelivery && this.orderDetails.expressdelivery == "true") {
       this.expressAmount = this.orderDetails.expressdeliverycharges;
     }
+    else{
+      this.expressAmount = 0;
+    }
+
     if (this.orderDetails.expressdelivery === null) {
       this.expressCheck = false;
     }
@@ -77,7 +84,7 @@ export class EditQuantityDailogComponent implements OnInit {
     //   this.orderDetails.slotdate = moment(this.orderDetails.slotdate).format('')
     // }
     if (this.showProductsList == false) {
-      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ( (this.orderDetails.servicecharges / this.orderDetails.quantity ) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, "emptycans": this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150) , expressdeliverycharges :  this.expressAmount }}
+      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ( (this.orderDetails.servicecharges / this.orderDetails.quantity ) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, emptycans : this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150) , expressdeliverycharges :  this.expressAmount }}
     }
     else {
       // no cans input
@@ -100,7 +107,7 @@ export class EditQuantityDailogComponent implements OnInit {
           output => this.updateQuantityResult(output),
           error => {
             //console.log("error in distrbutors");
-            this.loaderService.display(false);
+            // this.loaderService.display(false);
           });
 
     }
@@ -108,7 +115,7 @@ export class EditQuantityDailogComponent implements OnInit {
   updateQuantityResult(result) {
     AuthenticationService.showLog("Edit order output");
     AuthenticationService.showLog(result);
-    this.loaderService.display(false);
+    // this.loaderService.display(false);
     if (result.result == 'success') {
       this.onCloseModal('success')
 
