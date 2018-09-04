@@ -9,7 +9,7 @@
     width: 100% !important;
   }
    .preorder-scroll{
-    max-height: 60vh;
+    max-height:40vh;
     overflow-x: hidden;
     overflow-y: auto;
 }
