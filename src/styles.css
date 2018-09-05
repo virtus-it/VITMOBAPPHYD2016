@@ -1117,6 +1117,9 @@ margin-right: 15px;
 .firstLetterCap::first-letter{
   text-transform: uppercase;
 }
+.mat-button, .mat-icon-button, .mat-raised-button{
+  text-transform: uppercase
+}
   /* @media (min-width: 1200px){
     .customerSchList-height{
       height: 60vh !important;
