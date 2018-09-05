@@ -26,6 +26,7 @@
             <th width="17%">Invoice Date</th>
             <th width="17%">Created Date</th>
             <th width="17%">Updated Date</th>
+            <th width="17%">Confirmed Date</th>
             <th width="17%">Action</th>
           </tr>
         </thead>
@@ -36,20 +37,24 @@
               <span *ngIf="!stockrequest.reqid"> - </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate | utcDate24}}</span>
+              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate | utcDate}}</span>
               <span *ngIf="!stockrequest.modifieddate"> - </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate}}</span>
-              <span *ngIf="!stockrequest.modifieddate"> - </span>
+              <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
+              <span *ngIf="!stockrequest.reqdate"> pending </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
-              <span *ngIf="!stockrequest.reqid"> - </span>
+              <span *ngIf="stockrequest.dealer_confirmdate">{{stockrequest.dealer_confirmdate | utcDate}}</span>
+              <span *ngIf="!stockrequest.dealer_confirmdate"> pending </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
-              <span *ngIf="!stockrequest.reqid"> - </span>
+              <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
+              <span *ngIf="!stockrequest.reqconfirmdate"> pending </span>
+            </td>
+
+            <td>
+              <button class="btn btn-link" (click)="viewDetails()">View Details</button>
             </td>
 
           </tr>

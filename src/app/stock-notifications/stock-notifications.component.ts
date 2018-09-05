@@ -39,6 +39,16 @@ export class StockNotificationsComponent implements OnInit {
 
   }
 
+  viewDetails(){
+  //   let dialogRef = this.dialog.open(MapDialogComponent, {
+  //     width: '90%',
+  //      data: ''
+  //  });
+  //  dialogRef.afterClosed().subscribe(result => {
+  //      //console.log(`Dialog closed: ${result}`);
+  //  });
+  }
+
   ngOnInit() {
     this.getStockRequests();
   }

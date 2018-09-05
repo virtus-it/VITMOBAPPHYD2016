@@ -35,24 +35,35 @@ export class ReportsComponent implements OnInit {
   CategoryCtrl: FormControl;
   filteredcategories: Observable<any[]>;
 
+  salesTeamCtrl: FormControl;
+  filteredsalesteam: Observable<any[]>;
+
 
   constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private productService: ProductsService, private supplierservice: SupplierService, private customerService: CustomerService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+
     this.customerCtrl = new FormControl();
     this.filteredcustomer = this.customerCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findCustomers(dist) : this.customerList.slice());
+
     this.SupplierCtrl = new FormControl();
     this.filteredSupplier = this.SupplierCtrl.valueChanges
       .startWith(null)
       .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+
     this.CategoryCtrl = new FormControl();
     this.filteredcategories = this.CategoryCtrl.valueChanges
       .startWith(null)
       .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
+
+      this.salesTeamCtrl = new FormControl();
+      this.filteredsalesteam = this.salesTeamCtrl.valueChanges
+        .startWith(null)
+        .map(salesteam => salesteam ? this.findSalesTeam(salesteam) : this.allSalesTeam.slice());
 
 
 
@@ -74,6 +85,7 @@ export class ReportsComponent implements OnInit {
   distributors: any = [];
   categoryList: any = [];
   categoryid: any = '';
+  salesTeamId = '';
   tabPanelView = 'newlydownloaded';
   superDealer = true;
   customerCare = true;
@@ -99,6 +111,7 @@ export class ReportsComponent implements OnInit {
   categoryStockReport: boolean = false;
   typeOfReport: string = '';
   randomNumber:any = '';
+  allSalesTeam:any = [];
 
 
 
@@ -733,8 +746,36 @@ export class ReportsComponent implements OnInit {
         this.getProductByCategory();
       }
     }
-    return finalCategories;
+    return finalCategories; 
   }
+
+
+  findSalesTeam(name: string) {
+    let finalSalesTeam: any = [];
+    finalSalesTeam = this.allSalesTeam.filter(salesteam =>
+      salesteam.firstname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+
+    if (finalSalesTeam && finalSalesTeam.length > 0) {
+      let findSalesTeam: any = {};
+
+      findSalesTeam = _.find(finalSalesTeam, function (k, l) {
+        let catDetails: any = k;
+        return catDetails.category == name;
+      });
+
+      if (findSalesTeam) {
+        this.salesTeamId = findSalesTeam.userid;
+        //  this.filterTypeModel.categoryname = findCategory.category;
+      }
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        this.salesTeamUsers();
+      }
+    }
+    return finalSalesTeam;
+  }
+
 
   getProductByCategory() {
     let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
@@ -918,6 +959,21 @@ export class ReportsComponent implements OnInit {
     this.randomNumber =  Math.floor(Math.random()*90000) + 10000;
   }
 
+  salesTeamUsers(){
+    let input = {"root":{"userid": this.authenticationService.loggedInUserId() ,"transtype":"getsalesteam"}};
+    this.reportservice.changeAssociation(input)
+        .subscribe(
+          output => this.salesTeamUsersResult(output),
+          error => {
+            this.loaderService.display(false);
+          });
+  }
+  salesTeamUsersResult(result){
+    if(result.result == 'success'){
+      this.allSalesTeam = result.data;
+    }
+  }
+
 
 
 
@@ -927,6 +983,7 @@ export class ReportsComponent implements OnInit {
     this.getDistributors();
     this.getSupplierList();
     this.getProductByCategory();
+    this.salesTeamUsers();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
