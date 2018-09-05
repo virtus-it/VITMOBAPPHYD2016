@@ -16,6 +16,7 @@ export class AuthenticationService {
   // manufacturerLogin = true;
   customerCareLogin = true;
   salesTeamLogin:any = true;
+  distributorLogin  = true;
   CurrentSession: any = {};
   dashBoardDetails: any = {};
   polygons: any = {};
@@ -48,6 +49,7 @@ export class AuthenticationService {
     this.salesLogin = this.newSalesFunction();
     this.customerCareLogin = this.customerCareLoginFunction()
     this.salesTeamLogin = this.salesTeamLoginFunction();
+    this.distributorLogin = this.distributorLoginFunction();
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
@@ -103,6 +105,20 @@ export class AuthenticationService {
     else{
       return false;
     }
+    }
+    catch(ex){
+      return false;
+    }
+  }
+
+  distributorLoginFunction = function(){
+    try{
+      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'dealer')) {
+        return true;
+      }
+      else{
+        return false;
+      }
     }
     catch(ex){
       return false;

@@ -1048,6 +1048,7 @@ this.orderLandingService.getOrdersByfilter(input)
     this.quickFilterView = "";
     this.tabPanelView = 'forward';
     this.cantFilterMessage = "";
+    this.completeOrders = [];
 
     // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };

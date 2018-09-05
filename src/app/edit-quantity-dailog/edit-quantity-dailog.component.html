@@ -225,6 +225,7 @@
       <h5 class="center warning capital">{{emptyCanMessage}}</h5> <br>
       <b *ngIf="!showProductsList">Total Amount : {{totalAmountBeforeProducts}}</b>
       <b *ngIf="showProductsList">Total Amount : {{amountAfterProductsView}}</b>
+      <!-- <b>{{emptyCanMessage}}</b> -->
     <md-dialog-actions align="end">
       <button type="submit" class="btn-primary" md-raised-button (click)="updateQuantity()" [disabled]="emptyCansKeyUp == true">UPDATE</button>&nbsp;
       <button md-raised-button (click)='onCloseModal("cancel")'>CANCEL</button>

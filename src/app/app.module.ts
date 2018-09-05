@@ -135,6 +135,8 @@ import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
 import { DistributorMapDetailsComponent } from './distributor-map-details/distributor-map-details.component';
 import { ReportsPreviewComponent } from './reports-preview/reports-preview.component';
 import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
+import { StockNotificationsComponent } from './stock-notifications/stock-notifications.component';
+import { RaiseRequestComponent } from './raise-request/raise-request.component';
 
 
 
@@ -248,6 +250,8 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
         DistributorMapDetailsComponent,
         ReportsPreviewComponent,
         LocaltimezonePipe,
+        StockNotificationsComponent,
+        RaiseRequestComponent,
 
      
         
@@ -291,6 +295,8 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
             {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
             {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
             {path: 'inbox', component: InboxPageComponent , canActivate: [LoggedInGuard] },            
+            {path: 'raiserequest', component: RaiseRequestComponent , canActivate: [LoggedInGuard] },            
+            {path: 'stocknotifications', component: StockNotificationsComponent , canActivate: [LoggedInGuard] },            
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),

@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       this.authenticationService.salesLogin = this.authenticationService.newSalesFunction();
       this.authenticationService.customerCareLogin = this.authenticationService.customerCareLoginFunction();
       this.authenticationService.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
+      this.authenticationService.distributorLogin = this.authenticationService.distributorLoginFunction();
       //  this.getDashboardDetails();
       this.getPolygonDistributors();
       this.getDistributors();

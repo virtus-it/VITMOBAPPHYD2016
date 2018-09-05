@@ -1,0 +1,63 @@
+<div class=" dist-style minheight-500">
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-4 col-md-4 col-lg-4 ">
+      <h4><i class="fa fa-envelope-square"></i> Stock Notifications </h4>
+    </div>
+
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)"
+        (click)="showTabPanel('all')">All</button>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pending'}" href="javascript:void(0)"
+        (click)="showTabPanel('pending')">Pending</button>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2">
+      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'confirmed'}" href="javascript:void(0)"
+        (click)="showTabPanel('confirmed')">Confirmed</button>
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th width="17%">Req No.</th>
+            <th width="17%">Invoice Date</th>
+            <th width="17%">Created Date</th>
+            <th width="17%">Updated Date</th>
+            <th width="17%">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stockrequest of allStockRequests">
+            <td>
+              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
+              <span *ngIf="!stockrequest.reqid"> - </span>
+            </td>
+            <td>
+              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate | utcDate24}}</span>
+              <span *ngIf="!stockrequest.modifieddate"> - </span>
+            </td>
+            <td>
+              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate}}</span>
+              <span *ngIf="!stockrequest.modifieddate"> - </span>
+            </td>
+            <td>
+              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
+              <span *ngIf="!stockrequest.reqid"> - </span>
+            </td>
+            <td>
+              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
+              <span *ngIf="!stockrequest.reqid"> - </span>
+            </td>
+
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>

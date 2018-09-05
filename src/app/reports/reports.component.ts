@@ -98,6 +98,7 @@ export class ReportsComponent implements OnInit {
   distributorStockReport: boolean = false;
   categoryStockReport: boolean = false;
   typeOfReport: string = '';
+  randomNumber:any = '';
 
 
 
@@ -625,7 +626,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: ""
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "" , randominvoiceno: ''
       }
     };
     if (this.downloadInput.fromDate) {
@@ -638,15 +639,20 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.customerId;
       input.order.emailid = this.downloadInput.customerEmail;
       input.order.status = 'delivered';
+      this.generateRandomInvoiceNumber();
+      input.order.randominvoiceno = this.randomNumber;
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
+      this.generateRandomInvoiceNumber();
+      input.order.randominvoiceno = this.randomNumber;
     }
     if (this.downloadInput.filterBy == 'supplier') {
       input.order.filterid = this.downloadInput.supplierId;
       input.order.emailid = this.downloadInput.supplierEmail;
     }
+
     if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
       this.loaderService.display(true);
       this.reportservice.printInvoice(input)
@@ -906,6 +912,10 @@ export class ReportsComponent implements OnInit {
       }
     });
 
+  }
+
+  generateRandomInvoiceNumber(){
+    this.randomNumber =  Math.floor(Math.random()*90000) + 10000;
   }
 
 
