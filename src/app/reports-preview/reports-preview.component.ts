@@ -22,6 +22,7 @@ export class ReportsPreviewComponent implements OnInit {
   distributorsStockReports: any = [];
   categoryStockReports :any = [];
   distributorsCategoryStockReports :any = [];
+  
 
 
   showPreview() {
@@ -44,6 +45,9 @@ export class ReportsPreviewComponent implements OnInit {
     }
     else if(this.Details.type == 'distributorCategoryStockReport'){
       this.distributorsCategoryStockReports = this.Details.data;
+    }
+    else if(this.Details.type == 'salesTeamProductsReport'){
+
     }
   }
 

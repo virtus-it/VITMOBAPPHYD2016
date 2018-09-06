@@ -75,7 +75,7 @@ export class ReportsComponent implements OnInit {
   distOrders = { getDate: null };
   downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' };
 
-  stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "" };
+  stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: ""};
 
   reportsClickMore: boolean = false;
   reportsInput: any = {};
@@ -112,6 +112,7 @@ export class ReportsComponent implements OnInit {
   typeOfReport: string = '';
   randomNumber:any = '';
   allSalesTeam:any = [];
+  salesTeamProductsReport:boolean = false;
 
 
 
@@ -391,7 +392,11 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
-    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category')) {
+    else if(this.stockreportsInput.filterBy == 'salesteamcategory'){
+      input.order.categoryid = this.categoryid;
+      input.order.distributorid = this.salesTeamId;
+    }
+    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category' || this.stockreportsInput.filterBy == 'salesteamcategory' )) {
       this.loaderService.display(true);
       console.log(input, 'print input');
       this.reportservice.printInvoice(input)
@@ -753,18 +758,18 @@ export class ReportsComponent implements OnInit {
   findSalesTeam(name: string) {
     let finalSalesTeam: any = [];
     finalSalesTeam = this.allSalesTeam.filter(salesteam =>
-      salesteam.firstname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+      salesteam.fullname.toLowerCase().indexOf(name.toLowerCase()) === 0);
 
     if (finalSalesTeam && finalSalesTeam.length > 0) {
       let findSalesTeam: any = {};
 
       findSalesTeam = _.find(finalSalesTeam, function (k, l) {
-        let catDetails: any = k;
-        return catDetails.category == name;
+        let salesteam: any = k;
+        return salesteam.fullname == name;
       });
 
       if (findSalesTeam) {
-        this.salesTeamId = findSalesTeam.userid;
+        this.salesTeamId = findSalesTeam.user_id;
         //  this.filterTypeModel.categoryname = findCategory.category;
       }
     }
@@ -820,16 +825,21 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
+    if(this.stockreportsInput.filterBy == 'salesteamcategory'){
+      input.order.categoryid = this.categoryid;
+      input.order.distributorid = this.salesTeamId;
+    }
     if (input.order.filtertype == 'distributor') {
       this.distributorStockReport = true;
-
     }
     else if (input.order.filtertype == 'category') {
       this.categoryStockReport = true;
-
     }
     else if (input.order.filtertype == 'distributorcategory') {
       this.distributorCategoryStockReport = true;
+    }
+    else if(input.order.filtertype == 'salesteamcategory'){
+      this.salesTeamProductsReport = true;
     }
     if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category')) {
       this.loaderService.display(true);
@@ -856,6 +866,10 @@ export class ReportsComponent implements OnInit {
       }
       else if(this.categoryStockReport == true){
         this.typeOfReport = 'categoryStockReport';
+      }
+      else if(this.salesTeamProductsReport == true){
+        this.typeOfReport = 'salesTeamProductsReport'
+
       }
         this.reportsPreview(this.viewStockReportsData);
     }
@@ -886,7 +900,7 @@ export class ReportsComponent implements OnInit {
     }
     if (this.downloadInput.filterBy == 'supplier') {
       input.order.filterid = this.downloadInput.supplierId;
-      input.order.emailid = this.downloadInput.supplierEmail;
+      input.order.emailid = this.salesTeamId;
     }
     if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
       this.loaderService.display(true);
@@ -942,6 +956,7 @@ export class ReportsComponent implements OnInit {
         this.distributorOrderReports = false;
         this.distributorStockReport = false;
         this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
       }
       else if(result != 'success'){
         this.typeOfReport = '';
@@ -950,6 +965,7 @@ export class ReportsComponent implements OnInit {
         this.distributorOrderReports = false;
         this.distributorStockReport = false;
         this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
       }
     });
 

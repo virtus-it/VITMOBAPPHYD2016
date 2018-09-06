@@ -630,6 +630,7 @@
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="category">Category</md-option>
                 <md-option value="distributorcategory">Distributor + Category</md-option>
+                <md-option value="salesteamcategory">Sales Team + Category</md-option>
               </md-select>
 
             </div>
@@ -647,12 +648,24 @@
             </div>
 
 
-            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category' || stockreportsInput.filterBy == 'distributorcategory' ">
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category' || stockreportsInput.filterBy == 'distributorcategory' ||  stockreportsInput.filterBy == 'salesteamcategory' ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option *ngFor="let cat of filteredcategories | async" [value]="cat.category">
                     <span> {{cat.category}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+
+            </div>
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'salesteamcategory' ">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter sales team name" aria-label="State" [mdAutocomplete]="auto" [formControl]="salesTeamCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let salesteam of filteredsalesteam | async" [value]="salesteam.fullname">
+                    <span> {{salesteam.fullname}}</span>
                   </md-option>
                 </md-autocomplete>
               </md-form-field>
