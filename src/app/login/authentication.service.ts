@@ -16,6 +16,7 @@ export class AuthenticationService {
   // manufacturerLogin = true;
   customerCareLogin = true;
   salesTeamLogin:any = true;
+  distributorLogin  = true;
   CurrentSession: any = {};
   dashBoardDetails: any = {};
   polygons: any = {};
@@ -48,10 +49,12 @@ export class AuthenticationService {
     this.salesLogin = this.newSalesFunction();
     this.customerCareLogin = this.customerCareLoginFunction()
     this.salesTeamLogin = this.salesTeamLoginFunction();
+    this.distributorLogin = this.distributorLoginFunction();
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.tokenSession);
     let options = new RequestOptions({ headers: headers });
     return this.http
       .post(this.apiUrl + '/weblogin', bodyString, options)
@@ -109,6 +112,20 @@ export class AuthenticationService {
     }
   }
 
+  distributorLoginFunction = function(){
+    try{
+      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'dealer')) {
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+    catch(ex){
+      return false;
+    }
+  }
+
   getDashboardDetails(input) {
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
@@ -131,6 +148,7 @@ export class AuthenticationService {
     this.loggedIn = false;
     this.CurrentSession = {};
     this.router.navigate(['/login']);
+    localStorage.removeItem('token');
   }
   isLoggedIn() {
     return this.loggedIn;
