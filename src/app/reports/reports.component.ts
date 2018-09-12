@@ -60,10 +60,10 @@ export class ReportsComponent implements OnInit {
       .startWith(null)
       .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
 
-      this.salesTeamCtrl = new FormControl();
-      this.filteredsalesteam = this.salesTeamCtrl.valueChanges
-        .startWith(null)
-        .map(salesteam => salesteam ? this.findSalesTeam(salesteam) : this.allSalesTeam.slice());
+    this.salesTeamCtrl = new FormControl();
+    this.filteredsalesteam = this.salesTeamCtrl.valueChanges
+      .startWith(null)
+      .map(salesteam => salesteam ? this.findSalesTeam(salesteam) : this.allSalesTeam.slice());
 
 
 
@@ -75,7 +75,7 @@ export class ReportsComponent implements OnInit {
   distOrders = { getDate: null };
   downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' };
 
-  stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: ""};
+  stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "" };
 
   reportsClickMore: boolean = false;
   reportsInput: any = {};
@@ -110,9 +110,9 @@ export class ReportsComponent implements OnInit {
   distributorStockReport: boolean = false;
   categoryStockReport: boolean = false;
   typeOfReport: string = '';
-  randomNumber:any = '';
-  allSalesTeam:any = [];
-  salesTeamProductsReport:boolean = false;
+  randomNumber: any = '';
+  allSalesTeam: any = [];
+  salesTeamProductsReport: boolean = false;
 
 
 
@@ -392,11 +392,11 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
-    else if(this.stockreportsInput.filterBy == 'salesteamcategory'){
+    else if (this.stockreportsInput.filterBy == 'salesteamcategory') {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.salesTeamId;
     }
-    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category' || this.stockreportsInput.filterBy == 'salesteamcategory' )) {
+    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category' || this.stockreportsInput.filterBy == 'salesteamcategory')) {
       this.loaderService.display(true);
       console.log(input, 'print input');
       this.reportservice.printInvoice(input)
@@ -423,7 +423,7 @@ export class ReportsComponent implements OnInit {
             this.loaderService.display(false);
           });
     }
-    else{
+    else {
       this.loaderService.display(false);
       this.noData = true;
     }
@@ -644,7 +644,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "" , randominvoiceno: ''
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", randominvoiceno: ''
       }
     };
     if (this.downloadInput.fromDate) {
@@ -751,7 +751,7 @@ export class ReportsComponent implements OnInit {
         this.getProductByCategory();
       }
     }
-    return finalCategories; 
+    return finalCategories;
   }
 
 
@@ -825,7 +825,7 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
-    if(this.stockreportsInput.filterBy == 'salesteamcategory'){
+    if (this.stockreportsInput.filterBy == 'salesteamcategory') {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.salesTeamId;
     }
@@ -838,7 +838,7 @@ export class ReportsComponent implements OnInit {
     else if (input.order.filtertype == 'distributorcategory') {
       this.distributorCategoryStockReport = true;
     }
-    else if(input.order.filtertype == 'salesteamcategory'){
+    else if (input.order.filtertype == 'salesteamcategory') {
       this.salesTeamProductsReport = true;
     }
     if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category')) {
@@ -858,20 +858,20 @@ export class ReportsComponent implements OnInit {
       this.loaderService.display(false);
       this.viewStockReportsData = result.data;
       this.noData = false;
-      if(this.distributorCategoryStockReport == true){
+      if (this.distributorCategoryStockReport == true) {
         this.typeOfReport = 'distributorCategoryStockReport';
       }
-      else if(this.distributorStockReport == true){
+      else if (this.distributorStockReport == true) {
         this.typeOfReport = 'distributorStockReport';
       }
-      else if(this.categoryStockReport == true){
+      else if (this.categoryStockReport == true) {
         this.typeOfReport = 'categoryStockReport';
       }
-      else if(this.salesTeamProductsReport == true){
+      else if (this.salesTeamProductsReport == true) {
         this.typeOfReport = 'salesTeamProductsReport'
 
       }
-        this.reportsPreview(this.viewStockReportsData);
+      this.reportsPreview(this.viewStockReportsData);
     }
     else {
       this.viewStockReportsData = [];
@@ -882,7 +882,7 @@ export class ReportsComponent implements OnInit {
   }
 
   viewOrdersReports() {
-    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' }};
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' } };
     if (this.downloadInput.fromDate) {
       input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
@@ -910,7 +910,7 @@ export class ReportsComponent implements OnInit {
       else if (input.order.filtertype == 'distributor') {
         this.distributorOrderReports = true;
       }
-      console.log(input , 'sdgsdgdsgdhhddhdhdhdh');
+      console.log(input, 'sdgsdgdsgdhhddhdhdhdh');
       this.reportservice.printInvoice(input)
         .subscribe(
           output => this.viewOrdersReportsResult(output),
@@ -925,10 +925,10 @@ export class ReportsComponent implements OnInit {
       this.viewOrdersReportsData = result.data;
       this.noData = false;
       this.loaderService.display(false);
-      if(this.customerOrderReports == true){
+      if (this.customerOrderReports == true) {
         this.typeOfReport = 'customerOrderReports';
       }
-      else if(this.distributorOrderReports == true){
+      else if (this.distributorOrderReports == true) {
         this.typeOfReport = 'distributorOrderReports';
       }
       this.reportsPreview(this.viewOrdersReportsData);
@@ -942,7 +942,7 @@ export class ReportsComponent implements OnInit {
 
 
   reportsPreview(data) {
-    let formattedData = {data: data , type : this.typeOfReport }
+    let formattedData = { data: data, type: this.typeOfReport }
     let dialogRef = this.dialog.open(ReportsPreviewComponent, {
       width: '80%',
       data: formattedData
@@ -958,7 +958,7 @@ export class ReportsComponent implements OnInit {
         this.categoryStockReport = false;
         this.salesTeamProductsReport = false;
       }
-      else if(result != 'success'){
+      else if (result != 'success') {
         this.typeOfReport = '';
         this.customerOrderReports = false;
         this.distributorCategoryStockReport = false;
@@ -971,21 +971,21 @@ export class ReportsComponent implements OnInit {
 
   }
 
-  generateRandomInvoiceNumber(){
-    this.randomNumber =  Math.floor(Math.random()*90000) + 10000;
+  generateRandomInvoiceNumber() {
+    this.randomNumber = Math.floor(Math.random() * 90000) + 10000;
   }
 
-  salesTeamUsers(){
-    let input = {"root":{"userid": this.authenticationService.loggedInUserId() ,"transtype":"getsalesteam"}};
+  salesTeamUsers() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "transtype": "getsalesteam" } };
     this.reportservice.changeAssociation(input)
-        .subscribe(
-          output => this.salesTeamUsersResult(output),
-          error => {
-            this.loaderService.display(false);
-          });
+      .subscribe(
+        output => this.salesTeamUsersResult(output),
+        error => {
+          this.loaderService.display(false);
+        });
   }
-  salesTeamUsersResult(result){
-    if(result.result == 'success'){
+  salesTeamUsersResult(result) {
+    if (result.result == 'success') {
       this.allSalesTeam = result.data;
     }
   }

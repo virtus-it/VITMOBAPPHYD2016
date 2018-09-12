@@ -18,8 +18,11 @@
       <div class="row">
       <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'assigned'}" href="javascript:void(0)"
       (click)="showTabPanel('assigned')">Assigned</button> &nbsp;&nbsp;&nbsp; 
-      <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'lastTenOrders'}" href="javascript:void(0)"
-      (click)="showTabPanel('lastTenOrders')">Last Ten Orders</button>
+      <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'lastHundredOrders'}" href="javascript:void(0)"
+      (click)="showTabPanel('lastHundredOrders')">Last Hundred Orders</button>
+
+      <button type="submit" md-raised-button class="" [ngClass]="{'btn-primary': tabPanelView === 'delivered'}" href="javascript:void(0)"
+      (click)="showTabPanel('delivered')">Delivered</button>
     </div>
   </div>
     <div class="container-fluid ">
@@ -36,7 +39,7 @@
                   </agm-info-window>
                 </agm-marker>
 
-              <agm-marker *ngFor="let orderMarker of ordersMarkers; let i = index" [latitude]="orderMarker.lat" [longitude]="orderMarker.lng">
+              <agm-marker *ngFor="let orderMarker of ordersMarkers; let i = index" [latitude]="orderMarker.lat" [longitude]="orderMarker.lng"  [iconUrl]="orderMarker.icon">
 
                   <agm-info-window>
                       # {{orderMarker.orderid}} <br>

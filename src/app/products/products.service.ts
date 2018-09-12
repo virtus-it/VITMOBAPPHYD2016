@@ -15,138 +15,264 @@ export class ProductsService {
 
 
 
-  constructor(private http: Http, @Inject('API_URL') private apiUrl: string , private authenticationService: AuthenticationService) { }
+  constructor(private http: Http, @Inject('API_URL') private apiUrl: string, private authenticationService: AuthenticationService) { }
   getProducts(input) {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
     let options = new RequestOptions({ headers: headers });
-  return this.http.get(this.apiUrl + '/products/' + input.userId + '/' + input.appType + '/' + this.authenticationService.userType()   ,  options)
-      .map((res: Response) => res.json())
+    return this.http.get(this.apiUrl + '/products/' + input.userId + '/' + input.appType + '/' + this.authenticationService.userType(), options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
+      }
+    })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-    }
-    getProductsCategory(input) {
-      let headers = new Headers({ 'Content-Type': 'application/json'  }); // ... Set content type to JSON  res.json()
-      let options = new RequestOptions({ headers: headers });
-      return this.http.get(this.apiUrl + '/productcategory/' + input.userId + '/' + input.userType +'/' + input.appType, options)
-        .map((res: Response) => res.json())
-        .do(data => console.log('All: '))
-        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  getProductsCategory(input) {
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.get(this.apiUrl + '/productcategory/' + input.userId + '/' + input.userType + '/' + input.appType, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      getProductsByCategory(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/getproductsbycategory', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  getProductsByCategory(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getproductsbycategory', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      createProduct(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/createproduct', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  createProduct(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/createproduct', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      updateProduct(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.apiUrl + '/product', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  updateProduct(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.apiUrl + '/product', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      addStockDetails(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/maddstock', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  addStockDetails(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/maddstock', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      getStockHistroy(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/getsaleshistoryfilters', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  getStockHistroy(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getsaleshistoryfilters', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      setProductStatus(input) {
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/setproductstatus', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  setProductStatus(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/setproductstatus', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      createCategory(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/createcategory', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+  createCategory(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/createcategory', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
+      }
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
+  }
+  updateCategory(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.apiUrl + '/updatecategory', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
-      updateCategory(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.apiUrl + '/updatecategory', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  setPrice(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/setcustomer_wise_productprice', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-      setPrice(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/setcustomer_wise_productprice', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
+  assignDealerProducts(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/massignproduct', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-      assignDealerProducts(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/massignproduct', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
+  uploadImage(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/uploadimg', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-      uploadImage(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.post(this.apiUrl + '/uploadimg', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
+  updateUserOnImage(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.put(this.apiUrl + '/user', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      if(response.data == 'token expired') {
+        this.authenticationService.logout();
+      } 
+      else {
+        return res.json();
       }
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 
-      updateUserOnImage(input){
-        let bodyString = JSON.stringify(input); // Stringify payload
-        let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.apiUrl + '/user', bodyString, options)
-            .map((res: Response) => res.json())
-            .do(data => console.log('All: '))
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
-
-      }
+  }
 }

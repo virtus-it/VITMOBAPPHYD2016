@@ -471,7 +471,7 @@ export class OrderLandingComponent implements OnInit {
   }
   getForwardOrderDetailsResult(result) {
     this.orderslocationData = [];
-    this.forwardOrdersonMap();
+    // this.forwardOrdersonMap();
     // this.forwardOrders = result.data;
     this.loaderService.display(false);
     console.log(this.forwardOrders);

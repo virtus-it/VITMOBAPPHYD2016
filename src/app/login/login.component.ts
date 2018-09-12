@@ -47,6 +47,9 @@ export class LoginComponent implements OnInit {
       this.authenticationService.CurrentSession = JSON.parse(
         localStorage.getItem('currentUser')
       );
+      localStorage.setItem('token' ,data.token);
+      this.authenticationService.tokenSession = localStorage.getItem('token');
+      console.log('token details' , this.authenticationService.tokenSession)
       this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
       this.authenticationService.salesLogin = this.authenticationService.newSalesFunction();
       this.authenticationService.customerCareLogin = this.authenticationService.customerCareLoginFunction();

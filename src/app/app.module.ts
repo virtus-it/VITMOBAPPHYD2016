@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import {LocationStrategy,HashLocationStrategy} from '@angular/common'; 
 import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule,MdAutocompleteModule } from '@angular/material';
@@ -137,6 +138,9 @@ import { ReportsPreviewComponent } from './reports-preview/reports-preview.compo
 import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
 import { StockNotificationsComponent } from './stock-notifications/stock-notifications.component';
 import { RaiseRequestComponent } from './raise-request/raise-request.component';
+import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.component';
+import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
+import { authinterceptor } from './interceptor/authinterceptor';
 
 
 
@@ -252,6 +256,8 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
         LocaltimezonePipe,
         StockNotificationsComponent,
         RaiseRequestComponent,
+        SalesTeamAssignComponent,
+        RaiseRequestDetailDailogComponent,
 
      
         
@@ -271,6 +277,7 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
         MdInputModule,
         NgxGaugeModule,
         MdNativeDateModule,
+        HttpClientModule,
         AngularMultiSelectModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
@@ -328,8 +335,9 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
         PaymentsService,
         PromocodeServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
+        {provide: HTTP_INTERCEPTORS,useClass: authinterceptor, multi: true},
         { provide: 'API_URL', useValue: 'http://104.211.247.42:2221' },
-       { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  
+       { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
         MapDialogComponent, 
@@ -412,7 +420,9 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
          NotificationDetailsComponent,
          DeleteRuleComponent,
          DistributorMapDetailsComponent,
-         ReportsPreviewComponent
+         ReportsPreviewComponent,
+         SalesTeamAssignComponent,
+         RaiseRequestDetailDailogComponent
       
 
 

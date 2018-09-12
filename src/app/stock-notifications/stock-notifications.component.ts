@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { ReportsService } from '../reports/reports.service';
+import * as _ from 'underscore';
 
 
 @Component({
@@ -15,6 +16,7 @@ export class StockNotificationsComponent implements OnInit {
 
   allStockRequests:any = [];
   panelView:string = 'all';
+  tabPanelView = 'all';
 
 
   getStockRequests(){
@@ -29,15 +31,57 @@ export class StockNotificationsComponent implements OnInit {
   getStockRequestsResult(result){
     if(result.result == 'success'){
       this.allStockRequests = result.data;
+      if(this.tabPanelView == 'pending'){
+        this.showPendingRequests();
+      }
+      else if(this.tabPanelView == 'confirmed'){
+      this.showConfirmedRequests();
+
+      }
     }
   }
 
   showTabPanel(panelView){
     if(panelView == 'all'){
+      this.tabPanelView = 'all';
       this.getStockRequests();
     }
+    else if(panelView == 'pending'){
+      this.tabPanelView = 'pending';
+      this.getStockRequests();
+    }
+    else if(panelView == 'confirmed'){
+      this.tabPanelView = 'confirmed';
+      this.getStockRequests();
+      
+    }
+
 
   }
+
+  showPendingRequests(){
+    let pendingRequestsArray = [];
+    let pendingRequests = _.each(this.allStockRequests , function( i , j){
+      let details:any = i;
+      if(details.status == 'reqconfirm' || details.status == 'stockrequested'){
+        pendingRequestsArray.push(details);
+      }
+    });
+    this.allStockRequests = pendingRequestsArray;
+  }
+
+  showConfirmedRequests(){
+    let confirmedRequestsArray = [];
+    let confirmedRequests = _.each(this.allStockRequests , function(i , j){
+      let details:any  = i;
+      if(details.status == 'confirm'){
+        confirmedRequestsArray.push(details);
+      }
+    });
+    this.allStockRequests = confirmedRequestsArray;
+  }
+
+
 
   viewDetails(){
   //   let dialogRef = this.dialog.open(MapDialogComponent, {
