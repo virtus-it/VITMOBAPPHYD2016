@@ -407,6 +407,9 @@
                       {{customer.firstname}}{{customer.lastnsame}}
                     </md-option>
                   </md-select> -->
+
+              <input placeholder="Enter name" [(ngModel)]="searchName">
+              <i class="fa fa-search cursor fs-18 search-style" (click)="searchCustomers()"></i>
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
                 <md-autocomplete #auto="mdAutocomplete">

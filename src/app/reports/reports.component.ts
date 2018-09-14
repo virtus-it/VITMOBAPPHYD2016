@@ -113,6 +113,7 @@ export class ReportsComponent implements OnInit {
   randomNumber: any = '';
   allSalesTeam: any = [];
   salesTeamProductsReport: boolean = false;
+  searchName: string = '';
 
 
 
@@ -452,16 +453,16 @@ export class ReportsComponent implements OnInit {
   getCusotmerResult(result) {
     //console.log(result);
     if (result.result == 'success') {
-      let cusotmerCopy = [];
+      let customercopy = [];
       _.each(result.data, function (i, j) {
         let details: any = i;
         if (details.firstname) {
           details.fullName = details.firstname;
-          cusotmerCopy.push(details);
+          customercopy.push(details);
         }
 
       });
-      this.customerList = cusotmerCopy;
+      this.customerList = customercopy;
 
     }
 
@@ -990,12 +991,37 @@ export class ReportsComponent implements OnInit {
     }
   }
 
+  searchCustomers() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": this.searchName, "lastcustomerid": "0", "pagesize": "200", "apptype": this.authenticationService.appType() } }
+    this.customerService.searchCustomer(input)
+      .subscribe(
+        output => this.searchCustomersResult(output),
+        error => {
+          //console.log("error in customer");
+          this.loaderService.display(false);
+        });
+  }
+  searchCustomersResult(result){
+    if(result.result == 'success'){
+      let customercopy = [];
+      _.each(result.data, function (i, j) {
+        let details: any = i;
+        if (details.firstname) {
+          details.fullName = details.firstname + ' ' + details.mobileno ;
+          customercopy.push(details);
+        }
+
+      });
+      this.customerList = customercopy;
+    }
+  }
+
 
 
 
   ngOnInit() {
     this.searchReports(true, 'newlydownloaded');
-    this.getCustomer();
+    // this.getCustomer();
     this.getDistributors();
     this.getSupplierList();
     this.getProductByCategory();
