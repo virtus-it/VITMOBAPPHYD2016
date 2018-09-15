@@ -126,3 +126,13 @@ tbody{
 .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button{
   padding:0px 14px !important;
 }
+.search-style1{
+position: absolute;
+    right: 0px;
+    top: 16px;
+}
+.result-style{
+position: absolute;
+    top: 35px;
+    font-weight: bold;
+}

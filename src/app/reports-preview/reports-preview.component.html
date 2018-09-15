@@ -14,43 +14,74 @@
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'customerOrderReports'">
     <div class="well">
     <div class="row">
-<div class="col center">
-  <b>Invoice number</b> <br> <label>{{invoiceNumber}} </label>
-  </div>
-  <div class="col center">
-  <b>Subject  </b>  <br><label>Customers Orders Invoice </label> 
+      <div class="col">
+          <div class="row">
+              <b class="col-sm-4" >Invoice number: </b>
+              <div class="col-sm-8"> 
+                  <label>{{invoiceNumber}} </label>
+              </div>
+            </div>
+            <div class="row">
+                <b class="col-sm-4" >Subject: </b>
+                <div class="col-sm-8"> 
+                    <label>Customers Orders Invoice </label>
+                </div>
+              </div>
+              <div class="row">
+                  <b class="col-sm-4" >Total Quantity: </b>
+                  <div class="col-sm-8"> 
+                      <label>{{totalQuantity}} </label>
+                  </div>
+                </div>
+                <div class="row">
+                    <b class="col-sm-4" >Total Amount: </b>
+                    <div class="col-sm-8"> 
+                        <label>{{totalAmount}} </label>
+                    </div>
+                  </div>
+<!-- <div class="col center">
+  <b>Invoice number: </b> <label>{{invoiceNumber}} </label>
+  </div> -->
+  <!-- <div class="col center">
+  <b>Subject  </b> <label>Customers Orders Invoice </label> 
 </div>
 <div class="col center">
-  <b>Total Quantity  </b> <br><label>{{totalQuantity}}</label>
+  <b>Total Quantity  </b><label>{{totalQuantity}}</label>
 </div>
 <div class="col center">
-  <b>Total Amount  </b> <br><label> {{totalAmount}}</label>
+  <b>Total Amount  </b><label> {{totalAmount}}</label>
 </div>
 </div>
-<br>
-<div class="row">
-  <div class="col center">
+<br> -->
+<div class="col">
+    <!-- <div class="row">
+        <b class="col-sm-4" >Total Amount: </b>
+        <div class="col-sm-8"> 
+            <label>{{totalAmount}} </label>
+        </div>
+      </div> -->
+  <div class=" center">
     <span>
-      <span *ngIf="Details.data[0].orderby_firstname" class="capitalize"><b>Name</b> <br>{{Details.data[0].orderby_firstname}} </span>
+      <span *ngIf="Details.data[0].orderby_firstname" class="capitalize"><b>Name</b>{{Details.data[0].orderby_firstname}} </span>
       <span *ngIf="!Details.data[0].orderby_firstname"><b>Name</b><br> - </span>
     </span>
     </div>
-    <div class="col center">
-      <span *ngIf="Details.data[0].orderby_mobileno"><b>Mobile number</b> <br>{{Details.data[0].orderby_mobileno}} </span>
+    <div class=" center">
+      <span *ngIf="Details.data[0].orderby_mobileno"><b>Mobile number</b>{{Details.data[0].orderby_mobileno}} </span>
           <span *ngIf="!Details.data[0].orderby_mobileno"><b>Mobile number</b><br> - </span>
     </div>
-    <div class="col-6 pdleft-8pc">
-      <span *ngIf="Details.data[0].orderby_address" class="capitalize"><b>Address </b> <br> {{Details.data[0].orderby_address}} </span>
+    <div class=" ">
+      <span *ngIf="Details.data[0].orderby_address" class="capitalize"><b>Address </b> {{Details.data[0].orderby_address}} </span>
       <span *ngIf="!Details.data[0].orderby_address"><b>Address  </b><br>- </span>
   </div>
 
-
+</div>
   </div>
-
+</div>
       <!-- <div class="row">
-      <small>Invoice number: {{invoiceNumber}}</small> <br>
-      <small>Subject : Customers Orders Invoice </small> <br>
-      <small>Total Quantity : {{totalQuantity}}</small> <br>
+      <small>Invoice number: {{invoiceNumber}}</small>
+      <small>Subject : Customers Orders Invoice </small>
+      <small>Total Quantity : {{totalQuantity}}</small>
       <small>Total Amount : {{totalAmount}}</small>
     </div> -->
 
@@ -109,52 +140,124 @@
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorOrderReports'">
     <div class="well">
       <div class="row">
-  <div class="col center">
-    <b>Invoice number</b> <br> <label>{{invoiceNumber}} </label>
-    </div>
-    <div class="col center">
-    <b>Subject  </b>  <br><label>Distributor Orders Invoice </label> 
-  </div>
-  <div class="col center">
-    <b>Total Quantity  </b> <br><label>{{totalQuantity}}</label>
-  </div>
-  <div class="col center">
-    <b>Total Amount  </b> <br><label> {{totalQuantity}}  x 1 Rs</label>
-  </div>
-  <div class="col center">
-      <b>Total Invoiced Amount  </b> <br><label> {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col center">
-          <span *ngIf="Details.data[0].distributorname" class="capitalize"><b>Distributors Name</b> <br> {{Details.data[0].distributorname}} </span>
-          <span *ngIf="!Details.data[0].distributorname"><b>Distributors Name</b><br> - </span>
-       </div>
-      <div class="col center">
-
-            <span *ngIf="Details.data[0].companyname" class="capitalize"><b> Enterprise Name</b> <br> {{Details.data[0].companyname}} </span>
-        <span *ngIf="!Details.data[0].companyname"><b>Enterprise Name </b><br> - </span>
-      </div>
-      <div class="col center">
-          <span *ngIf="Details.data[0].distributormobile" class="capitalize"><b>Mobile number </b> <br> {{Details.data[0].distributormobile}} </span>
-          <span *ngIf="!Details.data[0].distributormobile"><b>Mobile number </b><br> - </span>
+            <!-- <div class="row">
+        <b class="col-sm-4" >Total Amount: </b>
+        <div class="col-sm-8"> 
+            <label>{{totalAmount}} </label>
         </div>
-      <div class="col-5 pdleft-8pc">
+      </div> -->
+      <div class="col-5">
+              <div class="row">
+        <b class="col-sm-5" >Invoice number: </b>
+        <div class="col-sm-7"> 
+            <label>{{invoiceNumber}} </label>
+        </div>
+      </div>
+      <div class="row">
+          <b class="col-sm-5" >Subject: </b>
+          <div class="col-sm-7"> 
+              <label>Distributor Orders Invoice </label>
+          </div>
+        </div>
+      <div class="row">
+          <b class="col-sm-5" >Total Quantity: </b>
+          <div class="col-sm-7"> 
+              <label>{{totalQuantity}}</label>
+          </div>
+        </div>
+            <div class="row">
+                <b class="col-sm-5" >Total Amount: </b>
+                <div class="col-sm-7"> 
+                    <label>{{totalQuantity}}  x 1 Rs </label>
+                </div>
+              </div>  
+              <div class="row">
+                  <b class="col-sm-5" >Total Invoiced Amount: </b>
+                  <div class="col-sm-7"> 
+                      <label>{{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
+                  </div>
+                </div>
+  <!-- <div class="col center">
+    <b>Invoice number</b> <label>{{invoiceNumber}} </label>
+    </div> -->
+    <!-- <div class="col center">
+    <b>Subject  </b> <label>Distributor Orders Invoice </label> 
+  </div> -->
+  <!-- <div class="col center">
+    <b>Total Quantity  </b><label>{{totalQuantity}}</label>
+  </div>
+  <div class="col center">
+    <b>Total Amount  </b><label> {{totalQuantity}}  x 1 Rs</label>
+  </div> -->
+  <!-- <div class="col center">
+      <b>Total Invoiced Amount  </b><label> 
+        {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
+    </div> -->
+  </div>
 
-        <span *ngIf="Details.data[0].distributoraddress" class="capitalize"><b>Address </b> <br> {{Details.data[0].distributoraddress}} </span>
+  <div class="col">
+      <div class="row">
+          <b class="col-sm-4">Distributors Name: </b>
+          <div class="col-sm-8"> 
+              <label *ngIf="Details.data[0].distributorname" class="capitalize">{{Details.data[0].distributorname}}</label>
+              <label *ngIf="!Details.data[0].distributorname">- </label>
+            </div>
+        </div>
+        <div class="row">
+            <b class="col-sm-4" >Enterprise Name: </b>
+            <div class="col-sm-8"> 
+                <label *ngIf="Details.data[0].companyname"  class="capitalize">
+                    {{Details.data[0].companyname}}</label>
+                <label *ngIf="!Details.data[0].companyname">- </label>
+              </div>
+          </div>
+
+          <div class="row">
+              <b class="col-sm-4" >Mobile number: </b>
+              <div class="col-sm-8"> 
+                  <label  *ngIf="Details.data[0].distributormobile" class="capitalize">
+                      {{Details.data[0].distributormobile}}</label>
+                  <label  *ngIf="!Details.data[0].distributormobile">- </label>
+                </div>
+            </div>
+            <div class="row">
+                <b class="col-sm-4" >Address: </b>
+                <div class="col-sm-8"> 
+                    <label  *ngIf="Details.data[0].distributoraddress" class="capitalize">
+                        {{Details.data[0].distributoraddress}} </label>
+                    <label  *ngIf="!Details.data[0].distributoraddress">- </label>
+                  </div>
+              </div>
+    <!-- <div class="col center">
+          <span *ngIf="Details.data[0].distributorname" class="capitalize"><b>Distributors Name</b>  </span>
+          <span *ngIf="!Details.data[0].distributorname"><b>Distributors Name</b><br> - </span>
+       </div> -->
+      <!-- <div class="col center">
+            <span *ngIf="Details.data[0].companyname" class="capitalize"><b> 
+              Enterprise Name</b> {{Details.data[0].companyname}} </span>
+        <span *ngIf="!Details.data[0].companyname"><b>Enterprise Name </b><br> - </span>
+      </div> -->
+      <!-- <div class="col center">
+          <span *ngIf="Details.data[0].distributormobile" class="capitalize"><b>Mobile number </b>
+             {{Details.data[0].distributormobile}} </span>
+          <span *ngIf="!Details.data[0].distributormobile"><b>Mobile number </b><br> - </span>
+        </div> -->
+      <!-- <div class="col-5 pdleft-8pc">
+
+        <span *ngIf="Details.data[0].distributoraddress" class="capitalize"><b>Address </b> 
+          {{Details.data[0].distributoraddress}} </span>
         <span *ngIf="!Details.data[0].distributoraddress"><b>Address </b><br> - </span>
-    </div>
+    </div> -->
   
-  
+  </div>
     </div>
     </div>
     <!-- <div class="row">
-      <small>Invoice number : {{invoiceNumber}}</small> <br>
-      <small>Subject : Distributor Orders Invoice </small> <br>
-      <small> Total Quantity : {{totalQuantity}}</small> <br>
-      <small>Total Amount : {{totalQuantity}} x 1 Rs</small> <br>
-      <small>Total Invoiced Amount : {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</small> <br>
+      <small>Invoice number : {{invoiceNumber}}</small>
+      <small>Subject : Distributor Orders Invoice </small>
+      <small> Total Quantity : {{totalQuantity}}</small>
+      <small>Total Amount : {{totalQuantity}} x 1 Rs</small>
+      <small>Total Invoiced Amount : {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</small>
 
     </div>
 
@@ -162,36 +265,36 @@
       <small>
         <span *ngIf="Details.data[0].distributorname">Distributors Name : {{Details.data[0].distributorname}} </span>
         <span *ngIf="!Details.data[0].distributorname">Distributors Name : - </span>
-      </small> <br>
+      </small>
       <small>
         <span *ngIf="Details.data[0].companyname"> Enterprise Name : {{Details.data[0].companyname}} </span>
         <span *ngIf="!Details.data[0].companyname"> Enterprise Name : - </span>
-      </small> <br>
+      </small>
       <small>
         <span *ngIf="Details.data[0].distributoraddress">Address : {{Details.data[0].distributoraddress}} </span>
         <span *ngIf="!Details.data[0].distributoraddress">Address : - </span>
-      </small> <br>
+      </small>
       <small>
         <span *ngIf="Details.data[0].distributormobile">Mobile number : {{Details.data[0].distributormobile}} </span>
         <span *ngIf="!Details.data[0].distributormobile">Mobile number : - </span>
-      </small> <br>
+      </small>
     </div> -->
 
     <md-dialog-content layout="column">
       <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th class="" width="15%">Order Id</th>
+            <th class="" width="10%">Order Id</th>
             <th class="" width="15%">Date</th>
-            <th class="" width="15%">Customer Name</th>
-            <th class="" width="20%">Category</th>
+            <th class="" width="19%">Customer Name</th>
+            <th class="" width="25%">Category</th>
             <th class="" width="10%">Qty</th>
             <th class="" width="25%">Delivery Status</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let distributorOrders of distributorsOrdersReports">
-            <td class="" width="15%">
+            <td class="" width="10%">
               <span *ngIf="distributorOrders.order_id">#{{distributorOrders.order_id}}</span>
               <span *ngIf="!distributorOrders.order_id"> - </span>
             </td>
@@ -199,12 +302,12 @@
               <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
               <span *ngIf="!distributorOrders.ordered_date"> - </span>
             </td>
-            <td class="" width="15%">
-              <span *ngIf="distributorOrders.orderby_firstname">{{distributorOrders.orderby_firstname}}</span>
+            <td class="" width="20%">
+              <span *ngIf="distributorOrders.orderby_firstname"  class="capitalize">{{distributorOrders.orderby_firstname}}</span>
               <span *ngIf="!distributorOrders.orderby_firstname"> - </span>
             </td>
-            <td class="" width="20%">
-              <span *ngIf="distributorOrders.category || distributorOrders.brandname">{{distributorOrders.category}}
+            <td class="" width="25%">
+              <span *ngIf="distributorOrders.category || distributorOrders.brandname"  class="capitalize">{{distributorOrders.category}}
                 {{distributorOrders.brandname}}
               </span>
               <span *ngIf="!distributorOrders.category"> - </span>
@@ -214,7 +317,7 @@
               <span *ngIf="!distributorOrders.quantity"> - </span>
             </td>
             <td class="" width="25%">
-              <span *ngIf="distributorOrders.status">{{distributorOrders.status}}</span>
+              <span *ngIf="distributorOrders.status" class="capitalize">{{distributorOrders.status}}</span>
               <span *ngIf="!distributorOrders.status"> - </span>
             </td>
 
