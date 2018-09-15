@@ -114,6 +114,8 @@ export class ReportsComponent implements OnInit {
   allSalesTeam: any = [];
   salesTeamProductsReport: boolean = false;
   searchName: string = '';
+  searchResultsLength = 0;
+  searchRecords:boolean = false;
 
 
 
@@ -1003,6 +1005,9 @@ export class ReportsComponent implements OnInit {
   }
   searchCustomersResult(result){
     if(result.result == 'success'){
+      this.searchResultsLength = result.data.length;
+      this.searchRecords = true;
+      console.log(this.searchResultsLength , 'this.searchResultsLength');
       let customercopy = [];
       _.each(result.data, function (i, j) {
         let details: any = i;

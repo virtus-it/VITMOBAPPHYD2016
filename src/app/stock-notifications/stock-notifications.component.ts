@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { ReportsService } from '../reports/reports.service';
 import * as _ from 'underscore';
+import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+declare var google: any;
+
+interface marker {
+  lat: any;
+  lng: any;
+  label?: string;
+  icon?: string;
+}
 
 
 @Component({
@@ -10,13 +19,24 @@ import * as _ from 'underscore';
   styleUrls: ['./stock-notifications.component.css']
 })
 export class StockNotificationsComponent implements OnInit {
+  lat: number = 17.385;
+  lng: number = 78.4867;
+  zoom: number = 12;
 
-  constructor(private authenticationService: AuthenticationService , private reportsService: ReportsService ) { }
+  constructor(private authenticationService: AuthenticationService , private reportsService: ReportsService, public gMaps: GoogleMapsAPIWrapper, ) { }
 
 
   allStockRequests:any = [];
   panelView:string = 'all';
   tabPanelView = 'all';
+  pageView = 'grid';
+  markers: any = [
+    {
+      lat: '',
+      lng: ''
+    }
+  ];
+  stockPointMarkers :any = [];
 
 
   getStockRequests(){
@@ -36,9 +56,13 @@ export class StockNotificationsComponent implements OnInit {
       }
       else if(this.tabPanelView == 'confirmed'){
       this.showConfirmedRequests();
-
+      }
+      else if(this.tabPanelView == 'all'){
+      this.getPointsOnMap();
       }
     }
+
+   
   }
 
   showTabPanel(panelView){
@@ -53,7 +77,6 @@ export class StockNotificationsComponent implements OnInit {
     else if(panelView == 'confirmed'){
       this.tabPanelView = 'confirmed';
       this.getStockRequests();
-      
     }
 
 
@@ -68,6 +91,7 @@ export class StockNotificationsComponent implements OnInit {
       }
     });
     this.allStockRequests = pendingRequestsArray;
+    this.getPointsOnMap();
   }
 
   showConfirmedRequests(){
@@ -79,8 +103,44 @@ export class StockNotificationsComponent implements OnInit {
       }
     });
     this.allStockRequests = confirmedRequestsArray;
+    this.getPointsOnMap();
   }
 
+  showPanelType(pageType){
+    if(pageType == 'grid'){
+      this.pageView = 'grid';
+    }
+    else{
+      this.pageView = 'map';
+      this.getStockRequests();
+
+    }
+
+  }
+
+  getPointsOnMap(){
+    let stockPoints = [];
+    let stockPointsOnMap = _.each(this.allStockRequests , function(i , j){
+      let markerArray = {lat: 0 , lng: 0 , icon: '' , label : 'stockpoint' , userid : '' , name: '' , mobileno : ''}
+      let details:any = i;
+      if(details.stockpoint_details){
+        if(details.stockpoint_details.latitude && details.stockpoint_details.longitude){
+        markerArray.lat = parseFloat(details.stockpoint_details.latitude);
+        markerArray.lng = parseFloat(details.stockpoint_details.longitude);
+        markerArray.userid = details.stockpoint_details.userid;
+        markerArray.name = details.distributor.firstname + ' ' + details.distributor.lastname;
+        markerArray.mobileno = details.distributor.mobileno;
+        }
+        stockPoints.push(markerArray);
+      }
+    });
+
+     this.stockPointMarkers = stockPoints;
+
+    console.log(stockPoints , 'stockPoints');
+
+
+  }
 
 
   viewDetails(){

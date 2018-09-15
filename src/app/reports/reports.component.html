@@ -410,6 +410,8 @@
 
               <input placeholder="Enter name" [(ngModel)]="searchName">
               <i class="fa fa-search cursor fs-18 search-style" (click)="searchCustomers()"></i>
+
+              <b *ngIf="searchResultsLength && searchRecords"> {{searchResultsLength}} Records found </b>
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
                 <md-autocomplete #auto="mdAutocomplete">

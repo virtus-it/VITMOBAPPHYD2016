@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { AuthenticationService } from '../login/authentication.service';
-import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { ProductListDialogComponent } from '../product-list-dialog/product-list-dialog.component';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
@@ -30,14 +30,14 @@ export class CoverageComponent implements OnInit {
   zoom: number = 12;
   polygonArray: any = [];
   displayPolygon: any = [];
-  productPolygonArray:any = [];
-  displayProductPolygon:any = [];
-  distributorProdDetails:any = [];
+  productPolygonArray: any = [];
+  displayProductPolygon: any = [];
+  distributorProdDetails: any = [];
   listOfDistributors: any = [];
-  distributors:any = [];
-  allDistributors:any = [];
+  distributors: any = [];
+  allDistributors: any = [];
   dialogRef: any = '';
-  stockpoints:any = [];
+  stockpoints: any = [];
   order = { orderId: '' };
   orderDetails = [];
   showMarkers: marker[] = [];
@@ -48,7 +48,7 @@ export class CoverageComponent implements OnInit {
       lng: ''
     }
   ];
-  stockPointsArray:any = [];
+  stockPointsArray: any = [];
   bindableArray = [];
   // stockPointsArrayDummy = [];
 
@@ -61,8 +61,8 @@ export class CoverageComponent implements OnInit {
   //   }
   // ];
 
-  tabPanelView:any = 'distributors';
-  changeButton : boolean  = false;
+  tabPanelView: any = 'distributors';
+  changeButton: boolean = false;
   allStockpointsArray = [];
   orderslocationData: marker[] = [];
   showFilterDailog = false;
@@ -74,8 +74,8 @@ export class CoverageComponent implements OnInit {
     public dialog: MdDialog,
     private orderLandingService: OrderLandingService,
     private loaderService: LoaderService
-  ) {}
-  mapClicked($event: any) {}
+  ) { }
+  mapClicked($event: any) { }
 
   categoryList: any = [];
 
@@ -113,16 +113,16 @@ export class CoverageComponent implements OnInit {
   // categoryName = [{"itemName":"details.categoryname"}];
 
   getPolygonDistributors() {
-    var input = {area: {user_type: 'dealer',user_id: 0,apptype: this.authenticationService.appType()}};
+    var input = { area: { user_type: 'dealer', user_id: 0, apptype: this.authenticationService.appType() } };
     this.loaderService.display(true);
     this.distributorService.getpolygonByDistributor(input)
       .subscribe(
-      output => this.getPolygonDataResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      }
-    );
+        output => this.getPolygonDataResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        }
+      );
   }
   getPolygonDataResult(output) {
     //  //console.log(output);
@@ -140,7 +140,7 @@ export class CoverageComponent implements OnInit {
             polygon.mobileno = data.mobileno;
             this.polygonArray.push(polygon);
             this.displayPolygon.push(polygon);
-            for(let latsandlng of polygon.path){
+            for (let latsandlng of polygon.path) {
               latsandlng.lat = parseFloat(latsandlng.lat);
               latsandlng.lng = parseFloat(latsandlng.lng);
             }
@@ -157,7 +157,7 @@ export class CoverageComponent implements OnInit {
     this.lat = myLatLng.lat();
     this.lng = myLatLng.lng();
     // for (let dist of this.polygonArray) {  this was before and it is changed because after filtering we are getting wrong dist details
-      for(let dist of this.displayPolygon){
+    for (let dist of this.displayPolygon) {
       var latlong = event.latLng;
       var polygonPath = new google.maps.Polygon({
         paths: dist.path
@@ -170,7 +170,7 @@ export class CoverageComponent implements OnInit {
   }
 
 
-  clickOnProductPolygon(event , polygon){
+  clickOnProductPolygon(event, polygon) {
 
     this.listOfDistributors = [];
     let polygonCategory = polygon.category_id;
@@ -179,34 +179,34 @@ export class CoverageComponent implements OnInit {
     this.lng = myLatLng.lng();
     this.distributors = [];
     for (let dist of this.distributorProdDetails) {
-      if(dist.categoryid == polygonCategory){
-      if(dist.distributorproductdetails){
-        for(let distDetails of dist.distributorproductdetails){
-          this.distributors.push(distDetails);
+      if (dist.categoryid == polygonCategory) {
+        if (dist.distributorproductdetails) {
+          for (let distDetails of dist.distributorproductdetails) {
+            this.distributors.push(distDetails);
+          }
         }
       }
-    }
       // google.maps.geometry.poly.containsLocation(latlong, polygonPath)
       // if (this.gMaps.containsLocation(latlong, polygonPath)) {
       //   this.listOfDistributors.push(dist);
       // }
-    //   if(dist.dealerpolygons){
-    //   for(let dealerpolygon of dist.dealerpolygons){
+      //   if(dist.dealerpolygons){
+      //   for(let dealerpolygon of dist.dealerpolygons){
 
-    //     for(let path of dealerpolygon.polygonvalue){
-    //       var latiandlong = event.latLng;
-    //       var polygonPath = new google.maps.Polygon({
-    //         paths: dist.path
-    //       });
-    //     }
-    //   }
-    // }
+      //     for(let path of dealerpolygon.polygonvalue){
+      //       var latiandlong = event.latLng;
+      //       var polygonPath = new google.maps.Polygon({
+      //         paths: dist.path
+      //       });
+      //     }
+      //   }
+      // }
+    }
   }
-  }
-  
+
   DistrbutorHover(distributor) {
     if (distributor.path) {
-      let allAreas = _.filter(this.polygonArray, function(e: any) {
+      let allAreas = _.filter(this.polygonArray, function (e: any) {
         return e.user_id == distributor.user_id;
       });
       // this.displayPolygon = [];
@@ -231,15 +231,15 @@ export class CoverageComponent implements OnInit {
   }
   getOrderDetail() {
     this.loaderService.display(true);
-    let input = {appType: this.authenticationService.appType(),orderid: this.order.orderId, userId: this.authenticationService.loggedInUserId()};
+    let input = { appType: this.authenticationService.appType(), orderid: this.order.orderId, userId: this.authenticationService.loggedInUserId() };
     this.distributorService.getOrderById(input)
-    .subscribe(
-      output => this.getOrderDetailResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      }
-    );
+      .subscribe(
+        output => this.getOrderDetailResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        }
+      );
   }
   getOrderDetailResult(result) {
     //console.log(result);
@@ -254,15 +254,14 @@ export class CoverageComponent implements OnInit {
       if (result.data[0].orderby_latitude && result.data[0].orderby_longitude) {
         this.markers[0].lat = parseFloat(result.data[0].orderby_latitude);
         this.markers[0].lng = parseFloat(result.data[0].orderby_longitude);
-      } 
+      }
       else if (
         result.data[0].customer_latitude &&
         result.data[0].customer_longitude
-      )
-       {
+      ) {
         this.markers[0].lat = parseFloat(result.data[0].customer_latitude);
         this.markers[0].lng = parseFloat(result.data[0].customer_longitude);
-      } 
+      }
       else {
         this.markers[0].lat = '';
         this.markers[0].lng = '';
@@ -309,12 +308,12 @@ export class CoverageComponent implements OnInit {
     let input = this.filterInput;
     //console.log(input);
     this.distributorService.getFilteredPolygon(input)
-    .subscribe(
-      output => this.getFilteredPolygonResult(output),
-      error => {
-        //console.log("error in products category list");
-      }
-    );
+      .subscribe(
+        output => this.getFilteredPolygonResult(output),
+        error => {
+          //console.log("error in products category list");
+        }
+      );
   }
   getFilteredPolygonResult(result) {
     //console.log(result);
@@ -332,7 +331,7 @@ export class CoverageComponent implements OnInit {
               polygon.mobileno = data.mobileno;
               // this.polygonArray.push(polygon);
               this.displayPolygon.push(polygon);
-              
+
             }
           }
         }
@@ -357,52 +356,52 @@ export class CoverageComponent implements OnInit {
   //     };
   // }
 
-  getProductsPolygon(){
-    let input = {"area": {"user_type": this.authenticationService.userType() ,"user_id":0,"apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":"","transtype":"getproductspolygons"}};
+  getProductsPolygon() {
+    let input = { "area": { "user_type": this.authenticationService.userType(), "user_id": 0, "apptype": this.authenticationService.appType(), "devicetype": "", "moyaversioncode": "", "transtype": "getproductspolygons" } };
     this.loaderService.display(true);
     console.log(input);
     this.distributorService.getpolygonByDistributor(input)
       .subscribe(
-      output => this.getProductsPolygonResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.getProductsPolygonResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
-  getProductsPolygonResult(result){
-    if(result.result == 'success'){
+  getProductsPolygonResult(result) {
+    if (result.result == 'success') {
       this.loaderService.display(false);
-          this.displayProductPolygon = [];
-          this.distributorProdDetails = []
-        for (let data of result.data) {
-          if (data.serviceareas && data.serviceareas.length > 0) {
-            for (let polygon of data.serviceareas) {
-              polygon.color = '';
-              polygon.category_id = data.categoryid;
-              polygon.product_name = data.product_name;
-              polygon.product_type = data.product_type;
-              polygon.categoryname = data.category;
-              this.productPolygonArray.push(polygon);
-              this.displayProductPolygon.push(polygon);
-              this.distributorProdDetails.push(data);
-              console.log(polygon, 'result');
-            }
+      this.displayProductPolygon = [];
+      this.distributorProdDetails = []
+      for (let data of result.data) {
+        if (data.serviceareas && data.serviceareas.length > 0) {
+          for (let polygon of data.serviceareas) {
+            polygon.color = '';
+            polygon.category_id = data.categoryid;
+            polygon.product_name = data.product_name;
+            polygon.product_type = data.product_type;
+            polygon.categoryname = data.category;
+            this.productPolygonArray.push(polygon);
+            this.displayProductPolygon.push(polygon);
+            this.distributorProdDetails.push(data);
+            console.log(polygon, 'result');
           }
-          // if(data.distributorproductdetails && data.distributorproductdetails.length > 0){
-          //   for(let dist of data.distributorproductdetails){
-          //     // dist.userid = data.userid;
-          //     // dist.address = data.address;
-          //     // dist.brandname = data.brandname;
-          //     // dist.mobileno = data.mobileno;
-          //     // dist.product_type = data.product_type;
-          //     // this.distributorProdDetails.push(dist , data);
-
-          //   }
-          // }
         }
-      
+        // if(data.distributorproductdetails && data.distributorproductdetails.length > 0){
+        //   for(let dist of data.distributorproductdetails){
+        //     // dist.userid = data.userid;
+        //     // dist.address = data.address;
+        //     // dist.brandname = data.brandname;
+        //     // dist.mobileno = data.mobileno;
+        //     // dist.product_type = data.product_type;
+        //     // this.distributorProdDetails.push(dist , data);
+
+        //   }
+        // }
+      }
+
     }
-    else{
+    else {
       this.loaderService.display(false);
 
     }
@@ -428,8 +427,8 @@ export class CoverageComponent implements OnInit {
     //console.log(result);
     let categoryListCopy = [];
     if (result.result == 'success') {
-      _.each(result, function(i, j) {
-        _.each(result.data, function(k, l) {
+      _.each(result, function (i, j) {
+        _.each(result.data, function (k, l) {
           let details: any = k;
           let value = { id: details.categoryid, itemName: details.category };
           categoryListCopy.push(value);
@@ -467,7 +466,7 @@ export class CoverageComponent implements OnInit {
     this.orderDetails = [];
   }
 
-  
+
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`)
   }
@@ -475,12 +474,12 @@ export class CoverageComponent implements OnInit {
 
   showTabPanel(panelName) {
     this.tabPanelView = panelName;
-    if(panelName== "distributors"){
-     
+    if (panelName == "distributors") {
+
     }
-    else if(panelName== "products"){
-     this.getProductsPolygon();
-     this.distributors = [];
+    else if (panelName == "products") {
+      this.getProductsPolygon();
+      this.distributors = [];
     }
   }
   pointers: marker[] = [
@@ -501,118 +500,118 @@ export class CoverageComponent implements OnInit {
 
 
 
-  showStockPoints(){
-    var input = {area: {user_type: 'dealer',user_id: 0,apptype: this.authenticationService.appType()}};
+  showStockPoints() {
+    var input = { area: { user_type: 'dealer', user_id: 0, apptype: this.authenticationService.appType() } };
     this.loaderService.display(true);
     this.distributorService.getpolygonByDistributor(input)
-    .subscribe(
-    output => this.showStockPointsResult(output),
-    error => {
-        //console.log("falied");
-    });
-   }
-   showStockPointsResult(result){
-     //console.log(result);
-     if(result.result == 'success'){
-       this.loaderService.display(false);
-       this.stockpoints=result.data;
-       let latlngsArray = [];
-       _.each(this.stockpoints , function (i , j){
-         let details:any = i;
-         latlngsArray.push(details.latlngs);
-       });
-       this.stockPointsArray = latlngsArray;
-       let stockPointsArrayDummy = [];
-       _.each( this.stockPointsArray , function ( k ,l){
-         let detailData:any = k;
-         let dum1 = [];
-         _.each(detailData , function (a,b){
-           let detail:any = a;
-           if(detail.latitude && detail.longitude){
-           detail.latitude = parseFloat(detail.latitude);
-           detail.longitude = parseFloat(detail.longitude);
-           dum1.push(detail);
-           }
+      .subscribe(
+        output => this.showStockPointsResult(output),
+        error => {
+          //console.log("falied");
+        });
+  }
+  showStockPointsResult(result) {
+    //console.log(result);
+    if (result.result == 'success') {
+      this.loaderService.display(false);
+      this.stockpoints = result.data;
+      let latlngsArray = [];
+      _.each(this.stockpoints, function (i, j) {
+        let details: any = i;
+        latlngsArray.push(details.latlngs);
+      });
+      this.stockPointsArray = latlngsArray;
+      let stockPointsArrayDummy = [];
+      _.each(this.stockPointsArray, function (k, l) {
+        let detailData: any = k;
+        let dum1 = [];
+        _.each(detailData, function (a, b) {
+          let detail: any = a;
+          if (detail.latitude && detail.longitude) {
+            detail.latitude = parseFloat(detail.latitude);
+            detail.longitude = parseFloat(detail.longitude);
+            dum1.push(detail);
+          }
           //  this.stockPointsArray = dum1;
-         });
-         stockPointsArrayDummy.push(dum1);
-       });
-       this.stockPointsArray = stockPointsArrayDummy;
-       let array1 = [];
+        });
+        stockPointsArrayDummy.push(dum1);
+      });
+      this.stockPointsArray = stockPointsArrayDummy;
+      let array1 = [];
       //  let lats = [];
       //  let lngs = [];
       //  let  userids = [];
-       _.each(this.stockPointsArray , function (m ,n){
-         let markers:any = m;
-         _.each(markers , function(c,d){
-           let innerDetail:any = c;
-           let stockpointsMarkers = {lat: 0 , lng: 0 , icon: '' , userid: 0}
-         stockpointsMarkers.lat = innerDetail.latitude;
-         stockpointsMarkers.lng = innerDetail.longitude;
-         stockpointsMarkers.icon = '';
-         stockpointsMarkers.userid = innerDetail.user_id;
-         array1.push(stockpointsMarkers);   
-         });   
-       });
-       this.bindableArray = array1;
-       console.log(this.bindableArray , 'sakgfajfgka');
-       this.changeButton = true;
+      _.each(this.stockPointsArray, function (m, n) {
+        let markers: any = m;
+        _.each(markers, function (c, d) {
+          let innerDetail: any = c;
+          let stockpointsMarkers = { lat: 0, lng: 0, icon: '', userid: 0 }
+          stockpointsMarkers.lat = innerDetail.latitude;
+          stockpointsMarkers.lng = innerDetail.longitude;
+          stockpointsMarkers.icon = '';
+          stockpointsMarkers.userid = innerDetail.user_id;
+          array1.push(stockpointsMarkers);
+        });
+      });
+      this.bindableArray = array1;
+      console.log(this.bindableArray, 'sakgfajfgka');
+      this.changeButton = true;
 
 
-     }
-     else{
-        // this.noDataError="No Stock Points for this distributor";
-        this.loaderService.display(false);
-        this.bindableArray = [];
-        // this.changeButton = false;
-     }
+    }
+    else {
+      // this.noDataError="No Stock Points for this distributor";
+      this.loaderService.display(false);
+      this.bindableArray = [];
+      // this.changeButton = false;
+    }
 
   }
 
-  hideStockPoints(){
+  hideStockPoints() {
     this.bindableArray = [];
     // this.showMarkers = [];
     this.changeButton = false;
-    
+
   }
 
 
   getDistributors() {
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getalldistributors",  "apptype": this.authenticationService.appType(), "pagesize": 1000 }};
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "getalldistributors", "apptype": this.authenticationService.appType(), "pagesize": 1000 } };
     this.distributorService.getAllDistributors(input)
-    .subscribe(
+      .subscribe(
         output => this.getDistributorsResult(output),
         error => {
-            //console.log("error in distrbutors");
-            this.loaderService.display(false);
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
         });
-}
-getDistributorsResult(data) {
+  }
+  getDistributorsResult(data) {
     if (data.result == 'success') {
-        this.allDistributors = data.data;
+      this.allDistributors = data.data;
     }
-}
+  }
 
-clickonMarker(data, event){
-  console.log(data);
-  let distributorUserId = '';
-       distributorUserId = data.userid;
-       this.listOfDistributors = [];
-       let findDistributor = _.find(this.allDistributors , function( i , j){
-         let details:any = i;
-         return details.userid == distributorUserId
-       });
-       let distDetails:any = [];
-       let distObject = {"distributorName" :"" , "mobileno":"" , "user_id":"" , "type":"stockpoints"};
-       if(findDistributor){
-         distDetails = findDistributor;
-         distObject.distributorName = distDetails.firstname;
-         distObject.mobileno = distDetails.mobileno;
-         distObject.user_id = distDetails.userid;
-         this.listOfDistributors.push(distObject);
-       }
-      
+  clickonMarker(data, event) {
+    console.log(data);
+    let distributorUserId = '';
+    distributorUserId = data.userid;
+    this.listOfDistributors = [];
+    let findDistributor = _.find(this.allDistributors, function (i, j) {
+      let details: any = i;
+      return details.userid == distributorUserId
+    });
+    let distDetails: any = [];
+    let distObject = { "distributorName": "", "mobileno": "", "user_id": "", "type": "stockpoints" };
+    if (findDistributor) {
+      distDetails = findDistributor;
+      distObject.distributorName = distDetails.firstname;
+      distObject.mobileno = distDetails.mobileno;
+      distObject.user_id = distDetails.userid;
+      this.listOfDistributors.push(distObject);
     }
+
+  }
 
   ngOnInit() {
     this.getPolygonDistributors();

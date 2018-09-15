@@ -27,7 +27,7 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
-import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
 declare var google: any;
 
 interface marker {
@@ -38,7 +38,7 @@ interface marker {
 }
 
 @Component({
-  
+
 
   templateUrl: './order-landing.component.html',
   styleUrls: ['./order-landing.component.css']
@@ -51,11 +51,11 @@ export class OrderLandingComponent implements OnInit {
   superDealer = true;
   customerCare = true;
   salesTeamLogin = true;
-  SupplierOrderList=[];
+  SupplierOrderList = [];
   ordersClickMore = true;
   miscOrdersClickMore = true;
-  followUpResultStatus:any = "";
-  categoryList:any = [];
+  followUpResultStatus: any = "";
+  categoryList: any = [];
 
   lat: number = 17.385;
   lng: number = 78.4867;
@@ -79,20 +79,20 @@ export class OrderLandingComponent implements OnInit {
   ];
 
   orderslocationData: marker[] = [];
-  
+
 
 
   //for guage
-  timeRemaining:any = '';
-  guageValue:any = "";
+  timeRemaining: any = '';
+  guageValue: any = "";
   guageMinimum = -12;
   guageMaximum = 12;
   // min:any = -10000;
   // max:any = 10000;
   thresholdConfig = {
-    '-12': {color: 'red'},
-      '1': {color: 'orange'},
-      '3': {color: 'green'}
+    '-12': { color: 'red' },
+    '1': { color: 'orange' },
+    '3': { color: 'green' }
   };
   gaugeType = "arch";
 
@@ -100,55 +100,55 @@ export class OrderLandingComponent implements OnInit {
   gaugeAppendText = "Hours";
   guageBackGround = '#ff0000'
 
-  orderedDate:any = "";
-  orderedHour:any = "";
-  deliveryDate:any = "";
-  deliveryHour:any = "";
-  nextDate:any = "";
-  nextDaytimeRemainingHours:any = "";
-  samedaytimeRemainingHours:any ="";
-  currentHour:any = "";
-  currentdate:any ="";
+  orderedDate: any = "";
+  orderedHour: any = "";
+  deliveryDate: any = "";
+  deliveryHour: any = "";
+  nextDate: any = "";
+  nextDaytimeRemainingHours: any = "";
+  samedaytimeRemainingHours: any = "";
+  currentHour: any = "";
+  currentdate: any = "";
 
 
 
   //for guage ends here
 
-    
 
-  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService,private router:Router ,   private productService: ProductsService, public gMaps: GoogleMapsAPIWrapper,) {
 
-    
+  constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, private orderLandingService: OrderLandingService, private supplierservice: SupplierService, private loaderService: LoaderService, private router: Router, private productService: ProductsService, public gMaps: GoogleMapsAPIWrapper, ) {
+
+
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
-      this.SupplierCtrl = new FormControl();
-      this.filteredSupplier = this.SupplierCtrl.valueChanges
-        .startWith(null)
-        .map(supplier =>supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+    this.SupplierCtrl = new FormControl();
+    this.filteredSupplier = this.SupplierCtrl.valueChanges
+      .startWith(null)
+      .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
 
   }
 
-  timesRemaining:any = [];
+  timesRemaining: any = [];
   distributors: any = [];
-  supplierList:any = [];
-  completeOrders:any =[];
+  supplierList: any = [];
+  completeOrders: any = [];
   LastfilterRecords = false;
   showFilterDailog = false;
   selectedDistForFilter: any = "";
-  orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website" , 'loginid': this.authenticationService.loggedInUserId() } };
+  orderListInput = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "status": "", "pagesize": 30, "last_orderid": null, "apptype": this.authenticationService.appType(), "createdthru": "website", 'loginid': this.authenticationService.loggedInUserId() } };
   tabPanelView: string = "forward";
-  newView:string = 'gridview';
+  newView: string = 'gridview';
   quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
-  distId:any="";
-  time:any =""
-  orderedTime:any="";
-  currentTime:any= "";
-  deliveryTime:any="";
-  cantFilterMessage:any = '';
+  distId: any = "";
+  time: any = ""
+  orderedTime: any = "";
+  currentTime: any = "";
+  deliveryTime: any = "";
+  cantFilterMessage: any = '';
   filterRecords = false;
   forwardClickMore = true;
   orderClickMore = true;
@@ -162,21 +162,21 @@ export class OrderLandingComponent implements OnInit {
 
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
 
-  globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" , "loginid": this.authenticationService.loggedInUserId() }};
+  globalFilterInput = { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
 
 
-//   {"order":{"userid":"289","usertype":"dealer","status":"ordered","last_orderid":"0",
-// "searchtype":"category","searchtext":"Bailey, Bisleri","pagesize":"10","apptype":"moya"}}
+  //   {"order":{"userid":"289","usertype":"dealer","status":"ordered","last_orderid":"0",
+  // "searchtype":"category","searchtext":"Bailey, Bisleri","pagesize":"10","apptype":"moya"}}
 
 
 
-  globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+  globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
 
   dropdownData = { selectedItems: [] };
-  superDealerId:number = 0;
+  superDealerId: number = 0;
 
-  categoryProduct = { selectedItems : []};
-  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+  categoryProduct = { selectedItems: [] };
+  filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
   dropdownSettings = {
     singleSelection: false,
     text: "Select Status",
@@ -208,20 +208,20 @@ export class OrderLandingComponent implements OnInit {
     { "id": "notreachable", "itemName": "Not Reachable" },
     { "id": "cantdeliver", "itemName": "Can't Deliver" }];
 
-    statusListComplete = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
-    { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
-    { "id": "ordered", "itemName": "Ordered" },
-    { "id": "backtodealer", "itemName": "Back to dealer" },
-    { "id": "delivered", "itemName": "Delivered" },
-    { "id": "cancelled", "itemName": "Cancelled" },
-    { "id": "doorlock", "itemName": "Doorlock" },
-    { "id": "rejected", "itemName": "Rejected" },
-    { "id": "notreachable", "itemName": "Not Reachable" },
-    { "id": "cantdeliver", "itemName": "Can't Deliver" }];
+  statusListComplete = [{ "id": "pendingwithdistributor", "itemName": "Pending With Distributor" },
+  { "id": "pendingwithsupplier", "itemName": "Pending With Supplier" },
+  { "id": "ordered", "itemName": "Ordered" },
+  { "id": "backtodealer", "itemName": "Back to dealer" },
+  { "id": "delivered", "itemName": "Delivered" },
+  { "id": "cancelled", "itemName": "Cancelled" },
+  { "id": "doorlock", "itemName": "Doorlock" },
+  { "id": "rejected", "itemName": "Rejected" },
+  { "id": "notreachable", "itemName": "Not Reachable" },
+  { "id": "cantdeliver", "itemName": "Can't Deliver" }];
 
 
-    categories = [];
-    
+  categories = [];
+
   findDistributors(name: string) {
     //console.log(name);
     let finalDistributors = this.distributors.filter(dist =>
@@ -244,7 +244,7 @@ export class OrderLandingComponent implements OnInit {
     }
     // else {
     //   if (name.length >= 3 && !this.LastfilterRecords) {
-        
+
     //     this.getDistributors();
     //   }
 
@@ -254,8 +254,8 @@ export class OrderLandingComponent implements OnInit {
   }
 
 
-  deliverySlot(){
-    let date  = moment(this.filterType.date).format('DD-MM-YYYY');
+  deliverySlot() {
+    let date = moment(this.filterType.date).format('DD-MM-YYYY');
     this.filterInput.order.searchtext = date + " " + this.time;
   }
   findSupplier(name: string) {
@@ -278,22 +278,22 @@ export class OrderLandingComponent implements OnInit {
 
 
     }
-  
+
     return finalsupplier;
   }
   showTabPanel(panelName) {
     // this.clearFilter();
     this.quickFilterView = "";
     this.tabPanelView = panelName;
-    this.showFilterDailog =false;
+    this.showFilterDailog = false;
     this.filterRecords = false;
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
     this.filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
-    if(panelName== "forward"){
+    if (panelName == "forward") {
       this.getForwardOrderDetails(true);
       this.forwardOrdersonMap();
     }
-    else if(panelName== "allorder"){
+    else if (panelName == "allorder") {
       this.getAllOrderDetails(true);
       this.getOrdersOnMap();
     }
@@ -301,17 +301,17 @@ export class OrderLandingComponent implements OnInit {
     //   this.getAllOrderDetails(true);
     //   this.getForwardOrderDetails(true);
     // }
-    
-    
-    
+
+
+
   }
 
-  showNewPanel(panelName){
+  showNewPanel(panelName) {
     this.newView = panelName;
-    if(this.tabPanelView == 'forward'){
+    if (this.tabPanelView == 'forward') {
       this.forwardOrdersonMap();
     }
-    else if(this.tabPanelView == 'allorder'){
+    else if (this.tabPanelView == 'allorder') {
       this.getOrdersOnMap();
     }
   }
@@ -322,38 +322,38 @@ export class OrderLandingComponent implements OnInit {
       data: orderDetails
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-      if(result == 'success'){
-      //console.log(`Dialog closed: ${result}`);
-      if(this.tabPanelView == 'forward'){
-        this.getForwardOrderDetails(true);
-      }
-        else{
+      if (result == 'success') {
+        //console.log(`Dialog closed: ${result}`);
+        if (this.tabPanelView == 'forward') {
+          this.getForwardOrderDetails(true);
+        }
+        else {
           this.getAllOrderDetails(true);
         }
-        
+
       }
       // this.clearFilter();
 
-  });
-}
+    });
+  }
 
-  filterValidation(){
-    if(this.filterInput.order.searchtype == ""){
+  filterValidation() {
+    if (this.filterInput.order.searchtype == "") {
       this.cantFilter = true;
     }
-    else{
+    else {
       this.cantFilter = false;
     }
   }
   showCoverageDetails(orderDetails) {
-    let distributorId ="";
-    if(orderDetails.distributor){
-    distributorId = orderDetails.distributor.userid;
+    let distributorId = "";
+    if (orderDetails.distributor) {
+      distributorId = orderDetails.distributor.userid;
     }
-    else{
+    else {
       distributorId = "";
     }
-    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId:distributorId , distDetails: orderDetails.distributor  }
+    let modelData = { orders: orderDetails, polygons: this.polygonArray, distId: distributorId, distDetails: orderDetails.distributor }
     let dialogRefCoverageDailog = this.dialog.open(OrderCoverageDetailDailogComponent, {
       width: '98%',
       data: modelData
@@ -364,10 +364,10 @@ export class OrderLandingComponent implements OnInit {
         this.getForwardOrderDetails(true);
         this.getAllOrderDetails(true);
         this.loaderService.display(false);
-        
+
       }
-      else{
-        this.loaderService.display(false);        
+      else {
+        this.loaderService.display(false);
       }
 
     });
@@ -381,7 +381,7 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefShowOrder.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);
-      if(result == 'success'){
+      if (result == 'success') {
         this.refresh();
       }
 
@@ -408,7 +408,7 @@ export class OrderLandingComponent implements OnInit {
 
   }
   showFollowUp(orderDetails) {
-    let data = {"id":orderDetails.order_id,"firstname" :orderDetails.orderby_firstname,"lastName" :orderDetails.orderby_lastname,"type":"order","mobileno":orderDetails.orderby_mobileno, "followupstatus":orderDetails.followupstatus , "refresh":"" };
+    let data = { "id": orderDetails.order_id, "firstname": orderDetails.orderby_firstname, "lastName": orderDetails.orderby_lastname, "type": "order", "mobileno": orderDetails.orderby_mobileno, "followupstatus": orderDetails.followupstatus, "refresh": "" };
     let dialogRefFollow = this.dialog.open(FollowUpComponent, {
 
       width: '70%',
@@ -416,19 +416,19 @@ export class OrderLandingComponent implements OnInit {
     });
     dialogRefFollow.afterClosed().subscribe(result => {
       console.log(`Dialog closed: ${result}`);
-      if(data.refresh == 'success'){
-        if(this.tabPanelView=='forward'){
-            this.getForwardOrderDetails(true);
-           }
-           else{
-            this.getAllOrderDetails(true);
-           }
+      if (data.refresh == 'success') {
+        if (this.tabPanelView == 'forward') {
+          this.getForwardOrderDetails(true);
+        }
+        else {
+          this.getAllOrderDetails(true);
+        }
       }
     });
 
   }
   showFollowUpDetails(orderDetails) {
-    let data = {id:orderDetails.order_id,firstname :orderDetails.customer.firstname,lastName :orderDetails.customer.lastname,type:"order"};
+    let data = { id: orderDetails.order_id, firstname: orderDetails.customer.firstname, lastName: orderDetails.customer.lastname, type: "order" };
     let dialogRefFollowDetails = this.dialog.open(FollowUpDetailsComponent, {
 
       width: '80%',
@@ -463,11 +463,11 @@ export class OrderLandingComponent implements OnInit {
     // }
     this.orderLandingService.getOrderList(forwardInput)
       .subscribe(
-      output => this.getForwardOrderDetailsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      });
+        output => this.getForwardOrderDetailsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
   }
   getForwardOrderDetailsResult(result) {
     this.orderslocationData = [];
@@ -507,11 +507,11 @@ export class OrderLandingComponent implements OnInit {
     // }
     this.orderLandingService.getOrderList(orderInput)
       .subscribe(
-      output => this.getAllOrderDetailsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      });
+        output => this.getAllOrderDetailsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
 
   }
   getAllOrderDetailsResult(result) {
@@ -576,7 +576,7 @@ export class OrderLandingComponent implements OnInit {
 
 
   // showTabPanel(panelName) {
-    
+
   //   this.tabPanelView = panelName;
   //   this.showFilterDailog =false;
   //   this.filterRecords = false;
@@ -589,7 +589,7 @@ export class OrderLandingComponent implements OnInit {
   //     this.getAllOrderDetails(true);
   //   }
 
-  quickFilter(type){
+  quickFilter(type) {
     this.quickFilterView = type;
     // if(this.tabPanelView=='forward'){
     //   this.filterInput.order.status = 'forwardedorders';
@@ -598,15 +598,15 @@ export class OrderLandingComponent implements OnInit {
     //   this.filterInput.order.status = 'all';
     // }
     this.filterInput.order.status = 'complete';
-    if(type=='ordered'){
+    if (type == 'ordered') {
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "ordered,backtodealer";
     }
-    if(type=='delivered'){
+    if (type == 'delivered') {
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "delivered";
     }
-    if(type=='followupdate'){
+    if (type == 'followupdate') {
       this.filterInput.order.searchtype = 'followupdate';
       this.filterInput.order.searchtext = moment(new Date()).format('YYYY-MM-DD 00:02:00');
     }
@@ -614,22 +614,22 @@ export class OrderLandingComponent implements OnInit {
     //   this.filterInput.order.searchtype = 'deliverySlot';
     //   this.filterInput.order.searchtext = moment()
     // }
-    if(type=='notDelivered'){
+    if (type == 'notDelivered') {
       this.filterInput.order.searchtype = 'status';
       this.filterInput.order.searchtext = "pendingwithdistributor,pendingwithsupplier,doorlock,notreachable,cantdeliver"
     }
-    if(this.newView == 'mapview'){
+    if (this.newView == 'mapview') {
       this.mapFilters(type)
     }
     console.log(this.filterInput);
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(this.filterInput)
       .subscribe(
-      output => this.quickFilterResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.quickFilterResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
   quickFilterResult(result) {
     console.log(result);
@@ -646,22 +646,22 @@ export class OrderLandingComponent implements OnInit {
       this.completeOrders = data;
       this.completeClickMore = true;
     }
-    else{  
+    else {
       this.allOrders = [];
       this.forwardOrders = [];
       if (this.tabPanelView == 'forward') {
         this.forwardClickMore = false;
       }
-      else if(this.tabPanelView == 'allorder') {
+      else if (this.tabPanelView == 'allorder') {
         this.orderClickMore = false;
-      } 
+      }
     }
     this.getFilteredQuickFilter(true);
   }
 
   //test code
 
-  getFilteredQuickFilter(firstcall){
+  getFilteredQuickFilter(firstcall) {
     if (!firstcall) {
       if (this.tabPanelView == 'forward') {
         let lastForwardOrder: any = _.last(this.forwardOrders);
@@ -675,7 +675,7 @@ export class OrderLandingComponent implements OnInit {
           this.filterInput.order.last_orderid = lastallOrder.order_id;
         }
       }
-      else if(this.tabPanelView == 'complete'){
+      else if (this.tabPanelView == 'complete') {
         let lastCompleteOrder: any = _.last(this.completeOrders);
         if (lastCompleteOrder) {
           this.filterInput.order.last_orderid = lastCompleteOrder.order_id;
@@ -691,7 +691,7 @@ export class OrderLandingComponent implements OnInit {
         this.allOrders = [];
         this.filterInput.order.last_orderid = "0";
       }
-      else if(this.tabPanelView == 'complete'){
+      else if (this.tabPanelView == 'complete') {
         this.completeOrders = [];
         this.filterInput.order.last_orderid = "0";
       }
@@ -701,16 +701,16 @@ export class OrderLandingComponent implements OnInit {
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
-      output => this.getFilteredOrdersResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.getFilteredOrdersResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
-  getFilteredQuickFilterResult(result){
+  getFilteredQuickFilterResult(result) {
     this.loaderService.display(false);
     if (result.result == 'success') {
-      
+
       this.filterRecords = true;
       if (this.tabPanelView == 'forward') {
         let data = this.ModifyOrderList(result.data);
@@ -723,11 +723,11 @@ export class OrderLandingComponent implements OnInit {
         this.orderClickMore = true;
         this.allOrders = _.union(this.allOrders, data);
       }
-      else if(this.tabPanelView == 'complete'){
+      else if (this.tabPanelView == 'complete') {
         let data = this.ModifyOrderList(result.data);
         this.orderClickMore = true;
         this.completeOrders = _.union(this.completeOrders, data);
-        
+
       }
     }
     else {
@@ -743,9 +743,9 @@ export class OrderLandingComponent implements OnInit {
   //test code for pagination ends here
 
   searchOrderList() {
-   
+
     this.deliverySlot();
- 
+
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
     }
@@ -763,7 +763,7 @@ export class OrderLandingComponent implements OnInit {
     }
     else if (this.filterInput.order.searchtype == 'followupdate') {
       this.filterInput.order.searchtext = moment(this.filterType.followUpdate).format('YYYY-MM-DD 00:02:00');
-     
+
     }
     else if (this.filterInput.order.searchtype == 'status') {
       this.filterInput.order.searchtext = "";
@@ -779,12 +779,12 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
-    else if (this.filterInput.order.searchtype == 'category'){
+    else if (this.filterInput.order.searchtype == 'category') {
       this.filterInput.order.searchtext = "";
-      if(this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0){
-        for(let data of this.categoryProduct.selectedItems){
-          if(this.filterInput.order.searchtext){
-            this.filterInput.order.searchtext += "," + data.itemName; 
+      if (this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0) {
+        for (let data of this.categoryProduct.selectedItems) {
+          if (this.filterInput.order.searchtext) {
+            this.filterInput.order.searchtext += "," + data.itemName;
           }
           else {
             this.filterInput.order.searchtext += data.itemName;
@@ -794,17 +794,17 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
-    else if(this.filterInput.order.searchtype == 'deliveryslot'){   
+    else if (this.filterInput.order.searchtype == 'deliveryslot') {
     }
 
 
 
 
-    if(this.cantFilter == true){
-      this.cantFilterMessage="Please Select to filter";
-      this.showFilterDailog =true;
+    if (this.cantFilter == true) {
+      this.cantFilterMessage = "Please Select to filter";
+      this.showFilterDailog = true;
     }
-    else{
+    else {
       this.cantFilter == false;
       this.cantFilterMessage = '';
     }
@@ -814,14 +814,14 @@ export class OrderLandingComponent implements OnInit {
     if (this.tabPanelView == 'forward') {
       this.filterInput.order.status = 'forwardedorders';
     }
-    else if(this.tabPanelView == 'allorder'){
+    else if (this.tabPanelView == 'allorder') {
       this.filterInput.order.status = 'all';
     }
     console.log(this.filterInput);
-    if(this.cantFilter == false){
-    this.getFilteredOrders(true);
+    if (this.cantFilter == false) {
+      this.getFilteredOrders(true);
     }
-// this.showFilterDailog =false;
+    // this.showFilterDailog =false;
 
   }
   getFilteredOrders(firstcall) {
@@ -840,13 +840,13 @@ export class OrderLandingComponent implements OnInit {
         }
 
       }
-    //   else if(this.tabPanelView == 'complete'){
-    //     let lastCompleteOrder:any = _.last(this.completeOrders);
-    //     if(lastCompleteOrder){
-    //       this.globalFilterInput.order.last_orderid = lastCompleteOrder.order_id;
-    //     }
-      
-    // }
+      //   else if(this.tabPanelView == 'complete'){
+      //     let lastCompleteOrder:any = _.last(this.completeOrders);
+      //     if(lastCompleteOrder){
+      //       this.globalFilterInput.order.last_orderid = lastCompleteOrder.order_id;
+      //     }
+
+      // }
 
 
     }
@@ -874,11 +874,11 @@ export class OrderLandingComponent implements OnInit {
     this.loaderService.display(true);
     this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
-      output => this.getFilteredOrdersResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.getFilteredOrdersResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
   getFilteredOrdersResult(result) {
     //console.log(result);
@@ -906,7 +906,7 @@ export class OrderLandingComponent implements OnInit {
 
         this.orderClickMore = false;
       }
-      else if(this.tabPanelView == 'complete'){
+      else if (this.tabPanelView == 'complete') {
         this.completeClickMore = false;
       }
 
@@ -914,7 +914,7 @@ export class OrderLandingComponent implements OnInit {
   }
 
 
-  globalSearch(firstcall){
+  globalSearch(firstcall) {
     this.tabPanelView = 'complete';
     this.deliverySlot();
     if (this.globalFilterInput.order.searchtype == 'name') {
@@ -934,7 +934,7 @@ export class OrderLandingComponent implements OnInit {
     }
     else if (this.globalFilterInput.order.searchtype == 'followupdate') {
       this.globalFilterInput.order.searchtext = moment(this.globalfilterType.followUpdate).format('YYYY-MM-DD 00:02:00');
-     
+
     }
     else if (this.globalFilterInput.order.searchtype == 'status') {
       this.globalFilterInput.order.searchtext = "";
@@ -950,12 +950,12 @@ export class OrderLandingComponent implements OnInit {
       }
     }
 
-    else if (this.globalFilterInput.order.searchtype == 'category'){
+    else if (this.globalFilterInput.order.searchtype == 'category') {
       this.globalFilterInput.order.searchtext = "";
-      if(this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0){
-        for(let data of this.categoryProduct.selectedItems){
-          if(this.globalFilterInput.order.searchtext){
-            this.globalFilterInput.order.searchtext += "," + data.itemName; 
+      if (this.categoryProduct.selectedItems && this.categoryProduct.selectedItems.length > 0) {
+        for (let data of this.categoryProduct.selectedItems) {
+          if (this.globalFilterInput.order.searchtext) {
+            this.globalFilterInput.order.searchtext += "," + data.itemName;
           }
           else {
             this.globalFilterInput.order.searchtext += data.itemName;
@@ -964,77 +964,84 @@ export class OrderLandingComponent implements OnInit {
         }
       }
     }
-   else if(this.globalFilterInput.order.searchtype == 'deliveryslot'){
+    else if (this.globalFilterInput.order.searchtype == 'deliveryslot') {
       this.globalFilterInput.order.searchtext = "";
-      let date:any= "";
-      let time:any = "";
+      let date: any = "";
+      let time: any = "";
       date = moment(this.globalfilterType.date).format('DD-MM-YYYY');
       time = this.time;
-      this.globalFilterInput.order.searchtext = date + " " + time ;
-      console.log("check del slot" , this.globalFilterInput.order.searchtext); 
+      this.globalFilterInput.order.searchtext = date + " " + time;
+      console.log("check del slot", this.globalFilterInput.order.searchtext);
 
-      
+
     }
 
     if (this.tabPanelView == 'allorder') {
       this.globalFilterInput.order.status = 'complete';
     }
-    else{
+    else {
       this.globalFilterInput.order.status = 'complete';
     }
 
-    if(this.superDealer == false && this.customerCare == false){
-    this.globalFilterInput.order.status = 'all';
+    if (this.superDealer == false && this.customerCare == false) {
+      this.globalFilterInput.order.status = 'all';
     }
     console.log(this.globalFilterInput);
 
-    if(!firstcall){
-         if(this.tabPanelView == 'complete'){
-        let lastCompleteOrder:any = _.last(this.completeOrders);
-        if(lastCompleteOrder){
+    if (!firstcall) {
+      if (this.tabPanelView == 'complete') {
+        if(this.globalFilterInput.order.searchtype != 'status'){
+          this.completeOrders = [];
+        }
+        let lastCompleteOrder: any = _.last(this.completeOrders);
+        if (lastCompleteOrder) {
           this.globalFilterInput.order.last_orderid = lastCompleteOrder.order_id;
         }
+      }
+      else {
+        if (this.tabPanelView == 'complete') {
+          this.completeOrders = [];
+          this.globalFilterInput.order.last_orderid = '0';
+        }
+      }
     }
     else{
-      if(this.tabPanelView == 'complete'){
-        this.completeOrders = [];
-        this.globalFilterInput.order.last_orderid = '0';
+      this.completeOrders = [];
     }
-  }
-    }
-  this.showFilterDailog =false;
-let input = this.globalFilterInput;
-// if(this.authenticationService.userType() == 'customercare'){
-//   input.order.userid = this.superDealerId;
-// }
-AuthenticationService.showLog("Search Input");
-AuthenticationService.showLog(JSON.stringify(input));
-this.orderLandingService.getOrdersByfilter(input)
+    this.showFilterDailog = false;
+    let input = this.globalFilterInput;
+    // if(this.authenticationService.userType() == 'customercare'){
+    //   input.order.userid = this.superDealerId;
+    // }
+    AuthenticationService.showLog("Search Input");
+    AuthenticationService.showLog(JSON.stringify(input));
+    this.orderLandingService.getOrdersByfilter(input)
       .subscribe(
-      output => this.getGlobalFilteredOrdersResult(output),
-      error => {
-        this.loaderService.display(false);
-      });
-  
-}
+        output => this.getGlobalFilteredOrdersResult(output),
+        error => {
+          this.loaderService.display(false);
+        });
+
+  }
   getGlobalFilteredOrdersResult(result) {
     AuthenticationService.showLog(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
-      if(this.tabPanelView == 'complete'){
+      if (this.tabPanelView == 'complete') {
         let data = this.ModifyOrderList(result.data);
         this.completeClickMore = true;
         this.completeOrders = _.union(this.completeOrders , data);
+        // this.completeOrders = data;
       }
     }
     else {
-      if(this.tabPanelView == 'complete'){
+      if (this.tabPanelView == 'complete') {
         this.completeClickMore = false;
       }
     }
   }
 
-  
+
   // refreshOrders() {
   //   this.clearFilter();
   //   this.filterRecords = false;
@@ -1043,7 +1050,7 @@ this.orderLandingService.getOrdersByfilter(input)
   //   //this.getPolygonDistributors();
   // }
   clearFilter() {
-    this.showFilterDailog =false;
+    this.showFilterDailog = false;
     this.filterRecords = false;
     this.quickFilterView = "";
     this.tabPanelView = 'forward';
@@ -1051,79 +1058,79 @@ this.orderLandingService.getOrdersByfilter(input)
     this.completeOrders = [];
 
     // this.completeOrders = [];
-    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date: null };
+    this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
     this.filterInput = { "order": { "pagesize": "10", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
-    this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
-    this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
+    this.globalFilterInput = { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
+    this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
     this.getForwardOrderDetails(true);
     this.getAllOrderDetails(true);
   }
 
 
-  refresh(){
-    this.showFilterDailog =false;
+  refresh() {
+    this.showFilterDailog = false;
     // this.quickFilterView = "";
     this.cantFilterMessage = "";
-    if(this.tabPanelView == 'forward'){
+    if (this.tabPanelView == 'forward') {
       this.getForwardOrderDetails(true);
     }
-    else if(this.tabPanelView == 'allorder'){
+    else if (this.tabPanelView == 'allorder') {
       this.getAllOrderDetails(true);
     }
-    else if(this.tabPanelView == 'complete'){
+    else if (this.tabPanelView == 'complete') {
       this.globalSearch(true);
     }
-    else if(this.quickFilterView == 'misc'){
+    else if (this.quickFilterView == 'misc') {
       this.showMiscOrders(true);
-    } 
-    else if(this.quickFilterView == 'delivered'){
+    }
+    else if (this.quickFilterView == 'delivered') {
       this.showDeliveredOrders(true);
-    }  
+    }
   }
   ModifyOrderList(result) {
-   
+
     _.each(result, function (i, j) {
-      let GV ="";
+      let GV = "";
       let details: any = i;
       details.timeRemaining = "";
       let currentTime = moment.utc(new Date());
-      if(details.slotdate){
+      if (details.slotdate) {
         let deliveryTime = moment(details.slotdate);
         var duration = moment.duration(deliveryTime.diff(currentTime));
         var hours = duration.asHours();
         let floorValue = Math.floor(hours);
-          // console.log(hours);
+        // console.log(hours);
         details.timeRemaining = floorValue;
         // console.log('success1' , details.timeRemaining );
       }
-      else{
+      else {
         let delivery_exceptedtime = details.delivery_exceptedtime;
-        if(delivery_exceptedtime){
-        let onlyDate = delivery_exceptedtime.split(" ");
-        let datePart = "";
-        datePart = onlyDate[0];
-        let endTimeValue = onlyDate[1];
-        let formattedDate = moment(datePart , 'DD-MM-YYYY').format('YYYY-MM-DD');
-        // console.log("formatted date" , formattedDate );
-         let expectedTime = details.delivery_exceptedtime;
-        let    timeConvert = endTimeValue;
-         let   time24 = moment(timeConvert, ["hA"]).format("HH:MM:SS");
-            let date =  formattedDate+ " " +time24;
-             let deliveryTimetest = moment(date);
-             var duration = moment.duration(deliveryTimetest.diff(currentTime));
-             var hours = duration.asHours();
-             let floorValue = Math.floor(hours);
-              //  console.log(hours);
-             details.timeRemaining = floorValue;
-            //  console.log('success 2' , details.timeRemaining);
+        if (delivery_exceptedtime) {
+          let onlyDate = delivery_exceptedtime.split(" ");
+          let datePart = "";
+          datePart = onlyDate[0];
+          let endTimeValue = onlyDate[1];
+          let formattedDate = moment(datePart, 'DD-MM-YYYY').format('YYYY-MM-DD');
+          // console.log("formatted date" , formattedDate );
+          let expectedTime = details.delivery_exceptedtime;
+          let timeConvert = endTimeValue;
+          let time24 = moment(timeConvert, ["hA"]).format("HH:MM:SS");
+          let date = formattedDate + " " + time24;
+          let deliveryTimetest = moment(date);
+          var duration = moment.duration(deliveryTimetest.diff(currentTime));
+          var hours = duration.asHours();
+          let floorValue = Math.floor(hours);
+          //  console.log(hours);
+          details.timeRemaining = floorValue;
+          //  console.log('success 2' , details.timeRemaining);
+        }
       }
-    } 
 
       GV = details.timeRemaining;
-      
+
       // this.timesRemaining = details.timeRemaining;
-    
-     
+
+
       if (details.status && details.status == "onhold") {
         details.OrderModifiedStatus = "On Hold";
         details.StatusColor = "warning";
@@ -1137,27 +1144,27 @@ this.orderLandingService.getOrdersByfilter(input)
       else if (details.status && details.status.toLowerCase() == "rejected") {
         details.OrderModifiedStatus = "Rejected";
         details.StatusColor = "danger";
-     
+
       }
-      else if (details.status &&  details.status == "assigned") {
+      else if (details.status && details.status == "assigned") {
         details.OrderModifiedStatus = "Re-Assign";
         details.StatusColor = "logo-color";
-   
+
       }
       else if (details.status && details.status.toLowerCase() == "delivered") {
         details.OrderModifiedStatus = "Delivered";
         details.StatusColor = "success";
 
       }
-      else if ( details.status && (details.status == "doorlock" || details.status == "Door Locked")) {
+      else if (details.status && (details.status == "doorlock" || details.status == "Door Locked")) {
         details.OrderModifiedStatus = "Door Locked";
         details.StatusColor = "warning";
-     
+
       }
       else if (details.status && (details.status == "cannot_deliver" || details.status == "Cant Deliver")) {
         details.OrderModifiedStatus = "Cant Deliver";
         details.StatusColor = "warning";
-  
+
       }
       else if (details.status && (details.status == "Not Reachable" || details.status == "not_reachable")) {
         details.OrderModifiedStatus = "Not Reachable";
@@ -1167,14 +1174,14 @@ this.orderLandingService.getOrdersByfilter(input)
       else if (details.status && details.status == "pending") {
         details.OrderModifiedStatus = "Pending";
         details.StatusColor = "logo-color";
-     
+
       }
       else if (details.status && (details.status == "ordered" || details.status == "backtodealer" || details.status == 'not_broadcasted')) {
         details.OrderModifiedStatus = "Assign";
         details.StatusColor = "logo-color";
- 
+
       }
-      else if(details.status && details.status == 'accept' ){
+      else if (details.status && details.status == 'accept') {
         details.OrderModifiedStatus = 'Assign';
         details.StatusColor = "logo-color";
       }
@@ -1199,13 +1206,13 @@ this.orderLandingService.getOrdersByfilter(input)
 
         this.getAllOrderDetails(firstcall);
       }
-      else if(tab == 'complete'){
-       this.globalSearch(firstcall);
+      else if (tab == 'complete') {
+        this.globalSearch(firstcall);
       }
-      else if(this.quickFilterView == 'misc'){
+      else if (this.quickFilterView == 'misc') {
         this.showMiscOrders(firstcall);
       }
-      else if(this.quickFilterView == 'delivered'){
+      else if (this.quickFilterView == 'delivered') {
         this.showDeliveredOrders(firstcall);
       }
     }
@@ -1214,33 +1221,33 @@ this.orderLandingService.getOrdersByfilter(input)
 
 
 
-  getAllCategories(){
-    let input= {"userId":this.authenticationService.loggedInUserId(),"userType":"dealer","loginid":this.authenticationService.loggedInUserId(),"appType":this.authenticationService.appType()};
+  getAllCategories() {
+    let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
     //console.log(input);
 
     this.productService.getProductsCategory(input)
-    .subscribe(
-    output => this.getProductsCategoryResult(output),
-    error => {
-      //console.log("error in products category list");
-    });
+      .subscribe(
+        output => this.getProductsCategoryResult(output),
+        error => {
+          //console.log("error in products category list");
+        });
   }
-  getProductsCategoryResult(result){
+  getProductsCategoryResult(result) {
     //console.log(result);
     if (result.result == "success") {
       // this.categoryList = result.data;
       let categoryProducts = [];
-      if(result.data && result.data.length > 0){
-        _.each(result.data , function(i, j){
-          let details :any = i ;
-          let categoryJSON = {"id": details.categoryid , "itemName":details.category };
+      if (result.data && result.data.length > 0) {
+        _.each(result.data, function (i, j) {
+          let details: any = i;
+          let categoryJSON = { "id": details.categoryid, "itemName": details.category };
           categoryProducts.push(categoryJSON);
         });
-        
+
         this.categories = categoryProducts;
       }
-      
-      
+
+
     }
   }
 
@@ -1331,26 +1338,26 @@ this.orderLandingService.getOrdersByfilter(input)
 
 
 
-  filterDailogToggle(){
+  filterDailogToggle() {
     this.showFilterDailog = !this.showFilterDailog;
   }
 
-  acceptOrder(Details){
+  acceptOrder(Details) {
     //console.log(Details);
-    let input={"order":{"orderid":Details.order_id,"status":"accept","loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"usertype":"dealer","apptype":this.authenticationService.appType()}};
+    let input = { "order": { "orderid": Details.order_id, "status": "accept", "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "apptype": this.authenticationService.appType() } };
     console.log(input);
     this.orderLandingService.AcceptOrder(input)
       .subscribe(
-      output => this.AcceptOrderResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.AcceptOrderResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
-  AcceptOrderResult(result){
+  AcceptOrderResult(result) {
     this.loaderService.display(false);
     console.log(result);
-    if(result.result='success'){
+    if (result.result = 'success') {
       this.getForwardOrderDetails(true);
       this.refresh();
 
@@ -1358,70 +1365,70 @@ this.orderLandingService.getOrdersByfilter(input)
     }
   }
 
-  rejectOrder(Details){
+  rejectOrder(Details) {
     //console.log(Details);
-    let input={"order":{"orderid":Details.order_id,"loginid":this.authenticationService.loggedInUserId(),"userid":this.authenticationService.loggedInUserId(),"reason":"comments","orderstatus":"backtodealer","usertype":"dealer","apptype":this.authenticationService.appType()}};
+    let input = { "order": { "orderid": Details.order_id, "loginid": this.authenticationService.loggedInUserId(), "userid": this.authenticationService.loggedInUserId(), "reason": "comments", "orderstatus": "backtodealer", "usertype": "dealer", "apptype": this.authenticationService.appType() } };
     //console.log(input);
     this.orderLandingService.updateOnHold(input)
       .subscribe(
-      output => this.rejectOrderResult(output),
-      error => {
-        //console.log("falied");
-        this.loaderService.display(false);
-      });
+        output => this.rejectOrderResult(output),
+        error => {
+          //console.log("falied");
+          this.loaderService.display(false);
+        });
   }
-  rejectOrderResult(result){
+  rejectOrderResult(result) {
     //console.log(result);
     this.loaderService.display(false);
     if (result.result == 'success') {
       this.getForwardOrderDetails(true);
-    this.refresh();
+      this.refresh();
     }
   }
 
   showCustomerAllOrders(orderData) {
     let dialogRefEditCustomer = this.dialog.open(CustomerDetailDailogComponent, {
-        width: '95%',
-        data: orderData
+      width: '95%',
+      data: orderData
     });
     dialogRefEditCustomer.afterClosed().subscribe(result => {
-        //console.log(`Dialog closed: ${result}`);
-        if(result == 'success'){
-          this.loaderService.display(false);
-          if(this.tabPanelView == 'forward'){
-            this.getForwardOrderDetails(true);
-          }
-          else{
+      //console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+        this.loaderService.display(false);
+        if (this.tabPanelView == 'forward') {
+          this.getForwardOrderDetails(true);
+        }
+        else {
           this.getAllOrderDetails(true);
-          }
         }
-        else{
-          this.loaderService.display(false);
-        }
+      }
+      else {
+        this.loaderService.display(false);
+      }
 
 
     });
 
-}
+  }
 
-  viewDistributorsOrders(data){
-    let formatteddata: any = { "type": "distributorOrder", "data": data , distributorId: data.distributor.userid };
-        let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
-          width: '95%',
-          height:'95vh',
-          data: formatteddata
-      });
-      dialogRefSupplierOrderList.afterClosed().subscribe(result => {
+  viewDistributorsOrders(data) {
+    let formatteddata: any = { "type": "distributorOrder", "data": data, distributorId: data.distributor.userid };
+    let dialogRefSupplierOrderList = this.dialog.open(DistributorOrderListComponent, {
+      width: '95%',
+      height: '95vh',
+      data: formatteddata
+    });
+    dialogRefSupplierOrderList.afterClosed().subscribe(result => {
 
-        if(result == 'success'){
-          this.loaderService.display(false);
-        }
-        
-       
-          //console.log(`Dialog closed: ${result}`);
-        
+      if (result == 'success') {
+        this.loaderService.display(false);
+      }
 
-      });
+
+      //console.log(`Dialog closed: ${result}`);
+
+
+    });
   }
 
 
@@ -1438,410 +1445,410 @@ this.orderLandingService.getOrdersByfilter(input)
 
 
   //let vvv = moment().startOf('hour').;
-    // let abc = moment(end.diff(this.forwardOrders.ordered_date)).format("m[m] s[s]");
-    // var duration = moment.duration(.diff(this.forwardOrders.ordered_date));
-    // var hours = duration.asHours();
+  // let abc = moment(end.diff(this.forwardOrders.ordered_date)).format("m[m] s[s]");
+  // var duration = moment.duration(.diff(this.forwardOrders.ordered_date));
+  // var hours = duration.asHours();
 
   //time(){
-    // let orderedDate =  this.forwardOrders.ordered_date;
-    // let B = moment(orderedDate).endOf('hour').fromNow();
-    // console.log(B);
-    // this.timeRemaining = B;
+  // let orderedDate =  this.forwardOrders.ordered_date;
+  // let B = moment(orderedDate).endOf('hour').fromNow();
+  // console.log(B);
+  // this.timeRemaining = B;
 
-// let orderedDate = this.forwardOrders.ordered_date;
-// let formatttedOrderedDate = moment(this.forwardOrders.ordered_date).format('YYYY-MM-DD HH:MM:SS');
-// let deliveryDate = this.forwardOrders.delivery_exceptedtime;
-// let formatttedDeliveryDate = moment(this.forwardOrders.delivery_exceptedtime).format('YYYY-MM-DD HH:MM:SS');
-// var timeStart:any = moment(new Date(formatttedOrderedDate)).format('HH');
-// var timeEnd:any = moment(new Date(formatttedDeliveryDate)).format('HH');
-// var timeStart = new Date(formatttedOrderedDate).getTime();
-// var timeEnd = new Date(formatttedDeliveryDate).getTime();
- //var hourDiff = timeEnd - timeStart; //in ms
-//var secDiff = hourDiff / 1000; //in s
-//var minDiff = hourDiff / 60 / 1000; //in minutes
-// var hDiff = hourDiff / 3600 / 1000; //in hours
-// console.log(hDiff);
-// var humanReadable = {};
-// humanReadable.hours = Math.floor(hDiff);
-// humanReadable.minutes = minDiff - 60 * humanReadable.hours;
-// console.log(humanReadable); //{hours: 0, minutes: 30}
- // }
+  // let orderedDate = this.forwardOrders.ordered_date;
+  // let formatttedOrderedDate = moment(this.forwardOrders.ordered_date).format('YYYY-MM-DD HH:MM:SS');
+  // let deliveryDate = this.forwardOrders.delivery_exceptedtime;
+  // let formatttedDeliveryDate = moment(this.forwardOrders.delivery_exceptedtime).format('YYYY-MM-DD HH:MM:SS');
+  // var timeStart:any = moment(new Date(formatttedOrderedDate)).format('HH');
+  // var timeEnd:any = moment(new Date(formatttedDeliveryDate)).format('HH');
+  // var timeStart = new Date(formatttedOrderedDate).getTime();
+  // var timeEnd = new Date(formatttedDeliveryDate).getTime();
+  //var hourDiff = timeEnd - timeStart; //in ms
+  //var secDiff = hourDiff / 1000; //in s
+  //var minDiff = hourDiff / 60 / 1000; //in minutes
+  // var hDiff = hourDiff / 3600 / 1000; //in hours
+  // console.log(hDiff);
+  // var humanReadable = {};
+  // humanReadable.hours = Math.floor(hDiff);
+  // humanReadable.minutes = minDiff - 60 * humanReadable.hours;
+  // console.log(humanReadable); //{hours: 0, minutes: 30}
+  // }
 
   ViewDistributors(data) {
-    if(data.OrderModifiedStatus == 'Assign' || data.OrderModifiedStatus == 'Re-Assign'){
-            let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
-    
-                width: '70%',
-                data: data
-            });
-            dialogRefDist.afterClosed().subscribe(result => {
-                //console.log(`Dialog closed: ${result}`);
-                if(result == 'success'){
-                  this.getForwardOrderDetails(true);
-                  this.getAllOrderDetails(true);
-                  this.refresh();
-                  this.loaderService.display(false);
-              
-                }
-                else if (result == 'Cancel' || result == undefined){
-                  this.loaderService.display(false);
-                  // this.refresh();
-                }
-    
-            });
-          }
-        
-          }
-          getMessage() {
-            this.orderLandingService
-                .getMessages()
-                .subscribe((message: string) => {
-                    console.log(message);
-                    var praseMsg = JSON.parse(message);
-                    let currentUrl = this.router.url.split('/');
-                    if(currentUrl[1] != 'preorder'){
-                      this.opensocketMessage(praseMsg);
-  
-                    }
-                });
-    
-        }
-        getMessagesfromWebsite() {
-          this.orderLandingService
-              .getMessagesfromWebsite()
-              .subscribe((message: string) => {
-                  console.log(message);
-                  var praseMsg = JSON.parse(message);
-                  let currentUrl = this.router.url.split('/');
-                  if(currentUrl[1] != 'preorder'){
-                    this.opensocketMessage(praseMsg);
+    if (data.OrderModifiedStatus == 'Assign' || data.OrderModifiedStatus == 'Re-Assign') {
+      let dialogRefDist = this.dialog.open(DistributorListDialogComponent, {
 
-                  }
-                 
-              });
-  
-      }
-        opensocketMessage(data){
-          let dialogRef= this.dialog.open(SocketmessagesComponent, {
-            
-                  width: '500px',
-                  data: data
-                });
-                dialogRef.afterClosed().subscribe(result => {
-                  
-                  if (result == 'success') {
-                   
-            
-                  }
-            
-                });
+        width: '70%',
+        data: data
+      });
+      dialogRefDist.afterClosed().subscribe(result => {
+        //console.log(`Dialog closed: ${result}`);
+        if (result == 'success') {
+          this.getForwardOrderDetails(true);
+          this.getAllOrderDetails(true);
+          this.refresh();
+          this.loaderService.display(false);
 
         }
-
-
-        orderHistoryDialog(data){
-          let dialogRef= this.dialog.open(OrderHistoryComponent, {
-                  width: '750px',
-                  data: data
-                });
-                dialogRef.afterClosed().subscribe(result => {       
-                  if (result == 'success') {
-                  }
-                });
-
-              }
-
-
-        inbox(){
-          let dialogRef= this.dialog.open(InboxComponent, {
-            
-            width: '80%',
-            data: ''
-          });
-          dialogRef.afterClosed().subscribe(result => {
-            
-            if (result == 'success') {
-             
-      
-            }
-      
-          });
-
-
-
+        else if (result == 'Cancel' || result == undefined) {
+          this.loaderService.display(false);
+          // this.refresh();
         }
 
-        copyElement(val: string){
-          let selectedElement = document.createElement('textarea');
-          selectedElement.style.position = 'fixed';
-          selectedElement.style.left = '0';
-          selectedElement.style.top = '0';
-          selectedElement.style.opacity = '0';
-          selectedElement.value = val;
-          document.body.appendChild(selectedElement);
-          selectedElement.focus();
-          selectedElement.select();
-          document.execCommand('copy');
-          document.body.removeChild(selectedElement);
-        }
-
-       
-        getOrdersOnMap() {
-          let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: null,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
-          console.log(input , 'all tab called');
-          this.orderLandingService.getOrderList(input)
-          .subscribe(
-            output => this.getOrderDetailsResult(output),
-            error => {
-              this.loaderService.display(false);
-            }
-          );
-        }
-        getOrderDetailsResult(result) {
-          if (result.result == 'success') {
-            this.allOrdersDetails = result.data;
-            let orderLocationArray = [];
-            let data = _.each(this.allOrdersDetails, function(i, j) {
-              let details: any = i;
-              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
-              UserData.lat = parseFloat(details.orderby_latitude);
-              UserData.lng = parseFloat(details.orderby_longitude);
-              UserData.name = details.firstname;
-              UserData.orderid = details.order_id;
-              UserData.status = details.orderstatus;
-              UserData.productType = details.product_type;
-              UserData.quantity = details.quantity;
-              UserData.userid = details.user_id;
-
-              if (UserData.status == 'delivered') {
-                UserData.icon = '../assets/images/green.png';
-              }
-               else {
-                UserData.icon = '../assets/images/red.png';
-              }
-              if (UserData.lat && UserData.lng) {
-                orderLocationArray.push(UserData);
-              }
-            });
-      
-            this.orderslocationData = orderLocationArray;
-            console.log('lats and lngs', this.orderslocationData);
-          }
-        }
-
-
-
-
-        forwardOrdersonMap() {
-          let input = { order: {userid: this.authenticationService.loggedInUserId(),priority: 289,usertype: 'dealer',status: 'forwardedorders' ,pagesize: 100,last_orderid: null,apptype: this.authenticationService.appType(),createdthru: 'website',transtype: 'getordersonmap'}};
-          console.log(input , 'forward tab called');
-          this.orderLandingService.getOrderList(input)
-          .subscribe(
-            output => this.forwardOrdersonMapResult(output),
-            error => {
-              this.loaderService.display(false);
-            }
-          );
-        }
-        forwardOrdersonMapResult(result) {
-          if (result.result == 'success') {
-            this.allOrdersDetails = result.data;
-            let orderLocationArray = [];
-            let data = _.each(this.allOrdersDetails, function(i, j) {
-              let details: any = i;
-              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
-              UserData.lat = parseFloat(details.orderby_latitude);
-              UserData.lng = parseFloat(details.orderby_longitude);
-              UserData.name = details.firstname;
-              UserData.orderid = details.order_id;
-              UserData.status = details.orderstatus;
-              UserData.productType = details.product_type;
-              UserData.quantity = details.quantity;
-              UserData.userid = details.user_id;
-
-              if (UserData.status == 'delivered') {
-                UserData.icon = '../assets/images/green.png';
-              }
-               else {
-                UserData.icon = '../assets/images/red.png';
-              }
-              if (UserData.lat && UserData.lng) {
-                orderLocationArray.push(UserData);
-              }
-            });
-      
-            this.orderslocationData = orderLocationArray;
-            console.log('lats and lngs', this.orderslocationData);
-          }
-        }
-
-
-
-        
-    mapFilters(type){
-
-            let orderLocationArray = [];
-            let data = _.each(this.allOrdersDetails, function(i, j) {
-              let details: any = i;
-              let UserData: any = {lat: '',lng: '',name: '',status: '',orderid: '',icon: '',label: '',productType: '',quantity: '' , userid : '' };
-              UserData.lat = parseFloat(details.orderby_latitude);
-              UserData.lng = parseFloat(details.orderby_longitude);
-              UserData.name = details.firstname;
-              UserData.orderid = details.order_id;
-              UserData.status = details.orderstatus;
-              UserData.productType = details.product_type;
-              UserData.quantity = details.quantity;
-              UserData.userid = details.user_id;
-
-
-              if (UserData.status == 'delivered') {
-                UserData.icon = '../assets/images/green.png';
-              }
-               else {
-                UserData.icon = '../assets/images/red.png';
-              }
-
-              if(type == 'ordered' && UserData.lat && UserData.lng ){
-                if(details.orderstatus == 'ordered'){
-                orderLocationArray.push(UserData);
-                }
-              }
-              else if(type == 'delivered' && UserData.lat && UserData.lng){
-
-                if(details.orderstatus == 'delivered'){     
-                orderLocationArray.push(UserData);
-              }
-            }
-            else if( (type != 'ordered') && (type != 'delivered') && UserData.lat && UserData.lng){
-              orderLocationArray.push(UserData);
-            }
-            });
-      
-            this.orderslocationData = orderLocationArray;
-            console.log('lats and lngs', this.orderslocationData);
+      });
     }
 
-        clickedMarker(data){
-          let formattedData = {customerid  : data.userid , data: data , 'type': 'mapviewAllOrders' }
-          let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+  }
+  getMessage() {
+    this.orderLandingService
+      .getMessages()
+      .subscribe((message: string) => {
+        console.log(message);
+        var praseMsg = JSON.parse(message);
+        let currentUrl = this.router.url.split('/');
+        if (currentUrl[1] != 'preorder') {
+          this.opensocketMessage(praseMsg);
 
-            width: '95%',
-            data: formattedData
-          });
-          dialogRefShowOrder.afterClosed().subscribe(result => {
-            //console.log(`Dialog closed: ${result}`);
-            if(result == 'success'){
-              this.refresh();
-            }
-          });
+        }
+      });
+
+  }
+  getMessagesfromWebsite() {
+    this.orderLandingService
+      .getMessagesfromWebsite()
+      .subscribe((message: string) => {
+        console.log(message);
+        var praseMsg = JSON.parse(message);
+        let currentUrl = this.router.url.split('/');
+        if (currentUrl[1] != 'preorder') {
+          this.opensocketMessage(praseMsg);
+
         }
 
-        resetDistributorsView(){
-          this.showFilterDailog =false;
-          this.quickFilterView = "";
-          this.cantFilterMessage = "";
-          this.tabPanelView = 'allorder';
-          this.globalFilterInput= { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
-          this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "",followUpdate:"" , date:null };
-          this.getAllOrderDetails(true);
-          
-        }
+      });
 
-        showMiscOrders(firstcall){
-          this.quickFilterView = 'misc';
-          this.tabPanelView = '';
-          if (this.completeOrders && this.completeOrders.length && !firstcall) {
-            let lastMiscOrder: any = _.last(this.completeOrders);
-            if (lastMiscOrder) {
-              this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
-            }
-      
-          }
-          else {
-            this.completeOrders = [];
-            this.orderListInput.order.last_orderid = null;
-          }
-          // let input = {"order":{"userid":this.authenticationService.loggedInUserId() ,"priority":"","usertype": this.authenticationService.userType() ,"status":"misc","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
-          this.orderListInput.order.status = 'misc';
-          let input = this.orderListInput;
-          this.loaderService.display(true);
-          this.orderLandingService.getOrderList(input)
-          .subscribe(
-          output => this.showMiscOrdersResult(output),
-          error => {
+  }
+  opensocketMessage(data) {
+    let dialogRef = this.dialog.open(SocketmessagesComponent, {
+
+      width: '500px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result == 'success') {
+
+
+      }
+
+    });
+
+  }
+
+
+  orderHistoryDialog(data) {
+    let dialogRef = this.dialog.open(OrderHistoryComponent, {
+      width: '750px',
+      data: data
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result == 'success') {
+      }
+    });
+
+  }
+
+
+  inbox() {
+    let dialogRef = this.dialog.open(InboxComponent, {
+
+      width: '80%',
+      data: ''
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result == 'success') {
+
+
+      }
+
+    });
+
+
+
+  }
+
+  copyElement(val: string) {
+    let selectedElement = document.createElement('textarea');
+    selectedElement.style.position = 'fixed';
+    selectedElement.style.left = '0';
+    selectedElement.style.top = '0';
+    selectedElement.style.opacity = '0';
+    selectedElement.value = val;
+    document.body.appendChild(selectedElement);
+    selectedElement.focus();
+    selectedElement.select();
+    document.execCommand('copy');
+    document.body.removeChild(selectedElement);
+  }
+
+
+  getOrdersOnMap() {
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: 289, usertype: 'dealer', status: null, pagesize: 100, last_orderid: null, apptype: this.authenticationService.appType(), createdthru: 'website', transtype: 'getordersonmap' } };
+    console.log(input, 'all tab called');
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+        output => this.getOrderDetailsResult(output),
+        error => {
+          this.loaderService.display(false);
+        }
+      );
+  }
+  getOrderDetailsResult(result) {
+    if (result.result == 'success') {
+      this.allOrdersDetails = result.data;
+      let orderLocationArray = [];
+      let data = _.each(this.allOrdersDetails, function (i, j) {
+        let details: any = i;
+        let UserData: any = { lat: '', lng: '', name: '', status: '', orderid: '', icon: '', label: '', productType: '', quantity: '', userid: '' };
+        UserData.lat = parseFloat(details.orderby_latitude);
+        UserData.lng = parseFloat(details.orderby_longitude);
+        UserData.name = details.firstname;
+        UserData.orderid = details.order_id;
+        UserData.status = details.orderstatus;
+        UserData.productType = details.product_type;
+        UserData.quantity = details.quantity;
+        UserData.userid = details.user_id;
+
+        if (UserData.status == 'delivered') {
+          UserData.icon = '../assets/images/green.png';
+        }
+        else {
+          UserData.icon = '../assets/images/red.png';
+        }
+        if (UserData.lat && UserData.lng) {
+          orderLocationArray.push(UserData);
+        }
+      });
+
+      this.orderslocationData = orderLocationArray;
+      console.log('lats and lngs', this.orderslocationData);
+    }
+  }
+
+
+
+
+  forwardOrdersonMap() {
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: 289, usertype: 'dealer', status: 'forwardedorders', pagesize: 100, last_orderid: null, apptype: this.authenticationService.appType(), createdthru: 'website', transtype: 'getordersonmap' } };
+    console.log(input, 'forward tab called');
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+        output => this.forwardOrdersonMapResult(output),
+        error => {
+          this.loaderService.display(false);
+        }
+      );
+  }
+  forwardOrdersonMapResult(result) {
+    if (result.result == 'success') {
+      this.allOrdersDetails = result.data;
+      let orderLocationArray = [];
+      let data = _.each(this.allOrdersDetails, function (i, j) {
+        let details: any = i;
+        let UserData: any = { lat: '', lng: '', name: '', status: '', orderid: '', icon: '', label: '', productType: '', quantity: '', userid: '' };
+        UserData.lat = parseFloat(details.orderby_latitude);
+        UserData.lng = parseFloat(details.orderby_longitude);
+        UserData.name = details.firstname;
+        UserData.orderid = details.order_id;
+        UserData.status = details.orderstatus;
+        UserData.productType = details.product_type;
+        UserData.quantity = details.quantity;
+        UserData.userid = details.user_id;
+
+        if (UserData.status == 'delivered') {
+          UserData.icon = '../assets/images/green.png';
+        }
+        else {
+          UserData.icon = '../assets/images/red.png';
+        }
+        if (UserData.lat && UserData.lng) {
+          orderLocationArray.push(UserData);
+        }
+      });
+
+      this.orderslocationData = orderLocationArray;
+      console.log('lats and lngs', this.orderslocationData);
+    }
+  }
+
+
+
+
+  mapFilters(type) {
+
+    let orderLocationArray = [];
+    let data = _.each(this.allOrdersDetails, function (i, j) {
+      let details: any = i;
+      let UserData: any = { lat: '', lng: '', name: '', status: '', orderid: '', icon: '', label: '', productType: '', quantity: '', userid: '' };
+      UserData.lat = parseFloat(details.orderby_latitude);
+      UserData.lng = parseFloat(details.orderby_longitude);
+      UserData.name = details.firstname;
+      UserData.orderid = details.order_id;
+      UserData.status = details.orderstatus;
+      UserData.productType = details.product_type;
+      UserData.quantity = details.quantity;
+      UserData.userid = details.user_id;
+
+
+      if (UserData.status == 'delivered') {
+        UserData.icon = '../assets/images/green.png';
+      }
+      else {
+        UserData.icon = '../assets/images/red.png';
+      }
+
+      if (type == 'ordered' && UserData.lat && UserData.lng) {
+        if (details.orderstatus == 'ordered') {
+          orderLocationArray.push(UserData);
+        }
+      }
+      else if (type == 'delivered' && UserData.lat && UserData.lng) {
+
+        if (details.orderstatus == 'delivered') {
+          orderLocationArray.push(UserData);
+        }
+      }
+      else if ((type != 'ordered') && (type != 'delivered') && UserData.lat && UserData.lng) {
+        orderLocationArray.push(UserData);
+      }
+    });
+
+    this.orderslocationData = orderLocationArray;
+    console.log('lats and lngs', this.orderslocationData);
+  }
+
+  clickedMarker(data) {
+    let formattedData = { customerid: data.userid, data: data, 'type': 'mapviewAllOrders' }
+    let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+
+      width: '95%',
+      data: formattedData
+    });
+    dialogRefShowOrder.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if (result == 'success') {
+        this.refresh();
+      }
+    });
+  }
+
+  resetDistributorsView() {
+    this.showFilterDailog = false;
+    this.quickFilterView = "";
+    this.cantFilterMessage = "";
+    this.tabPanelView = 'allorder';
+    this.globalFilterInput = { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
+    this.globalfilterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
+    this.getAllOrderDetails(true);
+
+  }
+
+  showMiscOrders(firstcall) {
+    this.quickFilterView = 'misc';
+    this.tabPanelView = '';
+    if (this.completeOrders && this.completeOrders.length && !firstcall) {
+      let lastMiscOrder: any = _.last(this.completeOrders);
+      if (lastMiscOrder) {
+        this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
+      }
+
+    }
+    else {
+      this.completeOrders = [];
+      this.orderListInput.order.last_orderid = null;
+    }
+    // let input = {"order":{"userid":this.authenticationService.loggedInUserId() ,"priority":"","usertype": this.authenticationService.userType() ,"status":"misc","pagesize":"10","apptype": this.authenticationService.appType() ,"devicetype":"","moyaversioncode":""}};
+    this.orderListInput.order.status = 'misc';
+    let input = this.orderListInput;
+    this.loaderService.display(true);
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+        output => this.showMiscOrdersResult(output),
+        error => {
           //console.log("error in distrbutors");
           this.loaderService.display(false);
         });
-        }
-        showMiscOrdersResult(result){
-          if(result.result == 'success'){
-          let data = this.ModifyOrderList(result.data);
-          this.completeOrders = _.union(this.completeOrders , data);
-          this.completeClickMore = true;
-          this.loaderService.display(false);
-          console.log(result.data  , 'misc');
-          }
-          else{
-            this.completeClickMore = false;
-            this.loaderService.display(false);
-          }
-        }
+  }
+  showMiscOrdersResult(result) {
+    if (result.result == 'success') {
+      let data = this.ModifyOrderList(result.data);
+      this.completeOrders = _.union(this.completeOrders, data);
+      this.completeClickMore = true;
+      this.loaderService.display(false);
+      console.log(result.data, 'misc');
+    }
+    else {
+      this.completeClickMore = false;
+      this.loaderService.display(false);
+    }
+  }
 
 
-        showDeliveredOrders(firstcall){
-          this.quickFilterView = 'delivered';
-          this.tabPanelView = '';
+  showDeliveredOrders(firstcall) {
+    this.quickFilterView = 'delivered';
+    this.tabPanelView = '';
 
-          if (this.completeOrders && this.completeOrders.length && !firstcall) {
-            let lastMiscOrder: any = _.last(this.completeOrders);
-            if (lastMiscOrder) {
-              this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
-            }
-      
-          }
-          else {
-            this.completeOrders = [];
-            this.orderListInput.order.last_orderid = null;
-          }
-          this.orderListInput.order.status = 'delivered';
-          let input = this.orderListInput;
-          this.loaderService.display(true);
-          this.orderLandingService.getOrderList(input)
-          .subscribe(
-          output => this.showDeliveredOrdersResult(output),
-          error => {
+    if (this.completeOrders && this.completeOrders.length && !firstcall) {
+      let lastMiscOrder: any = _.last(this.completeOrders);
+      if (lastMiscOrder) {
+        this.orderListInput.order.last_orderid = lastMiscOrder.order_id;
+      }
+
+    }
+    else {
+      this.completeOrders = [];
+      this.orderListInput.order.last_orderid = null;
+    }
+    this.orderListInput.order.status = 'delivered';
+    let input = this.orderListInput;
+    this.loaderService.display(true);
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+        output => this.showDeliveredOrdersResult(output),
+        error => {
           //console.log("error in distrbutors");
           this.loaderService.display(false);
         });
-        }
-        showDeliveredOrdersResult(result){
-          if(result.result == 'success'){
-            let data = this.ModifyOrderList(result.data);
-            this.completeOrders = _.union(this.completeOrders , data);
-            this.completeClickMore = true;
-            this.loaderService.display(false);
-            console.log(result.data  , 'misc');
-            }
-            else{
-              this.completeClickMore = false;
-              this.loaderService.display(false);
-            }
-          }
+  }
+  showDeliveredOrdersResult(result) {
+    if (result.result == 'success') {
+      let data = this.ModifyOrderList(result.data);
+      this.completeOrders = _.union(this.completeOrders, data);
+      this.completeClickMore = true;
+      this.loaderService.display(false);
+      console.log(result.data, 'misc');
+    }
+    else {
+      this.completeClickMore = false;
+      this.loaderService.display(false);
+    }
+  }
 
-          miscOrdersView(){
-              this.showMiscOrders(true);
-          }
+  miscOrdersView() {
+    this.showMiscOrders(true);
+  }
 
-          deliveredOrdersView(){
-            this.showDeliveredOrders(true);
-          }
+  deliveredOrdersView() {
+    this.showDeliveredOrders(true);
+  }
 
-          numberEvent(e:any){
-            // console.log(e);
-                if(isNaN(e.key) || e.key == ''){
-                    e.preventDefault();
-                }
-        }
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '') {
+      e.preventDefault();
+    }
+  }
 
 
   ngOnInit() {
@@ -1849,16 +1856,16 @@ this.orderLandingService.getOrdersByfilter(input)
     // this.getPolygonDistributors();
     this.superDealerId = this.authenticationService.superDelearId();
 
-    if(this.tabPanelView == 'forward'){
-    this.getForwardOrderDetails(true);
+    if (this.tabPanelView == 'forward') {
+      this.getForwardOrderDetails(true);
     }
-    else if(this.tabPanelView == 'allorder'){
-    this.getAllOrderDetails(true);
+    else if (this.tabPanelView == 'allorder') {
+      this.getAllOrderDetails(true);
     }
 
-    
-      // this.getOrdersOnMap();
-    
+
+    // this.getOrdersOnMap();
+
     // this.getDistributors();
     // this.getSupplier();
 
@@ -1870,15 +1877,15 @@ this.orderLandingService.getOrdersByfilter(input)
     // this.onInItConditions();
     // this.timesimu();
     // this.timeSimultor();
-   
+
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
-    if(!this.superDealer){
-this.tabPanelView = 'allorder';
-this.getAllOrderDetails(true);
+    if (!this.superDealer) {
+      this.tabPanelView = 'allorder';
+      this.getAllOrderDetails(true);
     }
-    else if(this.superDealer || this.customerCare){
+    else if (this.superDealer || this.customerCare) {
       this.tabPanelView == 'forward';
       this.getForwardOrderDetails(true);
     }

@@ -50,7 +50,7 @@ export class SalesTeamAssignComponent implements OnInit {
       });
 
       if (findSalesTeam) {
-        this.salesTeamId = findSalesTeam.user_id;
+        this.salesTeamId = findSalesTeam.userid;
         //  this.filterTypeModel.categoryname = findCategory.category;
       }
     }
