@@ -392,26 +392,24 @@
             <h3>Order Report</h3>
           </div>
           <div class="row form-group">
-            <div class="col-sm-6  col-md-6  col-lg-6">
+            <div class="col-sm-4  col-md-4  col-lg-4">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
                 <md-option value="all">Date</md-option>
                 <md-option value="customer">Customers</md-option>
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="supplier">Suppliers</md-option>
               </md-select>
-
             </div>
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'customer'">
-              <!-- <md-select placeholder="Customer" [(ngModel)]="downloadInput.customerId" name="type" class="wd-100pc" >
-                    <md-option *ngFor="let customer of customerList" [value]="customer.userid">
-                      {{customer.firstname}}{{customer.lastnsame}}
-                    </md-option>
-                  </md-select> -->
 
-              <input placeholder="Enter name" [(ngModel)]="searchName">
-              <i class="fa fa-search cursor fs-18 search-style" (click)="searchCustomers()"></i>
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="downloadInput.filterBy == 'customer'">
+              <md-form-field class="inline">
+                <input mdInput  [(ngModel)]="searchName" placeholder="Enter name">
+              </md-form-field>
+              <b *ngIf="searchResultsLength && searchRecords" class="success result-style"><small>{{searchResultsLength}} Records found </small> </b>
+              <i aria-hidden="true" class="fa fa-search cursor search-style1" (click)="searchCustomers()"></i>
+            </div>
 
-              <b *ngIf="searchResultsLength && searchRecords"> {{searchResultsLength}} Records found </b>
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="downloadInput.filterBy == 'customer'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -421,8 +419,8 @@
                 </md-autocomplete>
               </md-form-field>
             </div>
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'distributor'">
 
+            <div class="col-sm-8  col-md-8  col-lg-8" *ngIf="downloadInput.filterBy == 'distributor'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -433,9 +431,7 @@
               </md-form-field>
             </div>
 
-
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'supplier'">
-
+            <div class="col-sm-8  col-md-8  col-lg-8" *ngIf="downloadInput.filterBy == 'supplier'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Supplier" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -466,7 +462,7 @@
               </md-form-field>
             </div>
           </div>
-          <div class=" row">
+          <div class="row">
             <md-dialog-actions align="center">
               <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>
               <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>
