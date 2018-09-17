@@ -462,7 +462,7 @@
               </md-form-field>
             </div>
           </div>
-          <div class="row">
+          <div class="row mgleft-0">
             <md-dialog-actions align="center">
               <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>
               <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>
@@ -470,7 +470,6 @@
               <button md-raised-button class="btn-primary" (click)="invoiceHistory()">Invoice History</button>
               <button md-raised-button class="btn-primary" (click)="viewOrdersReports()">View </button>
             </md-dialog-actions>
-
             <br>
             <h3 class="danger mgtop-20" *ngIf="noData">
               <span class="fa fa-frown-o"></span> No Records found</h3>
@@ -615,16 +614,15 @@
 
 
       </div>
-
     </div>
-
 
     <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'stockreports'">
       <div class="jumbotron">
         <div class="jumbotron-style">
-          <div class="row form-group col">
+          <div class="row  col">
             <h3>Stock Report</h3>
           </div>
+          <br>
           <div class="row form-group">
             <div class="col-6">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">

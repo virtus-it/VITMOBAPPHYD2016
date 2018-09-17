@@ -13,86 +13,73 @@
   <!-- this is the table for customer order reports -->
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'customerOrderReports'">
     <div class="well">
-    <div class="row">
-      <div class="col">
+        <div class="row justify-content-between">
+        <div class="col-5">
           <div class="row">
-              <b class="col-sm-4" >Invoice number: </b>
-              <div class="col-sm-8"> 
-                  <label>{{invoiceNumber}} </label>
+            <b class="col-sm-4">Invoice number: </b>
+            <div class="col-sm-8">
+              <span>{{invoiceNumber}} </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-4">Subject: </b>
+            <div class="col-sm-8">
+              <span>Customers Orders Invoice </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-4">Total Quantity: </b>
+            <div class="col-sm-8">
+              <span>{{totalQuantity}} </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-4">Total Amount: </b>
+            <div class="col-sm-8">
+              <span>{{totalAmount}} </span>
+            </div>
+          </div>
+        </div>
+          <div class="col-5">
+            <div class="row">
+              <b class="col-sm-4">Name: </b>
+              <div class="col-sm-8">
+                <span *ngIf="Details.data[0].orderby_firstname" class="capitalize">
+                  {{Details.data[0].orderby_firstname}} </span>
+                <span *ngIf="!Details.data[0].orderby_firstname">
+                  - </span>
+              </div>
+            </div>
+
+            <div class="row">
+              <b class="col-sm-4">Mobile number: </b>
+              <div class="col-sm-8">
+                <span *ngIf="Details.data[0].orderby_mobileno">
+                  {{Details.data[0].orderby_mobileno}} </span>
+                <span *ngIf="!Details.data[0].orderby_mobileno">
+                  - </span>
               </div>
             </div>
             <div class="row">
-                <b class="col-sm-4" >Subject: </b>
-                <div class="col-sm-8"> 
-                    <label>Customers Orders Invoice </label>
-                </div>
+              <b class="col-sm-4">Address: </b>
+              <div class="col-sm-8">
+                <span *ngIf="Details.data[0].orderby_address" class="capitalize">
+                  {{Details.data[0].orderby_address}} </span>
+                <span *ngIf="!Details.data[0].orderby_address">
+                  - </span>
               </div>
-              <div class="row">
-                  <b class="col-sm-4" >Total Quantity: </b>
-                  <div class="col-sm-8"> 
-                      <label>{{totalQuantity}} </label>
-                  </div>
-                </div>
-                <div class="row">
-                    <b class="col-sm-4" >Total Amount: </b>
-                    <div class="col-sm-8"> 
-                        <label>{{totalAmount}} </label>
-                    </div>
-                  </div>
-<!-- <div class="col center">
-  <b>Invoice number: </b> <label>{{invoiceNumber}} </label>
-  </div> -->
-  <!-- <div class="col center">
-  <b>Subject  </b> <label>Customers Orders Invoice </label> 
-</div>
-<div class="col center">
-  <b>Total Quantity  </b><label>{{totalQuantity}}</label>
-</div>
-<div class="col center">
-  <b>Total Amount  </b><label> {{totalAmount}}</label>
-</div>
-</div>
-<br> -->
-<div class="col">
-    <!-- <div class="row">
-        <b class="col-sm-4" >Total Amount: </b>
-        <div class="col-sm-8"> 
-            <label>{{totalAmount}} </label>
-        </div>
-      </div> -->
-  <div class=" center">
-    <span>
-      <span *ngIf="Details.data[0].orderby_firstname" class="capitalize"><b>Name</b>{{Details.data[0].orderby_firstname}} </span>
-      <span *ngIf="!Details.data[0].orderby_firstname"><b>Name</b><br> - </span>
-    </span>
+            </div>
+          </div>
+        
+      </div>
     </div>
-    <div class=" center">
-      <span *ngIf="Details.data[0].orderby_mobileno"><b>Mobile number</b>{{Details.data[0].orderby_mobileno}} </span>
-          <span *ngIf="!Details.data[0].orderby_mobileno"><b>Mobile number</b><br> - </span>
-    </div>
-    <div class=" ">
-      <span *ngIf="Details.data[0].orderby_address" class="capitalize"><b>Address </b> {{Details.data[0].orderby_address}} </span>
-      <span *ngIf="!Details.data[0].orderby_address"><b>Address  </b><br>- </span>
-  </div>
-
-</div>
-  </div>
-</div>
-      <!-- <div class="row">
-      <small>Invoice number: {{invoiceNumber}}</small>
-      <small>Subject : Customers Orders Invoice </small>
-      <small>Total Quantity : {{totalQuantity}}</small>
-      <small>Total Amount : {{totalAmount}}</small>
-    </div> -->
-
-  </div>
 
     <md-dialog-content layout="column">
       <table class="table table-hover table-fixedheader table-striped">
         <thead>
           <tr>
-            <th class="" width="20%">Order Id</th>
-            <th class="" width="20%">Category</th>
+            <th class="" width="15%">Order Id</th>
+            <th class="" width="25%">Category</th>
             <th class="" width="10%">Qty (F)</th>
             <th class="" width="10%">Qty (E)</th>
             <th class="" width="20%">Amount</th>
@@ -101,11 +88,11 @@
         </thead>
         <tbody>
           <tr *ngFor="let customerOrders of customersOrdersReports">
-            <td class="" width="20%">
+            <td class="" width="15%">
               <span *ngIf="customerOrders.order_id">#{{customerOrders.order_id}}</span>
               <span *ngIf="!customerOrders.order_id"> - </span>
             </td>
-            <td class="" width="20%">
+            <td class="" width="25%">
               <span *ngIf="customerOrders.category || customerOrders.brandname">{{customerOrders.category}} {{customerOrders.brandname}}</span>
               <span *ngIf="!customerOrders.category"> - </span>
             </td>
@@ -139,157 +126,89 @@
 
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorOrderReports'">
     <div class="well">
-      <div class="row">
-            <!-- <div class="row">
-        <b class="col-sm-4" >Total Amount: </b>
-        <div class="col-sm-8"> 
-            <label>{{totalAmount}} </label>
-        </div>
-      </div> -->
-      <div class="col-5">
-              <div class="row">
-        <b class="col-sm-5" >Invoice number: </b>
-        <div class="col-sm-7"> 
-            <label>{{invoiceNumber}} </label>
-        </div>
-      </div>
-      <div class="row">
-          <b class="col-sm-5" >Subject: </b>
-          <div class="col-sm-7"> 
-              <label>Distributor Orders Invoice </label>
-          </div>
-        </div>
-      <div class="row">
-          <b class="col-sm-5" >Total Quantity: </b>
-          <div class="col-sm-7"> 
-              <label>{{totalQuantity}}</label>
-          </div>
-        </div>
-            <div class="row">
-                <b class="col-sm-5" >Total Amount: </b>
-                <div class="col-sm-7"> 
-                    <label>{{totalQuantity}}  x 1 Rs </label>
-                </div>
-              </div>  
-              <div class="row">
-                  <b class="col-sm-5" >Total Invoiced Amount: </b>
-                  <div class="col-sm-7"> 
-                      <label>{{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
-                  </div>
-                </div>
-  <!-- <div class="col center">
-    <b>Invoice number</b> <label>{{invoiceNumber}} </label>
-    </div> -->
-    <!-- <div class="col center">
-    <b>Subject  </b> <label>Distributor Orders Invoice </label> 
-  </div> -->
-  <!-- <div class="col center">
-    <b>Total Quantity  </b><label>{{totalQuantity}}</label>
-  </div>
-  <div class="col center">
-    <b>Total Amount  </b><label> {{totalQuantity}}  x 1 Rs</label>
-  </div> -->
-  <!-- <div class="col center">
-      <b>Total Invoiced Amount  </b><label> 
-        {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</label>
-    </div> -->
-  </div>
+      <div class="row justify-content-between">
 
-  <div class="col">
-      <div class="row">
-          <b class="col-sm-4">Distributors Name: </b>
-          <div class="col-sm-8"> 
-              <label *ngIf="Details.data[0].distributorname" class="capitalize">{{Details.data[0].distributorname}}</label>
-              <label *ngIf="!Details.data[0].distributorname">- </label>
+        <div class="col-5">
+          <div class="row">
+            <b class="col-sm-5">Invoice number: </b>
+            <div class="col-sm-7">
+              <span>{{invoiceNumber}} </span>
             </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-5">Subject: </b>
+            <div class="col-sm-7">
+              <span>Distributor Orders Invoice </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-5">Total Quantity: </b>
+            <div class="col-sm-7">
+              <span>{{totalQuantity}}</span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-5">Total Amount: </b>
+            <div class="col-sm-7">
+              <span>{{totalQuantity}} x 1 Rs </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-5">Total Invoiced Amount: </b>
+            <div class="col-sm-7">
+              <span>{{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</span>
+            </div>
+          </div>
+
         </div>
-        <div class="row">
-            <b class="col-sm-4" >Enterprise Name: </b>
-            <div class="col-sm-8"> 
-                <label *ngIf="Details.data[0].companyname"  class="capitalize">
-                    {{Details.data[0].companyname}}</label>
-                <label *ngIf="!Details.data[0].companyname">- </label>
-              </div>
+
+        <div class="col-6">
+          <div class="row">
+            <b class="col-sm-4">Distributors Name: </b>
+            <div class="col-sm-8">
+              <span *ngIf="Details.data[0].distributorname" class="capitalize">{{Details.data[0].distributorname}}</span>
+              <span *ngIf="!Details.data[0].distributorname">- </span>
+            </div>
+          </div>
+          <div class="row">
+            <b class="col-sm-4">Enterprise Name: </b>
+            <div class="col-sm-8">
+              <span *ngIf="Details.data[0].companyname" class="capitalize">
+                {{Details.data[0].companyname}}</span>
+              <span *ngIf="!Details.data[0].companyname">- </span>
+            </div>
           </div>
 
           <div class="row">
-              <b class="col-sm-4" >Mobile number: </b>
-              <div class="col-sm-8"> 
-                  <label  *ngIf="Details.data[0].distributormobile" class="capitalize">
-                      {{Details.data[0].distributormobile}}</label>
-                  <label  *ngIf="!Details.data[0].distributormobile">- </label>
-                </div>
+            <b class="col-sm-4">Mobile number: </b>
+            <div class="col-sm-8">
+              <span *ngIf="Details.data[0].distributormobile" class="capitalize">
+                {{Details.data[0].distributormobile}}</span>
+              <span *ngIf="!Details.data[0].distributormobile">- </span>
             </div>
-            <div class="row">
-                <b class="col-sm-4" >Address: </b>
-                <div class="col-sm-8"> 
-                    <label  *ngIf="Details.data[0].distributoraddress" class="capitalize">
-                        {{Details.data[0].distributoraddress}} </label>
-                    <label  *ngIf="!Details.data[0].distributoraddress">- </label>
-                  </div>
-              </div>
-    <!-- <div class="col center">
-          <span *ngIf="Details.data[0].distributorname" class="capitalize"><b>Distributors Name</b>  </span>
-          <span *ngIf="!Details.data[0].distributorname"><b>Distributors Name</b><br> - </span>
-       </div> -->
-      <!-- <div class="col center">
-            <span *ngIf="Details.data[0].companyname" class="capitalize"><b> 
-              Enterprise Name</b> {{Details.data[0].companyname}} </span>
-        <span *ngIf="!Details.data[0].companyname"><b>Enterprise Name </b><br> - </span>
-      </div> -->
-      <!-- <div class="col center">
-          <span *ngIf="Details.data[0].distributormobile" class="capitalize"><b>Mobile number </b>
-             {{Details.data[0].distributormobile}} </span>
-          <span *ngIf="!Details.data[0].distributormobile"><b>Mobile number </b><br> - </span>
-        </div> -->
-      <!-- <div class="col-5 pdleft-8pc">
+          </div>
+          <div class="row">
+            <b class="col-sm-4">Address: </b>
+            <div class="col-sm-8">
+              <span *ngIf="Details.data[0].distributoraddress" class="capitalize">
+                {{Details.data[0].distributoraddress}} </span>
+              <span *ngIf="!Details.data[0].distributoraddress">- </span>
+            </div>
+          </div>
 
-        <span *ngIf="Details.data[0].distributoraddress" class="capitalize"><b>Address </b> 
-          {{Details.data[0].distributoraddress}} </span>
-        <span *ngIf="!Details.data[0].distributoraddress"><b>Address </b><br> - </span>
-    </div> -->
-  
-  </div>
+        </div>
+      </div>
     </div>
-    </div>
-    <!-- <div class="row">
-      <small>Invoice number : {{invoiceNumber}}</small>
-      <small>Subject : Distributor Orders Invoice </small>
-      <small> Total Quantity : {{totalQuantity}}</small>
-      <small>Total Amount : {{totalQuantity}} x 1 Rs</small>
-      <small>Total Invoiced Amount : {{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</small>
-
-    </div>
-
-    <div class="row">
-      <small>
-        <span *ngIf="Details.data[0].distributorname">Distributors Name : {{Details.data[0].distributorname}} </span>
-        <span *ngIf="!Details.data[0].distributorname">Distributors Name : - </span>
-      </small>
-      <small>
-        <span *ngIf="Details.data[0].companyname"> Enterprise Name : {{Details.data[0].companyname}} </span>
-        <span *ngIf="!Details.data[0].companyname"> Enterprise Name : - </span>
-      </small>
-      <small>
-        <span *ngIf="Details.data[0].distributoraddress">Address : {{Details.data[0].distributoraddress}} </span>
-        <span *ngIf="!Details.data[0].distributoraddress">Address : - </span>
-      </small>
-      <small>
-        <span *ngIf="Details.data[0].distributormobile">Mobile number : {{Details.data[0].distributormobile}} </span>
-        <span *ngIf="!Details.data[0].distributormobile">Mobile number : - </span>
-      </small>
-    </div> -->
-
     <md-dialog-content layout="column">
       <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
             <th class="" width="10%">Order Id</th>
-            <th class="" width="15%">Date</th>
+            <th class="" width="17%">Date</th>
             <th class="" width="19%">Customer Name</th>
             <th class="" width="25%">Category</th>
-            <th class="" width="10%">Qty</th>
-            <th class="" width="25%">Delivery Status</th>
+            <th class="" width="8%">Qty</th>
+            <th class="" width="20%">Delivery Status</th>
           </tr>
         </thead>
         <tbody>
@@ -298,25 +217,24 @@
               <span *ngIf="distributorOrders.order_id">#{{distributorOrders.order_id}}</span>
               <span *ngIf="!distributorOrders.order_id"> - </span>
             </td>
-            <td class="" width="15%">
+            <td class="" width="17%">
               <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
               <span *ngIf="!distributorOrders.ordered_date"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="distributorOrders.orderby_firstname"  class="capitalize">{{distributorOrders.orderby_firstname}}</span>
+              <span *ngIf="distributorOrders.orderby_firstname" class="capitalize">{{distributorOrders.orderby_firstname}}</span>
               <span *ngIf="!distributorOrders.orderby_firstname"> - </span>
             </td>
             <td class="" width="25%">
-              <span *ngIf="distributorOrders.category || distributorOrders.brandname"  class="capitalize">{{distributorOrders.category}}
-                {{distributorOrders.brandname}}
+              <span *ngIf="distributorOrders.category || distributorOrders.brandname" class="capitalize">{{distributorOrders.category}} {{distributorOrders.brandname}}
               </span>
               <span *ngIf="!distributorOrders.category"> - </span>
             </td>
-            <td class="" width="10%">
+            <td class="" width="8%">
               <span *ngIf="distributorOrders.quantity">{{distributorOrders.quantity}}</span>
               <span *ngIf="!distributorOrders.quantity"> - </span>
             </td>
-            <td class="" width="25%">
+            <td class="" width="20%">
               <span *ngIf="distributorOrders.status" class="capitalize">{{distributorOrders.status}}</span>
               <span *ngIf="!distributorOrders.status"> - </span>
             </td>
@@ -380,98 +298,98 @@
 
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'categoryStockReport'">
 
-      <md-dialog-content layout="column">
-        <table class="table table-hover table-fixedheader">
-          <thead>
-            <tr>
-              <th class="" width="20%">Date</th>
-              <th class="" width="20%">Distributors Name</th>
-              <th class="" width="10%">Stock (F)</th>
-              <th class="" width="10%">Stock (E)</th>
-              <th class="" width="20%">Total Stock</th>
-              <th class="" width="20%">Paid Amount</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let categoryStock of categoryStockReports">
-              <td class="" width="20%">
-                <span *ngIf="categoryStock.createddate">{{categoryStock.createddate | localtimezone}}</span>
-                <span *ngIf="!categoryStock.createddate"> - </span>
-              </td>
-              <td class="" width="20%">
-                <span *ngIf="categoryStock.distributorname">{{categoryStock.distributorname}} </span>
-                <span *ngIf="!categoryStock.distributorname"> - </span>
-              </td>
-              <td class="" width="10%">
-                <span *ngIf="categoryStock.stock">{{categoryStock.stock}}</span>
-                <span *ngIf="!categoryStock.stock"> - </span>
-              </td>
-              <td class="" width="10%">
-                  <span *ngIf="categoryStock.returnemptycans">{{categoryStock.returnemptycans}}</span>
-                  <span *ngIf="!categoryStock.returnemptycans"> - </span>
-                </td>
-              <td class="" width="20%">
-                <span *ngIf="categoryStock.avaliable_stock">{{categoryStock.avaliable_stock}}
-                </span>
-                <span *ngIf="!categoryStock.avaliable_stock"> - </span>
-              </td>
-              <td class="" width="20%">
-                <span *ngIf="categoryStock.userpaidamt">{{categoryStock.userpaidamt}}
-                </span>
-                <span *ngIf="!categoryStock.userpaidamt"> - </span>
-              </td>
-  
-          </tbody>
-        </table>
-      </md-dialog-content>
-    </div>
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th class="" width="20%">Date</th>
+            <th class="" width="20%">Distributors Name</th>
+            <th class="" width="10%">Stock (F)</th>
+            <th class="" width="10%">Stock (E)</th>
+            <th class="" width="20%">Total Stock</th>
+            <th class="" width="20%">Paid Amount</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let categoryStock of categoryStockReports">
+            <td class="" width="20%">
+              <span *ngIf="categoryStock.createddate">{{categoryStock.createddate | localtimezone}}</span>
+              <span *ngIf="!categoryStock.createddate"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="categoryStock.distributorname">{{categoryStock.distributorname}} </span>
+              <span *ngIf="!categoryStock.distributorname"> - </span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="categoryStock.stock">{{categoryStock.stock}}</span>
+              <span *ngIf="!categoryStock.stock"> - </span>
+            </td>
+            <td class="" width="10%">
+              <span *ngIf="categoryStock.returnemptycans">{{categoryStock.returnemptycans}}</span>
+              <span *ngIf="!categoryStock.returnemptycans"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="categoryStock.avaliable_stock">{{categoryStock.avaliable_stock}}
+              </span>
+              <span *ngIf="!categoryStock.avaliable_stock"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="categoryStock.userpaidamt">{{categoryStock.userpaidamt}}
+              </span>
+              <span *ngIf="!categoryStock.userpaidamt"> - </span>
+            </td>
+
+        </tbody>
+      </table>
+    </md-dialog-content>
+  </div>
 
 
 
-    <!-- this table is prod + distributors -->
+  <!-- this table is prod + distributors -->
 
-    <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorCategoryStockReport'">
+  <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorCategoryStockReport'">
 
-        <md-dialog-content layout="column">
-          <table class="table table-hover table-fixedheader">
-            <thead>
-              <tr>
-                <th class="" width="20%">Stock Requested Date</th>
-                <th class="" width="20%">Stock Processed Date</th>
-                <th class="" width="20%">Category</th>
-                <th class="" width="20%">Stock Arrived</th>
-                <th class="" width="20%">Available Stock</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let distributorCategoryStock of distributorsCategoryStockReports">
-                <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.stockcreateddate">{{distributorCategoryStock.stockcreateddate | localtimezone}}</span>
-                  <span *ngIf="!distributorCategoryStock.stockcreateddate"> - </span>
-                </td>
-                <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.stockmodifieddate">{{distributorCategoryStock.stockmodifieddate | utcDate}} </span>
-                  <span *ngIf="!distributorCategoryStock.stockmodifieddate"> - </span>
-                </td>
-                <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.category || distributorCategoryStock.brandname">{{distributorCategoryStock.category}} {{distributorCategoryStock.brandname}}</span>
-                  <span *ngIf="!distributorCategoryStock.category"> - </span>
-                </td>
-                <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.stock">{{distributorCategoryStock.stock}}
-                  </span>
-                  <span *ngIf="!distributorCategoryStock.stock"> - </span>
-                </td>
-                <td class="" width="20%">
-                  <span *ngIf="distributorCategoryStock.avaliable_stock">{{distributorCategoryStock.avaliable_stock}}
-                  </span>
-                  <span *ngIf="!distributorCategoryStock.avaliable_stock"> - </span>
-                </td>
-    
-            </tbody>
-          </table>
-        </md-dialog-content>
-      </div>
+    <md-dialog-content layout="column">
+      <table class="table table-hover table-fixedheader">
+        <thead>
+          <tr>
+            <th class="" width="20%">Stock Requested Date</th>
+            <th class="" width="20%">Stock Processed Date</th>
+            <th class="" width="20%">Category</th>
+            <th class="" width="20%">Stock Arrived</th>
+            <th class="" width="20%">Available Stock</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let distributorCategoryStock of distributorsCategoryStockReports">
+            <td class="" width="20%">
+              <span *ngIf="distributorCategoryStock.stockcreateddate">{{distributorCategoryStock.stockcreateddate | localtimezone}}</span>
+              <span *ngIf="!distributorCategoryStock.stockcreateddate"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorCategoryStock.stockmodifieddate">{{distributorCategoryStock.stockmodifieddate | utcDate}} </span>
+              <span *ngIf="!distributorCategoryStock.stockmodifieddate"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorCategoryStock.category || distributorCategoryStock.brandname">{{distributorCategoryStock.category}} {{distributorCategoryStock.brandname}}</span>
+              <span *ngIf="!distributorCategoryStock.category"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorCategoryStock.stock">{{distributorCategoryStock.stock}}
+              </span>
+              <span *ngIf="!distributorCategoryStock.stock"> - </span>
+            </td>
+            <td class="" width="20%">
+              <span *ngIf="distributorCategoryStock.avaliable_stock">{{distributorCategoryStock.avaliable_stock}}
+              </span>
+              <span *ngIf="!distributorCategoryStock.avaliable_stock"> - </span>
+            </td>
+
+        </tbody>
+      </table>
+    </md-dialog-content>
+  </div>
 
 
 
