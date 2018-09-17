@@ -1,7 +1,7 @@
 
 .loginBg{
-	background: #f1f5f7;
-	/* background-image: url(/src/assests/images/bg_virtus.png); */
+	/* background: #f1f5f7; */
+	background-image: url(/src/assests/images/bg_virtus.png);
 }
 .loginStyle
 {

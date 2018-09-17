@@ -1,16 +1,16 @@
 ﻿<!--The content below is only a placeholder and can be replaced.-->
 
-<div style="text-align:center"  >
+<div style="text-align:center">
 
   <div class=''>
     <!--<app-side-menu></app-side-menu>-->
 
-    <md-sidenav-container class="demo-sidenav-container" >
+    <md-sidenav-container class="demo-sidenav-container">
       <md-sidenav #focusSidenav class="sidebar-style col-3">
         <md-nav-list class="row">
-          <a md-list-item routerLink="/profile" class="sidebar-list height-150 sidebar-nohover  align-self-center" (click)="focusSidenav.toggle()" >
+          <a md-list-item routerLink="/profile" class="sidebar-list height-150 sidebar-nohover  align-self-center" (click)="focusSidenav.toggle()">
             <img src="../assets/images/img_user.png" class="pdtopleft-80x25" />
-           
+
           </a>
           <a md-list-item routerLink="/orders" class="sidebar-list" (click)="focusSidenav.toggle()">
             <i class="fa fa-file-text-o" aria-hidden="true"></i>
@@ -29,18 +29,18 @@
             <i class="fa fa-sitemap"></i>
             <span class="pdtoprght-3x10">Distributors</span>
           </a>
-          
-          <a md-list-item routerLink="/product" class="sidebar-list" (click)="focusSidenav.toggle()" >
+
+          <a md-list-item routerLink="/product" class="sidebar-list" (click)="focusSidenav.toggle()">
             <i class="fa fa-gift" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Products</span>
           </a>
-         
-         
+
+
           <a md-list-item routerLink="/coverage" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-globe" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Coverage</span>
           </a>
-         
+
           <a md-list-item routerLink="/notifications" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-bell-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Notifications</span>
@@ -57,8 +57,8 @@
             <i class="fa fa-truck" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Suppliers</span>
           </a>
-          
-          
+
+
           <a md-list-item routerLink="/feedback" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-comment" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Feedback</span>
@@ -67,12 +67,12 @@
           <a md-list-item routerLink="/stocknotifications" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear  || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-commenting-o " aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Stock Notifications </span>
-            </a>
+          </a>
 
-            <a md-list-item routerLink="/raiserequest" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.distributorLogin">
-              <i class="fa fa-envelope-square" aria-hidden="true"></i>
-              <span class="pdtoprght-3x10"> Raise Request </span>
-              </a>
+          <a md-list-item routerLink="/raiserequest" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.distributorLogin">
+            <i class="fa fa-envelope-square" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Raise Request </span>
+          </a>
 
 
           <a md-list-item routerLink="/reports" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
@@ -80,20 +80,20 @@
             <span class="pdtoprght-3x10"> Reports</span>
           </a>
 
-          <a md-list-item routerLink="/templates" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin" >
+          <a md-list-item routerLink="/templates" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-send" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Templates</span>
           </a>
 
-          <a md-list-item routerLink="/users" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin " >
+          <a md-list-item routerLink="/users" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.salesLogin ">
             <i class="fa fa-users" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Users</span>
           </a>
 
 
-          
-         
-          <a md-list-item routerLink="/category" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin" >
+
+
+          <a md-list-item routerLink="/category" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa  fa fa-th" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Category</span>
           </a>
@@ -103,7 +103,7 @@
             <span class="pdtoprght-3x10"> Inbox</span>
           </a>
 
-          <a md-list-item routerLink="/points" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin" >
+          <a md-list-item routerLink="/points" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-trophy" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Points</span>
           </a>
@@ -114,7 +114,7 @@
           </a>
 
 
-          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin" >
+          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Profile</span>
           </a>
@@ -128,10 +128,10 @@
 
 
 
-         
 
-         
-          
+
+
+
         </md-nav-list>
       </md-sidenav>
 
@@ -139,14 +139,14 @@
         <div *ngIf="!_router.url.includes('login'); else elseBlock" class="container-fluid brd-bottom">
           <div class="row">
             <div class="col">
-              <span  (click)="focusSidenav.toggle()" class="btn-customMenu menu-style right-0 right float-left">
+              <span (click)="focusSidenav.toggle()" class="btn-customMenu menu-style right-0 right float-left">
                 <md-icon>menu</md-icon>
               </span>
               <img src="../assets/images/logo.png" class="float-left" />
             </div>
             <div class="col-6 pdtpright-10x30">
               <div class="right">
-                  <!-- <button type="button" class="btn btn-link badge1" data-toggle="tooltip" data-placement="bottom" title="Distributors">
+                <!-- <button type="button" class="btn btn-link badge1" data-toggle="tooltip" data-placement="bottom" title="Distributors">
                       <i class="fa fa-sitemap logo-color fs-20" aria-hidden="true"></i>
 
                       <span>
@@ -181,10 +181,10 @@
                               <i class="fa fa-line-chart logo-color fs-20" aria-hidden="true"></i>
                             <span> {{authenticationService.dashBoardDetails.vtotalsales}}</span>
                             </button> -->
-                          <button type="button" class="btn btn-link" (click)="logOut()">
-                              <i class="fa fa-sign-out fs-20"></i> Logout
-                            </button>
-                            <!-- <i class="fa fa-truck logo-color pdright-10" aria-hidden="true"></i> -->
+                <button type="button" class="btn btn-link" (click)="logOut()">
+                  <i class="fa fa-sign-out fs-20"></i> Logout
+                </button>
+                <!-- <i class="fa fa-truck logo-color pdright-10" aria-hidden="true"></i> -->
                 <!-- <i class="fa fa-sitemap logo-color pdright-10" aria-hidden="true"></i>
                 <i class="fa fa-users logo-color pdright-10" aria-hidden="true"></i>
                 <i class="fa fa-bell-o logo-color pdright-10" aria-hidden="true"></i>
@@ -215,13 +215,13 @@
                 <ul>
 
                   <li>
-                    <a href="javascript:void(0)" class="current">Home</a>
+                    <a href="http://moya.online" class="current">Home</a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">About us</a>
+                    <a href="http://moya.online/#aboutus">About us</a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">Shop</a>
+                    <a href="http://moya.online/shop.html">Shop</a>
                   </li>
                   <li>
                     <a href="javascript:void(0)">
@@ -229,7 +229,7 @@
                     </a>
                   </li>
                   <li>
-                    <a href="javascript:void(0)">Contact us</a>
+                    <a href="http://moya.online/#contactus">Contact us</a>
                   </li>
 
                 </ul>
@@ -271,11 +271,13 @@
           </div>
         </ng-template>
 
-        <router-outlet > 
+        <router-outlet>
           <!-- <div class="loader-style"   data-spy="affix" data-offset-top="205">
            <img src="assets/images/loader.gif"  class="loading">
           </div> -->
-          <div [hidden]="!showLoader"><span  class="loading"></span></div>
+          <div [hidden]="!showLoader">
+            <span class="loading"></span>
+          </div>
         </router-outlet>
         <!-- [ngClass]="{'':showLoader}" -->
         <!-- <span *ngIf="showLoader" class="loading">loading..</span> -->
@@ -308,8 +310,3 @@
   </div>
 
 </div>
-
-
-
-
-
