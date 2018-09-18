@@ -1,5 +1,5 @@
 table thead {
-    background: #0f75bc;
+    background: var(--logo-color);
     color: #fff;
   }
   .table td, .table th{

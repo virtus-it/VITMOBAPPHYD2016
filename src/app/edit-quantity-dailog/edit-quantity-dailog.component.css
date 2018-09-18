@@ -37,7 +37,7 @@
 }
 
 .nav-color{
-  background: #0f75bc;
+  background: var(--logo-color);
   color: white;
 }
 

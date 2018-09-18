@@ -235,7 +235,7 @@
               <span *ngIf="!distributorOrders.quantity"> - </span>
             </td>
             <td class="" width="20%">
-              <span *ngIf="distributorOrders.status" class="capitalize">{{distributorOrders.status}}</span>
+              <span *ngIf="distributorOrders.status" class="capitalize" [ngClass]="{'success':status=='delivered'}" >{{distributorOrders.status}}</span>
               <span *ngIf="!distributorOrders.status"> - </span>
             </td>
 

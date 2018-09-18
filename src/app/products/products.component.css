@@ -33,13 +33,13 @@ table thead {
     text-align: left;
   }
   a{
-    color: #0f75bc;
+    color: var(--logo-color);
   }
   .pdleft-20{
     padding-left: 20px !important;
   }
   .btn-link{
-    color: #0f75bc;
+    color: var(--logo-color);
   }
   .mgtop-5{
     margin-top: 5px;
