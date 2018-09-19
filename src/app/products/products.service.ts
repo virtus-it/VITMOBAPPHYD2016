@@ -23,12 +23,11 @@ export class ProductsService {
     return this.http.get(this.apiUrl + '/products/' + input.userId + '/' + input.appType + '/' + this.authenticationService.userType(), options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -40,12 +39,11 @@ export class ProductsService {
     return this.http.get(this.apiUrl + '/productcategory/' + input.userId + '/' + input.userType + '/' + input.appType, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -58,12 +56,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/getproductsbycategory', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -76,12 +73,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/createproduct', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -94,12 +90,11 @@ export class ProductsService {
     return this.http.put(this.apiUrl + '/product', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -112,12 +107,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/maddstock', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -130,12 +124,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/getsaleshistoryfilters', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -148,12 +141,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/setproductstatus', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -166,12 +158,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/createcategory', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -185,12 +176,11 @@ export class ProductsService {
     return this.http.put(this.apiUrl + '/updatecategory', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -204,12 +194,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/setcustomer_wise_productprice', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -224,12 +213,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/massignproduct', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -244,12 +232,11 @@ export class ProductsService {
     return this.http.post(this.apiUrl + '/uploadimg', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -264,12 +251,11 @@ export class ProductsService {
     return this.http.put(this.apiUrl + '/user', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

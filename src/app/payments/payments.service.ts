@@ -24,12 +24,11 @@ export class PaymentsService {
     return this.http.post(this.apiUrl + '/getpaymentstbyuserid', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -43,12 +42,11 @@ export class PaymentsService {
     return this.http.post(this.apiUrl + '/getbilldetailsofallcustomer', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -63,12 +61,11 @@ export class PaymentsService {
     return this.http.post(this.apiUrl + '/getpaymentsbyarea', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -83,12 +80,11 @@ export class PaymentsService {
     return this.http.post(this.apiUrl + '/changepaymentstatus', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -102,12 +98,11 @@ export class PaymentsService {
     return this.http.post(this.apiUrl + '/getadvanceamount', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

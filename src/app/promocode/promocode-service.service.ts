@@ -19,12 +19,11 @@ export class PromocodeServiceService {
     return this.http.post(this.apiUrl + '/offers', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

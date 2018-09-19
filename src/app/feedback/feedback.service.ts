@@ -22,12 +22,11 @@ export class FeedbackService {
     return this.http.post(this.apiUrl + '/getfeed_back', bodyString, options)
       .map(res => {
         let response = res.json();
-        if (response.data == 'token expired') {
+        this.authenticationService.sendRefreshedToken(res);
+        if(response.data == 'token malformed'){
           this.authenticationService.logout();
         }
-        else {
-          return res.json();
-        }
+        return res.json();
       })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -42,12 +41,11 @@ export class FeedbackService {
     return this.http.post(this.apiUrl + '/changeissuestatus', bodyString, options)
       .map(res => {
         let response = res.json();
-        if (response.data == 'token expired') {
+        this.authenticationService.sendRefreshedToken(res);
+        if(response.data == 'token malformed'){
           this.authenticationService.logout();
         }
-        else {
-          return res.json();
-        }
+        return res.json();
       })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -60,12 +58,11 @@ export class FeedbackService {
     return this.http.post(this.apiUrl + '/createreplytoissue', bodyString, options)
       .map(res => {
         let response = res.json();
-        if (response.data == 'token expired') {
+        this.authenticationService.sendRefreshedToken(res);
+        if(response.data == 'token malformed'){
           this.authenticationService.logout();
         }
-        else {
-          return res.json();
-        }
+        return res.json();
       })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
