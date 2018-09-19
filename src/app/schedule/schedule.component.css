@@ -2,7 +2,7 @@
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #0f75bc;
+    color: var(--logo-color);
 }
 
 .dropdown {
@@ -14,7 +14,7 @@
     display: none;
     position: absolute;
     right: 0;
-    color: #0f75bc;
+    color: var(--logo-color);
     cursor: pointer;    
     padding: 15px 20px;
     background-color: #f9f9f9;
@@ -42,7 +42,7 @@
   display: none;
   position: absolute;
   right: 0;
-  color: #0f75bc;   
+  color: var(--logo-color);   
   padding: 7px 10px;
   background-color: #f9f9f9;
   min-width: 170px;
@@ -53,7 +53,7 @@
   background: transparent;
   border: none;
   cursor: pointer;
-  color: #0f75bc;
+  color: var(--logo-color);
 }
 
 .danger{

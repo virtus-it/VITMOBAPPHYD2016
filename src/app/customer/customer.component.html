@@ -4,11 +4,11 @@
       <h4>
         <i class="fa fa-users"></i> Customers</h4>
     </div>
-    <div class="col-2">
-        <b cass="" *ngIf="customersCount != 0">Count : {{this.customersCount}}</b>
+    <div class="col-2 align-self-center">
+        <h5 cass="" *ngIf="customersCount != 0">Count: <span class="warning">{{this.customersCount}}</span></h5>
       </div>
 
-    <div class="col-5 align-self-center right">
+    <div class="col-4 align-self-center justify-content-end">
       <div class="row">
         <div class=" col">
           <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">

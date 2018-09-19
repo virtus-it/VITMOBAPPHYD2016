@@ -1,6 +1,6 @@
 .sendbtn{
     color: #fff;
-    background: #0f75bc;
+    background: var(--logo-color);
     font-family: Roboto,"Helvetica Neue",sans-serif;
     font-size: 14px;
     font-weight: 500;
@@ -43,7 +43,7 @@
     font-size: 18px;
     color: #fff;
     line-height: 1.2;
-    background: #0f75bc;
+    background: var(--logo-color);
 }
 .danger {
     color: #8B1210;

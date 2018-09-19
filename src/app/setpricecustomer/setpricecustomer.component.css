@@ -4,7 +4,7 @@
     overflow-y: auto;
 }
 .bg-ddd{
-    background: #0f75bc;
+    background: var(--logo-color);
     color: #fff;
 }
 
@@ -17,5 +17,5 @@
 }
 
 .bgcolor-fade-blue{
-    box-shadow: 0px 0px 50px #0f75bc inset !important;
+    box-shadow: 0px 0px 50px var(--logo-color) inset !important;
 }

@@ -1123,3 +1123,9 @@ margin-right: 15px;
  .pdleft-20{
    padding-left: 20px
  }
+ .mgleft-0{
+   margin-left: 0px !important;
+ }
+ .cursor{
+   cursor: pointer;
+ }

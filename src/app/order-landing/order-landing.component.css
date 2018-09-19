@@ -177,7 +177,7 @@ table thead {
 }
 
 .search-style{  
-  background: #0f75bc;
+  background: var(--logo-color);
 padding: 5px;
 color: #fff;
 border-radius: 3px;

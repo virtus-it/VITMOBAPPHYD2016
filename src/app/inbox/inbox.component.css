@@ -20,7 +20,7 @@ border-radius: 0px;
 .col-1-style{
     padding-top: 7px;
     padding-bottom: 7px;
-    background: #0f75bc !important;
+    background: var(--logo-color) !important;
     color: white;
 }
 
