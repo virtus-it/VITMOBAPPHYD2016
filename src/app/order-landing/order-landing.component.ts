@@ -80,6 +80,9 @@ export class OrderLandingComponent implements OnInit {
 
   orderslocationData: marker[] = [];
 
+  salesTeamView:string = '';
+
+
 
 
   //for guage
@@ -174,6 +177,8 @@ export class OrderLandingComponent implements OnInit {
 
   dropdownData = { selectedItems: [] };
   superDealerId: number = 0;
+  salesTeamOrders:any = [];
+
 
   categoryProduct = { selectedItems: [] };
   filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
@@ -1056,6 +1061,7 @@ export class OrderLandingComponent implements OnInit {
     this.tabPanelView = 'forward';
     this.cantFilterMessage = "";
     this.completeOrders = [];
+    this.salesTeamView = '';
 
     // this.completeOrders = [];
     this.filterType = { customerName: "", customerMobile: "", orderid: "", supplierid: "", distributorid: "", followUpdate: "", date: null };
@@ -1849,6 +1855,25 @@ export class OrderLandingComponent implements OnInit {
       e.preventDefault();
     }
   }
+
+
+  myOrdersForSalesTeam(){
+    this.salesTeamView = 'myorders';
+    let input = {"order":{"userid": this.authenticationService.loggedInUserId() ,"loginid": this.authenticationService.loggedInUserId() ,"priority":"1","usertype": this.authenticationService.userType() ,"status":"ordered","pagesize":"10","apptype": this.authenticationService.appType() ,"transtype":"myorders" }};
+    this.orderLandingService.getOrderList(input)
+      .subscribe(
+        output => this.myOrdersForSalesTeamResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        });
+  }
+  myOrdersForSalesTeamResult(result){
+    if(result.result == 'success'){
+      this.salesTeamOrders = result.data;
+    }
+  }
+
 
 
   ngOnInit() {

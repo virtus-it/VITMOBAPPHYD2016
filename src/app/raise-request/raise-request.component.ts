@@ -33,10 +33,10 @@ export class RaiseRequestComponent implements OnInit {
     }
   }
 
-  viewDetails(){
+  viewDetails(data){
     let dialogRefAddSupplier = this.dialog.open(RaiseRequestDetailDailogComponent, {
       width: '70%',
-      data: ''
+      data: data
   });
   dialogRefAddSupplier.afterClosed().subscribe(result => {
       if(result == 'success'){
