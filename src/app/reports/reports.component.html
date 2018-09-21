@@ -13,79 +13,11 @@
 
   </div>
 
-  <!-- <div id="" class="row pd-15x10 mg-0">
-          <div class="col-sm-3 col-md-3 col-lg-3 filter-style">
-              <div class="filtercol-style height-500">
-                  <h4 class="left form-group"><i class="fa fa-file-text"></i> Report</h4>
-                  <br>
-                      <div class="">
-                    <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
-                      <md-option *ngFor="let type of reportsType" [value]="type.value">
-                        {{type.viewValue}}
-                      </md-option>
-                    </md-select>
-
-                  </div>
-                  <div class="" >
-                     
-                    <md-form-field class="example-full-width inline ">
-                        <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
-          
-                      </md-form-field>
-          
-                  </div> 
-                    <div class="input-group pd-10  ">
-                      <button md-raised-button color="primary" (click)="searchReports(true)">
-                        Search
-                      </button>
-                    </div>
-                  </div>
-           </div>
-    <div class="col-sm-9 col-md-9 col-lg-9">    
-
-    </div>
-    </div> -->
   <div class="container-fluid">
 
     <!-- tabs left -->
     <div class="tab tabs-left row">
       <div class="col">
-        <!-- <div class=" row justify-content-between heading-style">
-              <div class="col-md-6  col-sm-6  col-lg-6">
-                  <h4><i class="fa fa-file-text"></i> Report</h4>
-              </div>
-            <div class="col-md-3 col-sm-3  col-lg-3">  
-                <a  href="javascript:void(0)" title="Download"><i  aria-hidden="true" class="fa fa-download fa-2x"></i></a>            </div>
-              </div> -->
-        <!-- <ul class="nav nav-tabs ">
-      <li>
-            <a href="javascript:void(0)" data-toggle="tab"></a>
-            <md-select placeholder="Reports" [(ngModel)]="reportDetails.reportType" name="type" class="wd-100pc">
-              <md-option *ngFor="let type of reportsType" [value]="type.value">
-                {{type.viewValue}}
-              </md-option>
-            </md-select>
-            <div class="">
-
-              <md-form-field class="example-full-width inline ">
-                <input class="form-control" mdInput placeholder="Days" name="days" [(ngModel)]="reportDetails.days">
-
-              </md-form-field>
-
-            </div>
-            <div class="input-group pd-10  ">
-              <button md-raised-button color="primary" (click)="searchReports(true)">
-                Search
-              </button>
-            </div>
-          </li> 
-          <li >
-            <button type="button" class="btn btn-primary btn-lg" >Newly Downloaded</button>
-          </li>
-          <li>
-              <button type="button" class="btn btn-default btn-lg" >Pending Orders</button>
-            </li> 
-        </ul>-->
         <table class="nav nav-pills flex-column row">
           <tr>
             <!-- <td class="nav-item" *ngFor="let type of reportsType" (click)="searchReports(true,type.value)">
@@ -392,21 +324,26 @@
             <h3>Order Report</h3>
           </div>
           <div class="row form-group">
-            <div class="col-sm-6  col-md-6  col-lg-6">
+            <div class="col-sm-4  col-md-4  col-lg-4">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="downloadInput.filterBy">
                 <md-option value="all">Date</md-option>
                 <md-option value="customer">Customers</md-option>
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="supplier">Suppliers</md-option>
               </md-select>
-
             </div>
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'customer'">
-              <!-- <md-select placeholder="Customer" [(ngModel)]="downloadInput.customerId" name="type" class="wd-100pc" >
-                    <md-option *ngFor="let customer of customerList" [value]="customer.userid">
-                      {{customer.firstname}}{{customer.lastnsame}}
-                    </md-option>
-                  </md-select> -->
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="downloadInput.filterBy == 'customer'">
+              <md-form-field class="inline">
+                <input mdInput [(ngModel)]="searchName" placeholder="Enter name">
+              </md-form-field>
+              <b *ngIf="searchResultsLength && searchRecords" class="success result-style">
+                <small>{{searchResultsLength}} Records found </small>
+              </b>
+              <i aria-hidden="true" class="fa fa-search cursor search-style1" (click)="searchCustomers()"></i>
+            </div>
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="downloadInput.filterBy == 'customer'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -416,8 +353,8 @@
                 </md-autocomplete>
               </md-form-field>
             </div>
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'distributor'">
 
+            <div class="col-sm-8  col-md-8  col-lg-8" *ngIf="downloadInput.filterBy == 'distributor'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -428,9 +365,7 @@
               </md-form-field>
             </div>
 
-
-            <div class="col-sm-6  col-md-6  col-lg-6" *ngIf="downloadInput.filterBy == 'supplier'">
-
+            <div class="col-sm-8  col-md-8  col-lg-8" *ngIf="downloadInput.filterBy == 'supplier'">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Supplier" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -461,15 +396,14 @@
               </md-form-field>
             </div>
           </div>
-          <div class=" col">
+          <div class="row mgleft-0">
             <md-dialog-actions align="center">
-              <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>&nbsp;
-              <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>&nbsp;
+              <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>
+              <button md-raised-button class="btn-primary" (click)="printFile()">Print</button>
               <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrder()">Raise An Invoice</button>
               <button md-raised-button class="btn-primary" (click)="invoiceHistory()">Invoice History</button>
               <button md-raised-button class="btn-primary" (click)="viewOrdersReports()">View </button>
             </md-dialog-actions>
-
             <br>
             <h3 class="danger mgtop-20" *ngIf="noData">
               <span class="fa fa-frown-o"></span> No Records found</h3>
@@ -614,22 +548,22 @@
 
 
       </div>
-
     </div>
-
 
     <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'stockreports'">
       <div class="jumbotron">
         <div class="jumbotron-style">
-          <div class="row form-group col">
+          <div class="row  col">
             <h3>Stock Report</h3>
           </div>
+          <br>
           <div class="row form-group">
             <div class="col-6">
               <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="stockreportsInput.filterBy">
                 <md-option value="distributor">Distributors</md-option>
                 <md-option value="category">Category</md-option>
                 <md-option value="distributorcategory">Distributor + Category</md-option>
+                <md-option value="salesteamcategory">Sales Team + Category</md-option>
               </md-select>
 
             </div>
@@ -647,7 +581,7 @@
             </div>
 
 
-            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category' || stockreportsInput.filterBy == 'distributorcategory' ">
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'category' || stockreportsInput.filterBy == 'distributorcategory' ||  stockreportsInput.filterBy == 'salesteamcategory' ">
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Enter Category" aria-label="State" [mdAutocomplete]="auto" [formControl]="CategoryCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
@@ -656,11 +590,20 @@
                   </md-option>
                 </md-autocomplete>
               </md-form-field>
-
             </div>
 
-
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="stockreportsInput.filterBy == 'salesteamcategory' ">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Enter sales team name" aria-label="State" [mdAutocomplete]="auto" [formControl]="salesTeamCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let salesteam of filteredsalesteam | async" [value]="salesteam.fullname">
+                    <span> {{salesteam.fullname}}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
           </div>
+
           <div class="row form-group">
             <div class="col-sm-6  col-md-6  col-lg-6">
               <md-form-field class="inline">
@@ -687,13 +630,8 @@
           </div>
           <h3 class="danger mgtop-20" *ngIf="noData">
             <span class="fa fa-frown-o"></span> No Records found</h3>
-
         </div>
       </div>
     </div>
-
-
-
   </div>
-
 </div>

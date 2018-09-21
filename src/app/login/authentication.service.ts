@@ -27,6 +27,8 @@ export class AuthenticationService {
   sales: any = {};
   manufacturer: any = {};
   tokenSession:any = {};
+  logoutOnExpiry:any = true;
+  refreshToken = {};
 
   constructor(
     private router: Router,
@@ -43,7 +45,7 @@ export class AuthenticationService {
     this.stockpoints = JSON.parse(localStorage.getItem('stockpoints'));
     this.distributors = JSON.parse(localStorage.getItem('distributors'));
     this.suppliers = JSON.parse(localStorage.getItem('suppliers'));
-    this.tokenSession = JSON.parse(localStorage.getItem('token'));
+    this.tokenSession = localStorage.getItem('token');
     //  this.sales = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     //  this.manufacturer = JSON.parse(localStorage.getItem('currentUser')).USERTYPE;
     this.salesLogin = this.newSalesFunction();
@@ -129,10 +131,18 @@ export class AuthenticationService {
   getDashboardDetails(input) {
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.tokenSession);
     let options = new RequestOptions({ headers: headers });
     return this.http
       .post(this.apiUrl + '/dashboard', bodyString, options)
-      .map((res: Response) => res.json())
+      .map(res => {
+        let response = res.json();
+        this.sendRefreshedToken(res);
+        if(response.data == 'token malformed'){
+          this.logout();
+        }
+        return res.json();
+      })
       .do(data => console.log('All: '))
       .catch((error: any) =>
         Observable.throw(error.json().error || 'Server error')
@@ -145,6 +155,7 @@ export class AuthenticationService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('token');
     this.loggedIn = false;
     this.CurrentSession = {};
     this.router.navigate(['/login']);
@@ -311,6 +322,22 @@ export class AuthenticationService {
       return false;
     }
   };
+
+  sendRefreshedToken(data){
+    var data = data.headers.get('Authorization');
+      if(data){
+      localStorage.removeItem('token');
+      localStorage.setItem('token' , data);
+      this.tokenSession = localStorage.getItem('token');
+      }
+  }
+
+
+  appendHeaders(){
+    let headers = new Headers({});
+    headers.append('Authorization', 'Bearer ' + this.tokenSession);
+    return headers;
+  }
 }
 
 // {

@@ -41,6 +41,8 @@ export class EditQuantityDailogComponent implements OnInit {
   totalAmountBeforeProducts = 0;
   emptyCansError: boolean = false;
   amountAfterProductsView = 0;
+  emptyCansStatus:boolean = false;
+  emptyCansMessaage:string = ''; 
 
 
 
@@ -59,6 +61,8 @@ export class EditQuantityDailogComponent implements OnInit {
 
     if (this.quantity.value < this.editOrderInput.emptyCans) {
       this.emptyCansError = true;
+      this.emptyCansStatus = true;
+      this.emptyCanMessage = 'Empty cans must be less than quantity';
     }
     else{
       this.emptyCansError = false;

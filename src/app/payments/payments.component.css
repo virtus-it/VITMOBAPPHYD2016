@@ -10,7 +10,7 @@
 } */
 
 .nav-tabs .active a{
-    background:#0f75bc;
+    background:var(--logo-color);
     content: "\f078";   
     color: #fff !important;
   }

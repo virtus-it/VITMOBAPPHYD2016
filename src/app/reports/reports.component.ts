@@ -35,24 +35,35 @@ export class ReportsComponent implements OnInit {
   CategoryCtrl: FormControl;
   filteredcategories: Observable<any[]>;
 
+  salesTeamCtrl: FormControl;
+  filteredsalesteam: Observable<any[]>;
+
 
   constructor(private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, public dialog: MdDialog, private reportservice: ReportsService, private loaderService: LoaderService, private productService: ProductsService, private supplierservice: SupplierService, private customerService: CustomerService) {
     this.DistributorCtrl = new FormControl();
     this.filteredDistributors = this.DistributorCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findDistributors(dist) : this.distributors.slice());
+
     this.customerCtrl = new FormControl();
     this.filteredcustomer = this.customerCtrl.valueChanges
       .startWith(null)
       .map(dist => dist ? this.findCustomers(dist) : this.customerList.slice());
+
     this.SupplierCtrl = new FormControl();
     this.filteredSupplier = this.SupplierCtrl.valueChanges
       .startWith(null)
       .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+
     this.CategoryCtrl = new FormControl();
     this.filteredcategories = this.CategoryCtrl.valueChanges
       .startWith(null)
       .map(cat => cat ? this.findCategories(cat) : this.categoryList.slice());
+
+    this.salesTeamCtrl = new FormControl();
+    this.filteredsalesteam = this.salesTeamCtrl.valueChanges
+      .startWith(null)
+      .map(salesteam => salesteam ? this.findSalesTeam(salesteam) : this.allSalesTeam.slice());
 
 
 
@@ -74,6 +85,7 @@ export class ReportsComponent implements OnInit {
   distributors: any = [];
   categoryList: any = [];
   categoryid: any = '';
+  salesTeamId = '';
   tabPanelView = 'newlydownloaded';
   superDealer = true;
   customerCare = true;
@@ -98,6 +110,12 @@ export class ReportsComponent implements OnInit {
   distributorStockReport: boolean = false;
   categoryStockReport: boolean = false;
   typeOfReport: string = '';
+  randomNumber: any = '';
+  allSalesTeam: any = [];
+  salesTeamProductsReport: boolean = false;
+  searchName: string = '';
+  searchResultsLength = 0;
+  searchRecords:boolean = false;
 
 
 
@@ -377,7 +395,11 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
-    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category')) {
+    else if (this.stockreportsInput.filterBy == 'salesteamcategory') {
+      input.order.categoryid = this.categoryid;
+      input.order.distributorid = this.salesTeamId;
+    }
+    if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category' || this.stockreportsInput.filterBy == 'salesteamcategory')) {
       this.loaderService.display(true);
       console.log(input, 'print input');
       this.reportservice.printInvoice(input)
@@ -404,7 +426,7 @@ export class ReportsComponent implements OnInit {
             this.loaderService.display(false);
           });
     }
-    else{
+    else {
       this.loaderService.display(false);
       this.noData = true;
     }
@@ -433,16 +455,16 @@ export class ReportsComponent implements OnInit {
   getCusotmerResult(result) {
     //console.log(result);
     if (result.result == 'success') {
-      let cusotmerCopy = [];
+      let customercopy = [];
       _.each(result.data, function (i, j) {
         let details: any = i;
         if (details.firstname) {
           details.fullName = details.firstname;
-          cusotmerCopy.push(details);
+          customercopy.push(details);
         }
 
       });
-      this.customerList = cusotmerCopy;
+      this.customerList = customercopy;
 
     }
 
@@ -625,7 +647,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: ""
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", randominvoiceno: ''
       }
     };
     if (this.downloadInput.fromDate) {
@@ -638,15 +660,20 @@ export class ReportsComponent implements OnInit {
       input.order.filterid = this.downloadInput.customerId;
       input.order.emailid = this.downloadInput.customerEmail;
       input.order.status = 'delivered';
+      this.generateRandomInvoiceNumber();
+      input.order.randominvoiceno = this.randomNumber;
     }
     if (this.downloadInput.filterBy == 'distributor') {
       input.order.filterid = this.downloadInput.distributorId;
       input.order.emailid = this.downloadInput.distributorEmail;
+      this.generateRandomInvoiceNumber();
+      input.order.randominvoiceno = this.randomNumber;
     }
     if (this.downloadInput.filterBy == 'supplier') {
       input.order.filterid = this.downloadInput.supplierId;
       input.order.emailid = this.downloadInput.supplierEmail;
     }
+
     if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
       this.loaderService.display(true);
       this.reportservice.printInvoice(input)
@@ -730,6 +757,34 @@ export class ReportsComponent implements OnInit {
     return finalCategories;
   }
 
+
+  findSalesTeam(name: string) {
+    let finalSalesTeam: any = [];
+    finalSalesTeam = this.allSalesTeam.filter(salesteam =>
+      salesteam.fullname.toLowerCase().indexOf(name.toLowerCase()) === 0);
+
+    if (finalSalesTeam && finalSalesTeam.length > 0) {
+      let findSalesTeam: any = {};
+
+      findSalesTeam = _.find(finalSalesTeam, function (k, l) {
+        let salesteam: any = k;
+        return salesteam.fullname == name;
+      });
+
+      if (findSalesTeam) {
+        this.salesTeamId = findSalesTeam.user_id;
+        //  this.filterTypeModel.categoryname = findCategory.category;
+      }
+    }
+    else {
+      if (name.length >= 3 && !this.LastfilterRecords) {
+        this.salesTeamUsers();
+      }
+    }
+    return finalSalesTeam;
+  }
+
+
   getProductByCategory() {
     let input = { "userId": this.authenticationService.loggedInUserId(), "userType": "dealer", "loginid": this.authenticationService.loggedInUserId(), "appType": this.authenticationService.appType() };
     this.productService.getProductsCategory(input)
@@ -773,16 +828,21 @@ export class ReportsComponent implements OnInit {
       input.order.categoryid = this.categoryid;
       input.order.distributorid = this.stockreportsInput.distributorId;
     }
+    if (this.stockreportsInput.filterBy == 'salesteamcategory') {
+      input.order.categoryid = this.categoryid;
+      input.order.distributorid = this.salesTeamId;
+    }
     if (input.order.filtertype == 'distributor') {
       this.distributorStockReport = true;
-
     }
     else if (input.order.filtertype == 'category') {
       this.categoryStockReport = true;
-
     }
     else if (input.order.filtertype == 'distributorcategory') {
       this.distributorCategoryStockReport = true;
+    }
+    else if (input.order.filtertype == 'salesteamcategory') {
+      this.salesTeamProductsReport = true;
     }
     if (this.stockreportsInput.fromDate && this.stockreportsInput.toDate && (this.stockreportsInput.filterBy == 'distributorcategory' || this.stockreportsInput.filterBy == 'distributor' || this.stockreportsInput.filterBy == 'category')) {
       this.loaderService.display(true);
@@ -801,16 +861,20 @@ export class ReportsComponent implements OnInit {
       this.loaderService.display(false);
       this.viewStockReportsData = result.data;
       this.noData = false;
-      if(this.distributorCategoryStockReport == true){
+      if (this.distributorCategoryStockReport == true) {
         this.typeOfReport = 'distributorCategoryStockReport';
       }
-      else if(this.distributorStockReport == true){
+      else if (this.distributorStockReport == true) {
         this.typeOfReport = 'distributorStockReport';
       }
-      else if(this.categoryStockReport == true){
+      else if (this.categoryStockReport == true) {
         this.typeOfReport = 'categoryStockReport';
       }
-        this.reportsPreview(this.viewStockReportsData);
+      else if (this.salesTeamProductsReport == true) {
+        this.typeOfReport = 'salesTeamProductsReport'
+
+      }
+      this.reportsPreview(this.viewStockReportsData);
     }
     else {
       this.viewStockReportsData = [];
@@ -821,7 +885,7 @@ export class ReportsComponent implements OnInit {
   }
 
   viewOrdersReports() {
-    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' }};
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' } };
     if (this.downloadInput.fromDate) {
       input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }
@@ -839,7 +903,7 @@ export class ReportsComponent implements OnInit {
     }
     if (this.downloadInput.filterBy == 'supplier') {
       input.order.filterid = this.downloadInput.supplierId;
-      input.order.emailid = this.downloadInput.supplierEmail;
+      input.order.emailid = this.salesTeamId;
     }
     if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
       this.loaderService.display(true);
@@ -849,7 +913,7 @@ export class ReportsComponent implements OnInit {
       else if (input.order.filtertype == 'distributor') {
         this.distributorOrderReports = true;
       }
-      console.log(input , 'sdgsdgdsgdhhddhdhdhdh');
+      console.log(input, 'sdgsdgdsgdhhddhdhdhdh');
       this.reportservice.printInvoice(input)
         .subscribe(
           output => this.viewOrdersReportsResult(output),
@@ -864,10 +928,10 @@ export class ReportsComponent implements OnInit {
       this.viewOrdersReportsData = result.data;
       this.noData = false;
       this.loaderService.display(false);
-      if(this.customerOrderReports == true){
+      if (this.customerOrderReports == true) {
         this.typeOfReport = 'customerOrderReports';
       }
-      else if(this.distributorOrderReports == true){
+      else if (this.distributorOrderReports == true) {
         this.typeOfReport = 'distributorOrderReports';
       }
       this.reportsPreview(this.viewOrdersReportsData);
@@ -881,7 +945,7 @@ export class ReportsComponent implements OnInit {
 
 
   reportsPreview(data) {
-    let formattedData = {data: data , type : this.typeOfReport }
+    let formattedData = { data: data, type: this.typeOfReport }
     let dialogRef = this.dialog.open(ReportsPreviewComponent, {
       width: '80%',
       data: formattedData
@@ -895,17 +959,70 @@ export class ReportsComponent implements OnInit {
         this.distributorOrderReports = false;
         this.distributorStockReport = false;
         this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
       }
-      else if(result != 'success'){
+      else if (result != 'success') {
         this.typeOfReport = '';
         this.customerOrderReports = false;
         this.distributorCategoryStockReport = false;
         this.distributorOrderReports = false;
         this.distributorStockReport = false;
         this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
       }
     });
 
+  }
+
+  generateRandomInvoiceNumber() {
+    this.randomNumber = Math.floor(Math.random() * 90000) + 10000;
+  }
+
+  salesTeamUsers() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "transtype": "getsalesteam" } };
+    this.reportservice.changeAssociation(input)
+      .subscribe(
+        output => this.salesTeamUsersResult(output),
+        error => {
+          this.loaderService.display(false);
+        });
+  }
+  salesTeamUsersResult(result) {
+    if (result.result == 'success') {
+      this.allSalesTeam = result.data;
+    }
+  }
+
+  searchCustomers() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": this.searchName, "lastcustomerid": "0", "pagesize": "200", "apptype": this.authenticationService.appType() } }
+    this.customerService.searchCustomer(input)
+      .subscribe(
+        output => this.searchCustomersResult(output),
+        error => {
+          //console.log("error in customer");
+          this.loaderService.display(false);
+        });
+  }
+  searchCustomersResult(result){
+    if(result.result == 'success'){
+      this.searchResultsLength = result.data.length;
+      this.searchRecords = true;
+      // console.log(this.searchResultsLength , 'this.searchResultsLength');
+      let customercopy = [];
+      _.each(result.data, function (i, j) {
+        let details: any = i;
+        if (details.firstname) {
+          details.fullName = details.firstname + ' ' + details.mobileno ;
+          customercopy.push(details);
+        }
+
+      });
+      this.customerList = customercopy;
+    }
+    else{
+      this.customerList = [];
+      this.searchRecords = false;
+    }
   }
 
 
@@ -913,10 +1030,11 @@ export class ReportsComponent implements OnInit {
 
   ngOnInit() {
     this.searchReports(true, 'newlydownloaded');
-    this.getCustomer();
+    // this.getCustomer();
     this.getDistributors();
     this.getSupplierList();
     this.getProductByCategory();
+    this.salesTeamUsers();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();

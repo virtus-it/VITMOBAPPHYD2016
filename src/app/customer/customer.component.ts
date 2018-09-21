@@ -16,7 +16,7 @@ import { FollowUpDetailsComponent } from '../follow-up-details/follow-up-details
 import { SetpricecustomerComponent } from '../setpricecustomer/setpricecustomer.component';
 import { CustomerScheduleEditDailogComponent } from '../customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import { CustomerDetailDailogComponent } from '../customer-detail-dailog/customer-detail-dailog.component';
-import {NotificationDetailsComponent } from '../notification-details/notification-details.component';
+import { NotificationDetailsComponent } from '../notification-details/notification-details.component';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { LoaderService } from '../login/loader.service';
@@ -41,7 +41,7 @@ export class CustomerComponent implements OnInit {
     superDealer = true;
     customerCare = true;
     salesTeamLogin = true;
-    customersCount :number = 0;
+    customersCount: number = 0;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
@@ -52,6 +52,7 @@ export class CustomerComponent implements OnInit {
         { value: 'customertype', viewValue: 'Customer Type' },
         { value: 'followupdate', viewValue: 'Followup Date' },
         { value: 'points', viewValue: 'Points' },
+        { value: 'advamt', viewValue: 'Adv Amt < available cans' }
 
 
     ];
@@ -258,7 +259,7 @@ export class CustomerComponent implements OnInit {
     }
     getCustomerList(firstcall) {
         this.loaderService.display(true);
-        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype": "getallcustomers", pagesize: 100, "loginid": this.authenticationService.loggedInUserId()  };
+        let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype": "getallcustomers", pagesize: 100, "loginid": this.authenticationService.loggedInUserId() };
         //console.log(input);
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
@@ -305,7 +306,9 @@ export class CustomerComponent implements OnInit {
 
         if (this.filterInput.root.searchtype == 'followupdate') {
             this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
-
+        }
+        if (this.filterInput.root.searchtype == 'advamt') {
+            this.filterInput.root.searchtext = 'empty';
         }
 
         let input = this.filterInput;
@@ -430,37 +433,37 @@ export class CustomerComponent implements OnInit {
     //     dialogRefeditStatus.afterClosed().subscribe(result => {
     //         ////console.log(`Dialog closed: ${result}`);
     //         if (result =='success') {
-    
+
     //         }
-    
+
     //     });
     // }
 
-    sortDescending(){
+    sortDescending() {
         var sortablearray = this.customerList;
         var sortedList = _.sortBy(sortablearray, 'firstname').reverse();
         console.log(sortedList);
         this.customerList = sortedList;
     }
 
-    sortAscending(){
+    sortAscending() {
         var sortablearray = this.customerList;
         var sortedList = _.sortBy(sortablearray, 'firstname');
         console.log(sortedList);
         this.customerList = sortedList;
     }
 
-    showAllNotifications(data){
+    showAllNotifications(data) {
         let dialogRefeditStatus = this.dialog.open(NotificationDetailsComponent, {
             width: '85%',
             data: data
         });
         dialogRefeditStatus.afterClosed().subscribe(result => {
             ////console.log(`Dialog closed: ${result}`);
-            if (result =='success') {
-    
+            if (result == 'success') {
+
             }
-    
+
         });
 
     }

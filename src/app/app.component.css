@@ -172,10 +172,10 @@
 }
 .navbar-light .navbar-nav .nav-link:hover{
   color: #fff !important;
-  background: #0f75bc;
+  background: var(--logo-color);
 }
 .active a{
-  color: #0f75bc !important;
+  color: var(--logo-color) !important;
 }
 .menu-style{
   margin: 20px;
@@ -185,10 +185,10 @@
 
 .active a:hover{
   color: #fff !important;
-  background: #0f75bc;
+  background: var(--logo-color);
 }
 .logo-bg{
-  background: #0f75bc;
+  background: var(--logo-color);
 }
 .wd-40pc{
   width: 40%;
@@ -219,7 +219,7 @@
   padding-top: 10px;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
-  color:#0f75bc !important;
+  color:var(--logo-color) !important;
 }
 .brd-bottom{
   border-bottom: 1px solid #c5d6de;
@@ -229,22 +229,22 @@
   border-bottom: 1px solid #c5d6de;
 }
 a{
-  color: #0f75bc;
+  color: var(--logo-color);
 }
 .btn{
   padding: .5rem 0.5rem !important;
 }
 .mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
-  background: #0f75bc !important;
+  background: var(--logo-color) !important;
 }
 .btn-link{
-  color: #0f75bc;
+  color: var(--logo-color);
 }
 .mgtop-12{
   margin-top: 12px;
 }
 .sidebar-style{
-  width: 14%;
+  width: 16%;
   }
   .pdtoprght-3x10{
     padding: 3px 0px 0px 10px;

@@ -1,7 +1,7 @@
 
 .loginBg{
-	background: #f1f5f7;
-	/* background-image: url(/src/assests/images/bg_virtus.png); */
+	/* background: #f1f5f7; */
+	/* background-image: url("../assets/images/bg_virtus.png"); */
 }
 .loginStyle
 {
@@ -39,11 +39,8 @@ border-radius: 0px;
 		border-bottom: 1px solid #999;
 	}
 .form-control:hover{
-	border-bottom: 1px solid #337ab7;
+	border-bottom: 1px solid var(--logo-color);
 }
 .btn-primary{
-	background: #0f75bc;
+	background: var(--logo-color);
 }	
-/* .mat-form-field{
-	display: block
-} */

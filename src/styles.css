@@ -1117,40 +1117,15 @@ margin-right: 15px;
 .firstLetterCap::first-letter{
   text-transform: uppercase;
 }
-  /* @media (min-width: 1200px){
-    .customerSchList-height{
-      height: 60vh !important;
-    }
-    .customerSchList-height .table{
-      max-height: 50vh !important;
-    }
-    .customerSchList-height  table.table-fixedheader>tbody{
-      height: 45vh !important;
-  overflow-x: auto;
-    }
-    }
-  
-  @media (min-width: 992px){
-    .customerSchList-height{
-      height: 60vh !important;
-    }
-    .customerSchList-height .table{
-      max-height: 50vh !important;
-    }
-    .customerSchList-height  table.table-fixedheader>tbody{
-      height: 45vh !important;
-  overflow-x: auto;
-    }
-    }
-  @media (min-width: 768px){
-    .customerSchList-height{
-      height: 60vh !important;
-    }
-    .customerSchList-height .table{
-      max-height: 50vh !important;
-    }
-    .customerSchList-height  table.table-fixedheader>tbody{
-      height: 45vh !important;
-  overflow-x: auto;
-    }
-    } */
+.mat-button, .mat-icon-button, .mat-raised-button{
+  text-transform: uppercase
+}
+ .pdleft-20{
+   padding-left: 20px
+ }
+ .mgleft-0{
+   margin-left: 0px !important;
+ }
+ .cursor{
+   cursor: pointer;
+ }

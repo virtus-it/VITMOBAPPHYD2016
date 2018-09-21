@@ -1,5 +1,5 @@
 table thead {
-    background: #0f75bc;
+    background: var(--logo-color);
     color: #fff;
   }
   .table td, .table th{
@@ -33,13 +33,13 @@ table thead {
     text-align: left;
   }
   a{
-    color: #0f75bc;
+    color: var(--logo-color);
   }
   .pdleft-20{
     padding-left: 20px !important;
   }
   .btn-link{
-    color: #0f75bc;
+    color: var(--logo-color);
   }
  .disabled{
    color: grey;

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
 import {LocationStrategy,HashLocationStrategy} from '@angular/common'; 
 import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule,MdAutocompleteModule } from '@angular/material';
@@ -135,6 +136,11 @@ import { UtcDate24Pipe } from './pipes/utc-date24.pipe';
 import { DistributorMapDetailsComponent } from './distributor-map-details/distributor-map-details.component';
 import { ReportsPreviewComponent } from './reports-preview/reports-preview.component';
 import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
+import { StockNotificationsComponent } from './stock-notifications/stock-notifications.component';
+import { RaiseRequestComponent } from './raise-request/raise-request.component';
+import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.component';
+import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
+import { authinterceptor } from './interceptor/authinterceptor';
 
 
 
@@ -248,6 +254,10 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
         DistributorMapDetailsComponent,
         ReportsPreviewComponent,
         LocaltimezonePipe,
+        StockNotificationsComponent,
+        RaiseRequestComponent,
+        SalesTeamAssignComponent,
+        RaiseRequestDetailDailogComponent,
 
      
         
@@ -267,6 +277,7 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
         MdInputModule,
         NgxGaugeModule,
         MdNativeDateModule,
+        HttpClientModule,
         AngularMultiSelectModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
@@ -291,6 +302,8 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
             {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
             {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
             {path: 'inbox', component: InboxPageComponent , canActivate: [LoggedInGuard] },            
+            {path: 'raiserequest', component: RaiseRequestComponent , canActivate: [LoggedInGuard] },            
+            {path: 'stocknotifications', component: StockNotificationsComponent , canActivate: [LoggedInGuard] },            
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -322,8 +335,9 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
         PaymentsService,
         PromocodeServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
-        { provide: 'API_URL', useValue: 'http://104.211.247.42:2221' },
-       { provide: 'App_URL', useValue: 'http://104.211.247.42:2221' }  
+        {provide: HTTP_INTERCEPTORS,useClass: authinterceptor, multi: true},
+        { provide: 'API_URL', useValue: 'http://192.168.1.50:2221' }, //http://192.168.1.50:2221
+       { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
         MapDialogComponent, 
@@ -406,7 +420,9 @@ import { LocaltimezonePipe } from './pipes/localtimezone.pipe';
          NotificationDetailsComponent,
          DeleteRuleComponent,
          DistributorMapDetailsComponent,
-         ReportsPreviewComponent
+         ReportsPreviewComponent,
+         SalesTeamAssignComponent,
+         RaiseRequestDetailDailogComponent
       
 
 

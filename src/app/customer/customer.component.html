@@ -4,11 +4,11 @@
       <h4>
         <i class="fa fa-users"></i> Customers</h4>
     </div>
-    <div class="col-2">
-        <b cass="" *ngIf="customersCount != 0">Count : {{this.customersCount}}</b>
+    <div class="col-2 align-self-center">
+        <h5 cass="" *ngIf="customersCount != 0">Count: <span class="warning">{{this.customersCount}}</span></h5>
       </div>
 
-    <div class="col-5 align-self-center right">
+    <div class="col-4 align-self-center justify-content-end">
       <div class="row">
         <div class=" col">
           <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
@@ -33,8 +33,6 @@
             <md-option value="cod">COD</md-option>
             <md-option value="credit">CREDIT</md-option>
             <md-option value="codwithpending">Cod with Pending</md-option>
-            <md-option value="advlesscans">Advance Amt
-              < Available Cans</md-option>
           </md-select>
         </div>
         <div class=" col" *ngIf="filterInput.root.searchtype == 'customertype'">
@@ -45,10 +43,16 @@
           </md-select>
         </div>
 
+        <div class="col" *ngIf="filterInput.root.searchtype == 'advamt'">
+         
+        </div>
+
         <div class=" col" *ngIf="filterInput.root.searchtype == 'points'">
             <md-select placeholder="Filter By" name="points" [(ngModel)]="filterInput.root.searchtext">
-              <md-option value="top10">Highest Points</md-option>
-              <md-option value="bottom10">Lowest Points</md-option>
+              <md-option value="top10">Highest 10 Points</md-option>
+              <md-option value="bottom10">Lowest 10 Points</md-option>
+              <md-option value="ascending">Ascending Order</md-option>
+              <md-option value="descending">Descending Order</md-option>
             </md-select>
           </div>
 
@@ -65,9 +69,9 @@
           &nbsp;
           <i class="fa fa-history logo-color fs-20" aria-hidden="true" (click)="clearFilter()"></i>
           &nbsp;
-          <i class="fa fa-arrow-circle-up logo-color fs-20" title="Descending order" (click)="sortDescending()"></i>
+          <!-- <i class="fa fa-arrow-circle-up logo-color fs-20" title="Descending order" (click)="sortDescending()"></i>
           &nbsp;
-          <i class="fa fa-arrow-circle-down logo-color fs-20" title="Ascending order" (click)="sortAscending()"></i>
+          <i class="fa fa-arrow-circle-down logo-color fs-20" title="Ascending order" (click)="sortAscending()"></i> -->
           &nbsp;
           <a class="cursor logo-color " title="Download" (click)='downloadCustomer()'>
             <i class="fa fa-download fs-20" aria-hidden="true"></i>
@@ -147,7 +151,7 @@
       <div class="col-4 left bg-color-bg">
         <div class="row align-items-center">
           <div class="col-2  pd-10 " align-self-center>
-            <span class="left capitalize joined-style" *ngIf="customers.firstname">
+            <span class="left capitalize joined-style">
               <!-- <span class="success"></span> -->
               <span *ngIf="customers.isappdownloaded" class="">
                 <i class="fa fa-thumbs-up success" title="Joined"></i>
@@ -289,7 +293,7 @@
             </div>
             <div class="row pdbottom-5">
               <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showAllNotifications(customers)">
-                <i class="fa fa-commenting-o" aria-hidden="true"></i> Notification
+                <i class="fa fa-bell-o" aria-hidden="true"></i> Notification
               </div>
             </div>
           </div>

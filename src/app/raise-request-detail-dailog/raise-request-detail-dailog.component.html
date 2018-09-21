@@ -1,0 +1,64 @@
+<div class="row justify-content-between modal-title ">
+
+  <div class="col-xs-7 col-sm-6 col-lg-8">
+    <strong><i class="fa fa-check-square-o" aria-hidden="true"></i></strong>Raise Request</div>
+
+
+  <div class="col-md-1 col-sm-1 right">
+    <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+<div class="container-fluid brd-bottom" *ngIf="Details.type == 'newRaiseRequest'">
+
+  <div class="row">
+
+
+    <md-form-field class="inline">
+        <input mdInput [mdDatepicker]="picker"  placeholder="Select Date" name="date" [(ngModel)]="raiseRequestDetails.requestdate">
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker></md-datepicker>
+      </md-form-field>
+
+
+  </div>
+
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th>Product Name</th>
+          <th>Filled Cans</th>
+          <th>Empty Cans</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let products of allProductsList"> 
+          <td>{{products.category}} | {{products.ptype}} | {{products.brandname}}</td>
+          <td class="">
+            <input type="text" name="stock" [(ngModel)]="products.stock" (keypress)="numberEvent($event)">
+          </td>
+          <td class="">
+            <input type="text" name="empty cans" [(ngModel)]="products.returnemptycans" (keypress)="numberEvent($event)" >
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
+<div class="container-fluid brd-bottom"> <!--  this is normal view details --> 
+
+
+</div>
+
+
+
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()">Raise Request</button> &nbsp;
+    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()">Cancel</button>&nbsp;
+  </md-dialog-actions>
+</div>
