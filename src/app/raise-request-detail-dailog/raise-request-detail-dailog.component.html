@@ -1,28 +1,26 @@
 <div class="row justify-content-between modal-title ">
 
   <div class="col-xs-7 col-sm-6 col-lg-8">
-    <strong><i class="fa fa-check-square-o" aria-hidden="true"></i></strong>Raise Request</div>
+    <strong><i class="fa fa-check-square-o" aria-hidden="true"></i>{{headerValue}}</strong></div>
 
+  <!-- Raise Request -->
 
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()"> <i class="fa fa-times fs-20" aria-hidden="true"></i>
     </strong>
   </div>
 </div>
+
+<!-- Step 1 by distributor-->
+
 <div class="container-fluid brd-bottom" *ngIf="Details.type == 'newRaiseRequest'">
-
   <div class="row">
-
-
     <md-form-field class="inline">
-        <input mdInput [mdDatepicker]="picker"  placeholder="Select Date" name="date" [(ngModel)]="raiseRequestDetails.requestdate">
-        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-        <md-datepicker #picker></md-datepicker>
-      </md-form-field>
-
-
+      <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="date" [(ngModel)]="invoiceDate">
+      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+      <md-datepicker #picker></md-datepicker>
+    </md-form-field>
   </div>
-
   <div class="row">
     <table>
       <thead>
@@ -33,23 +31,131 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let products of allProductsList"> 
+        <tr *ngFor="let products of allProductsList">
           <td>{{products.category}} | {{products.ptype}} | {{products.brandname}}</td>
           <td class="">
             <input type="text" name="stock" [(ngModel)]="products.stock" (keypress)="numberEvent($event)">
           </td>
           <td class="">
-            <input type="text" name="empty cans" [(ngModel)]="products.returnemptycans" (keypress)="numberEvent($event)" >
+            <input type="text" name="empty cans" [(ngModel)]="products.returnemptycans" (keypress)="numberEvent($event)">
           </td>
         </tr>
       </tbody>
     </table>
-
-
   </div>
 </div>
 
-<div class="container-fluid brd-bottom"> <!--  this is normal view details --> 
+<!-- Only viewing purpose for distributor -->
+<div class="container-fluid brd-bottom" *ngIf="Details.status == 'stockrequested'">
+  <div class="row">
+    <span class="">
+      <b>Request Date : {{modifieddate}}</b>
+    </span>
+  </div>
+
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th width="25%">Product Name</th>
+          <th width="25%">Quantity</th>
+          <th width="25%">Empty Cans</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of Details.products">
+          <td width="25%">{{req.category}} | {{req.ptype}} | {{req.brandname}}</td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.stock" disabled>
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.returnemptycans" disabled>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- This is the view that distributor gets after super dealer confirms -->
+<div class="container-fluid brd-bottom" *ngIf="Details.status == 'reqconfirm'">
+  <div class="row">
+    <span class="">
+      <b>Request Date : {{modifieddate}}</b>
+    </span>
+  </div>
+
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th width="25%">Product Name</th>
+          <th width="25%">Quantity</th>
+          <th width="25%">Empty Cans</th>
+          <th width="25%">Cost per Can</th>
+          <th width="25%">Paid Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of Details.products">
+          <td width="25%">{{req.category}} | {{req.ptype}} | {{req.brandname}}</td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.stock">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.returnemptycans">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.buycost">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.paidamt">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Final View No edits after confirmation by distributor-->
+  <div class="container-fluid brd-bottom" *ngIf="Details.status == 'confirm'">
+  <div class="row">
+    <span class="">
+      <b>Request Date : {{modifieddate}}</b>
+    </span>
+  </div>
+
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th width="25%">Product Name</th>
+          <th width="25%">Quantity</th>
+          <th width="25%">Empty Cans</th>
+          <th width="25%">Cost per Can</th>
+          <th width="25%">Paid Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of Details.products">
+          <td width="25%">{{req.category}} | {{req.ptype}} | {{req.brandname}}</td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.stock">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.returnemptycans">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.buycost">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.paidamt">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 
 
 </div>
@@ -58,7 +164,26 @@
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()">Raise Request</button> &nbsp;
-    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()">Cancel</button>&nbsp;
+    <!-- Step 1 by dist -->
+    <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()" *ngIf="Details.type == 'newRaiseRequest'">Raise
+      Request</button> &nbsp;
+    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'newRaiseRequest'">Cancel</button>&nbsp;
+     <!-- Step 1 by dist -->
+
+     <!-- Only viewing purpose for distributor -->
+    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.status == 'stockrequested'">OK</button>&nbsp;
+    <!-- Only viewing purpose for distributor -->
+
+
+    <!-- This is the view that distributor gets after super dealer confirms -->
+    <button type="submit" class="btn" md-raised-button (click)="requestComfirmByDistributor()" *ngIf="Details.status == 'reqconfirm'">CONFIRM</button>&nbsp;
+    <!-- This is the view that distributor gets after super dealer confirms -->
+
+
+<!-- Final View No edits after confirmation by distributor-->
+    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.status == 'confirm'">OK</button>&nbsp;
+    <!-- Final View No edits after confirmation by distributor-->
+
+
   </md-dialog-actions>
 </div>
