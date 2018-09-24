@@ -103,7 +103,7 @@
             </label>
           </div>
         </div>
-        <div class="row mgtop-20" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+        <div class="row mgtop-10" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div class="col-4 pleft">
             <small class="">Due Amount</small>
             <br>
@@ -117,12 +117,13 @@
           </div>
           <div class="col-4" *ngIf="editStatusInput.order.paymentype == 'cash'">
             <md-form-field class="wd-60pc">
-              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)]="editStatusInput.order.bill_amount" (keypress)="numberEvent($event)">
+              <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)]="editStatusInput.order.bill_amount"
+                (keypress)="numberEvent($event)">
             </md-form-field>
           </div>
         </div>
 
-        <div class="row mgtop-20" *ngIf="editStatusInput.order.orderstatus !== 'delivered'">
+        <div class="row mgtop-10" *ngIf="editStatusInput.order.orderstatus !== 'delivered'">
           <div class="col-4 pleft">
             <small class="">Due Amount</small>
             <br>
@@ -130,26 +131,14 @@
 
           </div>
           <div class="col-4">
-
-
             <small class="">Advance Amount </small>
             <br>
             <b class="">Rs.{{editStatusInput.order.adv_amt}}</b>
-
-
-            <!-- <input class="" mdInput placeholder="Advance Amount" name='advamt'  [(ngModel)]="editStatusInput.order.adv_amt" >  -->
-
           </div>
           <div class="col-4">
-
-
             <small class="">Bill Amount</small>
             <br>
             <b class="">Rs.{{orderDetail.bill_amount}}</b>
-
-
-            <!-- <input class="form-control" mdInput placeholder="Bill Amount" name="firstName" [(ngModel)] ="editStatusInput.order.received_amt"  > -->
-
           </div>
         </div>
         <div class="row">
@@ -169,36 +158,31 @@
             <br>
             <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b>
           </div>
-
-
         </div>
         <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div *ngIf="editStatusInput.order.paymentype == 'cash'">
             <!--   <span class=" col-md-5"><input type="text" class="form-control center" ng-value="" ng-model="editorderDetailslist.prod_cost*editorderDetailslist.userQuantity"></span> -->
-
           </div>
         </div>
-
       </div>
+
+      <h6 class="warning center" *ngIf="emptyCansError">
+        Empty cans must be less than quantity
+      </h6>
+
+      <h6 class="warning center" *ngIf="quantityError">
+        Quantity must be greater than empty cans
+      </h6>
+
     </div>
   </form>
 </md-dialog-content>
 
-<span class="red" *ngIf="emptyCansError">
-  <small>
-    Empty cans must be less than quantity
-  </small>
-</span>
-
-<span class="red" *ngIf="quantityError">
-  <small>
-    Quantity must be greater than empty cans
-  </small>
-</span>
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-    <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true && quantityError == true" (click)="updateOrderStatus()">UPDATE</button>
+    <button type="submit" class="btn-primary" md-raised-button [disabled]="emptyCansValidate == true && quantityError == true"
+      (click)="updateOrderStatus()">UPDATE</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

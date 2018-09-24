@@ -210,12 +210,12 @@
                     <small>Product Name</small>
                   </th>
                   <th width="30%">
-                      <small>Category</small>
-                    </th>
+                    <small>Category</small>
+                  </th>
                   <th width="20%">
                     <small>Empty Cans</small>
                   </th>
-                </tr> 
+                </tr>
               </thead>
               <tbody class="tab-heigt center">
                 <h5 *ngIf="customerProductDetails.length == 0" class="warning mgtop-10">
@@ -351,8 +351,6 @@
                       </li>
                     </ul>
 
-
-
                   </div>
                 </div>
               </li>
@@ -428,7 +426,7 @@
             <!-- <div class="col">
   <button class="mat-raised-button mat-primary"   (click)="getTemplates(dailogOrderDetails)"  > Read notification</button> 
   </div> -->
-            <div class="pad-11 pad-btn row" *ngIf="superDealer || customerCare || salesTeamLogin">
+            <div class="pad-btn row" *ngIf="superDealer || customerCare || salesTeamLogin">
               <button class="mat-raised-button mat-primary orderbtncol" (click)="getTemplates(dailogOrderDetails)">Customer Quick notification</button>
             </div>
 
@@ -539,7 +537,8 @@
 
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
-                  <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small> <br>
+                  <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small>
+                  <br>
                   <small *ngIf="msg.typeid">&nbsp; Next FollowUp Date {{msg.followupdate | utcDate24}}</small>
                 </div>
                 <div class="col right">
@@ -568,8 +567,9 @@
                 <span class="custom-control-description"> Distributor</span>
               </label>
               <label class="float-right">
-                  <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message"  (click)="internalMessage(orderDetail)"></i> &nbsp;
-                <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="messageTemplate(orderDetail)"></i> &nbsp;
+                <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message" (click)="internalMessage(orderDetail)"></i> &nbsp;
+                <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" *ngIf="superDealer || customerCare || salesTeamLogin"
+                  (click)="messageTemplate(orderDetail)"></i> &nbsp;
                 <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
               </label>
             </div>

@@ -11,7 +11,9 @@
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="form-group">
-     <h5 *ngIf="Detail.brandname!=' '"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{this.Detail.brandname}} </span><span class="gray9">{{this.Detail.ptype}} </span>
+     <h5 *ngIf="Detail.brandname!=' '" class="productName-style"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> 
+      <span class="capitalize">{{this.Detail.brandName}} </span>
+      <span class="">{{this.Detail.category}} </span>
        <!-- <span class="gray8"> - INR. {{this.Detail.pcost}}</span>  -->
       </h5>
       </div>

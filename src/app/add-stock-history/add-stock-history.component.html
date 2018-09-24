@@ -17,9 +17,10 @@
 
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
-    <div class="row">
 
-      <!-- <div class="col-md-4 addstock-style">
+    <div class="productName-style">
+      <div class="row ">
+        <!-- <div class="col-md-4 addstock-style">
         <div class="row">
           <div class="  col-sm-6 col-md-6  col-lg-6">
             <md-form-field class="inline">
@@ -62,86 +63,83 @@
           </button>
         </div>
       </div> -->
-      <div class="col">
-        <h5 class="left capital" *ngIf="Detail.type != 'distributorspage'">
-          <i class="fa fa-gift fs-20" aria-hidden="true"></i>
-          <span class="gray6">{{Detail.brandName}}</span> -
-          <span class="gray8">{{Detail.category}}</span>
-        </h5>
-        <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'">
-          <i class="fa fa-gift fs-20"></i>
-          <span class="gray6">{{Detail.data.data[0].pname}}</span> -
-          <span class="gray8">{{Detail.data.data[0].category}}</span>
-        </h5>
-        <div class="row">
-          <div class="col"  *ngIf="this.Detail.type == 'distributorsStockHistory'">
-            <md-form-field class="example-full-width">
-              <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
-              <md-autocomplete #auto="mdAutocomplete">
-                <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname">
-                  <span class="capitalize">{{prod.fullname}}</span>
-                </md-option>
-              </md-autocomplete>
-            </md-form-field>
-          </div>
-          <div class="col align-self-center">
-            <h5>
-              <span>Count : {{sum}} </span>
-            </h5>
-          </div>
+        <div class="col">
+          <h5 class="left capital" *ngIf="Detail.type != 'distributorspage'">
+            <i class="fa fa-gift fs-20" aria-hidden="true"></i>
+            <span class="">{{Detail.brandName}}</span> -
+            <span class="">{{Detail.category}}</span>
+          </h5>
+          <h5 class="left-capital" *ngIf="Detail.type=='distributorspage'">
+            <i class="fa fa-gift fs-20"></i>
+            <span class="">{{Detail.data.data[0].pname}}</span> -
+            <span class="">{{Detail.data.data[0].category}}</span>
+          </h5>
         </div>
-
-        <table class="table table-hover table-striped table-fixedheader">
-          <thead>
-            <tr>
-              <th width="15%">Cost per Can</th>
-              <th width="15%">Stock</th>
-              <th width="10%">Dist Paid amt</th>
-              <th width="10%">Total amt</th>
-              <th width="15%">Category</th>
-              <th width="10%">Empty Cans</th>
-              <th width="15%">Date</th>
-              <th width="10%">Action By</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let stock of StockList">
-
-              <td width="15%">{{stock.pcost}}</td>
-              <td width="15%">{{stock.stock}}</td>
-              <td width="10%">
-                <span *ngIf="stock.paidamt">{{stock.paidamt}} </span>
-                <span *ngIf="!stock.paidamt">-</span>
-              </td>
-              <td width="10%">
-                <span *ngIf="stock.billamt">{{stock.billamt}} </span>
-                <span *ngIf="!stock.billamt"> - </span>
-              
-              </td>
-              <td width="15%">{{stock.category}}</td>
-              <td width="10%">{{stock.returnemptycans}}</td>
-              <td width="15%">{{stock.modifieddate | utcDate24}}</td>
-              <td width="10%">
-                <span *ngIf="stock.actionby && stock.actionby.fullname">{{stock.actionby.fullname}}</span>
-                <span *ngIf="!stock.actionby"> - </span>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <div *ngIf="noRecord">
-
-          <h4 class="warning oneline center">
-            <i aria-hidden="true" class="fa fa-frown-o"></i>
-            Record Not Available</h4>
-
+        <div class="col" *ngIf="this.Detail.type == 'distributorsStockHistory'">
+          <md-form-field class="example-full-width">
+            <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
+            <md-autocomplete #auto="mdAutocomplete">
+              <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname">
+                <span class="capitalize">{{prod.fullname}}</span>
+              </md-option>
+            </md-autocomplete>
+          </md-form-field>
         </div>
-
-
-
+        <div class="col right">
+          <h5>
+           Count :  <span class="warning">{{sum}} </span>
+          </h5>
+        </div>
       </div>
+    </div>
+    <div>
+
+      <table class="table table-hover table-striped table-fixedheader">
+        <thead>
+          <tr>
+            <th width="12%">Cost Per Can</th>
+            <th width="10%">Stock</th>
+            <th width="12%">Dist Paid Amt</th>
+            <th width="9.5%">Total Amt</th>
+            <th width="15%">Category</th>
+            <th width="10%">Empty Cans</th>
+            <th width="15%">Date</th>
+            <th width="15%">Action By</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let stock of StockList">
+            <td width="12%">{{stock.pcost}}</td>
+            <td width="10%">{{stock.stock}}</td>
+            <td width="12%">
+              <span *ngIf="stock.paidamt">{{stock.paidamt}} </span>
+              <span *ngIf="!stock.paidamt">-</span>
+            </td>
+            <td width="10%">
+              <span *ngIf="stock.billamt">{{stock.billamt}} </span>
+              <span *ngIf="!stock.billamt"> - </span>
+            </td>
+            <td width="15%"><span class="capitalize">{{stock.category}}</span></td>
+            <td width="10%">{{stock.returnemptycans}}</td>
+            <td width="15%">{{stock.modifieddate | utcDate24}}</td>
+            <td width="15%">
+              <span *ngIf="stock.actionby && stock.actionby.fullname" class="capitalize">{{stock.actionby.fullname}}</span>
+              <span *ngIf="!stock.actionby"> - </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngIf="noRecord">
+      <br>
+      <h4 class="warning oneline center">
+        <i aria-hidden="true" class="fa fa-frown-o"></i>
+        Record Not Available</h4>
     </div>
   </div>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;

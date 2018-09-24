@@ -18,7 +18,7 @@
         </md-select>
       </div>
 
-      <div class="col-4 pdtop-8" *ngIf="ruleInput.type == 'promocode'">
+      <div class="col-4" *ngIf="ruleInput.type == 'promocode'">
         <!-- for promocode give condition -->
         <md-form-field class="example-full-width wd-100pc">
           <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl" [(ngModel)]="ruleInput.code">
@@ -30,7 +30,7 @@
         </md-form-field>
       </div>
 
-      <div class="col-4 pdtop-8">
+      <div class="col-4">
         <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value">
         </md-form-field>
@@ -47,10 +47,10 @@
           </md-autocomplete>
         </md-form-field>
       </div>
-
     </div>
   </div>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="submit()">CREATE</button>
