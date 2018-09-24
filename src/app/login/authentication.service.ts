@@ -28,6 +28,7 @@ export class AuthenticationService {
   manufacturer: any = {};
   tokenSession:any = {};
   logoutOnExpiry:any = true;
+  refreshToken = {};
 
   constructor(
     private router: Router,
@@ -137,12 +138,11 @@ export class AuthenticationService {
       .post(this.apiUrl + '/dashboard', bodyString, options)
       .map(res => {
         let response = res.json();
-        if(response.data == 'token expired') {
+        this.sendRefreshedToken(res);
+        if(response.data == 'token malformed'){
           this.logout();
-        } 
-        else {
-          return res.json();
         }
+        return res.json();
       })
       .do(data => console.log('All: '))
       .catch((error: any) =>
@@ -322,6 +322,15 @@ export class AuthenticationService {
       return false;
     }
   };
+
+  sendRefreshedToken(data){
+    var data = data.headers.get('Authorization');
+      if(data){
+      localStorage.removeItem('token');
+      localStorage.setItem('token' , data);
+      this.tokenSession = localStorage.getItem('token');
+      }
+  }
 
 
   appendHeaders(){

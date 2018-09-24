@@ -20,12 +20,11 @@ export class CustomerService {
     return this.http.get(this.apiUrl + '/user/user/' + input.userid + '/' + input.appType, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -40,12 +39,11 @@ export class CustomerService {
     return this.http.post('http://localhost:5000/api/login', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -59,12 +57,11 @@ export class CustomerService {
     return this.http.post('http://localhost:5000/api/posts', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -79,12 +76,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/createuser', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -97,12 +93,11 @@ export class CustomerService {
     return this.http.put(this.apiUrl + '/user', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -114,12 +109,11 @@ export class CustomerService {
     return this.http.get(this.apiUrl + '/customers/' + input.userId + '/' + input.lastId + '/' + input.appType + '/' + input.userType + '/' + input.transtype, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -151,12 +145,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/searchcustomer', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -169,12 +162,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/download_customers', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -187,12 +179,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/createscheduler', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -218,12 +209,11 @@ export class CustomerService {
     return this.http.get(this.apiUrl + '/getschedules/' + input.userId + '/' + input.appType + '/' + input.userType + '/' + input.dealerid, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -237,12 +227,11 @@ export class CustomerService {
     return this.http.put(this.apiUrl + '/scheduler', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -256,12 +245,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/changeschedulestatus', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -275,12 +263,11 @@ export class CustomerService {
     return this.http.post(this.apiUrl + '/getallschedules', bodyString, options)
     .map(res => {
       let response = res.json();
-      if(response.data == 'token expired') {
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
         this.authenticationService.logout();
-      } 
-      else {
-        return res.json();
       }
+      return res.json();
     })
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

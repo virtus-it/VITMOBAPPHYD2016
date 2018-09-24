@@ -1007,7 +1007,7 @@ export class ReportsComponent implements OnInit {
     if(result.result == 'success'){
       this.searchResultsLength = result.data.length;
       this.searchRecords = true;
-      console.log(this.searchResultsLength , 'this.searchResultsLength');
+      // console.log(this.searchResultsLength , 'this.searchResultsLength');
       let customercopy = [];
       _.each(result.data, function (i, j) {
         let details: any = i;
@@ -1018,6 +1018,10 @@ export class ReportsComponent implements OnInit {
 
       });
       this.customerList = customercopy;
+    }
+    else{
+      this.customerList = [];
+      this.searchRecords = false;
     }
   }
 
