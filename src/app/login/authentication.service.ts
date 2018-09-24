@@ -52,15 +52,12 @@ export class AuthenticationService {
     this.customerCareLogin = this.customerCareLoginFunction()
     this.salesTeamLogin = this.salesTeamLoginFunction();
     this.distributorLogin = this.distributorLoginFunction();
-    
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    // headers.append('Authorization', 'Bearer ' + this.tokenSession);
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON 
     let options = new RequestOptions({ headers: headers });
-    return this.http
-      .post(this.apiUrl + '/weblogin', bodyString, options)
+    return this.http.post(this.apiUrl + '/weblogin', bodyString, options)
       .map((res: Response) => {
         this.loggedIn = true;
         return res.json();
@@ -333,11 +330,11 @@ export class AuthenticationService {
   }
 
 
-  appendHeaders(){
-    let headers = new Headers({});
-    headers.append('Authorization', 'Bearer ' + this.tokenSession);
-    return headers;
-  }
+  // appendHeaders(){
+  //   let headers = new Headers({});
+  //   headers.append('Authorization', 'Bearer ' + this.tokenSession);
+  //   return headers;
+  // }
 }
 
 // {
