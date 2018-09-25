@@ -11,15 +11,15 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'redeemDetails'}" (click)="showTabPanel('redeemDetails')">Redeem Details</button>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'" >
+      <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" *ngIf="superDealer" title="Add promo code" (click)="addPromoCode()"></i>
       </a>
 
       <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
-        <i class="fa fa-gears" aria-hidden="true"   *ngIf="superDealer"   title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
+        <i class="fa fa-gears" aria-hidden="true" *ngIf="superDealer" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
       </a>
-
-      <a class="align-self-center">
+      &nbsp; &nbsp;
+      <a class="align-self-center cursor">
         <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="height-500">
@@ -30,24 +30,24 @@
             </div>
             <div class=" " *ngIf="filterInput.searchtype == 'date'">
 
-                <div class="col-4">
-                    <md-form-field >
-                      <input mdInput [mdDatepicker]="picker" placeholder="Start Date"  [(ngModel)]="filterType.startdate" required>
-                      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-                      <md-datepicker #picker></md-datepicker>
-                    </md-form-field>
-                  </div>
+              <div class="col-4">
+                <md-form-field>
+                  <input mdInput [mdDatepicker]="picker" placeholder="Start Date" [(ngModel)]="filterType.startdate" required>
+                  <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                  <md-datepicker #picker></md-datepicker>
+                </md-form-field>
+              </div>
 
-                  <div class="col-4">        
-                    <md-form-field>
-                      <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="filterType.enddate">
-                      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-                      <md-datepicker #pickers></md-datepicker>
-                    </md-form-field>
-                  </div>
+              <div class="col-4">
+                <md-form-field>
+                  <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="filterType.enddate">
+                  <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                  <md-datepicker #pickers></md-datepicker>
+                </md-form-field>
+              </div>
 
 
-                <!-- <md-form-field class="inline">
+              <!-- <md-form-field class="inline">
                     <input mdInput [mdDatepicker]="picker" placeholder="Start Date" name="fromdate" [(ngModel)]="filterType.startdate">
                     <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                     <md-datepicker #picker></md-datepicker>
@@ -116,7 +116,7 @@
           <td class="left capitalize" width="10%" *ngIf="superDealer">
             <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
             <span class="fa fa-pencil-square-o btn-link" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
-            <span class="fa fa-trash danger pad-fa" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>
+            <span class="fa fa-trash danger pad-fa cursor" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>
           </td>
           <!-- *ngFor="let promo of allPromoCodes" -->
         </tr>
@@ -161,9 +161,9 @@
             <span>
               <i class="fa fa-pencil-square-o btn-link" title="Change redeem settings" (click)="changeSettings(settings)"></i>
             </span>
-            &nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
             <span>
-              <i class="fa fa-trash danger pad-fa" title="Delete redeem setting" (click)="deleteRedeemSetting(settings)"></i>
+              <i class="fa fa-trash danger cursor pad-fa" title="Delete redeem setting" (click)="deleteRedeemSetting(settings)"></i>
             </span>
           </td>
         </tr>

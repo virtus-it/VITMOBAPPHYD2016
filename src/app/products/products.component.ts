@@ -180,8 +180,12 @@ export class ProductsComponent implements OnInit {
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
+  
 
         //let details: any = i;
 
@@ -476,8 +480,11 @@ if(result.result == 'success'){
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
 
         //let details: any = i;
 
@@ -525,9 +532,11 @@ if(result.result == 'success'){
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
-
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
         //let details: any = i;
 
         let findproduct = _.find(this.productList, function (k, l) {

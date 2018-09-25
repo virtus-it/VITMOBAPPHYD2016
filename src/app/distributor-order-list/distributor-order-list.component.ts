@@ -18,9 +18,6 @@ export class DistributorOrderListComponent implements OnInit {
   SupplierOrderList:any = [];
   ordersClickMore = true;
   
-
-
-
   supplierOrderList(firstcall) {
     this.loaderService.display(true);
     let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "priority": "5", "usertype": "supplier", "status": "all", "lastrecordtimestamp": "15", "pagesize": "10", "supplierid": this.Detail.data[0].userid, "customerid": 0, "apptype": this.authenticationService.appType() , "lastid":0 } }
@@ -28,9 +25,9 @@ export class DistributorOrderListComponent implements OnInit {
       let lastOrder: any = _.last(this.SupplierOrderList);
       if (lastOrder) {
         input.order.lastid = lastOrder.order_id;
-      }
-      
-  }
+      }      
+
+       }
   else {
       this.SupplierOrderList = [];
       input.order.lastid = 0;
@@ -65,7 +62,17 @@ export class DistributorOrderListComponent implements OnInit {
         if (lastOrder) {
           input.order.lastid = lastOrder.order_id;
         }
-        
+
+        // var colors = _.each(this.SupplierOrderList , function(i , j){
+        //   let details: any = i;
+        //   if(details.status == 'delivered'){
+        //     details.statusColor = 'success';
+        //   }
+        // });
+
+        console.log( this.SupplierOrderList , 'safasfasf');
+
+
     }
     else {
         this.SupplierOrderList = [];

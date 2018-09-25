@@ -49,7 +49,7 @@
               <span *ngIf="message.ispublic == 0">Message</span>
             </td>
             <td class="" width="10%">
-              <span *ngIf="message.userdetails && message.userdetails.fullname">{{message.userdetails.fullname}}</span>
+              <span *ngIf="message.userdetails && message.userdetails.fullname" class="capitalize">{{message.userdetails.fullname}}</span>
               <span *ngIf="!message.userdetails"> - </span>
 
             </td>

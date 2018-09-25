@@ -667,7 +667,7 @@ ul li small{
   text-align: center !important;
 }
 .gray9{
-  color: #999 !important;
+  color: #666 !important;
 }
 .grayb{
   color: #bbb !important;
@@ -818,7 +818,7 @@ border:2px solid var( --logo-color);
    color: #d9534f;
  }
  .white{
-   color: #ddd;
+   color: #fff;
  }
  .height-95pc{
     height: 95%;
@@ -1129,3 +1129,17 @@ margin-right: 15px;
  .cursor{
    cursor: pointer;
  }
+.productName-style{
+  background: #eee;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid;
+  color: #5bc0de;
+  text-transform: capitalize;
+}
+.modal-title {
+  text-transform: uppercase !important;
+}
+.fs-20{
+  font-size: 20px; 
+}
