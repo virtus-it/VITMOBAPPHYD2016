@@ -256,7 +256,7 @@
 
 
 <!-- This is for super dealer confirmation -->
-<button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'acceptRequestFromDealer'">Cancel</button>&nbsp;
+<button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'acceptRequestFromDealer' && Details.data && Details.data.status  != 'confirm'">Cancel</button>&nbsp;
 <!-- This is for super dealer confirmation -->
 
 
