@@ -5,6 +5,9 @@ import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import * as _ from 'underscore';
 import * as moment from 'moment';
+import { Observable } from 'rxjs/Observable';
+import { FormControl, Validators } from '@angular/forms';
+
 
 
 @Component({
@@ -13,8 +16,16 @@ import * as moment from 'moment';
   styleUrls: ['./raise-request-detail-dailog.component.css']
 })
 export class RaiseRequestDetailDailogComponent implements OnInit {
+  SupplierCtrl: FormControl;
+  filteredSupplier: Observable<any[]>;
 
-  constructor(@Inject(MD_DIALOG_DATA) public Details: any, public thisDialogRef: MdDialogRef<RaiseRequestDetailDailogComponent>, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, ) { }
+  constructor(@Inject(MD_DIALOG_DATA) public Details: any, public thisDialogRef: MdDialogRef<RaiseRequestDetailDailogComponent>, private authenticationService: AuthenticationService, private distributorService: DistributorServiceService, ) {
+    this.SupplierCtrl = new FormControl();
+    this.filteredSupplier = this.SupplierCtrl.valueChanges
+      .startWith(null)
+      .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
+
+   }
 
   allProductsList = [];
   bindableProductsArray = [];
@@ -25,10 +36,14 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   headerValue:string = '';
   modifieddate:string = '';
   secondStepDetails:any = [];
+  supplierId : any = '';
+  supplierName = '';
+  amountPaid:any = 0;
+  supplierList:any = [];
+
 
 
   // raiseRequestInput = { "product": { "pid": '', "productname": "", "pType": "", "stock": "", "returnemptycans": "", "loginid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "invoicedate": this.raiseRequestDetails.requestdate, "itemcost": "", "distributorid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.superDelearId(), "categoryid": "", "apptype": this.authenticationService.appType() } };
-
 
 
   getProducts() {
@@ -79,9 +94,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
         requiredProductsArray.push(requiredProductDetails);
       }
     });
-
     let input = requiredProductsArray;
-    console.log(input, 'sdgZDgsfjhgzfj');
     this.distributorService.raiseReqByDistributor(input)
     .subscribe(
       output => this.raiseRequestByDistributorResult(output),
@@ -100,22 +113,9 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     }
   }
 
-  // {"root":{"pid":"10","pcost":"50","stockcost":"50","stockid":"85","stock":"1","returnemptycans":"11","paidamt":"500","loginid":"289","usertype":"dealer","dealerid":"289","distributerid":"16","reqid":"85","status":"confirm","apptype":"moya"}
-
-
-// "{"root":{"pid":10,"pcost":50,"stockcost":50,"stockid":85,"stock":1,"returnemptycans":11,"paidamt":"500","loginid":16,"usertype":"dealer","dealerid":289,"distributerid":16,"reqid":85,"status":"confirm","apptype":"moya"}}"
-
-
-// {"root":{"pid":10,"pcost":50,"stockcost":50,"stockid":87,"stock":9,"returnemptycans":9,"paidamt":"980","loginid":289,"usertype":"dealer","dealerid":289,"distributerid":16,"reqid":87,"status":"confirm","apptype":"moya"}}
-
-
-// {"root":{"pid":"11","pcost":"50","stockcost":"50","stockid":"65","stock":"7","returnemptycans":"7","paidamt":"350","loginid":"289","usertype":"dealer","dealerid":"289","distributerid":"48","reqid":"65","status":"confirm","apptype":"moya"}}
-
-// {"root":{"pid":"10","pcost":"50","stockcost":"50","stockid":"88","stock":"1","returnemptycans":"1","paidamt":"5066","loginid":"16","userid":"16","usertype":"dealer","dealerid":"289","distributerid":"16","reqid":"88","status":"confirm","apptype":"moya"}
-
 
   requestComfirmByDistributor(){
-    let input = {"root":{"pid": this.Details.products[0].productid ,"pcost": this.Details.products[0].pcost ,"stockcost": this.Details.products[0].buycost,"stockid": this.Details.products[0].id ,"stock": this.Details.products[0].stock,"returnemptycans": this.Details.products[0].returnemptycans ,"paidamt": this.Details.products[0].paidamt ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.superDelearId() ,"distributerid": this.authenticationService.loggedInUserId() ,"reqid": this.Details.products[0].reqid ,"status":"confirm","apptype": this.authenticationService.appType() }};
+    let input = {"root":{"pid": this.Details.products[0].productid ,"pcost": this.Details.products[0].pcost ,"stockcost": this.Details.products[0].buycost,"stockid": this.Details.products[0].id ,"stock": this.Details.products[0].stock,"returnemptycans": this.Details.products[0].returnemptycans ,"paidamt": this.Details.products[0].paidamt ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() ,"distributerid": this.authenticationService.loggedInUserId() ,"reqid": this.Details.products[0].reqid ,"status":"confirm","apptype": this.authenticationService.appType() }};
     this.distributorService.confirmRequestByDistributor(input)
     .subscribe(
       output => this.requestComfirmByDistributorResult(output),
@@ -128,6 +128,95 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     }
   }
 
+
+  confirmRequestBySuperDealer(){
+    let loginid = this.authenticationService.loggedInUserId();
+    let usertype = this.authenticationService.userType();
+    let dealerid = this.authenticationService.loggedInUserId();
+    let apptype = this.authenticationService.appType();
+    let amount = this.amountPaid;
+    let distId = this.Details.data.distributor.userid;
+    let supplierId = this.supplierId;
+    let supplierName = this.supplierName;
+    let requiredInput  = [];
+    _.each(this.Details.data.products , function (i, j) {
+      let details: any = i;
+      if (details.stock && details.returnemptycans && details.stock > 0 ) {
+        let requiredProductDetails = {"product":{"pid": '' ,"pcost": '' ,"buycost": '' ,"stockid": '' ,"stock": '' ,"returnemptycans": '' ,"paidamt": '' ,"loginid": '' ,"usertype":'',"distributerid": '' ,"reqid": '',"status":"reqconfirm","apptype": '' ,"dealerid": '' ,"supplierid": '',"suppliername": '' }};
+        requiredProductDetails.product.stockid = details.id;
+        requiredProductDetails.product.pid = details.productid;
+        requiredProductDetails.product.buycost = details.buycost;
+        requiredProductDetails.product.pcost = details.pcost;
+        requiredProductDetails.product.stock = details.stock;
+        requiredProductDetails.product.returnemptycans = details.returnemptycans;
+        requiredProductDetails.product.paidamt = amount;
+        requiredProductDetails.product.apptype = apptype;
+        requiredProductDetails.product.dealerid = dealerid;
+        requiredProductDetails.product.loginid = loginid;
+        requiredProductDetails.product.usertype = usertype;
+        requiredProductDetails.product.distributerid = distId;
+        requiredProductDetails.product.reqid = details.reqid;
+        requiredProductDetails.product.supplierid = supplierId;
+        requiredProductDetails.product.suppliername = supplierName;
+        requiredInput.push(requiredProductDetails);
+      }
+    });
+    let input = requiredInput;
+    console.log(input);
+    this.distributorService.confirmStockRequestByDealer(input)
+    .subscribe(
+      output => this.confirmRequestBySuperDealerResult(output),
+      error => {
+      });
+  }
+  confirmRequestBySuperDealerResult(result){
+    if(result && result.result == 'success'){
+      this.thisDialogRef.close('success');
+    }
+  }
+
+
+  findSupplier(name: string) {
+    //console.log(name);
+    let finalsupplier = this.supplierList.filter(dist =>
+      dist.fullName.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    //console.log(finalsupplier);
+    if (finalsupplier && finalsupplier.length > 0) {
+      let findSupplier: any = {};
+
+      findSupplier = _.find(finalsupplier, function (k, l) {
+        let supplierDetails: any = k;
+        return supplierDetails.fullName == name;
+      });
+
+      if (findSupplier) {
+        this.supplierId = findSupplier.userid;
+        this.supplierName= findSupplier.firstname;
+      }
+
+
+    }
+
+    return finalsupplier;
+  }
+
+  confirmRequestBySuperDealerOnDistributor(){
+    let input = {"root":{"pid": this.Details.data.products[0].productid ,"pcost": this.Details.data.products[0].pcost ,"stockcost": this.Details.data.products[0].buycost,"stockid": this.Details.data.products[0].id ,"stock": this.Details.data.products[0].stock,"returnemptycans": this.Details.data.products[0].returnemptycans ,"paidamt": this.Details.data.products[0].paidamt ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() ,"distributerid": this.Details.data.distributor.userid ,"reqid": this.Details.data.products[0].reqid ,"status":"confirm","apptype": this.authenticationService.appType() }};
+    
+    this.distributorService.confirmRequestByDistributor(input)
+    .subscribe(
+      output => this.confirmRequestBySuperDealerOnDistributorResult(output),
+      error => {
+      });
+  }
+  confirmRequestBySuperDealerOnDistributorResult(result){
+    if(result.result == 'success'){
+      this.thisDialogRef.close('success');
+    }
+
+
+  }
+
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
@@ -137,6 +226,15 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     if (this.Details.type == 'newRaiseRequest') {
       this.getProducts();
       this.headerValue = 'Raise Request'
+    }
+    else if(this.Details.type == 'acceptRequestFromDealer'){
+      this.headerValue = 'Confirm Request';
+      this.getProducts();
+      this.modifieddate = this.Details.data.modifieddate;
+      let date = this.modifieddate.split(' ');
+      this.modifieddate = date[0];
+      this.supplierList = this.authenticationService.getSuppliers();
+      this.amountPaid = (this.Details.data.products[0].stock * this.Details.data.products[0].pcost)
     }
     else{
       this.headerValue = 'View Details';
@@ -148,3 +246,19 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// let requiredProductDetails = {"product":{"pid": this.Details.data.products[0].productid ,"pcost": this.Details.data.products[0].pcost ,"buycost": this.Details.data.products[0].buycost ,"stockid": this.Details.data.products[0].id ,"stock": this.Details.data.products[0].stock ,"returnemptycans": this.Details.data.products[0].returnemptycans ,"paidamt": this.amountPaid ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"distributerid": this.Details.data.distributor.userid ,"reqid": this.Details.data.products[0].reqid ,"status":"reqconfirm","apptype": this.authenticationService.appType() ,"dealerid": this.authenticationService.loggedInUserId() ,"supplierid": this.supplierId,"suppliername": this.supplierName }};

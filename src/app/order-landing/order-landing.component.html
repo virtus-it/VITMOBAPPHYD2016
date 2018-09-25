@@ -49,7 +49,7 @@
               </a>
 
 
-              <a>
+              <a *ngIf="salesTeamLogin">
                   <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
               </a>
 

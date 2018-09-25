@@ -119,7 +119,7 @@
 </div>
 
 <!-- Final View No edits after confirmation by distributor-->
-  <div class="container-fluid brd-bottom" *ngIf="Details.status == 'confirm'">
+<div class="container-fluid brd-bottom" *ngIf="Details.status == 'confirm'">
   <div class="row">
     <span class="">
       <b>Request Date : {{modifieddate}}</b>
@@ -141,16 +141,16 @@
         <tr *ngFor="let req of Details.products">
           <td width="25%">{{req.category}} | {{req.ptype}} | {{req.brandname}}</td>
           <td width="25%">
-            <input type="text" class="" [(ngModel)]="req.stock">
+            <input type="text" class="" [(ngModel)]="req.stock" disabled>
           </td>
           <td width="25%">
-            <input type="text" class="" [(ngModel)]="req.returnemptycans">
+            <input type="text" class="" [(ngModel)]="req.returnemptycans" disabled>
           </td>
           <td width="25%">
-            <input type="text" class="" [(ngModel)]="req.buycost">
+            <input type="text" class="" [(ngModel)]="req.buycost" disabled>
           </td>
           <td width="25%">
-            <input type="text" class="" [(ngModel)]="req.paidamt">
+            <input type="text" class="" [(ngModel)]="req.paidamt" disabled>
           </td>
         </tr>
       </tbody>
@@ -162,15 +162,74 @@
 
 
 
+<!-- This is for super dealer confirmation -->
+
+<div class="container-fluid brd-bottom" *ngIf="Details.type  == 'acceptRequestFromDealer'">
+  <div class="row">
+    <span class="">
+      <b>Request Date : {{modifieddate}}</b> <br>
+      <b> Request Date : {{Details.data.reqid}}</b>
+    </span>
+  </div>
+  <div class="row" *ngIf="Details.data.status == 'stockrequested'">
+
+      <md-form-field class="example-full-width">
+          <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
+              <span>{{ supplier.firstname }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+
+
+  </div>
+  <div class="row">
+    <table>
+      <thead>
+        <tr>
+          <th width="25%">Product Name</th>
+          <th width="25%">Quantity</th>
+          <th width="25%">Empty Cans</th>
+          <th width="25%">Cost per Can</th>
+          <th width="25%">Paid Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let req of Details.data.products">
+          <td width="25%">{{req.category}} | {{req.ptype}} | {{req.brandname}}</td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.stock">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.returnemptycans">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="req.buycost">
+          </td>
+          <td width="25%">
+            <input type="text" class="" [(ngModel)]="amountPaid">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<!-- This is for super dealer confirmation -->
+
+
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <!-- Step 1 by dist -->
     <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()" *ngIf="Details.type == 'newRaiseRequest'">Raise
       Request</button> &nbsp;
     <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'newRaiseRequest'">Cancel</button>&nbsp;
-     <!-- Step 1 by dist -->
+    <!-- Step 1 by dist -->
 
-     <!-- Only viewing purpose for distributor -->
+    <!-- Only viewing purpose for distributor -->
     <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.status == 'stockrequested'">OK</button>&nbsp;
     <!-- Only viewing purpose for distributor -->
 
@@ -180,9 +239,39 @@
     <!-- This is the view that distributor gets after super dealer confirms -->
 
 
-<!-- Final View No edits after confirmation by distributor-->
+    <!-- Final View No edits after confirmation by distributor-->
     <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.status == 'confirm'">OK</button>&nbsp;
     <!-- Final View No edits after confirmation by distributor-->
+
+
+
+    
+<!-- This is for super dealer confirmation -->
+<button type="submit" class="btn" md-raised-button (click)="confirmRequestBySuperDealer()" *ngIf="Details.type == 'acceptRequestFromDealer' && Details.data && Details.data.status == 'stockrequested'">CONFIRM</button>&nbsp;
+<!-- This is for super dealer confirmation -->
+
+<!-- Accept confirmation of distributor behalf by super dealer-->
+<button type="submit" class="btn" md-raised-button (click)="confirmRequestBySuperDealerOnDistributor()" *ngIf="Details.type == 'acceptRequestFromDealer' && Details.data && Details.data.status == 'reqconfirm'">CONFIRM</button>&nbsp;
+<!-- Accept confirmation of distributor behalf by super dealer-->
+
+
+<!-- This is for super dealer confirmation -->
+<button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'acceptRequestFromDealer'">Cancel</button>&nbsp;
+<!-- This is for super dealer confirmation -->
+
+
+
+<!-- Another confirm button -->
+<button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf=" Details.data && Details.data.status  == 'confirm'">OK</button>&nbsp;
+<!-- Another confirm button -->
+
+
+
+
+
+
+
+
 
 
   </md-dialog-actions>

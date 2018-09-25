@@ -39,12 +39,14 @@ export class AddStockDistributorComponent implements OnInit {
       let inputData = [];
       _.each(result.data, function (i, j) {
         let detail: any = i;
+        detail.amt = '';
         let inputFormatcopy = JSON.parse(JSON.stringify(inputFormat));
         inputFormatcopy.product.productid = detail.productid;
         inputFormatcopy.product.producttype = detail.ptype;
         inputFormatcopy.product.product_cost = detail.pcost;
         inputFormatcopy.product.productname = detail.brandname;
         inputFormatcopy.product.category = detail.category;
+        inputFormatcopy.product.amt = detail.amt;
         inputData.push(inputFormatcopy);
 
       });
@@ -63,7 +65,7 @@ export class AddStockDistributorComponent implements OnInit {
       }
     
     });
-    //console.log(input);
+    console.log(input);
     this.distributorService.setStockdistributor(input)
     .subscribe(
     output => this.setStockForDistributorResult(output),

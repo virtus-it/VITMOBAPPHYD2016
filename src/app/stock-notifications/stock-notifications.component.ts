@@ -3,6 +3,8 @@ import { AuthenticationService } from '../login/authentication.service';
 import { ReportsService } from '../reports/reports.service';
 import * as _ from 'underscore';
 import {AgmCoreModule,GoogleMapsAPIWrapper,LatLngLiteral,MapsAPILoader} from '@agm/core';
+import { MdDialog } from '@angular/material';
+import {RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
 declare var google: any;
 
 interface marker {
@@ -23,7 +25,7 @@ export class StockNotificationsComponent implements OnInit {
   lng: number = 78.4867;
   zoom: number = 12;
 
-  constructor(private authenticationService: AuthenticationService , private reportsService: ReportsService, public gMaps: GoogleMapsAPIWrapper, ) { }
+  constructor(private authenticationService: AuthenticationService , private reportsService: ReportsService, public gMaps: GoogleMapsAPIWrapper, public dialog: MdDialog  ) { }
 
 
   allStockRequests:any = [];
@@ -143,14 +145,18 @@ export class StockNotificationsComponent implements OnInit {
   }
 
 
-  viewDetails(){
-  //   let dialogRef = this.dialog.open(MapDialogComponent, {
-  //     width: '90%',
-  //      data: ''
-  //  });
-  //  dialogRef.afterClosed().subscribe(result => {
-  //      //console.log(`Dialog closed: ${result}`);
-  //  });
+  viewDetails(data){
+    let formattedData = {type : 'acceptRequestFromDealer' , data : data}
+    let dialogRefAddSupplier = this.dialog.open(RaiseRequestDetailDailogComponent, {
+      width: '70%',
+      data: formattedData
+  });
+  dialogRefAddSupplier.afterClosed().subscribe(result => {
+      if(result == 'success'){
+        this.getStockRequests();
+      }
+  });
+
   }
 
   ngOnInit() {
