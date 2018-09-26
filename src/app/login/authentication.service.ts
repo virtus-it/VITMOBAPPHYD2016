@@ -184,6 +184,13 @@ export class AuthenticationService {
     }
   };
 
+
+  numberEvent(e:any){
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
+
   //     salesFunction = function () {
   //         try {
   //             if(this.currentUser){
