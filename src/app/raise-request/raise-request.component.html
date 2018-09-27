@@ -15,12 +15,12 @@
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-                <th width="17%">Req No.</th>
-                <th width="17%">Invoice Date</th>
-                <th width="17%">Created Date</th>
-                <th width="17%">Updated Date</th>
-                <th width="17%">Confirmed Date</th>
-                <th width="17%">Action</th>
+                <th width="20%">Req No.</th>
+                <!-- <th width="17%">Invoice Date</th> -->
+                <th width="20%">Created Date</th>
+                <th width="20%">Updated Date</th>
+                <th width="20%">Confirmed Date</th>
+                <th width="20%">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -29,10 +29,10 @@
                     <span *ngIf="raiserequest.reqid">{{raiserequest.reqid}}</span>
                     <span *ngIf="!raiserequest.reqid"> - </span>
                   </td>
-                  <td>
+                  <!-- <td>
                     <span *ngIf="raiserequest.modifieddate">{{raiserequest.modifieddate | utcDate}}</span>
                     <span *ngIf="!raiserequest.modifieddate"> - </span>
-                  </td>
+                  </td> -->
                   <td>
                     <span *ngIf="raiserequest.reqdate">{{raiserequest.reqdate | utcDate}}</span>
                     <span *ngIf="!raiserequest.reqdate"> pending </span>
