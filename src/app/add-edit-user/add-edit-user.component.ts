@@ -1219,7 +1219,19 @@ addSalesteamResult(result) {
 
   }
 
+  numberEvent(e:any){
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
 
+  }
+
+  emailEvent(e:any){
+    if (e.keyCode == 32) {
+      e.preventDefault();
+    }
+
+  }
 
 
 

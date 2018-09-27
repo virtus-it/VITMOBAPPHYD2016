@@ -32,7 +32,7 @@
 
       <div class="col-4">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value">
+          <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value" (keypress)="numberEvent($event)" maxlength="3">
         </md-form-field>
       </div>
 
