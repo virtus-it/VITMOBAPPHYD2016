@@ -1,16 +1,17 @@
 ﻿<div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-2 align-self-center">
+    <div class="col-3 align-self-center">
       <h4>
-        <i class="fa fa-sitemap"></i> Distributor</h4>
+        <i class="fa fa-sitemap"></i> Distributors  <span cass="" *ngIf="distributorsCount != 0">
+          (<span class="warning">{{this.distributorsCount}}</span>) </span></h4>
       <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
     </div>
 
-    <div class="col-2 align-self-center">
+    <!-- <div class="col-2 align-self-center">
       <h5 cass="" *ngIf="distributorsCount != 0">Count :
         <span class="warning">{{this.distributorsCount}}</span>
       </h5>
-    </div>
+    </div> -->
 
     <div class="col align-self-center">
       <div class="row justify-content-end">
@@ -429,14 +430,12 @@
                   <div class="dropdown-content" style="right:0;">
 
                     <div class="row">
-
                       <label class="col-md-6" (click)="addstockDialog(dist)">
                         <i class="fa fa-cart-arrow-down"></i> Add Stock </label>
 
                       <label class="col-md-6" (click)="stockHistory(dist)">
                         <i class="fa fa-file-text"> </i> Stock History </label>
                     </div>
-
 
                     <div class="row">
                       <label class="col-md-6" (click)="distributorstockStatus(dist)">
