@@ -26,7 +26,8 @@
         <thead>
           <tr>
             <th width="10%">Req No.</th>
-            <th width="17%">Invoice Date</th>
+            <th width="10%">Raised By</th>
+            <!-- <th width="15%">Invoice Date</th> -->
             <th width="17%">Created Date</th>
             <th width="17%">Updated Date</th>
             <th width="17%">Confirmed Date</th>
@@ -40,9 +41,13 @@
               <span *ngIf="!stockrequest.reqid"> - </span>
             </td>
             <td>
+              <span *ngIf="stockrequest.distributor.firstname">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
+              <span *ngIf="!stockrequest.distributor.firstname"> - </span>
+            </td>
+            <!-- <td>
               <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate | utcDate}}</span>
               <span *ngIf="!stockrequest.modifieddate"> - </span>
-            </td>
+            </td> -->
             <td>
               <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
               <span *ngIf="!stockrequest.reqdate"> pending </span>

@@ -20,7 +20,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
     @Inject(MD_DIALOG_DATA) public Details: any,
     public dialog: MdDialog,
     private loaderService: LoaderService
-  ) {}
+  ) { }
 
   emailFormControl = new FormControl('', [Validators.required]);
   mobileFormControl = new FormControl('', [Validators.required]);
@@ -80,15 +80,15 @@ export class AddEditCustomerDailogComponent implements OnInit {
         };
       }
       this.customerService.getCustomerById(input)
-      .subscribe(
-        output => this.getCustomerDetailsResult(output),
-        error => {
-          //console.log("error in distrbutors");
-          this.loaderService.display(false);
-        }
-      );
+        .subscribe(
+          output => this.getCustomerDetailsResult(output),
+          error => {
+            //console.log("error in distrbutors");
+            this.loaderService.display(false);
+          }
+        );
     }
-    else{
+    else {
       this.loaderService.display(false);
     }
   }
@@ -134,7 +134,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
         this.customerInput.User.paymenttype =
           result.data.user.payment.paymenttype;
       }
-      else{
+      else {
         this.loaderService.display(false);
       }
     }
@@ -188,13 +188,13 @@ export class AddEditCustomerDailogComponent implements OnInit {
       input.User.orderid = this.Details.order_id;
       console.log(input);
       this.customerService.updateCustomer(input)
-      .subscribe(
-        output => this.updateCustomerResult(output),
-        error => {
-          //console.log("error in distrbutors");
-          this.loaderService.display(false);
-        }
-      );
+        .subscribe(
+          output => this.updateCustomerResult(output),
+          error => {
+            //console.log("error in distrbutors");
+            this.loaderService.display(false);
+          }
+        );
     }
   }
   updateCustomerResult(result) {
@@ -210,12 +210,12 @@ export class AddEditCustomerDailogComponent implements OnInit {
     this.thisDialogRef.close('cancel');
   }
 
-  numberEvent(e:any){
+  numberEvent(e: any) {
     // console.log(e);
-        if(isNaN(e.key) || e.key == ''){
-            e.preventDefault();
-        }
-}
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
 
 
 
@@ -291,7 +291,12 @@ export class AddEditCustomerDailogComponent implements OnInit {
       return true;
     }
   }
+
+
+
 }
+
+
 // ngAfterViewInit() {
 //   this.cdr.detectChanges();
 // }

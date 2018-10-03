@@ -5,6 +5,12 @@
       <i class="fa fa-check-square-o" aria-hidden="true"></i> {{headerValue}}</strong>
   </div>
 
+
+
+    <!-- Dist name -->
+
+    <b *ngIf="Details && Details.type == 'acceptRequestFromDealer' && Details.data.distributor">DISTRIBUTOR NAME :  {{Details.data.distributor.firstname}} {{Details.data.distributor.lastname}}</b>
+
   <!-- Raise Request -->
 
   <div class="col-md-1 col-sm-1 right">

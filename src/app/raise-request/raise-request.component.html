@@ -18,7 +18,7 @@
         <thead>
           <tr>
             <th>Request No.</th>
-            <th>Invoice Date</th>
+            <!-- <th>Invoice Date</th> -->
             <th>Created Date</th>
             <th>Updated Date</th>
             <th>Confirmed Date</th>
@@ -31,10 +31,10 @@
               <span *ngIf="raiserequest.reqid">{{raiserequest.reqid}}</span>
               <span *ngIf="!raiserequest.reqid"> - </span>
             </td>
-            <td>
+            <!-- <td>
               <span *ngIf="raiserequest.modifieddate">{{raiserequest.modifieddate | utcDate}}</span>
               <span *ngIf="!raiserequest.modifieddate"> - </span>
-            </td>
+            </td> -->
             <td>
               <span *ngIf="raiserequest.reqdate">{{raiserequest.reqdate | utcDate}}</span>
               <span *ngIf="!raiserequest.reqdate" class="danger blink-text"> Pending </span>

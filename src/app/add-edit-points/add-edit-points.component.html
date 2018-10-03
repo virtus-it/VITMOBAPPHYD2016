@@ -15,12 +15,12 @@
     <div class="row">
         <div class="col-4">
             <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Feature" name="feature" [(ngModel)]="addpointsInput.feature">
+          <input class="form-control" mdInput placeholder="Feature" name="feature" [(ngModel)]="addpointsInput.feature" maxlength="50">
         </md-form-field>
       </div>
       <div class="col-4">
           <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Points" name="points" [(ngModel)]="addpointsInput.points">
+          <input class="form-control" mdInput placeholder="Points" name="points" [(ngModel)]="addpointsInput.points" (keypress)="numberEvent($event)" maxlength="5">
         </md-form-field>
       </div>
       <div class="col-4">
@@ -34,7 +34,7 @@
     <div class="row">
       <div class="col">
           <md-form-field class="wd-100pc">
-              <textarea class="form-control" mdInput placeholder="Description" name="description" [(ngModel)]="addpointsInput.description"></textarea>
+              <textarea class="form-control" mdInput placeholder="Description" name="description" [(ngModel)]="addpointsInput.description" maxlength="150"></textarea>
             </md-form-field>
       </div>
     </div>

@@ -116,6 +116,12 @@ export class AddEditPointsComponent implements OnInit {
   }
   }
 
+  numberEvent(e:any){
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
+
   ngOnInit() {
     console.log(this.Details);
     this.getPointsDetails();
