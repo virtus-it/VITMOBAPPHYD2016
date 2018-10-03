@@ -37,15 +37,15 @@
             </td> -->
             <td>
               <span *ngIf="raiserequest.reqdate">{{raiserequest.reqdate | utcDate}}</span>
-              <span *ngIf="!raiserequest.reqdate" class="danger blink-text"> Pending </span>
+              <span *ngIf="!raiserequest.reqdate" class="danger"> Pending </span>
             </td>
             <td>
               <span *ngIf="raiserequest.dealer_confirmdate">{{raiserequest.dealer_confirmdate | utcDate}}</span>
-              <span *ngIf="!raiserequest.dealer_confirmdate" class="danger blink-text"> Pending </span>
+              <span *ngIf="!raiserequest.dealer_confirmdate" class="danger"> Pending </span>
             </td>
             <td>
               <span *ngIf="raiserequest.reqconfirmdate">{{raiserequest.reqconfirmdate | utcDate}}</span>
-              <span *ngIf="!raiserequest.reqconfirmdate" class="danger blink-text"> Pending </span>
+              <span *ngIf="!raiserequest.reqconfirmdate" class="danger"> Pending </span>
             </td>
             <td>
               <span class="logo-color cursor" (click)="viewDetails(raiserequest)">View Details</span>

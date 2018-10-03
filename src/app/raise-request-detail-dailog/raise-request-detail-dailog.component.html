@@ -7,9 +7,9 @@
 
 
 
-    <!-- Dist name -->
+  <!-- Dist name -->
 
-    <b *ngIf="Details && Details.type == 'acceptRequestFromDealer' && Details.data.distributor">DISTRIBUTOR NAME :  {{Details.data.distributor.firstname}} {{Details.data.distributor.lastname}}</b>
+  <b *ngIf="Details && Details.type == 'acceptRequestFromDealer' && Details.data.distributor">DISTRIBUTOR NAME : {{Details.data.distributor.firstname}} {{Details.data.distributor.lastname}}</b>
 
   <!-- Raise Request -->
 
@@ -66,8 +66,8 @@
 <!-- Only viewing purpose for distributor -->
 <div class="container-fluid   pd-15x25 brd-bottom" *ngIf="Details.status == 'stockrequested'">
   <div class="row form-group">
-    <div class="col">
-      <b>Request Date:</b> {{modifieddate}}
+      <div class="col form-group">
+          <b>Request Date:</b> {{modifieddate}}
     </div>
   </div>
 
@@ -103,8 +103,8 @@
 <!-- This is the view that distributor gets after super dealer confirms -->
 <div class="container-fluid   pd-15x25 brd-bottom" *ngIf="Details.status == 'reqconfirm'">
   <div class="row">
-    <span class="col">
-      <b>Request Date : {{modifieddate}}</b>
+      <span class="col form-group">
+          <b>Request Date:</b> {{modifieddate}}
     </span>
   </div>
 
@@ -153,8 +153,8 @@
 <!-- Final View No edits after confirmation by distributor-->
 <div class="container-fluid   pd-15x25 brd-bottom" *ngIf="Details.status == 'confirm'">
   <div class="row">
-    <span class="col">
-      <b>Request Date : {{modifieddate}}</b>
+    <span class="col form-group">
+      <b>Request Date: </b> {{modifieddate}}
     </span>
   </div>
 
@@ -162,31 +162,31 @@
     <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
-          <th width="25%">Product Name</th>
-          <th width="25%">Quantity</th>
-          <th width="25%">Empty Cans</th>
-          <th width="25%">Cost per Can</th>
-          <th width="25%">Paid Amount</th>
+          <th width="35%">Product Name</th>
+          <th width="10%">Quantity</th>
+          <th width="15%">Empty Cans</th>
+          <th width="20%">Cost per Can</th>
+          <th width="20%">Paid Amount</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let req of Details.products">
-          <td width="25%">
+          <td width="35%">
             <span class="capitalize">{{req.category}} | {{req.ptype}} | {{req.brandname}}</span>
           </td>
-          <td width="25%">
+          <td width="10%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter stock" [(ngModel)]="req.stock" disabled> </md-form-field>
           </td>
-          <td width="25%">
+          <td width="15%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter returnemptycans" [(ngModel)]="req.returnemptycans" disabled> </md-form-field>
           </td>
-          <td width="25%">
+          <td width="20%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter buycost" [(ngModel)]="req.buycost" disabled> </md-form-field>
           </td>
-          <td width="25%">
+          <td width="20%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter paidamt" [(ngModel)]="req.paidamt" disabled>
             </md-form-field>
@@ -272,8 +272,8 @@
   <md-dialog-actions align="end">
     <!-- Step 1 by dist -->
     <button type="submit" class="btn-primary" md-raised-button (click)="raiseRequestByDistributor()" *ngIf="Details.type == 'newRaiseRequest'">Raise Request
-    </button> 
-    
+    </button>
+
     <button type="submit" class=" mgright-5" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'newRaiseRequest'">Cancel</button>
     <!-- Step 1 by dist -->
 
