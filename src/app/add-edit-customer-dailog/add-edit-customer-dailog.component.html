@@ -285,6 +285,9 @@
   </div>
 
 </md-dialog-content>
+
+<small class="danger" *ngIf="duplicateUser">User Already Exists!!</small>
+
 <div class="row float-right pdright-30">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>

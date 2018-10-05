@@ -19,7 +19,7 @@
 
 <!-- Step 1 by distributor-->
 
-<div class="container-fluid brd-bottom" *ngIf="Details.type == 'newRaiseRequest'">
+<div class="container-fluid brd-bottom" *ngIf="Details.type == 'newRaiseRequest' || Details.type == 'raiseRequestBySuperDealer'">
   <div class="row">
     <md-form-field class="inline">
       <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="date" [(ngModel)]="invoiceDate">
@@ -230,9 +230,9 @@
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <!-- Step 1 by dist -->
-    <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()" *ngIf="Details.type == 'newRaiseRequest'">Raise
+    <button type="submit" class="btn-primary" (click)="raiseRequestByDistributor()" *ngIf="Details.type == 'newRaiseRequest' || Details.type == 'raiseRequestBySuperDealer'">Raise
       Request</button> &nbsp;
-    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'newRaiseRequest'">Cancel</button>&nbsp;
+    <button type="submit" class="btn" md-raised-button (click)="onCloseCancel()" *ngIf="Details.type == 'newRaiseRequest' ||  Details.type == 'raiseRequestBySuperDealer'">Cancel</button>&nbsp;
     <!-- Step 1 by dist -->
 
     <!-- Only viewing purpose for distributor -->

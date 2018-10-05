@@ -34,16 +34,16 @@
                     <span *ngIf="!raiserequest.modifieddate"> - </span>
                   </td> -->
                   <td>
-                    <span *ngIf="raiserequest.reqdate">{{raiserequest.reqdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.reqdate"> pending </span>
+                    <span *ngIf="raiserequest.products[0].reqdate">{{raiserequest.products[0].reqdate | utcDate}}</span>
+                    <span *ngIf="!raiserequest.products[0].reqdate"> pending </span>
                   </td>
                   <td>
-                    <span *ngIf="raiserequest.dealer_confirmdate">{{raiserequest.dealer_confirmdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.dealer_confirmdate"> pending </span>
+                    <span *ngIf="raiserequest.products[0].dealer_confirmdate">{{raiserequest.products[0].dealer_confirmdate | utcDate}}</span>
+                    <span *ngIf="!raiserequest.products[0].dealer_confirmdate"> pending </span>
                   </td>
                   <td>
-                    <span *ngIf="raiserequest.reqconfirmdate">{{raiserequest.reqconfirmdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.reqconfirmdate"> pending </span>
+                    <span *ngIf="raiserequest.products[0].reqconfirmdate">{{raiserequest.products[0].reqconfirmdate | utcDate}}</span>
+                    <span *ngIf="!raiserequest.products[0].reqconfirmdate"> pending </span>
                   </td>
       
                   <td>

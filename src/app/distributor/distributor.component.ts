@@ -28,6 +28,7 @@ import * as _ from 'underscore';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { LoaderService } from '../login/loader.service';
 import { ReportsService } from '../reports/reports.service';
+import {RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
 
 @Component({
 
@@ -779,6 +780,20 @@ export class DistributorComponent implements OnInit {
             }
         }
         return finalSalesTeam;
+    }
+
+    raiseRequestBySuperDealer(data){
+        let formattedData = {type : 'raiseRequestBySuperDealer' , data: data};
+        let dialogRefAddProduct = this.dialog.open(RaiseRequestDetailDailogComponent, {
+            width: '70%',
+            data: formattedData
+        });
+        dialogRefAddProduct.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if (result == 'success') {
+                this.getDistributors(true);
+            }
+        });
     }
 
 

@@ -58,6 +58,7 @@ export class AddEditCustomerDailogComponent implements OnInit {
   refresh: any = '';
   messageError: any = '';
   dup: any = false;
+  duplicateUser :boolean = false;
 
   getCustomerDetails() {
     //console.log(this.Details);
@@ -172,12 +173,15 @@ export class AddEditCustomerDailogComponent implements OnInit {
   createCustomerResult(result) {
     //console.log(result);
     this.loaderService.display(false);
-    if (result.result == 'success') {
-      this.thisDialogRef.close('success');
-      this.loaderService.display(false);
-      this.refresh = 'success';
-      this.dup = false;
+    if(result && result.data && result.data.code == '404'){
+      this.duplicateUser = true;
     }
+    else if (result.result == 'success' && result.data.message == 'user sucessfully created.') {
+        this.thisDialogRef.close('success');
+        this.loaderService.display(false);
+        this.refresh = 'success';
+        this.dup = false;
+      }
   }
   updateCustomer() {
     if (this.validation1() && this.validation2() && this.validation3()) {

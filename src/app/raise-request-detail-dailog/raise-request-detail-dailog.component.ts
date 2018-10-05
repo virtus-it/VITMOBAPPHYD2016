@@ -72,6 +72,10 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     invoiceDate = moment(this.invoiceDate).format('DD-MM-YYYY');
     // console.log(invoiceDate , 'invoiceDateinvoiceDateinvoiceDateinvoiceDateinvoiceDate');
     let dealerid = this.authenticationService.superDelearId();
+    if(this.Details.type == 'raiseRequestBySuperDealer'){
+      loginid = this.Details.data.userid;
+      dealerid = this.authenticationService.superDealerLoginId();
+    }
     let apptype = this.authenticationService.appType();
     let requiredProductsArray = [];
     _.each(this.allProductsList, function (i, j) {
@@ -235,6 +239,10 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
       this.modifieddate = date[0];
       this.supplierList = this.authenticationService.getSuppliers();
       this.amountPaid = (this.Details.data.products[0].stock * this.Details.data.products[0].pcost)
+    }
+    else if(this.Details.type == 'raiseRequestBySuperDealer'){
+      this.headerValue = 'Raise Request';
+      this.getProducts();
     }
     else{
       this.headerValue = 'View Details';

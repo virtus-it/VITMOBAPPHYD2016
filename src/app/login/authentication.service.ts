@@ -184,6 +184,18 @@ export class AuthenticationService {
     }
   };
 
+  superDealerLoginId = function(){
+    try {
+      if (this.CurrentSession.userid && this.CurrentSession.issuperdealer == 'true') {
+        return JSON.parse(this.CurrentSession.userid);
+      } else {
+        return 0;
+      }
+    } catch (ex) {
+      return 0;
+    }
+  };
+
 
   numberEvent(e:any){
     if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
