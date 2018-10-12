@@ -22,6 +22,7 @@
 	  <md-dialog-content layout="column">
 		<form class="example-form">
 		  <div class="container-fluid pd-15x25 brd-bottom">
+				<!-- <h4>{{details.firstname}} - {{etails.mobileno}}</h4> -->
 				<div class="form-group">
 						<b class="">Select Availability : &nbsp;</b>
 						<label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
@@ -36,20 +37,16 @@
 						</label>
 					  </div>
 	  
-
-	  
 			</div>
-			
-
-			<div>
-					
+					<div>
+	
 			</div>
 		</form>
+
 	  </md-dialog-content>
 	  <div class="row float-right pdright-30 mgbottom-20 ">
 		<md-dialog-actions align="end">
-			
-		  <button md-raised-button (click)="setAvailability()" >SET</button>
+		  <button md-raised-button class="btn-primary" (click)="setAvailability()" >SET</button>
 		  <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
 		</md-dialog-actions>
 	  </div>

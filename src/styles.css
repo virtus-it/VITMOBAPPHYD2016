@@ -1130,11 +1130,11 @@ margin-right: 15px;
    cursor: pointer;
  }
 .productName-style{
-  background: #eee;
+  background: #fdf8f3;
   padding: 10px;
   text-align: center;
-  border: 1px solid;
-  color: #5bc0de;
+  border: 1px solid var(--warning);
+  color: var(--warning);
   text-transform: capitalize;
 }
 .modal-title {
@@ -1143,3 +1143,18 @@ margin-right: 15px;
 .fs-20{
   font-size: 20px; 
 }
+.mgleft-ng10{
+  margin-left: -10px;
+}
+.mgleftright-20{
+  margin: 0px 20px;
+}
+.pdtopbottom-5{
+  padding: 5px 0px;
+}
+.blink-text {
+  animation: blink-text 0.6s linear infinite;
+ }
+@keyframes blink-text {  
+  50% { opacity: 0; }
+ }

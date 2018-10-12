@@ -25,50 +25,51 @@
         <!-- for complete tab filter -->
         <div class="col">
           <div class="row">
-              <a>
-                <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
+            <a>
+              <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
                 (click)="showTabPanel('allorder')">Ordered</button>
-              </a>&nbsp;&nbsp;
-              <a>
-              <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
-                href="javascript:void(0)" (click)="showTabPanel('forward')">Forwarded</button> 
             </a>&nbsp;&nbsp;
-              <a>
-                  <button  md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
-              </a>&nbsp;&nbsp;
-              <!-- <a class="align-self-center">
+            <a>
+              <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
+                href="javascript:void(0)" (click)="showTabPanel('forward')">Forwarded</button>
+            </a>&nbsp;&nbsp;
+            <a>
+              <button md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
+            </a>&nbsp;&nbsp;
+            <!-- <a class="align-self-center">
                 <button *ngIf="tabPanelView === 'forward'" md-raised-button (click)="quickFilter('notDelivered')" [ngClass]="{'btn-primary': quickFilterView==='notDelivered'}">Not Delivered</button>
               </a> -->
-              
-              <!-- <a class="align-self-center">
+
+            <!-- <a class="align-self-center">
                 <button md-raised-button class=" " (click)="quickFilter('delivered')" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">DELIVERED</button>
               </a> -->
-  
-              <a>
-                  <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
-              </a>
+
+            <a>
+              <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+            </a>
 
 
-              <a *ngIf="salesTeamLogin">
-                  <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
-              </a>
+            <a *ngIf="salesTeamLogin">
+              <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
+            </a>
 
 
-  
-              &nbsp;&nbsp;
-              <a>
-                  <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
-                  *ngIf='superDealer || customerCare || salesTeamLogin'>Todays FollowUp</button>
-              </a>
-              &nbsp;&nbsp;
-              <a>
-                  <button  md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'gridview'}"
-                  href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid </button> 
-                  <button  md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': newView === 'mapview'}"
-                  href="javascript:void(0)" (click)="showNewPanel('mapview')">Map </button></a>
-                  &nbsp;&nbsp;
 
-              <div class="">
+            &nbsp;&nbsp;
+            <a>
+              <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
+                *ngIf='superDealer || customerCare || salesTeamLogin'>Todays FollowUp</button>
+            </a>
+            &nbsp;&nbsp;
+            <a>
+              <button md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-warning': newView === 'gridview'}"
+                href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid </button>
+              <button md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-warning': newView === 'mapview'}"
+                href="javascript:void(0)" (click)="showNewPanel('mapview')">Map </button>
+            </a>
+            &nbsp;&nbsp;
+
+            <div class="">
               <md-select placeholder="Global Search" [(ngModel)]="globalFilterInput.order.searchtype" name="type" class="full-width left">
                 <md-option value="name">Customer</md-option>
                 <md-option value="mobile">Customer Mobile</md-option>
@@ -90,13 +91,14 @@
 
             <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'mobile'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10"
+                  (keypress)="numberEvent($event)">
               </md-form-field>
             </div>
 
             <div class="col-2" *ngIf="globalFilterInput.order.searchtype == 'orderid'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid" (keypress)="numberEvent($event)" >
+                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid" (keypress)="numberEvent($event)">
               </md-form-field>
             </div>
 
@@ -163,11 +165,11 @@
             </div>
 
             <!--  complete page  filter ends here -->
-       
+
             <a class="mgtop-10">
-                <i class="fa fa-search cursor search-style" aria-hidden="true" (click)="globalSearch('true')"></i>
-            </a>  &nbsp;&nbsp;
-            
+              <i class="fa fa-search cursor search-style" aria-hidden="true" (click)="globalSearch('true')"></i>
+            </a> &nbsp;&nbsp;
+
             <!-- <a class="align-self-center">
               <button *ngIf="tabPanelView === 'allorder'" md-raised-button (click)="quickFilter('ordered')" [ngClass]="{'btn-primary': quickFilterView==='ordered'}">Ordered</button>
             </a> -->
@@ -189,8 +191,8 @@
             </a> -->
 
 
-                <a class="mgtop-10">
-                    <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
+            <a class="mgtop-10">
+              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
               <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare || salesTeamLogin)" (click)="resetDistributorsView()"
@@ -198,7 +200,7 @@
             </a>
             &nbsp;&nbsp;&nbsp;
             <a class="mgtop-10">
-                <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <div class="filterView" *ngIf="showFilterDailog">
                 <div class="height-500">
                   <div class="form-group">
@@ -222,7 +224,8 @@
                   </div>
                   <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
+                      <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10"
+                        (keypress)="numberEvent($event)">
                     </md-form-field>
                   </div>
 
@@ -303,7 +306,7 @@
                 </div>
               </div>
             </a>&nbsp;
-        
+
           </div>
         </div>
       </div>
@@ -643,7 +646,7 @@
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
 
                   </ngx-gauge>
-                  <b *ngIf="forward.timeRemaining < -24" class="red">
+                  <b *ngIf="forward.timeRemaining < -24" class="red blink-text">
                     <i class="fa fa-exclamation-triangle fs-20"></i>
                     <br> {{forward.timeRemaining + (-2)* forward.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "
@@ -892,7 +895,8 @@
                     </div>
                     <div class="col-sm-6  col-md-6 col-lg-6  right">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'" title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
+                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'"
+                        title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
                   <div class="row form-group">
@@ -956,36 +960,34 @@
 
                     </div>
                   </div>
-                    <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
+                  <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(allorder)'>
                           <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(allorder)'>
                               <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                              <div class="row ">
-                                  <div class="col-sm-5  col-md-5  col-lg-5 left">
-                                    <p class="td-label mgbottom-0">
-                                        Action By  </p>
-                                        <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
-                                            <span *ngIf="allorder.senderdetails && allorder.senderdetails.fullname">
-                                              <span class="danger capitalize">{{allorder.senderdetails.fullname}}</span>
-                                            </span>
-                                            <span *ngIf="!allorder.senderdetails"> - </span>
-                                          </b>
-                                  </div>
-                                  <div class="col-sm-7  col-md-7  col-lg-7 right align-self-center">
-                                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare || salesTeamLogin">
-                                          <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
-                                          <span class="row" *ngIf !='superDealer || customerCare || salesTeamLogin'>
-                                              <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
-                                                <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                                              <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
-                                                <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
-                                            </span>
-                                        </div>
-                                </div>
-   
+                  <div class="row ">
+                    <div class="col-sm-5  col-md-5  col-lg-5 left">
+                      <p class="td-label mgbottom-0">
+                        Action By </p>
+                      <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
+                        <span *ngIf="allorder.senderdetails && allorder.senderdetails.fullname">
+                          <span class="danger capitalize">{{allorder.senderdetails.fullname}}</span>
+                        </span>
+                        <span *ngIf="!allorder.senderdetails"> - </span>
+                      </b>
+                    </div>
+                    <div class="col-sm-7  col-md-7  col-lg-7 right align-self-center">
+                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare || salesTeamLogin">
+                        <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
+                      <span class="row" *ngIf !='superDealer || customerCare || salesTeamLogin'>
+                        <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                          <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
+                        <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                          <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </td>
-
 
               <td width="10%" class="center">
                 <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept') || ((allorder.status == 'not_broadcasted')) )">
@@ -993,7 +995,7 @@
                     [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining' [label]="gaugeLabel"
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
-                  <b *ngIf="allorder.timeRemaining < -24" class="red">
+                  <b *ngIf="allorder.timeRemaining < -24" class="red blink-text">
                     <i class="fa fa-exclamation-triangle fs-20"></i>
                     <br> {{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
@@ -1370,7 +1372,7 @@
                     [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
 
-                  <b *ngIf="complete.timeRemaining < -24 " class="red">
+                  <b *ngIf="complete.timeRemaining < -24 " class="red blink-text">
                     <i class="fa fa-exclamation-triangle fs-20"></i>
                     <br> {{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
                   <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
@@ -1392,7 +1394,7 @@
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
 
 
-          <!-- <h5 class="warning  capitalize center">
+        <!-- <h5 class="warning  capitalize center">
             <a href="javascript:void(0);" (click)=getPagingMiscOrders(false,tabPanelView); *ngIf="miscOrdersClickMore">
               <i class="fa fa-cloud-upload" aria-hidden="true"></i>
               click for more data</a>

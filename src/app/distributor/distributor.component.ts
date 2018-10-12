@@ -355,10 +355,8 @@ export class DistributorComponent implements OnInit {
     }
 
     distributorsAvailability(data) {
-
         let dialogRef = this.dialog.open(DistributorsAvailabilityComponent, {
-
-            width: '75%',
+            width: '45%',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -726,7 +724,7 @@ export class DistributorComponent implements OnInit {
 
     assignToSalesTeam(data) {
         let dialogRefAddProduct = this.dialog.open(SalesTeamAssignComponent, {
-            width: '70%',
+            width: '40%',
             data: data
         });
         dialogRefAddProduct.afterClosed().subscribe(result => {
@@ -751,8 +749,6 @@ export class DistributorComponent implements OnInit {
             this.allSalesTeam = result.data;
         }
     }
-
-
 
 
 

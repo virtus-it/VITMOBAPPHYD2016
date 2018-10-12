@@ -12,7 +12,6 @@
     <div class="container-fluid pd-15x25 brd-bottom">
         <div class="d-flex ">
         <div class="p-2 col-1">
-
           <md-form-field class="wd-100pc">
             <input mdInput placeholder="Quantity" [(ngModel)]="quantity.value" name="quanitiy" required (ngModelChange)="changeQuantityEvent($event)">
             <md-error>
@@ -21,7 +20,7 @@
             </md-error>
           </md-form-field>
         </div>
-        <div class="p-2 col-1">
+        <div class="p-2 col-1 mgleftright-20">
           <md-form-field class="wd-100pc">
             <input mdInput placeholder="Empty cans" [(ngModel)]="editOrderInput.emptyCans" name="emptyCans" (ngModelChange)="onEmptyCansChange($event)"
               required>
@@ -31,7 +30,7 @@
             </md-error>
           </md-form-field>
         </div>
-        <div class="p-2">
+        <div class="p-2 col-2">
           <b>DELIVERY TIME</b>
           <br>
           <small>{{ orderDetails.delivery_exceptedtime }}</small>
@@ -57,7 +56,7 @@
         </div>
       </div>
 
-      <div class="row " *ngIf="this.hideTimeSlot">
+      <div class="row mgleft-ng10" *ngIf="this.hideTimeSlot">
         <div class="  col-5">
           <md-form-field class="example-full-width wd-100pc">
             <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" name="date" [(ngModel)]="changeTimeSlot.date"

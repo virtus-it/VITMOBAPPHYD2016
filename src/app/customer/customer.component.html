@@ -1,26 +1,27 @@
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center">
+    <div class="col-3 align-self-center">
       <h4>
-        <i class="fa fa-users"></i> Customers</h4>
+        <i class="fa fa-users"></i> Customers <span cass="" *ngIf="customersCount != 0">(<span class="warning">{{this.customersCount}}</span>)</span>
+      </h4>
     </div>
-    <div class="col-2 align-self-center">
+    <!-- <div class="col-2 align-self-center">
         <h5 cass="" *ngIf="customersCount != 0">Count: <span class="warning">{{this.customersCount}}</span></h5>
-      </div>
+      </div> -->
 
     <div class="col-4 align-self-center justify-content-end">
       <div class="row">
-        <div class=" col">
+        <div class=" col-4">
           <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
             <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
           </md-select>
         </div>
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+        <div class="col-3 wd-150pc" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
           <!-- ng-if="key == 'City' || key == 'County'"> -->
-          <md-form-field class="example-full-width">
-            <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
+          <md-form-field>
+            <input mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext" >
           </md-form-field>
         </div>
         <!-- <div class="" *ngIf="filterInput.root.searchtype == 'address'">
@@ -28,14 +29,14 @@
                   <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">  
               </md-form-field>
             </div> -->
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'paymenttype'">
+        <div class=" col-3" *ngIf="filterInput.root.searchtype == 'paymenttype'">
           <md-select placeholder="Filter By" name="paymenttype"  [(ngModel)]="filterInput.root.searchtext">
             <md-option value="cod">COD</md-option>
             <md-option value="credit">CREDIT</md-option>
             <md-option value="codwithpending">Cod with Pending</md-option>
           </md-select>
         </div>
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'customertype'">
+        <div class=" col-3" *ngIf="filterInput.root.searchtype == 'customertype'">
           <md-select placeholder="Filter By" name="customertype"  [(ngModel)]="filterInput.root.searchtext">
             <md-option value="residential">Residential</md-option>
             <md-option value="corperate">Corporate</md-option>
@@ -43,11 +44,10 @@
           </md-select>
         </div>
 
-        <div class="col" *ngIf="filterInput.root.searchtype == 'advamt'">
-         
+        <div class="col-3" *ngIf="filterInput.root.searchtype == 'advamt'">
         </div>
 
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'points'">
+        <div class=" col-3" *ngIf="filterInput.root.searchtype == 'points'">
             <md-select placeholder="Filter By" name="points" [(ngModel)]="filterInput.root.searchtext">
               <md-option value="top10">Highest 10 Points</md-option>
               <md-option value="bottom10">Lowest 10 Points</md-option>
@@ -56,7 +56,7 @@
             </md-select>
           </div>
 
-        <div class=" col" *ngIf="filterInput.root.searchtype == 'followupdate'">
+        <div class=" col-3" *ngIf="filterInput.root.searchtype == 'followupdate'">
           <md-form-field class="inline">
             <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followUpdate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -64,21 +64,17 @@
           </md-form-field>
         </div>
 
-        <div class="col-5 pdbottomtlr-5 left align-self-center">
-          <i class="fa fa-search cursor fs-18 search-style" aria-hidden="true" (click)="getCustomerByFilter('true')"></i>
-          &nbsp;
-          <i class="fa fa-history logo-color fs-20" aria-hidden="true" (click)="clearFilter()"></i>
-          &nbsp;
+        <div class="col-5 align-self-center right pdtopbottom-5">
+          <i class="fa fa-search cursor fs-18 search-style mgright-10" aria-hidden="true" (click)="getCustomerByFilter('true')"></i>
+          <i class="fa fa-history logo-color fs-20 mgright-10" aria-hidden="true" (click)="clearFilter()"></i>
           <!-- <i class="fa fa-arrow-circle-up logo-color fs-20" title="Descending order" (click)="sortDescending()"></i>
           &nbsp;
           <i class="fa fa-arrow-circle-down logo-color fs-20" title="Ascending order" (click)="sortAscending()"></i> -->
-          &nbsp;
-          <a class="cursor logo-color " title="Download" (click)='downloadCustomer()'>
+          <a class="cursor logo-color mgright-10" title="Download" (click)='downloadCustomer()'>
             <i class="fa fa-download fs-20" aria-hidden="true"></i>
           </a>
-          &nbsp;
           <a class="cursor logo-color" title="Add Customer" (click)='showAddCustomer()'>
-            <i class="fa fa-plus-circle fs-20" aria-hidden="true"></i>
+            <i class="fa fa-plus-circle fs-24" aria-hidden="true"></i>
           </a>
           <!-- 
       <button (click)="sort()">Sort</button> -->
@@ -200,7 +196,7 @@
       <div class="col-4 pd-10">
         <div class="row">
           <b class="capital col-4 left">Created By: </b>
-          <span class="onhovertooltip-150 col left" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
+          <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
           <span class="col" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
         </div>
         <div class="row">

@@ -35,14 +35,13 @@
                   <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
                 </button>
               </div>
-
             </div>
           </div>
         </div>
       </a>
-
     </div>
   </div>
+ 
   <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
     <div class="row brd-box-box" *ngFor="let points of allPoints">
       <div class="col-5 left bg-color-bg">
@@ -78,19 +77,15 @@
 
       <div class="col-1 align-self-center">
 
-        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
+        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-24" title="Active State" (click)="DeactivatePoints(points.type)"></i>
 
-        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"  ></i> &nbsp;
+        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-24" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
 
+        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-24" title="Active State"></i>
 
-        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" ></i>
+        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-24" title="In-active State"></i>
 
-        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
-
-
-
-
-        <i class="fa fa-edit logo-color" title="Edit points fs-18" (click)="editPoints(points)" *ngIf="superDealer" ></i>
+        <i class="fa fa-edit logo-color fs-24" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i>
       </div>
     </div>
   </div>
@@ -114,7 +109,6 @@
                 <th width="12%">Points</th>
                 <th width="25%">Date</th>
                 <th width="25%">Status</th>
-
               </tr>
             </thead>
             <tbody>

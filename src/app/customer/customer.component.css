@@ -143,6 +143,8 @@ border-radius: 3px;
   cursor: pointer;
   color: var( --logo-color);
 }
-
+}
+.wd-150pc .mat-input-container .mat-input-wrapper{
+  width: 150% !important;
 }
 

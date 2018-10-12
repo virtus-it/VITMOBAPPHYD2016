@@ -1,26 +1,23 @@
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-4 col-md-4 col-lg-4 ">
-      <h4><i class="fa fa-commenting-o"></i> Stock Notifications </h4>
+      <h4>
+        <i class="fa fa-commenting-o"></i> Stock Notifications </h4>
     </div>
 
     <div class="col right">
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)"
-        (click)="showTabPanel('all')">All</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)" (click)="showTabPanel('all')">All</button>
 
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pending'}" href="javascript:void(0)"
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'pending'}" href="javascript:void(0)"
         (click)="showTabPanel('pending')">Pending</button>
 
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'confirmed'}" href="javascript:void(0)"
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'confirmed'}" href="javascript:void(0)"
         (click)="showTabPanel('confirmed')">Confirmed</button>
 
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': pageView === 'grid'}" href="javascript:void(0)"
-        (click)="showPanelType('grid')">GRID</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'grid'}" href="javascript:void(0)" (click)="showPanelType('grid')">GRID</button>
 
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': pageView === 'map'}" href="javascript:void(0)"
-        (click)="showPanelType('map')">MAP</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)" (click)="showPanelType('map')">MAP</button>
     </div>
-
 
   </div>
   <div id="" class="row pd-15x10 mg-0" *ngIf="pageView == 'grid'">
@@ -63,16 +60,12 @@
               <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
               <span *ngIf="!stockrequest.reqconfirmdate"> pending </span>
             </td>
-
             <td>
-              <button class="btn btn-link" (click)="viewDetails(stockrequest)">View Details</button>
+                <span class="logo-color cursor" (click)="viewDetails(stockrequest)">View Details</span>
             </td>
-
           </tr>
-
         </tbody>
       </table>
-
 
     </div>
   </div>
@@ -81,10 +74,11 @@
     <div class="col">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
 
-        <agm-marker *ngFor="let marker of stockPointMarkers" [latitude]="marker.lat" [longitude]="marker.lng" >
+        <agm-marker *ngFor="let marker of stockPointMarkers" [latitude]="marker.lat" [longitude]="marker.lng">
 
-           <agm-info-window>
-             {{marker.name}} <br> {{marker.mobileno}}
+          <agm-info-window>
+            {{marker.name}}
+            <br> {{marker.mobileno}}
           </agm-info-window>
         </agm-marker>
 
