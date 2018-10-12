@@ -4,7 +4,6 @@
       <h4>
         <i class="fa fa-commenting-o"></i> Stock Notifications </h4>
     </div>
-
     <div class="col right">
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)" (click)="showTabPanel('all')">All</button>
 
@@ -18,7 +17,6 @@
 
       <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)" (click)="showPanelType('map')">MAP</button>
     </div>
-
   </div>
   <div id="" class="row pd-15x10 mg-0" *ngIf="pageView == 'grid'">
     <div class="col">
@@ -26,7 +24,7 @@
         <thead>
           <tr>
             <th width="10%">Req No.</th>
-            <th width="10%">Raised By</th>
+            <th width="20%">Raised By</th>
             <!-- <th width="15%">Invoice Date</th> -->
             <th width="17%">Created Date</th>
             <th width="17%">Updated Date</th>
@@ -41,7 +39,7 @@
               <span *ngIf="!stockrequest.reqid"> - </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.distributor.firstname">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
+              <span *ngIf="stockrequest.distributor.firstname" class="capitalize">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
               <span *ngIf="!stockrequest.distributor.firstname"> - </span>
             </td>
             <!-- <td>
@@ -50,15 +48,15 @@
             </td> -->
             <td>
               <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqdate"> pending </span>
+              <span *ngIf="!stockrequest.reqdate"> Pending </span>
             </td>
             <td>
               <span *ngIf="stockrequest.dealer_confirmdate">{{stockrequest.dealer_confirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.dealer_confirmdate"> pending </span>
+              <span *ngIf="!stockrequest.dealer_confirmdate"> Pending </span>
             </td>
             <td>
               <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqconfirmdate"> pending </span>
+              <span *ngIf="!stockrequest.reqconfirmdate">Pending </span>
             </td>
             <td>
                 <span class="logo-color cursor" (click)="viewDetails(stockrequest)">View Details</span>
@@ -73,9 +71,7 @@
   <div class="" *ngIf="pageView == 'map'">
     <div class="col">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
-
         <agm-marker *ngFor="let marker of stockPointMarkers" [latitude]="marker.lat" [longitude]="marker.lng">
-
           <agm-info-window>
             {{marker.name}}
             <br> {{marker.mobileno}}

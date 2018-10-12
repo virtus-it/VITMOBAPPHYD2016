@@ -70,7 +70,7 @@
 
     <!-- <span *ngIf="this.orderDetail.supplierdetails.userid">This customer is already auto assigned to supplier</span> -->
   </div>
-  
+
   <div class="container-fluid brd-bottom" *ngIf="tabPanelView === 'distributors'">
     <span class="fa fa-search"></span>
     <md-form-field class="example-full-width wd-96pc">
@@ -79,41 +79,42 @@
     </md-form-field>
 
     <div class="DistList-height">
-    <table class="table table-hover table-fixedheader table-striped">
-      <thead>
-        <tr>
-          <th width="30%">Name</th>
-          <th width="14%">Mobile </th>
-          <th width="24.5%">Area Name</th>
-          <th width="30%">Address</th>
-        </tr>
-      </thead>
-      <tbody>
+      <table class="table table-hover table-fixedheader table-striped">
+        <thead>
+          <tr>
+            <th width="30%">Name</th>
+            <th width="14%">Mobile </th>
+            <th width="24.5%">Area Name</th>
+            <th width="30%">Address</th>
+          </tr>
+        </thead>
+        <tbody>
 
-        <tr *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
-          <td width="30%" class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" [(ngModel)]="distributorID" class="custom-control-input" name="{{dist.userid}}" value="{{dist.userid}}">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">{{dist.firstname}} {{dist.lastname}}</span>
-            </label>
-          </td>
-          <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
+          <tr *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
+            <td width="30%" class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" [(ngModel)]="distributorID" class="custom-control-input" name="{{dist.userid}}" value="{{dist.userid}}">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">{{dist.firstname}} {{dist.lastname}}</span>
+              </label>
+            </td>
+            <!-- <td width="30%" class="left capital">  <input type="radio" [(ngModel)]="distributorID"  name="{{dist.userid}}" value="{{dist.userid}}">
           {{dist.firstname}} {{dist.lastname}}</td> -->
-          <td width="15%" class="left capital">{{dist.mobileno}}</td>
-          <td width="25%" class="left capital">{{dist.areaname}}</td>
-          <td width="30%" class="left capital">
-            <span class="onhovertooltip-200">{{dist.address}}</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+            <td width="15%" class="left capital">{{dist.mobileno}}</td>
+            <td width="25%" class="left capital">{{dist.areaname}}</td>
+            <td width="30%" class="left capital">
+              <span class="onhovertooltip-200">{{dist.address}}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
+  <h4 *ngIf="tabPanelView === 'suppliers'" class="warning center">{{message}}</h4>
+
 </md-dialog-content>
 <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
-    <p *ngIf="tabPanelView === 'suppliers'">{{message}}</p> &nbsp;&nbsp;&nbsp;
     <button type="submit" md-raised-button *ngIf="tabPanelView === 'suppliers'" [disabled]="!supplierID" (click)="assignOrder()"
       class="btn-primary">ASSIGN</button>
     <button type="submit" md-raised-button *ngIf="tabPanelView === 'distributors'" [disabled]="!distributorID" (click)="openProductAssingDialog()"

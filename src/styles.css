@@ -485,7 +485,7 @@ background: transparent;
   margin-top: 15px;
 }
 .mgright-10{
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 .mgtop-20{
   margin-top: 20px;
@@ -1157,4 +1157,10 @@ margin-right: 15px;
  }
 @keyframes blink-text {  
   50% { opacity: 0; }
+ }
+ .pdtopbottom-12{
+   padding: 12px 0px;
+ }
+ .pdtopbottom-8{
+  padding: 8px 0px;
  }
