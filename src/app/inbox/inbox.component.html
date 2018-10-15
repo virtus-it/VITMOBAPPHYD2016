@@ -12,28 +12,28 @@
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
 
-      <div class="row">
-        <div class="col-4">
-          <md-form-field class="inline">
-            <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="filterInput.fromDate">
-            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-            <md-datepicker #picker></md-datepicker>
-          </md-form-field>
-        </div>
-        <div class="col-4">
-          <md-form-field class="inline">
-            <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="filterInput.toDate">
-            <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-            <md-datepicker #pickers></md-datepicker>
-          </md-form-field>
-        </div>
-        <div class="col-4 align-self-center">
-          <button class="btn-primary btn-sm" md-raised-button (click)="filterMessages()">FILTER</button>
-          <button class="btn-default btn-sm" md-raised-button (click)="clearFilter()">CLEAR</button>
-
-        </div>
+    <div class="row">
+      <div class="col-4">
+        <md-form-field class="inline">
+          <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="filterInput.fromDate">
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
       </div>
-      <div class="scroll">
+      <div class="col-4">
+        <md-form-field class="inline">
+          <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="filterInput.toDate">
+          <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+          <md-datepicker #pickers></md-datepicker>
+        </md-form-field>
+      </div>
+      <div class="col-4 align-self-center">
+        <button class="btn-primary btn-sm" md-raised-button (click)="filterMessages()">FILTER</button>
+        <button class="btn-default btn-sm" md-raised-button (click)="clearFilter()">CLEAR</button>
+
+      </div>
+    </div>
+    <div class="scroll">
       <div class="row box-style" *ngFor="let message of allMessages">
         <div class="col-4 col-1-style">
           <div class="row">
@@ -48,25 +48,20 @@
                 <span class="fa fa-clock-o"></span> {{message.createddate | utcDate}}</span>
             </div>
             <div class="col-4">
-              <button  class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(message)">SELECT</button>
+              <button class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(message)">SELECT</button>
             </div>
           </div>
         </div>
-
-
         <div class="col-8">
-
           <span class="bold logo-color">Message:</span>
           <p>{{message.message}}</p>
         </div>
 
       </div>
-      </div>
+    </div>
 
-      <h4 *ngIf="noMessages" class="warning center mgtop-10">
-        <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>
-
-
+    <h4 *ngIf="noMessages" class="warning center mgtop-10">
+      <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>
   </div>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">

@@ -20,7 +20,7 @@
                 </md-option>
               </md-select>
             </div>
-            <div class="form-group" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+            <div class="" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
               <md-form-field class="example-full-width">
                 <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
               </md-form-field>
@@ -48,12 +48,12 @@
                 <md-datepicker #picker></md-datepicker>
               </md-form-field>
             </div>
-            <div class=" form-group">
+            <div class="mgtop-15">
               <button md-raised-button color="primary" (click)="getCustomerByFilter('true')">
                 <i class="fa fa-search" aria-hidden="true"></i> Search
               </button>
-              <button md-raised-button color="primary" (click)="clearFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear
               </button>
             </div>
           </div>
@@ -110,7 +110,7 @@
         </div>
         <div class="row">
           <b class="capital col-3 left">Mode: </b>
-          <div *ngIf="preorder.payments left" class="col left capitalize" >
+          <div *ngIf="preorder.payments left" class="col left capitalize">
             <span class="onhovertooltip-50" title="{{preorder.payments.paymenttype}} {{preorder.payments.days}}" *ngIf="preorder.payments.paymenttype=='credit'">
               {{preorder.payments.paymenttype}} , Bill Date: {{preorder.payments.days}}</span>
             <span *ngIf="preorder.payments.paymenttype=='cod'">{{preorder.payments.paymenttype}}</span>
@@ -145,5 +145,5 @@
     <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="preOrderClickMore">
       <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
   </h4>
-  <h4 *ngIf="!preOrderClickMore" class="warning">Record Not Available</h4>
+  <h4 *ngIf="!preOrderClickMore" class="warning"><i aria-hidden="true" class="fa fa-frown-o"></i> Record Not Available</h4>
 </div>

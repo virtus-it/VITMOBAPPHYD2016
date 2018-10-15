@@ -14,7 +14,7 @@
             (click)="showTabPanel('distributors')">DISTRIBUTORS</button>&nbsp;
           <button type="submit" md-raised-button class=" " [ngClass]="{'btn-primary': tabPanelView === 'products'}" href="javascript:void(0)"
             (click)="showTabPanel('products')"> PRODUCTS </button> &nbsp;
-          <button md-raised-button color="primary" *ngIf="tabPanelView == 'distributors'" (click)="ShowAllPolygons()"> Show All</button>
+          <button md-raised-button class="bg-warning" *ngIf="tabPanelView == 'distributors'" (click)="ShowAllPolygons()"> Show All</button>
         </div>
 
         <div class="col-sm-3 col-md-3 col-lg-3 row">
@@ -44,15 +44,16 @@
                     name="selectedItem"></angular2-multiselect>
                 </div>
                 <br>
-                <div class="input-group pd-10  ">
-                  <button md-raised-button color="primary" class="mgright-5" (click)="searchPolygon()">
-                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                  </button>
-                  <button md-raised-button color="primary" (click)="clearFilter()">
-                    <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                  </button>
+                <div class="row">
+                  <div class="col right">
+                    <button md-raised-button color="primary" class="mgright-5" (click)="searchPolygon()">
+                      <i class="fa fa-search" aria-hidden="true"></i> Search
+                    </button>
+                    <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                      <i class="fa fa-filter" aria-hidden="true"></i> Clear
+                    </button>
+                  </div>
                 </div>
-
               </div>
             </div>
           </a>
@@ -67,8 +68,6 @@
     <div class="col">
       <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
         <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"></agm-marker>
-
-
         <agm-marker *ngFor="let m of bindableArray; let i = index" (markerClick)="clickonMarker(m , $event)" [latitude]="m.lat" [longitude]="m.lng">
 
           <!-- <agm-info-window>

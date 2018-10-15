@@ -212,6 +212,9 @@ updateDistributorsStockStatusResult(result){
     else if(this.Details.type == 'stockStatusOfDistributorsProduct'){
       this.stockStatusValue = this.Details.data.data[0].stockstatus;
     }
+    else if(this.Details.type == 'changeStatusFromCategory'){
+      this.stockStatusValue = this.Details.data.stockstatus;
+    }
     else{
       this.stockStatusValue = this.Details.data[0].stockstatus;
     }

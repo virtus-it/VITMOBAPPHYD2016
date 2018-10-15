@@ -54,10 +54,11 @@ export class CategoryproductsComponent implements OnInit {
   }
 
   changeStatus(data){
+    let formattedData = {type : 'changeStatusFromCategory' , data : data}
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
 
       width: '700px',
-      data: data
+      data: formattedData
     });
     dialogRefAddProduct.afterClosed().subscribe(result => {
       //console.log(`Dialog closed: ${result}`);

@@ -6,12 +6,12 @@
         </div>
         <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
             <a class="cursor logo-color mgleft-10" (click)="filterViewToggle()">
-                <i aria-hidden="true" class="fa fa-sliders logo-color" title="Filter"></i>
+                <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter"></i>
             </a>
 
             <div class="filterviewSchedules" *ngIf="showFilterDailog">
                 <div class="height-500">
-                    <div class="form-group">
+                    <div class="mgtop-5 mgbottom-15">
                         <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="filter.searchtype">
                             <md-option value="bydistributor">Distributor</md-option>
                             <md-option value="bycustomer">Customer</md-option>
@@ -23,7 +23,7 @@
                     </div>
                     <div *ngIf="filter.searchtype == 'bydistributor'">
 
-                        <md-form-field class="example-full-width">
+                        <md-form-field class="example-full-width wd-100pc">
                             <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
                             <md-autocomplete #auto="mdAutocomplete">
                                 <md-option *ngFor="let dist of filteredStates | async" [value]="dist.fullName">
@@ -31,19 +31,17 @@
                                 </md-option>
                             </md-autocomplete>
                         </md-form-field>
-
                     </div>
 
                     <div *ngIf="filter.searchtype == 'bycustomer'">
-
-                        <md-form-field class="example-full-width">
+                        <md-form-field class="example-full-width wd-100pc">
                             <input class="form-control" mdInput placeholder="Enter Customer Mobile Number" [(ngModel)]="filter.customerNumber">
                         </md-form-field>
                     </div>
 
                     <div *ngIf="filter.searchtype == 'distributorcustomer'">
 
-                        <md-form-field class="example-full-width">
+                        <md-form-field class="example-full-width wd-100pc">
                             <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
                             <md-autocomplete #auto="mdAutocomplete">
                                 <md-option *ngFor="let dist of filteredStates | async" [value]="dist.fullName">
@@ -51,14 +49,14 @@
                                 </md-option>
                             </md-autocomplete>
                         </md-form-field>
-                        <md-form-field class="example-full-width">
+                        <md-form-field class="example-full-width wd-100pc">
                             <input class="form-control" mdInput placeholder="Enter Mobile Number" [(ngModel)]="filter.customerNumber">
                         </md-form-field>
                     </div>
 
                     <div *ngIf="filter.searchtype == 'bydate'">
 
-                        <md-form-field class="example-full-width">
+                        <md-form-field class="example-full-width wd-100pc">
                             <input mdInput [mdDatepicker]="picker" placeholder="Select Date" [(ngModel)]="filter.date">
                             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                             <md-datepicker #picker></md-datepicker>
@@ -67,17 +65,19 @@
 
                     <div *ngIf="filter.searchtype == 'weekdays'">
                         <div class=" row ">
-                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
-                                <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)"
-                                    [(ngModel)]="selectAllWeekDays">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description"></span>
-                                Select All
-                            </label>
+                            <div class="col left">
+                                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
+                                    <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAll($event.target.checked)"
+                                        [(ngModel)]="selectAllWeekDays">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description"></span>
+                                    Select All
+                                </label>
+                            </div>
                         </div>
                         <div class="row mgtop-5">
 
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Monday', $event.target.checked)"
                                         [value]="Monday">
@@ -86,7 +86,7 @@
                                     Monday
                                 </label>
                             </div>
-                            <div class="col-sm-4  ">
+                            <div class="col-sm-4  left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Tuesday', $event.target.checked)"
                                         [value]="Tuesday">
@@ -95,7 +95,7 @@
                                     Tuesday
                                 </label>
                             </div>
-                            <div class="col-sm-4  ">
+                            <div class="col-sm-4  left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Wednesday', $event.target.checked)"
                                         [value]="Wednesday">
@@ -106,8 +106,7 @@
                             </div>
                         </div>
                         <div class="row mgtop-5">
-
-                            <div class="col-sm-4  ">
+                            <div class="col-sm-4  left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Thursday', $event.target.checked)">
                                     <span class="custom-control-indicator"></span>
@@ -115,7 +114,7 @@
                                     Thursday
                                 </label>
                             </div>
-                            <div class="col-sm-4  ">
+                            <div class="col-sm-4  left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Friday', $event.target.checked)"
                                         [value]="Friday">
@@ -124,7 +123,7 @@
                                     Friday
                                 </label>
                             </div>
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Saturday', $event.target.checked)"
                                         [value]="Saturday">
@@ -135,7 +134,7 @@
                             </div>
                         </div>
                         <div class="row mgtop-5">
-                            <div class="col-sm-4 ">
+                            <div class="col-sm-4 left">
                                 <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
                                     <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAllWeek" (change)="onChangeCheckWeek('Sunday' , $event.target.checked)"
                                         [value]="Sunday">
@@ -149,14 +148,16 @@
                     </div>
 
                     <div *ngIf="filter.searchtype == 'days'">
-                        <div class="selalldays1 ">
-                            <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
-                                <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAllDays($event.target.checked)"
-                                    [(ngModel)]="selectAllDays">
-                                <span class="custom-control-indicator"></span>
-                                <span class="custom-control-description"></span>
-                                Select All
-                            </label>
+                        <div class="row">
+                            <div class="selalldays1 col left">
+                                <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 warning">
+                                    <input type="checkbox" id="rem" class="custom-control-input" [checked]="checkAll" (change)="onChangeCheckAllDays($event.target.checked)"
+                                        [(ngModel)]="selectAllDays">
+                                    <span class="custom-control-indicator"></span>
+                                    <span class="custom-control-description"></span>
+                                    Select All
+                                </label>
+                            </div>
                         </div>
                         <div class="row  mgtop-5">
                             <div class="col-sm-2 ">
@@ -392,12 +393,11 @@
                             <div class="col-sm-10"></div>
                         </div>
                     </div>
-                    <br>
-                    <div class="input-group pd-10  ">
+                    <div class="row pull-right">
                         <button md-raised-button color="primary" class="mgright-5" (click)="searchScheduledOrder()">
                             <i class="fa fa-search" aria-hidden="true"></i> Search
                         </button>
-                        <button md-raised-button color="primary" (click)="clearFilter()">
+                        <button md-raised-button class="bg-warning" (click)="clearFilter()">
                             <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
                         </button>
                     </div>
@@ -435,7 +435,7 @@
                     </td>
                     <td class="left" width="12%">
                         <span class="onhovertooltip-100" title="{{schedule.product_name}} {{schedule.product_quantity}} {{schedule.category}}">
-                        {{schedule.product_name}} {{schedule.product_quantity}} {{schedule.category}}</span>
+                            {{schedule.product_name}} {{schedule.product_quantity}} {{schedule.category}}</span>
                     </td>
                     <td class="left" width="8%">{{schedule.delivery_exceptedtime}}</td>
                     <td class="left " width="5%">{{schedule.quantity}}</td>

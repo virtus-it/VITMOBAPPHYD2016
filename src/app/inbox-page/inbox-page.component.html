@@ -5,25 +5,25 @@
         <i class="fa fa-envelope"></i> Inbox</h4>
     </div>
     <div class="col-2 offset-md-4 ">
-        <md-form-field class="inline">
-          <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="filterInput.fromDate">
-          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-          <md-datepicker #picker></md-datepicker>
-        </md-form-field>
-      </div>
-      <div class="col-2">
-        <md-form-field class="inline">
-          <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="filterInput.toDate">
-          <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
-          <md-datepicker #pickers></md-datepicker>
-        </md-form-field>
-      </div>
-      <div class="col-2">
-        <button class="btn-primary btn-sm" md-raised-button (click)="filterMessages()">FILTER</button>
-        <button class="btn-default btn-sm" md-raised-button (click)="clearFilter()">CLEAR</button>
-
-      </div>
+      <md-form-field class="inline">
+        <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="filterInput.fromDate">
+        <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+        <md-datepicker #picker></md-datepicker>
+      </md-form-field>
+    </div>
+    <div class="col-2">
+      <md-form-field class="inline">
+        <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="filterInput.toDate">
+        <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+        <md-datepicker #pickers></md-datepicker>
+      </md-form-field>
+    </div>
+    <div class="col-2 align-self-center">
+      <button class="" color="primary" md-raised-button (click)="filterMessages()">FILTER</button>
+      <button class="bg-warning" md-raised-button (click)="clearFilter()">CLEAR</button>
+    </div>
   </div>
+
   <div id="" class="row pd-15x10 mg-0">
     <div class="col">
       <table class="table table-hover table-striped">
@@ -55,16 +55,13 @@
             </td>
             <td class="" width="10%">
               <span *ngIf="message.createddate">{{message.createddate | utcDate}}</span>
-              <span *ngIf="!message.createddate"> - </span>            
+              <span *ngIf="!message.createddate"> - </span>
             </td>
             <td class="" width="10%">
               <span *ngIf="message.message">{{message.message}}</span>
               <span *ngIf="!message.message"> - </span>
             </td>
           </tr>
-
-          
-
         </tbody>
       </table>
 

@@ -2,13 +2,10 @@
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-3 align-self-center">
       <h4>
-        <i class="fa fa-users"></i> Customers <span cass="" *ngIf="customersCount != 0">(<span class="warning">{{this.customersCount}}</span>)</span>
+        <i class="fa fa-users"></i> Customers
+        <span cass="" *ngIf="customersCount != 0">(<span class="warning">{{this.customersCount}}</span>)</span>
       </h4>
     </div>
-    <!-- <div class="col-2 align-self-center">
-        <h5 cass="" *ngIf="customersCount != 0">Count: <span class="warning">{{this.customersCount}}</span></h5>
-      </div> -->
-
     <div class="col-4 align-self-center justify-content-end">
       <div class="row">
         <div class=" col-4">
@@ -18,10 +15,10 @@
             </md-option>
           </md-select>
         </div>
-        <div class="col-3 wd-150pc" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
+        <div class="col-3" *ngIf="filterInput.root.searchtype == 'alias' || filterInput.root.searchtype == 'mobile' || filterInput.root.searchtype == 'name' || filterInput.root.searchtype == 'address' ">
           <!-- ng-if="key == 'City' || key == 'County'"> -->
-          <md-form-field>
-            <input mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext" >
+          <md-form-field class="wd-100pc">
+            <input mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
           </md-form-field>
         </div>
         <!-- <div class="" *ngIf="filterInput.root.searchtype == 'address'">
@@ -30,14 +27,14 @@
               </md-form-field>
             </div> -->
         <div class=" col-3" *ngIf="filterInput.root.searchtype == 'paymenttype'">
-          <md-select placeholder="Filter By" name="paymenttype"  [(ngModel)]="filterInput.root.searchtext">
+          <md-select placeholder="Filter By" name="paymenttype" [(ngModel)]="filterInput.root.searchtext">
             <md-option value="cod">COD</md-option>
             <md-option value="credit">CREDIT</md-option>
             <md-option value="codwithpending">Cod with Pending</md-option>
           </md-select>
         </div>
         <div class=" col-3" *ngIf="filterInput.root.searchtype == 'customertype'">
-          <md-select placeholder="Filter By" name="customertype"  [(ngModel)]="filterInput.root.searchtext">
+          <md-select placeholder="Filter By" name="customertype" [(ngModel)]="filterInput.root.searchtext">
             <md-option value="residential">Residential</md-option>
             <md-option value="corperate">Corporate</md-option>
             <md-option value="commercial">Commercial</md-option>
@@ -48,13 +45,13 @@
         </div>
 
         <div class=" col-3" *ngIf="filterInput.root.searchtype == 'points'">
-            <md-select placeholder="Filter By" name="points" [(ngModel)]="filterInput.root.searchtext">
-              <md-option value="top10">Highest 10 Points</md-option>
-              <md-option value="bottom10">Lowest 10 Points</md-option>
-              <md-option value="ascending">Ascending Order</md-option>
-              <md-option value="descending">Descending Order</md-option>
-            </md-select>
-          </div>
+          <md-select placeholder="Filter By" name="points" [(ngModel)]="filterInput.root.searchtext">
+            <md-option value="top10">Highest 10 Points</md-option>
+            <md-option value="bottom10">Lowest 10 Points</md-option>
+            <md-option value="ascending">Ascending Order</md-option>
+            <md-option value="descending">Descending Order</md-option>
+          </md-select>
+        </div>
 
         <div class=" col-3" *ngIf="filterInput.root.searchtype == 'followupdate'">
           <md-form-field class="inline">
@@ -76,8 +73,7 @@
           <a class="cursor logo-color" title="Add Customer" (click)='showAddCustomer()'>
             <i class="fa fa-plus-circle fs-24" aria-hidden="true"></i>
           </a>
-          <!-- 
-      <button (click)="sort()">Sort</button> -->
+
           <a class="cursor logo-color mgleft-10">
             <!-- <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i> -->
 
@@ -196,7 +192,8 @@
       <div class="col-4 pd-10">
         <div class="row">
           <b class="capital col-4 left">Created By: </b>
-          <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby"> {{customers.usercreatedby.name}}</span>
+          <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby">
+          {{customers.usercreatedby.name}}</span>
           <span class="col" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
         </div>
         <div class="row">
@@ -215,11 +212,11 @@
           <span class="col left" title="" *ngIf="customers.customer_referencecode">{{customers.customer_referencecode}}</span>
           <span class="col left" title="" *ngIf="!customers.customer_referencecode"> - </span>
         </div>
-      
+
         <div class="row">
           <b class="capital col-4 left">Points: </b>
-          <span class="col left" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}}</span> 
-          <span class="col left" *ngIf="!customers.customerpoints"> - </span> 
+          <span class="col left" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}}</span>
+          <span class="col left" *ngIf="!customers.customerpoints"> - </span>
         </div>
       </div>
 
@@ -299,7 +296,8 @@
     <h4 class="warning  capitalize center">
       <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="customerClickMore">
         <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-      <span *ngIf="!customerClickMore"> <i class="fa fa-crown" aria-hidden="true"></i>Record Not Available</span>
+      <span *ngIf="!customerClickMore">
+        <i class="fa fa-crown" aria-hidden="true"></i>Record Not Available</span>
     </h4>
   </div>
 </div>
