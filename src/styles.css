@@ -1171,3 +1171,12 @@ margin-right: 15px;
 .mgleftright-10{
   margin: 0px 10px;
 }
+.wd-10pc{
+width: 10%;
+}
+.error{
+  color: red;
+}
+.btn.btn-outline-primary{
+  border-radius: 3px !important;
+}

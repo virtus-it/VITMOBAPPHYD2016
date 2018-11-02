@@ -112,11 +112,15 @@ export class SetpricecustomerComponent implements OnInit {
   setPriceResult(result){
     //console.log(result);
     if(result.result == 'success'){
-      this.thisDialogRef.close('success');
-      
-      
+      this.thisDialogRef.close('success');    
     }
-
+  }
+  
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '' || e.key == 32) {
+      e.preventDefault();
+    }
   }
 
   onCloseCancel(){

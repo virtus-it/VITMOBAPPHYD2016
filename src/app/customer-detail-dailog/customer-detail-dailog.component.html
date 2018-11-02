@@ -120,7 +120,8 @@
               <span *ngIf="customer.status == 'ordered' || !customer.dealerdetails"> - </span>
             </td>
 
-            <td class="logo-color" width="6%" (click)="viewOrderDetails(customer)">Select</td>
+            <td class="logo-color" width="6%" (click)="viewOrderDetails(customer)">
+              <span class="btn btn-outline-primary btn-sm">Select</span></td>
           </tr>
         </tbody>
       </table>

@@ -878,13 +878,16 @@ if(!this.createPreOrderInput.productDetails.default_qty){
   // })
   // });
   
-  
-
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '') {
+      e.preventDefault();
+    }
+  }
 
   ngOnInit() {
-    
+       
     this.getDistributors();
-
   
     // this.getProducts();
     // this.expressDeliveryCharge(true);

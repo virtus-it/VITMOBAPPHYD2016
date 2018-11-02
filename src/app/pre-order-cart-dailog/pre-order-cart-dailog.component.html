@@ -11,7 +11,7 @@
 
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
-    <div class="row brd-btm-2px">
+    <div class="d-flex">
       <!-- <div class="  col-sm-4  col-md-4  col-lg-4">
           <md-form-field class="example-full-width">
               <input mdInput placeholder="Distributors" aria-label="State" [mdAutocomplete]="auto" [formControl]="stateCtrl">
@@ -27,8 +27,13 @@
           </md-error>
         </md-form-field>
       </div> -->
-      <div class="  col-sm-4  col-md-4  col-lg-4">
-        <md-form-field class="example-full-width">
+      <div class="p-2 align-self-center">
+        <h5>Customer:
+          <span class="warning">{{Details.firstname}} {{Details.firstname}} - {{Details.mobileno}}</span>
+        </h5>
+      </div>
+      <div class="col-3">
+        <md-form-field class="example-full-width wd-100pc">
           <input mdInput [mdDatepicker]="picker" [min]="minDate" [max]="maxDate" placeholder="Select Date" [(ngModel)]="createPreOrderInput.date"
             (ngModelChange)="dateChanges($event)">
           <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -39,10 +44,6 @@
           </md-error>
         </md-form-field>
       </div>
-
-
-
-
 
       <!-- <div class="  col-sm-4  col-md-4  col-lg-4">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
@@ -64,7 +65,7 @@
         </md-select>
       </div> -->
 
-      <div class="  col-sm-4  col-md-4  col-lg-4">
+      <div class="col-3">
         <md-select placeholder="Select Time" name="type" class="wd-100pc" [(ngModel)]="createPreOrderInput.timeslot">
           <md-option>Select Slot</md-option>
           <md-option value="8AM-11AM" [disabled]='7 <= hours'>8AM-11AM</md-option>
@@ -226,8 +227,8 @@
                 </div>
 
                 <div class="col-7">
-                  <input class="brd-bottom form-control btn-sm nobg center" [(ngModel)]="details.quantity" (keyup)="onChangeQuantity(details,$event)"
-                    [disabled]="details.stockstatus == 'Soldout'">
+                  <input class="brd-bottom form-control btn-sm nobg center" (keypress)="numberEvent($event)" [(ngModel)]="details.quantity"
+                    (keyup)="onChangeQuantity(details,$event)" [disabled]="details.stockstatus == 'Soldout'">
                 </div>
                 <div class="col-2  row">
                   <a class="cursor logo-color">
@@ -245,7 +246,8 @@
                 </div>
 
                 <div class="col-7">
-                  <input class="brd-bottom form-control btn-sm nobg center" [(ngModel)]="details.emptycans" (ngModelChange)="emptyCansChange(details, $event)">
+                  <input class="brd-bottom form-control btn-sm nobg center" (keypress)="numberEvent($event)" [(ngModel)]="details.emptycans"
+                    (ngModelChange)="emptyCansChange(details, $event)">
                 </div>
                 <div class="col-2  row">
                   <a class="cursor logo-color">
@@ -258,7 +260,7 @@
             </td>
 
             <td class=" center">
-              <b class="text-danger">{{details.pcost}} </b>
+              <b class="danger">{{details.pcost}} </b>
             </td>
 
 
@@ -269,19 +271,18 @@
                 <span class="custom-control-description"></span> {{details.expressdeliverycharges}}
               </label>
             </td>
-            <td class="text-warning">{{details.servicecharge}} </td>
+            <td class="warning">{{details.servicecharge}} </td>
             <td>
-              <b class="text-success" *ngIf="createPreOrderInput.productDetails && details.quantity">{{details.pcost*details.quantity + amount + details.servicecharge*details.quantity }} </b>
-              <b class="text-success" *ngIf="details.quantity == 0 || detailsquantity == ''"> 0 </b>
+              <b class="success" *ngIf="createPreOrderInput.productDetails && details.quantity">{{details.pcost*details.quantity + amount + details.servicecharge*details.quantity }} </b>
+              <b class="success" *ngIf="details.quantity == 0 || detailsquantity == ''"> 0 </b>
               <!-- <b class="" *ngIf= "details.servicecharge"> 0 </b> -->
               <!-- <b class="" *ngIf="createPreOrderInput.productDetails.length <= 0">0</b> -->
             </td>
-
           </tr>
         </tbody>
       </table>
-
     </div>
+
     <h5 class="center warning capital">{{message}}</h5>
     <h5 class="center warning capital">{{message1}}</h5>
     <h5 class="center warning capital">{{message2}}</h5>
@@ -289,37 +290,36 @@
 
     <div class="row cost-style">
       <div class="col">
-        <h5> Product Cost:
+        <h6> Product Cost:
           <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
-        </h5>
+        </h6>
       </div>
       <div class="col">
-        <h5> Service Charge :
+        <h6> Service Charge :
           <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
           </b>
-        </h5>
+        </h6>
       </div>
       <div class="col">
-        <h5>Exp Delv Charges :
+        <h6>Exp Delv Charges :
           <b>{{this.amount}}</b>
-        </h5>
+        </h6>
       </div>
       <div class="col">
-        <h5>Empty Cans Amt :
+        <h6>Empty Cans Amt :
           <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
             }}
           </b>
-        </h5>
+        </h6>
       </div>
       <div class="col">
-        <h5 class="right">Total Cost :
+        <h6 class="right">Total Cost :
           <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
             * this.createPreOrderInput.productDetails.quantity) + (this.amount) + (( this.createPreOrderInput.productDetails.quantity
             - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
-        </h5>
+        </h6>
       </div>
     </div>
-
   </div>
 </md-dialog-content>
 

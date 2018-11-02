@@ -136,8 +136,8 @@
       </div>
     </div>
   </div>
+  
   <div class='pd-15'>
-
     <!-- | sorting : 'firstname' -->
     <div class="row brd-box-box" *ngFor="let customers of customerList">
       <div class="col-4 left bg-color-bg">
@@ -149,7 +149,7 @@
                 <i class="fa fa-thumbs-up success" title="Joined"></i>
               </span>
               <span *ngIf="!customers.isappdownloaded" class="">
-                <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
+                <i class="fa fa-thumbs-down error" title="Not Joined"></i>
               </span>
             </span>
           </div>

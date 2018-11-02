@@ -414,8 +414,7 @@ getfollowUpdetails() {
 
   editQuantity(data){
     let dialogRefEditQun = this.dialog.open(EditQuantityDailogComponent, {
-
-        width: '500px',
+        width: '80%',
         data: data
       });
       
