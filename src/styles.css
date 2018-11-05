@@ -1180,3 +1180,6 @@ width: 10%;
 .btn.btn-outline-primary{
   border-radius: 3px !important;
 }
+.btn-warning{
+  color: #000000 !important;
+}

@@ -11,6 +11,7 @@
 <md-dialog-content layout="column">
 
   <div class="container-fluid pd-15x25 brd-bottom">
+    <br>
     <!-- <div class="row">
       <b class="label-style col">Personal Details
         <span></span>
@@ -29,9 +30,8 @@
           <md-option value="followup">Follow up</md-option>
         </md-select>
       </div>
-      <div class="col-3">
-
-        <md-select placeholder="Order status" [(ngModel)]="createTemplateInput.orderstatus" name="status">
+      <div class="col-4">
+        <md-select placeholder="Order status" [(ngModel)]="createTemplateInput.orderstatus" name="status" class="wd-100pc">
           <md-option value="OrderCreated">Order Created</md-option>
           <md-option value="OrderAssigned">Order Assigned</md-option>
           <md-option value="OutForDelivery">Out for delivery</md-option>
@@ -51,71 +51,69 @@
           <md-option value="Delivered">Delivered</md-option>
           <md-option value="duplicate_order">Duplicate order</md-option>
           <md-option value="customerquery">Customer query</md-option>
-          
-          
-
 
         </md-select>
       </div>
-      <div class="col-3">
-        <md-form-field class="">
+      
+      <div class="col-4">
+        <md-form-field class="wd-100pc">
           <input class="form-control" mdInput placeholder="Template Name" name="tempname" [(ngModel)]="createTemplateInput.tempname">
         </md-form-field>
 
         <!-- <i class="	fa fa-question-circle" title= " "<<ORDER_ID>>" for order id <<ORDER_QUANTITY>>" for order quantity"></i> -->
       </div>
     </div>
-    <div class="row  form-group ">
+    <div class="row  ">
       <div class="col-5">
-
         <b class="">Audience </b>
+        <br>
+        <div class="row mgtop-10">
+          <div class="col align-self-end">
+
+            <div class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" class="custom-control-input" name="customerType" value="Customer" [(ngModel)]="createTemplateInput.type">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Customer</span>
+              </label>
+            </div>
+          </div>
+          <div class="col align-self-end">
+            <div class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" class="custom-control-input" [(ngModel)]="createTemplateInput.type" name="customerType" value="Distributor">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">distributor </span>
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-6 mgleft-15">
+      <div class="col-6 ">
         <b class="">Message type</b>
+        <br>
+        <div class="row mgtop-10">
+          <div class="col align-self-end ">
+            <span class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" class="custom-control-input" name="state" value="static" [(ngModel)]="createTemplateInput.messagetype">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Static</span>
+              </label>
+            </span>
+          </div>
+          <div class="col align-self-end ">
+            <span class="left capital">
+              <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                <input type="radio" class="custom-control-input" name="state" value="dynamic" [(ngModel)]="createTemplateInput.messagetype">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description">Dynamic</span>
+              </label>
+            </span>
+          </div>
+        </div>
       </div>
     </div>
-         <div class="row form-group">
-
-        <div class="col-2 align-self-end">
-
-          <div class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" name="customerType" value="Customer" [(ngModel)]="createTemplateInput.type">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Customer</span>
-            </label>
-          </div>
-        </div>
-        <div class="col-3 align-self-end">
-          <div class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" [(ngModel)]="createTemplateInput.type" name="customerType" value="Distributor">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">distributor </span>
-            </label>
-          </div>
-        </div>
-        <div class="col-2 align-self-end pd-left-30">
-
-          <span class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" name="state" value="static" [(ngModel)]="createTemplateInput.messagetype">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Static</span>
-            </label>
-          </span>
-        </div>
-        <div class="col-2 align-self-end marleft">
-          <span class="left capital">
-            <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
-              <input type="radio" class="custom-control-input" name="state" value="dynamic" [(ngModel)]="createTemplateInput.messagetype">
-              <span class="custom-control-indicator"></span>
-              <span class="custom-control-description">Dynamic</span>
-            </label>
-          </span>
-        </div>
-
-      </div>
 
     <div class="row">
       <div class="col">

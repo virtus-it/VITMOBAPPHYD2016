@@ -33,7 +33,8 @@
     <div class="row mgbottom-5" *ngIf="UserInput.usertype == 'Customer'">
       <div class="col-md-3 col-sm-3">
         <md-form-field class="">
-          <input class="form-control" [formControl]="emailFormControl" mdInput placeholder="First Name" name="firstName" required [(ngModel)]="customerInput.User.firstname" maxlength="15">
+          <input class="form-control" [formControl]="emailFormControl" mdInput placeholder="First Name" name="firstName" required [(ngModel)]="customerInput.User.firstname"
+            maxlength="15">
           <md-error *ngIf="emailFormControl.hasError('required')">
             First Name is
             <strong>required</strong>
@@ -42,7 +43,7 @@
       </div>
       <div class="col-md-3 col-sm-3 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname"  maxlength="15">
+          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname" maxlength="15">
           <md-error>
             Last Name is
             <strong>required</strong>
@@ -52,7 +53,7 @@
       </div>
       <div class="col-md-3 col-sm-3 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname"  maxlength="15">
+          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname" maxlength="15">
           <md-error>
             Alias Name is
             <strong>required</strong>
@@ -61,21 +62,23 @@
 
       </div>
       <div class="col-md-3 col-sm-3 " *ngIf="UserInput.usertype == 'Customer'">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email Id" name="emailid" [(ngModel)]="customerInput.User.emailid"  maxlength="32" (keypress)="emailEvent($event)">
-            <md-error>
-              Email Id is
-              <strong>required</strong>
-            </md-error>
-          </md-form-field>
-  
-        </div>
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Email Id" name="emailid" [(ngModel)]="customerInput.User.emailid" maxlength="32"
+            (keypress)="emailEvent($event)">
+          <md-error>
+            Email Id is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+
+      </div>
     </div>
     <div class="row mgbottom-5" *ngIf="UserInput.usertype == 'Customer'">
- 
+
       <div class="col-md-3 col-sm-3">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt" maxlength="4" (keypress)="numberEvent($event)">
+          <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt"
+            maxlength="4" (keypress)="numberEvent($event)">
           <md-error>
             Advance Amount is
             <strong>required</strong>
@@ -85,27 +88,29 @@
       <div class="col-md-3 col-sm-3">
         <md-form-field class="">
           <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [formControl]="mobileFormControl"
-            required [(ngModel)]="customerInput.User.mobileno"  (keypress)="numberEvent($event)">
+            required [(ngModel)]="customerInput.User.mobileno" (keypress)="numberEvent($event)">
           <md-error *ngIf="mobileFormControl.hasError('required')">
             Mobile Number is
             <strong>required</strong>
           </md-error>
         </md-form-field>
       </div>
-            <div class="col-md-3 col-sm-3" *ngIf="UserInput.usertype == 'Customer'">
+      <div class="col-md-3 col-sm-3" *ngIf="UserInput.usertype == 'Customer'">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1" [(ngModel)]="customerInput.User.mobileno_one" maxlength="10" (keypress)="numberEvent($event)">
+          <input class="form-control" mdInput placeholder="Mobile no 1" name="mobile1" [(ngModel)]="customerInput.User.mobileno_one"
+            maxlength="10" (keypress)="numberEvent($event)">
         </md-form-field>
       </div>
       <div class="col-md-3 col-sm-3" *ngIf="UserInput.usertype == 'Customer'">
-          <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile 2" [(ngModel)]="customerInput.User.mobileno_two" maxlength="10" (keypress)="numberEvent($event)">
-          </md-form-field>
-        </div>
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Mobile no 2" name="mobile 2" [(ngModel)]="customerInput.User.mobileno_two"
+            maxlength="10" (keypress)="numberEvent($event)">
+        </md-form-field>
+      </div>
     </div>
     <div class="row mgbottom-5" *ngIf="UserInput.usertype == 'Customer'">
 
-  
+
 
 
       <!-- <div class="col-md-3 col-sm-3">
@@ -115,36 +120,39 @@
 
       </div> -->
       <div class="col-md-3 col-sm-3 align-items-end">
-          <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]="customerInput.User.buildingname" maxlength="5">
-          </md-form-field>
-  
-        </div>
-        <div class="col-md-3 col-sm-3  align-items-end">
-            <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]="customerInput.User.locality" maxlength="25">
-            </md-form-field>
-          </div>
-         
-          <div class="col-md-3 col-sm-3 align-items-end" *ngIf="this.Details">
-              <md-form-field class="wd-100pc">
-                <input class="form-control" mdInput placeholder="Reference Code" name="referencecode" [(ngModel)]="customerInput.User.referencecode" maxlength="10">
-              </md-form-field>
-      
-            </div>
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]="customerInput.User.buildingname"
+            maxlength="5">
+        </md-form-field>
+
+      </div>
+      <div class="col-md-3 col-sm-3  align-items-end">
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]="customerInput.User.locality" maxlength="25">
+        </md-form-field>
+      </div>
+
+      <div class="col-md-3 col-sm-3 align-items-end" *ngIf="this.Details">
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Reference Code" name="referencecode" [(ngModel)]="customerInput.User.referencecode"
+            maxlength="10">
+        </md-form-field>
+
+      </div>
     </div>
     <div class="row" *ngIf="UserInput.usertype == 'Customer'">
 
 
-     
-        <div class="col-md-12 col-sm-12" *ngIf="UserInput.usertype == 'Customer'">
-            <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address" maxlength="150">
-            </md-form-field>
-          </div>
- 
 
-</div>
+      <div class="col-md-12 col-sm-12" *ngIf="UserInput.usertype == 'Customer'">
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"
+            maxlength="150">
+        </md-form-field>
+      </div>
+
+
+    </div>
 
 
     <!-- <div class="row mgbottom-5" *ngIf="UserInput.usertype == 'Customer'">
@@ -159,15 +167,15 @@
 
 
 
-<div class="row"  *ngIf="UserInput.usertype == 'Customer'"> 
+    <div class="row" *ngIf="UserInput.usertype == 'Customer'">
       <div class="col-3">
 
-                <md-select placeholder="Payment Type" class="wd-100pc"[(ngModel)]="customerInput.User.paymenttype">
-                  <md-option value="cod">COD</md-option>
-                  <md-option value="credit">CREDIT</md-option>
-                  <md-option value="paytm">PAYTM</md-option>
-                  <md-option value="online">ONLINE BANKING</md-option>
-                </md-select>
+        <md-select placeholder="Payment Type" class="wd-100pc" [(ngModel)]="customerInput.User.paymenttype">
+          <md-option value="cod">COD</md-option>
+          <md-option value="credit">CREDIT</md-option>
+          <md-option value="paytm">PAYTM</md-option>
+          <md-option value="online">ONLINE BANKING</md-option>
+        </md-select>
 
 
 
@@ -242,16 +250,16 @@
         </div>
 
       </div>
-      <div class="col-3" >
+      <div class="col-3">
 
-                <md-select placeholder="Customer Type" class="wd-100pc" [(ngModel)]="customerInput.User.registertype">
-                  <md-option value="Residential">Residential</md-option>
-                  <md-option value="Commercial">Commercial</md-option>
-                  <md-option value="Corporate">Corporate</md-option>
-                </md-select>
-         
+        <md-select placeholder="Customer Type" class="wd-100pc" [(ngModel)]="customerInput.User.registertype">
+          <md-option value="Residential">Residential</md-option>
+          <md-option value="Commercial">Commercial</md-option>
+          <md-option value="Corporate">Corporate</md-option>
+        </md-select>
 
-   
+
+
 
         <!-- <span width="30%" class="left capital">
           <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
@@ -295,7 +303,8 @@
       <div class="row mg-btm-14">
         <div class="col-md-3  col-sm-3  col-lg-3">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="dist.firstName" maxlength="15">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="dist.firstName"
+              maxlength="15">
             <md-error *ngIf="firstFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
@@ -305,7 +314,8 @@
         <div class="col-md-3  col-sm-3  col-lg-3">
           <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="dist.lastName" maxlength="15">
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="dist.lastName"
+                maxlength="15">
               <md-error *ngIf="lastFormControl.hasError('required')">
                 Last Name is
                 <strong>required</strong>
@@ -315,7 +325,8 @@
         </div>
         <div class="col-md-3  col-sm-3  col-lg-3" *ngIf="!phone && authenticationService.isSuperDelear == false">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="dist.phone"  (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="dist.phone"
+              (keypress)="numberEvent($event)">
 
             <md-error *ngIf="phoneFormControl.hasError('required')">
               Phone Number is
@@ -325,21 +336,24 @@
         </div>
         <div class="col-md-3  col-sm-3  col-lg-3" *ngIf="phone && authenticationService.isSuperDelear == false">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="dist.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="dist.phone"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
 
 
-        <div class="col-md-4  col-sm-4  col-lg-4"  *ngIf="authenticationService.isSuperDelear">
-            <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10" (keypress)="numberEvent($event)" >
-              
-                <md-error *ngIf="phoneFormControl.hasError('required')" >
-                    Phone Number is <strong>required</strong>
-                  </md-error>
-              </md-form-field>
-            </div> 
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="authenticationService.isSuperDelear">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone"
+              maxlength="10" (keypress)="numberEvent($event)">
+
+            <md-error *ngIf="phoneFormControl.hasError('required')">
+              Phone Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
 
 
       </div>
@@ -348,7 +362,8 @@
 
         <div class="col-md-3  col-sm-3  col-lg-3">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="dist.mobile1" (keypress)="numberEvent($event)" >
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="dist.mobile1"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -356,7 +371,8 @@
 
         <div class="col-md-3  col-sm-3  col-lg-3">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="dist.mobile2" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="dist.mobile2"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -390,21 +406,22 @@
         </div>
 
         <div class="col-md-4  col-sm-4  col-lg-4">
-                        
-            <md-select placeholder="Type of Phone" name="phonetype" class="wd-100pc" [(ngModel)]="dist.phonetype">
-              <md-option value="no_smartphone">No Smartphone</md-option>
-              <md-option value="android">Android</md-option>
-              <md-option value="ios">Iphone</md-option>
-            </md-select>
 
-          </div>
+          <md-select placeholder="Type of Phone" name="phonetype" class="wd-100pc" [(ngModel)]="dist.phonetype">
+            <md-option value="no_smartphone">No Smartphone</md-option>
+            <md-option value="android">Android</md-option>
+            <md-option value="ios">Iphone</md-option>
+          </md-select>
 
-          
+        </div>
+
+
       </div>
       <div class="row mg-btm-21">
         <div class="col-md-12  col-sm-12  col-lg-12">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="dist.address" maxlength="150">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="dist.address"
+              maxlength="150">
             <md-error *ngIf="addressFormControl.hasError('required')">
               Address is
               <strong>required</strong>
@@ -431,49 +448,54 @@
       <div class="row">
         <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First name" name="firstName" [formControl]="emailFormControl" [(ngModel)]="supplierInput.firstname" maxlength="15">
+            <input class="form-control" mdInput placeholder="First name" name="firstName" [formControl]="emailFormControl" [(ngModel)]="supplierInput.firstname"
+              maxlength="15">
             <md-error *ngIf="emailFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
             </md-error>
           </md-form-field>
-</div>
-<div class="col-md-3 col-sm-3">
+        </div>
+        <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="supplierInput.lastname" [formControl]="emailFormControl" maxlength="15">
+            <input class="form-control" mdInput placeholder="Last name" name="lastname" [(ngModel)]="supplierInput.lastname" [formControl]="emailFormControl"
+              maxlength="15">
 
-              <md-error *ngIf="emailFormControl.hasError('required')">
-                  Last Name is
-                  <strong>required</strong>
-                </md-error>
-            </md-form-field>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno" (keypress)="numberEvent($event)">
-                  <md-error>
-                    Mobile Number is
-                    <strong>required</strong>
-                  </md-error>
-                </md-form-field>
-                </div>
-            <div class="col-md-3 col-sm-3">
+            <md-error *ngIf="emailFormControl.hasError('required')">
+              Last Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno" (keypress)="numberEvent($event)">
+            <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno"
+              (keypress)="numberEvent($event)">
+            <md-error>
+              Mobile Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="supplierInput.altmobileno"
+              (keypress)="numberEvent($event)">
             <md-error>
               Alternate Phone Number is
               <strong>required</strong>
             </md-error>
           </md-form-field>
         </div>
-        </div>
-  <div class="row">
+      </div>
+      <div class="row">
         <div class="col-md-3 col-sm-3 ">
-            <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="supplierInput.emailid" maxlength="32" (keypress)="emailEvent($event)">
-            </md-form-field>
-          </div>
-          <div class="col-md-9 col-sm-9 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="supplierInput.emailid" maxlength="32"
+              (keypress)="emailEvent($event)">
+          </md-form-field>
+        </div>
+        <div class="col-md-9 col-sm-9 ">
           <md-form-field class="wd-95pc">
             <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="supplierInput.address" maxlength="150">
             <md-error>
@@ -481,10 +503,10 @@
               <strong>required</strong>
             </md-error>
           </md-form-field>
+        </div>
       </div>
- </div>
 
-     
+
 
     </div>
   </form>
@@ -505,7 +527,8 @@
       <div class="row mg-btm-14">
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="salesInput.firstName" maxlength="15">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="salesInput.firstName"
+              maxlength="15">
             <md-error *ngIf="firstFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
@@ -515,7 +538,8 @@
         <div class="col-md-4  col-sm-4  col-lg-4">
           <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="salesInput.lastName" maxlength="15">
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="salesInput.lastName"
+                maxlength="15">
               <md-error *ngIf="lastFormControl.hasError('required')">
                 Last Name is
                 <strong>required</strong>
@@ -525,7 +549,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="salesInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="salesInput.phone"
+              (keypress)="numberEvent($event)">
 
             <md-error *ngIf="phoneFormControl.hasError('required')">
               Phone Number is
@@ -535,7 +560,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="salesInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="salesInput.phone"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -545,7 +571,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="salesInput.mobile1" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="salesInput.mobile1"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -553,7 +580,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="salesInput.mobile2" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="salesInput.mobile2"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -562,7 +590,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="salesInput.emailid" maxlength="32" (keypress)="emailEvent($event)">
+            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="salesInput.emailid" maxlength="32"
+              (keypress)="emailEvent($event)">
           </md-form-field>
         </div>
 
@@ -576,7 +605,8 @@
       <div class="row">
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="salesInput.referCode" maxlength="10">
+            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="salesInput.referCode"
+              maxlength="10">
           </md-form-field>
         </div>
 
@@ -589,7 +619,8 @@
       <div class="row mg-btm-21">
         <div class="col-md-12  col-sm-12  col-lg-12">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="salesInput.address" maxlength="150">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="salesInput.address"
+              maxlength="150">
             <md-error *ngIf="addressFormControl.hasError('required')">
               Address is
               <strong>required</strong>
@@ -616,7 +647,8 @@
       <div class="row mg-btm-14">
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="manufacturerInput.firstName" maxlength="15">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="manufacturerInput.firstName"
+              maxlength="15">
             <md-error *ngIf="firstFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
@@ -626,7 +658,8 @@
         <div class="col-md-4  col-sm-4  col-lg-4">
           <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="manufacturerInput.lastName" maxlength="15">
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="manufacturerInput.lastName"
+                maxlength="15">
               <md-error *ngIf="lastFormControl.hasError('required')">
                 Last Name is
                 <strong>required</strong>
@@ -636,7 +669,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="manufacturerInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="manufacturerInput.phone"
+              (keypress)="numberEvent($event)">
 
             <md-error *ngIf="phoneFormControl.hasError('required')">
               Phone Number is
@@ -646,7 +680,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="manufacturerInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="manufacturerInput.phone"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -656,7 +691,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="manufacturerInput.mobile1" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="manufacturerInput.mobile1"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -664,7 +700,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="manufacturerInput.mobile2" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="manufacturerInput.mobile2"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -673,7 +710,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="manufacturerInput.emailid" maxlength="50" (keypress)="emailEvent($event)">
+            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="manufacturerInput.emailid" maxlength="50"
+              (keypress)="emailEvent($event)">
           </md-form-field>
         </div>
 
@@ -687,20 +725,23 @@
       <div class="row">
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="manufacturerInput.referCode" maxlength="10">
+            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="manufacturerInput.referCode"
+              maxlength="10">
           </md-form-field>
         </div>
 
         <div class="col-md-8  col-sm-8  col-lg-8">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Company Name" name="companyname" [(ngModel)]="manufacturerInput.companyname" maxlength="50">
+            <input mdInput class="form-control" placeholder="Company Name" name="companyname" [(ngModel)]="manufacturerInput.companyname"
+              maxlength="50">
           </md-form-field>
         </div>
       </div>
       <div class="row mg-btm-21">
         <div class="col-md-12  col-sm-12  col-lg-12">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="manufacturerInput.address" maxlength="150">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="manufacturerInput.address"
+              maxlength="150">
             <md-error *ngIf="addressFormControl.hasError('required')">
               Address is
               <strong>required</strong>
@@ -729,7 +770,8 @@
       <div class="row mg-btm-14">
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="marketingInput.firstName" maxlength="15">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="marketingInput.firstName"
+              maxlength="15">
             <md-error *ngIf="firstFormControl.hasError('required')">
               First Name is
               <strong>required</strong>
@@ -739,7 +781,8 @@
         <div class="col-md-4  col-sm-4  col-lg-4">
           <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="marketingInput.lastName" maxlength="15">
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="marketingInput.lastName"
+                maxlength="15">
               <md-error *ngIf="lastFormControl.hasError('required')">
                 Last Name is
                 <strong>required</strong>
@@ -749,7 +792,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="marketingInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="marketingInput.phone"
+              (keypress)="numberEvent($event)">
 
             <md-error *ngIf="phoneFormControl.hasError('required')">
               Phone Number is
@@ -759,7 +803,8 @@
         </div>
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="marketingInput.phone" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="marketingInput.phone"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -769,7 +814,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="marketingInput.mobile1" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="marketingInput.mobile1"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -777,7 +823,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="marketingInput.mobile2" (keypress)="numberEvent($event)">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="marketingInput.mobile2"
+              (keypress)="numberEvent($event)">
           </md-form-field>
 
         </div>
@@ -786,7 +833,8 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="marketingInput.emailid" maxlength="50" (keypress)="emailEvent($event)">
+            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="marketingInput.emailid" maxlength="50"
+              (keypress)="emailEvent($event)">
           </md-form-field>
         </div>
 
@@ -800,20 +848,23 @@
       <div class="row">
         <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="this.Details">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="marketingInput.referCode" maxlength="10">
+            <input mdInput class="form-control" placeholder="Reference code" name="referenceCode" [(ngModel)]="marketingInput.referCode"
+              maxlength="10">
           </md-form-field>
         </div>
 
         <div class="col-md-8  col-sm-8  col-lg-8">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Company Name" name="companyname" [(ngModel)]="marketingInput.companyname" maxlength="50">
+            <input mdInput class="form-control" placeholder="Company Name" name="companyname" [(ngModel)]="marketingInput.companyname"
+              maxlength="50">
           </md-form-field>
         </div>
       </div>
       <div class="row mg-btm-21">
         <div class="col-md-12  col-sm-12  col-lg-12">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="marketingInput.address" maxlength="150">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="marketingInput.address"
+              maxlength="150">
             <md-error *ngIf="addressFormControl.hasError('required')">
               Address is
               <strong>required</strong>
@@ -824,7 +875,7 @@
 
       </div>
     </div>
-    
+
   </form>
 </md-dialog-content>
 
@@ -838,253 +889,272 @@
 
 
 <md-dialog-content layout="column" *ngIf="UserInput.usertype == 'Customercare'">
-    <form class="example-form">
-      <div class="container-fluid pd-15x25 brd-bottom">
-        <div class="row mg-btm-14">
-          <div class="col-md-4  col-sm-4  col-lg-4">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row mg-btm-14">
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="customerCareInput.firstName"
+              maxlength="15">
+            <md-error *ngIf="firstFormControl.hasError('required')">
+              First Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="customerCareInput.firstName" maxlength="15">
-              <md-error *ngIf="firstFormControl.hasError('required')">
-                First Name is
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="customerCareInput.lastName"
+                maxlength="15">
+              <md-error *ngIf="lastFormControl.hasError('required')">
+                Last Name is
                 <strong>required</strong>
               </md-error>
             </md-form-field>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <div class=" form-group pdright-20">
-              <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="customerCareInput.lastName" maxlength="15">
-                <md-error *ngIf="lastFormControl.hasError('required')">
-                  Last Name is
-                  <strong>required</strong>
-                </md-error>
-              </md-form-field>
-            </div>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="customerCareInput.phone">
-  
-              <md-error *ngIf="phoneFormControl.hasError('required')" (keypress)="numberEvent($event)">
-                Phone Number is
-                <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="customerCareInput.phone" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
           </div>
         </div>
-  
-        <div class="row">
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="customerCareInput.mobile1" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
-          </div>
-  
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="customerCareInput.mobile2" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
-          </div>
-  
-  
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="customerCareInput.emailid"  maxlength="50" (keypress)="emailEvent($event)">
-            </md-form-field>
-          </div>
-  
-  
-  
-  
-  
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="customerCareInput.phone">
+
+            <md-error *ngIf="phoneFormControl.hasError('required')" (keypress)="numberEvent($event)">
+              Phone Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
         </div>
-  
-  
-       
-        <div class="row mg-btm-21">
-          <div class="col-md-12  col-sm-12  col-lg-12">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="customerCareInput.address"  maxlength="150">
-              <md-error *ngIf="addressFormControl.hasError('required')">
-                Address is
-                <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-  
-  
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="customerCareInput.phone"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
         </div>
       </div>
-      
-    </form>
-  </md-dialog-content>
+
+      <div class="row">
+
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="customerCareInput.mobile1"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
+        </div>
 
 
-  <!-- ccEnds here -->
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="customerCareInput.mobile2"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
+        </div>
 
 
-  <!-- sales team starts here -->
 
-  <md-dialog-content layout="column" *ngIf="UserInput.usertype == 'salesteam'">
-    <form class="example-form">
-      <div class="container-fluid pd-15x25 brd-bottom">
-        <div class="row mg-btm-14">
-          <div class="col-md-4  col-sm-4  col-lg-4">
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="customerCareInput.emailid" maxlength="50"
+              (keypress)="emailEvent($event)">
+          </md-form-field>
+        </div>
+
+
+
+
+
+      </div>
+
+
+
+      <div class="row mg-btm-21">
+        <div class="col-md-12  col-sm-12  col-lg-12">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="customerCareInput.address"
+              maxlength="150">
+            <md-error *ngIf="addressFormControl.hasError('required')">
+              Address is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+
+
+      </div>
+    </div>
+
+  </form>
+</md-dialog-content>
+
+
+<!-- ccEnds here -->
+
+
+<!-- sales team starts here -->
+
+<md-dialog-content layout="column" *ngIf="UserInput.usertype == 'salesteam'">
+  <form class="example-form">
+    <div class="container-fluid pd-15x25 brd-bottom">
+      <div class="row mg-btm-14">
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="salesteamInput.firstName"
+              maxlength="15">
+            <md-error *ngIf="firstFormControl.hasError('required')">
+              First Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <div class=" form-group pdright-20">
             <md-form-field class="example-full-width wd-100pc">
-              <input class="" mdInput placeholder="First Name" [formControl]="firstFormControl" name="firstName" [(ngModel)]="salesteamInput.firstName"  maxlength="15">
-              <md-error *ngIf="firstFormControl.hasError('required')">
-                First Name is
+              <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="salesteamInput.lastName"
+                maxlength="15">
+              <md-error *ngIf="lastFormControl.hasError('required')">
+                Last Name is
                 <strong>required</strong>
               </md-error>
             </md-form-field>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <div class=" form-group pdright-20">
-              <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Last Name" [formControl]="lastFormControl" name="lastName" [(ngModel)]="salesteamInput.lastName"  maxlength="15">
-                <md-error *ngIf="lastFormControl.hasError('required')">
-                  Last Name is
-                  <strong>required</strong>
-                </md-error>
-              </md-form-field>
-            </div>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="salesteamInput.phone" (keypress)="numberEvent($event)">
-  
-              <md-error *ngIf="phoneFormControl.hasError('required')">
-                Phone Number is
-                <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-          <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="salesteamInput.phone" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
           </div>
         </div>
-  
-        <div class="row">
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="salesteamInput.mobile1" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
-          </div>
-  
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="salesteamInput.mobile2" (keypress)="numberEvent($event)">
-            </md-form-field>
-  
-          </div>
-  
-  
-  
-          <div class="col-md-4  col-sm-4  col-lg-4">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="salesteamInput.emailid" maxlength="50" (keypress)="emailEvent($event)">
-            </md-form-field>
-          </div>
-  
-  
-  
-  
-  
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" name="phone" maxlength="10" [(ngModel)]="salesteamInput.phone"
+              (keypress)="numberEvent($event)">
+
+            <md-error *ngIf="phoneFormControl.hasError('required')">
+              Phone Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
         </div>
-  
-  
-       
-        <div class="row mg-btm-21">
-          <div class="col-md-12  col-sm-12  col-lg-12">
-            <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="salesteamInput.address" maxlength="150">
-              <md-error *ngIf="addressFormControl.hasError('required')">
-                Address is
-                <strong>required</strong>
-              </md-error>
-            </md-form-field>
-          </div>
-  
-  
+        <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Phone" name="phone" maxlength="10" disabled="disabled" [(ngModel)]="salesteamInput.phone"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
         </div>
       </div>
-      
-    </form>
-  </md-dialog-content>
 
-  <!-- sales team ends here-->
+      <div class="row">
+
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Mobile number 1" name="phone1" maxlength="10" [(ngModel)]="salesteamInput.mobile1"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
+        </div>
 
 
-  <!-- Super supplier starts -->
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Mobile Number 2" name="phone2" maxlength="10" [(ngModel)]="salesteamInput.mobile2"
+              (keypress)="numberEvent($event)">
+          </md-form-field>
+
+        </div>
 
 
-  
+
+        <div class="col-md-4  col-sm-4  col-lg-4">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Email id" name="emailid" [(ngModel)]="salesteamInput.emailid" maxlength="50"
+              (keypress)="emailEvent($event)">
+          </md-form-field>
+        </div>
+
+
+
+
+
+      </div>
+
+
+
+      <div class="row mg-btm-21">
+        <div class="col-md-12  col-sm-12  col-lg-12">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput class="form-control" placeholder="Address" [formControl]="addressFormControl" name="address" [(ngModel)]="salesteamInput.address"
+              maxlength="150">
+            <md-error *ngIf="addressFormControl.hasError('required')">
+              Address is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+
+
+      </div>
+    </div>
+
+  </form>
+</md-dialog-content>
+
+<!-- sales team ends here-->
+
+
+<!-- Super supplier starts -->
+
+
+
 <md-dialog-content layout="column" *ngIf="UserInput.usertype == 'Supersupplier'">
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="row">
         <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First name" name="firstName" [(ngModel)]="superSupplierInput.firstname" maxlength="15">
-            <md-error >
+            <input class="form-control" mdInput placeholder="First name" name="firstName" [(ngModel)]="superSupplierInput.firstname"
+              maxlength="15">
+            <md-error>
               First Name is
               <strong>required</strong>
             </md-error>
           </md-form-field>
-</div>
-<div class="col-md-3 col-sm-3">
+        </div>
+        <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Last name" name="lastname"  [(ngModel)]="superSupplierInput.lastname" maxlength="15">
+            <input class="form-control" mdInput placeholder="Last name" name="lastname" [(ngModel)]="superSupplierInput.lastname" maxlength="15">
 
-              <md-error>
-                  Last Name is
-                  <strong>required</strong>
-                </md-error>
-            </md-form-field>
-            </div>
-            <div class="col-md-3 col-sm-3">
-                <md-form-field class="">
-                  <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="superSupplierInput.mobileno" (keypress)="numberEvent($event)">
-                  <md-error>
-                    Mobile Number is
-                    <strong>required</strong>
-                  </md-error>
-                </md-form-field>
-                </div>
-            <div class="col-md-3 col-sm-3">
+            <md-error>
+              Last Name is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="superSupplierInput.altmobileno" (keypress)="numberEvent($event)">
+            <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="superSupplierInput.mobileno"
+              (keypress)="numberEvent($event)">
+            <md-error>
+              Mobile Number is
+              <strong>required</strong>
+            </md-error>
+          </md-form-field>
+        </div>
+        <div class="col-md-3 col-sm-3">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Alternate Number" name="altmobileno" maxlength="10" [(ngModel)]="superSupplierInput.altmobileno"
+              (keypress)="numberEvent($event)">
             <md-error>
               Alternate Phone Number is
               <strong>required</strong>
             </md-error>
           </md-form-field>
         </div>
-        </div>
-  <div class="row">
+      </div>
+      <div class="row">
         <div class="col-md-3 col-sm-3 ">
-            <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="superSupplierInput.emailid" maxlength="50" (keypress)="emailEvent($event)">
-            </md-form-field>
-          </div>
-          <div class="col-md-9 col-sm-9 ">
+          <md-form-field class="">
+            <input class="form-control" mdInput placeholder="Email id" name="emailId" [(ngModel)]="superSupplierInput.emailid" maxlength="50"
+              (keypress)="emailEvent($event)">
+          </md-form-field>
+        </div>
+        <div class="col-md-9 col-sm-9 ">
           <md-form-field class="wd-95pc">
             <input class="form-control" mdInput placeholder="Address" name="address" [(ngModel)]="superSupplierInput.address" maxlength="150">
             <md-error>
@@ -1092,10 +1162,10 @@
               <strong>required</strong>
             </md-error>
           </md-form-field>
+        </div>
       </div>
- </div>
 
-     
+
 
     </div>
   </form>
@@ -1103,25 +1173,13 @@
 
 
 <!-- super supplier ends -->
-
-
-
-
-
-
-
-
-
-<small class="red">{{this.messageError}}</small>
-<small class="red"> {{validateMessage}} </small>
+<h5 class="error center">{{this.messageError}}</h5>
+<h5 class="error center"> {{validateMessage}} </h5>
 
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" *ngIf="!this.Details" md-raised-button (click)="createOrUpdateUser()">SUBMIT</button>
-
     <button type="submit" class="btn-primary" *ngIf="this.Details" md-raised-button (click)="createOrUpdateUser()">UPDATE</button>
-
-
-    <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
+   <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>

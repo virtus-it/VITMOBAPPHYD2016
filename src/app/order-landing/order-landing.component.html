@@ -25,14 +25,14 @@
                     (click)="showTabPanel('allorder')">Ordered</button>
                 </a>
                 <a class="">
-                    <button type="submit" md-raised-button class="pdright-5" *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
+                  <button type="submit" md-raised-button class="pdright-5" *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
                     href="javascript:void(0)" (click)="showTabPanel('forward')">Forwarded</button>
                 </a>
                 <a class="pdright-5">
-                    <button md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
+                  <button md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
                 </a>
                 <a class="pdright-5">
-                    <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+                  <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
                 </a>
                 <a *ngIf="salesTeamLogin" class="pdright-5">
                   <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
@@ -238,7 +238,7 @@
                       </md-autocomplete>
                     </md-form-field>
                   </div>
-                  <div class="form-group" *ngIf="filterInput.order.searchtype == 'followupdate'">
+                  <div class="" *ngIf="filterInput.order.searchtype == 'followupdate'">
                     <md-form-field class="inline">
                       <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="filterType.followUpdate">
                       <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -246,21 +246,21 @@
                     </md-form-field>
                   </div>
 
-                  <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                  <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
                     <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                       name="selectedItem"></angular2-multiselect>
                   </div>
-                  <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+                  <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
                     <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
                       name="selectedItem"></angular2-multiselect>
                   </div>
 
-                  <div class="left mgtop-20" *ngIf="filterInput.order.searchtype == 'category'">
+                  <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'category'">
                     <angular2-multiselect class="" [data]="categories" [(ngModel)]="categoryProduct.selectedItems" [settings]="dropdownSettings"
                       name="selectedItem"></angular2-multiselect>
                   </div>
 
-                  <div class="" *ngIf="filterInput.order.searchtype =='deliveryslot'">
+                  <div class="form-group" *ngIf="filterInput.order.searchtype =='deliveryslot'">
                     <md-form-field class="inline">
                       <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date" [(ngModel)]="filterType.date">
                       <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
@@ -274,23 +274,19 @@
                       <md-option value="5PM-8PM">5PM-8PM</md-option>
                     </md-select>
                   </div>
-                  <br>
-                  <small>{{this.cantFilterMessage}}</small>
-                  <div class="input-group pd-10 ">
+                  <small class="error" *ngIf="this.cantFilterMessage">{{this.cantFilterMessage}}</small>
+                  <div class="input-group pd-10">
                     <button md-raised-button color="primary" class="mgright-5" (click)="searchOrderList()">
                       <i class="fa fa-search" aria-hidden="true"></i> Search
                     </button>
-                    <button md-raised-button color="primary" (click)="clearFilter()">
+                    <button md-raised-button (click)="clearFilter()" class="btn-warning">
                       <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
                     </button>
                   </div>
-
                 </div>
               </div>
             </a>&nbsp;
           </div>
-
-
         </div>
       </div>
 
@@ -464,13 +460,13 @@
                       <b class="" *ngIf="forward.advance_amount">{{forward.advance_amount}}</b>
                       <b class="" *ngIf="forward.advance_amount === null"> - </b>
                       <b class="" *ngIf="forward.advance_amount == 0"> 0 </b>
-
                     </div>
                   </div>
+
                   <div class=" row mgtop-15">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
-                      <b class=" success">Rs.{{forward.bill_amount}}</b>
+                      <b class=" danger">Rs.{{forward.bill_amount}}</b>
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 ">
@@ -831,11 +827,10 @@
                     </div>
                   </div>
 
-
                   <div class=" row mgtop-15">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
-                      <b class="success">Rs.{{allorder.bill_amount}}</b>
+                      <b class="danger">Rs.{{allorder.bill_amount}}</b>
                     </div>
 
                     <div class="col-sm-4  col-md-4  col-lg-4 ">
@@ -1196,7 +1191,7 @@
                   <div class=" row mgtop-15">
                     <div class="col-sm-3  col-md-3  col-lg-3  left align-self-center">
                       <p class="td-label mgbottom-0">Total Amt </p>
-                      <b class="success">Rs.{{complete.bill_amount}}</b>
+                      <b class="danger">Rs.{{complete.bill_amount}}</b>
                       <!-- <b class="" *ngIf="forward.receivedamt > 0">Rs.{{forward.receivedamt}}</b> -->
                     </div>
 
@@ -1268,12 +1263,18 @@
 
                 <div class="row">
                   <div class="col left">
-                    <p class="td-label mgbottom-0">
-                      Address
-                    </p>
-                    <b class="capitalize onhovertooltip-260" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
-                    <button class="btn btn-link btn-sm copy-btn fa fa-copy" (click)="copyElement(complete.orderby_address)">copy</button>
+                    <div class="row">
+                      <div class="col-9">
+                        <p class="td-label mgbottom-0">
+                          Address</p>
+                        <b class="capitalize onhovertooltip-260" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
 
+                      </div>
+                      <div class="col-3 right align-self-center">
+                        <button class="btn btn-link btn-sm copy-btn" (click)="copyElement(complete.orderby_address)">
+                          <i class=" fa fa-copy" aria-hidden="true"></i> Copy</button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </td>
@@ -1377,18 +1378,6 @@
         </h5>
         <h4 *ngIf="!completeClickMore" class="warning center">
           <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-
-
-        <!-- <h5 class="warning  capitalize center">
-            <a href="javascript:void(0);" (click)=getPagingMiscOrders(false,tabPanelView); *ngIf="miscOrdersClickMore">
-              <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-              click for more data</a>
-          </h5>
-          <h4 *ngIf="!miscOrdersClickMore" class="warning center">
-            <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4> -->
-
-
-
       </div>
     </div>
   </div>

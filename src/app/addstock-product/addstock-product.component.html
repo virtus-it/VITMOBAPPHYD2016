@@ -28,7 +28,7 @@
         </div>
         <div class="col-md-6 col-sm-6 col-lg-6">
           <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Stock/Quantity" name="stock" [(ngModel)]="StockInput.stock">
+            <input class="form-control" mdInput placeholder="Stock/Quantity" (keypress)="numberEvent($event)" name="stock" [(ngModel)]="StockInput.stock">
           </md-form-field>
         </div>
 
@@ -36,13 +36,13 @@
       <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-6">
           <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Purchasing Cost" name="cost" [(ngModel)]="StockInput.itemCost">
+            <input class="form-control" mdInput placeholder="Purchasing Cost"  (keypress)="numberEvent($event)" name="cost" [(ngModel)]="StockInput.itemCost">
           </md-form-field>
 
         </div>
         <div class="col-md-6 col-sm-6 col-lg-6">
           <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Return Cans" name="retruncans" [(ngModel)]="StockInput.returnemptycans">
+            <input class="form-control" mdInput placeholder="Return Cans" (keypress)="numberEvent($event)" name="retruncans" [(ngModel)]="StockInput.returnemptycans">
           </md-form-field>
 
         </div>
@@ -53,7 +53,7 @@
 
         <div class="col-md-6 col-sm-6 col-lg-6">
           <md-form-field class="wd-100pc">
-            <input class="form-control" mdInput placeholder="Distributor paid amount" name="amount" [(ngModel)]="StockInput.distributorpaidamount">
+            <input class="form-control" mdInput placeholder="Distributor paid amount" (keypress)="numberEvent($event)" name="amount" [(ngModel)]="StockInput.distributorpaidamount">
           </md-form-field>
 
         </div>

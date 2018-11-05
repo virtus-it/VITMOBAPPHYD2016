@@ -49,8 +49,8 @@
       </div>
       <div class="col-md-3 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Quantity" name="quantity" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
-          <md-error *ngIf="FormControl.hasError('required')">
+          <input class="form-control" mdInput placeholder="Quantity" name="quantity" (keypress)="numberEvent($event)" [formControl]="FormControl" [(ngModel)]="scheduleInput.productQuantity">
+          <md-error *ngIf="FormControl.hasError('required')" >
             Quantity is
             <strong>required</strong>
           </md-error>
@@ -496,7 +496,7 @@
     </div>
 
     <h4 class="warning capitalize mgtop-20" *ngIf='message!=""'>
-    {{message}}</h4>
+      {{message}}</h4>
   </div>
   <div class="row float-right pdright-30 mgbottom-20">
 

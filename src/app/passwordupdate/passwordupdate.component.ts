@@ -12,46 +12,70 @@ export class PasswordupdateComponent implements OnInit {
 
   constructor(public thisDialogRef: MdDialogRef<PasswordupdateComponent>, private customerService: CustomerService, private authenticationService: AuthenticationService) { }
 
-  checkPassword: any = {"oldpassword":"", "newpassword":"", "confirmpassword":""};
-  wrongPassword= false;
-  passwordUpdated= false;
+  checkPassword: any = { "oldpassword": "", "newpassword": "", "confirmpassword": "" };
+  wrongPassword = "";
+  passwordUpdated = false;
 
 
-  updatePassword(){
-    let input={"User":{"userid":this.authenticationService.loggedInUserId(),"user_type":"dealer","oldpwd":this.checkPassword.oldpassword,"pwd":this.checkPassword.newpassword,"apptype":this.authenticationService.appType()}};
+  updatePassword() {
+    let input = { "User": { "userid": this.authenticationService.loggedInUserId(), "user_type": "dealer", "oldpwd": this.checkPassword.oldpassword, "pwd": this.checkPassword.newpassword, "apptype": this.authenticationService.appType() } };
     //console.log(input);
     this.customerService.updateCustomer(input)
       .subscribe(
-      output => this.updatePasswordResult(output),
-      error => {
-        //console.log("error in updating profile");
-      });
+        output => this.updatePasswordResult(output),
+        error => {
+          //console.log("error in updating profile");
+        });
   }
-  updatePasswordResult(result){
+  updatePasswordResult(result) {
     //console.log(result);
     if (result.result == 'success') {
       this.passwordUpdated = true;
       // this.thisDialogRef.close('success');
-      
-    
+
     }
   }
 
-  validatePassword(){
-    if (this.checkPassword.newpassword==this.checkPassword.confirmpassword) {
+  validatePassword() {
+    this.wrongPassword = '';
+    console.log("validatePassword click");
+    if (!this.checkPassword.oldpassword) {
+      this.wrongPassword = 'Please enter current password';
+      return false;
+    }
+    if (!this.checkPassword.newpassword) {
+      this.wrongPassword = 'Please enter new password';
+      return false;
+    }
+    if (!this.checkPassword.confirmpassword) {
+      this.wrongPassword = 'Please enter confirm password';
+      return false;
+    }
+    if (this.checkPassword.oldpassword.length < 3) {
+      this.wrongPassword = 'Please enter min 3 characters for current password';
+      return false;
+    }
+    if (this.checkPassword.newpassword.length < 3) {
+      this.wrongPassword = 'Please enter min 3 characters for new password';
+      return false;
+    }
+    if (this.checkPassword.confirmpassword.length < 3) {
+      this.wrongPassword = 'Please enter min 3 characters for confirm password';
+      return false;
+    }
+    if (this.checkPassword.newpassword == this.checkPassword.confirmpassword) {
       this.updatePassword();
     }
-    else{
-      this.wrongPassword= true; 
+    else {
+      this.wrongPassword = ' Passwords does not match';
     }
-
 
   }
 
 
-onCloseCancel() {
-this.thisDialogRef.close('Cancel');
-}
+  onCloseCancel() {
+    this.thisDialogRef.close('Cancel');
+  }
 
   ngOnInit() {
   }

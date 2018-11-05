@@ -48,18 +48,18 @@
             </td> -->
             <td>
               <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqdate"> Pending </span>
+              <span *ngIf="!stockrequest.reqdate" class="danger"> Pending </span>
             </td>
             <td>
               <span *ngIf="stockrequest.dealer_confirmdate">{{stockrequest.dealer_confirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.dealer_confirmdate"> Pending </span>
+              <span *ngIf="!stockrequest.dealer_confirmdate" class="danger"> Pending </span>
             </td>
             <td>
               <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqconfirmdate">Pending </span>
+              <span *ngIf="!stockrequest.reqconfirmdate" class="danger">Pending </span>
             </td>
             <td>
-                <span class="logo-color cursor" (click)="viewDetails(stockrequest)">View Details</span>
+              <span class="logo-color cursor" (click)="viewDetails(stockrequest)">View Details</span>
             </td>
           </tr>
         </tbody>

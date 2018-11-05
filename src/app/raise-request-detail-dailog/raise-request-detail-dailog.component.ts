@@ -25,7 +25,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
       .startWith(null)
       .map(supplier => supplier ? this.findSupplier(supplier) : this.supplierList.slice());
 
-   }
+  }
 
   allProductsList = [];
   bindableProductsArray = [];
@@ -33,13 +33,13 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   ipSendingArray = [];
   errorMessage = '';
   invoiceDate = null;
-  headerValue:string = '';
-  modifieddate:string = '';
-  secondStepDetails:any = [];
-  supplierId : any = '';
+  headerValue: string = '';
+  modifieddate: string = '';
+  secondStepDetails: any = [];
+  supplierId: any = '';
   supplierName = '';
-  amountPaid:any = 0;
-  supplierList:any = [];
+  amountPaid: any = 0;
+  supplierList: any = [];
 
 
 
@@ -72,7 +72,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     invoiceDate = moment(this.invoiceDate).format('DD-MM-YYYY');
     // console.log(invoiceDate , 'invoiceDateinvoiceDateinvoiceDateinvoiceDateinvoiceDate');
     let dealerid = this.authenticationService.superDelearId();
-    if(this.Details.type == 'raiseRequestBySuperDealer'){
+    if (this.Details.type == 'raiseRequestBySuperDealer') {
       loginid = this.Details.data.userid;
       dealerid = this.authenticationService.superDealerLoginId();
     }
@@ -81,7 +81,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     _.each(this.allProductsList, function (i, j) {
       let details: any = i;
       if (details.stock && details.returnemptycans && details.stock > 0 && (details.returnemptycans >= 0)) {
-        let requiredProductDetails = { "product": { "pid": '', "productname": "", "pType": "", "stock": "", "returnemptycans": "", "loginid": '', "usertype": '', "invoicedate": '' , "itemcost": "", "distributorid": '', "dealerid": '', "categoryid": "", "apptype": '' } };
+        let requiredProductDetails = { "product": { "pid": '', "productname": "", "pType": "", "stock": "", "returnemptycans": "", "loginid": '', "usertype": '', "invoicedate": '', "itemcost": "", "distributorid": '', "dealerid": '', "categoryid": "", "apptype": '' } };
         requiredProductDetails.product.productname = details.pname;
         requiredProductDetails.product.pid = details.productid;
         requiredProductDetails.product.pType = details.ptype;
@@ -100,10 +100,10 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     });
     let input = requiredProductsArray;
     this.distributorService.raiseReqByDistributor(input)
-    .subscribe(
-      output => this.raiseRequestByDistributorResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.raiseRequestByDistributorResult(output),
+        error => {
+        });
   }
   raiseRequestByDistributorResult(result) {
     if (result.result == 'success') {
@@ -111,29 +111,23 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     }
   }
 
-  numberEvent(e: any) {
-    if (isNaN(e.key) || e.key == '') {
-      e.preventDefault();
-    }
-  }
 
-
-  requestComfirmByDistributor(){
-    let input = {"root":{"pid": this.Details.products[0].productid ,"pcost": this.Details.products[0].pcost ,"stockcost": this.Details.products[0].buycost,"stockid": this.Details.products[0].id ,"stock": this.Details.products[0].stock,"returnemptycans": this.Details.products[0].returnemptycans ,"paidamt": this.Details.products[0].paidamt ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() ,"distributerid": this.authenticationService.loggedInUserId() ,"reqid": this.Details.products[0].reqid ,"status":"confirm","apptype": this.authenticationService.appType() }};
+  requestComfirmByDistributor() {
+    let input = { "root": { "pid": this.Details.products[0].productid, "pcost": this.Details.products[0].pcost, "stockcost": this.Details.products[0].buycost, "stockid": this.Details.products[0].id, "stock": this.Details.products[0].stock, "returnemptycans": this.Details.products[0].returnemptycans, "paidamt": this.Details.products[0].paidamt, "loginid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "dealerid": this.authenticationService.loggedInUserId(), "distributerid": this.authenticationService.loggedInUserId(), "reqid": this.Details.products[0].reqid, "status": "confirm", "apptype": this.authenticationService.appType() } };
     this.distributorService.confirmRequestByDistributor(input)
-    .subscribe(
-      output => this.requestComfirmByDistributorResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.requestComfirmByDistributorResult(output),
+        error => {
+        });
   }
-  requestComfirmByDistributorResult(result){
-    if(result.result == 'success'){
+  requestComfirmByDistributorResult(result) {
+    if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
   }
 
 
-  confirmRequestBySuperDealer(){
+  confirmRequestBySuperDealer() {
     let loginid = this.authenticationService.loggedInUserId();
     let usertype = this.authenticationService.userType();
     let dealerid = this.authenticationService.loggedInUserId();
@@ -142,11 +136,11 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     let distId = this.Details.data.distributor.userid;
     let supplierId = this.supplierId;
     let supplierName = this.supplierName;
-    let requiredInput  = [];
-    _.each(this.Details.data.products , function (i, j) {
+    let requiredInput = [];
+    _.each(this.Details.data.products, function (i, j) {
       let details: any = i;
-      if (details.stock && details.returnemptycans && details.stock > 0 ) {
-        let requiredProductDetails = {"product":{"pid": '' ,"pcost": '' ,"buycost": '' ,"stockid": '' ,"stock": '' ,"returnemptycans": '' ,"paidamt": '' ,"loginid": '' ,"usertype":'',"distributerid": '' ,"reqid": '',"status":"reqconfirm","apptype": '' ,"dealerid": '' ,"supplierid": '',"suppliername": '' }};
+      if (details.stock && details.returnemptycans && details.stock > 0) {
+        let requiredProductDetails = { "product": { "pid": '', "pcost": '', "buycost": '', "stockid": '', "stock": '', "returnemptycans": '', "paidamt": '', "loginid": '', "usertype": '', "distributerid": '', "reqid": '', "status": "reqconfirm", "apptype": '', "dealerid": '', "supplierid": '', "suppliername": '' } };
         requiredProductDetails.product.stockid = details.id;
         requiredProductDetails.product.pid = details.productid;
         requiredProductDetails.product.buycost = details.buycost;
@@ -168,13 +162,13 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     let input = requiredInput;
     console.log(input);
     this.distributorService.confirmStockRequestByDealer(input)
-    .subscribe(
-      output => this.confirmRequestBySuperDealerResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.confirmRequestBySuperDealerResult(output),
+        error => {
+        });
   }
-  confirmRequestBySuperDealerResult(result){
-    if(result && result.result == 'success'){
+  confirmRequestBySuperDealerResult(result) {
+    if (result && result.result == 'success') {
       this.thisDialogRef.close('success');
     }
   }
@@ -195,7 +189,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
 
       if (findSupplier) {
         this.supplierId = findSupplier.userid;
-        this.supplierName= findSupplier.firstname;
+        this.supplierName = findSupplier.firstname;
       }
 
 
@@ -204,21 +198,26 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
     return finalsupplier;
   }
 
-  confirmRequestBySuperDealerOnDistributor(){
-    let input = {"root":{"pid": this.Details.data.products[0].productid ,"pcost": this.Details.data.products[0].pcost ,"stockcost": this.Details.data.products[0].buycost,"stockid": this.Details.data.products[0].id ,"stock": this.Details.data.products[0].stock,"returnemptycans": this.Details.data.products[0].returnemptycans ,"paidamt": this.Details.data.products[0].paidamt ,"loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() ,"distributerid": this.Details.data.distributor.userid ,"reqid": this.Details.data.products[0].reqid ,"status":"confirm","apptype": this.authenticationService.appType() }};
-    
+  confirmRequestBySuperDealerOnDistributor() {
+    let input = { "root": { "pid": this.Details.data.products[0].productid, "pcost": this.Details.data.products[0].pcost, "stockcost": this.Details.data.products[0].buycost, "stockid": this.Details.data.products[0].id, "stock": this.Details.data.products[0].stock, "returnemptycans": this.Details.data.products[0].returnemptycans, "paidamt": this.Details.data.products[0].paidamt, "loginid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "dealerid": this.authenticationService.loggedInUserId(), "distributerid": this.Details.data.distributor.userid, "reqid": this.Details.data.products[0].reqid, "status": "confirm", "apptype": this.authenticationService.appType() } };
+
     this.distributorService.confirmRequestByDistributor(input)
-    .subscribe(
-      output => this.confirmRequestBySuperDealerOnDistributorResult(output),
-      error => {
-      });
+      .subscribe(
+        output => this.confirmRequestBySuperDealerOnDistributorResult(output),
+        error => {
+        });
   }
-  confirmRequestBySuperDealerOnDistributorResult(result){
-    if(result.result == 'success'){
+  confirmRequestBySuperDealerOnDistributorResult(result) {
+    if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
+  }
 
-
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
   }
 
   onCloseCancel() {
@@ -231,7 +230,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
       this.getProducts();
       this.headerValue = 'Raise Request'
     }
-    else if(this.Details.type == 'acceptRequestFromDealer'){
+    else if (this.Details.type == 'acceptRequestFromDealer') {
       this.headerValue = 'Confirm Request';
       this.getProducts();
       this.modifieddate = this.Details.data.modifieddate;
@@ -240,11 +239,11 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
       this.supplierList = this.authenticationService.getSuppliers();
       this.amountPaid = (this.Details.data.products[0].stock * this.Details.data.products[0].pcost)
     }
-    else if(this.Details.type == 'raiseRequestBySuperDealer'){
+    else if (this.Details.type == 'raiseRequestBySuperDealer') {
       this.headerValue = 'Raise Request';
       this.getProducts();
     }
-    else{
+    else {
       this.headerValue = 'View Details';
       this.modifieddate = this.Details.modifieddate;
       let date = this.modifieddate.split(' ');

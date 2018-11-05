@@ -13,7 +13,7 @@
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
             <br>
-            <div class="form-group">
+            <div class="mgbottom-20">
               <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
                 <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
                   {{type.viewValue}}
@@ -25,7 +25,7 @@
                 <input class="form-control" mdInput placeholder="Value" [(ngModel)]="filterInput.root.searchtext">
               </md-form-field>
             </div>
-            <div class="form-group" *ngIf="filterInput.root.searchtype == 'paymenttype'">
+            <div class="mgbottom-20" *ngIf="filterInput.root.searchtype == 'paymenttype'">
               <md-select placeholder="Filter By" name="paymenttype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
                 <md-option value="cod">COD</md-option>
                 <md-option value="credit">CREDIT</md-option>
@@ -34,21 +34,21 @@
                   < Available Cans</md-option>
               </md-select>
             </div>
-            <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
+            <div class="mgbottom-20" *ngIf="filterInput.root.searchtype == 'customertype'">
               <md-select placeholder="Filter By" name="customertype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
                 <md-option value="residential">Residential</md-option>
                 <md-option value="corperate">Corporate</md-option>
                 <md-option value="commercial">Commercial</md-option>
               </md-select>
             </div>
-            <div class="form-group" *ngIf="filterInput.root.searchtype == 'followupdate'">
+            <div class="mgbottom-10" *ngIf="filterInput.root.searchtype == 'followupdate'">
               <md-form-field class="inline">
                 <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="followUpdate">
                 <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                 <md-datepicker #picker></md-datepicker>
               </md-form-field>
             </div>
-            <div class="mgtop-15">
+            <div class="mgtop-10 left">
               <button md-raised-button color="primary" (click)="getCustomerByFilter('true')">
                 <i class="fa fa-search" aria-hidden="true"></i> Search
               </button>
@@ -72,7 +72,7 @@
               <i class="fa fa-thumbs-up success" title="Joined"></i>
             </span>
             <span *ngIf="!preorder.isappdownloaded" class="joined-style">
-              <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
+              <i class="fa fa-thumbs-down error" title="Not Joined"></i>
             </span>
           </div>
 

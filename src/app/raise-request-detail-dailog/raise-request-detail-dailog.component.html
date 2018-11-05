@@ -126,22 +126,22 @@
           </td>
           <td width="20%">
             <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Enter stock" [(ngModel)]="req.stock">
+              <input class="form-control" mdInput placeholder="Enter stock" [(ngModel)]="req.stock" (keypress)="numberEvent($event)">
             </md-form-field>
           </td>
           <td width="20%">
             <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Enter return empty cans" [(ngModel)]="req.returnemptycans">
+              <input class="form-control" mdInput placeholder="Enter return empty cans" (keypress)="numberEvent($event)" [(ngModel)]="req.returnemptycans">
             </md-form-field>
           </td>
           <td width="20%">
             <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Enter buy cost" [(ngModel)]="req.buycost">
+              <input class="form-control" mdInput placeholder="Enter buy cost" (keypress)="numberEvent($event)" [(ngModel)]="req.buycost">
             </md-form-field>
           </td>
           <td width="20%">
             <md-form-field class="wd-100pc">
-              <input class="form-control" mdInput placeholder="Enter paid amt" [(ngModel)]="req.paidamt">
+              <input class="form-control" mdInput placeholder="Enter paid amt" (keypress)="numberEvent($event)" [(ngModel)]="req.paidamt">
             </md-form-field>
           </td>
         </tr>
@@ -241,22 +241,23 @@
             </td>
             <td width="10%">
               <md-form-field class="wd-100pc">
-                <input mdInput placeholder="Enter stock" name="stock" [(ngModel)]="req.stock">
+                <input mdInput placeholder="Enter stock" name="stock" [(ngModel)]="req.stock" (keypress)="numberEvent($event)">
               </md-form-field>
             </td>
             <td width="15%">
               <md-form-field class="wd-100pc">
-                <input class="form-control" mdInput placeholder="Enter returnemptycans" name="returnemptycans" [(ngModel)]="req.returnemptycans">
+                <input class="form-control" mdInput placeholder="Enter returnemptycans" (keypress)="numberEvent($event)" name="returnemptycans"
+                  [(ngModel)]="req.returnemptycans">
               </md-form-field>
             </td>
             <td width="20%">
               <md-form-field class="wd-100pc">
-                <input class="form-control" mdInput placeholder="Enter buycost" name="buycost" [(ngModel)]="req.buycost">
+                <input class="form-control" mdInput placeholder="Enter buycost" (keypress)="numberEvent($event)" name="buycost" [(ngModel)]="req.buycost">
               </md-form-field>
             </td>
             <td width="20%">
               <md-form-field class="wd-100pc">
-                <input class="form-control" mdInput placeholder="Enter amountPaid" [(ngModel)]="amountPaid">
+                <input class="form-control" mdInput placeholder="Enter amountPaid" (keypress)="numberEvent($event)" [(ngModel)]="amountPaid">
               </md-form-field>
             </td>
           </tr>

@@ -110,13 +110,14 @@
       </div>
 
       <div class="success" *ngIf="imageUplaodSuccess == true">
-        <h3>Image Uploaded successfully</h3>
+        <h5>Image Uploaded successfully</h5>
       </div>
       <div class="error" *ngIf="imageUpdateError == true">
-        <h3>Please select image size less than 35kb</h3>
+        <h5>Please select image size less than 35kb</h5>
       </div>
       <div *ngIf="updateStatus" class="success">
-        <h3>Profile Updated successfully</h3>
+        <h5>
+          <i class="fa fa-thumbs-o-up"></i>Profile Updated successfully</h5>
       </div>
     </div>
   </div>

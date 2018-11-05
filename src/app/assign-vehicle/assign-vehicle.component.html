@@ -33,7 +33,7 @@
         <div class="row">
           <div class="col-4 ">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Cans" name="cans" [(ngModel)]="assignVehicleInput.User.canscount">
+              <input class="form-control" mdInput placeholder="Cans" name="cans" (keypress)="numberEvent($event)" [(ngModel)]="assignVehicleInput.User.canscount">
             </md-form-field>
           </div>
           <div class="col-4">
@@ -115,7 +115,7 @@
   
           <div class="col-4">
             <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Empty cans" name="empty cans" [(ngModel)]="assignVehicleInput.User.emptycans">
+              <input class="form-control" mdInput placeholder="Empty cans" (keypress)="numberEvent($event)" name="empty cans" [(ngModel)]="assignVehicleInput.User.emptycans">
             </md-form-field>  
           </div>   
         </div>   

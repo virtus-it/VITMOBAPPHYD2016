@@ -31,7 +31,6 @@ export class AddVehicleComponent implements OnInit {
     }
   }
 
-
   onCloseCancel(){
     this.thisDialogRef.close('cancel');
   }
