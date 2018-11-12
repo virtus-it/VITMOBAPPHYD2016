@@ -107,11 +107,11 @@
       <tfoot>
         <tr>
           <td colspan="8">
-            <h4 class="capitalize center">
+            <h4 class="center">
               <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore" class="logo-color">
-                <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-              <span *ngIf="!UserClickMore" class="warning">
-                <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</span>
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+              <span *ngIf="!UserClickMore" class="error">
+                <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
             </h4>
           </td>
         </tr>

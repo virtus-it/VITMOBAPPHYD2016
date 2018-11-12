@@ -115,6 +115,9 @@ table thead {
   .mgbottom-5{
     margin-bottom: 5px !important;
   }
+  .black{
+    color: var( --black);
+  }
   a{
     color: var( --logo-color);
   }
@@ -1183,3 +1186,13 @@ width: 10%;
 .btn-warning{
   color: #000000 !important;
 }
+.error:first-letter{
+  text-transform:uppercase !important;
+}
+.center:first-letter {
+  text-transform:uppercase !important;
+}
+.pdright-15{
+  padding-right: 15px !important;
+}
+

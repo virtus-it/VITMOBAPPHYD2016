@@ -527,7 +527,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       this.message = '';
       return true;
     } else {
-      this.message = 'please select product';
+      this.message = 'Please select product';
       return false;
     }
   }

@@ -217,7 +217,7 @@ export class AddEditProductDailogComponent implements OnInit {
       return true;
     }
      else {
-      this.message = 'please select category';
+      this.message = 'Please select category';
       return false;
     }
   }

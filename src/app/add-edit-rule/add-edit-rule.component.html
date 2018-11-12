@@ -8,6 +8,7 @@
     </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row ">
@@ -36,7 +37,7 @@
         </md-form-field>
       </div>
 
-      <div class="col-8" *ngIf="ruleInput.type == 'points'">
+      <div class="col-6" *ngIf="ruleInput.type == 'points'">
         <!-- For points give condition -->
         <md-form-field class="example-full-width wd-100pc">
           <input mdInput placeholder="Enter points Description" aria-label="State" [mdAutocomplete]="auto" [formControl]="pointsCtrl">

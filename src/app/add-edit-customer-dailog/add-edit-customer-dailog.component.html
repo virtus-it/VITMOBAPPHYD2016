@@ -246,7 +246,7 @@
       </div>
     </div>
 
-    <h5 class="error center mgbottom-0 mgtop-10">{{this.messageError}}</h5>
+    <h5 class="error center mgbottom-0 mgtop-10"><i class="fa fa-warning"></i> {{this.messageError}}</h5>
 
     <!-- <div class="col-7">
         <div class=" form-group">
@@ -280,7 +280,7 @@
   </div>
 </md-dialog-content>
 
-<h5 class="error center" *ngIf="duplicateUser">User Already Exists!!</h5>
+<h5 class="error center" *ngIf="duplicateUser"><i class="fa fa-warning"></i> User Already Exists!!</h5>
 
 <div class="row float-right pdright-30">
   <md-dialog-actions align="end">
@@ -288,7 +288,3 @@
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-
-
-<!-- 
-|| (customerInput.User.paymenttype=='credit' && !dateFormControl.valid && !dueDateFormControl.valid) -->

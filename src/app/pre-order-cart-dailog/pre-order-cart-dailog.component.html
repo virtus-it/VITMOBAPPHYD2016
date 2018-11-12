@@ -27,10 +27,10 @@
           </md-error>
         </md-form-field>
       </div> -->
-      <div class="p-2 align-self-center">
-        <h5>Customer:
-          <span class="warning">{{Details.firstname}} {{Details.firstname}} - {{Details.mobileno}}</span>
-        </h5>
+      <div class="">
+        <small>Customer</small>
+        <h6 class="capitalize">{{Details.firstname}} {{Details.firstname}} - {{Details.mobileno}}
+        </h6>
       </div>
       <div class="col-3">
         <md-form-field class="example-full-width wd-100pc">
@@ -181,11 +181,11 @@
             <td class="" colspan="6">
               <b class="capital">
                 <i class="fa fa-gift" aria-hidden="true"></i>
-                Product Name : {{prod.brandName}}
+                Product Name: {{prod.brandName}}
                 <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
                   <span class="">
                     <i class="fa fa-bars" aria-hidden="true"></i>
-                    Category : {{prod.category}}</span>
+                    Category: {{prod.category}}</span>
                 </b>
               </b>
             </td>
@@ -193,14 +193,12 @@
           <tr class="border-topbottom" style="background: #0f75bc;
           color: white;">
             <th width="30%">Type</th>
-
             <th class="center" width="13%">Quantity</th>
             <th class="center" width="12%">Empty Cans</th>
             <th class="center" width="12%">Price Per Unit</th>
             <th width="11%" title="Express Delivery">Exp Delv</th>
             <th width="11%" title="Service Charge">Serv Chgs</th>
             <th width="9%">Cost</th>
-
           </tr>
           <tr *ngFor="let details of prod.data">
             <td>
@@ -283,38 +281,38 @@
       </table>
     </div>
 
-    <h5 class="center warning capital">{{message}}</h5>
-    <h5 class="center warning capital">{{message1}}</h5>
-    <h5 class="center warning capital">{{message2}}</h5>
-    <h5 class="center warning capital">{{emptyCanMessage}}</h5>
+    <h5 class="center error capital" *ngIf="message"> <i class="fa fa-warning" aria-hidden="true"></i> {{message}}</h5>
+    <h5 class="center error capital" *ngIf="message1"> <i class="fa fa-warning" aria-hidden="true"></i> {{message1}}</h5>
+    <h5 class="center error capital" *ngIf="message2"> <i class="fa fa-warning" aria-hidden="true"></i> {{message2}}</h5>
+    <h5 class="center error capital" *ngIf="emptyCanMessage"> <i class="fa fa-warning" aria-hidden="true"></i> {{emptyCanMessage}}</h5>
 
     <div class="row cost-style">
       <div class="col">
-        <h6> Product Cost:
-          <b>{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
+        <h6 class="black"> Product Cost:
+          <b class="danger">{{this.createPreOrderInput.productDetails.pcost}} x {{this.createPreOrderInput.productDetails.quantity}}</b>
         </h6>
       </div>
       <div class="col">
-        <h6> Service Charge :
-          <b>{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
+        <h6 class="black"> Service Charge:
+            <b class="danger">{{this.createPreOrderInput.productDetails.servicecharge}} x {{this.createPreOrderInput.productDetails.quantity}}
           </b>
         </h6>
       </div>
       <div class="col">
-        <h6>Exp Delv Charges :
-          <b>{{this.amount}}</b>
+        <h6 class="black">Exp Delv Charges:
+            <b class="danger">{{this.amount}}</b>
         </h6>
       </div>
       <div class="col">
-        <h6>Empty Cans Amt :
-          <b>{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
+        <h6 class="black">Empty Cans Amt:
+            <b class="danger">{{ (this.createPreOrderInput.productDetails.quantity - this.createPreOrderInput.productDetails.emptycans) * 150
             }}
           </b>
         </h6>
       </div>
       <div class="col">
-        <h6 class="right">Total Cost :
-          <b>{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
+        <h6 class="black">Total Cost:
+            <b class="danger">{{(this.createPreOrderInput.productDetails.pcost * this.createPreOrderInput.productDetails.quantity) + (this.createPreOrderInput.productDetails.servicecharge
             * this.createPreOrderInput.productDetails.quantity) + (this.amount) + (( this.createPreOrderInput.productDetails.quantity
             - this.createPreOrderInput.productDetails.emptycans) * 150 ) }}</b>
         </h6>

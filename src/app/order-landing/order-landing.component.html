@@ -640,13 +640,13 @@
             </tr>
           </tbody>
         </table>
-        <h5 class="warning  capitalize center">
+        <h5 class="center">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="forwardClickMore">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            click for more data</a>
+            Click for more data</a>
         </h5>
-        <h4 *ngIf="!forwardClickMore" class="warning center">
-          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+        <h4 *ngIf="!forwardClickMore" class="error center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</h4>
       </div>
       <div *ngIf="tabPanelView === 'allorder' && newView === 'gridview'" class="panelview-style">
         <table class="table table-hover table-striped">
@@ -988,13 +988,12 @@
             </tr>
           </tbody>
         </table>
-        <h5 class="warning  center capitalize">
+        <h5 class="center">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="orderClickMore">
             <i class="fa fa-upload" aria-hidden="true"></i> Click for more data</a>
         </h5>
-        <h4 *ngIf="!orderClickMore" class="warning center">
-          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
-
+        <h4 *ngIf="!orderClickMore" class="error center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</h4>
 
       </div>
 
@@ -1306,7 +1305,6 @@
                     </div>
                   </div>
                   <div class="row form-group">
-
                     <div class="col">
                       <p class="td-label mgbottom-0">
                         Assigned On</p>
@@ -1319,34 +1317,28 @@
                     </div>
                   </div>
 
-
-                  <div class="float-right pdtopbottom-12">
+                  <div class=" pdtopbottom-12">
+                    <span class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
+                      <p class="td-label mgbottom-0" *ngIf="complete.senderdetails && complete.senderdetails.fullname">Action By :</p>
+                      <span class="danger capitalize onhovertooltip-150" *ngIf="complete.senderdetails">{{complete.senderdetails.fullname}} </span>
+                      <span *ngIf="!complete.senderdetails"> - </span>
+                    </span>
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                             <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                                 <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(complete)" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')  && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0)">
-
+                    <button class="btn btn-link btn-sm pull-right" (click)="acceptOrder(complete)" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')  && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0)">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept') && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0) "
+                    <button class="btn red btn-link btn-sm pull-right" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept') && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0) "
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                    <b class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
-                      <span *ngIf="complete.senderdetails && complete.senderdetails.fullname">Action By :
-                        <span class="danger capitalize onhovertooltip-150">{{complete.senderdetails.fullname}} </span>
-                      </span>
-                      <span *ngIf="!complete.senderdetails">Action By : - </span>
-                    </b>
-
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare || salesTeamLogin">
+                    <button class="btn btn-link btn-sm pull-right" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
-
-                    <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(complete)">
+                    <button class="btn btn-link btn-sm pull-right" (click)="viewDistributorsOrders(complete)">
                       <i class="fa fa-sitemap fa-2" aria-hidden="true"></i> Orders </button>
-
                   </div>
                 </div>
               </td>
@@ -1371,13 +1363,13 @@
             </tr>
           </tbody>
         </table>
-        <h5 class="warning  capitalize center">
+        <h5 class="center">
           <a href="javascript:void(0);" (click)=getPagingOrderDetails(false,tabPanelView); *ngIf="completeClickMore">
             <i class="fa fa-cloud-upload" aria-hidden="true"></i>
-            click for more data</a>
+            Click for more data</a>
         </h5>
-        <h4 *ngIf="!completeClickMore" class="warning center">
-          <i class="fa fa-frown-o" aria-hidden="true"></i> Record Not Available</h4>
+        <h4 *ngIf="!completeClickMore" class="error center">
+          <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</h4>
       </div>
     </div>
   </div>
