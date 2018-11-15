@@ -3,51 +3,51 @@
     <i class="fa fa-th"></i> CATEGORY
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
-    <strong (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-          </strong>
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
 
 <md-dialog-content layout="column">
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
-      <div class="row">
-      <div class="col-4">
+      <div class="row form-group">
+        <div class="col">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="form-control" mdInput placeholder="Category Name"  [(ngModel)]="categoryInput.cname"  name="categoryName" required >
+            <input class="form-control" mdInput placeholder="Category Name" [(ngModel)]="categoryInput.cname" name="categoryName" required>
             <!-- <md-error *ngIf="cnameFormControl.hasError('required')">
               Category Name is <strong>required</strong>
             </md-error> -->
           </md-form-field>
-      </div>
-
-      <div class="col-4">
+        </div>
+        <div class="col">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput  placeholder="Category Details" name="categoryDetails" [(ngModel)]="categoryInput.cdesc" required>
-            </md-form-field>
-          </div> 
-
-          <div class="col-4">
-              <md-form-field class="example-full-width wd-100pc">
-                  <input mdInput class="form-control" placeholder="Priority" name="priority" [(ngModel)]="categoryInput.priority" required>
-                  <!-- <md-error *ngIf="cdescFormControl.hasError('required')">
+            <input mdInput class="form-control" placeholder="Priority" (keypress)="numberEvent($event)" name="priority" [(ngModel)]="categoryInput.priority" required>
+            <!-- <md-error *ngIf="cdescFormControl.hasError('required')">
                       Priority is <strong>required</strong>
                     </md-error> -->
-                </md-form-field>
-              </div> 
+          </md-form-field>
+        </div>
 
+      </div>
+      <div class="row">
+        <div class="col">
+          <md-form-field class="example-full-width wd-100pc">
+            <input mdInput placeholder="Category Details" name="categoryDetails" [(ngModel)]="categoryInput.cdesc" required>
+          </md-form-field>
+        </div>
+      </div>
+      <h5 class="error center" *ngIf="validateMessage"> <i class="fa fa-warning"></i> {{validateMessage}}</h5>
 
-
-    </div>
     </div>
   </form>
 </md-dialog-content>
 
 <div class="row float-right pdright-30 mgbottom-20">
-  <small class="red" >{{validateMessage}}</small>
   <md-dialog-actions align="end">
-      <button type="submit" md-raised-button class="btn-primary" (click)="createAndUpdateCategory()">ADD</button>
-      &nbsp;
+    <button type="submit" md-raised-button class="btn-primary" (click)="createAndUpdateCategory()">ADD</button>
+    &nbsp;
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>
   </md-dialog-actions>
 </div>

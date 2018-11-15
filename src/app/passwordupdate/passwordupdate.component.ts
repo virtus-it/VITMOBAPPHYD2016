@@ -35,7 +35,6 @@ export class PasswordupdateComponent implements OnInit {
       this.passwordUpdated = true;
       // this.thisDialogRef.close('success');
 
-
     }
   }
 

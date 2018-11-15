@@ -26,7 +26,6 @@
     <tbody>
 
       <tr *ngFor="let product of productsList">
-
         <td class="left" width="16%">
           <div class="form-check form-check-inline">
             <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
@@ -41,17 +40,12 @@
         <td class="left" width="16%">{{product.pcost}}</td>
         <td class="left" width="16%">{{product.servicecharge}}</td>
         <td class="left" width="16%">{{product.expressdeliverycharges}}</td>
-
     </tbody>
-
   </table>
 </div>
 
-
-
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
-
     <button md-raised-button class="btn-primary" (click)="confirmProduct()">CONFIRM</button>
     <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>
   </md-dialog-actions>

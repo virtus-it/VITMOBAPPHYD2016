@@ -14,7 +14,17 @@ export class OnHoldOrderStatusComponent implements OnInit {
 
   constructor(private authenticationService: AuthenticationService, public thisDialogRef: MdDialogRef<OnHoldOrderStatusComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, public dialog: MdDialog, private orderLandingService: OrderLandingService,private loaderService: LoaderService) { }
   reasonOnHold: "";
+  reasonOnHolderror=false;
+  errorMessage=false;
   updateOrderOnhold() {
+    // if(!this.reasonOnHold){
+    //   this.reasonOnHolderror=false;
+    //   this.errorMessage=true;
+    // }
+    // if(this.reasonOnHold){
+    //   this.reasonOnHolderror=true
+    //   this.errorMessage=false;
+    // }
     this.loaderService.display(true);
     let input = { "order": { "orderstatus": "onhold", "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "apptype": this.authenticationService.appType(), "customerid": this.orderDetail.order_by, "reason": this.reasonOnHold, "from": "website" } }
     //console.log(input);
@@ -25,8 +35,9 @@ export class OnHoldOrderStatusComponent implements OnInit {
         //console.log("error in order details");
         this.loaderService.display(false);
       });
+    }
 
-  }
+
   updateOrderOnholdResult(result) {
     this.loaderService.display(false);
     if (result.result == 'success') {

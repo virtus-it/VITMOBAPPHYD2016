@@ -752,7 +752,7 @@ if(!this.createPreOrderInput.productDetails.default_qty){
      return true;
    }
    else{
-    this.message="please set quantity";
+    this.message="Please set quantity";
     return false;
   }
   
@@ -767,7 +767,7 @@ if(!this.createPreOrderInput.productDetails.default_qty){
    }
    else{
      this.message= "";
-     this.message1="please select timeSlot";
+     this.message1="Please select timeSlot";
      return false;
    }
 
@@ -783,7 +783,7 @@ if(!this.createPreOrderInput.productDetails.default_qty){
    else{
      this.message= "";
      this.message1="";
-     this.message2 ="please enter the empty cans";
+     this.message2 ="Please enter the empty cans";
      return false;
 
     }
@@ -878,13 +878,16 @@ if(!this.createPreOrderInput.productDetails.default_qty){
   // })
   // });
   
-  
-
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '') {
+      e.preventDefault();
+    }
+  }
 
   ngOnInit() {
-    
+       
     this.getDistributors();
-
   
     // this.getProducts();
     // this.expressDeliveryCharge(true);

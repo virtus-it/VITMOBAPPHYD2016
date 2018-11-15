@@ -29,7 +29,7 @@
         </div>
         <div class="col-4">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Mobile Number" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno" (keypress)="numberEvent($event)"
+            <input class="form-control" mdInput placeholder="Mobile Number"  (keypress)="numberEvent($event)" name="mobileno" maxlength="10" [(ngModel)]="supplierInput.mobileno"
               required>
             <md-error>
               Mobile Number is
@@ -55,6 +55,8 @@
 
         </div>
       </div>
+      
+      <h5 class="error center" *ngIf="validateMessage">  <i class="fa fa-warning"></i> {{validateMessage}}</h5>
     </div>
     <!-- <div class="row">
           <b class="label-style">Address Details<span></span></b>
@@ -106,7 +108,7 @@
   </form>
 </md-dialog-content>
 <div class="row float-right pdright-30 mgbottom-20">
-  <small class="red">{{validateMessage}}</small>
+
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary"  md-raised-button (click)="createAndUpdateSupplier()">SUBMIT</button>
     <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;

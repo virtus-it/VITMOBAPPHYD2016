@@ -221,8 +221,6 @@ export class AddEditCustomerDailogComponent implements OnInit {
     }
   }
 
-
-
   ngOnInit() {
     // "userid":"1768"
     console.log(this.Details);

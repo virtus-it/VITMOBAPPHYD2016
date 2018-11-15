@@ -1,6 +1,7 @@
 <div class="row justify-content-between modal-title ">
   <div class="col">
-    <i class="fa fa-file-text-o"></i> Order Details
+    <!-- <i class="fa fa-file-text-o"></i>  -->
+    Order Details
   </div>
   <div class="col-2 right">
     <strong (click)="onCloseModel()">
@@ -15,7 +16,7 @@
       <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 brd-right">
         <div class="container-fluid">
           <div class="d-flex">
-            <b class="p-0">
+            <b class="p-0 mr-auto">
               <i class="fa fa-file-text-o"></i> Order Details</b>
 
             <span class="ml-auto p-0 mgright-15  logo-color" *ngIf="dailogOrderDetails.status != 'delivered'">
@@ -48,8 +49,8 @@
               <b>Status: </b>
               <span [ngClass]="dailogOrderDetails.StatusColor"> {{dailogOrderDetails.OrderModifiedStatus}} </span>
             </small>
-            <small class="gray">
-              <b>Delivery Date: </b> {{dailogOrderDetails.delivery_exceptedtime}} </small>
+            <small >
+              <b class="gray">Delivery Date: </b> <span class="danger">{{dailogOrderDetails.delivery_exceptedtime}}</span> </small>
           </div>
 
           <div class="row">
@@ -119,7 +120,6 @@
                   <span> {{dailogOrderDetails.buildingname}}
                   </span>
                   <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
-
                 </b>
                 <br>
                 <span class="gray9"> {{dailogOrderDetails.orderby_address}}</span>
@@ -142,9 +142,7 @@
                 </b>
                 <b>
                   <span class="gray9">{{dailogOrderDetails.buildingname}} </span>
-
                   <span *ngIf="dailogOrderDetails.buildingname == '' || dailogOrderDetails.buildingname === null"> - </span>
-
                 </b>
                 <br>
                 <span class="gray9"> {{customerAddressDetails}}</span>
@@ -156,7 +154,7 @@
           </div>
           <div class="row  border-top pdtop-10  form-group " *ngIf="dailogOrderDetails.customerpaymentdts">
             <div class="col-md-3">
-              <small class="control-label success">
+              <small class="control-label ">
                 <b>Advance Amt</b>
               </small>
               <br>
@@ -164,7 +162,7 @@
             </div>
 
             <div class="col-md-3 center">
-              <small class="control-label warning">
+              <small class="control-label ">
                 <b> Due Amount</b>
               </small>
               <br>
@@ -180,11 +178,11 @@
             </div>
 
             <div class="col-md-3 right">
-              <small class="control-label black">
+              <small class="control-label ">
                 <b>Total</b>
               </small>
               <br>
-              <small class="control-label black">Rs.{{dailogOrderDetails.bill_amount}}
+              <small class="control-label danger">Rs.{{dailogOrderDetails.bill_amount}}
                 <b></b>
               </small>
             </div>
@@ -434,7 +432,7 @@
               <div class="container-fluid messages-style" *ngFor="let history of notificationHistory">
                 <div class="row">
                   <div class="col">
-                    <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname">
+                    <small *ngIf="history.notificationsendedby && history.notificationsendedby.fullname" class="capitalize">
                       <i aria-hidden="true" class="fa fa-reply rotate-180"></i> {{history.notificationsendedby.fullname}}</small>
                     <small *ngIf="!history.notificationsendedby"> - </small>
                   </div>
@@ -525,33 +523,25 @@
                     <b>{{msg.user.firstname}} {{msg.user.lastname}} </b>
                   </small>
                 </div>
-                <div class="col right">
+                <div class="col-5 right">
                   <small class="gray9">{{ msg.createddate | utcDate}} </small>
                 </div>
               </div>
               <small>{{ msg.message}} </small>
-
-
-
               <div class="row" *ngIf="msg.typeid">
-
                 <div class="col">
                   <i class="fa fa-reply" aria-hidden="true"></i>
                   <small *ngIf="msg.typeid">&nbsp; Follow Up by {{msg.username}}</small>
                   <br>
-                  <small *ngIf="msg.typeid">&nbsp; Next FollowUp Date {{msg.followupdate | utcDate24}}</small>
+                  <small *ngIf="msg.typeid">Next FollowUp Date {{msg.followupdate | utcDate24}}</small>
                 </div>
-                <div class="col right">
+                <div class="col-5 right">
                   <small class="">{{ msg.createddate | utcDate}} </small>
                 </div>
               </div>
               <small>{{ msg.remarks}} </small>
-
-
             </li>
-            <!-- <li class="nolist-style  messages-style" [ngClass]="{'followupmessage':msg.typeid}" *ngFor="let msg of orderbyallMessages">
-                  
-                </li> -->
+
           </ul>
           <div class=" border-top pdtop-10">
             <div class="form-group">

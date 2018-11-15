@@ -19,3 +19,6 @@
 .bgcolor-fade-blue{
     box-shadow: 0px 0px 50px var(--logo-color) inset !important;
 }
+.table{
+    margin-bottom: 0px !important;
+}

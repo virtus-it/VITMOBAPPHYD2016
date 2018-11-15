@@ -13,12 +13,12 @@
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
       <a class="cursor logo-color " title="Add Promocode" *ngIf="tabPanelView === 'promoCode'">
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" *ngIf="superDealer" title="Add promo code" (click)="addPromoCode()"></i>
-      </a>
+      </a>     &nbsp; &nbsp;
 
       <a class="cursor logo-color " title="Add new Redeem Settings" *ngIf="tabPanelView === 'redeemSetting'">
         <i class="fa fa-gears" aria-hidden="true" *ngIf="superDealer" title="Redeem Settings" (click)="redeemSettingsDialog()"></i>
       </a>
-      &nbsp; &nbsp;
+ 
       <a class="align-self-center cursor">
         <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
         <div class="filterView" *ngIf="showFilterDailog">
@@ -28,18 +28,17 @@
                 <md-option value="date">DATE</md-option>
               </md-select>
             </div>
-            <div class=" " *ngIf="filterInput.searchtype == 'date'">
-
-              <div class="col-4">
-                <md-form-field>
+            <div class="mgtop-5" *ngIf="filterInput.searchtype == 'date'">
+              <div class="">
+                <md-form-field class="wd-100pc">
                   <input mdInput [mdDatepicker]="picker" placeholder="Start Date" [(ngModel)]="filterType.startdate" required>
                   <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                   <md-datepicker #picker></md-datepicker>
                 </md-form-field>
               </div>
 
-              <div class="col-4">
-                <md-form-field>
+              <div class="">
+                <md-form-field class="wd-100pc">
                   <input mdInput [mdDatepicker]="pickers" placeholder="End Date" [(ngModel)]="filterType.enddate">
                   <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
                   <md-datepicker #pickers></md-datepicker>
@@ -60,23 +59,22 @@
                     </md-form-field> -->
             </div>
 
-            <div class="input-group pd-10 ">
-              <button md-raised-button color="primary" class="mgright-5" (click)="searchByDate()">
-                <i class="fa fa-search" aria-hidden="true"></i> Search
-              </button>
-              <button md-raised-button color="primary" (click)="clearFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-              </button>
+            <div class="row">
+              <div class="col right">
+                <button md-raised-button color="primary"  (click)="searchByDate()">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </button>&nbsp;
+                <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Clear
+                </button>
+              </div>
             </div>
-
           </div>
         </div>
       </a>&nbsp;
-
-
-
-    </div>
+   </div>
   </div>
+
   <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'promoCode'">
     <table class="table table-hover table-striped">
       <thead>
@@ -109,14 +107,14 @@
             <span class="onhovertooltip-100" title="{{promo.startdate | utcDate}}">{{promo.startdate | utcDate}}</span>
           </td>
           <td class="left" width="10%">
-            <span class="onhovertooltip-100" *ngIf="promo.enddate">{{promo.enddate | utcDate}}</span>
+            <span class="onhovertooltip-100" *ngIf="promo.enddate" title="{{promo.enddate | utcDate}}">{{promo.enddate | utcDate}}</span>
             <span *ngIf="promo.enddate === null || promo.enddate == ''"> - </span>
           </td>
           <td class="left capitalize" width="10%" *ngIf="promo.promotype">{{promo.promotype}}</td>
           <td class="left capitalize" width="10%" *ngIf="superDealer">
             <!-- <span class="fa fa-plus-circle fs-20" title="Add promo code"></span>                 -->
-            <span class="fa fa-pencil-square-o btn-link" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
-            <span class="fa fa-trash danger pad-fa cursor" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>
+            <span class="fa fa-pencil-square-o btn-link fs-18" title="Edit promo code" (click)="editPromoCode(promo)"></span> &nbsp;&nbsp;
+            <span class="fa fa-trash danger fs-18 cursor" title="Delete Promo code" (click)="deletePromoCodeDialog(promo)"></span>
           </td>
           <!-- *ngFor="let promo of allPromoCodes" -->
         </tr>
@@ -159,11 +157,11 @@
 
           <td class="" width="20%">
             <span>
-              <i class="fa fa-pencil-square-o btn-link" title="Change redeem settings" (click)="changeSettings(settings)"></i>
+              <i class="fa fa-pencil-square-o btn-link fs-18" title="Change redeem settings" (click)="changeSettings(settings)"></i>
             </span>
             &nbsp;&nbsp;&nbsp;
             <span>
-              <i class="fa fa-trash danger cursor pad-fa" title="Delete redeem setting" (click)="deleteRedeemSetting(settings)"></i>
+              <i class="fa fa-trash danger cursor fs-18" title="Delete redeem setting" (click)="deleteRedeemSetting(settings)"></i>
             </span>
           </td>
         </tr>
@@ -171,6 +169,7 @@
     </table>
   </div>
   <!-- ends second table -->
+
   <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemDetails'">
     <table class="table table-hover table-striped">
       <thead>

@@ -259,10 +259,8 @@ export class AddstockProductComponent implements OnInit {
 
     }
 
+}
 
-
-
-  }
   ngOnInit() {
     console.log(this.Detail);
     if (this.Detail.type == 'distributorsStock') {

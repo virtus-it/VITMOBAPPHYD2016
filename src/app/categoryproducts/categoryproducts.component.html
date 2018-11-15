@@ -1,48 +1,50 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-md-2  col-sm-2  col-lg-2">
-      <i class="fa fa-gift"></i>  Products
+  <div class="col-3">
+    <i class="fa fa-gift"></i> Products
   </div>
-  <div class="col-md-9  col-sm-9  col-lg-9 center" >
-      <span align=" white capitalize"> Category: {{details.category}} </span>
-</div>
-  <div class="col-md-1  col-sm-1  col-lg-1 right">
-        <strong   (click)="onCloseCancel()"><i class="fa fa-times fs-20" aria-hidden="true"></i>
-        </strong>         
+  <div class="col align-self-center center">
+    <span align=" white capitalize"> Category: {{details.category}} </span>
+  </div>
+  <div class="col-2 right">
+    <strong (click)="onCloseCancel()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
   </div>
 </div>
-  <md-dialog-content layout="column">
-      <div class="pd-15x25 brd-bottom">         
-          <table class="table table-hover table-striped table-fixedheader">
+<md-dialog-content layout="column">
+  <div class="pd-15x25 brd-bottom">
+    <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
-          <th width="46%">Product Type</th>
+          <th width="42%">Product Type</th>
           <th width="10%">Price</th>
-          <th width="12%" title="Cans returnable">Cans ret</th>
+          <th width="15%" title="Cans returnable">Cans Return</th>
           <th width="10%">Stock</th>
           <th width="12%">Status</th>
           <th width="10%">Action</th>
-           </tr>
+        </tr>
       </thead>
       <tbody>
         <tr *ngFor="let product of productCategory">
-          <td width="46%" class="left capital"><span class="onhovertooltip-300 capitalize" title="{{product.category}} {{product.ptype}}">{{product.category}} {{product.ptype}}</span></td>
+          <td width="42%" class="left capital">
+            <span class="onhovertooltip-300 capitalize" title="{{product.category}} {{product.ptype}}">{{product.category}} {{product.ptype}}</span>
+          </td>
           <td width="10%" class="left capital">{{product.pcost}}</td>
-          <td width="12%" class="left capital">{{product.iscanreturnable}}</td>
+          <td width="15%" class="left capital">{{product.iscanreturnable}}</td>
           <td width="10%" class="left capital">{{product.avaliable_stock}}</td>
           <td width="12%" class="left capital">{{product.stockstatus}}</td>
           <td width="10%" class="left capital">
-           <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add stock" (click)="addStock(product)" ></i>
-           &nbsp; &nbsp;<i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Change status" (click)="changeStatus(product)" ></i>
+            <i class="fa fa-cart-plus logo-color cursor" aria-hidden="true" title="Add stock" (click)="addStock(product)"></i>
+            &nbsp; 
+            <i class="fa fa-edit logo-color cursor" aria-hidden="true" title="Change status" (click)="changeStatus(product)"></i>
           </td>
-         </tr>
+        </tr>
       </tbody>
     </table>
   </div>
-  </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20">
-      <md-dialog-actions align="end">
-        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
-      </md-dialog-actions>
-    </div>
-
-
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

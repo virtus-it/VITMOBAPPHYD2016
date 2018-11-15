@@ -1,5 +1,5 @@
 <div class="row justify-content-between modal-title ">
-  <div class="col-md-4  col-sm-4  col-lg-4">
+  <div class="col">
     <i class="fa fa-hand-paper-o"></i> On-Hold Order
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
@@ -7,6 +7,7 @@
             </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
   <form class="example-form" >
     <div class="container-fluid pd-15x25 brd-bottom">
@@ -17,9 +18,12 @@
                     <input class="form-control" [(ngModel)]="reasonOnHold" mdInput placeholder="Are you sure you want to onhold the order" name="Return Cans">
               </md-form-field>
           </div>
+          <h5 class="center error capital" *ngIf="reasonOnHolderror">Are you sure you want to onhold the order</h5>
+          <h5 class="center error capital" *ngIf="errorMessage">Please type reason for onhold</h5>
      </div>
   </form>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
       <button type="submit" class="btn-primary" md-raised-button (click)="updateOrderOnhold()">YES</button>      

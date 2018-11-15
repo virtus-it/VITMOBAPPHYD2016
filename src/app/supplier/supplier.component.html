@@ -1,13 +1,15 @@
 <div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
-      <h4><i class="fa fa-truck"></i> Suppliers</h4>
+      <h4>
+        <i class="fa fa-truck"></i> Suppliers</h4>
     </div>
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-      <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()'><i class="fa fa-plus fa-2 plus-style"
-          aria-hidden="true"></i></a>
-      <a class="cursor logo-color mgleft-10"><i aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()"
-          title="Filter"></i>
+      <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()'>
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+      <a class="cursor logo-color mgleft-10">
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" (click)="filterToggle()" title="Filter"></i>
 
         <div class="filterView" *ngIf="showFilterDialog">
           <div class="">
@@ -15,8 +17,8 @@
             <br>
             <div class=" ">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm"
-                  (ngModelChange)="searchSupplier()" name="searchSupplierTerm">
+                <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm" (ngModelChange)="searchSupplier()"
+                  name="searchSupplierTerm">
               </md-form-field>
             </div>
           </div>
@@ -29,11 +31,11 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="13%">Name</th>
+            <th width="16%">Name</th>
             <th width="10%">Mobile </th>
             <th width="12%">Email</th>
-            <th width="25%">Address</th>
-            <th width="19%" class="no-th-row">Action</th>
+            <th width="26%">Address</th>
+            <th width="18%" class="no-th-row">Action</th>
           </tr>
         </thead>
         <tbody>

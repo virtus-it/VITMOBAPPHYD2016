@@ -11,8 +11,8 @@
 
     </div>
   </div>
-  <div id="" class="row  mg-0">
-    <div class="pd-15">
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
@@ -22,7 +22,6 @@
             <th width="7%">Type</th>
             <th width="10%">Message Type</th>
             <th class="" width="7%">Action</th>
-
           </tr>
         </thead>
         <tbody>
@@ -31,11 +30,10 @@
             <td class="left capitalize" width="18%">
               <span class="onhovertooltip-500" title="{{temp.template_name}}">{{temp.template_name}}</span>
             </td>
-
             <td class="left capitalize" width="10%">{{temp.type}}
             </td>
             <td class="left numbers" width="7%">{{temp.orderstatus}}
-           </td>
+            </td>
 
             <td class="left capitalize" width="7%">
               {{temp.template_type}} </td>
@@ -43,13 +41,11 @@
             <td class="capitalize" width="10%">{{temp.messagetype}}</td>
 
             <td class="left" width="7%">
-              <i class="fa fa-edit logo-color pad-fa fs-20" aria-hidden="true" title="Edit" (click)="editTemplate(temp)"></i>
-              <i class="fa fa-trash danger fs-20" aria-hidden="true" title="Delete" (click)="deleteTemplate(temp)"></i>
+              <i class="fa fa-edit logo-color pad-fa fs-18" aria-hidden="true" title="Edit" (click)="editTemplate(temp)"></i>
+              <i class="fa fa-trash danger fs-18" aria-hidden="true" title="Delete" (click)="deleteTemplate(temp)"></i>
               <!-- <i class="fa fa-file-text-o btn-link" aria-hidden="true" title="History"></i> -->
-
             </td>
           </tr>
-
         </tbody>
       </table>
     </div>

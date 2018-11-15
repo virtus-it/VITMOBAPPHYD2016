@@ -44,7 +44,7 @@
 <div class="row float-right pdright-30  mgbottom-20">
   <md-dialog-actions align="end">
 
-    <p class="warning"> {{message}}</p> &nbsp;&nbsp;
+    <p class="error" *ngIf="message"> <i class="fa fa-warning"></i> {{message}}</p> &nbsp;&nbsp;
       <button md-raised-button color="primary" (click)="createAndUpdate()">{{buttonValue}}</button>
   </md-dialog-actions>
 </div> 

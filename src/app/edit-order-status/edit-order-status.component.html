@@ -72,8 +72,8 @@
           </label>
         </div>
       </div>
-      <div class="border-top pdtop-10">
-        <div class="row form-group" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
+      <div class="border-top ">
+        <div class="row mgtop-10 form-group" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
           <div class="col-2">
             <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
               <input type="radio" id="rem" class="custom-control-input" name="type" value="cash" [(ngModel)]="editStatusInput.order.paymentype">
@@ -107,7 +107,7 @@
           <div class="col-4 pleft">
             <small class="">Due Amount</small>
             <br>
-            <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+            <b class="danger" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
 
           </div>
           <div class="col-4">
@@ -127,36 +127,36 @@
           <div class="col-4 pleft">
             <small class="">Due Amount</small>
             <br>
-            <b class="" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
+            <b class="danger" *ngIf="orderDetail.customerpaymentdts">Rs.{{orderDetail.customerpaymentdts.amount_pending}}</b>
 
           </div>
           <div class="col-4">
             <small class="">Advance Amount </small>
             <br>
-            <b class="">Rs.{{editStatusInput.order.adv_amt}}</b>
+            <b class="success">Rs.{{editStatusInput.order.adv_amt}}</b>
           </div>
           <div class="col-4">
             <small class="">Bill Amount</small>
             <br>
-            <b class="">Rs.{{orderDetail.bill_amount}}</b>
+            <b class="warning">Rs.{{orderDetail.bill_amount}}</b>
           </div>
         </div>
-        <div class="row">
+        <div class="row mgtop-10">
           <div class="col-4 pleft">
             <small class="">Ordered Amount</small>
             <br>
-            <b class="">Rs.{{orderDetail.prod_cost}} * {{orderDetail.quantity}}</b>
+            <b class="warning">Rs.{{orderDetail.prod_cost}} * {{orderDetail.quantity}}</b>
           </div>
           <div class="col-4">
             <small class="">Service Charges</small>
             <br>
-            <b class=""> Rs. {{orderDetail.servicecharges}} </b>
+            <b class="info"> Rs. {{orderDetail.servicecharges}} </b>
           </div>
 
           <div class="col-4">
             <small class="">Express Delivery Charges</small>
             <br>
-            <b class="">Rs. {{orderDetail.expressdeliverycharges}}</b>
+            <b class="info">Rs. {{orderDetail.expressdeliverycharges}}</b>
           </div>
         </div>
         <div class="col-4 pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">

@@ -123,6 +123,8 @@ table thead {
 }
 .filterView{
   top: 42px;
+  padding:30px 30px 20px !important;
+  right:10px !important;
 }
 .panelview-style{
   padding: 15px;

@@ -31,7 +31,7 @@
         </md-form-field>
       </div>
     </div>
-    <h4 class="warning" *ngIf='validateMessage!=""'>{{validateMessage}}</h4>
+    <h4 class="error" *ngIf='validateMessage!=""'> <i class="fa fa-warning"></i> {{validateMessage}}</h4>
   </div>
 </md-dialog-content>
 

@@ -4,59 +4,55 @@
       <h4>
         <i class="fa  fa-hand-o-up"></i> Raise Request </h4>
     </div>
-
     <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
       <a class="cursor logo-color " title="Raise Request" (click)='raiseRequest()'>
         <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
       </a>
     </div>
-    <div id="" class="row pd-15x10 mg-0">
-      <div class="col">
-        <table class="table table-hover table-striped">
-          <thead>
-            <tr>
-                <th width="20%">Req No.</th>
-                <!-- <th width="17%">Invoice Date</th> -->
-                <th width="20%">Created Date</th>
-                <th width="20%">Updated Date</th>
-                <th width="20%">Confirmed Date</th>
-                <th width="20%">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let raiserequest of allStockRequests">
-                <td>
-                    <span *ngIf="raiserequest.reqid">{{raiserequest.reqid}}</span>
-                    <span *ngIf="!raiserequest.reqid"> - </span>
-                  </td>
-                  <!-- <td>
+  </div>
+
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
+      <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th>Req No.</th>
+            <!-- <th width="17%">Invoice Date</th> -->
+            <th>Created Date</th>
+            <th>Updated Date</th>
+            <th>Confirmed Date</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let raiserequest of allStockRequests">
+            <td>
+              <span *ngIf="raiserequest.reqid">{{raiserequest.reqid}}</span>
+              <span *ngIf="!raiserequest.reqid"> - </span>
+            </td>
+            <!-- <td>
                     <span *ngIf="raiserequest.modifieddate">{{raiserequest.modifieddate | utcDate}}</span>
                     <span *ngIf="!raiserequest.modifieddate"> - </span>
                   </td> -->
-                  <td>
-                    <span *ngIf="raiserequest.products[0].reqdate">{{raiserequest.products[0].reqdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.products[0].reqdate"> pending </span>
-                  </td>
-                  <td>
-                    <span *ngIf="raiserequest.products[0].dealer_confirmdate">{{raiserequest.products[0].dealer_confirmdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.products[0].dealer_confirmdate"> pending </span>
-                  </td>
-                  <td>
-                    <span *ngIf="raiserequest.products[0].reqconfirmdate">{{raiserequest.products[0].reqconfirmdate | utcDate}}</span>
-                    <span *ngIf="!raiserequest.products[0].reqconfirmdate"> pending </span>
-                  </td>
-      
-                  <td>
-                    <button class="btn btn-link" (click)="viewDetails(raiserequest)">View Details</button>
-                  </td>
-            </tr>
-            
-  
-          </tbody>
-        </table>
-  
-  
-      </div>
+            <td>
+              <span *ngIf="raiserequest.products[0].reqdate">{{raiserequest.products[0].reqdate | utcDate}}</span>
+              <span *ngIf="!raiserequest.products[0].reqdate"> pending </span>
+            </td>
+            <td>
+              <span *ngIf="raiserequest.products[0].dealer_confirmdate">{{raiserequest.products[0].dealer_confirmdate | utcDate}}</span>
+              <span *ngIf="!raiserequest.products[0].dealer_confirmdate"> pending </span>
+            </td>
+            <td>
+              <span *ngIf="raiserequest.products[0].reqconfirmdate">{{raiserequest.products[0].reqconfirmdate | utcDate}}</span>
+              <span *ngIf="!raiserequest.products[0].reqconfirmdate"> pending </span>
+            </td>
+
+            <td>
+              <a class="btn-link" (click)="viewDetails(raiserequest)">View Details</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>

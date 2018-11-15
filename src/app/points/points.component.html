@@ -5,18 +5,17 @@
         <i class="fa fa-trophy"></i> Points</h4>
     </div>
 
-
     <div class="col-sm-6 col-md-3 col-lg-3 align-self-center right">
       <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
         (click)="showTabPanel('pointsDetails')">Points Details </button>&nbsp;&nbsp;
       <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
       <i class="fa fa-plus-circle fs-25 logo-color cursor " *ngIf="superDealer" title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp;
       <a class="cursor logo-color">
-        <i aria-hidden="true" class="fa fa-sliders logo-color cursor" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'"></i>
+        <i aria-hidden="true" class="fa fa-sliders logo-color cursor fs-20" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'"></i>
         <div class="filterView" *ngIf="showFilterDialog">
           <div class="">
-            <b class="float-left">Filter By</b>
-            <br>
+            <!-- <b class="float-left">Filter By</b> -->
+
             <div class=" ">
               <md-select placeholder="Filter By" name="type" [(ngModel)]="filterInput.type" class="full-width left">
                 <md-option value="top10">Top 10 points</md-option>
@@ -26,22 +25,25 @@
                 <md-option value="least50">Least 50 points</md-option>
                 <md-option value="least100">Least 100 points</md-option>
               </md-select>
-
-              <div class="input-group pd-10 ">
-                <button md-raised-button color="primary" class="mgright-5" (click)="search()">
-                  <i class="fa fa-search" aria-hidden="true"></i> Search
-                </button>
-                <button md-raised-button color="primary" (click)="clearFilter()">
-                  <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
-                </button>
-              </div>
             </div>
+              <br>
+              <div class="row">
+                <div class="col right">
+                  <button md-raised-button color="primary" class="mgright-5" (click)="search()">
+                    <i class="fa fa-search" aria-hidden="true"></i> Search
+                  </button>
+                  <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                    <i class="fa fa-filter" aria-hidden="true"></i> Clear
+                  </button>
+                </div>
+              </div>
+           
           </div>
         </div>
       </a>
     </div>
   </div>
- 
+
   <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
     <div class="row brd-box-box" *ngFor="let points of allPoints">
       <div class="col-5 left bg-color-bg">
@@ -77,15 +79,15 @@
 
       <div class="col-1 align-self-center">
 
-        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-24" title="Active State" (click)="DeactivatePoints(points.type)"></i>
+        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
 
-        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-24" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
+        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
 
-        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-24" title="Active State"></i>
+        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-18" title="Active State"></i>
 
-        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-24" title="In-active State"></i>
+        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
 
-        <i class="fa fa-edit logo-color fs-24" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i>
+        <i class="fa fa-edit logo-color fs-18" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i>
       </div>
     </div>
   </div>

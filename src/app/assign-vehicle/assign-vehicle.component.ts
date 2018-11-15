@@ -147,6 +147,14 @@ export class AssignVehicleComponent implements OnInit {
       this.assignVehicleInput.User.tracking_interval = result.data[0].trackingtime;
     }
   }
+  
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
+
 
   onCloseModal() {
     this.thisDialogRef.close('Cancel');

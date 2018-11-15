@@ -10,29 +10,23 @@
         <i aria-hidden="true" class="fa fa-sliders logo-color  fs-20" (click)="filterToggle()" title="Filter"></i>
 
         <div class="filterView" *ngIf="showFilterDialog">
-          <div class="">
+          <!-- <div class="">
             <b class="float-left">Filter By</b>
-            <br>
+          </div> -->
             <div class=" ">
-              <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="search text" [(ngModel)]="searchPaymentTerm" (ngModelChange)="searchPayment()"
+              <md-form-field class="example-full-width wd-100pc">
+                <input class="form-control" mdInput placeholder="Filter By" [(ngModel)]="searchPaymentTerm" (ngModelChange)="searchPayment()"
                   name="searchPaymentTerm">
               </md-form-field>
             </div>
-          </div>
         </div>
       </a>
-
     </div>
-
   </div>
 
-
   <div class="container-fluid">
-
     <div class="tab tabs-left row">
       <div class="col-2">
-
         <table class="nav nav-pills flex-column row">
           <tr>
             <td class="nav-item" (click)="viewTabpanel('cod')">
@@ -103,7 +97,7 @@
                     <span class="capitalize">{{payments.customer.firstname}} {{payments.customer.lastname}} </span> have paid the amount of INR {{payments.amount_received}}
                     to Dealer/Supplier: {{payments.dealer.firstname}} {{payments.dealer.lastname}} </small>
                   <div *ngIf="payments.status=='rejected'" class="">
-                    <small> Rejected By:
+                    <small class="danger"> Rejected By:
                       <span class="capitalize">{{payments.dealer.firstname}} {{payments.dealer.lastname}} </span>
                     </small>
                   </div>

@@ -5,10 +5,11 @@
         <i class="fa fa-users"></i> Users</h4>
     </div>
 
-
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
-      
-    <a class="cursor logo-color">
+      <a class="cursor logo-color " title="Add User">
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" (click)="addUser()"></i>
+      </a> &nbsp;&nbsp; &nbsp;
+      <a class="cursor logo-color">
         <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i>
         <div class="filterView" *ngIf="showFilterDailog">
           <div class="">
@@ -20,8 +21,8 @@
                 <md-option value="address">Address</md-option>
               </md-select>
             </div>
-  
-            <div class="form-group" *ngIf="filterType.type == 'usertype'">
+
+            <div class="mgbottom-20" *ngIf="filterType.type == 'usertype'">
               <md-select placeholder="User Type" name="type" class="full-width left" [(ngModel)]="filterInput.userType">
                 <md-option value="customer">Customer</md-option>
                 <md-option value="dealer">Distributor</md-option>
@@ -34,12 +35,12 @@
               </md-select>
             </div>
             <div class="form-group" *ngIf="filterType.type == 'mobileno'">
-              <md-form-field class="example-full-width">
+              <md-form-field class="example-full-width wd-100pc">
                 <input class="form-control" mdInput placeholder="mobileno" [(ngModel)]="filterInput.mobileno">
               </md-form-field>
             </div>
             <div class="form-group" *ngIf="filterType.type == 'address'">
-              <md-form-field class="example-full-width">
+              <md-form-field class="example-full-width wd-100pc">
                 <input class="form-control" mdInput placeholder="address" [(ngModel)]="filterInput.address">
               </md-form-field>
             </div>
@@ -47,15 +48,12 @@
               <button md-raised-button color="primary" (click)="search('true')">
                 <i class="fa fa-search" aria-hidden="true"></i> Search
               </button>
-              <button md-raised-button color="primary" (click)="clearFilter()">
-                <i class="fa fa-filter" aria-hidden="true"></i> Clear Filter
+              <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                <i class="fa fa-filter" aria-hidden="true"></i> Clear
               </button>
             </div>
           </div>
         </div>
-      </a> &nbsp;&nbsp;
-      <a class="cursor logo-color " title="Add User">
-        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true" (click)="addUser()"></i>
       </a>
     </div>
   </div>
@@ -98,7 +96,7 @@
             <span *ngIf="user.address == '' || user.address === null"> - </span>
           </td>
           <td class="left" width="10%">
-            <i class="fa fa-edit logo-color " title="Edit User" (click)="editUser(user)"></i>
+            <i class="fa fa-edit logo-color fs-18" title="Edit User" (click)="editUser(user)"></i>
           </td>
           <!-- <td class="left" width="15%">5</td>
                 <td class="left" width="15%">6</td>
@@ -109,10 +107,11 @@
       <tfoot>
         <tr>
           <td colspan="8">
-            <h4 class="warning  capitalize center">
-              <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore">
-                <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-              <span *ngIf="!UserClickMore">Record Not Available</span>
+            <h4 class="center">
+              <a href="javascript:void(0);" (click)=getUsersByPaging(); *ngIf="UserClickMore" class="logo-color">
+                <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+              <span *ngIf="!UserClickMore" class="error">
+                <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
             </h4>
           </td>
         </tr>

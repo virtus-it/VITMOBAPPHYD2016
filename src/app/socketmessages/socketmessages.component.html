@@ -1,22 +1,24 @@
 <div class="row justify-content-between modal-title ">
   <div class=" col-md-4  col-sm-4  col-lg-4">
-    <i class="fa fa-edit"></i> Message
+    <i class="fa fa-comment"></i> Message
   </div>
   <div class=" col-md-1  col-sm-1  col-lg-1 right">
-    <strong><i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseModal("cancel")'></i>
-            </strong>
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseModal("cancel")'></i>
+    </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
-    <div class="container-fluid brd-bottom mgtop-10">
-        
-  <div class="warning"><h5>{{MessageInfo}}</h5></div>
+  <div class="container-fluid brd-bottom mgtop-10">
+    <div class="warning">
+      <b class="fs-20 msgInfo">{{MessageInfo}}</b>
+    </div>
   </div>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
- 
-    <button md-raised-button (click)='onCloseModal("success")'>OK</button>
-    
+    <button md-raised-button color="primary" (click)='onCloseModal("success")'>OK</button>
   </md-dialog-actions>
 </div>
