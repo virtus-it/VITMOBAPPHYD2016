@@ -3,7 +3,9 @@
     <div class="col-3 align-self-center">
       <h4>
         <i class="fa fa-users"></i> Customers
-        <span cass="" *ngIf="customersCount != 0">(<span class="warning">{{this.customersCount}}</span>)</span>
+        <span cass="" *ngIf="customersCount != 0">
+          (
+          <span class="warning">{{this.customersCount}}</span>)</span>
       </h4>
     </div>
     <div class="col-4 align-self-center justify-content-end">
@@ -143,7 +145,7 @@
     <div class="row brd-box-box" *ngFor="let customers of customerList">
       <div class="col-4 left bg-color-bg">
         <div class="row align-items-center">
-          <div class="col-2  pd-10 " align-self-center>
+          <div class="col-2 " align-self-center>
             <span class="left capitalize joined-style">
               <!-- <span class="success"></span> -->
               <span *ngIf="customers.isappdownloaded" class="">
@@ -155,35 +157,33 @@
             </span>
           </div>
           <div class="col">
-            <div class="row">
+            <div class="d-flex">
               <b class="capital col-5 left">Customer: </b>
-              <div class="left capitalize col left" *ngIf="customers && customers.firstname">
-                <span class="onhovertooltip-140" title=" {{customers.firstname}} {{customers.lastname}} ">
-                  <!-- <span class="success"></span> -->
-                  <!-- <span *ngIf="customers.isappdownloaded" class="">
+              <span class="onhovertooltip-150 left capitalize " *ngIf="customers && customers.firstname" title=" {{customers.firstname}} {{customers.lastname}} ">
+                <!-- <span class="success"></span> -->
+                <!-- <span *ngIf="customers.isappdownloaded" class="">
                             <i class="fa fa-thumbs-up success" title="Joined"></i>
                           </span>
                           <span *ngIf="!customers.isappdownloaded" class="">
                             <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
                           </span> -->
-                  {{customers.firstname}} {{customers.lastname}}
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <b class="capital col-5 left">Mobile: </b>
-              <span class="col left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="col" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                {{customers.firstname}} {{customers.lastname}}
               </span>
             </div>
-            <div class="row">
-              <b class="capital col-5 left">Address: </b>
-              <span class="onhovertooltip-150 col left" title="{{customers.address}}">{{customers.address}}</span>
+            <div class="d-flex">
+              <b class="capital col-5 left">Mobile: </b>
+              <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+              </span>
             </div>
-            <div class="row">
+            <div class="d-flex">
+              <b class="capital col-5 left">Address: </b>
+              <span class="onhovertooltip-180  left" title="{{customers.address}}">{{customers.address}}</span>
+            </div>
+            <div class="d-flex">
               <b class="capital col-5 left">Referral Code: </b>
-              <span class="col left" title="" *ngIf="customers.reference_code">{{customers.reference_code}}</span>
-              <span class="col left" title="" *ngIf="!customers.reference_code"> - </span>
+              <span class=" left" title="" *ngIf="customers.reference_code">{{customers.reference_code}}</span>
+              <span class=" left" title="" *ngIf="!customers.reference_code"> - </span>
             </div>
 
           </div>
@@ -308,7 +308,7 @@
     <div class="row brd-box-box" *ngFor="let customers of customerList">
       <div class="col-4 left bg-color-bg">
         <div class="row align-items-center">
-          <div class="col-2  pd-10 " align-self-center>
+          <div class="col-2 " align-self-center>
             <span class="left capitalize joined-style">
               <!-- <span class="success"></span> -->
               <span *ngIf="customers.isappdownloaded" class="">
@@ -320,30 +320,28 @@
             </span>
           </div>
           <div class="col">
-            <div class="row">
+            <div class="d-flex">
               <b class="capital col-5 left">Customer: </b>
-              <div class="left capitalize col left" *ngIf="customers && customers.firstname">
-                <span class="onhovertooltip-140" title=" {{customers.firstname}} {{customers.lastname}} ">
-                  <!-- <span class="success"></span> -->
-                  <!-- <span *ngIf="customers.isappdownloaded" class="">
+              <span class="onhovertooltip-150 left capitalize" *ngIf="customers && customers.firstname" title=" {{customers.firstname}} {{customers.lastname}} ">
+                <!-- <span class="success"></span> -->
+                <!-- <span *ngIf="customers.isappdownloaded" class="">
                                 <i class="fa fa-thumbs-up success" title="Joined"></i>
                               </span>
                               <span *ngIf="!customers.isappdownloaded" class="">
                                 <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
                               </span> -->
-                  {{customers.firstname}} {{customers.lastname}}
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <b class="capital col-5 left">Mobile: </b>
-              <span class="col left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="col" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                {{customers.firstname}} {{customers.lastname}}
               </span>
             </div>
-            <div class="row">
+            <div class="d-flex">
+              <b class="capital col-5 left">Mobile: </b>
+              <span class="left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+              </span>
+            </div>
+            <div class="d-flex">
               <b class="capital col-5 left">Address: </b>
-              <span class="onhovertooltip-150 col left" title="{{customers.address}}">{{customers.address}}</span>
+              <span class="onhovertooltip-180 left" title="{{customers.address}}">{{customers.address}}</span>
             </div>
           </div>
         </div>
@@ -443,9 +441,9 @@
   <div class='pd-15' *ngIf="advanceAmountViews">
     <!-- | sorting : 'firstname' -->
     <div class="row brd-box-box" *ngFor="let customers of customerList">
-      <div class="col-4 left bg-color-bg">
-        <div class="row align-items-center">
-          <div class="col-2  pd-10 " align-self-center>
+      <div class="col-4 left bg-color-bg ">
+        <div class="row align-items-center pdtopbottom-5">
+          <div class="col-2 " align-self-center>
             <span class="left capitalize joined-style">
               <!-- <span class="success"></span> -->
               <span *ngIf="customers.isappdownloaded" class="">
@@ -457,36 +455,34 @@
             </span>
           </div>
           <div class="col">
-            <div class="row">
+            <div class="d-flex">
               <b class="capital col-5 left">Customer: </b>
-              <div class="left capitalize col left" *ngIf="customers && customers.firstname">
-                <span class="onhovertooltip-140" title=" {{customers.firstname}} {{customers.lastname}} ">
-                  <!-- <span class="success"></span> -->
-                  <!-- <span *ngIf="customers.isappdownloaded" class="">
+              <span class="onhovertooltip-150 capitalize  left" *ngIf="customers && customers.firstname" title=" {{customers.firstname}} {{customers.lastname}} ">
+                <!-- <span class="success"></span> -->
+                <!-- <span *ngIf="customers.isappdownloaded" class="">
                                 <i class="fa fa-thumbs-up success" title="Joined"></i>
                               </span>
                               <span *ngIf="!customers.isappdownloaded" class="">
                                 <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
                               </span> -->
-                  {{customers.firstname}} {{customers.lastname}}
-                </span>
-              </div>
-            </div>
-            <div class="row">
-              <b class="capital col-5 left">Mobile: </b>
-              <span class="col left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="col" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                {{customers.firstname}} {{customers.lastname}}
               </span>
             </div>
-            <div class="row">
+            <div class="d-flex">
+              <b class="capital col-5 left">Mobile: </b>
+              <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+              </span>
+            </div>
+            <div class="d-flex">
               <b class="capital col-5 left">Address: </b>
-              <span class="onhovertooltip-150 col left" title="{{customers.address}}">{{customers.address}}</span>
+              <span class="onhovertooltip-180  left" title="{{customers.address}}">{{customers.address}}</span>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="col-4 pd-10">
+      <div class="col-4  align-self-center">
         <div class="row">
           <b class="capital col-4 left">Created By: </b>
           <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby">
@@ -506,31 +502,31 @@
         </div>
       </div>
 
-      <div class="col-2 pd-10">
+      <div class="col-2 pd-10 align-self-center">
         <div class="row">
-          <b class="capital col left">Mode: </b>
+          <b class="capital col-7  left">Mode: </b>
           <span *ngIf="customers.payments" class="col left">{{customers.paymenttype}}</span>
         </div>
 
         <div class="row">
-          <b class="capital col  left">Due Amt: </b>
+          <b class="capital col-7   left">Due Amt: </b>
           <span class="danger col left" *ngIf="customers.payments">{{customers.payments.amount_pending}}</span>
         </div>
         <div class="row">
-              <b class="capital col left">Points: </b>
-              <span class="col left" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}} </span>
-              <span class="col left" *ngIf="!customers.customerpoints"> 0 </span>
-          </div>
+          <b class="capital col-7 left">Available Cans: </b>
+          <span class="col left" title="" *ngIf="customers.availablecans">{{customers.availablecans}} </span>
+          <span class="col left" *ngIf="!customers.availablecans"> 0 </span>
+        </div>
       </div>
 
       <div class="col-2  pd-10 align-self-center">
-          <div class="row mg-10">
-              <div class="col">
-              <!-- <b class="capital col left">Dep Amt: </b> -->
-              <span class="adv-style center" *ngIf="customers.payments">Advance Amt: {{customers.payments.advance_amount}}</span>
-              <span class="adv-style center" *ngIf="!customers.payments">Advance Amt: 0</span>
-            </div>
-            </div>
+        <div class="row mg-10">
+          <div class="col">
+            <!-- <b class="capital col left">Dep Amt: </b> -->
+            <span class="adv-style center" *ngIf="customers.payments">Advance Amt: {{customers.payments.advance_amount}}</span>
+            <span class="adv-style center" *ngIf="!customers.payments">Advance Amt: 0</span>
+          </div>
+        </div>
 
         <div class="row dropdown ">
           <button class="btn-primary dropbtn" md-raised-button>

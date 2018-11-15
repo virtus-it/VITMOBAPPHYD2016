@@ -5,6 +5,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import * as _ from 'underscore';
 import { LoaderService } from '../login/loader.service';
+import { AssociateCategoryComponent } from '../associate-category/associate-category.component';
 
 @Component({
   selector: 'app-users',
@@ -38,11 +39,10 @@ addUser() {
       data: ''
   });
   dialogRefEditCustomer.afterClosed().subscribe(result => {
-      //console.log(`Dialog closed: ${result}`);
-      if(result == "success"){
-        this.getAllUsers(true);
-      }
-
+    //console.log(`Dialog closed: ${result}`);
+    if (result == "success") {
+     
+    }
   });
 
 }

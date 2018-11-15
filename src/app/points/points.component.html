@@ -9,7 +9,7 @@
       <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'pointsDetails'}" href="javascript:void(0)"
         (click)="showTabPanel('pointsDetails')">Points Details </button>&nbsp;&nbsp;
       <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
-      <i class="fa fa-plus-circle fs-25 logo-color cursor " *ngIf="superDealer" title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp;
+      <!-- <i class="fa fa-plus-circle fs-25 logo-color cursor " *ngIf="superDealer" title="Add Points" (click)='addpoints()' aria-hidden="true"></i>&nbsp;&nbsp; -->
       <a class="cursor logo-color">
         <i aria-hidden="true" class="fa fa-sliders logo-color cursor fs-20" (click)="filterToggle()" title="Filter" *ngIf="tabPanelView === 'pointsDetails'"></i>
         <div class="filterView" *ngIf="showFilterDialog">
@@ -87,7 +87,7 @@
 
         <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
 
-        <i class="fa fa-edit logo-color fs-18" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i>
+        <!-- <i class="fa fa-edit logo-color fs-18" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i> -->
       </div>
     </div>
   </div>

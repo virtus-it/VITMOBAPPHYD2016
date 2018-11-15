@@ -261,6 +261,13 @@ export class AddstockProductComponent implements OnInit {
 
 }
 
+numberEvent(e: any) {
+  // console.log(e);
+  if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+    e.preventDefault();
+  }
+}
+
   ngOnInit() {
     console.log(this.Detail);
     if (this.Detail.type == 'distributorsStock') {
