@@ -141,6 +141,7 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
 import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.component';
 import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
 import { authinterceptor } from './interceptor/authinterceptor';
+import { AssociateCategoryComponent } from './associate-category/associate-category.component';
 
 
 
@@ -258,6 +259,7 @@ import { authinterceptor } from './interceptor/authinterceptor';
         RaiseRequestComponent,
         SalesTeamAssignComponent,
         RaiseRequestDetailDailogComponent,
+        AssociateCategoryComponent,
 
      
         
@@ -422,7 +424,8 @@ import { authinterceptor } from './interceptor/authinterceptor';
          DistributorMapDetailsComponent,
          ReportsPreviewComponent,
          SalesTeamAssignComponent,
-         RaiseRequestDetailDailogComponent
+         RaiseRequestDetailDailogComponent,
+         AssociateCategoryComponent
       
 
 

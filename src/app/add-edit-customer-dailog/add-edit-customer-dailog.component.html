@@ -246,7 +246,7 @@
       </div>
     </div>
 
-    <h5 class="error center mgbottom-0 mgtop-10"><i class="fa fa-warning"></i> {{this.messageError}}</h5>
+    <h5 class="error center mgbottom-0 mgtop-10" *ngIf="messageError"><i class="fa fa-warning"></i> {{this.messageError}}</h5>
 
     <!-- <div class="col-7">
         <div class=" form-group">
