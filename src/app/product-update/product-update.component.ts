@@ -20,7 +20,8 @@ import { DistributorServiceService } from '../distributor/distributor-service.se
 
 
 
-export class ProductUpdateComponent implements OnInit {
+export class 
+ProductUpdateComponent implements OnInit {
 
 productsCtrl: FormControl;
 filteredProducts: Observable<any[]>;
@@ -158,8 +159,29 @@ update(){
   else if(this.Details.type == 'stockStatusOfDistributorsProduct'){
     this.updateDistStockStatusFromProductsView();
   }
+  else if(this.Details.type == 'categoryPage'){
+    this.updateProductUnderCategory();
+  }
   else{
     this.updateStatus();
+  }
+}
+
+updateProductUnderCategory(){
+  let input = { "product": { "category":this.Details.data.category, "categoryid": this.Details.categoryDetails.categoryid , "status": this.stockStatusValue, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() , "userid": this.authenticationService.loggedInUserId() } }
+
+  if(this.validation()){
+    this.productService.setProductStatus(input)
+      .subscribe(
+      output => this.updateProductUnderCategoryResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      });
+    }
+}
+updateProductUnderCategoryResult(result){
+  if(result && result.result == 'success'){
+    this.thisDialogRef.close('success');
   }
 }
 
@@ -211,6 +233,9 @@ updateDistributorsStockStatusResult(result){
     }
     else if(this.Details.type == 'stockStatusOfDistributorsProduct'){
       this.stockStatusValue = this.Details.data.data[0].stockstatus;
+    }
+    else if(this.Details.type == 'categoryPage'){
+      this.stockStatusValue = this.Details.data.stockstatus;
     }
     else{
       this.stockStatusValue = this.Details.data[0].stockstatus;

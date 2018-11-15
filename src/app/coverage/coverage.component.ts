@@ -416,7 +416,8 @@ export class CoverageComponent implements OnInit {
     };
     //console.log(input);
 
-    this.productService.getProductsCategory(input).subscribe(
+    this.productService.getProductsCategory(input)
+    .subscribe(
       output => this.getProductsCategoryResult(output),
       error => {
         //console.log("error in products category list");

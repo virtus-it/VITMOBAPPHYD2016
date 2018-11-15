@@ -310,6 +310,9 @@ export class ReportsComponent implements OnInit {
           });
 
     }
+    else{
+      this.loaderService.display(false);
+    }
 
   }
   getFileResult(result) {

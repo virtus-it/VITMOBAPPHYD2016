@@ -60,7 +60,7 @@
       </div>
       <div class="col-4 ">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required>          
+          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required (keypress)="numberEvent($event)" maxlength="5">          
         </md-form-field>
       </div>
     </div>

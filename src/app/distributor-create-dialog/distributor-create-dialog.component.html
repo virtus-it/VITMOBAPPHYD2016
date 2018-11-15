@@ -43,13 +43,13 @@
           </div> 
       <div class="col-md-4  col-sm-4  col-lg-4" *ngIf="phone && authenticationService.isSuperDelear == false">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone"  [(ngModel)]="dist.phone" name="phone" maxlength="10" disabled="disabled">
+              <input mdInput class="form-control" placeholder="Phone"  [(ngModel)]="dist.phone" name="phone" maxlength="10" disabled="disabled"  (keypress)="numberEvent($event)" >
           </md-form-field>
 
       </div>
       <div class="col-md-4  col-sm-4  col-lg-4"  *ngIf="authenticationService.isSuperDelear">
           <md-form-field class="example-full-width wd-100pc">
-              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10"  >
+              <input mdInput class="form-control" placeholder="Phone" [formControl]="phoneFormControl" [(ngModel)]="dist.phone" name="phone" maxlength="10"  (keypress)="numberEvent($event)" >
             
               <md-error *ngIf="phoneFormControl.hasError('required')" >
                   Phone Number is <strong>required</strong>
@@ -62,7 +62,7 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4">
             <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Mobile number 1" [(ngModel)]="dist.mobile1"   name="phone1" maxlength="10">
+                <input mdInput class="form-control" placeholder="Mobile number 1" [(ngModel)]="dist.mobile1"   name="phone1" maxlength="10"  (keypress)="numberEvent($event)">
             </md-form-field>
   
         </div>
@@ -70,7 +70,7 @@
 
         <div class="col-md-4  col-sm-4  col-lg-4" >
             <md-form-field class="example-full-width wd-100pc">
-                <input mdInput class="form-control" placeholder="Mobile Number 2"  [(ngModel)]="dist.mobile2" name="phone2" maxlength="10" >
+                <input mdInput class="form-control" placeholder="Mobile Number 2"  [(ngModel)]="dist.mobile2" name="phone2" maxlength="10"  (keypress)="numberEvent($event)" >
             </md-form-field>
   
         </div>

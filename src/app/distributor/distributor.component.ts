@@ -28,7 +28,7 @@ import * as _ from 'underscore';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { LoaderService } from '../login/loader.service';
 import { ReportsService } from '../reports/reports.service';
-import {RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
+import { RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
 
 @Component({
 
@@ -606,18 +606,20 @@ export class DistributorComponent implements OnInit {
             this.filterInput.root.searchtype = 'stockpoints';
             this.filterInput.root.searchtext = this.filterTypeModel.isstockpointDefined;
         }
-        else if(this.filterType == 'salesteamassociation'){
+        else if (this.filterType == 'salesteamassociation') {
             this.filterInput.root.searchtype = 'assign';
             this.filterInput.root.searchtext = this.salesTeamId;
         }
-        let input = this.filterInput;
-        this.distributorService.getAllDistributors(input)
-            .subscribe(
-                output => this.searchFilterResult(output),
-                error => {
-                    //console.log("error in distrbutors");
-                    this.loaderService.display(false);
-                });
+        if (this.filterInput.root.searchtext) {
+            let input = this.filterInput;
+            this.distributorService.getAllDistributors(input)
+                .subscribe(
+                    output => this.searchFilterResult(output),
+                    error => {
+                        //console.log("error in distrbutors");
+                        this.loaderService.display(false);
+                    });
+        }
     }
     searchFilterResult(result) {
         if (result.result == 'success') {
@@ -778,8 +780,8 @@ export class DistributorComponent implements OnInit {
         return finalSalesTeam;
     }
 
-    raiseRequestBySuperDealer(data){
-        let formattedData = {type : 'raiseRequestBySuperDealer' , data: data};
+    raiseRequestBySuperDealer(data) {
+        let formattedData = { type: 'raiseRequestBySuperDealer', data: data };
         let dialogRefAddProduct = this.dialog.open(RaiseRequestDetailDailogComponent, {
             width: '70%',
             data: formattedData
