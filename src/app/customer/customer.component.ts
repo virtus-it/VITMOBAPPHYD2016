@@ -302,9 +302,6 @@ export class CustomerComponent implements OnInit {
         this.filterInput.root.searchtext = "";
     }
     getCustomerByFilter(firstcall) {
-
-
-
         if (this.filterInput.root.searchtype == 'followupdate') {
             this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
         }
@@ -313,6 +310,8 @@ export class CustomerComponent implements OnInit {
         }
 
         let input = this.filterInput;
+        // if (this.filterInput.root.searchtext && this.filterInput.root.searchtext.length > 2) {
+
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {
@@ -324,13 +323,16 @@ export class CustomerComponent implements OnInit {
             this.customerList = [];
             input.root.lastcustomerid = "0";
         }
-        this.customerService.searchCustomer(input)
-            .subscribe(
-                output => this.getCustomerByFilterResult(output),
-                error => {
-                    //console.log("error in customer");
-                    this.loaderService.display(false);
-                });
+            this.customerService.searchCustomer(input)
+                .subscribe(
+                    output => this.getCustomerByFilterResult(output),
+                    error => {
+                        //console.log("error in customer");
+                        this.loaderService.display(false);
+                    });
+
+        // }
+
     }
     getCustomerByFilterResult(result) {
         //console.log(result);
@@ -339,9 +341,9 @@ export class CustomerComponent implements OnInit {
             this.customerList = _.union(this.customerList, result.data);
             // this.customersSort = this.customerList;
         }
-        else {
-            this.customerClickMore = false;
-        }
+        // else {
+        //     this.customerClickMore = false;
+        // }
 
     }
     getcustomerByPaging() {
@@ -389,6 +391,7 @@ export class CustomerComponent implements OnInit {
         this.showFilterDailog = false;
         this.filterRecords = false;
         this.followUpdate = null;
+        this.customerClickMore = true;
         this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
         this.getCustomerList(true);
 

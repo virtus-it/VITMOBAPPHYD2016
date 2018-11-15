@@ -24,12 +24,13 @@
         <thead>
           <tr>
             <th width="10%">Req No.</th>
-            <th width="20%">Raised By</th>
-            <!-- <th width="15%">Invoice Date</th> -->
-            <th width="17%">Created Date</th>
-            <th width="17%">Updated Date</th>
-            <th width="17%">Confirmed Date</th>
-            <th width="17%" class="pdleft-20">Action</th>
+            <th width="10%">Raised By</th>
+            <th width="12%">Category | Product</th>
+            <th width="12%">Stock / Empty Cans</th>
+            <th width="14%">Created Date</th>
+            <th width="14%">Updated Date</th>
+            <th width="14%">Confirmed Date</th>
+            <th width="14%" class="pdleft-20">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -42,10 +43,17 @@
               <span *ngIf="stockrequest.distributor.firstname" class="capitalize">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
               <span *ngIf="!stockrequest.distributor.firstname"> - </span>
             </td>
-            <!-- <td>
-              <span *ngIf="stockrequest.modifieddate">{{stockrequest.modifieddate | utcDate}}</span>
-              <span *ngIf="!stockrequest.modifieddate"> - </span>
-            </td> -->
+            <td>
+              <span *ngIf="stockrequest.products && stockrequest.products[0]">{{stockrequest.products[0].category}} | {{stockrequest.products[0].pname}}</span>
+              <span *ngIf="!stockrequest.products"> - </span>
+            </td>
+
+            <td>
+              <span *ngIf="stockrequest.products && stockrequest.products[0]">{{stockrequest.products[0].stock}} / {{stockrequest.products[0].returnemptycans}}</span>
+              <span *ngIf="!stockrequest.products"> - </span>
+            </td>
+
+
             <td>
               <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
               <span *ngIf="!stockrequest.reqdate" class="danger"> Pending </span>

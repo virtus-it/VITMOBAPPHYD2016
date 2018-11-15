@@ -33,7 +33,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname">
+            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname" maxlength="15">
             <md-error>
               First Name is
               <strong>required</strong>
@@ -42,7 +42,7 @@
         </div>
         <div class="col-6">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname">
+            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname" maxlength="15">
             <md-error>
               Last Name is
               <strong>required</strong>
@@ -53,7 +53,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno" (keypress)="numberEvent($event)">
             <md-error>
               Phone Number is
               <strong>required</strong>
@@ -62,7 +62,7 @@
         </div>
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email id" name="emailid" [(ngModel)]="profileUpdate.emailid">
+            <input class="form-control" mdInput placeholder="Email id" name="emailid" [(ngModel)]="profileUpdate.emailid" maxlength="35">
             <md-error>
               Email id is
               <strong>required</strong>
@@ -74,7 +74,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname">
+            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname" maxlength="50">
           </md-form-field>
         </div>
 
@@ -90,7 +90,7 @@
         <div class="col">
           <div class="">
             <md-form-field class="wd-80pc">
-              <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="profileUpdate.address"></textarea>
+              <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="profileUpdate.address" maxlength="500"></textarea>
             </md-form-field>
           </div>
           <div class="smalltxt-style">

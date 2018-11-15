@@ -181,37 +181,11 @@ dialogRef.afterClosed().subscribe(result => {
 
 
 
-// generateTokenAtLogin(){
-//   let input = {username : '9863636314' , password : '9863636314'};
-//   this.customerService.tokenGenerate(input)
-//   .subscribe(
-//     output => this.generateTokenAtLoginResult(output),
-//     error => {
-//       //console.log("error in getting profile details");
-//     });
-// }
-// generateTokenAtLoginResult(result){
-//   console.log(result , 'result');
-//   if(result){
-//     localStorage.setItem('token' , JSON.stringify(result.token) );
-//     // this.authenticationService.CurrentSession = JSON.parse(localStorage.getItem('token'));
-//   }
-// }
-
-// getTokenDetailsAndData(){
-//   let input = {'name': 'sdf' , 'age' : '22'};
-//   this.customerService.verifyTokenDetails(input)
-//   .subscribe(
-//     output => this.getTokenDetailsAndDataResult(output),
-//     error => {
-//       //console.log("error in getting profile details");
-//     });
-// }
-// getTokenDetailsAndDataResult(result){
-//   if(result){
-//     console.log(result , 'success!!!!');
-//   }
-// }
+numberEvent(e:any){
+  if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+    e.preventDefault();
+  }
+}
 
 
 

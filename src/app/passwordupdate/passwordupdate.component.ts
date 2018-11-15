@@ -13,8 +13,10 @@ export class PasswordupdateComponent implements OnInit {
   constructor(public thisDialogRef: MdDialogRef<PasswordupdateComponent>, private customerService: CustomerService, private authenticationService: AuthenticationService) { }
 
   checkPassword: any = { "oldpassword": "", "newpassword": "", "confirmpassword": "" };
-  wrongPassword = "";
+  wrongPassword = false;
   passwordUpdated = false;
+  shortPassword = false;
+  longPassword = false;
 
 
   updatePassword() {
@@ -37,37 +39,26 @@ export class PasswordupdateComponent implements OnInit {
   }
 
   validatePassword() {
-    this.wrongPassword = '';
-    console.log("validatePassword click");
-    if (!this.checkPassword.oldpassword) {
-      this.wrongPassword = 'Please enter current password';
-      return false;
+    if (this.checkPassword.newpassword && this.checkPassword.newpassword.length < 4) {
+      this.shortPassword = true;
     }
-    if (!this.checkPassword.newpassword) {
-      this.wrongPassword = 'Please enter new password';
-      return false;
+    else if (this.checkPassword.confirmpassword && this.checkPassword.confirmpassword.length < 4) {
+      this.shortPassword = true;
     }
-    if (!this.checkPassword.confirmpassword) {
-      this.wrongPassword = 'Please enter confirm password';
-      return false;
+    else if (this.checkPassword.newpassword && this.checkPassword.newpassword.length > 15) {
+      this.longPassword = true;
     }
-    if (this.checkPassword.oldpassword.length < 3) {
-      this.wrongPassword = 'Please enter min 3 characters for current password';
-      return false;
+    else if (this.checkPassword.confirmpassword && this.checkPassword.confirmpassword.length > 15) {
+      this.longPassword = true;
     }
-    if (this.checkPassword.newpassword.length < 3) {
-      this.wrongPassword = 'Please enter min 3 characters for new password';
-      return false;
+    else if (this.checkPassword.newpassword != this.checkPassword.confirmpassword) {
+      this.wrongPassword = true;
     }
-    if (this.checkPassword.confirmpassword.length < 3) {
-      this.wrongPassword = 'Please enter min 3 characters for confirm password';
-      return false;
-    }
-    if (this.checkPassword.newpassword == this.checkPassword.confirmpassword) {
+    else if ((this.checkPassword.newpassword == this.checkPassword.confirmpassword) && this.checkPassword.newpassword.length > 4 && this.checkPassword.confirmpassword.length > 4) {
+      this.shortPassword = false;
+      this.wrongPassword = false;
+      this.longPassword = false;
       this.updatePassword();
-    }
-    else {
-      this.wrongPassword = ' Passwords does not match';
     }
 
   }

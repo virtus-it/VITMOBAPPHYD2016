@@ -130,12 +130,12 @@ export class AddSupplierDailogComponent implements OnInit {
     }
   }
 
-  numberEvent(e: any) {
-    // console.log(e);
+   numberEvent(e:any){
     if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
       e.preventDefault();
     }
-  }
+   }
+
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }

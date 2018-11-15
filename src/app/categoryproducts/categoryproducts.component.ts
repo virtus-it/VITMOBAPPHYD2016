@@ -54,9 +54,8 @@ export class CategoryproductsComponent implements OnInit {
   }
 
   changeStatus(data){
-    let formattedData = {type : 'changeStatusFromCategory' , data : data}
+    let formattedData = {type: 'categoryPage' , data: data , categoryDetails : this.details}
     let dialogRefAddProduct = this.dialog.open(ProductUpdateComponent, {
-
       width: '700px',
       data: formattedData
     });
@@ -79,7 +78,7 @@ export class CategoryproductsComponent implements OnInit {
 
 
   ngOnInit() {
-    //console.log(this.details);
+    console.log(this.details , 'catcatcat');
     this.getCategoryProducts();
   }
 
