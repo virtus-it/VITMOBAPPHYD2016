@@ -23,14 +23,15 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="10%">Req No.</th>
+            <th width="6%">Req No.</th>
             <th width="10%">Raised By</th>
-            <th width="12%">Category | Product</th>
-            <th width="12%">Stock / Empty Cans</th>
-            <th width="14%">Created Date</th>
-            <th width="14%">Updated Date</th>
-            <th width="14%">Confirmed Date</th>
-            <th width="14%" class="pdleft-20">Action</th>
+            <th width="15%">Category </th>
+            <th width="10%">Product</th>
+            <th width="11%">Stock / Emp Cans</th>
+            <th width="13%">Created Date</th>
+            <th width="13%">Updated Date</th>
+            <th width="13%">Confirmed Date</th>
+            <th width="12%">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -40,20 +41,21 @@
               <span *ngIf="!stockrequest.reqid"> - </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.distributor.firstname" class="capitalize">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
+              <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
               <span *ngIf="!stockrequest.distributor.firstname"> - </span>
             </td>
             <td>
-              <span *ngIf="stockrequest.products && stockrequest.products[0]">{{stockrequest.products[0].category}} | {{stockrequest.products[0].pname}}</span>
+              <span *ngIf="stockrequest.products && stockrequest.products[0]" class="capitalize onhovertooltip-150" title="{{stockrequest.products[0].category}}">{{stockrequest.products[0].category}}</span>
               <span *ngIf="!stockrequest.products"> - </span>
             </td>
-
             <td>
-              <span *ngIf="stockrequest.products && stockrequest.products[0]">{{stockrequest.products[0].stock}} / {{stockrequest.products[0].returnemptycans}}</span>
+                <span *ngIf="stockrequest.products && stockrequest.products[0]" class="onhovertooltip-120" title="{{stockrequest.products[0].pname}}">{{stockrequest.products[0].pname}}</span>
+                <span *ngIf="!stockrequest.products"> - </span>
+              </td>
+            <td>
+              <span *ngIf="stockrequest.products && stockrequest.products[0]" ><span class="success">{{stockrequest.products[0].stock}}</span> / <span class="warning">{{stockrequest.products[0].returnemptycans}}</span></span>
               <span *ngIf="!stockrequest.products"> - </span>
             </td>
-
-
             <td>
               <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
               <span *ngIf="!stockrequest.reqdate" class="danger"> Pending </span>
@@ -67,12 +69,11 @@
               <span *ngIf="!stockrequest.reqconfirmdate" class="danger">Pending </span>
             </td>
             <td>
-              <span class="logo-color cursor" (click)="viewDetails(stockrequest)">View Details</span>
+              <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span>
             </td>
           </tr>
         </tbody>
       </table>
-
     </div>
   </div>
 
