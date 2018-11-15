@@ -40,6 +40,9 @@ export class CustomerComponent implements OnInit {
     loginId: any = 0;
     superDealer = true;
     customerCare = true;
+    customerViews=true;
+    pointsViews = true;
+    advanceAmountViews=true;
     salesTeamLogin = true;
     customersCount: number = 0;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
@@ -53,8 +56,6 @@ export class CustomerComponent implements OnInit {
         { value: 'followupdate', viewValue: 'Followup Date' },
         { value: 'points', viewValue: 'Points' },
         { value: 'advamt', viewValue: 'Adv Amt < available cans' }
-
-
     ];
 
     sortCustomer = {
