@@ -80,8 +80,6 @@ import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
 import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
 import { PromocodeServiceService } from './promocode/promocode-service.service';
 
-
-
 import { ProductsService } from './products/products.service';
 import { AddstockProductComponent } from './addstock-product/addstock-product.component';
 import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.component';

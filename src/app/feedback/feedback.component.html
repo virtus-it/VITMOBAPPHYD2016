@@ -2,7 +2,7 @@
   <div class=" row justify-content-between distIcon-style left">
     <div class="col-sm-2 col-md-2 col-lg-2 ">
       <h4>
-        <i class="fa fa-comment-o"></i> Feedback</h4>
+        <i class="fa fa-comments-o"></i> Feedback</h4>
     </div>
     <div class="col-sm-1 col-md-1 col-lg-1 align-self-center right">
       <a class="" (click)="refresh()">
@@ -60,7 +60,7 @@
 
             <div *ngFor="let replies of feed.reply">
 
-              <b *ngIf="replies.createdby"> {{replies.createdby.firstname}} {{replies.createdby.lastname}} Replied:</b>
+              <b *ngIf="replies.createdby" class="capitalize"> {{replies.createdby.firstname}} {{replies.createdby.lastname}} Replied:</b>
               <p class="gray6 mgbottom-5"> {{replies.message}} </p>
 
               <!-- <span>Date:</span>  -->

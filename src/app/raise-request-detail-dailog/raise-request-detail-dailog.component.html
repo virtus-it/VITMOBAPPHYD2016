@@ -21,38 +21,55 @@
 </div>
 
 <!-- Step 1 by distributor-->
-
 <div class="container-fluid brd-bottom pd-15x25" *ngIf="Details.type == 'newRaiseRequest' || Details.type == 'raiseRequestBySuperDealer'">
   <div class="row">
     <div class="col">
-      <md-form-field class="inline">
+      <small>Distributor</small>
+      <h6 class="capitalize">{{this.Details.data.firstname}} {{this.Details.data.lastname}} - {{this.Details.data.mobileno}}</h6>
+    </div>
+    <div class="col">
+      <md-select placeholder="Select Day" name="type" class="full-width left" [(ngModel)]="invoiceDateFiter">
+        <md-option value="today">Today </md-option>
+        <md-option value="tommorrow">Tommorrow</md-option>
+        <md-option value="twodaysfromnow">Two days from now</md-option>
+        <md-option value="threedaysfromnow">Three days from now</md-option>
+      </md-select>
+      <!-- <md-form-field class="inline">
         <input mdInput [mdDatepicker]="picker" placeholder="Enter select date" name="date" [(ngModel)]="invoiceDate">
         <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
         <md-datepicker #picker></md-datepicker>
-      </md-form-field>
+      </md-form-field> -->
     </div>
   </div>
 
-  <div class="">
+  <div class="mgtop-10">
     <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
-          <th width="39%">Product Name</th>
-          <th width="30%">Filled Cans</th>
-          <th width="30%">Empty Cans</th>
+          <th width="20%">category</th>
+          <th width="25%">Product Name</th>
+          <th width="18%">Product Type</th>
+          <th width="18%">Filled Cans</th>
+          <th width="18%">Empty Cans</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let products of allProductsList">
-          <td width="40%">
-            <div class="capitalize pdtopbottom-8">{{products.category}} | {{products.ptype}} | {{products.brandname}}</div>
+          <td width="20%">
+            <div class="capitalize pdtopbottom-8">{{products.category}}</div>
           </td>
-          <td width="30%">
+          <td width="25%">
+              <div class="capitalize pdtopbottom-8">{{products.brandname}}</div>
+            </td>
+            <td width="17%">
+                <div class="capitalize pdtopbottom-8">{{products.ptype}} </div>
+              </td>
+          <td width="18%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter stock" [(ngModel)]="products.stock" (keypress)="numberEvent($event)">
             </md-form-field>
           </td>
-          <td width="30%">
+          <td width="18%">
             <md-form-field class="wd-100pc">
               <input class="form-control" mdInput placeholder="Enter return empty cans" [(ngModel)]="products.returnemptycans" (keypress)="numberEvent($event)">
             </md-form-field>
@@ -61,6 +78,9 @@
       </tbody>
     </table>
   </div>
+  <h5 class="error center" *ngIf="raisreqError">Please {{raisreqError}} {{emptyqty}}</h5>
+  <h5 class="error center" *ngIf="raisreqErrorQty">Please enter stock and empty cans values</h5>
+
 </div>
 
 <!-- Only viewing purpose for distributor -->

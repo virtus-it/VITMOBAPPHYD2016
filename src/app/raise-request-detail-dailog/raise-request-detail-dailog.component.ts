@@ -7,6 +7,7 @@ import * as _ from 'underscore';
 import * as moment from 'moment';
 import { Observable } from 'rxjs/Observable';
 import { FormControl, Validators } from '@angular/forms';
+import { letProto } from 'rxjs/operator/let';
 
 
 
@@ -32,7 +33,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   raiseRequestDetails = { requestdate: '', requestquantity: '' };
   ipSendingArray = [];
   errorMessage = '';
-  invoiceDate = null;
+  invoiceDate: any;
   headerValue: string = '';
   modifieddate: string = '';
   secondStepDetails: any = [];
@@ -40,7 +41,14 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   supplierName = '';
   amountPaid: any = 0;
   supplierList: any = [];
-
+  invoiceDateFiter: any = "";
+  invoiceDate1: any;
+  invoiceDate2: any;
+  invoiceDate0: any;
+  invoiceDate3: any;
+  raisreqError: any = "";
+  raisreqErrorQty=false;
+  rasiereqInput: any = {  invoiceDate: "", productDetails: {} }
 
 
   // raiseRequestInput = { "product": { "pid": '', "productname": "", "pType": "", "stock": "", "returnemptycans": "", "loginid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "invoicedate": this.raiseRequestDetails.requestdate, "itemcost": "", "distributorid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.superDelearId(), "categoryid": "", "apptype": this.authenticationService.appType() } };
@@ -66,11 +74,38 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   }
 
   raiseRequestByDistributor() {
+    
+    let raisreqErrorQty = this.raisreqError;
+    this.raisreqError = "";
+    raisreqErrorQty = "";
+    if (this.invoiceDateFiter == 'today') {
+      console.log('today' + this.invoiceDate);
+      this.invoiceDate = this.invoiceDate0;
+    }
+    if (this.invoiceDateFiter == 'tommorrow') {
+      console.log('tommorrow' + this.invoiceDate1);
+      this.invoiceDate = this.invoiceDate1;
+    }
+    if (this.invoiceDateFiter == 'twodaysfromnow') {
+      console.log('twodaysfromnow' + this.invoiceDate2);
+      this.invoiceDate = this.invoiceDate2;
+    }
+    if (this.invoiceDateFiter == 'threedaysfromnow') {
+      console.log('threedaysfromnow' + this.invoiceDate3);
+      this.invoiceDate = this.invoiceDate3;
+    }
+    let selectedDate = this.invoiceDate;
+    if (!selectedDate) {
+      this.raisreqError = "select the day";
+      return false;
+    }
+    // else(){
+
+    // }
+
     let loginid = this.authenticationService.loggedInUserId();
     let usertype = this.authenticationService.userType();
-    let invoiceDate = null;
-    invoiceDate = moment(this.invoiceDate).format('DD-MM-YYYY');
-    // console.log(invoiceDate , 'invoiceDateinvoiceDateinvoiceDateinvoiceDateinvoiceDate');
+
     let dealerid = this.authenticationService.superDelearId();
     if (this.Details.type == 'raiseRequestBySuperDealer') {
       loginid = this.Details.data.userid;
@@ -93,18 +128,27 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
         requiredProductDetails.product.dealerid = dealerid;
         requiredProductDetails.product.loginid = loginid;
         requiredProductDetails.product.usertype = usertype;
-        requiredProductDetails.product.invoicedate = invoiceDate;
+        requiredProductDetails.product.invoicedate = selectedDate;
         requiredProductDetails.product.distributorid = loginid;
         requiredProductsArray.push(requiredProductDetails);
       }
+      else {
+        console.log("Please enter stock and empty cans values");
+        raisreqErrorQty = true;
+        // return true;
+      }
     });
     let input = requiredProductsArray;
+    console.log(input);
+
     this.distributorService.raiseReqByDistributor(input)
       .subscribe(
         output => this.raiseRequestByDistributorResult(output),
         error => {
+          console.log("server error");
         });
   }
+
   raiseRequestByDistributorResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -225,6 +269,24 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   }
 
   ngOnInit() {
+    let today = new Date();
+
+    console.log("todays date is:" + today);
+
+    var tomorrow = moment(today).add(1, 'days');
+    var tomorrow2 = moment(today).add(2, 'days');
+    var tomorrow3 = moment(today).add(3, 'days');
+
+    this.invoiceDate0 = moment(today).format('YYYY-MM-DD 02:00:00');
+    this.invoiceDate1 = moment(tomorrow).format('YYYY-MM-DD 02:00:00');
+    this.invoiceDate2 = moment(tomorrow2).format('YYYY-MM-DD 02:00:00');
+    this.invoiceDate3 = moment(tomorrow3).format('YYYY-MM-DD 02:00:00');
+
+    console.log(this.invoiceDate0 + 'today');
+    console.log(this.invoiceDate1 + 'tomorrow');
+    console.log(this.invoiceDate2 + 'twodaysfromnow');
+    console.log(this.invoiceDate3 + 'tomorrow3');
+
     console.log(this.Details);
     if (this.Details.type == 'newRaiseRequest') {
       this.getProducts();
