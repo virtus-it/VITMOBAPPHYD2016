@@ -569,27 +569,20 @@ export class AddEditUserComponent implements OnInit {
         categoryid : ''
       }
     };
-    this.addCategoryOfManufacturer(this.manufacturerId);
-    if (this.manufacturerValidation()) {
-      this.distributorService.createDistributor(input)
-        .subscribe(
-          output => this.addManufacturerResult(output),
-          error => {
-            //console.log("error in distrbutors");
-          }
-        );
-    }
+        if (this.manufacturerValidation()) {
+        this.addCategoryOfManufacturer(input);
+        }
   }
-  addManufacturerResult(result) {
-    if (result.result == 'success') {
-      this.manufacturerId  = result.data.user_id;
-      // this.thisDialogRef.close('success');
-    }
-  }
+  // addManufacturerResult(result) {
+  //   if (result.result == 'success') {
+  //     this.manufacturerId  = result.data.user_id;
+  //     // this.thisDialogRef.close('success');
+  //   }
+  // }
 
 
-  addCategoryOfManufacturer(id) {
-    let formattedData = { userid : id }
+  addCategoryOfManufacturer(input) {
+    let formattedData = { input : input }
     let dialogRefEditCustomer = this.dialog.open(AssociateCategoryComponent, {
       width: '80%',
       data: formattedData
@@ -598,6 +591,7 @@ export class AddEditUserComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == "success") {
         this.thisDialogRef.close('success');
+       
       }
     });
 
@@ -829,31 +823,33 @@ export class AddEditUserComponent implements OnInit {
         mobileno_two: this.manufacturerInput.mobile2,
         emailid: this.manufacturerInput.emailid,
         dealer_mobileno: this.authenticationService.dealerNo(),
-        apptype: this.authenticationService.appType()
+        apptype: this.authenticationService.appType(),
+        categoryid : ''
       }
     };
     input.User.userid = this.Details.userid;
     if (this.manufacturerValidation()) {
-      this.distributorService.updateDistributor(input)
-        .subscribe(
-          output => this.UpdateManufacturerResult(output),
-          error => {
-            //console.log("error in distrbutors");
-          }
-        );
+      this.addCategoryOfManufacturerOnUpdate(input);
+      // this.distributorService.updateDistributor(input)
+      //   .subscribe(
+      //     output => this.UpdateManufacturerResult(output),
+      //     error => {
+      //       //console.log("error in distrbutors");
+      //     }
+      //   );
     }
   }
-  UpdateManufacturerResult(result) {
-    if (result.result == 'success') {
-      console.log('manufacturer updated successfully');
-      // this.thisDialogRef.close('success');
-      this.addCategoryOfManufacturerOnUpdate(result.data);
-      this.getUserDetails();
-    }
-  }
+  // UpdateManufacturerResult(result) {
+  //   if (result.result == 'success') {
+  //     console.log('manufacturer updated successfully');
+  //     // this.thisDialogRef.close('success');
+      
+  //     this.getUserDetails();
+  //   }
+  // }
 
   addCategoryOfManufacturerOnUpdate(data) {
-    let formattedData = {userid : data.userid }
+    let formattedData = {input : data }
     let dialogRefEditCustomer = this.dialog.open(AssociateCategoryComponent, {
       width: '80%',
       data: formattedData

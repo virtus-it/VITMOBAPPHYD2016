@@ -41,7 +41,7 @@ addUser() {
   dialogRefEditCustomer.afterClosed().subscribe(result => {
     //console.log(`Dialog closed: ${result}`);
     if (result == "success") {
-     
+      this.getAllUsers(true);
     }
   });
 
