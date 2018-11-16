@@ -40,6 +40,9 @@ export class CustomerComponent implements OnInit {
     loginId: any = 0;
     superDealer = true;
     customerCare = true;
+    customerViews = true;
+    pointsViews = false;
+    advanceAmountViews = false;
     salesTeamLogin = true;
     customersCount: number = 0;
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
@@ -53,14 +56,13 @@ export class CustomerComponent implements OnInit {
         { value: 'followupdate', viewValue: 'Followup Date' },
         { value: 'points', viewValue: 'Points' },
         { value: 'advamt', viewValue: 'Adv Amt < available cans' }
-
-
     ];
 
     sortCustomer = {
         name: '',
         sorting: null
     };
+
 
     // customersSort : customers[];
     // path: string[] = ['customers'];
@@ -306,6 +308,14 @@ export class CustomerComponent implements OnInit {
         }
         if (this.filterInput.root.searchtype == 'advamt') {
             this.filterInput.root.searchtext = 'empty';
+            this.customerViews = false;
+            this.pointsViews = false;
+            this.advanceAmountViews = true;
+        }
+        if (this.filterInput.root.searchtype == 'points') {
+            this.customerViews = false;
+            this.pointsViews = true;
+            this.advanceAmountViews = false;
         }
 
         let input = this.filterInput;
@@ -322,13 +332,13 @@ export class CustomerComponent implements OnInit {
             this.customerList = [];
             input.root.lastcustomerid = "0";
         }
-            this.customerService.searchCustomer(input)
-                .subscribe(
-                    output => this.getCustomerByFilterResult(output),
-                    error => {
-                        //console.log("error in customer");
-                        this.loaderService.display(false);
-                    });
+        this.customerService.searchCustomer(input)
+            .subscribe(
+                output => this.getCustomerByFilterResult(output),
+                error => {
+                    //console.log("error in customer");
+                    this.loaderService.display(false);
+                });
 
         // }
 

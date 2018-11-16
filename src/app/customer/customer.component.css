@@ -147,4 +147,25 @@ border-radius: 3px;
 .wd-150pc .mat-input-container .mat-input-wrapper{
   width: 150% !important;
 }
+.points-style{
+  padding: 5px 10px;
+  border: 1px solid #ce8d16;
+  background: var(--warning);
+  border-radius: 15px;
+  color: #fff;
+}
+.points-style1{
+  padding: 10px 20px;
+  border: 1px solid #ce8d16;
+  background: var(--warning);
+  border-radius: 20px;
+  font-size: 16px;
+  color: #fff;
+}
+.adv-style{
+      color: white;
+background: var(--success);
+padding: 5px 10px;
+border-radius: 15px;
+}
 
