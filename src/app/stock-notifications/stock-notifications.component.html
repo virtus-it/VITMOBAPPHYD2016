@@ -25,13 +25,14 @@
           <tr>
             <th width="6%">Req No.</th>
             <th width="10%">Raised By</th>
-            <th width="15%">Category </th>
+            <th width="13%">Category </th>
             <th width="10%">Product</th>
             <th width="11%">Stock / Emp Cans</th>
-            <th width="13%">Created Date</th>
-            <th width="13%">Updated Date</th>
-            <th width="13%">Confirmed Date</th>
-            <th width="12%">Action</th>
+            <th width="10%">Created Date</th>
+            <th width="10%">Updated Date</th>
+            <th width="10%">Confirmed Date</th>
+            <th width="10%">Expected Delivery</th>
+            <th width="10%">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -67,6 +68,11 @@
             <td>
               <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
               <span *ngIf="!stockrequest.reqconfirmdate" class="danger">Pending </span>
+            </td>
+
+            <td>
+              <span *ngIf="stockrequest.expected_deliverydate"> {{stockrequest.expected_deliverydate | utcDate}}</span>
+              <span *ngIf="!stockrequest.expected_deliverydate"> - </span>
             </td>
             <td>
               <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span>

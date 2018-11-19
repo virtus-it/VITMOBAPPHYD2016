@@ -317,7 +317,6 @@ export class CustomerComponent implements OnInit {
             this.pointsViews = true;
             this.advanceAmountViews = false;
         }
-
         let input = this.filterInput;
         // if (this.filterInput.root.searchtext && this.filterInput.root.searchtext.length > 2) {
 
@@ -326,7 +325,6 @@ export class CustomerComponent implements OnInit {
             if (lastCustomer) {
                 input.root.lastcustomerid = lastCustomer.userid;
             }
-
         }
         else {
             this.customerList = [];
@@ -350,9 +348,9 @@ export class CustomerComponent implements OnInit {
             this.customerList = _.union(this.customerList, result.data);
             // this.customersSort = this.customerList;
         }
-        // else {
-        //     this.customerClickMore = false;
-        // }
+        else {
+            this.customerClickMore = false;
+        }
 
     }
     getcustomerByPaging() {
@@ -401,8 +399,12 @@ export class CustomerComponent implements OnInit {
         this.filterRecords = false;
         this.followUpdate = null;
         this.customerClickMore = true;
+        this.customerViews = true;
+        this.pointsViews = false;
+        this.advanceAmountViews = false;
         this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
         this.getCustomerList(true);
+
 
     }
 
