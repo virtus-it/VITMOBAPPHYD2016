@@ -3,8 +3,8 @@
     <div class="col-3 align-self-center">
       <h4>
         <i class="fa fa-users"></i> Customers
-        <span cass="" *ngIf="customersCount != 0">
-          (<span class="warning">{{this.customersCount}}</span>)</span>
+        <span cass="" *ngIf="this.customerList && this.customerList[0]">
+          (<span class="warning">{{this.customerList[0].totalcustomercount}}</span>)</span>
       </h4>
     </div>
     <div class="col-4 align-self-center justify-content-end">
@@ -512,9 +512,9 @@
           <span class="danger col left" *ngIf="customers.payments">{{customers.payments.amount_pending}}</span>
         </div>
         <div class="row">
-          <b class="capital col-7 left">Available Cans: </b>
-          <span class="col left" title="" *ngIf="customers.availablecans">{{customers.availablecans}} </span>
-          <span class="col left" *ngIf="!customers.availablecans"> 0 </span>
+          <b class="capital col-7 left success">Available Cans: </b>
+          <span class="col left success" title="" *ngIf="customers.emptycans">{{customers.emptycans}} </span>
+          <span class="col left success" *ngIf="!customers.emptycans"> 0 </span>
         </div>
       </div>
 
@@ -522,8 +522,8 @@
         <div class="row mg-10">
           <div class="col">
             <!-- <b class="capital col left">Dep Amt: </b> -->
-            <span class="adv-style center" *ngIf="customers.payments">Advance Amt: {{customers.payments.advance_amount}}</span>
-            <span class="adv-style center" *ngIf="!customers.payments">Advance Amt: 0</span>
+            <span class="adv-style center" *ngIf="customers.payments.advance_amount">Advance Amt: {{customers.payments.advance_amount}}</span>
+            <span class="adv-style center" *ngIf="!customers.payments.advance_amount">Advance Amt: 0</span>
           </div>
         </div>
 

@@ -231,7 +231,7 @@
         <b>Request Date:</b> {{modifieddate}}
       </div>
       <!-- <div class="row" *ngIf="Details.data.status == 'stockrequested'"> -->
-      <div class="col right">
+      <div class="col right" *ngIf="Details.data.status != 'confirm'">
         <md-form-field class="example-full-width">
           <input mdInput placeholder="Enter Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
           <md-autocomplete #auto="mdAutocomplete">
