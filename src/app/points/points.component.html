@@ -26,18 +26,18 @@
                 <md-option value="least100">Least 100 points</md-option>
               </md-select>
             </div>
-              <br>
-              <div class="row">
-                <div class="col right">
-                  <button md-raised-button color="primary" class="mgright-5" (click)="search()">
-                    <i class="fa fa-search" aria-hidden="true"></i> Search
-                  </button>
-                  <button md-raised-button class="bg-warning" (click)="clearFilter()">
-                    <i class="fa fa-filter" aria-hidden="true"></i> Clear
-                  </button>
-                </div>
+            <br>
+            <div class="row">
+              <div class="col right">
+                <button md-raised-button color="primary" class="mgright-5" (click)="search()">
+                  <i class="fa fa-search" aria-hidden="true"></i> Search
+                </button>
+                <button md-raised-button class="bg-warning" (click)="clearFilter()">
+                  <i class="fa fa-filter" aria-hidden="true"></i> Clear
+                </button>
               </div>
-           
+            </div>
+
           </div>
         </div>
       </a>
@@ -46,9 +46,23 @@
 
   <div class='pd-15' *ngIf="tabPanelView !== 'pointsDetails'">
     <div class="row brd-box-box" *ngFor="let points of allPoints">
-      <div class="col-5 left bg-color-bg">
+
+      <div class="col-6 left bg-color-bg">
         <div class="row">
-          <div class="col">
+          <div class="col-2 align-self-center center" >
+            <span class="left capitalize joined-style">
+              <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
+
+              <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"></i> 
+
+              <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-18" title="Active State"></i>
+
+              <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
+
+              <!-- <i class="fa fa-edit logo-color fs-18" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i> -->
+            </span>
+          </div>
+           <div class="col">
             <div class="row">
               <b class="capital col-3">Feature: </b>
               <span class="capitalize col">{{points.type}}</span>
@@ -77,18 +91,6 @@
         </div>
       </div>
 
-      <div class="col-1 align-self-center">
-
-        <i *ngIf="points.isactive == 1 && superDealer" class="fa fa-thumbs-up success fs-18" title="Active State" (click)="DeactivatePoints(points.type)"></i>
-
-        <i *ngIf="points.isactive == 0 && superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State" (click)="ActivatePoints(points.type)"></i> &nbsp;
-
-        <i *ngIf="points.isactive == 1 && !superDealer" class="fa fa-thumbs-up success fs-18" title="Active State"></i>
-
-        <i *ngIf="points.isactive == 0 && !superDealer" class="fa fa-thumbs-down danger fs-18" title="In-active State"></i>
-
-        <!-- <i class="fa fa-edit logo-color fs-18" title="Edit points " (click)="editPoints(points)" *ngIf="superDealer"></i> -->
-      </div>
     </div>
   </div>
 

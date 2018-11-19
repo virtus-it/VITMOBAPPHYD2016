@@ -27,7 +27,7 @@
         <tbody>
           <tr *ngFor="let raiserequest of allStockRequests">
             <td>
-              <span *ngIf="raiserequest.reqid">{{raiserequest.reqid}}</span>
+              <span *ngIf="raiserequest.reqid">#{{raiserequest.reqid}}</span>
               <span *ngIf="!raiserequest.reqid"> - </span>
             </td>
             <!-- <td>

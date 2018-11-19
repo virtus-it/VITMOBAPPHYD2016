@@ -14,11 +14,11 @@
 
       <!-- <button class="" md-raised-button (click)="distributorProductsView()" [ngClass]="{'btn-primary': distributorView == true }">Distributors Products</button> -->
 
-      <button class="" md-raised-button (click)="showActiveProducts()" *ngIf="distributorView == false">Active Products</button>
+      <button class="" md-raised-button [ngClass]="{'active': selectedIndex == 1}" (click)="showActiveProducts(1)" *ngIf="distributorView == false">Active Products</button>
 
-      <button class="" md-raised-button (click)="showInactiveProducts()" *ngIf="distributorView == false">In-active Products</button>
+      <button class="" md-raised-button [ngClass]="{'active': selectedIndex == 2}" (click)="showInactiveProducts(2)" *ngIf="distributorView == false">In-active Products</button>
 
-      <button class="" md-raised-button (click)="getProducts()" *ngIf="distributorView == false">All Products</button>
+      <button class="" md-raised-button [ngClass]="{'active': selectedIndex == 3}" (click)="getProducts(3)" *ngIf="distributorView == false">All Products</button>
 
       <i aria-hidden="true" class="fa fa-history logo-color fs-20 mgleft-10" title="Reset" *ngIf="distributorView == true" (click)="reset()"></i>
 
