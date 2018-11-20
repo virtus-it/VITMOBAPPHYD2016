@@ -1,3 +1,10 @@
 agm-map {
     height: 650px;
   }
+  .highlight-style{
+  background: #f1f5f7;
+  border: 1px dotted darkorange;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 10px;
+  }

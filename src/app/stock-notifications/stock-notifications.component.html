@@ -18,69 +18,76 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)" (click)="showPanelType('map')">MAP</button>
     </div>
   </div>
-  <div id="" class="row pd-15x10 mg-0" *ngIf="pageView == 'grid'">
-    <div class="col">
-      <table class="table table-hover table-striped">
-        <thead>
-          <tr>
-            <th width="6%">Req No.</th>
-            <th width="10%">Raised By</th>
-            <th width="13%">Category </th>
-            <th width="10%">Product</th>
-            <th width="11%">Stock / Emp Cans</th>
-            <th width="10%">Created Date</th>
-            <th width="10%">Updated Date</th>
-            <th width="10%">Confirmed Date</th>
-            <th width="10%">Expected Delivery</th>
-            <th width="10%">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let stockrequest of allStockRequests">
-            <td>
-              <span *ngIf="stockrequest.reqid">{{stockrequest.reqid}}</span>
-              <span *ngIf="!stockrequest.reqid"> - </span>
-            </td>
-            <td>
-              <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
-              <span *ngIf="!stockrequest.distributor.firstname"> - </span>
-            </td>
-            <td>
-              <span *ngIf="stockrequest.products && stockrequest.products[0]" class="capitalize onhovertooltip-150" title="{{stockrequest.products[0].category}}">{{stockrequest.products[0].category}}</span>
-              <span *ngIf="!stockrequest.products"> - </span>
-            </td>
-            <td>
-                <span *ngIf="stockrequest.products && stockrequest.products[0]" class="onhovertooltip-120" title="{{stockrequest.products[0].pname}}">{{stockrequest.products[0].pname}}</span>
-                <span *ngIf="!stockrequest.products"> - </span>
-              </td>
-            <td>
-              <span *ngIf="stockrequest.products && stockrequest.products[0]" ><span class="success">{{stockrequest.products[0].stock}}</span> / <span class="warning">{{stockrequest.products[0].returnemptycans}}</span></span>
-              <span *ngIf="!stockrequest.products"> - </span>
-            </td>
-            <td>
-              <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqdate" class="danger"> Pending </span>
-            </td>
-            <td>
-              <span *ngIf="stockrequest.dealer_confirmdate">{{stockrequest.dealer_confirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.dealer_confirmdate" class="danger"> Pending </span>
-            </td>
-            <td>
-              <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
-              <span *ngIf="!stockrequest.reqconfirmdate" class="danger">Pending </span>
-            </td>
 
-            <td>
-              <span *ngIf="stockrequest.expected_deliverydate"> {{stockrequest.expected_deliverydate | utcDate}}</span>
-              <span *ngIf="!stockrequest.expected_deliverydate"> - </span>
-            </td>
-            <td>
-              <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+  <div class='pd-15' *ngIf="pageView == 'grid'">
+    <div class="row brd-box-box" *ngFor="let stockrequest of allStockRequests">
+      <div class="col-4 left bg-color-bg">
+        <div class="d-flex">
+          <b class="capital col-4 left">Req No.: </b>
+          <span *ngIf="stockrequest.reqid">#{{stockrequest.reqid}}</span>
+          <span *ngIf="!stockrequest.reqid"> - </span>
+        </div>
+        <div class="d-flex">
+          <b class="capital col-4 left">Raised By: </b>
+          <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
+          <span *ngIf="!stockrequest.distributor.firstname"> - </span>
+        </div>
+        <div class="d-flex">
+          <b class="capital col-4 left">Category: </b>
+          <span *ngIf="stockrequest.products && stockrequest.products[0]" class="capitalize onhovertooltip-150" title="{{stockrequest.products[0].category}}">{{stockrequest.products[0].category}}</span>
+          <span *ngIf="!stockrequest.products"> - </span>
+        </div>
+        <div class="d-flex">
+          <b class="capital col-4 left">Product: </b>
+          <span *ngIf="stockrequest.products && stockrequest.products[0]" class="capitalize onhovertooltip-150" title="{{stockrequest.products[0].category}}">{{stockrequest.products[0].category}}</span>
+          <span *ngIf="!stockrequest.products"> - </span>
+        </div>
+      </div>
+
+      <div class="col-4 pd-10">
+        <div class="row">
+          <b class="capital col-5 left">Created Date: </b>
+          <span *ngIf="stockrequest.reqdate">{{stockrequest.reqdate | utcDate}}</span>
+          <span *ngIf="!stockrequest.reqdate" class="danger"> Pending </span>
+        </div>
+        <div class="row">
+          <b class="capital col-5 left">Updated Date: </b>
+          <span *ngIf="stockrequest.dealer_confirmdate">{{stockrequest.dealer_confirmdate | utcDate}}</span>
+          <span *ngIf="!stockrequest.dealer_confirmdate" class="danger"> Pending </span>
+        </div>
+        <div class="row">
+          <b class="capital col-5 left">Confirmed Date: </b>
+          <span *ngIf="stockrequest.reqconfirmdate">{{stockrequest.reqconfirmdate | utcDate}}</span>
+          <span *ngIf="!stockrequest.reqconfirmdate" class="danger">Pending </span>
+        </div>
+        <div class="row">
+          <b class="capital col-5 left">Expected Delivery: </b>
+          <span *ngIf="stockrequest.expected_deliverydate"> {{stockrequest.expected_deliverydate | utcDate}}</span>
+          <span *ngIf="!stockrequest.expected_deliverydate"> - </span>
+        </div>
+      </div>
+
+      <div class="col-2 pd-10 align-self-center">
+        <div class="highlight-style">
+          <span *ngIf="stockrequest.products && stockrequest.products[0]">
+            <p class="success mgbottom-0">Stock: {{stockrequest.products[0].stock}}</p>
+            <span class="warning">Emp Cans: {{stockrequest.products[0].returnemptycans}}</span>
+          </span>
+          <p *ngIf="!stockrequest.products" class="mgbottom-0">Stock: - </p>
+          <span *ngIf="!stockrequest.products">Emp Cans: - </span>
+        </div>
+      </div>
+
+      <div class="col-2  pd-10 align-self-center">
+        <!-- <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span> -->
+        <button class="btn-primary " md-raised-button (click)="viewDetails(stockrequest)">View Details</button>
+      </div>
     </div>
+
+    <h4 class="error  center">
+      <span *ngIf="!allStockRequests">
+        <i class="fa fa-crown" aria-hidden="true"></i> Record not available</span>
+    </h4>
   </div>
 
   <div class="" *ngIf="pageView == 'map'">

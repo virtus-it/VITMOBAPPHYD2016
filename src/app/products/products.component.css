@@ -69,3 +69,8 @@ table thead {
   .disable{
     color: grey;
   }
+  .active {  
+      background: var(--logo-color) !important;
+    color: #fff !important;
+  }
+  

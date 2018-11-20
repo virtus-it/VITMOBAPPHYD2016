@@ -138,6 +138,8 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
         // return true;
       }
     });
+    console.log(raisreqErrorQty);
+
     let input = requiredProductsArray;
     console.log(input);
 
