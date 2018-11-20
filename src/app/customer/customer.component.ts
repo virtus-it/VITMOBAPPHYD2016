@@ -43,9 +43,10 @@ export class CustomerComponent implements OnInit {
     customerViews = true;
     pointsViews = false;
     advanceAmountViews = false;
+    paymentsDueView = false;
     salesTeamLogin = true;
     customersCount: number = 0;
-    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType(), userpoints: null } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
         { value: 'name', viewValue: 'Name' },
@@ -55,7 +56,8 @@ export class CustomerComponent implements OnInit {
         { value: 'customertype', viewValue: 'Customer Type' },
         { value: 'followupdate', viewValue: 'Followup Date' },
         { value: 'points', viewValue: 'Points' },
-        { value: 'advamt', viewValue: 'Adv Amt < available cans' }
+        { value: 'advamt', viewValue: 'Adv Amt < available cans' },
+        { value: 'paymentsdue', viewValue: 'Payments Due' }
     ];
 
     sortCustomer = {
@@ -311,11 +313,20 @@ export class CustomerComponent implements OnInit {
             this.customerViews = false;
             this.pointsViews = false;
             this.advanceAmountViews = true;
+            this.paymentsDueView = false;
         }
         if (this.filterInput.root.searchtype == 'points') {
             this.customerViews = false;
             this.pointsViews = true;
             this.advanceAmountViews = false;
+            this.paymentsDueView = false;
+            this.filterInput.root.userpoints = null;
+        }
+        if (this.filterInput.root.searchtype == 'paymentsdue') {
+            this.customerViews = false;
+            this.pointsViews = false;
+            this.advanceAmountViews = false;
+            this.paymentsDueView = true;
         }
         let input = this.filterInput;
         // if (this.filterInput.root.searchtext && this.filterInput.root.searchtext.length > 2) {
@@ -324,12 +335,17 @@ export class CustomerComponent implements OnInit {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {
                 input.root.lastcustomerid = lastCustomer.userid;
+                if (this.filterInput.root.searchtype == 'points') {
+                    input.root.userpoints = lastCustomer.customerpoints;
+                }
+
             }
         }
         else {
             this.customerList = [];
             input.root.lastcustomerid = "0";
         }
+        console.log(input , 'sdfsdfd dfsa d')
         this.customerService.searchCustomer(input)
             .subscribe(
                 output => this.getCustomerByFilterResult(output),
@@ -400,9 +416,10 @@ export class CustomerComponent implements OnInit {
         this.followUpdate = null;
         this.customerClickMore = true;
         this.customerViews = true;
+        this.paymentsDueView = false;
         this.pointsViews = false;
         this.advanceAmountViews = false;
-        this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType() } };
+        this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType(), userpoints: null } };
         this.getCustomerList(true);
 
 
