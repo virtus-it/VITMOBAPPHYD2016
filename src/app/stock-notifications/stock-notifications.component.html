@@ -1,11 +1,13 @@
 <div class=" dist-style minheight-500">
-  <div class=" row justify-content-between distIcon-style left">
-    <div class="col-sm-4 col-md-4 col-lg-4 ">
+  <div class=" d-flex  justify-content-between distIcon-style align-items-center">
+    <div class="" style=" width: 28%;">
       <h4>
         <i class="fa fa-commenting-o"></i> Stock Notifications </h4>
     </div>
-    <div class="col right">
-      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)" (click)="showTabPanel('all')">All</button>
+
+    <div class="" style="width:50%">
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)"
+        (click)="showTabPanel('all')">All</button>
 
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'pending'}" href="javascript:void(0)"
         (click)="showTabPanel('pending')">Pending</button>
@@ -13,9 +15,78 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'confirmed'}" href="javascript:void(0)"
         (click)="showTabPanel('confirmed')">Confirmed</button>
 
-      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'grid'}" href="javascript:void(0)" (click)="showPanelType('grid')">GRID</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'grid'}" href="javascript:void(0)"
+        (click)="showPanelType('grid')">GRID</button>
 
-      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)" (click)="showPanelType('map')">MAP</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)"
+        (click)="showPanelType('map')">MAP</button>
+    </div>
+
+    <div class="d-flex">
+      <div class="flex-fill p-2 col-3">
+        <md-select class="wd-100pc" placeholder="Filter By" [(ngModel)]="stockFilter.filterType">
+          <md-option value="createdby">Created By</md-option>
+          <md-option value="distributor">Distributor</md-option>
+          <md-option value="category"> Category</md-option>
+        </md-select>
+      </div>
+
+      <!-- <div class="row"> -->
+      <div class="flex-fill p-2 col-3" *ngIf="stockFilter.filterType == 'createdby'">
+        <md-form-field class="wd-100pc">
+          <input mdInput placeholder="Created by name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allUsersCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let user of filteredUsers | async" [value]="user.firstname">
+              <span>{{ user.firstname }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div>
+
+      <div class="flex-fill p-2 col-3" *ngIf="stockFilter.filterType == 'distributor'">
+        <md-form-field class="wd-100pc">
+          <input mdInput placeholder="Distributor name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allDistributorsCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.firstname">
+              <span>{{ dist.firstname }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div>
+
+      <div class="flex-fill p-2 col-3" *ngIf="stockFilter.filterType == 'category'">
+        <md-form-field class="wd-100pc">
+          <input mdInput placeholder="Category name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allCategoriesCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let cat of filteredCategories | async" [value]="cat.category">
+              <span>{{ cat.category }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+      </div>
+
+      <!-- </div> -->
+
+
+      <div class="flex-fill p-2 ">
+        <md-form-field class="wd-100pc">
+          <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="fromDate">
+          <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+          <md-datepicker #picker></md-datepicker>
+        </md-form-field>
+      </div>
+
+      <div class="flex-fill p-2 ">
+        <md-form-field class="wd-100pc">
+          <input mdInput [mdDatepicker]="picker1" placeholder="To Date" name="fromdate" [(ngModel)]="toDate">
+          <md-datepicker-toggle mdSuffix [for]="picker1"></md-datepicker-toggle>
+          <md-datepicker #picker1></md-datepicker>
+        </md-form-field>
+      </div>
+
+      <div class="align-self-center p-2">
+        <i class="fa fa-search logo-color" (click)="search()"></i>
+      </div>
     </div>
   </div>
 
@@ -29,7 +100,8 @@
         </div>
         <div class="d-flex">
           <b class="capital col-4 left">Raised By: </b>
-          <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}</span>
+          <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}}
+            {{stockrequest.distributor.lastname}}</span>
           <span *ngIf="!stockrequest.distributor.firstname"> - </span>
         </div>
         <div class="d-flex">

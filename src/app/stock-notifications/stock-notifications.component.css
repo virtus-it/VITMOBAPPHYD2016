@@ -8,3 +8,6 @@ agm-map {
   border-radius: 30px;
   margin: 10px;
   }
+  .mat-button, .mat-fab, .mat-icon-button, .mat-mini-fab, .mat-raised-button {
+    min-width: 72px !important;
+  }
