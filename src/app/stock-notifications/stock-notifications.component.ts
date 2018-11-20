@@ -83,6 +83,7 @@ export class StockNotificationsComponent implements OnInit {
   distributorId: any = '';
   toDate: any = null;
   fromDate: any = null;
+  noFilterData: boolean = false;
 
 
 
@@ -311,28 +312,57 @@ export class StockNotificationsComponent implements OnInit {
   }
 
   search() {
-    let input = { filtertype: this.stockFilter.filterType, username : '', userid: '', transtype: '', categoryId: '', categoryName: '', distributorName: '', distibutorId: '', fromDate: this.fromDate, toDate: this.toDate };
-    if (input.filtertype == 'createdby') {
-      input.username = this.userName;
-      input.userid = this.userid;
-      input.transtype = 'searchCreatedBy';
-      input.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
-      input.toDate = moment(this.toDate).format('YYYY-MM-DD');
+    let input = { root: { viewtype: this.stockFilter.filterType, username: '', userid: '', transtype: '', categoryId: '', categoryName: '', distributorName: '', distibutorId: '', fromDate: this.fromDate, toDate: this.toDate, loginid: this.authenticationService.loggedInUserId(), usertype: this.authenticationService.userType() } };
+    if (input.root.viewtype == 'createdby') {
+      input.root.username = this.userName;
+      input.root.userid = this.userid;
+      input.root.distibutorId = null;
+      input.root.categoryId = null;
+      input.root.categoryName = null;
+      input.root.distributorName = null;
+      input.root.transtype = 'searchCreatedBy';
+      if (this.fromDate && this.toDate) {
+        input.root.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
+        input.root.toDate = moment(this.toDate).format('YYYY-MM-DD 23:59:59');
+      }
+      else {
+        input.root.fromDate = null;
+        input.root.toDate = null;
+      }
     }
-    else if (input.filtertype == 'category') {
-      input.categoryId = this.categoryId;
-      input.categoryName = this.categoryName;
-      input.transtype = 'searchCategory'; 
-      input.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
-      input.toDate = moment(this.toDate).format('YYYY-MM-DD');
-
+    else if (input.root.viewtype == 'category') {
+      input.root.categoryId = this.categoryId;
+      input.root.categoryName = this.categoryName;
+      input.root.username = null;
+      input.root.userid = null;
+      input.root.distibutorId = null;
+      input.root.distributorName = null;
+      input.root.transtype = 'searchCategory';
+      if (this.fromDate && this.toDate) {
+        input.root.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
+        input.root.toDate = moment(this.toDate).format('YYYY-MM-DD 23:59:59');
+      }
+      else {
+        input.root.fromDate = null;
+        input.root.toDate = null;
+      }
     }
-    else if (input.filtertype == 'distributor') {
-      input.distributorName = this.distributorName;
-      input.distibutorId = this.distributorId;
-      input.transtype = 'searchDistributor';
-      input.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
-      input.toDate = moment(this.toDate).format('YYYY-MM-DD');
+    else if (input.root.viewtype == 'distributor') {
+      input.root.distributorName = this.distributorName;
+      input.root.distibutorId = this.distributorId;
+      input.root.username = null;
+      input.root.userid = null;
+      input.root.categoryId = null;
+      input.root.categoryName = null;
+      input.root.transtype = 'searchDistributor';
+      if (this.fromDate && this.toDate) {
+        input.root.fromDate = moment(this.fromDate).format('YYYY-MM-DD');
+        input.root.toDate = moment(this.toDate).format('YYYY-MM-DD 23:59:59');
+      }
+      else {
+        input.root.fromDate = null;
+        input.root.toDate = null;
+      }
     }
     console.log(input, 'input');
     this.reportsService.stockRequests(input)
@@ -341,9 +371,14 @@ export class StockNotificationsComponent implements OnInit {
         error => {
         });
   }
-  searchResults(result){
-    if(result && result.result == 'success'){
+  searchResults(result) {
+    if (result && result.result == 'success') {
       this.allStockRequests = result.data;
+      this.noFilterData = false;
+    }
+    else {
+      this.allStockRequests = [];
+      this.noFilterData = true;
     }
   }
 

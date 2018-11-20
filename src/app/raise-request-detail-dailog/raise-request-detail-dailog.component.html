@@ -23,9 +23,9 @@
 <!-- Step 1 by distributor-->
 <div class="container-fluid brd-bottom pd-15x25" *ngIf="Details.type == 'newRaiseRequest' || Details.type == 'raiseRequestBySuperDealer'">
   <div class="row">
-    <div class="col">
+    <div class="col" *ngIf="this.Details && this.Details.data && this.Details.data.firstname">
       <small>Distributor</small>
-      <h6 class="capitalize">{{this.Details.data.firstname}} {{this.Details.data.lastname}} - {{this.Details.data.mobileno}}</h6>
+      <h6 class="capitalize" >{{this.Details.data.firstname}} {{this.Details.data.lastname}} - {{this.Details.data.mobileno}}</h6>
     </div>
     <div class="col">
       <md-select placeholder="Select Day" name="type" class="full-width left" [(ngModel)]="invoiceDateFiter">

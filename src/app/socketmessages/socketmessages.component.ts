@@ -24,7 +24,9 @@ else if(this.details && this.details.data.order){
 }
 else if(this.details && this.details.data.orderdetails){
   this.MessageInfo = "Received Feedback From Customer :" + this.details.data.userdetails.firstname + "("+this.details.data.userdetails.mobileno+") Message :" +this.details.data.orderdetails.root.subject;
-
+}
+else if(this.details && this.details.data.message){
+  this.MessageInfo = 'Feedback Message : Subject - ' + this.details.data.message.root.subject + '( Message : ' + this.details.data.message.root.details + ' )' ;   
 }
 
   }

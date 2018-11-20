@@ -583,6 +583,9 @@ export class PreOrderCartDailogComponent implements OnInit {
       if (this.Details.dealers.user_id == 289) {
         this.ViewDistributors(data);
       }
+      else if(this.Details.dealers.user_id == this.authenticationService.loggedInUserId() ){
+        this.ViewDistributors(data);
+      }
       else {
         this.thisDialogRef.close('Cancel');
       }

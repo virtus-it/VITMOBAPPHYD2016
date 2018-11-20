@@ -323,6 +323,7 @@ export class CustomerComponent implements OnInit {
             this.filterInput.root.userpoints = null;
         }
         if (this.filterInput.root.searchtype == 'paymentsdue') {
+            this.filterInput.root.searchtext = 'billdate'
             this.customerViews = false;
             this.pointsViews = false;
             this.advanceAmountViews = false;
