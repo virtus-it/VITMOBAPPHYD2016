@@ -6,8 +6,7 @@
     </div>
 
     <div class="" style="width:50%">
-      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)"
-        (click)="showTabPanel('all')">All</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'all'}" href="javascript:void(0)" (click)="showTabPanel('all')">All</button>
 
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'pending'}" href="javascript:void(0)"
         (click)="showTabPanel('pending')">Pending</button>
@@ -15,11 +14,9 @@
       <button type="submit" md-raised-button [ngClass]="{'btn-primary': tabPanelView === 'confirmed'}" href="javascript:void(0)"
         (click)="showTabPanel('confirmed')">Confirmed</button>
 
-      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'grid'}" href="javascript:void(0)"
-        (click)="showPanelType('grid')">GRID</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'grid'}" href="javascript:void(0)" (click)="showPanelType('grid')">GRID</button>
 
-      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)"
-        (click)="showPanelType('map')">MAP</button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-warning': pageView === 'map'}" href="javascript:void(0)" (click)="showPanelType('map')">MAP</button>
     </div>
 
     <div class="d-flex">
@@ -36,8 +33,8 @@
         <md-form-field class="wd-100pc">
           <input mdInput placeholder="Created by name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allUsersCtrl">
           <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let user of filteredUsers | async" [value]="user.firstname">
-              <span>{{ user.firstname }}</span>
+            <md-option *ngFor="let user of filteredUsers | async" [value]="user.firstname" (onSelectionChange)="onDropdownSelected($event, user,'createdby')">
+              <span>{{ user.firstname +" "+ user.lastname }}</span>
             </md-option>
           </md-autocomplete>
         </md-form-field>
@@ -47,8 +44,8 @@
         <md-form-field class="wd-100pc">
           <input mdInput placeholder="Distributor name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allDistributorsCtrl">
           <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.firstname">
-              <span>{{ dist.firstname }}</span>
+            <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.firstname" (onSelectionChange)="onDropdownSelected($event, dist,'distributor')">
+              <span>{{ dist.firstname +" "+ dist.firstname}}</span>
             </md-option>
           </md-autocomplete>
         </md-form-field>
@@ -58,7 +55,7 @@
         <md-form-field class="wd-100pc">
           <input mdInput placeholder="Category name" aria-label="State" [mdAutocomplete]="auto" [formControl]="allCategoriesCtrl">
           <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let cat of filteredCategories | async" [value]="cat.category">
+            <md-option *ngFor="let cat of filteredCategories | async" [value]="cat.category" (onSelectionChange)="onDropdownSelected($event, cat,'category')">
               <span>{{ cat.category }}</span>
             </md-option>
           </md-autocomplete>
@@ -100,9 +97,10 @@
         </div>
         <div class="d-flex">
           <b class="capital col-4 left">Raised To: </b>
-          <span *ngIf="stockrequest.distributor.firstname" class="capitalize onhovertooltip-120" title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}}
-            {{stockrequest.distributor.lastname}}</span>
-          <span *ngIf="!stockrequest.distributor.firstname"> - </span>
+          <span *ngIf="stockrequest && stockrequest.distributor && stockrequest.distributor.firstname" class="capitalize onhovertooltip-120"
+            title="{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}">{{stockrequest.distributor.firstname}} {{stockrequest.distributor.lastname}}
+          </span>
+          <span *ngIf="!stockrequest.distributor"> - </span>
         </div>
         <div class="d-flex">
           <b class="capital col-4 left">Category: </b>
@@ -112,7 +110,7 @@
         <div class="d-flex">
           <b class="capital col-4 left">Raised By: </b>
           <span *ngIf="stockrequest.request_createdby && stockrequest.request_createdby" class="capitalize onhovertooltip-150" title="{{stockrequest.request_createdby}}">{{stockrequest.request_createdby}}</span>
-          <span *ngIf="!stockrequest.products"> - </span>
+          <span *ngIf="!stockrequest.request_createdby"> - </span>
         </div>
       </div>
 
@@ -150,7 +148,7 @@
         </div>
       </div>
 
-      <div class="col-2  pd-10 align-self-center">
+      <div class="col-2  pd-10 align-self-center" *ngIf="stockrequest.products">
         <!-- <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span> -->
         <button class="btn-primary " md-raised-button (click)="viewDetails(stockrequest)">View Details</button>
       </div>
@@ -158,16 +156,21 @@
 
 
     <h4 class="error  center">
-        <span *ngIf="noFilterData">
-          <i class="fa fa-crown" aria-hidden="true"></i> Record not available</span>
-      </h4>
+      <span *ngIf="noFilterData">
+        <i class="fa fa-crown" aria-hidden="true"></i> Record not available</span>
+    </h4>
 
 
     <h4 class="error  center">
       <span *ngIf="!allStockRequests">
         <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
     </h4>
+    <!-- <h4 class="error  center">
+      <a href="javascript:void(0);" (click)=doPaging(); *ngIf="customerClickMore">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+    </h4> -->
   </div>
+
 
   <div class="" *ngIf="pageView == 'map'">
     <div class="col">

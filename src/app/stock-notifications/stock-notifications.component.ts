@@ -45,7 +45,7 @@ export class StockNotificationsComponent implements OnInit {
     this.allUsersCtrl = new FormControl();
     this.filteredUsers = this.allUsersCtrl.valueChanges
       .startWith(null)
-      .map(users => users ? this.findUsers(users) : this.allUsers.slice());
+      .map(users => users ? this.findUsers(users, "1") : this.allUsers.slice());
 
     this.allDistributorsCtrl = new FormControl();
     this.filteredDistributors = this.allDistributorsCtrl.valueChanges
@@ -220,6 +220,7 @@ export class StockNotificationsComponent implements OnInit {
   getAllUsersResult(result) {
     if (result.result == 'success') {
       this.allUsers = result.data;
+      console.log(this.allUsers);
     }
   }
 
@@ -258,7 +259,7 @@ export class StockNotificationsComponent implements OnInit {
   }
 
 
-  findUsers(name: string) {
+  findUsers(name: string, dummy) {
     let finalUser = this.allUsers.filter(user =>
       user.firstname.toLowerCase().indexOf(name.toLowerCase()) === 0);
     if (finalUser && finalUser.length > 0) {
@@ -268,12 +269,30 @@ export class StockNotificationsComponent implements OnInit {
         return userDetails.firstname == name;
       });
       if (findUser) {
-        this.userid = findUser.userid;
+        // this.userid = findUser.userid; picking wrong userid if there first name same
         this.userName = findUser.firstname;
       }
     }
     return finalUser;
   }
+  onDropdownSelected(event, data, actiontype) {
+    console.log(data);
+    if (actiontype == 'createdby') {
+      if (data && data.userid) {
+        this.userid = data.userid;
+      }
+    } else if (actiontype == 'distributor') {
+      if (data && data.userid) {
+        this.distributorId = data.userid;
+      }
+    } else if (actiontype == 'category') {
+      this.categoryId = data.categoryid;
+      
+    }
+
+  }
+
+  doPaging(){}
 
   findDistributors(name: string) {
     let finalDistributor = this.allDistributors.filter(dist =>
@@ -285,7 +304,7 @@ export class StockNotificationsComponent implements OnInit {
         return distributorDetails.firstname == name;
       });
       if (findDistributor) {
-        this.distributorId = findDistributor.userid;
+        // this.distributorId = findDistributor.userid; picking wrong userid if there first name same
         this.distributorName = findDistributor.firstname;
       }
     }
@@ -303,7 +322,7 @@ export class StockNotificationsComponent implements OnInit {
         return categoryDetails.category == name;
       });
       if (findCategory) {
-        this.categoryId = findCategory.categoryid;
+        // this.categoryId = findCategory.categoryid;picking wrong userid if there name same
         this.categoryName = findCategory.category;
       }
     }
