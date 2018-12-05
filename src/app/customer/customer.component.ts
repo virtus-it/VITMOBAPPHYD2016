@@ -335,7 +335,10 @@ export class CustomerComponent implements OnInit {
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {
-                input.root.lastcustomerid = lastCustomer.userid;
+                if (this.filterInput.root.searchtype == 'points' || this.filterInput.root.searchtype == 'paymentsdue')
+                    input.root.lastcustomerid = lastCustomer.row;
+                else
+                    input.root.lastcustomerid = lastCustomer.userid;
                 if (this.filterInput.root.searchtype == 'points') {
                     input.root.userpoints = lastCustomer.customerpoints;
                 }
@@ -346,7 +349,7 @@ export class CustomerComponent implements OnInit {
             this.customerList = [];
             input.root.lastcustomerid = "0";
         }
-        console.log(input , 'sdfsdfd dfsa d')
+        console.log(input, 'sdfsdfd dfsa d')
         this.customerService.searchCustomer(input)
             .subscribe(
                 output => this.getCustomerByFilterResult(output),
