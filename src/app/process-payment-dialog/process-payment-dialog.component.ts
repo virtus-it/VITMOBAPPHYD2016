@@ -22,7 +22,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
     let input = {"User" : {"id": this.Details.id, loginid: this.authenticationService.loggedInUserId() , apptype:this.authenticationService.appType() , userid: this.Details.user_id , type : this.processPaymentInput.type , TransType:"updateprocess" ,  redeemmobileno : this.processPaymentInput.paytmNumber , acknowledgeid :  this.processPaymentInput.ackId , amount: this.processPaymentInput.amount }};
     this.smsObject.name = this.processPaymentInput.name;
     this.smsObject.mobileno = input.User.redeemmobileno;
-    this.smsObject.messageBody = 'message text ' + input.User.acknowledgeid + ' message text';
+    this.smsObject.messageBody = 'Thank you for redeeming your points on Moya for an amount of INR 20 (100 points) (Transaction ID: ' + input.User.acknowledgeid + '). We encourage you to use the platform and keep earning points. Help us grow by asking 5 of your friends to join Moya and you could redeem another INR 20. Regards, Moya - The Water Man Support Team.';
     console.log(input);
     this.distributorService.getPoints(input)
     .subscribe(
