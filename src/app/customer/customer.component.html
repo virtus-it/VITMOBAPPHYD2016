@@ -282,7 +282,7 @@
               <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showFollowUp(customers)">
                 <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
               </div>
-              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showPoints(customers)">
+              <div class="col-md-6" *ngIf="superDealer" (click)="showPoints(customers)">
                 <i class="fa fa-trophy"></i> Points
               </div>
             </div>
