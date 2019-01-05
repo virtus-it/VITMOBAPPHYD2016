@@ -1,41 +1,45 @@
 <div class="row justify-content-between modal-title ">
-    <div class=" col-md-4  col-sm-4  col-lg-4">
-      <i class="fa fa-reply"></i> Reply
-    </div>
-    <div class=" col-md-1  col-sm-1  col-lg-1 right">
-      <strong>
-        <i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseCancel()'></i>
-              </strong>
-    </div>
+  <div class=" col-md-4  col-sm-4  col-lg-4">
+    <i class="fa fa-reply"></i> Reply
   </div>
-  <md-dialog-content layout="column">
+  <div class=" col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)='onCloseCancel()'></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
 
-      <div class="container-fluid pd-15x25 brd-bottom">
-         <!-- <div class="row">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <!-- <div class="row">
          <b class="label-style col"> Please write your reply 
             <span></span>
           </b>
         </div> -->
-        <div class="row">
-            <div class="col">
-              <md-form-field class="example-full-width inline">
-                  <textarea maxlength="250"  mdInput placeholder="Please write here..." [formControl]="emailFormControl" name="reply" [(ngModel)]="feedbackInput.root.message"  > </textarea>
-                <md-error *ngIf="emailFormControl.hasError('required')">
-                    Feedback required
-                </md-error>
-              </md-form-field>
-              <small>Characters Remanining :
-                  <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
-                </small>
+    <div class="row">
+      <div class="col">
+        <md-form-field class="example-full-width inline">
+          <textarea maxlength="250" mdInput placeholder="Please write here..." [formControl]="emailFormControl" name="reply" [(ngModel)]="feedbackInput.root.message"> </textarea>
+          <md-error *ngIf="emailFormControl.hasError('required')">
+            Feedback required
+          </md-error>
+        </md-form-field>
+        <small>Characters Remanining :
+          <span class="danger"> {{250 - feedbackInput.root.message.length}}</span>
+        </small>
 
-                <h5 *ngIf="this.errorMessage" class="warning center mgtop-10"> <span class="fa fa-warning"></span> Feedback cannot be less than three characters </h5>
+        <h5 *ngIf="this.errorMessage" class="error center mgtop-10">
+          <span class="fa fa-warning"></span> Feedback cannot be less than three characters </h5>
 
-            </div></div>
-      </div></md-dialog-content>
-      <div class="row float-right pdright-30 mgbottom-20">
-          <md-dialog-actions align="end">
-            <button type="submit" class="btn-primary" md-raised-button (click)="sendFeedback()" [disabled]="!emailFormControl.valid">SEND</button>
-            <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp; <br>
-          </md-dialog-actions>
-          
-        </div>
+      </div>
+    </div>
+  </div>
+</md-dialog-content>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button type="submit" class="btn-primary" md-raised-button (click)="sendFeedback()" [disabled]="!emailFormControl.valid">SEND</button>
+    <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+    <br>
+  </md-dialog-actions>
+
+</div>

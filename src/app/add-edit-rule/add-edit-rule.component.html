@@ -8,17 +8,18 @@
     </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
   <div class="container-fluid pd-15x25 brd-bottom">
     <div class="row ">
-      <div class="col-4">
+      <div class="col">
         <md-select placeholder="Type" [(ngModel)]="ruleInput.type" class=" wd-100pc">
           <md-option value="promocode">Promo Code</md-option>
           <md-option value="points">Points </md-option>
         </md-select>
       </div>
 
-      <div class="col-4 pdtop-8" *ngIf="ruleInput.type == 'promocode'">
+      <div class="col" *ngIf="ruleInput.type == 'promocode'">
         <!-- for promocode give condition -->
         <md-form-field class="example-full-width wd-100pc">
           <input mdInput placeholder="Enter promocode" aria-label="State" [mdAutocomplete]="auto" [formControl]="promocodeCtrl" [(ngModel)]="ruleInput.code">
@@ -30,13 +31,13 @@
         </md-form-field>
       </div>
 
-      <div class="col-4 pdtop-8">
+      <div class="col">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value">
+          <input class="form-control" mdInput placeholder="Can be Used For" name="value" [(ngModel)]="ruleInput.value" (keypress)="numberEvent($event)" maxlength="3">
         </md-form-field>
       </div>
 
-      <div class="col-8 pdtop-8" *ngIf="ruleInput.type == 'points'">
+      <div class="col-6" *ngIf="ruleInput.type == 'points'">
         <!-- For points give condition -->
         <md-form-field class="example-full-width wd-100pc">
           <input mdInput placeholder="Enter points Description" aria-label="State" [mdAutocomplete]="auto" [formControl]="pointsCtrl">
@@ -47,10 +48,10 @@
           </md-autocomplete>
         </md-form-field>
       </div>
-
     </div>
   </div>
 </md-dialog-content>
+
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="submit()">CREATE</button>

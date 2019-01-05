@@ -27,7 +27,7 @@ export class EditQuantityDailogComponent implements OnInit {
   hours: any = "";
   expressAmount: any = "";
 
-  editOrderInput = { emptyCans:  0 };
+  editOrderInput = { emptyCans: 0 };
   showProductsList: boolean = false;
   productList = [];
   duplicate: boolean = false;
@@ -41,8 +41,8 @@ export class EditQuantityDailogComponent implements OnInit {
   totalAmountBeforeProducts = 0;
   emptyCansError: boolean = false;
   amountAfterProductsView = 0;
-  emptyCansStatus:boolean = false;
-  emptyCansMessaage:string = ''; 
+  emptyCansStatus: boolean = false;
+  emptyCansMessaage: string = '';
 
 
 
@@ -64,16 +64,16 @@ export class EditQuantityDailogComponent implements OnInit {
       this.emptyCansStatus = true;
       this.emptyCanMessage = 'Empty cans must be less than quantity';
     }
-    else{
+    else {
       this.emptyCansError = false;
     }
 
-    let input = { "order": { "amt": 0, "total_amt": 0, "orderid": '', "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": '', "quantity": 0, "excepted_time": '', "productid": '', "product_name": '', "product_type": '', "product_cost": 0, "expressdelivery": false, "servicecharges": 0, "slotdate": '', "delivery_locality": '', "delivery_buildingname": '', "emptycans": 0, "advance_amt": 0 , expressdeliverycharges: 0 } }
+    let input = { "order": { "amt": 0, "total_amt": 0, "orderid": '', "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": '', "quantity": 0, "excepted_time": '', "productid": '', "product_name": '', "product_type": '', "product_cost": 0, "expressdelivery": false, "servicecharges": 0, "slotdate": '', "delivery_locality": '', "delivery_buildingname": '', "emptycans": 0, "advance_amt": 0, expressdeliverycharges: 0 } }
 
     if (this.showProductsList == false && this.orderDetails.expressdelivery && this.orderDetails.expressdelivery == "true") {
       this.expressAmount = this.orderDetails.expressdeliverycharges;
     }
-    else{
+    else {
       this.expressAmount = 0;
     }
 
@@ -81,18 +81,18 @@ export class EditQuantityDailogComponent implements OnInit {
       this.expressCheck = false;
     }
 
-    if(this.showProductsList == true){
-       this.expressAmount = this.amount; 
+    if (this.showProductsList == true) {
+      this.expressAmount = this.amount;
     }
     // if(this.orderDetails.slotdate){
     //   this.orderDetails.slotdate = moment(this.orderDetails.slotdate).format('')
     // }
     if (this.showProductsList == false) {
-      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ( (this.orderDetails.servicecharges / this.orderDetails.quantity ) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, emptycans : this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150) , expressdeliverycharges :  this.expressAmount }}
+      input = { "order": { "amt": this.orderDetails.bill_amount, "total_amt": this.orderDetails.bill_amount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.quantity.value, "excepted_time": datetime, "productid": this.orderDetails.prod_id, "product_name": this.orderDetails.brandname, "product_type": this.orderDetails.prod_type, "product_cost": this.orderDetails.prod_cost, "expressdelivery": this.expressCheck, "servicecharges": ((this.orderDetails.servicecharges / this.orderDetails.quantity) * this.quantity.value), "slotdate": datetime, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, emptycans: this.editOrderInput.emptyCans, "advance_amt": (this.editOrderInput.emptyCans * 150), expressdeliverycharges: this.expressAmount } }
     }
     else {
       // no cans input
-      input = { "order": { "amt": this.changedProductDetails.totalAmount, "total_amt": this.changedProductDetails.totalAmount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.createPreOrderInput.productDetails.quantity, "excepted_time": datetime, "productid": this.changedProductDetails.productid, "product_name": this.changedProductDetails.productname, "product_type": this.changedProductDetails.producttype, "product_cost": this.changedProductDetails.productcost, "expressdelivery": this.changedProductDetails.expressdelivery, "servicecharges": this.changedProductDetails.servicecharges, "slotdate": this.changeTimeSlot.timeslot, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, "emptycans": this.createPreOrderInput.productDetails.emptycans, "advance_amt": (this.createPreOrderInput.productDetails.emptycans * 150) , expressdeliverycharges :  this.expressAmount } }
+      input = { "order": { "amt": this.changedProductDetails.totalAmount, "total_amt": this.changedProductDetails.totalAmount, "orderid": this.orderDetails.order_id, "loginid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "delivery_address": this.orderDetails.orderby_address, "quantity": this.createPreOrderInput.productDetails.quantity, "excepted_time": datetime, "productid": this.changedProductDetails.productid, "product_name": this.changedProductDetails.productname, "product_type": this.changedProductDetails.producttype, "product_cost": this.changedProductDetails.productcost, "expressdelivery": this.changedProductDetails.expressdelivery, "servicecharges": this.changedProductDetails.servicecharges, "slotdate": this.changeTimeSlot.timeslot, "delivery_locality": this.orderDetails.locality, "delivery_buildingname": this.orderDetails.buildingname, "emptycans": this.createPreOrderInput.productDetails.emptycans, "advance_amt": (this.createPreOrderInput.productDetails.emptycans * 150), expressdeliverycharges: this.expressAmount } }
     }
 
     if (this.createPreOrderInput.productDetails.emptycans == 0) { // cust orders with empty cans so we dont charge him with anything
@@ -380,8 +380,6 @@ export class EditQuantityDailogComponent implements OnInit {
     data.quantity = data.quantity + 1;
     this.changeQuantity(data);
     this.totalPriceAfterProductsView();
-
-
   }
 
   increaseEmptyCans(data) {
@@ -397,14 +395,12 @@ export class EditQuantityDailogComponent implements OnInit {
 
   }
 
-
   deacreaseEmptyCans(data) {
     if (data.emptycans > 0) {
       data.emptycans = data.emptycans - 1;
       this.emptyCansChange(data);
     }
     this.changeQuantity(data);
-
     this.totalPriceAfterProductsView();
   }
 
@@ -459,9 +455,7 @@ export class EditQuantityDailogComponent implements OnInit {
 
     this.totalPriceAfterProductsView();
 
-
   }
-
   // customTrackBy(index: number, obj: any): any {
   //   return index;
   // }
@@ -479,14 +473,12 @@ export class EditQuantityDailogComponent implements OnInit {
     }
   }
 
-
   totalPricesBeforeProductsView() {
     if (this.orderDetails.expressdelivery && this.orderDetails.expressdelivery == "true") {
       this.expressDeliveryAmount = this.orderDetails.expressdeliverycharges;
     }
     this.totalAmountBeforeProducts = ((parseInt(this.orderDetails.quantity) * parseInt(this.orderDetails.prod_cost)) + parseInt(this.orderDetails.servicecharges) + this.expressDeliveryAmount + (this.editOrderInput.emptyCans * 150));
   }
-
 
   onChangeQuantity(event) {
     if (event) {
@@ -496,13 +488,17 @@ export class EditQuantityDailogComponent implements OnInit {
   }
 
   totalPriceAfterProductsView() {
-    this.amountAfterProductsView = (this.changedProductDetails.totalAmount + (this.createPreOrderInput.productDetails.emptycans * 150) + this.amount );
+    this.amountAfterProductsView = (this.changedProductDetails.totalAmount + (this.createPreOrderInput.productDetails.emptycans * 150) + this.amount);
   }
 
-
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '') {
+      e.preventDefault();
+    }
+  }
 
   ngOnInit() {
-
     this.quantity.value = this.orderDetails.quantity;
     this.editOrderInput.emptyCans = this.orderDetails.empty_cans;
     this.totalPricesBeforeProductsView();

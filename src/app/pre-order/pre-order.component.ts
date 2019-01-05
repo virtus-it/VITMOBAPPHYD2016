@@ -147,6 +147,7 @@ export class PreOrderComponent implements OnInit {
         }
 
         let input = this.filterInput;
+        if(this.filterInput.root.searchtext && this.filterInput.root.searchtext){
         if (this.customerList && this.customerList.length && !firstcall) {
             let lastCustomer: any = _.last(this.customerList);
             if (lastCustomer) {
@@ -158,6 +159,7 @@ export class PreOrderComponent implements OnInit {
             this.customerList = [];
             input.root.lastcustomerid = "0";
         }
+      
         this.customerService.searchCustomer(input)
             .subscribe(
             output => this.getCustomerByFilterResult(output),
@@ -165,6 +167,7 @@ export class PreOrderComponent implements OnInit {
                 //console.log("error in customer");
                 this.loaderService.display(false);
             });
+        }
     }
     getCustomerByFilterResult(result) {
         //console.log(result);

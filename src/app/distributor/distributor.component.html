@@ -1,15 +1,11 @@
 ﻿<div class=" dist-style minheight-500">
   <div class=" row justify-content-between distIcon-style left">
-    <div class="col-2 align-self-center">
+    <div class="col-3 align-self-center">
       <h4>
-        <i class="fa fa-sitemap"></i> Distributor</h4>
-      <!-- <button class="" md-raised-button (click)="quickFilter()" >CATEGORY</button> -->
-    </div>
-
-    <div class="col-2 align-self-center">
-      <h5 cass="" *ngIf="distributorsCount != 0">Count :
-        <span class="warning">{{this.distributorsCount}}</span>
-      </h5>
+        <i class="fa fa-sitemap"></i> Distributors
+        <span cass="" *ngIf="distributorsCount != 0">
+          (<span class="warning">{{this.distributorsCount}}</span>) </span>
+      </h4>
     </div>
 
     <div class="col align-self-center">
@@ -85,7 +81,7 @@
         </div>
 
         <div class="col-5" *ngIf="filterType == 'stockpoints'">
-          <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isstockpointDefined">
+          <md-select placeholder="Please select" [(ngModel)]="filterTypeModel.isstockpointDefined" class="wd-100pc">
             <md-option value="yes">YES</md-option>
             <md-option value="no">NO</md-option>
           </md-select>
@@ -110,15 +106,17 @@
       </div>
     </div>
 
-    <div class="col-4 align-self-center">
-      <button type="submit" md-raised-button class="" href="javascript:void(0)" (click)="activeDistributors()">Active
-      </button> &nbsp;
-      <button type="submit" md-raised-button class="" href="javascript:void(0)" (click)="inactiveDistributors()">In-Active
-      </button>&nbsp;
-      <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
-        (click)="showTabPanel('bystock')">By Stock </button>&nbsp;
-      <i class="fa fa-history logo-color fs-20" title="Reset" (click)="reset()"></i>&nbsp;&nbsp;
-      <a class="cursor logo-color " title="Add Distributor">
+    <div class="col-4 align-self-center d-flex">
+      <button type="submit" md-raised-button class="mgright-10" href="javascript:void(0)" (click)="activeDistributors()">Active
+      </button>
+      <button type="submit" md-raised-button class="mgright-10" href="javascript:void(0)" (click)="inactiveDistributors()">In-Active
+      </button>
+      <button type="submit" md-raised-button class="mgright-10" [ngClass]="{'btn-primary': tabPanelView === 'bystock'}" href="javascript:void(0)"
+        (click)="showTabPanel('bystock')">By Stock </button>
+      <a class="cursor logo-color align-self-center mgright-10" title="Reset">
+        <i class="fa fa-history logo-color fs-20" (click)="reset()"></i>
+      </a>
+      <a class="cursor logo-color align-self-center" title="Add Distributor">
         <i class="fa fa-plus fs-25 plus-style" (click)="openCreateDialog()" aria-hidden="true"></i>
       </a>&nbsp;
 
@@ -240,40 +238,40 @@
             <tr>
               <th width="12%">Name</th>
               <th width="13%">Created By</th>
-              <th width="10%">Created Date</th>
-              <th width="9%" title="Customer Count">Cust Count</th>
-              <th width="10%">Mobile</th>
+              <th width="12%">Created Date</th>
+              <th width="8%" title="Customer Count">Cust Count</th>
+              <th width="9%">Mobile</th>
               <!-- <th width="10%">Email Id</th> -->
-              <th width="10%">Refer Code</th>
+              <th width="8%">Refer Code</th>
               <th width="15%">Address</th>
               <th width="13%">Company </th>
               <th width="10%">Assoc. To </th>
-              <th width="10%" class="no-th-arrow">Views </th>
+              <th width="9%" class="no-th-arrow">Views </th>
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributors; let i = index" [attr.data-index]="i">
               <td class="left capitalize" width="12%">
-                <span class="onhovertooltip-150 capitalize" title="{{dist.firstname}} {{dist.lastname}}">
-                  <i class="fa fa-thumbs-up green" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></i>
-                  <i class="fa fa-thumbs-down danger" *ngIf="dist.isactive == '0'" (click)="activateDeactivateDist(dist)" title="click to activate"></i>
+                <span class="onhovertooltip-135 capitalize" title="{{dist.firstname}} {{dist.lastname}}">
+                  <i class="fa fa-thumbs-up green cursor" *ngIf="dist.isactive == '1'" (click)="activateDeactivateDist(dist)" title="click to deactivate"></i>
+                  <i class="fa fa-thumbs-down danger cursor" *ngIf="dist.isactive == '0'" (click)="activateDeactivateDist(dist)" title="click to activate"></i>
                   {{dist.firstname}} {{dist.lastname}}</span>
               </td>
               <td class="" width="13%">
                 <span *ngIf="dist.usercreatedby" class="onhovertooltip-150 capitalize"> {{dist.usercreatedby.name}}</span>
                 <span *ngIf="dist.usercreatedby === null || dist.usercreatedby == ''"> - </span>
               </td>
-              <td class="" width="10%">
+              <td class="" width="12%">
                 <span class="onhovertooltip-100" title="{{dist.timestamp | utcDate}}">{{dist.timestamp | utcDate}}</span>
               </td>
-              <td class="left" width="9%">{{dist.customercount}} </td>
-              <td class="left numbers" width="10%">
+              <td class="left" width="8%">{{dist.customercount}} </td>
+              <td class="left numbers" width="9%">
                 <span class="onhovertooltip-100" title="{{dist.mobileno}} {{dist.mobileno_one}} {{dist.mobileno_two}}">{{dist.mobileno}}
                   <span *ngIf="dist.mobileno_one || dist.mobileno_two"> {{dist.mobileno_one}} {{dist.mobileno_two}}</span>
                 </span>
               </td>
               <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{dist.emailid}}">{{dist.emailid}}</span> </td> -->
-              <td class="left" width="10%">{{dist.reference_code}}</td>
+              <td class="left" width="8%">{{dist.reference_code}}</td>
               <td class="left capitalize" width="15%">
                 <span class="onhovertooltip-180" title="{{dist.address}}">{{dist.address}}</span>
               </td>
@@ -286,9 +284,9 @@
                 <span *ngIf="dist.salesteaminfo && dist.salesteaminfo.salesteamname">{{dist.salesteaminfo.salesteamname}}</span>
                 <span *ngIf="!dist.salesteaminfo"> - </span>
               </td>
-              <td class="left" width="10%">
+              <td class="left" width="9%">
                 <div class="dropdown">
-                  <button class="dropbtn" [disabled]="dist.usercreatedby && dist.usercreatedby.userid != 'loginId'">View More
+                  <button class="dropbtn  btn-outline-primary btn-sm" [disabled]="dist.usercreatedby && dist.usercreatedby.userid != 'loginId'">View More
                   </button>
                   <div class="dropdown-content" style="right:0;">
                     <div class="row pdbottom-5">
@@ -325,7 +323,7 @@
                       <label class="col-md-6" (click)="openMapDialog(dist)">
                         <i class="fa fa-globe logo-color cursor" title="Service area"></i> Service area</label>
                     </div>
-                    <div class="row">
+                    <div class="row  pdbottom-5">
 
                       <label class="col-md-6" (click)="viewStockPoints(dist)">
                         <i class="fa fa-vimeo"></i> Stock Points</label>
@@ -333,11 +331,16 @@
                       <label class="col-md-6" (click)="viewPoints(dist)">
                         <i class="fa fa-trophy"></i> Points</label>
                     </div>
-                    <div class="row">
+                    <div class="row  pdbottom-5">
                       <label class="col-md-6" (click)="distributorsAvailability(dist)">
                         <i class="fa fa-thumbs-o-up"></i> Availability </label>
                       <label class="col-md-6" (click)="assignToSalesTeam(dist)">
                         <i class="fa fa-check-square-o"></i> Assign To Sales Team </label>
+                    </div>
+
+                    <div class="row">
+                      <label class="col-md-6" (click)="raiseRequestBySuperDealer(dist)">
+                        <i class="fa fa-check-square-o"></i> Raise Request </label>
                     </div>
 
 
@@ -386,21 +389,19 @@
           </tbody>
         </table>
 
-        <h4 class="warning  capitalize">
+        <h4 class=" center">
           <a href="javascript:void(0);" (click)=getDistributors(false); *ngIf="distributorClickMore">
-            <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
         </h4>
-        <h4 *ngIf="!distributorClickMore" class="warning">Record Not Available</h4>
+        <h4 *ngIf="!distributorClickMore" class="error">
+          <i aria-hidden="true" class="fa fa-frown-o"></i> Record not available</h4>
 
       </div>
     </div>
   </div>
 
 
-
-
   <div class="" *ngIf="tabPanelView === 'bystock'">
-
     <div id="" class="row pd-15 mg-0">
 
       <div class="">
@@ -429,14 +430,12 @@
                   <div class="dropdown-content" style="right:0;">
 
                     <div class="row">
-
                       <label class="col-md-6" (click)="addstockDialog(dist)">
                         <i class="fa fa-cart-arrow-down"></i> Add Stock </label>
 
                       <label class="col-md-6" (click)="stockHistory(dist)">
                         <i class="fa fa-file-text"> </i> Stock History </label>
                     </div>
-
 
                     <div class="row">
                       <label class="col-md-6" (click)="distributorstockStatus(dist)">
@@ -446,19 +445,12 @@
                         <i class="fa fa-gift logo-color cursor" title="Products"></i>View Products</label>
                     </div>
 
-
-                  </div>
+                 </div>
                 </div>
 
               </td>
-
-
-
           </tbody>
         </table>
-
-
-
       </div>
     </div>
   </div>

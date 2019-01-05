@@ -3,8 +3,6 @@
     <div class="col-md-4  col-sm-4  col-lg-4 left">
       <h4>
         <i class="fa fa-address-card-o"></i> Profile Update</h4>
-
-
     </div>
 
     <!-- <div class="col-md-4  col-sm-4  col-lg-4">
@@ -23,8 +21,8 @@
       </a>
       &nbsp;&nbsp;
       <label for="files" class="fa fa-file-image-o logo-color cursor" title="select image"></label>
-      <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)">
-      &nbsp;&nbsp; <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage()"></i>
+      <input class="" id="files" style="visibility:hidden;display:none" type="file" (change)="onFileSelected($event)"> &nbsp;&nbsp;
+      <i class="fa fa-cloud-upload logo-color cursor" type="submit" title="upload" (click)="uploadImage()"></i>
     </div>
   </div>
 
@@ -35,7 +33,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname">
+            <input class="form-control" mdInput placeholder="First Name" name="firstName" [(ngModel)]="profileUpdate.firstname" maxlength="15">
             <md-error>
               First Name is
               <strong>required</strong>
@@ -44,7 +42,7 @@
         </div>
         <div class="col-6">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname">
+            <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="profileUpdate.lastname" maxlength="15">
             <md-error>
               Last Name is
               <strong>required</strong>
@@ -55,7 +53,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno">
+            <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10" [(ngModel)]="profileUpdate.mobileno" (keypress)="numberEvent($event)">
             <md-error>
               Phone Number is
               <strong>required</strong>
@@ -64,7 +62,7 @@
         </div>
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Email id" name="emailid" [(ngModel)]="profileUpdate.emailid">
+            <input class="form-control" mdInput placeholder="Email id" name="emailid" [(ngModel)]="profileUpdate.emailid" maxlength="35">
             <md-error>
               Email id is
               <strong>required</strong>
@@ -76,7 +74,7 @@
       <div class="row">
         <div class="col-6 ">
           <md-form-field class="">
-            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname">
+            <input class="form-control" mdInput placeholder="Company Name" name="companyName" [(ngModel)]="profileUpdate.companyname" maxlength="50">
           </md-form-field>
         </div>
 
@@ -88,12 +86,11 @@
         </div>
       </div>
 
-
       <div class="row">
         <div class="col">
           <div class="">
             <md-form-field class="wd-80pc">
-              <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="profileUpdate.address"></textarea>
+              <textarea class="form-control" mdInput placeholder="Address" name="Address" [(ngModel)]="profileUpdate.address" maxlength="500"></textarea>
             </md-form-field>
           </div>
           <div class="smalltxt-style">
@@ -101,15 +98,7 @@
               <span class="danger"> {{500 - profileUpdate.address.length}}</span>
             </small>
           </div>
-          <div *ngIf="updateStatus">
-            <span>Profile Updated successfully</span>
-          </div>
-          <div class="success" *ngIf="imageUplaodSuccess == true">
-            <h3>Image Uploaded successfully</h3>
-          </div>
-          <div class="error" *ngIf="imageUpdateError == true">
-            <h3>Please select image size less than 35kb</h3>
-          </div>
+
         </div>
 
       </div>
@@ -119,13 +108,17 @@
           <button md-raised-button class="btn-primary" (click)="updateProfile()">UPDATE</button>&nbsp;
         </div>
       </div>
-      
 
-      <!-- <div class="row col">
-          <p> token checking</p><br>
-          <button md-raised-button class="" (click)='generateTokenAtLogin()'> token generate by login</button>
-         &nbsp;  &nbsp; <button md-raised-button class="" (click)='getTokenDetailsAndData()'> get token Details</button>
-        </div> -->
+      <div class="success" *ngIf="imageUplaodSuccess == true">
+        <h5>Image Uploaded successfully</h5>
+      </div>
+      <div class="error" *ngIf="imageUpdateError == true">
+        <h5>Please select image size less than 35kb</h5>
+      </div>
+      <div *ngIf="updateStatus" class="success">
+        <h5>
+          <i class="fa fa-thumbs-o-up"></i>Profile updated successfully</h5>
+      </div>
     </div>
   </div>
 </div>

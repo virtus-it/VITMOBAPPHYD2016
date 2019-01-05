@@ -27,52 +27,49 @@
               </a>
             </td> -->
 
-
             <td class="nav-item" (click)="searchReports(true,'newlydownloaded')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'newlydownloaded'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-download" aria-hidden="true"></i>
+                <i class="fa fa-download fs-18" aria-hidden="true"></i>
                 <br> Newly Downloaded Customers </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'lastdays')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'lastdays'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-users" aria-hidden="true"></i>
+                <i class="fa fa-users fs-18" aria-hidden="true"></i>
                 <br> Customers not Ordered in Last 10 Days </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'pendingorders')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'pendingorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-dot-circle-o" aria-hidden="true"></i>
+                <i class="fa fa-dot-circle-o fs-18" aria-hidden="true"></i>
                 <br> Pending Orders </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'rejectedorders')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'rejectedorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-ban" aria-hidden="true"></i>
+                <i class="fa fa-ban fs-18" aria-hidden="true"></i>
                 <br> Rejected Orders
               </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'notregistered')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'notregistered'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                <i class="fa fa-exclamation-circle fs-18" aria-hidden="true"></i>
                 <br> Customers not Registered </a>
             </td>
             <td class="nav-item" (click)="searchReports(true,'orderdownload')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'orderdownload'}" href="javascript:void(0)">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <i class="fa fa-file-text-o fs-18" aria-hidden="true"></i>
                 <br> Order Reports</a>
             </td>
 
             <td class="nav-item" (click)="searchDistributorsOrders()">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'distributorsorders'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-users" aria-hidden="true"></i>
+                <i class="fa fa-sitemap fs-18" aria-hidden="true"></i>
                 <br>Distributors Orders </a>
             </td>
 
             <td class="nav-item" (click)="searchReports(true,'stockreports')">
               <a class="nav-link" [ngClass]="{'active': tabPanelView === 'stockreports'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
-                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <i class="fa fa fa-line-chart	fs-18" aria-hidden="true"></i>
                 <br> Stock Reports </a>
             </td>
-
-
           </tr>
         </table>
         <!-- <ul class="nav nav-pills navbar-nav flex-column row">
@@ -118,17 +115,17 @@
               </td>
               <td class="left">
                 <span *ngIf="reports.orderedstatus=='true'">
-                  <i class="fa fa-check-circle-o check"> </i>
+                  <i class="fa fa-check-circle-o check fs-18"> </i>
                 </span>
                 <span *ngIf="reports.orderedstatus=='false'">
-                  <i class="fa fa-times-circle-o cross"></i>
+                  <i class="fa fa-times-circle-o cross fs-18"></i>
                 </span>
 
               </td>
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="center error">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
             <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
           <span *ngIf="!reportsClickMore">
@@ -172,7 +169,7 @@
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="error  center">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
             <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
           <span *ngIf="!reportsClickMore">
@@ -248,9 +245,9 @@
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="error  capitalize">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
-            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
           <span *ngIf="!reportsClickMore">
             <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
         </h4>
@@ -265,50 +262,46 @@
     <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'distributorsorders'">
 
       <div class="tab-pane active" id="a">
-        <div class="row mgleft-0  justify-content-center">
-          <md-form-field class="inline">
-            <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="Createddate" [(ngModel)]="distOrders.getDate">
-
-            <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
-            <md-datepicker #picker></md-datepicker>
-          </md-form-field>
-          <md-dialog-actions align="end" class="mg-10x20">
-            <button type="submit" md-raised-button class="btn-primary" (click)="filterReports()">SUBMIT</button>
-
-
-
-          </md-dialog-actions>
-        </div>
+          <div class=" d-flex justify-content-center">
+              <div class="p-2">
+                  <md-form-field class="inline">
+                      <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="Createddate" [(ngModel)]="distOrders.getDate">
+                      <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                      <md-datepicker #picker></md-datepicker>
+                    </md-form-field>
+              </div>
+              <div class="p-2">
+                  <md-dialog-actions align="end" class="mgleftright-10">
+                      <button type="submit" md-raised-button class="btn-primary" (click)="filterReports()">SUBMIT</button>
+                    </md-dialog-actions>
+              </div>
+            </div>
 
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-
               <th width="30%"> Distributors Name</th>
               <th width="15%">Delivered Orders</th>
               <th width="15%">Cancelled Orders</th>
               <th width="15%">Other Orders</th>
               <th width="15%">Pending Orders</th>
-
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let dist of distributorsorderData">
-
               <td class="left">
-                <span class="onhovertooltip-150" title="{{dist.fullname}}">{{dist.fullname}} </span>
+                <span class="onhovertooltip-150 capitalize" title="{{dist.fullname}}">{{dist.fullname}} </span>
               </td>
-              <td class="left">{{dist.deliveredorders}}</td>
-              <td class="left">{{dist.cancelledorders}}</td>
-
-              <td class="left">{{dist.otherorders}}</td>
-              <td class="left">{{dist.pendingorders}}</td>
+              <td class="left success">{{dist.deliveredorders}}</td>
+              <td class="left danger">{{dist.cancelledorders}}</td>
+              <td class="left info">{{dist.otherorders}}</td>
+              <td class="left warning">{{dist.pendingorders}}</td>
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="error  capitalize">
           <a href="javascript:void(0);" *ngIf="reportsClickMore">
-            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
+            <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
           <span *ngIf="!reportsClickMore">
             <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
         </h4>
@@ -442,9 +435,8 @@
                 <span *ngIf="!reports.customermobile"> - </span>
               </td>
 
-
               <td class="left" width="14%">
-                <span *ngIf="reports.address" class="onhovertooltip-150">{{reports.address}}</span>
+                <span *ngIf="reports.address" class="onhovertooltip-150" title="{{reports.address}}">{{reports.address}}</span>
                 <span *ngIf="!reports"> - </span>
               </td>
 
@@ -470,7 +462,7 @@
               </td>
 
               <td class="left" width="8%">
-                <span *ngIf="reports.firstname">{{reports.firstname}}</span>
+                <span *ngIf="reports.firstname" class="capitalize">{{reports.firstname}}</span>
                 <span *ngIf="!reports.firstname"> - </span>
               </td>
 
@@ -482,15 +474,13 @@
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="error  capitalize">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
             <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
           <span *ngIf="!reportsClickMore">
             <i aria-hidden="true" class="fa fa-exclamation-triangle"></i> No more data</span>
         </h4>
       </div>
-
-
     </div>
 
 
@@ -499,16 +489,15 @@
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th width="15%">Customer Name</th>
-              <th width="10%">Mobile No</th>
-              <th width="30%">Address</th>
-              <th width="15%">Last Ordered Date</th>
-              <th width="10%">Notification</th>
+              <th width="12%">Customer Name</th>
+              <th width="8%">Mobile No</th>
+              <th width="40%">Address</th>
+              <th width="12%">Last Ordered Date</th>
+              <th width="8%">Notification</th>
             </tr>
           </thead>
           <tbody>
             <tr id="Preordrlist" *ngFor="let reports of reportsData">
-
               <td class="left">
                 <span class="onhovertooltip-150 capitalize" *ngIf="reports && reports.firstname" title="{{reports.firstname}} {{reports.lastname}}">{{reports.firstname}} {{reports.lastname}}
                 </span>
@@ -532,12 +521,12 @@
               </td>
 
               <td>
-                <i class="fa fa-envelope logo-color cursor env-size" title="Send Notification" (click)="sendNotification(reports)"></i>
+                <i class="fa fa-envelope logo-color cursor fs-18" title="Send Notification" (click)="sendNotification(reports)"></i>
               </td>
             </tr>
           </tbody>
         </table>
-        <h4 class="warning  capitalize">
+        <h4 class="error  capitalize">
           <a href="javascript:void(0);" (click)=searchReports(false,tabPanelView); *ngIf="reportsClickMore">
             <i class="fa fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
           <span *ngIf="!reportsClickMore">
@@ -565,11 +554,9 @@
                 <md-option value="distributorcategory">Distributor + Category</md-option>
                 <md-option value="salesteamcategory">Sales Team + Category</md-option>
               </md-select>
-
             </div>
 
             <div class="col-6" *ngIf="stockreportsInput.filterBy == 'distributor' || stockreportsInput.filterBy == 'distributorcategory'">
-
               <md-form-field class="example-full-width">
                 <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">

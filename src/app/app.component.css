@@ -234,9 +234,7 @@ a{
 .btn{
   padding: .5rem 0.5rem !important;
 }
-.mat-fab.mat-primary, .mat-mini-fab.mat-primary, .mat-raised-button.mat-primary{
-  background: var(--logo-color) !important;
-}
+
 .btn-link{
   color: var(--logo-color);
 }

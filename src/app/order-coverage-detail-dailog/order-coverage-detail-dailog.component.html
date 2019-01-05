@@ -83,7 +83,7 @@
       <div class="row">
         <div class="col mgbottom-10">
           <div *ngIf="gpsMessage">
-            <h4 class="warning">
+            <h4 class="error">
               <span class="fa fa-globe"></span> {{gpsMessage}}</h4>
           </div>
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">

@@ -23,7 +23,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     public thisDialogRef: MdDialogRef<CustomerScheduleDaiolgComponent>,
     private authenticationService: AuthenticationService,
     @Inject(MD_DIALOG_DATA) public Detail: any
-  ) {}
+  ) { }
 
   FormControl = new FormControl('', [Validators.required]);
   ScheduleFormControl = new FormControl('', [Validators.required]);
@@ -105,7 +105,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         weekdays = weekdays.join(',');
         input = {
           order: {
-            userid: this.Detail.customerId, 
+            userid: this.Detail.customerId,
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -124,14 +124,14 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             product_cost: this.scheduleInput.productName.pcost,
             amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_items: this.scheduleInput.productQuantity,
             scheduledfrom: 'admin'
           }
@@ -142,7 +142,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
-            userid : this.Detail.customerId, 
+            userid: this.Detail.customerId,
             orderto: this.Detail.data.dealerid,
             orderfrom: this.Detail.customerId,
             paymentmode: 'cash',
@@ -158,14 +158,14 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             product_cost: this.scheduleInput.productName.pcost,
             amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_items: this.scheduleInput.productQuantity,
             scheduledfrom: 'admin'
           }
@@ -203,7 +203,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         input = {
           order: {
             schdid: this.Detail.data.id,
-            userid : this.Detail.userid, 
+            userid: this.Detail.userid,
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -222,14 +222,14 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             scheduletype: this.scheduleInput.schedulefor,
             amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_items: this.scheduleInput.productQuantity,
             scheduledfrom: 'admin'
           }
@@ -238,7 +238,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         input = {
           order: {
             schdid: this.Detail.data.id,
-            userid : this.Detail.userid,
+            userid: this.Detail.userid,
             apptype: this.authenticationService.appType(),
             excepted_time: this.scheduleInput.timeslot,
             orderstatus: 'ordered',
@@ -257,14 +257,14 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
             scheduletype: this.scheduleInput.schedulefor,
             amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_amt:
               parseInt(this.scheduleInput.productName.pcost) *
-                parseInt(this.scheduleInput.productQuantity) +
+              parseInt(this.scheduleInput.productQuantity) +
               parseInt(this.scheduleInput.productName.servicecharge) *
-                parseInt(this.scheduleInput.productQuantity),
+              parseInt(this.scheduleInput.productQuantity),
             total_items: this.scheduleInput.productQuantity,
             scheduledfrom: 'admin'
           }
@@ -341,9 +341,9 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       this.loaderService.display(false);
       let productListCopy = [];
       let filteredArray = [];
-      _.each(result.data.products, function(i, j) {
+      _.each(result.data.products, function (i, j) {
         let details: any = i;
-        let customerProduct = _.find(result.data.customerproducts, function(
+        let customerProduct = _.find(result.data.customerproducts, function (
           e: any
         ) {
           return e.productid == details.productid;
@@ -352,7 +352,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
         if (customerProduct) {
           productListCopy.push(customerProduct);
         }
-         else {
+        else {
           productListCopy.push(details);
         }
 
@@ -369,7 +369,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
       // this.productList = filteredArray;
 
-      this.productList = _.filter(this.productList, function(e: any) {
+      this.productList = _.filter(this.productList, function (e: any) {
         return e.stockstatus !== 'Soldout';
       });
     }
@@ -395,15 +395,15 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
   onChangeCheckWeek(week: string, isChecked: boolean) {
     if (isChecked) {
       this.checkAll = false;
-      
+
       if (this.scheduleInput.weekdays) {
         this.scheduleInput.weekdays = this.scheduleInput.weekdays + ',' + week;
-      } 
+      }
       else {
         this.scheduleInput.weekdays = this.scheduleInput.weekdays + week;
       }
     }
-    
+
     else {
       this.checkAll = false;
       this.selectAllWeekDays = false;
@@ -478,7 +478,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     if (this.Detail.type == 'create') {
       this.scheduleInput.CustomerName = this.Detail.customerName;
       this.scheduleInput.productName = this.Detail.productName;
-    } 
+    }
     else {
       this.product = true;
       this.ProductFormControl = new FormControl({ valid: true }, [
@@ -489,14 +489,14 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       this.scheduleInput.schedulefor = this.Detail.data.scheduletype;
       this.scheduleInput.timeslot = this.Detail.data.delivery_exceptedtime;
       let productId = this.Detail.data.productid;
-      let productItem = _.find(this.productList, function(k, l) {
+      let productItem = _.find(this.productList, function (k, l) {
         let prodId: any = k;
         return prodId.productid == productId;
       });
       if (productItem) {
         this.scheduleInput.productName = productItem;
       }
-      else{
+      else {
         this.scheduleInput.productName = this.Detail.productName;
       }
     }
@@ -527,7 +527,7 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
       this.message = '';
       return true;
     } else {
-      this.message = 'please select product';
+      this.message = 'Please select product';
       return false;
     }
   }
@@ -561,12 +561,12 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
     }
   }
 
-  minQuantity(product , event){
-    if(event.value.default_qty){
+  minQuantity(product, event) {
+    if (event.value.default_qty) {
       this.eventQuantity = event.value.default_qty;
-     this.scheduleInput.productQuantity = this.eventQuantity;
+      this.scheduleInput.productQuantity = this.eventQuantity;
     }
-    else{
+    else {
       this.eventQuantity = event.value.minorderqty;
       this.scheduleInput.productQuantity = this.eventQuantity;
 
@@ -575,10 +575,10 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
 
   validateScheduleDays() {
 
-    if(this.Detail.data.weekdays){
+    if (this.Detail.data.weekdays) {
       this.scheduleInput.weekdays = this.Detail.data.weekdays;
     }
-    else if(this.Detail.data.days){
+    else if (this.Detail.data.days) {
       this.scheduleInput.days = this.Detail.data.days;
     }
     if (this.Detail.data.scheduletype) {
@@ -613,106 +613,113 @@ export class CustomerScheduleDaiolgComponent implements OnInit {
           let daysArray = [];
           let days = this.Detail.data.days;
           daysArray = days.split(',');
-          if(daysArray.length > 0){
-          for(let i=0; i < daysArray.length; i++){
-          if (daysArray[i] == '1') {
-            this.cb1 = true;
-          }
-          if (daysArray[i] == '2') {
-            this.cb2 = true;
-          }
-          if (daysArray[i] == '3') {
-            this.cb3 = true;
-          }
-          if (daysArray[i] == '4') {
-            this.cb4 = true;
-          }
-          if (daysArray[i] == '5') {
-            this.cb5 = true;
-          }
-          if (daysArray[i] == '6') {
-            this.cb6 = true;
-          }
-          if (daysArray[i] == '7') {
-            this.cb7 = true;
-          }
-          if (daysArray[i] == '8') {
-            this.cb8 = true;
-          }
-          if (daysArray[i] == '9') {
-            this.cb9 = true;
-          }
-          if (daysArray[i] == '10') {
-            this.cb10 = true;
-          }
-          if (daysArray[i] == '11') {
-            this.cb11 = true;
-          }
-          if (daysArray[i] == '12') {
-            this.cb12 = true;
-          }
-          if (daysArray[i] == '13') {
-            this.cb13 = true;
-          }
-          if (daysArray[i] == '14') {
-            this.cb14 = true;
-          }
-          if (daysArray[i] == '15') {
-            this.cb15 = true;
-          }
-          if (daysArray[i] == '16') {
-            this.cb16 = true;
-          }
-          if (daysArray[i] == '17') {
-            this.cb17 = true;
-          }
-          if (daysArray[i] == '18') {
-            this.cb18 = true;
-          }
-          if (daysArray[i] == '19') {
-            this.cb19 = true;
-          }
-          if (daysArray[i] == '20') {
-            this.cb20 = true;
-          }
-          if (daysArray[i] == '21') {
-            this.cb21 = true;
-          }
-          if (daysArray[i] == '22') {
-            this.cb22 = true;
-          }
-          if (daysArray[i] == '23') {
-            this.cb23 = true;
-          }
-          if (daysArray[i] == '24') {
-            this.cb24 = true;
-          }
-          if (daysArray[i] == '25') {
-            this.cb25 = true;
-          }
-          if (daysArray[i] == '26') {
-            this.cb26 = true;
-          }
-          if (daysArray[i] == '27') {
-            this.cb27 = true;
-          }
-          if (daysArray[i] == '28') {
-            this.cb28 = true;
-          }
-          if (daysArray[i] == '29') {
-            this.cb29 = true;
-          }
-          if (daysArray[i] == '30') {
-            this.cb30 = true;
-          }
-          if (daysArray[i] == '31') {
-            this.cb31 = true;
+          if (daysArray.length > 0) {
+            for (let i = 0; i < daysArray.length; i++) {
+              if (daysArray[i] == '1') {
+                this.cb1 = true;
+              }
+              if (daysArray[i] == '2') {
+                this.cb2 = true;
+              }
+              if (daysArray[i] == '3') {
+                this.cb3 = true;
+              }
+              if (daysArray[i] == '4') {
+                this.cb4 = true;
+              }
+              if (daysArray[i] == '5') {
+                this.cb5 = true;
+              }
+              if (daysArray[i] == '6') {
+                this.cb6 = true;
+              }
+              if (daysArray[i] == '7') {
+                this.cb7 = true;
+              }
+              if (daysArray[i] == '8') {
+                this.cb8 = true;
+              }
+              if (daysArray[i] == '9') {
+                this.cb9 = true;
+              }
+              if (daysArray[i] == '10') {
+                this.cb10 = true;
+              }
+              if (daysArray[i] == '11') {
+                this.cb11 = true;
+              }
+              if (daysArray[i] == '12') {
+                this.cb12 = true;
+              }
+              if (daysArray[i] == '13') {
+                this.cb13 = true;
+              }
+              if (daysArray[i] == '14') {
+                this.cb14 = true;
+              }
+              if (daysArray[i] == '15') {
+                this.cb15 = true;
+              }
+              if (daysArray[i] == '16') {
+                this.cb16 = true;
+              }
+              if (daysArray[i] == '17') {
+                this.cb17 = true;
+              }
+              if (daysArray[i] == '18') {
+                this.cb18 = true;
+              }
+              if (daysArray[i] == '19') {
+                this.cb19 = true;
+              }
+              if (daysArray[i] == '20') {
+                this.cb20 = true;
+              }
+              if (daysArray[i] == '21') {
+                this.cb21 = true;
+              }
+              if (daysArray[i] == '22') {
+                this.cb22 = true;
+              }
+              if (daysArray[i] == '23') {
+                this.cb23 = true;
+              }
+              if (daysArray[i] == '24') {
+                this.cb24 = true;
+              }
+              if (daysArray[i] == '25') {
+                this.cb25 = true;
+              }
+              if (daysArray[i] == '26') {
+                this.cb26 = true;
+              }
+              if (daysArray[i] == '27') {
+                this.cb27 = true;
+              }
+              if (daysArray[i] == '28') {
+                this.cb28 = true;
+              }
+              if (daysArray[i] == '29') {
+                this.cb29 = true;
+              }
+              if (daysArray[i] == '30') {
+                this.cb30 = true;
+              }
+              if (daysArray[i] == '31') {
+                this.cb31 = true;
+              }
+            }
           }
         }
       }
+      AuthenticationService.showLog(this.scheduleInput.weekdays);
     }
   }
-      AuthenticationService.showLog(this.scheduleInput.weekdays);
+
+  numberEvent(e: any) {
+    // console.log(e);
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
     }
   }
 

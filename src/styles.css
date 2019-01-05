@@ -15,6 +15,7 @@
   --grayb:#bbb;
   --grayd:#ddd;
   --white:#fff;
+  --black:#000;
   --gray157:#f1f5f7;
   --success:#28a745;
   --red:#FF0000;
@@ -43,12 +44,15 @@ body,.mat-select-trigger{
 .red{
   color: var( --red) !important;
 }
+.bg-warning{
+  background: var(--warning) !important;
+  color: var( --black) !important;
+}
 .btn-link{
   color: var( --logo-color) !important;
 }
 .firstlettercap::first-letter{
   text-transform:uppercase;
-
 }
 table thead {
     background: var( --logo-color) !important;
@@ -110,6 +114,9 @@ table thead {
   }
   .mgbottom-5{
     margin-bottom: 5px !important;
+  }
+  .black{
+    color: var( --black);
   }
   a{
     color: var( --logo-color);
@@ -485,7 +492,7 @@ background: transparent;
   margin-top: 15px;
 }
 .mgright-10{
-  margin-right: 10px;
+  margin-right: 10px !important;
 }
 .mgtop-20{
   margin-top: 20px;
@@ -667,7 +674,7 @@ ul li small{
   text-align: center !important;
 }
 .gray9{
-  color: #999 !important;
+  color: #666 !important;
 }
 .grayb{
   color: #bbb !important;
@@ -818,7 +825,7 @@ border:2px solid var( --logo-color);
    color: #d9534f;
  }
  .white{
-   color: #ddd;
+   color: #fff;
  }
  .height-95pc{
     height: 95%;
@@ -1129,3 +1136,71 @@ margin-right: 15px;
  .cursor{
    cursor: pointer;
  }
+.productName-style{
+  background: #fdf8f3;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--warning);
+  color: var(--warning);
+  text-transform: capitalize;
+}
+.modal-title {
+  text-transform: uppercase !important;
+}
+.fs-20{
+  font-size: 20px; 
+}
+.mgleft-ng10{
+  margin-left: -10px;
+}
+.mgleftright-20{
+  margin: 0px 20px;
+}
+.pdtopbottom-5{
+  padding: 5px 0px;
+}
+.blink-text {
+  animation: blink-text 0.6s linear infinite;
+ }
+@keyframes blink-text {  
+  50% { opacity: 0; }
+ }
+ .pdtopbottom-12{
+   padding: 12px 0px;
+ }
+ .pdtopbottom-8{
+  padding: 8px 0px;
+ }
+.mgleftright-10{
+  margin: 0px 10px;
+}
+.wd-10pc{
+width: 10%;
+}
+.error{
+  color: red;
+}
+.btn.btn-outline-primary{
+  border-radius: 3px !important;
+}
+.btn-warning{
+  color: #000000 !important;
+}
+.error:first-letter{
+  text-transform:uppercase !important;
+}
+.center:first-letter {
+  text-transform:uppercase !important;
+}
+.pdright-15{
+  padding-right: 15px !important;
+}
+.brd-box-box{
+  padding: 0;
+  border: 1px solid #ddd;
+  border-radius: 1px;
+  margin: 0;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 20px -6px #777;
+  border-radius: 0;
+}

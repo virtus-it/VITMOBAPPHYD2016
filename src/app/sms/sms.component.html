@@ -91,10 +91,10 @@
 
     </div>
   </div>
-  <h4 class="warning  capitalize center">
+  <h4 class="error  center">
     <a href="javascript:void(0);" (click)=getsmsByPaging(); *ngIf="smsClickMore">
-      <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-    <span *ngIf="!smsClickMore">Record Not Available</span>
+      <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+    <span *ngIf="!smsClickMore"><i aria-hidden="true" class="fa fa-frown-o"></i> Record not available</span>
   </h4>
 </div>
 <!-- <button md-raised-button color="primary" (click)="openSmsDialog()"><i class="fa fa-plus fa-2" aria-hidden="true"></i></button> -->

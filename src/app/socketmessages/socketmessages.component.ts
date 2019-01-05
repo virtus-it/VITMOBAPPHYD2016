@@ -24,7 +24,12 @@ else if(this.details && this.details.data.order){
 }
 else if(this.details && this.details.data.orderdetails){
   this.MessageInfo = "Received Feedback From Customer :" + this.details.data.userdetails.firstname + "("+this.details.data.userdetails.mobileno+") Message :" +this.details.data.orderdetails.root.subject;
-
+}
+else if(this.details && this.details.data.message && this.details.data.message.root.subject){
+  this.MessageInfo = 'Feedback Message : Subject - ' + this.details.data.message.root.subject + '( Message : ' + this.details.data.message.root.details + ' )' ;   
+}
+else if(this.details && this.details.message.root.message){
+  this.MessageInfo = 'Reply : ' + this.details.message.root.message;
 }
 
   }

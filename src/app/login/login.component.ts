@@ -27,12 +27,11 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private distributorService: DistributorServiceService,
     private loaderService: LoaderService
-  ) {}
+  ) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
   login() {
-    this.authenticationService
-      .login(this.loginDetails.username, this.loginDetails.password)
+    this.authenticationService.login(this.loginDetails.username, this.loginDetails.password)
       .subscribe(
         output => this.loginResult(output),
         error => {
@@ -47,9 +46,9 @@ export class LoginComponent implements OnInit {
       this.authenticationService.CurrentSession = JSON.parse(
         localStorage.getItem('currentUser')
       );
-      localStorage.setItem('token' ,data.token);
+      localStorage.setItem('token', data.token);
       this.authenticationService.tokenSession = localStorage.getItem('token');
-      console.log('token details' , this.authenticationService.tokenSession)
+      console.log('token details', this.authenticationService.tokenSession)
       this.authenticationService.isSuperDelear = this.authenticationService.getSupperDelear();
       this.authenticationService.salesLogin = this.authenticationService.newSalesFunction();
       this.authenticationService.customerCareLogin = this.authenticationService.customerCareLoginFunction();
@@ -65,6 +64,12 @@ export class LoginComponent implements OnInit {
     }
   }
 
+  numberEvent(e: any) {
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
+
   getPolygonDistributors() {
     var input = {
       area: {
@@ -75,12 +80,12 @@ export class LoginComponent implements OnInit {
     };
 
     this.distributorService.getpolygonByDistributor(input)
-    .subscribe(
-      output => this.getPolygonDataResult(output),
-      error => {
-        //console.log("falied");
-      }
-    );
+      .subscribe(
+        output => this.getPolygonDataResult(output),
+        error => {
+          //console.log("falied");
+        }
+      );
   }
   getPolygonDataResult(output) {
     if (output.data && output.data.length > 0) {
@@ -126,7 +131,7 @@ export class LoginComponent implements OnInit {
         usertype: this.authenticationService.userType(),
         loginid: this.authenticationService.loggedInUserId(),
         lastuserid: null,
-        "transtype":"getalldistributors" , 
+        "transtype": "getalldistributors",
         apptype: this.authenticationService.appType(),
         pagesize: 1000
       }
@@ -135,20 +140,20 @@ export class LoginComponent implements OnInit {
     this.distributors = [];
 
     this.distributorService.getAllDistributors(input)
-    .subscribe(
-      output => this.getDistributorsResult(output),
-      error => {
-        //console.log("error in distrbutors");
-        this.loaderService.display(false);
-      }
-    );
+      .subscribe(
+        output => this.getDistributorsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+          this.loaderService.display(false);
+        }
+      );
   }
   getDistributorsResult(data) {
     if (data.result == 'success') {
       let distributorCopy = [];
 
       if (data.data && data.data.length) {
-        _.each(data.data, function(i, j) {
+        _.each(data.data, function (i, j) {
           let details: any = i;
           details.fullName = details.firstname + ' ' + details.lastname;
           distributorCopy.push(details);
@@ -166,23 +171,23 @@ export class LoginComponent implements OnInit {
       loginid: this.authenticationService.loggedInUserId(),
       appType: this.authenticationService.appType(),
       userid: this.authenticationService.loggedInUserId(),
-      usertype : this.authenticationService.userType() , 
+      usertype: this.authenticationService.userType(),
       transtype: 'website'
     };
     this.distributorService.getAllSuppliers(input)
-     .subscribe(
-      output => this.getSupplierResult(output),
-      error => {
-        this.loaderService.display(false);
-      }
-    );
+      .subscribe(
+        output => this.getSupplierResult(output),
+        error => {
+          this.loaderService.display(false);
+        }
+      );
   }
   getSupplierResult(data) {
     if (data.result == 'success') {
       let supplierCopy = [];
 
       if (data.data && data.data.length) {
-        _.each(data.data, function(i, j) {
+        _.each(data.data, function (i, j) {
           let details: any = i;
           details.fullName = details.firstname + ' ' + details.lastname;
           supplierCopy.push(details);

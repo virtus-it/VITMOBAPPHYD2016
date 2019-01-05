@@ -60,7 +60,7 @@
       </div>
       <div class="col-4 ">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required>          
+          <input class="form-control" mdInput placeholder="value" name="value" [(ngModel)]='promoCodeInput.discountinpercent' required (keypress)="numberEvent($event)" maxlength="5">          
         </md-form-field>
       </div>
     </div>
@@ -90,12 +90,13 @@
         </md-form-field>
       </div>
     </div>
+    <h5 class="red center" *ngIf="validateMessage">{{validateMessage}}</h5>
+
   </div>
 </md-dialog-content>
 
 <!-- <small>{{errorMessage}}</small> -->
 <div class="row float-right pdright-30 mgbottom-20">
-    <small class="red">{{validateMessage}}</small>
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="submitPromoCode()">CREATE</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;

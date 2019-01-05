@@ -55,11 +55,9 @@ export class AuthenticationService {
   }
   login(username: string, password: string) {
     let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
-    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
-    headers.append('Authorization', 'Bearer ' + this.tokenSession);
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON 
     let options = new RequestOptions({ headers: headers });
-    return this.http
-      .post(this.apiUrl + '/weblogin', bodyString, options)
+    return this.http.post(this.apiUrl + '/weblogin', bodyString, options)
       .map((res: Response) => {
         this.loggedIn = true;
         return res.json();
@@ -186,6 +184,25 @@ export class AuthenticationService {
       return 0;
     }
   };
+
+  superDealerLoginId = function(){
+    try {
+      if (this.CurrentSession.userid && this.CurrentSession.issuperdealer == 'true') {
+        return JSON.parse(this.CurrentSession.userid);
+      } else {
+        return 0;
+      }
+    } catch (ex) {
+      return 0;
+    }
+  };
+
+
+  numberEvent(e:any){
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
+  }
 
   //     salesFunction = function () {
   //         try {
@@ -333,11 +350,11 @@ export class AuthenticationService {
   }
 
 
-  appendHeaders(){
-    let headers = new Headers({});
-    headers.append('Authorization', 'Bearer ' + this.tokenSession);
-    return headers;
-  }
+  // appendHeaders(){
+  //   let headers = new Headers({});
+  //   headers.append('Authorization', 'Bearer ' + this.tokenSession);
+  //   return headers;
+  // }
 }
 
 // {

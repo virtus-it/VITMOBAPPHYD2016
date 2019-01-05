@@ -60,7 +60,7 @@
 
 
           <a md-list-item routerLink="/feedback" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || !authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
-            <i class="fa fa-comment" aria-hidden="true"></i>
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Feedback</span>
           </a>
 
@@ -70,7 +70,7 @@
           </a>
 
           <a md-list-item routerLink="/raiserequest" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.distributorLogin">
-            <i class="fa fa-envelope-square" aria-hidden="true"></i>
+            <i class="fa fa-hand-o-up" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Raise Request </span>
           </a>
 
@@ -90,16 +90,13 @@
             <span class="pdtoprght-3x10"> Users</span>
           </a>
 
-
-
-
           <a md-list-item routerLink="/category" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
             <i class="fa  fa fa-th" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Category</span>
           </a>
 
           <a md-list-item routerLink="/inbox" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
-            <i class="fa fa-envelope logo-color cursor env-size" aria-hidden="true"></i>
+            <i class="fa fa-envelope cursor" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Inbox</span>
           </a>
 
@@ -113,25 +110,16 @@
             <span class="pdtoprght-3x10"> Promocode</span>
           </a>
 
-
-          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
-            <i class="fa fa-address-card-o" aria-hidden="true"></i>
-            <span class="pdtoprght-3x10"> Profile</span>
-          </a>
-
-
           <a md-list-item routerLink="/rules" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="authenticationService.isSuperDelear">
             <i class="fa fa-registered" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Rules </span>
           </a>
 
-
-
-
-
-
-
-
+          <a md-list-item routerLink="/profile" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
+            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Profile</span>
+          </a>
+    
         </md-nav-list>
       </md-sidenav>
 

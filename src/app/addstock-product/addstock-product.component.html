@@ -1,6 +1,6 @@
 <div class="row justify-content-between modal-title ">
   <div class="col-md-4 col-sm-4">
-      <i _ngcontent-c5="" aria-hidden="true" class="fa fa-cart-plus "></i> Add Stock</div>
+    <i _ngcontent-c5="" aria-hidden="true" class="fa fa-cart-plus "></i> Add Stock</div>
   <div class="col-md-1 col-sm-1 right">
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -11,59 +11,62 @@
   <form class="example-form">
     <div class="container-fluid pd-15x25 brd-bottom">
       <div class="form-group">
-     <h5 *ngIf="Detail.brandname!=' '"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{this.Detail.brandname}} </span><span class="gray9">{{this.Detail.ptype}} </span>
-       <!-- <span class="gray8"> - INR. {{this.Detail.pcost}}</span>  -->
-      </h5>
+        <h5 *ngIf="Detail.brandname!=' '" class="productName-style">
+          <i class="fa fa-gift fs-20" aria-hidden="true"></i>
+          <span class="capitalize">{{this.Detail.brandName}} </span>
+          <span class="">{{this.Detail.category}} </span>
+          <!-- <span class="gray8"> - INR. {{this.Detail.pcost}}</span>  -->
+        </h5>
       </div>
       <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-6 ">
-          <md-form-field class="">
+          <md-form-field class="wd-100pc">
             <input mdInput [mdDatepicker]="picker" placeholder="Select Date" name="fromdate" [(ngModel)]="StockInput.invoiceDate">
             <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
             <md-datepicker #picker></md-datepicker>
           </md-form-field>
         </div>
-          <div class="col-md-6 col-sm-6 col-lg-6">
-            <md-form-field class="">
-              <input class="form-control" mdInput placeholder="Stock/Quantity" name="stock" [(ngModel)]="StockInput.stock">
-            </md-form-field>
-          </div>
-    
-      </div>
-      <div class="row">
-          <div class="col-md-6 col-sm-6 col-lg-6">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Purchasing Cost" name="cost" [(ngModel)]="StockInput.itemCost">
-              </md-form-field>
-  
-          </div>
-          <div class="col-md-6 col-sm-6 col-lg-6">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Return Cans" name="retruncans" [(ngModel)]="StockInput.returnemptycans">
-              </md-form-field>
-  
-          </div>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Stock/Quantity" (keypress)="numberEvent($event)" name="stock" [(ngModel)]="StockInput.stock">
+          </md-form-field>
+        </div>
 
       </div>
+      <div class="row">
+        <div class="col-md-6 col-sm-6 col-lg-6">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Purchasing Cost"  (keypress)="numberEvent($event)" name="cost" [(ngModel)]="StockInput.itemCost">
+          </md-form-field>
+
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Return Cans" (keypress)="numberEvent($event)" name="retruncans" [(ngModel)]="StockInput.returnemptycans">
+          </md-form-field>
+
+        </div>
+
+      </div>
 
       <div class="row">
 
-          <div class="col-md-6 col-sm-6 col-lg-6">
-              <md-form-field class="">
-                <input class="form-control" mdInput placeholder="Distributor paid amount" name="amount" [(ngModel)]="StockInput.distributorpaidamount">
-              </md-form-field>
-  
-          </div>
+        <div class="col-md-6 col-sm-6 col-lg-6">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Distributor paid amount" (keypress)="numberEvent($event)" name="amount" [(ngModel)]="StockInput.distributorpaidamount">
+          </md-form-field>
+
+        </div>
 
 
       </div>
 
 
       <div class="row" *ngIf="Detail.type == 'distributorsStock'">
-        <md-form-field class="example-full-width">
+        <md-form-field class="wd-100pc">
           <input mdInput placeholder="Products" aria-label="State" [mdAutocomplete]="auto" [formControl]="productsCtrl">
           <md-autocomplete #auto="mdAutocomplete">
-            <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname" >
+            <md-option *ngFor="let prod of filteredProducts | async" [value]="prod.fullname">
               <span class="capitalize">{{prod.fullname}}</span>
             </md-option>
           </md-autocomplete>
@@ -72,6 +75,7 @@
     </div>
   </form>
 </md-dialog-content>
+{{validateMessage}}
 <div class="row float-right pdright-30 mgbottom-20">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="addStock()">SUBMIT</button>

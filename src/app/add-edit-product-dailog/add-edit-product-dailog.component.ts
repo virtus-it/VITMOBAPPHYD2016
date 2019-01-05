@@ -217,11 +217,16 @@ export class AddEditProductDailogComponent implements OnInit {
       return true;
     }
      else {
-      this.message = 'please select category';
+      this.message = 'Please select category';
       return false;
     }
   }
+  numberEvent(e:any){
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
 
+  }
   changeProdName(e){
     console.log(e);
     this.productDetails.brandname = e;

@@ -1,72 +1,69 @@
 <div class="row modal-title">
-    <div class="col-sm-4 col-md-4 col-lg-4 ">
-        <i class="fa fa-money" ></i> Set Prices
-    </div>
-    <div class="col-7">
-        <i class="fa fa-user"></i> <b class="text-capitalize">Customer name: {{this.Details.firstname}} {{this.Details.lastname}}</b>
-    </div>
-    <div class="col-md-1  col-sm-1  col-lg-1 right">
-      <strong>
-        <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
-      </strong>
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-money"></i> Set Prices
+  </div>
+  <div class="col-7">
+    <i class="fa fa-user"></i>
+    <b class="text-capitalize">Customer name: {{this.Details.firstname}} {{this.Details.lastname}}</b>
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <div class="table-scroll">
+      <table class="table table-hover table-striped">
+        <tbody *ngFor="let prod of productList">
+          <tr class="border-topbottom">
+            <td class="bgcolor-fade-blue" colspan="4">
+              <b class="capital">
+                <i class="fa fa-gift" aria-hidden="true"></i>
+                Product Name : {{prod.brandName}}
+                <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
+                  <span class="">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                    Category :{{prod.category}}</span>
+                </b>
+              </b>
+            </td>
+          </tr>
+
+          <tr class="border-topbottom" style="background: #0f75bc;
+                color: white;">
+            <th width="56%">Type</th>
+            <th width="22%">Price per Unit</th>
+            <th width="22%">Quantity</th>
+          </tr>
+          <tr *ngFor="let details of prod.data">
+            <td class="text-capitalize"> {{details.ptype}} </td>
+            <td class="">
+              <div class="">
+                <md-form-field class="wd-50pc">
+                  <input class="form-control" mdInput placeholder="Price" (keypress)=numberEvent($event) [(ngModel)]="details.pcost">
+                </md-form-field>
+              </div>
+            </td>
+            <td class="">
+              <div class="">
+                <md-form-field class="wd-50pc">
+                  <input class="form-control" mdInput placeholder="Quantity" (keypress)=numberEvent($event) [(ngModel)]="details.minorderqty">
+                </md-form-field>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
   </div>
-  
-      <md-dialog-content layout="column">
-        
-        <div class="container-fluid pd-15x25 brd-bottom">
-                <div class="table-scroll">
-          <table class="table table-hover table-striped">
-              <tbody  *ngFor="let prod of productList">
-                <tr class="border-topbottom">
-                  <td class="bgcolor-fade-blue" colspan="4">
-                    <b class="capital">
-                      <i class="fa fa-gift" aria-hidden="true"></i>
-                      Product Name : {{prod.brandName}}
-                      <b class="capital"> &nbsp;&nbsp; | &nbsp;&nbsp;
-                        <span class="">
-                          <i class="fa fa-bars" aria-hidden="true"></i>
-                          Category :{{prod.category}}</span>
-                      </b>
-                    </b>
-                  </td>
-                </tr>
-                <tr class="border-topbottom" style="background: #0f75bc;
-                color: white;">
-                  <th width="56%">Type</th>
-                  <th width="22%">Price per Unit</th>
-                  <th width="22%">Quantity</th>
-                  
-                </tr>
-                <tr *ngFor="let details of prod.data">
-                  <td class="text-capitalize"> {{details.ptype}} </td>
-                  <td class="">
-                    <div class="">
-                        <md-form-field class="wd-50pc">
-                            <input class="form-control" mdInput placeholder="Price"  [(ngModel)]="details.pcost">
-                          </md-form-field>
-                  
-                    </div>
-                  </td>
-                  <td class=""> 
-                    <div class="">
-                        <md-form-field class="wd-50pc">
-                            <input class="form-control" mdInput placeholder="Quantity"  [(ngModel)]="details.minorderqty">
-                          </md-form-field>
-                    </div> 
-                  </td> 
-                </tr>
-              </tbody>
-            </table>
+</md-dialog-content>
 
-          </div></div>
-
-  
-      </md-dialog-content>
-    
-    <div class="row float-right pdright-30 mgbottom-20">
-      <md-dialog-actions align="end">
-          <button md-raised-button class="btn-primary" (click)="setPrice()">SET PRICES</button>
-        <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
-      </md-dialog-actions>
-    </div>
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button class="btn-primary" (click)="setPrice()">SET PRICES</button>
+    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

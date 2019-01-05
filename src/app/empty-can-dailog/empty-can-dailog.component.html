@@ -19,17 +19,17 @@
       <thead>
         <tr>
           <th width="12%">S.No</th>
-          <th width="40%">Product Name</th>
+          <th width="45%">Product Name</th>
           <th width="25%">Type</th>
-          <th width="22%">Empty Cans</th>
+          <th width="15%">Empty Cans</th>
            </tr>
       </thead>
       <tbody>
         <tr  *ngFor="let cans of ProductsCans let i = index" [attr.data-index]="i">
           <td width="12%" class="left" scope="row">{{i + 1}}</td>
-          <td width="40%" class="left capital">{{cans.root.brandname}}</td>
+          <td width="45%" class="left capital">{{cans.root.brandname}}</td>
           <td width="25%" class="left capital">{{cans.root.brandType}}</td>
-          <td width="22%" class="left capital"> 
+          <td width="15%" class="left capital"> 
             <input class="form-control center brd-bottom" mdInput [(ngModel)]="cans.root.avaliablecans"/>
                  </td>
          </tr>

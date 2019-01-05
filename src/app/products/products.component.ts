@@ -50,7 +50,9 @@ export class ProductsComponent implements OnInit {
   listOfProducts = [];
   noProductsError = false;
   salesTeamLogin :boolean = true;
+  selectedIndex = 1;
   
+
   filterViewToggle() {
     this.showFilterDialog = !this.showFilterDialog;
   }
@@ -65,7 +67,7 @@ export class ProductsComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
-        this.getProducts();
+        this.getProducts(1);
       }
 
     });
@@ -81,7 +83,7 @@ export class ProductsComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
-        this.getProducts();
+        this.getProducts(1);
       }
 
     });
@@ -97,7 +99,7 @@ export class ProductsComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
-        this.getProducts();
+        this.getProducts(1);
       }
 
     });
@@ -113,7 +115,7 @@ export class ProductsComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
-        this.getProducts();
+        this.getProducts(1);
       }
 
     });
@@ -128,7 +130,7 @@ export class ProductsComponent implements OnInit {
       //console.log(`Dialog closed: ${result}`);
       if (result == 'success') {
 
-        this.getProducts();
+        this.getProducts(1);
       }
 
     });
@@ -160,7 +162,9 @@ export class ProductsComponent implements OnInit {
 
   }
   
-  getProducts() {
+  getProducts(selectedtab:number) {
+    this.selectedIndex = selectedtab;
+
     let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"getallproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
     this.loaderService.display(true);
     this.productService.createProduct(input)
@@ -180,8 +184,12 @@ export class ProductsComponent implements OnInit {
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
+  
 
         //let details: any = i;
 
@@ -238,7 +246,7 @@ export class ProductsComponent implements OnInit {
   activateProductResult(result){
 if(result.result == 'success'){
   console.log('product activated');
-  this.getProducts();
+  this.getProducts(1);
 
 }
   }
@@ -256,7 +264,7 @@ if(result.result == 'success'){
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
-      this.getProducts();
+      this.getProducts(1);
 
     }
 
@@ -302,7 +310,7 @@ if(result.result == 'success'){
    }
    uploadImageResult(result){
      if(result.result == 'success'){
-      this.getProducts();
+      this.getProducts(1);
 
      }
    }
@@ -316,7 +324,7 @@ if(result.result == 'success'){
 
    reset(){
     this.distributorView = false;
-    this.getProducts();
+    this.getProducts(1);
     
    }
 
@@ -458,7 +466,8 @@ if(result.result == 'success'){
   
   }
 
-  showActiveProducts(){
+  showActiveProducts(selectedtab:number) {
+      this.selectedIndex = selectedtab;
     let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"activeproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
     this.loaderService.display(true);
     this.productService.createProduct(input)
@@ -476,8 +485,11 @@ if(result.result == 'success'){
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
 
         //let details: any = i;
 
@@ -507,7 +519,8 @@ if(result.result == 'success'){
 
 
 
-  showInactiveProducts(){
+  showInactiveProducts(selectedtab:number) {
+    this.selectedIndex = selectedtab;
     let input = {"product":{ userid: this.authenticationService.loggedInUserId(), apptype: this.authenticationService.appType() , "transtype":"inactiveproducts" ,loginid:this.authenticationService.loggedInUserId() , usertype: this.authenticationService.userType() }};
     this.loaderService.display(true);
     this.productService.createProduct(input)
@@ -525,9 +538,11 @@ if(result.result == 'success'){
       // let productCopy = [];
       for (let details of result.data) {
         if(details.stockstatus == 'Soldout'){
-          details.stockColor = 'warn';
+          details.stockColor = 'danger';
           }
-
+          if(details.stockstatus == 'Lowstock'){
+            details.stockColor = 'warning';
+            }
         //let details: any = i;
 
         let findproduct = _.find(this.productList, function (k, l) {
@@ -555,7 +570,7 @@ if(result.result == 'success'){
   }
 
   ngOnInit() {
-    this.getProducts();
+    this.getProducts(1);
     this.superDealer = this.authenticationService.getSupperDelear();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();

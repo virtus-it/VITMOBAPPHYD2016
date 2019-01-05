@@ -80,8 +80,6 @@ import { ViewSupplierComponent } from './view-supplier/view-supplier.component';
 import { DeliverpreorderComponent } from './deliverpreorder/deliverpreorder.component';
 import { PromocodeServiceService } from './promocode/promocode-service.service';
 
-
-
 import { ProductsService } from './products/products.service';
 import { AddstockProductComponent } from './addstock-product/addstock-product.component';
 import { InvoicedetailsComponent } from './invoicedetails/invoicedetails.component';
@@ -141,6 +139,7 @@ import { RaiseRequestComponent } from './raise-request/raise-request.component';
 import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.component';
 import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
 import { authinterceptor } from './interceptor/authinterceptor';
+import { AssociateCategoryComponent } from './associate-category/associate-category.component';
 
 
 
@@ -258,6 +257,7 @@ import { authinterceptor } from './interceptor/authinterceptor';
         RaiseRequestComponent,
         SalesTeamAssignComponent,
         RaiseRequestDetailDailogComponent,
+        AssociateCategoryComponent,
 
      
         
@@ -422,7 +422,8 @@ import { authinterceptor } from './interceptor/authinterceptor';
          DistributorMapDetailsComponent,
          ReportsPreviewComponent,
          SalesTeamAssignComponent,
-         RaiseRequestDetailDailogComponent
+         RaiseRequestDetailDailogComponent,
+         AssociateCategoryComponent
       
 
 

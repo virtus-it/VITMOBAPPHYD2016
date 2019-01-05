@@ -174,7 +174,7 @@ color: #fff;
 color: #fff !important;
 }
 .dist-msg{
-  background: #eec191;
+  background: #f3dab6;
 color: #666;
 }
 
@@ -204,8 +204,8 @@ margin-bottom: 3px;
 .mat-raised-button.mat-primary {
   background: var( --logo-color);
   color: var( --white);
-  padding-left: 50px;
-  padding-right: 50px;
+  padding-left: 35px;
+  padding-right: 35px;
   margin: 0px 15px;
 }
 
@@ -266,4 +266,7 @@ background: #f1f5f7 !important;
     max-height: 90vh !important;
     overflow-y: auto !important;
     overflow-x: hidden
+}
+.fa-20{
+  font-size: 20px !important;
 }

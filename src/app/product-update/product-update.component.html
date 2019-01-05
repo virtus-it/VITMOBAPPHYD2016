@@ -2,10 +2,6 @@
     <div class="col-md-6 col-sm-6">
       <i class="fa fa-dot-circle-o"></i> Update Status </div>
 
-
-
-
-
     <div class="col-md-2 col-sm-2 right">
       <strong>
         <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
@@ -16,7 +12,7 @@
       <form class="example-form">
         <div class="container-fluid pd-15x25 brd-bottom">
           <div class="form-group">
-         <h5> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="gray6">{{Details.brandname}} </span><span class="gray8">{{Details.ptype}} </span> 
+         <h5 class="productName-style"> <i class="fa fa-gift fs-20" aria-hidden="true"></i> <span class="">{{Details.data.brandName}} {{Details.data.category}} </span> 
           <!-- <span class="gray7"> - INR. {{Details.pcost}}</span> -->
         </h5>
           </div>

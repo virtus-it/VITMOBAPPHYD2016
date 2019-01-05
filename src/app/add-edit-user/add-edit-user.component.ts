@@ -1,11 +1,13 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MdDialogRef } from '@angular/material';
+import { MdDialog } from '@angular/material';
 import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { SupplierService } from '../supplier/supplier.service';
 import { MD_DIALOG_DATA } from '@angular/material';
+import { AssociateCategoryComponent } from '../associate-category/associate-category.component';
 
 @Component({
   selector: 'app-add-edit-user',
@@ -19,8 +21,8 @@ export class AddEditUserComponent implements OnInit {
     private customerService: CustomerService,
     private distributorService: DistributorServiceService,
     private supplierservice: SupplierService,
-    @Inject(MD_DIALOG_DATA) public Details: any
-  ) {}
+    @Inject(MD_DIALOG_DATA) public Details: any, public dialog: MdDialog
+  ) { }
 
   emailFormControl = new FormControl('', [Validators.required]);
   mobileFormControl = new FormControl('', [Validators.required]);
@@ -34,7 +36,7 @@ export class AddEditUserComponent implements OnInit {
   paymentdueDate: any = '';
   UserInput = { usertype: 'Customer' };
   UserType = '';
-  validateMessage:string = '';
+  validateMessage: string = '';
 
   customerInput: any = {
     User: {
@@ -70,7 +72,7 @@ export class AddEditUserComponent implements OnInit {
     address: '',
     emailid: '',
     referCode: '',
-    phonetype : ""
+    phonetype: ""
   };
 
   salesInput = {
@@ -132,7 +134,7 @@ export class AddEditUserComponent implements OnInit {
 
   areaList = [];
   phone = false;
-  
+
   supplierInput = {
     firstname: '',
     mobileno: '',
@@ -156,6 +158,7 @@ export class AddEditUserComponent implements OnInit {
 
 
   headerValue: any = 'Add User';
+  manufacturerId:any = '';
 
   //   submitUser(){
 
@@ -192,17 +195,17 @@ export class AddEditUserComponent implements OnInit {
       } else if (this.UserInput.usertype == 'Marketing') {
         this.UpdateMarketingUser();
       }
-      else if(this.UserInput.usertype == 'Supersupplier'){
+      else if (this.UserInput.usertype == 'Supersupplier') {
         this.UpdateSuperSupplier();
       }
-      else if(this.UserInput.usertype == 'Customercare'){
+      else if (this.UserInput.usertype == 'Customercare') {
         this.UpdateCustomerCare();
       }
-      else if(this.UserInput.usertype == 'salesteam'){
+      else if (this.UserInput.usertype == 'salesteam') {
         this.updateSalesTeam();
       }
     }
-     else {
+    else {
       if (this.UserInput.usertype == 'Customer') {
         this.addCustomer();
       } else if (this.UserInput.usertype == 'Distributor') {
@@ -214,16 +217,16 @@ export class AddEditUserComponent implements OnInit {
       } else if (this.UserInput.usertype == 'Manufacturer') {
         this.addManufacturer();
       }
-       else if (this.UserInput.usertype == 'Marketing') {
+      else if (this.UserInput.usertype == 'Marketing') {
         this.addMarketingUser();
       }
-      else if(this.UserInput.usertype == 'Customercare'){
+      else if (this.UserInput.usertype == 'Customercare') {
         this.addCustomerCare();
       }
-      else if(this.UserInput.usertype == 'Supersupplier'){
+      else if (this.UserInput.usertype == 'Supersupplier') {
         this.addSuperSupplier();
       }
-      else if(this.UserInput.usertype == 'salesteam'){
+      else if (this.UserInput.usertype == 'salesteam') {
         this.addSalesteam();
       }
     }
@@ -247,16 +250,16 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    if(this.customerCareValidation()){
-    this.distributorService.createDistributor(input)
-    .subscribe(
-      output => this.addCustomerCareResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.customerCareValidation()) {
+      this.distributorService.createDistributor(input)
+        .subscribe(
+          output => this.addCustomerCareResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
   addCustomerCareResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -280,37 +283,38 @@ export class AddEditUserComponent implements OnInit {
         apptype: this.authenticationService.appType()
       }
     };
-    if(this.salesTeamValidation()){
-    this.distributorService.createDistributor(input)
-    .subscribe(
-      output => this.addSalesteamResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.salesTeamValidation()) {
+      this.distributorService.createDistributor(input)
+        .subscribe(
+          output => this.addSalesteamResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
-addSalesteamResult(result) {
+  addSalesteamResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
   }
 
 
-  addSuperSupplier(){
+  addSuperSupplier() {
     let input: any = {
-      User: {user_type: 'supersupplier',TransType: 'create', firstname: this.superSupplierInput.firstname , gender: 'Male', pwd: this.superSupplierInput.mobileno, address: this.superSupplierInput.address,  loginid: this.authenticationService.loggedInUserId(),mobileno: this.superSupplierInput.mobileno, emailid: this.superSupplierInput.emailid, lastname : this.superSupplierInput.lastname  , mobileno_one: this.superSupplierInput.altmobileno,issuppersupplier: true, dealer_mobileno: this.authenticationService.dealerNo(), apptype: this.authenticationService.appType()}};
-      if(this.supersupplierValidation()){
-    this.supplierservice.createSupplier(input)
-    .subscribe(
-      output => this.addSuperSupplierResult(output),
-      error => {
-        //console.log("error in supplier");
-      });
+      User: { user_type: 'supersupplier', TransType: 'create', firstname: this.superSupplierInput.firstname, gender: 'Male', pwd: this.superSupplierInput.mobileno, address: this.superSupplierInput.address, loginid: this.authenticationService.loggedInUserId(), mobileno: this.superSupplierInput.mobileno, emailid: this.superSupplierInput.emailid, lastname: this.superSupplierInput.lastname, mobileno_one: this.superSupplierInput.altmobileno, issuppersupplier: true, dealer_mobileno: this.authenticationService.dealerNo(), apptype: this.authenticationService.appType() }
+    };
+    if (this.supersupplierValidation()) {
+      this.supplierservice.createSupplier(input)
+        .subscribe(
+          output => this.addSuperSupplierResult(output),
+          error => {
+            //console.log("error in supplier");
+          });
+    }
   }
-}
-  addSuperSupplierResult(result){
-    if(result.result == 'success'){
+  addSuperSupplierResult(result) {
+    if (result.result == 'success') {
       this.thisDialogRef.close('success');
     }
   }
@@ -401,7 +405,7 @@ addSalesteamResult(result) {
       if (this.dup == true) {
         this.customerService
           .createCustomer(input)
-          .subscribe(output => this.createCustomerResult(output), error => {});
+          .subscribe(output => this.createCustomerResult(output), error => { });
       }
     }
   }
@@ -451,19 +455,21 @@ addSalesteamResult(result) {
   }
 
   addDistributor() {
-    var input: any = {User: {pwd: this.dist.phone,user_type: 'dealer',TransType: 'create',phonetype: this.dist.phonetype ,referCode: this.dist.referCode,firstname: this.dist.firstName,lastname: this.dist.lastName,companyname: this.dist.companyname,address: this.dist.address,loginid: this.authenticationService.loggedInUserId(),mobileno: this.dist.phone,mobileno_one: this.dist.mobile1,mobileno_two: this.dist.mobile2,emailid: this.dist.emailid,dealer_mobileno: this.authenticationService.dealerNo(),apptype: this.authenticationService.appType()
+    var input: any = {
+      User: {
+        pwd: this.dist.phone, user_type: 'dealer', TransType: 'create', phonetype: this.dist.phonetype, referCode: this.dist.referCode, firstname: this.dist.firstName, lastname: this.dist.lastName, companyname: this.dist.companyname, address: this.dist.address, loginid: this.authenticationService.loggedInUserId(), mobileno: this.dist.phone, mobileno_one: this.dist.mobile1, mobileno_two: this.dist.mobile2, emailid: this.dist.emailid, dealer_mobileno: this.authenticationService.dealerNo(), apptype: this.authenticationService.appType()
       }
     };
-    if(this.distributorValidation()){
-    this.distributorService.createDistributor(input)
-    .subscribe(
-      output => this.onSubmitResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.distributorValidation()) {
+      this.distributorService.createDistributor(input)
+        .subscribe(
+          output => this.onSubmitResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
   onSubmitResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -489,16 +495,16 @@ addSalesteamResult(result) {
         apptype: this.authenticationService.appType()
       }
     };
-    if(this.supplierValidation()){
-    this.supplierservice.createSupplier(input)
-    .subscribe(
-      output => this.submitSupplierResult(output),
-      error => {
-        //console.log("error in supplier");
-      }
-    );
+    if (this.supplierValidation()) {
+      this.supplierservice.createSupplier(input)
+        .subscribe(
+          output => this.submitSupplierResult(output),
+          error => {
+            //console.log("error in supplier");
+          }
+        );
+    }
   }
-}
   submitSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -526,16 +532,16 @@ addSalesteamResult(result) {
         apptype: this.authenticationService.appType()
       }
     };
-    if(this.salesValidation()){
-    this.distributorService.createDistributor(input)
-    .subscribe(
-      output => this.addSalesUserResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.salesValidation()) {
+      this.distributorService.createDistributor(input)
+        .subscribe(
+          output => this.addSalesUserResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
   addSalesUserResult(result) {
     if (result.result == 'success') {
       this.thisDialogRef.close('success');
@@ -559,23 +565,36 @@ addSalesteamResult(result) {
         mobileno_two: this.manufacturerInput.mobile2,
         emailid: this.manufacturerInput.emailid,
         dealer_mobileno: this.authenticationService.dealerNo(),
-        apptype: this.authenticationService.appType()
+        apptype: this.authenticationService.appType(),
+        categoryid : ''
       }
     };
-    if(this.manufacturerValidation()){
-    this.distributorService.createDistributor(input)
-    .subscribe(
-      output => this.addManufacturerResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+        if (this.manufacturerValidation()) {
+        this.addCategoryOfManufacturer(input);
+        }
   }
-}
-  addManufacturerResult(result) {
-    if (result.result == 'success') {
-      this.thisDialogRef.close('success');
-    }
+  // addManufacturerResult(result) {
+  //   if (result.result == 'success') {
+  //     this.manufacturerId  = result.data.user_id;
+  //     // this.thisDialogRef.close('success');
+  //   }
+  // }
+
+
+  addCategoryOfManufacturer(input) {
+    let formattedData = { input : input }
+    let dialogRefEditCustomer = this.dialog.open(AssociateCategoryComponent, {
+      width: '80%',
+      data: formattedData
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if (result == "success") {
+        this.thisDialogRef.close('success');
+       
+      }
+    });
+
   }
 
   getUserDetails() {
@@ -596,7 +615,7 @@ addSalesteamResult(result) {
       this.customerInput.User.promocode = this.Details.promocode;
       this.customerInput.User.referencecode = this.Details.reference_code;
       // this.customerInput.User.advamt = this.Details.reference_code;
-    } 
+    }
     else if (this.Details.usertype == 'dealer') {
       this.phone = true;
       this.dist.firstName = this.Details.firstname;
@@ -646,7 +665,7 @@ addSalesteamResult(result) {
       this.marketingInput.emailid = this.Details.emailid;
       this.marketingInput.referCode = this.Details.reference_code;
     }
-    else if(this.Details.usertype == 'customercare'){
+    else if (this.Details.usertype == 'customercare') {
       this.customerCareInput.firstName = this.Details.firstname;
       this.customerCareInput.lastName = this.Details.lastname;
       this.customerCareInput.phone = this.Details.mobileno;
@@ -655,7 +674,7 @@ addSalesteamResult(result) {
       this.customerCareInput.address = this.Details.address;
       this.customerCareInput.emailid = this.Details.emailid;
     }
-    else if(this.Details.usertype == 'supersupplier'){
+    else if (this.Details.usertype == 'supersupplier') {
       this.superSupplierInput.firstname = this.Details.firstname;
       this.superSupplierInput.mobileno = this.Details.mobileno;
       this.superSupplierInput.altmobileno = this.Details.mobileno_one;
@@ -663,7 +682,7 @@ addSalesteamResult(result) {
       this.superSupplierInput.emailid = this.Details.emailid;
       this.superSupplierInput.lastname = this.Details.lastname;
     }
-    else if(this.Details.usertype == 'salesteam'){
+    else if (this.Details.usertype == 'salesteam') {
       this.salesteamInput.firstName = this.Details.firstname;
       this.salesteamInput.lastName = this.Details.lastname;
       this.salesteamInput.phone = this.Details.mobileno;
@@ -675,17 +694,17 @@ addSalesteamResult(result) {
   }
 
 
-//   let input ={};
-//   if(this.customerInput.advamt){
-//  input["advamt"] = this.customerInput.advamt; 
-//  };
- 
+  //   let input ={};
+  //   if(this.customerInput.advamt){
+  //  input["advamt"] = this.customerInput.advamt; 
+  //  };
+
 
   UpdateCustomer() {
     if (this.validation1() && this.validation2() && this.validation3()) {
-    
-      let input =  this.customerInput;
-      if(input.User.advamt === null || input.User.advamt == ''){
+
+      let input = this.customerInput;
+      if (input.User.advamt === null || input.User.advamt == '') {
         delete input.User.advamt;
       }
       input.User.paymentday = this.paymentDate;
@@ -694,12 +713,12 @@ addSalesteamResult(result) {
 
       console.log(input);
       this.customerService.updateCustomer(input)
-      .subscribe(
-        output => this.updateCustomerResult(output),
-        error => {
-          //console.log("error in distrbutors");
-        }
-      );
+        .subscribe(
+          output => this.updateCustomerResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
     }
   }
   updateCustomerResult(result) {
@@ -712,8 +731,10 @@ addSalesteamResult(result) {
   }
 
   UpdateDistributor() {
-    let input: any = {User: {pwd: this.dist.phone,user_type: 'dealer',referCode: this.dist.referCode,firstname: this.dist.firstName,
-        lastname: this.dist.lastName, phonetype: this.dist.phonetype ,
+    let input: any = {
+      User: {
+        pwd: this.dist.phone, user_type: 'dealer', referCode: this.dist.referCode, firstname: this.dist.firstName,
+        lastname: this.dist.lastName, phonetype: this.dist.phonetype,
         companyname: this.dist.companyname,
         address: this.dist.address,
         loginid: this.authenticationService.loggedInUserId(),
@@ -726,16 +747,16 @@ addSalesteamResult(result) {
       }
     };
     input.User.userid = this.Details.userid;
-    if(this.distributorValidation()){
-    this.distributorService.updateDistributor(input)
-    .subscribe(
-      output => this.updateDistributorResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.distributorValidation()) {
+      this.distributorService.updateDistributor(input)
+        .subscribe(
+          output => this.updateDistributorResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
   updateDistributorResult(result) {
     if (result.result == 'success') {
       console.log('dist updated successfully');
@@ -765,16 +786,16 @@ addSalesteamResult(result) {
       }
     };
     input.User.userid = this.Details.userid;
-    if(this.salesValidation()){
-    this.distributorService.updateDistributor(input)
-    .subscribe(
-      output => this.UpdateSalesUserResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.salesValidation()) {
+      this.distributorService.updateDistributor(input)
+        .subscribe(
+          output => this.UpdateSalesUserResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          }
+        );
+    }
   }
-}
   UpdateSalesUserResult(result) {
     if (result.result == 'success') {
       console.log('salesuser updated successfully');
@@ -802,77 +823,97 @@ addSalesteamResult(result) {
         mobileno_two: this.manufacturerInput.mobile2,
         emailid: this.manufacturerInput.emailid,
         dealer_mobileno: this.authenticationService.dealerNo(),
-        apptype: this.authenticationService.appType()
+        apptype: this.authenticationService.appType(),
+        categoryid : ''
       }
     };
     input.User.userid = this.Details.userid;
-    if(this.manufacturerValidation()){
-    this.distributorService.updateDistributor(input)
-    .subscribe(
-      output => this.UpdateManufacturerResult(output),
-      error => {
-        //console.log("error in distrbutors");
-      }
-    );
+    if (this.manufacturerValidation()) {
+      this.addCategoryOfManufacturerOnUpdate(input);
+      // this.distributorService.updateDistributor(input)
+      //   .subscribe(
+      //     output => this.UpdateManufacturerResult(output),
+      //     error => {
+      //       //console.log("error in distrbutors");
+      //     }
+      //   );
+    }
   }
-}
-  UpdateManufacturerResult(result) {
+  // UpdateManufacturerResult(result) {
+  //   if (result.result == 'success') {
+  //     console.log('manufacturer updated successfully');
+  //     // this.thisDialogRef.close('success');
+      
+  //     this.getUserDetails();
+  //   }
+  // }
+
+  addCategoryOfManufacturerOnUpdate(data) {
+    let formattedData = {input : data }
+    let dialogRefEditCustomer = this.dialog.open(AssociateCategoryComponent, {
+      width: '80%',
+      data: formattedData
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if (result == "success") {
+        this.thisDialogRef.close('success');
+      }
+    });
+
+  }
+
+
+  updateSalesTeam() {
+
+    let input: any = {
+      User: { userid: this.Details.userid, firstname: this.salesteamInput.firstName, lastname: this.salesteamInput.lastName, mobileno: this.salesteamInput.phone, address: this.salesteamInput.address, emailid: this.salesteamInput.emailid, loginid: this.authenticationService.loggedInUserId(), user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.salesteamInput.mobile1, mobileno_two: this.salesteamInput.mobile2 }
+    };
+    console.log(input);
+    if (this.salesTeamValidation()) {
+      this.distributorService.updateDistributor(input)
+        .subscribe(
+          output => this.updateSalesTeamResult(output),
+          error => {
+            //console.log("error in distrbutors");
+          });
+    }
+  }
+  updateSalesTeamResult(result) {
     if (result.result == 'success') {
-      console.log('manufacturer updated successfully');
+      console.log('salesteam updated successfully');
       this.thisDialogRef.close('success');
       this.getUserDetails();
     }
   }
 
 
-  updateSalesTeam(){
+  UpdateCustomerCare() {
 
     let input: any = {
-      User: {userid: this.Details.userid, firstname: this.salesteamInput.firstName, lastname : this.salesteamInput.lastName, mobileno: this.salesteamInput.phone, address: this.salesteamInput.address, emailid: this.salesteamInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.salesteamInput.mobile1 , mobileno_two : this.salesteamInput.mobile2}};
-      console.log(input);
-      if(this.salesTeamValidation()){
+      User: { userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname: this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId(), user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1, mobileno_two: this.customerCareInput.mobile2 }
+    };
+    console.log(input);
+    if (this.customerCareValidation()) {
       this.distributorService.updateDistributor(input)
-      .subscribe(
-        output => this.updateSalesTeamResult(output),
-        error => {
-          //console.log("error in distrbutors");
-        });
-     }
-    }
-    updateSalesTeamResult(result){
-       if(result.result == 'success'){
-        console.log('salesteam updated successfully');
-        this.thisDialogRef.close('success');
-        this.getUserDetails();
-       }
-     }
-
-
-     UpdateCustomerCare(){
-
-      let input: any = {
-        User: {userid: this.Details.userid, firstname: this.customerCareInput.firstName, lastname : this.customerCareInput.lastName, mobileno: this.customerCareInput.phone, address: this.customerCareInput.address, emailid: this.customerCareInput.emailid, loginid: this.authenticationService.loggedInUserId() , user_type: 'customercare', issuppersupplier: false, apptype: this.authenticationService.appType(), mobileno_one: this.customerCareInput.mobile1 , mobileno_two : this.customerCareInput.mobile2}};
-        console.log(input);
-        if(this.customerCareValidation()){
-        this.distributorService.updateDistributor(input)
         .subscribe(
           output => this.UpdateCustomerCareResult(output),
           error => {
             //console.log("error in distrbutors");
           });
-       }
-      }
-       UpdateCustomerCareResult(result){
-         if(result.result == 'success'){
-          console.log('customer care updated successfully');
-          this.thisDialogRef.close('success');
-          this.getUserDetails();
-         }
-       }
+    }
+  }
+  UpdateCustomerCareResult(result) {
+    if (result.result == 'success') {
+      console.log('customer care updated successfully');
+      this.thisDialogRef.close('success');
+      this.getUserDetails();
+    }
+  }
 
 
 
-     
+
 
 
   UpdateSupplier() {
@@ -891,16 +932,16 @@ addSalesteamResult(result) {
       }
     };
     //console.log(input);
-    if(this.supplierValidation()){
-    this.supplierservice.updateSupplier(input)
-    .subscribe(
-      output => this.updateSupplierResult(output),
-      error => {
-        //console.log("error in updation of suppliers");
-      }
-    );
+    if (this.supplierValidation()) {
+      this.supplierservice.updateSupplier(input)
+        .subscribe(
+          output => this.updateSupplierResult(output),
+          error => {
+            //console.log("error in updation of suppliers");
+          }
+        );
+    }
   }
-}
   updateSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -910,19 +951,19 @@ addSalesteamResult(result) {
     }
   }
 
-  UpdateSuperSupplier(){
+  UpdateSuperSupplier() {
 
-    let input: any = {User: { userid: this.Details.userid , firstname : this.superSupplierInput.firstname, mobileno: this.superSupplierInput.mobileno, address: this.superSupplierInput.address, emailid: this.superSupplierInput.emailid, loginid:  this.authenticationService.loggedInUserId() ,user_type: 'supersupplier',issuppersupplier: true , apptype: this.authenticationService.appType(),mobileno_one: this.superSupplierInput.altmobileno , lastname : this.superSupplierInput.lastname }};
-    if(this.supersupplierValidation()){
-    this.supplierservice.updateSupplier(input)
-    .subscribe(
-      output => this.UpdateSuperSupplierResult(output),
-      error => {
-        //console.log("error in updation of suppliers");
-      }
-    );
+    let input: any = { User: { userid: this.Details.userid, firstname: this.superSupplierInput.firstname, mobileno: this.superSupplierInput.mobileno, address: this.superSupplierInput.address, emailid: this.superSupplierInput.emailid, loginid: this.authenticationService.loggedInUserId(), user_type: 'supersupplier', issuppersupplier: true, apptype: this.authenticationService.appType(), mobileno_one: this.superSupplierInput.altmobileno, lastname: this.superSupplierInput.lastname } };
+    if (this.supersupplierValidation()) {
+      this.supplierservice.updateSupplier(input)
+        .subscribe(
+          output => this.UpdateSuperSupplierResult(output),
+          error => {
+            //console.log("error in updation of suppliers");
+          }
+        );
+    }
   }
-}
   UpdateSuperSupplierResult(result) {
     //console.log(result);
     if (result.result == 'success') {
@@ -934,243 +975,243 @@ addSalesteamResult(result) {
 
 
 
-  supplierValidation(){
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.supplierInput.address){
-            this.validateMessage = 'Enter Address';
-          }
-    }
-        case '2' : {
-          if(!this.supplierInput.mobileno){
-            this.validateMessage = 'Enter Mobile number';
-          }   
-    }
-        case '3' : {
-          if(this.supplierInput.lastname == ''){
-            this.validateMessage = "Enter lastname";
-        }  
-    }
-        case '4' : {
-          if(!this.supplierInput.firstname){
-            this.validateMessage = "Enter first name";
+  supplierValidation() {
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.supplierInput.address) {
+          this.validateMessage = 'Enter Address';
         }
-    }
-     
-      case '5' : {
-        if(this.supplierInput.firstname && this.supplierInput.lastname && this.supplierInput.mobileno && this.supplierInput.address ){
+      }
+      case '2': {
+        if (!this.supplierInput.mobileno) {
+          this.validateMessage = 'Enter Mobile number';
+        }
+      }
+      case '3': {
+        if (this.supplierInput.lastname == '') {
+          this.validateMessage = "Enter lastname";
+        }
+      }
+      case '4': {
+        if (!this.supplierInput.firstname) {
+          this.validateMessage = "Enter first name";
+        }
+      }
+
+      case '5': {
+        if (this.supplierInput.firstname && this.supplierInput.lastname && this.supplierInput.mobileno && this.supplierInput.address) {
           this.validateMessage = '';
           return true;
         }
       }
-}
+    }
   }
 
 
-  distributorValidation(){
+  distributorValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.dist.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.dist.phone){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.dist.lastName){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.dist.firstName){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.dist.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.dist.firstName && this.dist.lastName && this.dist.phone && this.dist.address ){
+      }
+      case '2': {
+        if (!this.dist.phone) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.dist.lastName) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.dist.firstName) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.dist.firstName && this.dist.lastName && this.dist.phone && this.dist.address) {
           this.validateMessage = '';
           this.messageError = '';
           return true;
         }
       }
-}
+    }
 
   }
 
 
 
-  salesValidation(){
+  salesValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.salesInput.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.salesInput.phone){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.salesInput.lastName){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.salesInput.firstName){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.salesInput.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.salesInput.firstName && this.salesInput.lastName && this.salesInput.phone && this.salesInput.address ){
+      }
+      case '2': {
+        if (!this.salesInput.phone) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.salesInput.lastName) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.salesInput.firstName) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.salesInput.firstName && this.salesInput.lastName && this.salesInput.phone && this.salesInput.address) {
           this.validateMessage = '';
           this.messageError = '';
           return true;
         }
       }
-}
+    }
 
   }
 
 
 
-  manufacturerValidation(){
+  manufacturerValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.manufacturerInput.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.manufacturerInput.phone){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.manufacturerInput.lastName){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.manufacturerInput.firstName){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.manufacturerInput.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.manufacturerInput.firstName && this.manufacturerInput.lastName && this.manufacturerInput.phone && this.manufacturerInput.address ){
+      }
+      case '2': {
+        if (!this.manufacturerInput.phone) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.manufacturerInput.lastName) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.manufacturerInput.firstName) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.manufacturerInput.firstName && this.manufacturerInput.lastName && this.manufacturerInput.phone && this.manufacturerInput.address) {
           this.validateMessage = '';
           this.messageError = '';
           return true;
         }
       }
-}
+    }
 
   }
 
 
 
-  customerCareValidation(){
+  customerCareValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.customerCareInput.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.customerCareInput.phone){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.customerCareInput.lastName){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.customerCareInput.firstName){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.customerCareInput.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.customerCareInput.firstName && this.customerCareInput.lastName && this.customerCareInput.phone && this.customerCareInput.address ){
+      }
+      case '2': {
+        if (!this.customerCareInput.phone) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.customerCareInput.lastName) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.customerCareInput.firstName) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.customerCareInput.firstName && this.customerCareInput.lastName && this.customerCareInput.phone && this.customerCareInput.address) {
           this.validateMessage = '';
           return true;
         }
       }
-}
+    }
 
   }
 
 
 
-  salesTeamValidation(){
+  salesTeamValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.salesteamInput.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.salesteamInput.phone){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.salesteamInput.lastName){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.salesteamInput.firstName){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.salesteamInput.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.salesteamInput.firstName && this.salesteamInput.lastName && this.salesteamInput.phone && this.salesteamInput.address ){
+      }
+      case '2': {
+        if (!this.salesteamInput.phone) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.salesteamInput.lastName) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.salesteamInput.firstName) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.salesteamInput.firstName && this.salesteamInput.lastName && this.salesteamInput.phone && this.salesteamInput.address) {
           this.validateMessage = '';
           return true;
         }
       }
-}
+    }
 
   }
 
@@ -1178,48 +1219,60 @@ addSalesteamResult(result) {
 
 
 
-  supersupplierValidation(){
+  supersupplierValidation() {
 
-    var validate : string = '1';
-    switch(validate){
-        case "1" : {
-          if(!this.superSupplierInput.address){
-            this.validateMessage = 'Enter Address';
-            this.messageError = '';
-          }
-    }
-        case '2' : {
-          if(!this.superSupplierInput.mobileno){
-            this.validateMessage = 'Enter Mobile number';
-            this.messageError = '';
-          }   
-    }
-        case '3' : {
-          if(!this.superSupplierInput.lastname){
-            this.validateMessage = "Enter lastname";
-            this.messageError = '';
-        }  
-    }
-        case '4' : {
-          if(!this.superSupplierInput.firstname){
-            this.validateMessage = "Enter first name";
-            this.messageError = '';
+    var validate: string = '1';
+    switch (validate) {
+      case "1": {
+        if (!this.superSupplierInput.address) {
+          this.validateMessage = 'Enter Address';
+          this.messageError = '';
         }
-    }
-     
-      case '5' : {
-        if(this.superSupplierInput.firstname && this.superSupplierInput.lastname && this.superSupplierInput.mobileno && this.superSupplierInput.address ){
+      }
+      case '2': {
+        if (!this.superSupplierInput.mobileno) {
+          this.validateMessage = 'Enter Mobile number';
+          this.messageError = '';
+        }
+      }
+      case '3': {
+        if (!this.superSupplierInput.lastname) {
+          this.validateMessage = "Enter lastname";
+          this.messageError = '';
+        }
+      }
+      case '4': {
+        if (!this.superSupplierInput.firstname) {
+          this.validateMessage = "Enter first name";
+          this.messageError = '';
+        }
+      }
+
+      case '5': {
+        if (this.superSupplierInput.firstname && this.superSupplierInput.lastname && this.superSupplierInput.mobileno && this.superSupplierInput.address) {
           this.validateMessage = '';
           this.messageError = '';
           return true;
         }
       }
-}
+    }
 
 
   }
 
+  numberEvent(e: any) {
+    if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
+      e.preventDefault();
+    }
 
+  }
+
+  emailEvent(e: any) {
+    if (e.keyCode == 32) {
+      e.preventDefault();
+    }
+
+  }
 
 
 
@@ -1247,16 +1300,16 @@ addSalesteamResult(result) {
       } else if (this.Details.usertype == 'marketing') {
         this.UserInput.usertype = 'Marketing';
       }
-      else if(this.Details.usertype == 'customercare'){
+      else if (this.Details.usertype == 'customercare') {
         this.UserInput.usertype = 'Customercare';
       }
-      else if(this.Details.usertype == 'supersupplier'){
+      else if (this.Details.usertype == 'supersupplier') {
         this.UserInput.usertype = 'Supersupplier';
       }
-      else if(this.Details.usertype == 'salesteam'){
+      else if (this.Details.usertype == 'salesteam') {
         this.UserInput.usertype = 'salesteam';
       }
-      
+
 
 
       this.headerValue = 'Update User';
@@ -1265,6 +1318,6 @@ addSalesteamResult(result) {
 
 
     this.UserType = this.authenticationService.userType();
-      console.log(this.UserType);
+    console.log(this.UserType);
   }
 }

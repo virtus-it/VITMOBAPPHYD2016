@@ -4,12 +4,12 @@
     Order List
   </div>
   <div class="col-7">
-    <span *ngIf="Detail.type=='distributorOrder' && Detail.data.distributor" class="capitalize"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</span>
+    <span *ngIf="Detail.type=='distributorOrder' && Detail.data.distributor"> Dist Name: {{Detail.data.distributor.firstname}} {{Detail.data.distributor.lastname}}</span>
     <span *ngIf="Detail.type=='distributorOrder' && Detail.data.distributor"> - {{Detail.data.distributor.mobileno}}</span>
-    <span *ngIf="Detail.type == 'distributorOrder' && Detail.data.distributor">&nbsp;&nbsp;&nbsp;&nbsp; Created Date:  {{Detail.data.distributor.createddate | utcDate}}</span>
-    <span *ngIf="Detail.type=='distributorOrdersfromCoverage' && Detail.distributorName " class="capitalize"> Dist Name : {{Detail.distributorName}} </span>
+    <span *ngIf="Detail.type == 'distributorOrder' && Detail.data.distributor">&nbsp;&nbsp;&nbsp;&nbsp; Created Date: {{Detail.data.distributor.createddate | utcDate}}</span>
+    <span *ngIf="Detail.type=='distributorOrdersfromCoverage' && Detail.distributorName "> Dist Name : {{Detail.distributorName}} </span>
     <span *ngIf="Detail.type=='distributorOrdersfromCoverage' && Detail.distributorNumber"> - {{Detail.distributorNumber}}</span>
-    <span *ngIf="Detail.type == 'distributorOrdersfromCoverage' && Detail.data.distDetails">&nbsp;&nbsp;&nbsp;  Created Date : {{Detail.data.distDetails.createddate | utcDate}}</span>
+    <span *ngIf="Detail.type == 'distributorOrdersfromCoverage' && Detail.data.distDetails">&nbsp;&nbsp;&nbsp; Created Date : {{Detail.data.distDetails.createddate | utcDate}}</span>
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
@@ -23,15 +23,14 @@
     <table class="table table-hover table-striped  table-fixedheader">
       <thead>
         <tr>
-          <th width="6%">Id</th>
-          <th width="6%">Cust Name</th>          
-          <th width="9%">Product </th>
+          <th width="4%">Id</th>
+          <th width="11%">Cust Name</th>
+          <th width="11%">Product </th>
           <th width="4%" title="Quantity">Qty</th>
           <th width="9%" title="Cost, Express Delivery Charge, Service Charge">Cost,Exp,Serv</th>
-
-          <th width="9%">Status</th>
+          <th width="7%">Status</th>
           <th width="5%">Mode</th>
-          <th width="8%">Amount</th>
+          <th width="7%">Amount</th>
           <th class="" width="7%" title="Return Quantity">Ret Qty</th>
           <!-- <th class="" width="9%">Serv chgs</th>
           <th class="" width="9%">Exp del chgs</th> -->
@@ -49,9 +48,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let supplierOrder of SupplierOrderList">
-          <td width="6%" class="left cellpadding" scope="row">#{{supplierOrder.order_id}}</td>
-          <td width="6%" class="left cellpadding" scope="row">#{{supplierOrder.orderby_firstname}}</td>
-          <td width="9%" class="capitalize left cellpadding" scope="row">
+          <td width="4%" class="left cellpadding" scope="row">#{{supplierOrder.order_id}}</td>
+          <td width="11%" class="left cellpadding" scope="row">{{supplierOrder.orderby_firstname}}</td>
+          <td width="11%" class="capitalize left cellpadding" scope="row">
             <span class="onhovertooltip-100" title="{{supplierOrder.brandname}}">{{supplierOrder.brandname}}</span>
           </td>
           <td width="4%" class="left cellpadding" scope="row">
@@ -65,13 +64,15 @@
             <span *ngIf="supplierOrder.servicecharges > 0 ">{{supplierOrder.servicecharges}}</span>
           </td>
 
-          <td width="9%" class="left capitalize cellpadding" scope="row">
-            <span class="text-warning">{{supplierOrder.status}}</span>
+          <td width="7%" class="left capitalize cellpadding" scope="row">
+            <span class="" [ngClass]="{'success' : supplierOrder.status == 'delivered', 'warning' : supplierOrder.status != 'delivered'} ">{{supplierOrder.status}}</span>
           </td>
+
+
           <td width="5%" class="left capitalize cellpadding" scope="row">
             <span class=" text-info">{{supplierOrder.paymenttype}}</span>
           </td>
-          <td width="8%" class="left cellpadding" scope="row">
+          <td width="7%" class="left cellpadding" scope="row">
             <span class=" text-danger">{{supplierOrder.bill_amount}}</span>
           </td>
           <td width="7%" class="left cellpadding" scope="row">
@@ -117,10 +118,11 @@
       </tbody>
     </table>
     <br>
-    <h4 class="warning  capitalize center">
+    <h4 class="center">
       <a href="javascript:void(0);" (click)=getOrdersByPaging(); *ngIf="ordersClickMore">
-        <i class="fa fa-cloud-upload" aria-hidden="true"></i> click for more data</a>
-      <span *ngIf="!ordersClickMore">Record Not Available</span>
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+      <span *ngIf="!ordersClickMore" class="error">
+        <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
     </h4>
   </div>
 </md-dialog-content>

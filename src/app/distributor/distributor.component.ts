@@ -28,6 +28,7 @@ import * as _ from 'underscore';
 import { ProductUpdateComponent } from '../product-update/product-update.component';
 import { LoaderService } from '../login/loader.service';
 import { ReportsService } from '../reports/reports.service';
+import { RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
 
 @Component({
 
@@ -354,10 +355,8 @@ export class DistributorComponent implements OnInit {
     }
 
     distributorsAvailability(data) {
-
         let dialogRef = this.dialog.open(DistributorsAvailabilityComponent, {
-
-            width: '75%',
+            width: '45%',
             data: data
         });
         dialogRef.afterClosed().subscribe(result => {
@@ -607,18 +606,20 @@ export class DistributorComponent implements OnInit {
             this.filterInput.root.searchtype = 'stockpoints';
             this.filterInput.root.searchtext = this.filterTypeModel.isstockpointDefined;
         }
-        else if(this.filterType == 'salesteamassociation'){
+        else if (this.filterType == 'salesteamassociation') {
             this.filterInput.root.searchtype = 'assign';
             this.filterInput.root.searchtext = this.salesTeamId;
         }
-        let input = this.filterInput;
-        this.distributorService.getAllDistributors(input)
-            .subscribe(
-                output => this.searchFilterResult(output),
-                error => {
-                    //console.log("error in distrbutors");
-                    this.loaderService.display(false);
-                });
+        if (this.filterInput.root.searchtext) {
+            let input = this.filterInput;
+            this.distributorService.getAllDistributors(input)
+                .subscribe(
+                    output => this.searchFilterResult(output),
+                    error => {
+                        //console.log("error in distrbutors");
+                        this.loaderService.display(false);
+                    });
+        }
     }
     searchFilterResult(result) {
         if (result.result == 'success') {
@@ -725,7 +726,7 @@ export class DistributorComponent implements OnInit {
 
     assignToSalesTeam(data) {
         let dialogRefAddProduct = this.dialog.open(SalesTeamAssignComponent, {
-            width: '70%',
+            width: '40%',
             data: data
         });
         dialogRefAddProduct.afterClosed().subscribe(result => {
@@ -753,8 +754,6 @@ export class DistributorComponent implements OnInit {
 
 
 
-
-
     findSalesTeam(name: string) {
         let finalSalesTeam: any = [];
         finalSalesTeam = this.allSalesTeam.filter(salesteam =>
@@ -779,6 +778,20 @@ export class DistributorComponent implements OnInit {
             }
         }
         return finalSalesTeam;
+    }
+
+    raiseRequestBySuperDealer(data) {
+        let formattedData = { type: 'raiseRequestBySuperDealer', data: data };
+        let dialogRefAddProduct = this.dialog.open(RaiseRequestDetailDailogComponent, {
+            width: '70%',
+            data: formattedData
+        });
+        dialogRefAddProduct.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            if (result == 'success') {
+                this.getDistributors(true);
+            }
+        });
     }
 
 

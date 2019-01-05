@@ -1,70 +1,77 @@
-
 <div class=" dist-style minheight-500">
-    <div class=" row justify-content-between distIcon-style left">
-        <div class="col-sm-2 col-md-2 col-lg-2 ">
-            <h4><i class="fa fa-truck"></i> Suppliers</h4>
+  <div class=" row justify-content-between distIcon-style left">
+    <div class="col-sm-2 col-md-2 col-lg-2 ">
+      <h4>
+        <i class="fa fa-truck"></i> Suppliers</h4>
+    </div>
+    <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
+      <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()'>
+        <i class="fa fa-plus fa-2 plus-style" aria-hidden="true"></i>
+      </a>
+      <a class="cursor logo-color mgleft-10">
+        <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" (click)="filterToggle()" title="Filter"></i>
+
+        <div class="filterView" *ngIf="showFilterDialog">
+          <div class="">
+            <b class="float-left">Filter By</b>
+            <br>
+            <div class=" ">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm" (ngModelChange)="searchSupplier()"
+                  name="searchSupplierTerm">
+              </md-form-field>
+            </div>
+          </div>
         </div>
-      <div class="col-sm-2 col-md-2 col-lg-2 align-self-center right">
-          <a class="cursor logo-color " title="Add Supplier" (click)='addSupplier()' ><i class="fa fa-plus fa-2 plus-style"  aria-hidden="true"></i></a>
-            <a class="cursor logo-color mgleft-10" ><i  aria-hidden="true" class="fa fa-sliders logo-color" (click)="filterToggle()" title="Filter" ></i>
-    
-                                <div class="filterView" *ngIf="showFilterDialog">
-                            <div class="">
-                                <b class="float-left">Filter By</b>
-                                <br>
-                                <div class=" ">
-                                  <md-form-field class="example-full-width">
-                                    <input class="form-control" mdInput placeholder=" Supplier Name" [(ngModel)]="searchSupplierTerm" (ngModelChange) = "searchSupplier()" name="searchSupplierTerm">
-                                  </md-form-field>
-                                </div>
-                                </div>
-                         </div>  
-            </a>
-      </div>
-        </div>
-    <div id="" class="row pd-15x10 mg-0">
-  <div class="col">    
+      </a>
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="13%">Name</th>
+            <th width="16%">Name</th>
             <th width="10%">Mobile </th>
             <th width="12%">Email</th>
-            <th width="25%">Address</th>
-            <th width="19%" class="no-th-row">Action</th>
+            <th width="26%">Address</th>
+            <th width="18%" class="no-th-row">Action</th>
           </tr>
         </thead>
         <tbody>
-          <tr  *ngFor = "let supplier of supplierList; let i = index" [attr.data-index]="i">
-            <td class="left capital" width="13%"><span class="onhovertooltip-100" title="{{supplier.firstname}}"> {{supplier.firstname}}</span></td>
+          <tr *ngFor="let supplier of supplierList; let i = index" [attr.data-index]="i">
+            <td class="left capital" width="13%"><span class="onhovertooltip-100" title="{{supplier.firstname}}">
+                {{supplier.firstname}}</span></td>
             <td class="left" width="10%"> {{supplier.mobileno}}</td>
-            <td class="left"  width="12%"><span class="onhovertoltip-150" title="{{supplier.emailid}}"> {{supplier.emailid}}</span></td>
-            <td class="left capital"  width="25%"> {{supplier.address}}</td>
-            <td class="left" width="19%" >
+            <td class="left" width="12%"><span class="onhovertoltip-150" title="{{supplier.emailid}}">
+                {{supplier.emailid}}</span></td>
+            <td class="left capital" width="25%"> {{supplier.address}}</td>
+            <td class="left" width="19%">
               <i class="fa fa-pencil-square-o btn-link" aria-hidden="true" title="Edit Supplier" (click)='editSupplier(supplier)'></i>
-               &nbsp; &nbsp;  <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)='deleteSupplier(supplier)'></i>
-               &nbsp; &nbsp;<i class="fa fa-file-text-o btn-link" aria-hidden="true" title="Orders" (click)='supplierOrdersList(supplier)' ></i>
-               &nbsp; &nbsp; 
-               <i class="fa fa-globe btn-link" aria-hidden="true" title="Assign Area" (click)="openMapDialog(supplier)"></i>&nbsp;&nbsp;
+              &nbsp; &nbsp; <i class="fa fa-trash danger" aria-hidden="true" title="Delete Supplier" (click)='deleteSupplier(supplier)'></i>
+              &nbsp; &nbsp;<i class="fa fa-file-text-o btn-link" aria-hidden="true" title="Orders" (click)='supplierOrdersList(supplier)'></i>
+              &nbsp; &nbsp;
+              <i class="fa fa-globe btn-link" aria-hidden="true" title="Assign Area" (click)="openMapDialog(supplier)"></i>&nbsp;&nbsp;
 
-               <i class="fa fa-automobile disabled" aria-hidden="true" title="disabled Assign Vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1"></i>
+              <i class="fa fa-automobile disabled" aria-hidden="true" title="disabled Assign Vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1"></i>
 
-               <i class="fa fa-automobile btn-link" aria-hidden="true" title="Assign vehicle" (click)="assignVehicle(supplier)"  *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)"></i>
-                &nbsp;&nbsp;
+              <i class="fa fa-automobile btn-link" aria-hidden="true" title="Assign vehicle" (click)="assignVehicle(supplier)"
+                *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)"></i>
+              &nbsp;&nbsp;
 
-                <i class="fa fa-truck disabled" aria-hidden="true" title="Edit vehicle"  *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)" ></i>
+              <i class="fa fa-truck disabled" aria-hidden="true" title="Edit vehicle" *ngIf="(supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 0) || (supplier.assignedstatus === null)"></i>
 
-               <i class="fa fa-truck btn-link" aria-hidden="true" title="Edit vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1" (click)="editVehicle(supplier)"></i> &nbsp;&nbsp;
+              <i class="fa fa-truck btn-link" aria-hidden="true" title="Edit vehicle" *ngIf="supplier.assignedstatus && supplier.assignedstatus[0].vehicleassignedstatus == 1"
+                (click)="editVehicle(supplier)"></i> &nbsp;&nbsp;
 
 
-               <i class="fa fa fa-compass	
+              <i class="fa fa fa-compass	
                btn-link" aria-hidden="true" title="Track supplier" (click)="trackSupplier(supplier)"></i>
-              </td>      
+            </td>
         </tbody>
       </table>
-      
-  </div>
+
+    </div>
   </div>
   <!-- <h4 *ngIf="!NoRecords"  class="warning" > <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Record Not Available</h4> -->
-  </div>  
-
+</div>

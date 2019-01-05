@@ -21,7 +21,7 @@
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
           <input class="form-control" [formControl]="emailFormControl" mdInput placeholder="First Name" name="firstName" [(ngModel)]="customerInput.User.firstname"
-            required>
+            required maxlength='15'>
           <md-error *ngIf="emailFormControl.hasError('required')">
             First Name is
             <strong>required</strong>
@@ -30,7 +30,7 @@
       </div>
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname">
+          <input class="form-control" mdInput placeholder="Last Name" name="lastname" [(ngModel)]="customerInput.User.lastname" maxlength='15'>
           <md-error>
             Last Name is
             <strong>required</strong>
@@ -40,7 +40,7 @@
       </div>
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname">
+          <input class="form-control" mdInput placeholder="Alias Name" name="alias" [(ngModel)]="customerInput.User.aliasname" maxlength='15'>
           <md-error>
             Alias Name is
             <strong>required</strong>
@@ -53,7 +53,7 @@
     <div class="row">
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Email Id" name="emailid" [(ngModel)]="customerInput.User.emailid">
+          <input class="form-control" mdInput placeholder="Email Id" name="emailid" [(ngModel)]="customerInput.User.emailid" maxlength='50'>
           <md-error>
             Email Id is
             <strong>required</strong>
@@ -63,7 +63,7 @@
       </div>
       <div class="col-md-4 col-sm-6 ">
         <md-form-field class="">
-          <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt">
+          <input class="form-control" mdInput placeholder="Advance Amount" name="advancenumber" [(ngModel)]="customerInput.User.advamt" (keypress)="numberEvent($event)" maxlength="5"> 
           <md-error>
             Advance Amount is
             <strong>required</strong>
@@ -95,25 +95,21 @@
       </div>
       <div class="col-4" *ngIf="this.Details" >
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Reference Code" name="ReferenceCode">
+          <input class="form-control" mdInput placeholder="Reference Code" name="ReferenceCode" maxlength="10">
         </md-form-field>
-
       </div>
-
-
     </div>
     <!-- third row finished -->
     <div class="row">
-
       <div class="col-4">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname'>
+          <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname' maxlength="10">
         </md-form-field>
-
       </div>
+
       <div class="col-4 align-self-end">
         <md-form-field class="wd-100pc">
-          <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality'>
+          <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality' maxlength="50">
         </md-form-field>
       </div>
             <!-- <div class="col-md-4 col-sm-6">
@@ -123,18 +119,17 @@
 
       </div> -->
     </div>
-    <div class="row">
 
+    <div class="row form-group">
       <div class="col" *ngIf="this.Details.order_id">
         <md-form-field class="wd-100pc">
-          <textarea class="form-control" mdInput placeholder="Order Address" name="Address" [(ngModel)]="customerInput.User.orderaddress"></textarea>
+          <textarea class="form-control" mdInput placeholder="Order Address" name="Address" [(ngModel)]="customerInput.User.orderaddress" maxlength="150"></textarea>
         </md-form-field>
-
       </div>
 
       <div class="col">
         <md-form-field class="wd-100pc">
-          <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"></textarea>
+          <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address" maxlength="150"></textarea>
         </md-form-field>
       </div>
 
@@ -240,8 +235,7 @@
         </div>
       </div>
 
-
-      <div class="col-4">
+     <div class="col-4">
         <div class="form-group">
           <md-select placeholder="Customer Type" class="wd-100pc" [(ngModel)]="customerInput.User.registertype">
             <md-option value="residential">Residential</md-option>
@@ -251,7 +245,8 @@
         </div>
       </div>
     </div>
-    <h3 class="warning">{{this.messageError}}</h3>
+
+    <h5 class="error center mgbottom-0 mgtop-10" *ngIf="messageError"><i class="fa fa-warning"></i> {{this.messageError}}</h5>
 
     <!-- <div class="col-7">
         <div class=" form-group">
@@ -283,15 +278,13 @@
         </span>
       </div> -->
   </div>
-
 </md-dialog-content>
+
+<h5 class="error center" *ngIf="duplicateUser"><i class="fa fa-warning"></i> User Already Exists!!</h5>
+
 <div class="row float-right pdright-30">
   <md-dialog-actions align="end">
     <button type="submit" class="btn-primary" md-raised-button (click)="createUpdatecustomer()">SUBMIT</button>
     <button md-raised-button (click)="onCloseModal()">CANCEL</button>&nbsp;
   </md-dialog-actions>
 </div>
-
-
-<!-- 
-|| (customerInput.User.paymenttype=='credit' && !dateFormControl.valid && !dueDateFormControl.valid) -->
