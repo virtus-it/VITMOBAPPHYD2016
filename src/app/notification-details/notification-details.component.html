@@ -11,28 +11,35 @@
     </div>
   </div>
   
-    <md-dialog-content layout="column">
+    <md-dialog-content layout="column" *ngIf="!noNotificationsSent">
         <div class="row pd-15x25 brd-bottom">
             <table class="table table-hover table-fixedheader nofath">
         <thead>
           <tr>
-            <th width="25%"> Template Name</th>
-            <th width="25%">Customer </th>
             <th width="25%">Date</th>
-            <th width="25%">Status</th>
-             </tr>
+            <th width="25%">Customer</th>
+            <th width="25%">Description</th>
+            <th width="10%">Status</th>
+            <th width="15%">Sent By</th>
+            </tr>
         </thead>
         <tbody>
-          <tr>
-            <td width="25%" class="left" scope="row">123</td>
-            <td width="25%" class="left" scope="row">123</td>
-            <td width="25%" class="left" scope="row">123</td>
-            <td width="25%" class="left" scope="row">123</td>           
-           </tr>
+          <tr *ngFor="let notification of allNotifications">
+            <td width="25%" class="left" scope="row">{{notification.createddate | utcDate}} </td>
+            <td width="25%" class="left" scope="row">{{Details.firstname}}</td>
+            <td width="25%" class="left" scope="row">{{notification.description}}</td>
+            <td width="10%" class="left" scope="row">{{notification.status}}</td>        
+            <td *ngIf="notification.notificationsendedby" width="15%" class="left" scope="row">{{notification.notificationsendedby.fullname}}</td>
+          </tr>
         </tbody>
       </table>
     </div>
     </md-dialog-content>
+
+
+    <div class="danger" *ngIf="noNotificationsSent">
+      <h3>No notifications sent to this customer </h3>
+    </div>
     <div class="row float-right pdright-30 mgbottom-20">
         <md-dialog-actions align="end">
           <button md-raised-button (click)="onCloseCancel()" >CANCEL</button>&nbsp;

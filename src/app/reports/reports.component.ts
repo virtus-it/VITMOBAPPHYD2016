@@ -73,7 +73,7 @@ export class ReportsComponent implements OnInit {
       ()
   };
   distOrders = { getDate: null };
-  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' };
+  downloadInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' , gstDetailsOfCustomer : '' , gstDetailsOfDistributor : ''};
 
   stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "" };
 
@@ -650,7 +650,7 @@ export class ReportsComponent implements OnInit {
       order: {
         userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all',
         lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0,
-        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", randominvoiceno: ''
+        customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", randominvoiceno: '' , gstDetailsOfCustomer : this.downloadInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.downloadInput.gstDetailsOfDistributor
       }
     };
     if (this.downloadInput.fromDate) {
@@ -888,7 +888,7 @@ export class ReportsComponent implements OnInit {
   }
 
   viewOrdersReports() {
-    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' } };
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfCustomer : this.downloadInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.downloadInput.gstDetailsOfDistributor } };
     if (this.downloadInput.fromDate) {
       input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
     }

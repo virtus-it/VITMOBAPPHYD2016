@@ -15,7 +15,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
   constructor( public thisDialogRef: MdDialogRef<ProcessPaymentDialogComponent>, private authenticationService: AuthenticationService,  @Inject(MD_DIALOG_DATA) public Details: any, private distributorService: DistributorServiceService  , private smsService: SmsServiceService) { }
 
 
-  processPaymentInput = {name:"" , type:"paytm", ackId:"" , paytmNumber:"" , amount: 0 }
+  processPaymentInput = {name:"" , type:"paytm", ackId:"" , paytmNumber:"" , amount: 0 , orginalmobileno : '' }
   smsObject = {name : '' , mobileno: '' , messageBody : ''};
 
   processPayment(){
@@ -60,6 +60,7 @@ export class ProcessPaymentDialogComponent implements OnInit {
       this.processPaymentInput.paytmNumber = this.Details.typedetails;
       this.processPaymentInput.amount = this.Details.amount;
       this.processPaymentInput.name = this.Details.fullname;
+      this.processPaymentInput.orginalmobileno = this.Details.orginalmobileno;
     }
 
   }

@@ -47,7 +47,9 @@ export class AddEditCustomerDailogComponent implements OnInit {
       buildingname: '',
       promocode: '',
       orderaddress: '',
-      orderid: ''
+      orderid: '',
+      latitude: '' , 
+      longitude : ''
     }
   };
 
@@ -120,6 +122,8 @@ export class AddEditCustomerDailogComponent implements OnInit {
           registertype: result.data.user.registertype,
           orderaddress: this.Details.orderby_address,
           referencecode: result.data.user.reference_code,
+          latitude: result.data.user.latitude,
+          longitude : result.data.user.longitude ,
           apptype: this.authenticationService.appType()
         }
       };
