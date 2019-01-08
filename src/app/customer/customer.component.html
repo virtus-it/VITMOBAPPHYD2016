@@ -10,7 +10,8 @@
     <div class="col-4 align-self-center justify-content-end">
       <div class="row">
         <div class=" col-4">
-          <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
+          <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left"
+            (change)="onChangeType()">
             <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
               {{type.viewValue}}
             </md-option>
@@ -75,6 +76,10 @@
             <i class="fa fa-plus-circle fs-24" aria-hidden="true"></i>
           </a>
 
+          <div class='loadExcelInput'>
+            <button type="submit" class="btn-primary"  md-raised-button (click)="openExcelDialog()">UPLOAD EXCEL</button>
+          </div>
+
           <a class="cursor logo-color mgleft-10">
             <!-- <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"></i> -->
 
@@ -82,7 +87,8 @@
               <div class="">
                 <br>
                 <div class="form-group">
-                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left" (change)="onChangeType()">
+                  <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left"
+                    (change)="onChangeType()">
                     <md-option *ngFor="let type of FilterTypeDetails" [value]="type.value">
                       {{type.viewValue}}
                     </md-option>
@@ -105,17 +111,12 @@
                     <md-option value="credit">CREDIT</md-option>
                     <md-option value="codwithpending">Cod with Pending</md-option>
                     <md-option value="advlesscans">Advance Amt
-                      < Available Cans</md-option>
-                    
-
-                  </md-select>
-                </div>
-                <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
-                  <md-select placeholder="Filter By" name="customertype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
-                    <md-option value="residential">Residential</md-option>
-                    <md-option value="corperate">Corporate</md-option>
-                    <md-option value="commercial">Commercial</md-option>
-                  </md-select>
+                      < Available Cans</md-option> </md-select> </div> <div class="form-group" *ngIf="filterInput.root.searchtype == 'customertype'">
+                        <md-select placeholder="Filter By" name="customertype" class="full-width left" [(ngModel)]="filterInput.root.searchtext">
+                          <md-option value="residential">Residential</md-option>
+                          <md-option value="corperate">Corporate</md-option>
+                          <md-option value="commercial">Commercial</md-option>
+                        </md-select>
                 </div>
                 <div class="form-group" *ngIf="filterInput.root.searchtype == 'followupdate'">
                   <md-form-field class="inline">
@@ -174,7 +175,8 @@
             <div class="d-flex">
               <b class="capital col-5 left">Mobile: </b>
               <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}}
+                  {{customers.mobileno_two}}</span>
               </span>
             </div>
             <div class="d-flex">
@@ -200,7 +202,8 @@
         </div>
         <div class="row">
           <b class="capital col-4 left">Created Date: </b>
-          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>
+          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp |
+            utcDate}}</span>
         </div>
         <div class="row">
           <b class="capital col-4 left">Distributor: </b>
@@ -238,7 +241,8 @@
       <div class="col-2  pd-10 align-self-center">
         <div class="row mg-10">
           <div class="col">
-            <span class="points-style" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}} Points</span>
+            <span class="points-style" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}}
+              Points</span>
             <span class="points-style" *ngIf="!customers.customerpoints"> 0 Point</span>
           </div>
         </div>
@@ -337,7 +341,8 @@
             <div class="d-flex">
               <b class="capital col-5 left">Mobile: </b>
               <span class="left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}}
+                  {{customers.mobileno_two}}</span>
               </span>
             </div>
             <div class="d-flex">
@@ -357,7 +362,8 @@
         </div>
         <div class="row">
           <b class="capital col-4 left">Created Date: </b>
-          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>
+          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp |
+            utcDate}}</span>
         </div>
         <div class="row">
           <b class="capital col-4 left">Distributor: </b>
@@ -371,7 +377,8 @@
 
       <div class="col-2 pd-10 align-self-center">
         <div class="mg-10">
-          <span class="points-style1" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}} Points</span>
+          <span class="points-style1" title="" *ngIf=" customers && customers.customerpoints">{{customers.customerpoints}}
+            Points</span>
           <span class="points-style1" *ngIf="!customers.customerpoints"> 0 Point</span>
         </div>
       </div>
@@ -472,7 +479,8 @@
             <div class="d-flex">
               <b class="capital col-5 left">Mobile: </b>
               <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}}
+                  {{customers.mobileno_two}}</span>
               </span>
             </div>
             <div class="d-flex">
@@ -492,7 +500,8 @@
         </div>
         <div class="row">
           <b class="capital col-4 left">Created Date: </b>
-          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>
+          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp |
+            utcDate}}</span>
         </div>
         <div class="row">
           <b class="capital col-4 left">Distributor: </b>
@@ -524,7 +533,8 @@
         <div class="row mg-10">
           <div class="col">
             <!-- <b class="capital col left">Dep Amt: </b> -->
-            <span class="adv-style center" *ngIf="customers.payments.advance_amount">Advance Amt: {{customers.payments.advance_amount}}</span>
+            <span class="adv-style center" *ngIf="customers.payments.advance_amount">Advance Amt:
+              {{customers.payments.advance_amount}}</span>
             <span class="adv-style center" *ngIf="!customers.payments.advance_amount">Advance Amt: 0</span>
           </div>
         </div>
@@ -592,151 +602,154 @@
 
   <div class='pd-15' *ngIf="paymentsDueView">
 
-      <div class="row brd-box-box" *ngFor="let customers of customerList">
-          <div class="col-4 left bg-color-bg ">
-            <div class="row align-items-center pdtopbottom-5">
-              <div class="col-2 " align-self-center>
-                <span class="left capitalize joined-style">
-                  <!-- <span class="success"></span> -->
-                  <span *ngIf="customers.isappdownloaded" class="">
-                    <i class="fa fa-thumbs-up success" title="Joined"></i>
-                  </span>
-                  <span *ngIf="!customers.isappdownloaded" class="">
-                    <i class="fa fa-thumbs-down error" title="Not Joined"></i>
-                  </span>
-                </span>
-              </div>
-              <div class="col">
-                <div class="d-flex">
-                  <b class="capital col-5 left">Customer: </b>
-                  <span class="onhovertooltip-150 capitalize  left" *ngIf="customers && customers.firstname" title=" {{customers.firstname}} {{customers.lastname}} ">
-                    <!-- <span class="success"></span> -->
-                    <!-- <span *ngIf="customers.isappdownloaded" class="">
+    <div class="row brd-box-box" *ngFor="let customers of customerList">
+      <div class="col-4 left bg-color-bg ">
+        <div class="row align-items-center pdtopbottom-5">
+          <div class="col-2 " align-self-center>
+            <span class="left capitalize joined-style">
+              <!-- <span class="success"></span> -->
+              <span *ngIf="customers.isappdownloaded" class="">
+                <i class="fa fa-thumbs-up success" title="Joined"></i>
+              </span>
+              <span *ngIf="!customers.isappdownloaded" class="">
+                <i class="fa fa-thumbs-down error" title="Not Joined"></i>
+              </span>
+            </span>
+          </div>
+          <div class="col">
+            <div class="d-flex">
+              <b class="capital col-5 left">Customer: </b>
+              <span class="onhovertooltip-150 capitalize  left" *ngIf="customers && customers.firstname" title=" {{customers.firstname}} {{customers.lastname}} ">
+                <!-- <span class="success"></span> -->
+                <!-- <span *ngIf="customers.isappdownloaded" class="">
                                     <i class="fa fa-thumbs-up success" title="Joined"></i>
                                   </span>
                                   <span *ngIf="!customers.isappdownloaded" class="">
                                     <i class="fa fa-thumbs-down danger" title="Not Joined"></i>
                                   </span> -->
-                    {{customers.firstname}} {{customers.lastname}}
-                  </span>
-                </div>
-                <div class="d-flex">
-                  <b class="capital col-5 left">Mobile: </b>
-                  <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
-                    <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}} {{customers.mobileno_two}}</span>
-                  </span>
-                </div>
-                <div class="d-flex">
-                  <b class="capital col-5 left">Address: </b>
-                  <span class="onhovertooltip-180  left" title="{{customers.address}}">{{customers.address}}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-    
-          <div class="col-4  align-self-center">
-            <div class="row">
-              <b class="capital col-4 left">Created By: </b>
-              <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby">
-                {{customers.usercreatedby.name}}</span>
-              <span class="col" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
-            </div>
-            <div class="row">
-              <b class="capital col-4 left">Created Date: </b>
-              <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp | utcDate}}</span>
-            </div>
-            <div class="row">
-              <b class="capital col-4 left">Distributor: </b>
-              <span class="onhovertooltip-150 capitalize col left" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer"
-                *ngIf="customers.dealers && customers.dealers.firstname">
-                {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
+                {{customers.firstname}} {{customers.lastname}}
               </span>
             </div>
-          </div>
-    
-          <div class="col-2 pd-10 align-self-center">
-            <div class="row">
-              <b class="capital col-7  left">Mode: </b>
-              <span *ngIf="customers.payments" class="col left">{{customers.paymenttype}}</span>
+            <div class="d-flex">
+              <b class="capital col-5 left">Mobile: </b>
+              <span class=" left" title="{{customers.mobileno}}  {{customers.mobileno_one}} {{customers.mobileno_two}}">{{customers.mobileno}}
+                <span class="" *ngIf="customers.mobileno_one || customers.mobileno_two">{{customers.mobileno_one}}
+                  {{customers.mobileno_two}}</span>
+              </span>
             </div>
-    
-            <div class="row">
-              <b class="capital col-7   danger left">Due Amt: </b>
-              <span class="danger col left" *ngIf="customers.payments">{{customers.payments.amount_pending}}</span>
-            </div>
-            <div class="row">
-              <b class="capital col-7 left danger">Bill Date: </b>
-              <span class="col left danger" title="" *ngIf="customers.payments.billpaymentdueday">{{customers.payments.billpaymentdueday}} </span>
-              <span class="col left danger" *ngIf="!customers.payments.billpaymentdueday"> - </span>
+            <div class="d-flex">
+              <b class="capital col-5 left">Address: </b>
+              <span class="onhovertooltip-180  left" title="{{customers.address}}">{{customers.address}}</span>
             </div>
           </div>
-    
-          <div class="col-2  pd-10 align-self-center">
-            <!-- <div class="row mg-10">
+        </div>
+      </div>
+
+      <div class="col-4  align-self-center">
+        <div class="row">
+          <b class="capital col-4 left">Created By: </b>
+          <span class="onhovertooltip-150 col left capitalize" title="{{customers.usercreatedby.name}}" *ngIf="customers.usercreatedby">
+            {{customers.usercreatedby.name}}</span>
+          <span class="col" *ngIf="customers.usercreatedby === null || customers.usercreatedby == ''"> - </span>
+        </div>
+        <div class="row">
+          <b class="capital col-4 left">Created Date: </b>
+          <span class="onhovertooltip-150 col left" title="{{customers.timestamp | utcDate}}">{{customers.timestamp |
+            utcDate}}</span>
+        </div>
+        <div class="row">
+          <b class="capital col-4 left">Distributor: </b>
+          <span class="onhovertooltip-150 capitalize col left" title="{{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer"
+            *ngIf="customers.dealers && customers.dealers.firstname">
+            {{customers.dealers.firstname}} {{customers.dealers.lastname}}'s customer
+          </span>
+        </div>
+      </div>
+
+      <div class="col-2 pd-10 align-self-center">
+        <div class="row">
+          <b class="capital col-7  left">Mode: </b>
+          <span *ngIf="customers.payments" class="col left">{{customers.paymenttype}}</span>
+        </div>
+
+        <div class="row">
+          <b class="capital col-7   danger left">Due Amt: </b>
+          <span class="danger col left" *ngIf="customers.payments">{{customers.payments.amount_pending}}</span>
+        </div>
+        <div class="row">
+          <b class="capital col-7 left danger">Bill Date: </b>
+          <span class="col left danger" title="" *ngIf="customers.payments.billpaymentdueday">{{customers.payments.billpaymentdueday}}
+          </span>
+          <span class="col left danger" *ngIf="!customers.payments.billpaymentdueday"> - </span>
+        </div>
+      </div>
+
+      <div class="col-2  pd-10 align-self-center">
+        <!-- <div class="row mg-10">
               <div class="col">
                 <span class="adv-style center" *ngIf="customers.payments.advance_amount">Advance Amt: {{customers.payments.advance_amount}}</span>
                 <span class="adv-style center" *ngIf="!customers.payments.advance_amount">Advance Amt: 0</span>
               </div>
             </div>
      -->
-            <div class="row dropdown ">
-              <button class="btn-primary dropbtn" md-raised-button>
-                <i class="fa fa-caret-down"></i> View More</button>
-              <div class="dropdown-content left">
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)='showCustomerAllOrders(customers)'>
-                    <i class="fa fa-file-text-o"></i>
-                    Orders</label>
-                  <label class="col-md-6" (click)='showPlaceOrder(customers)'>
-                    <i class="fa fa-shopping-cart" aria-hidden="true"></i> Place order</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)='showResendInvitation()'>
-                    <i class="fa fa-reply"></i> Re-send invitation</label>
-                  <label class="col-md-6" (click)='showInactive(customers)'>
-                    <i class="fa fa-ban"></i> Activate/Deactivate</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)='showSetting()'>
-                    <i class="fa fa-cog"></i>
-                    Settings</label>
-                  <label class="col-md-6" (click)='showSetPayment(customers)'>
-                    <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)='showEditCustomer(customers)'>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Customer</label>
-                  <label class="col-md-6" (click)='showSchedule(customers)'>
-                    <i class="fa fa-calendar"></i> Schedule</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <label class="col-md-6" (click)='editScheduleOrder(customers)'>
-                    <i class="fa fa-calendar-plus-o btn-link" aria-hidden="true"></i> Scheduled List </label>
-                  <label class="col-md-6" (click)="setPrice(customers)">
-                    <i class="fa fa-money"></i> Set price</label>
-                </div>
-                <div class="row pdbottom-5">
-                  <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showFollowUp(customers)">
-                    <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
-                  </div>
-                  <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showPoints(customers)">
-                    <i class="fa fa-trophy"></i> Points
-                  </div>
-                </div>
-                <div class="row pdbottom-5">
-                  <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showAllNotifications(customers)">
-                    <i class="fa fa-bell-o" aria-hidden="true"></i> Notification
-                  </div>
-                </div>
+        <div class="row dropdown ">
+          <button class="btn-primary dropbtn" md-raised-button>
+            <i class="fa fa-caret-down"></i> View More</button>
+          <div class="dropdown-content left">
+            <div class="row pdbottom-5">
+              <label class="col-md-6" (click)='showCustomerAllOrders(customers)'>
+                <i class="fa fa-file-text-o"></i>
+                Orders</label>
+              <label class="col-md-6" (click)='showPlaceOrder(customers)'>
+                <i class="fa fa-shopping-cart" aria-hidden="true"></i> Place order</label>
+            </div>
+            <div class="row pdbottom-5">
+              <label class="col-md-6" (click)='showResendInvitation()'>
+                <i class="fa fa-reply"></i> Re-send invitation</label>
+              <label class="col-md-6" (click)='showInactive(customers)'>
+                <i class="fa fa-ban"></i> Activate/Deactivate</label>
+            </div>
+            <div class="row pdbottom-5">
+              <label class="col-md-6" (click)='showSetting()'>
+                <i class="fa fa-cog"></i>
+                Settings</label>
+              <label class="col-md-6" (click)='showSetPayment(customers)'>
+                <i class="fa fa-credit-card" aria-hidden="true"></i> Set payment cycle</label>
+            </div>
+            <div class="row pdbottom-5">
+              <label class="col-md-6" (click)='showEditCustomer(customers)'>
+                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit Customer</label>
+              <label class="col-md-6" (click)='showSchedule(customers)'>
+                <i class="fa fa-calendar"></i> Schedule</label>
+            </div>
+            <div class="row pdbottom-5">
+              <label class="col-md-6" (click)='editScheduleOrder(customers)'>
+                <i class="fa fa-calendar-plus-o btn-link" aria-hidden="true"></i> Scheduled List </label>
+              <label class="col-md-6" (click)="setPrice(customers)">
+                <i class="fa fa-money"></i> Set price</label>
+            </div>
+            <div class="row pdbottom-5">
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showFollowUp(customers)">
+                <i class="fa fa-volume-control-phone" aria-hidden="true"></i> FollowUp
+              </div>
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showPoints(customers)">
+                <i class="fa fa-trophy"></i> Points
+              </div>
+            </div>
+            <div class="row pdbottom-5">
+              <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showAllNotifications(customers)">
+                <i class="fa fa-bell-o" aria-hidden="true"></i> Notification
               </div>
             </div>
           </div>
         </div>
-        <h4 class="error  center">
-          <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="customerClickMore">
-            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
-          <span *ngIf="!customerClickMore">
-            <i class="fa fa-crown" aria-hidden="true"></i> Record not available</span>
-        </h4>
-    
-</div>
+      </div>
+    </div>
+    <h4 class="error  center">
+      <a href="javascript:void(0);" (click)=getcustomerByPaging(); *ngIf="customerClickMore">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+      <span *ngIf="!customerClickMore">
+        <i class="fa fa-crown" aria-hidden="true"></i> Record not available</span>
+    </h4>
+
+  </div>

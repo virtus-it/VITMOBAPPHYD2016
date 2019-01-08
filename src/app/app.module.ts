@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import {LocationStrategy,HashLocationStrategy} from '@angular/common'; 
-import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule,MdAutocompleteModule } from '@angular/material';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule, MdAutocompleteModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
@@ -67,9 +67,9 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
 import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-distributor.component';
 import { SelectProductsForassingComponent } from './select-products-forassing/select-products-forassing.component';
-import {FeedbackService} from './feedback/feedback.service';
+import { FeedbackService } from './feedback/feedback.service';
 import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-reply-dialog.component';
-import {SupplierService} from './supplier/supplier.service';
+import { SupplierService } from './supplier/supplier.service';
 import { DeletesupplierComponent } from './deletesupplier/deletesupplier.component';
 import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-scheduled-order.component';
@@ -140,6 +140,7 @@ import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.
 import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
 import { authinterceptor } from './interceptor/authinterceptor';
 import { AssociateCategoryComponent } from './associate-category/associate-category.component';
+import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-excel-upload.component';
 
 
 
@@ -258,9 +259,10 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
         SalesTeamAssignComponent,
         RaiseRequestDetailDailogComponent,
         AssociateCategoryComponent,
+        CustomerExcelUploadComponent,
 
-     
-        
+
+
 
     ],
     imports: [
@@ -294,16 +296,16 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
             { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
             { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
-            {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
-            {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
-            {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
-            {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
-            {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
-            {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
-            {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
-            {path: 'inbox', component: InboxPageComponent , canActivate: [LoggedInGuard] },            
-            {path: 'raiserequest', component: RaiseRequestComponent , canActivate: [LoggedInGuard] },            
-            {path: 'stocknotifications', component: StockNotificationsComponent , canActivate: [LoggedInGuard] },            
+            { path: 'profile', component: ProfileComponent, canActivate: [LoggedInGuard] },
+            { path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard] },
+            { path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
+            { path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
+            { path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
+            { path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },
+            { path: 'rules', component: RulesComponent, canActivate: [LoggedInGuard] },
+            { path: 'inbox', component: InboxPageComponent, canActivate: [LoggedInGuard] },
+            { path: 'raiserequest', component: RaiseRequestComponent, canActivate: [LoggedInGuard] },
+            { path: 'stocknotifications', component: StockNotificationsComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -313,8 +315,8 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
             //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
             // libraries: ["geometry"],
-            libraries: ["drawing","places"],
-            apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko' 
+            libraries: ["drawing", "places"],
+            apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko'
 
         })
     ],
@@ -334,100 +336,101 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
         ProductsService,
         PaymentsService,
         PromocodeServiceService,
-        {provide: LocationStrategy, useClass: HashLocationStrategy},
-        {provide: HTTP_INTERCEPTORS,useClass: authinterceptor, multi: true},
+        { provide: LocationStrategy, useClass: HashLocationStrategy },
+        { provide: HTTP_INTERCEPTORS, useClass: authinterceptor, multi: true },
         { provide: 'API_URL', useValue: 'http://192.168.1.50:2221' }, //http://192.168.1.50:2221
-       { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
+        { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
-        MapDialogComponent, 
+        MapDialogComponent,
         DistributorCreateDialogComponent,
-         SmsDialogComponent,
-         ProductListDialogComponent,
-         DistributorListDialogComponent,
-         OrderDetailDailogComponent,
-         AddEditCustomerDailogComponent,
-         EditQuantityDailogComponent,
-         CustomerDetailDailogComponent,
-         EmptyCanDailogComponent,
-         EditOrderStatusComponent,
-         OnHoldOrderStatusComponent,
-         PreOrderCartDailogComponent,
-         AddSupplierDailogComponent,
-         SupplierOrderListComponent,
-         AddEditProductDailogComponent,
-         AddInvoiceDailogComponent,
-         AddStockHistoryComponent,
-         ProductHistoryDailogComponent,
-         CustomerOrderListComponent,
-         CustomerPlaceorderDailogComponent,
-         CustomerResendInvitationComponent,
-         CustomerMakeInactiveComponent,
-         CustomerSettingDailogComponent,
-         CustomerSetPaymentCycleComponent,
-         CustomerScheduleDaiolgComponent,
-         OrderCoverageDetailDailogComponent,
-         FollowUpComponent,
-         FollowUpDetailsComponent,
-         AddStockDistributorComponent,
-         SelectProductsForassingComponent,
-         FeedbackReplyDialogComponent,
-         DeletesupplierComponent,
-         DeleteScheduledOrderComponent,
-         ScheduleComponent,
-         CustomerScheduleEditDailogComponent,
-         ViewCustomerComponent,
-         ViewSupplierComponent,
-         AddstockProductComponent,
-         InvoicedetailsComponent,
-         DeliverpreorderComponent,
-         PaymentsComponent,
-         PasswordupdateComponent,
-         ProductUpdateComponent,
-         CreateupdatecategoryComponent,
-         CategoryproductsComponent,
-         SetpricecustomerComponent,
-         InvoiceHistoryComponent,
-         ProfileupdateComponent,
-         AddproductconfirmComponent,
-         AddProductDealerComponent,
-         DistributorOrderListComponent,
-         MapStockpointComponent,
-         ViewStockpointsComponent,
-         TimeChartComponent,
-         MessageTemplateComponent,
-         SocketmessagesComponent,
-         QuickNotificationComponent,
-         TemplatesComponent,
-         CreateUpdateTemplateComponent,
-         AddPromocodeDialogComponent,
-         DeleteTemplateComponent,
-         DeletePromocodeComponent,
-         InboxComponent,
-         AddEditUserComponent,
-         ProductServiceAreaComponent,
-         EditPointsComponent,
-         AddEditPointsComponent,
-         OrderHistoryComponent,
-         RedeemSettingsDialogComponent,
-         ProcessPaymentDialogComponent,
-         ProcessedPaymentsDetailsComponent,
-         AddEditRuleComponent,
-         DistributorsAvailabilityComponent,
-         AddVehicleComponent,
-         AssignVehicleComponent,
-         TrackSupplierComponent,
-         NotificationDetailsComponent,
-         DeleteRuleComponent,
-         DistributorMapDetailsComponent,
-         ReportsPreviewComponent,
-         SalesTeamAssignComponent,
-         RaiseRequestDetailDailogComponent,
-         AssociateCategoryComponent
-      
+        SmsDialogComponent,
+        ProductListDialogComponent,
+        DistributorListDialogComponent,
+        OrderDetailDailogComponent,
+        AddEditCustomerDailogComponent,
+        CustomerExcelUploadComponent,
+        EditQuantityDailogComponent,
+        CustomerDetailDailogComponent,
+        EmptyCanDailogComponent,
+        EditOrderStatusComponent,
+        OnHoldOrderStatusComponent,
+        PreOrderCartDailogComponent,
+        AddSupplierDailogComponent,
+        SupplierOrderListComponent,
+        AddEditProductDailogComponent,
+        AddInvoiceDailogComponent,
+        AddStockHistoryComponent,
+        ProductHistoryDailogComponent,
+        CustomerOrderListComponent,
+        CustomerPlaceorderDailogComponent,
+        CustomerResendInvitationComponent,
+        CustomerMakeInactiveComponent,
+        CustomerSettingDailogComponent,
+        CustomerSetPaymentCycleComponent,
+        CustomerScheduleDaiolgComponent,
+        OrderCoverageDetailDailogComponent,
+        FollowUpComponent,
+        FollowUpDetailsComponent,
+        AddStockDistributorComponent,
+        SelectProductsForassingComponent,
+        FeedbackReplyDialogComponent,
+        DeletesupplierComponent,
+        DeleteScheduledOrderComponent,
+        ScheduleComponent,
+        CustomerScheduleEditDailogComponent,
+        ViewCustomerComponent,
+        ViewSupplierComponent,
+        AddstockProductComponent,
+        InvoicedetailsComponent,
+        DeliverpreorderComponent,
+        PaymentsComponent,
+        PasswordupdateComponent,
+        ProductUpdateComponent,
+        CreateupdatecategoryComponent,
+        CategoryproductsComponent,
+        SetpricecustomerComponent,
+        InvoiceHistoryComponent,
+        ProfileupdateComponent,
+        AddproductconfirmComponent,
+        AddProductDealerComponent,
+        DistributorOrderListComponent,
+        MapStockpointComponent,
+        ViewStockpointsComponent,
+        TimeChartComponent,
+        MessageTemplateComponent,
+        SocketmessagesComponent,
+        QuickNotificationComponent,
+        TemplatesComponent,
+        CreateUpdateTemplateComponent,
+        AddPromocodeDialogComponent,
+        DeleteTemplateComponent,
+        DeletePromocodeComponent,
+        InboxComponent,
+        AddEditUserComponent,
+        ProductServiceAreaComponent,
+        EditPointsComponent,
+        AddEditPointsComponent,
+        OrderHistoryComponent,
+        RedeemSettingsDialogComponent,
+        ProcessPaymentDialogComponent,
+        ProcessedPaymentsDetailsComponent,
+        AddEditRuleComponent,
+        DistributorsAvailabilityComponent,
+        AddVehicleComponent,
+        AssignVehicleComponent,
+        TrackSupplierComponent,
+        NotificationDetailsComponent,
+        DeleteRuleComponent,
+        DistributorMapDetailsComponent,
+        ReportsPreviewComponent,
+        SalesTeamAssignComponent,
+        RaiseRequestDetailDailogComponent,
+        AssociateCategoryComponent
 
 
-        ],
+
+    ],
     exports: [
         MaterialModule
     ],

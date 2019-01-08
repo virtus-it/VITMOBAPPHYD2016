@@ -15,8 +15,8 @@ export class AuthenticationService {
   salesLogin = true;
   // manufacturerLogin = true;
   customerCareLogin = true;
-  salesTeamLogin:any = true;
-  distributorLogin  = true;
+  salesTeamLogin: any = true;
+  distributorLogin = true;
   CurrentSession: any = {};
   dashBoardDetails: any = {};
   polygons: any = {};
@@ -26,8 +26,8 @@ export class AuthenticationService {
   hideData: boolean = false;
   sales: any = {};
   manufacturer: any = {};
-  tokenSession:any = {};
-  logoutOnExpiry:any = true;
+  tokenSession: any = {};
+  logoutOnExpiry: any = true;
   refreshToken = {};
 
   constructor(
@@ -54,7 +54,7 @@ export class AuthenticationService {
     this.distributorLogin = this.distributorLoginFunction();
   }
   login(username: string, password: string) {
-    let bodyString = JSON.stringify({userName: username,userPwd: password,apptype: 'moya'}); // Stringify payload
+    let bodyString = JSON.stringify({ userName: username, userPwd: password, apptype: 'moya' }); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON 
     let options = new RequestOptions({ headers: headers });
     return this.http.post(this.apiUrl + '/weblogin', bodyString, options)
@@ -68,7 +68,11 @@ export class AuthenticationService {
       );
   }
 
-  newSalesFunction = function() {
+  uploadExcel(data: any) {
+    return this.http.post(this.apiUrl + '/uploadmultiplecustomers', data).map((res: Response) => res.json()).do(data => console.log('All: ')).catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  newSalesFunction = function () {
     try {
       if (
         this.CurrentSession.issuperdealer == 'false' &&
@@ -84,44 +88,44 @@ export class AuthenticationService {
     }
   };
 
-  customerCareLoginFunction = function() {
+  customerCareLoginFunction = function () {
     try {
-      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'customercare')){
-      return true;
-    }
-    else{
-      return false;
-    }
-    }
-    catch(ex){
-      return false;
-    }
-  }
-
-  salesTeamLoginFunction = function() {
-    try {
-      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'salesteam')){
-      return true;
-    }
-    else{
-      return false;
-    }
-    }
-    catch(ex){
-      return false;
-    }
-  }
-
-  distributorLoginFunction = function(){
-    try{
-      if(this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'dealer')) {
+      if (this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'customercare')) {
         return true;
       }
-      else{
+      else {
         return false;
       }
     }
-    catch(ex){
+    catch (ex) {
+      return false;
+    }
+  }
+
+  salesTeamLoginFunction = function () {
+    try {
+      if (this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'salesteam')) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    catch (ex) {
+      return false;
+    }
+  }
+
+  distributorLoginFunction = function () {
+    try {
+      if (this.CurrentSession.issuperdealer == 'false' && (this.CurrentSession.USERTYPE == 'dealer')) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+    catch (ex) {
       return false;
     }
   }
@@ -136,7 +140,7 @@ export class AuthenticationService {
       .map(res => {
         let response = res.json();
         this.sendRefreshedToken(res);
-        if(response.data == 'token malformed'){
+        if (response.data == 'token malformed') {
           this.logout();
         }
         return res.json();
@@ -162,7 +166,7 @@ export class AuthenticationService {
   isLoggedIn() {
     return this.loggedIn;
   }
-  loggedInUserId = function() {
+  loggedInUserId = function () {
     try {
       if (this.CurrentSession.userid) {
         return JSON.parse(this.CurrentSession.userid);
@@ -173,7 +177,7 @@ export class AuthenticationService {
       return 0;
     }
   };
-  superDelearId = function() {
+  superDelearId = function () {
     try {
       if (this.CurrentSession.superdealerid) {
         return JSON.parse(this.CurrentSession.superdealerid);
@@ -185,7 +189,7 @@ export class AuthenticationService {
     }
   };
 
-  superDealerLoginId = function(){
+  superDealerLoginId = function () {
     try {
       if (this.CurrentSession.userid && this.CurrentSession.issuperdealer == 'true') {
         return JSON.parse(this.CurrentSession.userid);
@@ -198,7 +202,7 @@ export class AuthenticationService {
   };
 
 
-  numberEvent(e:any){
+  numberEvent(e: any) {
     if (isNaN(e.key) || e.key == '' || e.keyCode == 32 || (e.keyCode > 64 && e.keyCode < 91)) {
       e.preventDefault();
     }
@@ -234,7 +238,7 @@ export class AuthenticationService {
   // }
   // };
 
-  appType = function() {
+  appType = function () {
     try {
       if (this.CurrentSession.apptype) {
         return this.CurrentSession.apptype.toString();
@@ -245,7 +249,7 @@ export class AuthenticationService {
       return '';
     }
   };
-  dealerNo = function() {
+  dealerNo = function () {
     try {
       if (this.CurrentSession.mobileno) {
         return this.CurrentSession.mobileno.toString();
@@ -256,7 +260,7 @@ export class AuthenticationService {
       return '';
     }
   };
-  userFullName = function() {
+  userFullName = function () {
     try {
       if (this.CurrentSession.first_name) {
         let fullName =
@@ -269,7 +273,7 @@ export class AuthenticationService {
       return '';
     }
   };
-  userType = function() {
+  userType = function () {
     try {
       if (this.CurrentSession.USERTYPE) {
         return this.CurrentSession.USERTYPE.toString();
@@ -280,7 +284,7 @@ export class AuthenticationService {
       return '';
     }
   };
-  getSupperDelear = function() {
+  getSupperDelear = function () {
     try {
       if (this.CurrentSession.issuperdealer == 'true') {
         return true;
@@ -292,7 +296,7 @@ export class AuthenticationService {
     }
   };
 
-  getPolygons = function() {
+  getPolygons = function () {
     try {
       if (this.polygons) {
         return this.polygons;
@@ -304,7 +308,7 @@ export class AuthenticationService {
     }
   };
 
-  getStockpoints = function() {
+  getStockpoints = function () {
     try {
       if (this.stockpoints) {
         return this.stockpoints;
@@ -316,7 +320,7 @@ export class AuthenticationService {
     }
   };
 
-  getDistributors = function() {
+  getDistributors = function () {
     try {
       if (this.distributors) {
         return this.distributors;
@@ -328,7 +332,7 @@ export class AuthenticationService {
     }
   };
 
-  getSuppliers = function() {
+  getSuppliers = function () {
     try {
       if (this.suppliers) {
         return this.suppliers;
@@ -340,13 +344,13 @@ export class AuthenticationService {
     }
   };
 
-  sendRefreshedToken(data){
+  sendRefreshedToken(data) {
     var data = data.headers.get('Authorization');
-      if(data){
+    if (data) {
       localStorage.removeItem('token');
-      localStorage.setItem('token' , data);
+      localStorage.setItem('token', data);
       this.tokenSession = localStorage.getItem('token');
-      }
+    }
   }
 
 

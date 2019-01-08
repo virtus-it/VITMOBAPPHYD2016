@@ -1,0 +1,35 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col-md-4 col-sm-4">
+    <i class="fa fa-edit"></i> Excel upload
+  </div>
+  <div class="col-md-1 col-sm-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseModal()"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+
+  <div class="container-fluid pd-15x25 brd-bottom">
+
+    <div class="mgbottom-5 message-box">
+      <p>Please download sample excel from <a href="assets/customerexcelsample.xlsx">here</a></p>
+      <div>
+        <br>
+        Note :
+        <p>1. Fristname and mobile number is mandatory field<br> 2. DONOT modify excel headers use what has given in sample excel
+        </p>
+      </div>
+
+
+      <div class='loadExcelInput' style="margin-top: 5px !important;">
+        <p>Open Excel File</p>
+        <input type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="onFileSelected($event)" />
+      </div>
+
+       <h5 class="error center mgtop-10" *ngIf="validateMessage">
+    <i class="fa fa-warning"></i> {{validateMessage}} </h5>
+    </div>
+
+  </div>
+</md-dialog-content>
