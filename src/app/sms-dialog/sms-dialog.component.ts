@@ -492,8 +492,8 @@ export class SmsDialogComponent implements OnInit {
 
   }
   saveMobileSmsResult(result) {
-    console.log(result);
-    this.thisDialogRef.close(result);
+      console.log(result);
+      this.thisDialogRef.close(result);
   }
 
 

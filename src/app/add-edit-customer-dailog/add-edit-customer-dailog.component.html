@@ -120,6 +120,22 @@
       </div> -->
     </div>
 
+
+    <div class="row">
+      <div class="col-4">
+        <md-form-field class="wd-100pc">
+          <input class="form-control" mdInput placeholder="Latitude" name="latitude" [(ngModel)]="customerInput.User.latitude">
+        </md-form-field>
+      </div>
+
+      <div class="col-4 align-self-end">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Longitude" name="longitude" [(ngModel)]="customerInput.User.longitude">
+          </md-form-field>
+        </div>
+
+    </div>
+
     <div class="row form-group">
       <div class="col" *ngIf="this.Details.order_id">
         <md-form-field class="wd-100pc">

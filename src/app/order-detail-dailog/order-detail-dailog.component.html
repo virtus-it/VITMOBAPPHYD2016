@@ -556,6 +556,15 @@
                 <span class="custom-control-indicator"></span>
                 <span class="custom-control-description"> Distributor</span>
               </label>
+
+              <label>
+                <i class="fa fa-envelope fa-20 logo-color" aria-hidden="true" title="Send Order details to customer" (click)="sendOrderDetailsMessage(orderDetail)"></i> 
+              </label>
+
+              <label>
+                <i class="fa fa-envelope-open-o fa-20 logo-color" aria-hidden="true" title="Send Order details to distributor" (click)="sendOrderDetailsMessageToDistributor(orderDetail)"></i> 
+              </label>
+
               <label class="float-right">
                 <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message" (click)="internalMessage(orderDetail)"></i> &nbsp;
                 <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" *ngIf="superDealer || customerCare || salesTeamLogin"
