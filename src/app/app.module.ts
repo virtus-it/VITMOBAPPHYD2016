@@ -428,7 +428,8 @@ import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-e
          SalesTeamAssignComponent,
          RaiseRequestDetailDailogComponent,
          AssociateCategoryComponent,
-         AssociateDistributorComponent
+         AssociateDistributorComponent,
+         CustomerExcelUploadComponent
       
 
 
