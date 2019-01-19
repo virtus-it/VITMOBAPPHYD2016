@@ -294,6 +294,11 @@
               <div class="col-md-6" *ngIf="superDealer || customerCare || salesTeamLogin" (click)="showAllNotifications(customers)">
                 <i class="fa fa-bell-o" aria-hidden="true"></i> Notification
               </div>
+
+              <div class="col-md-6" *ngIf="superDealer" (click)="associateDistributor(customers)">
+                <i class="fa fa-handshake-o"></i> Associate Distributor
+              </div>
+
             </div>
           </div>
         </div>

@@ -140,6 +140,7 @@ import { SalesTeamAssignComponent } from './sales-team-assign/sales-team-assign.
 import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog/raise-request-detail-dailog.component';
 import { authinterceptor } from './interceptor/authinterceptor';
 import { AssociateCategoryComponent } from './associate-category/associate-category.component';
+import { AssociateDistributorComponent } from './associate-distributor/associate-distributor.component';
 
 
 
@@ -258,6 +259,7 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
         SalesTeamAssignComponent,
         RaiseRequestDetailDailogComponent,
         AssociateCategoryComponent,
+        AssociateDistributorComponent,
 
      
         
@@ -336,8 +338,8 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
         PromocodeServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: HTTP_INTERCEPTORS,useClass: authinterceptor, multi: true},
-        { provide: 'API_URL', useValue: 'http://104.211.247.42:3229' }, //http://192.168.1.50:2221
-       { provide: 'App_URL', useValue: 'http://104.211.247.42:3229' }  // http://104.211.247.42:2221 -->  
+        { provide: 'API_URL', useValue: 'http://192.168.1.50:2221' }, //http://192.168.1.50:2221
+       { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
         MapDialogComponent, 
@@ -423,7 +425,8 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
          ReportsPreviewComponent,
          SalesTeamAssignComponent,
          RaiseRequestDetailDailogComponent,
-         AssociateCategoryComponent
+         AssociateCategoryComponent,
+         AssociateDistributorComponent
       
 
 
