@@ -5,8 +5,8 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
-import {LocationStrategy,HashLocationStrategy} from '@angular/common'; 
-import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule,MdAutocompleteModule } from '@angular/material';
+import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule, MdAutocompleteModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown/angular2-multiselect-dropdown';
 import 'hammerjs';
@@ -67,9 +67,9 @@ import { FollowUpComponent } from './follow-up/follow-up.component';
 import { FollowUpDetailsComponent } from './follow-up-details/follow-up-details.component';
 import { AddStockDistributorComponent } from './add-stock-distributor/add-stock-distributor.component';
 import { SelectProductsForassingComponent } from './select-products-forassing/select-products-forassing.component';
-import {FeedbackService} from './feedback/feedback.service';
+import { FeedbackService } from './feedback/feedback.service';
 import { FeedbackReplyDialogComponent } from './feedback-reply-dialog/feedback-reply-dialog.component';
-import {SupplierService} from './supplier/supplier.service';
+import { SupplierService } from './supplier/supplier.service';
 import { DeletesupplierComponent } from './deletesupplier/deletesupplier.component';
 import { CustomerScheduleEditDailogComponent } from './customer-schedule-edit-dailog/customer-schedule-edit-dailog.component';
 import { DeleteScheduledOrderComponent } from './delete-scheduled-order/delete-scheduled-order.component';
@@ -141,6 +141,7 @@ import { RaiseRequestDetailDailogComponent } from './raise-request-detail-dailog
 import { authinterceptor } from './interceptor/authinterceptor';
 import { AssociateCategoryComponent } from './associate-category/associate-category.component';
 import { AssociateDistributorComponent } from './associate-distributor/associate-distributor.component';
+import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-excel-upload.component';
 
 
 
@@ -260,9 +261,10 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
         RaiseRequestDetailDailogComponent,
         AssociateCategoryComponent,
         AssociateDistributorComponent,
+        CustomerExcelUploadComponent,
 
-     
-        
+
+
 
     ],
     imports: [
@@ -296,16 +298,16 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
             { path: 'supplier', component: SupplierComponent, canActivate: [LoggedInGuard] },
             { path: 'feedback', component: FeedbackComponent, canActivate: [LoggedInGuard] },
             { path: 'schedule', component: ScheduleComponent, canActivate: [LoggedInGuard] },
-            {path: 'profile', component:ProfileComponent, canActivate: [LoggedInGuard]},
-            {path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard]},
-            {path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
-            {path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
-            {path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
-            {path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },            
-            {path: 'rules', component: RulesComponent , canActivate: [LoggedInGuard] },            
-            {path: 'inbox', component: InboxPageComponent , canActivate: [LoggedInGuard] },            
-            {path: 'raiserequest', component: RaiseRequestComponent , canActivate: [LoggedInGuard] },            
-            {path: 'stocknotifications', component: StockNotificationsComponent , canActivate: [LoggedInGuard] },            
+            { path: 'profile', component: ProfileComponent, canActivate: [LoggedInGuard] },
+            { path: 'category', component: CategoryComponent, canActivate: [LoggedInGuard] },
+            { path: 'templates', component: TemplatesComponent, canActivate: [LoggedInGuard] },
+            { path: 'promocode', component: PromocodeComponent, canActivate: [LoggedInGuard] },
+            { path: 'users', component: UsersComponent, canActivate: [LoggedInGuard] },
+            { path: 'points', component: PointsComponent, canActivate: [LoggedInGuard] },
+            { path: 'rules', component: RulesComponent, canActivate: [LoggedInGuard] },
+            { path: 'inbox', component: InboxPageComponent, canActivate: [LoggedInGuard] },
+            { path: 'raiserequest', component: RaiseRequestComponent, canActivate: [LoggedInGuard] },
+            { path: 'stocknotifications', component: StockNotificationsComponent, canActivate: [LoggedInGuard] },
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),
@@ -315,8 +317,8 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
             //apiKey: 'AIzaSyA_ysbvje4RpkAlvBAxoyurGPWrcKTkIF0',
 
             // libraries: ["geometry"],
-            libraries: ["drawing","places"],
-            apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko' 
+            libraries: ["drawing", "places"],
+            apiKey: 'AIzaSyDIybymyTZp7fg21yNL8iq2SjKSBYMwkko'
 
         })
     ],
@@ -342,7 +344,7 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
        { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
-        MapDialogComponent, 
+        MapDialogComponent,
         DistributorCreateDialogComponent,
          SmsDialogComponent,
          ProductListDialogComponent,
@@ -430,7 +432,8 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
       
 
 
-        ],
+
+    ],
     exports: [
         MaterialModule
     ],

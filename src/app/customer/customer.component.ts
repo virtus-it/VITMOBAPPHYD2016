@@ -24,6 +24,11 @@ import * as FileSaver from 'file-saver';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { SortingPipe } from '../pipes/sorting.pipe';
 import { AssociateDistributorComponent } from '../associate-distributor/associate-distributor.component';
+import { CustomerExcelUploadComponent } from '../customer-excel-upload/customer-excel-upload.component';
+
+
+// excel 
+
 
 @Component({
 
@@ -32,7 +37,10 @@ import { AssociateDistributorComponent } from '../associate-distributor/associat
 })
 export class CustomerComponent implements OnInit {
 
-    constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private customerService: CustomerService, private loaderService: LoaderService) { }
+    constructor(public dialog: MdDialog, private authenticationService: AuthenticationService, private customerService: CustomerService, private loaderService: LoaderService) {
+
+
+    }
     customerClickMore = true;
     customerList: any = [];
     showFilterDailog = false;
@@ -66,6 +74,22 @@ export class CustomerComponent implements OnInit {
         name: '',
         sorting: null
     };
+
+    openExcelDialog() {
+        let option = {
+            width: '80%',
+            data: ''
+        }
+        let dialogRefEditCustomer = this.dialog.open(CustomerExcelUploadComponent, option);
+        dialogRefEditCustomer.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+            if (result == "success") {
+                this.getCustomerList(true);
+
+            }
+
+        });
+    }
 
 
     // customersSort : customers[];
