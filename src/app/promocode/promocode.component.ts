@@ -10,6 +10,8 @@ import { ProcessPaymentDialogComponent } from '../process-payment-dialog/process
 import { ProcessedPaymentsDetailsComponent } from '../processed-payments-details/processed-payments-details.component';
 import { DeletePromocodeComponent } from '../delete-promocode/delete-promocode.component';
 import * as moment from 'moment';
+import * as _ from 'underscore';
+
 
 
 
@@ -28,11 +30,14 @@ tabPanelView:string="promoCode";
 redeemDetails:any = [];
 redeemSettingsDetails:any = [];
 showFilterDailog = false;
-filterInput = {"searchtype":""};
+filterInput = {"searchtype":"",  "status":''};
 filterType = {"startdate": null , "enddate": null};
 startDate = '';
 endDate = '';
 superDealer = false;
+detailsClickMore =  true;
+userView:string = '';
+noRecords:boolean = false;
 
 
   addPromoCode(){
@@ -116,7 +121,7 @@ superDealer = false;
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
       this.getRedeemSettingsDetails();
-      this.getRedeemDetails();
+      this.getRedeemDetails(true);
       this.getAllPromoCodes();
     }
   });
@@ -126,10 +131,12 @@ superDealer = false;
   showTabPanel(panelName) {
     this.tabPanelView=panelName;
     if(this.tabPanelView == 'redeemSetting'){
+      this.userView = '';
+      this.noRecords = false;
       this.getRedeemSettingsDetails();
     }
     else if(this.tabPanelView == 'redeemDetails'){
-      this.getRedeemDetails();
+      this.getRedeemDetails(true);
     }
       }
 
@@ -166,8 +173,22 @@ superDealer = false;
 
 
 
-  getRedeemDetails(){
-    let input = {"User":{"TransType":"getredeemdetails" , appType: this.authenticationService.appType()}};
+  getRedeemDetails(firstcall){
+    let input = {"User":{"TransType":"getredeemdetails" , appType: this.authenticationService.appType() , "lastId":0,"pagesize":10  }};
+    console.log(input , 'sdlkuasfasj kughs' );
+
+    if (this.redeemDetails && this.redeemDetails.length && !firstcall) {
+      let lastDetails: any = _.last(this.redeemDetails);
+      if (lastDetails) {
+          input.User.lastId = lastDetails.id;
+      }
+
+  }
+  else {
+      this.redeemDetails = [];
+      input.User.lastId = 0;
+  }
+
     this.distributorService.getPoints(input)
     .subscribe(
     output => this.getRedeemDetailsResult(output),
@@ -177,7 +198,10 @@ superDealer = false;
   }
   getRedeemDetailsResult(result){
     if(result.result == 'success'){
-      this.redeemDetails = result.data;
+      this.redeemDetails = _.union(this.redeemDetails, result.data);
+    }
+    else{
+      this.detailsClickMore = false;
     }
   }
 
@@ -189,7 +213,7 @@ superDealer = false;
   });
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
-      this.getRedeemDetails();
+      this.getRedeemDetails(true);
     }
   });
 
@@ -227,6 +251,42 @@ superDealer = false;
     this.showFilterDailog = !this.showFilterDailog;
   }
 
+
+  searchFilter(){
+
+    if(this.filterInput.searchtype == 'date'){
+      this.searchByDate();
+    }
+    else{
+      this.searchByType();
+    }
+  }
+
+  searchByType(){
+    let input = {};
+    if(this.filterInput.searchtype == 'type' && this.filterInput.status == 'completed'){
+      input = {"User":{"TransType":"searchwithstatus","apptype": this.authenticationService.appType() ,"pagesize":"100", "loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() , filterby: 'Complete'}}
+    }
+    if(this.filterInput.searchtype == 'type' && this.filterInput.status == 'inprocess'){
+      input = {"User":{"TransType":"searchwithstatus","apptype": this.authenticationService.appType() ,"pagesize":"100", "loginid": this.authenticationService.loggedInUserId() ,"usertype": this.authenticationService.userType() ,"dealerid": this.authenticationService.loggedInUserId() , filterby: 'inprocess'}}
+    }
+    this.distributorService.getPoints(input)
+      .subscribe(
+        output => this.searchByTypeResult(output),
+        error => {
+          console.log('Error in getting all points Details');
+        });
+  }
+  searchByTypeResult(result){
+    if(result && result.data){
+      this.redeemDetails = result.data;
+      this.noRecords = false;
+    }
+    else{
+      this.noRecords = true;
+    }
+  }
+
   searchByDate(){
     let input = {};
     if(this.filterType.startdate && this.filterType.enddate === null){
@@ -262,9 +322,55 @@ superDealer = false;
 
   clearFilter(){
     this.showFilterDailog = false;
-    this.filterInput = {"searchtype":""};
+    this.filterInput = {"searchtype":"" , "status":''};
     this.filterType = {"startdate": null , "enddate": null};
     this.getAllPromoCodes();
+  }
+
+  showUserView(data){
+    if(data && data =='customer'){
+      this.userView = 'customer'
+      this.getRedeemDetailsofCustomers();
+    }
+    else{
+      this.userView = 'dealer'
+      this.getRedeemDetailsofCustomersOfDealer();
+    }
+  }
+
+  getRedeemDetailsofCustomers(){
+
+    let input = {"User":{ appType: this.authenticationService.appType()  , filterby : this.userView , TransType: 'searchwithusertype' }};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getRedeemDetailsofCustomersResult(output),
+    error => {      
+    });
+  }
+  getRedeemDetailsofCustomersResult(result){
+    if(result && result.data){
+      this.redeemDetails =  result.data;
+    }
+    else{
+      this.redeemDetails = [];
+    }
+  }
+
+  getRedeemDetailsofCustomersOfDealer(){
+    let input = {"User":{ appType: this.authenticationService.appType()  , filterby : this.userView , TransType: 'searchwithusertype' }};
+    this.distributorService.getPoints(input)
+    .subscribe(
+    output => this.getRedeemDetailsofCustomersOfDealerResult(output),
+    error => {      
+    });
+  }
+  getRedeemDetailsofCustomersOfDealerResult(result){
+    if(result && result.data){
+      this.redeemDetails = result.data;
+    }
+    else{
+      this.redeemDetails = [];
+    }
   }
 
 

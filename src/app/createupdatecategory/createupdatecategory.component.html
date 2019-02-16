@@ -38,6 +38,18 @@
           </md-form-field>
         </div>
       </div>
+
+      <!-- <div class="row">
+        <md-form-field class="example-full-width">
+          <input mdInput placeholder="Manufacturer" aria-label="State" [mdAutocomplete]="auto" [formControl]="manufacturerCtrl">
+          <md-autocomplete #auto="mdAutocomplete">
+            <md-option *ngFor="let manu of filteredManufacturers | async" [value]="manu.firstname">
+              <span class="capitalize">{{ manu.firstname }}</span>
+            </md-option>
+          </md-autocomplete>
+        </md-form-field>
+
+      </div> -->
       <h5 class="error center" *ngIf="validateMessage"> <i class="fa fa-warning"></i> {{validateMessage}}</h5>
 
     </div>

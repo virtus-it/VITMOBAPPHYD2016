@@ -26,6 +26,7 @@
             <div class="form-group">
               <md-select placeholder="Filter By" [(ngModel)]="filterInput.searchtype" name="type" class="full-width left">
                 <md-option value="date">DATE</md-option>
+                <md-option value="type">TYPE</md-option>
               </md-select>
             </div>
             <div class="mgtop-5" *ngIf="filterInput.searchtype == 'date'">
@@ -59,9 +60,22 @@
                     </md-form-field> -->
             </div>
 
+
+            <div class="mgtop-5" *ngIf="filterInput.searchtype == 'type'">
+                <div class="">
+
+                    <md-select placeholder="Filter By" [(ngModel)]="filterInput.status" name="type" class="full-width left">
+                        <md-option value="completed">Completed</md-option>
+                        <md-option value="inprocess">Inprocess</md-option>
+                      </md-select>
+                </div>
+
+              </div>
+
+
             <div class="row">
               <div class="col right">
-                <button md-raised-button color="primary"  (click)="searchByDate()">
+                <button md-raised-button color="primary"  (click)="searchFilter()">
                   <i class="fa fa-search" aria-hidden="true"></i> Search
                 </button>&nbsp;
                 <button md-raised-button class="bg-warning" (click)="clearFilter()">
@@ -170,7 +184,15 @@
   </div>
   <!-- ends second table -->
 
-  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemDetails'">
+  <div class=""  *ngIf="tabPanelView === 'redeemDetails'">
+
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': userView === 'customer'}" (click)="showUserView('customer')">
+        Customers </button>
+      <button type="submit" md-raised-button [ngClass]="{'btn-primary': userView === 'dealer'}" (click)="showUserView('dealer')">Distributors</button>
+
+
+  </div>
+  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemDetails' && noRecords == false">
     <table class="table table-hover table-striped">
       <thead>
         <tr>
@@ -218,6 +240,19 @@
         </tr>
       </tbody>
     </table>
+
+
+    <h4 class="error  center">
+      <a href="javascript:void(0);" (click)=getRedeemDetails(false); *ngIf="detailsClickMore">
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+      <span *ngIf="!detailsClickMore">
+        <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
+    </h4>
+
+  </div>
+
+  <div class=""  *ngIf="tabPanelView === 'redeemDetails' && noRecords == true">
+    <h3> No records exists</h3>
   </div>
   <!-- ends third table  -->
 </div>
