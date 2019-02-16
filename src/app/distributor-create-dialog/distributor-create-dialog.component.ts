@@ -70,7 +70,7 @@ export class DistributorCreateDialogComponent implements OnInit {
             }
         }
         if (this.dist.acceptonlinepayment) {
-            input.User['acceptonlinepayment'] = 1;
+            input.User['acceptpayment'] = 1;
         }
         if (this.dist.gstno) {
             if (this.dist.gstno.length <= 50) {
@@ -160,6 +160,14 @@ export class DistributorCreateDialogComponent implements OnInit {
             this.dist.emailid = this.distributorDetail.emailid;
             this.dist.referCode = this.distributorDetail.reference_code;
             this.dist.phonetype = this.distributorDetail.phonetype;
+            if (this.distributorDetail.gstno)
+                this.dist.gstno = this.distributorDetail.gstno;
+            if (this.distributorDetail.acceptonlinepayment && this.distributorDetail.acceptonlinepayment == 1)
+                this.dist.acceptonlinepayment = true;
+            else
+                this.dist.acceptonlinepayment = false;
+
+
             _.each(this.distributorDetail.areainfo, function (i, j) {
                 var area: any = i;
                 var areaDetails = { id: parseInt(area.areaid), itemName: area.areaname + ',' + area.subarea, };

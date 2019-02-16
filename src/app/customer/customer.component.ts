@@ -23,6 +23,7 @@ import { LoaderService } from '../login/loader.service';
 import * as FileSaver from 'file-saver';
 import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { SortingPipe } from '../pipes/sorting.pipe';
+import { AssociateDistributorComponent } from '../associate-distributor/associate-distributor.component';
 import { CustomerExcelUploadComponent } from '../customer-excel-upload/customer-excel-upload.component';
 
 
@@ -525,6 +526,20 @@ export class CustomerComponent implements OnInit {
 
             }
 
+        });
+
+    }
+
+    associateDistributor(data){
+        console.log(data , 'customer Details');
+        let dialogRefeditStatus = this.dialog.open(AssociateDistributorComponent, {
+            width: '85%',
+            data: data
+        });
+        dialogRefeditStatus.afterClosed().subscribe(result => {
+            ////console.log(`Dialog closed: ${result}`);
+            if (result == 'success') {
+            }
         });
 
     }

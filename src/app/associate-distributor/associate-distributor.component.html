@@ -1,0 +1,66 @@
+<div class="row justify-content-between modal-title">
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-handshake-o"></i> Associate Distributor
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+
+  <!-- <div id="" class="container-fluid pd-15x25 brd-bottom">
+    <md-dialog-content layout="column">
+      <ul  *ngFor="let distributor of allDistributors">
+        <li> {{distributor.firstname}}</li>
+      </ul>
+     
+    </md-dialog-content>
+  </div> -->
+
+
+  <div class="container-fluid brd-bottom">
+      <span class="fa fa-search"></span>
+      <md-form-field class="example-full-width wd-96pc">
+     <input mdInput class="form-control" placeholder="Search Name" [(ngModel)]="searchDistributor" (ngModelChange)="searchDistrubutors()"
+          name="searchDistributor"> 
+      </md-form-field>
+  
+      <div class="DistList-height">
+        <table class="table table-hover table-fixedheader table-striped">
+          <thead>
+            <tr>
+              <th width="30%">Name</th>
+              <th width="14%">Mobile </th>
+              <th width="24.5%">Area Name</th>
+              <th width="30%">Address</th>
+            </tr>
+          </thead>
+          <tbody>
+  
+            <tr *ngFor="let distributor of allDistributors; let i = index" [attr.data-index]="i">
+              <td width="30%" class="left capital">
+                <label class="custom-control custom-radio mb-2 mr-sm-2 mb-sm-0">
+                  <input type="radio" [(ngModel)]="distributorID" class="custom-control-input" name="{{distributor.userid}}" value="{{distributor.userid}}">
+                  <span class="custom-control-indicator"></span>
+                  <span class="custom-control-description">{{distributor.firstname}} {{distributor.lastname}}</span>
+                </label>
+              </td>
+              <td width="15%" class="left capital">{{distributor.mobileno}}</td>
+              <td width="25%" class="left capital">{{distributor.areaname}}</td>
+              <td width="30%" class="left capital">
+                <span class="onhovertooltip-200">{{distributor.address}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+
+  <div class="row float-right pdright-30 mgbottom-20">
+    <md-dialog-actions align="end">
+        <button class="btn-primary" md-raised-button (click)='associateDistributor()'>Associate Distributor</button> &nbsp;
+      <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+    </md-dialog-actions>
+  </div>
