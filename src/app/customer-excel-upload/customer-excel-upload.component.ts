@@ -13,11 +13,10 @@ import { MD_DIALOG_DATA } from '@angular/material';
 })
 export class CustomerExcelUploadComponent implements OnInit {
   validateMessage: string;
+  showButton: boolean = false;
 
   constructor(public thisDialogRef: MdDialogRef<CustomerExcelUploadComponent>,
     private authenticationService: AuthenticationService,
-    private customerService: CustomerService,
-    private distributorService: DistributorServiceService,
     @Inject(MD_DIALOG_DATA) public Details: any) { }
 
 
@@ -29,14 +28,23 @@ export class CustomerExcelUploadComponent implements OnInit {
     if (files && file) {
       const frmData = new FormData();
       frmData.append("fileName", file);
+      frmData.append("userid", this.authenticationService.loggedInUserId());
       this.authenticationService.uploadExcel(frmData).subscribe(res => {
         console.log(res);
         this.validateMessage = JSON.stringify(res.data);
+        this.showButton = false;
+
       }, err => {
+        this.showButton = false;
+        this.validateMessage = JSON.stringify(err);
         console.log(err);
       })
     }
 
+  }
+  openExcelDialog() {
+    this.validateMessage = '';
+    this.showButton = true;
   }
   ngOnInit() {
   }

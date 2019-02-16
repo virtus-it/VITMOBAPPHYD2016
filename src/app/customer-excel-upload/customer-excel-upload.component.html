@@ -13,22 +13,27 @@
   <div class="container-fluid pd-15x25 brd-bottom">
 
     <div class="mgbottom-5 message-box">
-      <p>Please download sample excel from <a href="assets/customerexcelsample.xlsx">here</a></p>
+      <p>Please download sample excel from <a href="assets/customerexcelsample.xlsx">here</a> Max size 1 mb</p>
       <div>
         <br>
         Note :
-        <p>1. Fristname and mobile number is mandatory<br> 2. DONOT modify excel headers use what has given in sample excel
+        <p>1. Fristname , mobile number and address is mandatory<br> 2. DONOT modify excel headers use what has given in sample
+          excel
         </p>
       </div>
 
 
-      <div class='loadExcelInput' style="margin-top: 5px !important;">
+      <div class='loadExcelInput' style="margin-top: 5px !important;" *ngIf="showButton">
         <p>Open Excel File</p>
         <input type="file" name="files[]" multiple id="jsonFile" accept=".xlsx" (change)="onFileSelected($event)" />
       </div>
 
-       <h5 class="error center mgtop-10" *ngIf="validateMessage">
-    <i class="fa fa-warning"></i> {{validateMessage}} </h5>
+      <div class='loadExcelInput' style="margin-top: 5px !important;" *ngIf="!showButton">
+        <button type="submit" class="btn-primary" md-raised-button (click)="openExcelDialog()">UPLOAD EXCEL</button>
+      </div>
+
+      <h5 class="error center mgtop-10" *ngIf="validateMessage">
+        <i class="fa fa-warning"></i> {{validateMessage}} </h5>
     </div>
 
   </div>
