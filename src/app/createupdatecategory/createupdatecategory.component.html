@@ -15,7 +15,8 @@
       <div class="row form-group">
         <div class="col">
           <md-form-field class="example-full-width wd-100pc">
-            <input class="form-control" mdInput placeholder="Category Name" [(ngModel)]="categoryInput.cname" name="categoryName" required>
+            <input class="form-control" mdInput placeholder="Category Name" [(ngModel)]="categoryInput.cname" name="categoryName"
+              required>
             <!-- <md-error *ngIf="cnameFormControl.hasError('required')">
               Category Name is <strong>required</strong>
             </md-error> -->
@@ -23,7 +24,8 @@
         </div>
         <div class="col">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput class="form-control" placeholder="Priority" (keypress)="numberEvent($event)" name="priority" [(ngModel)]="categoryInput.priority" required>
+            <input mdInput class="form-control" placeholder="Priority" (keypress)="numberEvent($event)" name="priority"
+              [(ngModel)]="categoryInput.priority" required>
             <!-- <md-error *ngIf="cdescFormControl.hasError('required')">
                       Priority is <strong>required</strong>
                     </md-error> -->
@@ -34,12 +36,25 @@
       <div class="row">
         <div class="col">
           <md-form-field class="example-full-width wd-100pc">
-            <input mdInput placeholder="Category Details" name="categoryDetails" [(ngModel)]="categoryInput.cdesc" required>
+            <input mdInput placeholder="Category Details" name="categoryDetails" [(ngModel)]="categoryInput.cdesc"
+              required>
           </md-form-field>
         </div>
       </div>
+      <div >
+        <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+          <input type="checkbox" class="custom-control-input" [(ngModel)]="assignTo" name="Assign to Manufacturer">
+          <span class="custom-control-indicator"></span>
+          Assign to Manufacturer
+        </label>
+      </div>
+     
+      <div class="pdright-5 mgbottom-20" *ngIf="assignTo" >
+        <md-select placeholder="Manufacturer" [(ngModel)]="manufacturer" name="Manufacturer" class="full-width left">
+          <md-option [value]="user.userid" *ngFor="let user of allUsers">{{user.firstname}} {{user.lastname}}</md-option>
+        </md-select>
+      </div>
       <h5 class="error center" *ngIf="validateMessage"> <i class="fa fa-warning"></i> {{validateMessage}}</h5>
-
     </div>
   </form>
 </md-dialog-content>
