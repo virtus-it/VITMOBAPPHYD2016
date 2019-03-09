@@ -23,6 +23,7 @@
           <tr>
             <th width="">Category</th>
             <th width="">Category Details</th>
+            <th width="">Manufacturer</th>
             <th width="">Action</th>
           </tr>
         </thead>
@@ -30,6 +31,9 @@
           <tr *ngFor="let cat of categoryList">
             <td class="capitalize">{{cat.category}}</td>
             <td class="">{{cat.category_desc}}</td>
+            <td class="" *ngIf="cat.manfacturername">{{cat.manfacturername}}</td>
+            <td class="" *ngIf="!cat.manfacturername">-</td>
+            
             <td class="">
               <i class="fa fa-pencil-square-o btn-link fs-18" aria-hidden="true" title="Edit" (click)="updateCategory(cat)"></i> &nbsp;&nbsp;&nbsp;
               <i class="fa fa-gift btn-link fs-18" aria-hidden="true" title="products" (click)="getProducts(cat)"></i>

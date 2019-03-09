@@ -23,6 +23,9 @@ export class CreateupdatecategoryComponent implements OnInit {
       .map(dist => dist ? this.findManufacturers(dist) : this.manufacturerList.slice());
   }
   categoryInput = { cname: "", cdesc: "", categoryid: "", priority: 0 , manufacturerId : ''};
+  allUsers = [];
+  manufacturer: any;
+  assignTo: boolean = false;
   // cnameFormControl = new FormControl('', [
   //   Validators.required]);
   //   cdescFormControl = new FormControl('', [
@@ -33,7 +36,21 @@ export class CreateupdatecategoryComponent implements OnInit {
   manufacturerList:any = [];
 
   createCategory() {
+    console.log(this.manufacturer)
+    this.validateMessage = "";
+    if (this.assignTo) {
+      if (!this.manufacturer) {
+        this.validateMessage = "Please select manufacturer";
+        return;
+      }
+    }
+
     let input = { "product": { "cname": this.categoryInput.cname, "cdesc": this.categoryInput.cdesc, "priority": this.categoryInput.priority, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() } };
+    if (this.assignTo) {
+      if (this.manufacturer) {
+        input.product["manufacturerid"] = this.manufacturer;
+      }
+    }
     //console.log(input);
     if (this.categoryValidation()) {
       this.productService.createCategory(input)
@@ -72,9 +89,21 @@ export class CreateupdatecategoryComponent implements OnInit {
 
 
   updateCategory() {
+    this.validateMessage = "";
+    if (this.assignTo) {
+      if (!this.manufacturer) {
+        this.validateMessage = "Please select manufacturer";
+        return;
+      }
+    }
     let input = { "product": { "cname": this.categoryInput.cname, "cdesc": this.categoryInput.cdesc, "categoryid": this.categoryInput.categoryid, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "priority": this.categoryInput.priority } };
 
     //console.log(input);
+    if (this.assignTo) {
+      if (this.manufacturer) {
+        input.product["manufacturerid"] = this.manufacturer;
+      }
+    }
     if (this.categoryValidation()) {
       this.productService.updateCategory(input)
         .subscribe(
@@ -101,6 +130,7 @@ export class CreateupdatecategoryComponent implements OnInit {
   }
 
   openDailog() {
+    console.log(this.details);
     if (this.details) {
       //console.log(this.details);
       this.categoryInput.cname = this.details.category;
@@ -151,28 +181,46 @@ export class CreateupdatecategoryComponent implements OnInit {
     }
   }
 
-  getAllManufacturers(){
-    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0,"transtype":"getmanufacturers",  "apptype": this.authenticationService.appType(), "pagesize": 100 } };
+  getAllUsers() {
+    let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": "dealer", "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "getall", "apptype": this.authenticationService.appType(), "pagesize": 1000 } };
+
     this.distributorService.getAllDistributors(input)
-            .subscribe(
-            output => this.getAllManufacturersResult(output),
-            error => {
-            });
+      .subscribe(
+        output => this.getDistributorsResult(output),
+        error => {
+          //console.log("error in distrbutors");
+        });
   }
-  getAllManufacturersResult(result){
-    if(result && result.data){
-      this.manufacturerList = result.data;
-      console.log(this.manufacturerList , 'this.manufacturerListthis.manufacturerListthis.manufacturerList');
-    }
-    else{
-      this.manufacturerList = [];
+
+  getDistributorsResult(result) {
+    //console.log(data);
+    try {
+
+
+      if (result.result == 'success' && result.data) {
+        for (let i = 0; i < result.data.length; i++) {
+          const element = result.data[i];
+          if (element.usertype && element.usertype.toLowerCase() == "manufacturer") {
+            this.allUsers.push(element);
+          }
+          if (this.details && this.details.manfacturerid && this.details.manfacturerid == element.userid) {
+            this.manufacturer = this.details.manfacturerid;
+            this.assignTo = true;
+          }
+        }
+        console.log(this.allUsers)
+      }
+    } catch (error) {
+      console.log(error);
     }
   }
 
   ngOnInit() {
     //console.log(this.details);
+    this.getAllUsers()
     this.openDailog();
     // this.getAllManufacturers();
+
 
   }
 
