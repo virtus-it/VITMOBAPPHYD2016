@@ -3,6 +3,7 @@ import { FollowUpService } from '../follow-up/follow-up.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
 import * as moment from 'moment';
+import * as _ from 'underscore';
 
 
 
@@ -17,6 +18,8 @@ export class InboxPageComponent implements OnInit {
   AllMessages:any = [];
   noMessages = false;
   filterInput ={"fromDate":null , "toDate":null};
+  viewType: any = 'customer';
+  customerMessages:any =[];
 
 
 
@@ -36,6 +39,14 @@ export class InboxPageComponent implements OnInit {
     if(result.result == 'success'){
       this.AllMessages= result.data;
       console.log(this.AllMessages , 'result');
+      let messages = [];
+      _.each(this.AllMessages , function (i , j){
+        let details:any = i;
+        if(details.userdetails.user_type == 'customer'){
+          messages.push(details); 
+        }
+      });
+      this.customerMessages = messages;
     }
     else{
       this.noMessages = true;
@@ -83,6 +94,15 @@ export class InboxPageComponent implements OnInit {
     this.filterInput ={"fromDate":null , "toDate":null};
   }
 
+  messages(data){
+    if(data == 'all'){
+      this.viewType = 'all';    
+    }
+    else{
+      this.viewType = 'customer';
+    }
+
+  }
 
   ngOnInit() {
     this.getAllMessages();

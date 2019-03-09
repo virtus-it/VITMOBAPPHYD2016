@@ -27,6 +27,7 @@
               <md-select placeholder="Filter By" [(ngModel)]="filterInput.searchtype" name="type" class="full-width left">
                 <md-option value="date">DATE</md-option>
                 <md-option value="type">TYPE</md-option>
+                <md-option value="mobile">Mobile Number</md-option>
               </md-select>
             </div>
             <div class="mgtop-5" *ngIf="filterInput.searchtype == 'date'">
@@ -70,6 +71,12 @@
                       </md-select>
                 </div>
 
+              </div>
+
+              <div class="" *ngIf="filterInput.searchtype == 'mobile'">
+                  <md-form-field class="example-full-width">
+                      <input class="form-control" mdInput placeholder="Enter Mobile Number" [(ngModel)]="filterText" maxlength="10">
+                    </md-form-field>
               </div>
 
 
@@ -202,6 +209,7 @@
           <th width="10%">Type</th>
           <th width="10%">Amount</th>
           <th width="10%">Paytm Number</th>
+          <th width="10%">Acknowledgement Id</th>
           <th width="10%">Created date</th>
           <th class="" width="10%">Status</th>
           <th class="" width="10%">Action</th>
@@ -225,6 +233,12 @@
           <td class="left capitalize" width="10%">{{redeem.type}}</td>
           <td class="left" width="10%">{{redeem.amount}}</td>
           <td class="left" width="10%">{{redeem.typedetails}}</td>
+          <span *ngIf="redeem.acknowledgementnumber">
+            <td class="left" width="10%">{{redeem.acknowledgementnumber}}</td>
+          </span>
+          <span *ngIf="!redeem.acknowledgementnumber">
+            <td class="left" width="10%">-</td>
+          </span>
           <td class="left" width="10%">{{redeem.createddate | utcDate}}</td>
           <td class="left" width="10%">
             <span *ngIf="redeem.status">{{redeem.status}} </span>

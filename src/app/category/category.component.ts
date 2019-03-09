@@ -88,6 +88,22 @@ this.loaderService.display(true);
 
   }
 
+  deleteCategory(data){
+    let input = {"product":{"transtype":"delete","categoryid": data.categoryid}};
+    this.productService.createCategory(input)
+    .subscribe(
+      output => this.deleteCategoryResult(output),
+      error => {
+        //console.log("error in distrbutors");
+      });
+  }
+  deleteCategoryResult(result){
+    if(result && result.data){
+      console.log('deleted');
+      this.getProductByCategory();
+    }
+  }
+
 
 
   ngOnInit() {

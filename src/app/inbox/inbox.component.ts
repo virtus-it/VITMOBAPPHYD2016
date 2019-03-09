@@ -7,6 +7,7 @@ import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-
 import { OrderLandingService } from '../order-landing/order-landing.service';
 import { MdDialog } from '@angular/material';
 import * as moment from 'moment';
+import * as _ from 'underscore';
 
 @Component({
   selector: 'app-inbox',
@@ -22,6 +23,9 @@ export class InboxComponent implements OnInit {
   filteredData:any = [];
   filterInput ={"fromDate":null , "toDate":null};
   noMessages = false;
+  viewType: any = 'customer';
+  customerMessages:any =[];
+
   
   getAllMessages(){
     let input = {"root":{"loginid":this.authenticationService.loggedInUserId(),"fromdate":null,"todate": null,"transtype":"getallmessages" , "apptype" :this.authenticationService.appType()}};
@@ -36,6 +40,16 @@ export class InboxComponent implements OnInit {
   getAllMessagesResult(result){
     if(result.result == 'success'){
       this.allMessages= result.data;
+      let messages = [];
+      _.each(this.allMessages , function (i , j){
+        let details:any = i;
+        if(details.userdetails.user_type == 'customer'){
+          messages.push(details); 
+        }
+      });
+      this.customerMessages = messages;
+      console.log(this.customerMessages ,  'customerMessages');
+      console.log(this.allMessages ,  'allMessages');
       this.noMessages = false;
     }
     else{
@@ -93,6 +107,16 @@ export class InboxComponent implements OnInit {
   clearFilter(){
     this.getAllMessages();
     this.filterInput ={"fromDate":null , "toDate":null};
+  }
+
+  messages(data){
+    if(data == 'all'){
+      this.viewType = 'all';    
+    }
+    else{
+      this.viewType = 'customer';
+    }
+
   }
   onCloseCancel(){
     this.thisDialogRef.close('cancel');

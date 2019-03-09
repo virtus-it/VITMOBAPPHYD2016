@@ -33,7 +33,13 @@
 
       </div>
     </div>
-    <div class="scroll">
+
+    <div class="">
+        
+        <button class="btn-sm"  [ngClass]="{'btn-primary': viewType === 'customer'}" md-raised-button (click)="messages('customer')">CUSTOMER</button>
+        <button class="btn-sm" [ngClass]="{'btn-primary': viewType === 'all'}" md-raised-button (click)="messages('all')">ALL</button>
+    </div>
+    <div class="scroll" *ngIf="this.viewType == 'all'">
       <div class="row box-style" *ngFor="let message of allMessages">
         <div class="col-4 col-1-style">
           <div class="row">
@@ -46,6 +52,13 @@
               <br>
               <span class="left grayd">
                 <span class="fa fa-clock-o"></span> {{message.createddate | utcDate}}</span>
+                <br>
+                <span *ngIf="message.orderstatus">
+                <b>Order status :</b> {{message.orderstatus}}
+              </span>
+              <span *ngIf="!message.orderstatus">
+                  <b>Order status :</b> -
+                </span>
             </div>
             <div class="col-4">
               <button class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(message)">SELECT</button>
@@ -59,6 +72,41 @@
 
       </div>
     </div>
+
+    <div class="scroll" *ngIf="this.viewType == 'customer'">
+        <div class="row box-style" *ngFor="let message of customerMessages">
+          <div class="col-4 col-1-style">
+            <div class="row">
+              <div class="col-8">
+                <b>Id: #{{message.orderid}} </b>
+                <br>
+                <b>Type: </b>
+                <span class="" *ngIf="message.ispublic == 2">Complaint</span>
+                <span class="" *ngIf="message.ispublic == 0">Message</span>
+                <br>
+                <span class="left grayd">
+                  <span class="fa fa-clock-o"></span> {{message.createddate | utcDate}}</span>
+                  <br>
+                  <span *ngIf="message.orderstatus">
+                  <b>Order status :</b> {{message.orderstatus}}
+                </span>
+                <span *ngIf="!message.orderstatus">
+                    <b>Order status :</b> -
+                  </span>
+              </div>
+              <div class="col-4">
+                <button class="btn-sm float-right btn-warning" md-raised-button (click)="showOrderDetails(message)">SELECT</button>
+              </div>
+            </div>
+          </div>
+          <div class="col-8">
+            <span class="bold logo-color">Message:</span>
+            <p>{{message.message}}</p>
+          </div>
+  
+        </div>
+      </div>
+
 
     <h4 *ngIf="noMessages" class="error center mgtop-10">
       <i class="fa fa-frown-o" aria-hidden="true"></i> No Messages</h4>

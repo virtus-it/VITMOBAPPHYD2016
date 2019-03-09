@@ -32,6 +32,7 @@ redeemSettingsDetails:any = [];
 showFilterDailog = false;
 filterInput = {"searchtype":"",  "status":''};
 filterType = {"startdate": null , "enddate": null};
+filterText = '';
 startDate = '';
 endDate = '';
 superDealer = false;
@@ -153,6 +154,9 @@ noRecords:boolean = false;
         if(result.result == 'success'){
           this.redeemSettingsDetails = result.data;
         }
+        else{
+          this.redeemSettingsDetails = [];
+        }
       }
 
       changeSettings(data){
@@ -256,6 +260,10 @@ noRecords:boolean = false;
 
     if(this.filterInput.searchtype == 'date'){
       this.searchByDate();
+    }
+
+    else if(this.filterInput.searchtype == 'mobile'){
+      this.searchByNumber();
     }
     else{
       this.searchByType();
@@ -365,6 +373,24 @@ noRecords:boolean = false;
     });
   }
   getRedeemDetailsofCustomersOfDealerResult(result){
+    if(result && result.data){
+      this.redeemDetails = result.data;
+    }
+    else{
+      this.redeemDetails = [];
+    }
+  }
+
+  searchByNumber(){
+    console.log('Need to be implemented');
+    let input = {"User":{"TransType":"searchwithmobileno","filterby":"mobile","redeemmobileno": this.filterText}};
+    this.distributorService.getPoints(input)
+    .subscribe(
+      output => this.searchByNumberResult(output),
+      error => {      
+      });
+  }
+  searchByNumberResult(result){
     if(result && result.data){
       this.redeemDetails = result.data;
     }

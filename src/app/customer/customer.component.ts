@@ -56,7 +56,7 @@ export class CustomerComponent implements OnInit {
     paymentsDueView = false;
     salesTeamLogin = true;
     customersCount: number = 0;
-    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType(), userpoints: null } };
+    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "mobile", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType(), userpoints: null } };
     FilterTypeDetails = [
         { value: 'alias', viewValue: 'Alias' },
         { value: 'name', viewValue: 'Name' },
