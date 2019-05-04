@@ -10,6 +10,7 @@ import { Observable } from 'rxjs/Observable';
 import { FormControl, Validators } from '@angular/forms';
 import { ProductsService } from '../products/products.service';
 import * as moment from 'moment';
+import { FollowUpComponent } from '../follow-up/follow-up.component';
 
 
 declare var google: any;
@@ -401,6 +402,22 @@ export class StockNotificationsComponent implements OnInit {
     }
   }
 
+
+
+  createFollowup(data) {
+    let formattedData = {data : data , type : 'followupOnStockNotification'}
+    let dialogRefFollow = this.dialog.open(FollowUpComponent, {
+
+      width: '70%',
+      data: formattedData
+    });
+    dialogRefFollow.afterClosed().subscribe(result => {
+      console.log(`Dialog closed: ${result}`);
+      if (data.refresh == 'success') {
+      }
+    });
+
+  }
 
 
   ngOnInit() {

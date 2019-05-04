@@ -142,6 +142,7 @@ import { authinterceptor } from './interceptor/authinterceptor';
 import { AssociateCategoryComponent } from './associate-category/associate-category.component';
 import { AssociateDistributorComponent } from './associate-distributor/associate-distributor.component';
 import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-excel-upload.component';
+import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-redeem-settings.component';
 
 
 
@@ -262,6 +263,7 @@ import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-e
         AssociateCategoryComponent,
         AssociateDistributorComponent,
         CustomerExcelUploadComponent,
+        DeleteRedeemSettingsComponent,
 
 
 
@@ -429,7 +431,8 @@ import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-e
          RaiseRequestDetailDailogComponent,
          AssociateCategoryComponent,
          AssociateDistributorComponent,
-         CustomerExcelUploadComponent
+         CustomerExcelUploadComponent,
+         DeleteRedeemSettingsComponent
       
 
 

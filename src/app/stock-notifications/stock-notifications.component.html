@@ -148,10 +148,30 @@
         </div>
       </div>
 
-      <div class="col-2  pd-10 align-self-center" *ngIf="stockrequest.products">
-        <!-- <span class="btn btn-outline-primary btn-sm" (click)="viewDetails(stockrequest)">View Details</span> -->
+      <!-- <div class="col-2  pd-10 align-self-center" *ngIf="stockrequest.products">
         <button class="btn-primary " md-raised-button (click)="viewDetails(stockrequest)">View Details</button>
+      </div> -->
+
+
+      <div class="dropdown col-2 py-5">
+        <button class="dropbtn">View More
+        </button>
+        <div class="dropdown-content" style="right:0;">
+
+          <div class="row">
+            <label class="col-md-6"  (click)="viewDetails(stockrequest)">
+              <i class="fa fa-file-text"></i> View Details </label>
+
+            <label class="col-md-6" (click)="createFollowup(stockrequest)">
+              <i class="fa fa-volume-control-phone fa-2 logo-color"> </i> Follow Up </label>
+          </div>
+
+         
+
+       </div>
       </div>
+
+
     </div>
 
 

@@ -10,7 +10,7 @@
   </div>
   <md-dialog-content layout="column">
     
-    <form class="example-form" ngNativeValidate>
+    <form class="example-form" ngNativeValidate *ngIf="!hideDetailsInFollow">
         <div class="container-fluid brd-bottom scroll">
           <br>
             <h5 class="capitalize mgleft-15">
@@ -79,10 +79,41 @@
        </div>
        </div>
     </form>
+
+
+    <form class="example-form" *ngIf="hideDetailsInFollow">
+        <div class="container-fluid brd-bottom scroll">
+            <div class="row"> 
+                <div class="col-10">             
+                    <md-form-field class="example-full-width inline ">
+                      <textarea  maxlength="250" class="form-control" mdInput placeholder="Follow Up" name="body" [(ngModel)]="stockNotificationInput"></textarea>
+                    </md-form-field>
+                    <small class="charStyle">Characters Remanining : <span class="danger"> {{250 - stockNotificationInput.length }} </span></small>
+                  </div> 
+                  </div>
+        </div>
+    </form>
   </md-dialog-content>
-  <div class="row float-right pdright-30 mgbottom-20" *ngIf=" !followUpStatus || followUpStatus=='open'">
+
+
+  <div class="row float-right pdright-30 mgbottom-20" *ngIf=" (!followUpStatus || followUpStatus=='open') && !hideDetailsInFollow">
     <md-dialog-actions align="end">
         <button type="submit" class="btn-primary" md-raised-button (click)="createFollowUp()">SAVE</button>      
       <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
     </md-dialog-actions>
   </div>
+
+
+
+  <div class="row float-right pdright-30 mgbottom-20" *ngIf="hideDetailsInFollow">
+      <md-dialog-actions align="end">
+          <button type="submit" class="btn-primary" md-raised-button (click)="createFollowUpForStockNotification()">SAVE</button>      
+        <button md-raised-button (click)="onCloseCancel()">CANCEL</button>&nbsp;
+      </md-dialog-actions>
+    </div>
+
+
+
+
+
+  

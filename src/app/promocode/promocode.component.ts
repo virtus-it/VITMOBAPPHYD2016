@@ -11,6 +11,7 @@ import { ProcessedPaymentsDetailsComponent } from '../processed-payments-details
 import { DeletePromocodeComponent } from '../delete-promocode/delete-promocode.component';
 import * as moment from 'moment';
 import * as _ from 'underscore';
+import {DeleteRedeemSettingsComponent} from '../delete-redeem-settings/delete-redeem-settings.component';
 
 
 
@@ -231,6 +232,19 @@ noRecords:boolean = false;
   dialogRef.afterClosed().subscribe(result => {
     if(result == 'success'){
      
+    }
+  });
+
+  }
+
+  deleteRedeemSettingDialog(data){
+    let dialogRef = this.dialog.open(DeleteRedeemSettingsComponent , {
+      width: '75%',
+      data: data
+  });
+  dialogRef.afterClosed().subscribe(result => {
+    if(result == 'success'){
+     this.getRedeemSettingsDetails();
     }
   });
 

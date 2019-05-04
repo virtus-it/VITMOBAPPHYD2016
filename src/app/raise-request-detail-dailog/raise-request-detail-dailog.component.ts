@@ -17,6 +17,8 @@ import { letProto } from 'rxjs/operator/let';
   styleUrls: ['./raise-request-detail-dailog.component.css']
 })
 export class RaiseRequestDetailDailogComponent implements OnInit {
+
+
   SupplierCtrl: FormControl;
   filteredSupplier: Observable<any[]>;
 
@@ -55,7 +57,7 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
 
 
   getProducts() {
-    let input = { "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType() };
+    let input = { "userid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType()};
     this.distributorService.getProductsForRaiseRequest(input)
       .subscribe(
         output => this.getProductsResult(output),
@@ -272,23 +274,13 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
 
   ngOnInit() {
     let today = new Date();
-
-    // console.log("todays date is:" + today);
-
     var tomorrow = moment(today).add(1, 'days');
     var tomorrow2 = moment(today).add(2, 'days');
     var tomorrow3 = moment(today).add(3, 'days');
-
     this.invoiceDate0 = moment(today).format('YYYY-MM-DD 02:00:00');
     this.invoiceDate1 = moment(tomorrow).format('YYYY-MM-DD 02:00:00');
     this.invoiceDate2 = moment(tomorrow2).format('YYYY-MM-DD 02:00:00');
     this.invoiceDate3 = moment(tomorrow3).format('YYYY-MM-DD 02:00:00');
-
-    // console.log(this.invoiceDate0 + 'today');
-    // console.log(this.invoiceDate1 + 'tomorrow');
-    // console.log(this.invoiceDate2 + 'twodaysfromnow');
-    // console.log(this.invoiceDate3 + 'tomorrow3');
-
     console.log(this.Details , 'injection details');
     if (this.Details.type == 'newRaiseRequest') {
       this.getProducts();

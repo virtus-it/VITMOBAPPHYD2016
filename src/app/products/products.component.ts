@@ -195,7 +195,8 @@ export class ProductsComponent implements OnInit {
 
         let findproduct = _.find(this.productList, function (k, l) {
           let productDetails: any = k;
-          return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category));
+          // return ((productDetails.brandName == details.brandname) && (productDetails.category == details.category)); removed this as we were getting products under a category
+          return ((productDetails.category == details.category));
           
         });
 

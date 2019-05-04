@@ -21,12 +21,16 @@ export class FollowUpComponent implements OnInit {
   followupDate  = null;
   followUpTemplate=[];
   refresh:any = "";
+  hideDetailsInFollow : boolean = false;
   followUpInput = {
     "User": {
       "type": this.details.type, "typeid": this.details.id, "username": this.authenticationService.userFullName(),
       "remarks": "", "mobileno": this.details.mobileno, "transtype": "create", "userid": this.authenticationService.loggedInUserId(),"followupdate":null
     }
-  }
+  };
+
+  stockNotificationInput : '';
+  
   createFollowUp() {
     if (this.followupDate) {
       this.followUpInput.User.followupdate = moment(this.followupDate).format('YYYY-MM-DD 00:02:00');
@@ -145,11 +149,19 @@ getFollowUpTemplateResult(result){
   
 
 }
+
+createFollowUpForStockNotification(){
+  console.log('Need ip for this implementation');
+}
   
   ngOnInit() {
     console.log(this.details);
     this.getfollowUpdetails();
     this.getFollowUpTemplate();
+    if(this.details && this.details.type == 'followupOnStockNotification'){
+      console.log('follow up from stock notification');
+      this.hideDetailsInFollow  = true;
+    }
   }
 
 }
