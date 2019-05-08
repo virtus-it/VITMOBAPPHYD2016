@@ -143,6 +143,7 @@ import { AssociateCategoryComponent } from './associate-category/associate-categ
 import { AssociateDistributorComponent } from './associate-distributor/associate-distributor.component';
 import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-excel-upload.component';
 import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-redeem-settings.component';
+import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.component';
 
 
 
@@ -264,6 +265,7 @@ import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-r
         AssociateDistributorComponent,
         CustomerExcelUploadComponent,
         DeleteRedeemSettingsComponent,
+        UnknownOrdersComponent,
 
 
 
@@ -432,7 +434,8 @@ import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-r
          AssociateCategoryComponent,
          AssociateDistributorComponent,
          CustomerExcelUploadComponent,
-         DeleteRedeemSettingsComponent
+         DeleteRedeemSettingsComponent,
+         UnknownOrdersComponent
       
 
 

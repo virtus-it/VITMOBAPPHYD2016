@@ -28,6 +28,7 @@ import 'rxjs/add/operator/map';
 import * as _ from 'underscore';
 import * as moment from 'moment';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } from '@agm/core';
+import { UnknownOrdersComponent } from '../unknown-orders/unknown-orders.component';
 declare var google: any;
 
 interface marker {
@@ -80,7 +81,7 @@ export class OrderLandingComponent implements OnInit {
 
   orderslocationData: marker[] = [];
 
-  salesTeamView:string = '';
+  salesTeamView: string = '';
 
 
 
@@ -177,7 +178,7 @@ export class OrderLandingComponent implements OnInit {
 
   dropdownData = { selectedItems: [] };
   superDealerId: number = 0;
-  salesTeamOrders:any = [];
+  salesTeamOrders: any = [];
 
 
   categoryProduct = { selectedItems: [] };
@@ -226,6 +227,20 @@ export class OrderLandingComponent implements OnInit {
 
 
   categories = [];
+
+  unknownOrder() {
+    let dialogRefEditCustomer = this.dialog.open(UnknownOrdersComponent, {
+      width: '95%',
+      height: '95vh'
+    });
+    dialogRefEditCustomer.afterClosed().subscribe(result => {
+      if (result == 'success') {
+        console.log(`Dialog closed: ${result}`);
+
+      }
+    });
+
+  }
 
   findDistributors(name: string) {
     //console.log(name);
@@ -995,7 +1010,7 @@ export class OrderLandingComponent implements OnInit {
 
     if (!firstcall) {
       if (this.tabPanelView == 'complete') {
-        if(this.globalFilterInput.order.searchtype != 'status'){
+        if (this.globalFilterInput.order.searchtype != 'status') {
           this.completeOrders = [];
         }
         let lastCompleteOrder: any = _.last(this.completeOrders);
@@ -1010,7 +1025,7 @@ export class OrderLandingComponent implements OnInit {
         }
       }
     }
-    else{
+    else {
       this.completeOrders = [];
     }
     this.showFilterDailog = false;
@@ -1035,7 +1050,7 @@ export class OrderLandingComponent implements OnInit {
       if (this.tabPanelView == 'complete') {
         let data = this.ModifyOrderList(result.data);
         this.completeClickMore = true;
-        this.completeOrders = _.union(this.completeOrders , data);
+        this.completeOrders = _.union(this.completeOrders, data);
         // this.completeOrders = data;
       }
     }
@@ -1857,9 +1872,9 @@ export class OrderLandingComponent implements OnInit {
   }
 
 
-  myOrdersForSalesTeam(){
+  myOrdersForSalesTeam() {
     this.salesTeamView = 'myorders';
-    let input = {"order":{"userid": this.authenticationService.loggedInUserId() ,"loginid": this.authenticationService.loggedInUserId() ,"priority":"1","usertype": this.authenticationService.userType() ,"status":"ordered","pagesize":"10","apptype": this.authenticationService.appType() ,"transtype":"myorders" }};
+    let input = { "order": { "userid": this.authenticationService.loggedInUserId(), "loginid": this.authenticationService.loggedInUserId(), "priority": "1", "usertype": this.authenticationService.userType(), "status": "ordered", "pagesize": "10", "apptype": this.authenticationService.appType(), "transtype": "myorders" } };
     this.orderLandingService.getOrderList(input)
       .subscribe(
         output => this.myOrdersForSalesTeamResult(output),
@@ -1868,8 +1883,8 @@ export class OrderLandingComponent implements OnInit {
           this.loaderService.display(false);
         });
   }
-  myOrdersForSalesTeamResult(result){
-    if(result.result == 'success'){
+  myOrdersForSalesTeamResult(result) {
+    if (result.result == 'success') {
       this.salesTeamOrders = result.data;
     }
   }

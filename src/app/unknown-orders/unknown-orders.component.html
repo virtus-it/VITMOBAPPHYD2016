@@ -1,0 +1,96 @@
+<div class="row justify-content-between modal-title ">
+  <div class="col">
+    <!-- <i class="fa fa-file-text-o"></i>  -->
+    Un-known Orders
+  </div>
+  <div class="col-2 right">
+    <md-form-field class="example-full-width">
+      <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalFilterInput.order.searchtext">
+    </md-form-field>
+    <a class="mgtop-10">
+      <i class="fa fa-search cursor search-style" aria-hidden="true" (click)="search()"></i>
+    </a>
+
+  </div>
+
+  <div class="col-2 right">
+    <strong (click)="onCloseModal()">
+      <i class="fa fa-times fs-20" aria-hidden="true"></i>
+    </strong>
+  </div>
+</div>
+<md-dialog-content layout="column">
+<div *ngIf="completeOrders" class="panelview-style">
+  
+  <div id="" class="row pd-15 mg-0">
+    <div class="">
+      <table class="table table-hover table-striped" style="table-layout:fixed">
+        <thead>
+          <tr>
+            <th width="5%">Order Id</th>
+            <th width="5%">Quantity</th>
+            <th width="12%">Time stamp</th>
+            <th width="12%" title="Address">Address</th>
+            <th width="10%">ALT Mobile</th>
+            <!-- <th width="10%">Email Id</th> -->
+            <th width="10%">Product Info</th>
+            <th width="10%">Delivery Time</th>
+            <th width="10%">Order info </th>
+          </tr>
+        </thead>
+        <tbody class="scrollheight-pop">
+          <tr id="Preordrlist" *ngFor="let order of completeOrders; let i = index" [attr.data-index]="i" (click)="showLog(order)">
+            <td class="left capitalize" width="5%">
+              <span class="onhovertooltip-135 capitalize" title="{{order.orderid}}">
+                #{{order.orderid}}</span>
+            </td>
+            <td class="" width="5%">
+              <span *ngIf="order.quantity" class="onhovertooltip-150 capitalize"> {{order.quantity}}</span>
+              <span *ngIf="order.quantity === null || order.quantity == ''"> - </span>
+            </td>
+            <td class="" width="12%">
+              <span class="onhovertooltip-100" title="{{order.modifieddate | utcDate}}">{{order.modifieddate | utcDate}}</span>
+            </td>
+            <td class="left" width="12%"> {{order.buildingname}} {{order.locality}} {{order.delivery_address}}</td>
+            <td class="left numbers" width="10%">
+              <span class="onhovertooltip-100" title="{{order.mobileno_alt}}">{{order.mobileno_alt}}      </span>          
+            </td>
+            <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{order.emailid}}">{{order.emailid}}</span> </td> -->
+            <td class="left" title="product info" width="10%">PId : {{order.productid}} P-Cost : {{order.product_cost}} p-Type: {{order.product_type}} </td>
+            <!-- <td class="left capitalize" width="15%">
+              <span class="onhovertooltip-180" title="{{order.address}}">{{order.address}}</span>
+            </td> -->
+            <td class="left capitalize" width="10%">
+              <span class="" *ngIf="order.delivery_exceptedtime">{{order.delivery_exceptedtime}}</span>
+              <span class="" *ngIf="!order.delivery_exceptedtime"> - </span>
+            </td>
+
+            <td class="left capitalize" width="10%">
+              <span class="onhovertooltip-100" title="CId : {{order.orderfrom}} DId: {{order.orderto}}" *ngIf="order.orderfrom && order.orderfrom">CId : {{order.orderfrom}} DId: {{order.orderto}}</span>
+              <span *ngIf="!order.orderfrom"> - </span>
+            </td>
+            <!-- <td class="left" width="9%">
+            
+            </td> -->
+        
+
+        </tbody>
+      </table>
+
+      <h4 class=" center">
+        <a href="javascript:void(0);" (click)=getorderributors(false); *ngIf="orderributorClickMore">
+          <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+      </h4>
+      <h4 *ngIf="!completeOrders" class="error">
+        <i aria-hidden="true" class="fa fa-frown-o"></i> Record not available</h4>
+
+    </div>
+  </div>
+  
+</div>
+</md-dialog-content>
+<div class="row float-right pdright-30">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)="onCloseModal()">CLOSE</button>&nbsp;
+  </md-dialog-actions>
+</div>

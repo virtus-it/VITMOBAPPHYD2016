@@ -34,6 +34,10 @@
                 <a class="pdright-5">
                   <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
                 </a>
+                <a class="pdright-5">
+                  <button md-raised-button class=" " (click)="unknownOrder()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Unknown</button>
+                </a>
+
                 <a *ngIf="salesTeamLogin" class="pdright-5">
                   <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
                 </a>
