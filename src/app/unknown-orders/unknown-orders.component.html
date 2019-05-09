@@ -7,87 +7,228 @@
     <md-form-field class="example-full-width">
       <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalFilterInput.order.searchtext">
     </md-form-field>
-    <a class="mgtop-10">
+    <a>
       <i class="fa fa-search cursor search-style" aria-hidden="true" (click)="search()"></i>
     </a>
 
   </div>
-
   <div class="col-2 right">
     <strong (click)="onCloseModal()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
     </strong>
   </div>
 </div>
+
 <md-dialog-content layout="column">
-<div *ngIf="completeOrders" class="panelview-style">
-  
-  <div id="" class="row pd-15 mg-0">
-    <div class="">
-      <table class="table table-hover table-striped" style="table-layout:fixed">
-        <thead>
-          <tr>
-            <th width="5%">Order Id</th>
-            <th width="5%">Quantity</th>
-            <th width="12%">Time stamp</th>
-            <th width="12%" title="Address">Address</th>
-            <th width="10%">ALT Mobile</th>
-            <!-- <th width="10%">Email Id</th> -->
-            <th width="10%">Product Info</th>
-            <th width="10%">Delivery Time</th>
-            <th width="10%">Order info </th>
-          </tr>
-        </thead>
-        <tbody class="scrollheight-pop">
-          <tr id="Preordrlist" *ngFor="let order of completeOrders; let i = index" [attr.data-index]="i" (click)="showLog(order)">
-            <td class="left capitalize" width="5%">
-              <span class="onhovertooltip-135 capitalize" title="{{order.orderid}}">
-                #{{order.orderid}}</span>
-            </td>
-            <td class="" width="5%">
-              <span *ngIf="order.quantity" class="onhovertooltip-150 capitalize"> {{order.quantity}}</span>
-              <span *ngIf="order.quantity === null || order.quantity == ''"> - </span>
-            </td>
-            <td class="" width="12%">
-              <span class="onhovertooltip-100" title="{{order.modifieddate | utcDate}}">{{order.modifieddate | utcDate}}</span>
-            </td>
-            <td class="left" width="12%"> {{order.buildingname}} {{order.locality}} {{order.delivery_address}}</td>
-            <td class="left numbers" width="10%">
-              <span class="onhovertooltip-100" title="{{order.mobileno_alt}}">{{order.mobileno_alt}}      </span>          
-            </td>
-            <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{order.emailid}}">{{order.emailid}}</span> </td> -->
-            <td class="left" title="product info" width="10%">PId : {{order.productid}} P-Cost : {{order.product_cost}} p-Type: {{order.product_type}} </td>
-            <!-- <td class="left capitalize" width="15%">
+  <div *ngIf="completeOrders && page1" class="panelview-style">
+
+    <div id="" class="row pd-15 mg-0" *ngIf="page1">
+      <div class="">
+        <table class="table table-hover table-striped" style="table-layout:fixed">
+          <thead>
+            <tr>
+              <th width="5%">Order Id</th>
+              <th width="5%">Quantity</th>
+              <th width="12%">Time stamp</th>
+              <th width="12%" title="Address">Address</th>
+              <th width="10%">ALT Mobile</th>
+              <!-- <th width="10%">Email Id</th> -->
+              <th width="10%">Product Info</th>
+              <th width="10%">Delivery Time</th>
+              <th width="10%">Order info </th>
+              <th width="5%">Action</th>
+
+            </tr>
+          </thead>
+          <tbody class="scrollheight-pop">
+            <tr id="Preordrlist" *ngFor="let order of completeOrders; let i = index" [attr.data-index]="i" (click)="showLog(order)">
+              <td class="left capitalize" width="5%">
+                <span class="onhovertooltip-135 capitalize" title="{{order.orderid}}">
+                  #{{order.orderid}}</span>
+              </td>
+              <td class="" width="5%">
+                <span *ngIf="order.quantity" class="onhovertooltip-150 capitalize"> {{order.quantity}}</span>
+                <span *ngIf="order.quantity === null || order.quantity == ''"> - </span>
+              </td>
+              <td class="" width="12%"> {{order.modifieddate | utcDate}} </td>
+              <td class="left" width="12%"> {{order.buildingname}} {{order.locality}} {{order.delivery_address}}</td>
+              <td class="left numbers" width="10%">
+                <span class="onhovertooltip-100" title="{{order.mobileno_alt}}">{{order.mobileno_alt}} </span>
+              </td>
+              <!-- <td class="left" width="10%"><span class="onhovertooltip-100" title="{{order.emailid}}">{{order.emailid}}</span> </td> -->
+              <td class="left" title="product info" width="10%">Category : {{order.productdetails.category }}
+                {{order.productdetails.brandname }} <br>
+                Product cost: {{order.product_cost}} <br> Total Amt: Rs.{{order.bill_amount}}
+                <br> Serv Chgs: {{order.servicecharges}} <br> Exp Chgs: {{order.expressdeliverycharges}} <br> Emp Cans
+                Amt: {{order.advance_amount}}
+              </td>
+              <!-- <td class="left capitalize" width="15%">
               <span class="onhovertooltip-180" title="{{order.address}}">{{order.address}}</span>
             </td> -->
-            <td class="left capitalize" width="10%">
-              <span class="" *ngIf="order.delivery_exceptedtime">{{order.delivery_exceptedtime}}</span>
-              <span class="" *ngIf="!order.delivery_exceptedtime"> - </span>
-            </td>
+              <td class="left capitalize" width="10%">
+                <span class="" *ngIf="order.delivery_exceptedtime">{{order.delivery_exceptedtime}}</span>
+                <span class="" *ngIf="!order.delivery_exceptedtime"> - </span>
+              </td>
 
-            <td class="left capitalize" width="10%">
-              <span class="onhovertooltip-100" title="CId : {{order.orderfrom}} DId: {{order.orderto}}" *ngIf="order.orderfrom && order.orderfrom">CId : {{order.orderfrom}} DId: {{order.orderto}}</span>
-              <span *ngIf="!order.orderfrom"> - </span>
-            </td>
-            <!-- <td class="left" width="9%">
-            
-            </td> -->
-        
+              <td class="left capitalize" width="10%">
+                Customer Id: {{order.orderfrom}}<br>Dealer Id: {{order.orderto}}
+              </td>
+              <td class="left" width="5%">
+                <span class="logo-color cursor" (click)='openMessage(order)'> Show Chat</span>
+                <span class="logo-color cursor" (click)='showInsert(order)'>Insert User</span>
+              </td>
 
-        </tbody>
-      </table>
 
-      <h4 class=" center">
-        <a href="javascript:void(0);" (click)=getorderributors(false); *ngIf="orderributorClickMore">
-          <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
-      </h4>
-      <h4 *ngIf="!completeOrders" class="error">
-        <i aria-hidden="true" class="fa fa-frown-o"></i> Record not available</h4>
+          </tbody>
+        </table>
 
+        <h4 class=" center">
+          <a href="javascript:void(0);" (click)=getorderributors(false); *ngIf="orderributorClickMore">
+            <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
+        </h4>
+        <h4 *ngIf="!completeOrders" class="error">
+          <i aria-hidden="true" class="fa fa-frown-o"></i> Record not available</h4>
+
+      </div>
     </div>
   </div>
+
+  <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 border-left" *ngIf="orderbyallMessages && orderbyallMessages.length > 0  && !page1">
+    <div class=" form-group ">
+      <h4>#{{messageInput.order.orderid}}</h4>
+      <b class="">
+        <i class="fa fa-comments-o" aria-hidden="true"></i> Messages</b>
+      <ul class="scrollheight-pop">
+        <li class="nolist-style  messages-style" *ngFor="let msg of orderbyallMessages | sorting : 'createddate'">
+          <div class="row" *ngIf="msg.user">
+            <div class="col">
+              <i class="fa fa-reply" aria-hidden="true"></i>
+              <small *ngIf="msg.user" class="capitalize">&nbsp;
+                <b>{{msg.user.firstname}} {{msg.user.lastname}} </b>
+              </small>
+            </div>
+            <div class="col-5 right">
+              <small class="gray9">{{ msg.createddate | utcDate}} </small>
+            </div>
+          </div>
+          <small>{{ msg.message}} </small>
+          <small>{{ msg.remarks}} </small>
+        </li>
+
+      </ul>
+      <div class=" border-top pdtop-10">
+        <div class="form-group">
+          <label class="float-right">
+            <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()">
+            </i>
+          </label>
+        </div>
+        <div class=" ">
+          <textarea rows="5" cols="20" type="text" maxlength="500" class="no-border form-control fs-12" placeholder="Type your message here"
+            [(ngModel)]="messageInput.order.reason"> </textarea>
+        </div>
+
+        <div class="">
+          <small class="">Characters Remaining :
+            <span class="danger">{{500 - messageInput.order.reason.length}}</span>
+          </small>
+        </div>
+        <span class="logo-color cursor" (click)='closeChat()'> Close Chat</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid pd-15x25 brd-bottom" *ngIf="page2">
+    <div class="row">
+      <b class="label-style col">Personal Details
+        <span></span>
+      </b>
+    </div>
+    <!-- first row starts>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> -->
+    <div class="row">
+
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+          <input mdInput placeholder="Customer Id" name="userid" maxlength="10" [(ngModel)]="customerInput.User.userid"
+            required>
+        </md-form-field>
+      </div>
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+          <input mdInput placeholder="Dealer Id" name="dealerid" maxlength="10" [(ngModel)]="customerInput.User.dealerid"
+            required>
+        </md-form-field>
+      </div>
+
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+          <input class="form-control" [formControl]="emailFormControl" mdInput placeholder="First Name" name="firstName"
+            [(ngModel)]="customerInput.User.firstname" required maxlength='15'>
+          <md-error *ngIf="emailFormControl.hasError('required')">
+            First Name is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </div>
+      <div class="col-md-4 col-sm-6 ">
+        <md-form-field class="">
+          <input class="form-control" mdInput placeholder="Phone Number" name="phonenumber" maxlength="10"
+            [formControl]="mobileFormControl" [(ngModel)]="customerInput.User.mobileno" required (keypress)="numberEvent($event)">
+          <md-error *ngIf="mobileFormControl.hasError('required')">
+            Mobile Number is
+            <strong>required</strong>
+          </md-error>
+        </md-form-field>
+      </div>
+    </div>
+    <!-- third row finished -->
+    <!-- <div class="row">
+        <div class="col-4">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Flat Number" name="flatNo" [(ngModel)]='customerInput.User.buildingname' maxlength="10">
+          </md-form-field>
+        </div>
   
-</div>
+        <div class="col-4 align-self-end">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Landmark" name="landmark" [(ngModel)]='customerInput.User.locality' maxlength="50">
+          </md-form-field>
+        </div>             
+      </div> -->
+
+
+    <!-- <div class="row">
+        <div class="col-4">
+          <md-form-field class="wd-100pc">
+            <input class="form-control" mdInput placeholder="Latitude" name="latitude" [(ngModel)]="customerInput.User.latitude">
+          </md-form-field>
+        </div>
+  
+        <div class="col-4 align-self-end">
+            <md-form-field class="wd-100pc">
+              <input class="form-control" mdInput placeholder="Longitude" name="longitude" [(ngModel)]="customerInput.User.longitude">
+            </md-form-field>
+          </div>
+      </div> -->
+
+    <div class="row form-group">
+      <div class="col">
+        <md-form-field class="wd-100pc">
+          <textarea class="form-control" mdInput placeholder="Profile Address" name="Address" [(ngModel)]="customerInput.User.address"
+            maxlength="150"></textarea>
+        </md-form-field>
+      </div>
+    </div>
+
+
+
+    <h5 class="error center mgbottom-0 mgtop-10" *ngIf="messageError"><i class="fa fa-warning"></i>
+      {{this.messageError}}</h5>
+
+    <button type="submit" class="btn-primary" md-raised-button (click)="insertUser()">SUBMIT</button>
+
+
+  </div>
 </md-dialog-content>
 <div class="row float-right pdright-30">
   <md-dialog-actions align="end">
