@@ -163,10 +163,11 @@ export class OrderLandingComponent implements OnInit {
   polygonArray = [];
   // order = { orderId: '' };
   allOrdersDetails: any = [];
+  isSearch: boolean = false;
 
   filterInput = { "order": { "pagesize": "30", "searchtype": "", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0" } };
 
-  globalFilterInput = { "order": { "pagesize": "30", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
+  globalFilterInput = { "order": { "pagesize": "10", "searchtype": "orderid", "status": "", "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtext": "", "apptype": this.authenticationService.appType(), "last_orderid": "0", "loginid": this.authenticationService.loggedInUserId() } };
 
 
   //   {"order":{"userid":"289","usertype":"dealer","status":"ordered","last_orderid":"0",
@@ -935,6 +936,9 @@ export class OrderLandingComponent implements OnInit {
 
 
   globalSearch(firstcall) {
+    this.globalFilterInput.order.last_orderid = '0';
+    this.isSearch = true;
+
     this.tabPanelView = 'complete';
     this.deliverySlot();
     if (this.globalFilterInput.order.searchtype == 'name') {
@@ -1011,7 +1015,8 @@ export class OrderLandingComponent implements OnInit {
     if (!firstcall) {
       if (this.tabPanelView == 'complete') {
         if (this.globalFilterInput.order.searchtype != 'status') {
-          this.completeOrders = [];
+          if (!this.isSearch)
+            this.completeOrders = [];
         }
         let lastCompleteOrder: any = _.last(this.completeOrders);
         if (lastCompleteOrder) {
@@ -1040,6 +1045,7 @@ export class OrderLandingComponent implements OnInit {
         output => this.getGlobalFilteredOrdersResult(output),
         error => {
           this.loaderService.display(false);
+          this.isSearch = false;
         });
 
   }
@@ -1049,12 +1055,22 @@ export class OrderLandingComponent implements OnInit {
     if (result.result == 'success') {
       if (this.tabPanelView == 'complete') {
         let data = this.ModifyOrderList(result.data);
-        this.completeClickMore = true;
-        this.completeOrders = _.union(this.completeOrders, data);
-        // this.completeOrders = data;
+        if (this.isSearch) {
+          for (let i = 0; i < data.length; i++) {
+            this.completeOrders.push(data[i]);
+          }
+          this.completeClickMore = true;
+        } else {
+
+          this.completeClickMore = true;
+          this.completeOrders = _.union(this.completeOrders, data);
+          // this.completeOrders = data;
+        }
       }
     }
     else {
+      this.isSearch = false;
+
       if (this.tabPanelView == 'complete') {
         this.completeClickMore = false;
       }
