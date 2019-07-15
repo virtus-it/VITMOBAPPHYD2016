@@ -119,6 +119,10 @@
             <i class="fa fa-address-card-o" aria-hidden="true"></i>
             <span class="pdtoprght-3x10"> Profile</span>
           </a>
+          <a md-list-item routerLink="/salestracking" class="sidebar-list" (click)="focusSidenav.toggle()" *ngIf="!authenticationService.salesLogin || authenticationService.customerCareLogin || authenticationService.salesTeamLogin">
+            <i class="fa fa-address-card-o" aria-hidden="true"></i>
+            <span class="pdtoprght-3x10"> Sales Tracking</span>
+          </a>
     
         </md-nav-list>
       </md-sidenav>

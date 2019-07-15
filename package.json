@@ -15,7 +15,7 @@
   },
   "private": true,
   "dependencies": {
-    "@agm/core": "^1.0.0-beta.0",
+    "@agm/core": "^1.0.0-beta.6",
     "@angular/animations": "^4.0.0",
     "@angular/cdk": "^2.0.0-beta.8",
     "@angular/common": "^4.3.6",
@@ -30,6 +30,7 @@
     "@types/googlemaps": "^3.30.7",
     "@types/moment": "^2.13.0",
     "@types/underscore": "^1.8.2",
+    "agm-direction": "^0.3.5",
     "angular2-multiselect-dropdown": "^1.2.6",
     "bootstrap": "^4.0.0-alpha.6",
     "clipboard": "^2.0.0",

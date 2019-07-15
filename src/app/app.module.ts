@@ -4,7 +4,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core';
+import { AgmCoreModule, GoogleMapsAPIWrapper } from '@agm/core'; 
+import { AgmDirectionModule } from 'agm-direction'; 
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { MaterialModule, MdSidenavModule, MdDialogModule, MdTooltipModule, MdInputModule, MdNativeDateModule, MdAutocompleteModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -144,6 +145,7 @@ import { AssociateDistributorComponent } from './associate-distributor/associate
 import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-excel-upload.component';
 import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-redeem-settings.component';
 import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.component';
+import { SalestrackingComponent } from './salestracking/salestracking.component';
 
 
 
@@ -266,6 +268,7 @@ import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.componen
         CustomerExcelUploadComponent,
         DeleteRedeemSettingsComponent,
         UnknownOrdersComponent,
+        SalestrackingComponent,
 
 
 
@@ -287,6 +290,7 @@ import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.componen
         MdNativeDateModule,
         HttpClientModule,
         AngularMultiSelectModule,
+        AgmDirectionModule,
         RouterModule.forRoot([
             { path: 'login', component: LoginComponent },
             { path: 'order', component: OrderComponent, canActivate: [LoggedInGuard] },
@@ -312,6 +316,7 @@ import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.componen
             { path: 'inbox', component: InboxPageComponent, canActivate: [LoggedInGuard] },
             { path: 'raiserequest', component: RaiseRequestComponent, canActivate: [LoggedInGuard] },
             { path: 'stocknotifications', component: StockNotificationsComponent, canActivate: [LoggedInGuard] },
+            {path:'salestracking', component: SalestrackingComponent, canActivate: [LoggedInGuard]}, 
             { path: '', redirectTo: 'orders', pathMatch: 'full', canActivate: [LoggedInGuard] },
             { path: '**', redirectTo: 'login' }
         ]),

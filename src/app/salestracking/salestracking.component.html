@@ -1,0 +1,58 @@
+<div class="dist-style  minheight-500">
+  <div class=" row  distIcon-style justify-content-between">
+    <div class="col-md-4  col-sm-4 col-lg-4">
+      <h4 class="left">
+        <i class="fa fa-globe"></i> Sales Tracking</h4>
+    </div>
+    <div class="col align-self-center right">
+      <div class="row form-group">
+        <div class="col-sm-4  col-md-4  col-lg-4">
+          <md-select placeholder="Sales person" name="type" class="full-width left" [(ngModel)]="userInputs.userid">
+            <md-option *ngFor="let data of salesPersonsList" [value]="data.user_id">
+              <span>{{data.firstname}} {{data.lastname}}</span>
+             
+            </md-option>
+
+          </md-select>
+        </div>
+        <div class=" col-sm-4  col-md-4  col-lg-4">
+        <md-form-field class="inline">
+            <input mdInput [mdDatepicker]="pickers" placeholder="Date" name="todate" [(ngModel)]="userInputs.date">
+            <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+            <md-datepicker #pickers></md-datepicker>
+          </md-form-field> 
+        </div>
+        <div class="row float-right pdright-30 mgbottom-20">
+           &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;  <button type="submit" class="btn btn-primary" type="button" (click)="getUsersLatLong()">Go!</button>
+           &nbsp;&nbsp; &nbsp;&nbsp; 
+            <button type="submit" class="btn btn-primary" type="button" (click)="liveData()">Live</button>
+      </div>
+      
+      </div>
+    </div>
+  </div>
+  <div id="" class="row pd-15x10 mg-0">
+    <div class="col">
+      <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
+          <agm-direction  *ngFor="let dir of getLatLong" [origin]="dir.origin" [destination]="dir.destination"  [renderOptions]="renderOptions">
+             </agm-direction> 
+         
+  <agm-marker *ngFor="let mpdata of mapData" 
+[latitude]="mpdata.latitude"
+[longitude]="mpdata.longitude"
+(mouseOver)="onMouseOver(infoWindow, $event)" 
+(mouseOut)="onMouseOut(infoWindow, $event)">
+<agm-info-window [disableAutoPan]="false" #infoWindow>
+
+    
+    <div>
+        <a (click)="onClickInfoView({id:mpdata.id})" class="btn btn-attention pull-right" >{{mpdata.createddate}}</a>
+    </div>
+
+</agm-info-window>
+
+</agm-marker>  
+      </agm-map>
+    </div>
+  </div>
+ </div>
