@@ -47,6 +47,7 @@ export class OrderDetailDailogComponent implements OnInit {
     orderDetailsMessageToCustomer: any = '';
     orderDetailsMessageToDistributor : any = '';
     address: any = '';
+    raiseInvoiceInput={loginid:this.authenticationService.loggedInUserId(),orderid: this.orderDetail.order_id, status:"",apptype: "moya"};
 
 
 
@@ -542,8 +543,42 @@ export class OrderDetailDailogComponent implements OnInit {
     console.log(result);
     // this.thisDialogRef.close(result);
     }
-
-
+raiseInvoice(){
+this.raiseInvoiceInput.status="raiseinvoice";
+let input={"order":this.raiseInvoiceInput};
+console.log(this.raiseInvoiceInput);
+this.orderLandingService.raiseInvoiceStatus(input)
+            .subscribe(
+                output => this.raiseInvoiceResult(output),
+                error => {
+                    console.log("failed");
+                });
+}
+raiseInvoiceResult(data){
+    if(data.result == "success")
+    this.getOrderDetailsById();
+    this.getProductsListByCustomerId();
+    this.deliveryStatus();  
+    console.log(data);
+}
+paymentReceived(){
+    this.raiseInvoiceInput.status="invoicepaymentconfirm";
+    let input={"order":this.raiseInvoiceInput};
+    console.log(this.raiseInvoiceInput);
+    this.orderLandingService.raiseInvoiceStatus(input)
+            .subscribe(
+                output => this.paymentReceivedResult(output),
+                error => {
+                    console.log("failed");
+                });
+}
+paymentReceivedResult(data){
+    if(data.result == "success")
+    this.getOrderDetailsById();
+    this.getProductsListByCustomerId();
+    this.deliveryStatus();  
+console.log(data);
+}
 
 
 
@@ -557,6 +592,7 @@ ngOnInit() {
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
     console.log(this.orderDetail);
     // this.getUserDetails();
+
 }
 
 }

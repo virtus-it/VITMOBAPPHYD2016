@@ -7,13 +7,13 @@
     <div class="col align-self-center right">
       <div class="row form-group">
         <div class="col-sm-4  col-md-4  col-lg-4">
-          <md-select placeholder="Sales person" name="type" class="full-width left" [(ngModel)]="userInputs.userid">
+          <md-select placeholder="Sales person" name="type" class="full-width left" [(ngModel)]="userInputs.userid" required>
             <md-option *ngFor="let data of salesPersonsList" [value]="data.user_id">
               <span>{{data.firstname}} {{data.lastname}}</span>
-             
             </md-option>
 
           </md-select>
+        
         </div>
         <div class=" col-sm-4  col-md-4  col-lg-4">
         <md-form-field class="inline">
