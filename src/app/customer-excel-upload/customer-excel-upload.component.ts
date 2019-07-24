@@ -4,7 +4,7 @@ import { AuthenticationService } from '../login/authentication.service';
 import { CustomerService } from '../customer/customer.service';
 import { DistributorServiceService } from '../distributor/distributor-service.service';
 import { MD_DIALOG_DATA } from '@angular/material';
-
+import { LoaderService } from '../login/loader.service';
 
 @Component({
   selector: 'app-customer-excel-upload',
@@ -16,11 +16,12 @@ export class CustomerExcelUploadComponent implements OnInit {
   showButton: boolean = false;
 
   constructor(public thisDialogRef: MdDialogRef<CustomerExcelUploadComponent>,
-    private authenticationService: AuthenticationService,
+    private authenticationService: AuthenticationService,private loaderService: LoaderService,
     @Inject(MD_DIALOG_DATA) public Details: any) { }
 
-
+ 
   onFileSelected(event) {
+   
     console.log(event);
     var files = event.target.files;
     var file = files[0];
@@ -39,6 +40,7 @@ export class CustomerExcelUploadComponent implements OnInit {
         this.validateMessage = JSON.stringify(err);
         console.log(err);
       })
+      
     }
 
   }

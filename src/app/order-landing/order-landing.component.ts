@@ -766,7 +766,7 @@ export class OrderLandingComponent implements OnInit {
   searchOrderList() {
 
     this.deliverySlot();
-
+ this.showFilterDailog = false;
     if (this.filterInput.order.searchtype == 'name') {
       this.filterInput.order.searchtext = this.filterType.customerName;
     }

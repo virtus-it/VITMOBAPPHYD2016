@@ -3,6 +3,9 @@
     <div class="col-md-4  col-sm-4 col-lg-4">
       <h4 class="left">
         <i class="fa fa-globe"></i> Sales Tracking</h4>
+        <md-error *ngIf="message" align="left">
+        <h6>{{message}}</h6>
+        </md-error>
     </div>
     <div class="col align-self-center right">
       <div class="row form-group">

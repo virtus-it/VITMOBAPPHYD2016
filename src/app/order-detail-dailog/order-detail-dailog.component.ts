@@ -151,7 +151,7 @@ export class OrderDetailDailogComponent implements OnInit {
 
         }
         this.orderLandingService.getOrderById(input)
-            .subscribe(
+            .subscribe( 
                 output => this.getOrderDetailsByIdResult(output),
                 error => {
                     ////console.log("error in order details");
@@ -277,7 +277,7 @@ export class OrderDetailDailogComponent implements OnInit {
         }
     }
     onCloseCancel() {
-        this.thisDialogRef.close('Cancel');
+        this.thisDialogRef.close('success');
     }
 
     deliveryStatus() {
@@ -291,7 +291,8 @@ export class OrderDetailDailogComponent implements OnInit {
     }
 
     onCloseModel() {
-        this.thisDialogRef.close(this.message);
+
+        this.thisDialogRef.close("success");
     }
 
 

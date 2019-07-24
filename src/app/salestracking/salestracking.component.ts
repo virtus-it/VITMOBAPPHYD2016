@@ -4,7 +4,7 @@ import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader } fro
 import { MapDialogComponent } from '../map-dialog/map-dialog.component';
 import { SupplierService } from '../supplier/supplier.service';
 import { AuthenticationService } from '../login/authentication.service';
-
+import { AgmDirectionModule } from 'agm-direction'; 
 import * as _ from 'underscore';
 import * as moment from 'moment';
 declare var google: any;
@@ -43,7 +43,9 @@ export class SalestrackingComponent implements OnInit {
   // };
   constructor(public gMaps: GoogleMapsAPIWrapper, private router: Router, private supplierservice: SupplierService, private authenticationService: AuthenticationService) { }
   mapData:any=[];
+  message: string = '';
   userInputs = { userid: "", date: null };
+  
   getLatLong = [];  //array to store the latlongs of persons
   salesPersonsList = []; //array to store the salespersons list
   //  mapRoute={
@@ -51,7 +53,7 @@ export class SalestrackingComponent implements OnInit {
   //    destination:{lat:17.395760,long:-281.568141}
 
   //   } ;
-  mapClicked($event) {
+  mapClicked($event) {  
 
   }
   getUsersLatLong() { //to get the users latlong details
@@ -118,10 +120,20 @@ this.mapData=data.data;
             this.getLatLong.push(Details);   // pushing the Details data into getlanglong arrray
           }
         }
+      
+      
+
         console.log(this.mapData);
        
       }
+    } 
+    else {
+      var id = this.userInputs.userid
+        let userData = _.find(this.salesPersonsList, function (e:any) { return e.user_id == id; });
+       let name= userData.firstname + " " + userData.lastname;
+      this.message = 'No data exist for '+ name +'';
     }
+    
   }
   getSalesPerson() {  // to get the salespersons list
     var input = { "root": { "transtype": "getsalespersons", "loginid": this.authenticationService.loggedInUserId(), apptype: "moya" } }
@@ -152,7 +164,7 @@ this.mapData=data.data;
         }
       );
   }
-  
+ 
    onMouseOver(infoWindow, $event: MouseEvent) {
     infoWindow.open();
    }

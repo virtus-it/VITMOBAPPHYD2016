@@ -363,7 +363,7 @@
                     </small>
                     <span class="logo-color">
                       <b class="float-right fs-12" (click)="raiseInvoice()" *ngIf="dailogOrderDetails.OrderModifiedStatus == 'Delivered' &&  !dailogOrderDetails.raiseinvoicestatus">
-                        <i class="fa fa-dot-circle-o" aria-hidden="true" title="Raise invoice"></i> Raise invoice</b>
+                        <i class="fa fa-dot-circle-o" aria-hidden="true" title="Raise invoice"></i> Raise Invoice</b>
                     </span>
                   </div>
 
@@ -417,16 +417,34 @@
                         <small class="ng-binding">
                           <i class="fa fa-arrow-right" aria-hidden="true"></i> x{{dailogOrderDetails.return_cans}}(Qty)</small>
                       </li>
-                       <div class="ml-auto p-0">
-                        <small class="ng-binding gray9">
-                          <i class="fa fa-calendar fa-10 logo-color" aria-hidden="true" title="Invoice Raised Date" *ngIf="dailogOrderDetails.raiseinvoicedate" ></i>
-                          {{dailogOrderDetails.raiseinvoicedate | utcDate}}</small>
-                      </div> 
+                      
                     </ul>
                   </div>
                   
                 </div>
               </li>
+              <li>
+              <div class="timeline-badge"  *ngIf="dailogOrderDetails.raiseinvoicestatus">
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+                </div>
+                <div class="timeline-panel"  *ngIf="dailogOrderDetails.raiseinvoicestatus" >
+                <div class="timeline-heading">
+                    <small class="timeline-title warning" *ngIf="dailogOrderDetails.raiseinvoicestatus">
+                      <b> Invoice Raised</b>
+                    </small>
+            
+                  </div>
+                  <div class="timeline-body">
+                      <div class="ml-auto p-0">
+                          <small class="ng-binding gray9">
+                            <i class="fa fa-calendar fa-10 logo-color" aria-hidden="true" title="Invoice Raised Date" *ngIf="dailogOrderDetails.raiseinvoicedate" ></i>
+                            {{dailogOrderDetails.raiseinvoicedate | utcDate}}</small>
+                        </div> 
+                  </div>
+                  </div>
+              </li>
+
+
               <li>  
                 <div class="timeline-badge success" *ngIf="dailogOrderDetails.raiseinvoicestatus">
                   <i class="fa fa-check-square-o white" aria-hidden="true"></i>
@@ -437,7 +455,7 @@
                       <b> Payment Pending</b>
                     </small>
                     <small class="timeline-title warning" *ngIf="dailogOrderDetails.invoicepaymentconfirmstatus">
-                      <b> Order Completed</b>
+                      <b> Payment Received</b>
                     </small>
                     <span class="logo-color">
                       <b class="float-right fs-12" (click)="paymentReceived()" *ngIf="!dailogOrderDetails.invoicepaymentconfirmstatus">

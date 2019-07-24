@@ -140,7 +140,7 @@ export class PreOrderComponent implements OnInit {
     getCustomerByFilter(firstcall) {
 
 
-
+        this.showFilterDailog = false;
         if (this.filterInput.root.searchtype == 'followupdate') {
             this.filterInput.root.searchtext = moment(this.followUpdate).format('YYYY-MM-DD HH:MM:SS');
 

@@ -14,56 +14,71 @@
           <div class="d-flex">
             <div class="tabs">
               <div class="none">
-                <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
+                <button type="submit" md-raised-button class="  "
+                  [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
                   (click)="showTabPanel('allorder')">ORDERED</button>
-                <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
-                  href="javascript:void(0)" (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
+                <button type="submit" md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin"
+                  [ngClass]="{'btn-primary': tabPanelView === 'forward'}" href="javascript:void(0)"
+                  (click)="showTabPanel('forward')">FORWARDED ORDERS</button>
               </div>
               <div class="">
                 <a class="pdright-5">
-                  <button type="submit" md-raised-button class="  " [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
+                  <button type="submit" md-raised-button class="  "
+                    [ngClass]="{'btn-primary': tabPanelView === 'allorder'}" href="javascript:void(0)"
                     (click)="showTabPanel('allorder')">Ordered</button>
                 </a>
                 <a class="">
-                  <button type="submit" md-raised-button class="pdright-5" *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-primary': tabPanelView === 'forward'}"
-                    href="javascript:void(0)" (click)="showTabPanel('forward')">Forwarded</button>
+                  <button type="submit" md-raised-button class="pdright-5"
+                    *ngIf="superDealer || customerCare || salesTeamLogin"
+                    [ngClass]="{'btn-primary': tabPanelView === 'forward'}" href="javascript:void(0)"
+                    (click)="showTabPanel('forward')">Forwarded</button>
                 </a>
                 <a class="pdright-5">
-                  <button md-raised-button (click)="miscOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
+                  <button md-raised-button (click)="miscOrdersView()"
+                    [ngClass]="{'btn-primary': quickFilterView==='misc'}">Miscellaneous</button>
                 </a>
                 <a class="pdright-5">
-                  <button md-raised-button class=" " (click)="deliveredOrdersView()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
+                  <button md-raised-button class=" " (click)="deliveredOrdersView()"
+                    [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Delivered</button>
                 </a>
                 <a class="pdright-5">
-                  <button md-raised-button class=" " (click)="unknownOrder()" [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Unknown</button>
+                  <button md-raised-button class=" " (click)="unknownOrder()"
+                    [ngClass]="{'btn-primary': quickFilterView==='delivered'}">Unknown</button>
                 </a>
 
                 <a *ngIf="salesTeamLogin" class="pdright-5">
-                  <button md-raised-button class=" " (click)="myOrdersForSalesTeam()" [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
+                  <button md-raised-button class=" " (click)="myOrdersForSalesTeam()"
+                    [ngClass]="{'btn-primary': salesTeamView ==='myorders'}">My Orders</button>
                 </a>
                 <a class="pdright-5">
-                  <button md-raised-button class=" " (click)="quickFilter('followupdate')" [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
+                  <button md-raised-button class=" " (click)="quickFilter('followupdate')"
+                    [ngClass]="{'btn-primary': quickFilterView==='followupdate'}"
                     *ngIf='superDealer || customerCare || salesTeamLogin'>Todays FollowUp</button>
                 </a>
                 <a class="pdright-5">
-                  <button md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-warning': newView === 'gridview'}"
-                    href="javascript:void(0)" (click)="showNewPanel('gridview')">Grid </button>
-                  <button md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin" [ngClass]="{'btn-warning': newView === 'mapview'}"
-                    href="javascript:void(0)" (click)="showNewPanel('mapview')">Map </button>
+                  <button md-raised-button class="  " *ngIf="superDealer || customerCare || salesTeamLogin"
+                    [ngClass]="{'btn-warning': newView === 'gridview'}" href="javascript:void(0)"
+                    (click)="showNewPanel('gridview')">Grid </button>
+                  <button md-raised-button class=" " *ngIf="superDealer || customerCare || salesTeamLogin"
+                    [ngClass]="{'btn-warning': newView === 'mapview'}" href="javascript:void(0)"
+                    (click)="showNewPanel('mapview')">Map </button>
                 </a>
               </div>
             </div>
           </div>
           <div class="d-flex pdright-10">
             <div class="pdright-5">
-              <md-select placeholder="Global Search" [(ngModel)]="globalFilterInput.order.searchtype" name="type" class="full-width left">
+              <md-select placeholder="Global Search" [(ngModel)]="globalFilterInput.order.searchtype" name="type"
+                class="full-width left">
                 <md-option value="name">Customer</md-option>
                 <md-option value="mobile">Customer Mobile</md-option>
                 <md-option value="orderid">Order Id</md-option>
                 <md-option value="status">Status</md-option>
-                <md-option value="followupdate" *ngIf="superDealer || customerCare || salesTeamLogin">FollowUp Date</md-option>
+                <md-option value="followupdate" *ngIf="superDealer || customerCare || salesTeamLogin">FollowUp Date
+                </md-option>
                 <md-option value="supplierid">Supplier</md-option>
-                <md-option value="distributor_id" *ngIf="superDealer || customerCare || salesTeamLogin">Distributor</md-option>
+                <md-option value="distributor_id" *ngIf="superDealer || customerCare || salesTeamLogin">Distributor
+                </md-option>
                 <md-option value="deliveryslot">Delivery Slot</md-option>
                 <md-option value="category">Category</md-option>
               </md-select>
@@ -71,26 +86,29 @@
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'name'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="globalfilterType.customerName">
+                <input class="form-control" mdInput placeholder="Enter Customer Name"
+                  [(ngModel)]="globalfilterType.customerName">
               </md-form-field>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'mobile'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="globalfilterType.customerMobile" maxlength="10"
-                  (keypress)="numberEvent($event)">
+                <input class="form-control" mdInput placeholder="Enter Customer Mobile"
+                  [(ngModel)]="globalfilterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
               </md-form-field>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'orderid'">
               <md-form-field class="example-full-width">
-                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid" (keypress)="numberEvent($event)">
+                <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="globalfilterType.orderid"
+                  (keypress)="numberEvent($event)">
               </md-form-field>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'supplierid'">
               <md-form-field class="example-full-width">
-                <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto"
+                  [formControl]="SupplierCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
                     <span>{{ supplier.fullName }}</span>
@@ -101,7 +119,8 @@
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'distributor_id'">
               <md-form-field class="example-full-width">
-                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto"
+                  [formControl]="DistributorCtrl">
                 <md-autocomplete #auto="mdAutocomplete">
                   <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
                     <span>{{ dist.fullName }}</span>
@@ -112,27 +131,30 @@
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'followupdate'">
               <md-form-field class="inline">
-                <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="globalfilterType.followUpdate">
+                <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate"
+                  [(ngModel)]="globalfilterType.followUpdate">
                 <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                 <md-datepicker #picker></md-datepicker>
               </md-form-field>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'status'">
-              <angular2-multiselect class="mgright left" [data]="statusListComplete" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                name="selectedItem"></angular2-multiselect>
+              <angular2-multiselect class="mgright left" [data]="statusListComplete"
+                [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings" name="selectedItem">
+              </angular2-multiselect>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype == 'category'">
-              <angular2-multiselect class="mgright left" [data]="categories" [(ngModel)]="categoryProduct.selectedItems" [settings]="dropdownSettings"
-                name="selectedItem"></angular2-multiselect>
+              <angular2-multiselect class="mgright left" [data]="categories" [(ngModel)]="categoryProduct.selectedItems"
+                [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
             </div>
 
             <div class="pdright-5" *ngIf="globalFilterInput.order.searchtype =='deliveryslot'">
               <div class="row">
                 <div class="col-6">
                   <md-form-field class="inline">
-                    <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date" [(ngModel)]="globalfilterType.date">
+                    <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date"
+                      [(ngModel)]="globalfilterType.date">
                     <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                     <md-datepicker #picker></md-datepicker>
                   </md-form-field>
@@ -178,19 +200,24 @@
 
 
             <a class="mgtop-10">
-              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()" *ngIf="superDealer || customerCare || salesTeamLogin "></i>
-              <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
-              <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
-              <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare || salesTeamLogin)" (click)="resetDistributorsView()"
-                title="restore"></i>
+              <i class="fa fa-envelope logo-color cursor env-size" title="Inbox" (click)="inbox()"
+                *ngIf="superDealer || customerCare || salesTeamLogin "></i>
+              <i aria-hidden="true" class="fa fa-history logo-color fs-20" title="Reset" (click)="clearFilter()"
+                *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+              <i aria-hidden="true" class="fa fa-refresh logo-color fs-20" title="Refresh" (click)="refresh()"
+                *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+              <i class="fa fa-history logo-color fs-20" *ngIf="!(superDealer || customerCare || salesTeamLogin)"
+                (click)="resetDistributorsView()" title="restore"></i>
             </a>
             &nbsp;&nbsp;&nbsp;
             <a class="mgtop-10">
-              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()" *ngIf="superDealer || customerCare || salesTeamLogin"></i>
+              <i aria-hidden="true" class="fa fa-sliders logo-color fs-20" title="Filter" (click)="filterDailogToggle()"
+                *ngIf="superDealer || customerCare || salesTeamLogin"></i>
               <div class="filterView" *ngIf="showFilterDailog">
                 <div class="height-500">
                   <div class="form-group">
-                    <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type" class="full-width left">
+                    <md-select placeholder="Filter By" [(ngModel)]="filterInput.order.searchtype" name="type"
+                      class="full-width left">
                       <md-option value="name">Customer</md-option>
                       <md-option value="mobile">Customer Mobile</md-option>
                       <md-option value="orderid">Order Id</md-option>
@@ -205,25 +232,28 @@
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'name'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Customer Name" [(ngModel)]="filterType.customerName">
+                      <input class="form-control" mdInput placeholder="Enter Customer Name"
+                        [(ngModel)]="filterType.customerName">
                     </md-form-field>
                   </div>
                   <div class=" " *ngIf="filterInput.order.searchtype == 'mobile'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Customer Mobile" [(ngModel)]="filterType.customerMobile" maxlength="10"
-                        (keypress)="numberEvent($event)">
+                      <input class="form-control" mdInput placeholder="Enter Customer Mobile"
+                        [(ngModel)]="filterType.customerMobile" maxlength="10" (keypress)="numberEvent($event)">
                     </md-form-field>
                   </div>
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'orderid'">
                     <md-form-field class="example-full-width">
-                      <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid" (keypress)="numberEvent($event)">
+                      <input class="form-control" mdInput placeholder="Enter Order Id" [(ngModel)]="filterType.orderid"
+                        (keypress)="numberEvent($event)">
                     </md-form-field>
                   </div>
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'supplierid'">
                     <md-form-field class="example-full-width">
-                      <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto" [formControl]="SupplierCtrl">
+                      <input mdInput placeholder="Enter Supplier Name" aria-label="State" [mdAutocomplete]="auto"
+                        [formControl]="SupplierCtrl">
                       <md-autocomplete #auto="mdAutocomplete">
                         <md-option *ngFor="let supplier of filteredSupplier | async" [value]="supplier.fullName">
                           <span>{{ supplier.fullName }}</span>
@@ -234,7 +264,8 @@
 
                   <div class=" " *ngIf="filterInput.order.searchtype == 'distributor_id'">
                     <md-form-field class="example-full-width">
-                      <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                      <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto"
+                        [formControl]="DistributorCtrl">
                       <md-autocomplete #auto="mdAutocomplete">
                         <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
                           <span>{{ dist.fullName }}</span>
@@ -244,29 +275,33 @@
                   </div>
                   <div class="" *ngIf="filterInput.order.searchtype == 'followupdate'">
                     <md-form-field class="inline">
-                      <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate" [(ngModel)]="filterType.followUpdate">
+                      <input mdInput [mdDatepicker]="picker" placeholder="Next FollowUp Date" name="fromdate"
+                        [(ngModel)]="filterType.followUpdate">
                       <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                       <md-datepicker #picker></md-datepicker>
                     </md-form-field>
                   </div>
 
-                  <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
-                    <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                      name="selectedItem"></angular2-multiselect>
+                  <div class="left mgtop-20 mgbottom-10"
+                    *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'forward'">
+                    <angular2-multiselect class="" [data]="statusListForward" [(ngModel)]="dropdownData.selectedItems"
+                      [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
                   </div>
-                  <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
-                    <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems" [settings]="dropdownSettings"
-                      name="selectedItem"></angular2-multiselect>
+                  <div class="left mgtop-20 mgbottom-10"
+                    *ngIf="filterInput.order.searchtype == 'status' && tabPanelView === 'allorder'">
+                    <angular2-multiselect class="" [data]="statusListAll" [(ngModel)]="dropdownData.selectedItems"
+                      [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
                   </div>
 
                   <div class="left mgtop-20 mgbottom-10" *ngIf="filterInput.order.searchtype == 'category'">
-                    <angular2-multiselect class="" [data]="categories" [(ngModel)]="categoryProduct.selectedItems" [settings]="dropdownSettings"
-                      name="selectedItem"></angular2-multiselect>
+                    <angular2-multiselect class="" [data]="categories" [(ngModel)]="categoryProduct.selectedItems"
+                      [settings]="dropdownSettings" name="selectedItem"></angular2-multiselect>
                   </div>
 
                   <div class="form-group" *ngIf="filterInput.order.searchtype =='deliveryslot'">
                     <md-form-field class="inline">
-                      <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date" [(ngModel)]="filterType.date">
+                      <input mdInput [mdDatepicker]="picker" placeholder="Delivery Date" name="date"
+                        [(ngModel)]="filterType.date">
                       <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
                       <md-datepicker #picker></md-datepicker>
                     </md-form-field>
@@ -348,7 +383,8 @@
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(forward)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "  > -->
-                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(forward)'></i>
+                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders"
+                      (click)='showCustomerAllOrders(forward)'></i>
                     <!-- </button> -->
                   </div>
                 </div>
@@ -359,8 +395,11 @@
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
-                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
-                        <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor" title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }} </b>
+                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left"
+                          title="Distributor Name"></b>
+                        <b class="col-10 rightbtn" class=" onhovertooltip-150  capitalize" *ngIf="forward.distributor"
+                          title="{{forward.distributor.firstname}} {{forward.distributor.lastname }}">{{forward.distributor.firstname +" "+forward.distributor.lastname }}
+                        </b>
                       </div>
                     </label>
                   </div>
@@ -368,16 +407,20 @@
                     <!-- forward.customersource === 'MoyaCustomer' -->
 
 
-                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.expressdelivery == 'true'"
-                      title="Express Delivery"></i>
-                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor" *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
-                    <i class="fa fa-calendar-check-o " *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin' || forward.ispreorder === 'scheduler'"
-                      aria-hidden="true" [ngClass]="forward.StatusColor" [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i>
-                    <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="forward.StatusColor"
-                      title="Moya Customer"></i>
+                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="forward.StatusColor"
+                      *ngIf="forward.expressdelivery == 'true'" title="Express Delivery"></i>
+                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="forward.StatusColor"
+                      *ngIf="forward.isfirstorder === '1'" title="New Order"></i>
+                    <i class="fa fa-calendar-check-o "
+                      *ngIf="forward.ispreorder === 'true' || forward.ispreorder === 'MoyaCustomer' || forward.ispreorder === 'Admin' || forward.ispreorder === 'scheduler'"
+                      aria-hidden="true" [ngClass]="forward.StatusColor"
+                      [attr.title]="forward.ispreorder === 'true' ? 'Preorder': forward.ispreorder"></i>
+                    <i class="fa fa-reply-all " *ngIf="forward.customersource === 'MoyaCustomer'" aria-hidden="true"
+                      [ngClass]="forward.StatusColor" title="Moya Customer"></i>
 
                     <i class="fa fa-frown-o red" title="Revert" *ngIf="forward.status == 'backtodealer'"></i>
-                    <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)"> {{forward.OrderModifiedStatus}} </label>
+                    <label class=" capitalize" [ngClass]="forward.StatusColor" (click)="ViewDistributors(forward)">
+                      {{forward.OrderModifiedStatus}} </label>
                     <!-- assign button -->
                     <br>
                   </div>
@@ -407,7 +450,8 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="forward.productdetails" title="{{forward.productdetails.category}}">
+                      <b class="capitalize onhovertooltip-100" *ngIf="forward.productdetails"
+                        title="{{forward.productdetails.category}}">
                         {{forward.productdetails.category}} </b>
                       <b class="" *ngIf="forward.productdetails === null || forward.productdetails == ''"> - </b>
                     </div>
@@ -478,8 +522,10 @@
                       <b class="capitalize">{{forward.paymenttype}}</b>
                     </div>
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
-                      <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
-                      <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                      <i *ngIf="forward.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"
+                        title="Preorder"></i>
+                      <i *ngIf="forward.preorderby !== null && forward.preorderby !=='dealer'" class="fa fa-asterisk"
+                        style="color:tomato"></i>
                     </div>
                     <div class="p-2-align align-self-center">
                       <span class="logo-color cursor" (click)='showOrderDetails(forward)'>
@@ -500,7 +546,8 @@
                     <div class="col-sm-5  col-md-5  col-lg-5 right">
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
-                      <b class="capitalize" *ngIf="forward.customersource == 'DistributorCustomer' && forward.customer ">{{forward.customer.suppliercode}}</b>
+                      <b class="capitalize"
+                        *ngIf="forward.customersource == 'DistributorCustomer' && forward.customer ">{{forward.customer.suppliercode}}</b>
                       <b class="" *ngIf="!forward.customer"> - </b>
                     </div>
                   </div>
@@ -525,11 +572,15 @@
                     </div>
                     <div class="col-6 right" *ngIf="forward.customersource == 'DistributorCustomer'">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize"
+                        title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}}
+                        {{forward.distributor.lastname}}</b>
                     </div>
                     <div class="col-6 right" *ngIf="forward.customersource == 'MoyaCustomer'">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize" title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}} {{forward.distributor.lastname}}</b>
+                      <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize"
+                        title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}}
+                        {{forward.distributor.lastname}}</b>
                     </div>
                   </div>
 
@@ -540,7 +591,8 @@
                           <p class="td-label mgbottom-0">
                             Address</p>
                           <b>
-                            <span class="capitalize onhovertooltip-260" title="{{forward.orderby_address}}"> {{forward.customer.address}}</span>
+                            <span class="capitalize onhovertooltip-260" title="{{forward.orderby_address}}">
+                              {{forward.customer.address}}</span>
                           </b>
                         </div>
                         <div class="col-3 right align-self-center">
@@ -564,7 +616,9 @@
                     <div class="col-sm-7  col-md-7  col-lg-7 right">
                       <span class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
                         <p class="td-label mgbottom-0"> Action By </p>
-                        <b class="td-label mgbottom-0 danger capitalize onhovertooltip-150" *ngIf="forward.senderdetails && forward.senderdetails.fullname">{{forward.senderdetails.fullname}} </b>
+                        <b class="td-label mgbottom-0 danger capitalize onhovertooltip-150"
+                          *ngIf="forward.senderdetails && forward.senderdetails.fullname">{{forward.senderdetails.fullname}}
+                        </b>
                         <span *ngIf="!forward.senderdetails"> - </span>
                       </span>
                     </div>
@@ -572,7 +626,8 @@
                   <div class="row form-group">
                     <div class="col-7 left">
                       <p class="td-label mgbottom-0"> Supplier</p>
-                      <b class="capitalize onhovertooltip" *ngIf="forward.supplierdetails" title="{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}">
+                      <b class="capitalize onhovertooltip" *ngIf="forward.supplierdetails"
+                        title="{{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}">
                         {{forward.supplierdetails.firstname}} {{forward.supplierdetails.lastname}}</b>
                       <b class="capitalize" *ngIf="forward.supplierdetails === null"> - </b>
                     </div>
@@ -593,7 +648,8 @@
 
                     <div class="col right">
                       <p class="td-label mgbottom-0"> Delivered On </p>
-                      <b class="success" *ngIf="forward.OrderModifiedStatus == 'Delivered'">{{forward.order_delivereddate | utcDate }}</b>
+                      <b class="success"
+                        *ngIf="forward.OrderModifiedStatus == 'Delivered'">{{forward.order_delivereddate | utcDate }}</b>
                       <b class="" *ngIf="forward.OrderModifiedStatus !== 'Delivered'"> - </b>
                     </div>
                   </div>
@@ -603,14 +659,17 @@
                           <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                           <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                               <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
+                    <button class="btn btn-link btn-sm" (click)="acceptOrder(forward)"
+                      *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) ">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm" *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
+                    <button class="btn red btn-link btn-sm"
+                      *ngIf="(forward.status == 'backtodealer' || forward.status == 'assigned' || forward.status == 'ordered') && (forward.status != 'accept') && (forward.distributor != null && forward.supplierdetails === null) && (forward.forwardedby && forward.forwardedby > 0) "
                       (click)="rejectOrder(forward)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)' *ngIf="superDealer || customerCare || salesTeamLogin">
+                    <button class="btn btn-link btn-sm" (click)='showCoverageDetails(forward)'
+                      *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker" aria-hidden="true"></i> Map</button>
 
                     <button class="btn btn-link btn-sm" (click)="viewDistributorsOrders(forward)">
@@ -623,10 +682,13 @@
                   <img src="../assets/images/piechart.png" class="height-95pc" alt="Pie-Chart" />
                 </td> -->
               <td width="10%" class="center">
-                <span *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
-                  <ngx-gauge *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
-                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='forward.timeRemaining' [label]="gaugeLabel"
-                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
+                <span
+                  *ngIf=" ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept'))">
+                  <ngx-gauge
+                    *ngIf="-24 < forward.timeRemaining && forward.timeRemaining < 24 || (forward.timeRemaining == -24 || forward.timeRemaining == 24)"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='forward.timeRemaining'
+                    [label]="gaugeLabel" [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum'
+                    [size]='130' [backgroundColor]="guageBackGround">
 
                   </ngx-gauge>
                   <b *ngIf="forward.timeRemaining < -24" class="red blink-text">
@@ -635,11 +697,25 @@
                   <b *ngIf="forward.timeRemaining > 24 && ((forward.status == 'ordered') || (forward.status == 'assigned') || (forward.status == 'backtodealer') || (forward.status == 'pending') || (forward.status == 'accept')) "
                     class="green"> {{forward.timeRemaining}} Hours Time Remaining</b>
                 </span>
+                <!--  changed by fayaq  -->
                 <b *ngIf="((forward.status == 'delivered') || (forward.status == 'Delivered'))" class="success">
-                  <i class="fa fa-check-square-o fs-20"></i>
-                  <br> Delivered
-                </b>
-
+                  <i class="fa fa-check-square-o fs-20"></i>Delivered</b>
+                <div class="col-sm-5  col-md-5 col-lg-5 left">
+                  <div class="col left">
+                    <b
+                      *ngIf="((forward.status == 'delivered') || (forward.status == 'Delivered')) && forward.raiseinvoicestatus">
+                      <br>Invoice Raised
+                    </b>
+                  </div>
+                </div>
+                <div class="col right">
+                  <div class="col-sm-5  col-md-5 col-lg-5 left">
+                    <b
+                      *ngIf="((forward.status == 'delivered') || (forward.status == 'Delivered'))  && forward.invoicepaymentconfirmstatus">
+                      <br>Payment Received
+                    </b>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
@@ -704,7 +780,8 @@
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(allorder)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!--              <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm " > -->
-                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(allorder)'></i>
+                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders"
+                      (click)='showCustomerAllOrders(allorder)'></i>
                     <!-- </button> -->
                   </div>
                 </div>
@@ -713,7 +790,8 @@
                 <div class="row">
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">Supplier:
-                      <b class="capitalize" *ngIf="allorder.supplierdetails" title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}">
+                      <b class="capitalize" *ngIf="allorder.supplierdetails"
+                        title="{{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}">
                         {{allorder.supplierdetails.firstname}} {{allorder.supplierdetails.lastname}}</b>
                       <b *ngIf="allorder.supplierdetails === null"> - </b>
                     </label>
@@ -727,15 +805,19 @@
                   </div> -->
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
 
-                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.expressdelivery == 'true'"
-                      title="Express Delivery"></i>
-                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor" *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
-                    <i class="fa fa-calendar-check-o " *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'"
-                      aria-hidden="true" [ngClass]="allorder.StatusColor" [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
-                    <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="allorder.StatusColor"
-                      title="Moya Customer"></i>
+                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="allorder.StatusColor"
+                      *ngIf="allorder.expressdelivery == 'true'" title="Express Delivery"></i>
+                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="allorder.StatusColor"
+                      *ngIf="allorder.isfirstorder === '1'" title="New Order"></i>
+                    <i class="fa fa-calendar-check-o "
+                      *ngIf="allorder.ispreorder === 'true' || allorder.ispreorder === 'MoyaCustomer' || allorder.ispreorder === 'Admin'"
+                      aria-hidden="true" [ngClass]="allorder.StatusColor"
+                      [attr.title]="allorder.ispreorder === 'true' ? 'Preorder': allorder.ispreorder"></i>
+                    <i class="fa fa-reply-all " *ngIf="allorder.customersource === 'MoyaCustomer'" aria-hidden="true"
+                      [ngClass]="allorder.StatusColor" title="Moya Customer"></i>
                     <i class="fa fa-frown-o red" title="Revert" *ngIf="allorder.status == 'backtodealer'"></i>
-                    <label class="capitalize" [ngClass]="allorder.StatusColor" (click)="ViewDistributors(allorder)">{{allorder.OrderModifiedStatus}}</label>
+                    <label class="capitalize" [ngClass]="allorder.StatusColor"
+                      (click)="ViewDistributors(allorder)">{{allorder.OrderModifiedStatus}}</label>
                     <br>
                   </div>
                 </div>
@@ -766,7 +848,8 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails" title="allorder.productdetails.category">
+                      <b class="capitalize onhovertooltip-100" *ngIf="allorder.productdetails"
+                        title="allorder.productdetails.category">
                         {{allorder.productdetails.category}} </b>
                       <b class="capitalize" *ngIf="allorder.productdetails === null">
                         - </b>
@@ -843,8 +926,10 @@
                     </div>
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center">
-                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
-                      <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                      <i *ngIf="allorder.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"
+                        title="Preorder"></i>
+                      <i *ngIf="allorder.preorderby !== null && allorder.preorderby !=='dealer'" class="fa fa-asterisk"
+                        style="color:tomato"></i>
                     </div>
                     <div class="p-2-align align-self-center">
                       <span class="logo-color cursor" (click)='showOrderDetails(allorder)'>
@@ -865,7 +950,8 @@
                     <div class="col-sm-5  col-md-5  col-lg-5 right">
                       <p class="td-label mgbottom-0">
                         Supplier Code</p>
-                      <b class="left" *ngIf="allorder.customersource == 'DistributorCustomer' && allorder.customer">{{allorder.customer.suppliercode}}</b>
+                      <b class="left"
+                        *ngIf="allorder.customersource == 'DistributorCustomer' && allorder.customer">{{allorder.customer.suppliercode}}</b>
                       <b class="capitalize" *ngIf="!allorder.customer"> - </b>
 
                     </div>
@@ -877,7 +963,8 @@
                     </div>
                     <div class="col-sm-6  col-md-6 col-lg-6  right">
                       <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                      <b class=" capitalize onhovertooltip-150" *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'"
+                      <b class=" capitalize onhovertooltip-150"
+                        *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'"
                         title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
                     </div>
                   </div>
@@ -903,7 +990,8 @@
                           <p class="td-label mgbottom-0">
                             Address</p>
                           <b>
-                            <span class="capitalize onhovertooltip-260" title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</span>
+                            <span class="capitalize onhovertooltip-260"
+                              title="{{allorder.orderby_address}}">{{allorder.orderby_address}}</span>
                           </b>
                         </div>
                         <div class="col-3 right align-self-center">
@@ -938,7 +1026,8 @@
                   <div class="row form-group">
                     <div class="col left">
                       <p class="td-label mgbottom-0"> Delivered On </p>
-                      <b class="success" *ngIf="allorder.OrderModifiedStatus == 'Delivered'">{{allorder.order_delivereddate | utcDate }}</b>
+                      <b class="success"
+                        *ngIf="allorder.OrderModifiedStatus == 'Delivered'">{{allorder.order_delivereddate | utcDate }}</b>
                       <b *ngIf="allorder.OrderModifiedStatus !== 'Delivered'"> - </b>
 
                     </div>
@@ -959,12 +1048,15 @@
                       <span *ngIf="!customerCare || !superDealer || !salesTeamLogin"> - </span>
                     </div>
                     <div class="col-sm-7  col-md-7  col-lg-7 right align-self-center">
-                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)' *ngIf="superDealer || customerCare || salesTeamLogin">
+                      <button class="btn btn-link btn-sm" (click)='showCoverageDetails(allorder)'
+                        *ngIf="superDealer || customerCare || salesTeamLogin">
                         <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
                       <span class="row" *ngIf !='superDealer || customerCare || salesTeamLogin'>
-                        <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)" *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                        <button class="btn btn-link btn-sm" (click)="acceptOrder(allorder)"
+                          *ngIf="(allorder.status != 'delivered' || allorder.status == 'backtodealer' || allorder.status == 'assigned')  && (allorder.forwardedby && allorder.forwardedby > 0) ">
                           <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
-                        <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)" *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
+                        <button class="btn red btn-link btn-sm" (click)="rejectOrder(allorder)"
+                          *ngIf="(allorder.status !='accept' && allorder.status !='delivered') && (allorder.forwardedby && allorder.forwardedby > 0) ">
                           <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
                       </span>
                     </div>
@@ -973,15 +1065,19 @@
               </td>
 
               <td width="10%" class="center">
-                <span *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept') || ((allorder.status == 'not_broadcasted')) )">
-                  <ngx-gauge *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
-                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining' [label]="gaugeLabel"
-                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
+                <span
+                  *ngIf="((allorder.status == 'ordered') || (allorder.status == 'assigned') || (allorder.status == 'backtodealer') || (allorder.status == 'pending') || (allorder.status == 'accept') || ((allorder.status == 'not_broadcasted')) )">
+                  <ngx-gauge
+                    *ngIf="-24 < allorder.timeRemaining && allorder.timeRemaining < 24 || allorder.timeRemaining == -24 || allorder.timeRemaining == 24"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='allorder.timeRemaining'
+                    [label]="gaugeLabel" [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum'
+                    [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
                   <b *ngIf="allorder.timeRemaining < -24" class="red blink-text">
                     <i class="fa fa-exclamation-triangle fs-20"></i>
                     <br> {{allorder.timeRemaining + (-2)* allorder.timeRemaining}} Hours Over Due </b>
-                  <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time Remaining</b>
+                  <b *ngIf="allorder.timeRemaining > 24" class="green"> {{allorder.timeRemaining}} Hours Time
+                    Remaining</b>
                 </span>
                 <b *ngIf="((allorder.status == 'delivered') || (allorder.status == 'Delivered'))" class="success">
                   <i class="fa fa-check-square-o fs-20"></i>
@@ -1005,15 +1101,16 @@
         <div class="col">
           <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="mapClicked($event)" class="">
 
-            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m)" [latitude]="m.lat" [longitude]="m.lng"
-              [iconUrl]="m.icon">
+            <agm-marker *ngFor="let m of orderslocationData; let i = index" (markerClick)="clickedMarker(m)"
+              [latitude]="m.lat" [longitude]="m.lng" [iconUrl]="m.icon">
             </agm-marker>
 
 
           </agm-map>
         </div>
       </div>
-      <div *ngIf="tabPanelView === 'complete' || quickFilterView == 'misc' || quickFilterView == 'delivered'" class="panelview-style">
+      <div *ngIf="tabPanelView === 'complete' || quickFilterView == 'misc' || quickFilterView == 'delivered'"
+        class="panelview-style">
         <table class="table table-hover table-striped">
           <tbody *ngFor="let complete of completeOrders; let i = index" [attr.data-index]="i">
             <tr class="border-topbottom bg-eee">
@@ -1065,7 +1162,8 @@
                   <div class="col-sm-4  col-md-4  col-lg-4 right" (click)='showEditCustomer(complete)'>
                     <i class="fa fa-edit logo-color "></i>
                     <!-- <button class="col-sm-2 col-md-2 col-lg-2 btn btn-link btn-sm "   > -->
-                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders" (click)='showCustomerAllOrders(complete)'></i>
+                    <i class="fa fa-user logo-color" aria-hidden="true" title="Customers orders"
+                      (click)='showCustomerAllOrders(complete)'></i>
                     <!-- </button> -->
                   </div>
                 </div>
@@ -1075,8 +1173,11 @@
                   <div class="col-sm-7  col-md-7  col-lg-7  left">
                     <label class="td-label">
                       <div class="row">
-                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left" title="Distributor Name"></b>
-                        <b class="col-10 rightbtn" class=" capitalize onhovertooltip-150" *ngIf="complete.distributor" title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }} </b>
+                        <b class="col-2 align-self-center fa fa-sitemap onhovertooltip-200 left"
+                          title="Distributor Name"></b>
+                        <b class="col-10 rightbtn" class=" capitalize onhovertooltip-150" *ngIf="complete.distributor"
+                          title="{{complete.distributor.firstname}} {{complete.distributor.lastname }}">{{complete.distributor.firstname +" "+complete.distributor.lastname }}
+                        </b>
                       </div>
                     </label>
                     <br>
@@ -1084,15 +1185,19 @@
                   <div class="col-sm-5  col-md-5  col-lg-5  right">
                     <!-- forward.customersource === 'MoyaCustomer' -->
 
-                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.expressdelivery == 'true'"
-                      title="Express Delivery"></i>
-                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor" *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
-                    <i class="fa fa-calendar-check-o " *ngIf="complete.ispreorder === 'true' || complete.ispreorder === 'MoyaCustomer' || complete.ispreorder === 'Admin' || complete.ispreorder === 'scheduler'"
-                      aria-hidden="true" [ngClass]="complete.StatusColor" [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
-                    <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true" [ngClass]="complete.StatusColor"
-                      title="Moya Customer"></i>
+                    <i class="fa fa-fighter-jet" aria-hidden="true" [ngClass]="complete.StatusColor"
+                      *ngIf="complete.expressdelivery == 'true'" title="Express Delivery"></i>
+                    <i class="fa fa-first-order" aria-hidden="true" [ngClass]="complete.StatusColor"
+                      *ngIf="complete.isfirstorder === '1'" title="New Order"></i>
+                    <i class="fa fa-calendar-check-o "
+                      *ngIf="complete.ispreorder === 'true' || complete.ispreorder === 'MoyaCustomer' || complete.ispreorder === 'Admin' || complete.ispreorder === 'scheduler'"
+                      aria-hidden="true" [ngClass]="complete.StatusColor"
+                      [attr.title]="complete.ispreorder === 'true' ? 'Preorder': complete.ispreorder"></i>
+                    <i class="fa fa-reply-all " *ngIf="complete.customersource === 'MoyaCustomer'" aria-hidden="true"
+                      [ngClass]="complete.StatusColor" title="Moya Customer"></i>
                     <i class="fa fa-frown-o red" title="Revert" *ngIf="complete.status == 'backtodealer'"></i>
-                    <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)"> {{complete.OrderModifiedStatus}} </label>
+                    <label class=" capitalize" [ngClass]="complete.StatusColor" (click)="ViewDistributors(complete)">
+                      {{complete.OrderModifiedStatus}} </label>
                     <br>
                   </div>
                 </div>
@@ -1128,7 +1233,8 @@
                   <div class="form-group row ">
                     <div class="col-sm-4  col-md-4  col-lg-4 left">
                       <p class="td-label mgbottom-0">Category </p>
-                      <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails" title="complete.productdetails.category">
+                      <b class="capitalize onhovertooltip-100" *ngIf="complete.productdetails"
+                        title="complete.productdetails.category">
                         {{complete.productdetails.category}} </b>
                       <b class="capitalize" *ngIf="complete.productdetails === null ">
                         - </b>
@@ -1204,8 +1310,10 @@
                     </div>
 
                     <div class="col-sm-2  col-md-2  col-lg-2 align-self-center ">
-                      <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato" title="Preorder"></i>
-                      <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk" style="color:tomato"></i>
+                      <i *ngIf="complete.ispreorder == 'true'" class="fa fa-asterisk" style="color:tomato"
+                        title="Preorder"></i>
+                      <i *ngIf="complete.preorderby !== null && complete.preorderby !=='dealer'" class="fa fa-asterisk"
+                        style="color:tomato"></i>
                     </div>
                     <div class="p-2-align align-self-center">
                       <span class="logo-color cursor" (click)='showOrderDetails(complete)'>
@@ -1225,7 +1333,8 @@
                   <div class="col-sm-5  col-md-5  col-lg-5 right">
                     <p class="td-label mgbottom-0">
                       Supplier Code</p>
-                    <b class="capitalize" *ngIf="(complete.customer) && (complete.customersource == 'DistributorCustomer')">{{complete.customer.suppliercode}}</b>
+                    <b class="capitalize"
+                      *ngIf="(complete.customer) && (complete.customersource == 'DistributorCustomer')">{{complete.customer.suppliercode}}</b>
 
                     <b class="capitalize" *ngIf="!complete.customer"> - </b>
                   </div>
@@ -1239,11 +1348,15 @@
                   <div class="col-6 right" *ngIf="complete.customersource == 'DistributorCustomer'">
                     <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
 
-                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize"
+                      title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}}
+                      {{complete.distributor.lastname}}</b>
                   </div>
                   <div class="col-6 right" *ngIf="complete.customersource == 'MoyaCustomer'">
                     <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
-                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize" title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}} {{complete.distributor.lastname}}</b>
+                    <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize"
+                      title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}}
+                      {{complete.distributor.lastname}}</b>
                   </div>
                 </div>
                 <div class="row form-group">
@@ -1270,7 +1383,8 @@
                       <div class="col-9">
                         <p class="td-label mgbottom-0">
                           Address</p>
-                        <b class="capitalize onhovertooltip-260" title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
+                        <b class="capitalize onhovertooltip-260"
+                          title="{{complete.orderby_address}}">{{complete.orderby_address}}</b>
 
                       </div>
                       <div class="col-3 right align-self-center">
@@ -1298,7 +1412,8 @@
                     <div class="col-7 left">
                       <p class="td-label mgbottom-0">
                         Supplier</p>
-                      <b *ngIf="complete.supplierdetails" class="onhovertooltip-100 capitalize" title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}">
+                      <b *ngIf="complete.supplierdetails" class="onhovertooltip-100 capitalize"
+                        title="{{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}">
                         {{complete.supplierdetails.firstname}} {{complete.supplierdetails.lastname}}</b>
                     </div>
                     <div class="col-5  right">
@@ -1312,33 +1427,40 @@
                     <div class="col">
                       <p class="td-label mgbottom-0">
                         Assigned On</p>
-                      <b class="" *ngIf="complete.OrderModifiedStatus !== 'Assign'" class="warning">{{complete.order_assigneddate | utcDate }}</b>
+                      <b class="" *ngIf="complete.OrderModifiedStatus !== 'Assign'"
+                        class="warning">{{complete.order_assigneddate | utcDate }}</b>
                     </div>
 
                     <div class="col right">
                       <p class="td-label mgbottom-0"> Delivered On </p>
-                      <b class="success" *ngIf="complete.OrderModifiedStatus == 'Delivered' || complete.OrderModifiedStatus == 'Rejected'">{{complete.order_delivereddate | utcDate }}</b>
+                      <b class="success"
+                        *ngIf="complete.OrderModifiedStatus == 'Delivered' || complete.OrderModifiedStatus == 'Rejected'">{{complete.order_delivereddate | utcDate }}</b>
                     </div>
                   </div>
 
                   <div class=" pdtopbottom-12">
                     <span class="" aria-hidden="true" *ngIf="customerCare || superDealer || salesTeamLogin">
-                      <p class="td-label mgbottom-0" *ngIf="complete.senderdetails && complete.senderdetails.fullname">Action By :</p>
-                      <span class="danger capitalize onhovertooltip-150" *ngIf="complete.senderdetails">{{complete.senderdetails.fullname}} </span>
+                      <p class="td-label mgbottom-0" *ngIf="complete.senderdetails && complete.senderdetails.fullname">
+                        Action By :</p>
+                      <span class="danger capitalize onhovertooltip-150"
+                        *ngIf="complete.senderdetails">{{complete.senderdetails.fullname}} </span>
                       <span *ngIf="!complete.senderdetails"> - </span>
                     </span>
                     <!-- <button class="btn btn-link btn-sm" (click)='showFollowUpDetails(forward)'>
                             <i class="fa fa-phone-square fa-2" aria-hidden="true"></i> FollowUp Details</button>
                             <button class="btn btn-link btn-sm" (click)='showFollowUp(forward)'>
                                 <i class="fa fa-volume-control-phone fa-2" aria-hidden="true"></i> FollowUp</button> -->
-                    <button class="btn btn-link btn-sm pull-right" (click)="acceptOrder(complete)" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')  && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0)">
+                    <button class="btn btn-link btn-sm pull-right" (click)="acceptOrder(complete)"
+                      *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept')  && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0)">
                       <i class="fa fa-check-circle-o" aria-hidden="true"></i> Accept</button>
 
-                    <button class="btn red btn-link btn-sm pull-right" *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept') && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0) "
+                    <button class="btn red btn-link btn-sm pull-right"
+                      *ngIf="(complete.status == 'backtodealer' || complete.status == 'assigned' || complete.status == 'ordered') && (complete.status != 'accept') && (complete.distributor != null && complete.supplierdetails === null) && (complete.forwardedby && complete.forwardedby > 0) "
                       (click)="rejectOrder(complete)">
                       <i class="fa fa-times-circle-o red" aria-hidden="true"></i> Reject</button>
 
-                    <button class="btn btn-link btn-sm pull-right" (click)='showCoverageDetails(complete)' *ngIf="superDealer || customerCare || salesTeamLogin">
+                    <button class="btn btn-link btn-sm pull-right" (click)='showCoverageDetails(complete)'
+                      *ngIf="superDealer || customerCare || salesTeamLogin">
                       <i class="fa fa-map-marker fa-2" aria-hidden="true"></i> Map</button>
 
                     <button class="btn btn-link btn-sm pull-right" (click)="viewDistributorsOrders(complete)">
@@ -1348,21 +1470,42 @@
               </td>
 
               <td width="10%" class="center">
-                <span *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
-                  <ngx-gauge *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
-                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='complete.timeRemaining' [label]="gaugeLabel"
-                    [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum' [size]='130' [backgroundColor]="guageBackGround">
+                <span
+                  *ngIf=" ((complete.status == 'ordered') || (complete.status == 'assigned') || (complete.status == 'backtodealer') || (complete.status == 'pending') || (complete.status == 'accept'))">
+                  <ngx-gauge
+                    *ngIf="-24 < complete.timeRemaining && complete.timeRemaining < 24 || complete.timeRemaining == -24 || complete.timeRemaining == 24"
+                    [thresholds]="thresholdConfig" [type]="gaugeType" [value]='complete.timeRemaining'
+                    [label]="gaugeLabel" [append]="gaugeAppendText" [min]='guageMinimum' [max]='guageMaximum'
+                    [size]='130' [backgroundColor]="guageBackGround">
                   </ngx-gauge>
 
                   <b *ngIf="complete.timeRemaining < -24 " class="red blink-text">
                     <i class="fa fa-exclamation-triangle fs-20"></i>
                     <br> {{complete.timeRemaining + (-2)* complete.timeRemaining}} Hours Over Due </b>
-                  <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time Remaining</b>
+                  <b *ngIf="complete.timeRemaining > 24" class="green"> {{complete.timeRemaining}} Hours Time
+                    Remaining</b>
                 </span>
                 <b *ngIf="((complete.status == 'delivered') || (complete.status == 'Delivered'))" class="success">
                   <i class="fa fa-check-square-o fs-20"></i>
                   <br> Delivered
                 </b>
+                <div class="col-sm-5  col-md-5 col-lg-5 left">
+                  <div class="col left">
+                    <b
+                      *ngIf="((complete.status == 'delivered') || (complete.status == 'Delivered')) && complete.raiseinvoicestatus">
+                      <br>Invoice Raised
+                    </b>
+                  </div>
+                </div>
+
+                <div class="col right">
+                  <div class="col-sm-5  col-md-5 col-lg-5 left">
+                    <b
+                      *ngIf="((complete.status == 'delivered') || (complete.status == 'Delivered'))  && complete.invoicepaymentconfirmstatus">
+                      <br>Payment Received
+                    </b>
+                  </div>
+                </div>
               </td>
             </tr>
           </tbody>
