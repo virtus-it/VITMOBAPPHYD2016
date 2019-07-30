@@ -493,12 +493,13 @@ export class OrderDetailDailogComponent implements OnInit {
         this.orderDetailsMessageToCustomer = 'Hi ' + data.orderby_firstname + ' Your order with Moya The waterman is being handled by distributor ' + data.distributor.firstname + '. Your Order Details are : Order ID ' + data.order_id + 'Product : ' + data.productdetails.category + ', Quantity : ' + data.quantity + ' . At address : ' + this.address + '.';
         let userMessageInput = { "User": { "mobilenumber": [{ "mobileno": data.orderby_mobileno, "gcm_regid": "0", "fullName": data.orderby_firstname }], "count": 1, "name": 'Moya', "smstype": "sms", "user_type": this.authenticationService.userType(), "transtype": "createsms", "type": "", "showcomment": false, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "body": this.orderDetailsMessageToCustomer, "title": "", "redirecturl": "", "url": "", "buttons": [""], "buttonactions": [], "option": [""], "sliderurl": [{ "image": "", "count": 0 }] } }
         let formattedInput = { type: '', getAllMobileInput: {}, sendSmsInput: userMessageInput };
-
-        this.smsService.CreateSms(formattedInput)
-            .subscribe(
-                output => this.sendOrderDetailsMessageResult(output),
-                error => {
-                });
+        this.messageInput.order.reason = this.orderDetailsMessageToCustomer;
+        this.messageInput.order.ispublic = '0';
+        // this.smsService.CreateSms(formattedInput)
+        //     .subscribe(
+        //         output => this.sendOrderDetailsMessageResult(output),
+        //         error => {
+        //         });
     }
     sendOrderDetailsMessageResult(result) {
     console.log(result);
@@ -533,13 +534,14 @@ export class OrderDetailDailogComponent implements OnInit {
         this.orderDetailsMessageToDistributor = 'Hi ' + data.distributor.firstname + ' You received an order from' + data.distributor.firstname + '. The Order Details are : Order ID ' + data.order_id + 'Product : ' + data.productdetails.category + ', Quantity : ' + data.quantity + ' . At address : ' + this.address + '.';
         let userMessageInput = { "User": { "mobilenumber": [{ "mobileno": data.orderby_mobileno, "gcm_regid": "0", "fullName": data.orderby_firstname }], "count": 1, "name": 'Moya', "smstype": "sms", "user_type": this.authenticationService.userType(), "transtype": "createsms", "type": "", "showcomment": false, "loginid": this.authenticationService.loggedInUserId(), "apptype": this.authenticationService.appType(), "body": this.orderDetailsMessageToCustomer, "title": "", "redirecturl": "", "url": "", "buttons": [""], "buttonactions": [], "option": [""], "sliderurl": [{ "image": "", "count": 0 }] } }
         let formattedInput = { type: '', getAllMobileInput: {}, sendSmsInput: userMessageInput };
-
-        this.smsService.CreateSms(formattedInput)
-            .subscribe(
-                output => this.sendOrderDetailsMessageToDistributorResult(output),
-                error => {
-                });
-    }
+        this.messageInput.order.reason = this.orderDetailsMessageToDistributor;
+        this.messageInput.order.ispublic = '1';
+    //     this.smsService.CreateSms(formattedInput)
+    //         .subscribe(
+    //             output => this.sendOrderDetailsMessageToDistributorResult(output),
+    //             error => {
+    //             });
+     }
     sendOrderDetailsMessageToDistributorResult(result) {
     console.log(result);
     // this.thisDialogRef.close(result);

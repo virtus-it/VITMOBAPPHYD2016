@@ -49,6 +49,9 @@ export class EditOrderStatusComponent implements OnInit {
 
   updateOrderStatus() {
     this.loaderService.display(true);
+    // if (this.editStatusInput.order.paymentype == "credit") {
+    //   this.isConfirmed = false; 
+    // }
     if (!this.editStatusInput.order.received_amt) {
       this.editStatusInput.order.received_amt = 0;
     }
@@ -107,7 +110,7 @@ export class EditOrderStatusComponent implements OnInit {
 
 
       if (this.editStatusInput.order.paymentype == "credit") {
-        this.editStatusInput.order.received_amt = 0;
+        this.editStatusInput.order.received_amt = 0; 
       }
       if (this.isConfirmed) {
         this.editStatusInput.order.paymentstatus = 'confirm';

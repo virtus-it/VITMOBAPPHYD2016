@@ -129,7 +129,9 @@ export class DistributorCreateDialogComponent implements OnInit {
             }
             else {
                 let data = { id: result.data.user_id }
-                this.openStockDialog(data);
+                this.thisDialogRef.close('success');
+                //this.openStockDialog(data);
+
 
 
 
@@ -179,19 +181,19 @@ export class DistributorCreateDialogComponent implements OnInit {
         }
 
     }
-    openStockDialog(data) {
-        let dialogRef = this.dialog.open(AddStockDistributorComponent, {
-            width: '70%',
-            data: data
-        });
-        dialogRef.afterClosed().subscribe(result => {
-            //console.log(`Dialog closed: ${result}`);
-            //this.dialogResult = result;
-            if (result == 'success') {
-                this.thisDialogRef.close('success');
-            }
-        });
-    }
+    // openStockDialog(data) {
+    //     let dialogRef = this.dialog.open(AddStockDistributorComponent, {
+    //         width: '70%',
+    //         data: data
+    //     });
+    //     dialogRef.afterClosed().subscribe(result => {
+    //         //console.log(`Dialog closed: ${result}`);
+    //         //this.dialogResult = result;
+    //         if (result == 'success') {
+    //             this.thisDialogRef.close('success');
+    //         }
+    //     });
+    // }
     onCloseCancel() {
         this.thisDialogRef.close('Cancel');
     }

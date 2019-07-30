@@ -21,7 +21,7 @@ export class CustomerExcelUploadComponent implements OnInit {
 
  
   onFileSelected(event) {
-   
+    
     console.log(event);
     var files = event.target.files;
     var file = files[0];
@@ -32,26 +32,35 @@ export class CustomerExcelUploadComponent implements OnInit {
       frmData.append("userid", this.authenticationService.loggedInUserId());
       this.authenticationService.uploadExcel(frmData).subscribe(res => {
         console.log(res);
-        this.validateMessage = JSON.stringify(res.data);
+        //this.validateMessage = JSON.stringify(res.data);
+        if(res.data && res.data.message){
+        this.validateMessage=res.data.message;
+        }
+        else if(res.data){
+          this.validateMessage=res.data;
+        }
+       /// this.validateMessage="Upload Successfully";
         this.showButton = false;
-
       }, err => {
         this.showButton = false;
-        this.validateMessage = JSON.stringify(err);
+        //this.validateMessage = JSON.stringify(err);
         console.log(err);
-      })
-      
-    }
+        this.loaderService.display(false);
 
+      })
+     
+    }
   }
   openExcelDialog() {
     this.validateMessage = '';
     this.showButton = true;
+  
   }
   ngOnInit() {
   }
 
   onCloseModal() {
-    this.thisDialogRef.close('cancel');
+    this.thisDialogRef.close('success');
+ 
   }
 }
