@@ -25,7 +25,7 @@ export class PaymentsService {
     .map(res => {
       let response = res.json();
       this.authService.sendRefreshedToken(res);
-      if(response.data == 'token malformed'){
+      if(response.data == 'token malformed'){ 
         this.authService.logout();
       }
       return res.json();

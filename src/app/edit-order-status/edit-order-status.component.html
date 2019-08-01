@@ -49,6 +49,15 @@
           </label>
         </div>
       </div>
+      <div class="row mgtop-10">
+        <div class="col-3 form-group">
+            <label class="custom-control mb-2 mr-sm-2 mb-sm-0">
+                <md-form-field class="wd-60pc">
+                <input class="" mdInput placeholder="DC Challan" name='dcchallan' [(ngModel)]="editStatusInput.order.dcchallan">
+                </md-form-field>
+              </label>
+        </div>
+      </div>
       <div class="row pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
         <div class="col-3 pleft">
 
