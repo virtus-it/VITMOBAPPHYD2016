@@ -39,7 +39,7 @@ export class OrderDetailDailogComponent implements OnInit {
     salesTeamLogin = true;
     quickFilterView = "";
     customerAddressDetails = "";
-    messageInput = { "order": { "orderstatus": "Message", "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "ispublic": "0", "customerid": this.orderDetail.order_by, "reason": "" } };
+    messageInput = { "order": { "orderstatus": "Message", "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "orderid": this.orderDetail.order_id, "ispublic": "0", "customerid": this.orderDetail.order_by, "reason": "", "sendSmsToCust": false } };
 
     notificationDetails = { "templatename": "", "status": "sent" };
     notificationHistory = [];
@@ -263,13 +263,13 @@ export class OrderDetailDailogComponent implements OnInit {
         // let input:any =  JSON.parse(JSON.stringify(this.messageInput)); deep copy
         let input:any = Object.assign({}, this.messageInput); //json copy
          if (input.order.ispublic == "1") {
-            input.order.sendSmsToCust = false; 
+            input.order.sendSmsToCust = '0';
             }
-      if(input.order.sendSmsToCust){
-          input.order.sendSmsToCust = 1;
+      else if(input.order.sendSmsToCust){
+          input.order.sendSmsToCust = '1';
       }
       else{
-          input.order.sendSmsToCust = 0;
+          input.order.sendSmsToCust = '0';
       }   
         this.orderLandingService.sendMessage(input)
             .subscribe(
