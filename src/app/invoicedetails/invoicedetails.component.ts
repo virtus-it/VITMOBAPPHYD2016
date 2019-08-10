@@ -31,7 +31,7 @@ export class InvoicedetailsComponent implements OnInit {
       .subscribe(
       output => this.sendInvoiceResult(output),
       error => {
-        //console.log("error");
+        console.log("error");
 
       });
 
@@ -43,7 +43,7 @@ export class InvoicedetailsComponent implements OnInit {
     }
   }
   ngOnInit() {
-    //console.log(this.Detail);
+    console.log(this.Detail);
 }
 
 }

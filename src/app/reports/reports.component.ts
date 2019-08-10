@@ -287,7 +287,7 @@ export class ReportsComponent implements OnInit {
     //console.log(input);
     this.loaderService.display(true);
 
-    this.reportservice.downloadReports(input)
+    this.reportservice.printInvoice(input)
       .subscribe(
         output => this.downloadOrdersResult(output),
         error => {
@@ -308,7 +308,7 @@ export class ReportsComponent implements OnInit {
             //console.log("error in customer");
             this.loaderService.display(false);
           });
-
+ 
     }
     else{
       this.loaderService.display(false);

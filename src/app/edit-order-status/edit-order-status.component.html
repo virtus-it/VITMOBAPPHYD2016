@@ -50,14 +50,19 @@
         </div>
       </div>
       <div class="row mgtop-10">
-        <div class="col-3 form-group">
-            <label class="custom-control mb-2 mr-sm-2 mb-sm-0">
+          <div class="col-4 form-group">
                 <md-form-field class="wd-60pc">
                 <input class="" mdInput placeholder="DC Challan" name='dcchallan' [(ngModel)]="editStatusInput.order.dcchallan">
-                </md-form-field>
-              </label>
-        </div>
-      </div>
+                </md-form-field>              
+              </div>
+              <div class=" col-sm-4  col-md-4  col-lg-4 form-group">
+                  <md-form-field class="inline">
+                      <input class="" mdInput [mdDatepicker]="pickers" placeholder="DC Date" name='dcdate' [(ngModel)]="dcChallenDate">
+                      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                      <md-datepicker #pickers></md-datepicker>
+                    </md-form-field> 
+                  </div>
+          </div>
       <div class="row pdtop-5" *ngIf="editStatusInput.order.orderstatus == 'delivered'">
         <div class="col-3 pleft">
 

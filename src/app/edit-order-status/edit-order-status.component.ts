@@ -5,7 +5,7 @@ import {MdDialogRef} from '@angular/material';
 import {AuthenticationService} from '../login/authentication.service';
 import {OrderLandingService} from '../order-landing/order-landing.service';
 import {LoaderService} from '../login/loader.service';
-
+import * as moment from 'moment';
 @Component({
   selector: 'app-edit-order-status',
   templateUrl: './edit-order-status.component.html',
@@ -22,7 +22,7 @@ export class EditOrderStatusComponent implements OnInit {
   emptyCansError = false;
   emptyCansValidate = false;
   quantityError = false;
-
+dcChallenDate = null;
 
   editStatusInput: any = {
     "order": {
@@ -38,7 +38,8 @@ export class EditOrderStatusComponent implements OnInit {
       "return_cans": this.orderDetail.return_cans,
       "adv_amt": 0,
       "servicecharges" : this.orderDetail.servicecharges,
-      "dcchallan": this.orderDetail.dc_challan
+      "dcchallan": this.orderDetail.dc_challan,
+      "dcdate": ""
     }
   };
   isConfirmed = true;
@@ -49,6 +50,8 @@ export class EditOrderStatusComponent implements OnInit {
 
   updateOrderStatus() {
     this.loaderService.display(true);
+    var date = moment(this.dcChallenDate).format('YYYY-MM-DD HH:MM:SS');
+    this.editStatusInput.order.dcdate= date;
     // if (this.editStatusInput.order.paymentype == "credit") {
     //   this.isConfirmed = false; 
     // }
@@ -224,7 +227,9 @@ export class EditOrderStatusComponent implements OnInit {
     this.editStatusInput.order.return_cans = this.orderDetail.quantity - this.orderDetail.empty_cans;
     this.amountCalculate();
     // this.editStatusInput.order.bill_amount = this.orderDetail.bill_amount;
-
+ if(this.orderDetail.dcdate){
+  this.dcChallenDate = new Date(this.orderDetail.dcdate);
+ }
     console.log(this.orderDetail);
   }
 

@@ -260,7 +260,17 @@ export class OrderDetailDailogComponent implements OnInit {
     }
     sendMessage() {
         this.loaderService.display(true);
-        let input = this.messageInput;
+        // let input:any =  JSON.parse(JSON.stringify(this.messageInput)); deep copy
+        let input:any = Object.assign({}, this.messageInput); //json copy
+         if (input.order.ispublic == "1") {
+            input.order.sendSmsToCust = false; 
+            }
+      if(input.order.sendSmsToCust){
+          input.order.sendSmsToCust = 1;
+      }
+      else{
+          input.order.sendSmsToCust = 0;
+      }   
         this.orderLandingService.sendMessage(input)
             .subscribe(
                 output => this.sendMessageResult(output),
@@ -276,6 +286,20 @@ export class OrderDetailDailogComponent implements OnInit {
             this.getOrderDetailsById();
         }
     }
+    // sendSmsToCust(){
+    //     this.loaderService.display(true);
+    //     let input = this.messageInput;
+    //     if(this.sendSmsToCust){
+    //         input.order.ispublic = '1';
+    //     }    
+    //     this.orderLandingService.sendMessage(input)
+    //         .subscribe(
+    //             output => this.sendMessageResult(output),
+    //             error => {
+    //                 ////console.log("error in order details");
+    //             });
+    // }
+    
     onCloseCancel() {
         this.thisDialogRef.close('success');
     }

@@ -35,7 +35,7 @@ export class ReportsService {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
     let options = new RequestOptions({ headers: headers });
-    return this.http.post(this.apiUrl + '/download_orderlist_browser', bodyString, options)
+    return this.http.post(this.apiUrl + '/printinvoice', bodyString, options)
       .map(res => {
         let response = res.json();
         this.authenticationService.sendRefreshedToken(res);

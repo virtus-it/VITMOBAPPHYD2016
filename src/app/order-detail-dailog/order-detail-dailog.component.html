@@ -620,14 +620,14 @@
               </label>
 
               <label>
-                <i class="fa fa-envelope-open-o fa-20 logo-color" aria-hidden="true" title="Send Order details to distributor" (click)="sendOrderDetailsMessageToDistributor(orderDetail)"></i> 
+                <i class="fa fa-envelope-open-o fa-20 logo-color" aria-hidden="true" title="Send Order details to distributor" (click)="sendOrderDetailsMessageToDistributor(orderDetail)"></i>&nbsp;
               </label>
 
               <label class="float-right">
                 <i class="fa fa-volume-control-phone fa-20 logo-color" aria-hidden="true" title="Internal Message" (click)="internalMessage(orderDetail)"></i> &nbsp;
                 <i class="fa fa-commenting-o 	logo-color fs-24" aria-hidden="true" title="Message Template" *ngIf="superDealer || customerCare || salesTeamLogin"
-                  (click)="messageTemplate(orderDetail)"></i> &nbsp;
-                <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>
+                  (click)="messageTemplate(orderDetail)"></i> &nbsp;   
+                              
               </label>
             </div>
             <div class=" ">
@@ -638,7 +638,16 @@
             <div class="">
               <small class="">Characters Remaining :
                 <span class="danger">{{500 - messageInput.order.reason.length}}</span>
-              </small>
+              </small>                 
+                  <!-- <i class="fa fa-paper-plane logo-color  fs-20" title="Send SMS to customer" aria-hidden="true" (click)="sendMessage(false)" *ngIf="messageInput.order.ispublic == 0"></i> -->                 
+                  <label class="float-right">
+                      <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>                    
+                    </label> 
+                      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 float-right" *ngIf="messageInput.order.ispublic == 0">
+                        <input type="checkbox" class="custom-control-input"  [(ngModel)]="messageInput.order.sendSmsToCust" name="send sms" >
+                        <span class="custom-control-indicator"></span>
+                       Send Sms &nbsp;
+                      </label>                       
             </div>
           </div>
         </div>

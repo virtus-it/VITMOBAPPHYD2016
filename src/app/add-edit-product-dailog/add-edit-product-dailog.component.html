@@ -123,7 +123,7 @@
             </md-error>
 
           </md-form-field>
-        </div>
+          </div>
         <div class="col-md-4 col-sm-4 col-lg-4">
           <md-form-field class="">
             <input class="form-control" mdInput placeholder="Express delivery" [formControl]="p7FC" [(ngModel)]="productDetails.expressdeliverycharges"
@@ -132,7 +132,6 @@
               Express Delivery Charges is
               <strong>required</strong>
             </md-error>
-
           </md-form-field>
         </div>
 
@@ -149,6 +148,13 @@
                   </md-form-field>
                 </div> -->
 
+      </div>
+      <div class="row form-group">
+          <div class="col-md-4 col-sm-4 col-lg-4">
+              <md-form-field class="example-full-width">
+                <input class="form-control" mdInput placeholder="HSN Code"  [(ngModel)]="productDetails.hsncode" name="hsn Code">
+              </md-form-field>
+            </div> 
       </div>
       <div class="row">
         <div class="col-md-4 col-sm-4 col-lg-4 align-self-center">
