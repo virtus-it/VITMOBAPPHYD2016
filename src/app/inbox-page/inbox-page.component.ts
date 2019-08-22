@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FollowUpService } from '../follow-up/follow-up.service';
 import { AuthenticationService } from '../login/authentication.service';
 import { LoaderService } from '../login/loader.service';
+import { OrderDetailDailogComponent } from '../order-detail-dailog/order-detail-dailog.component';
+import { MdDialog } from '@angular/material';
 import * as moment from 'moment';
 import * as _ from 'underscore';
 
@@ -14,7 +16,7 @@ import * as _ from 'underscore';
 })
 export class InboxPageComponent implements OnInit {
 
-  constructor( private followupService: FollowUpService, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
+  constructor( private followupService: FollowUpService, public dialog: MdDialog,private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   AllMessages:any = [];
   noMessages = false;
   filterInput ={"fromDate":null , "toDate":null};
@@ -51,6 +53,19 @@ export class InboxPageComponent implements OnInit {
     else{
       this.noMessages = true;
     }
+  }
+  showOrderDetails(data) {
+    let formattedData = {order_id: data.orderid , order_by:data.userid}
+    let dialogRefShowOrder = this.dialog.open(OrderDetailDailogComponent, {
+
+      width: '95%',
+      data: formattedData
+    });
+    dialogRefShowOrder.afterClosed().subscribe(result => {
+      //console.log(`Dialog closed: ${result}`);
+      if(result == 'success'){
+      }
+    });
   }
 
   filterMessages(){

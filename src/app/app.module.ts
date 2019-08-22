@@ -146,6 +146,7 @@ import { CustomerExcelUploadComponent } from './customer-excel-upload/customer-e
 import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-redeem-settings.component';
 import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.component';
 import { SalestrackingComponent } from './salestracking/salestracking.component';
+import { PaymentsHistoryComponent } from './payments-history/payments-history.component';
 
 
 
@@ -269,6 +270,7 @@ import { SalestrackingComponent } from './salestracking/salestracking.component'
         DeleteRedeemSettingsComponent,
         UnknownOrdersComponent,
         SalestrackingComponent,
+        PaymentsHistoryComponent,
 
 
 
@@ -440,7 +442,8 @@ import { SalestrackingComponent } from './salestracking/salestracking.component'
          AssociateDistributorComponent,
          CustomerExcelUploadComponent,
          DeleteRedeemSettingsComponent,
-         UnknownOrdersComponent
+         UnknownOrdersComponent,
+         PaymentsHistoryComponent
       
 
 

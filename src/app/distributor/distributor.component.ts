@@ -65,7 +65,7 @@ export class DistributorComponent implements OnInit {
     category: '';
 
     filterTypeModel = { categoryname: "", typeofphone: "", address: "", isAreaDefined: "", productId: '', isstockpointDefined: '', mobileno: '', firstname: '' };
-    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "search", "apptype": this.authenticationService.appType(), "pagesize": 100, "searchtype": "", "searchtext": "", "devicetype": "", "moyaversioncode": "", "category": '', "producttype": '', 'productname': "" } };
+    filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "search", "apptype": this.authenticationService.appType(), "pagesize": 100, "searchtype": "", "searchtext": "", "devicetype": "", "moyaversioncode": "", "category": '', "producttype": '', 'productname': "" } };//page size change from 1000 to 100
 
 
     distributorClickMore = true;
@@ -77,7 +77,7 @@ export class DistributorComponent implements OnInit {
     salesTeamId: any = '';
     // LastfilterRecords = false;
 
-    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "getalldistributors", "apptype": this.authenticationService.appType(), "pagesize": 1000 } };
+    distributorInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "getalldistributors", "apptype": this.authenticationService.appType(), "pagesize": 100 } };
 
 
     // let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 1000 } }
@@ -211,9 +211,6 @@ export class DistributorComponent implements OnInit {
             this.LastfilterRecords = true;
         }
     }
-
-
-
     getDistributors(firstCall) {
         this.loaderService.display(true);
         if (this.distributors && this.distributors.length && !firstCall) {
@@ -221,14 +218,13 @@ export class DistributorComponent implements OnInit {
             if (lastdistributor) {
                 this.distributorInput.root.lastuserid = lastdistributor.userid;
             }
-
         }
         else {
             this.distributors = [];
             this.distributorInput.root.lastuserid = null;
         }
         let input = this.distributorInput;
-        //console.log(input);
+        console.log(input);
         this.distributorService.getAllDistributors(input)
             .subscribe(
                 output => this.getDistributorsResult(output),
@@ -251,10 +247,11 @@ export class DistributorComponent implements OnInit {
 
         }
         else {
-            this.distributorClickMore = false;
+            this.distributorClickMore = false ;
 
         }
     }
+    
     openMapDialog(data) {
         let dialogRef = this.dialog.open(MapDialogComponent, {
             width: '95%',

@@ -18,7 +18,7 @@ export class EditPointsComponent implements OnInit {
   distributorPoints:any = [];
   distributorPointsDetails:any = [];
   noPoints:boolean = false;
-
+  errorMessage :boolean= false;
 
   getAllPointsCustomer(){
     let input = {"User":{"TransType":"getpoints","userid": this.Detail.userid,"usertype":"customer"}};
@@ -48,6 +48,7 @@ export class EditPointsComponent implements OnInit {
   }
   getPointsDetailsResult(result){
     if(result.result == 'success'){
+      if(result.data && result.data.length > 0){    
       _.each(result.data , function(i , j){
         let details:any = i;
       if(details.status == 'delivered'){
@@ -62,8 +63,13 @@ export class EditPointsComponent implements OnInit {
       
 
     });
-      this.customerPointsDetails = result.data;
-
+    this.customerPointsDetails = result.data;
+    
+      this.errorMessage = false;
+  }
+  else{
+    this.errorMessage = true;
+  }
     }
 
   }

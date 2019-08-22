@@ -25,6 +25,7 @@ import { EditPointsComponent } from '../edit-points/edit-points.component';
 import { SortingPipe } from '../pipes/sorting.pipe';
 import { AssociateDistributorComponent } from '../associate-distributor/associate-distributor.component';
 import { CustomerExcelUploadComponent } from '../customer-excel-upload/customer-excel-upload.component';
+import { PaymentsHistoryComponent } from '../payments-history/payments-history.component';
 
 
 // excel 
@@ -175,6 +176,17 @@ export class CustomerComponent implements OnInit {
         let dialogRefSetting = this.dialog.open(CustomerSettingDailogComponent, {
             width: '810px',
             data: ''
+        });
+        dialogRefSetting.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            //this.dialogResult = result;
+        });
+    }
+    paymentHistory(details){
+        let customerDetails ={ userid: details.userid}
+        let dialogRefSetting = this.dialog.open(PaymentsHistoryComponent, {
+            width: '800px',
+            data: customerDetails
         });
         dialogRefSetting.afterClosed().subscribe(result => {
             //console.log(`Dialog closed: ${result}`);

@@ -35,11 +35,12 @@
           </div>
           <div class="col right">
               <button md-raised-button class="btn btn-primary btn-small fs-14" (click)="getPointsDetails()">Details</button>&nbsp;
+              
             </div>
         </div>
       </div>
 
-      <div class="" *ngIf="Detail.usertype !== 'dealer' && customerPointsDetails ">
+      <div class="" *ngIf="Detail.usertype !== 'dealer' && customerPointsDetails">
         <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
           <thead >
             <tr *ngIf="customerPointsDetails.length > 0">
@@ -58,6 +59,10 @@
             </tr>
           </tbody>
         </table>
+        <h4 class="error  center">
+          <span *ngIf="errorMessage">
+            <i class="fa fa-frown-o" aria-hidden="true"></i> No Points Available</span>
+          </h4>
       </div>
 
       <!-- Customer points-->

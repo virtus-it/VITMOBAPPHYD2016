@@ -33,6 +33,23 @@ export class PaymentsService {
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+  paymentHistory(input){
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/getpaymentdetails', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      this.authService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){ 
+        this.authService.logout();
+      }
+      return res.json();
+    })
+      .do(data => console.log('All: ') )
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
   getBillDetails(input){
     let bodyString = JSON.stringify(input); // Stringify payload
@@ -89,7 +106,6 @@ export class PaymentsService {
       .do(data => console.log('All: ') )
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-
   getAdvanceAmount(input){
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()

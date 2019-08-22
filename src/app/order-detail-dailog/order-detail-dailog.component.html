@@ -76,10 +76,10 @@
               </small>
             </div>
             <div class="col-md-6 col-6 col-sm-12 right">
-              <small *ngIf="dailogOrderDetails.dealerdetails" class="capitalize info">
-                <i class="fa fa-sitemap info" title="Distributor"></i>
+              <b class="logo-color float-right" *ngIf="dailogOrderDetails.dealerdetails" (click)='openUpdateDialog()'>
+                <i class="fa fa-user" title="Distributor" aria-hidden="true"> </i>
                 {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}} ({{dailogOrderDetails.dealerdetails.mobileno}})
-              </small>
+              </b>
 
               <small *ngIf="dailogOrderDetails.dealerdetails == '' || dailogOrderDetails.dealerdetails === null " class="info">
                 <i class="fa fa-sitemap " title="Distributor"></i> - </small>
@@ -104,8 +104,9 @@
           </div>
           <div class="row form-group">
             <div class="col-md-6">
-              <small class="capital ">
-                <i class="fa fa-user" aria-hidden="true"></i> {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
+              <small class="logo-color capital "  (click)='showEditCustomer()'>
+                <i class="fa fa-user" aria-hidden="true"></i> 
+                {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
               <br>
               <small class="capital ">
                 <i class="fa fa-map-marker" aria-hidden="true"></i>
@@ -273,7 +274,7 @@
                       <li>
                         <div class="d-flex">
                           <div class="p-0">
-                            <small class="capital ng-binding">
+                            <small class="logo-color capital ng-binding" (click)='showEditCustomer()'>
                               <i class="fa fa-user" aria-hidden="true"></i>
                               {{dailogOrderDetails.orderby_firstname}} {{dailogOrderDetails.orderby_lastname}} </small>
                           </div>
@@ -307,12 +308,11 @@
                     <ul class="pdleft-15" *ngIf="dailogOrderDetails.supplierdetails">
                       <li>
                         <div class="d-flex">
-                          <div class="p-0">
-
-                            <small class="capital ng-binding">
-                              <i class="fa fa-user" aria-hidden="true"></i>
-                              {{dailogOrderDetails.supplierdetails.firstname}} {{dailogOrderDetails.supplierdetails.lastname}}</small>
-                          </div>
+                          <div class="p-0">                           
+                            <small class="logo-color capital ng-binding " *ngIf="dailogOrderDetails.dealerdetails" (click)='openUpdateDialog()'>
+                                      <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
+                                      {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
+                                  </div>
                           <div class="ml-auto p-0">
                             <small class="ng-binding gray9">
                               <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -332,7 +332,7 @@
                         <div class="d-flex">
                           <div class="p-0">
 
-                            <small class="capital ng-binding">
+                            <small class="logo-color capital ng-binding"  *ngIf="dailogOrderDetails.dealerdetails" (click)='openUpdateDialog()'>
                               <i class="fa fa-user" aria-hidden="true"></i>
                               {{dailogOrderDetails.forwardeddetails.fullname}}</small>
                           </div>
@@ -396,8 +396,8 @@
                     <ul class="pdleft-15" *ngIf="!dailogOrderDetails.supplierdetails">
                       <li>
                         <div class="d-flex">
-                          <div class="p-0">
-                            <small class="capital ng-binding" *ngIf="dailogOrderDetails.dealerdetails">
+                          <div class="p-0">                           
+                    <small class=" logo-color capital ng-binding" *ngIf="dailogOrderDetails.dealerdetails" (click)='openUpdateDialog()'>
                               <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
                               {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
                           </div>
@@ -643,7 +643,7 @@
                   <label class="float-right">
                       <i class="fa  fa-share-square-o logo-color  fs-20" title="Send Message" aria-hidden="true" (click)="sendMessage()"> </i>                    
                     </label> 
-                      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 float-right" *ngIf="messageInput.order.ispublic == 0">
+                      <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0 float-right" *ngIf="messageInput.order.ispublic == '0'">
                         <input type="checkbox" class="custom-control-input"  [(ngModel)]="messageInput.order.sendSmsToCust" name="send sms" >
                         <span class="custom-control-indicator"></span>
                        Send Sms &nbsp;

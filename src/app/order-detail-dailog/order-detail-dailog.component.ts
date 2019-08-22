@@ -16,6 +16,8 @@ import { FollowUpService } from '../follow-up/follow-up.service';
 import { EditQuantityDailogComponent } from '../edit-quantity-dailog/edit-quantity-dailog.component';
 import { LoaderService } from '../login/loader.service';
 import { DistributorListDialogComponent } from '../distributor-list-dialog/distributor-list-dialog.component';
+import { DistributorCreateDialogComponent } from '../distributor-create-dialog/distributor-create-dialog.component';
+import { AddEditCustomerDailogComponent } from '../add-edit-customer-dailog/add-edit-customer-dailog.component';
 import * as _ from 'underscore';
 
 
@@ -66,6 +68,29 @@ export class OrderDetailDailogComponent implements OnInit {
         });
 
     }
+    openUpdateDialog() {
+        let dialogRef = this.dialog.open(DistributorCreateDialogComponent, {
+            width: '700px',
+            data: this.dailogOrderDetails.dealerdetails
+        });
+        dialogRef.afterClosed().subscribe(result => {
+            //console.log(`Dialog closed: ${result}`);
+            //this.dialogResult = result;
+
+        });
+    }
+    showEditCustomer() {
+
+        let dialogRefEditCustomer = this.dialog.open(AddEditCustomerDailogComponent, {
+
+            width: '700px',
+            data: this.dailogOrderDetails
+        });
+        dialogRefEditCustomer.afterClosed().subscribe(result => {
+            console.log(`Dialog closed: ${result}`);
+        });
+    }
+
     editCan(orderData) {
         this.customerProductDetailsCopy.order_by = orderData.order_by;
         let dialogRefEditCan = this.dialog.open(EmptyCanDailogComponent, {
@@ -151,7 +176,7 @@ export class OrderDetailDailogComponent implements OnInit {
 
         }
         this.orderLandingService.getOrderById(input)
-            .subscribe( 
+            .subscribe(
                 output => this.getOrderDetailsByIdResult(output),
                 error => {
                     ////console.log("error in order details");
@@ -262,15 +287,15 @@ export class OrderDetailDailogComponent implements OnInit {
         this.loaderService.display(true);
         // let input:any =  JSON.parse(JSON.stringify(this.messageInput)); deep copy
         let input:any = Object.assign({}, this.messageInput); //json copy
-         if (input.order.ispublic == "1") {
-            input.order.sendSmsToCust = '0';
+         if (input.order.ispublic == true) {
+            input.order.sendSmsToCust = false;
             }
       else if(input.order.sendSmsToCust){
-          input.order.sendSmsToCust = '1';
+          input.order.sendSmsToCust = true;
       }
       else{
-          input.order.sendSmsToCust = '0';
-      }   
+          input.order.sendSmsToCust = false;
+      }
         this.orderLandingService.sendMessage(input)
             .subscribe(
                 output => this.sendMessageResult(output),
@@ -291,7 +316,7 @@ export class OrderDetailDailogComponent implements OnInit {
     //     let input = this.messageInput;
     //     if(this.sendSmsToCust){
     //         input.order.ispublic = '1';
-    //     }    
+    //     }
     //     this.orderLandingService.sendMessage(input)
     //         .subscribe(
     //             output => this.sendMessageResult(output),
@@ -299,7 +324,7 @@ export class OrderDetailDailogComponent implements OnInit {
     //                 ////console.log("error in order details");
     //             });
     // }
-    
+
     onCloseCancel() {
         this.thisDialogRef.close('success');
     }
@@ -355,7 +380,7 @@ export class OrderDetailDailogComponent implements OnInit {
     //     input.User.body= "body tag message here";
     //     input.User.title = "title bar message";
     //     input.User.buttons = ["Radio Button"];
-    //     input.User.option= ["option1"]; 
+    //     input.User.option= ["option1"];
     // }
     // if(type=='website'){
     //     input.User.smstype = "notification";
@@ -364,7 +389,7 @@ export class OrderDetailDailogComponent implements OnInit {
     //     input.User.title = "title bar message";
     //     input.User.redirecturl = "http://www.moya.online";
     // }
-    // if(type=='slide'){ 
+    // if(type=='slide'){
     //     input.User.smstype = "notification";
     //     input.User.type = "slide";
     //     input.User.body= "body tag message here";
@@ -585,7 +610,7 @@ raiseInvoiceResult(data){
     if(data.result == "success")
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
-    this.deliveryStatus();  
+    this.deliveryStatus();
     console.log(data);
 }
 paymentReceived(){
@@ -603,7 +628,7 @@ paymentReceivedResult(data){
     if(data.result == "success")
     this.getOrderDetailsById();
     this.getProductsListByCustomerId();
-    this.deliveryStatus();  
+    this.deliveryStatus();
 console.log(data);
 }
 

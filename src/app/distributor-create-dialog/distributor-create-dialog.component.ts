@@ -143,9 +143,6 @@ export class DistributorCreateDialogComponent implements OnInit {
         }
     }
 
-
-
-
     getDetails() {
         if (this.distributorDetail) {
             this.phone = true;

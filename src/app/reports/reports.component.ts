@@ -287,7 +287,7 @@ export class ReportsComponent implements OnInit {
     //console.log(input);
     this.loaderService.display(true);
 
-    this.reportservice.printInvoice(input)
+    this.reportservice.downloadReports(input)
       .subscribe(
         output => this.downloadOrdersResult(output),
         error => {
