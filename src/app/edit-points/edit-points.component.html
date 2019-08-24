@@ -19,7 +19,7 @@
       <div *ngIf="Detail.usertype !== 'dealer'" class="points-style">
         <div class="row">
           <div class="col center">
-            <h1 *ngIf="customerPoints && customerPoints.totalpoints" class="fs-50 danger mgbottom-0"> {{customerPoints.totalpoints}}</h1>
+            <h1 *ngIf="customerPoints" class="fs-50 danger mgbottom-0"> {{customerPoints.totalpoints}}</h1>
             <h1 *ngIf="noPoints" class="fs-50 danger mgbottom-0"> 0 </h1>
             <span>POINTS</span>
           </div>

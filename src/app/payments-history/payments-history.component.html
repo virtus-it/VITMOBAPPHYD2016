@@ -22,9 +22,7 @@
           </thead>
           <tbody>
               <tr *ngFor="let payment of paymentHistory">
-                  <td class="" width="15%">
-                      <span class="" title="orderid">{{payment.orderid}}</span>
-                    </td>
+                    <td class="" width="15%">{{payment.orderid}}</td>                      
                     <td class="" width="23%">{{payment.customername}} </td>
                     <td class="" width="24%">{{payment.amount_received}} </td>
                     <td class="" width="18%">{{payment.paymenttype}} </td>

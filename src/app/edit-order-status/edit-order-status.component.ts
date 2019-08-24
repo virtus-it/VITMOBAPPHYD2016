@@ -22,7 +22,7 @@ export class EditOrderStatusComponent implements OnInit {
   emptyCansError = false;
   emptyCansValidate = false;
   quantityError = false;
-dcChallenDate = null;
+  dcChallenDate = null;
 
   editStatusInput: any = {
     "order": {
@@ -50,8 +50,18 @@ dcChallenDate = null;
 
   updateOrderStatus() {
     this.loaderService.display(true);
+    if(this.dcChallenDate){
     var date = moment(this.dcChallenDate).format('YYYY-MM-DD HH:MM:SS');
     this.editStatusInput.order.dcdate= date;
+    }
+    else{
+      this.editStatusInput.order.dcdate = null;
+    }
+    if(!this.editStatusInput.order.dcchallan){
+      this.editStatusInput.order.dcchallan = null;
+    }
+    
+
     // if (this.editStatusInput.order.paymentype == "credit") {
     //   this.isConfirmed = false; 
     // }

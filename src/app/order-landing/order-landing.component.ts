@@ -147,6 +147,7 @@ export class OrderLandingComponent implements OnInit {
   quickFilterView: any = "";
   forwardOrders: any = [];
   allOrders: any = [];
+  deliveredOrders: any = [];
   distId: any = "";
   time: any = ""
   orderedTime: any = "";
@@ -676,6 +677,9 @@ export class OrderLandingComponent implements OnInit {
       else if (this.tabPanelView == 'allorder') {
         this.orderClickMore = false;
       }
+      else if (this.quickFilterView == 'delivered') {
+        this.orderClickMore = false;
+      }
     }
     this.getFilteredQuickFilter(true);
   }
@@ -702,6 +706,12 @@ export class OrderLandingComponent implements OnInit {
           this.filterInput.order.last_orderid = lastCompleteOrder.order_id;
         }
       }
+      else if (this.quickFilterView == 'delivered') {
+        let lastCompleteOrders: any = _.last(this.completeOrders);
+        if (lastCompleteOrders) {
+          this.filterInput.order.last_orderid = lastCompleteOrders.order_id;
+        }
+      }
     }
     else {
       if (this.tabPanelView == 'forward') {
@@ -713,6 +723,10 @@ export class OrderLandingComponent implements OnInit {
         this.filterInput.order.last_orderid = "0";
       }
       else if (this.tabPanelView == 'complete') {
+        this.completeOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if (this.quickFilterView == 'delivered') {
         this.completeOrders = [];
         this.filterInput.order.last_orderid = "0";
       }
@@ -750,12 +764,21 @@ export class OrderLandingComponent implements OnInit {
         this.completeOrders = _.union(this.completeOrders, data);
 
       }
+      else if (this.quickFilterView == 'delivered') {
+        let data = this.ModifyOrderList(result.data);
+        this.orderClickMore = true;
+        this.completeOrders = _.union(this.completeOrders, data);
+
+      }
     }
     else {
       if (this.tabPanelView == 'forward') {
         this.forwardClickMore = false;
       }
       else if (this.tabPanelView == 'allorder') {
+        this.orderClickMore = false;
+      }
+      else if (this.quickFilterView == 'delivered') {
         this.orderClickMore = false;
       }
     }
@@ -838,6 +861,9 @@ export class OrderLandingComponent implements OnInit {
     else if (this.tabPanelView == 'allorder') {
       this.filterInput.order.status = 'all';
     }
+    else if (this.quickFilterView == 'delivered') {
+      this.filterInput.order.status = 'delivered';
+    }
     console.log(this.filterInput);
     if (this.cantFilter == false) {
       this.getFilteredOrders(true);
@@ -860,7 +886,14 @@ export class OrderLandingComponent implements OnInit {
           this.filterInput.order.last_orderid = lastallOrder.order_id;
         }
 
-      }
+       }
+       else if (this.quickFilterView == 'delivered') {
+        let lastDeliveredOrder: any = _.last(this.allOrders);
+        if (lastDeliveredOrder) {
+          this.filterInput.order.last_orderid = lastDeliveredOrder.order_id;
+        }
+
+       }
       //   else if(this.tabPanelView == 'complete'){
       //     let lastCompleteOrder:any = _.last(this.completeOrders);
       //     if(lastCompleteOrder){
@@ -878,6 +911,10 @@ export class OrderLandingComponent implements OnInit {
       }
       else if (this.tabPanelView == 'allorder') {
         this.allOrders = [];
+        this.filterInput.order.last_orderid = "0";
+      }
+      else if (this.quickFilterView == 'delivered') {
+        this.completeOrders = [];
         this.filterInput.order.last_orderid = "0";
       }
       // else if(this.tabPanelView == 'complete'){
@@ -917,6 +954,11 @@ export class OrderLandingComponent implements OnInit {
         this.orderClickMore = true;
         this.allOrders = _.union(this.allOrders, data);
       }
+      else if (this.quickFilterView == 'delivered') {
+        let data = this.ModifyOrderList(result.data);
+        this.orderClickMore = true;
+        this.completeOrders = _.union(this.completeOrders, data);
+      }
     }
     else {
       if (this.tabPanelView == 'forward') {
@@ -928,6 +970,9 @@ export class OrderLandingComponent implements OnInit {
         this.orderClickMore = false;
       }
       else if (this.tabPanelView == 'complete') {
+        this.completeClickMore = false;
+      }
+      else if (this.quickFilterView == 'delivered') {
         this.completeClickMore = false;
       }
 

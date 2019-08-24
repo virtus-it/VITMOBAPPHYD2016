@@ -44,7 +44,7 @@
                 </td>
                  
                  <td class="" width="20%">
-                  <span class="" *ngIf="details.createddate">{{details.createddate}}</span> <!--//changed by fayaq 18-07-2019 -->
+                  <span class="" *ngIf="details.createddate">{{details.createddate | utcDate}}</span> <!--//changed by fayaq 18-07-2019 -->
                   <span *ngIf="details.createddate === null || details.createddate == ''"> -  </span>                
                 </td> 
 

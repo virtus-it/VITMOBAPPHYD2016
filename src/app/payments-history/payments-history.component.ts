@@ -38,7 +38,7 @@ export class PaymentsHistoryComponent implements OnInit {
    this.paymentHistory =[];
    this.loaderService.display(false);
    this.noRecord = true;
-   //console.log("No schedule orders");
+   //console.log("No payment history");
  }
   }
 
