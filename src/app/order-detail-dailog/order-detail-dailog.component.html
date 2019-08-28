@@ -187,6 +187,24 @@
                 <b></b>
               </small>
             </div>
+            <div class="col-md-3">
+              <small class="control-label ">
+                <b>Dc Challan</b>
+              </small>
+              <br>
+              <small class="control-label gray">{{dailogOrderDetails.dc_challan}}
+                <b></b>
+              </small>
+            </div>
+            <div class="col-md-4 center">
+              <small class="control-label ">
+                <b>Dc Date</b>
+              </small>
+              <br>
+              <small class="graycontrol-label gray">{{dailogOrderDetails.dcdate | utcDate }}
+                <b></b>
+              </small>
+            </div>
           </div>
         </div>
         <div class="container-fluid  border-top pdtop-5">
@@ -309,7 +327,7 @@
                       <li>
                         <div class="d-flex">
                           <div class="p-0">                           
-                            <small class="logo-color capital ng-binding " *ngIf="dailogOrderDetails.dealerdetails" (click)='openUpdateDialog()'>
+                            <small class="logo-color capital ng-binding" *ngIf="dailogOrderDetails.supplierdetails" (click)='openUpdateDialog()'>
                                       <i class="fa fa fa-check-square-o" aria-hidden="true"></i>
                                       {{dailogOrderDetails.dealerdetails.firstname}} {{dailogOrderDetails.dealerdetails.lastname}}</small>
                                   </div>

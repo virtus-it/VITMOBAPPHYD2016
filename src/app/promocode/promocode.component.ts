@@ -173,11 +173,6 @@ noRecords:boolean = false;
       });
 
       }
-
-
-
-
-
   getRedeemDetails(firstcall){
     let input = {"User":{"TransType":"getredeemdetails" , appType: this.authenticationService.appType() , "lastId":0,"pagesize":10  }};
     console.log(input , 'sdlkuasfasj kughs' );
@@ -352,10 +347,12 @@ noRecords:boolean = false;
   showUserView(data){
     if(data && data =='customer'){
       this.userView = 'customer'
+      this.detailsClickMore = true;
       this.getRedeemDetailsofCustomers();
     }
     else{
       this.userView = 'dealer'
+      this.detailsClickMore = true;
       this.getRedeemDetailsofCustomersOfDealer();
     }
   }

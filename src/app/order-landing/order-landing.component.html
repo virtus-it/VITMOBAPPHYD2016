@@ -468,12 +468,16 @@
                   </div>
 
                   <div class="row form-group mgtop-ng5">
-                    <div class="col-sm-6  col-md-6  col-lg-6">
+                    <div class="col-sm-4  col-md-4  col-lg-4">
                       <p class="td-label mgbottom-0">Quantity </p>
                       <b class="">{{forward.quantity}}</b>
                     </div>
-
-                    <div class="col-sm-6  col-md-6  col-lg-6 right">
+                    <div class="col-sm-4  col-md-4  col-lg-4">
+                      <p class="td-label mgbottom-0">Dc Challan </p>
+                      <b class="">{{forward.dc_challan}}</b>
+                    </div>
+                    
+                    <div class="col-sm-4  col-md-4  col-lg-4 ">
                       <p class="td-label mgbottom-0">Empty Cans</p>
                       <b class="" *ngIf="forward.empty_cans">{{forward.empty_cans}}</b>
                       <b class="" *ngIf="forward.empty_cans == null"> - </b>
@@ -571,13 +575,13 @@
                       <b class=" danger">{{forward.delivery_exceptedtime}}</b>
                     </div>
                     <div class="col-6 right" *ngIf="forward.customersource == 'DistributorCustomer'">
-                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Assoc Distributor</p>
                       <b *ngIf="forward.distributor" class="onhovertooltip-150  capitalize"
                         title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}}
                         {{forward.distributor.lastname}}</b>
                     </div>
                     <div class="col-6 right" *ngIf="forward.customersource == 'MoyaCustomer'">
-                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Assoc Distributor</p>
                       <b *ngIf="forward.distributor" class="onhovertooltip-150 capitalize"
                         title="{{forward.distributor.firstname}} {{forward.distributor.lastname}}">{{forward.distributor.firstname}}
                         {{forward.distributor.lastname}}</b>
@@ -962,7 +966,7 @@
                       <b class="left danger">{{allorder.delivery_exceptedtime}}</b>
                     </div>
                     <div class="col-sm-6  col-md-6 col-lg-6  right">
-                      <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                      <p class="td-label mgbottom-0" title="Associate Distributor">Assoc Distributor</p>
                       <b class=" capitalize onhovertooltip-150"
                         *ngIf="allorder.customersource && allorder.customer && allorder.customersource == 'DistributorCustomer'"
                         title="{{allorder.customer.firstname}}">{{allorder.customer.firstname}}</b>
@@ -1346,14 +1350,14 @@
                     <b class=" danger">{{complete.delivery_exceptedtime}}</b>
                   </div>
                   <div class="col-6 right" *ngIf="complete.customersource == 'DistributorCustomer'">
-                    <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                    <p class="td-label mgbottom-0" title="Associate Distributor">Assoc Distributor</p>
 
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize"
                       title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}}
                       {{complete.distributor.lastname}}</b>
                   </div>
                   <div class="col-6 right" *ngIf="complete.customersource == 'MoyaCustomer'">
-                    <p class="td-label mgbottom-0" title="Associate Distributor">Ass Distributor</p>
+                    <p class="td-label mgbottom-0" title="Associate Distributor">Assoc Distributor</p>
                     <b *ngIf="complete.distributor" class="onhovertooltip-150 capitalize"
                       title="{{complete.distributor.firstname}} {{complete.distributor.lastname}}">{{complete.distributor.firstname}}
                       {{complete.distributor.lastname}}</b>

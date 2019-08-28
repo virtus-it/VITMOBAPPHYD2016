@@ -57,7 +57,8 @@
             <table class="table table-hover">
               <thead>
                 <tr>
-                  <th width="15%">Type</th>
+                  <th width="8%">Type</th>
+                  <th width="7%">HSN Code</th>
                   <th width="7%">Priority </th>
                   <th width="7%">Min Qty </th>
                   <th width="6%">Cost </th>
@@ -69,6 +70,7 @@
                   <th width="7%">Status</th>
                   <th width="8%" class="no-th-arrow" title="Cans Return?">Cans Ret</th>
                   <th width="11%" class="no-th-arrow">Action</th>
+                
                 </tr>
               </thead>
               <tbody>
@@ -80,6 +82,9 @@
                         <span class="fa fa-thumbs-down danger" *ngIf="details.isactive == '0'" (click)="activateProduct(details)" title="click to activate"></span>
                         {{details.ptype}}</span>
                     </b>
+                  </td>
+                  <td>
+                    <b class="">{{details.hsncode}}</b>
                   </td>
                   <td>
                     <b class="gray9">{{details.priority}}</b>

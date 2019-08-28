@@ -712,6 +712,8 @@ export class OrderLandingComponent implements OnInit {
           this.filterInput.order.last_orderid = lastCompleteOrders.order_id;
         }
       }
+
+
     }
     else {
       if (this.tabPanelView == 'forward') {
