@@ -199,8 +199,10 @@
 
 
     </div>
-  <div id="" class="row pd-15 mg-0" *ngIf="tabPanelView === 'redeemDetails' && noRecords == false">
-    <table class="table table-hover table-striped">
+  <div *ngIf="tabPanelView === 'redeemDetails' && noRecords == false">
+    <div id="" class="row pd-15 mg-0">
+        <div class="">
+    <table class="table table-hover table-striped" style="table-layout:fixed">
       <thead>
         <tr>
           <th width="10%">Name</th>
@@ -258,11 +260,12 @@
     </table>
     <h4 class="error center">
       <a href="javascript:void(0);" (click)=getRedeemDetails(false); *ngIf="detailsClickMore">
-        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a>
-      <span *ngIf="!detailsClickMore">       
-        <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</span>
-    </h4>  
+        <i class="fa fa-cloud-upload" aria-hidden="true"></i> Click for more data</a> </h4>
+      <h4 *ngIf="!detailsClickMore" class="error">       
+        <i class="fa fa-frown-o" aria-hidden="true"></i> Record not available</h4>    
   </div>
+ </div>
+</div>
   <div class=""  *ngIf="tabPanelView === 'redeemDetails' && noRecords == true">
     <h3> No records exists</h3>
   </div>
