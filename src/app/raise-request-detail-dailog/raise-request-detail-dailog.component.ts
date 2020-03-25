@@ -51,7 +51,8 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
   raisreqError: any = "";
   raisreqErrorQty=false;
   rasiereqInput: any = {  invoiceDate: "", productDetails: {} }
-
+  isDesc:boolean = false;
+  column:any;
 
   // raiseRequestInput = { "product": { "pid": '', "productname": "", "pType": "", "stock": "", "returnemptycans": "", "loginid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "invoicedate": this.raiseRequestDetails.requestdate, "itemcost": "", "distributorid": this.authenticationService.loggedInUserId(), "dealerid": this.authenticationService.superDelearId(), "categoryid": "", "apptype": this.authenticationService.appType() } };
 
@@ -270,6 +271,28 @@ export class RaiseRequestDetailDailogComponent implements OnInit {
 
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.allProductsList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('allProducts List');
+      console.log(this.allProductsList);
+    } else {
+      this.isDesc = true;
+      this.allProductsList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

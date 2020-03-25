@@ -17,6 +17,8 @@ export class DistributorOrderListComponent implements OnInit {
 
   SupplierOrderList:any = [];
   ordersClickMore = true;
+  isDesc:boolean = false;
+  column:any;
   
   supplierOrderList(firstcall) {
     this.loaderService.display(true);
@@ -120,9 +122,30 @@ export class DistributorOrderListComponent implements OnInit {
       else {
         this.getDistributorsOrders(false);
       }
-      
-      
-}
+    }
+
+    sortTable(parm) {
+      if(this.isDesc == true) {
+        this.isDesc = false;
+        this.SupplierOrderList.sort((a, b) => {
+            if(a[parm]){
+         return a[parm].localeCompare(b[parm]);
+      }
+        });
+        this.column = parm;
+        console.log('SupplierOrder List');
+        console.log(this.SupplierOrderList);
+      } else {
+        this.isDesc = true;
+        this.SupplierOrderList.sort((a, b) => {
+          if(b[parm]){
+          return b[parm].localeCompare(a[parm]);
+      }
+       });
+       this.column = parm;
+     }
+    }
+
   ngOnInit() {
     this.onInitCheck();
   console.log(this.Detail);

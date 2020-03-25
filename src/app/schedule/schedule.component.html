@@ -411,14 +411,14 @@
         <table class="table table-hover table-striped" style="table-layout:fixed">
             <thead>
                 <tr>
-                    <th width="12%">Customer</th>
-                    <th width="12%">Distributor</th>
-                    <th width="12%">Product </th>
-                    <th width="8%">Slot </th>
+                    <th width="12%" (click)="sortTable('customerdetails.scheduledby')">Customer&nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'customerdetails.scheduledby', 'fa-sort-asc': (column == 'customerdetails.scheduledby' && isDesc), 'fa-sort-desc': (column == 'customerdetails.scheduledby' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th width="12%" (click)="sortTable('dealerinfo.scheduledby')">Distributor&nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'dealerinfo.scheduledby', 'fa-sort-asc': (column == 'dealerinfo.scheduledby' && isDesc), 'fa-sort-desc': (column == 'dealerinfo.scheduledby' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th width="12%" (click)="sortTable('product_name')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'product_name', 'fa-sort-asc': (column == 'product_name' && isDesc), 'fa-sort-desc': (column == 'product_name' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th width="8%" (click)="sortTable('delivery_exceptedtime')">Slot &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'delivery_exceptedtime', 'fa-sort-asc': (column == 'delivery_exceptedtime' && isDesc), 'fa-sort-desc': (column == 'delivery_exceptedtime' && !isDesc) }" aria-hidden="true"> </i></th>
                     <th width="5%">Qty</th>
-                    <th width="18%">Schedule For</th>
-                    <th width="14%">Created By</th>
-                    <th width="14%">Created Date</th>
+                    <th width="18%" (click)="sortTable('weekdays')">Schedule For &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'weekdays', 'fa-sort-asc': (column == 'weekdays' && isDesc), 'fa-sort-desc': (column == 'weekdays' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th width="14%" (click)="sortTable('createdbyinfo.scheduledby')">Created By &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createdbyinfo.scheduledby', 'fa-sort-asc': (column == 'createdbyinfo.scheduledby' && isDesc), 'fa-sort-desc': (column == 'createdbyinfo.scheduledby' && !isDesc) }" aria-hidden="true"> </i></th>
+                    <th width="14%" (click)="sortTable('createddate')">Created Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createddate', 'fa-sort-asc': (column == 'createddate' && isDesc), 'fa-sort-desc': (column == 'createddate' && !isDesc) }" aria-hidden="true"> </i></th>
                     <th width="10% " class="no-th-arrow">Action</th>
 
                 </tr>

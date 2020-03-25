@@ -1,0 +1,63 @@
+<div class="row justify-content-between modal-title">
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-calendar-plus-o"></i> Sale Reports Preview
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+
+<!-- this is the table for distributors order reports  -->
+
+<div id="" class="container-fluid pd-15x25 brd-bottom">
+  <md-dialog-content layout="column">
+    <table class="table table-hover table-fixedheader">
+      <thead>
+        <tr>
+          <th class="" width="10%">Date</th>
+          <th class="" width="10%">Product</th>
+          <th class="" width="11%">Start Stock</th>
+          <th class="" width="13%">Sold Out</th>
+          <th class="" width="11%">Available Stock</th>
+        </tr>
+      </thead>
+      <!-- <tbody>
+        <tr *ngFor="let distributorOrders of distributorsOrdersReports">
+          <td class="" width="10%">
+            <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
+            <span *ngIf="!distributorOrders.ordered_date"> - </span>
+          </td>
+          <td class="" width="10%">
+            <span *ngIf="distributorOrders.orderby_paymenttype">{{distributorOrders.orderby_paymenttype}}</span>
+            <span *ngIf="!distributorOrders.orderby_paymenttype"> - </span>
+          </td>
+          <td class="" width="11%">
+            <span *ngIf="distributorOrders.bill_amount">{{distributorOrders.bill_amount}}</span>
+            <span *ngIf="!distributorOrders.bill_amount"> - </span>
+          </td>
+          <td class="" width="13%">
+            <span *ngIf="distributorOrders.receivedamount">{{distributorOrders.receivedamount}}</span>
+            <span *ngIf="!distributorOrders.receivedamount"> - </span>
+          </td>
+          <td class="" width="11%">
+            <span *ngIf="distributorOrders.status" class="capitalize" [ngClass]="{'success':status=='delivered'}" >{{distributorOrders.status}}</span>
+            <span *ngIf="!distributorOrders.status"> - </span>
+          </td>
+
+      </tbody> -->
+    </table>
+  </md-dialog-content>
+</div>
+
+<!-- this is the table for distributor order reports ends here -->
+
+
+
+
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>

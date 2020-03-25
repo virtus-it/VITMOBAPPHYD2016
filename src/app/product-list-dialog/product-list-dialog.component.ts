@@ -22,6 +22,8 @@ export class ProductListDialogComponent implements OnInit {
   distributorId:any = "";
   isSuperDealer = false;
   noProductsError = false;
+  isDesc:boolean = false;
+  column:any;
 
   constructor(public thisDialogRef: MdDialogRef<ProductListDialogComponent>, public dialog: MdDialog, @Inject(MD_DIALOG_DATA) public distributorDetails: any,private distributorService: DistributorServiceService, private productService: ProductsService,  private authenticationService: AuthenticationService,private loaderService: LoaderService) { }
 
@@ -208,6 +210,27 @@ if(result.result == 'success'){
 
   }
 
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.listOfProducts.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('listOfProducts List');
+      console.log(this.listOfProducts);
+    } else {
+      this.isDesc = true;
+      this.listOfProducts.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');

@@ -20,6 +20,10 @@ import { QuickNotificationComponent } from '../quick-notification/quick-notifica
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/map';
 import { ReportsPreviewComponent } from '../reports-preview/reports-preview.component';
+import { RaisereportspreviewComponent } from '../raisereportspreview/raisereportspreview.component';
+import { SalesreportspreviewComponent } from '../salesreportspreview/salesreportspreview.component';
+import { PaymentreportpreviewComponent } from '../paymentreportpreview/paymentreportpreview.component';
+
 @Component({
 
   templateUrl: './reports.component.html',
@@ -77,6 +81,10 @@ export class ReportsComponent implements OnInit {
 
   stockreportsInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "" };
 
+  salesreportInput = { filterBy: 'distributor', fromDate: null, toDate: null, distributorId: '', filterId: "0", distributorEmail: "", gstDetailsOfDistributor : ''  };
+
+  paymentreportInput = {filterBy: '', fromDate: null, toDate: null, distributorId: '', customerId: "",filterId: "0", distributorEmail: "",customerEmail: "",gstDetailsOfCustomer : '' , gstDetailsOfDistributor : '' }
+
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
@@ -92,6 +100,7 @@ export class ReportsComponent implements OnInit {
   salesTeamLogin: boolean = true;
   LastfilterRecords = false;
   distributorsorderData = [];
+  selectProduct: any = 'none';
   reportsType = [
     { value: 'newlydownloaded', viewValue: 'Newly Downloaded Customers', issuperDelear: this.superDealer },
     { value: 'lastdays', viewValue: 'Customers not Ordered in Last 10 Days', issuperDelear: this.superDealer },
@@ -99,16 +108,23 @@ export class ReportsComponent implements OnInit {
     { value: 'rejectedorders', viewValue: 'Rejected Orders', issuperDelear: this.superDealer },
     { value: 'notregistered', viewValue: 'Customers not Registered', issuperDelear: this.superDealer },
     { value: 'orderdownload', viewValue: 'Order Downloads', issuperDelear: true },
-    { value: "distributorsorders", viewValue: "Distributors Orders", issuperDelear: this.superDealer }
+    { value: "distributorsorders", viewValue: "Distributors Orders", issuperDelear: this.superDealer },
+    { value: "salesreports", viewValue: "Sales Reports", issuperDelear: this.superDealer},
+    { value: "paymentsreport", viewValue: "Payments Reports", issuperDelear: this.superDealer}
   ];
   noData: boolean = false;
   viewStockReportsData: any = [];
   viewOrdersReportsData: any = [];
+  viewSalesReportsData:any = [];
+  viewPaymentReportsData:any = [];
   customerOrderReports: boolean = false;
   distributorOrderReports: boolean = false;
   distributorCategoryStockReport: boolean = false;
   distributorStockReport: boolean = false;
+  distributorSalesReport: boolean = false;
   categoryStockReport: boolean = false;
+  customerPaymentReports: boolean = false;
+  distributorPaymentReports: boolean = false;
   typeOfReport: string = '';
   randomNumber: any = '';
   allSalesTeam: any = [];
@@ -116,7 +132,9 @@ export class ReportsComponent implements OnInit {
   searchName: string = '';
   searchResultsLength = 0;
   searchRecords:boolean = false;
-
+  productsList: any = [];
+  isDesc:boolean = false;
+  column:any;
 
 
   searchReports(firstCall, Rtype) {
@@ -260,6 +278,37 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  getProducts(){
+    if(this.tabPanelView = 'salesreports'){
+    let input = {"product":{
+      "userid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(),"transtype":"getallproducts","loginid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType()
+    }
+   }
+
+   //this.loaderService.display(true);
+    this.productService.getProduct(input)
+      .subscribe(
+      output => this.getProductsResult(output),
+      error => {
+        //console.log("error");
+        //this.loaderService.display(false);
+      });
+    }
+  }
+
+  getProductsResult(result) {
+    if (result.result == 'success') {
+      this.productsList = result.data;
+    }else{
+      this.productsList = []
+      //this.loaderService.display(false);
+    }
+  }
+
+  selectedValue(){
+    console.log(this.selectProduct);
+  }
+
   downloadOrders() {
 
     let input = {
@@ -270,10 +319,12 @@ export class ReportsComponent implements OnInit {
       }
     };
     if (this.downloadInput.fromDate) {
-      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD HH:mm:ss.sss');
     }
     if (this.downloadInput.toDate) {
-      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD');
+      input.order.todate = input.order.todate+' 23:59:59.000';
+
     }
     if (this.downloadInput.filterBy == 'customer') {
       input.order.filterid = this.downloadInput.customerId;
@@ -321,6 +372,49 @@ export class ReportsComponent implements OnInit {
 
   }
 
+  downloadPaymentReports(){
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.paymentreportInput.fromDate, todate: this.paymentreportInput.toDate,  customerid: 0, filterid: this.paymentreportInput.filterId, filtertype: this.paymentreportInput.filterBy, "transtype": "stockreports",  "distributorid": "" } };
+
+    if (this.paymentreportInput.fromDate) {
+      input.order.fromdate = moment(this.stockreportsInput.fromDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.paymentreportInput.toDate) {
+      input.order.todate = moment(this.paymentreportInput.toDate).format('YYYY-MM-DD HH:MM:SS.sss');
+    }
+    if (this.paymentreportInput.filterBy == 'distributor') {
+      input.order.filterid = this.paymentreportInput.distributorId;
+    }
+    
+    if (this.stockreportsInput.fromDate && this.paymentreportInput.toDate && (this.paymentreportInput.filterBy == 'distributor')) {
+      console.log(input, 'download input');
+      // this.reportservice.downloadReports(input)
+      //   .subscribe(
+      //     output => this.downloadPaymentReportsResult(output),
+      //     error => {
+      //       //console.log("error");
+      //       this.loaderService.display(false);
+      //     });
+    }
+  }
+
+  downloadPaymentReportsResult(result) {
+    //console.log("downloaded result", result);
+    if (result.result == 'success') {
+      let path = result.data.filename;
+      this.customerService.getFile(path)
+        .subscribe(
+          output => this.getpaymentReportFileResult(output),
+          error => {
+            //console.log("error in customer");
+            this.loaderService.display(false);
+          });
+
+    }
+  }
+
+  getpaymentReportFileResult(result) {
+    FileSaver.saveAs(result, "orders" + moment().format() + ".xlsx");
+  }
 
 
   downloadStockReports() {
@@ -489,6 +583,8 @@ export class ReportsComponent implements OnInit {
       if (findcustomer) {
         this.downloadInput.customerId = findcustomer.userid;
         this.downloadInput.customerEmail = "";// findcustomer.emailid;
+        this.paymentreportInput.customerId = findcustomer.userid;
+        this.paymentreportInput.customerEmail = findcustomer.emailid;
       }
 
 
@@ -632,6 +728,10 @@ export class ReportsComponent implements OnInit {
         this.downloadInput.distributorEmail = findDistributor.emailid;
         this.stockreportsInput.distributorId = findDistributor.userid;
         this.stockreportsInput.distributorEmail = findDistributor.emailid;
+        this.salesreportInput.distributorId = findDistributor.userid;
+        this.salesreportInput.distributorEmail = findDistributor.emailid;
+        this.paymentreportInput.distributorId = findDistributor.userid;
+        this.paymentreportInput.distributorEmail = findDistributor.emailid;
       }
 
 
@@ -887,6 +987,109 @@ export class ReportsComponent implements OnInit {
     }
   }
 
+  viewSalesReport(){
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.salesreportInput.fromDate, todate: this.salesreportInput.toDate,  filterid: this.salesreportInput.filterId, filtertype: this.salesreportInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfDistributor : this.salesreportInput.gstDetailsOfDistributor,productid: this.selectProduct.productid } };
+    if (this.salesreportInput.fromDate) {
+      input.order.fromdate = moment(this.salesreportInput.fromDate).format('YYYY-MM-DD 00:00:00');
+    }
+    if (this.salesreportInput.toDate) {
+      input.order.todate = moment(this.salesreportInput.toDate).format('YYYY-MM-DD 23:59:59');
+    }
+    if (this.salesreportInput.filterBy == 'distributor') {
+      input.order.filterid = this.salesreportInput.distributorId;
+      input.order.emailid = this.salesreportInput.distributorEmail;
+    }
+    if (this.salesreportInput.fromDate && this.salesreportInput.toDate || (this.salesreportInput.filterBy == 'distributor')) {
+      this.loaderService.display(true);
+      if (input.order.filtertype == 'distributor') {
+        this.distributorSalesReport = true;
+      }
+      console.log('Sales view Report')
+      console.log(input);
+      // this.reportservice.printInvoice(input)
+      //   .subscribe(
+      //     output => this.viewSalesReportResult(output),
+      //     error => {
+      //       this.loaderService.display(false);
+      //     });
+
+    }
+}
+
+viewSalesReportResult(result) {
+  if (result.result == 'success') {
+    this.viewSalesReportsData = result.data;
+    this.noData = false;
+    this.loaderService.display(false);
+     if (this.distributorSalesReport == true) {
+      this.typeOfReport = 'distributorSalesReport';
+    }
+    this.salesReportPreview(this.viewSalesReportsData);
+  }
+  else {
+    this.viewSalesReportsData = [];
+    this.loaderService.display(false);
+    this.noData = true;
+  }
+}
+
+viewPaymentReports(){
+  let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.paymentreportInput.fromDate, todate: this.paymentreportInput.toDate, customerid: 0, filterid: this.paymentreportInput.filterId, filtertype: this.paymentreportInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfCustomer : this.paymentreportInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.paymentreportInput.gstDetailsOfDistributor } };
+    if (this.paymentreportInput.fromDate) {
+      input.order.fromdate = moment(this.paymentreportInput.fromDate).format('YYYY-MM-DD 00:00:00');
+    }
+    if (this.paymentreportInput.toDate) {
+      input.order.todate = moment(this.paymentreportInput.toDate).format('YYYY-MM-DD 23:59:59');
+    }
+    if (this.paymentreportInput.filterBy == 'customer') {
+      input.order.filterid = this.paymentreportInput.customerId;
+      input.order.emailid = this.paymentreportInput.customerEmail;
+      input.order.status = 'delivered';
+    }
+    if (this.paymentreportInput.filterBy == 'distributor') {
+      input.order.filterid = this.paymentreportInput.distributorId;
+      input.order.emailid = this.paymentreportInput.distributorEmail;
+    }
+    if (this.paymentreportInput.fromDate && this.paymentreportInput.toDate || (this.paymentreportInput.filterBy == 'customer' || this.paymentreportInput.filterBy == 'distributor')) {
+      this.loaderService.display(true);
+      if (input.order.filtertype == 'customer') {
+        this.customerPaymentReports = true;
+      }
+      else if (input.order.filtertype == 'distributor') {
+        this.distributorPaymentReports = true;
+      }
+      console.log('Payment view report')
+      console.log(input);
+      // this.reportservice.printInvoice(input)
+      //   .subscribe(
+      //     output => this.viewPaymentReportsResult(output),
+      //     error => {
+      //       this.loaderService.display(false);
+      //     });
+
+    }
+}
+
+viewPaymentReportsResult(result) {
+  if (result.result == 'success') {
+    this.viewPaymentReportsData = result.data;
+    this.noData = false;
+    this.loaderService.display(false);
+    if (this.customerPaymentReports == true) {
+      this.typeOfReport = 'customerPaymentReports';
+    }
+    else if (this.distributorPaymentReports == true) {
+      this.typeOfReport = 'distributorPaymentReports';
+    }
+    this.paymentReportPreview(this.viewPaymentReportsData);
+  }
+  else {
+    this.viewPaymentReportsData = [];
+    this.loaderService.display(false);
+    this.noData = true;
+  }
+}
+
   viewOrdersReports() {
     let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfCustomer : this.downloadInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.downloadInput.gstDetailsOfDistributor } };
     if (this.downloadInput.fromDate) {
@@ -946,6 +1149,153 @@ export class ReportsComponent implements OnInit {
     }
   }
 
+  viewOrdersRaiseReports(){
+    let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfCustomer : this.downloadInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.downloadInput.gstDetailsOfDistributor } };
+    if (this.downloadInput.fromDate) {
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
+    }
+    if (this.downloadInput.toDate) {
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD 23:59:59');
+    }
+    if (this.downloadInput.filterBy == 'customer') {
+      input.order.filterid = this.downloadInput.customerId;
+      input.order.emailid = this.downloadInput.customerEmail;
+      input.order.status = 'delivered';
+    }
+    if (this.downloadInput.filterBy == 'distributor') {
+      input.order.filterid = this.downloadInput.distributorId;
+      input.order.emailid = this.downloadInput.distributorEmail;
+    }
+    if (this.downloadInput.filterBy == 'supplier') {
+      input.order.filterid = this.downloadInput.supplierId;
+      input.order.emailid = this.salesTeamId;
+    }
+    if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
+      this.loaderService.display(true);
+      if (input.order.filtertype == 'customer') {
+        this.customerOrderReports = true;
+      }
+      else if (input.order.filtertype == 'distributor') {
+        this.distributorOrderReports = true;
+      }
+      console.log(input, 'sdgsdgdsgdhhddhdhdhdh');
+      this.reportservice.raiseprintInvoice(input)
+        .subscribe(
+          output => this.viewOrdersRaiseReportsResult(output),
+          error => {
+            this.loaderService.display(false);
+          });
+
+    }
+  }
+  viewOrdersRaiseReportsResult(result) {
+    if (result.result == 'success') {
+      this.viewOrdersReportsData = result.data;
+      this.noData = false;
+      this.loaderService.display(false);
+      if (this.customerOrderReports == true) {
+        this.typeOfReport = 'customerOrderReports';
+      }
+      else if (this.distributorOrderReports == true) {
+        this.typeOfReport = 'distributorOrderReports';
+      }
+      this.raisereportsprview(this.viewOrdersReportsData);
+    }
+    else {
+      this.viewOrdersReportsData = [];
+      this.loaderService.display(false);
+      this.noData = true;
+    }
+  }
+
+  paymentReportPreview(data){
+    let formattedData = { data: data, type: this.typeOfReport,Fromdate:this.paymentreportInput.fromDate,Todate:this.paymentreportInput.toDate }
+    let dialogRef = this.dialog.open(PaymentreportpreviewComponent, {
+      width: '80%',
+      data: formattedData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result == 'success') {
+        // this.typeOfReport = '';
+        // this.customerOrderReports = false;
+        // this.distributorCategoryStockReport = false;
+        // this.distributorOrderReports = false;
+        // this.distributorStockReport = false;
+        // this.categoryStockReport = false;
+        // this.salesTeamProductsReport = false;
+      }
+      // else if (result != 'success') {
+      //   this.typeOfReport = '';
+      //   this.customerOrderReports = false;
+      //   this.distributorCategoryStockReport = false;
+      //   this.distributorOrderReports = false;
+      //   this.distributorStockReport = false;
+      //   this.categoryStockReport = false;
+      //   this.salesTeamProductsReport = false;
+      // }
+    });
+  }
+
+  salesReportPreview(data){
+    let formattedData = { data: data, type: this.typeOfReport,Fromdate:this.salesreportInput.fromDate,Todate:this.salesreportInput.toDate }
+    let dialogRef = this.dialog.open(SalesreportspreviewComponent, {
+      width: '80%',
+      data: formattedData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result == 'success') {
+        // this.typeOfReport = '';
+        // this.customerOrderReports = false;
+        // this.distributorCategoryStockReport = false;
+        // this.distributorOrderReports = false;
+        // this.distributorStockReport = false;
+        // this.categoryStockReport = false;
+        // this.salesTeamProductsReport = false;
+      }
+      // else if (result != 'success') {
+      //   this.typeOfReport = '';
+      //   this.customerOrderReports = false;
+      //   this.distributorCategoryStockReport = false;
+      //   this.distributorOrderReports = false;
+      //   this.distributorStockReport = false;
+      //   this.categoryStockReport = false;
+      //   this.salesTeamProductsReport = false;
+      // }
+    });
+
+  }
+
+  raisereportsprview(data){
+    let formattedData = { data: data, type: this.typeOfReport,Fromdate:this.downloadInput.fromDate,Todate:this.downloadInput.toDate }
+    let dialogRef = this.dialog.open(RaisereportspreviewComponent, {
+      width: '80%',
+      data: formattedData
+    });
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result == 'success') {
+        this.typeOfReport = '';
+        this.customerOrderReports = false;
+        this.distributorCategoryStockReport = false;
+        this.distributorOrderReports = false;
+        this.distributorStockReport = false;
+        this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
+      }
+      else if (result != 'success') {
+        this.typeOfReport = '';
+        this.customerOrderReports = false;
+        this.distributorCategoryStockReport = false;
+        this.distributorOrderReports = false;
+        this.distributorStockReport = false;
+        this.categoryStockReport = false;
+        this.salesTeamProductsReport = false;
+      }
+    });
+
+  }
 
   reportsPreview(data) {
     let formattedData = { data: data, type: this.typeOfReport }
@@ -1028,8 +1378,49 @@ export class ReportsComponent implements OnInit {
     }
   }
 
+  sortReports(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.reportsData.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('reportsData List');
+      console.log(this.reportsData);
+    } else {
+      this.isDesc = true;
+      this.reportsData.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
-
+  sortDistributor(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.distributorsorderData.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('distributorsorderData List');
+      console.log(this.distributorsorderData);
+    } else {
+      this.isDesc = true;
+      this.distributorsorderData.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
   ngOnInit() {
     this.searchReports(true, 'newlydownloaded');
@@ -1038,6 +1429,7 @@ export class ReportsComponent implements OnInit {
     this.getSupplierList();
     this.getProductByCategory();
     this.salesTeamUsers();
+    this.getProducts();
     this.customerCare = this.authenticationService.customerCareLoginFunction();
     this.superDealer = this.authenticationService.getSupperDelear();
     this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();
@@ -1045,5 +1437,6 @@ export class ReportsComponent implements OnInit {
       this.tabPanelView = 'orderdownload';
     }
   }
+
 
 }

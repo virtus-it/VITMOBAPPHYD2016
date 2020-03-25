@@ -1,7 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { AuthenticationService } from '../login/authentication.service';
 import { AgmCoreModule, GoogleMapsAPIWrapper, LatLngLiteral, MapsAPILoader, AgmMarker } from '@agm/core';
-import { } from '@types/googlemaps';
+//import { } from '@types/googlemaps';
 import { MdDialogRef } from '@angular/material';
 import { SupplierService } from '../supplier/supplier.service';
 import { MD_DIALOG_DATA } from '@angular/material';

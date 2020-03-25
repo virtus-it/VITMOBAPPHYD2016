@@ -14,6 +14,8 @@ export class RulesComponent implements OnInit {
   constructor(public dialog: MdDialog,private authenticationService: AuthenticationService , private followupService: FollowUpService) { }
 
   allRules = [];
+  isDesc:boolean = false;
+  column:any;
 
   getAllRules(){
     let input = {"offer":{"userid": this.authenticationService.loggedInUserId() , apptype : this.authenticationService.appType() ,    'transtype' :"getrule" , 'loginid': this.authenticationService.loggedInUserId() }} ;
@@ -72,7 +74,27 @@ export class RulesComponent implements OnInit {
   });
   }
 
-  
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.allRules.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('all Rules List');
+      console.log(this.allRules);
+    } else {
+      this.isDesc = true;
+      this.allRules.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
   ngOnInit() {
     this.getAllRules();

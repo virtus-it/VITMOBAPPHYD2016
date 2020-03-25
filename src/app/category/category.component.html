@@ -21,9 +21,9 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="">Category</th>
-            <th width="">Category Details</th>
-            <th width="">Manufacturer</th>
+            <th width="" (click)="sortTable('category')">Category &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="" (click)="sortTable('category_desc')">Category Details &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category_desc', 'fa-sort-asc': (column == 'category_desc' && isDesc), 'fa-sort-desc': (column == 'category_desc' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="" (click)="sortTable('manfacturername')">Manufacturer &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'manfacturername', 'fa-sort-asc': (column == 'manfacturername' && isDesc), 'fa-sort-desc': (column == 'manfacturername' && !isDesc) }" aria-hidden="true"> </i></th>
             <th width="">Action</th>
           </tr>
         </thead>

@@ -260,7 +260,7 @@
             <tr>
               <th width="25%">Distributor</th>
               <th width="25%">Mobile</th>
-              <th width="20%">Category</th>
+              <!-- <th width="20%">Category</th> -->
               <th width="30%" class="">Product</th>
             </tr>
           </thead>
@@ -276,12 +276,12 @@
                 <span *ngIf="dist.mobileno"> {{dist.mobileno}} </span>
                 <span *ngIf="dist.mobileno === null || dist.mobileno == ''"> - </span>
               </td>
-              <td width="20%" class="left capital">
+              <!-- <td width="20%" class="left capital">
                 <span *ngIf="dist.category">{{dist.category}} </span>
                 <span *ngIf="dist.category === null || dist.category == '' "> - </span>
-              </td>
+              </td> -->
               <td width="30%" class="capital">
-                <span *ngIf="dist.brandname" class="onhovertooltip-100" title="{{dist.brandname}}">{{dist.brandname}}</span>
+                <span *ngIf="dist.brandname" class="onhovertooltip-100" title="{{dist.category}} {{dist.brandname}}">{{dist.category}} {{dist.brandname}}</span>
                 <span *ngIf="dist.brandname === null || dist.brandname == ''"> - </span>
               </td>
 

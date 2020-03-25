@@ -70,6 +70,18 @@
                 <i class="fa fa fa-line-chart	fs-18" aria-hidden="true"></i>
                 <br> Stock Reports </a>
             </td>
+
+            <td class="nav-item" (click)="searchReports(true,'salesreports')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'salesreports'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
+                <i class="fa fa fa-line-chart	fs-18" aria-hidden="true"></i>
+                <br> Sales Reports </a>
+            </td>
+
+            <td class="nav-item" (click)="searchReports(true,'paymentsreport')">
+              <a class="nav-link" [ngClass]="{'active': tabPanelView === 'paymentsreport'}" href="javascript:void(0)" *ngIf="superDealer || customerCare || salesTeamLogin">
+                <i class="fa fa-paypal	fs-18" aria-hidden="true"></i>
+                <br>Payments Reports </a>
+            </td>
           </tr>
         </table>
         <!-- <ul class="nav nav-pills navbar-nav flex-column row">
@@ -92,10 +104,10 @@
           <thead>
             <tr>
 
-              <th width="15%"> Customer Name</th>
-              <th width="10%">Mobile No</th>
-              <th width="15%">Created Date</th>
-              <th width="50%">Address</th>
+              <th width="15%" (click)="sortReports('firstname')"> Customer Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="10%" (click)="sortReports('mobileno')">Mobile No &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="15%" (click)="sortReports('createddate')">Created Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createddate', 'fa-sort-asc': (column == 'createddate' && isDesc), 'fa-sort-desc': (column == 'createddate' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="50%" (click)="sortReports('address')">Address &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'address', 'fa-sort-asc': (column == 'address' && isDesc), 'fa-sort-desc': (column == 'address' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="10%">Cust Ordered</th>
 
             </tr>
@@ -138,17 +150,14 @@
 
     </div>
 
-
-
-
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'notregistered'">
       <div class="tab-pane active" id="a">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
 
-              <th width="50%">GCM ID</th>
-              <th width="50%">Downloaded Date</th>
+              <th width="50%" (click)="sortReports('mobileno')">GCM ID &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="50%" (click)="sortReports('createddate')">Downloaded Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createddate', 'fa-sort-asc': (column == 'createddate' && isDesc), 'fa-sort-desc': (column == 'createddate' && !isDesc) }" aria-hidden="true"> </i></th>
             </tr>
           </thead>
           <tbody>
@@ -182,19 +191,16 @@
 
     </div>
 
-
-
-
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'rejectedorders'">
       <div class="tab-pane active" id="a">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
 
-              <th width="15%"> Dealer Name</th>
-              <th width="10%">Mobile No</th>
-              <th width="15%">Created Date</th>
-              <th width="50%">Address</th>
+              <th width="15%" (click)="sortReports('firstname')"> Dealer Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="10%" (click)="sortReports('mobileno')">Mobile No &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="15%" (click)="sortReports('createddate')">Created Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createddate', 'fa-sort-asc': (column == 'createddate' && isDesc), 'fa-sort-desc': (column == 'createddate' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="50%" (click)="sortReports('address')">Address &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'address', 'fa-sort-asc': (column == 'address' && isDesc), 'fa-sort-desc': (column == 'address' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="10%">Cust Ordered</th>
 
               <!-- <th width="10%"> Customer Name</th>
@@ -206,12 +212,6 @@
               <th width="5%">Quantity</th>
               <th width="8%">Distributor</th>
               <th width="8%">Dist.Mobileno</th> -->
-
-
-
-
-
-
             </tr>
           </thead>
           <tbody>
@@ -258,7 +258,6 @@
 
     </div>
 
-
     <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'distributorsorders'">
 
       <div class="tab-pane active" id="a">
@@ -280,7 +279,7 @@
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th width="30%"> Distributors Name</th>
+              <th width="30%" (click)="sortDistributor('fullname')"> Distributors Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'fullname', 'fa-sort-asc': (column == 'fullname' && isDesc), 'fa-sort-desc': (column == 'fullname' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="15%">Delivered Orders</th>
               <th width="15%">Cancelled Orders</th>
               <th width="15%">Other Orders</th>
@@ -407,6 +406,27 @@
               </md-form-field>
             </div>
           </div>
+
+          <div class="row">
+          <div class="col-sm-2 col-md-2  col-lg-2">
+            <h4>Orders</h4>
+         </div>
+          <div class="row mgleft-0 col">
+            <md-dialog-actions align="center">
+              <button md-raised-button class="btn-primary" (click)="downloadOrders()">Orders Download</button>
+              <button md-raised-button class="btn-primary">Orders Print</button>
+              <!-- <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrder()">Raise An Invoice</button> -->
+              <button md-raised-button class="btn-primary" (click)="viewOrdersRaiseReports()">Orders View </button>
+            </md-dialog-actions>
+            <br>
+          </div>
+        </div>
+          <br>
+
+          <div class="row">
+            <div class="col-sm-2 col-md-2  col-lg-2">
+              <h4>Invoice</h4>
+           </div>
           <div class="row mgleft-0">
             <md-dialog-actions align="center">
               <button md-raised-button class="btn-primary" (click)="downloadOrders()">Download</button>
@@ -419,6 +439,7 @@
             <h3 class="danger mgtop-20" *ngIf="noData">
               <span class="fa fa-frown-o"></span> No Records found</h3>
           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -428,15 +449,15 @@
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th width="10%"> Customer Name</th>
-              <th width="8%">Mobile No</th>
-              <th width="14%">Address</th>
-              <th width="14%">Order Created Date</th>
-              <th width="14%">Delivery Date</th>
-              <th width="14%">Product Type</th>
+              <th width="10%" (click)="sortReports('customername')"> Customer Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'customername', 'fa-sort-asc': (column == 'customername' && isDesc), 'fa-sort-desc': (column == 'customername' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="8%" (click)="sortReports('customermobile')">Mobile No &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'customermobile', 'fa-sort-asc': (column == 'customermobile' && isDesc), 'fa-sort-desc': (column == 'customermobile' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="14%" (click)="sortReports('address')">Address &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'address', 'fa-sort-asc': (column == 'address' && isDesc), 'fa-sort-desc': (column == 'address' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="14%" (click)="sortReports('createddate')">Order Created Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createddate', 'fa-sort-asc': (column == 'createddate' && isDesc), 'fa-sort-desc': (column == 'createddate' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="14%" (click)="sortReports('deliverydate')">Delivery Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'deliverydate', 'fa-sort-asc': (column == 'deliverydate' && isDesc), 'fa-sort-desc': (column == 'deliverydate' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="14%" (click)="sortReports('product_type')">Product Type &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'product_type', 'fa-sort-asc': (column == 'product_type' && isDesc), 'fa-sort-desc': (column == 'product_type' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="5%">Quantity</th>
-              <th width="8%">Distributor</th>
-              <th width="8%">Dist.Mobileno</th>
+              <th width="8%" (click)="sortReports('firstname')">Distributor &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="8%" (click)="sortReports('mobileno')">Dist.Mobileno &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i></th>
 
             </tr>
           </thead>
@@ -501,19 +522,18 @@
       </div>
     </div>
 
-
     <div class="tab-content pdtop-15" *ngIf="tabPanelView == 'lastdays'">
       <div class="tab-pane active" id="a">
         <table class="table table-hover table-striped">
           <thead>
             <tr>
-              <th width="12%">Customer Name</th>
-              <th width="8%">Mobile No</th>
+              <th width="12%" (click)="sortReports('firstname')">Customer Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="8%" (click)="sortReports('mobileno')">Mobile No &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i></th>
               <!-- <th width="40%">Address</th> -->
-              <th width="10%">Last Ordered Product</th>
-              <th width="10%">Last Order status</th>
-              <th width="10%">Last Order Handled By</th>
-              <th width="12%">Last Ordered Date</th>
+              <th width="10%" (click)="sortReports('lastorderdetails[0].category')">Last Ordered Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'lastorderdetails[0].category', 'fa-sort-asc': (column == 'lastorderdetails[0].category' && isDesc), 'fa-sort-desc': (column == 'lastorderdetails[0].category' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="10%" (click)="sortReports('lastorderdetails[0].orderstatus')">Last Order status &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'lastorderdetails[0].orderstatus', 'fa-sort-asc': (column == 'lastorderdetails[0].orderstatus' && isDesc), 'fa-sort-desc': (column == 'lastorderdetails[0].orderstatus' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="10%" (click)="sortReports('lastorderdetails[0].distributorname')">Last Order Handled By &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'lastorderdetails[0].distributorname', 'fa-sort-asc': (column == 'lastorderdetails[0].distributorname' && isDesc), 'fa-sort-desc': (column == 'lastorderdetails[0].distributorname' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="12%" (click)="sortReports('lastorderdetails[0].createddate')">Last Ordered Date&nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'lastorderdetails[0].createddate', 'fa-sort-asc': (column == 'lastorderdetails[0].createddate' && isDesc), 'fa-sort-desc': (column == 'lastorderdetails[0].createddate' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="8%"> Notification</th>
             </tr>
           </thead>
@@ -654,6 +674,169 @@
           </div>
           <h3 class="danger mgtop-20" *ngIf="noData">
             <span class="fa fa-frown-o"></span> No Records found</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'salesreports'">
+      <div class="jumbotron">
+        <div class="jumbotron-style">
+          <div class="row  col">
+            <h3>Sales Report</h3>
+          </div>
+          <br>
+          
+          <div class="row form-group">
+            <div class="col-6">
+              <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="salesreportInput.filterBy">
+                <md-option value="distributor">Distributors</md-option>
+              </md-select>
+            </div>
+
+            <div class="col-6" *ngIf="salesreportInput.filterBy == 'distributor'">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                    <span class="capitalize">{{ dist.fullName }}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-sm-6  col-md-6  col-lg-6">
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="salesreportInput.fromDate">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker></md-datepicker>
+              </md-form-field>
+            </div>
+
+            <div class=" col-sm-6  col-md-6  col-lg-6">
+               <md-form-field class="inline">
+                      <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="salesreportInput.toDate">
+                      <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                      <md-datepicker #pickers></md-datepicker>
+               </md-form-field>
+              
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-md-5 col-sm-5 col-lg-5">
+              <h5>Select Product:</h5>&nbsp;
+              <select [(ngModel)]="selectProduct" name="selectProduct" (change)="selectedValue()">
+                <option value="none" selected disabled hidden>
+                  Select an product
+              </option>
+                <option width="65%" *ngFor="let details of productsList" [ngValue]="details">{{details.category}}</option>
+            </select>
+          </div>
+          </div>
+
+          <div class=" row col">
+            <md-dialog-actions align="center">
+              <button md-raised-button class="btn-primary" (click)="viewSalesReport()">View</button>&nbsp;&nbsp;
+            </md-dialog-actions>
+          </div>
+          <!-- <h3 class="danger mgtop-20" *ngIf="noData">
+            <span class="fa fa-frown-o"></span> No Records found</h3> -->
+        </div>
+      </div>
+    </div>
+
+    <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'paymentsreport'">
+      <div class="jumbotron">
+        <div class="jumbotron-style">
+          <div class="row  col">
+            <h3>Payments Report</h3>
+          </div>
+          <br>
+          <div class="row form-group">
+            <div class="col-6">
+              <md-select placeholder="Filter By" name="type" class="full-width left" [(ngModel)]="paymentreportInput.filterBy">
+                <md-option value="distributor">Distributors</md-option>
+                <md-option value="customer">Customers</md-option>
+              </md-select>
+            </div>
+
+            <div class="col-6" *ngIf="paymentreportInput.filterBy == 'distributor'">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Distributor" aria-label="State" [mdAutocomplete]="auto" [formControl]="DistributorCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let dist of filteredDistributors | async" [value]="dist.fullName">
+                    <span class="capitalize">{{ dist.fullName }}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
+
+            <div class="form-checkbox form-checkbox-inline col-sm-4  col-md-4  col-lg-4" *ngIf="paymentreportInput.filterBy == 'distributor'">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentreportInput.gstDetailsOfDistributor">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> GST Details </span>
+              </label>
+            </div>
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="paymentreportInput.filterBy == 'customer'">
+              <md-form-field class="inline">
+                <input mdInput [(ngModel)]="searchName" placeholder="Enter name">
+              </md-form-field>
+              <b *ngIf="searchResultsLength && searchRecords" class="success result-style">
+                <small>{{searchResultsLength}} Records found </small>
+              </b>
+              <i aria-hidden="true" class="fa fa-search cursor search-style1" (click)="searchCustomers()"></i>
+            </div>
+
+            <div class="col-sm-4  col-md-4  col-lg-4" *ngIf="paymentreportInput.filterBy == 'customer'">
+              <md-form-field class="example-full-width">
+                <input mdInput placeholder="Customer" aria-label="State" [mdAutocomplete]="auto" [formControl]="customerCtrl">
+                <md-autocomplete #auto="mdAutocomplete">
+                  <md-option *ngFor="let cust of filteredcustomer | async" [value]="cust.fullName">
+                    <span class="capitalize">{{ cust.fullName }}</span>
+                  </md-option>
+                </md-autocomplete>
+              </md-form-field>
+            </div>
+
+            <div class="form-checkbox form-checkbox-inline col-sm-4  col-md-4  col-lg-4" *ngIf="paymentreportInput.filterBy == 'customer'">
+              <label class="custom-control custom-checkbox mb-2 mr-sm-2 mb-sm-0">
+                <input type="checkbox" class="custom-control-input" [(ngModel)]="paymentreportInput.gstDetailsOfCustomer">
+                <span class="custom-control-indicator"></span>
+                <span class="custom-control-description"> GST Details </span>
+              </label>
+            </div>
+          </div>
+
+          <div class="row form-group">
+            <div class="col-sm-6  col-md-6  col-lg-6">
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="picker" placeholder="From Date" name="fromdate" [(ngModel)]="paymentreportInput.fromDate">
+                <md-datepicker-toggle mdSuffix [for]="picker"></md-datepicker-toggle>
+                <md-datepicker #picker></md-datepicker>
+              </md-form-field>
+            </div>
+            <div class=" col-sm-6  col-md-6  col-lg-6">
+
+              <md-form-field class="inline">
+                <input mdInput [mdDatepicker]="pickers" placeholder="To Date" name="todate" [(ngModel)]="paymentreportInput.toDate">
+                <md-datepicker-toggle mdSuffix [for]="pickers"></md-datepicker-toggle>
+                <md-datepicker #pickers></md-datepicker>
+              </md-form-field>
+            </div>
+          </div>
+          <div class=" row col">
+            <md-dialog-actions align="center">
+              <button md-raised-button class="btn-primary" (click)="downloadPaymentReports()">Download</button>&nbsp;&nbsp;
+              <button md-raised-button class="btn-primary" (click)="printPaymentReports()">Print</button>&nbsp;&nbsp;
+              <button md-raised-button class="btn-primary" (click)="viewPaymentReports()">View</button>&nbsp;&nbsp;
+            </md-dialog-actions>
+          </div>
+          <!-- <h3 class="danger mgtop-20" *ngIf="noData">
+            <span class="fa fa-frown-o"></span> No Records found</h3> -->
         </div>
       </div>
     </div>

@@ -26,6 +26,8 @@ export class ViewCustomerComponent implements OnInit {
   customersList:any =[];
   noRecords= false;
   customerClickMore = true;
+  isDesc:boolean = false;
+  column:any;
 
 
   getCustomerList(firstcall) {
@@ -126,6 +128,28 @@ getcustomerByPaging(){
 }
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.customersList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('customers List');
+      console.log(this.customersList);
+    } else {
+      this.isDesc = true;
+      this.customersList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

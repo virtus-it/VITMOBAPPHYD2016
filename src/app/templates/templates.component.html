@@ -16,11 +16,11 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="18%">Name</th>
-            <th width="10%">Audience</th>
-            <th width="7%">Order Status</th>
-            <th width="7%">Type</th>
-            <th width="10%">Message Type</th>
+            <th width="18%" (click)="sortTable('template_name')">Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'template_name', 'fa-sort-asc': (column == 'template_name' && isDesc), 'fa-sort-desc': (column == 'template_name' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="10%" (click)="sortTable('type')">Audience &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'type', 'fa-sort-asc': (column == 'type' && isDesc), 'fa-sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="7%" (click)="sortTable('orderstatus')">Order Status  &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'orderstatus', 'fa-sort-asc': (column == 'orderstatus' && isDesc), 'fa-sort-desc': (column == 'orderstatus' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="7%" (click)="sortTable('template_type')">Type   &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'template_type', 'fa-sort-asc': (column == 'template_type' && isDesc), 'fa-sort-desc': (column == 'template_type' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="10%" (click)="sortTable('messagetype')">Message Type  &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'messagetype', 'fa-sort-asc': (column == 'messagetype' && isDesc), 'fa-sort-desc': (column == 'messagetype' && !isDesc) }" aria-hidden="true"> </i></th>
             <th class="" width="7%">Action</th>
           </tr>
         </thead>

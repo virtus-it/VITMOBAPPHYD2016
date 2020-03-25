@@ -19,7 +19,8 @@ export class TemplatesComponent implements OnInit {
   constructor( public dialog: MdDialog ,private loaderService: LoaderService, private followupService: FollowUpService,  private authenticationService: AuthenticationService) { }
 
   AllTemplates:any = [];
-
+  isDesc:boolean = false;
+  column:any;
 
 
   getAllTemplates(){
@@ -83,9 +84,27 @@ export class TemplatesComponent implements OnInit {
 
   });
 
+}
 
-
+sortTable(parm) {
+  if(this.isDesc == true) {
+    this.isDesc = false;
+    this.AllTemplates.sort((a, b) => {
+        if(a[parm]){
+     return a[parm].localeCompare(b[parm]);
   }
+    });
+    this.column = parm;
+  } else {
+    this.isDesc = true;
+    this.AllTemplates.sort((a, b) => {
+      if(b[parm]){
+      return b[parm].localeCompare(a[parm]);
+  }
+   });
+   this.column = parm;
+ }
+}
 
 
   ngOnInit() {

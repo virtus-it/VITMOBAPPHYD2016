@@ -40,7 +40,9 @@ export class ScheduleComponent implements OnInit {
   filterRecords = false;
   distributors: any = [];
   NoRecords = true;
-  
+  isDesc:boolean = false;
+  column:any;
+
   //FilterInputs
   filter: any = { "distributorid": "", "customerNumber": "", "searchtype": "", "weekdays": "", "days": "", "searchtext": "", "date":null , "last_orderid":null };
 
@@ -342,6 +344,27 @@ export class ScheduleComponent implements OnInit {
     this.showFilterDailog = !this.showFilterDailog;
   }
 
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.scheduleOrdersList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+     
+    } else {
+      this.isDesc = true;
+      this.scheduleOrdersList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
   ngOnInit() {
     this.scheduleOrderList();

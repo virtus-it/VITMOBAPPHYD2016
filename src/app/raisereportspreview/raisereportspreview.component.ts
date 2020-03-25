@@ -1,18 +1,17 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
+import * as moment from 'moment';
 import * as _ from 'underscore';
 
-
-
 @Component({
-  selector: 'app-reports-preview',
-  templateUrl: './reports-preview.component.html',
-  styleUrls: ['./reports-preview.component.css']
+  selector: 'app-raisereportspreview',
+  templateUrl: './raisereportspreview.component.html',
+  styleUrls: ['./raisereportspreview.component.css']
 })
-export class ReportsPreviewComponent implements OnInit {
+export class RaisereportspreviewComponent implements OnInit {
 
-  constructor(@Inject(MD_DIALOG_DATA) public Details: any, public thisDialogRef: MdDialogRef<ReportsPreviewComponent>) { }
+  constructor(@Inject(MD_DIALOG_DATA) public Details: any, public thisDialogRef: MdDialogRef<RaisereportspreviewComponent>) { }
 
   customersOrdersReports: any = [];
   invoiceNumber: number = 0;
@@ -22,9 +21,9 @@ export class ReportsPreviewComponent implements OnInit {
   distributorsStockReports: any = [];
   categoryStockReports :any = [];
   distributorsCategoryStockReports :any = [];
-  isDesc:boolean = false;
-  column:any;
-
+  fromdate:any;
+  todate:any;
+  totalamount:any;
 
   showPreview() {
     if (this.Details.type == 'customerOrderReports') {
@@ -35,6 +34,8 @@ export class ReportsPreviewComponent implements OnInit {
     }
     else if (this.Details.type == 'distributorOrderReports') {
       this.distributorsOrdersReports = this.Details.data;
+      this.fromdate = moment(this.Details.Fromdate).format('YYYY-MM-DD');
+      this.todate = moment(this.Details.Todate).format('YYYY-MM-DD');
       this.generateInvoiceNumber();
       this.getTotalQuantityOfDistributorsOrders();
     }
@@ -51,6 +52,22 @@ export class ReportsPreviewComponent implements OnInit {
 
     }
   }
+
+  calculateTotalBillAmt(){
+    let billAmt =0;
+    for(let i =0 ; i < this.Details.data.length; i++){
+      billAmt = billAmt + this.Details.data[i].bill_amount;
+    }
+    return billAmt; 
+  }
+
+  calculateTotalRecivedAmt(){
+    let revicedAmt = 0;
+      for(let i =0 ; i < this.Details.data.length; i++){
+        revicedAmt = revicedAmt + this.Details.data[i].receivedamount;
+      }
+      return revicedAmt;
+   }
 
   generateInvoiceNumber() {
     this.invoiceNumber = Math.floor(10000 + Math.random() * 90000)
@@ -93,35 +110,11 @@ export class ReportsPreviewComponent implements OnInit {
   }
 
 
-
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
 
-  sortReportsPreview(parm) {
-    if(this.isDesc == true) {
-      this.isDesc = false;
-      this.distributorsOrdersReports.sort((a, b) => {
-          if(a[parm]){
-       return a[parm].localeCompare(b[parm]);
-    }
-      });
-      this.column = parm;
-      console.log('distributorsOrdersReports List');
-      console.log(this.distributorsOrdersReports);
-    } else {
-      this.isDesc = true;
-      this.distributorsOrdersReports.sort((a, b) => {
-        if(b[parm]){
-        return b[parm].localeCompare(a[parm]);
-    }
-     });
-     this.column = parm;
-   }
-  }
-
   ngOnInit() {
-    console.log(this.Details);
     this.showPreview();
   }
 

@@ -26,6 +26,8 @@ export class UsersComponent implements OnInit {
   "transtype":"usersearch","apptype":this.authenticationService.appType(),"pagesize":500,
   "searchtype":this.filterType.type ,"searchtext": ''  ,"devicetype":"", 
   "moyaversioncode":""}};
+  isDesc:boolean = false;
+    column:any;
 
 
 
@@ -193,6 +195,28 @@ deactivateUserResult(result){
 
 filterDailogToggle(){
   this.showFilterDailog = !this.showFilterDailog;
+}
+
+sortTable(parm) {
+  if(this.isDesc == true) {
+    this.isDesc = false;
+    this.allUsers.sort((a, b) => {
+        if(a[parm]){
+     return a[parm].localeCompare(b[parm]);
+  }
+    });
+    this.column = parm;
+    console.log('allUsers List');
+    console.log(this.allUsers);
+  } else {
+    this.isDesc = true;
+    this.allUsers.sort((a, b) => {
+      if(b[parm]){
+      return b[parm].localeCompare(a[parm]);
+  }
+   });
+   this.column = parm;
+ }
 }
 
 

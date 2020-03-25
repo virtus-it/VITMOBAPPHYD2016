@@ -28,10 +28,10 @@
     <table class="table table-hover table-fixedheader table-striped">
       <thead>
         <tr>
-          <th width="30%">Name</th>
-          <th width="14%">Mobile </th>
-          <th width="24.5%">Area Name</th>
-          <th width="30%">Address</th>
+          <th width="30%" (click)="sortSupplier('firstname')">Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+          <th width="14%" (click)="sortSupplier('mobileno')">Mobile &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i> </th>
+          <th width="24.5%" (click)="sortSupplier('areaname')">Area Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'areaname', 'fa-sort-asc': (column == 'areaname' && isDesc), 'fa-sort-desc': (column == 'areaname' && !isDesc) }" aria-hidden="true"> </i> </th>
+          <th width="30%" (click)="sortSupplier('address')">Address &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'address', 'fa-sort-asc': (column == 'address' && isDesc), 'fa-sort-desc': (column == 'address' && !isDesc) }" aria-hidden="true"> </i> </th>
         </tr>
       </thead>
       <tbody>
@@ -82,10 +82,10 @@
       <table class="table table-hover table-fixedheader table-striped">
         <thead>
           <tr>
-            <th width="30%">Name</th>
-            <th width="14%">Mobile </th>
-            <th width="24.5%">Area Name</th>
-            <th width="30%">Address</th>
+            <th width="30%" (click)="sortDistributor('firstname')">Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'firstname', 'fa-sort-asc': (column == 'firstname' && isDesc), 'fa-sort-desc': (column == 'firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="14%" (click)="sortDistributor('mobileno')">Mobile &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'mobileno', 'fa-sort-asc': (column == 'mobileno' && isDesc), 'fa-sort-desc': (column == 'mobileno' && !isDesc) }" aria-hidden="true"> </i> </th>
+            <th width="24.5%" (click)="sortDistributor('areaname')">Area Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'areaname', 'fa-sort-asc': (column == 'areaname' && isDesc), 'fa-sort-desc': (column == 'areaname' && !isDesc) }" aria-hidden="true"> </i> </th>
+            <th width="30%" (click)="sortDistributor('address')">Address &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'address', 'fa-sort-asc': (column == 'address' && isDesc), 'fa-sort-desc': (column == 'address' && !isDesc) }" aria-hidden="true"> </i></th>
           </tr>
         </thead>
         <tbody>

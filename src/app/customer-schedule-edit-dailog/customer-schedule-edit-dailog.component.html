@@ -14,11 +14,11 @@
       <table class="table table-hover table-fixedheader">
         <thead>
           <tr>
-            <th width="29%">Product Type</th>
+            <th width="29%" (click)="sortTable('product_type')">Product Type &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'product_type', 'fa-sort-asc': (column == 'product_type' && isDesc), 'fa-sort-desc': (column == 'product_type' && !isDesc) }" aria-hidden="true"> </i></th>
             <th width="6%" title="Quantity">Qty</th>
-            <th width="35%">Schedule</th>
+            <th width="35%" (click)="sortTable('weekdays')">Schedule &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'weekdays', 'fa-sort-asc': (column == 'weekdays' && isDesc), 'fa-sort-desc': (column == 'weekdays' && !isDesc) }" aria-hidden="true"> </i></th>
             <!-- <th width="">Created By</th> -->
-            <th width="15%">Expected Time</th>
+            <th width="15%" (click)="sortTable('delivery_exceptedtime')">Expected Time &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'delivery_exceptedtime', 'fa-sort-asc': (column == 'delivery_exceptedtime' && isDesc), 'fa-sort-desc': (column == 'delivery_exceptedtime' && !isDesc) }" aria-hidden="true"> </i></th>
             <th width="8%" class="no-th-arrow">Action</th>
           </tr>
         </thead>

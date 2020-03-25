@@ -30,6 +30,9 @@ export class DistributorListDialogComponent implements OnInit {
   message:any="";
   autoAssignedSuppliername:any = '';
   superDealer =true;
+  isDesc:boolean = false;
+  column:any;
+
   constructor(public thisDialogRef: MdDialogRef<DistributorListDialogComponent>, @Inject(MD_DIALOG_DATA) public orderDetail: any, private distributorService: DistributorServiceService,public dialog: MdDialog, private authenticationService: AuthenticationService, private loaderService: LoaderService) { }
   tabPanelView: string = "suppliers";
   showTabPanel(panelName) {
@@ -247,6 +250,49 @@ export class DistributorListDialogComponent implements OnInit {
     this.supplierName = supplier.fullName;
   }
 
+  sortSupplier(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.suppliers.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('suppliers List');
+      console.log(this.suppliers);
+    } else {
+      this.isDesc = true;
+      this.suppliers.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
+
+  sortDistributor(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.distributors.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('distributors List');
+      console.log(this.distributors);
+    } else {
+      this.isDesc = true;
+      this.distributors.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
 //   changed(event){
 // if(this.orderDetail.supplierdetails.userid != event || ""){

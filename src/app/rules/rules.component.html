@@ -16,10 +16,10 @@
       <table class="table table-hover table-striped">
         <thead>
           <tr>
-            <th width="15%">Created By</th>
-            <th width="12%">Rule Name </th>
-            <th width="12%">Type</th>
-            <th width="30%">Type Details</th>
+            <th width="15%" (click)="sortTable('createdby')">Created By &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'createdby', 'fa-sort-asc': (column == 'createdby' && isDesc), 'fa-sort-desc': (column == 'createdby' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="12%" (click)="sortTable('rule name')">Rule Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'rule name', 'fa-sort-asc': (column == 'rule name' && isDesc), 'fa-sort-desc': (column == 'rule name' && !isDesc) }" aria-hidden="true"> </i> </th>
+            <th width="12%" (click)="sortTable('type')">Type &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'type', 'fa-sort-asc': (column == 'type' && isDesc), 'fa-sort-desc': (column == 'type' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="30%" (click)="sortTable('code_description')">Type Details &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'code_description', 'fa-sort-asc': (column == 'code_description' && isDesc), 'fa-sort-desc': (column == 'code_description' && !isDesc) }" aria-hidden="true"> </i></th>
             <th width="10%">Value</th>
             <th width="10%" class="no-th-row">Action</th>
           </tr>

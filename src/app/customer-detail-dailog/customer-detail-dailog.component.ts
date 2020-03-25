@@ -40,7 +40,8 @@ export class CustomerDetailDailogComponent implements OnInit {
   distributorID = "";
   customersOrdersClickMore = true;
   OrdersClickMore = true;
-
+  isDesc:boolean = false;
+  column:any;
 
   findDistributors(name: string) {
     //console.log(name);
@@ -266,6 +267,28 @@ export class CustomerDetailDailogComponent implements OnInit {
        
     this.getCustomerOrder(false);
 
+}
+
+sortTable(parm) {
+  if(this.isDesc == true) {
+    this.isDesc = false;
+    this.customerOrderDetails.sort((a, b) => {
+        if(a[parm]){
+     return a[parm].localeCompare(b[parm]);
+  }
+    });
+    this.column = parm;
+    console.log('customerOrderDetails List');
+    console.log(this.customerOrderDetails);
+  } else {
+    this.isDesc = true;
+    this.customerOrderDetails.sort((a, b) => {
+      if(b[parm]){
+      return b[parm].localeCompare(a[parm]);
+  }
+   });
+   this.column = parm;
+ }
 }
   ngOnInit() {
     console.log(this.orderDetail);

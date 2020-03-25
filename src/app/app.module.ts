@@ -147,6 +147,9 @@ import { DeleteRedeemSettingsComponent } from './delete-redeem-settings/delete-r
 import { UnknownOrdersComponent } from './unknown-orders/unknown-orders.component';
 import { SalestrackingComponent } from './salestracking/salestracking.component';
 import { PaymentsHistoryComponent } from './payments-history/payments-history.component';
+import { RaisereportspreviewComponent } from './raisereportspreview/raisereportspreview.component';
+import { SalesreportspreviewComponent } from './salesreportspreview/salesreportspreview.component';
+import { PaymentreportpreviewComponent } from './paymentreportpreview/paymentreportpreview.component';
 
 
 
@@ -271,6 +274,9 @@ import { PaymentsHistoryComponent } from './payments-history/payments-history.co
         UnknownOrdersComponent,
         SalestrackingComponent,
         PaymentsHistoryComponent,
+        RaisereportspreviewComponent,
+        SalesreportspreviewComponent,
+        PaymentreportpreviewComponent,
 
 
 
@@ -443,7 +449,10 @@ import { PaymentsHistoryComponent } from './payments-history/payments-history.co
          CustomerExcelUploadComponent,
          DeleteRedeemSettingsComponent,
          UnknownOrdersComponent,
-         PaymentsHistoryComponent
+         PaymentsHistoryComponent,
+         RaisereportspreviewComponent,
+         SalesreportspreviewComponent,
+         PaymentreportpreviewComponent
       
 
 

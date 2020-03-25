@@ -35,6 +35,8 @@ export class SelectProductsForassingComponent implements OnInit {
   emptyCansKeyUp:boolean = false;
   expressDeliveryCheck:boolean = false;
   emptyCanAmount1 = 0;
+  isDesc:boolean = false;
+  column:any;
   // emptycans:any = 0;
   // order update input 
   //{"order":{"orderid":"22067","loginid":"289","productid":"1831","product_name":"Kinley","quantity":"1","product_cost":"50","product_type":"dummy product","apptype":"moya"}}
@@ -246,10 +248,6 @@ if(this.productsDetails.expressCheck == true){
   
   }
 
-
- 
-
-
   changeQuantity(products , data){
     console.log(data , products);
     
@@ -360,6 +358,28 @@ changeOfQuantity(data){
     
       }
     }
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.productList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('product List');
+      console.log(this.productList);
+    } else {
+      this.isDesc = true;
+      this.productList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

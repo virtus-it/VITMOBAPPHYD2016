@@ -20,7 +20,8 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
   constructor(public dialog: MdDialog, private authenticationService: AuthenticationService,private customerservice: CustomerService,private loaderService: LoaderService, public thisDialogRef: MdDialogRef<CustomerScheduleEditDailogComponent>,@Inject(MD_DIALOG_DATA) public Detail: any, ) { }
   scheduleOrdersList=[];
   noRecord=false;
-
+  isDesc:boolean = false;
+  column:any;
 
   
 //View schedule orders
@@ -113,12 +114,30 @@ export class CustomerScheduleEditDailogComponent implements OnInit {
 
     }
 
-    
-
-    
-
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.scheduleOrdersList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('scheduleOrdersList List');
+      console.log(this.scheduleOrdersList);
+    } else {
+      this.isDesc = true;
+      this.scheduleOrdersList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

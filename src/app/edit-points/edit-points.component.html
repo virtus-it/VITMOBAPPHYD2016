@@ -44,10 +44,10 @@
         <table class="table table-hover table-striped table-fixedheader" style="table-layout:fixed">
           <thead >
             <tr *ngIf="customerPointsDetails.length > 0">
-              <th width="29%">Date</th>
+              <th width="29%" (click)="sortTable('date')">Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'date', 'fa-sort-asc': (column == 'date' && isDesc), 'fa-sort-desc': (column == 'date' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="20%">Order id</th>
               <th width="20%">Points</th>
-              <th width="29%">Rewarded for</th>
+              <th width="29%" (click)="sortTable('status')">Rewarded for &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'status', 'fa-sort-asc': (column == 'status' && isDesc), 'fa-sort-desc': (column == 'status' && !isDesc) }" aria-hidden="true"> </i></th>
             </tr>
           </thead>
           <tbody>

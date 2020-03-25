@@ -23,20 +23,20 @@
     <table class="table table-hover table-striped  table-fixedheader">
       <thead>
         <tr>
-          <th width="4%">Id</th>
-          <th width="11%">Cust Name</th>
-          <th width="11%">Product </th>
+          <th width="4%" >Id</th>
+          <th width="11%" (click)="sortTable('orderby_firstname')">Cust Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'orderby_firstname', 'fa-sort-asc': (column == 'orderby_firstname' && isDesc), 'fa-sort-desc': (column == 'orderby_firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+          <th width="11%" (click)="sortTable('category')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i> </th>
           <th width="4%" title="Quantity">Qty</th>
           <th width="9%" title="Cost, Express Delivery Charge, Service Charge">Cost,Exp,Serv</th>
-          <th width="7%">Status</th>
-          <th width="5%">Mode</th>
+          <th width="7%" (click)="sortTable('status')">Status &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'status', 'fa-sort-asc': (column == 'status' && isDesc), 'fa-sort-desc': (column == 'status' && !isDesc) }" aria-hidden="true"> </i></th>
+          <th width="5%" (click)="sortTable('paymenttype')">Mode &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'paymenttype', 'fa-sort-asc': (column == 'paymenttype' && isDesc), 'fa-sort-desc': (column == 'paymenttype' && !isDesc) }" aria-hidden="true"> </i></th>
           <th width="7%">Amount</th>
           <th class="" width="7%" title="Return Quantity">Ret Qty</th>
           <!-- <th class="" width="9%">Serv chgs</th>
           <th class="" width="9%">Exp del chgs</th> -->
           <th class="" width="8%" title="Recive Amount">Recv Amt</th>
-          <th class="" width="13%">Created Date</th>
-          <th class="" width="13%">Delivery Date</th>
+          <th class="" width="13%" (click)="sortTable('ordered_date')">Created Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'ordered_date', 'fa-sort-asc': (column == 'ordered_date' && isDesc), 'fa-sort-desc': (column == 'ordered_date' && !isDesc) }" aria-hidden="true"> </i></th>
+          <th class="" width="13%" (click)="sortTable('order_delivereddate')">Delivery Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'order_delivereddate', 'fa-sort-asc': (column == 'order_delivereddate' && isDesc), 'fa-sort-desc': (column == 'order_delivereddate' && !isDesc) }" aria-hidden="true"> </i></th>
           <!-- <th class="" width="5%">Flw up</th>
           <th class="" width="5%">Address</th>
            -->
@@ -51,7 +51,7 @@
           <td width="4%" class="left cellpadding" scope="row">#{{supplierOrder.order_id}}</td>
           <td width="11%" class="left cellpadding" scope="row">{{supplierOrder.orderby_firstname}}</td>
           <td width="11%" class="capitalize left cellpadding" scope="row">
-            <span class="onhovertooltip-100" title="{{supplierOrder.brandname}}">{{supplierOrder.brandname}}</span>
+            <span class="onhovertooltip-100" title="{{supplierOrder.category}} {{supplierOrder.brandname}} {{supplierOrder.prod_type}}">{{supplierOrder.category}} {{supplierOrder.brandname}} {{supplierOrder.prod_type}}</span>
           </td>
           <td width="4%" class="left cellpadding" scope="row">
             <span class="text-info">{{supplierOrder.quantity}}</span>

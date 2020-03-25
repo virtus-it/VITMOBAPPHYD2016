@@ -74,8 +74,8 @@
         <thead>
           <tr class="wd-99pc">
             <th width="6%">Id</th>
-            <th class="" width="9%">Category</th>
-            <th width="10%">Product Name</th>
+            <!-- <th class="" width="9%">Category</th> -->
+            <th width="10%" (click)="sortTable('category')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i></th>
             <th width="7%">Dc Challn</th>
             <!-- <th width="7%">Cart Id</th> -->
             <th width="4%" title="Order Quantity">Qty</th>
@@ -84,9 +84,9 @@
             <th width="5%" title="Exp Del Chgs">Exp Chgs</th>
             <th width="6%" title="Order Amount">Amt</th>
             <th width="7%" title="Received Amount">Rec Amt</th>
-            <th width="8%">Status</th>
-            <th width="10%" title="Delivery Date">Delv Date</th>
-            <th width="10%" title="Delivered By Last Handled Distributor">Last Handled..</th>
+            <th width="8%" (click)="sortTable('status')">Status &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'status', 'fa-sort-asc': (column == 'status' && isDesc), 'fa-sort-desc': (column == 'status' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="10%" title="Delivery Date" (click)="sortTable('order_delivereddate')"> Delv Date  &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'order_delivereddate', 'fa-sort-asc': (column == 'order_delivereddate' && isDesc), 'fa-sort-desc': (column == 'order_delivereddate' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th width="10%" title="Delivered By Last Handled Distributor" (click)="sortTable('dealerdetails.firstname')">Last Handled..  &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'dealerdetails.firstname', 'fa-sort-asc': (column == 'dealerdetails.firstname' && isDesc), 'fa-sort-desc': (column == 'dealerdetails.firstname' && !isDesc) }" aria-hidden="true"> </i></th>
             <th class="" width="6%">Action</th>
 
           </tr>
@@ -95,12 +95,12 @@
         <tbody>
           <tr *ngFor="let customer of customerOrderDetails">
             <td width="6%" class="left" scope="row">#{{customer.order_id}}</td>
-            <td width="9%" class="left" scope="row">
+            <!-- <td width="9%" class="left" scope="row">
               <span class="onhovertooltip-100" title="{{customer.category}}">{{customer.category}}</span>
-            </td>
+            </td> -->
 
             <td width="10%" class=" capital">
-              <span class="onhovertooltip-100" title="{{customer.brandname}} {{customer.prod_type}}">{{customer.brandname}} {{customer.prod_type}}</span>
+              <span class="onhovertooltip-100" title=" {{customer.category}} {{customer.brandname}} {{customer.prod_type}}">{{customer.category}} {{customer.brandname}} {{customer.prod_type}}</span>
             </td>
             <!-- <td width="7%" class=" capital">{{customer.cart_id}}</td> -->
             <td width="7%" class="left" scope="row">

@@ -15,6 +15,8 @@ export class PaymentsHistoryComponent implements OnInit {
 
   paymentHistory=[];
   noRecord=false;
+  isDesc:boolean = false;
+  column:any;
 
   paymentsHistory(){
     let input:any ={"root":{"transtype":"paymentshistory","userid":this.Detail.userid,"loginid" : this.authenticationService.loggedInUserId(),"apptype" : this.authenticationService.appType(),"lastid":"0","pagesize":"50"}}
@@ -45,6 +47,29 @@ export class PaymentsHistoryComponent implements OnInit {
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
   }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.paymentHistory.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('paymentHistory List');
+      console.log(this.paymentHistory);
+    } else {
+      this.isDesc = true;
+      this.paymentHistory.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
+
   ngOnInit() {
     console.log(this.Detail);
     this.paymentsHistory();

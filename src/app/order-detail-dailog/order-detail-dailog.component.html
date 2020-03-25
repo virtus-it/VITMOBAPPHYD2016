@@ -223,12 +223,12 @@
             <table class="table table-hover table-striped table-fixedheader">
               <thead>
                 <tr>
-                  <th width="50%">
-                    <small>Product Name</small>
+                  <th width="70%">
+                    <small>Product</small>
                   </th>
-                  <th width="30%">
+                  <!-- <th width="30%">
                     <small>Category</small>
-                  </th>
+                  </th> -->
                   <th width="20%">
                     <small>Empty Cans</small>
                   </th>
@@ -241,17 +241,17 @@
                   <td width="50%">
 
                     <small>
-                      <span class="onhovertooltip-350" title="{{canDetails.product.productname}} {{canDetails.product.product_type}}">{{canDetails.product.productname}} {{canDetails.product.product_type}}</span>
+                      <span class="onhovertooltip-350" title="{{canDetails.product.category}} {{canDetails.product.productname}} {{canDetails.product.product_type}}">{{canDetails.product.category}} {{canDetails.product.productname}} {{canDetails.product.product_type}}</span>
                     </small>
                   </td>
 
                   <!-- <td class=""> {{canDetails.product.category}}</td> -->
 
-                  <td class="" width="30%">
+                  <!-- <td class="" width="30%">
                     <small>
                       <span class="">{{canDetails.product.category}}</span>
                     </small>
-                  </td>
+                  </td> -->
                   <td width="20%">
                     <small class="col-md-5 col-5 col-sm-5"> {{canDetails.avaliablecans}}</small>
                     <a *ngIf="canDetails.showIcon">

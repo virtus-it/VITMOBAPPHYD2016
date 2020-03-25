@@ -21,7 +21,8 @@ export class AssociateDistributorComponent implements OnInit {
   searchDistributor = "";
   distributorsCopy:any = [];
   distributorID :any = "";
-
+  isDesc:boolean = false;
+  column:any;
 
 
 
@@ -86,6 +87,28 @@ export class AssociateDistributorComponent implements OnInit {
 
   onCloseCancel(){
     this.thisDialogRef.close('Cancel');
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.allDistributors.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('Distributor List');
+      console.log(this.allDistributors);
+    } else {
+      this.isDesc = true;
+      this.allDistributors.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

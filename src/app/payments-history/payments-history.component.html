@@ -14,10 +14,10 @@
           <thead>
             <tr>
               <th width="15%">ORDER ID</th>
-              <th width="23%">CUSTOMER NAME</th>
+              <th width="23%" (click)="sortTable('customername')">CUSTOMER NAME &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'customername', 'fa-sort-asc': (column == 'customername' && isDesc), 'fa-sort-desc': (column == 'customername' && !isDesc) }" aria-hidden="true"> </i></th>
               <th width="24%">RECEIVED AMOUNT</th>
-              <th width="18%">PAYMENT TYPE</th>
-              <th width="20%">RECEIVED DATE</th>
+              <th width="18%" (click)="sortTable('paymenttype')">PAYMENT TYPE &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'paymenttype', 'fa-sort-asc': (column == 'paymenttype' && isDesc), 'fa-sort-desc': (column == 'paymenttype' && !isDesc) }" aria-hidden="true"> </i></th>
+              <th width="20%" (click)="sortTable('amount_receiveddate')">RECEIVED DATE &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'amount_receiveddate', 'fa-sort-asc': (column == 'amount_receiveddate' && isDesc), 'fa-sort-desc': (column == 'amount_receiveddate' && !isDesc) }" aria-hidden="true"> </i></th>
             </tr>
           </thead>
           <tbody>

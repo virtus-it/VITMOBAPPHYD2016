@@ -3,6 +3,35 @@
     <i class="fa fa-check-square-o" aria-hidden="true"></i>
     Select Product
   </div>
+
+  <div class="col">
+    <!-- <span>Customer : {{orderDetail.orders.customer.firstname}}</span>
+    <span class="mgleft-10">Brand : {{orderDetail.orders.brandname}}</span>
+    <span>{{orderDetail.orders.prod_type}}</span> -
+    <span>{{orderDetail.orders.quantity}}(qty)</span> -->
+
+    <span>Customer :
+       <span *ngIf="orderDetail.orderDetails && orderDetail.orderDetails.orderby_firstname"> {{orderDetail.orderDetails.orderby_firstname}}</span>
+       <span *ngIf = '!orderDetail.orderDetails.orderby_firstname'> - </span>
+    </span>
+
+    <span>|  Category : 
+      <span *ngIf="orderDetail.orderDetails && orderDetail.orderDetails.productdetails">{{orderDetail.orderDetails.productdetails.category}}</span>
+      <span *ngIf = "!orderDetail.orderDetails.productdetails"> - </span>
+    </span>
+
+    <span> | Product type : 
+      <span *ngIf="orderDetail.orderDetails && orderDetail.orderDetails.prod_type">{{orderDetail.orderDetails.prod_type}}</span>
+      <span *ngIf="!orderDetail.orderDetails.prod_type"> - </span>
+    </span>
+
+    <span> | Quantity : 
+      <span *ngIf="orderDetail.orderDetails && orderDetail.orderDetails.quantity">{{orderDetail.orderDetails.quantity}}</span>
+      <span *ngIf="!orderDetail.orderDetails.quantity"> - </span>
+    </span>
+
+  </div>
+
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong (click)="onCloseCancel()">
       <i class="fa fa-times fs-20" aria-hidden="true"></i>
@@ -21,9 +50,9 @@
     <table class="table table-hover table-striped table-fixedheader mgtop-10">
       <thead>
         <tr>
-          <th width="16%">Product</th>
-          <th class="" width="12%">Category</th>
-          <th width="15%">Product Type </th>
+          <th width="16%" (click)="sortTable('category')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i></th>
+          <!-- <th class="" width="12%">Category</th> -->
+          <th width="15%" (click)="sortTable('pname')">Product Type &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'pname', 'fa-sort-asc': (column == 'pname' && isDesc), 'fa-sort-desc': (column == 'pname' && !isDesc) }" aria-hidden="true"> </i> </th>
           <th width="10%">Count</th>
           <th width="12%">Price per unit</th>
           <th width="10%">Exp Del Chgs</th>
@@ -40,12 +69,12 @@
               <input type="radio" [disabled]="product.stockstatus== 'Soldout'" [checked]="this.productID === product.productid" [(ngModel)]='this.productID'
                 class="custom-control-input" name="{{product.productid}}" [value]="product.productid" (ngModelChange)="changeQuantity(product , $event)">
               <span class="custom-control-indicator"></span>
-              <span class="custom-control-description onhovertooltip-150" title="{{product.brandname}}">{{product.brandname}} </span>
+              <span class="custom-control-description onhovertooltip-150" title="{{product.category}} {{product.brandname}}">{{product.category}} {{product.brandname}} </span>
             </label>
           </td>
-          <td class="" width="12%">
+          <!-- <td class="" width="12%">
             <span class="onhovertooltip-100" title="{{product.category}}">{{product.category}}</span>
-          </td>
+          </td> -->
 
           <td width="15%" class="left capital">
             <span class="onhovertooltip-150" title="{{product.pname}} {{product.ptype}}">{{product.pname}} {{product.ptype}}</span>

@@ -16,7 +16,7 @@ import { SelectProductsForassingComponent } from '../select-products-forassing/s
 import {DistributorMapDetailsComponent } from '../distributor-map-details/distributor-map-details.component';
 import * as _ from 'underscore';
 import { DistributorOrderListComponent } from '../distributor-order-list/distributor-order-list.component';
-import {} from '@types/googlemaps';
+//import {} from '@types/googlemaps';
 declare var google: any;
 
 interface marker {
@@ -550,6 +550,8 @@ export class OrderCoverageDetailDailogComponent implements OnInit {
       });
       if (this.gMaps.containsLocation(latlong, polygonPath)) {
         this.listOfDistributors.push(dist);
+        console.log('List of Distributors');
+        console.log(this.listOfDistributors)
       }
     }
 

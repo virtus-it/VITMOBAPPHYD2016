@@ -22,7 +22,8 @@ export class SupplierComponent implements OnInit {
   supplierList = [];
   searchSupplierTerm= "" ;
   SupplierListCopy = [];
-
+  isDesc:boolean = false;
+  column:any;
 
  
 //ts file for dialog box for addinng a supplier
@@ -191,6 +192,29 @@ dialogRefdeleteSupplier.afterClosed().subscribe(result => {
   filterToggle(){
     this.showFilterDialog = !this.showFilterDialog;
   }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.supplierList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('supplier List');
+      console.log(this.supplierList);
+    } else {
+      this.isDesc = true;
+      this.supplierList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
+
   ngOnInit() {
     this.getSupplierList();
   }

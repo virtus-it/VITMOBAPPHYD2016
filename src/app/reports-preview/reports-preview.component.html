@@ -79,7 +79,7 @@
         <thead>
           <tr>
             <th class="" width="15%">Order Id</th>
-            <th class="" width="25%">Category</th>
+            <th class="" width="25%">Product</th>
             <th class="" width="10%">Qty (F)</th>
             <th class="" width="10%">Qty (E)</th>
             <th class="" width="20%">Amount</th>
@@ -204,11 +204,11 @@
         <thead>
           <tr>
             <th class="" width="10%">Order Id</th>
-            <th class="" width="17%">Date</th>
-            <th class="" width="19%">Customer Name</th>
-            <th class="" width="25%">Category</th>
+            <th class="" width="17%" (click)="sortReportsPreview('ordered_date')">Date &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'ordered_date', 'fa-sort-asc': (column == 'ordered_date' && isDesc), 'fa-sort-desc': (column == 'ordered_date' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th class="" width="19%" (click)="sortReportsPreview('orderby_firstname')">Customer Name &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'orderby_firstname', 'fa-sort-asc': (column == 'orderby_firstname' && isDesc), 'fa-sort-desc': (column == 'orderby_firstname' && !isDesc) }" aria-hidden="true"> </i></th>
+            <th class="" width="25%" (click)="sortReportsPreview('category')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i></th>
             <th class="" width="8%">Qty</th>
-            <th class="" width="20%">Delivery Status</th>
+            <th class="" width="20%" (click)="sortReportsPreview('status')">Delivery Status &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'status', 'fa-sort-asc': (column == 'status' && isDesc), 'fa-sort-desc': (column == 'status' && !isDesc) }" aria-hidden="true"> </i></th>
           </tr>
         </thead>
         <tbody>
@@ -344,8 +344,6 @@
     </md-dialog-content>
   </div>
 
-
-
   <!-- this table is prod + distributors -->
 
   <div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorCategoryStockReport'">
@@ -390,10 +388,6 @@
       </table>
     </md-dialog-content>
   </div>
-
-
-
-
 
 
   <div class="row float-right pdright-30 mgbottom-20">

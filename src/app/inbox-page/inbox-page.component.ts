@@ -22,7 +22,8 @@ export class InboxPageComponent implements OnInit {
   filterInput ={"fromDate":null , "toDate":null};
   viewType: any = 'customer';
   customerMessages:any =[];
-
+  isDesc:boolean = false;
+  column:any;
 
 
 
@@ -117,6 +118,28 @@ export class InboxPageComponent implements OnInit {
       this.viewType = 'customer';
     }
 
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.AllMessages.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('All Messages List');
+      console.log(this.AllMessages);
+    } else {
+      this.isDesc = true;
+      this.AllMessages.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

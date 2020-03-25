@@ -17,7 +17,8 @@ export class CategoryComponent implements OnInit {
   constructor(public dialog: MdDialog,private authenticationService: AuthenticationService,  private productService: ProductsService , private loaderService: LoaderService) { }
 
   categoryList :any =[];
-
+  isDesc:boolean = false;
+  column:any;
 
 
 
@@ -104,6 +105,27 @@ this.loaderService.display(true);
     }
   }
 
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.categoryList.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('category List');
+      console.log(this.categoryList);
+    } else {
+      this.isDesc = true;
+      this.categoryList.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
 
 
   ngOnInit() {

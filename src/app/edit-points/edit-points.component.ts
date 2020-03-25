@@ -19,6 +19,8 @@ export class EditPointsComponent implements OnInit {
   distributorPointsDetails:any = [];
   noPoints:boolean = false;
   errorMessage :boolean= false;
+  isDesc:boolean = false;
+  column:any;
 
   getAllPointsCustomer(){
     let input = {"User":{"TransType":"getpoints","userid": this.Detail.userid,"usertype":"customer"}};
@@ -126,6 +128,28 @@ export class EditPointsComponent implements OnInit {
 
   onCloseCancel() {
     this.thisDialogRef.close('cancel');
+  }
+
+  sortTable(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.customerPointsDetails.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('customerPointsDetails List');
+      console.log(this.customerPointsDetails);
+    } else {
+      this.isDesc = true;
+      this.customerPointsDetails.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
   ngOnInit() {

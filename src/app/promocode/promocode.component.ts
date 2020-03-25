@@ -40,6 +40,8 @@ superDealer = false;
 detailsClickMore =  true;
 userView:string = '';
 noRecords:boolean = false;
+isDesc:boolean = false;
+column:any;
 
 
   addPromoCode(){
@@ -408,6 +410,72 @@ noRecords:boolean = false;
     else{
       this.redeemDetails = [];
     }
+  }
+
+  sortPromoCode(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.allPromoCodes.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('all PromoCodes List');
+      console.log(this.allPromoCodes);
+    } else {
+      this.isDesc = true;
+      this.allPromoCodes.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
+
+  sortReedemSettings(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.redeemSettingsDetails.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('all redeemSettings List');
+      console.log(this.redeemSettingsDetails);
+    } else {
+      this.isDesc = true;
+      this.redeemSettingsDetails.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
+  }
+
+  sortReedemDetails(parm) {
+    if(this.isDesc == true) {
+      this.isDesc = false;
+      this.redeemDetails.sort((a, b) => {
+          if(a[parm]){
+       return a[parm].localeCompare(b[parm]);
+    }
+      });
+      this.column = parm;
+      console.log('all redeemDetails List');
+      console.log(this.redeemDetails);
+    } else {
+      this.isDesc = true;
+      this.redeemDetails.sort((a, b) => {
+        if(b[parm]){
+        return b[parm].localeCompare(a[parm]);
+    }
+     });
+     this.column = parm;
+   }
   }
 
 

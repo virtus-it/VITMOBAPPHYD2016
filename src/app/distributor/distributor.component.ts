@@ -29,6 +29,8 @@ import { ProductUpdateComponent } from '../product-update/product-update.compone
 import { LoaderService } from '../login/loader.service';
 import { ReportsService } from '../reports/reports.service';
 import { RaiseRequestDetailDailogComponent } from '../raise-request-detail-dailog/raise-request-detail-dailog.component';
+import { SortingPipe } from '../pipes/sorting.pipe';
+import {DistributorMapDetailsComponent } from '../distributor-map-details/distributor-map-details.component';
 
 @Component({
 
@@ -63,6 +65,10 @@ export class DistributorComponent implements OnInit {
     producttype: '';
     pname: '';
     category: '';
+    isDesc:boolean = false;
+    column:any;
+    direction:any;
+    sortByAsc: boolean = true;
 
     filterTypeModel = { categoryname: "", typeofphone: "", address: "", isAreaDefined: "", productId: '', isstockpointDefined: '', mobileno: '', firstname: '' };
     filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "transtype": "search", "apptype": this.authenticationService.appType(), "pagesize": 100, "searchtype": "", "searchtext": "", "devicetype": "", "moyaversioncode": "", "category": '', "producttype": '', 'productname': "" } };//page size change from 1000 to 100
@@ -82,7 +88,12 @@ export class DistributorComponent implements OnInit {
 
     // let input = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "loginid": this.authenticationService.loggedInUserId(), "lastuserid": 0, "apptype": this.authenticationService.appType(), "pagesize": 1000 } }
 
-
+    //sorting
+    // key: string = 'name'; 
+    // reverse: boolean = false;
+    // sort(key){
+    //     this.key = key;
+    // }
 
     constructor(private distributorService: DistributorServiceService, private authenticationService: AuthenticationService, public dialog: MdDialog, private loaderService: LoaderService, private productService: ProductsService, private reportservice: ReportsService, ) {
 
@@ -103,6 +114,8 @@ export class DistributorComponent implements OnInit {
 
 
     }
+
+    
 
     findCategories(name: string) {
         let finalCategories: any = [];
@@ -136,6 +149,17 @@ export class DistributorComponent implements OnInit {
         }
     }
 
+    distributorsMap(data){
+        let Details = {"path":[],"color":"","user_id":data.userid,"distributorName":data.firstname+ " "+data.lastname,"supplier":[],"mobileno":data.mobileno,"mobileno1":data.mobileno_one,"mobileno2":data.mobileno_two,"stockpoint":[]}
+        let dialogRef = this.dialog.open(DistributorMapDetailsComponent, {
+          width: '90%',
+          data: Details
+        });
+        dialogRef.afterClosed().subscribe(result => {
+          if (result == 'success') {
+          }
+        });
+      }
 
 
     findProducts(name: string) {
@@ -791,6 +815,34 @@ export class DistributorComponent implements OnInit {
         });
     }
 
+    // sort(property){
+    //     this.isDesc = !this.isDesc; //change the direction    
+    //     this.column = property;
+    //     this.direction = this.isDesc ? 1 : -1;
+    //     console.log(property);
+    //   };
+
+    sortTable(parm) {
+        if(this.isDesc == true) {
+          this.isDesc = false;
+          this.distributors.sort((a, b) => {
+              if(a[parm]){
+           return a[parm].localeCompare(b[parm]);
+        }
+          });
+          this.column = parm;
+          console.log('Distributor List');
+          console.log(this.distributors);
+        } else {
+          this.isDesc = true;
+          this.distributors.sort((a, b) => {
+            if(b[parm]){
+            return b[parm].localeCompare(a[parm]);
+        }
+         });
+         this.column = parm;
+       }
+      }
 
     ngOnInit() {
         this.getDistributors(true);

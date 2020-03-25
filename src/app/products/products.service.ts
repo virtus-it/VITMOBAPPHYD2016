@@ -99,6 +99,24 @@ export class ProductsService {
       .do(data => console.log('All: '))
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
+
+  getProduct(input) {
+    let bodyString = JSON.stringify(input); // Stringify payload
+    let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
+    headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
+    let options = new RequestOptions({ headers: headers });
+    return this.http.post(this.apiUrl + '/createproduct', bodyString, options)
+    .map(res => {
+      let response = res.json();
+      this.authenticationService.sendRefreshedToken(res);
+      if(response.data == 'token malformed'){
+        this.authenticationService.logout();
+      }
+      return res.json();
+    })
+      .do(data => console.log('All: '))
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
   addStockDetails(input) {
     let bodyString = JSON.stringify(input); // Stringify payload
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()

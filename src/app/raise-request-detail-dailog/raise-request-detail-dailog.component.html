@@ -46,23 +46,23 @@
     <table class="table table-hover table-striped table-fixedheader">
       <thead>
         <tr>
-          <th width="20%">category</th>
-          <th width="24%">Product Name</th>
-          <th width="18%">Product Type</th>
+          <!-- <th width="20%">category</th> -->
+          <th width="24%" (click)="sortTable('category')">Product &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'category', 'fa-sort-asc': (column == 'category' && isDesc), 'fa-sort-desc': (column == 'category' && !isDesc) }" aria-hidden="true"> </i></th>
+          <th width="18%" (click)="sortTable('ptype')">Product Type &nbsp;<i class="fa" [ngClass]="{'fa-sort': column != 'ptype', 'fa-sort-asc': (column == 'ptype' && isDesc), 'fa-sort-desc': (column == 'ptype' && !isDesc) }" aria-hidden="true"> </i></th>
           <th width="18%">Filled Cans</th>
           <th width="18%">Empty Cans</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let products of allProductsList">
-          <td width="20%">
+          <!-- <td width="20%">
             <div class="capitalize pdtopbottom-8">{{products.category}}</div>
-          </td>
+          </td> -->
           <td width="25%">
-              <div class="capitalize pdtopbottom-8">{{products.brandname}}</div>
+              <div class="capitalize pdtopbottom-8" title="{{products.category}} {{products.brandname}}">{{products.category}} {{products.brandname}}</div>
             </td>
             <td width="18%">
-                <div class="capitalize pdtopbottom-8">{{products.ptype}} </div>
+                <div class="capitalize pdtopbottom-8" title="{{products.ptype}}">{{products.ptype}} </div>
               </td>
           <td width="18%">
             <md-form-field class="wd-100pc">
