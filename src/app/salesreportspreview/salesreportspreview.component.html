@@ -1,12 +1,56 @@
 <div class="row justify-content-between modal-title">
   <div class="col-sm-4 col-md-4 col-lg-4 ">
-    <i class="fa fa-calendar-plus-o"></i> Sale Reports Preview
+    <i class="fa fa-calendar-plus-o"></i> sale Reports Preview
   </div>
   <div class="col-md-1  col-sm-1  col-lg-1 right">
     <strong>
       <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
     </strong>
   </div>
+</div>
+
+<div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorSalesReport'">
+  <div class="well">
+    <div class="row justify-content-between">
+
+        <div class="col-5">
+        <div class="row">
+          <b class="col-sm-5">Distributors Name: </b>
+          <div class="col-sm-6">
+            <span *ngIf="Details.data[0].distributorname" class="capitalize">{{Details.data[0].distributorname}}</span>
+            <span *ngIf="!Details.data[0].distributorname">- </span>
+          </div>
+        </div>
+        <div class="row">
+          <b class="col-sm-4">Enterprise Name: </b>
+          <div class="col-sm-8">
+            <span *ngIf="Details.data[0].companyname" class="capitalize">
+              {{Details.data[0].companyname}}</span>
+            <span *ngIf="!Details.data[0].companyname">- </span>
+          </div>
+        </div>
+
+        <div class="row">
+          <b class="col-sm-4">Mobile number: </b>
+          <div class="col-sm-8">
+            <span *ngIf="Details.data[0].distributormobile" class="capitalize">
+              {{Details.data[0].distributormobile}}</span>
+            <span *ngIf="!Details.data[0].distributormobile">- </span>
+          </div>
+        </div>
+        <div class="row">
+          <b class="col-sm-4">Address: </b>
+          <div class="col-sm-8">
+            <span *ngIf="Details.data[0].distributoraddress" class="capitalize">
+              {{Details.data[0].distributoraddress}} </span>
+            <span *ngIf="!Details.data[0].distributoraddress">- </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  
 </div>
 
 <!-- this is the table for distributors order reports  -->
@@ -23,30 +67,34 @@
           <th class="" width="11%">Available Stock</th>
         </tr>
       </thead>
-      <!-- <tbody>
-        <tr *ngFor="let distributorOrders of distributorsOrdersReports">
+      <tbody>
+        <tr *ngFor="let distributorSales of distributorsSalesReports">
           <td class="" width="10%">
-            <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
-            <span *ngIf="!distributorOrders.ordered_date"> - </span>
+            <span *ngIf="distributorSales.ordered_date">{{distributorSales.ordered_date | utcDate}} </span>
+            <span *ngIf="!distributorSales.ordered_date"> - </span>
           </td>
           <td class="" width="10%">
-            <span *ngIf="distributorOrders.orderby_paymenttype">{{distributorOrders.orderby_paymenttype}}</span>
-            <span *ngIf="!distributorOrders.orderby_paymenttype"> - </span>
+            <span *ngIf="distributorSales.category || distributorSales.brandname">{{distributorSales.category}} {{distributorSales.brandname}}</span>
+            <span *ngIf="!distributorSales.category"> - </span>
           </td>
           <td class="" width="11%">
-            <span *ngIf="distributorOrders.bill_amount">{{distributorOrders.bill_amount}}</span>
-            <span *ngIf="!distributorOrders.bill_amount"> - </span>
+            <span *ngIf="distributorSales.stock">{{distributorSales.stock}}</span>
+            <span *ngIf="!distributorSales.stock"> - </span>
+          </td>
+          <td class="" width="11%">
+            <span *ngIf="distributorSales.arrivedstock">{{distributorSales.arrivedstock}}</span>
+            <span *ngIf="!distributorSales.arrivedstock"> - </span>
           </td>
           <td class="" width="13%">
-            <span *ngIf="distributorOrders.receivedamount">{{distributorOrders.receivedamount}}</span>
-            <span *ngIf="!distributorOrders.receivedamount"> - </span>
+            <span *ngIf="distributorSales.avaliable_stock">{{distributorSales.avaliable_stock}}</span>
+            <span *ngIf="!distributorSales.avaliable_stock"> - </span>
           </td>
-          <td class="" width="11%">
+          <!-- <td class="" width="11%">
             <span *ngIf="distributorOrders.status" class="capitalize" [ngClass]="{'success':status=='delivered'}" >{{distributorOrders.status}}</span>
             <span *ngIf="!distributorOrders.status"> - </span>
-          </td>
+          </td> -->
 
-      </tbody> -->
+      </tbody>
     </table>
   </md-dialog-content>
 </div>

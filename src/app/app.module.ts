@@ -357,8 +357,8 @@ import { PaymentreportpreviewComponent } from './paymentreportpreview/paymentrep
         PromocodeServiceService,
         {provide: LocationStrategy, useClass: HashLocationStrategy},
         {provide: HTTP_INTERCEPTORS,useClass: authinterceptor, multi: true},
-        { provide: 'API_URL', useValue: 'http://192.168.1.50:2221' }, //http://192.168.1.50:2221
-       { provide: 'App_URL', useValue: 'http://192.168.1.50:2221' }  // http://104.211.247.42:2221 -->  
+        { provide: 'API_URL', useValue: 'http://104.211.247.42:2250' }, //http://192.168.1.50:2221
+       { provide: 'App_URL', useValue: 'http://104.211.247.42:2250' }  // http://104.211.247.42:2221 -->  
     ],
     entryComponents: [
         MapDialogComponent,
