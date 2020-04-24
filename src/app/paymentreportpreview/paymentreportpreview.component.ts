@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MD_DIALOG_DATA } from '@angular/material';
 import { MdDialogRef } from '@angular/material';
+import * as moment from 'moment';
 import * as _ from 'underscore';
 
 @Component({
@@ -19,60 +20,64 @@ export class PaymentreportpreviewComponent implements OnInit {
   distributorsPaymentReports: any = [];
   isDesc:boolean = false;
   column:any;
+  fromdate:any;
+  todate:any;
 
   showPreview() {
     if (this.Details.type == 'customersPaymentReports') {
       this.customersPaymentReports = this.Details.data;
-      this.generateInvoiceNumber();
-      this.getTotalQuantityOfCustomersPayment();
-      this.getTotalAmountOfCustomersPayment();
+      // this.generateInvoiceNumber();
+      // this.getTotalQuantityOfCustomersPayment();
+      // this.getTotalAmountOfCustomersPayment();
     }
-    else if (this.Details.type == 'distributorsPaymentReports') {
+    else if (this.Details.type == 'distributorPaymentReports') {
       this.distributorsPaymentReports = this.Details.data;
-      this.generateInvoiceNumber();
-      this.getTotalQuantityOfDistributorsPayment();
+      this.fromdate = moment(this.Details.Fromdate).format('YYYY-MM-DD');
+      this.todate = moment(this.Details.Todate).format('YYYY-MM-DD');
+      // this.generateInvoiceNumber();
+      // this.getTotalQuantityOfDistributorsPayment();
     }
    }
 
-   generateInvoiceNumber() {
-    this.invoiceNumber = Math.floor(10000 + Math.random() * 90000)
-  }
+  //  generateInvoiceNumber() {
+  //   this.invoiceNumber = Math.floor(10000 + Math.random() * 90000)
+  // }
 
-  getTotalQuantityOfCustomersPayment() {
-    let quantityCount = [];
-    var total = _.each(this.customersPaymentReports, function (i, j) {
-      let details: any = i;
-      if (details.quantity) {
-        quantityCount.push(details.quantity);
-      }
-    });
-    this.totalQuantity = quantityCount.reduce((a, b) => a + b, 0);
-  }
+  // getTotalQuantityOfCustomersPayment() {
+  //   let quantityCount = [];
+  //   var total = _.each(this.customersPaymentReports, function (i, j) {
+  //     let details: any = i;
+  //     if (details.quantity) {
+  //       quantityCount.push(details.quantity);
+  //     }
+  //   });
+  //   this.totalQuantity = quantityCount.reduce((a, b) => a + b, 0);
+  // }
 
-  getTotalAmountOfCustomersPayment() {
-    let totalAmountsArray = [];
-    var total = _.each(this.customersPaymentReports, function (i, j) {
-      let details: any = i;
-      if (details.bill_amount) {
-        totalAmountsArray.push(details.bill_amount);
-      }
-    });
-    this.totalAmount = totalAmountsArray.reduce((a, b) => a + b, 0);
-  }
+  // getTotalAmountOfCustomersPayment() {
+  //   let totalAmountsArray = [];
+  //   var total = _.each(this.customersPaymentReports, function (i, j) {
+  //     let details: any = i;
+  //     if (details.bill_amount) {
+  //       totalAmountsArray.push(details.bill_amount);
+  //     }
+  //   });
+  //   this.totalAmount = totalAmountsArray.reduce((a, b) => a + b, 0);
+  // }
 
-  getTotalQuantityOfDistributorsPayment() {
-    let quantityCount = [];
-    var total = _.each(this.distributorsPaymentReports, function (i, j) {
-      let details: any = i;
-      if (details.quantity) {
-        quantityCount.push(details.quantity);
-      }
-      if(details.status == 'not_broadcasted'){
-        details.status = 'Assigned';
-      }
-    });
-    this.totalQuantity = quantityCount.reduce((a, b) => a + b, 0);
-  }
+  // getTotalQuantityOfDistributorsPayment() {
+  //   let quantityCount = [];
+  //   var total = _.each(this.distributorsPaymentReports, function (i, j) {
+  //     let details: any = i;
+  //     if (details.quantity) {
+  //       quantityCount.push(details.quantity);
+  //     }
+  //     if(details.status == 'not_broadcasted'){
+  //       details.status = 'Assigned';
+  //     }
+  //   });
+  //   this.totalQuantity = quantityCount.reduce((a, b) => a + b, 0);
+  // }
 
   onCloseCancel() {
     this.thisDialogRef.close('Cancel');
@@ -81,7 +86,7 @@ export class PaymentreportpreviewComponent implements OnInit {
 
 
   ngOnInit() {
-    console.log(this.Details)
+   // console.log(this.Details)
     this.showPreview();
   }
 

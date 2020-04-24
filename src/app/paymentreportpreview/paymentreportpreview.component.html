@@ -109,126 +109,94 @@
 
 <!-- this is the table for customer order reports ends here -->
 
-<!-- this is the table for distributors order reports  -->
+<!-- this is the table for distributors order reports     -->
 
 
-<div id="" class="container-fluid pd-15x25 brd-bottom" *ngIf="Details.type == 'distributorsPaymentReports'">
+<div id="" class="container-fluid pd-15x25 brd-bottom"  *ngIf="Details.type == 'distributorPaymentReports'">
   <div class="well">
-    <div class="row justify-content-between">
-
-      <div class="col-5">
-        <div class="row">
-          <b class="col-sm-5">Invoice number: </b>
-          <!-- <div class="col-sm-7">
-            <span>{{invoiceNumber}} </span>
-          </div> -->
-        </div>
-        <div class="row">
-          <b class="col-sm-5">Subject: </b>
-          <!-- <div class="col-sm-7">
-            <span>Distributor Orders Invoice </span>
-          </div> -->
-        </div>
-        <div class="row">
-          <b class="col-sm-5">Total Quantity: </b>
-          <!-- <div class="col-sm-7">
-            <span>{{totalQuantity}}</span>
-          </div> -->
-        </div>
-        <div class="row">
-          <b class="col-sm-5">Total Amount: </b>
-          <!-- <div class="col-sm-7">
-            <span>{{totalQuantity}} x 1 Rs </span>
-          </div> -->
-        </div>
-        <div class="row">
-          <b class="col-sm-5">Total Invoiced Amount: </b>
-          <!-- <div class="col-sm-7">
-            <span>{{ (totalQuantity) + (totalQuantity * 18/100) }} (Including GST/Tax)</span>
-          </div> -->
-        </div>
-
-      </div>
+    <div class="row justify-content-between" >
 
       <div class="col-6">
         <div class="row">
           <b class="col-sm-4">Distributors Name: </b>
-          <!-- <div class="col-sm-8">
+          <div class="col-sm-8">
             <span *ngIf="Details.data[0].distributorname" class="capitalize">{{Details.data[0].distributorname}}</span>
             <span *ngIf="!Details.data[0].distributorname">- </span>
-          </div> -->
+          </div>
         </div>
         <div class="row">
           <b class="col-sm-4">Enterprise Name: </b>
-          <!-- <div class="col-sm-8">
+          <div class="col-sm-8">
             <span *ngIf="Details.data[0].companyname" class="capitalize">
               {{Details.data[0].companyname}}</span>
             <span *ngIf="!Details.data[0].companyname">- </span>
-          </div> -->
+          </div>
         </div>
 
         <div class="row">
           <b class="col-sm-4">Mobile number: </b>
-          <!-- <div class="col-sm-8">
+          <div class="col-sm-8">
             <span *ngIf="Details.data[0].distributormobile" class="capitalize">
               {{Details.data[0].distributormobile}}</span>
             <span *ngIf="!Details.data[0].distributormobile">- </span>
-          </div> -->
+          </div>
         </div>
         <div class="row">
           <b class="col-sm-4">Address: </b>
-          <!-- <div class="col-sm-8">
+          <div class="col-sm-8">
             <span *ngIf="Details.data[0].distributoraddress" class="capitalize">
               {{Details.data[0].distributoraddress}} </span>
             <span *ngIf="!Details.data[0].distributoraddress">- </span>
-          </div> -->
+          </div>
         </div>
 
       </div>
     </div>
   </div>
+</div>
+
+<div id="" class="container-fluid pd-15x25 brd-bottom">
   <md-dialog-content layout="column">
     <table class="table table-hover table-fixedheader">
       <thead>
         <tr>
           <th class="" width="15%">Order Id</th>
-          <th class="" width="25%">Product</th>
-          <th class="" width="20%">Amount</th>
+          <th class="" width="20%">Product</th>
+          <th class="" width="15%">Amount</th>
           <th class="" width="20%">Paid</th>
+          <th class="" width="20%">Payment Type</th>
         </tr>
       </thead>
-      <!-- <tbody>
-        <tr *ngFor="let distributorOrders of distributorsOrdersReports">
-          <td class="" width="10%">
-            <span *ngIf="distributorOrders.order_id">#{{distributorOrders.order_id}}</span>
-            <span *ngIf="!distributorOrders.order_id"> - </span>
-          </td>
-          <td class="" width="17%">
-            <span *ngIf="distributorOrders.ordered_date">{{distributorOrders.ordered_date | utcDate}} </span>
-            <span *ngIf="!distributorOrders.ordered_date"> - </span>
+      <tbody>
+        <tr *ngFor="let distributorPayment of distributorsPaymentReports">
+          <td class="" width="15%">
+            <span *ngIf="distributorPayment.order_id">#{{distributorPayment.order_id}}</span>
+            <span *ngIf="!distributorPayment.order_id"> - </span>
           </td>
           <td class="" width="20%">
-            <span *ngIf="distributorOrders.orderby_firstname" class="capitalize">{{distributorOrders.orderby_firstname}}</span>
-            <span *ngIf="!distributorOrders.orderby_firstname"> - </span>
-          </td>
-          <td class="" width="25%">
-            <span *ngIf="distributorOrders.category || distributorOrders.brandname" class="capitalize">{{distributorOrders.category}} {{distributorOrders.brandname}}
+            <span *ngIf="distributorPayment.category || distributorPayment.brandname" class="capitalize">{{distributorPayment.category}} {{distributorPayment.brandname}}
             </span>
-            <span *ngIf="!distributorOrders.category"> - </span>
+            <span *ngIf="!distributorPayment.category"> - </span>
           </td>
-          <td class="" width="8%">
-            <span *ngIf="distributorOrders.quantity">{{distributorOrders.quantity}}</span>
-            <span *ngIf="!distributorOrders.quantity"> - </span>
+          <td class="" width="15%">
+            <span *ngIf="distributorPayment.quantity">{{distributorPayment.quantity}}</span>
+            <span *ngIf="!distributorPayment.quantity"> - </span>
           </td>
           <td class="" width="20%">
-            <span *ngIf="distributorOrders.status" class="capitalize" [ngClass]="{'success':status=='delivered'}" >{{distributorOrders.status}}</span>
-            <span *ngIf="!distributorOrders.status"> - </span>
+            <span *ngIf="distributorPayment.bill_amount">{{distributorPayment.bill_amount}}</span>
+            <span *ngIf="!distributorPayment.bill_amount"> - </span>
           </td>
+          <td class="" width="20%">
+            <span *ngIf="distributorPayment.paymenttype">{{distributorPayment.paymenttype}}</span>
+            <span *ngIf="!distributorPayment.paymenttype"> - </span>
+          </td>
+          
 
-      </tbody> -->
+      </tbody>
     </table>
   </md-dialog-content>
 </div>
+
 
 <!-- this is the table for distributor order reports ends here -->
 
