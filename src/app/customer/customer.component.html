@@ -8,6 +8,7 @@
       </h4>
     </div>
     <div class="col-4 align-self-center justify-content-end">
+      
       <div class="row">
         <div class=" col-4">
           <md-select placeholder="Filter By" [(ngModel)]="filterInput.root.searchtype" name="type" class="full-width left"
@@ -42,6 +43,23 @@
             <md-option value="commercial">Commercial</md-option>
           </md-select>
         </div>
+
+        
+      <div class=" col-3" *ngIf="filterInput.root.searchtype == 'customerarea'">
+        <!-- <div class="row"> -->
+          <!-- <div class="col-4"> -->
+            <md-dialog-actions align="center">
+              <button md-raised-button class="btn-primary" (click)="customerMap()">Map View</button>
+              </md-dialog-actions>
+          <!-- </div> -->
+        <!-- </div> -->
+      </div>
+
+      <div class=" col-3" *ngIf="filterInput.root.searchtype == 'products'">
+         <md-select placeholder="Filter By" name="Produts" (change)="selectedValue()" [(ngModel)]="selectProduct">
+          <md-option *ngFor="let details of productList" [value]="details">{{details.category}} {{details.pname}}</md-option>
+         </md-select>
+      </div>
 
         <div class="col-3" *ngIf="filterInput.root.searchtype == 'advamt'">
         </div>
@@ -125,6 +143,11 @@
                     <md-datepicker #picker></md-datepicker>
                   </md-form-field>
                 </div>
+                <div class=" col-3" *ngIf="filterInput.root.searchtype == 'products'">
+                  <md-select placeholder="Filter By" name="Produts" (change)="selectedValue()"  [(ngModel)]="selectProduct">
+                   <md-option *ngFor="let details of productList" value="details">{{details.category}} {{details.pname}}</md-option>
+                  </md-select>
+                </div>
                 <div class=" form-group">
                   <button md-raised-button color="primary" (click)="getCustomerByFilter('true')">
                     <i class="fa fa-search" aria-hidden="true"></i> Search
@@ -138,6 +161,8 @@
           </a>
         </div>
       </div>
+
+      
     </div>
   </div>
 

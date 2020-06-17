@@ -26,6 +26,7 @@ import { SortingPipe } from '../pipes/sorting.pipe';
 import { AssociateDistributorComponent } from '../associate-distributor/associate-distributor.component';
 import { CustomerExcelUploadComponent } from '../customer-excel-upload/customer-excel-upload.component';
 import { PaymentsHistoryComponent } from '../payments-history/payments-history.component';
+import { CustomermapviewComponent } from '../customermapview/customermapview.component';
 
 
 // excel 
@@ -44,6 +45,8 @@ export class CustomerComponent implements OnInit {
     }
     customerClickMore = true;
     customerList: any = [];
+    productList: any = [];
+    selectProduct: any ='';
     showFilterDailog = false;
     followUpdate = null;
     filterRecords = false;
@@ -65,6 +68,8 @@ export class CustomerComponent implements OnInit {
         { value: 'address', viewValue: 'Address' },
         { value: 'paymenttype', viewValue: 'Payment Mode' },
         { value: 'customertype', viewValue: 'Customer Type' },
+        { value: 'customerarea', viewValue: 'Customer By Area'},
+        { value: 'products', viewValue: 'Filter by Products'},
         { value: 'followupdate', viewValue: 'Followup Date' },
         { value: 'points', viewValue: 'Points' },
         { value: 'advamt', viewValue: 'Adv Amt < available cans' },
@@ -92,6 +97,20 @@ export class CustomerComponent implements OnInit {
         });
     }
 
+    customerMap(){
+        let dialogRefeditStatus = this.dialog.open(CustomermapviewComponent, {
+            width: '85%',
+            data: ''
+        });
+        dialogRefeditStatus.afterClosed().subscribe(result => {
+            ////console.log(`Dialog closed: ${result}`);
+            if (result == 'success') {
+                this.getCustomerList(true);
+            }
+
+        });
+
+    }
 
     // customersSort : customers[];
     // path: string[] = ['customers'];
@@ -299,6 +318,32 @@ export class CustomerComponent implements OnInit {
         });
 
     }
+
+    getProductList(){
+        let input = {
+            "product":{"userid":this.authenticationService.loggedInUserId(),"apptype":this.authenticationService.appType(),"transtype":"getallproducts","loginid":this.authenticationService.loggedInUserId(),"usertype":this.authenticationService.userType()}
+        }
+
+        this.customerService.createProduct(input)
+        .subscribe(
+            output => this.getProductListResult(output),
+            error => {
+                //console.log("error in customer");
+                //this.loaderService.display(false);
+            });
+    }
+    getProductListResult(result) {
+        if (result.result == 'success') {
+          this.productList = result.data;
+          console.log('Product list')
+        console.log(this.productList)
+        
+        }else{
+          this.productList = []
+          //this.loaderService.display(false);
+        }
+      }
+
     getCustomerList(firstcall) {
         this.loaderService.display(true);
         let input = { userId: this.authenticationService.loggedInUserId(), lastId: 0, userType: this.authenticationService.userType(), appType: this.authenticationService.appType(), "transtype": "getallcustomers", pagesize: 100, "loginid": this.authenticationService.loggedInUserId() };
@@ -367,6 +412,10 @@ export class CustomerComponent implements OnInit {
             this.advanceAmountViews = false;
             this.paymentsDueView = true;
         }
+        if (this.filterInput.root.searchtype == 'products') {
+            this.filterInput.root.searchtext = this.selectProduct.productid;
+            
+        }
         let input = this.filterInput;
         // if (this.filterInput.root.searchtext && this.filterInput.root.searchtext.length > 2) {
 
@@ -411,6 +460,11 @@ export class CustomerComponent implements OnInit {
         }
 
     }
+
+    selectedValue(){
+        console.log('Product Name')
+        console.log(this.selectProduct);
+      }
     getcustomerByPaging() {
         if (this.filterRecords) {
             this.getCustomerByFilter(false);
@@ -463,7 +517,7 @@ export class CustomerComponent implements OnInit {
         this.advanceAmountViews = false;
         this.filterInput = { "root": { "userid": this.authenticationService.loggedInUserId(), "usertype": this.authenticationService.userType(), "searchtype": "name", "searchtext": "", "lastcustomerid": "0", "pagesize": "50", "apptype": this.authenticationService.appType(), userpoints: null } };
         this.getCustomerList(true);
-
+        
 
     }
 
@@ -559,6 +613,7 @@ export class CustomerComponent implements OnInit {
 
     ngOnInit() {
         this.getCustomerList(true);
+        this.getProductList();
         this.superDealer = this.authenticationService.getSupperDelear();
         this.customerCare = this.authenticationService.customerCareLoginFunction();
         this.salesTeamLogin = this.authenticationService.salesTeamLoginFunction();

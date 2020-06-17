@@ -20,7 +20,7 @@ export class SupplierService {
     let headers = new Headers({ 'Content-Type': 'application/json' }); // ... Set content type to JSON  res.json()
     headers.append('Authorization', 'Bearer ' + this.authenticationService.tokenSession);
     let options = new RequestOptions({ headers: headers });
-    return this.http.get(this.apiUrl + '/supplierslist/' + input.userId + '/' + input.appType + '/' + input.usertype, options)
+    return this.http.get(this.apiUrl + '/supplierslist/' + input.userId + '/' + input.appType , options)
     .map(res => {
       let response = res.json();
       this.authenticationService.sendRefreshedToken(res);

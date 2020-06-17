@@ -150,6 +150,7 @@ import { PaymentsHistoryComponent } from './payments-history/payments-history.co
 import { RaisereportspreviewComponent } from './raisereportspreview/raisereportspreview.component';
 import { SalesreportspreviewComponent } from './salesreportspreview/salesreportspreview.component';
 import { PaymentreportpreviewComponent } from './paymentreportpreview/paymentreportpreview.component';
+import { CustomermapviewComponent } from './customermapview/customermapview.component';
 
 
 
@@ -277,6 +278,7 @@ import { PaymentreportpreviewComponent } from './paymentreportpreview/paymentrep
         RaisereportspreviewComponent,
         SalesreportspreviewComponent,
         PaymentreportpreviewComponent,
+        CustomermapviewComponent,
 
 
 
@@ -452,7 +454,8 @@ import { PaymentreportpreviewComponent } from './paymentreportpreview/paymentrep
          PaymentsHistoryComponent,
          RaisereportspreviewComponent,
          SalesreportspreviewComponent,
-         PaymentreportpreviewComponent
+         PaymentreportpreviewComponent,
+         CustomermapviewComponent
       
 
 

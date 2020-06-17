@@ -414,7 +414,7 @@
           <div class="row mgleft-0 col">
             <md-dialog-actions align="center">
               <button md-raised-button class="btn-primary" (click)="downloadOrders()">Orders Download</button>
-              <button md-raised-button class="btn-primary">Orders Print</button>
+              <button md-raised-button class="btn-primary" (click)="orderPrint()">Orders Print</button>
               <button md-raised-button class="btn-primary" (click)="raiseInvoiceOfOrders()">Orders Raise An Invoice</button>
               <button md-raised-button class="btn-primary" (click)="viewOrdersRaiseReports()">Orders View </button>
             </md-dialog-actions>
@@ -442,7 +442,168 @@
           </div>
         </div>
       </div>
-    </div>
+      <div id="RaiseInvoice" style="display: none;" *ngIf="downloadInput.filterBy == 'customer'">
+        
+        <body style="margin: 1rem; font-family: sans-serif;">
+    <header >
+      <!-- <img src="" alt="moyalogo" /> -->
+      <div style="display: flex;justify-content: space-between;color: #0077ff;border-top: 2px solid #0077ff; border-bottom: 2px solid #0077ff; background-color: #0077ff1e; padding: 0px 1em; font-size: 11px !important; margin: 5px;">
+        <h2>Virtus IT India Private Limited</h2>
+        <h1>INVOICE</h1>
+      </div>
+    </header>
+    <main>
+      <section  style="display: flex; justify-content: space-between;border-bottom: 1px solid #0077ff;">
+        <textarea name="from_address"  cols="50" rows="8" disabled style="background-color: #ffffff !important;color: #000000;height: 108px; overflow-y: hidden; padding-top: 10px; font-size: 9px; font-family: sans-serif; border: none; resize: none;line-height: 1rem;">
+            Virtus IT India Private Limited
+            8-1-301,302 & 303,West World,
+            II floor,B BLock,Front Portion,
+            Shaikpet,
+            Hyderabada-5000008,TG
+            India
+      </textarea>
+
+        <div>
+          <pre style="font-family: sans-serif !important; font-size: 9px;position: relative;top: 4rem;">
+  CIN:U72200TG2012PTC079562
+  GSTIN:36AADCV9616K1ZU </pre>
+        </div>
+      </section>
+      <section  style="display: flex;border-bottom: 1px solid #0077ff;padding: 0.5em 0 1rem 1rem;position: relative;">
+        <span style="font-size:10px; margin-right: 3px;">To:</span>
+        <table>
+          <tbody>
+            <tr>
+              <td style="font-size: 9px">###customername</td>
+            </tr>
+            <tr>
+              <td style="font-size: 9px">###customeraddress</td>
+            </tr>
+           </tbody>
+        </table>
+        <div  style="position: absolute;
+        right: 0;
+        padding-right: 3.3rem;">
+          <h6>
+            <span>Date:</span> &nbsp;&nbsp;
+            <span style="font-weight:100">###orderdate</span>
+          </h6>
+          <h6>
+            <span>Ref:</span> &nbsp;&nbsp;<span style="font-weight:100">
+              &nbsp;&nbsp;###orderid</span>
+          </h6>
+        </div>
+      </section>
+
+      <table style="border-collapse: collapse;width:100%">
+        <thead>
+          <tr>
+            <td style="padding-top: 5px;font-size:9px;">Product Details</td>
+            <td
+              style="height: fit-content !important;border-right: 1px solid #0077ff;font-size:9px;"
+            ></td>
+          </tr>
+        </thead>
+        <tbody>
+          ###Productdetails
+           <tr>
+            <td style="background-color: rgb(255, 255, 255);height: 180px;font-size:9px;"></td>
+            <td style="background-color: rgb(255, 255, 255);height: 180px;font-size:9px;"></td>
+            <td style=" border-left: 1px solid #0077ff;font-size:9px;"></td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr  style=" border-top: 2px solid #a52a2a; background-color: #0077ff3b;border-bottom: 2px solid #a52a2a;">
+            <td  style="padding: 0.7rem 0;font-weight:600;font-size:9px;">Invoice Total</td>
+            <td 
+           
+              style="height: fit-content !important;background-color:#c4e0ff;padding: 0.7rem 0;font-size:9px;" 
+            ></td>
+            <td  style=" padding: 0.7rem 0;border-left: 1px solid #0077ff;font-size:9px;">
+              <span  style="font-weight:600"> INR</span>&nbsp; &nbsp; &nbsp;<span
+                 style="font-weight:600">{{orderPrintInvoiceData[0]?.bill_amount}}</span>
+            </td>
+          </tr>
+        </tfoot>
+
+        <tfoot>
+          <tr>
+            <td  style="padding: 0.7rem 0;font-weight:600;font-size:9px;">Invoice Sub Total</td>
+            <td  style="height: fit-content !important; padding: 0.7rem 0;font-size:9px;"></td>
+            <td style="border:1px solid #0077ff;border-right:none; padding: 0.7rem 0;font-weight:600;font-size:9px;" >
+              INR &nbsp; &nbsp;&nbsp;{{orderPrintInvoiceData[0]?.bill_amount}} &nbsp;
+            </td>
+          </tr>
+        </tfoot>
+        <tfoot>
+          <tr>
+            <td >
+             <span style="font-size:9px;" > Tax:</span> <span style="position:relative; padding: 0.7rem 0;font-weight:600;font-size:9px;">GST @18%</span>
+            </td>
+            <td  style="height: fit-content !important; padding: 0.7rem 0;font-size:9px;"></td>
+            <td style="border-left:1px solid #0077ff;padding-top:2rem; padding: 0.7rem 0;font-weight:600;font-size:9px;">
+              INR &nbsp; &nbsp;&nbsp;654.00 &nbsp;
+            </td>
+          </tr>
+        </tfoot>
+        <tfoot>
+        
+        </tfoot>
+      </table>
+      <section style=" padding-bottom: 2rem;
+      position: relative;">
+        <h6>Payment Details:</h6>
+        <h6  style="margin: 8px 26px;font-size: x-small;color: #0077ff;">Please settle all invoices within 2 days</h6>
+        <h6  style="margin: 8px 26px;font-size: x-small;color: #0077ff;">
+          Please send electronic payments to the following account:
+        </h6>
+        <table  style="margin-left:4rem">
+          <tbody>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">Name of Bank</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;">ICICI BANK LIMITED</td>
+            </tr>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">Bank Account Name(Payee):</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;">VIRTUS IT INDIA PVT LTD</td>
+            </tr>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">Bank Account Number:</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;">0382050017698</td>
+            </tr>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">SWIFTBIC:</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;">ICICINBBCTS (IFSC CODE:ICIC0000382)</td>
+            </tr>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">Address of Bank</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;">
+                MUMBAI(GLOBAL TRADE SERVICE UNIT-MUMBAI)
+              </td>
+            </tr>
+            <tr>
+              <td style=" color: #0077ff;font-size:9px;">Address of Payee:</td>
+              <td style="padding-left:8rem; font-weight:600;font-size:9px;" >
+                Virtus IT India Private Limited,8-1-301,302 & 303,West World,<br />
+                II floor,B BLock,Front Portion,Shaikpet,Hyderabada-5000008,TG,
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div  style="position: absolute;right: 5px;bottom: 0;color: #0077ff;font-size: x-small;"><span>e-Mail:finance@virtus-it.com</span></div>
+      </section>
+      <footer  style="display: flex;justify-content: space-between; color: #0077ff; border-top: 2px solid #0077ff;border-bottom: 2px solid #0077ff;background-color: #0077ff1e;padding: 0px 1em;font-size: 11px !important; margin: 5px;">
+        <h6  style="margin:10px">UK Parent Company Registered Ofiice:</h6>
+        <h6  style="margin:10px">
+          Virtus IT Limited,Stering House,20 Station Road,Gerrads
+          Cross,Buckinghamshire SL9 8EL
+        </h6>
+      </footer>
+    </main>
+  </body>
+       
+ </div>
+</div>
 
     <div class="tab-content  pdtop-15" *ngIf="tabPanelView == 'pendingorders'">
       <div class="tab-pane active" id="a">

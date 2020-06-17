@@ -87,6 +87,7 @@ export class ReportsComponent implements OnInit {
 
   paymentreportInput = {filterBy: '', fromDate: null, toDate: null, distributorId: '', customerId: "",filterId: "0", distributorEmail: "",customerEmail: "",gstDetailsOfCustomer : '' , gstDetailsOfDistributor : '' }
 
+  printInvoiceInput = { fromDate: null, toDate: null, filterBy: "", filterId: "0", customerId: "", distributorId: "", distributorEmail: "", customerEmail: "", supplierId: "", supplierEmail: '' , gstDetailsOfCustomer : '' , gstDetailsOfDistributor : ''};
   reportsClickMore: boolean = false;
   reportsInput: any = {};
   reportsData = [];
@@ -120,6 +121,7 @@ export class ReportsComponent implements OnInit {
   viewSalesReportsData:any = [];
   viewPaymentReportsData:any = [];
   raiseInvoiceData:any = [];
+  orderPrintInvoiceData: any = [];
   customerOrderReports: boolean = false;
   distributorOrderReports: boolean = false;
   distributorCategoryStockReport: boolean = false;
@@ -209,6 +211,8 @@ export class ReportsComponent implements OnInit {
         this.downloadInput.supplierEmail = findSupplier.emailid;
         this.invoiceInput.supplierId = findSupplier.userid;
         this.invoiceInput.supplierEmail = findSupplier.emailid;
+        this.printInvoiceInput.supplierId = findSupplier.userid;
+        this.printInvoiceInput.supplierEmail = findSupplier.emailid;
       }
 
 
@@ -656,6 +660,8 @@ export class ReportsComponent implements OnInit {
         this.paymentreportInput.customerEmail = findcustomer.emailid;
         this.invoiceInput.customerId = findcustomer.userid;
         this.invoiceInput.customerEmail = findcustomer.emailid;
+        this.printInvoiceInput.customerId = findcustomer.userid;
+        this.printInvoiceInput.customerEmail = findcustomer.emailid;
       }
 
 
@@ -863,6 +869,8 @@ export class ReportsComponent implements OnInit {
         this.paymentreportInput.distributorEmail = findDistributor.emailid;
         this.invoiceInput.distributorId = findDistributor.userid;
         this.invoiceInput.distributorEmail = findDistributor.emailid;
+        this.printInvoiceInput.distributorId = findDistributor.userid;
+        this.printInvoiceInput.distributorEmail = findDistributor.emailid;
       }
 
 
@@ -1551,6 +1559,94 @@ viewPaymentReportsResult(result) {
      });
      this.column = parm;
    }
+  }
+
+  
+orderPrint(){
+  let input = { order: { userid: this.authenticationService.loggedInUserId(), priority: "5", usertype: this.authenticationService.userType(), status: 'all', lastrecordtimestamp: "15", pagesize: "10", fromdate: this.downloadInput.fromDate, todate: this.downloadInput.toDate, supplierid: 0, customerid: 0, filterid: this.downloadInput.filterId, filtertype: this.downloadInput.filterBy, emailid: "", type: 'viewordersreports' , gstDetailsOfCustomer : this.downloadInput.gstDetailsOfCustomer , gstDetailsOfDistributor : this.downloadInput.gstDetailsOfDistributor } };
+    if (this.downloadInput.fromDate) {
+      input.order.fromdate = moment(this.downloadInput.fromDate).format('YYYY-MM-DD 00:00:00');
+    }
+    if (this.downloadInput.toDate) {
+      input.order.todate = moment(this.downloadInput.toDate).format('YYYY-MM-DD 23:59:59');
+    }
+    if (this.downloadInput.filterBy == 'customer') {
+      input.order.filterid = this.downloadInput.customerId;
+      input.order.emailid = this.downloadInput.customerEmail;
+      input.order.status = 'delivered';
+    }
+    if (this.downloadInput.filterBy == 'distributor') {
+      input.order.filterid = this.downloadInput.distributorId;
+      input.order.emailid = this.downloadInput.distributorEmail;
+    }
+    if (this.downloadInput.filterBy == 'supplier') {
+      input.order.filterid = this.printInvoiceInput.supplierId;
+      input.order.emailid = this.salesTeamId;
+    }
+    if (this.downloadInput.fromDate && this.downloadInput.toDate || (this.downloadInput.filterBy == 'customer' || this.downloadInput.filterBy == 'distributor' || this.downloadInput.filterBy == 'supplier')) {
+      this.loaderService.display(true);
+      
+      console.log(input, 'Order Print Input');
+     
+      this.reportservice.orderprintInvoice(input)
+        .subscribe(
+          output => this.orderPrintResult(output),
+          error => {
+            this.loaderService.display(false);
+          });
+
+    }
+
+}
+
+orderPrintResult(result) {
+  if (result.result == 'success') {
+    this.orderPrintInvoiceData = result.data;
+    this.noData = false;
+    this.loaderService.display(false);
+     this.orderPrintInvoice(this.orderPrintInvoiceData);
+  }
+  else {
+   this.orderPrintInvoiceData = [];
+    this.loaderService.display(false);
+    this.noData = true;
+  }
+}
+
+orderPrintInvoice(data){
+  let popupWinindow;
+  let printContents = document.getElementById("RaiseInvoice").innerHTML;
+
+  printContents = printContents.replace(/###customername/g,data[0].orderby_firstname)
+  printContents = printContents.replace(/###customeraddress/g,data[0].orderby_address)
+  let date = moment(data[0].ordered_date).format('DD MMMM YYYY')
+  printContents = printContents.replace(/###orderdate/g,date)
+  printContents = printContents.replace(/###orderid/g,data[0].order_id)
+  
+  var productdata = "";
+  data.forEach(i => {
+      let trdata = '<tr><td style="padding:1px 30px;font-size:9px;"><span>1.</span> &nbsp;<span>###productname</span><div style="padding-left: 29px;">DC REF NO:MOYA ###productid Dated ###deliverdate</div></td><td style="font-weight:600;padding: 0px 5rem;font-size:9px;" ><span>Qty(in Cases):###qty*###cost = ###productamount<span> INR</span>&nbsp; &nbsp; &nbsp;<span>###productamount</span></td></tr>';
+      trdata = trdata.replace(/###productname/g,i.prod_type)
+      trdata = trdata.replace(/###qty/g,i.quantity)
+      trdata = trdata.replace(/###cost/g,i.prod_cost)
+      trdata = trdata.replace(/###productid/g,i.prod_id)
+      let date = moment(i.order_delivereddate).format('DD MMMM YYYY')
+      trdata = trdata.replace(/###deliverdate/g,date)
+      let productamount = i.quantity  * i.prod_cost
+      trdata = trdata.replace(/###productamount/g,productamount.toString());
+     productdata = productdata + trdata;
+   });
+  printContents = printContents.replace('###Productdetails',productdata)
+// document.body.innerHTML = printContents;
+popupWinindow = window.open('', '_blank', 'scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+  popupWinindow.document.open();
+  popupWinindow.document.write('<html><head></head><body onload="window.print();" style="margin: 1rem font-family: sans-serif">' + printContents + '</html>');
+  popupWinindow.document.close();
+  setTimeout(function(){ 
+      popupWinindow.close();
+
+   }, 5000);
+//  window.print();
   }
 
   ngOnInit() {
