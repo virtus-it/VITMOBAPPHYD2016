@@ -1,0 +1,50 @@
+<div class="row justify-content-between modal-title">
+  <div class="col-sm-4 col-md-4 col-lg-4 ">
+    <i class="fa fa-calendar-plus-o"></i> Customer Map VIew
+  </div>
+  <div class="col-md-1  col-sm-1  col-lg-1 right">
+    <strong>
+      <i class="fa fa-times fs-20" aria-hidden="true" (click)="onCloseCancel()"></i>
+    </strong>
+  </div>
+</div>
+
+<md-dialog-content layout="column">
+  <div class="container-fluid pd-15x25 brd-bottom">
+    <!-- <div class="row"> -->
+      <!-- <div class="col"> -->
+        <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" class="">
+
+          <agm-polygon [fillColor]="'#0073e6'" [geodesic]="true" [strokeWeight]="1"
+                  [clickable]="false" [editable]="false" [polyDraggable]="false">
+            </agm-polygon>
+        </agm-map>
+        <!-- *ngFor="let p of polygons; let i = index" [paths]="p.path" -->
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+</md-dialog-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="row float-right pdright-30 mgbottom-20">
+  <md-dialog-actions align="end">
+    <button md-raised-button (click)='onCloseCancel()'>CANCEL</button>&nbsp;
+  </md-dialog-actions>
+</div>
